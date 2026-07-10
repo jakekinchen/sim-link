@@ -32,6 +32,10 @@ PI05_IMAGE_KEYS = (
     "observation.images.left_wrist_0_rgb",
     "observation.images.right_wrist_0_rgb",
 )
+CAUSAL_IMAGE_KEYS = (
+    "observation.images.top",
+    "observation.images.wrist",
+)
 IMAGE_ROLES = ("base", "wrist", "overhead")
 JOINT_NAMES = (
     "shoulder_pan",
@@ -64,6 +68,15 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--dataset-schema",
+        choices=("intervention", "pi05_causal"),
+        default="intervention",
+        help=(
+            "Use the full intervention audit schema, or the compact six-axis "
+            "PI0.5 causal-training schema used by the accepted sorting adapter."
+        ),
+    )
+    parser.add_argument(
         "--allow-scripted-harness",
         action="store_true",
         help="Allow explicitly test-only simulated intervention episodes.",
@@ -89,7 +102,7 @@ def main() -> int:
         fps=args.fps,
         root=args.output_root,
         robot_type="so101_follower",
-        features=_features(args.image_size),
+        features=_features(args.image_size, args.dataset_schema),
         use_videos=False,
         image_writer_processes=0,
         image_writer_threads=0,
@@ -124,14 +137,14 @@ def main() -> int:
         for frame in frames:
             images, sources = _load_frame_images(episode_dir, frame, args.image_size)
             image_hashes.update(_sha256(Path(path)) for path in sources.values())
-            state = _pad32(_mujoco_to_lerobot(_control6(frame["observation"]["state"])))
-            executed = _pad32(_mujoco_to_lerobot(_control6(frame["executed_action"])))
-            policy = _pad32(_mujoco_to_lerobot(_control6(frame["policy_action"])))
+            state6 = _mujoco_to_lerobot(_control6(frame["observation"]["state"]))
+            executed6 = _mujoco_to_lerobot(_control6(frame["executed_action"]))
+            policy6 = _mujoco_to_lerobot(_control6(frame["policy_action"]))
             human_raw = frame.get("human_action")
-            human = (
-                _pad32(_mujoco_to_lerobot(_control6(human_raw)))
+            human6 = (
+                _mujoco_to_lerobot(_control6(human_raw))
                 if human_raw is not None
-                else np.zeros((32,), dtype=np.float32)
+                else [0.0] * 6
             )
             is_intervention = bool(frame.get("is_intervention"))
             is_expert_correction = is_dagger_correction_frame(frame)
@@ -141,23 +154,31 @@ def main() -> int:
                 source = str(frame.get("action_source") or "unknown")
                 correction_source_counts[source] = correction_source_counts.get(source, 0) + 1
                 correction_deltas.append(policy_expert_delta_l2(frame))
-            dataset.add_frame(
-                {
+            if args.dataset_schema == "pi05_causal":
+                dataset_frame = {
+                    "observation.images.top": images[2].copy(),
+                    "observation.images.wrist": images[1].copy(),
+                    "observation.state": np.asarray(state6, dtype=np.float32),
+                    "action": np.asarray(executed6, dtype=np.float32),
+                    "task": _task(summary),
+                }
+            else:
+                dataset_frame = {
                     **{
                         key: image.copy()
                         for key, image in zip(PI05_IMAGE_KEYS, images, strict=True)
                     },
-                    "observation.state": state,
-                    "action": executed,
-                    "policy_action": policy,
-                    "human_action": human,
+                    "observation.state": _pad32(state6),
+                    "action": _pad32(executed6),
+                    "policy_action": _pad32(policy6),
+                    "human_action": _pad32(human6),
                     "is_intervention": np.asarray([is_intervention], dtype=bool),
                     "is_expert_correction": np.asarray([is_expert_correction], dtype=bool),
                     "deadman_fresh": np.asarray([bool(frame.get("deadman_fresh"))], dtype=bool),
                     "randomization_seed": np.asarray([int(summary["seed"])], dtype=np.int64),
                     "task": _task(summary),
                 }
-            )
+            dataset.add_frame(dataset_frame)
             sidecar_rows.append(
                 {
                     "episode_index": episode_index,
@@ -227,29 +248,39 @@ def main() -> int:
             row["is_expert_correction"] for row in sidecar_rows
         ),
         "fps": args.fps,
-        "features": sorted(_features(args.image_size)),
+        "features": sorted(_features(args.image_size, args.dataset_schema)),
         "sidecar": str(sidecar_path),
         "task": _task(json.loads(summary_paths[0].read_text(encoding="utf-8"))),
         "allow_scripted_harness": args.allow_scripted_harness,
         "frame_selection": args.frame_selection,
+        "dataset_schema": args.dataset_schema,
         "episodes": episode_reports,
     }
 
     if args.verify:
         loaded = LeRobotDataset(args.repo_id, root=args.output_root, return_uint8=True)
         item = loaded[0]
-        export_summary["verified"] = {
+        verified: dict[str, Any] = {
             "num_frames": loaded.num_frames,
             "num_episodes": loaded.num_episodes,
             "task": item["task"],
             "state_shape": list(item["observation.state"].shape),
             "action_shape": list(item["action"].shape),
-            "policy_action_shape": list(item["policy_action"].shape),
-            "human_action_shape": list(item["human_action"].shape),
-            "intervention_shape": list(item["is_intervention"].shape),
-            "expert_correction_shape": list(item["is_expert_correction"].shape),
-            "image_shapes": {key: list(item[key].shape) for key in PI05_IMAGE_KEYS},
+            "image_shapes": {
+                key: list(item[key].shape)
+                for key in _image_keys(args.dataset_schema)
+            },
         }
+        if args.dataset_schema == "intervention":
+            verified.update(
+                {
+                    "policy_action_shape": list(item["policy_action"].shape),
+                    "human_action_shape": list(item["human_action"].shape),
+                    "intervention_shape": list(item["is_intervention"].shape),
+                    "expert_correction_shape": list(item["is_expert_correction"].shape),
+                }
+            )
+        export_summary["verified"] = verified
 
     summary_path = args.output_root / "scenesmith_intervention_export_summary.json"
     summary_path.write_text(
@@ -296,7 +327,35 @@ def _add_lerobot_to_path() -> None:
         sys.path.insert(0, str(lerobot_src))
 
 
-def _features(image_size: int) -> dict[str, dict[str, Any]]:
+def _image_keys(dataset_schema: str) -> tuple[str, ...]:
+    return CAUSAL_IMAGE_KEYS if dataset_schema == "pi05_causal" else PI05_IMAGE_KEYS
+
+
+def _features(image_size: int, dataset_schema: str = "intervention") -> dict[str, dict[str, Any]]:
+    if dataset_schema == "pi05_causal":
+        names6 = [f"{name}.pos" for name in JOINT_NAMES]
+        return {
+            **{
+                key: {
+                    "dtype": "image",
+                    "shape": (3, image_size, image_size),
+                    "names": ["channel", "height", "width"],
+                }
+                for key in CAUSAL_IMAGE_KEYS
+            },
+            "observation.state": {
+                "dtype": "float32",
+                "shape": (6,),
+                "names": names6,
+            },
+            "action": {
+                "dtype": "float32",
+                "shape": (6,),
+                "names": names6,
+            },
+        }
+    if dataset_schema != "intervention":
+        raise ValueError(f"Unknown dataset schema: {dataset_schema}")
     names32 = list(JOINT_NAMES) + [f"pad_{index}" for index in range(26)]
     features: dict[str, dict[str, Any]] = {
         key: {

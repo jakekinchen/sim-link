@@ -1,0 +1,6 @@
+{
+  "basis": "current best MPS-backed hybrid checkpoint; not yet pure-policy promotion proof",
+  "model": "outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250",
+  "schema_version": "scenesmith.pi05_accepted_checkpoint.v1",
+  "source_commit": "a9c9f9e"
+}

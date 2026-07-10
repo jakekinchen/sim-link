@@ -1,0 +1,228 @@
+{
+  "accepted_model": "outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250",
+  "candidate_model": "outputs/robot_lab/autolearn/cycle-001-mps/train/checkpoints/000025/pretrained_model",
+  "config_path": "configurations/robot_lab/pi05_autolearn.example.json",
+  "config_sha256": "c7c6868b631642f0b1a12df30f49125bfa132a9de49ec6527633559ead80bbd5",
+  "cycle_id": "cycle-001-mps",
+  "eval_seeds": [
+    7300,
+    7301,
+    7302,
+    7303
+  ],
+  "external_compute": {
+    "cleanup_required": false,
+    "provider": "none"
+  },
+  "max_training_steps": 25,
+  "promotion": null,
+  "schema_version": "scenesmith.pi05_autolearn_cycle.v1",
+  "source_commit": "62519d31c0bc98917e3897ae8cb9ef5b4490ff7c",
+  "stages": [
+    {
+      "allowed_exit_codes": [
+        0
+      ],
+      "argv": [
+        "./.mujoco_venv/bin/python",
+        "scripts/robot_lab/run_pi05_eval_with_server.py",
+        "--policy-repo",
+        "outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250",
+        "--output-dir",
+        "outputs/robot_lab/autolearn/cycle-001-mps/baseline-eval",
+        "--seed",
+        "7300",
+        "--episodes",
+        "4",
+        "--device",
+        "mps",
+        "--policy-port",
+        "8840",
+        "--grasp-assist-mode",
+        "policy_gripper",
+        "--max-policy-steps",
+        "6000"
+      ],
+      "env_keys": [],
+      "log_path": "outputs/robot_lab/autolearn/cycle-001-mps/logs/baseline-eval.log",
+      "name": "baseline_eval",
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/cycle-001-mps/baseline-eval/intervention_batch_summary.json"
+      ],
+      "timeout_s": 43200.0
+    },
+    {
+      "allowed_exit_codes": [
+        0
+      ],
+      "argv": [
+        "./.mujoco_venv/bin/python",
+        "scripts/robot_lab/run_pi05_eval_with_server.py",
+        "--policy-repo",
+        "outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250",
+        "--output-dir",
+        "outputs/robot_lab/autolearn/cycle-001-mps/collection",
+        "--seed",
+        "7200",
+        "--episodes",
+        "4",
+        "--device",
+        "mps",
+        "--policy-port",
+        "8840",
+        "--grasp-assist-mode",
+        "policy_gripper_tray_transfer",
+        "--max-policy-steps",
+        "6000"
+      ],
+      "env_keys": [],
+      "log_path": "outputs/robot_lab/autolearn/cycle-001-mps/logs/collect-dagger.log",
+      "name": "collect_dagger",
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/cycle-001-mps/collection/intervention_batch_summary.json"
+      ],
+      "timeout_s": 43200.0
+    },
+    {
+      "allowed_exit_codes": [
+        0
+      ],
+      "argv": [
+        "external/leLab/.venv/bin/python",
+        "scripts/robot_lab/export_intervention_dataset.py",
+        "--batch-summary",
+        "outputs/robot_lab/autolearn/cycle-001-mps/collection/intervention_batch_summary.json",
+        "--output-root",
+        "outputs/robot_lab/autolearn/cycle-001-mps/dagger-dataset",
+        "--repo-id",
+        "local/pi05-dagger-cycle-001-mps",
+        "--fps",
+        "30",
+        "--frame-selection",
+        "dagger_corrections",
+        "--dataset-schema",
+        "pi05_causal",
+        "--verify"
+      ],
+      "env_keys": [],
+      "log_path": "outputs/robot_lab/autolearn/cycle-001-mps/logs/export-corrections.log",
+      "name": "export_corrections",
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/cycle-001-mps/dagger-dataset/meta/info.json",
+        "outputs/robot_lab/autolearn/cycle-001-mps/dagger-dataset/scenesmith_intervention_export_summary.json"
+      ],
+      "timeout_s": 7200.0
+    },
+    {
+      "allowed_exit_codes": [
+        0
+      ],
+      "argv": [
+        "external/leLab/.venv/bin/python",
+        "scripts/robot_lab/merge_pi05_training_datasets.py",
+        "--base-root",
+        "outputs/robot_lab/so101_desk_cube_sort/datasets/causal_pi05_tail_v2_stage_tasks/dataset",
+        "--corrections-root",
+        "outputs/robot_lab/autolearn/cycle-001-mps/dagger-dataset",
+        "--output-root",
+        "outputs/robot_lab/autolearn/cycle-001-mps/training-dataset",
+        "--repo-id",
+        "local/pi05-autolearn-cycle-001-mps"
+      ],
+      "env_keys": [],
+      "log_path": "outputs/robot_lab/autolearn/cycle-001-mps/logs/aggregate-dataset.log",
+      "name": "aggregate_dataset",
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/cycle-001-mps/training-dataset/meta/info.json",
+        "outputs/robot_lab/autolearn/cycle-001-mps/training-dataset/scenesmith_merge_summary.json"
+      ],
+      "timeout_s": 7200.0
+    },
+    {
+      "allowed_exit_codes": [
+        0
+      ],
+      "argv": [
+        "external/leLab/.venv/bin/python",
+        "-m",
+        "lerobot.scripts.lerobot_train",
+        "--dataset.repo_id=local/pi05-autolearn-cycle-001-mps",
+        "--dataset.root=outputs/robot_lab/autolearn/cycle-001-mps/training-dataset",
+        "--dataset.eval_split=0.0",
+        "--dataset.return_uint8=true",
+        "--policy.path=outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250",
+        "--policy.device=mps",
+        "--policy.dtype=float32",
+        "--policy.push_to_hub=false",
+        "--policy.gradient_checkpointing=true",
+        "--policy.compile_model=false",
+        "--policy.optimizer_lr=5e-7",
+        "--policy.scheduler_warmup_steps=5",
+        "--policy.scheduler_decay_steps=25",
+        "--rename_map={\"observation.images.top\":\"observation.images.base_0_rgb\",\"observation.images.wrist\":\"observation.images.left_wrist_0_rgb\"}",
+        "--steps=25",
+        "--batch_size=1",
+        "--num_workers=0",
+        "--log_freq=1",
+        "--save_freq=25",
+        "--save_checkpoint=true",
+        "--env_eval_freq=0",
+        "--eval_steps=0",
+        "--wandb.enable=false",
+        "--output_dir=outputs/robot_lab/autolearn/cycle-001-mps/train"
+      ],
+      "env_keys": [
+        "HF_HUB_OFFLINE",
+        "PYTORCH_ENABLE_MPS_FALLBACK",
+        "TOKENIZERS_PARALLELISM",
+        "TRANSFORMERS_OFFLINE"
+      ],
+      "log_path": "outputs/robot_lab/autolearn/cycle-001-mps/logs/train.log",
+      "name": "train",
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/cycle-001-mps/train/checkpoints/000025/pretrained_model/config.json",
+        "outputs/robot_lab/autolearn/cycle-001-mps/train/checkpoints/000025/pretrained_model/adapter_model.safetensors"
+      ],
+      "timeout_s": 21600.0
+    },
+    {
+      "allowed_exit_codes": [
+        0
+      ],
+      "argv": [
+        "./.mujoco_venv/bin/python",
+        "scripts/robot_lab/run_pi05_eval_with_server.py",
+        "--policy-repo",
+        "outputs/robot_lab/autolearn/cycle-001-mps/train/checkpoints/000025/pretrained_model",
+        "--output-dir",
+        "outputs/robot_lab/autolearn/cycle-001-mps/candidate-eval",
+        "--seed",
+        "7300",
+        "--episodes",
+        "4",
+        "--device",
+        "mps",
+        "--policy-port",
+        "8840",
+        "--grasp-assist-mode",
+        "policy_gripper",
+        "--max-policy-steps",
+        "6000"
+      ],
+      "env_keys": [],
+      "log_path": "outputs/robot_lab/autolearn/cycle-001-mps/logs/candidate-eval.log",
+      "name": "candidate_eval",
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/cycle-001-mps/candidate-eval/intervention_batch_summary.json"
+      ],
+      "timeout_s": 43200.0
+    }
+  ],
+  "status": "dry_run",
+  "train_seeds": [
+    7200,
+    7201,
+    7202,
+    7203
+  ]
+}
