@@ -1,0 +1,27 @@
+{
+  "schema_version": "scenesmith.scoped_worktree.v1",
+  "expected_branch": "codex/pi05-autolearn-loop",
+  "governed_path_prefixes": [
+    "GOAL.md",
+    "executor-reviewer-pair-programming.md",
+    "configurations/robot_lab/",
+    "docs/autonomous-workflow/",
+    "docs/briefs/",
+    "docs/manager-log/",
+    "docs/reviewer-messages/",
+    "docs/session-logs/",
+    "scenesmith/robot_lab/",
+    "scripts/robot_lab/",
+    "scripts/run_pi05_pair_cycle.sh",
+    "scripts/start_pi05_goal_loop.sh",
+    "scripts/stop_pi05_goal_loop.sh",
+    "tests/unit/test_experience_compiler.py",
+    "tests/unit/test_pi05_autolearn.py",
+    "tests/unit/test_robot_lab_intervention.py",
+    "tests/unit/test_robot_lab_scene_builder.py",
+    "tests/unit/test_scoped_worktree_guard.py"
+  ],
+  "explicitly_protected_paths": [
+    "experiments/pi05_autolearn/cycles/cycle-001-mps.json"
+  ]
+}
