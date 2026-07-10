@@ -1,0 +1,50 @@
+{
+  "audit_pool": [
+    8300,
+    8301,
+    8302,
+    8303,
+    8304,
+    8305,
+    8306,
+    8307,
+    8308,
+    8309,
+    8310,
+    8311
+  ],
+  "development_pool": [
+    7300,
+    7301,
+    7302,
+    7303,
+    7304,
+    7305,
+    7306,
+    7307,
+    7308,
+    7309,
+    7310,
+    7311,
+    7312,
+    7313,
+    7314,
+    7315
+  ],
+  "development_rotation_window": 2,
+  "reservations": [
+    {
+      "cycle_id": "m13-rung-250",
+      "promotable": false,
+      "seeds": [
+        7304,
+        7305,
+        7306,
+        7307
+      ],
+      "sequence": 1,
+      "tier": "development"
+    }
+  ],
+  "schema_version": "scenesmith.pi05_seed_registry.v1"
+}

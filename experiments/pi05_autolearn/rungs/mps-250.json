@@ -1,7 +1,7 @@
 {
   "schema_version": "scenesmith.pi05_training_rung.v1",
   "rung_id": "m13-rung-250",
-  "status": "training",
+  "status": "evaluating",
   "source_commit": "4cab24514064c4db067a75fac94b36ab210c7178",
   "steps": 250,
   "replay_seed": 7400,
@@ -23,6 +23,24 @@
     "path": "outputs/robot_lab/autolearn/m13-rung-250/training-input-provenance.json",
     "sha256": "de1098e1dc462a1db154f532183e999ca36a46435eab74927c081fefa1ce9b17",
     "identity_sha256": "9eb04c1a5bd84fcab1491715e4ddb8bdfe4eb45f6f6ea75c95956d74484ff1a1"
+  },
+  "training_result": {
+    "updates": 250,
+    "duration_seconds": 481,
+    "final_loss": 0.193,
+    "final_gradient_norm": 4.056,
+    "replay_audit_sha256": "cce8e3aa25dd76deec5729f2c29682fd38c5f7b990bf06e6750e142c4b18a8b5",
+    "adapter_sha256": "2cce807f678d35867a04c6690c114602daadbbca8d0e75fe671be570eb00dcab",
+    "finalize_summary_sha256": "633309ffb20618d55fc6728d649842019eaa0644c7f0b1c116c6095cc8cd4877",
+    "normalization_stats_sha256": "649c8cf43238217fabf9b226b0d292f2cc4ac06130cc619c7b182531c0c063d3",
+    "candidate_provenance_sha256": "ebfd16f583dc6824dd55d94fbd43c67f8c54f6daabcb3601d544861577ac0b47",
+    "candidate_identity_sha256": "ea744dc63b0906f371c3967087a8c777278bb6b1f61116abdf4fe597d15ebf71",
+    "candidate_model_tree_sha256": "432eb7346368eca5396d41e1f4740b169d9319915c009f40b3336109b0cb17be"
+  },
+  "evaluation_seed_reservation": {
+    "tier": "development",
+    "seeds": [7304, 7305, 7306, 7307],
+    "promotable": false
   },
   "required_evidence": [
     "250 realized replay draws",
