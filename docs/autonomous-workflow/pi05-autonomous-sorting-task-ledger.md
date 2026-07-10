@@ -86,7 +86,7 @@ Next step: deterministic approach/contact progress and stall trigger
 Status: T11.3 verified; T11.4 in_progress
 Completed: progress-aware pre-contact stall monitor and contact-gated recovery scheduling
 Evidence: 56 tests; MPS seed-6204 trigger at 333 and real contact at 388; 55 recovery frames
-Commit: pending T11.3 checkpoint
+Commit: 6d9c2af T11.3
 Remaining: cumulative bounded replay registry
 Blockers: none
 Next step: retain accepted correction sources across cycles under a bounded manifest
