@@ -44,6 +44,7 @@ repo state. This proves the new behavior is reachable without test-only wiring.
 
 ## Evidence
 
+- Commit: `936dd2f`
 - Artifact: `configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json`
 - Structural diff identity: `f457ea288b1d54faaeca8806fc76712b26fdfb49059ad5d7848637e9aec6f6a2`
 - Bound twin profile identity: `77a942306a012263d4f5f886eca692980c973de939c3e3ce06f1781567d34826`

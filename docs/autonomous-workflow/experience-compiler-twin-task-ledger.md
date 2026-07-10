@@ -7,7 +7,7 @@ training_lock: closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.3 semantic structural diff correction
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical hash/diff baseline plus TwinProfile artifact binding
-evidence: commit 7bebf55 proves deterministic XML diff plumbing; follow-up profile binding validation pending commit; manager audit 005 keeps semantic acceptance open
+evidence: commits 7bebf55 and 936dd2f prove deterministic XML diff plumbing plus TwinProfile artifact binding; manager audit 005 keeps semantic acceptance open
 remaining: M16-M19 prerequisites, then Gates C-D and closeout
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
 next_step: canonicalize rotations/effective defaults, surface inferred inertia unknowns, and re-review T16.3
@@ -134,8 +134,8 @@ Next step: execute brief 014 and obtain a fresh reviewer decision before T16.4
 Current task: T16.3
 State: in_progress
 Completed: structural diff now binds the checked-in simulation-only TwinProfile as an explicit artifact input and rejects profile drift during verify
-Evidence: local write/verify product path; 6 focused tests; 31 broad robot-lab tests
-Commit: pending
+Evidence: commit 936dd2f; local write/verify product path; 6 focused tests; 31 broad robot-lab tests
+Commit: 936dd2f
 Remaining: canonical rotations, effective solver defaults, inferred-inertia unknowns, effective friction/contact evidence, and deterministic identifier limits
 Blockers: none for offline correction
 Training lock: closed
