@@ -21,9 +21,9 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Pin and verify the Menagerie-derived SO-101 structural baseline, preserve the
-existing coordinate/camera runtime contract deliberately, and create immutable
-TwinProfile/TwinQualificationReport schemas without opening physical hardware.
+Pin LeRobot, OpenPI as a semantic reference, Robot Studio, and Menagerie by
+revision/license/content identity. Record local patch state and preserve the
+existing coordinate/camera runtime contract without opening physical hardware.
 
 ## Durable State
 

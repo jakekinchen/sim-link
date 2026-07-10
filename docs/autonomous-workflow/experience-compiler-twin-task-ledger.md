@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.0 protect the goal loop from unrelated dirty worktree state
-completed: prior M10-M12 infrastructure and historical 250-step MPS rung retained
-evidence: commit 206751b; reach 0.500 -> 0.625; no grasp or task success
+current_task: T16.1 pin dependency and structural-model identities
+completed: T16.0 scoped dirty-path goal-loop guard; prior evidence retained
+evidence: 70 tests; 51 protected paths unchanged across pair dry-run; commit b5d056b
 remaining: M16-M19 prerequisites, then Gates C-D and closeout
 blockers: physical M19 work requires separate read and motion authority; offline work is unblocked
-next_step: add a deterministic scoped-cleanliness guard and validate the loop in dry-run mode
+next_step: emit and validate one tracked dependency lock with upstream and local patch identities
 ```
 
 ## Rules
@@ -28,8 +28,8 @@ next_step: add a deterministic scoped-cleanliness guard and validate the loop in
 
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
-| T16.0 | in_progress | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | Unrelated dirty paths fingerprint unchanged; dry-run passes without unsafe blanket trust |
-| T16.1 | pending | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Tracked dependency lock resolves every runtime input to SHA/hash |
+| T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
+| T16.1 | in_progress | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Tracked dependency lock resolves every runtime input to SHA/hash |
 | T16.2 | pending | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Property/schema tests; content-addressed simulation-only example |
 | T16.3 | pending | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | Machine structural diff of inertials, limits, contacts, camera, gripper, actuator, backlash |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
@@ -126,4 +126,18 @@ Remaining: M16-M19 before any more training
 Blockers: none for offline implementation
 Training lock: closed
 Next step: protect and dry-run the repo-local goal loop, then pin dependencies and reconcile the twin
+```
+
+### 2026-07-10 - T16.0 scoped goal-loop guard
+
+```text
+Current task: T16.1
+State: in_progress
+Completed: protected-worktree snapshot/verify and scoped pair/start/stop wrappers
+Evidence: 70 tests; 51 protected paths; pre/post dry-run guard pass
+Commit: b5d056b
+Remaining: dependency lock and twin foundation
+Blockers: none for offline work
+Training lock: closed
+Next step: pin all policy/model/runtime repositories and local patches
 ```
