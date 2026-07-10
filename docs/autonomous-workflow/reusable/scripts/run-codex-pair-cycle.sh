@@ -185,8 +185,8 @@ codex_base_args() {
   else
     printf '%s\n' "-s"
     printf '%s\n' "$SANDBOX"
-    printf '%s\n' "-a"
-    printf '%s\n' "$APPROVAL"
+    printf '%s\n' "-c"
+    printf 'approval_policy="%s"\n' "$APPROVAL"
   fi
 }
 
