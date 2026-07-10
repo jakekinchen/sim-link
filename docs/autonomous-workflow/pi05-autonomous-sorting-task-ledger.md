@@ -163,3 +163,14 @@ Remaining: meaningful MPS training/evaluation, curriculum, reward improvement
 Blockers: none
 Next step: run corrected 250-step MPS candidate then paired development evaluation
 ```
+
+### 2026-07-10 - M13 corrected MPS rung 250
+
+```text
+Status: M13 in_progress; 250-step rung verified; owner review hold before rung 500
+Completed: 250 audited MPS updates, finalize, standalone reload, paired four-seed strict evaluation
+Evidence: reach 0.500 -> 0.625; contact 0.250 -> 0.250; all grasp-through-success stages remain 0
+Decision: rung evidence accepted; candidate not promoted; accepted pointer unchanged
+Blockers: no infrastructure blocker; learned grasp is the current behavioral bottleneck
+Next step: incorporate owner advice before choosing rung 500 or a targeted grasp-data/reward change
+```

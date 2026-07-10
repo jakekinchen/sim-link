@@ -1,7 +1,7 @@
 {
   "schema_version": "scenesmith.pi05_training_rung.v1",
   "rung_id": "m13-rung-250",
-  "status": "evaluating",
+  "status": "complete",
   "source_commit": "4cab24514064c4db067a75fac94b36ab210c7178",
   "steps": 250,
   "replay_seed": 7400,
@@ -41,6 +41,25 @@
     "tier": "development",
     "seeds": [7304, 7305, 7306, 7307],
     "promotable": false
+  },
+  "paired_development_evaluation": {
+    "comparison": "outputs/robot_lab/autolearn/m13-rung-250/development-comparison.json",
+    "baseline_batch_sha256": "94c270f1e1726a3e204804b61f2e1e449af21e4f2ba4c848f8ffac3b49a26f5b",
+    "candidate_batch_sha256": "1f0edfbf9df77ef84271163ed4f14e3a285eaf4af0b66fda7da9e65bd2daf5cd",
+    "strict_episodes_each": 4,
+    "baseline_reach_rate": 0.5,
+    "candidate_reach_rate": 0.625,
+    "baseline_contact_rate": 0.25,
+    "candidate_contact_rate": 0.25,
+    "baseline_task_success_rate": 0.0,
+    "candidate_task_success_rate": 0.0,
+    "downstream_stage_improvement": false
+  },
+  "decision": {
+    "rung_evidence_accepted": true,
+    "candidate_promoted": false,
+    "reason": "All 250-step rung gates passed and strict reach improved, but no grasp or downstream improvement occurred and development seeds are non-promotable.",
+    "next_action": "Pause before the 500-step rung for owner review and advice."
   },
   "required_evidence": [
     "250 realized replay draws",
