@@ -365,12 +365,28 @@
         "--max-policy-steps",
         "200"
       ],
+      "artifacts": {
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/candidate-eval/intervention_batch_summary.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/candidate-eval/intervention_batch_summary.json",
+          "sha256": "9af6f9c3002657ea245412fcae0c559534f3d62a55be2ed3b03d7000aa7a2b09",
+          "size_bytes": 10465
+        }
+      },
       "env_keys": [],
+      "git_commit_before": "2ce06d0ef15fdc4ebfcdc49c00c2782f61a051b4",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/candidate-eval.log",
       "name": "candidate_eval",
       "required_artifacts": [
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/candidate-eval/intervention_batch_summary.json"
       ],
+      "result": {
+        "duration_s": 146.056,
+        "exit_code": 0,
+        "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/candidate-eval.log",
+        "log_sha256": "dd6f2ee2be8d6827874c46a13bb91d66cb6af6aafe42b00715ec738cb9070cda"
+      },
       "timeout_s": 43200.0
     }
   ],
