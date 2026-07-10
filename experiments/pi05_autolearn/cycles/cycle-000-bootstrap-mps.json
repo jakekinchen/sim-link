@@ -12,7 +12,40 @@
     "provider": "none"
   },
   "max_training_steps": 5,
-  "promotion": null,
+  "promotion": {
+    "accepted": false,
+    "baseline": {
+      "assisted_episodes": 0,
+      "episodes": 1,
+      "mean_sorted_count": 0.0,
+      "physical_follower_episodes": 0,
+      "pure_success_rate": 0.0,
+      "pure_successes": 0,
+      "scripted_episodes": 0,
+      "seeds": [
+        6301
+      ],
+      "task_success_rate": 0.0,
+      "task_successes": 0
+    },
+    "candidate": {
+      "assisted_episodes": 0,
+      "episodes": 1,
+      "mean_sorted_count": 0.0,
+      "physical_follower_episodes": 0,
+      "pure_success_rate": 0.0,
+      "pure_successes": 0,
+      "scripted_episodes": 0,
+      "seeds": [
+        6301
+      ],
+      "task_success_rate": 0.0,
+      "task_successes": 0
+    },
+    "reasons": [
+      "candidate_below_pure_success_threshold"
+    ]
+  },
   "resumed_from": {
     "config_sha256": "12f4dc2379d1ed403f331ee10f596715e1468ad5aa9c57bb09e3b16ec48c0218",
     "error": {
@@ -390,7 +423,7 @@
       "timeout_s": 43200.0
     }
   ],
-  "status": "running",
+  "status": "complete",
   "train_seeds": [
     6204
   ]
