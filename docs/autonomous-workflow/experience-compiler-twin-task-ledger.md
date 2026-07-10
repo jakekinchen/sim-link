@@ -6,11 +6,11 @@ Updated: 2026-07-10
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.3 semantic structural diff correction
-completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical hash/diff baseline plus TwinProfile artifact binding
-evidence: commits 7bebf55 and 936dd2f prove deterministic XML diff plumbing plus TwinProfile artifact binding; manager audit 005 keeps semantic acceptance open
-remaining: inferred-inertia unknowns, effective friction/contact attachment semantics, deterministic unnamed-geom limits, then M16-M19 prerequisites and Gates C-D
+completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, and partial quaternion normalization
+evidence: commits 7bebf55, 936dd2f, and fb54e64; manager audits 005-006 keep semantic acceptance open
+remaining: complete quaternion semantics, inferred-inertia unknowns, effective friction/contact attachment semantics, deterministic unnamed-geom limits, then M16-M19 prerequisites and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: surface inferred inertia unknowns and effective friction/contact semantics, then re-review T16.3
+next_step: finish quaternion coverage for collision geoms and implicit identity, then execute inertial/contact truthfulness
 ```
 
 ## Rules
@@ -113,6 +113,20 @@ next_step: surface inferred inertia unknowns and effective friction/contact sema
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.3 quaternion coverage correction
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: TwinProfile binding and effective solver comparison; partial rotation canonicalization
+Evidence: commit fb54e64; five scale-equivalent arm-collision quaternion deltas remain in the artifact; manager audit 006
+Commit: pending
+Remaining: collision/implicit-identity quaternion semantics, inferred-inertia unknowns, effective friction/contact evidence, and deterministic identifier limits
+Blockers: none for offline correction
+Training lock: closed
+Next step: execute brief 017, then return to queued brief 016
+```
 
 ### 2026-07-10 - T16.3 semantic acceptance reopened
 

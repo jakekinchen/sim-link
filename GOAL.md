@@ -21,10 +21,9 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Represent non-derivable inertials as explicit `unknown` records and distinguish
-declaration-only friction/contact settings from effective runtime attachments in
-the structural twin diff. Do not open hardware or begin measured-mass
-compilation until T16.3 is re-accepted.
+Complete quaternion canonicalization across every transform-bearing structural
+category, including collision geoms and implicit identity rotations. Do not
+open hardware or begin inertial/contact or measured-mass work in this slice.
 
 ## Durable State
 
