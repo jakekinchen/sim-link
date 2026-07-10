@@ -21,9 +21,9 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Define `TwinProfile`, `TwinQualificationSpec`, and `TwinQualificationReport`
-schemas plus a simulation-only example that binds back to
-`configurations/robot_lab/pi05_robotics_dependency_lock.json`.
+Finish T16.1: replace unresolved OpenPI/Menagerie placeholders with exact remote
+revision and license/content pins, and make the tracked lock portable across
+checkout locations. Do not begin twin schemas until the corrected lock verifies.
 
 ## Durable State
 
