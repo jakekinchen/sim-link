@@ -1,7 +1,8 @@
 {
   "schema_version": "scenesmith.pi05_training_rung.v1",
   "rung_id": "m13-rung-250",
-  "status": "planned",
+  "status": "training",
+  "source_commit": "4cab24514064c4db067a75fac94b36ab210c7178",
   "steps": 250,
   "replay_seed": 7400,
   "correction_fraction": 0.5,
@@ -10,6 +11,19 @@
   "candidate_model": "outputs/robot_lab/autolearn/m13-rung-250/train/checkpoints/000250/pretrained_model",
   "development_seeds": [7304, 7305, 7306, 7307],
   "promotion_eligible": false,
+  "replay_plan": {
+    "path": "outputs/robot_lab/autolearn/m13-rung-250/replay-plan.json",
+    "sha256": "be9c66bd3105aa28c0b9e59f1d3f2a85f1f5ab3182d2a05fddfdaddf927cbdce",
+    "draws": 250,
+    "base_draws": 125,
+    "correction_draws": 125,
+    "phase_draws_each": 25
+  },
+  "training_input_provenance": {
+    "path": "outputs/robot_lab/autolearn/m13-rung-250/training-input-provenance.json",
+    "sha256": "de1098e1dc462a1db154f532183e999ca36a46435eab74927c081fefa1ce9b17",
+    "identity_sha256": "9eb04c1a5bd84fcab1491715e4ddb8bdfe4eb45f6f6ea75c95956d74484ff1a1"
+  },
   "required_evidence": [
     "250 realized replay draws",
     "reloadable finalized checkpoint",
