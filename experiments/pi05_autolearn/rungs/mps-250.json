@@ -1,0 +1,20 @@
+{
+  "schema_version": "scenesmith.pi05_training_rung.v1",
+  "rung_id": "m13-rung-250",
+  "status": "planned",
+  "steps": 250,
+  "replay_seed": 7400,
+  "correction_fraction": 0.5,
+  "dataset_root": "outputs/robot_lab/autolearn/m11-registry-canary-v2/training-dataset",
+  "output_dir": "outputs/robot_lab/autolearn/m13-rung-250",
+  "candidate_model": "outputs/robot_lab/autolearn/m13-rung-250/train/checkpoints/000250/pretrained_model",
+  "development_seeds": [7304, 7305, 7306, 7307],
+  "promotion_eligible": false,
+  "required_evidence": [
+    "250 realized replay draws",
+    "reloadable finalized checkpoint",
+    "candidate provenance manifest",
+    "paired strict development evaluation",
+    "stage-funnel comparison against accepted baseline"
+  ]
+}

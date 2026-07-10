@@ -1,0 +1,36 @@
+{
+  "schema_version": "scenesmith.pi05_mps_ladder.v1",
+  "accepted_model": "outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250",
+  "dataset_root": "outputs/robot_lab/autolearn/m11-registry-canary-v2/training-dataset",
+  "correction_sidecar": "outputs/robot_lab/autolearn/m11-registry-canary-v2/training-dataset/scenesmith_correction_replay_sidecar.jsonl",
+  "normalization_stats": "outputs/robot_lab/autolearn/m11-registry-canary-v2/training-dataset/meta/stats.json",
+  "device": "mps",
+  "dtype": "float32",
+  "batch_size": 1,
+  "correction_fraction": 0.5,
+  "optimizer_lr": 5e-7,
+  "replay_seed": 7400,
+  "development_seed_sets": {
+    "250": [7304, 7305, 7306, 7307],
+    "500": [7308, 7309, 7310, 7311],
+    "1000": [7312, 7313, 7314, 7315]
+  },
+  "rungs": [
+    {
+      "steps": 250,
+      "output_dir": "outputs/robot_lab/autolearn/m13-rung-250"
+    },
+    {
+      "steps": 500,
+      "output_dir": "outputs/robot_lab/autolearn/m13-rung-500"
+    },
+    {
+      "steps": 1000,
+      "output_dir": "outputs/robot_lab/autolearn/m13-rung-1000"
+    }
+  ],
+  "promotion": {
+    "eligible": false,
+    "reason": "ladder rungs use rotating development seeds; audit evaluation is separate"
+  }
+}
