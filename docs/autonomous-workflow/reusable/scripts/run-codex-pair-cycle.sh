@@ -204,7 +204,10 @@ run_role() {
     return
   fi
 
-  mapfile -t args < <(codex_base_args)
+  args=()
+  while IFS= read -r arg; do
+    args+=("$arg")
+  done < <(codex_base_args)
   args+=("-o" "$last_msg" "-")
 
   printf '\n== Running %s ==\n' "$role"
