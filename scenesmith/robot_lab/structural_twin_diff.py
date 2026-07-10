@@ -13,7 +13,11 @@ from scenesmith.robot_lab.robotics_dependency_lock import (
     MENAGERIE_VENDORED_ROOT,
     verify_robotics_dependency_lock,
 )
-from scenesmith.robot_lab.twin_contract import DEFAULT_DEPENDENCY_LOCK_PATH
+from scenesmith.robot_lab.twin_contract import (
+    DEFAULT_DEPENDENCY_LOCK_PATH,
+    DEFAULT_TWIN_PROFILE_PATH,
+    verify_twin_profile,
+)
 
 
 STRUCTURAL_TWIN_DIFF_SCHEMA_VERSION = "scenesmith.structural_twin_diff.v1"
@@ -40,9 +44,15 @@ def build_structural_twin_diff(
     *,
     repo_root: Path,
     dependency_lock_path: Path = DEFAULT_DEPENDENCY_LOCK_PATH,
+    twin_profile_path: Path = DEFAULT_TWIN_PROFILE_PATH,
 ) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     dependency_lock = _load_dependency_lock(repo_root=repo_root, dependency_lock_path=dependency_lock_path)
+    twin_profile = _load_twin_profile(
+        repo_root=repo_root,
+        twin_profile_path=twin_profile_path,
+        dependency_lock_path=dependency_lock_path,
+    )
     runtime_source = dependency_lock["payload"]["runtime_contract"]["source_mjcf"]
     menagerie_source = _menagerie_so101_source(dependency_lock["payload"])
 
@@ -68,6 +78,7 @@ def build_structural_twin_diff(
         "schema_version": STRUCTURAL_TWIN_DIFF_SCHEMA_VERSION,
         "artifact_name": "pi05_structural_twin_diff_simulation_only",
         "dependency_lock_ref": dependency_lock["ref"],
+        "twin_profile_ref": twin_profile["ref"],
         "sources": {
             "runtime": _artifact_source_record(runtime_source),
             "menagerie": _artifact_source_record(menagerie_source),
@@ -91,6 +102,7 @@ def verify_structural_twin_diff(
     *,
     repo_root: Path,
     dependency_lock_path: Path = DEFAULT_DEPENDENCY_LOCK_PATH,
+    twin_profile_path: Path = DEFAULT_TWIN_PROFILE_PATH,
 ) -> None:
     repo_root = repo_root.resolve()
     if payload.get("schema_version") != STRUCTURAL_TWIN_DIFF_SCHEMA_VERSION:
@@ -113,6 +125,13 @@ def verify_structural_twin_diff(
     dependency_lock = _load_dependency_lock(repo_root=repo_root, dependency_lock_path=dependency_lock_path)
     if payload["dependency_lock_ref"] != dependency_lock["ref"]:
         raise ValueError("Structural diff dependency lock reference drifted")
+    twin_profile = _load_twin_profile(
+        repo_root=repo_root,
+        twin_profile_path=twin_profile_path,
+        dependency_lock_path=dependency_lock_path,
+    )
+    if payload.get("twin_profile_ref") != twin_profile["ref"]:
+        raise ValueError("Twin profile identity drifted")
 
     runtime_source = dependency_lock["payload"]["runtime_contract"]["source_mjcf"]
     menagerie_source = _menagerie_so101_source(dependency_lock["payload"])
@@ -143,6 +162,7 @@ def verify_structural_twin_diff(
     expected = build_structural_twin_diff(
         repo_root=repo_root,
         dependency_lock_path=dependency_lock_path,
+        twin_profile_path=twin_profile_path,
     )
     if payload != expected:
         raise ValueError("Structural twin diff artifact drifted from repo state")
@@ -153,10 +173,12 @@ def write_structural_twin_diff(
     repo_root: Path,
     output_path: Path = DEFAULT_STRUCTURAL_TWIN_DIFF_PATH,
     dependency_lock_path: Path = DEFAULT_DEPENDENCY_LOCK_PATH,
+    twin_profile_path: Path = DEFAULT_TWIN_PROFILE_PATH,
 ) -> dict[str, Any]:
     payload = build_structural_twin_diff(
         repo_root=repo_root,
         dependency_lock_path=dependency_lock_path,
+        twin_profile_path=twin_profile_path,
     )
     artifact_path = output_path if output_path.is_absolute() else repo_root / output_path
     artifact_path.parent.mkdir(parents=True, exist_ok=True)
@@ -182,6 +204,26 @@ def _artifact_source_record(source_evidence: dict[str, Any]) -> dict[str, Any]:
         "path": source_evidence["path"],
         "sha256": source_evidence["sha256"],
         "size_bytes": source_evidence["size_bytes"],
+    }
+
+
+def _load_twin_profile(
+    *,
+    repo_root: Path,
+    twin_profile_path: Path,
+    dependency_lock_path: Path,
+) -> dict[str, Any]:
+    resolved = twin_profile_path if twin_profile_path.is_absolute() else repo_root / twin_profile_path
+    payload = json.loads(resolved.read_text(encoding="utf-8"))
+    verify_twin_profile(payload, repo_root=repo_root, dependency_lock_path=dependency_lock_path)
+    return {
+        "payload": payload,
+        "ref": {
+            "path": str(Path(str(twin_profile_path)).as_posix()),
+            "schema_version": payload["schema_version"],
+            "identity_sha256": payload["identity_sha256"],
+            "file_sha256": hashlib.sha256(resolved.read_bytes()).hexdigest(),
+        },
     }
 
 

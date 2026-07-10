@@ -13,6 +13,7 @@ from scenesmith.robot_lab.structural_twin_diff import (
     verify_structural_twin_diff,
     write_structural_twin_diff,
 )
+from scenesmith.robot_lab.twin_contract import DEFAULT_TWIN_PROFILE_PATH
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -59,6 +60,15 @@ class StructuralTwinDiffTests(unittest.TestCase):
             payload["sources"]["menagerie"]["path"],
             "third_party/mujoco_menagerie/robotstudio_so101/so101.xml",
         )
+        self.assertEqual(
+            payload["twin_profile_ref"]["path"],
+            "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
+        )
+        expected_profile = json.loads((REPO_ROOT / DEFAULT_TWIN_PROFILE_PATH).read_text(encoding="utf-8"))
+        self.assertEqual(
+            payload["twin_profile_ref"]["identity_sha256"],
+            expected_profile["identity_sha256"],
+        )
         self.assertTrue(
             any(
                 record["key"] == "site:gripperframe"
@@ -104,6 +114,14 @@ class StructuralTwinDiffTests(unittest.TestCase):
         _resign(payload)
 
         with self.assertRaisesRegex(ValueError, "Missing structural diff categories"):
+            verify_structural_twin_diff(payload, repo_root=REPO_ROOT)
+
+    def test_verify_rejects_twin_profile_identity_tamper(self):
+        payload = build_structural_twin_diff(repo_root=REPO_ROOT)
+        payload["twin_profile_ref"]["identity_sha256"] = "0" * 64
+        _resign(payload)
+
+        with self.assertRaisesRegex(ValueError, "Twin profile identity drifted"):
             verify_structural_twin_diff(payload, repo_root=REPO_ROOT)
 
 

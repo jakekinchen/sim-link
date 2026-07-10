@@ -2739,7 +2739,7 @@
     "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json"
   },
-  "identity_sha256": "d71576574eb3dbb592cb495481a9de2e17e1581cc3e10476e1bc098106053b89",
+  "identity_sha256": "f457ea288b1d54faaeca8806fc76712b26fdfb49059ad5d7848637e9aec6f6a2",
   "schema_version": "scenesmith.structural_twin_diff.v1",
   "sources": {
     "menagerie": {
@@ -2838,5 +2838,11 @@
     "mismatched_records": 32,
     "missing_records": 29,
     "unknown_records": 0
+  },
+  "twin_profile_ref": {
+    "file_sha256": "cc122e1ad9a85a6f9bab0895753c35ec28c5ea0aeb21def93169ba4a4f77226f",
+    "identity_sha256": "77a942306a012263d4f5f886eca692980c973de939c3e3ce06f1781567d34826",
+    "path": "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
+    "schema_version": "scenesmith.twin_profile.v1"
   }
 }
