@@ -119,15 +119,36 @@
       "role": "local_patch_checkout"
     },
     "menagerie_robotstudio_so101": {
+      "license_file": {
+        "path": "robotstudio_so101/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357
+      },
       "license_id": "Apache-2.0",
       "model_path": "robotstudio_so101",
+      "reference_files": [
+        {
+          "path": "robotstudio_so101/README.md",
+          "sha256": "e2344e7c14290bed85c7907247aecb8bf6cb4392e3de0d7c45680efe9bb9b5a9",
+          "size_bytes": 1142
+        },
+        {
+          "path": "robotstudio_so101/scene.xml",
+          "sha256": "d3037f0fd36b61a9b6805b2c79831e7a392276d0f490145d01f718542eee9150",
+          "size_bytes": 825
+        }
+      ],
       "repository_url": "https://github.com/google-deepmind/mujoco_menagerie",
-      "resolution": "unresolved_remote_reference",
-      "resolution_reason": "SceneSmith has not vendored or pinned a local MuJoCo Menagerie checkout yet; this records the intended upstream structural lineage without switching runtime inputs in place.",
-      "revision": null,
+      "resolution": "exact_remote_pin",
+      "revision": "71f066ad0be9cd271f7ed58c030243ef157af9f4",
       "role": "proposed_structural_lineage"
     },
     "openpi_semantic_reference": {
+      "license_file": {
+        "path": "LICENSE",
+        "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+        "size_bytes": 11356
+      },
       "license_id": "Apache-2.0",
       "local_reference_files": [
         {
@@ -151,10 +172,21 @@
           "size_bytes": 10828
         }
       ],
+      "reference_files": [
+        {
+          "path": "src/openpi/transforms.py",
+          "sha256": "a1b94e9e72849a18834778f229c6bb389a495eb7fbe0aa800edea728b9424ff4",
+          "size_bytes": 15752
+        },
+        {
+          "path": "src/openpi/shared/normalize.py",
+          "sha256": "6c2cea4946fb07e51801530400d2b2fd94730e195cd290d6b6960114eca9739d",
+          "size_bytes": 5529
+        }
+      ],
       "repository_url": "https://github.com/Physical-Intelligence/openpi",
-      "resolution": "unresolved_remote_reference",
-      "resolution_reason": "No OpenPI checkout is vendored or pinned in this repo; SceneSmith currently references OpenPI semantics through LeRobot PI0.5 ports and parity fixtures.",
-      "revision": null,
+      "resolution": "exact_remote_pin",
+      "revision": "15a9616a00943ada6c20a0f158e3adb39df2ccac",
       "role": "semantic_reference_only"
     },
     "robotstudio_so101": {
@@ -181,8 +213,7 @@
       "role": "active_structural_model"
     }
   },
-  "identity_sha256": "1ef4aa35e4748e89e8f877c3c6ab2d05e89f5fc9e1beae9ccfa6b8adf47421fc",
-  "repo_root": "/Users/kelly/Documents/Codex/2026-07-06/download-the-code-from-here-install/scenesmith",
+  "identity_sha256": "50948edf04aeec242c3db2c7eae1dfd706af6f29d4648193d7b483cdfa7f7193",
   "runtime_contract": {
     "joint_names": [
       "shoulder_pan",

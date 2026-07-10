@@ -2,11 +2,15 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import subprocess
+import tempfile
 import unittest
 
 from pathlib import Path
 
 from scenesmith.robot_lab.robotics_dependency_lock import (
+    OPENPI_REVISION,
     build_robotics_dependency_lock,
     verify_robotics_dependency_lock,
 )
@@ -33,13 +37,14 @@ class RoboticsDependencyLockTests(unittest.TestCase):
             "split_runtime_unresolved",
         )
         self.assertEqual(
-            payload["dependencies"]["openpi_semantic_reference"]["resolution"],
-            "unresolved_remote_reference",
+            payload["dependencies"]["openpi_semantic_reference"]["revision"],
+            OPENPI_REVISION,
         )
         self.assertEqual(
             payload["dependencies"]["menagerie_robotstudio_so101"]["model_path"],
             "robotstudio_so101",
         )
+        self.assertNotIn("repo_root", payload)
 
     def test_verify_rejects_missing_dirty_patch_identity(self):
         payload = build_robotics_dependency_lock(repo_root=REPO_ROOT)
@@ -60,6 +65,125 @@ class RoboticsDependencyLockTests(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "Remote reference license drifted"):
             verify_robotics_dependency_lock(payload, repo_root=REPO_ROOT)
+
+    def test_verify_rejects_short_remote_revision(self):
+        payload = build_robotics_dependency_lock(repo_root=REPO_ROOT)
+        payload["dependencies"]["openpi_semantic_reference"]["revision"] = OPENPI_REVISION[:12]
+        _resign(payload)
+
+        with self.assertRaisesRegex(ValueError, "40-character commit SHA"):
+            verify_robotics_dependency_lock(payload, repo_root=REPO_ROOT)
+
+    def test_verify_rejects_wrong_remote_reference_path(self):
+        payload = build_robotics_dependency_lock(repo_root=REPO_ROOT)
+        payload["dependencies"]["menagerie_robotstudio_so101"]["reference_files"][1]["path"] = (
+            "robotstudio_so101/wrong.xml"
+        )
+        _resign(payload)
+
+        with self.assertRaisesRegex(ValueError, "Remote reference file pin drifted"):
+            verify_robotics_dependency_lock(payload, repo_root=REPO_ROOT)
+
+    def test_verify_rejects_modified_signed_fields(self):
+        payload = build_robotics_dependency_lock(repo_root=REPO_ROOT)
+        payload["dependencies"]["openpi_semantic_reference"]["reference_files"][0]["sha256"] = "0" * 64
+
+        with self.assertRaisesRegex(ValueError, "identity hash is invalid"):
+            verify_robotics_dependency_lock(payload, repo_root=REPO_ROOT)
+
+    def test_build_is_portable_across_equivalent_roots(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root_a = Path(temp_dir) / "root-a"
+            root_b = Path(temp_dir) / "root-b"
+            self._write_portable_fixture(root_a)
+            self._write_portable_fixture(root_b)
+
+            payload_a = build_robotics_dependency_lock(repo_root=root_a)
+            payload_b = build_robotics_dependency_lock(repo_root=root_b)
+
+            self.assertEqual(payload_a, payload_b)
+            verify_robotics_dependency_lock(payload_a, repo_root=root_a)
+            verify_robotics_dependency_lock(payload_b, repo_root=root_b)
+
+    def _write_portable_fixture(self, root: Path) -> None:
+        files = {
+            "scenesmith/robot_lab/spec.py": "spec fixture\n",
+            "scenesmith/robot_lab/so101_coordinates.py": "coords fixture\n",
+            "scenesmith/robot_lab/mujoco_export.py": "export fixture\n",
+            "external/SO-ARM100/LICENSE": "robotstudio license\n",
+            "external/SO-ARM100/Simulation/SO101/so101_new_calib.xml": "<mujoco/>\n",
+            "external/leLab/LICENSE": "lelab license\n",
+            "external/leLab/pyproject.toml": """
+[project]
+name = "LeLab"
+version = "0.1.0"
+license = "Apache-2.0"
+dependencies = [
+  "lerobot[core_scripts,feetech,training] @ git+https://github.com/huggingface/lerobot.git@v0.6.0",
+]
+
+[project.urls]
+source = "https://github.com/huggingface/leLab.git"
+""".strip()
+            + "\n",
+            "external/leLab/frontend/public/so-101-urdf/urdf/so101_new_calib.urdf": "<robot/>\n",
+            "external/lerobot/LICENSE": "lerobot license\n",
+            "external/lerobot/pyproject.toml": """
+[project]
+name = "lerobot"
+version = "0.6.1"
+license = "Apache-2.0"
+
+[project.urls]
+source = "https://github.com/huggingface/lerobot"
+""".strip()
+            + "\n",
+            "external/lerobot/docs/source/policy_pi05_README.md": "pi05 readme\n",
+            "external/lerobot/src/lerobot/policies/pi05/configuration_pi05.py": "cfg = 1\n",
+            "external/lerobot/src/lerobot/policies/pi05/modeling_pi05.py": "model = 1\n",
+            "external/lerobot/src/lerobot/policies/pi05/processor_pi05.py": "processor = 1\n",
+            "external/lerobot/src/lerobot/processor/relative_action_processor.py": "processor = 2\n",
+            "external/lerobot/src/lerobot/scripts/lerobot_train.py": "train = 1\n",
+            "external/lerobot/tests/policies/pi0_pi05/utils/openpi_parity.py": "parity = 1\n",
+        }
+        for relative, contents in files.items():
+            path = root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(contents, encoding="utf-8")
+
+        self._init_repo(
+            root / "external/leLab",
+            remote_url="https://github.com/huggingface/leLab.git",
+        )
+        self._init_repo(
+            root / "external/lerobot",
+            remote_url="https://github.com/huggingface/lerobot.git",
+        )
+        self._init_repo(
+            root / "external/SO-ARM100",
+            remote_url="https://github.com/TheRobotStudio/SO-ARM100.git",
+        )
+
+    def _init_repo(self, path: Path, *, remote_url: str) -> None:
+        self._git(path, "init")
+        self._git(path, "config", "user.name", "Fixture User")
+        self._git(path, "config", "user.email", "fixture@example.com")
+        self._git(path, "remote", "add", "origin", remote_url)
+        self._git(path, "add", ".")
+        self._git(path, "commit", "-m", "fixture")
+
+    def _git(self, path: Path, *args: str) -> None:
+        env = os.environ.copy()
+        env["GIT_AUTHOR_DATE"] = "2026-01-01T00:00:00+00:00"
+        env["GIT_COMMITTER_DATE"] = "2026-01-01T00:00:00+00:00"
+        subprocess.run(
+            ["git", *args],
+            cwd=path,
+            check=True,
+            capture_output=True,
+            text=True,
+            env=env,
+        )
 
 
 if __name__ == "__main__":

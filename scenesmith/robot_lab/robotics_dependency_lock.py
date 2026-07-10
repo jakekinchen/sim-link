@@ -20,6 +20,44 @@ MENAGERIE_REPOSITORY_URL = "https://github.com/google-deepmind/mujoco_menagerie"
 MENAGERIE_MODEL_PATH = "robotstudio_so101"
 OPENPI_LICENSE_ID = "Apache-2.0"
 MENAGERIE_LICENSE_ID = "Apache-2.0"
+EXACT_REMOTE_PIN_RESOLUTION = "exact_remote_pin"
+_COMMIT_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+OPENPI_REVISION = "15a9616a00943ada6c20a0f158e3adb39df2ccac"
+MENAGERIE_REVISION = "71f066ad0be9cd271f7ed58c030243ef157af9f4"
+OPENPI_LICENSE_FILE = {
+    "path": "LICENSE",
+    "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+    "size_bytes": 11356,
+}
+OPENPI_REFERENCE_FILES = [
+    {
+        "path": "src/openpi/transforms.py",
+        "sha256": "a1b94e9e72849a18834778f229c6bb389a495eb7fbe0aa800edea728b9424ff4",
+        "size_bytes": 15752,
+    },
+    {
+        "path": "src/openpi/shared/normalize.py",
+        "sha256": "6c2cea4946fb07e51801530400d2b2fd94730e195cd290d6b6960114eca9739d",
+        "size_bytes": 5529,
+    },
+]
+MENAGERIE_LICENSE_FILE = {
+    "path": "robotstudio_so101/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "size_bytes": 11357,
+}
+MENAGERIE_REFERENCE_FILES = [
+    {
+        "path": "robotstudio_so101/README.md",
+        "sha256": "e2344e7c14290bed85c7907247aecb8bf6cb4392e3de0d7c45680efe9bb9b5a9",
+        "size_bytes": 1142,
+    },
+    {
+        "path": "robotstudio_so101/scene.xml",
+        "sha256": "d3037f0fd36b61a9b6805b2c79831e7a392276d0f490145d01f718542eee9150",
+        "size_bytes": 825,
+    },
+]
 
 _LEROBOT_GIT_DEPENDENCY_RE = re.compile(
     r"^lerobot(?:\[[^]]+\])?\s*@\s*git\+(?P<url>[^@]+)@(?P<ref>\S+)$"
@@ -44,7 +82,6 @@ def build_robotics_dependency_lock(*, repo_root: Path) -> dict[str, Any]:
     active_urdf = repo_root / robot.source_urdf
     payload: dict[str, Any] = {
         "schema_version": ROBOTICS_DEPENDENCY_LOCK_SCHEMA_VERSION,
-        "repo_root": str(repo_root),
         "spec_sources": [_file_evidence(path, repo_root=repo_root) for path in spec_sources],
         "runtime_contract": {
             "robot_model": robot.model,
@@ -105,12 +142,10 @@ def build_robotics_dependency_lock(*, repo_root: Path) -> dict[str, Any]:
                 "role": "semantic_reference_only",
                 "repository_url": OPENPI_REPOSITORY_URL,
                 "license_id": OPENPI_LICENSE_ID,
-                "resolution": "unresolved_remote_reference",
-                "revision": None,
-                "resolution_reason": (
-                    "No OpenPI checkout is vendored or pinned in this repo; SceneSmith currently "
-                    "references OpenPI semantics through LeRobot PI0.5 ports and parity fixtures."
-                ),
+                "resolution": EXACT_REMOTE_PIN_RESOLUTION,
+                "revision": OPENPI_REVISION,
+                "license_file": dict(OPENPI_LICENSE_FILE),
+                "reference_files": [dict(entry) for entry in OPENPI_REFERENCE_FILES],
                 "local_reference_files": [_file_evidence(path, repo_root=repo_root) for path in [
                     lerobot_root / "docs/source/policy_pi05_README.md",
                     lerobot_root / "src/lerobot/policies/pi05/modeling_pi05.py",
@@ -131,13 +166,10 @@ def build_robotics_dependency_lock(*, repo_root: Path) -> dict[str, Any]:
                 "repository_url": MENAGERIE_REPOSITORY_URL,
                 "license_id": MENAGERIE_LICENSE_ID,
                 "model_path": MENAGERIE_MODEL_PATH,
-                "resolution": "unresolved_remote_reference",
-                "revision": None,
-                "resolution_reason": (
-                    "SceneSmith has not vendored or pinned a local MuJoCo Menagerie checkout yet; "
-                    "this records the intended upstream structural lineage without switching runtime "
-                    "inputs in place."
-                ),
+                "resolution": EXACT_REMOTE_PIN_RESOLUTION,
+                "revision": MENAGERIE_REVISION,
+                "license_file": dict(MENAGERIE_LICENSE_FILE),
+                "reference_files": [dict(entry) for entry in MENAGERIE_REFERENCE_FILES],
             },
         },
     }
@@ -151,8 +183,6 @@ def verify_robotics_dependency_lock(payload: dict[str, Any], *, repo_root: Path)
     if payload.get("schema_version") != ROBOTICS_DEPENDENCY_LOCK_SCHEMA_VERSION:
         raise ValueError("Unsupported robotics dependency lock schema")
     _verify_identity_hash(payload)
-    if Path(payload["repo_root"]).resolve() != repo_root:
-        raise ValueError("Dependency lock repo_root does not match verification root")
     for evidence in payload["spec_sources"]:
         _verify_file_evidence(evidence, repo_root=repo_root)
     _verify_runtime_contract(payload["runtime_contract"], repo_root=repo_root)
@@ -163,6 +193,9 @@ def verify_robotics_dependency_lock(payload: dict[str, Any], *, repo_root: Path)
         dependencies["openpi_semantic_reference"],
         expected_repository_url=OPENPI_REPOSITORY_URL,
         expected_license_id=OPENPI_LICENSE_ID,
+        expected_revision=OPENPI_REVISION,
+        expected_license_file=OPENPI_LICENSE_FILE,
+        expected_reference_files=OPENPI_REFERENCE_FILES,
         require_local_reference_files=True,
         repo_root=repo_root,
     )
@@ -171,6 +204,9 @@ def verify_robotics_dependency_lock(payload: dict[str, Any], *, repo_root: Path)
         dependencies["menagerie_robotstudio_so101"],
         expected_repository_url=MENAGERIE_REPOSITORY_URL,
         expected_license_id=MENAGERIE_LICENSE_ID,
+        expected_revision=MENAGERIE_REVISION,
+        expected_license_file=MENAGERIE_LICENSE_FILE,
+        expected_reference_files=MENAGERIE_REFERENCE_FILES,
         require_local_reference_files=False,
         repo_root=repo_root,
     )
@@ -232,6 +268,9 @@ def _verify_remote_reference(
     *,
     expected_repository_url: str,
     expected_license_id: str,
+    expected_revision: str,
+    expected_license_file: dict[str, Any],
+    expected_reference_files: list[dict[str, Any]],
     require_local_reference_files: bool,
     repo_root: Path,
 ) -> None:
@@ -239,12 +278,17 @@ def _verify_remote_reference(
         raise ValueError(f"Remote reference URL drifted: {expected_repository_url}")
     if entry["license_id"] != expected_license_id:
         raise ValueError(f"Remote reference license drifted: {expected_repository_url}")
-    if entry.get("resolution") != "unresolved_remote_reference":
-        raise ValueError(f"Remote reference unexpectedly resolved: {expected_repository_url}")
-    if entry.get("revision") not in (None, ""):
-        raise ValueError(f"Unresolved remote reference cannot claim a pinned revision: {expected_repository_url}")
-    if not entry.get("resolution_reason"):
-        raise ValueError(f"Missing unresolved reason for remote reference: {expected_repository_url}")
+    if entry.get("resolution") != EXACT_REMOTE_PIN_RESOLUTION:
+        raise ValueError(f"Remote reference is not pinned exactly: {expected_repository_url}")
+    revision = str(entry.get("revision") or "")
+    if not _COMMIT_SHA_RE.fullmatch(revision):
+        raise ValueError(f"Remote reference revision must be a 40-character commit SHA: {expected_repository_url}")
+    if revision != expected_revision:
+        raise ValueError(f"Remote reference revision drifted: {expected_repository_url}")
+    if entry.get("license_file") != expected_license_file:
+        raise ValueError(f"Remote reference license file drifted: {expected_repository_url}")
+    if entry.get("reference_files") != expected_reference_files:
+        raise ValueError(f"Remote reference file pin drifted: {expected_repository_url}")
     if require_local_reference_files:
         files = entry.get("local_reference_files") or []
         if not files:

@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.1 finish portable OpenPI and Menagerie dependency pins
-completed: T16.0 guard; T16.1 local runtime/dirty-patch evidence landed but is not yet complete
-evidence: commit 92adde5 pins local inputs; manager redirect found two unresolved revisions and absolute repo_root
+current_task: T16.2 twin qualification schemas
+completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified
+evidence: commit 92adde5 pinned local inputs; follow-up correction now pins exact OpenPI/Menagerie revisions and removes absolute repo_root identity
 remaining: M16-M19 prerequisites, then Gates C-D and closeout
 blockers: physical M19 work requires separate read and motion authority; offline work is unblocked
-next_step: pin exact OpenPI/Menagerie revisions and content/license hashes; remove machine-specific root identity
+next_step: define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas with a simulation-only example bound to the corrected dependency lock
 ```
 
 ## Rules
@@ -29,7 +29,7 @@ next_step: pin exact OpenPI/Menagerie revisions and content/license hashes; remo
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
-| T16.1 | in_progress | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Local runtime/patch pin: 92adde5; remote and portability correction required |
+| T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Local runtime/patch pin: 92adde5; portable remote correction verified with exact OpenPI/Menagerie pins and relocation test |
 | T16.2 | pending | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Property/schema tests; content-addressed simulation-only example |
 | T16.3 | pending | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | Machine structural diff of inertials, limits, contacts, camera, gripper, actuator, backlash |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
@@ -168,4 +168,18 @@ Remaining: twin profile, qualification schemas, structural reconciliation, and d
 Blockers: none for offline work; unrelated broad-suite provenance test still needs an importable lerobot package in the validation environment
 Training lock: closed
 Next step: define TwinProfile, TwinQualificationSpec, and TwinQualificationReport with a simulation-only example tied to the new dependency lock
+```
+
+### 2026-07-10 - T16.1 portable remote pin correction
+
+```text
+Current task: T16.2
+State: verified
+Completed: replaced unresolved OpenPI and Menagerie placeholders with exact remote revisions plus license/content hashes; removed absolute repo_root from the signed lock identity
+Evidence: updated configurations/robot_lab/pi05_robotics_dependency_lock.json; 7 focused dependency-lock tests passing; live write+verify pass; 11-test broad robot-lab suite pass including scene-builder reachability
+Commit: pending
+Remaining: twin schemas, structural reconciliation, and downstream compiler gates
+Blockers: none for offline work
+Training lock: closed
+Next step: define TwinProfile, TwinQualificationSpec, and TwinQualificationReport with a simulation-only example tied to the corrected dependency lock
 ```
