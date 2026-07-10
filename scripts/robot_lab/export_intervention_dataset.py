@@ -16,6 +16,16 @@ from typing import Any
 import numpy as np
 from PIL import Image
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scenesmith.robot_lab.autolearn import (
+    is_dagger_correction_frame,
+    policy_expert_delta_l2,
+    select_training_frames,
+    validate_dagger_episode_scope,
+)
+
 
 PI05_IMAGE_KEYS = (
     "observation.images.base_0_rgb",
@@ -46,9 +56,12 @@ def main() -> int:
     parser.add_argument("--verify", action="store_true")
     parser.add_argument(
         "--frame-selection",
-        choices=("intervention_only", "all"),
+        choices=("intervention_only", "dagger_corrections", "all"),
         default="intervention_only",
-        help="Export expert correction frames by default; use all only for replay/pipeline tests.",
+        help=(
+            "Export human interventions, privileged DAgger controller corrections, "
+            "or all frames for replay/pipeline tests."
+        ),
     )
     parser.add_argument(
         "--allow-scripted-harness",
@@ -86,15 +99,16 @@ def main() -> int:
     episode_reports: list[dict[str, Any]] = []
     for episode_index, summary_path in enumerate(summary_paths):
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
-        _validate_training_scope(summary, args.allow_scripted_harness)
         trajectory_path = Path(summary["artifacts"]["trajectory"])
         source_frames = json.loads(trajectory_path.read_text(encoding="utf-8"))["frames"]
         if not source_frames:
             raise ValueError(f"Intervention trajectory is empty: {trajectory_path}")
-        frames = (
-            source_frames
-            if args.frame_selection == "all"
-            else [frame for frame in source_frames if frame.get("is_intervention")]
+        frames = select_training_frames(source_frames, args.frame_selection)
+        _validate_training_scope(
+            summary,
+            args.allow_scripted_harness,
+            frame_selection=args.frame_selection,
+            frames=frames,
         )
         if not frames:
             raise ValueError(
@@ -104,6 +118,9 @@ def main() -> int:
         episode_dir = summary_path.parent
         image_hashes: set[str] = set()
         intervention_count = 0
+        correction_count = 0
+        correction_source_counts: dict[str, int] = {}
+        correction_deltas: list[float] = []
         for frame in frames:
             images, sources = _load_frame_images(episode_dir, frame, args.image_size)
             image_hashes.update(_sha256(Path(path)) for path in sources.values())
@@ -117,7 +134,13 @@ def main() -> int:
                 else np.zeros((32,), dtype=np.float32)
             )
             is_intervention = bool(frame.get("is_intervention"))
+            is_expert_correction = is_dagger_correction_frame(frame)
             intervention_count += int(is_intervention)
+            correction_count += int(is_expert_correction)
+            if is_expert_correction:
+                source = str(frame.get("action_source") or "unknown")
+                correction_source_counts[source] = correction_source_counts.get(source, 0) + 1
+                correction_deltas.append(policy_expert_delta_l2(frame))
             dataset.add_frame(
                 {
                     **{
@@ -129,6 +152,7 @@ def main() -> int:
                     "policy_action": policy,
                     "human_action": human,
                     "is_intervention": np.asarray([is_intervention], dtype=bool),
+                    "is_expert_correction": np.asarray([is_expert_correction], dtype=bool),
                     "deadman_fresh": np.asarray([bool(frame.get("deadman_fresh"))], dtype=bool),
                     "randomization_seed": np.asarray([int(summary["seed"])], dtype=np.int64),
                     "task": _task(summary),
@@ -141,6 +165,7 @@ def main() -> int:
                     "time_s": frame["time_s"],
                     "phase": frame["phase"],
                     "is_intervention": is_intervention,
+                    "is_expert_correction": is_expert_correction,
                     "intervention_event": frame.get("intervention_event"),
                     "action_source": frame.get("action_source"),
                     "policy_action": frame.get("policy_action"),
@@ -170,6 +195,13 @@ def main() -> int:
                 "frames": len(frames),
                 "source_frames": len(source_frames),
                 "intervention_frames": intervention_count,
+                "expert_correction_frames": correction_count,
+                "correction_source_counts": correction_source_counts,
+                "mean_policy_expert_delta_l2": (
+                    sum(correction_deltas) / len(correction_deltas)
+                    if correction_deltas
+                    else 0.0
+                ),
                 "unique_source_images": len(image_hashes),
                 "expected_source_images": len(frames) * len(PI05_IMAGE_KEYS),
                 "proof_scope": summary.get("proof_scope"),
@@ -191,6 +223,9 @@ def main() -> int:
         "num_episodes": len(summary_paths),
         "num_frames": len(sidecar_rows),
         "num_intervention_frames": sum(row["is_intervention"] for row in sidecar_rows),
+        "num_expert_correction_frames": sum(
+            row["is_expert_correction"] for row in sidecar_rows
+        ),
         "fps": args.fps,
         "features": sorted(_features(args.image_size)),
         "sidecar": str(sidecar_path),
@@ -212,6 +247,7 @@ def main() -> int:
             "policy_action_shape": list(item["policy_action"].shape),
             "human_action_shape": list(item["human_action"].shape),
             "intervention_shape": list(item["is_intervention"].shape),
+            "expert_correction_shape": list(item["is_expert_correction"].shape),
             "image_shapes": {key: list(item[key].shape) for key in PI05_IMAGE_KEYS},
         }
 
@@ -232,7 +268,16 @@ def _summary_paths(episode_summaries: list[Path], batch_summary: Path | None) ->
     return list(dict.fromkeys(paths))
 
 
-def _validate_training_scope(summary: dict[str, Any], allow_scripted_harness: bool) -> None:
+def _validate_training_scope(
+    summary: dict[str, Any],
+    allow_scripted_harness: bool,
+    *,
+    frame_selection: str,
+    frames: list[dict[str, Any]],
+) -> None:
+    if frame_selection == "dagger_corrections":
+        validate_dagger_episode_scope(summary, frames)
+        return
     scope = summary.get("proof_scope", {})
     if scope.get("physical_leader_frames_are_training_eligible"):
         return
@@ -264,6 +309,7 @@ def _features(image_size: int) -> dict[str, dict[str, Any]]:
     for key in ("observation.state", "action", "policy_action", "human_action"):
         features[key] = {"dtype": "float32", "shape": (32,), "names": names32}
     features["is_intervention"] = {"dtype": "bool", "shape": (1,), "names": None}
+    features["is_expert_correction"] = {"dtype": "bool", "shape": (1,), "names": None}
     features["deadman_fresh"] = {"dtype": "bool", "shape": (1,), "names": None}
     features["randomization_seed"] = {"dtype": "int64", "shape": (1,), "names": None}
     return features
