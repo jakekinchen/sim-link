@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ## Program Status
 
 ```text
-Current state: M10-M12 verified; M13 meaningful policy improvement active
+Current state: M10-M12 verified; M13 suspended after its verified 250-step rung
 Completed: trusted replay plus honest, provenance-bound, storage-bounded evaluation
 Evidence: 66 tests; sparse MPS eval and one-start/two-seed warm-server canary
-Remaining: M13-M15 below
+Remaining: M16-M19 prerequisite program, then rebased M20-M22
 Blockers: none for local P0 implementation
-Next step: T13.1 corrected 250/500/1,000-step MPS ladder
+Next step: use experience-compiler-twin-task-ledger.md; no further training yet
 ```
 
 ## Tasks
@@ -31,16 +31,16 @@ Next step: T13.1 corrected 250/500/1,000-step MPS ladder
 | T12.3 | M12 | verified | Add rotating development and locked audit seed registries | 62 tests; development rotation and audit reuse rejected; dev non-promotable |
 | T12.4 | M12 | verified | Pin LeRobot/preprocessing/runtime and strengthen artifact hashes | 64 tests; runtime/model tree manifest verified; resume rejects hash drift |
 | T12.5 | M12 | verified | Reduce evaluation I/O and keep policy services warm | 66 tests; 120-step eval retained 4 frames; one server served two seeds |
-| T13.1 | M13 | in_progress | Run corrected 250/500/1,000-step MPS training ladder | Reloadable checkpoints and manifests |
-| T13.2 | M13 | pending | Sweep action execution horizon on paired seeds | Recorded stage/terminal comparison |
-| T13.3 | M13 | pending | Run PI0.5 vs SmolVLA vs ACT/Diffusion baseline bakeoff | Same data, prompts, seeds, and proof modes |
-| T13.4 | M13 | pending | Promote or reject with Git-tracked evidence | Accepted pointer changes only on verified improvement |
-| T14.1 | M14 | pending | Add named curriculum randomization levels | Deterministic manifests for every level |
-| T14.2 | M14 | pending | Add missing camera/dynamics/latency/calibration axes | Tests plus held-out stress tiers |
-| T14.3 | M14 | pending | Add competence-gated curriculum expansion | Level advances only after configured gate |
-| T15.1 | M15 | pending | Add dense progress annotations and reward-weighted BC | Offline ablation improves stage metrics |
-| T15.2 | M15 | pending | Add bounded residual/action-expert RL after nonzero competence | Rollout budget, safety gate, paired evaluation |
-| T15.3 | M15 | pending | Produce final capability and sim-to-real readiness audit | Honest proof matrix and remaining physical gates |
+| T13.1 | M13 | superseded | Run corrected 250/500/1,000-step MPS training ladder; 250 verified, later rungs moved to T20.4 | Reloadable checkpoints and manifests |
+| T13.2 | M13 | superseded | Sweep action execution horizon on paired seeds; moved to T20.5 | Recorded stage/terminal comparison |
+| T13.3 | M13 | superseded | Run PI0.5 vs SmolVLA vs ACT/Diffusion bakeoff; moved to T20.7 | Same data, prompts, seeds, and proof modes |
+| T13.4 | M13 | superseded | Promote or reject; moved to T20.8 | Accepted pointer changes only on verified improvement |
+| T14.1 | M14 | superseded | Named curriculum levels; moved to T21.6 | Deterministic manifests for every level |
+| T14.2 | M14 | superseded | Camera/dynamics/latency/calibration axes; moved to twin posterior and T21.6 | Tests plus held-out stress tiers |
+| T14.3 | M14 | superseded | Competence-gated expansion; moved to T21.6 | Level advances only after configured gate |
+| T15.1 | M15 | superseded | Dense progress and reward-weighted BC; moved to T21.1-T21.2 | Offline ablation improves stage metrics |
+| T15.2 | M15 | superseded | Bounded residual RL; moved to T21.3-T21.5 | Rollout budget, safety gate, paired evaluation |
+| T15.3 | M15 | superseded | Capability/sim-to-real audit; moved to T22.3 | Honest proof matrix and remaining physical gates |
 
 ## Milestone History
 

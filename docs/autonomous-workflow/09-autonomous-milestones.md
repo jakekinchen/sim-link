@@ -291,6 +291,11 @@ ablation, and model-baseline comparison on the same proof contract.
 **Completion evidence:** checkpoint hashes, sample exposure, paired metrics,
 review decision, and accepted-pointer integrity.
 
+**2026-07-10 rebaseline:** The 250-step rung is verified as historical
+development evidence (reach 0.500 to 0.625, no grasp or task success). Rungs 500
+and 1,000, the action-horizon sweep, and the model bakeoff are suspended until
+M16-M18 verify the twin, compiled experience, and intentional mixture gates.
+
 ## M14 - Competence-Gated Domain Randomization
 
 **Required outcome:** Visual, geometry, dynamics, latency, and calibration
@@ -319,3 +324,127 @@ evaluation, and final proof matrix.
 
 **Completion evidence:** reward definitions, safety/budget logs, promotion or
 rejection, Git history, and explicit remaining physical validation gates.
+
+## M16 - Hardware Twin Foundation And Qualification Contract
+
+**Required outcome:** SceneSmith uses a pinned, license-recorded SO-101 structural
+baseline and can emit immutable TwinProfile and TwinQualificationReport artifacts
+that distinguish sourced priors, measured overrides, fitted parameters,
+uncertainty, and held-out predictive evidence.
+
+**Why this is invariant:** A visually plausible MJCF is not proof that simulated
+kinematics, gripper contact, actuator response, camera timing, or uncertainty
+cover the real arm. Training must bind to an explicit twin identity and
+qualification state.
+
+**Verification gate:** Offline structural validation proves model source/hash,
+named joints, inertials, ranges, gripper collision/contact setup, camera mount,
+and no hardware access. Physical census/identification remains a separately
+authorized gate and may not be fabricated.
+
+**Completion evidence:** source pin and license, model comparison, TwinProfile
+schema, offline profile artifact, qualification report, tests, and explicit
+`simulation_only` versus `physical_qualified` state.
+
+## M17 - Experience Compiler Truth Gate
+
+**Required outcome:** Immutable raw rollouts compile deterministically into
+contract-bound frame records, hard-boundary segments, and valid unpadded action
+windows for horizons 5, 10, 15, and 50.
+
+**Why this is invariant:** More training is misleading when labels, ownership,
+prompts, coordinate semantics, or temporal windows are ambiguous.
+
+**Verification gate:** Full-scan compiler validation reports zero accepted
+invalid windows; collection, training, and inference fixtures produce identical
+canonical/normalized tensors; a deterministic sampled-window audit succeeds.
+
+**Completion evidence:** coordinate contract, normalization bundle,
+`frames.parquet`, `segments.parquet`, `window_index.parquet`, schema/hash manifest,
+and audit report.
+
+## M18 - Intentional Experience Mixture And Branch Corrections
+
+**Required outcome:** Training views are built from separate logical buffers with
+source x task-phase x control-mode sampling, append-only cycles, exact simulator
+progress, and snapshot-linked failure/correction branches.
+
+**Why this is invariant:** Sampling composition and correction provenance must be
+reproducible independently from reward weighting, and recovery must not be
+misrepresented as a physical task phase.
+
+**Verification gate:** One manifest reproduces exact sampled window IDs and
+composition; branch-and-correct pairs share a correction event while preserving
+immutable source rollouts; no source cell silently disappears.
+
+**Completion evidence:** dataset-mixture manifest, exact draw audit, cumulative
+registry, phase/progress predicates, branch linkage, and training-lock decision.
+
+## M19 - Physical Hardware Twin Qualification
+
+**Required outcome:** Explicitly authorized read-only census and bounded physical
+experiments identify camera, kinematic, gripper, actuator, backlash, contact, and
+timing distributions well enough that held-out real behavior falls inside the
+simulated envelope.
+
+**Why this is invariant:** CAD detail and simulated canaries cannot establish
+predictive equivalence to this particular printed, wired, calibrated arm.
+
+**Verification gate:** A preregistered TwinQualificationSpec passes on held-out
+real trajectories and contacts. Bus reads, commanded motion, and contact testing
+are separate authority boundaries.
+
+**Completion evidence:** immutable census, calibration runs, fitted posterior,
+held-out TwinQualificationReport, profile hash, and requalification triggers.
+
+## M20 - Cheap Falsification And Clean Supervision
+
+**Required outcome:** Clean compiled single-cube data can be overfit by a small
+baseline and PI0.5; checkpoint, execution-horizon, and model-bakeoff experiments
+then establish repeatable nonzero strict competence before broader improvement.
+
+**Why this is invariant:** A larger training run should not diagnose a data path
+that a tiny policy or tiny overfit cannot learn.
+
+**Verification gate:** One immutable split and proof contract support ACT and
+PI0.5 overfit, the optimizer-update ladder, horizon sweep, and four-policy bakeoff.
+
+**Completion evidence:** exact sampled windows, optimizer-update accounting,
+reloadable checkpoints, paired phase metrics, and promotion/rejection decision.
+
+## M21 - Improve A Competent Policy
+
+**Required outcome:** Exact-progress reward-aware cloning and, only after stable
+strict competence, a bounded deployment-honest residual policy improve held-out
+behavior across a one-factor-at-a-time curriculum.
+
+**Why this is invariant:** RL must improve a competent prior rather than hide
+coordinate, temporal, normalization, ownership, or sparse-reward failures.
+
+**Verification gate:** Uniform/balanced/RA-BC ablation precedes the residual-RL
+readiness gate; every online run has residual, rollout, safety, and budget bounds.
+
+**Completion evidence:** progress artifact, ablations, learner/client interface,
+paired residual result, curriculum decisions, and accepted-pointer integrity.
+
+## M22 - Physical Shadow And Closeout
+
+**Required outcome:** Explicitly authorized shadow-mode tensor parity and a
+separately authorized reduced-risk physical phase produce an honest final
+capability and sim-to-real readiness audit.
+
+**Why this is invariant:** Simulation success and physical qualification are
+different proof states, and command review must precede actuation.
+
+**Verification gate:** Read-only observation parity, no-actuation command review,
+deadman/workspace safeguards, and bounded physical evidence are recorded separately.
+
+**Completion evidence:** physical proof artifacts, final proof matrix, Git
+history, and explicit unresolved safety/transfer gates.
+
+## Rebased Execution Order
+
+Execute `M16 -> M17 -> M18 -> M19 -> M20 -> M21 -> M22`. M16-M19 are
+prerequisites, not claims that the earlier verified infrastructure was useless.
+They replace the assumption that the existing aggregate and unqualified twin are
+already adequate for more training. M20-M22 supersede the remaining M13-M15 work.

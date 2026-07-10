@@ -3,12 +3,13 @@
 ## Active Mission
 
 Complete the SceneSmith PI0.5 autonomous sorting program through a bounded,
-Git-tracked goal loop. Repair the robot/data contract before further training,
-then build validated intervention replay, balanced fine-tuning, stage-level
-evaluation, curriculum randomization, and reward-informed improvement. Update
-the task ledger at every verified milestone and continue until the acceptance
-criteria in `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md` are
-met or a genuine human-authority blocker is recorded.
+Git-tracked goal loop. Before any further training, qualify the simulation
+structure and build an Experience Compiler that turns immutable raw rollouts
+into semantically valid segments, action windows, mixture plans, and provenance-
+bound training views. Continue through cheap policy falsification, curriculum,
+reward-aware cloning, and competence-gated residual learning only after those
+prerequisites pass. Update the active ledger at every verified slice and continue
+until the acceptance criteria are met or a genuine human-authority blocker is recorded.
 
 The physical SO-101 follower must never be instantiated or commanded by this
 path. Neural-policy, contact-stabilized, controller-assisted, and physical-robot
@@ -16,17 +17,19 @@ proof states must remain distinct.
 
 ## Current Milestone
 
-M13 - Meaningful policy improvement
+M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Run the corrected, balanced, provenance-bound MPS training ladder at 250, 500,
-and 1,000 updates. Finalize and reload each candidate, evaluate on rotating
-development seeds, and promote only a later audit-tier candidate that improves.
+Pin and verify the Menagerie-derived SO-101 structural baseline, preserve the
+existing coordinate/camera runtime contract deliberately, and create immutable
+TwinProfile/TwinQualificationReport schemas without opening physical hardware.
 
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
+- Active execution ledger: `docs/autonomous-workflow/experience-compiler-twin-task-ledger.md`
+- Rebased loop prompt: `docs/autonomous-workflow/experience-compiler-twin-goal-loop.md`
 - Incremental task ledger: `docs/autonomous-workflow/pi05-autonomous-sorting-task-ledger.md`
 - Invariant milestones: `docs/autonomous-workflow/09-autonomous-milestones.md`
 - Active slice brief: latest numbered file in `docs/briefs/`
@@ -45,6 +48,8 @@ development seeds, and promote only a later audit-tier candidate that improves.
 7. Commit only scoped robotics/workflow files at the milestone boundary.
 8. Continue immediately to the next ledger task unless a stop condition applies.
 
+No optimizer run is authorized while the active ledger says `training_lock: closed`.
+
 ## Stop Conditions
 
 - Stop before any code path opens or writes to the physical follower port.
@@ -52,6 +57,8 @@ development seeds, and promote only a later audit-tier candidate that improves.
 - Stop training if coordinate transforms, normalization, preprocessing, task
   labels, temporal continuity, source weighting, or dataset identity are not
   versioned and validated.
+- Stop training if the structural twin pin, compiled window index, or reproducible
+  mixture manifest is missing, stale, or fails its qualification gate.
 - Never promote from training seeds, incomplete evaluation, assisted completion,
   or an uncommitted learning-loop implementation.
 - Never call contact-stabilized or controller-assisted success `strict pure`.
@@ -68,3 +75,5 @@ development seeds, and promote only a later audit-tier candidate that improves.
 - M10 now rejects the malformed bootstrap aggregate and proves a corrected
   12-episode canary merge with exact frame tasks and pinned normalization.
 - `cycle-001-mps` is interrupted and must not resume under its current recipe.
+- The corrected 250-step rung is retained as historical evidence of a narrow
+  reach improvement; rungs 500/1,000 are suspended behind M16-M19.

@@ -13,8 +13,9 @@ Use these sources in descending order of authority:
 
 1. The latest explicit user instruction.
 2. This mandate and `GOAL.md`.
-3. `pi05-autonomous-sorting-task-ledger.md`.
-4. `09-autonomous-milestones.md` and the active numbered slice brief.
+3. `experience-compiler-twin-task-ledger.md` for the rebased M16-M22 program.
+4. `09-autonomous-milestones.md`, `experience-compiler-twin-goal-loop.md`, and
+   the active numbered slice brief.
 5. Machine-readable cycle manifests and `experiments/pi05_autolearn/accepted.json`.
 6. Tests, source code, dataset/checkpoint manifests, and runtime artifacts.
 7. Executor logs, reviewer decisions, and research notes.
@@ -38,6 +39,13 @@ The repository can repeatedly:
 
 - One canonical, round-trip-tested SO-101 coordinate transform is used by expert
   generation, intervention export, training data, and inference.
+- A pinned SO-101 structural twin and immutable TwinProfile identify model source,
+  inertials, actuator/contact priors, camera contract, measured overrides, and
+  qualification state without claiming perfect physical identity.
+- Immutable raw rollouts compile into hashed frames, hard-boundary segments, and
+  unpadded valid-window indices for horizons 5, 10, 15, and 50.
+- Task phase, control mode, controller owner, and source are independent fields;
+  proposed, expert, residual, and executed actions are not conflated.
 - Dataset merges reject transform, normalization, preprocessing, feature, task,
   or temporal-contract mismatches.
 - No PI0.5 action chunk crosses a source discontinuity or incompatible phase.
@@ -86,6 +94,8 @@ proof that every operator ran on Metal.
 - MPS inference and bounded LoRA optimization work on this Mac.
 - The current correction aggregate must be rebuilt before meaningful training.
 - The physical follower is outside the current authorization boundary.
+- The completed 250-step development rung changed reach but not grasp; all later
+  training is suspended until M16-M19 pass.
 
 ### Recommended Defaults
 
@@ -112,6 +122,10 @@ Repeat until all acceptance criteria are met:
 5. Review with one decision: `CONTINUE`, `NUDGE`, `REDIRECT`, `STOP`, or `ESCALATE`.
 6. Commit the verified boundary and move to the next task.
 
+During M16-M22, read and update
+`docs/autonomous-workflow/experience-compiler-twin-task-ledger.md` on every turn.
+Do not run policy optimization while its `training_lock` is closed.
+
 ## Progress Ledger Contract
 
 The ledger must be updated at task start and at milestone completion. Every
@@ -127,9 +141,9 @@ Blockers:
 Next step:
 ```
 
-Allowed task states are `pending`, `in_progress`, `verified`, `blocked`, and
-`deferred`. A milestone becomes `verified` only after its gate passes and its
-reviewer decision is recorded.
+Allowed task states are `pending`, `in_progress`, `verified`, `blocked`,
+`deferred`, and `superseded`. A milestone becomes `verified` only after its gate
+passes and its reviewer decision is recorded.
 
 ## Completion Condition
 
