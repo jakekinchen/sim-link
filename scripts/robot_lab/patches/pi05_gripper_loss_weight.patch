@@ -1,0 +1,100 @@
+diff --git a/src/lerobot/policies/pi05/modeling_pi05.py b/src/lerobot/policies/pi05/modeling_pi05.py
+index aabd04c..5c6dd9a 100644
+--- a/src/lerobot/policies/pi05/modeling_pi05.py
++++ b/src/lerobot/policies/pi05/modeling_pi05.py
+@@ -17,6 +17,7 @@
+ import builtins
+ import logging
+ import math
++import os
+ from collections import deque
+ from pathlib import Path
+ from typing import TYPE_CHECKING, Literal, TypedDict, Unpack
+@@ -1277,6 +1278,22 @@ class PI05Policy(PreTrainedPolicy):
+         original_action_dim = self.config.output_features[ACTION].shape[0]
+         losses = losses[:, :, :original_action_dim]
++        gripper_loss_weight = float(os.environ.get("SCENESMITH_GRIPPER_LOSS_WEIGHT", "1"))
++        if not math.isfinite(gripper_loss_weight) or gripper_loss_weight <= 0:
++            raise ValueError("SCENESMITH_GRIPPER_LOSS_WEIGHT must be finite and positive")
++        gripper_only_loss = os.environ.get("SCENESMITH_GRIPPER_ONLY_LOSS", "0") == "1"
++        if original_action_dim >= 6 and gripper_only_loss:
++            action_dim_weights = losses.new_zeros(original_action_dim)
++            action_dim_weights[-1] = original_action_dim
++            losses = losses * action_dim_weights.view(1, 1, -1)
++        elif original_action_dim >= 6 and gripper_loss_weight != 1:
++            action_dim_weights = losses.new_ones(original_action_dim)
++            action_dim_weights[-1] = gripper_loss_weight
++            action_dim_weights /= action_dim_weights.mean()
++            losses = losses * action_dim_weights.view(1, 1, -1)
++
+         loss_dict = {
+             "loss_per_dim": losses.mean(dim=[0, 1]).detach().cpu().numpy().tolist(),
++            "gripper_loss_weight": gripper_loss_weight,
++            "gripper_only_loss": gripper_only_loss,
+         }
+         if reduction == "none":
+diff --git a/src/lerobot/scripts/lerobot_train.py b/src/lerobot/scripts/lerobot_train.py
+index 6e84585..32a75c7 100644
+--- a/src/lerobot/scripts/lerobot_train.py
++++ b/src/lerobot/scripts/lerobot_train.py
+@@ -20,5 +20,6 @@ Requires: pip install 'lerobot[training]'  (includes dataset + accelerate + wand
+ import dataclasses
+ import logging
++import os
+ import sys
+ import time
+ from contextlib import nullcontext
+@@ -308,4 +309,53 @@ def train(cfg: TrainPipelineConfig, accelerator: "Accelerator | None" = None):
+             peft_cli_overrides = dataclasses.asdict(cfg.peft)
+             policy = policy.wrap_with_peft(peft_cli_overrides=peft_cli_overrides)
++    trainable_parameter_substring = os.environ.get(
++        "SCENESMITH_TRAINABLE_PARAMETER_SUBSTRING", ""
++    )
++    if trainable_parameter_substring:
++        matched_parameters = 0
++        for name, parameter in policy.named_parameters():
++            if parameter.requires_grad:
++                parameter.requires_grad_(trainable_parameter_substring in name)
++                if parameter.requires_grad:
++                    matched_parameters += parameter.numel()
++        if matched_parameters == 0:
++            raise ValueError(
++                "SCENESMITH_TRAINABLE_PARAMETER_SUBSTRING matched no trainable parameters: "
++                f"{trainable_parameter_substring!r}"
++            )
++        logging.info(
++            "Restricted trainable parameters to %r (%s parameters)",
++            trainable_parameter_substring,
++            matched_parameters,
++        )
++
++    trainable_output_rows = os.environ.get("SCENESMITH_TRAINABLE_OUTPUT_ROWS", "")
++    if trainable_output_rows:
++        row_indices = tuple(
++            sorted({int(value.strip()) for value in trainable_output_rows.split(",")})
++        )
++        masked_parameters = 0
++        for name, parameter in policy.named_parameters():
++            if not parameter.requires_grad:
++                continue
++            if parameter.ndim < 1 or not row_indices or row_indices[-1] >= parameter.shape[0]:
++                raise ValueError(
++                    f"Invalid output rows {row_indices!r} for trainable parameter "
++                    f"{name!r} with shape {tuple(parameter.shape)!r}"
++                )
++            gradient_mask = torch.zeros_like(parameter)
++            gradient_mask[list(row_indices)] = 1
++            parameter.register_hook(
++                lambda gradient, mask=gradient_mask: gradient * mask
++            )
++            masked_parameters += len(row_indices) * parameter[0].numel()
++        if masked_parameters == 0:
++            raise ValueError("SCENESMITH_TRAINABLE_OUTPUT_ROWS found no trainable parameters")
++        logging.info(
++            "Restricted trainable output rows to %s (%s effective parameters)",
++            row_indices,
++            masked_parameters,
++        )
++
+     # Wait for all processes to finish model creation before continuing
+     accelerator.wait_for_everyone()

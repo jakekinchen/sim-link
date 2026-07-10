@@ -1,0 +1,325 @@
+#!/usr/bin/env python3
+"""Export synchronized SceneSmith intervention episodes as a LeRobot dataset."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+import shutil
+import sys
+
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+from PIL import Image
+
+
+PI05_IMAGE_KEYS = (
+    "observation.images.base_0_rgb",
+    "observation.images.left_wrist_0_rgb",
+    "observation.images.right_wrist_0_rgb",
+)
+IMAGE_ROLES = ("base", "wrist", "overhead")
+JOINT_NAMES = (
+    "shoulder_pan",
+    "shoulder_lift",
+    "elbow_flex",
+    "wrist_flex",
+    "wrist_roll",
+    "gripper",
+)
+GRIPPER_RANGE_RAD = (-0.17453, 1.74533)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--episode-summary", type=Path, action="append", default=[])
+    parser.add_argument("--batch-summary", type=Path)
+    parser.add_argument("--output-root", type=Path, required=True)
+    parser.add_argument("--repo-id", default="gauntlet/scenesmith-so101-interventions")
+    parser.add_argument("--fps", type=int, default=10)
+    parser.add_argument("--image-size", type=int, default=224)
+    parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument("--verify", action="store_true")
+    parser.add_argument(
+        "--frame-selection",
+        choices=("intervention_only", "all"),
+        default="intervention_only",
+        help="Export expert correction frames by default; use all only for replay/pipeline tests.",
+    )
+    parser.add_argument(
+        "--allow-scripted-harness",
+        action="store_true",
+        help="Allow explicitly test-only simulated intervention episodes.",
+    )
+    args = parser.parse_args()
+
+    summary_paths = _summary_paths(args.episode_summary, args.batch_summary)
+    if not summary_paths:
+        parser.error("Pass --episode-summary at least once or provide --batch-summary")
+    if args.fps <= 0 or args.image_size <= 0:
+        parser.error("--fps and --image-size must be positive")
+
+    _add_lerobot_to_path()
+    from lerobot.datasets import LeRobotDataset
+
+    if args.output_root.exists():
+        if not args.overwrite:
+            raise SystemExit(f"{args.output_root} already exists; pass --overwrite to replace it.")
+        shutil.rmtree(args.output_root)
+
+    dataset = LeRobotDataset.create(
+        repo_id=args.repo_id,
+        fps=args.fps,
+        root=args.output_root,
+        robot_type="so101_follower",
+        features=_features(args.image_size),
+        use_videos=False,
+        image_writer_processes=0,
+        image_writer_threads=0,
+    )
+
+    sidecar_rows: list[dict[str, Any]] = []
+    episode_reports: list[dict[str, Any]] = []
+    for episode_index, summary_path in enumerate(summary_paths):
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        _validate_training_scope(summary, args.allow_scripted_harness)
+        trajectory_path = Path(summary["artifacts"]["trajectory"])
+        source_frames = json.loads(trajectory_path.read_text(encoding="utf-8"))["frames"]
+        if not source_frames:
+            raise ValueError(f"Intervention trajectory is empty: {trajectory_path}")
+        frames = (
+            source_frames
+            if args.frame_selection == "all"
+            else [frame for frame in source_frames if frame.get("is_intervention")]
+        )
+        if not frames:
+            raise ValueError(
+                f"No frames matched --frame-selection={args.frame_selection}: {trajectory_path}"
+            )
+
+        episode_dir = summary_path.parent
+        image_hashes: set[str] = set()
+        intervention_count = 0
+        for frame in frames:
+            images, sources = _load_frame_images(episode_dir, frame, args.image_size)
+            image_hashes.update(_sha256(Path(path)) for path in sources.values())
+            state = _pad32(_mujoco_to_lerobot(_control6(frame["observation"]["state"])))
+            executed = _pad32(_mujoco_to_lerobot(_control6(frame["executed_action"])))
+            policy = _pad32(_mujoco_to_lerobot(_control6(frame["policy_action"])))
+            human_raw = frame.get("human_action")
+            human = (
+                _pad32(_mujoco_to_lerobot(_control6(human_raw)))
+                if human_raw is not None
+                else np.zeros((32,), dtype=np.float32)
+            )
+            is_intervention = bool(frame.get("is_intervention"))
+            intervention_count += int(is_intervention)
+            dataset.add_frame(
+                {
+                    **{
+                        key: image.copy()
+                        for key, image in zip(PI05_IMAGE_KEYS, images, strict=True)
+                    },
+                    "observation.state": state,
+                    "action": executed,
+                    "policy_action": policy,
+                    "human_action": human,
+                    "is_intervention": np.asarray([is_intervention], dtype=bool),
+                    "deadman_fresh": np.asarray([bool(frame.get("deadman_fresh"))], dtype=bool),
+                    "randomization_seed": np.asarray([int(summary["seed"])], dtype=np.int64),
+                    "task": _task(summary),
+                }
+            )
+            sidecar_rows.append(
+                {
+                    "episode_index": episode_index,
+                    "frame_index": int(frame["frame_index"]),
+                    "time_s": frame["time_s"],
+                    "phase": frame["phase"],
+                    "is_intervention": is_intervention,
+                    "intervention_event": frame.get("intervention_event"),
+                    "action_source": frame.get("action_source"),
+                    "policy_action": frame.get("policy_action"),
+                    "human_action": human_raw,
+                    "executed_action": frame.get("executed_action"),
+                    "deadman": {
+                        "armed": frame.get("deadman_armed"),
+                        "takeover": frame.get("deadman_takeover"),
+                        "fresh": frame.get("deadman_fresh"),
+                        "age_s": frame.get("deadman_age_s"),
+                        "sequence": frame.get("deadman_sequence"),
+                    },
+                    "failure_reason": frame.get("failure_reason"),
+                    "seed": summary.get("seed"),
+                    "scene_id": summary.get("scene_id"),
+                    "object_motion_mode": frame.get("object_motion_mode"),
+                    "observation_images": sources,
+                    "transition": frame.get("transition"),
+                }
+            )
+
+        dataset.save_episode(parallel_encoding=False)
+        episode_reports.append(
+            {
+                "episode_index": episode_index,
+                "source_summary": str(summary_path),
+                "frames": len(frames),
+                "source_frames": len(source_frames),
+                "intervention_frames": intervention_count,
+                "unique_source_images": len(image_hashes),
+                "expected_source_images": len(frames) * len(PI05_IMAGE_KEYS),
+                "proof_scope": summary.get("proof_scope"),
+            }
+        )
+
+    dataset.finalize()
+    sidecar_path = args.output_root / "scenesmith_intervention_sidecar.jsonl"
+    sidecar_path.write_text(
+        "".join(json.dumps(row, sort_keys=True) + "\n" for row in sidecar_rows),
+        encoding="utf-8",
+    )
+    export_summary: dict[str, Any] = {
+        "schema_version": "scenesmith.intervention_dataset_export.v2",
+        "status": "pass",
+        "repo_id": args.repo_id,
+        "root": str(args.output_root),
+        "source_episode_summaries": [str(path) for path in summary_paths],
+        "num_episodes": len(summary_paths),
+        "num_frames": len(sidecar_rows),
+        "num_intervention_frames": sum(row["is_intervention"] for row in sidecar_rows),
+        "fps": args.fps,
+        "features": sorted(_features(args.image_size)),
+        "sidecar": str(sidecar_path),
+        "task": _task(json.loads(summary_paths[0].read_text(encoding="utf-8"))),
+        "allow_scripted_harness": args.allow_scripted_harness,
+        "frame_selection": args.frame_selection,
+        "episodes": episode_reports,
+    }
+
+    if args.verify:
+        loaded = LeRobotDataset(args.repo_id, root=args.output_root, return_uint8=True)
+        item = loaded[0]
+        export_summary["verified"] = {
+            "num_frames": loaded.num_frames,
+            "num_episodes": loaded.num_episodes,
+            "task": item["task"],
+            "state_shape": list(item["observation.state"].shape),
+            "action_shape": list(item["action"].shape),
+            "policy_action_shape": list(item["policy_action"].shape),
+            "human_action_shape": list(item["human_action"].shape),
+            "intervention_shape": list(item["is_intervention"].shape),
+            "image_shapes": {key: list(item[key].shape) for key in PI05_IMAGE_KEYS},
+        }
+
+    summary_path = args.output_root / "scenesmith_intervention_export_summary.json"
+    summary_path.write_text(
+        json.dumps(export_summary, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    print(json.dumps(export_summary, indent=2, sort_keys=True))
+    return 0
+
+
+def _summary_paths(episode_summaries: list[Path], batch_summary: Path | None) -> list[Path]:
+    paths = [path.resolve() for path in episode_summaries]
+    if batch_summary is not None:
+        payload = json.loads(batch_summary.read_text(encoding="utf-8"))
+        paths.extend(Path(path).resolve() for path in payload.get("episode_summaries", []))
+    return list(dict.fromkeys(paths))
+
+
+def _validate_training_scope(summary: dict[str, Any], allow_scripted_harness: bool) -> None:
+    scope = summary.get("proof_scope", {})
+    if scope.get("physical_leader_frames_are_training_eligible"):
+        return
+    if allow_scripted_harness:
+        return
+    raise ValueError(
+        "Episode is a simulated/scripted intervention harness, not a human correction demo. "
+        "Pass --allow-scripted-harness only for pipeline tests."
+    )
+
+
+def _add_lerobot_to_path() -> None:
+    repo_root = Path(__file__).resolve().parents[2]
+    lerobot_src = repo_root / "external" / "lerobot" / "src"
+    if lerobot_src.exists():
+        sys.path.insert(0, str(lerobot_src))
+
+
+def _features(image_size: int) -> dict[str, dict[str, Any]]:
+    names32 = list(JOINT_NAMES) + [f"pad_{index}" for index in range(26)]
+    features: dict[str, dict[str, Any]] = {
+        key: {
+            "dtype": "image",
+            "shape": (3, image_size, image_size),
+            "names": ["channel", "height", "width"],
+        }
+        for key in PI05_IMAGE_KEYS
+    }
+    for key in ("observation.state", "action", "policy_action", "human_action"):
+        features[key] = {"dtype": "float32", "shape": (32,), "names": names32}
+    features["is_intervention"] = {"dtype": "bool", "shape": (1,), "names": None}
+    features["deadman_fresh"] = {"dtype": "bool", "shape": (1,), "names": None}
+    features["randomization_seed"] = {"dtype": "int64", "shape": (1,), "names": None}
+    return features
+
+
+def _load_frame_images(
+    episode_dir: Path,
+    frame: dict[str, Any],
+    image_size: int,
+) -> tuple[tuple[np.ndarray, ...], dict[str, str]]:
+    relative_paths = frame["observation"]["images"]
+    sources = {role: episode_dir / relative_paths[role] for role in IMAGE_ROLES}
+    missing = [str(path) for path in sources.values() if not path.is_file()]
+    if missing:
+        raise FileNotFoundError(f"Missing synchronized image observations: {missing}")
+    images = tuple(_load_resized_rgb(sources[role], image_size) for role in IMAGE_ROLES)
+    return images, {role: str(path) for role, path in sources.items()}
+
+
+def _load_resized_rgb(path: Path, image_size: int) -> np.ndarray:
+    with Image.open(path) as image:
+        resized = image.convert("RGB").resize((image_size, image_size), Image.Resampling.BILINEAR)
+    return np.asarray(resized, dtype=np.uint8)
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _task(summary: dict[str, Any]) -> str:
+    return summary.get("task") or "Sort each cube into the same-colored tray."
+
+
+def _control6(value: Any) -> list[float]:
+    if not isinstance(value, list) or len(value) < 6:
+        raise ValueError(f"Expected six-value SO-101 control, got {value!r}")
+    return [float(item) for item in value[:6]]
+
+
+def _mujoco_to_lerobot(control: list[float]) -> list[float]:
+    body = [math.degrees(value) for value in control[:5]]
+    low, high = GRIPPER_RANGE_RAD
+    gripper_percent = 100.0 * (control[5] - low) / (high - low)
+    return [*body, min(100.0, max(0.0, gripper_percent))]
+
+
+def _pad32(values: list[float]) -> np.ndarray:
+    padded = np.zeros((32,), dtype=np.float32)
+    n = min(len(values), 32)
+    padded[:n] = np.asarray(values[:n], dtype=np.float32)
+    return padded
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
