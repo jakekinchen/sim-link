@@ -14,7 +14,7 @@
   "max_training_steps": 5,
   "promotion": null,
   "schema_version": "scenesmith.pi05_autolearn_cycle.v1",
-  "source_commit": "1a0896a2ee6735e2a8d6f0a7699baaf5791a77dc",
+  "source_commit": "841a32d3e647a6bba15fc9a2e8ddfb50f4cc73e0",
   "stages": [
     {
       "allowed_exit_codes": [
@@ -40,12 +40,28 @@
         "--max-policy-steps",
         "200"
       ],
+      "artifacts": {
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/baseline-eval/intervention_batch_summary.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/baseline-eval/intervention_batch_summary.json",
+          "sha256": "33d978450366b84856ade688593c2d48bd70b44b60870c6133ead802b4bf132b",
+          "size_bytes": 10458
+        }
+      },
       "env_keys": [],
+      "git_commit_before": "841a32d3e647a6bba15fc9a2e8ddfb50f4cc73e0",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/baseline-eval.log",
       "name": "baseline_eval",
       "required_artifacts": [
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/baseline-eval/intervention_batch_summary.json"
       ],
+      "result": {
+        "duration_s": 148.617,
+        "exit_code": 0,
+        "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/baseline-eval.log",
+        "log_sha256": "625f7d50eaf19209aac5edc2ad526e2a887ba2bf290e017f24bc0bc634358ff4"
+      },
       "timeout_s": 43200.0
     },
     {
@@ -215,7 +231,7 @@
       "timeout_s": 43200.0
     }
   ],
-  "status": "dry_run",
+  "status": "running",
   "train_seeds": [
     6204
   ]
