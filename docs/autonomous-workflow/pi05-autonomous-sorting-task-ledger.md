@@ -98,7 +98,7 @@ Next step: retain accepted correction sources across cycles under a bounded mani
 Status: M11 verified; M12 in_progress
 Completed: bounded content-addressed cumulative registry and registry-driven merge/planning
 Evidence: 57 tests; mutation/overlap rejection; 870-frame clean registry merge; pinned stats
-Commit: pending T11.4/M11 checkpoint
+Commit: 0d3a27f T11.4/M11
 Remaining: M12 honest evaluation and provenance
 Blockers: none
 Next step: stage-level reach/contact/grasp/lift/transport/release metrics
