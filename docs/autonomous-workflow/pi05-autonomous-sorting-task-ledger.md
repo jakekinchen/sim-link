@@ -110,7 +110,7 @@ Next step: stage-level reach/contact/grasp/lift/transport/release metrics
 Status: T12.1 verified; T12.2 in_progress
 Completed: per-episode and aggregate reach/contact/grasp/lift/transport/release/placement metrics
 Evidence: 59 tests; MPS seed-7300 strict-control smoke reached/contacted 2/4, later stages 0/4
-Commit: pending T12.1 checkpoint
+Commit: e7d2610 T12.1
 Remaining: proof modes, seed registries, provenance, evaluation runtime
 Blockers: none
 Next step: explicit strict/contact-stabilized/assisted/physical proof gates
