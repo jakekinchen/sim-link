@@ -222,26 +222,100 @@ not evidence that a new checkpoint learned autonomous sorting.
 - The accepted checkpoint pointer changes only for a passing candidate and the
   decision manifest is committed separately from generated model data.
 
-## M10 - Production-Scale Policy Improvement
+## M10 - Trusted PI0.5 Training Data Contract
 
-**Required outcome:** Run the four-training-seed, four-held-out-seed cycle with
-a non-smoke fine-tune and either promote a pure candidate or preserve a complete
-rejection that identifies the next correction/training change.
+**Required outcome:** Every base, correction, and runtime action uses one
+versioned SO-101 coordinate and normalization contract; correction chunks are
+temporally valid and retain the exact task prompt shown to the policy.
 
-**Why this is invariant:** The completed bootstrap proves automation, MPS
-training, reload, and rollback, but five optimizer steps and one 200-frame seed
-are not evidence of autonomous sorting capability.
+**Why this is invariant:** A bounded training run is not meaningful when its
+expert targets use different joint coordinates, normalization, temporal order,
+or language conditioning from the accepted data and runtime.
 
 **Verification gate:**
 
 ```bash
-./.mujoco_venv/bin/python scripts/robot_lab/run_pi05_autolearn_cycle.py \
-  --config configurations/robot_lab/pi05_autolearn.example.json
+./.mujoco_venv/bin/python -m unittest \
+  tests.unit.test_robot_lab_intervention \
+  tests.unit.test_pi05_autolearn
 ```
 
 **Completion evidence:**
 
-- Four disjoint collection seeds and four complete held-out seeds.
-- A finite 25-step candidate with finalized checkpoint hashes.
-- Promotion or rejection metrics committed without changing the accepted
-  pointer on failure.
+- One round-trip-tested transform is shared by expert, exporter, and runtime.
+- Malformed bootstrap corrections are rejected by merge validation.
+- Regenerated corrections have compatible statistics, task labels, and episode boundaries.
+
+## M11 - Balanced Failure-Focused Replay
+
+**Required outcome:** Training replay balances accepted/base behavior with
+correction/context samples, covers pre-contact failures, and retains bounded
+corrections across cycles.
+
+**Why this is invariant:** Uniform sampling currently exposes a 25-step run to
+only two correction frames and mostly teaches post-contact behavior even though
+the strict policy fails before grasp.
+
+**Verification gate:** source/phase sampling tests plus a rollout whose logged
+exposure matches configuration and whose interventions include approach/grasp.
+
+**Completion evidence:** sampler counts, context-window audit, trigger evidence,
+and cumulative replay manifest.
+
+## M12 - Honest Evaluation And Provenance
+
+**Required outcome:** Evaluation reports stage progress and separates strict,
+contact-stabilized, controller-assisted, and physical proof; runtime, seeds,
+datasets, normalizers, processors, and checkpoints are content-addressed.
+
+**Why this is invariant:** Terminal 0/4 alone hides regressions such as loss of
+contact, and a contact-gated weld cannot be called strict autonomous success.
+
+**Verification gate:** promotion/provenance tests and paired evaluation artifacts.
+
+**Completion evidence:** stage metrics, disjoint seed registries, proof-mode
+gates, pinned runtime manifest, and bounded evaluation storage.
+
+## M13 - Meaningful Policy Improvement
+
+**Required outcome:** Corrected candidates are trained at meaningful bounded
+budgets, reloaded, compared on paired seeds, and either promoted or rejected with
+an identified next change.
+
+**Why this is invariant:** Five or 25 batch-one updates are pipeline smoke tests,
+not evidence that PI0.5 can learn the sorting behavior.
+
+**Verification gate:** corrected 250/500/1,000-step MPS ladder, action-horizon
+ablation, and model-baseline comparison on the same proof contract.
+
+**Completion evidence:** checkpoint hashes, sample exposure, paired metrics,
+review decision, and accepted-pointer integrity.
+
+## M14 - Competence-Gated Domain Randomization
+
+**Required outcome:** Visual, geometry, dynamics, latency, and calibration
+variation expand through named levels only when the current policy clears the
+previous level.
+
+**Why this is invariant:** Uniformly broad randomization can hide basic learning
+failure and produce conservative high-variance policies.
+
+**Verification gate:** deterministic level manifests, held-out stress tiers, and
+automatic advance/hold tests.
+
+**Completion evidence:** per-level success curves and recorded curriculum decisions.
+
+## M15 - Reward-Informed Improvement And Closeout
+
+**Required outcome:** Simulator progress signals improve replay or policy
+learning without reward hacking; bounded RL begins only after repeatable nonzero
+strict success, followed by a final capability and sim-to-real readiness audit.
+
+**Why this is invariant:** Sparse terminal RL cannot learn when all rollouts fail,
+and simulation completion is not physical-robot proof.
+
+**Verification gate:** reward ablation, bounded rollout budget, paired strict
+evaluation, and final proof matrix.
+
+**Completion evidence:** reward definitions, safety/budget logs, promotion or
+rejection, Git history, and explicit remaining physical validation gates.
