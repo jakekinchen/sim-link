@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4 measured inertial intake and assembly inertia compiler
-completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 structural diff baseline verified
-evidence: structural diff artifact d71576574eb3dbb592cb495481a9de2e17e1581cc3e10476e1bc098106053b89; focused write/verify pass; 17-test broad robot-lab suite pass
+current_task: T16.3 semantic structural diff correction
+completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical hash/diff baseline only
+evidence: commit 7bebf55 proves deterministic XML diff plumbing; manager audit 005 reopens semantic acceptance
 remaining: M16-M19 prerequisites, then Gates C-D and closeout
-blockers: no offline T16.3 blocker; physical M19 still requires separate read and motion authority
-next_step: ingest measured part masses and assembly inertia/COM evidence against the verified structural baseline
+blockers: no offline blocker; physical M19 still requires separate read and motion authority
+next_step: bind TwinProfile, canonicalize rotations/effective defaults, surface inferred inertia unknowns, and re-review T16.3
 ```
 
 ## Rules
@@ -31,7 +31,7 @@ next_step: ingest measured part masses and assembly inertia/COM evidence against
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
 | T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
 | T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
-| T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json`; identity `d71576574eb3dbb592cb495481a9de2e17e1581cc3e10476e1bc098106053b89`; 5 focused tests; 17 broad tests |
+| T16.3 | in_progress | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` mechanical baseline retained; semantic correction required by manager audit 005 |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
 | T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
 
@@ -113,6 +113,20 @@ next_step: ingest measured part masses and assembly inertia/COM evidence against
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.3 semantic acceptance reopened
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: deterministic source/hash plumbing and first machine diff baseline
+Evidence: commit 7bebf55; manager audit 005; independent semantic audit
+Commit: pending
+Remaining: profile binding, canonical rotations, effective solver semantics, inferred-inertia unknowns, effective friction/contact evidence, and regression tests
+Blockers: none for offline correction
+Training lock: closed
+Next step: execute brief 014 and obtain a fresh reviewer decision before T16.4
+```
 
 ### 2026-07-10 - Advice rebaseline
 

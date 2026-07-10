@@ -21,8 +21,9 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Compile measured-part mass intake and assembly inertia/COM evidence against the
-verified structural twin baseline. Do not open hardware.
+Correct the structural twin diff so it binds the twin profile and compares
+canonical/effective physics semantics rather than raw XML spelling. Do not open
+hardware or begin measured-mass compilation until this proof is re-accepted.
 
 ## Durable State
 
@@ -76,6 +77,6 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
 - `cycle-001-mps` is interrupted and must not resume under its current recipe.
 - The corrected 250-step rung is retained as historical evidence of a narrow
   reach improvement; rungs 500/1,000 are suspended behind M16-M19.
-- T16.3 now emits a verified structural diff artifact between the active Robot
-  Studio MJCF and pinned Menagerie `so101.xml`; runtime/Menagerie mismatches
-  remain explicit and no runtime switch has occurred.
+- The first T16.3 artifact proves deterministic source/hash plumbing, but its
+  semantic comparison is reopened: profile binding, quaternion equivalence,
+  effective defaults, and inferred-inertia unknowns still require correction.
