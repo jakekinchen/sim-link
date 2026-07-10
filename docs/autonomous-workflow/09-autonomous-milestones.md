@@ -124,3 +124,100 @@ scripts/audit_autonomous_workflow.sh
 **Completion audit:** `docs/so101-intervention-completion-audit.md` and
 `outputs/robot_lab/so101_desk_cube_sort/completion-audit/intervention-system-completion.json`
 both report pass on 2026-07-09.
+
+## M6 - Git-Guarded Learning-Cycle Contract
+
+**Required outcome:** Every learning cycle starts from a recorded clean Git
+commit, uses a versioned configuration, writes a small append-only manifest, and
+refuses ambiguous seed overlap, dirty learning-loop code, or unbounded external
+compute commands.
+
+**Why this is invariant:** A candidate model cannot be reproduced or audited if
+the code, dataset recipe, training command, and evaluation gate are not tied to
+one immutable source revision.
+
+**Verification gate:**
+
+```bash
+./.mujoco_venv/bin/python -m unittest tests.unit.test_pi05_autolearn
+./.mujoco_venv/bin/python scripts/robot_lab/run_pi05_autolearn_cycle.py \
+  --config configurations/robot_lab/pi05_autolearn.example.json --dry-run
+```
+
+**Completion evidence:**
+
+- Config validation rejects overlapping train/evaluation seeds and unsafe
+  physical-follower or unbounded Brev commands.
+- Dry-run manifest records the current commit, stage commands, expected
+  artifacts, and cleanup policy without starting training.
+
+## M7 - Policy-Visited DAgger Corrections
+
+**Required outcome:** Assisted neural episodes can export only explicitly logged
+privileged controller or human correction frames as expert action targets, while
+excluding scripted object motion and ordinary policy proposals.
+
+**Why this is invariant:** DAgger depends on expert labels for states visited by
+the learner; relabeling policy actions or fabricated cube motion would reinforce
+the failure instead of correcting it.
+
+**Verification gate:**
+
+```bash
+./.mujoco_venv/bin/python -m unittest \
+  tests.unit.test_robot_lab_intervention \
+  tests.unit.test_pi05_autolearn
+```
+
+**Completion evidence:**
+
+- Frame-selection tests cover direct policy frames, task-space recovery,
+  task-space transfer, post-place control, human intervention, and scripted
+  harness rejection.
+- Export summaries report correction source counts and policy-versus-executed
+  action deltas.
+
+## M8 - Bounded Training And Cost Cleanup
+
+**Required outcome:** A cycle launches one explicitly bounded fine-tune command,
+captures its exit status and artifact hashes, and always executes/records the
+configured Brev stop or delete cleanup before the cycle can finish.
+
+**Why this is invariant:** Training must not silently run without limits or
+leave paid compute alive after success or failure.
+
+**Verification gate:**
+
+```bash
+./.mujoco_venv/bin/python -m unittest tests.unit.test_pi05_autolearn
+```
+
+**Completion evidence:**
+
+- Fake-runner tests prove cleanup runs after both training success and failure.
+- The cycle manifest records training bounds, model artifact identity, and the
+  final Brev inventory.
+
+## M9 - Held-Out Promotion Or Rollback
+
+**Required outcome:** Candidate and baseline are evaluated on the same complete
+held-out seed set in pure-policy mode; promotion requires the configured success
+rate, no controller assistance or physical-follower commands, and a non-regression
+against the baseline. Rejected candidates remain recorded without replacing the
+accepted pointer.
+
+**Why this is invariant:** A single assisted 4/4 episode is a product milestone,
+not evidence that a new checkpoint learned autonomous sorting.
+
+**Verification gate:**
+
+```bash
+./.mujoco_venv/bin/python -m unittest tests.unit.test_pi05_autolearn
+```
+
+**Completion evidence:**
+
+- Promotion tests cover incomplete evaluation, assist contamination, success
+  threshold, baseline regression, accept, and reject.
+- The accepted checkpoint pointer changes only for a passing candidate and the
+  decision manifest is committed separately from generated model data.

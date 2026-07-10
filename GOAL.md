@@ -2,21 +2,35 @@
 
 ## Active Mission
 
-Build the SceneSmith-native SO-101 domain-randomized evaluation and human-intervention loop. SceneSmith must generate the workcell, run inspectable MuJoCo episodes, arbitrate policy and leader-arm actions at each control step, record synchronized observations and correction labels, export a loadable LeRobot dataset, and expose the workflow in the existing browser action server. The physical SO-101 follower must never be instantiated or commanded by this path.
+Close the SceneSmith PI0.5 simulation learning flywheel. A bounded cycle must run
+the current policy on randomized workcells, capture privileged corrective actions
+from policy-visited states, export a verified DAgger dataset, launch an explicitly
+configured fine-tune, evaluate fixed held-out seeds without high-level controller
+assistance, and promote a candidate only when it clears the acceptance gate. Git
+commits and small machine-readable manifests are the source of truth between
+feature, data, training, and promotion boundaries. The physical SO-101 follower
+must never be instantiated or commanded by this path.
 
 ## Current Milestone
 
-M5 - End-to-end acceptance complete
+M6 - Git-guarded learning-cycle contract
 
 ## Current Slice
 
-Goal loop stopped after `docs/reviewer-messages/003-completion-audit.md` accepted the requirement-by-requirement audit in `docs/so101-intervention-completion-audit.md`. Physical data collection and policy fine-tuning are routed to the next product cycle.
+Implement `docs/briefs/002-pi05-autolearn-loop.md`: DAgger correction export,
+cycle orchestration, held-out promotion gates, and Git-backed evidence ledgers.
 
 ## Stop Conditions
 
 - Stop before any code path opens or writes to the physical follower port.
 - Stop before destructive dataset replacement unless an explicit overwrite flag is present.
 - Do not mark the goal complete from scripted cube teleportation, final-frame image reuse, or browser animation alone.
+- Never train on policy-proposed actions when an expert/controller action was
+  executed unless the label source is explicit.
+- Never promote from training seeds, a partial evaluation set, assisted task
+  completion, or a dirty/uncommitted learning-loop implementation.
+- Stop/delete paid Brev resources after a bounded training stage finishes or
+  fails; record the cleanup result in the cycle manifest.
 - Escalate only after three evidence-backed attempts at a true tool, dependency, or hardware blocker.
 
 ## Human Constraints
