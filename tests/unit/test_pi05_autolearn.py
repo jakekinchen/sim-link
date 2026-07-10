@@ -21,6 +21,10 @@ from scenesmith.robot_lab.autolearn_cycle import (
     CycleRunner,
     StageResult,
 )
+from scenesmith.robot_lab.balanced_replay import (
+    AuditedReplaySampler,
+    build_replay_plan,
+)
 from scenesmith.robot_lab.pi05_dataset_contract import (
     build_dataset_contract,
     validate_merge_contracts,
@@ -85,6 +89,74 @@ def _episode(
 
 
 class DaggerFrameTests(unittest.TestCase):
+    def test_balanced_replay_is_deterministic_and_balances_source_and_phase(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            dataset = root / "dataset"
+            dataset.mkdir()
+            (dataset / "scenesmith_pi05_dataset_contract.json").write_text("{}")
+            (dataset / "scenesmith_merge_summary.json").write_text(
+                json.dumps(
+                    {
+                        "total_frames": 16,
+                        "sources": [
+                            {"total_frames": 10},
+                            {"total_frames": 6},
+                        ],
+                    }
+                )
+            )
+            sidecar = root / "sidecar.jsonl"
+            phases = [
+                "contact_gated_recovery_pick",
+                "contact_gated_tray_transfer",
+                "contact_reflex_post_place",
+            ] * 2
+            sidecar.write_text(
+                "".join(json.dumps({"action_source": phase}) + "\n" for phase in phases)
+            )
+
+            plan = build_replay_plan(
+                dataset,
+                sidecar,
+                draws=25,
+                correction_fraction=0.5,
+                seed=7200,
+            )
+            repeated = build_replay_plan(
+                dataset,
+                sidecar,
+                draws=25,
+                correction_fraction=0.5,
+                seed=7200,
+            )
+
+            self.assertEqual(plan["sample_indices"], repeated["sample_indices"])
+            self.assertEqual(plan["source_counts"], {"base": 13, "correction": 12})
+            self.assertEqual(
+                plan["correction_phase_counts"],
+                {"post_place": 4, "recovery_pick": 4, "tray_transfer": 4},
+            )
+            sources = ["base" if index < 10 else "correction" for index in plan["sample_indices"]]
+            self.assertEqual(sources.count("base"), 13)
+            self.assertEqual(sources.count("correction"), 12)
+            self.assertNotIn(["base", "base", "base"], [sources[i : i + 3] for i in range(23)])
+
+    def test_audited_replay_sampler_records_requested_indices(self):
+        with tempfile.TemporaryDirectory() as directory:
+            audit = Path(directory) / "audit.jsonl"
+            sampler = AuditedReplaySampler(
+                {
+                    "schema_version": "scenesmith.pi05_replay_plan.v1",
+                    "sample_indices": [4, 1, 7],
+                },
+                audit,
+            )
+
+            self.assertEqual(list(sampler), [4, 1, 7])
+            rows = [json.loads(line) for line in audit.read_text().splitlines()]
+            self.assertEqual([row["sample_index"] for row in rows], [4, 1, 7])
+
     def test_selects_controller_and_human_corrections_only(self):
         policy = _frame("policy")
         transfer = _frame("contact_gated_tray_transfer")

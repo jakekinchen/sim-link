@@ -91,10 +91,31 @@
       "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/aggregate-dataset.log"
     },
     {
+      "name": "plan_replay",
+      "argv": [
+        "external/leLab/.venv/bin/python",
+        "scripts/robot_lab/build_pi05_replay_plan.py",
+        "--dataset-root", "outputs/robot_lab/autolearn/{cycle_id}/training-dataset",
+        "--correction-sidecar", "outputs/robot_lab/autolearn/{cycle_id}/dagger-dataset/scenesmith_intervention_sidecar.jsonl",
+        "--output", "outputs/robot_lab/autolearn/{cycle_id}/replay-plan.json",
+        "--steps", "{max_steps}",
+        "--batch-size", "1",
+        "--correction-fraction", "0.5",
+        "--seed", "{train_seed_start}"
+      ],
+      "timeout_s": 60,
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/{cycle_id}/replay-plan.json"
+      ],
+      "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/plan-replay.log"
+    },
+    {
       "name": "train",
       "argv": [
         "external/leLab/.venv/bin/python",
-        "-m", "lerobot.scripts.lerobot_train",
+        "scripts/robot_lab/train_pi05_balanced.py",
+        "--replay-plan", "outputs/robot_lab/autolearn/{cycle_id}/replay-plan.json",
+        "--replay-audit", "outputs/robot_lab/autolearn/{cycle_id}/train/replay-audit.jsonl",
         "--dataset.repo_id=local/pi05-autolearn-cycle-001-mps",
         "--dataset.root=outputs/robot_lab/autolearn/{cycle_id}/training-dataset",
         "--dataset.eval_split=0.0",
@@ -122,6 +143,7 @@
       ],
       "timeout_s": 21600,
       "required_artifacts": [
+        "outputs/robot_lab/autolearn/{cycle_id}/train/replay-audit.jsonl",
         "{candidate_model}/train_config.json",
         "{candidate_model}/adapter_model.safetensors"
       ],
@@ -185,10 +207,12 @@
       "experiments/pi05_autolearn",
       "scenesmith/robot_lab/autolearn.py",
       "scenesmith/robot_lab/autolearn_cycle.py",
+      "scenesmith/robot_lab/balanced_replay.py",
       "scenesmith/robot_lab/intervention_supervisor.py",
       "scenesmith/robot_lab/pi05_dataset_contract.py",
       "scenesmith/robot_lab/so101_coordinates.py",
       "scripts/robot_lab/export_intervention_dataset.py",
+      "scripts/robot_lab/build_pi05_replay_plan.py",
       "scripts/robot_lab/finalize_pi05_checkpoint.py",
       "scripts/robot_lab/generate_causal_pi05_dataset.py",
       "scripts/robot_lab/merge_pi05_training_datasets.py",
@@ -197,6 +221,7 @@
       "scripts/robot_lab/run_pi05_autolearn_cycle.py",
       "scripts/robot_lab/run_pi05_eval_with_server.py",
       "scripts/robot_lab/stamp_pi05_dataset_contract.py",
+      "scripts/robot_lab/train_pi05_balanced.py",
       "tests/unit/test_pi05_autolearn.py"
     ]
   },

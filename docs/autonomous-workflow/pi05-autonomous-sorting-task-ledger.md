@@ -6,11 +6,11 @@ Updated: 2026-07-10
 
 ```text
 Current state: M10 trusted-data gate verified; M11 replay balancing active
-Completed: pipeline bootstrap, research audit, goal mandate, trusted PI0.5 data contract
-Evidence: 51 tests; MPS canary; four valid correction segments; pinned stats hash
+Completed: pipeline bootstrap, research audit, trusted data contract, balanced sampler
+Evidence: 53 tests; six-update MPS replay smoke; exact realized draw audit
 Remaining: M11-M15 below
 Blockers: none for local P0 implementation
-Next step: T11.1 source- and phase-balanced sampling
+Next step: T11.2 pre-intervention and post-recovery context export
 ```
 
 ## Tasks
@@ -22,8 +22,8 @@ Next step: T11.1 source- and phase-balanced sampling
 | T10.3 | M10 | verified | Split correction runs at temporal/source boundaries | 20 tests; chunks cannot cross selected-frame gaps |
 | T10.4 | M10 | verified | Persist the exact per-frame PI0.5 task prompt | 49 tests; legacy unlabeled DAgger frames rejected |
 | T10.5 | M10 | verified | Harden dataset merge compatibility and regenerate corrections | Old corrections rejected; 12-episode/11,316-frame canary merge passes |
-| T11.1 | M11 | in_progress | Add source- and phase-balanced sampling | Logged sample counts match configured ratios |
-| T11.2 | M11 | pending | Export pre-intervention and post-recovery context | Context windows remain temporally valid |
+| T11.1 | M11 | verified | Add source- and phase-balanced sampling | 53 tests; MPS smoke realized 3 base/3 correction and all three phases |
+| T11.2 | M11 | in_progress | Export pre-intervention and post-recovery context | Context windows remain temporally valid |
 | T11.3 | M11 | pending | Add pre-contact progress/stall intervention triggers | Deterministic trigger tests and rollout evidence |
 | T11.4 | M11 | pending | Add cumulative bounded replay registry | Prior accepted corrections retained or sampled by policy |
 | T12.1 | M12 | pending | Add stage-level reach/contact/grasp/lift/transport/release metrics | Metrics emitted for baseline and candidate |
@@ -54,4 +54,16 @@ Commit: 56003aa mandate; 4cd49ce T10.1; 4dfbe38 T10.2; 7468a90 T10.3; 25ddc84 T1
 Remaining: implement M11 balanced failure-focused replay
 Blockers: none
 Next step: deterministic source/phase sampler with auditable exposure counts
+```
+
+### 2026-07-10 - Balanced replay sampler
+
+```text
+Status: T11.1 verified; T11.2 in_progress
+Completed: content-addressed deterministic source/phase replay and realized-draw audit
+Evidence: six MPS updates; 3 base/3 correction; recovery, transfer, and post-place each sampled once
+Commit: pending T11.1 checkpoint
+Remaining: context export, pre-contact triggers, cumulative replay registry
+Blockers: none
+Next step: export bounded pre-intervention and post-recovery context without crossing gaps
 ```

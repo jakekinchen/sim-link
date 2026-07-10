@@ -20,9 +20,9 @@ M11 - Balanced failure-focused replay
 
 ## Current Slice
 
-Add deterministic source- and phase-balanced sampling so each bounded training
-run receives meaningful exposure to trusted base behavior and sparse correction
-windows. Log actual sample counts and preserve cumulative accepted corrections.
+Export bounded pre-intervention and post-recovery context around correction
+windows without crossing source-frame gaps. Retain exact tasks and label context
+separately from expert targets before adding pre-contact failure triggers.
 
 ## Durable State
 
