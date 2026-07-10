@@ -7,10 +7,10 @@ Updated: 2026-07-10
 ```text
 Current state: M10-M11 verified; M12 honest evaluation/provenance active
 Completed: trusted data and bounded failure-focused cumulative replay
-Evidence: 59 tests; stage funnel MPS smoke; registry overlap/mutation rejection
+Evidence: 61 tests; strict-none eval plan; proof-contamination promotion rejection
 Remaining: M12-M15 below
 Blockers: none for local P0 implementation
-Next step: T12.2 proof-mode gates
+Next step: T12.3 rotating development and locked audit seeds
 ```
 
 ## Tasks
@@ -27,8 +27,8 @@ Next step: T12.2 proof-mode gates
 | T11.3 | M11 | verified | Add pre-contact progress/stall intervention triggers | 56 tests; MPS trigger at frame 333, contact at 388, no hardware |
 | T11.4 | M11 | verified | Add cumulative bounded replay registry | Bounded/hash-verified registry; duplicate trajectories rejected; merge canary passes |
 | T12.1 | M12 | verified | Add stage-level reach/contact/grasp/lift/transport/release metrics | 59 tests; strict MPS smoke measured 2/4 reach/contact and 0/4 later stages |
-| T12.2 | M12 | in_progress | Separate strict, contact-stabilized, assisted, and physical gates | Promotion tests reject proof-mode contamination |
-| T12.3 | M12 | pending | Add rotating development and locked audit seed registries | No seed overlap or routine audit reuse |
+| T12.2 | M12 | verified | Separate strict, contact-stabilized, assisted, and physical gates | 61 tests; strict gate rejects stabilized/controller/human/physical evidence |
+| T12.3 | M12 | in_progress | Add rotating development and locked audit seed registries | No seed overlap or routine audit reuse |
 | T12.4 | M12 | pending | Pin LeRobot/preprocessing/runtime and strengthen artifact hashes | Resume and merge verify full identities |
 | T12.5 | M12 | pending | Reduce evaluation I/O and keep policy services warm | Same metrics with bounded disk/runtime |
 | T13.1 | M13 | pending | Run corrected 250/500/1,000-step MPS training ladder | Reloadable checkpoints and manifests |
@@ -114,4 +114,16 @@ Commit: e7d2610 T12.1
 Remaining: proof modes, seed registries, provenance, evaluation runtime
 Blockers: none
 Next step: explicit strict/contact-stabilized/assisted/physical proof gates
+```
+
+### 2026-07-10 - Proof-mode separation
+
+```text
+Status: T12.2 verified; T12.3 in_progress
+Completed: none-assist runtime and strict/contact/controller/human/physical classifiers/gates
+Evidence: 61 tests; cycle eval argv uses none; stabilized success rejected by strict promotion
+Commit: pending T12.2 checkpoint
+Remaining: seed registries, provenance, evaluation runtime
+Blockers: none
+Next step: rotating development seeds and locked one-use audit seeds
 ```

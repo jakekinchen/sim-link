@@ -9,6 +9,7 @@ from pathlib import Path
 
 from scenesmith.robot_lab.autolearn import (
     PromotionGate,
+    classify_proof_mode,
     decide_promotion,
     is_dagger_correction_frame,
     policy_expert_delta_l2,
@@ -426,6 +427,17 @@ class DaggerFrameTests(unittest.TestCase):
 
 
 class PromotionTests(unittest.TestCase):
+    def test_proof_modes_separate_strict_stabilized_controller_and_physical(self):
+        strict = _episode(1, success=False, sorted_count=0)
+        stabilized = _episode(2, success=False, sorted_count=0, grasp_activations=1)
+        controller = _episode(3, success=False, sorted_count=0, controller_frames=1)
+        physical = _episode(4, success=False, sorted_count=0, physical=True)
+
+        self.assertEqual(classify_proof_mode(strict), "strict_neural")
+        self.assertEqual(classify_proof_mode(stabilized), "contact_stabilized")
+        self.assertEqual(classify_proof_mode(controller), "controller_assisted")
+        self.assertEqual(classify_proof_mode(physical), "physical_robot")
+
     def test_evaluation_aggregates_stage_funnel_rates(self):
         episode = _episode(7100, success=False, sorted_count=1)
         episode["stage_metrics"] = {
@@ -482,6 +494,40 @@ class PromotionTests(unittest.TestCase):
         )
         self.assertFalse(decision.accepted)
         self.assertIn("candidate_contains_controller_or_human_assistance", decision.reasons)
+
+    def test_strict_gate_rejects_contact_stabilized_candidate(self):
+        seeds = (7100, 7101)
+        baseline = summarize_evaluation(
+            {"results": [_episode(seed, success=False, sorted_count=0) for seed in seeds]}
+        )
+        candidate = summarize_evaluation(
+            {
+                "results": [
+                    _episode(
+                        seed,
+                        success=True,
+                        sorted_count=4,
+                        grasp_activations=1,
+                    )
+                    for seed in seeds
+                ]
+            },
+            allow_contact_gated_grasp_assist=True,
+        )
+
+        decision = decide_promotion(
+            baseline,
+            candidate,
+            PromotionGate(
+                expected_seeds=seeds,
+                min_pure_success_rate=0.5,
+                allow_contact_gated_grasp_assist=True,
+                required_proof_mode="strict_neural",
+            ),
+        )
+
+        self.assertFalse(decision.accepted)
+        self.assertIn("candidate_proof_mode_mismatch", decision.reasons)
 
     def test_rejects_incomplete_seed_set_and_physical_command(self):
         baseline = summarize_evaluation(

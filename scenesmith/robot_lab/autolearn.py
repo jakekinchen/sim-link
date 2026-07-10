@@ -156,6 +156,7 @@ class EvaluationMetrics:
     physical_follower_episodes: int
     stage_metric_episodes: int
     mean_stage_rates: dict[str, float]
+    proof_mode_counts: dict[str, int]
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -169,6 +170,7 @@ class PromotionGate:
     min_pure_success_rate: float = 0.8
     min_success_rate_delta: float = 0.0
     allow_contact_gated_grasp_assist: bool = False
+    required_proof_mode: str = "strict_neural"
 
     def __post_init__(self) -> None:
         if not self.expected_seeds:
@@ -217,6 +219,7 @@ def summarize_evaluation(
         stage: 0.0
         for stage in ("reach", "contact", "grasp", "lift", "transport", "release", "placement")
     }
+    proof_mode_counts: dict[str, int] = {}
     for episode in results:
         seed = int(episode["seed"])
         seeds.append(seed)
@@ -235,6 +238,8 @@ def summarize_evaluation(
         physical_episodes += int(physical)
         assisted_episodes += int(assisted)
         pure_successes += int(success and not scripted and not physical and not assisted)
+        proof_mode = classify_proof_mode(episode)
+        proof_mode_counts[proof_mode] = proof_mode_counts.get(proof_mode, 0) + 1
         stage_metrics = episode.get("stage_metrics")
         if isinstance(stage_metrics, dict) and isinstance(stage_metrics.get("rates"), dict):
             stage_metric_episodes += 1
@@ -256,6 +261,7 @@ def summarize_evaluation(
         mean_stage_rates={
             stage: total / episodes for stage, total in stage_rate_totals.items()
         },
+        proof_mode_counts=dict(sorted(proof_mode_counts.items())),
     )
 
 
@@ -276,6 +282,10 @@ def decide_promotion(
         reasons.append("candidate_commanded_physical_follower")
     if candidate.assisted_episodes:
         reasons.append("candidate_contains_controller_or_human_assistance")
+    if baseline.proof_mode_counts != {gate.required_proof_mode: baseline.episodes}:
+        reasons.append("baseline_proof_mode_mismatch")
+    if candidate.proof_mode_counts != {gate.required_proof_mode: candidate.episodes}:
+        reasons.append("candidate_proof_mode_mismatch")
     if candidate.pure_success_rate < gate.min_pure_success_rate:
         reasons.append("candidate_below_pure_success_threshold")
     required_rate = baseline.pure_success_rate + gate.min_success_rate_delta
@@ -289,6 +299,32 @@ def decide_promotion(
         baseline=baseline,
         candidate=candidate,
     )
+
+
+def classify_proof_mode(episode: dict[str, Any]) -> str:
+    proof = episode.get("proof_scope") or {}
+    if proof.get("scripted_object_motion") is not False:
+        return "invalid_scripted"
+    if _physical_follower_commanded(episode):
+        return "physical_robot"
+    intervention = episode.get("intervention") or {}
+    if int(intervention.get("frames") or 0) > 0:
+        return "human_intervened"
+    grasp = proof.get("grasp_assist") or {}
+    controller = grasp.get("post_place_controller") or {}
+    modes = {str(value) for value in proof.get("object_motion_modes") or []}
+    if any("task_space" in mode or "post_place_controller" in mode for mode in modes) or any(
+        int(controller.get(key) or 0) > 0
+        for key in ("executed_frames", "tray_transfer_executed_frames", "recovery_pick_executed_frames")
+    ):
+        return "controller_assisted"
+    if int(grasp.get("activation_count") or 0) > 0:
+        return "contact_stabilized"
+    if proof.get("neural_policy_actions_applied_to_simulation") or any(
+        "neural_policy" in mode for mode in modes
+    ):
+        return "strict_neural"
+    return "invalid_unproven"
 
 
 def _episode_was_assisted(

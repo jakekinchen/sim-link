@@ -420,6 +420,9 @@ def run_domain_randomized_intervention_episode(
                 "final_wrist_render": str(output_dir / "policy_final_wrist.png"),
             },
         }
+        from scenesmith.robot_lab.autolearn import classify_proof_mode
+
+        summary["proof_mode"] = classify_proof_mode(summary)
         _write_jsonl(output_dir / "observation_frames.jsonl", recorder.frames)
         _write_jsonl(output_dir / "intervention_frames.jsonl", intervention_frames)
         write_json(output_dir / "intervention_trajectory.json", {"frames": recorder.frames})
@@ -470,6 +473,7 @@ def run_neural_policy_intervention_episode(
     if max_policy_steps <= 0:
         raise ValueError("max_policy_steps must be positive")
     if run_config.grasp_assist_mode not in {
+        "none",
         "policy_gripper",
         "contact_reflex",
         "policy_gripper_tray_release",
@@ -560,6 +564,7 @@ def run_neural_policy_intervention_episode(
             "policy_gripper_tray_release",
             "policy_gripper_tray_transfer",
         }
+        grasp_stabilization = run_config.grasp_assist_mode != "none"
         for _ in range(max_policy_steps):
             controller_action, controller_phase = _contact_reflex_post_place_control(
                 grasp_assist,
@@ -722,7 +727,7 @@ def run_neural_policy_intervention_episode(
                 controller_phase
                 and controller_phase.startswith("contact_gated_recovery_pick")
             )
-            if controller_action is None or recovery_pick_control:
+            if grasp_stabilization and (controller_action is None or recovery_pick_control):
                 _activate_neural_grasp_assist_on_contact(
                     mujoco,
                     model,
@@ -1026,6 +1031,9 @@ def run_neural_policy_intervention_episode(
                 "policy_gripper_contact_verified": policy_contact_frames > 0,
                 "grasp_assist": {
                     "mode": (
+                        "none"
+                        if run_config.grasp_assist_mode == "none"
+                        else (
                         "contact_gated_jaw_reflex_to_matching_tray"
                         if contact_reflex
                         else (
@@ -1036,7 +1044,7 @@ def run_neural_policy_intervention_episode(
                                 if tray_release
                                 else "contact_gated_mujoco_weld"
                             )
-                        )
+                        ))
                     ),
                     "events": grasp_assist.events,
                     "contact_reflex_max_hold_steps": (

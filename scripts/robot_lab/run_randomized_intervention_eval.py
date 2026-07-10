@@ -56,6 +56,7 @@ def main() -> int:
     parser.add_argument(
         "--grasp-assist-mode",
         choices=(
+            "none",
             "policy_gripper",
             "contact_reflex",
             "policy_gripper_tray_release",

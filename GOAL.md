@@ -20,9 +20,9 @@ M12 - Honest evaluation and provenance
 
 ## Current Slice
 
-Define and enforce distinct strict, contact-stabilized, controller-assisted,
-human-intervened, and physical proof modes. Promotion must reject missing or
-mixed proof-mode evidence and never treat a grasp weld as strict autonomy.
+Add disjoint rotating development seeds and locked audit seeds with usage
+history. Routine iteration must not consume audit seeds, and promotion must
+fail if training, development, and audit seed identities overlap.
 
 ## Durable State
 

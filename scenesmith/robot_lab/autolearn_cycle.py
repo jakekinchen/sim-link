@@ -193,6 +193,9 @@ class CycleConfig:
                 allow_contact_gated_grasp_assist=bool(
                     promotion.get("allow_contact_gated_grasp_assist", False)
                 ),
+                required_proof_mode=str(
+                    promotion.get("required_proof_mode", "strict_neural")
+                ),
             ),
             external_compute=ExternalComputeSpec.from_dict(payload.get("external_compute")),
         )

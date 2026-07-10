@@ -21,7 +21,7 @@
         "--episodes", "{eval_episodes}",
         "--device", "mps",
         "--policy-port", "8840",
-        "--grasp-assist-mode", "policy_gripper",
+        "--grasp-assist-mode", "none",
         "--max-policy-steps", "6000"
       ],
       "timeout_s": 43200,
@@ -202,7 +202,7 @@
         "--episodes", "{eval_episodes}",
         "--device", "mps",
         "--policy-port", "8840",
-        "--grasp-assist-mode", "policy_gripper",
+        "--grasp-assist-mode", "none",
         "--max-policy-steps", "6000"
       ],
       "timeout_s": 43200,
@@ -250,6 +250,7 @@
   "promotion": {
     "min_pure_success_rate": 0.75,
     "min_success_rate_delta": 0.0,
-    "allow_contact_gated_grasp_assist": true
+    "allow_contact_gated_grasp_assist": false,
+    "required_proof_mode": "strict_neural"
   }
 }
