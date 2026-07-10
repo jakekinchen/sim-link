@@ -88,12 +88,28 @@
         "--max-policy-steps",
         "3500"
       ],
+      "artifacts": {
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/collection/intervention_batch_summary.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/collection/intervention_batch_summary.json",
+          "sha256": "0bbea0d73b602d829dae09c942dc225e6bda778971f9716d0aa6b3cdfe9256a0",
+          "size_bytes": 17037
+        }
+      },
       "env_keys": [],
+      "git_commit_before": "9fa80695ec819a3302302c90cfa069ee9a1a89a1",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/collect-dagger.log",
       "name": "collect_dagger",
       "required_artifacts": [
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/collection/intervention_batch_summary.json"
       ],
+      "result": {
+        "duration_s": 458.307,
+        "exit_code": 0,
+        "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/collect-dagger.log",
+        "log_sha256": "1e2f10b1f91ac3b87e2a26d5f80351931fd943670aa32516a19ecf5f991df29a"
+      },
       "timeout_s": 43200.0
     },
     {
