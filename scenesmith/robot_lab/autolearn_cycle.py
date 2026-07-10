@@ -332,7 +332,7 @@ class CycleRunner:
         self.stages = tuple(stage.render(self.context) for stage in config.stages)
         self.external_cleaned = False
 
-    def run(self, *, dry_run: bool = False) -> dict[str, Any]:
+    def run(self, *, dry_run: bool = False, resume: bool = False) -> dict[str, Any]:
         manifest_path = self._path(self.config.manifest_path.format_map(self.context))
         accepted_path = self._path(self.config.accepted_pointer_path.format_map(self.context))
         if not dry_run and self.enforce_git:
@@ -340,6 +340,13 @@ class CycleRunner:
                 raise CycleExecutionError("Real cycles require git.auto_commit=true")
             self.git.require_clean(self.config.git_clean_paths)
         source_commit = self.git.head() if self.enforce_git else "test-no-git"
+        prior_manifest = None
+        if resume:
+            if not manifest_path.is_file():
+                raise CycleExecutionError(f"Cannot resume without a manifest: {manifest_path}")
+            prior_manifest = _read_json(manifest_path)
+            if prior_manifest.get("cycle_id") != self.config.cycle_id:
+                raise CycleExecutionError("Resume manifest cycle_id does not match config")
         manifest: dict[str, Any] = {
             "schema_version": "scenesmith.pi05_autolearn_cycle.v1",
             "cycle_id": self.config.cycle_id,
@@ -360,16 +367,44 @@ class CycleRunner:
             ),
             "promotion": None,
         }
+        if prior_manifest is not None:
+            manifest["resumed_from"] = {
+                "status": prior_manifest.get("status"),
+                "source_commit": prior_manifest.get("source_commit"),
+                "config_sha256": prior_manifest.get("config_sha256"),
+                "error": prior_manifest.get("error"),
+            }
         _write_json(manifest_path, manifest)
         if dry_run:
             return manifest
 
         completed_stages: list[dict[str, Any]] = []
+        prior_records = {
+            str(record.get("name")): record
+            for record in (prior_manifest or {}).get("stages", [])
+            if isinstance(record, dict) and record.get("result")
+        }
         training_attempted = False
         try:
             for stage in self.stages:
                 record = self._planned_stage(stage)
                 record["git_commit_before"] = self.git.head() if self.enforce_git else source_commit
+                prior_record = prior_records.get(stage.name)
+                if resume and prior_record and self._can_resume_stage(stage, prior_record):
+                    record.update(
+                        {
+                            "result": prior_record["result"],
+                            "artifacts": self._artifact_evidence(stage.required_artifacts),
+                            "resumed": True,
+                        }
+                    )
+                    completed_stages.append(record)
+                    manifest["stages"] = completed_stages + [
+                        self._planned_stage(item)
+                        for item in self.stages[len(completed_stages) :]
+                    ]
+                    _write_json(manifest_path, manifest)
+                    continue
                 if stage.name == self.config.training_stage:
                     training_attempted = True
                 result = self.stage_runner.run(stage, repo_root=self.repo_root)
@@ -440,6 +475,21 @@ class CycleRunner:
             boundary = "interruption" if isinstance(exc, KeyboardInterrupt) else "failure"
             self._commit_paths([manifest_path], boundary)
             raise
+
+    def _can_resume_stage(self, stage: StageSpec, record: dict[str, Any]) -> bool:
+        if record.get("argv") != list(stage.argv):
+            return False
+        result = record.get("result") or {}
+        if int(result.get("exit_code", -1)) not in stage.allowed_exit_codes:
+            return False
+        evidence = self._artifact_evidence(stage.required_artifacts)
+        if not all(item["exists"] for item in evidence.values()):
+            return False
+        if stage.name == self.config.training_stage and self.config.external_compute:
+            external = record.get("external_compute") or {}
+            if not external.get("cleanup") or not external.get("inventory"):
+                return False
+        return True
 
     def _cleanup_external(self, manifest: dict[str, Any]) -> str | None:
         if self.config.external_compute is None or self.external_cleaned:

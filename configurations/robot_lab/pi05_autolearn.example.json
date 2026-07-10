@@ -119,7 +119,7 @@
       ],
       "timeout_s": 21600,
       "required_artifacts": [
-        "{candidate_model}/config.json",
+        "{candidate_model}/train_config.json",
         "{candidate_model}/adapter_model.safetensors"
       ],
       "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/train.log",
@@ -129,6 +129,21 @@
         "PYTORCH_ENABLE_MPS_FALLBACK": "1",
         "TOKENIZERS_PARALLELISM": "false"
       }
+    },
+    {
+      "name": "finalize_candidate",
+      "argv": [
+        "./.mujoco_venv/bin/python",
+        "scripts/robot_lab/finalize_pi05_checkpoint.py",
+        "--checkpoint-root", "{candidate_model}",
+        "--source-config", "{accepted_model}/config.json"
+      ],
+      "timeout_s": 60,
+      "required_artifacts": [
+        "{candidate_model}/config.json",
+        "{candidate_model}/scenesmith_finalize_summary.json"
+      ],
+      "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/finalize-candidate.log"
     },
     {
       "name": "candidate_eval",
@@ -167,6 +182,7 @@
       "scenesmith/robot_lab/autolearn.py",
       "scenesmith/robot_lab/autolearn_cycle.py",
       "scripts/robot_lab/export_intervention_dataset.py",
+      "scripts/robot_lab/finalize_pi05_checkpoint.py",
       "scripts/robot_lab/merge_pi05_training_datasets.py",
       "scripts/robot_lab/run_pi05_autolearn_cycle.py",
       "scripts/robot_lab/run_pi05_eval_with_server.py",

@@ -329,6 +329,52 @@ class CycleConfigTests(unittest.TestCase):
             self.assertEqual(manifest["status"], "interrupted")
             self.assertEqual(manifest["error"]["type"], "KeyboardInterrupt")
 
+    def test_resume_skips_matching_successful_stage(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            payload = _cycle_payload()
+            config_path = root / "cycle.json"
+            config_path.write_text(json.dumps(payload), encoding="utf-8")
+            (root / "outputs").mkdir()
+            evaluation = {"results": [_episode(7100, success=False, sorted_count=0), _episode(7101, success=False, sorted_count=0)]}
+            (root / "outputs/baseline.json").write_text(json.dumps(evaluation))
+            (root / "outputs/candidate.json").write_text(json.dumps(evaluation))
+            manifest_path = root / "experiments/pi05_autolearn/cycles/test-cycle.json"
+            manifest_path.parent.mkdir(parents=True)
+            manifest_path.write_text(
+                json.dumps(
+                    {
+                        "cycle_id": "test-cycle",
+                        "status": "failed",
+                        "source_commit": "old",
+                        "config_sha256": "old",
+                        "stages": [
+                            {
+                                "name": "train",
+                                "argv": ["trainer", "--steps=25"],
+                                "result": {
+                                    "exit_code": 0,
+                                    "duration_s": 1.0,
+                                    "log_path": "outputs/train.log",
+                                    "log_sha256": "0" * 64,
+                                },
+                            }
+                        ],
+                    }
+                )
+            )
+            fake = _FakeStageRunner()
+            manifest = CycleRunner(
+                CycleConfig.from_dict(payload),
+                repo_root=root,
+                config_path=config_path,
+                stage_runner=fake,
+                enforce_git=False,
+            ).run(resume=True)
+            self.assertEqual(fake.calls, [])
+            self.assertEqual(manifest["status"], "complete")
+            self.assertTrue(manifest["stages"][0]["resumed"])
+
 
 if __name__ == "__main__":
     unittest.main()

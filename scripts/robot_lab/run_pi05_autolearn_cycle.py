@@ -20,13 +20,18 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Reuse only prior successful stages whose argv and required artifacts still match.",
+    )
     args = parser.parse_args()
 
     config_path = args.config.resolve()
     config = load_cycle_config(config_path)
     runner = CycleRunner(config, repo_root=REPO_ROOT, config_path=config_path)
     try:
-        manifest = runner.run(dry_run=args.dry_run)
+        manifest = runner.run(dry_run=args.dry_run, resume=args.resume)
     except Exception as exc:  # noqa: BLE001
         print(f"autolearn cycle failed: {exc}", file=sys.stderr)
         return 1
