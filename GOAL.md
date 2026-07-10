@@ -21,9 +21,9 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Finish T16.1: replace unresolved OpenPI/Menagerie placeholders with exact remote
-revision and license/content pins, and make the tracked lock portable across
-checkout locations. Do not begin twin schemas until the corrected lock verifies.
+Define content-addressed `TwinProfile`, `TwinQualificationSpec`, and
+`TwinQualificationReport` schemas plus one simulation-only, physically
+unqualified example bound to the corrected dependency lock. Open no hardware.
 
 ## Durable State
 

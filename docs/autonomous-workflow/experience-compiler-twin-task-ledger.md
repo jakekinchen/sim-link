@@ -7,10 +7,10 @@ training_lock: closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.2 twin qualification schemas
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified
-evidence: commit 92adde5 pinned local inputs; follow-up correction now pins exact OpenPI/Menagerie revisions and removes absolute repo_root identity
+evidence: 92adde5 local pins; addcafd portable remote pins; cd5ab42 actual Menagerie so101.xml hash; 81 tests pass
 remaining: M16-M19 prerequisites, then Gates C-D and closeout
 blockers: physical M19 work requires separate read and motion authority; offline work is unblocked
-next_step: define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas with a simulation-only example bound to the corrected dependency lock
+next_step: implement TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas and example
 ```
 
 ## Rules
@@ -29,8 +29,8 @@ next_step: define TwinProfile, TwinQualificationSpec, and TwinQualificationRepor
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
-| T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Local runtime/patch pin: 92adde5; portable remote correction verified with exact OpenPI/Menagerie pins and relocation test |
-| T16.2 | pending | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Property/schema tests; content-addressed simulation-only example |
+| T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
+| T16.2 | in_progress | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Property/schema tests; content-addressed simulation-only example |
 | T16.3 | pending | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | Machine structural diff of inertials, limits, contacts, camera, gripper, actuator, backlash |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
 | T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
@@ -154,6 +154,20 @@ Remaining: portable remote pins before T16.2
 Blockers: none
 Training lock: closed
 Next step: correct the dependency lock and re-review T16.1
+```
+
+### 2026-07-10 - T16.1 completed and planning realigned
+
+```text
+Current task: T16.2
+State: in_progress
+Completed: portable local/remote dependency lock including actual Menagerie so101.xml
+Evidence: commits 92adde5, addcafd, cd5ab42; 81 tests; live offline lock verify
+Commit: cd5ab42 final content correction
+Remaining: twin schemas, structural reconciliation, mass compiler, fake qualification harness
+Blockers: none for T16.2
+Training lock: closed
+Next step: content-addressed simulation-only twin contract
 ```
 
 ### 2026-07-10 - T16.1 robotics dependency lock
