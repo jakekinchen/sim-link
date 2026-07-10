@@ -181,13 +181,36 @@
         "--repo-id",
         "local/pi05-autolearn-cycle-000-bootstrap-mps"
       ],
+      "artifacts": {
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/training-dataset/meta/info.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/training-dataset/meta/info.json",
+          "sha256": "d9f0f59a87bf68bff98d79ee5ab0a823ae9412d6c9fcebd44067cbab3e1d5f52",
+          "size_bytes": 2474
+        },
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/training-dataset/scenesmith_merge_summary.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/training-dataset/scenesmith_merge_summary.json",
+          "sha256": "d5c30599a6e291f5fb5f39f737b10a2b11535a13cb6e8d4fb8afffc04c276699",
+          "size_bytes": 1007
+        }
+      },
       "env_keys": [],
+      "git_commit_before": "e3bb00249e15b7a574ce7c35087364480552547a",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/aggregate-dataset.log",
       "name": "aggregate_dataset",
       "required_artifacts": [
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/training-dataset/meta/info.json",
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/training-dataset/scenesmith_merge_summary.json"
       ],
+      "result": {
+        "duration_s": 12.339,
+        "exit_code": 0,
+        "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/aggregate-dataset.log",
+        "log_sha256": "3a0821219d09691606a70c6ca6e782bc9a8192f973b0e188dec5ed537d893759"
+      },
       "timeout_s": 7200.0
     },
     {
