@@ -44,6 +44,15 @@ class RoboticsDependencyLockTests(unittest.TestCase):
             payload["dependencies"]["menagerie_robotstudio_so101"]["model_path"],
             "robotstudio_so101",
         )
+        self.assertIn(
+            "robotstudio_so101/so101.xml",
+            {
+                entry["path"]
+                for entry in payload["dependencies"]["menagerie_robotstudio_so101"][
+                    "reference_files"
+                ]
+            },
+        )
         self.assertNotIn("repo_root", payload)
 
     def test_verify_rejects_missing_dirty_patch_identity(self):
@@ -76,7 +85,7 @@ class RoboticsDependencyLockTests(unittest.TestCase):
 
     def test_verify_rejects_wrong_remote_reference_path(self):
         payload = build_robotics_dependency_lock(repo_root=REPO_ROOT)
-        payload["dependencies"]["menagerie_robotstudio_so101"]["reference_files"][1]["path"] = (
+        payload["dependencies"]["menagerie_robotstudio_so101"]["reference_files"][2]["path"] = (
             "robotstudio_so101/wrong.xml"
         )
         _resign(payload)

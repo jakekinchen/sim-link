@@ -133,6 +133,11 @@
           "size_bytes": 1142
         },
         {
+          "path": "robotstudio_so101/so101.xml",
+          "sha256": "5ad49f2b45c083baac9ffe5d4d3213a5da7eac8039095bb2df177a697aae8308",
+          "size_bytes": 16670
+        },
+        {
           "path": "robotstudio_so101/scene.xml",
           "sha256": "d3037f0fd36b61a9b6805b2c79831e7a392276d0f490145d01f718542eee9150",
           "size_bytes": 825
@@ -213,7 +218,7 @@
       "role": "active_structural_model"
     }
   },
-  "identity_sha256": "50948edf04aeec242c3db2c7eae1dfd706af6f29d4648193d7b483cdfa7f7193",
+  "identity_sha256": "222bce608b7c91527e1f37136ff97e1d2eeaeab59df384aeba2c98a511aff965",
   "runtime_contract": {
     "joint_names": [
       "shoulder_pan",

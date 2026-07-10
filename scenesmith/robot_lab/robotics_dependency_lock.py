@@ -53,6 +53,11 @@ MENAGERIE_REFERENCE_FILES = [
         "size_bytes": 1142,
     },
     {
+        "path": "robotstudio_so101/so101.xml",
+        "sha256": "5ad49f2b45c083baac9ffe5d4d3213a5da7eac8039095bb2df177a697aae8308",
+        "size_bytes": 16670,
+    },
+    {
         "path": "robotstudio_so101/scene.xml",
         "sha256": "d3037f0fd36b61a9b6805b2c79831e7a392276d0f490145d01f718542eee9150",
         "size_bytes": 825,
