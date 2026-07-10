@@ -133,13 +133,36 @@
         "pi05_causal",
         "--verify"
       ],
+      "artifacts": {
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/dagger-dataset/meta/info.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/dagger-dataset/meta/info.json",
+          "sha256": "cee8e3a1b545678471e7987fd41b3d2dfc13a8054e57008809ea23f767a48dd5",
+          "size_bytes": 2472
+        },
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/dagger-dataset/scenesmith_intervention_export_summary.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/dagger-dataset/scenesmith_intervention_export_summary.json",
+          "sha256": "e66a7823d704c4cf404444a7e429467dbd2cfcbc43954eae3adca6ccd83fb703",
+          "size_bytes": 10445
+        }
+      },
       "env_keys": [],
+      "git_commit_before": "ef38c473d60c2431b9f38be9517e4ca6b6516977",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/export-corrections.log",
       "name": "export_corrections",
       "required_artifacts": [
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/dagger-dataset/meta/info.json",
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/dagger-dataset/scenesmith_intervention_export_summary.json"
       ],
+      "result": {
+        "duration_s": 10.297,
+        "exit_code": 0,
+        "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/export-corrections.log",
+        "log_sha256": "c7f019aed428251930fdbe56953abf3ae5db8cf7795cc11a22ead31f913c0abd"
+      },
       "timeout_s": 7200.0
     },
     {
