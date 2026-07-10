@@ -11,8 +11,19 @@ RUNNER="$ROOT/docs/autonomous-workflow/reusable/scripts/run-codex-pair-cycle.sh"
 mkdir -p "$RUNTIME_DIR"
 python3 "$GUARD" verify --repo-root "$ROOT" --scope "$SCOPE" --baseline "$BASELINE"
 
+has_model=0
+for argument in "$@"; do
+  if [ "$argument" = "--model" ]; then
+    has_model=1
+  fi
+done
+model_args=()
+if [ "$has_model" -eq 0 ]; then
+  model_args=(--model "${PI05_CODEX_MODEL:-gpt-5.4}")
+fi
+
 set +e
-"$RUNNER" "$@" --root "$ROOT" --allow-dirty
+"$RUNNER" "$@" "${model_args[@]}" --ignore-user-config --root "$ROOT" --allow-dirty
 runner_status=$?
 set -e
 

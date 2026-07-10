@@ -15,6 +15,7 @@ Options:
   --model <name>        Pass a model to codex exec.
   --sandbox <mode>      Codex sandbox mode. Default: workspace-write.
   --approval <policy>   Codex approval policy. Default: never.
+  --ignore-user-config  Run with an explicit model and repo prompts only.
   --allow-dirty         Allow starting from a dirty worktree.
   --dangerous           Use --dangerously-bypass-approvals-and-sandbox.
   -h, --help            Show this help.
@@ -34,6 +35,7 @@ SANDBOX="workspace-write"
 APPROVAL="never"
 ALLOW_DIRTY=0
 DANGEROUS=0
+IGNORE_USER_CONFIG=0
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
@@ -79,6 +81,10 @@ while [ "$#" -gt 0 ]; do
       ;;
     --dangerous)
       DANGEROUS=1
+      shift
+      ;;
+    --ignore-user-config)
+      IGNORE_USER_CONFIG=1
       shift
       ;;
     -h|--help)
@@ -179,6 +185,9 @@ codex_base_args() {
   if [ -n "$MODEL" ]; then
     printf '%s\n' "-m"
     printf '%s\n' "$MODEL"
+  fi
+  if [ "$IGNORE_USER_CONFIG" -eq 1 ]; then
+    printf '%s\n' "--ignore-user-config"
   fi
   if [ "$DANGEROUS" -eq 1 ]; then
     printf '%s\n' "--dangerously-bypass-approvals-and-sandbox"
