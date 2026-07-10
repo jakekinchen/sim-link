@@ -53,6 +53,7 @@ def main() -> int:
     parser.add_argument("--steps-per-waypoint", type=int, default=3)
     parser.add_argument("--observation-width", type=int, default=224)
     parser.add_argument("--observation-height", type=int, default=224)
+    parser.add_argument("--observation-retention-stride", type=int, default=1)
     parser.add_argument(
         "--grasp-assist-mode",
         choices=(
@@ -78,6 +79,8 @@ def main() -> int:
         parser.error("--episodes must be positive")
     if args.contact_reflex_max_hold_steps <= 0:
         parser.error("--contact-reflex-max-hold-steps must be positive")
+    if args.observation_retention_stride <= 0:
+        parser.error("--observation-retention-stride must be positive")
     if args.precontact_stall_steps <= 0:
         parser.error("--precontact-stall-steps must be positive")
     if (
@@ -99,6 +102,7 @@ def main() -> int:
         scripted_steps_per_waypoint=args.steps_per_waypoint,
         observation_width=args.observation_width,
         observation_height=args.observation_height,
+        observation_retention_stride=args.observation_retention_stride,
         deadman_timeout_s=args.deadman_timeout,
         intervention_wait_timeout_s=args.intervention_wait_timeout,
         intervention_run_timeout_s=args.intervention_run_timeout,

@@ -63,6 +63,7 @@
         "--device", "mps",
         "--policy-port", "8840",
         "--grasp-assist-mode", "none",
+        "--observation-retention-stride", "30",
         "--max-policy-steps", "6000"
       ],
       "timeout_s": 43200,
@@ -83,6 +84,7 @@
         "--device", "mps",
         "--policy-port", "8840",
         "--grasp-assist-mode", "policy_gripper_tray_transfer",
+        "--observation-retention-stride", "1",
         "--max-policy-steps", "6000"
       ],
       "timeout_s": 43200,
@@ -283,6 +285,7 @@
         "--device", "mps",
         "--policy-port", "8840",
         "--grasp-assist-mode", "none",
+        "--observation-retention-stride", "30",
         "--max-policy-steps", "6000"
       ],
       "timeout_s": 43200,

@@ -36,6 +36,7 @@ from scenesmith.robot_lab.intervention_supervisor import (
     _contact_reflex_post_place_control,
     _contact_reflex_release_ready,
     _episode_stage_metrics,
+    _observation_retention_summary,
     _policy_task_for_remaining_cubes,
     _policy_search_seed,
     _release_neural_grasp_assist_if_open,
@@ -135,6 +136,19 @@ class DomainRandomizationTests(unittest.TestCase):
 
 
 class ContactReflexControllerTests(unittest.TestCase):
+    def test_observation_retention_summary_counts_sparse_snapshots(self):
+        frames = [
+            {"observation": {"retained_images": {"base": "0.png"}}},
+            {"observation": {"retained_images": None}},
+            {"observation": {"retained_images": None}},
+            {"observation": {"retained_images": {"base": "3.png"}}},
+        ]
+
+        summary = _observation_retention_summary(frames, 3)
+
+        self.assertEqual(summary["retained_frames"], 2)
+        self.assertTrue(summary["live_images_overwritten"])
+
     def test_stage_metrics_report_full_sort_funnel(self):
         scene = {
             "cubes": [

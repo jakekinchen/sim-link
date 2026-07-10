@@ -52,6 +52,7 @@ from scenesmith.robot_lab.so101_coordinates import coordinate_contract
 from scripts.robot_lab.export_intervention_dataset import (
     _features,
     _frame_task,
+    _observation_image_paths,
     _split_contiguous_runs,
 )
 from scripts.robot_lab.finalize_pi05_checkpoint import _compare_normalization
@@ -108,6 +109,19 @@ def _episode(
 
 
 class DaggerFrameTests(unittest.TestCase):
+    def test_sparse_evaluation_frames_cannot_be_exported_as_training_data(self):
+        retained = {"base": "base.png", "wrist": "wrist.png", "overhead": "top.png"}
+        self.assertEqual(
+            _observation_image_paths(
+                {"observation": {"images": {"base": "live.png"}, "retained_images": retained}}
+            ),
+            retained,
+        )
+        with self.assertRaisesRegex(ValueError, "no retained synchronized images"):
+            _observation_image_paths(
+                {"observation": {"images": {"base": "live.png"}, "retained_images": None}}
+            )
+
     def test_replay_registry_retains_history_bounds_and_rejects_mutation(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

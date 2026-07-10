@@ -83,6 +83,19 @@ def main() -> int:
     if int(batch.get("episodes") or 0) != args.episodes:
         print("Evaluation batch is incomplete", file=sys.stderr)
         return 1
+    png_files = list(args.output_dir.rglob("*.png"))
+    batch["evaluation_runtime"] = {
+        "policy_server_starts": 1,
+        "policy_server_reused_across_episodes": args.episodes > 1,
+        "checkpoint": args.policy_repo,
+        "device": args.device,
+        "observation_retention_stride": args.observation_retention_stride,
+        "png_file_count": len(png_files),
+        "png_size_bytes": sum(path.stat().st_size for path in png_files),
+    }
+    temporary = batch_path.with_suffix(batch_path.suffix + ".tmp")
+    temporary.write_text(json.dumps(batch, indent=2, sort_keys=True) + "\n")
+    temporary.replace(batch_path)
     print(
         json.dumps(
             {
@@ -115,6 +128,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--action-horizon", type=int, default=15)
     parser.add_argument("--max-policy-steps", type=int, default=6000)
     parser.add_argument("--control-hz", type=int, default=30)
+    parser.add_argument("--observation-retention-stride", type=int, default=30)
     parser.add_argument("--precontact-stall-steps", type=int, default=240)
     parser.add_argument("--precontact-min-progress-m", type=float, default=0.005)
     parser.add_argument("--precontact-contact-distance-m", type=float, default=0.05)
@@ -187,6 +201,8 @@ def _evaluation_argv(args: argparse.Namespace) -> list[str]:
         args.grasp_assist_mode,
         "--control-hz",
         str(args.control_hz),
+        "--observation-retention-stride",
+        str(args.observation_retention_stride),
         "--precontact-stall-steps",
         str(args.precontact_stall_steps),
         "--precontact-min-progress-m",

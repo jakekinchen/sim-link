@@ -16,13 +16,13 @@ proof states must remain distinct.
 
 ## Current Milestone
 
-M12 - Honest evaluation and provenance
+M13 - Meaningful policy improvement
 
 ## Current Slice
 
-Reduce evaluation image/storage overhead without changing metrics, and keep a
-policy service warm across paired seeds where checkpoint identity is unchanged.
-Prove output equivalence and bounded service lifecycle before closing M12.
+Run the corrected, balanced, provenance-bound MPS training ladder at 250, 500,
+and 1,000 updates. Finalize and reload each candidate, evaluate on rotating
+development seeds, and promote only a later audit-tier candidate that improves.
 
 ## Durable State
 

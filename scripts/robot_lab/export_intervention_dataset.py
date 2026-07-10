@@ -436,12 +436,25 @@ def _features(image_size: int, dataset_schema: str = "intervention") -> dict[str
     return features
 
 
+def _observation_image_paths(frame: dict[str, Any]) -> dict[str, str]:
+    observation = frame["observation"]
+    if "retained_images" in observation:
+        if not observation["retained_images"]:
+            raise ValueError(
+                "Selected frame has no retained synchronized images; collect training data at stride 1"
+            )
+        relative_paths = observation["retained_images"]
+    else:
+        relative_paths = observation["images"]
+    return relative_paths
+
+
 def _load_frame_images(
     episode_dir: Path,
     frame: dict[str, Any],
     image_size: int,
 ) -> tuple[tuple[np.ndarray, ...], dict[str, str]]:
-    relative_paths = frame["observation"]["images"]
+    relative_paths = _observation_image_paths(frame)
     sources = {role: episode_dir / relative_paths[role] for role in IMAGE_ROLES}
     missing = [str(path) for path in sources.values() if not path.is_file()]
     if missing:

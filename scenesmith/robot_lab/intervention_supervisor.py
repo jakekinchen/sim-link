@@ -43,6 +43,7 @@ class EpisodeRunConfig:
     scripted_steps_per_waypoint: int = 3
     observation_width: int = 224
     observation_height: int = 224
+    observation_retention_stride: int = 1
     deadman_timeout_s: float = 0.55
     intervention_wait_timeout_s: float = 20.0
     intervention_run_timeout_s: float = 45.0
@@ -212,6 +213,7 @@ def run_domain_randomized_intervention_episode(
         randomization_manifest=randomization_manifest,
         width=run_config.observation_width,
         height=run_config.observation_height,
+        observation_retention_stride=run_config.observation_retention_stride,
     )
     correction: CorrectionSource | None = None
     failure_events: list[dict[str, Any]] = []
@@ -408,6 +410,9 @@ def run_domain_randomized_intervention_episode(
             "final_score": final_score,
             "final_cube_states": final_states,
             "observation_frames": len(recorder.frames),
+            "observation_retention": _observation_retention_summary(
+                recorder.frames, run_config.observation_retention_stride
+            ),
             "artifacts": {
                 "summary": str(output_dir / "intervention_episode_summary.json"),
                 "trajectory": str(output_dir / "intervention_trajectory.json"),
@@ -520,6 +525,7 @@ def run_neural_policy_intervention_episode(
         randomization_manifest=randomization_manifest,
         width=run_config.observation_width,
         height=run_config.observation_height,
+        observation_retention_stride=run_config.observation_retention_stride,
     )
     correction: CorrectionSource | None = None
     failure_events: list[dict[str, Any]] = []
@@ -1089,6 +1095,9 @@ def run_neural_policy_intervention_episode(
             "stage_metrics": stage_metrics,
             "final_cube_states": final_states,
             "observation_frames": len(recorder.frames),
+            "observation_retention": _observation_retention_summary(
+                recorder.frames, run_config.observation_retention_stride
+            ),
             "artifacts": {
                 "summary": str(output_dir / "intervention_episode_summary.json"),
                 "trajectory": str(output_dir / "intervention_trajectory.json"),
@@ -1123,6 +1132,18 @@ def run_neural_policy_intervention_episode(
             correction.close()
 
 
+def _observation_retention_summary(
+    frames: list[dict[str, Any]], stride: int
+) -> dict[str, Any]:
+    return {
+        "stride": stride,
+        "retained_frames": sum(
+            bool((row.get("observation") or {}).get("retained_images")) for row in frames
+        ),
+        "live_images_overwritten": stride > 1,
+    }
+
+
 class EpisodeRecorder:
     def __init__(
         self,
@@ -1137,6 +1158,7 @@ class EpisodeRecorder:
         randomization_manifest: dict[str, Any],
         width: int,
         height: int,
+        observation_retention_stride: int = 1,
     ):
         self.mujoco = mujoco
         self.model = model
@@ -1148,6 +1170,9 @@ class EpisodeRecorder:
         self.frames: list[dict[str, Any]] = []
         self.frame_index = 0
         self.failure_reason: str | None = None
+        if observation_retention_stride <= 0:
+            raise ValueError("Observation retention stride must be positive")
+        self.observation_retention_stride = observation_retention_stride
         self.renderer = mujoco.Renderer(model, width=width, height=height)
         self.brightness = float(randomization_manifest["observation_augmentation"]["brightness_scale"])
         self.noise_std = float(randomization_manifest["observation_augmentation"]["camera_noise_std"])
@@ -1215,11 +1240,12 @@ class EpisodeRecorder:
         return row
 
     def capture_observation(self) -> tuple[dict[str, Any], float]:
-        image_paths = self._render_observations()
+        image_paths, retained_paths = self._render_observations()
         return (
             {
                 "state": self.data.qpos[:6].round(6).tolist(),
                 "images": image_paths,
+                "retained_images": retained_paths,
                 "cube_states": _cube_states_from_model(
                     self.mujoco, self.model, self.data, self.scene
                 ),
@@ -1227,8 +1253,11 @@ class EpisodeRecorder:
             round(float(self.data.time), 6),
         )
 
-    def _render_observations(self) -> dict[str, str]:
+    def _render_observations(self) -> tuple[dict[str, str], dict[str, str] | None]:
         paths: dict[str, str] = {}
+        retained: dict[str, str] | None = (
+            {} if self.frame_index % self.observation_retention_stride == 0 else None
+        )
         for camera_index, (role, camera_name) in enumerate(CAMERAS.items()):
             self.renderer.update_scene(self.data, camera=camera_name)
             pixels = self.renderer.render().copy()
@@ -1238,10 +1267,26 @@ class EpisodeRecorder:
                 noise_std=self.noise_std,
                 seed=self.seed * 100_003 + self.frame_index * 17 + camera_index,
             )
-            relative = Path("observations") / role / f"{self.frame_index:06d}.png"
+            relative = (
+                Path("observations") / role / f"{self.frame_index:06d}.png"
+                if self.observation_retention_stride == 1
+                else Path("observations") / "live" / f"{role}.png"
+            )
             _write_png(self.output_dir / relative, pixels)
             paths[role] = relative.as_posix()
-        return paths
+            if retained is not None:
+                retained_relative = (
+                    relative
+                    if self.observation_retention_stride == 1
+                    else Path("observations")
+                    / "retained"
+                    / role
+                    / f"{self.frame_index:06d}.png"
+                )
+                if retained_relative != relative:
+                    _write_png(self.output_dir / retained_relative, pixels)
+                retained[role] = retained_relative.as_posix()
+        return paths, retained
 
     def render_final(self, path: Path, camera: str) -> None:
         self.renderer.update_scene(self.data, camera=camera)
@@ -1506,6 +1551,16 @@ def _episode_stage_metrics(
             if (
                 abs(float(position[0]) - float(tray["center_m"][0])) <= half_x
                 and abs(float(position[1]) - float(tray["center_m"][1])) <= half_y
+                and (
+                    name in lifted
+                    or float(
+                        np.linalg.norm(
+                            np.asarray(position, dtype=np.float64)
+                            - np.asarray(initial_positions[name], dtype=np.float64)
+                        )
+                    )
+                    >= 0.05
+                )
             ):
                 transported.add(name)
     grasped = {

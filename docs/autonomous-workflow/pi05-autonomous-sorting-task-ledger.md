@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ## Program Status
 
 ```text
-Current state: M10-M11 verified; M12 honest evaluation/provenance active
-Completed: trusted data and bounded failure-focused cumulative replay
-Evidence: 64 tests; full 88 MiB model/runtime provenance and resume-drift rejection
-Remaining: M12-M15 below
+Current state: M10-M12 verified; M13 meaningful policy improvement active
+Completed: trusted replay plus honest, provenance-bound, storage-bounded evaluation
+Evidence: 66 tests; sparse MPS eval and one-start/two-seed warm-server canary
+Remaining: M13-M15 below
 Blockers: none for local P0 implementation
-Next step: T12.5 bounded evaluation storage and persistent services
+Next step: T13.1 corrected 250/500/1,000-step MPS ladder
 ```
 
 ## Tasks
@@ -30,8 +30,8 @@ Next step: T12.5 bounded evaluation storage and persistent services
 | T12.2 | M12 | verified | Separate strict, contact-stabilized, assisted, and physical gates | 61 tests; strict gate rejects stabilized/controller/human/physical evidence |
 | T12.3 | M12 | verified | Add rotating development and locked audit seed registries | 62 tests; development rotation and audit reuse rejected; dev non-promotable |
 | T12.4 | M12 | verified | Pin LeRobot/preprocessing/runtime and strengthen artifact hashes | 64 tests; runtime/model tree manifest verified; resume rejects hash drift |
-| T12.5 | M12 | in_progress | Reduce evaluation I/O and keep policy services warm | Same metrics with bounded disk/runtime |
-| T13.1 | M13 | pending | Run corrected 250/500/1,000-step MPS training ladder | Reloadable checkpoints and manifests |
+| T12.5 | M12 | verified | Reduce evaluation I/O and keep policy services warm | 66 tests; 120-step eval retained 4 frames; one server served two seeds |
+| T13.1 | M13 | in_progress | Run corrected 250/500/1,000-step MPS training ladder | Reloadable checkpoints and manifests |
 | T13.2 | M13 | pending | Sweep action execution horizon on paired seeds | Recorded stage/terminal comparison |
 | T13.3 | M13 | pending | Run PI0.5 vs SmolVLA vs ACT/Diffusion baseline bakeoff | Same data, prompts, seeds, and proof modes |
 | T13.4 | M13 | pending | Promote or reject with Git-tracked evidence | Accepted pointer changes only on verified improvement |
@@ -150,4 +150,16 @@ Commit: 51c2616 T12.4
 Remaining: evaluation storage/service optimization
 Blockers: none
 Next step: reduce per-frame evaluation I/O and reuse one policy service per paired evaluation
+```
+
+### 2026-07-10 - M12 bounded evaluation runtime
+
+```text
+Status: M12 verified; M13 in_progress
+Completed: sparse evaluation retention, lossless collection, warm multi-seed policy service
+Evidence: 66 tests; 120 frames retained 4 snapshots/18 total PNGs; two seeds one model load
+Commit: pending T12.5/M12 checkpoint
+Remaining: meaningful MPS training/evaluation, curriculum, reward improvement
+Blockers: none
+Next step: run corrected 250-step MPS candidate then paired development evaluation
 ```
