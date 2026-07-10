@@ -35,6 +35,7 @@ from scenesmith.robot_lab.intervention_supervisor import (
     _contact_gated_tray_transfer_control,
     _contact_reflex_post_place_control,
     _contact_reflex_release_ready,
+    _episode_stage_metrics,
     _policy_task_for_remaining_cubes,
     _policy_search_seed,
     _release_neural_grasp_assist_if_open,
@@ -134,6 +135,57 @@ class DomainRandomizationTests(unittest.TestCase):
 
 
 class ContactReflexControllerTests(unittest.TestCase):
+    def test_stage_metrics_report_full_sort_funnel(self):
+        scene = {
+            "cubes": [
+                {
+                    "name": "red_cube_0",
+                    "color": "red",
+                    "side_length_m": 0.03,
+                }
+            ],
+            "trays": [
+                {
+                    "color": "red",
+                    "center_m": [0.3, 0.1, 0.3],
+                    "size_m": [0.16, 0.12, 0.02],
+                }
+            ],
+        }
+        frames = [
+            {
+                "cube": "red_cube_0",
+                "cube_position_m": [0.2, 0.1, 0.32],
+                "gripper_position_m": [0.3, 0.1, 0.36],
+                "robot_cube_contacts": [
+                    {"left_body": "red_cube_0", "right_body": "gripper"}
+                ],
+                "transition": {
+                    "next_cube_states": [
+                        {
+                            "name": "red_cube_0",
+                            "position_m": [0.3, 0.1, 0.37],
+                        }
+                    ]
+                },
+            }
+        ]
+        events = [
+            {"kind": "activated", "cube": "red_cube_0"},
+            {"kind": "released", "cube": "red_cube_0"},
+        ]
+
+        metrics = _episode_stage_metrics(
+            frames,
+            scene,
+            {"red_cube_0": [0.2, 0.1, 0.32]},
+            events,
+            {"entries": [{"cube": "red_cube_0", "correct": True}]},
+        )
+
+        self.assertEqual(metrics["counts"], {stage: 1 for stage in metrics["counts"]})
+        self.assertAlmostEqual(metrics["minimum_gripper_cube_distance_m"], 0.01)
+
     def test_precontact_monitor_triggers_only_after_bounded_stall(self):
         monitor = ApproachProgressMonitor(
             stall_steps=3,

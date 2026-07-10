@@ -982,6 +982,13 @@ def run_neural_policy_intervention_episode(
         neural_policy_frames = sum(
             row["action_source"] == "policy" for row in recorder.frames
         )
+        stage_metrics = _episode_stage_metrics(
+            recorder.frames,
+            scene_dict,
+            initial_positions,
+            grasp_assist.events,
+            final_score,
+        )
         summary = {
             "schema_version": "scenesmith.intervention_episode.v2",
             "status": "pass" if final_score["success"] else "fail",
@@ -1071,6 +1078,7 @@ def run_neural_policy_intervention_episode(
             "randomization_manifest": str(output_dir / "domain_randomization_manifest.json"),
             "scene_export": proof["artifacts"],
             "final_score": final_score,
+            "stage_metrics": stage_metrics,
             "final_cube_states": final_states,
             "observation_frames": len(recorder.frames),
             "artifacts": {
@@ -1166,6 +1174,9 @@ class EpisodeRecorder:
             "policy_task": policy_task,
             "cube_position_m": _body_position(
                 self.mujoco, self.model, self.data, cube_name
+            ),
+            "gripper_position_m": _gripper_site_position(
+                self.mujoco, self.model, self.data
             ),
             "robot_control": decision_payload["executed_action"],
             **decision_payload,
@@ -1443,6 +1454,86 @@ def _body_position(mujoco, model, data, body_name: str) -> list[float]:
 def _gripper_site_position(mujoco, model, data) -> list[float]:
     site_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_SITE, "gripperframe")
     return data.site_xpos[site_id].round(6).tolist()
+
+
+def _episode_stage_metrics(
+    frames: list[dict[str, Any]],
+    scene: dict[str, Any],
+    initial_positions: dict[str, list[float]],
+    grasp_events: list[dict[str, Any]],
+    final_score: dict[str, Any],
+) -> dict[str, Any]:
+    cubes = {cube["name"]: cube for cube in scene["cubes"]}
+    trays = {tray["color"]: tray for tray in scene["trays"]}
+    reached: set[str] = set()
+    contacted: set[str] = set()
+    lifted: set[str] = set()
+    transported: set[str] = set()
+    minimum_distance = float("inf")
+    for frame in frames:
+        gripper_position = frame.get("gripper_position_m")
+        for contact in frame.get("robot_cube_contacts") or []:
+            for name in (contact.get("left_body"), contact.get("right_body")):
+                if name in cubes:
+                    contacted.add(str(name))
+        transition = frame.get("transition") or {}
+        for state in transition.get("next_cube_states") or []:
+            name = str(state["name"])
+            position = state["position_m"]
+            if gripper_position is not None:
+                distance = float(
+                    np.linalg.norm(
+                        np.asarray(gripper_position, dtype=np.float64)
+                        - np.asarray(position, dtype=np.float64)
+                    )
+                )
+                minimum_distance = min(minimum_distance, distance)
+                if distance <= 0.06:
+                    reached.add(name)
+            if float(position[2]) >= float(initial_positions[name][2]) + 0.03:
+                lifted.add(name)
+            tray = trays[str(cubes[name]["color"])]
+            half_x = float(tray["size_m"][0]) / 2 + float(cubes[name]["side_length_m"])
+            half_y = float(tray["size_m"][1]) / 2 + float(cubes[name]["side_length_m"])
+            if (
+                abs(float(position[0]) - float(tray["center_m"][0])) <= half_x
+                and abs(float(position[1]) - float(tray["center_m"][1])) <= half_y
+            ):
+                transported.add(name)
+    grasped = {
+        str(event["cube"])
+        for event in grasp_events
+        if event.get("kind") == "activated" and event.get("cube") in cubes
+    }
+    released = {
+        str(event["cube"])
+        for event in grasp_events
+        if event.get("kind") == "released" and event.get("cube") in cubes
+    }
+    placed = {
+        str(entry["cube"])
+        for entry in final_score.get("entries") or []
+        if entry.get("correct")
+    }
+    stage_sets = {
+        "reach": reached,
+        "contact": contacted,
+        "grasp": grasped,
+        "lift": lifted,
+        "transport": transported,
+        "release": released,
+        "placement": placed,
+    }
+    return {
+        "schema_version": "scenesmith.sort_stage_metrics.v1",
+        "total_cubes": len(cubes),
+        "minimum_gripper_cube_distance_m": (
+            round(minimum_distance, 6) if np.isfinite(minimum_distance) else None
+        ),
+        "counts": {stage: len(names) for stage, names in stage_sets.items()},
+        "rates": {stage: len(names) / len(cubes) for stage, names in stage_sets.items()},
+        "cubes": {stage: sorted(names) for stage, names in stage_sets.items()},
+    }
 
 
 def _target_cube_position(cube: dict[str, Any], tray: dict[str, Any], index: int) -> list[float]:

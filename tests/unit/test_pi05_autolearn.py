@@ -426,6 +426,26 @@ class DaggerFrameTests(unittest.TestCase):
 
 
 class PromotionTests(unittest.TestCase):
+    def test_evaluation_aggregates_stage_funnel_rates(self):
+        episode = _episode(7100, success=False, sorted_count=1)
+        episode["stage_metrics"] = {
+            "rates": {
+                "reach": 1.0,
+                "contact": 0.75,
+                "grasp": 0.5,
+                "lift": 0.5,
+                "transport": 0.25,
+                "release": 0.25,
+                "placement": 0.25,
+            }
+        }
+
+        metrics = summarize_evaluation({"results": [episode]})
+
+        self.assertEqual(metrics.stage_metric_episodes, 1)
+        self.assertEqual(metrics.mean_stage_rates["contact"], 0.75)
+        self.assertEqual(metrics.mean_stage_rates["placement"], 0.25)
+
     def test_accepts_complete_unassisted_improvement(self):
         seeds = (7100, 7101, 7102, 7103)
         baseline = summarize_evaluation(

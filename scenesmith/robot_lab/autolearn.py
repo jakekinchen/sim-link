@@ -154,6 +154,8 @@ class EvaluationMetrics:
     assisted_episodes: int
     scripted_episodes: int
     physical_follower_episodes: int
+    stage_metric_episodes: int
+    mean_stage_rates: dict[str, float]
 
     def to_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -210,6 +212,11 @@ def summarize_evaluation(
     assisted_episodes = 0
     scripted_episodes = 0
     physical_episodes = 0
+    stage_metric_episodes = 0
+    stage_rate_totals = {
+        stage: 0.0
+        for stage in ("reach", "contact", "grasp", "lift", "transport", "release", "placement")
+    }
     for episode in results:
         seed = int(episode["seed"])
         seeds.append(seed)
@@ -228,6 +235,11 @@ def summarize_evaluation(
         physical_episodes += int(physical)
         assisted_episodes += int(assisted)
         pure_successes += int(success and not scripted and not physical and not assisted)
+        stage_metrics = episode.get("stage_metrics")
+        if isinstance(stage_metrics, dict) and isinstance(stage_metrics.get("rates"), dict):
+            stage_metric_episodes += 1
+            for stage in stage_rate_totals:
+                stage_rate_totals[stage] += float(stage_metrics["rates"].get(stage, 0.0))
     episodes = len(results)
     return EvaluationMetrics(
         seeds=tuple(sorted(seeds)),
@@ -240,6 +252,10 @@ def summarize_evaluation(
         assisted_episodes=assisted_episodes,
         scripted_episodes=scripted_episodes,
         physical_follower_episodes=physical_episodes,
+        stage_metric_episodes=stage_metric_episodes,
+        mean_stage_rates={
+            stage: total / episodes for stage, total in stage_rate_totals.items()
+        },
     )
 
 

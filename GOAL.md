@@ -20,9 +20,9 @@ M12 - Honest evaluation and provenance
 
 ## Current Slice
 
-Add stage-level reach, contact, grasp, lift, transport, release, and placement
-metrics so baseline/candidate comparisons expose partial competence rather than
-only terminal success. Keep proof modes and held-out evidence separate.
+Define and enforce distinct strict, contact-stabilized, controller-assisted,
+human-intervened, and physical proof modes. Promotion must reject missing or
+mixed proof-mode evidence and never treat a grasp weld as strict autonomy.
 
 ## Durable State
 

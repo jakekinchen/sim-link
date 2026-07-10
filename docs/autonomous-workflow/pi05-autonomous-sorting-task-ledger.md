@@ -7,10 +7,10 @@ Updated: 2026-07-10
 ```text
 Current state: M10-M11 verified; M12 honest evaluation/provenance active
 Completed: trusted data and bounded failure-focused cumulative replay
-Evidence: 57 tests; content-addressed registry; overlap/mutation rejection; MPS smokes
+Evidence: 59 tests; stage funnel MPS smoke; registry overlap/mutation rejection
 Remaining: M12-M15 below
 Blockers: none for local P0 implementation
-Next step: T12.1 stage-level evaluation metrics
+Next step: T12.2 proof-mode gates
 ```
 
 ## Tasks
@@ -26,8 +26,8 @@ Next step: T12.1 stage-level evaluation metrics
 | T11.2 | M11 | verified | Export pre-intervention and post-recovery context | Four contiguous episodes; 120 pre/90 post/660 expert frames |
 | T11.3 | M11 | verified | Add pre-contact progress/stall intervention triggers | 56 tests; MPS trigger at frame 333, contact at 388, no hardware |
 | T11.4 | M11 | verified | Add cumulative bounded replay registry | Bounded/hash-verified registry; duplicate trajectories rejected; merge canary passes |
-| T12.1 | M12 | in_progress | Add stage-level reach/contact/grasp/lift/transport/release metrics | Metrics emitted for baseline and candidate |
-| T12.2 | M12 | pending | Separate strict, contact-stabilized, assisted, and physical gates | Promotion tests reject proof-mode contamination |
+| T12.1 | M12 | verified | Add stage-level reach/contact/grasp/lift/transport/release metrics | 59 tests; strict MPS smoke measured 2/4 reach/contact and 0/4 later stages |
+| T12.2 | M12 | in_progress | Separate strict, contact-stabilized, assisted, and physical gates | Promotion tests reject proof-mode contamination |
 | T12.3 | M12 | pending | Add rotating development and locked audit seed registries | No seed overlap or routine audit reuse |
 | T12.4 | M12 | pending | Pin LeRobot/preprocessing/runtime and strengthen artifact hashes | Resume and merge verify full identities |
 | T12.5 | M12 | pending | Reduce evaluation I/O and keep policy services warm | Same metrics with bounded disk/runtime |
@@ -102,4 +102,16 @@ Commit: 0d3a27f T11.4/M11
 Remaining: M12 honest evaluation and provenance
 Blockers: none
 Next step: stage-level reach/contact/grasp/lift/transport/release metrics
+```
+
+### 2026-07-10 - Stage-level evaluation funnel
+
+```text
+Status: T12.1 verified; T12.2 in_progress
+Completed: per-episode and aggregate reach/contact/grasp/lift/transport/release/placement metrics
+Evidence: 59 tests; MPS seed-7300 strict-control smoke reached/contacted 2/4, later stages 0/4
+Commit: pending T12.1 checkpoint
+Remaining: proof modes, seed registries, provenance, evaluation runtime
+Blockers: none
+Next step: explicit strict/contact-stabilized/assisted/physical proof gates
 ```
