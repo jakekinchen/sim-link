@@ -16,6 +16,7 @@ preferred physical-leader broker because it already owns the serial buses.
 | Neural browser path | `PI0.5 live` selected; MPS policy actions reached MuJoCo; expected task failure returned as an inspectable episode | The UI-to-action-server-to-policy path is real and no longer converts normal task failure into HTTP 500. |
 | V10 hybrid sort | Held-out seed 6204 sorted 4/4 with 2,559 neural frames plus bounded transfer/recovery controller frames | MPS-backed closed-loop PI0.5 contributes real grasps, but this is not pure end-to-end task success. |
 | Autolearn data path | 660 V10 correction frames merged with 10,656 causal frames into a verified 11,316-frame dataset | Policy-visited DAgger labeling and base-data aggregation work end to end; candidate improvement remains to be evaluated. |
+| Autolearn bootstrap | Five MPS steps, standalone reload, identical seed 6301 evaluation, candidate rejected at 0/4 | The automated flywheel and rollback work; pure sorting improvement is not yet proven. |
 | Studio leader bridge | Five read-only samples plus eight deadman-gated MuJoCo intervention frames | The connected leader controls simulated joints without SceneSmith opening either serial port. |
 | Human contact correction | Ready for operator use | A person still needs to move the leader through a real grasp/place correction; no contact success is claimed yet. |
 

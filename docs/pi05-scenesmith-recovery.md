@@ -129,6 +129,12 @@ cleanly with the 10,656-frame base dataset, producing a verified 11,316-frame
 training set. This proves the data flywheel and schema path; it does not yet
 prove that a trained candidate improves autonomous sorting.
 
+The first real bootstrap then completed five MPS optimizer steps, finalized and
+reloaded the candidate, and evaluated the same held-out seed as the baseline.
+Both policies sorted 0/4 at the 200-frame bound, so the promotion gate rejected
+the candidate and left V10 accepted. The next checked-in cycle expands to four
+collection seeds, 25 steps, and four held-out seeds.
+
 Cycle manifests and the accepted-checkpoint pointer live under
 `experiments/pi05_autolearn/`. Generated datasets and weights stay under
 ignored `outputs/`. The local example uses no paid external compute. The final

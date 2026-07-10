@@ -221,3 +221,27 @@ not evidence that a new checkpoint learned autonomous sorting.
   threshold, baseline regression, accept, and reject.
 - The accepted checkpoint pointer changes only for a passing candidate and the
   decision manifest is committed separately from generated model data.
+
+## M10 - Production-Scale Policy Improvement
+
+**Required outcome:** Run the four-training-seed, four-held-out-seed cycle with
+a non-smoke fine-tune and either promote a pure candidate or preserve a complete
+rejection that identifies the next correction/training change.
+
+**Why this is invariant:** The completed bootstrap proves automation, MPS
+training, reload, and rollback, but five optimizer steps and one 200-frame seed
+are not evidence of autonomous sorting capability.
+
+**Verification gate:**
+
+```bash
+./.mujoco_venv/bin/python scripts/robot_lab/run_pi05_autolearn_cycle.py \
+  --config configurations/robot_lab/pi05_autolearn.example.json
+```
+
+**Completion evidence:**
+
+- Four disjoint collection seeds and four complete held-out seeds.
+- A finite 25-step candidate with finalized checkpoint hashes.
+- Promotion or rejection metrics committed without changing the accepted
+  pointer on failure.

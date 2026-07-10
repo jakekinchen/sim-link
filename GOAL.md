@@ -13,12 +13,14 @@ must never be instantiated or commanded by this path.
 
 ## Current Milestone
 
-M6 - Git-guarded learning-cycle contract
+M10 - Production-scale policy improvement
 
 ## Current Slice
 
-Implement `docs/briefs/002-pi05-autolearn-loop.md`: DAgger correction export,
-cycle orchestration, held-out promotion gates, and Git-backed evidence ledgers.
+Run the restored four-train/four-held-out `cycle-001-mps` configuration from a
+clean commit. Use the completed bootstrap cycle as pipeline proof, not as model
+quality evidence; preserve rejection if the 25-step candidate remains below
+the pure-policy threshold.
 
 ## Stop Conditions
 

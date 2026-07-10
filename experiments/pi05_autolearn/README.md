@@ -32,3 +32,15 @@ Validate the full command plan without starting inference or training:
 Remove `--dry-run` only after the configuration, source commit, free disk space,
 and expected output paths have been reviewed. The example runs locally on Apple
 MPS and does not instantiate or command a physical SO-101 follower.
+
+## Completed bootstrap
+
+`cycle-000-bootstrap-mps` completed the full path on 2026-07-10. It trained a
+five-step candidate on MPS, reloaded it in an isolated policy server, and
+rejected it because baseline and candidate both sorted 0/4 on held-out seed
+6301. The accepted pointer was unchanged. The cycle manifest retains the first
+checkpoint-layout failure, verified resume provenance, and final rejection.
+
+The checked-in example is restored to the production-scale `cycle-001-mps`
+configuration: four training seeds, four held-out seeds, 25 optimizer steps,
+and a 0.75 pure-success threshold.
