@@ -158,7 +158,7 @@ Next step: reduce per-frame evaluation I/O and reuse one policy service per pair
 Status: M12 verified; M13 in_progress
 Completed: sparse evaluation retention, lossless collection, warm multi-seed policy service
 Evidence: 66 tests; 120 frames retained 4 snapshots/18 total PNGs; two seeds one model load
-Commit: pending T12.5/M12 checkpoint
+Commit: b02a1ae T12.5/M12
 Remaining: meaningful MPS training/evaluation, curriculum, reward improvement
 Blockers: none
 Next step: run corrected 250-step MPS candidate then paired development evaluation
