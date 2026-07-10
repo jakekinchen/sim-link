@@ -21,10 +21,10 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Normalize equivalent quaternions and compare effective solver defaults in the
-structural twin diff so T16.3 advances on physics semantics rather than raw XML
-spelling. Do not open hardware or begin measured-mass compilation until this
-proof is re-accepted.
+Represent non-derivable inertials as explicit `unknown` records and distinguish
+declaration-only friction/contact settings from effective runtime attachments in
+the structural twin diff. Do not open hardware or begin measured-mass
+compilation until T16.3 is re-accepted.
 
 ## Durable State
 
