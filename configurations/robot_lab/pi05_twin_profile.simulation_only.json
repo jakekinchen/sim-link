@@ -1,11 +1,11 @@
 {
   "dependency_lock_ref": {
-    "file_sha256": "5ee3a64953c4aa4ac1a4b28abb0957f3f27942fd0167dd73cbdc814e6eda6ffe",
-    "identity_sha256": "222bce608b7c91527e1f37136ff97e1d2eeaeab59df384aeba2c98a511aff965",
+    "file_sha256": "dad1fd6b7d02e87348c39b46377b0b3d57ee5f88ca62317ae0608598431561dd",
+    "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
     "schema_version": "scenesmith.robotics_dependency_lock.v1"
   },
-  "identity_sha256": "52379b7cdceddfd6425f441a81e6f5617d67974d18185fa201887a1bbdca615d",
+  "identity_sha256": "77a942306a012263d4f5f886eca692980c973de939c3e3ce06f1781567d34826",
   "profile_name": "pi05_so101_simulation_only",
   "proof_state": "simulation_only",
   "qualification_state": "simulation_only_unqualified",

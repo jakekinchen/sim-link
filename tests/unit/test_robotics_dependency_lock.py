@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -53,6 +54,10 @@ class RoboticsDependencyLockTests(unittest.TestCase):
                 ]
             },
         )
+        self.assertEqual(
+            payload["dependencies"]["menagerie_robotstudio_so101"]["vendored_root"],
+            "third_party/mujoco_menagerie/robotstudio_so101",
+        )
         self.assertNotIn("repo_root", payload)
 
     def test_verify_rejects_missing_dirty_patch_identity(self):
@@ -91,6 +96,14 @@ class RoboticsDependencyLockTests(unittest.TestCase):
         _resign(payload)
 
         with self.assertRaisesRegex(ValueError, "Remote reference file pin drifted"):
+            verify_robotics_dependency_lock(payload, repo_root=REPO_ROOT)
+
+    def test_verify_rejects_missing_vendored_model_evidence(self):
+        payload = build_robotics_dependency_lock(repo_root=REPO_ROOT)
+        payload["dependencies"]["menagerie_robotstudio_so101"]["vendored_files"] = []
+        _resign(payload)
+
+        with self.assertRaisesRegex(ValueError, "vendored file set drifted"):
             verify_robotics_dependency_lock(payload, repo_root=REPO_ROOT)
 
     def test_verify_rejects_modified_signed_fields(self):
@@ -159,6 +172,11 @@ source = "https://github.com/huggingface/lerobot"
             path = root / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(contents, encoding="utf-8")
+
+        shutil.copytree(
+            REPO_ROOT / "third_party/mujoco_menagerie/robotstudio_so101",
+            root / "third_party/mujoco_menagerie/robotstudio_so101",
+        )
 
         self._init_repo(
             root / "external/leLab",

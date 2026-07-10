@@ -18,6 +18,7 @@ ROBOTICS_DEPENDENCY_LOCK_SCHEMA_VERSION = "scenesmith.robotics_dependency_lock.v
 OPENPI_REPOSITORY_URL = "https://github.com/Physical-Intelligence/openpi"
 MENAGERIE_REPOSITORY_URL = "https://github.com/google-deepmind/mujoco_menagerie"
 MENAGERIE_MODEL_PATH = "robotstudio_so101"
+MENAGERIE_VENDORED_ROOT = Path("third_party/mujoco_menagerie/robotstudio_so101")
 OPENPI_LICENSE_ID = "Apache-2.0"
 MENAGERIE_LICENSE_ID = "Apache-2.0"
 EXACT_REMOTE_PIN_RESOLUTION = "exact_remote_pin"
@@ -175,6 +176,12 @@ def build_robotics_dependency_lock(*, repo_root: Path) -> dict[str, Any]:
                 "revision": MENAGERIE_REVISION,
                 "license_file": dict(MENAGERIE_LICENSE_FILE),
                 "reference_files": [dict(entry) for entry in MENAGERIE_REFERENCE_FILES],
+                "vendored_root": str(MENAGERIE_VENDORED_ROOT),
+                "vendored_files": _vendored_remote_file_evidence(
+                    repo_root=repo_root,
+                    vendored_root=MENAGERIE_VENDORED_ROOT,
+                    upstream_files=[MENAGERIE_LICENSE_FILE, *MENAGERIE_REFERENCE_FILES],
+                ),
             },
         },
     }
@@ -213,6 +220,7 @@ def verify_robotics_dependency_lock(payload: dict[str, Any], *, repo_root: Path)
         expected_license_file=MENAGERIE_LICENSE_FILE,
         expected_reference_files=MENAGERIE_REFERENCE_FILES,
         require_local_reference_files=False,
+        expected_vendored_root=MENAGERIE_VENDORED_ROOT,
         repo_root=repo_root,
     )
 
@@ -278,6 +286,7 @@ def _verify_remote_reference(
     expected_reference_files: list[dict[str, Any]],
     require_local_reference_files: bool,
     repo_root: Path,
+    expected_vendored_root: Path | None = None,
 ) -> None:
     if entry["repository_url"] != expected_repository_url:
         raise ValueError(f"Remote reference URL drifted: {expected_repository_url}")
@@ -300,6 +309,38 @@ def _verify_remote_reference(
             raise ValueError(f"Missing local reference files for remote reference: {expected_repository_url}")
         for evidence in files:
             _verify_file_evidence(evidence, repo_root=repo_root)
+    if expected_vendored_root is not None:
+        if entry.get("vendored_root") != str(expected_vendored_root):
+            raise ValueError(f"Remote reference vendored root drifted: {expected_repository_url}")
+        vendored_files = entry.get("vendored_files") or []
+        expected_files = [expected_license_file, *expected_reference_files]
+        if {item.get("upstream_path") for item in vendored_files} != {
+            item["path"] for item in expected_files
+        }:
+            raise ValueError(f"Remote reference vendored file set drifted: {expected_repository_url}")
+        expected_by_path = {item["path"]: item for item in expected_files}
+        for evidence in vendored_files:
+            _verify_file_evidence(evidence, repo_root=repo_root)
+            expected_evidence = expected_by_path[evidence["upstream_path"]]
+            if evidence["sha256"] != expected_evidence["sha256"]:
+                raise ValueError(f"Remote reference vendored file hash drifted: {expected_repository_url}")
+            if evidence["size_bytes"] != expected_evidence["size_bytes"]:
+                raise ValueError(f"Remote reference vendored file size drifted: {expected_repository_url}")
+
+
+def _vendored_remote_file_evidence(
+    *,
+    repo_root: Path,
+    vendored_root: Path,
+    upstream_files: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    evidence: list[dict[str, Any]] = []
+    for upstream in upstream_files:
+        local_path = repo_root / vendored_root / Path(upstream["path"]).name
+        item = _file_evidence(local_path, repo_root=repo_root)
+        item["upstream_path"] = upstream["path"]
+        evidence.append(item)
+    return evidence
 
 
 def _verify_identity_hash(payload: dict[str, Any]) -> None:

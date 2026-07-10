@@ -19,7 +19,8 @@
     "tests/unit/test_pi05_autolearn.py",
     "tests/unit/test_robot_lab_intervention.py",
     "tests/unit/test_robot_lab_scene_builder.py",
-    "tests/unit/test_scoped_worktree_guard.py"
+    "tests/unit/test_scoped_worktree_guard.py",
+    "third_party/mujoco_menagerie/robotstudio_so101/"
   ],
   "explicitly_protected_paths": [
     "experiments/pi05_autolearn/cycles/cycle-001-mps.json"

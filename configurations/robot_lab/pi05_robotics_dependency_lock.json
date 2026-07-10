@@ -146,7 +146,34 @@
       "repository_url": "https://github.com/google-deepmind/mujoco_menagerie",
       "resolution": "exact_remote_pin",
       "revision": "71f066ad0be9cd271f7ed58c030243ef157af9f4",
-      "role": "proposed_structural_lineage"
+      "role": "proposed_structural_lineage",
+      "vendored_files": [
+        {
+          "path": "third_party/mujoco_menagerie/robotstudio_so101/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "upstream_path": "robotstudio_so101/LICENSE"
+        },
+        {
+          "path": "third_party/mujoco_menagerie/robotstudio_so101/README.md",
+          "sha256": "e2344e7c14290bed85c7907247aecb8bf6cb4392e3de0d7c45680efe9bb9b5a9",
+          "size_bytes": 1142,
+          "upstream_path": "robotstudio_so101/README.md"
+        },
+        {
+          "path": "third_party/mujoco_menagerie/robotstudio_so101/so101.xml",
+          "sha256": "5ad49f2b45c083baac9ffe5d4d3213a5da7eac8039095bb2df177a697aae8308",
+          "size_bytes": 16670,
+          "upstream_path": "robotstudio_so101/so101.xml"
+        },
+        {
+          "path": "third_party/mujoco_menagerie/robotstudio_so101/scene.xml",
+          "sha256": "d3037f0fd36b61a9b6805b2c79831e7a392276d0f490145d01f718542eee9150",
+          "size_bytes": 825,
+          "upstream_path": "robotstudio_so101/scene.xml"
+        }
+      ],
+      "vendored_root": "third_party/mujoco_menagerie/robotstudio_so101"
     },
     "openpi_semantic_reference": {
       "license_file": {
@@ -218,7 +245,7 @@
       "role": "active_structural_model"
     }
   },
-  "identity_sha256": "222bce608b7c91527e1f37136ff97e1d2eeaeab59df384aeba2c98a511aff965",
+  "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
   "runtime_contract": {
     "joint_names": [
       "shoulder_pan",
