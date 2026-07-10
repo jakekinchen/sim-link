@@ -4,6 +4,10 @@
   "config_path": "configurations/robot_lab/pi05_autolearn.example.json",
   "config_sha256": "12f4dc2379d1ed403f331ee10f596715e1468ad5aa9c57bb09e3b16ec48c0218",
   "cycle_id": "cycle-000-bootstrap-mps",
+  "error": {
+    "message": "Stage train missing artifacts: ['outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json']",
+    "type": "CycleExecutionError"
+  },
   "eval_seeds": [
     6301
   ],
@@ -246,18 +250,38 @@
         "--wandb.enable=false",
         "--output_dir=outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train"
       ],
+      "artifacts": {
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/adapter_model.safetensors": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/adapter_model.safetensors",
+          "sha256": "159e0e018ce2e35bf6518d70905547d36450c68509cd1642bbbc734aac2083f6",
+          "size_bytes": 92352824
+        },
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json": {
+          "exists": false,
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json"
+        }
+      },
       "env_keys": [
         "HF_HUB_OFFLINE",
         "PYTORCH_ENABLE_MPS_FALLBACK",
         "TOKENIZERS_PARALLELISM",
         "TRANSFORMERS_OFFLINE"
       ],
+      "git_commit_before": "0ff3237a1beb7de4cb1e65f1f7f7edd3ffb7bc54",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/train.log",
       "name": "train",
       "required_artifacts": [
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json",
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/adapter_model.safetensors"
       ],
+      "result": {
+        "duration_s": 145.816,
+        "exit_code": 0,
+        "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/train.log",
+        "log_sha256": "2e725e772a6027320bd709b9d8b2dbc1c2733f4395a43df0527402ec129cb060"
+      },
       "timeout_s": 21600.0
     },
     {
@@ -293,7 +317,7 @@
       "timeout_s": 43200.0
     }
   ],
-  "status": "running",
+  "status": "failed",
   "train_seeds": [
     6204
   ]
