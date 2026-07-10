@@ -20,9 +20,9 @@ M12 - Honest evaluation and provenance
 
 ## Current Slice
 
-Content-address the LeRobot runtime, Python environment, preprocessing configs,
-datasets, replay plan, normalizer, and checkpoint artifacts. Resume must reject
-identity drift, and manifests must prove the exact executable training surface.
+Reduce evaluation image/storage overhead without changing metrics, and keep a
+policy service warm across paired seeds where checkpoint identity is unchanged.
+Prove output equivalence and bounded service lifecycle before closing M12.
 
 ## Durable State
 

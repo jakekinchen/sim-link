@@ -21,6 +21,7 @@ from scenesmith.robot_lab.autolearn import (
 from scenesmith.robot_lab.autolearn_cycle import (
     CycleConfig,
     CycleRunner,
+    StageSpec,
     StageResult,
     _tiered_promotion_payload,
 )
@@ -42,6 +43,10 @@ from scenesmith.robot_lab.replay_registry import (
 from scenesmith.robot_lab.seed_registry import (
     reserve_evaluation_seeds,
     write_seed_registry,
+)
+from scenesmith.robot_lab.provenance import (
+    build_pi05_provenance,
+    verify_pi05_provenance,
 )
 from scenesmith.robot_lab.so101_coordinates import coordinate_contract
 from scripts.robot_lab.export_intervention_dataset import (
@@ -619,6 +624,53 @@ def _cycle_payload(*, external=False):
 
 
 class CycleConfigTests(unittest.TestCase):
+    def test_resume_rejects_artifact_hash_drift(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_path = root / "cycle.json"
+            config_path.write_text("{}")
+            artifact = root / "artifact.bin"
+            artifact.write_bytes(b"v1")
+            runner = CycleRunner(
+                CycleConfig.from_dict(_cycle_payload()),
+                repo_root=root,
+                config_path=config_path,
+                enforce_git=False,
+            )
+            stage = StageSpec(
+                name="proof",
+                argv=("proof",),
+                timeout_s=1,
+                required_artifacts=("artifact.bin",),
+            )
+            record = {
+                "argv": ["proof"],
+                "result": {"exit_code": 0},
+                "artifacts": runner._artifact_evidence(stage.required_artifacts),
+            }
+            self.assertTrue(runner._can_resume_stage(stage, record))
+            artifact.write_bytes(b"v2")
+            self.assertFalse(runner._can_resume_stage(stage, record))
+
+    def test_provenance_hashes_full_model_and_rejects_artifact_mutation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            model = root / "model"
+            model.mkdir()
+            (model / "adapter.bin").write_bytes(b"model-v1")
+            artifact = root / "stats.json"
+            artifact.write_text('{"mean": 1}')
+
+            provenance = build_pi05_provenance(
+                model_root=model,
+                artifacts=[artifact],
+            )
+            verify_pi05_provenance(provenance)
+            artifact.write_text('{"mean": 2}')
+
+            with self.assertRaisesRegex(ValueError, "artifact mutated"):
+                verify_pi05_provenance(provenance)
+
     def test_seed_registry_rotates_development_and_locks_audit(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "seeds.json"

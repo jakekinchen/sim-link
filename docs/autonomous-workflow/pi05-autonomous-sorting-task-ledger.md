@@ -7,10 +7,10 @@ Updated: 2026-07-10
 ```text
 Current state: M10-M11 verified; M12 honest evaluation/provenance active
 Completed: trusted data and bounded failure-focused cumulative replay
-Evidence: 62 tests; rotating development and one-use audit reservation canary
+Evidence: 64 tests; full 88 MiB model/runtime provenance and resume-drift rejection
 Remaining: M12-M15 below
 Blockers: none for local P0 implementation
-Next step: T12.4 runtime and artifact provenance
+Next step: T12.5 bounded evaluation storage and persistent services
 ```
 
 ## Tasks
@@ -29,8 +29,8 @@ Next step: T12.4 runtime and artifact provenance
 | T12.1 | M12 | verified | Add stage-level reach/contact/grasp/lift/transport/release metrics | 59 tests; strict MPS smoke measured 2/4 reach/contact and 0/4 later stages |
 | T12.2 | M12 | verified | Separate strict, contact-stabilized, assisted, and physical gates | 61 tests; strict gate rejects stabilized/controller/human/physical evidence |
 | T12.3 | M12 | verified | Add rotating development and locked audit seed registries | 62 tests; development rotation and audit reuse rejected; dev non-promotable |
-| T12.4 | M12 | in_progress | Pin LeRobot/preprocessing/runtime and strengthen artifact hashes | Resume and merge verify full identities |
-| T12.5 | M12 | pending | Reduce evaluation I/O and keep policy services warm | Same metrics with bounded disk/runtime |
+| T12.4 | M12 | verified | Pin LeRobot/preprocessing/runtime and strengthen artifact hashes | 64 tests; runtime/model tree manifest verified; resume rejects hash drift |
+| T12.5 | M12 | in_progress | Reduce evaluation I/O and keep policy services warm | Same metrics with bounded disk/runtime |
 | T13.1 | M13 | pending | Run corrected 250/500/1,000-step MPS training ladder | Reloadable checkpoints and manifests |
 | T13.2 | M13 | pending | Sweep action execution horizon on paired seeds | Recorded stage/terminal comparison |
 | T13.3 | M13 | pending | Run PI0.5 vs SmolVLA vs ACT/Diffusion baseline bakeoff | Same data, prompts, seeds, and proof modes |
@@ -138,4 +138,16 @@ Commit: 066d4ba T12.3
 Remaining: provenance and evaluation runtime optimization
 Blockers: none
 Next step: pin runtime/preprocessing identity and strengthen resume hashes
+```
+
+### 2026-07-10 - Runtime and artifact provenance
+
+```text
+Status: T12.4 verified; T12.5 in_progress
+Completed: full model tree, runtime sources/packages, preprocessing/data/replay provenance
+Evidence: 64 tests; 92,383,464-byte checkpoint tree verified; resume hash drift rejected
+Commit: pending T12.4 checkpoint
+Remaining: evaluation storage/service optimization
+Blockers: none
+Next step: reduce per-frame evaluation I/O and reuse one policy service per paired evaluation
 ```

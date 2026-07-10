@@ -530,6 +530,12 @@ class CycleRunner:
         evidence = self._artifact_evidence(stage.required_artifacts)
         if not all(item["exists"] for item in evidence.values()):
             return False
+        prior_evidence = record.get("artifacts") or {}
+        for path, current in evidence.items():
+            previous = prior_evidence.get(path) or {}
+            for key in ("kind", "size_bytes", "sha256", "file_count"):
+                if key in current and current.get(key) != previous.get(key):
+                    return False
         if stage.name == self.config.training_stage and self.config.external_compute:
             external = record.get("external_compute") or {}
             if not external.get("cleanup") or not external.get("inventory"):

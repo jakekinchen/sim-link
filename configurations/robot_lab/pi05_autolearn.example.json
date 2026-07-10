@@ -36,6 +36,22 @@
       "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/reserve-evaluation-seeds.log"
     },
     {
+      "name": "capture_runtime_provenance",
+      "argv": [
+        "external/leLab/.venv/bin/python",
+        "scripts/robot_lab/write_pi05_provenance.py",
+        "--output", "outputs/robot_lab/autolearn/{cycle_id}/runtime-provenance.json",
+        "--model-root", "{accepted_model}",
+        "--artifact", "configurations/robot_lab/pi05_autolearn.example.json",
+        "--artifact", "experiments/pi05_autolearn/accepted.json"
+      ],
+      "timeout_s": 300,
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/{cycle_id}/runtime-provenance.json"
+      ],
+      "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/capture-runtime-provenance.log"
+    },
+    {
       "name": "baseline_eval",
       "argv": [
         "./.mujoco_venv/bin/python",
@@ -155,6 +171,28 @@
       "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/plan-replay.log"
     },
     {
+      "name": "capture_training_provenance",
+      "argv": [
+        "external/leLab/.venv/bin/python",
+        "scripts/robot_lab/write_pi05_provenance.py",
+        "--output", "outputs/robot_lab/autolearn/{cycle_id}/training-provenance.json",
+        "--model-root", "{accepted_model}",
+        "--artifact", "outputs/robot_lab/autolearn/{cycle_id}/runtime-provenance.json",
+        "--artifact", "outputs/robot_lab/autolearn/{cycle_id}/training-dataset/scenesmith_pi05_dataset_contract.json",
+        "--artifact", "outputs/robot_lab/autolearn/{cycle_id}/training-dataset/scenesmith_merge_summary.json",
+        "--artifact", "outputs/robot_lab/autolearn/{cycle_id}/training-dataset/meta/stats.json",
+        "--artifact", "outputs/robot_lab/autolearn/{cycle_id}/training-dataset/scenesmith_correction_replay_sidecar.jsonl",
+        "--artifact", "outputs/robot_lab/autolearn/{cycle_id}/replay-plan.json",
+        "--artifact", "experiments/pi05_autolearn/replay_registry.json",
+        "--artifact", "experiments/pi05_autolearn/seed_registry.json"
+      ],
+      "timeout_s": 300,
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/{cycle_id}/training-provenance.json"
+      ],
+      "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/capture-training-provenance.log"
+    },
+    {
       "name": "train",
       "argv": [
         "external/leLab/.venv/bin/python",
@@ -217,6 +255,23 @@
       "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/finalize-candidate.log"
     },
     {
+      "name": "capture_candidate_provenance",
+      "argv": [
+        "external/leLab/.venv/bin/python",
+        "scripts/robot_lab/write_pi05_provenance.py",
+        "--output", "outputs/robot_lab/autolearn/{cycle_id}/candidate-provenance.json",
+        "--model-root", "{candidate_model}",
+        "--artifact", "outputs/robot_lab/autolearn/{cycle_id}/training-provenance.json",
+        "--artifact", "{candidate_model}/scenesmith_finalize_summary.json",
+        "--artifact", "outputs/robot_lab/autolearn/{cycle_id}/training-dataset/meta/stats.json"
+      ],
+      "timeout_s": 300,
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/{cycle_id}/candidate-provenance.json"
+      ],
+      "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/capture-candidate-provenance.log"
+    },
+    {
       "name": "candidate_eval",
       "argv": [
         "./.mujoco_venv/bin/python",
@@ -257,6 +312,7 @@
       "scenesmith/robot_lab/pi05_dataset_contract.py",
       "scenesmith/robot_lab/replay_registry.py",
       "scenesmith/robot_lab/seed_registry.py",
+      "scenesmith/robot_lab/provenance.py",
       "scenesmith/robot_lab/so101_coordinates.py",
       "scripts/robot_lab/export_intervention_dataset.py",
       "scripts/robot_lab/build_pi05_replay_plan.py",
@@ -271,6 +327,7 @@
       "scripts/robot_lab/train_pi05_balanced.py",
       "scripts/robot_lab/update_pi05_replay_registry.py",
       "scripts/robot_lab/reserve_pi05_evaluation_seeds.py",
+      "scripts/robot_lab/write_pi05_provenance.py",
       "tests/unit/test_pi05_autolearn.py"
     ]
   },
