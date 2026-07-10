@@ -146,7 +146,7 @@ Next step: pin runtime/preprocessing identity and strengthen resume hashes
 Status: T12.4 verified; T12.5 in_progress
 Completed: full model tree, runtime sources/packages, preprocessing/data/replay provenance
 Evidence: 64 tests; 92,383,464-byte checkpoint tree verified; resume hash drift rejected
-Commit: pending T12.4 checkpoint
+Commit: 51c2616 T12.4
 Remaining: evaluation storage/service optimization
 Blockers: none
 Next step: reduce per-frame evaluation I/O and reuse one policy service per paired evaluation
