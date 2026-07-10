@@ -21,9 +21,10 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Complete quaternion canonicalization across every transform-bearing structural
-category, including collision geoms and implicit identity rotations. Do not
-open hardware or begin inertial/contact or measured-mass work in this slice.
+Resume T16.3 by surfacing non-derivable inertials as explicit unknowns and by
+separating effective friction/contact attachments from declaration-only
+defaults. Do not reopen quaternion work, deterministic unnamed-geom repair,
+measured-mass intake, hardware, or training in this slice.
 
 ## Durable State
 
@@ -78,5 +79,6 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
 - The corrected 250-step rung is retained as historical evidence of a narrow
   reach improvement; rungs 500/1,000 are suspended behind M16-M19.
 - The first T16.3 artifact proves deterministic source/hash plumbing, but its
-  semantic comparison is reopened: profile binding, quaternion equivalence,
-  effective defaults, and inferred-inertia unknowns still require correction.
+  semantic comparison remains open only for inferred-inertia unknown handling,
+  effective friction/contact truthfulness, and deterministic unnamed-geom
+  limits.
