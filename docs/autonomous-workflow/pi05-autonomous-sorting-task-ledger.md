@@ -122,7 +122,7 @@ Next step: explicit strict/contact-stabilized/assisted/physical proof gates
 Status: T12.2 verified; T12.3 in_progress
 Completed: none-assist runtime and strict/contact/controller/human/physical classifiers/gates
 Evidence: 61 tests; cycle eval argv uses none; stabilized success rejected by strict promotion
-Commit: pending T12.2 checkpoint
+Commit: 907184c T12.2
 Remaining: seed registries, provenance, evaluation runtime
 Blockers: none
 Next step: rotating development seeds and locked one-use audit seeds
