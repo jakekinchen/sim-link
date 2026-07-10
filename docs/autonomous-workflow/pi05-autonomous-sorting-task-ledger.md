@@ -50,7 +50,7 @@ Next step: T11.1 source- and phase-balanced sampling
 Status: M10 verified; M11 in_progress
 Completed: trusted coordinate, normalization, segmentation, task, and merge contracts
 Evidence: 51 tests; seed-6204 MPS canary; 660 correction frames in four contiguous episodes
-Commit: 56003aa mandate; 4cd49ce T10.1; 4dfbe38 T10.2; 7468a90 T10.3; 25ddc84 T10.4
+Commit: 56003aa mandate; 4cd49ce T10.1; 4dfbe38 T10.2; 7468a90 T10.3; 25ddc84 T10.4; b595576 T10.5/M10
 Remaining: implement M11 balanced failure-focused replay
 Blockers: none
 Next step: deterministic source/phase sampler with auditable exposure counts
