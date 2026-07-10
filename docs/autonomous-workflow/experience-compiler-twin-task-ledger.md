@@ -9,8 +9,8 @@ current_task: T16.3 structural reconciliation against pinned Menagerie
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified
 evidence: twin schemas bc5187c; truth correction ae6fe04 removes invented measurements; 94 focused tests pass
 remaining: M16-M19 prerequisites, then Gates C-D and closeout
-blockers: local Menagerie `robotstudio_so101` structural sources are not present in repo state, so T16.3 cannot produce the required real structural diff artifact; physical M19 work still requires separate read and motion authority
-next_step: vendor or otherwise track the pinned Menagerie `robotstudio_so101` XML sources in repo state, then rerun T16.3 diff generation without changing runtime inputs
+blockers: no offline T16.3 blocker; physical M19 still requires separate read and motion authority
+next_step: generate the structural diff from the active runtime MJCF and tracked Menagerie source
 ```
 
 ## Rules
@@ -31,7 +31,7 @@ next_step: vendor or otherwise track the pinned Menagerie `robotstudio_so101` XM
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
 | T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
 | T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
-| T16.3 | blocked | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | Blocked: pinned Menagerie XML sources are hash-pinned in the dependency lock but not present in repo state for machine diff generation |
+| T16.3 | in_progress | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | Menagerie source vendored and lock-bound at 38b3425; structural diff pending |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
 | T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
 
@@ -182,6 +182,20 @@ Remaining: structural diff, measured-mass compiler, offline qualification harnes
 Blockers: none for structural diff
 Training lock: closed
 Next step: compare pinned runtime and Menagerie structures without switching either
+```
+
+### 2026-07-10 - T16.3 false blocker cleared
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: tracked exact Menagerie license, README, so101.xml, and scene.xml
+Evidence: commit 38b3425; vendored hashes match remote pin; 95 tests
+Commit: 38b3425
+Remaining: machine structural diff and reconciliation decision
+Blockers: none for offline work
+Training lock: closed
+Next step: resume structural comparison from tracked source inputs
 ```
 
 ### 2026-07-10 - T16.1 robotics dependency lock
