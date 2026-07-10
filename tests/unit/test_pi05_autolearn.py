@@ -21,7 +21,7 @@ from scenesmith.robot_lab.autolearn_cycle import (
     CycleRunner,
     StageResult,
 )
-from scripts.robot_lab.export_intervention_dataset import _features
+from scripts.robot_lab.export_intervention_dataset import _features, _split_contiguous_runs
 from scripts.robot_lab.finalize_pi05_checkpoint import _compare_normalization
 from scripts.robot_lab.merge_pi05_training_datasets import (
     _pin_normalization_stats,
@@ -166,6 +166,32 @@ class DaggerFrameTests(unittest.TestCase):
         actual["action.mean"][1] = 20.0
         with self.assertRaisesRegex(ValueError, "differs for action.mean"):
             _compare_normalization(expected, actual, ("action",))
+
+    def test_correction_export_splits_before_temporal_gaps(self):
+        frames = [
+            {"frame_index": index}
+            for index in [121, 122, 123, 709, 710, 1864, 1865, 1866]
+        ]
+
+        runs = _split_contiguous_runs(frames)
+
+        self.assertEqual(
+            [[frame["frame_index"] for frame in run] for run in runs],
+            [[121, 122, 123], [709, 710], [1864, 1865, 1866]],
+        )
+        for run in runs:
+            for anchor in range(len(run)):
+                chunk = run[anchor : anchor + 50]
+                self.assertTrue(
+                    all(
+                        right["frame_index"] == left["frame_index"] + 1
+                        for left, right in zip(chunk, chunk[1:])
+                    )
+                )
+
+    def test_correction_export_rejects_reordered_frames(self):
+        with self.assertRaisesRegex(ValueError, "strictly ordered"):
+            _split_contiguous_runs([{"frame_index": 2}, {"frame_index": 1}])
 
 
 class PromotionTests(unittest.TestCase):

@@ -107,7 +107,8 @@ def main() -> int:
 
     sidecar_rows: list[dict[str, Any]] = []
     episode_reports: list[dict[str, Any]] = []
-    for episode_index, summary_path in enumerate(summary_paths):
+    dataset_episode_index = 0
+    for source_episode_index, summary_path in enumerate(summary_paths):
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
         trajectory_path = Path(summary["artifacts"]["trajectory"])
         source_frames = json.loads(trajectory_path.read_text(encoding="utf-8"))["frames"]
@@ -126,105 +127,117 @@ def main() -> int:
             )
 
         episode_dir = summary_path.parent
-        image_hashes: set[str] = set()
-        intervention_count = 0
-        correction_count = 0
-        correction_source_counts: dict[str, int] = {}
-        correction_deltas: list[float] = []
-        for frame in frames:
-            images, sources = _load_frame_images(episode_dir, frame, args.image_size)
-            image_hashes.update(_sha256(Path(path)) for path in sources.values())
-            state6 = mujoco_to_lerobot(_control6(frame["observation"]["state"]))
-            executed6 = mujoco_to_lerobot(_control6(frame["executed_action"]))
-            policy6 = mujoco_to_lerobot(_control6(frame["policy_action"]))
-            human_raw = frame.get("human_action")
-            human6 = (
-                mujoco_to_lerobot(_control6(human_raw))
-                if human_raw is not None
-                else [0.0] * 6
-            )
-            is_intervention = bool(frame.get("is_intervention"))
-            is_expert_correction = is_dagger_correction_frame(frame)
-            intervention_count += int(is_intervention)
-            correction_count += int(is_expert_correction)
-            if is_expert_correction:
-                source = str(frame.get("action_source") or "unknown")
-                correction_source_counts[source] = correction_source_counts.get(source, 0) + 1
-                correction_deltas.append(policy_expert_delta_l2(frame))
-            if args.dataset_schema == "pi05_causal":
-                dataset_frame = {
-                    "observation.images.top": images[2].copy(),
-                    "observation.images.wrist": images[1].copy(),
-                    "observation.state": np.asarray(state6, dtype=np.float32),
-                    "action": np.asarray(executed6, dtype=np.float32),
-                    "task": _task(summary),
-                }
-            else:
-                dataset_frame = {
-                    **{
-                        key: image.copy()
-                        for key, image in zip(PI05_IMAGE_KEYS, images, strict=True)
-                    },
-                    "observation.state": _pad32(state6),
-                    "action": _pad32(executed6),
-                    "policy_action": _pad32(policy6),
-                    "human_action": _pad32(human6),
-                    "is_intervention": np.asarray([is_intervention], dtype=bool),
-                    "is_expert_correction": np.asarray([is_expert_correction], dtype=bool),
-                    "deadman_fresh": np.asarray([bool(frame.get("deadman_fresh"))], dtype=bool),
-                    "randomization_seed": np.asarray([int(summary["seed"])], dtype=np.int64),
-                    "task": _task(summary),
-                }
-            dataset.add_frame(dataset_frame)
-            sidecar_rows.append(
-                {
-                    "episode_index": episode_index,
-                    "frame_index": int(frame["frame_index"]),
-                    "time_s": frame["time_s"],
-                    "phase": frame["phase"],
-                    "is_intervention": is_intervention,
-                    "is_expert_correction": is_expert_correction,
-                    "intervention_event": frame.get("intervention_event"),
-                    "action_source": frame.get("action_source"),
-                    "policy_action": frame.get("policy_action"),
-                    "human_action": human_raw,
-                    "executed_action": frame.get("executed_action"),
-                    "deadman": {
-                        "armed": frame.get("deadman_armed"),
-                        "takeover": frame.get("deadman_takeover"),
-                        "fresh": frame.get("deadman_fresh"),
-                        "age_s": frame.get("deadman_age_s"),
-                        "sequence": frame.get("deadman_sequence"),
-                    },
-                    "failure_reason": frame.get("failure_reason"),
-                    "seed": summary.get("seed"),
-                    "scene_id": summary.get("scene_id"),
-                    "object_motion_mode": frame.get("object_motion_mode"),
-                    "observation_images": sources,
-                    "transition": frame.get("transition"),
-                }
-            )
+        for segment_index, run in enumerate(_split_contiguous_runs(frames)):
+            image_hashes: set[str] = set()
+            intervention_count = 0
+            correction_count = 0
+            correction_source_counts: dict[str, int] = {}
+            correction_deltas: list[float] = []
+            for frame in run:
+                images, sources = _load_frame_images(episode_dir, frame, args.image_size)
+                image_hashes.update(_sha256(Path(path)) for path in sources.values())
+                state6 = mujoco_to_lerobot(_control6(frame["observation"]["state"]))
+                executed6 = mujoco_to_lerobot(_control6(frame["executed_action"]))
+                policy6 = mujoco_to_lerobot(_control6(frame["policy_action"]))
+                human_raw = frame.get("human_action")
+                human6 = (
+                    mujoco_to_lerobot(_control6(human_raw))
+                    if human_raw is not None
+                    else [0.0] * 6
+                )
+                is_intervention = bool(frame.get("is_intervention"))
+                is_expert_correction = is_dagger_correction_frame(frame)
+                intervention_count += int(is_intervention)
+                correction_count += int(is_expert_correction)
+                if is_expert_correction:
+                    source = str(frame.get("action_source") or "unknown")
+                    correction_source_counts[source] = correction_source_counts.get(source, 0) + 1
+                    correction_deltas.append(policy_expert_delta_l2(frame))
+                if args.dataset_schema == "pi05_causal":
+                    dataset_frame = {
+                        "observation.images.top": images[2].copy(),
+                        "observation.images.wrist": images[1].copy(),
+                        "observation.state": np.asarray(state6, dtype=np.float32),
+                        "action": np.asarray(executed6, dtype=np.float32),
+                        "task": _task(summary),
+                    }
+                else:
+                    dataset_frame = {
+                        **{
+                            key: image.copy()
+                            for key, image in zip(PI05_IMAGE_KEYS, images, strict=True)
+                        },
+                        "observation.state": _pad32(state6),
+                        "action": _pad32(executed6),
+                        "policy_action": _pad32(policy6),
+                        "human_action": _pad32(human6),
+                        "is_intervention": np.asarray([is_intervention], dtype=bool),
+                        "is_expert_correction": np.asarray([is_expert_correction], dtype=bool),
+                        "deadman_fresh": np.asarray(
+                            [bool(frame.get("deadman_fresh"))], dtype=bool
+                        ),
+                        "randomization_seed": np.asarray(
+                            [int(summary["seed"])], dtype=np.int64
+                        ),
+                        "task": _task(summary),
+                    }
+                dataset.add_frame(dataset_frame)
+                sidecar_rows.append(
+                    {
+                        "episode_index": dataset_episode_index,
+                        "source_episode_index": source_episode_index,
+                        "segment_index": segment_index,
+                        "frame_index": int(frame["frame_index"]),
+                        "time_s": frame["time_s"],
+                        "phase": frame["phase"],
+                        "is_intervention": is_intervention,
+                        "is_expert_correction": is_expert_correction,
+                        "intervention_event": frame.get("intervention_event"),
+                        "action_source": frame.get("action_source"),
+                        "policy_action": frame.get("policy_action"),
+                        "human_action": human_raw,
+                        "executed_action": frame.get("executed_action"),
+                        "deadman": {
+                            "armed": frame.get("deadman_armed"),
+                            "takeover": frame.get("deadman_takeover"),
+                            "fresh": frame.get("deadman_fresh"),
+                            "age_s": frame.get("deadman_age_s"),
+                            "sequence": frame.get("deadman_sequence"),
+                        },
+                        "failure_reason": frame.get("failure_reason"),
+                        "seed": summary.get("seed"),
+                        "scene_id": summary.get("scene_id"),
+                        "object_motion_mode": frame.get("object_motion_mode"),
+                        "observation_images": sources,
+                        "transition": frame.get("transition"),
+                    }
+                )
 
-        dataset.save_episode(parallel_encoding=False)
-        episode_reports.append(
-            {
-                "episode_index": episode_index,
-                "source_summary": str(summary_path),
-                "frames": len(frames),
-                "source_frames": len(source_frames),
-                "intervention_frames": intervention_count,
-                "expert_correction_frames": correction_count,
-                "correction_source_counts": correction_source_counts,
-                "mean_policy_expert_delta_l2": (
-                    sum(correction_deltas) / len(correction_deltas)
-                    if correction_deltas
-                    else 0.0
-                ),
-                "unique_source_images": len(image_hashes),
-                "expected_source_images": len(frames) * len(PI05_IMAGE_KEYS),
-                "proof_scope": summary.get("proof_scope"),
-            }
-        )
+            dataset.save_episode(parallel_encoding=False)
+            episode_reports.append(
+                {
+                    "episode_index": dataset_episode_index,
+                    "source_episode_index": source_episode_index,
+                    "segment_index": segment_index,
+                    "source_summary": str(summary_path),
+                    "frames": len(run),
+                    "source_frames": len(source_frames),
+                    "source_frame_start": int(run[0]["frame_index"]),
+                    "source_frame_end": int(run[-1]["frame_index"]),
+                    "intervention_frames": intervention_count,
+                    "expert_correction_frames": correction_count,
+                    "correction_source_counts": correction_source_counts,
+                    "mean_policy_expert_delta_l2": (
+                        sum(correction_deltas) / len(correction_deltas)
+                        if correction_deltas
+                        else 0.0
+                    ),
+                    "unique_source_images": len(image_hashes),
+                    "expected_source_images": len(run) * len(_image_keys(args.dataset_schema)),
+                    "proof_scope": summary.get("proof_scope"),
+                }
+            )
+            dataset_episode_index += 1
 
     dataset.finalize()
     sidecar_path = args.output_root / "scenesmith_intervention_sidecar.jsonl"
@@ -238,7 +251,7 @@ def main() -> int:
         "repo_id": args.repo_id,
         "root": str(args.output_root),
         "source_episode_summaries": [str(path) for path in summary_paths],
-        "num_episodes": len(summary_paths),
+        "num_episodes": len(episode_reports),
         "num_frames": len(sidecar_rows),
         "num_intervention_frames": sum(row["is_intervention"] for row in sidecar_rows),
         "num_expert_correction_frames": sum(
@@ -295,6 +308,24 @@ def _summary_paths(episode_summaries: list[Path], batch_summary: Path | None) ->
         payload = json.loads(batch_summary.read_text(encoding="utf-8"))
         paths.extend(Path(path).resolve() for path in payload.get("episode_summaries", []))
     return list(dict.fromkeys(paths))
+
+
+def _split_contiguous_runs(frames: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    """Split selected frames before LeRobot can construct chunks across source gaps."""
+
+    if not frames:
+        return []
+    runs: list[list[dict[str, Any]]] = [[frames[0]]]
+    previous = int(frames[0]["frame_index"])
+    for frame in frames[1:]:
+        current = int(frame["frame_index"])
+        if current <= previous:
+            raise ValueError("Selected training frames must be strictly ordered")
+        if current != previous + 1:
+            runs.append([])
+        runs[-1].append(frame)
+        previous = current
+    return runs
 
 
 def _validate_training_scope(
