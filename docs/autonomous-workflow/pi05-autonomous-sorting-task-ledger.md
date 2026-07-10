@@ -7,10 +7,10 @@ Updated: 2026-07-10
 ```text
 Current state: M10-M11 verified; M12 honest evaluation/provenance active
 Completed: trusted data and bounded failure-focused cumulative replay
-Evidence: 61 tests; strict-none eval plan; proof-contamination promotion rejection
+Evidence: 62 tests; rotating development and one-use audit reservation canary
 Remaining: M12-M15 below
 Blockers: none for local P0 implementation
-Next step: T12.3 rotating development and locked audit seeds
+Next step: T12.4 runtime and artifact provenance
 ```
 
 ## Tasks
@@ -28,8 +28,8 @@ Next step: T12.3 rotating development and locked audit seeds
 | T11.4 | M11 | verified | Add cumulative bounded replay registry | Bounded/hash-verified registry; duplicate trajectories rejected; merge canary passes |
 | T12.1 | M12 | verified | Add stage-level reach/contact/grasp/lift/transport/release metrics | 59 tests; strict MPS smoke measured 2/4 reach/contact and 0/4 later stages |
 | T12.2 | M12 | verified | Separate strict, contact-stabilized, assisted, and physical gates | 61 tests; strict gate rejects stabilized/controller/human/physical evidence |
-| T12.3 | M12 | in_progress | Add rotating development and locked audit seed registries | No seed overlap or routine audit reuse |
-| T12.4 | M12 | pending | Pin LeRobot/preprocessing/runtime and strengthen artifact hashes | Resume and merge verify full identities |
+| T12.3 | M12 | verified | Add rotating development and locked audit seed registries | 62 tests; development rotation and audit reuse rejected; dev non-promotable |
+| T12.4 | M12 | in_progress | Pin LeRobot/preprocessing/runtime and strengthen artifact hashes | Resume and merge verify full identities |
 | T12.5 | M12 | pending | Reduce evaluation I/O and keep policy services warm | Same metrics with bounded disk/runtime |
 | T13.1 | M13 | pending | Run corrected 250/500/1,000-step MPS training ladder | Reloadable checkpoints and manifests |
 | T13.2 | M13 | pending | Sweep action execution horizon on paired seeds | Recorded stage/terminal comparison |
@@ -126,4 +126,16 @@ Commit: 907184c T12.2
 Remaining: seed registries, provenance, evaluation runtime
 Blockers: none
 Next step: rotating development seeds and locked one-use audit seeds
+```
+
+### 2026-07-10 - Evaluation seed governance
+
+```text
+Status: T12.3 verified; T12.4 in_progress
+Completed: disjoint development/audit pools, rotating reservations, audit locks, dev no-promotion
+Evidence: 62 tests; CLI rejects development-window reuse and one-use audit reuse
+Commit: pending T12.3 checkpoint
+Remaining: provenance and evaluation runtime optimization
+Blockers: none
+Next step: pin runtime/preprocessing identity and strengthen resume hashes
 ```

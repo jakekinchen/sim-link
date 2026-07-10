@@ -22,6 +22,7 @@ from scenesmith.robot_lab.autolearn_cycle import (
     CycleConfig,
     CycleRunner,
     StageResult,
+    _tiered_promotion_payload,
 )
 from scenesmith.robot_lab.balanced_replay import (
     AuditedReplaySampler,
@@ -37,6 +38,10 @@ from scenesmith.robot_lab.replay_registry import (
     load_replay_registry,
     register_correction_dataset,
     write_replay_registry,
+)
+from scenesmith.robot_lab.seed_registry import (
+    reserve_evaluation_seeds,
+    write_seed_registry,
 )
 from scenesmith.robot_lab.so101_coordinates import coordinate_contract
 from scripts.robot_lab.export_intervention_dataset import (
@@ -473,6 +478,9 @@ class PromotionTests(unittest.TestCase):
         )
         self.assertTrue(decision.accepted)
         self.assertEqual(decision.reasons, ())
+        development = _tiered_promotion_payload("development", decision)
+        self.assertFalse(development["accepted"])
+        self.assertEqual(development["reasons"], ["development_evaluation_not_promotable"])
 
     def test_rejects_assisted_success(self):
         seeds = (7100, 7101)
@@ -569,7 +577,13 @@ def _cycle_payload(*, external=False):
         "schema_version": "scenesmith.pi05_autolearn.v1",
         "cycle_id": "test-cycle",
         "train_seeds": [7000, 7001],
-        "eval_seeds": [7100, 7101],
+        "evaluation": {
+            "tier": "development",
+            "seeds": [7100, 7101],
+            "development_pool": [7100, 7101, 7102, 7103],
+            "audit_pool": [8100, 8101, 8102, 8103],
+            "registry_path": "experiments/pi05_autolearn/seed_registry.json",
+        },
         "accepted_model": "models/accepted",
         "candidate_model": "models/candidate",
         "manifest_path": "experiments/pi05_autolearn/cycles/test-cycle.json",
@@ -605,9 +619,51 @@ def _cycle_payload(*, external=False):
 
 
 class CycleConfigTests(unittest.TestCase):
+    def test_seed_registry_rotates_development_and_locks_audit(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "seeds.json"
+            common = {
+                "development_pool": (7100, 7101, 7102, 7103),
+                "audit_pool": (8100, 8101, 8102, 8103),
+                "development_rotation_window": 2,
+            }
+            registry = reserve_evaluation_seeds(
+                path,
+                cycle_id="dev-1",
+                tier="development",
+                seeds=(7100, 7101),
+                **common,
+            )
+            write_seed_registry(path, registry)
+            with self.assertRaisesRegex(ValueError, "rotation window"):
+                reserve_evaluation_seeds(
+                    path,
+                    cycle_id="dev-2",
+                    tier="development",
+                    seeds=(7101, 7102),
+                    **common,
+                )
+            registry = reserve_evaluation_seeds(
+                path,
+                cycle_id="audit-1",
+                tier="audit",
+                seeds=(8100, 8101),
+                **common,
+            )
+            write_seed_registry(path, registry)
+            with self.assertRaisesRegex(ValueError, "locked after first use"):
+                reserve_evaluation_seeds(
+                    path,
+                    cycle_id="audit-2",
+                    tier="audit",
+                    seeds=(8101, 8102),
+                    **common,
+                )
+
     def test_rejects_seed_overlap(self):
         payload = _cycle_payload()
-        payload["eval_seeds"] = [7001, 7100]
+        payload["evaluation"]["seeds"] = [7001, 7100]
+        payload["evaluation"]["development_pool"].append(7001)
         with self.assertRaisesRegex(ValueError, "overlap"):
             CycleConfig.from_dict(payload)
 

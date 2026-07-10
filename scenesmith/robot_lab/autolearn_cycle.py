@@ -126,6 +126,10 @@ class CycleConfig:
     cycle_id: str
     train_seeds: tuple[int, ...]
     eval_seeds: tuple[int, ...]
+    evaluation_tier: str
+    development_seed_pool: tuple[int, ...]
+    audit_seed_pool: tuple[int, ...]
+    seed_registry_path: str
     accepted_model: str
     candidate_model: str
     manifest_path: str
@@ -145,11 +149,28 @@ class CycleConfig:
         if payload.get("schema_version") != "scenesmith.pi05_autolearn.v1":
             raise ValueError("Unsupported cycle schema_version")
         train_seeds = tuple(int(value) for value in payload.get("train_seeds", []))
-        eval_seeds = tuple(int(value) for value in payload.get("eval_seeds", []))
+        evaluation = payload.get("evaluation") or {}
+        evaluation_tier = str(evaluation.get("tier") or "")
+        development_seed_pool = tuple(
+            int(value) for value in evaluation.get("development_pool", [])
+        )
+        audit_seed_pool = tuple(int(value) for value in evaluation.get("audit_pool", []))
+        eval_seeds = tuple(int(value) for value in evaluation.get("seeds", []))
         if not train_seeds or not eval_seeds:
-            raise ValueError("Cycle requires non-empty train_seeds and eval_seeds")
+            raise ValueError("Cycle requires non-empty train and active evaluation seeds")
+        if evaluation_tier not in {"development", "audit"}:
+            raise ValueError("evaluation.tier must be development or audit")
+        if not development_seed_pool or not audit_seed_pool:
+            raise ValueError("Cycle requires development and audit seed pools")
         if len(set(train_seeds)) != len(train_seeds) or len(set(eval_seeds)) != len(eval_seeds):
             raise ValueError("Train and evaluation seeds must be unique")
+        if set(development_seed_pool) & set(audit_seed_pool):
+            raise ValueError("Development and audit seed pools overlap")
+        if set(train_seeds) & (set(development_seed_pool) | set(audit_seed_pool)):
+            raise ValueError("Training seeds overlap evaluation seed pools")
+        active_pool = development_seed_pool if evaluation_tier == "development" else audit_seed_pool
+        if not set(eval_seeds).issubset(active_pool):
+            raise ValueError("Active evaluation seeds are outside the selected tier pool")
         overlap = sorted(set(train_seeds) & set(eval_seeds))
         if overlap:
             raise ValueError(f"Train and evaluation seeds overlap: {overlap}")
@@ -175,6 +196,10 @@ class CycleConfig:
             cycle_id=str(payload.get("cycle_id") or ""),
             train_seeds=train_seeds,
             eval_seeds=eval_seeds,
+            evaluation_tier=evaluation_tier,
+            development_seed_pool=development_seed_pool,
+            audit_seed_pool=audit_seed_pool,
+            seed_registry_path=str(evaluation.get("registry_path") or ""),
             accepted_model=str(payload.get("accepted_model") or ""),
             candidate_model=str(payload.get("candidate_model") or ""),
             manifest_path=str(payload.get("manifest_path") or ""),
@@ -211,6 +236,7 @@ class CycleConfig:
             "accepted_pointer_path": self.accepted_pointer_path,
             "baseline_evaluation": self.baseline_evaluation,
             "candidate_evaluation": self.candidate_evaluation,
+            "seed_registry_path": self.seed_registry_path,
         }
         missing = [name for name, value in required_strings.items() if not value]
         if missing:
@@ -227,6 +253,10 @@ class CycleConfig:
             "train_episodes": len(self.train_seeds),
             "eval_seed_start": min(self.eval_seeds),
             "eval_episodes": len(self.eval_seeds),
+            "evaluation_tier": self.evaluation_tier,
+            "eval_seeds_csv": ",".join(str(seed) for seed in self.eval_seeds),
+            "development_pool_csv": ",".join(str(seed) for seed in self.development_seed_pool),
+            "audit_pool_csv": ",".join(str(seed) for seed in self.audit_seed_pool),
             "max_steps": self.max_training_steps,
         }
 
@@ -361,6 +391,9 @@ class CycleRunner:
             "candidate_model": self.config.candidate_model,
             "train_seeds": list(self.config.train_seeds),
             "eval_seeds": list(self.config.eval_seeds),
+            "evaluation_tier": self.config.evaluation_tier,
+            "development_seed_pool": list(self.config.development_seed_pool),
+            "audit_seed_pool": list(self.config.audit_seed_pool),
             "max_training_steps": self.config.max_training_steps,
             "stages": [self._planned_stage(stage) for stage in self.stages],
             "external_compute": (
@@ -432,7 +465,13 @@ class CycleRunner:
                 if missing:
                     raise CycleExecutionError(f"Stage {stage.name} missing artifacts: {missing}")
                 _write_json(manifest_path, manifest)
-                self._commit_boundary(manifest_path, stage.name)
+                if stage.name == "reserve_evaluation_seeds":
+                    self._commit_paths(
+                        [manifest_path, self._path(self.config.seed_registry_path)],
+                        stage.name,
+                    )
+                else:
+                    self._commit_boundary(manifest_path, stage.name)
 
             baseline_payload = _read_json(
                 self._path(self.config.baseline_evaluation.format_map(self.context))
@@ -453,10 +492,13 @@ class CycleRunner:
                 ),
             )
             decision = decide_promotion(baseline, candidate, self.config.promotion_gate)
-            manifest["promotion"] = decision.to_dict()
+            manifest["promotion"] = _tiered_promotion_payload(
+                self.config.evaluation_tier,
+                decision,
+            )
             manifest["status"] = "complete"
             commit_paths = [manifest_path]
-            if decision.accepted:
+            if self.config.evaluation_tier == "audit" and decision.accepted:
                 pointer = {
                     "schema_version": "scenesmith.pi05_accepted_checkpoint.v1",
                     "cycle_id": self.config.cycle_id,
@@ -551,6 +593,20 @@ class CycleRunner:
 
 def load_cycle_config(path: Path) -> CycleConfig:
     return CycleConfig.from_dict(_read_json(path))
+
+
+def _tiered_promotion_payload(tier: str, decision) -> dict[str, Any]:
+    if tier == "audit":
+        return decision.to_dict()
+    if tier != "development":
+        raise ValueError(f"Unknown evaluation tier: {tier}")
+    return {
+        "accepted": False,
+        "eligible": False,
+        "reasons": ["development_evaluation_not_promotable"],
+        "baseline": decision.baseline.to_dict(),
+        "candidate": decision.candidate.to_dict(),
+    }
 
 
 def _declares_step_bound(argv: tuple[str, ...], max_steps: int) -> bool:

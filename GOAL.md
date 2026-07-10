@@ -20,9 +20,9 @@ M12 - Honest evaluation and provenance
 
 ## Current Slice
 
-Add disjoint rotating development seeds and locked audit seeds with usage
-history. Routine iteration must not consume audit seeds, and promotion must
-fail if training, development, and audit seed identities overlap.
+Content-address the LeRobot runtime, Python environment, preprocessing configs,
+datasets, replay plan, normalizer, and checkpoint artifacts. Resume must reject
+identity drift, and manifests must prove the exact executable training surface.
 
 ## Durable State
 

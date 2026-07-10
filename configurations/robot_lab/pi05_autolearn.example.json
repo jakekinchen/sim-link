@@ -2,7 +2,13 @@
   "schema_version": "scenesmith.pi05_autolearn.v1",
   "cycle_id": "cycle-001-mps",
   "train_seeds": [7200, 7201, 7202, 7203],
-  "eval_seeds": [7300, 7301, 7302, 7303],
+  "evaluation": {
+    "tier": "development",
+    "seeds": [7300, 7301, 7302, 7303],
+    "development_pool": [7300, 7301, 7302, 7303, 7304, 7305, 7306, 7307, 7308, 7309, 7310, 7311],
+    "audit_pool": [8300, 8301, 8302, 8303, 8304, 8305, 8306, 8307, 8308, 8309, 8310, 8311],
+    "registry_path": "experiments/pi05_autolearn/seed_registry.json"
+  },
   "accepted_model": "outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250",
   "candidate_model": "outputs/robot_lab/autolearn/cycle-001-mps/train/checkpoints/000025/pretrained_model",
   "manifest_path": "experiments/pi05_autolearn/cycles/cycle-001-mps.json",
@@ -10,6 +16,25 @@
   "baseline_evaluation": "outputs/robot_lab/autolearn/cycle-001-mps/baseline-eval/intervention_batch_summary.json",
   "candidate_evaluation": "outputs/robot_lab/autolearn/cycle-001-mps/candidate-eval/intervention_batch_summary.json",
   "stages": [
+    {
+      "name": "reserve_evaluation_seeds",
+      "argv": [
+        "external/leLab/.venv/bin/python",
+        "scripts/robot_lab/reserve_pi05_evaluation_seeds.py",
+        "--registry", "experiments/pi05_autolearn/seed_registry.json",
+        "--cycle-id", "{cycle_id}",
+        "--tier", "{evaluation_tier}",
+        "--seeds", "{eval_seeds_csv}",
+        "--development-pool", "{development_pool_csv}",
+        "--audit-pool", "{audit_pool_csv}",
+        "--development-rotation-window", "2"
+      ],
+      "timeout_s": 60,
+      "required_artifacts": [
+        "experiments/pi05_autolearn/seed_registry.json"
+      ],
+      "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/reserve-evaluation-seeds.log"
+    },
     {
       "name": "baseline_eval",
       "argv": [
@@ -231,6 +256,7 @@
       "scenesmith/robot_lab/intervention_supervisor.py",
       "scenesmith/robot_lab/pi05_dataset_contract.py",
       "scenesmith/robot_lab/replay_registry.py",
+      "scenesmith/robot_lab/seed_registry.py",
       "scenesmith/robot_lab/so101_coordinates.py",
       "scripts/robot_lab/export_intervention_dataset.py",
       "scripts/robot_lab/build_pi05_replay_plan.py",
@@ -244,6 +270,7 @@
       "scripts/robot_lab/stamp_pi05_dataset_contract.py",
       "scripts/robot_lab/train_pi05_balanced.py",
       "scripts/robot_lab/update_pi05_replay_registry.py",
+      "scripts/robot_lab/reserve_pi05_evaluation_seeds.py",
       "tests/unit/test_pi05_autolearn.py"
     ]
   },
