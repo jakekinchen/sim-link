@@ -134,6 +134,11 @@ def main() -> int:
             correction_source_counts: dict[str, int] = {}
             correction_deltas: list[float] = []
             for frame in run:
+                frame_task = _frame_task(
+                    frame,
+                    summary,
+                    require_frame_task=args.frame_selection == "dagger_corrections",
+                )
                 images, sources = _load_frame_images(episode_dir, frame, args.image_size)
                 image_hashes.update(_sha256(Path(path)) for path in sources.values())
                 state6 = mujoco_to_lerobot(_control6(frame["observation"]["state"]))
@@ -159,7 +164,7 @@ def main() -> int:
                         "observation.images.wrist": images[1].copy(),
                         "observation.state": np.asarray(state6, dtype=np.float32),
                         "action": np.asarray(executed6, dtype=np.float32),
-                        "task": _task(summary),
+                        "task": frame_task,
                     }
                 else:
                     dataset_frame = {
@@ -179,7 +184,7 @@ def main() -> int:
                         "randomization_seed": np.asarray(
                             [int(summary["seed"])], dtype=np.int64
                         ),
-                        "task": _task(summary),
+                        "task": frame_task,
                     }
                 dataset.add_frame(dataset_frame)
                 sidecar_rows.append(
@@ -190,6 +195,7 @@ def main() -> int:
                         "frame_index": int(frame["frame_index"]),
                         "time_s": frame["time_s"],
                         "phase": frame["phase"],
+                        "policy_task": frame_task,
                         "is_intervention": is_intervention,
                         "is_expert_correction": is_expert_correction,
                         "intervention_event": frame.get("intervention_event"),
@@ -433,6 +439,19 @@ def _sha256(path: Path) -> str:
 
 def _task(summary: dict[str, Any]) -> str:
     return summary.get("task") or "Sort each cube into the same-colored tray."
+
+
+def _frame_task(
+    frame: dict[str, Any], summary: dict[str, Any], *, require_frame_task: bool
+) -> str:
+    task = frame.get("policy_task")
+    if isinstance(task, str) and task.strip():
+        return task.strip()
+    if require_frame_task:
+        raise ValueError(
+            "DAgger correction frame lacks the exact policy_task used during collection"
+        )
+    return _task(summary)
 
 
 def _control6(value: Any) -> list[float]:

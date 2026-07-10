@@ -574,12 +574,13 @@ def run_neural_policy_intervention_episode(
                         frame_index=recorder.frame_index,
                     )
             observation, observation_time_s = recorder.capture_observation()
+            policy_task = _policy_task_for_remaining_cubes(
+                scene_dict, grasp_assist.completed_cubes
+            )
             policy_action = policy.get_action(
                 observation,
                 episode_dir=output_dir,
-                task=_policy_task_for_remaining_cubes(
-                    scene_dict, grasp_assist.completed_cubes
-                ),
+                task=policy_task,
             )
             if controller_action is None:
                 decision = arbiter.decide(policy_action, None, DeadmanSignal())
@@ -751,6 +752,7 @@ def run_neural_policy_intervention_episode(
                 phase=controller_phase or "neural_policy_contact_physics",
                 target_tray=tracked_tray["name"],
                 decision=decision,
+                policy_task=policy_task,
                 object_motion_mode=(
                     "contact_gated_task_space_tray_transfer"
                     if controller_phase
@@ -1044,6 +1046,7 @@ class EpisodeRecorder:
         target_tray: str,
         decision,
         object_motion_mode: str,
+        policy_task: str | None = None,
     ) -> dict[str, Any]:
         decision_payload = decision.to_dict()
         next_cube_states = _cube_states_from_model(
@@ -1057,6 +1060,7 @@ class EpisodeRecorder:
             "cube": cube_name,
             "phase": phase,
             "target_tray": target_tray,
+            "policy_task": policy_task,
             "cube_position_m": _body_position(
                 self.mujoco, self.model, self.data, cube_name
             ),

@@ -21,7 +21,11 @@ from scenesmith.robot_lab.autolearn_cycle import (
     CycleRunner,
     StageResult,
 )
-from scripts.robot_lab.export_intervention_dataset import _features, _split_contiguous_runs
+from scripts.robot_lab.export_intervention_dataset import (
+    _features,
+    _frame_task,
+    _split_contiguous_runs,
+)
 from scripts.robot_lab.finalize_pi05_checkpoint import _compare_normalization
 from scripts.robot_lab.merge_pi05_training_datasets import (
     _pin_normalization_stats,
@@ -192,6 +196,21 @@ class DaggerFrameTests(unittest.TestCase):
     def test_correction_export_rejects_reordered_frames(self):
         with self.assertRaisesRegex(ValueError, "strictly ordered"):
             _split_contiguous_runs([{"frame_index": 2}, {"frame_index": 1}])
+
+    def test_dagger_export_requires_exact_frame_policy_task(self):
+        summary = {"task": "generic sort"}
+
+        self.assertEqual(
+            _frame_task(
+                {"policy_task": "Pick up one blue block and place it in the blue plate."},
+                summary,
+                require_frame_task=True,
+            ),
+            "Pick up one blue block and place it in the blue plate.",
+        )
+        with self.assertRaisesRegex(ValueError, "lacks the exact policy_task"):
+            _frame_task({}, summary, require_frame_task=True)
+        self.assertEqual(_frame_task({}, summary, require_frame_task=False), "generic sort")
 
 
 class PromotionTests(unittest.TestCase):
