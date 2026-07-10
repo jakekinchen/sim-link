@@ -2,12 +2,8 @@
   "accepted_model": "outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250",
   "candidate_model": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model",
   "config_path": "configurations/robot_lab/pi05_autolearn.example.json",
-  "config_sha256": "12f4dc2379d1ed403f331ee10f596715e1468ad5aa9c57bb09e3b16ec48c0218",
+  "config_sha256": "8c36cd9e0285514822fb57686434300de8fe61b780959ca7735f52cc12b56539",
   "cycle_id": "cycle-000-bootstrap-mps",
-  "error": {
-    "message": "Stage train missing artifacts: ['outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json']",
-    "type": "CycleExecutionError"
-  },
   "eval_seeds": [
     6301
   ],
@@ -17,8 +13,17 @@
   },
   "max_training_steps": 5,
   "promotion": null,
+  "resumed_from": {
+    "config_sha256": "12f4dc2379d1ed403f331ee10f596715e1468ad5aa9c57bb09e3b16ec48c0218",
+    "error": {
+      "message": "Stage train missing artifacts: ['outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json']",
+      "type": "CycleExecutionError"
+    },
+    "source_commit": "841a32d3e647a6bba15fc9a2e8ddfb50f4cc73e0",
+    "status": "failed"
+  },
   "schema_version": "scenesmith.pi05_autolearn_cycle.v1",
-  "source_commit": "841a32d3e647a6bba15fc9a2e8ddfb50f4cc73e0",
+  "source_commit": "f19d59129d3d0ccfe92ab39a2be3a729679597e3",
   "stages": [
     {
       "allowed_exit_codes": [
@@ -54,7 +59,7 @@
         }
       },
       "env_keys": [],
-      "git_commit_before": "841a32d3e647a6bba15fc9a2e8ddfb50f4cc73e0",
+      "git_commit_before": "f19d59129d3d0ccfe92ab39a2be3a729679597e3",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/baseline-eval.log",
       "name": "baseline_eval",
       "required_artifacts": [
@@ -66,6 +71,7 @@
         "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/baseline-eval.log",
         "log_sha256": "625f7d50eaf19209aac5edc2ad526e2a887ba2bf290e017f24bc0bc634358ff4"
       },
+      "resumed": true,
       "timeout_s": 43200.0
     },
     {
@@ -102,7 +108,7 @@
         }
       },
       "env_keys": [],
-      "git_commit_before": "9fa80695ec819a3302302c90cfa069ee9a1a89a1",
+      "git_commit_before": "f19d59129d3d0ccfe92ab39a2be3a729679597e3",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/collect-dagger.log",
       "name": "collect_dagger",
       "required_artifacts": [
@@ -114,6 +120,7 @@
         "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/collect-dagger.log",
         "log_sha256": "1e2f10b1f91ac3b87e2a26d5f80351931fd943670aa32516a19ecf5f991df29a"
       },
+      "resumed": true,
       "timeout_s": 43200.0
     },
     {
@@ -154,7 +161,7 @@
         }
       },
       "env_keys": [],
-      "git_commit_before": "ef38c473d60c2431b9f38be9517e4ca6b6516977",
+      "git_commit_before": "f19d59129d3d0ccfe92ab39a2be3a729679597e3",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/export-corrections.log",
       "name": "export_corrections",
       "required_artifacts": [
@@ -167,6 +174,7 @@
         "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/export-corrections.log",
         "log_sha256": "c7f019aed428251930fdbe56953abf3ae5db8cf7795cc11a22ead31f913c0abd"
       },
+      "resumed": true,
       "timeout_s": 7200.0
     },
     {
@@ -202,7 +210,7 @@
         }
       },
       "env_keys": [],
-      "git_commit_before": "e3bb00249e15b7a574ce7c35087364480552547a",
+      "git_commit_before": "f19d59129d3d0ccfe92ab39a2be3a729679597e3",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/aggregate-dataset.log",
       "name": "aggregate_dataset",
       "required_artifacts": [
@@ -215,6 +223,7 @@
         "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/aggregate-dataset.log",
         "log_sha256": "3a0821219d09691606a70c6ca6e782bc9a8192f973b0e188dec5ed537d893759"
       },
+      "resumed": true,
       "timeout_s": 7200.0
     },
     {
@@ -258,9 +267,12 @@
           "sha256": "159e0e018ce2e35bf6518d70905547d36450c68509cd1642bbbc734aac2083f6",
           "size_bytes": 92352824
         },
-        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json": {
-          "exists": false,
-          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json"
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/train_config.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/train_config.json",
+          "sha256": "ff79e21d40ecdefb4e0ad1552186c5b2cc2dfa20463bf6df472aadf39fbcd718",
+          "size_bytes": 7597
         }
       },
       "env_keys": [
@@ -269,11 +281,11 @@
         "TOKENIZERS_PARALLELISM",
         "TRANSFORMERS_OFFLINE"
       ],
-      "git_commit_before": "0ff3237a1beb7de4cb1e65f1f7f7edd3ffb7bc54",
+      "git_commit_before": "f19d59129d3d0ccfe92ab39a2be3a729679597e3",
       "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/train.log",
       "name": "train",
       "required_artifacts": [
-        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json",
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/train_config.json",
         "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/adapter_model.safetensors"
       ],
       "result": {
@@ -282,7 +294,52 @@
         "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/train.log",
         "log_sha256": "2e725e772a6027320bd709b9d8b2dbc1c2733f4395a43df0527402ec129cb060"
       },
+      "resumed": true,
       "timeout_s": 21600.0
+    },
+    {
+      "allowed_exit_codes": [
+        0
+      ],
+      "argv": [
+        "./.mujoco_venv/bin/python",
+        "scripts/robot_lab/finalize_pi05_checkpoint.py",
+        "--checkpoint-root",
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model",
+        "--source-config",
+        "outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250/config.json"
+      ],
+      "artifacts": {
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json",
+          "sha256": "2ba73b733e894a94af5504d7b52494343b8063af9420520fc7ef28ab88913eb2",
+          "size_bytes": 2278
+        },
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/scenesmith_finalize_summary.json": {
+          "exists": true,
+          "kind": "file",
+          "path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/scenesmith_finalize_summary.json",
+          "sha256": "3cbe7f17be0d7e4f3cbade9835664bafc4f08dea8d0eeae74578fd67dd30a25b",
+          "size_bytes": 861
+        }
+      },
+      "env_keys": [],
+      "git_commit_before": "f19d59129d3d0ccfe92ab39a2be3a729679597e3",
+      "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/finalize-candidate.log",
+      "name": "finalize_candidate",
+      "required_artifacts": [
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/config.json",
+        "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model/scenesmith_finalize_summary.json"
+      ],
+      "result": {
+        "duration_s": 0.085,
+        "exit_code": 0,
+        "log_path": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/logs/finalize-candidate.log",
+        "log_sha256": "3cbe7f17be0d7e4f3cbade9835664bafc4f08dea8d0eeae74578fd67dd30a25b"
+      },
+      "timeout_s": 60.0
     },
     {
       "allowed_exit_codes": [
@@ -317,7 +374,7 @@
       "timeout_s": 43200.0
     }
   ],
-  "status": "failed",
+  "status": "running",
   "train_seeds": [
     6204
   ]
