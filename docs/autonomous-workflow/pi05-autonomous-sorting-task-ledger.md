@@ -62,7 +62,7 @@ Next step: deterministic source/phase sampler with auditable exposure counts
 Status: T11.1 verified; T11.2 in_progress
 Completed: content-addressed deterministic source/phase replay and realized-draw audit
 Evidence: six MPS updates; 3 base/3 correction; recovery, transfer, and post-place each sampled once
-Commit: pending T11.1 checkpoint
+Commit: d6cd8b9 T11.1
 Remaining: context export, pre-contact triggers, cumulative replay registry
 Blockers: none
 Next step: export bounded pre-intervention and post-recovery context without crossing gaps
