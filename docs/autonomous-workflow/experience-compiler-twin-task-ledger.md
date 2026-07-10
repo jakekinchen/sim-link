@@ -8,9 +8,9 @@ current_milestone: M16 Twin and dependency foundation
 current_task: T16.3 semantic structural diff correction
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical hash/diff baseline plus TwinProfile artifact binding
 evidence: commits 7bebf55 and 936dd2f prove deterministic XML diff plumbing plus TwinProfile artifact binding; manager audit 005 keeps semantic acceptance open
-remaining: M16-M19 prerequisites, then Gates C-D and closeout
+remaining: inferred-inertia unknowns, effective friction/contact attachment semantics, deterministic unnamed-geom limits, then M16-M19 prerequisites and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: canonicalize rotations/effective defaults, surface inferred inertia unknowns, and re-review T16.3
+next_step: surface inferred inertia unknowns and effective friction/contact semantics, then re-review T16.3
 ```
 
 ## Rules
@@ -140,6 +140,20 @@ Remaining: canonical rotations, effective solver defaults, inferred-inertia unkn
 Blockers: none for offline correction
 Training lock: closed
 Next step: normalize equivalent quaternions and compare effective solver defaults before reopening T16.3 for review
+```
+
+### 2026-07-10 - T16.3 quaternion and solver semantics correction
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: structural diff now canonicalizes equivalent quaternions for semantic comparison, records compared canonical quaternion values on true rotation mismatches, and compares effective MuJoCo solver defaults even when one source omits <option>
+Evidence: configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json identity 6a990b8a28d6b18e12dde18398122ea84ba7d3a91569ca2f728d8c09f5d3dad7; 9 focused structural-diff tests; live write+verify product path; 34 broad robot-lab tests
+Commit: pending
+Remaining: inferred-inertia unknown handling, effective friction/contact attachment semantics, and deterministic unnamed-geom limits
+Blockers: none for offline correction
+Training lock: closed
+Next step: close the remaining T16.3 semantic gaps before reopening T16.4
 ```
 
 ### 2026-07-10 - Advice rebaseline

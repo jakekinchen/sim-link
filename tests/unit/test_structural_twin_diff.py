@@ -9,6 +9,8 @@ from pathlib import Path
 
 from scenesmith.robot_lab.structural_twin_diff import (
     DEFAULT_STRUCTURAL_TWIN_DIFF_PATH,
+    MUJOCO_OPTION_DEFAULTS,
+    _compare_category,
     build_structural_twin_diff,
     verify_structural_twin_diff,
     write_structural_twin_diff,
@@ -69,12 +71,29 @@ class StructuralTwinDiffTests(unittest.TestCase):
             payload["twin_profile_ref"]["identity_sha256"],
             expected_profile["identity_sha256"],
         )
+        gripperframe = next(
+            record
+            for record in payload["categories"]["named_sites"]["mismatched"]
+            if record["key"] == "site:gripperframe"
+        )
+        self.assertNotIn("quat", gripperframe["numeric_deltas"])
+        self.assertEqual(
+            gripperframe["compared_values"],
+            {
+                "runtime": {"quat": [0.707106781, -0.0, 0.707106781, -0.0]},
+                "menagerie": {"quat": [0.707106781, 0.0, 0.707106781, 0.0]},
+            },
+        )
+        solver_mismatches = payload["categories"]["solver_settings"]["mismatched"]
         self.assertTrue(
             any(
-                record["key"] == "site:gripperframe"
-                for record in payload["categories"]["named_sites"]["mismatched"]
+                record["key"] == "option:global"
+                and record["runtime"]["integrator"] == MUJOCO_OPTION_DEFAULTS["integrator"]
+                and record["menagerie"]["integrator"] == "implicitfast"
+                for record in solver_mismatches
             )
         )
+        self.assertFalse(payload["categories"]["solver_settings"]["missing"])
         self.assertTrue(
             any(
                 record["key"] == "joint:wrist_roll"
@@ -82,6 +101,80 @@ class StructuralTwinDiffTests(unittest.TestCase):
             )
         )
         self.assertTrue(payload["summary"]["mismatched_records"] > 0)
+
+    def test_compare_category_matches_equivalent_quaternions(self):
+        category = _compare_category(
+            "named_sites",
+            {
+                "site:gripperframe": {
+                    "quat": [0.707107, 0.0, 0.707107, 0.0],
+                }
+            },
+            {
+                "site:gripperframe": {
+                    "quat": [1.0, 0.0, 1.0, 0.0],
+                }
+            },
+        )
+
+        self.assertEqual(len(category["matched"]), 1)
+        self.assertFalse(category["mismatched"])
+
+    def test_compare_category_records_canonical_quaternion_values_for_true_mismatch(self):
+        category = _compare_category(
+            "named_sites",
+            {
+                "site:tool": {
+                    "quat": [0.0, 0.0, 0.707107, 0.707107],
+                }
+            },
+            {
+                "site:tool": {
+                    "quat": [0.0, 0.0, 1.0, 0.0],
+                }
+            },
+        )
+
+        mismatch = category["mismatched"][0]
+        self.assertEqual(
+            mismatch["compared_values"],
+            {
+                "runtime": {"quat": [0.0, 0.0, 0.707106781, 0.707106781]},
+                "menagerie": {"quat": [0.0, 0.0, 1.0, 0.0]},
+            },
+        )
+
+    def test_compare_category_uses_effective_solver_defaults_when_option_is_omitted(self):
+        category = _compare_category(
+            "solver_settings",
+            {"option:global": dict(MUJOCO_OPTION_DEFAULTS)},
+            {
+                "option:global": {
+                    **MUJOCO_OPTION_DEFAULTS,
+                    "integrator": "implicitfast",
+                    "iterations": 10.0,
+                    "ls_iterations": 20.0,
+                    "impratio": 10.0,
+                    "cone": "elliptic",
+                    "timestep": 0.005,
+                }
+            },
+        )
+
+        self.assertFalse(category["missing"])
+        self.assertFalse(category["extra"])
+        mismatch = category["mismatched"][0]
+        self.assertEqual(mismatch["key"], "option:global")
+        self.assertEqual(mismatch["runtime"]["integrator"], "euler")
+        self.assertEqual(
+            mismatch["numeric_deltas"],
+            {
+                "impratio": -9.0,
+                "iterations": 90.0,
+                "ls_iterations": 30.0,
+                "timestep": -0.003,
+            },
+        )
 
     def test_write_current_repo_artifact_is_deterministic(self):
         expected = build_structural_twin_diff(repo_root=REPO_ROOT)

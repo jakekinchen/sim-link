@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import xml.etree.ElementTree as ET
 
 from pathlib import Path
@@ -38,6 +39,14 @@ REQUIRED_CATEGORIES = (
     "named_sites",
 )
 DIFF_DECISIONS = {"adopt", "adapt", "retain"}
+MUJOCO_OPTION_DEFAULTS = {
+    "cone": "pyramidal",
+    "impratio": 1.0,
+    "integrator": "euler",
+    "iterations": 100.0,
+    "ls_iterations": 50.0,
+    "timestep": 0.002,
+}
 
 
 def build_structural_twin_diff(
@@ -378,9 +387,10 @@ def _extract_cameras(root: ET.Element) -> dict[str, dict[str, Any]]:
 
 def _extract_solver_settings(root: ET.Element) -> dict[str, dict[str, Any]]:
     option = root.find("./option")
-    if option is None:
-        return {}
-    return {"option:global": _normalize_attrs(option.attrib)}
+    effective = dict(MUJOCO_OPTION_DEFAULTS)
+    if option is not None:
+        effective.update(_normalize_attrs(option.attrib))
+    return {"option:global": effective}
 
 
 def _extract_friction(
@@ -480,18 +490,24 @@ def _compare_category(
                 }
             )
             continue
-        if runtime_value == menagerie_value:
+        runtime_compared, menagerie_compared, comparison_metadata = _comparison_views(
+            category_name,
+            runtime_value,
+            menagerie_value,
+        )
+        if runtime_compared == menagerie_compared:
             matched.append({"key": key, "value": runtime_value})
             continue
-        mismatched.append(
-            {
-                "key": key,
-                "runtime": runtime_value,
-                "menagerie": menagerie_value,
-                "numeric_deltas": _numeric_deltas(runtime_value, menagerie_value),
-                **_reconciliation_decision(category_name, key, difference_kind="mismatched"),
-            }
-        )
+        mismatch_record = {
+            "key": key,
+            "runtime": runtime_value,
+            "menagerie": menagerie_value,
+            "numeric_deltas": _numeric_deltas(runtime_compared, menagerie_compared),
+            **_reconciliation_decision(category_name, key, difference_kind="mismatched"),
+        }
+        if comparison_metadata:
+            mismatch_record["compared_values"] = comparison_metadata
+        mismatched.append(mismatch_record)
     return {
         "matched": matched,
         "mismatched": mismatched,
@@ -552,6 +568,50 @@ def _numeric_deltas(runtime_value: Any, menagerie_value: Any) -> dict[str, Any]:
                 if delta != 0:
                     deltas[key] = delta
     return deltas
+
+
+def _comparison_views(
+    category_name: str,
+    runtime_value: dict[str, Any],
+    menagerie_value: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    runtime_compared = dict(runtime_value)
+    menagerie_compared = dict(menagerie_value)
+    metadata: dict[str, Any] = {}
+
+    if category_name in {"joint_frames", "cameras", "named_sites"}:
+        runtime_quat = _canonicalize_quaternion(runtime_value.get("quat"))
+        menagerie_quat = _canonicalize_quaternion(menagerie_value.get("quat"))
+        if runtime_quat is not None and menagerie_quat is not None:
+            runtime_compared["quat"] = runtime_quat
+            menagerie_compared["quat"] = menagerie_quat
+            if runtime_value.get("quat") != runtime_quat or menagerie_value.get("quat") != menagerie_quat:
+                metadata = {
+                    "runtime": {"quat": runtime_quat},
+                    "menagerie": {"quat": menagerie_quat},
+                }
+
+    return runtime_compared, menagerie_compared, metadata
+
+
+def _canonicalize_quaternion(value: Any) -> list[float] | None:
+    if not isinstance(value, list) or len(value) != 4 or not all(isinstance(item, (int, float)) for item in value):
+        return None
+    norm = math.sqrt(sum(float(item) * float(item) for item in value))
+    if norm == 0:
+        return None
+    normalized = [round(float(item) / norm, 9) for item in value]
+    sign = _canonical_quaternion_sign(normalized)
+    return [round(item * sign, 9) for item in normalized]
+
+
+def _canonical_quaternion_sign(value: list[float]) -> float:
+    for item in value:
+        if item > 0:
+            return 1.0
+        if item < 0:
+            return -1.0
+    return 1.0
 
 
 def _build_summary(categories: dict[str, dict[str, list[dict[str, Any]]]]) -> dict[str, Any]:
