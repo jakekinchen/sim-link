@@ -28,6 +28,7 @@ from scenesmith.robot_lab.intervention_control import (
     InterventionControlStore,
 )
 from scenesmith.robot_lab.intervention_supervisor import (
+    ApproachProgressMonitor,
     CLOSED_GRIPPER_CONTROL,
     EpisodeRunConfig,
     NeuralGraspAssistState,
@@ -133,6 +134,67 @@ class DomainRandomizationTests(unittest.TestCase):
 
 
 class ContactReflexControllerTests(unittest.TestCase):
+    def test_precontact_monitor_triggers_only_after_bounded_stall(self):
+        monitor = ApproachProgressMonitor(
+            stall_steps=3,
+            min_progress_m=0.01,
+            contact_distance_m=0.05,
+        )
+        common = {
+            "gripper_position_m": [0.0, 0.0, 0.0],
+            "cube_positions_m": {"red_cube_0": [0.2, 0.0, 0.0]},
+            "has_contact": False,
+            "controller_active": False,
+        }
+
+        self.assertIsNone(monitor.update(frame_index=0, **common))
+        self.assertIsNone(monitor.update(frame_index=1, **common))
+        self.assertIsNone(monitor.update(frame_index=2, **common))
+        event = monitor.update(frame_index=3, **common)
+
+        self.assertEqual(event["kind"], "policy_precontact_stall")
+        self.assertEqual(event["cube"], "red_cube_0")
+        self.assertFalse(event["contact_gated"])
+
+    def test_precontact_monitor_resets_on_progress_contact_or_controller(self):
+        monitor = ApproachProgressMonitor(3, 0.01, 0.05)
+        self.assertIsNone(
+            monitor.update(
+                frame_index=0,
+                gripper_position_m=[0.0, 0.0, 0.0],
+                cube_positions_m={"cube": [0.2, 0.0, 0.0]},
+                has_contact=False,
+                controller_active=False,
+            )
+        )
+        self.assertIsNone(
+            monitor.update(
+                frame_index=2,
+                gripper_position_m=[0.03, 0.0, 0.0],
+                cube_positions_m={"cube": [0.2, 0.0, 0.0]},
+                has_contact=False,
+                controller_active=False,
+            )
+        )
+        self.assertIsNone(
+            monitor.update(
+                frame_index=5,
+                gripper_position_m=[0.03, 0.0, 0.0],
+                cube_positions_m={"cube": [0.2, 0.0, 0.0]},
+                has_contact=True,
+                controller_active=False,
+            )
+        )
+        self.assertIsNone(
+            monitor.update(
+                frame_index=8,
+                gripper_position_m=[0.03, 0.0, 0.0],
+                cube_positions_m={"cube": [0.2, 0.0, 0.0]},
+                has_contact=False,
+                controller_active=True,
+            )
+        )
+
     def test_followup_task_targets_color_with_more_remaining_cubes(self):
         scene = build_so101_desk_sort_scene(DESCRIPTION).to_dict()
         initial = _policy_task_for_remaining_cubes(scene, set())

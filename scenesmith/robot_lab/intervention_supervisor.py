@@ -52,6 +52,9 @@ class EpisodeRunConfig:
     contact_reflex_post_place_lift_steps: int = 25
     contact_reflex_post_place_retreat_steps: int = 35
     neural_search_retry_steps: int = 1000
+    precontact_stall_steps: int = 240
+    precontact_min_progress_m: float = 0.005
+    precontact_contact_distance_m: float = 0.05
     realtime: bool = False
 
 
@@ -88,6 +91,69 @@ class NeuralGraspAssistState:
     def __post_init__(self) -> None:
         if self.events is None:
             self.events = []
+
+
+@dataclass
+class ApproachProgressMonitor:
+    stall_steps: int
+    min_progress_m: float
+    contact_distance_m: float
+    best_distance_m: float = float("inf")
+    last_progress_frame: int = 0
+    last_trigger_frame: int | None = None
+
+    def __post_init__(self) -> None:
+        if self.stall_steps <= 0:
+            raise ValueError("Pre-contact stall steps must be positive")
+        if self.min_progress_m <= 0 or self.contact_distance_m <= 0:
+            raise ValueError("Pre-contact distance thresholds must be positive")
+
+    def update(
+        self,
+        *,
+        frame_index: int,
+        gripper_position_m: list[float],
+        cube_positions_m: dict[str, list[float]],
+        has_contact: bool,
+        controller_active: bool,
+    ) -> dict[str, Any] | None:
+        if controller_active or has_contact or not cube_positions_m:
+            self.reset(frame_index)
+            return None
+        gripper = np.asarray(gripper_position_m, dtype=np.float64)
+        distances = {
+            name: float(np.linalg.norm(gripper - np.asarray(position, dtype=np.float64)))
+            for name, position in cube_positions_m.items()
+        }
+        cube_name, distance = min(distances.items(), key=lambda item: (item[1], item[0]))
+        if not np.isfinite(self.best_distance_m):
+            self.best_distance_m = distance
+            self.last_progress_frame = frame_index
+            return None
+        if self.best_distance_m - distance >= self.min_progress_m:
+            self.best_distance_m = distance
+            self.last_progress_frame = frame_index
+            return None
+        if distance <= self.contact_distance_m:
+            return None
+        if frame_index - self.last_progress_frame < self.stall_steps:
+            return None
+        self.best_distance_m = distance
+        self.last_progress_frame = frame_index
+        self.last_trigger_frame = frame_index
+        return {
+            "kind": "policy_precontact_stall",
+            "frame_index": frame_index,
+            "cube": cube_name,
+            "distance_m": round(distance, 6),
+            "stall_steps": self.stall_steps,
+            "min_progress_m": self.min_progress_m,
+            "contact_gated": False,
+        }
+
+    def reset(self, frame_index: int) -> None:
+        self.best_distance_m = float("inf")
+        self.last_progress_frame = frame_index
 
 
 def run_domain_randomized_intervention_episode(
@@ -456,6 +522,11 @@ def run_neural_policy_intervention_episode(
     intervention_frames: list[dict[str, Any]] = []
     intervention_success = False
     grasp_assist = NeuralGraspAssistState()
+    approach_monitor = ApproachProgressMonitor(
+        stall_steps=run_config.precontact_stall_steps,
+        min_progress_m=run_config.precontact_min_progress_m,
+        contact_distance_m=run_config.precontact_contact_distance_m,
+    )
     tracked_cube = scene_dict["cubes"][0]
     tracked_tray = next(
         tray for tray in scene_dict["trays"] if tray["color"] == tracked_cube["color"]
@@ -508,6 +579,37 @@ def run_neural_policy_intervention_episode(
                         lower_steps=30,
                     )
                 )
+            remaining_cube_positions = {
+                cube["name"]: _body_position(mujoco, model, data, cube["name"])
+                for cube in scene_dict["cubes"]
+                if cube["name"] not in grasp_assist.completed_cubes
+            }
+            stall_event = approach_monitor.update(
+                frame_index=recorder.frame_index,
+                gripper_position_m=_gripper_site_position(mujoco, model, data),
+                cube_positions_m=remaining_cube_positions,
+                has_contact=bool(_robot_cube_contacts(mujoco, model, data)),
+                controller_active=(
+                    controller_action is not None or grasp_assist.active_cube is not None
+                ),
+            )
+            if stall_event is not None and tray_transfer and controller_action is None:
+                recovery_cube = next(
+                    cube
+                    for cube in scene_dict["cubes"]
+                    if cube["name"] == stall_event["cube"]
+                )
+                grasp_assist.events.append(stall_event)
+                grasp_assist.search_retries_since_place += 1
+                grasp_assist.last_policy_reset_frame = recorder.frame_index
+                _schedule_contact_gated_recovery_pick(
+                    mujoco,
+                    model,
+                    data,
+                    grasp_assist,
+                    recovery_cube,
+                    frame_index=recorder.frame_index,
+                )
             if controller_action is None and tray_transfer:
                 controller_action, controller_phase = (
                     _contact_gated_recovery_pick_control(
@@ -537,6 +639,7 @@ def run_neural_policy_intervention_episode(
                 controller_action is None
                 and grasp_assist.active_cube is None
                 and not grasp_assist.policy_reset_pending
+                and grasp_assist.recovery_pick_start_frame is None
                 and recorder.frame_index - grasp_assist.last_policy_reset_frame
                 >= run_config.neural_search_retry_steps
             ):
@@ -1335,6 +1438,11 @@ def _cube_states_from_model(mujoco, model, data, scene: dict[str, Any]) -> list[
 def _body_position(mujoco, model, data, body_name: str) -> list[float]:
     body_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, body_name)
     return data.xpos[body_id].round(6).tolist()
+
+
+def _gripper_site_position(mujoco, model, data) -> list[float]:
+    site_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_SITE, "gripperframe")
+    return data.site_xpos[site_id].round(6).tolist()
 
 
 def _target_cube_position(cube: dict[str, Any], tray: dict[str, Any], index: int) -> list[float]:

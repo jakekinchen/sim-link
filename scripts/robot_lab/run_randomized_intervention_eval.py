@@ -64,6 +64,9 @@ def main() -> int:
         default="policy_gripper",
     )
     parser.add_argument("--contact-reflex-max-hold-steps", type=int, default=300)
+    parser.add_argument("--precontact-stall-steps", type=int, default=240)
+    parser.add_argument("--precontact-min-progress-m", type=float, default=0.005)
+    parser.add_argument("--precontact-contact-distance-m", type=float, default=0.05)
     parser.add_argument("--deadman-timeout", type=float, default=0.55)
     parser.add_argument("--intervention-wait-timeout", type=float, default=20.0)
     parser.add_argument("--intervention-run-timeout", type=float, default=45.0)
@@ -74,6 +77,8 @@ def main() -> int:
         parser.error("--episodes must be positive")
     if args.contact_reflex_max_hold_steps <= 0:
         parser.error("--contact-reflex-max-hold-steps must be positive")
+    if args.precontact_stall_steps <= 0:
+        parser.error("--precontact-stall-steps must be positive")
     if (
         args.correction_source not in {"none", "simulated_leader"}
         and args.intervention_control is None
@@ -98,6 +103,9 @@ def main() -> int:
         intervention_run_timeout_s=args.intervention_run_timeout,
         grasp_assist_mode=args.grasp_assist_mode,
         contact_reflex_max_hold_steps=args.contact_reflex_max_hold_steps,
+        precontact_stall_steps=args.precontact_stall_steps,
+        precontact_min_progress_m=args.precontact_min_progress_m,
+        precontact_contact_distance_m=args.precontact_contact_distance_m,
         realtime=(
             args.realtime
             or args.correction_source in {"studio_leader", "physical_leader"}

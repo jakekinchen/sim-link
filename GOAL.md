@@ -20,9 +20,9 @@ M11 - Balanced failure-focused replay
 
 ## Current Slice
 
-Add deterministic pre-contact progress and stall triggers so controller or human
-takeover can occur during failed approach/grasp behavior, not only after contact.
-Record trigger evidence while keeping physical-follower safety fail-closed.
+Add a cumulative, bounded correction replay registry so accepted historical
+corrections are retained across cycles with hashes, budgets, and explicit
+sampling policy. Reject missing or mutated registered sources.
 
 ## Durable State
 

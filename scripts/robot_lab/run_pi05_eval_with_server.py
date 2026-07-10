@@ -115,6 +115,9 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--action-horizon", type=int, default=15)
     parser.add_argument("--max-policy-steps", type=int, default=6000)
     parser.add_argument("--control-hz", type=int, default=30)
+    parser.add_argument("--precontact-stall-steps", type=int, default=240)
+    parser.add_argument("--precontact-min-progress-m", type=float, default=0.005)
+    parser.add_argument("--precontact-contact-distance-m", type=float, default=0.05)
     parser.add_argument(
         "--grasp-assist-mode",
         choices=(
@@ -183,6 +186,12 @@ def _evaluation_argv(args: argparse.Namespace) -> list[str]:
         args.grasp_assist_mode,
         "--control-hz",
         str(args.control_hz),
+        "--precontact-stall-steps",
+        str(args.precontact_stall_steps),
+        "--precontact-min-progress-m",
+        str(args.precontact_min_progress_m),
+        "--precontact-contact-distance-m",
+        str(args.precontact_contact_distance_m),
     ]
 
 
