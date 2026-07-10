@@ -5,7 +5,7 @@
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
     "schema_version": "scenesmith.robotics_dependency_lock.v1"
   },
-  "identity_sha256": "4ec3884b43b79dbe17e3c5e86598a7641a24ec8f90872ac135c49e93a06c6ab5",
+  "identity_sha256": "52379b7cdceddfd6425f441a81e6f5617d67974d18185fa201887a1bbdca615d",
   "profile_name": "pi05_so101_simulation_only",
   "proof_state": "simulation_only",
   "qualification_state": "simulation_only_unqualified",
@@ -22,26 +22,18 @@
         {
           "evidence": [
             {
-              "kind": "documentation",
-              "ref": "configurations/robot_lab/pi05_robotics_dependency_lock.json"
+              "kind": "planned_measurement",
+              "ref": "T19.1 read-only servo census"
             }
           ],
           "origin": "read",
           "parameter_id": "nominal_bus_voltage",
           "uncertainty": {
-            "lower": 0.0,
-            "upper": 0.0
+            "state": "unknown"
           },
           "units": "volt",
-          "validity_conditions": [
-            {
-              "field": "ambient_temperature",
-              "max_value": 28.0,
-              "min_value": 18.0,
-              "units": "celsius"
-            }
-          ],
-          "value": 12.0
+          "validity_conditions": [],
+          "value": null
         }
       ]
     },
@@ -90,12 +82,50 @@
         {
           "evidence": [
             {
-              "kind": "spec",
-              "ref": "scenesmith/robot_lab/spec.py"
+              "kind": "source",
+              "ref": "scenesmith/robot_lab/so101_coordinates.py"
+            },
+            {
+              "kind": "contract_identity_sha256",
+              "ref": "45c3f7e201dcf6bba9295b9bacb3dee72159c78d53be8a8e8e248fb990b99ba7"
             }
           ],
           "origin": "read",
-          "parameter_id": "action_coordinate_contract",
+          "parameter_id": "coordinate_contract_schema_version",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "identifier",
+          "validity_conditions": [],
+          "value": "scenesmith.so101_coordinates.v1"
+        },
+        {
+          "evidence": [
+            {
+              "kind": "source",
+              "ref": "scenesmith/robot_lab/pi05_dataset_contract.py"
+            }
+          ],
+          "origin": "read",
+          "parameter_id": "policy_action_representation",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "identifier",
+          "validity_conditions": [],
+          "value": "absolute_joint_degrees_plus_gripper_percent"
+        },
+        {
+          "evidence": [
+            {
+              "kind": "source",
+              "ref": "scenesmith/robot_lab/so101_coordinates.py"
+            }
+          ],
+          "origin": "read",
+          "parameter_id": "simulator_control_representation",
           "uncertainty": {
             "lower": 0.0,
             "upper": 0.0

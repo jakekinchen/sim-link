@@ -8,6 +8,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from scenesmith.robot_lab.so101_coordinates import coordinate_contract
+
 
 TWIN_PROFILE_SCHEMA_VERSION = "scenesmith.twin_profile.v1"
 TWIN_QUALIFICATION_SPEC_SCHEMA_VERSION = "scenesmith.twin_qualification_spec.v1"
@@ -56,6 +58,11 @@ SECTION_NAMES = (
     "gripper_contact",
     "environment_object_profiles",
 )
+QUALIFICATION_STATE_BY_PROOF_STATE = {
+    "structural_baseline_only": "unqualified",
+    "simulation_only": "simulation_only_unqualified",
+    "physical_qualified": "physical_qualified",
+}
 
 
 def build_twin_profile(
@@ -65,6 +72,10 @@ def build_twin_profile(
 ) -> dict[str, Any]:
     dependency_lock = _dependency_lock_ref(repo_root=repo_root, dependency_lock_path=dependency_lock_path)
     runtime_contract = dependency_lock["payload"]["runtime_contract"]
+    coordinates = coordinate_contract()
+    coordinate_identity = hashlib.sha256(
+        json.dumps(coordinates, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
     return _sign(
         {
             "schema_version": TWIN_PROFILE_SCHEMA_VERSION,
@@ -104,11 +115,32 @@ def build_twin_profile(
                 "coordinate_gripper_contract": {
                     "parameters": [
                         _parameter(
-                            parameter_id="action_coordinate_contract",
+                            parameter_id="coordinate_contract_schema_version",
+                            value=coordinates["schema_version"],
+                            units="identifier",
+                            origin="read",
+                            evidence=[
+                                _evidence("source", "scenesmith/robot_lab/so101_coordinates.py"),
+                                _evidence("contract_identity_sha256", coordinate_identity),
+                            ],
+                        ),
+                        _parameter(
+                            parameter_id="policy_action_representation",
+                            value="absolute_joint_degrees_plus_gripper_percent",
+                            units="identifier",
+                            origin="read",
+                            evidence=[
+                                _evidence("source", "scenesmith/robot_lab/pi05_dataset_contract.py"),
+                            ],
+                        ),
+                        _parameter(
+                            parameter_id="simulator_control_representation",
                             value="absolute_joint_radians_plus_gripper_radians",
                             units="identifier",
                             origin="read",
-                            evidence=[_evidence("spec", "scenesmith/robot_lab/spec.py")],
+                            evidence=[
+                                _evidence("source", "scenesmith/robot_lab/so101_coordinates.py"),
+                            ],
                         ),
                         _parameter(
                             parameter_id="gripper_joint_name",
@@ -147,13 +179,11 @@ def build_twin_profile(
                     "parameters": [
                         _parameter(
                             parameter_id="nominal_bus_voltage",
-                            value=12.0,
+                            value=None,
                             units="volt",
                             origin="read",
-                            validity_conditions=[
-                                _validity_condition(field="ambient_temperature", min_value=18.0, max_value=28.0, units="celsius"),
-                            ],
-                            evidence=[_evidence("documentation", dependency_lock["ref"]["path"])],
+                            uncertainty={"state": "unknown"},
+                            evidence=[_evidence("planned_measurement", "T19.1 read-only servo census")],
                         ),
                     ],
                 },
@@ -284,13 +314,11 @@ def build_twin_qualification_report(
             "metrics": [
                 {
                     "metric_id": "sim_joint_limit_projection_error",
-                    "status": "pass",
-                    "measured_value": 0.012,
+                    "status": "not_run",
+                    "measured_value": None,
                     "units": "radian",
-                    "evidence_mode": "simulation_trace",
-                    "evidence_refs": [
-                        "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
-                    ],
+                    "evidence_mode": "not_run",
+                    "evidence_refs": [],
                 },
                 {
                     "metric_id": "physical_gripper_contact_latency",
@@ -342,8 +370,9 @@ def verify_twin_profile(
     if payload.get("schema_version") != TWIN_PROFILE_SCHEMA_VERSION:
         raise ValueError("Unsupported twin profile schema")
     _verify_identity_hash(payload, label="Twin profile")
-    _verify_proof_state(payload["proof_state"])
-    if payload.get("qualification_state") != "simulation_only_unqualified" and payload["proof_state"] != "physical_qualified":
+    proof_state = str(payload["proof_state"])
+    _verify_proof_state(proof_state)
+    if payload.get("qualification_state") != QUALIFICATION_STATE_BY_PROOF_STATE[proof_state]:
         raise ValueError("Twin profile qualification state is inconsistent with its proof state")
     dependency_lock = _dependency_lock_ref(repo_root=repo_root, dependency_lock_path=dependency_lock_path)
     _verify_dependency_lock_ref(payload.get("dependency_lock_ref"), dependency_lock["ref"])
@@ -425,6 +454,8 @@ def verify_twin_qualification_report(
     _verify_identity_hash(payload, label="Twin qualification report")
     proof_state = str(payload.get("proof_state") or "")
     _verify_proof_state(proof_state)
+    if payload.get("qualification_state") != QUALIFICATION_STATE_BY_PROOF_STATE[proof_state]:
+        raise ValueError("Twin qualification report state is inconsistent with its proof state")
     dependency_lock = _dependency_lock_ref(repo_root=repo_root, dependency_lock_path=dependency_lock_path)
     _verify_dependency_lock_ref(payload.get("dependency_lock_ref"), dependency_lock["ref"])
     profile = twin_profile or build_twin_profile(
@@ -436,6 +467,11 @@ def verify_twin_qualification_report(
         dependency_lock_path=dependency_lock_path,
         twin_profile=profile,
     )
+    if proof_state == "physical_qualified":
+        if profile.get("proof_state") != "physical_qualified":
+            raise ValueError("Physical-qualified report requires a physical-qualified twin profile")
+        if spec.get("authority_level") != "physical_qualified":
+            raise ValueError("Physical-qualified report requires a physical qualification spec")
     if payload.get("profile_identity_sha256") != profile["identity_sha256"]:
         raise ValueError("Twin qualification report profile identity does not match the twin profile")
     if payload.get("spec_identity_sha256") != spec["identity_sha256"]:
@@ -468,11 +504,15 @@ def verify_twin_qualification_report(
                 raise ValueError(f"Not-run metric must use not_run evidence mode: {metric_id}")
             if evidence_refs:
                 raise ValueError(f"Not-run metric must not carry evidence refs: {metric_id}")
+            if metric.get("measured_value") is not None:
+                raise ValueError(f"Not-run metric must not carry a measured value: {metric_id}")
         else:
             if not evidence_refs:
                 raise ValueError(f"Executed metric must carry evidence refs: {metric_id}")
             if evidence_mode == "not_run":
                 raise ValueError(f"Executed metric cannot use not_run evidence mode: {metric_id}")
+            if not isinstance(metric.get("measured_value"), (int, float)):
+                raise ValueError(f"Executed metric requires a numeric measured value: {metric_id}")
     if set(metric_index) != seen_metric_ids:
         missing = sorted(set(metric_index) - seen_metric_ids)
         raise ValueError(f"Twin qualification report is missing metric results: {missing}")
@@ -613,6 +653,8 @@ def _verify_parameter(parameter: dict[str, Any]) -> None:
     if "state" in uncertainty:
         if uncertainty["state"] != "unknown":
             raise ValueError(f"Twin profile parameter uncertainty state is invalid: {parameter_id}")
+        if parameter.get("value") is not None:
+            raise ValueError(f"Unknown twin profile parameter must not carry a value: {parameter_id}")
     else:
         if "lower" not in uncertainty or "upper" not in uncertainty:
             raise ValueError(f"Twin profile parameter uncertainty bounds are required: {parameter_id}")

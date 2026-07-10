@@ -5,16 +5,14 @@
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
     "schema_version": "scenesmith.robotics_dependency_lock.v1"
   },
-  "identity_sha256": "fc1853656ab5ead8832417989151ae8acefa01a96ae99011142ec54ebfdedd63",
+  "identity_sha256": "80505e3c5e80ecff6e520829617f4319ee56a222d82acd5ed5227afa6a868788",
   "metrics": [
     {
-      "evidence_mode": "simulation_trace",
-      "evidence_refs": [
-        "configurations/robot_lab/pi05_twin_profile.simulation_only.json"
-      ],
-      "measured_value": 0.012,
+      "evidence_mode": "not_run",
+      "evidence_refs": [],
+      "measured_value": null,
       "metric_id": "sim_joint_limit_projection_error",
-      "status": "pass",
+      "status": "not_run",
       "units": "radian"
     },
     {
@@ -26,11 +24,11 @@
       "units": "millisecond"
     }
   ],
-  "profile_identity_sha256": "4ec3884b43b79dbe17e3c5e86598a7641a24ec8f90872ac135c49e93a06c6ab5",
+  "profile_identity_sha256": "52379b7cdceddfd6425f441a81e6f5617d67974d18185fa201887a1bbdca615d",
   "proof_state": "simulation_only",
   "qualification_state": "simulation_only_unqualified",
   "report_name": "pi05_twin_qualification_report_simulation_only",
   "schema_version": "scenesmith.twin_qualification_report.v1",
-  "spec_identity_sha256": "32eb1d353edc9db05f03b33dbd73d33e08d97bd9813d744d71e9596512fec995",
+  "spec_identity_sha256": "73ec9c3e2d75842dba720e84bcb7a60cb4bd4e565af23bba6299d0409d3b9834",
   "summary": "Simulation-only structural twin artifact. Physical qualification has not run and must not be inferred from this report."
 }

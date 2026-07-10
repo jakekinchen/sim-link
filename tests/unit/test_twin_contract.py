@@ -40,6 +40,18 @@ class TwinContractTests(unittest.TestCase):
 
         self.assertEqual(examples["profile"]["proof_state"], "simulation_only")
         self.assertEqual(examples["report"]["qualification_state"], "simulation_only_unqualified")
+        self.assertTrue(all(metric["status"] == "not_run" for metric in examples["report"]["metrics"]))
+        parameters = {
+            parameter["parameter_id"]: parameter
+            for section in examples["profile"]["sections"].values()
+            for parameter in section["parameters"]
+        }
+        self.assertIsNone(parameters["nominal_bus_voltage"]["value"])
+        self.assertEqual(parameters["nominal_bus_voltage"]["uncertainty"], {"state": "unknown"})
+        self.assertEqual(
+            parameters["policy_action_representation"]["value"],
+            "absolute_joint_degrees_plus_gripper_percent",
+        )
         self.assertEqual(
             examples["profile"]["dependency_lock_ref"]["path"],
             "configurations/robot_lab/pi05_robotics_dependency_lock.json",
@@ -121,7 +133,7 @@ class TwinContractTests(unittest.TestCase):
         report["metrics"][1]["status"] = "not_run"
         report["identity_sha256"] = _resign(report)
 
-        with self.assertRaisesRegex(ValueError, "require every metric to pass"):
+        with self.assertRaisesRegex(ValueError, "requires a physical-qualified twin profile"):
             verify_twin_qualification_report(
                 report,
                 repo_root=REPO_ROOT,
@@ -146,13 +158,52 @@ class TwinContractTests(unittest.TestCase):
         }
         report["identity_sha256"] = _resign(report)
 
-        with self.assertRaisesRegex(ValueError, "require the spec-declared evidence mode"):
+        with self.assertRaisesRegex(ValueError, "requires a physical-qualified twin profile"):
             verify_twin_qualification_report(
                 report,
                 repo_root=REPO_ROOT,
                 twin_profile=examples["profile"],
                 twin_spec=examples["spec"],
             )
+
+    def test_verify_rejects_report_qualification_state_mismatch(self):
+        examples = build_twin_contract_examples(repo_root=REPO_ROOT)
+        report = dict(examples["report"])
+        report["qualification_state"] = "physical_qualified"
+        report["identity_sha256"] = _resign(report)
+
+        with self.assertRaisesRegex(ValueError, "state is inconsistent"):
+            verify_twin_qualification_report(
+                report,
+                repo_root=REPO_ROOT,
+                twin_profile=examples["profile"],
+                twin_spec=examples["spec"],
+            )
+
+    def test_verify_rejects_not_run_metric_with_measured_value(self):
+        examples = build_twin_contract_examples(repo_root=REPO_ROOT)
+        report = dict(examples["report"])
+        report["metrics"] = json.loads(json.dumps(report["metrics"]))
+        report["metrics"][0]["measured_value"] = 0.012
+        report["identity_sha256"] = _resign(report)
+
+        with self.assertRaisesRegex(ValueError, "must not carry a measured value"):
+            verify_twin_qualification_report(
+                report,
+                repo_root=REPO_ROOT,
+                twin_profile=examples["profile"],
+                twin_spec=examples["spec"],
+            )
+
+    def test_verify_rejects_unknown_parameter_with_invented_value(self):
+        examples = build_twin_contract_examples(repo_root=REPO_ROOT)
+        profile = dict(examples["profile"])
+        profile["sections"] = json.loads(json.dumps(profile["sections"]))
+        profile["sections"]["actuators"]["parameters"][0]["value"] = 12.0
+        profile["identity_sha256"] = _resign(profile)
+
+        with self.assertRaisesRegex(ValueError, "Unknown twin profile parameter"):
+            verify_twin_profile(profile, repo_root=REPO_ROOT)
 
 
 def _resign(payload: dict) -> str:

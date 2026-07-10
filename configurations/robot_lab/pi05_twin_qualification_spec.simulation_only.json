@@ -37,8 +37,8 @@
       }
     }
   ],
-  "identity_sha256": "32eb1d353edc9db05f03b33dbd73d33e08d97bd9813d744d71e9596512fec995",
-  "profile_identity_sha256": "4ec3884b43b79dbe17e3c5e86598a7641a24ec8f90872ac135c49e93a06c6ab5",
+  "identity_sha256": "73ec9c3e2d75842dba720e84bcb7a60cb4bd4e565af23bba6299d0409d3b9834",
+  "profile_identity_sha256": "52379b7cdceddfd6425f441a81e6f5617d67974d18185fa201887a1bbdca615d",
   "required_evidence": [
     "dependency_lock_ref",
     "profile_identity_sha256",
