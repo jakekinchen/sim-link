@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.1 pin dependency and structural-model identities
-completed: T16.0 scoped dirty-path goal-loop guard; prior evidence retained
-evidence: 70 tests; 51 protected paths unchanged across pair dry-run; commit b5d056b
+current_task: T16.2 define twin profile and qualification schemas
+completed: T16.0 scoped dirty-path goal-loop guard; T16.1 pinned robotics dependency identities
+evidence: dependency lock manifest + validator; 7 robot-lab tests; live lock verify pass; broader scene-builder pass
 remaining: M16-M19 prerequisites, then Gates C-D and closeout
 blockers: physical M19 work requires separate read and motion authority; offline work is unblocked
-next_step: emit and validate one tracked dependency lock with upstream and local patch identities
+next_step: define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas against the pinned dependency lock
 ```
 
 ## Rules
@@ -29,7 +29,7 @@ next_step: emit and validate one tracked dependency lock with upstream and local
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
-| T16.1 | in_progress | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Tracked dependency lock resolves every runtime input to SHA/hash |
+| T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | `configurations/robot_lab/pi05_robotics_dependency_lock.json`; validator + live verify |
 | T16.2 | pending | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Property/schema tests; content-addressed simulation-only example |
 | T16.3 | pending | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | Machine structural diff of inertials, limits, contacts, camera, gripper, actuator, backlash |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
@@ -140,4 +140,18 @@ Remaining: dependency lock and twin foundation
 Blockers: none for offline work
 Training lock: closed
 Next step: pin all policy/model/runtime repositories and local patches
+```
+
+### 2026-07-10 - T16.1 robotics dependency lock
+
+```text
+Current task: T16.2
+State: verified
+Completed: pinned LeLab runtime, split local LeRobot checkout, OpenPI semantic reference, Robot Studio SO-101 runtime files, and Menagerie target lineage in one tracked lock
+Evidence: configurations/robot_lab/pi05_robotics_dependency_lock.json; 7 tests passing in .mujoco_venv; live lock write+verify pass; active MJCF/URDF hashes recorded; local lerobot tracked diff sha256 captured
+Commit: pending
+Remaining: twin profile, qualification schemas, structural reconciliation, and downstream compiler gates
+Blockers: none for offline work; unrelated broad-suite provenance test still needs an importable lerobot package in the validation environment
+Training lock: closed
+Next step: define TwinProfile, TwinQualificationSpec, and TwinQualificationReport with a simulation-only example tied to the new dependency lock
 ```

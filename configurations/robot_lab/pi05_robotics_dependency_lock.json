@@ -1,0 +1,225 @@
+{
+  "dependencies": {
+    "lelab_runtime": {
+      "active_urdf": {
+        "path": "external/leLab/frontend/public/so-101-urdf/urdf/so101_new_calib.urdf",
+        "sha256": "443d38d756e01bac7d3455b24430047ddc6427105e0d3454b2003116f5f67236",
+        "size_bytes": 16309
+      },
+      "git": {
+        "is_dirty": true,
+        "path": "external/leLab",
+        "remote_origin_url": "https://github.com/huggingface/leLab.git",
+        "revision": "def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da",
+        "tracked_changes": [],
+        "untracked_file_evidence": [
+          {
+            "path": "external/leLab/uv.lock",
+            "sha256": "41736ab906b2acbe7d5fc1ae8e02a9a8ca6aa0632a51bd366dce08de0614d862",
+            "size_bytes": 584692
+          }
+        ],
+        "untracked_files": [
+          "uv.lock"
+        ],
+        "untracked_tree_sha256": "08bf4f906f77de957b27e172805c65158f19f2fada41bb5dcb1cc2100088d399"
+      },
+      "license_id": "Apache-2.0",
+      "package": {
+        "license_file": {
+          "path": "external/leLab/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size_bytes": 11358
+        },
+        "name": "LeLab",
+        "pyproject": {
+          "path": "external/leLab/pyproject.toml",
+          "sha256": "41af88b0edc1256c5f77c3d0ab88d1c3d4da190a4cb098c5bb3bcb1924366c1a",
+          "size_bytes": 3386
+        },
+        "version": "0.1.0"
+      },
+      "repository_url": "https://github.com/huggingface/leLab.git",
+      "role": "active_runtime_entrypoint",
+      "runtime_lerobot_dependency": {
+        "dependency": "lerobot[core_scripts,feetech,training] @ git+https://github.com/huggingface/lerobot.git@v0.6.0",
+        "repository_url": "https://github.com/huggingface/lerobot.git",
+        "revision": "v0.6.0"
+      }
+    },
+    "local_lerobot_checkout": {
+      "git": {
+        "is_dirty": true,
+        "path": "external/lerobot",
+        "remote_origin_url": "https://github.com/huggingface/lerobot.git",
+        "revision": "e40b58a8dfa9e7b86918c374791599d070518d11",
+        "tracked_changes": [
+          "src/lerobot/policies/pi05/modeling_pi05.py",
+          "src/lerobot/scripts/lerobot_train.py"
+        ],
+        "tracked_diff_sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+        "untracked_files": []
+      },
+      "license_id": "Apache-2.0",
+      "package": {
+        "license_file": {
+          "path": "external/lerobot/LICENSE",
+          "sha256": "0583375a0ec642ec79c447781f34322b0cfa66baff31258214d040f1f6d86d7c",
+          "size_bytes": 27627
+        },
+        "name": "lerobot",
+        "pyproject": {
+          "path": "external/lerobot/pyproject.toml",
+          "sha256": "d9e8960c33b69f963af3e7753ef05b902385c5f632444a73a10fd52fbc79851c",
+          "size_bytes": 21775
+        },
+        "version": "0.6.1"
+      },
+      "relevant_sources": {
+        "files": [
+          {
+            "path": "external/lerobot/src/lerobot/policies/pi05/configuration_pi05.py",
+            "sha256": "a8b80f54ffe98993529d8013b1f8ddde4289a71b5c6a5e41d7346ac7622da6a6",
+            "size_bytes": 6885
+          },
+          {
+            "path": "external/lerobot/src/lerobot/policies/pi05/modeling_pi05.py",
+            "sha256": "b05b6afe70a4a09f2eb610827b9ae09e8b08e43cd748d435e47879344e3fa619",
+            "size_bytes": 54155
+          },
+          {
+            "path": "external/lerobot/src/lerobot/policies/pi05/processor_pi05.py",
+            "sha256": "2e6e66bccea03ae3810667d1806386589a70f440abe4e21e24bf38333c788066",
+            "size_bytes": 7049
+          },
+          {
+            "path": "external/lerobot/src/lerobot/processor/relative_action_processor.py",
+            "sha256": "37f03152a430066bed5630d4c86fd28a0482a9fa7e798218ab9d790a05c069bc",
+            "size_bytes": 8625
+          },
+          {
+            "path": "external/lerobot/src/lerobot/scripts/lerobot_train.py",
+            "sha256": "aa04a56165fd001d1b7ae2a63729ae201b95aa8d4c024a20fecf35cb98587614",
+            "size_bytes": 37839
+          }
+        ],
+        "relative_paths": [
+          "src/lerobot/policies/pi05/configuration_pi05.py",
+          "src/lerobot/policies/pi05/modeling_pi05.py",
+          "src/lerobot/policies/pi05/processor_pi05.py",
+          "src/lerobot/processor/relative_action_processor.py",
+          "src/lerobot/scripts/lerobot_train.py"
+        ],
+        "root": "external/lerobot",
+        "tree_sha256": "54bdc2f215fe744903f1a8d8a1df5042b839c2c52c13bd9b159798d8ea34b21a"
+      },
+      "repository_url": "https://github.com/huggingface/lerobot",
+      "resolution": "split_runtime_unresolved",
+      "resolution_reason": "LeLab pins lerobot by tag for runtime, but this repo also carries a separate local lerobot checkout with uncommitted PI0.5 changes.",
+      "role": "local_patch_checkout"
+    },
+    "menagerie_robotstudio_so101": {
+      "license_id": "Apache-2.0",
+      "model_path": "robotstudio_so101",
+      "repository_url": "https://github.com/google-deepmind/mujoco_menagerie",
+      "resolution": "unresolved_remote_reference",
+      "resolution_reason": "SceneSmith has not vendored or pinned a local MuJoCo Menagerie checkout yet; this records the intended upstream structural lineage without switching runtime inputs in place.",
+      "revision": null,
+      "role": "proposed_structural_lineage"
+    },
+    "openpi_semantic_reference": {
+      "license_id": "Apache-2.0",
+      "local_reference_files": [
+        {
+          "path": "external/lerobot/docs/source/policy_pi05_README.md",
+          "sha256": "b049a73d6fc826357d051b1ae5f98affa85dc03ae06ca94400084af069dc4e5c",
+          "size_bytes": 4672
+        },
+        {
+          "path": "external/lerobot/src/lerobot/policies/pi05/modeling_pi05.py",
+          "sha256": "b05b6afe70a4a09f2eb610827b9ae09e8b08e43cd748d435e47879344e3fa619",
+          "size_bytes": 54155
+        },
+        {
+          "path": "external/lerobot/src/lerobot/policies/pi05/processor_pi05.py",
+          "sha256": "2e6e66bccea03ae3810667d1806386589a70f440abe4e21e24bf38333c788066",
+          "size_bytes": 7049
+        },
+        {
+          "path": "external/lerobot/tests/policies/pi0_pi05/utils/openpi_parity.py",
+          "sha256": "3fb409307715db9c046f8140071487f0ded902add0008702911a8b915f524920",
+          "size_bytes": 10828
+        }
+      ],
+      "repository_url": "https://github.com/Physical-Intelligence/openpi",
+      "resolution": "unresolved_remote_reference",
+      "resolution_reason": "No OpenPI checkout is vendored or pinned in this repo; SceneSmith currently references OpenPI semantics through LeRobot PI0.5 ports and parity fixtures.",
+      "revision": null,
+      "role": "semantic_reference_only"
+    },
+    "robotstudio_so101": {
+      "active_mjcf": {
+        "path": "external/SO-ARM100/Simulation/SO101/so101_new_calib.xml",
+        "sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+        "size_bytes": 13921
+      },
+      "git": {
+        "is_dirty": false,
+        "path": "external/SO-ARM100",
+        "remote_origin_url": "https://github.com/TheRobotStudio/SO-ARM100.git",
+        "revision": "fda892cba81032c46c40976a48c9ceadbf40a9ca",
+        "tracked_changes": [],
+        "untracked_files": []
+      },
+      "license_file": {
+        "path": "external/SO-ARM100/LICENSE",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+        "size_bytes": 11357
+      },
+      "license_id": "Apache-2.0",
+      "repository_url": "https://github.com/TheRobotStudio/SO-ARM100.git",
+      "role": "active_structural_model"
+    }
+  },
+  "identity_sha256": "1ef4aa35e4748e89e8f877c3c6ab2d05e89f5fc9e1beae9ccfa6b8adf47421fc",
+  "repo_root": "/Users/kelly/Documents/Codex/2026-07-06/download-the-code-from-here-install/scenesmith",
+  "runtime_contract": {
+    "joint_names": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "robot_model": "SO-101",
+    "source_mjcf": {
+      "path": "external/SO-ARM100/Simulation/SO101/so101_new_calib.xml",
+      "sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+      "size_bytes": 13921
+    },
+    "source_urdf": {
+      "path": "external/leLab/frontend/public/so-101-urdf/urdf/so101_new_calib.urdf",
+      "sha256": "443d38d756e01bac7d3455b24430047ddc6427105e0d3454b2003116f5f67236",
+      "size_bytes": 16309
+    }
+  },
+  "schema_version": "scenesmith.robotics_dependency_lock.v1",
+  "spec_sources": [
+    {
+      "path": "scenesmith/robot_lab/spec.py",
+      "sha256": "e686005c2e2f1f71acdfcc9b3c840cc32fe017e0b1fc159a07fa2850c7f96c0e",
+      "size_bytes": 9803
+    },
+    {
+      "path": "scenesmith/robot_lab/so101_coordinates.py",
+      "sha256": "9382e02106741906380eed572959f991382c285cedd08c8d652d0a3375cf843a",
+      "size_bytes": 3929
+    },
+    {
+      "path": "scenesmith/robot_lab/mujoco_export.py",
+      "sha256": "dd77bb7e9a972b2b87a9cb06814652b210a21cdf0fe57ad03c86775f17b5ae56",
+      "size_bytes": 12037
+    }
+  ]
+}
