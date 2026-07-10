@@ -134,7 +134,7 @@ Next step: rotating development seeds and locked one-use audit seeds
 Status: T12.3 verified; T12.4 in_progress
 Completed: disjoint development/audit pools, rotating reservations, audit locks, dev no-promotion
 Evidence: 62 tests; CLI rejects development-window reuse and one-use audit reuse
-Commit: pending T12.3 checkpoint
+Commit: 066d4ba T12.3
 Remaining: provenance and evaluation runtime optimization
 Blockers: none
 Next step: pin runtime/preprocessing identity and strengthen resume hashes
