@@ -17,14 +17,22 @@ from urllib.request import urlopen
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scenesmith.robot_lab.so101_coordinates import (
+    BODY_JOINT_OFFSETS_DEG,
+    BODY_JOINT_SIGNS,
+)
+
+
 DEFAULT_CAMERA_MAP = (
     '{"observation.images.base_0_rgb":"overhead",'
     '"observation.images.left_wrist_0_rgb":"wrist",'
     '"observation.images.right_wrist_0_rgb":"empty"}'
 )
 DEFAULT_HOME = "[0.050438,-1.697719,1.549157,1.059675,-0.053182,1.6]"
-DEFAULT_SIGNS = "[1,1,1,1,1]"
-DEFAULT_OFFSETS = "[0,-105.85,89.58,0,0]"
+DEFAULT_SIGNS = json.dumps(BODY_JOINT_SIGNS)
+DEFAULT_OFFSETS = json.dumps(BODY_JOINT_OFFSETS_DEG)
 
 
 def main() -> int:

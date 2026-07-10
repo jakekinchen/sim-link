@@ -6,19 +6,19 @@ Updated: 2026-07-10
 
 ```text
 Current state: research complete; unsafe production recipe stopped
-Completed: MPS pipeline bootstrap, save/reload, evaluation, rejection, research audit
-Evidence: cycle-000-bootstrap-mps complete; cycle-001-mps interrupted
+Completed: pipeline bootstrap, research audit, goal mandate, canonical coordinate contract
+Evidence: cycle manifests; 28 passing intervention tests
 Remaining: M10-M15 below
 Blockers: none for local P0 implementation
-Next step: T10.1 canonical coordinate transform
+Next step: T10.2 accepted normalization contract
 ```
 
 ## Tasks
 
 | ID | Milestone | State | Task | Verification / Evidence |
 |---|---|---|---|---|
-| T10.1 | M10 | in_progress | Centralize the SO-101 MuJoCo/LeRobot transform and metadata | Round-trip and semantic-range tests |
-| T10.2 | M10 | pending | Preserve accepted normalization or version an explicit migration | Hash equality/equivalence test |
+| T10.1 | M10 | verified | Centralize the SO-101 MuJoCo/LeRobot transform and metadata | 28 intervention tests pass; canonical v1 contract |
+| T10.2 | M10 | in_progress | Preserve accepted normalization or version an explicit migration | Hash equality/equivalence test |
 | T10.3 | M10 | pending | Split correction runs at temporal/source boundaries | No 50-step chunk crosses a gap |
 | T10.4 | M10 | pending | Persist the exact per-frame PI0.5 task prompt | Exported task counts match source phases |
 | T10.5 | M10 | pending | Harden dataset merge compatibility and regenerate corrections | Merge refuses incompatible contracts; regenerated stats pass |
@@ -48,10 +48,10 @@ Next step: T10.1 canonical coordinate transform
 
 ```text
 Status: in_progress
-Completed: multi-lens research, repo audit, proof-boundary audit, task decomposition
-Evidence: bootstrap manifest, interrupted production manifest, source/data statistics
-Commit: pending
-Remaining: implement and verify T10.1-T10.5
+Completed: goal-loop mandate and T10.1 canonical coordinate contract
+Evidence: 28 intervention tests; shared transform used by expert, exporter, and server
+Commit: 56003aa mandate; T10.1 implementation pending commit
+Remaining: implement and verify T10.2-T10.5
 Blockers: none
-Next step: replace duplicated coordinate conversion with one canonical module
+Next step: pin or explicitly version normalization during incremental training
 ```

@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
 import os
 import sys
 import threading
@@ -21,6 +20,16 @@ from PIL import Image
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scenesmith.robot_lab.so101_coordinates import (
+    BODY_JOINT_OFFSETS_DEG,
+    BODY_JOINT_SIGNS,
+    lerobot_to_mujoco,
+    mujoco_to_lerobot,
+)
+
+
 DEFAULT_POLICY = (
     REPO_ROOT
     / "outputs"
@@ -32,9 +41,8 @@ DEFAULT_POLICY = (
     / "000001"
     / "pretrained_model"
 )
-GRIPPER_RANGE_RAD = (-0.17453, 1.74533)
-DEFAULT_BODY_JOINT_SIGNS = (1.0, -1.0, 1.0, 1.0, 1.0)
-DEFAULT_BODY_JOINT_OFFSETS_DEG = (0.0, 0.0, 0.0, 0.0, 0.0)
+DEFAULT_BODY_JOINT_SIGNS = BODY_JOINT_SIGNS
+DEFAULT_BODY_JOINT_OFFSETS_DEG = BODY_JOINT_OFFSETS_DEG
 
 
 def main() -> int:
@@ -532,22 +540,7 @@ def _mujoco_state_to_lerobot(
     signs: list[float] | tuple[float, ...] = DEFAULT_BODY_JOINT_SIGNS,
     offsets_deg: list[float] | tuple[float, ...] = DEFAULT_BODY_JOINT_OFFSETS_DEG,
 ) -> np.ndarray:
-    if len(values) < 6:
-        raise ValueError("MuJoCo state must contain six joints")
-    low, high = GRIPPER_RANGE_RAD
-    gripper = 100.0 * (float(values[5]) - low) / (high - low)
-    body_degrees = [math.degrees(float(value)) for value in values[:5]]
-    calibrated = [
-        (value - offset) / sign
-        for value, sign, offset in zip(body_degrees, signs, offsets_deg, strict=True)
-    ]
-    return np.asarray(
-        [
-            *calibrated,
-            min(100.0, max(0.0, gripper)),
-        ],
-        dtype=np.float32,
-    )
+    return np.asarray(mujoco_to_lerobot(values, signs, offsets_deg), dtype=np.float32)
 
 
 def _lerobot_action_to_mujoco(
@@ -555,26 +548,7 @@ def _lerobot_action_to_mujoco(
     signs: list[float] | tuple[float, ...] = DEFAULT_BODY_JOINT_SIGNS,
     offsets_deg: list[float] | tuple[float, ...] = DEFAULT_BODY_JOINT_OFFSETS_DEG,
 ) -> list[float]:
-    if len(values) < 6:
-        raise ValueError("Policy action must contain at least six values")
-    limits = (
-        (-1.91986, 1.91986),
-        (-1.74533, 1.74533),
-        (-1.69, 1.69),
-        (-1.65806, 1.65806),
-        (-2.74385, 2.84121),
-    )
-    body_degrees = [
-        float(value) * sign + offset
-        for value, sign, offset in zip(values[:5], signs, offsets_deg, strict=True)
-    ]
-    body = [
-        round(min(high, max(low, math.radians(value))), 6)
-        for value, (low, high) in zip(body_degrees, limits, strict=True)
-    ]
-    low, high = GRIPPER_RANGE_RAD
-    percent = min(100.0, max(0.0, float(values[5])))
-    return [*body, round(low + (high - low) * percent / 100.0, 6)]
+    return lerobot_to_mujoco(values, signs, offsets_deg, round_digits=6)
 
 
 def _tensor_to_float_list(value: Any) -> list[float]:

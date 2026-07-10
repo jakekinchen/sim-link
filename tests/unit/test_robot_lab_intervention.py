@@ -47,6 +47,14 @@ from scenesmith.robot_lab.leader_arm_bridge import (
     _studio_payload_to_six_radians,
 )
 from scenesmith.robot_lab.policy_action_source import HttpPolicyActionSource
+from scenesmith.robot_lab.so101_coordinates import (
+    BODY_JOINT_OFFSETS_DEG,
+    BODY_JOINT_SIGNS,
+    COORDINATE_SCHEMA_VERSION,
+    coordinate_contract,
+    lerobot_to_mujoco,
+    mujoco_to_lerobot,
+)
 from scripts.robot_lab.local_policy_action_server import (
     _camera_role_for_feature_key,
     _has_cached_adapter_config,
@@ -494,6 +502,22 @@ class LocalPI05AdapterTests(unittest.TestCase):
         raw = _mujoco_state_to_lerobot(mujoco, signs, offsets)
         custom_round_trip = _lerobot_action_to_mujoco(raw.tolist(), signs, offsets)
         np.testing.assert_allclose(custom_round_trip, mujoco, atol=1e-6)
+
+        canonical = mujoco_to_lerobot(mujoco)
+        np.testing.assert_allclose(canonical, calibrated, atol=1e-6)
+        np.testing.assert_allclose(lerobot_to_mujoco(canonical), mujoco, atol=1e-6)
+
+    def test_so101_coordinate_contract_is_canonical_and_versioned(self):
+        contract = coordinate_contract()
+
+        self.assertEqual(contract["schema_version"], COORDINATE_SCHEMA_VERSION)
+        self.assertEqual(contract["body_joint_signs"], list(BODY_JOINT_SIGNS))
+        self.assertEqual(contract["body_joint_offsets_deg"], list(BODY_JOINT_OFFSETS_DEG))
+        home = mujoco_to_lerobot(
+            [0.050438, -1.697719, 1.549157, 1.059675, -0.053182, 1.6]
+        )
+        self.assertGreater(home[1], 0.0)
+        self.assertLess(home[2], 0.0)
 
     def test_saved_normalizer_controls_raw_state_width(self):
         tensor = type("Tensor", (), {"numel": lambda self: 6})()

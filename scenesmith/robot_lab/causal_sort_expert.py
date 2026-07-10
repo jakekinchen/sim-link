@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import math
 import random
 
 from dataclasses import dataclass
@@ -12,6 +11,12 @@ from typing import Any, Callable
 import numpy as np
 
 from scenesmith.robot_lab.scoring import score_cube_sort
+from scenesmith.robot_lab.so101_coordinates import (
+    BODY_JOINT_OFFSETS_DEG,
+    BODY_JOINT_SIGNS,
+    GRIPPER_RANGE_RAD,
+    mujoco_to_lerobot,
+)
 from scenesmith.robot_lab.spec import RobotLabScene, RobotLabTray
 
 
@@ -24,9 +29,6 @@ JOINT_NAMES = (
     "gripper.pos",
 )
 TASK = "Sort each colored block onto the plate of the matching color."
-GRIPPER_RANGE_RAD = (-0.17453, 1.74533)
-BODY_JOINT_SIGNS = (1.0, 1.0, 1.0, 1.0, 1.0)
-BODY_JOINT_OFFSETS_DEG = (0.0, -105.85, 89.58, 0.0, 0.0)
 SIMULATION_HOME = (0.050438, -1.697719, 1.549157, 1.059675, -0.053182, 1.6)
 
 
@@ -505,19 +507,4 @@ class CausalSortExpert:
 
     @staticmethod
     def _mujoco_to_lerobot(values: np.ndarray) -> list[float]:
-        body_degrees = [math.degrees(float(value)) for value in values[:5]]
-        calibrated = [
-            (value - offset) / sign
-            for value, sign, offset in zip(
-                body_degrees,
-                BODY_JOINT_SIGNS,
-                BODY_JOINT_OFFSETS_DEG,
-                strict=True,
-            )
-        ]
-        low, high = GRIPPER_RANGE_RAD
-        gripper = 100.0 * (float(values[5]) - low) / (high - low)
-        return [
-            *[round(value, 6) for value in calibrated],
-            round(min(100.0, max(0.0, gripper)), 6),
-        ]
+        return mujoco_to_lerobot(values, round_digits=6)

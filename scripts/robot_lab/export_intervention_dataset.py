@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import math
 import shutil
 import sys
 
@@ -25,6 +24,7 @@ from scenesmith.robot_lab.autolearn import (
     select_training_frames,
     validate_dagger_episode_scope,
 )
+from scenesmith.robot_lab.so101_coordinates import coordinate_contract, mujoco_to_lerobot
 
 
 PI05_IMAGE_KEYS = (
@@ -45,9 +45,6 @@ JOINT_NAMES = (
     "wrist_roll",
     "gripper",
 )
-GRIPPER_RANGE_RAD = (-0.17453, 1.74533)
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--episode-summary", type=Path, action="append", default=[])
@@ -137,12 +134,12 @@ def main() -> int:
         for frame in frames:
             images, sources = _load_frame_images(episode_dir, frame, args.image_size)
             image_hashes.update(_sha256(Path(path)) for path in sources.values())
-            state6 = _mujoco_to_lerobot(_control6(frame["observation"]["state"]))
-            executed6 = _mujoco_to_lerobot(_control6(frame["executed_action"]))
-            policy6 = _mujoco_to_lerobot(_control6(frame["policy_action"]))
+            state6 = mujoco_to_lerobot(_control6(frame["observation"]["state"]))
+            executed6 = mujoco_to_lerobot(_control6(frame["executed_action"]))
+            policy6 = mujoco_to_lerobot(_control6(frame["policy_action"]))
             human_raw = frame.get("human_action")
             human6 = (
-                _mujoco_to_lerobot(_control6(human_raw))
+                mujoco_to_lerobot(_control6(human_raw))
                 if human_raw is not None
                 else [0.0] * 6
             )
@@ -254,6 +251,7 @@ def main() -> int:
         "allow_scripted_harness": args.allow_scripted_harness,
         "frame_selection": args.frame_selection,
         "dataset_schema": args.dataset_schema,
+        "coordinate_contract": coordinate_contract(),
         "episodes": episode_reports,
     }
 
@@ -410,13 +408,6 @@ def _control6(value: Any) -> list[float]:
     if not isinstance(value, list) or len(value) < 6:
         raise ValueError(f"Expected six-value SO-101 control, got {value!r}")
     return [float(item) for item in value[:6]]
-
-
-def _mujoco_to_lerobot(control: list[float]) -> list[float]:
-    body = [math.degrees(value) for value in control[:5]]
-    low, high = GRIPPER_RANGE_RAD
-    gripper_percent = 100.0 * (control[5] - low) / (high - low)
-    return [*body, min(100.0, max(0.0, gripper_percent))]
 
 
 def _pad32(values: list[float]) -> np.ndarray:
