@@ -9,8 +9,8 @@ current_task: T16.3 structural reconciliation against pinned Menagerie
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified
 evidence: twin schemas bc5187c; truth correction ae6fe04 removes invented measurements; 94 focused tests pass
 remaining: M16-M19 prerequisites, then Gates C-D and closeout
-blockers: physical M19 work requires separate read and motion authority; offline work is unblocked
-next_step: diff the active Robot Studio runtime against pinned Menagerie structural sources without changing runtime inputs
+blockers: local Menagerie `robotstudio_so101` structural sources are not present in repo state, so T16.3 cannot produce the required real structural diff artifact; physical M19 work still requires separate read and motion authority
+next_step: vendor or otherwise track the pinned Menagerie `robotstudio_so101` XML sources in repo state, then rerun T16.3 diff generation without changing runtime inputs
 ```
 
 ## Rules
@@ -31,7 +31,7 @@ next_step: diff the active Robot Studio runtime against pinned Menagerie structu
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
 | T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
 | T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
-| T16.3 | in_progress | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | Machine structural diff of inertials, limits, contacts, camera, gripper, actuator, backlash |
+| T16.3 | blocked | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | Blocked: pinned Menagerie XML sources are hash-pinned in the dependency lock but not present in repo state for machine diff generation |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
 | T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
 
@@ -224,4 +224,18 @@ Remaining: Menagerie vs Robot Studio structural diff, measured inertial intake, 
 Blockers: none for offline work
 Training lock: closed
 Next step: reconcile the active Robot Studio SO-101 runtime against pinned Menagerie with a machine-readable structural diff and explicit no-switch semantics
+```
+
+### 2026-07-10 - T16.3 blocked on missing Menagerie sources
+
+```text
+Current task: T16.3
+State: blocked
+Completed: confirmed the active runtime MJCF is present locally and that the dependency lock only records Menagerie `robotstudio_so101` as an exact remote pin plus reference-file hashes
+Evidence: configurations/robot_lab/pi05_robotics_dependency_lock.json pins `robotstudio_so101/so101.xml` and `robotstudio_so101/scene.xml`; repo search finds no local `robotstudio_so101` directory or Menagerie XML sources to diff against
+Commit: pending
+Remaining: vendor or otherwise track the pinned Menagerie structural XML sources, then generate the machine-readable diff artifact
+Blockers: brief 011 requires a CLI that resolves both runtime and Menagerie sources from repo state, which is impossible while only remote hashes are tracked locally
+Training lock: closed
+Next step: add the pinned Menagerie `robotstudio_so101` source files to repo state under a tracked path and resume T16.3 without switching the active runtime inputs
 ```
