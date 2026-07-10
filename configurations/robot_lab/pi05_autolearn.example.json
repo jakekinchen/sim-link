@@ -78,7 +78,8 @@
         "--base-root", "outputs/robot_lab/so101_desk_cube_sort/datasets/causal_pi05_tail_v2_stage_tasks/dataset",
         "--corrections-root", "outputs/robot_lab/autolearn/{cycle_id}/dagger-dataset",
         "--output-root", "outputs/robot_lab/autolearn/{cycle_id}/training-dataset",
-        "--repo-id", "local/pi05-autolearn-cycle-001-mps"
+        "--repo-id", "local/pi05-autolearn-cycle-001-mps",
+        "--normalization-root", "outputs/robot_lab/so101_desk_cube_sort/datasets/causal_pi05_tail_v2_stage_tasks/dataset"
       ],
       "timeout_s": 7200,
       "required_artifacts": [
@@ -133,10 +134,11 @@
     {
       "name": "finalize_candidate",
       "argv": [
-        "./.mujoco_venv/bin/python",
+        "external/leLab/.venv/bin/python",
         "scripts/robot_lab/finalize_pi05_checkpoint.py",
         "--checkpoint-root", "{candidate_model}",
-        "--source-config", "{accepted_model}/config.json"
+        "--source-config", "{accepted_model}/config.json",
+        "--normalization-stats", "outputs/robot_lab/autolearn/{cycle_id}/training-dataset/meta/stats.json"
       ],
       "timeout_s": 60,
       "required_artifacts": [

@@ -22,7 +22,11 @@ from scenesmith.robot_lab.autolearn_cycle import (
     StageResult,
 )
 from scripts.robot_lab.export_intervention_dataset import _features
-from scripts.robot_lab.merge_pi05_training_datasets import _validate_compatible
+from scripts.robot_lab.finalize_pi05_checkpoint import _compare_normalization
+from scripts.robot_lab.merge_pi05_training_datasets import (
+    _pin_normalization_stats,
+    _validate_compatible,
+)
 
 
 def _frame(source: str, *, intervention: bool = False, motion: str = "contact_physics"):
@@ -122,6 +126,46 @@ class DaggerFrameTests(unittest.TestCase):
         corrections["action"]["shape"] = (32,)
         with self.assertRaisesRegex(ValueError, "definitions differ"):
             _validate_compatible({"features": base}, {"features": corrections})
+
+    def test_merge_pins_normalization_stats_from_accepted_base(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source" / "meta"
+            output = root / "output" / "meta"
+            source.mkdir(parents=True)
+            output.mkdir(parents=True)
+            expected = {
+                "action": {"mean": [1.0], "std": [2.0]},
+                "observation.state": {"mean": [3.0], "std": [4.0]},
+            }
+            (source / "stats.json").write_text(json.dumps(expected), encoding="utf-8")
+            (output / "stats.json").write_text(json.dumps({"action": {}}), encoding="utf-8")
+
+            contract = _pin_normalization_stats(root / "source", root / "output")
+
+            self.assertEqual(contract["mode"], "pinned")
+            self.assertEqual(
+                json.loads((output / "stats.json").read_text(encoding="utf-8")), expected
+            )
+            self.assertEqual(
+                contract["source_stats_sha256"], contract["output_stats_sha256"]
+            )
+
+    def test_checkpoint_normalization_comparison_rejects_drift(self):
+        expected = {
+            "action": {"mean": [1.0, 2.0], "std": [3.0, 4.0]},
+            "observation.state": {"mean": [5.0], "std": [6.0]},
+        }
+        actual = {
+            "action.mean": [1.0, 2.0],
+            "action.std": [3.0, 4.0],
+            "observation.state.mean": [5.0],
+            "observation.state.std": [6.0],
+        }
+        _compare_normalization(expected, actual, ("action", "observation.state"))
+        actual["action.mean"][1] = 20.0
+        with self.assertRaisesRegex(ValueError, "differs for action.mean"):
+            _compare_normalization(expected, actual, ("action",))
 
 
 class PromotionTests(unittest.TestCase):

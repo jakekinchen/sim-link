@@ -10,7 +10,7 @@ Completed: pipeline bootstrap, research audit, goal mandate, canonical coordinat
 Evidence: cycle manifests; 28 passing intervention tests
 Remaining: M10-M15 below
 Blockers: none for local P0 implementation
-Next step: T10.2 accepted normalization contract
+Next step: T10.3 temporal/source segmentation
 ```
 
 ## Tasks
@@ -18,8 +18,8 @@ Next step: T10.2 accepted normalization contract
 | ID | Milestone | State | Task | Verification / Evidence |
 |---|---|---|---|---|
 | T10.1 | M10 | verified | Centralize the SO-101 MuJoCo/LeRobot transform and metadata | 28 intervention tests pass; canonical v1 contract |
-| T10.2 | M10 | in_progress | Preserve accepted normalization or version an explicit migration | Hash equality/equivalence test |
-| T10.3 | M10 | pending | Split correction runs at temporal/source boundaries | No 50-step chunk crosses a gap |
+| T10.2 | M10 | verified | Preserve accepted normalization or version an explicit migration | 18 tests; V10 processor equality; pinned stats hash |
+| T10.3 | M10 | in_progress | Split correction runs at temporal/source boundaries | No 50-step chunk crosses a gap |
 | T10.4 | M10 | pending | Persist the exact per-frame PI0.5 task prompt | Exported task counts match source phases |
 | T10.5 | M10 | pending | Harden dataset merge compatibility and regenerate corrections | Merge refuses incompatible contracts; regenerated stats pass |
 | T11.1 | M11 | pending | Add source- and phase-balanced sampling | Logged sample counts match configured ratios |
@@ -50,8 +50,8 @@ Next step: T10.2 accepted normalization contract
 Status: in_progress
 Completed: goal-loop mandate and T10.1 canonical coordinate contract
 Evidence: 28 intervention tests; shared transform used by expert, exporter, and server
-Commit: 56003aa mandate; T10.1 implementation pending commit
-Remaining: implement and verify T10.2-T10.5
+Commit: 56003aa mandate; 4cd49ce T10.1
+Remaining: implement and verify T10.3-T10.5
 Blockers: none
-Next step: pin or explicitly version normalization during incremental training
+Next step: preserve correction temporal continuity for 50-action chunks
 ```

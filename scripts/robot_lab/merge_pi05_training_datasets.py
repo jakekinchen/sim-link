@@ -29,6 +29,14 @@ def main() -> int:
     parser.add_argument("--corrections-root", type=Path, required=True)
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--repo-id", required=True)
+    parser.add_argument(
+        "--normalization-root",
+        type=Path,
+        help=(
+            "Dataset whose meta/stats.json remains the fixed normalization contract. "
+            "Defaults to --base-root for incremental same-embodiment training."
+        ),
+    )
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
 
@@ -63,6 +71,10 @@ def main() -> int:
             f"got {merged.num_episodes} episodes/{merged.num_frames} frames, "
             f"expected {expected_episodes}/{expected_frames}"
         )
+    normalization = _pin_normalization_stats(
+        args.normalization_root or args.base_root,
+        args.output_root,
+    )
 
     summary = {
         "schema_version": "scenesmith.pi05_training_merge.v1",
@@ -76,6 +88,7 @@ def main() -> int:
         "total_episodes": int(output_info["total_episodes"]),
         "total_frames": int(output_info["total_frames"]),
         "features": sorted(output_info["features"]),
+        "normalization_contract": normalization,
     }
     summary_path = args.output_root / "scenesmith_merge_summary.json"
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -124,6 +137,25 @@ def _source_evidence(root: Path, info: dict[str, Any]) -> dict[str, Any]:
         "info_sha256": hashlib.sha256(info_path.read_bytes()).hexdigest(),
         "total_episodes": int(info["total_episodes"]),
         "total_frames": int(info["total_frames"]),
+    }
+
+
+def _pin_normalization_stats(source_root: Path, output_root: Path) -> dict[str, Any]:
+    source = source_root / "meta" / "stats.json"
+    destination = output_root / "meta" / "stats.json"
+    if not source.is_file():
+        raise FileNotFoundError(f"Missing normalization statistics: {source}")
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or not {"action", "observation.state"}.issubset(payload):
+        raise ValueError(f"Normalization statistics lack action/state entries: {source}")
+    temporary = destination.with_suffix(destination.suffix + ".tmp")
+    temporary.write_bytes(source.read_bytes())
+    temporary.replace(destination)
+    return {
+        "mode": "pinned",
+        "source_root": str(source_root),
+        "source_stats_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+        "output_stats_sha256": hashlib.sha256(destination.read_bytes()).hexdigest(),
     }
 
 
