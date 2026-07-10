@@ -21,9 +21,10 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Correct the structural twin diff so it binds the twin profile and compares
-canonical/effective physics semantics rather than raw XML spelling. Do not open
-hardware or begin measured-mass compilation until this proof is re-accepted.
+Normalize equivalent quaternions and compare effective solver defaults in the
+structural twin diff so T16.3 advances on physics semantics rather than raw XML
+spelling. Do not open hardware or begin measured-mass compilation until this
+proof is re-accepted.
 
 ## Durable State
 
