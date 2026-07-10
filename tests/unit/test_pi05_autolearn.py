@@ -27,8 +27,15 @@ from scenesmith.robot_lab.balanced_replay import (
     build_replay_plan,
 )
 from scenesmith.robot_lab.pi05_dataset_contract import (
+    DATASET_CONTRACT_FILENAME,
+    DATASET_CONTRACT_SCHEMA_VERSION,
     build_dataset_contract,
     validate_merge_contracts,
+)
+from scenesmith.robot_lab.replay_registry import (
+    load_replay_registry,
+    register_correction_dataset,
+    write_replay_registry,
 )
 from scenesmith.robot_lab.so101_coordinates import coordinate_contract
 from scripts.robot_lab.export_intervention_dataset import (
@@ -90,6 +97,74 @@ def _episode(
 
 
 class DaggerFrameTests(unittest.TestCase):
+    def test_replay_registry_retains_history_bounds_and_rejects_mutation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+
+            def correction(name: str, frames: int) -> Path:
+                dataset = root / name
+                (dataset / "meta").mkdir(parents=True)
+                (dataset / DATASET_CONTRACT_FILENAME).write_text(
+                    json.dumps(
+                        {
+                            "schema_version": DATASET_CONTRACT_SCHEMA_VERSION,
+                            "total_frames": frames,
+                        }
+                    )
+                )
+                (dataset / "meta/info.json").write_text(
+                    json.dumps({"total_frames": frames})
+                )
+                (dataset / "scenesmith_intervention_sidecar.jsonl").write_text(
+                    "".join(
+                        json.dumps(
+                            {
+                                "scene_id": name,
+                                "seed": frames,
+                                "frame_index": index,
+                            }
+                        )
+                        + "\n"
+                        for index in range(frames)
+                    )
+                )
+                return dataset
+
+            registry_path = root / "registry.json"
+            first = correction("first", 4)
+            second = correction("second", 5)
+            third = correction("third", 6)
+            registry = register_correction_dataset(
+                registry_path, first, cycle_id="cycle-1", max_sources=2, max_frames=11
+            )
+            write_replay_registry(registry_path, registry)
+            registry = register_correction_dataset(
+                registry_path, second, cycle_id="cycle-2", max_sources=2, max_frames=11
+            )
+            write_replay_registry(registry_path, registry)
+            self.assertEqual([item["cycle_id"] for item in registry["entries"]], ["cycle-1", "cycle-2"])
+
+            registry = register_correction_dataset(
+                registry_path, third, cycle_id="cycle-3", max_sources=2, max_frames=11
+            )
+            write_replay_registry(registry_path, registry)
+            self.assertEqual([item["cycle_id"] for item in registry["entries"]], ["cycle-2", "cycle-3"])
+            overlap = correction("overlap", 5)
+            (overlap / "scenesmith_intervention_sidecar.jsonl").write_text(
+                (second / "scenesmith_intervention_sidecar.jsonl").read_text()
+            )
+            with self.assertRaisesRegex(ValueError, "overlapping correction frames"):
+                register_correction_dataset(
+                    registry_path,
+                    overlap,
+                    cycle_id="cycle-4",
+                    max_sources=3,
+                    max_frames=20,
+                )
+            (second / "scenesmith_intervention_sidecar.jsonl").write_text("mutated\n")
+            with self.assertRaisesRegex(ValueError, "mutated for sidecar_sha256"):
+                load_replay_registry(registry_path, verify_files=True)
+
     def test_dagger_context_is_bounded_and_never_crosses_source_gaps(self):
         frames = []
         for index in [0, 1, 2, 3, 10, 11, 12, 13]:

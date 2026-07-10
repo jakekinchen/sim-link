@@ -20,6 +20,10 @@ from scenesmith.robot_lab.pi05_dataset_contract import (
     validate_merge_contracts,
     write_dataset_contract,
 )
+from scenesmith.robot_lab.replay_registry import (
+    SIDECAR_FILENAME,
+    load_replay_registry,
+)
 
 
 LEROBOT_SRC = REPO_ROOT / "external" / "lerobot" / "src"
@@ -34,7 +38,8 @@ REQUIRED_FEATURES = {
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base-root", type=Path, required=True)
-    parser.add_argument("--corrections-root", type=Path, required=True)
+    parser.add_argument("--corrections-root", type=Path, action="append", default=[])
+    parser.add_argument("--replay-registry", type=Path)
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--repo-id", required=True)
     parser.add_argument(
@@ -49,11 +54,22 @@ def main() -> int:
     args = parser.parse_args()
 
     base_info = _load_info(args.base_root)
-    correction_info = _load_info(args.corrections_root)
-    _validate_compatible(base_info, correction_info)
+    correction_roots = list(args.corrections_root)
+    registry = None
+    if args.replay_registry is not None:
+        if correction_roots:
+            parser.error("Use --corrections-root or --replay-registry, not both")
+        registry = load_replay_registry(args.replay_registry, verify_files=True)
+        correction_roots = [Path(entry["root"]) for entry in registry["entries"]]
+    if not correction_roots:
+        parser.error("At least one correction dataset is required")
+    correction_infos = [_load_info(root) for root in correction_roots]
+    for correction_info in correction_infos:
+        _validate_compatible(base_info, correction_info)
     base_contract = load_dataset_contract(args.base_root)
-    correction_contract = load_dataset_contract(args.corrections_root)
-    validate_merge_contracts(base_contract, correction_contract)
+    correction_contracts = [load_dataset_contract(root) for root in correction_roots]
+    for correction_contract in correction_contracts:
+        validate_merge_contracts(base_contract, correction_contract)
     if args.output_root.exists():
         if not args.overwrite:
             parser.error(f"{args.output_root} exists; pass --overwrite to replace it")
@@ -63,19 +79,29 @@ def main() -> int:
     from lerobot.datasets import LeRobotDataset, merge_datasets
 
     base_repo = "local/pi05-base"
-    correction_repo = "local/pi05-dagger-corrections"
     base = LeRobotDataset(base_repo, root=args.base_root, return_uint8=True)
-    corrections = LeRobotDataset(correction_repo, root=args.corrections_root, return_uint8=True)
+    corrections = [
+        LeRobotDataset(
+            f"local/pi05-dagger-corrections-{index}",
+            root=root,
+            return_uint8=True,
+        )
+        for index, root in enumerate(correction_roots)
+    ]
     merged = merge_datasets(
-        [base, corrections],
+        [base, *corrections],
         output_repo_id=args.repo_id,
         output_dir=args.output_root,
         concatenate_videos=False,
         concatenate_data=False,
     )
     output_info = _load_info(args.output_root)
-    expected_episodes = int(base_info["total_episodes"]) + int(correction_info["total_episodes"])
-    expected_frames = int(base_info["total_frames"]) + int(correction_info["total_frames"])
+    expected_episodes = int(base_info["total_episodes"]) + sum(
+        int(info["total_episodes"]) for info in correction_infos
+    )
+    expected_frames = int(base_info["total_frames"]) + sum(
+        int(info["total_frames"]) for info in correction_infos
+    )
     if merged.num_episodes != expected_episodes or merged.num_frames != expected_frames:
         raise RuntimeError(
             "Merged dataset count mismatch: "
@@ -90,6 +116,7 @@ def main() -> int:
         args.output_root,
         task_conditioning="frame_exact_task_mixture",
     )
+    replay_sidecar = _combine_correction_sidecars(correction_roots, args.output_root)
 
     summary = {
         "schema_version": "scenesmith.pi05_training_merge.v1",
@@ -98,7 +125,10 @@ def main() -> int:
         "output_root": str(args.output_root),
         "sources": [
             _source_evidence(args.base_root, base_info),
-            _source_evidence(args.corrections_root, correction_info),
+            *[
+                _source_evidence(root, info)
+                for root, info in zip(correction_roots, correction_infos, strict=True)
+            ],
         ],
         "total_episodes": int(output_info["total_episodes"]),
         "total_frames": int(output_info["total_frames"]),
@@ -106,9 +136,11 @@ def main() -> int:
         "normalization_contract": normalization,
         "dataset_contracts": {
             "base": base_contract,
-            "corrections": correction_contract,
+            "corrections": correction_contracts,
             "output": output_contract,
         },
+        "replay_registry": registry,
+        "correction_replay_sidecar": str(replay_sidecar),
     }
     summary_path = args.output_root / "scenesmith_merge_summary.json"
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -177,6 +209,23 @@ def _pin_normalization_stats(source_root: Path, output_root: Path) -> dict[str, 
         "source_stats_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "output_stats_sha256": hashlib.sha256(destination.read_bytes()).hexdigest(),
     }
+
+
+def _combine_correction_sidecars(roots: list[Path], output_root: Path) -> Path:
+    destination = output_root / "scenesmith_correction_replay_sidecar.jsonl"
+    with destination.open("w", encoding="utf-8") as stream:
+        for source_index, root in enumerate(roots):
+            path = root / SIDECAR_FILENAME
+            if not path.is_file():
+                raise FileNotFoundError(f"Missing correction sidecar: {path}")
+            for line in path.read_text(encoding="utf-8").splitlines():
+                if not line:
+                    continue
+                row = json.loads(line)
+                row["replay_source_index"] = source_index
+                row["replay_source_root"] = str(root)
+                stream.write(json.dumps(row, sort_keys=True) + "\n")
+    return destination
 
 
 if __name__ == "__main__":

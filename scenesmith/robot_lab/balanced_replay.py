@@ -30,10 +30,10 @@ def build_replay_plan(
     contract_path = dataset_root / "scenesmith_pi05_dataset_contract.json"
     merge = _read_json(merge_summary_path)
     sources = merge.get("sources") or []
-    if len(sources) != 2:
-        raise ValueError("Balanced PI0.5 replay requires exactly base and correction sources")
+    if len(sources) < 2:
+        raise ValueError("Balanced PI0.5 replay requires base and correction sources")
     base_frames = int(sources[0]["total_frames"])
-    correction_frames = int(sources[1]["total_frames"])
+    correction_frames = sum(int(source["total_frames"]) for source in sources[1:])
     if base_frames + correction_frames != int(merge["total_frames"]):
         raise ValueError("Merge source counts do not match merged frame count")
 

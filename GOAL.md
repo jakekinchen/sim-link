@@ -16,13 +16,13 @@ proof states must remain distinct.
 
 ## Current Milestone
 
-M11 - Balanced failure-focused replay
+M12 - Honest evaluation and provenance
 
 ## Current Slice
 
-Add a cumulative, bounded correction replay registry so accepted historical
-corrections are retained across cycles with hashes, budgets, and explicit
-sampling policy. Reject missing or mutated registered sources.
+Add stage-level reach, contact, grasp, lift, transport, release, and placement
+metrics so baseline/candidate comparisons expose partial competence rather than
+only terminal success. Keep proof modes and held-out evidence separate.
 
 ## Durable State
 

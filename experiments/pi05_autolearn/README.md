@@ -10,11 +10,13 @@ Each real cycle follows the same bounded sequence:
 1. evaluate the accepted checkpoint on fixed held-out seeds without task-space
    transfer or recovery;
 2. collect controller corrections on a disjoint randomized training seed set;
-3. export only expert corrections from policy-visited states;
-4. merge corrections with the original causal demonstrations;
-5. run a finite fine-tune;
-6. evaluate the candidate on the same held-out seeds; and
-7. promote only if the candidate meets the pure-policy gate without regression.
+3. export expert corrections plus bounded pre/post context from policy-visited states;
+4. register correction datasets by content hash under source/frame budgets;
+5. merge cumulative disjoint corrections with the original causal demonstrations;
+6. build a deterministic source/phase-balanced replay plan and audit realized draws;
+7. run a finite fine-tune;
+8. evaluate the candidate on the same held-out seeds; and
+9. promote only if the candidate meets the pure-policy gate without regression.
 
 The runner refuses dirty learning-loop paths before a real cycle. It commits the
 manifest after every stage and commits the accepted-checkpoint pointer only when

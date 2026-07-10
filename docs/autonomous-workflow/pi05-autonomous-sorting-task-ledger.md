@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ## Program Status
 
 ```text
-Current state: M10 trusted-data gate verified; M11 replay balancing active
-Completed: trusted data, balanced replay/context, pre-contact stall correction trigger
-Evidence: 56 tests; frame-333 MPS trigger and frame-388 contact; exact draw audit
-Remaining: M11-M15 below
+Current state: M10-M11 verified; M12 honest evaluation/provenance active
+Completed: trusted data and bounded failure-focused cumulative replay
+Evidence: 57 tests; content-addressed registry; overlap/mutation rejection; MPS smokes
+Remaining: M12-M15 below
 Blockers: none for local P0 implementation
-Next step: T11.4 cumulative bounded replay registry
+Next step: T12.1 stage-level evaluation metrics
 ```
 
 ## Tasks
@@ -25,8 +25,8 @@ Next step: T11.4 cumulative bounded replay registry
 | T11.1 | M11 | verified | Add source- and phase-balanced sampling | 53 tests; MPS smoke realized 3 base/3 correction and all three phases |
 | T11.2 | M11 | verified | Export pre-intervention and post-recovery context | Four contiguous episodes; 120 pre/90 post/660 expert frames |
 | T11.3 | M11 | verified | Add pre-contact progress/stall intervention triggers | 56 tests; MPS trigger at frame 333, contact at 388, no hardware |
-| T11.4 | M11 | in_progress | Add cumulative bounded replay registry | Prior accepted corrections retained or sampled by policy |
-| T12.1 | M12 | pending | Add stage-level reach/contact/grasp/lift/transport/release metrics | Metrics emitted for baseline and candidate |
+| T11.4 | M11 | verified | Add cumulative bounded replay registry | Bounded/hash-verified registry; duplicate trajectories rejected; merge canary passes |
+| T12.1 | M12 | in_progress | Add stage-level reach/contact/grasp/lift/transport/release metrics | Metrics emitted for baseline and candidate |
 | T12.2 | M12 | pending | Separate strict, contact-stabilized, assisted, and physical gates | Promotion tests reject proof-mode contamination |
 | T12.3 | M12 | pending | Add rotating development and locked audit seed registries | No seed overlap or routine audit reuse |
 | T12.4 | M12 | pending | Pin LeRobot/preprocessing/runtime and strengthen artifact hashes | Resume and merge verify full identities |
@@ -90,4 +90,16 @@ Commit: 6d9c2af T11.3
 Remaining: cumulative bounded replay registry
 Blockers: none
 Next step: retain accepted correction sources across cycles under a bounded manifest
+```
+
+### 2026-07-10 - M11 bounded cumulative replay
+
+```text
+Status: M11 verified; M12 in_progress
+Completed: bounded content-addressed cumulative registry and registry-driven merge/planning
+Evidence: 57 tests; mutation/overlap rejection; 870-frame clean registry merge; pinned stats
+Commit: pending T11.4/M11 checkpoint
+Remaining: M12 honest evaluation and provenance
+Blockers: none
+Next step: stage-level reach/contact/grasp/lift/transport/release metrics
 ```
