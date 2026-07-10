@@ -14,6 +14,8 @@ preferred physical-leader broker because it already owns the serial buses.
 | Persistent PI0.5 on MPS | Real SceneSmith observation accepted; first action 1.51 s, queued actions 12 ms and 11 ms | The local checkpoint is loaded once and can drive the control loop. |
 | Neural contact-physics episode | PI0.5 actions applied; `neural_policy_stalled` detected | Honest expected failure of the one-step smoke checkpoint; no object teleportation. |
 | Neural browser path | `PI0.5 live` selected; MPS policy actions reached MuJoCo; expected task failure returned as an inspectable episode | The UI-to-action-server-to-policy path is real and no longer converts normal task failure into HTTP 500. |
+| V10 hybrid sort | Held-out seed 6204 sorted 4/4 with 2,559 neural frames plus bounded transfer/recovery controller frames | MPS-backed closed-loop PI0.5 contributes real grasps, but this is not pure end-to-end task success. |
+| Autolearn data path | 660 V10 correction frames merged with 10,656 causal frames into a verified 11,316-frame dataset | Policy-visited DAgger labeling and base-data aggregation work end to end; candidate improvement remains to be evaluated. |
 | Studio leader bridge | Five read-only samples plus eight deadman-gated MuJoCo intervention frames | The connected leader controls simulated joints without SceneSmith opening either serial port. |
 | Human contact correction | Ready for operator use | A person still needs to move the leader through a real grasp/place correction; no contact success is claimed yet. |
 
@@ -124,6 +126,23 @@ The exporter refuses scripted/simulated episodes unless
 `--allow-scripted-harness` is explicit. `--frame-selection all` is intended
 only for replay, debugging, or pipeline verification.
 
+Privileged controller corrections from a neural policy rollout use the
+six-axis causal schema so they can be aggregated with the accepted adapter's
+base demonstrations:
+
+```bash
+external/leLab/.venv/bin/python scripts/robot_lab/export_intervention_dataset.py \
+  --batch-summary <hybrid-policy-batch>/intervention_batch_summary.json \
+  --output-root outputs/robot_lab/autolearn/<cycle>/dagger-dataset \
+  --frame-selection dagger_corrections \
+  --dataset-schema pi05_causal \
+  --fps 30 \
+  --verify
+```
+
+`merge_pi05_training_datasets.py` refuses incompatible feature keys, shapes,
+or names and verifies the combined episode and frame counts before training.
+
 ## Verification
 
 ```bash
@@ -170,8 +189,16 @@ outputs/robot_lab/so101_desk_cube_sort/completion-audit/intervention-system-comp
 
 ## Training Direction
 
-Use behavior cloning or DAgger-style supervised fine-tuning first. Collect
-operator corrections from the randomized neural contact-physics mode, export
-only intervention frames, fine-tune PI0.5, then re-run the same held-out seeds.
-Move to HIL-SERL only after the task has a reliable reset, reward/success
-detector, and short episode horizon.
+The DAgger-style supervised loop is now automated by
+`run_pi05_autolearn_cycle.py`. Every real cycle requires a clean scoped Git
+state and records a manifest commit after baseline evaluation, collection,
+export, aggregation, finite training, candidate evaluation, and promotion or
+rejection. Train and held-out seeds are disjoint. The accepted pointer cannot
+change for assisted success, incomplete seeds, scripted motion, a physical
+follower command, threshold failure, or regression.
+
+Use this bounded imitation-learning loop before full reinforcement learning.
+Move to HIL-SERL only after the pure-policy path has a reliable reset,
+reward/success detector, and short episode horizon; otherwise RL would spend
+most of its budget rediscovering controller corrections already available as
+direct supervision.

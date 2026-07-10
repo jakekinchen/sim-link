@@ -113,5 +113,23 @@ completed and rendered `final 4/4, intervention 0 frames` in the in-app browser.
 
 ## Remaining operational note
 
-The A100 Brev instance remains running. SceneSmith does not stop or delete paid
-instances without explicit owner confirmation.
+The next learning step is now a checked-in, Git-guarded cycle rather than a
+manual sequence. `configurations/robot_lab/pi05_autolearn.example.json` runs:
+
+1. a pure-mode baseline on held-out seeds;
+2. hybrid correction collection on disjoint training seeds;
+3. six-axis DAgger correction export and aggregation with the causal base data;
+4. a finite 25-step MPS fine-tune;
+5. candidate evaluation on the same held-out seeds; and
+6. promotion only when the candidate is complete, unassisted, above threshold,
+   and non-regressing.
+
+The known V10 trajectory re-exported 660 controller corrections and merged
+cleanly with the 10,656-frame base dataset, producing a verified 11,316-frame
+training set. This proves the data flywheel and schema path; it does not yet
+prove that a trained candidate improves autonomous sorting.
+
+Cycle manifests and the accepted-checkpoint pointer live under
+`experiments/pi05_autolearn/`. Generated datasets and weights stay under
+ignored `outputs/`. The local example uses no paid external compute. The final
+Brev inventory check on 2026-07-10 reported no workspaces.
