@@ -74,7 +74,7 @@ Next step: export bounded pre-intervention and post-recovery context without cro
 Status: T11.2 verified; T11.3 in_progress
 Completed: bounded 30-frame pre/post context with exact task and replay-role labels
 Evidence: 54 tests; 870-frame context canary in four contiguous episodes; pinned merge passes
-Commit: pending T11.2 checkpoint
+Commit: 7d7b6ee T11.2
 Remaining: pre-contact triggers and cumulative replay registry
 Blockers: none
 Next step: deterministic approach/contact progress and stall trigger
