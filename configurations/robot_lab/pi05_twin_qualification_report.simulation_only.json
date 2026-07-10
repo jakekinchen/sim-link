@@ -1,0 +1,36 @@
+{
+  "dependency_lock_ref": {
+    "file_sha256": "5ee3a64953c4aa4ac1a4b28abb0957f3f27942fd0167dd73cbdc814e6eda6ffe",
+    "identity_sha256": "222bce608b7c91527e1f37136ff97e1d2eeaeab59df384aeba2c98a511aff965",
+    "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+    "schema_version": "scenesmith.robotics_dependency_lock.v1"
+  },
+  "identity_sha256": "fc1853656ab5ead8832417989151ae8acefa01a96ae99011142ec54ebfdedd63",
+  "metrics": [
+    {
+      "evidence_mode": "simulation_trace",
+      "evidence_refs": [
+        "configurations/robot_lab/pi05_twin_profile.simulation_only.json"
+      ],
+      "measured_value": 0.012,
+      "metric_id": "sim_joint_limit_projection_error",
+      "status": "pass",
+      "units": "radian"
+    },
+    {
+      "evidence_mode": "not_run",
+      "evidence_refs": [],
+      "measured_value": null,
+      "metric_id": "physical_gripper_contact_latency",
+      "status": "not_run",
+      "units": "millisecond"
+    }
+  ],
+  "profile_identity_sha256": "4ec3884b43b79dbe17e3c5e86598a7641a24ec8f90872ac135c49e93a06c6ab5",
+  "proof_state": "simulation_only",
+  "qualification_state": "simulation_only_unqualified",
+  "report_name": "pi05_twin_qualification_report_simulation_only",
+  "schema_version": "scenesmith.twin_qualification_report.v1",
+  "spec_identity_sha256": "32eb1d353edc9db05f03b33dbd73d33e08d97bd9813d744d71e9596512fec995",
+  "summary": "Simulation-only structural twin artifact. Physical qualification has not run and must not be inferred from this report."
+}

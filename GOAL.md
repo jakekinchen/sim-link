@@ -21,9 +21,9 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Define content-addressed `TwinProfile`, `TwinQualificationSpec`, and
-`TwinQualificationReport` schemas plus one simulation-only, physically
-unqualified example bound to the corrected dependency lock. Open no hardware.
+Reconcile the current Robot Studio SO-101 runtime model against the pinned
+Menagerie `robotstudio_so101` lineage with a machine-readable structural diff.
+Do not switch runtime inputs or open hardware.
 
 ## Durable State
 

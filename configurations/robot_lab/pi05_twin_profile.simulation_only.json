@@ -1,0 +1,268 @@
+{
+  "dependency_lock_ref": {
+    "file_sha256": "5ee3a64953c4aa4ac1a4b28abb0957f3f27942fd0167dd73cbdc814e6eda6ffe",
+    "identity_sha256": "222bce608b7c91527e1f37136ff97e1d2eeaeab59df384aeba2c98a511aff965",
+    "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+    "schema_version": "scenesmith.robotics_dependency_lock.v1"
+  },
+  "identity_sha256": "4ec3884b43b79dbe17e3c5e86598a7641a24ec8f90872ac135c49e93a06c6ab5",
+  "profile_name": "pi05_so101_simulation_only",
+  "proof_state": "simulation_only",
+  "qualification_state": "simulation_only_unqualified",
+  "requalification_triggers": [
+    "dependency_lock_identity_changed",
+    "structural_diff_detected",
+    "measured_mass_inputs_changed",
+    "camera_or_timing_measurements_changed"
+  ],
+  "schema_version": "scenesmith.twin_profile.v1",
+  "sections": {
+    "actuators": {
+      "parameters": [
+        {
+          "evidence": [
+            {
+              "kind": "documentation",
+              "ref": "configurations/robot_lab/pi05_robotics_dependency_lock.json"
+            }
+          ],
+          "origin": "read",
+          "parameter_id": "nominal_bus_voltage",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "volt",
+          "validity_conditions": [
+            {
+              "field": "ambient_temperature",
+              "max_value": 28.0,
+              "min_value": 18.0,
+              "units": "celsius"
+            }
+          ],
+          "value": 12.0
+        }
+      ]
+    },
+    "backlash_friction_compliance": {
+      "parameters": [
+        {
+          "evidence": [
+            {
+              "kind": "planned_slice",
+              "ref": "T16.5 identification harness pending"
+            }
+          ],
+          "origin": "fitted",
+          "parameter_id": "wrist_friction_model",
+          "uncertainty": {
+            "state": "unknown"
+          },
+          "units": "ratio",
+          "validity_conditions": [],
+          "value": null
+        }
+      ]
+    },
+    "cameras_timing": {
+      "parameters": [
+        {
+          "evidence": [
+            {
+              "kind": "planned_slice",
+              "ref": "M19 held-out timing census pending"
+            }
+          ],
+          "origin": "measured",
+          "parameter_id": "policy_camera_latency_ms",
+          "uncertainty": {
+            "state": "unknown"
+          },
+          "units": "millisecond",
+          "validity_conditions": [],
+          "value": null
+        }
+      ]
+    },
+    "coordinate_gripper_contract": {
+      "parameters": [
+        {
+          "evidence": [
+            {
+              "kind": "spec",
+              "ref": "scenesmith/robot_lab/spec.py"
+            }
+          ],
+          "origin": "read",
+          "parameter_id": "action_coordinate_contract",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "identifier",
+          "validity_conditions": [],
+          "value": "absolute_joint_radians_plus_gripper_radians"
+        },
+        {
+          "evidence": [
+            {
+              "kind": "spec",
+              "ref": "scenesmith/robot_lab/spec.py"
+            }
+          ],
+          "origin": "read",
+          "parameter_id": "gripper_joint_name",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "identifier",
+          "validity_conditions": [],
+          "value": "gripper"
+        }
+      ]
+    },
+    "environment_object_profiles": {
+      "parameters": [
+        {
+          "evidence": [
+            {
+              "kind": "spec",
+              "ref": "scenesmith/robot_lab/spec.py"
+            }
+          ],
+          "origin": "read",
+          "parameter_id": "desk_sort_cube_mass_kg",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "kilogram",
+          "validity_conditions": [],
+          "value": 0.035
+        }
+      ]
+    },
+    "gripper_contact": {
+      "parameters": [
+        {
+          "evidence": [
+            {
+              "kind": "runtime_model",
+              "ref": "external/SO-ARM100/Simulation/SO101/so101_new_calib.xml"
+            }
+          ],
+          "origin": "CAD",
+          "parameter_id": "cube_contact_patch_model",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "identifier",
+          "validity_conditions": [],
+          "value": "simulation_default_contact_only"
+        }
+      ]
+    },
+    "inertials": {
+      "parameters": [
+        {
+          "evidence": [
+            {
+              "kind": "planned_slice",
+              "ref": "T16.4 measured inertial intake pending"
+            }
+          ],
+          "origin": "CAD",
+          "parameter_id": "full_arm_mass_kg",
+          "uncertainty": {
+            "state": "unknown"
+          },
+          "units": "kilogram",
+          "validity_conditions": [],
+          "value": null
+        }
+      ]
+    },
+    "kinematics": {
+      "parameters": [
+        {
+          "evidence": [
+            {
+              "kind": "spec",
+              "ref": "scenesmith/robot_lab/spec.py"
+            }
+          ],
+          "origin": "read",
+          "parameter_id": "joint_home_pose_nominal",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "radian",
+          "validity_conditions": [],
+          "value": [
+            0.0,
+            -0.55,
+            1.05,
+            -0.48,
+            0.0,
+            0.35
+          ]
+        }
+      ]
+    },
+    "structural_model_identity": {
+      "parameters": [
+        {
+          "evidence": [
+            {
+              "kind": "dependency_lock",
+              "ref": "configurations/robot_lab/pi05_robotics_dependency_lock.json"
+            }
+          ],
+          "origin": "read",
+          "parameter_id": "runtime_robot_model",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "identifier",
+          "validity_conditions": [],
+          "value": "SO-101"
+        },
+        {
+          "evidence": [
+            {
+              "kind": "dependency_lock",
+              "ref": "configurations/robot_lab/pi05_robotics_dependency_lock.json"
+            }
+          ],
+          "origin": "read",
+          "parameter_id": "runtime_joint_count",
+          "uncertainty": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "units": "unitless",
+          "validity_conditions": [],
+          "value": 6
+        }
+      ]
+    }
+  },
+  "structural_lineage": {
+    "runtime_joint_names": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "runtime_robot_model": "SO-101",
+    "source_mjcf_sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+    "source_urdf_sha256": "443d38d756e01bac7d3455b24430047ddc6427105e0d3454b2003116f5f67236"
+  }
+}
