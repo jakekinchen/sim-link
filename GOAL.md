@@ -21,9 +21,9 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Pin LeRobot, OpenPI as a semantic reference, Robot Studio, and Menagerie by
-revision/license/content identity. Record local patch state and preserve the
-existing coordinate/camera runtime contract without opening physical hardware.
+Define `TwinProfile`, `TwinQualificationSpec`, and `TwinQualificationReport`
+schemas plus a simulation-only example that binds back to
+`configurations/robot_lab/pi05_robotics_dependency_lock.json`.
 
 ## Durable State
 
