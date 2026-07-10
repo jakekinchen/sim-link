@@ -45,6 +45,70 @@ def select_training_frames(
     raise ValueError(f"Unknown frame selection: {selection}")
 
 
+def select_dagger_context_frames(
+    frames: Iterable[dict[str, Any]],
+    *,
+    before: int,
+    after: int,
+) -> list[dict[str, Any]]:
+    """Select correction runs plus bounded contiguous policy context."""
+
+    if before < 0 or after < 0:
+        raise ValueError("DAgger context bounds cannot be negative")
+    rows = list(frames)
+    if not rows:
+        return []
+    indices = [int(row["frame_index"]) for row in rows]
+    if any(right <= left for left, right in zip(indices, indices[1:])):
+        raise ValueError("Source frames must be strictly ordered")
+    selected: dict[int, dict[str, Any]] = {}
+    for contiguous in _contiguous_source_runs(rows):
+        correction_positions = [
+            index for index, row in enumerate(contiguous) if is_dagger_correction_frame(row)
+        ]
+        for correction_run in _contiguous_integer_runs(correction_positions):
+            first, last = correction_run[0], correction_run[-1]
+            start = max(0, first - before)
+            stop = min(len(contiguous), last + after + 1)
+            for position in range(start, stop):
+                row = dict(contiguous[position])
+                if position in correction_run:
+                    role = "expert_correction"
+                elif position < first:
+                    role = "pre_context"
+                else:
+                    role = "post_context"
+                row["replay_role"] = role
+                frame_index = int(row["frame_index"])
+                existing = selected.get(frame_index)
+                if existing is None or role == "expert_correction":
+                    selected[frame_index] = row
+    return [selected[index] for index in sorted(selected)]
+
+
+def _contiguous_source_runs(rows: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    runs: list[list[dict[str, Any]]] = []
+    current: list[dict[str, Any]] = []
+    for row in rows:
+        if current and int(row["frame_index"]) != int(current[-1]["frame_index"]) + 1:
+            runs.append(current)
+            current = []
+        current.append(row)
+    if current:
+        runs.append(current)
+    return runs
+
+
+def _contiguous_integer_runs(values: list[int]) -> list[list[int]]:
+    runs: list[list[int]] = []
+    for value in values:
+        if not runs or value != runs[-1][-1] + 1:
+            runs.append([value])
+        else:
+            runs[-1].append(value)
+    return runs
+
+
 def validate_dagger_episode_scope(
     summary: dict[str, Any], frames: Iterable[dict[str, Any]]
 ) -> None:

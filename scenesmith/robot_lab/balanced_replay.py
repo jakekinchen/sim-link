@@ -146,6 +146,9 @@ def _even_slots(total: int, selected: int) -> list[bool]:
 
 
 def _correction_phase(row: dict[str, Any]) -> str:
+    replay_role = str(row.get("replay_role") or "")
+    if replay_role in {"pre_context", "post_context"}:
+        return replay_role
     source = str(row.get("action_source") or "unknown")
     if "recovery_pick" in source:
         return "recovery_pick"

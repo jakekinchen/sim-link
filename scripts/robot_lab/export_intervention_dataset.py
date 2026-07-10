@@ -21,6 +21,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from scenesmith.robot_lab.autolearn import (
     is_dagger_correction_frame,
     policy_expert_delta_l2,
+    select_dagger_context_frames,
     select_training_frames,
     validate_dagger_episode_scope,
 )
@@ -58,13 +59,15 @@ def main() -> int:
     parser.add_argument("--verify", action="store_true")
     parser.add_argument(
         "--frame-selection",
-        choices=("intervention_only", "dagger_corrections", "all"),
+        choices=("intervention_only", "dagger_corrections", "dagger_context", "all"),
         default="intervention_only",
         help=(
             "Export human interventions, privileged DAgger controller corrections, "
             "or all frames for replay/pipeline tests."
         ),
     )
+    parser.add_argument("--context-before", type=int, default=30)
+    parser.add_argument("--context-after", type=int, default=30)
     parser.add_argument(
         "--dataset-schema",
         choices=("intervention", "pi05_causal"),
@@ -115,7 +118,15 @@ def main() -> int:
         source_frames = json.loads(trajectory_path.read_text(encoding="utf-8"))["frames"]
         if not source_frames:
             raise ValueError(f"Intervention trajectory is empty: {trajectory_path}")
-        frames = select_training_frames(source_frames, args.frame_selection)
+        frames = (
+            select_dagger_context_frames(
+                source_frames,
+                before=args.context_before,
+                after=args.context_after,
+            )
+            if args.frame_selection == "dagger_context"
+            else select_training_frames(source_frames, args.frame_selection)
+        )
         _validate_training_scope(
             summary,
             args.allow_scripted_harness,
@@ -138,7 +149,7 @@ def main() -> int:
                 frame_task = _frame_task(
                     frame,
                     summary,
-                    require_frame_task=args.frame_selection == "dagger_corrections",
+                    require_frame_task=args.frame_selection in {"dagger_corrections", "dagger_context"},
                 )
                 images, sources = _load_frame_images(episode_dir, frame, args.image_size)
                 image_hashes.update(_sha256(Path(path)) for path in sources.values())
@@ -199,6 +210,7 @@ def main() -> int:
                         "policy_task": frame_task,
                         "is_intervention": is_intervention,
                         "is_expert_correction": is_expert_correction,
+                        "replay_role": frame.get("replay_role", "expert_correction"),
                         "intervention_event": frame.get("intervention_event"),
                         "action_source": frame.get("action_source"),
                         "policy_action": frame.get("policy_action"),
@@ -248,7 +260,9 @@ def main() -> int:
 
     dataset.finalize()
     task_conditioning = (
-        "frame_policy_task" if args.frame_selection == "dagger_corrections" else "episode_task"
+        "frame_policy_task"
+        if args.frame_selection in {"dagger_corrections", "dagger_context"}
+        else "episode_task"
     )
     dataset_contract = write_dataset_contract(
         args.output_root,
@@ -271,6 +285,10 @@ def main() -> int:
         "num_expert_correction_frames": sum(
             row["is_expert_correction"] for row in sidecar_rows
         ),
+        "replay_role_counts": {
+            role: sum(row["replay_role"] == role for row in sidecar_rows)
+            for role in sorted({row["replay_role"] for row in sidecar_rows})
+        },
         "fps": args.fps,
         "features": sorted(_features(args.image_size, args.dataset_schema)),
         "sidecar": str(sidecar_path),
@@ -350,7 +368,7 @@ def _validate_training_scope(
     frame_selection: str,
     frames: list[dict[str, Any]],
 ) -> None:
-    if frame_selection == "dagger_corrections":
+    if frame_selection in {"dagger_corrections", "dagger_context"}:
         validate_dagger_episode_scope(summary, frames)
         return
     scope = summary.get("proof_scope", {})

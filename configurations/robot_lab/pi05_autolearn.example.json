@@ -59,7 +59,9 @@
         "--output-root", "outputs/robot_lab/autolearn/{cycle_id}/dagger-dataset",
         "--repo-id", "local/pi05-dagger-cycle-001-mps",
         "--fps", "30",
-        "--frame-selection", "dagger_corrections",
+        "--frame-selection", "dagger_context",
+        "--context-before", "30",
+        "--context-after", "30",
         "--dataset-schema", "pi05_causal",
         "--verify"
       ],

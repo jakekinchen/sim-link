@@ -12,6 +12,7 @@ from scenesmith.robot_lab.autolearn import (
     decide_promotion,
     is_dagger_correction_frame,
     policy_expert_delta_l2,
+    select_dagger_context_frames,
     select_training_frames,
     summarize_evaluation,
     validate_dagger_episode_scope,
@@ -89,6 +90,27 @@ def _episode(
 
 
 class DaggerFrameTests(unittest.TestCase):
+    def test_dagger_context_is_bounded_and_never_crosses_source_gaps(self):
+        frames = []
+        for index in [0, 1, 2, 3, 10, 11, 12, 13]:
+            source = "contact_gated_tray_transfer" if index in {2, 11} else "policy"
+            frames.append({**_frame(source), "frame_index": index})
+
+        selected = select_dagger_context_frames(frames, before=1, after=1)
+
+        self.assertEqual([row["frame_index"] for row in selected], [1, 2, 3, 10, 11, 12])
+        self.assertEqual(
+            [row["replay_role"] for row in selected],
+            [
+                "pre_context",
+                "expert_correction",
+                "post_context",
+                "pre_context",
+                "expert_correction",
+                "post_context",
+            ],
+        )
+
     def test_balanced_replay_is_deterministic_and_balances_source_and_phase(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

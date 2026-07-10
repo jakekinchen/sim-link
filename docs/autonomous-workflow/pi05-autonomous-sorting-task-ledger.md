@@ -6,11 +6,11 @@ Updated: 2026-07-10
 
 ```text
 Current state: M10 trusted-data gate verified; M11 replay balancing active
-Completed: pipeline bootstrap, research audit, trusted data contract, balanced sampler
-Evidence: 53 tests; six-update MPS replay smoke; exact realized draw audit
+Completed: bootstrap, research, trusted data, balanced sampler, correction context
+Evidence: 54 tests; context canary; six-update MPS replay smoke; exact draw audit
 Remaining: M11-M15 below
 Blockers: none for local P0 implementation
-Next step: T11.2 pre-intervention and post-recovery context export
+Next step: T11.3 pre-contact progress/stall intervention triggers
 ```
 
 ## Tasks
@@ -23,8 +23,8 @@ Next step: T11.2 pre-intervention and post-recovery context export
 | T10.4 | M10 | verified | Persist the exact per-frame PI0.5 task prompt | 49 tests; legacy unlabeled DAgger frames rejected |
 | T10.5 | M10 | verified | Harden dataset merge compatibility and regenerate corrections | Old corrections rejected; 12-episode/11,316-frame canary merge passes |
 | T11.1 | M11 | verified | Add source- and phase-balanced sampling | 53 tests; MPS smoke realized 3 base/3 correction and all three phases |
-| T11.2 | M11 | in_progress | Export pre-intervention and post-recovery context | Context windows remain temporally valid |
-| T11.3 | M11 | pending | Add pre-contact progress/stall intervention triggers | Deterministic trigger tests and rollout evidence |
+| T11.2 | M11 | verified | Export pre-intervention and post-recovery context | Four contiguous episodes; 120 pre/90 post/660 expert frames |
+| T11.3 | M11 | in_progress | Add pre-contact progress/stall intervention triggers | Deterministic trigger tests and rollout evidence |
 | T11.4 | M11 | pending | Add cumulative bounded replay registry | Prior accepted corrections retained or sampled by policy |
 | T12.1 | M12 | pending | Add stage-level reach/contact/grasp/lift/transport/release metrics | Metrics emitted for baseline and candidate |
 | T12.2 | M12 | pending | Separate strict, contact-stabilized, assisted, and physical gates | Promotion tests reject proof-mode contamination |
@@ -66,4 +66,16 @@ Commit: d6cd8b9 T11.1
 Remaining: context export, pre-contact triggers, cumulative replay registry
 Blockers: none
 Next step: export bounded pre-intervention and post-recovery context without crossing gaps
+```
+
+### 2026-07-10 - Temporal correction context
+
+```text
+Status: T11.2 verified; T11.3 in_progress
+Completed: bounded 30-frame pre/post context with exact task and replay-role labels
+Evidence: 54 tests; 870-frame context canary in four contiguous episodes; pinned merge passes
+Commit: pending T11.2 checkpoint
+Remaining: pre-contact triggers and cumulative replay registry
+Blockers: none
+Next step: deterministic approach/contact progress and stall trigger
 ```
