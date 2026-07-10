@@ -309,6 +309,24 @@
       "matched": [],
       "mismatched": [
         {
+          "compared_values": {
+            "menagerie": {
+              "quat": [
+                0.5,
+                0.5,
+                0.5,
+                -0.5
+              ]
+            },
+            "runtime": {
+              "quat": [
+                0.5,
+                0.5,
+                0.5,
+                -0.5
+              ]
+            }
+          },
           "decision": "adapt",
           "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:wrist[1]",
           "menagerie": {
@@ -339,12 +357,6 @@
               0.0,
               0.0,
               0.005
-            ],
-            "quat": [
-              -0.5,
-              -0.5,
-              -0.5,
-              0.5
             ]
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
@@ -369,6 +381,24 @@
           }
         },
         {
+          "compared_values": {
+            "menagerie": {
+              "quat": [
+                0.5,
+                -0.5,
+                -0.5,
+                -0.5
+              ]
+            },
+            "runtime": {
+              "quat": [
+                0.5,
+                -0.5,
+                -0.5,
+                -0.5
+              ]
+            }
+          },
           "decision": "adapt",
           "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:wrist[3]",
           "menagerie": {
@@ -399,12 +429,6 @@
               0.0,
               -0.008,
               -0.001
-            ],
-            "quat": [
-              -0.5,
-              0.5,
-              0.5,
-              0.5
             ]
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
@@ -483,6 +507,24 @@
           }
         },
         {
+          "compared_values": {
+            "menagerie": {
+              "quat": [
+                -0.0,
+                1.0,
+                -0.0,
+                -0.0
+              ]
+            },
+            "runtime": {
+              "quat": [
+                -0.0,
+                1.0,
+                0.0,
+                0.0
+              ]
+            }
+          },
           "decision": "adapt",
           "key": "geom:base/shoulder/upper_arm/lower_arm:lower_arm[3]",
           "menagerie": {
@@ -537,6 +579,24 @@
           }
         },
         {
+          "compared_values": {
+            "menagerie": {
+              "quat": [
+                -0.0,
+                0.707106781,
+                -0.707106781,
+                -0.0
+              ]
+            },
+            "runtime": {
+              "quat": [
+                -0.0,
+                0.707106781,
+                -0.707106781,
+                0.0
+              ]
+            }
+          },
           "decision": "adapt",
           "key": "geom:base/shoulder/upper_arm:upper_arm[1]",
           "menagerie": {
@@ -567,12 +627,6 @@
               -0.05257,
               -0.0155,
               -0.0013
-            ],
-            "quat": [
-              0.0,
-              0.292893,
-              -0.292893,
-              -0.0
             ]
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
@@ -651,6 +705,24 @@
           }
         },
         {
+          "compared_values": {
+            "menagerie": {
+              "quat": [
+                0.5,
+                0.5,
+                0.5,
+                -0.5
+              ]
+            },
+            "runtime": {
+              "quat": [
+                0.5,
+                0.5,
+                0.5,
+                -0.5
+              ]
+            }
+          },
           "decision": "adapt",
           "key": "geom:base/shoulder:shoulder[1]",
           "menagerie": {
@@ -681,12 +753,6 @@
               -2e-07,
               2.41e-07,
               -0.003
-            ],
-            "quat": [
-              -0.5,
-              -0.5,
-              -0.5,
-              0.5
             ]
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
@@ -711,6 +777,24 @@
           }
         },
         {
+          "compared_values": {
+            "menagerie": {
+              "quat": [
+                0.5,
+                0.5,
+                -0.5,
+                0.5
+              ]
+            },
+            "runtime": {
+              "quat": [
+                0.5,
+                0.5,
+                -0.5,
+                0.5
+              ]
+            }
+          },
           "decision": "adapt",
           "key": "geom:base/shoulder:shoulder[3]",
           "menagerie": {
@@ -741,12 +825,6 @@
               -0.0425992,
               -0.000177759,
               0.0158499
-            ],
-            "quat": [
-              -0.5,
-              -0.5,
-              0.5,
-              -0.5
             ]
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
@@ -2243,6 +2321,23 @@
               0.706897
             ]
           }
+        },
+        {
+          "key": "body:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1",
+          "value": {
+            "name": "moving_jaw_so101_v1",
+            "pos": [
+              0.0202,
+              0.0188,
+              -0.0234
+            ],
+            "quat": [
+              0.707107,
+              0.707107,
+              -1.9e-08,
+              1.9e-08
+            ]
+          }
         }
       ],
       "mismatched": [
@@ -2301,65 +2396,6 @@
               0.0,
               -1.0,
               -0.0
-            ]
-          }
-        },
-        {
-          "compared_values": {
-            "menagerie": {
-              "quat": [
-                0.707106781,
-                0.707106781,
-                0.0,
-                0.0
-              ]
-            },
-            "runtime": {
-              "quat": [
-                0.707106781,
-                0.707106781,
-                -1.9e-08,
-                1.9e-08
-              ]
-            }
-          },
-          "decision": "retain",
-          "key": "body:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1",
-          "menagerie": {
-            "name": "moving_jaw_so101_v1",
-            "pos": [
-              0.0202,
-              0.0188,
-              -0.0234
-            ],
-            "quat": [
-              1.0,
-              1.0,
-              0.0,
-              0.0
-            ]
-          },
-          "numeric_deltas": {
-            "quat": [
-              0.0,
-              0.0,
-              -1.9e-08,
-              1.9e-08
-            ]
-          },
-          "rationale": "This slice records the active runtime as the declared baseline and defers any structural replacement.",
-          "runtime": {
-            "name": "moving_jaw_so101_v1",
-            "pos": [
-              0.0202,
-              0.0188,
-              -0.0234
-            ],
-            "quat": [
-              0.707107,
-              0.707107,
-              -1.9e-08,
-              1.9e-08
             ]
           }
         }
@@ -2729,7 +2765,7 @@
     "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json"
   },
-  "identity_sha256": "6a990b8a28d6b18e12dde18398122ea84ba7d3a91569ca2f728d8c09f5d3dad7",
+  "identity_sha256": "a90ffc8b347ae8b6d4a7a4bde0d60c3be64af7a41fb77b543e2c6c9beb6b9331",
   "schema_version": "scenesmith.structural_twin_diff.v1",
   "sources": {
     "menagerie": {
@@ -2796,8 +2832,8 @@
       },
       "joint_frames": {
         "extra": 0,
-        "matched": 4,
-        "mismatched": 2,
+        "matched": 5,
+        "mismatched": 1,
         "missing": 0,
         "unknown": 0
       },
@@ -2824,8 +2860,8 @@
       }
     },
     "extra_records": 5,
-    "matched_records": 11,
-    "mismatched_records": 30,
+    "matched_records": 12,
+    "mismatched_records": 29,
     "missing_records": 28,
     "unknown_records": 0
   },

@@ -6,11 +6,11 @@ Updated: 2026-07-10
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.3 semantic structural diff correction
-completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, and partial quaternion normalization
-evidence: commits 7bebf55, 936dd2f, and fb54e64; manager audits 005-006 keep semantic acceptance open
-remaining: complete quaternion semantics, inferred-inertia unknowns, effective friction/contact attachment semantics, deterministic unnamed-geom limits, then M16-M19 prerequisites and Gates C-D
+completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, and complete quaternion normalization
+evidence: commits 7bebf55, 936dd2f, and fb54e64; manager audits 005-006 keep semantic acceptance open until inferred-inertia/contact truthfulness closes
+remaining: inferred-inertia unknowns, effective friction/contact attachment semantics, deterministic unnamed-geom limits, then M16-M19 prerequisites and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: finish quaternion coverage for collision geoms and implicit identity, then execute inertial/contact truthfulness
+next_step: execute inertial/contact truthfulness from brief 016, then close the remaining deterministic identifier limits
 ```
 
 ## Rules
@@ -113,6 +113,20 @@ next_step: finish quaternion coverage for collision geoms and implicit identity,
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.3 complete quaternion semantic coverage
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: structural diff now applies quaternion canonicalization across all transform-bearing structural categories, treats omitted transform quaternions as effective identity where MuJoCo defaults apply, and tolerates tiny canonical quaternion noise
+Evidence: configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json identity a90ffc8b347ae8b6d4a7a4bde0d60c3be64af7a41fb77b543e2c6c9beb6b9331; 12 focused structural-diff tests; live CLI write+verify pass; 37 broad robot-lab tests
+Commit: pending
+Remaining: inferred-inertia unknown handling, effective friction/contact attachment semantics, and deterministic unnamed-geom limits
+Blockers: none for offline correction
+Training lock: closed
+Next step: resume brief 016 and make inertial/contact truthfulness explicit without reopening quaternion false deltas
+```
 
 ### 2026-07-10 - T16.3 quaternion coverage correction
 

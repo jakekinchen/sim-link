@@ -47,6 +47,15 @@ MUJOCO_OPTION_DEFAULTS = {
     "ls_iterations": 50.0,
     "timestep": 0.002,
 }
+IDENTITY_QUATERNION = [1.0, 0.0, 0.0, 0.0]
+QUATERNION_SEMANTIC_CATEGORIES = {
+    "joint_frames",
+    "arm_collisions",
+    "gripper_collisions",
+    "cameras",
+    "named_sites",
+}
+QUATERNION_TOLERANCE = 1e-7
 
 
 def build_structural_twin_diff(
@@ -495,7 +504,7 @@ def _compare_category(
             runtime_value,
             menagerie_value,
         )
-        if runtime_compared == menagerie_compared:
+        if _compared_records_equal(runtime_compared, menagerie_compared):
             matched.append({"key": key, "value": runtime_value})
             continue
         mismatch_record = {
@@ -579,9 +588,15 @@ def _comparison_views(
     menagerie_compared = dict(menagerie_value)
     metadata: dict[str, Any] = {}
 
-    if category_name in {"joint_frames", "cameras", "named_sites"}:
-        runtime_quat = _canonicalize_quaternion(runtime_value.get("quat"))
-        menagerie_quat = _canonicalize_quaternion(menagerie_value.get("quat"))
+    if category_name in QUATERNION_SEMANTIC_CATEGORIES:
+        runtime_quat = _canonicalize_quaternion(
+            runtime_value.get("quat"),
+            use_identity_default=True,
+        )
+        menagerie_quat = _canonicalize_quaternion(
+            menagerie_value.get("quat"),
+            use_identity_default=True,
+        )
         if runtime_quat is not None and menagerie_quat is not None:
             runtime_compared["quat"] = runtime_quat
             menagerie_compared["quat"] = menagerie_quat
@@ -594,7 +609,9 @@ def _comparison_views(
     return runtime_compared, menagerie_compared, metadata
 
 
-def _canonicalize_quaternion(value: Any) -> list[float] | None:
+def _canonicalize_quaternion(value: Any, *, use_identity_default: bool = False) -> list[float] | None:
+    if use_identity_default and (value is None or value == []):
+        return list(IDENTITY_QUATERNION)
     if not isinstance(value, list) or len(value) != 4 or not all(isinstance(item, (int, float)) for item in value):
         return None
     norm = math.sqrt(sum(float(item) * float(item) for item in value))
@@ -612,6 +629,42 @@ def _canonical_quaternion_sign(value: list[float]) -> float:
         if item < 0:
             return -1.0
     return 1.0
+
+
+def _compared_records_equal(runtime_value: Any, menagerie_value: Any) -> bool:
+    if isinstance(runtime_value, dict) and isinstance(menagerie_value, dict):
+        if set(runtime_value) != set(menagerie_value):
+            return False
+        return all(
+            _compared_field_equal(key, runtime_value[key], menagerie_value[key])
+            for key in runtime_value
+        )
+    if isinstance(runtime_value, list) and isinstance(menagerie_value, list):
+        if len(runtime_value) != len(menagerie_value):
+            return False
+        return all(
+            _compared_records_equal(runtime_item, menagerie_item)
+            for runtime_item, menagerie_item in zip(runtime_value, menagerie_value)
+        )
+    return runtime_value == menagerie_value
+
+
+def _compared_field_equal(field_name: str, runtime_value: Any, menagerie_value: Any) -> bool:
+    if field_name == "quat":
+        return _quaternion_lists_equal(runtime_value, menagerie_value)
+    return _compared_records_equal(runtime_value, menagerie_value)
+
+
+def _quaternion_lists_equal(runtime_value: Any, menagerie_value: Any) -> bool:
+    if not isinstance(runtime_value, list) or not isinstance(menagerie_value, list):
+        return runtime_value == menagerie_value
+    if len(runtime_value) != len(menagerie_value):
+        return False
+    return all(_numbers_equal(runtime_item, menagerie_item) for runtime_item, menagerie_item in zip(runtime_value, menagerie_value))
+
+
+def _numbers_equal(runtime_value: float, menagerie_value: float) -> bool:
+    return math.isclose(float(runtime_value), float(menagerie_value), abs_tol=QUATERNION_TOLERANCE, rel_tol=0.0)
 
 
 def _build_summary(categories: dict[str, dict[str, list[dict[str, Any]]]]) -> dict[str, Any]:

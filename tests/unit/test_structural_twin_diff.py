@@ -10,6 +10,7 @@ from pathlib import Path
 from scenesmith.robot_lab.structural_twin_diff import (
     DEFAULT_STRUCTURAL_TWIN_DIFF_PATH,
     MUJOCO_OPTION_DEFAULTS,
+    QUATERNION_SEMANTIC_CATEGORIES,
     _compare_category,
     build_structural_twin_diff,
     verify_structural_twin_diff,
@@ -120,6 +121,36 @@ class StructuralTwinDiffTests(unittest.TestCase):
         self.assertEqual(len(category["matched"]), 1)
         self.assertFalse(category["mismatched"])
 
+    def test_compare_category_matches_equivalent_collision_quaternions(self):
+        category = _compare_category(
+            "arm_collisions",
+            {
+                "geom:arm:guard": {
+                    "quat": [0.5, 0.5, 0.5, -0.5],
+                }
+            },
+            {
+                "geom:arm:guard": {
+                    "quat": [-1.0, -1.0, -1.0, 1.0],
+                }
+            },
+        )
+
+        self.assertEqual(len(category["matched"]), 1)
+        self.assertFalse(category["mismatched"])
+
+    def test_compare_category_uses_identity_quaternion_default_for_transform_categories(self):
+        for category_name in QUATERNION_SEMANTIC_CATEGORIES:
+            with self.subTest(category_name=category_name):
+                category = _compare_category(
+                    category_name,
+                    {"record": {"quat": []}},
+                    {"record": {"quat": [1.0, 0.0, 0.0, 0.0]}},
+                )
+
+                self.assertEqual(len(category["matched"]), 1)
+                self.assertFalse(category["mismatched"])
+
     def test_compare_category_records_canonical_quaternion_values_for_true_mismatch(self):
         category = _compare_category(
             "named_sites",
@@ -143,6 +174,24 @@ class StructuralTwinDiffTests(unittest.TestCase):
                 "menagerie": {"quat": [0.0, 0.0, 1.0, 0.0]},
             },
         )
+
+    def test_compare_category_tolerates_small_canonical_quaternion_noise(self):
+        category = _compare_category(
+            "joint_frames",
+            {
+                "body:wrist": {
+                    "quat": [0.707106781, 0.707106781, -0.000000019, 0.000000019],
+                }
+            },
+            {
+                "body:wrist": {
+                    "quat": [0.707106781, 0.707106781, 0.0, 0.0],
+                }
+            },
+        )
+
+        self.assertEqual(len(category["matched"]), 1)
+        self.assertFalse(category["mismatched"])
 
     def test_compare_category_uses_effective_solver_defaults_when_option_is_omitted(self):
         category = _compare_category(
