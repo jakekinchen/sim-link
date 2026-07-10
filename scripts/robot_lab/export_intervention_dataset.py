@@ -25,6 +25,7 @@ from scenesmith.robot_lab.autolearn import (
     validate_dagger_episode_scope,
 )
 from scenesmith.robot_lab.so101_coordinates import coordinate_contract, mujoco_to_lerobot
+from scenesmith.robot_lab.pi05_dataset_contract import write_dataset_contract
 
 
 PI05_IMAGE_KEYS = (
@@ -246,6 +247,13 @@ def main() -> int:
             dataset_episode_index += 1
 
     dataset.finalize()
+    task_conditioning = (
+        "frame_policy_task" if args.frame_selection == "dagger_corrections" else "episode_task"
+    )
+    dataset_contract = write_dataset_contract(
+        args.output_root,
+        task_conditioning=task_conditioning,
+    )
     sidecar_path = args.output_root / "scenesmith_intervention_sidecar.jsonl"
     sidecar_path.write_text(
         "".join(json.dumps(row, sort_keys=True) + "\n" for row in sidecar_rows),
@@ -271,6 +279,7 @@ def main() -> int:
         "frame_selection": args.frame_selection,
         "dataset_schema": args.dataset_schema,
         "coordinate_contract": coordinate_contract(),
+        "dataset_contract": dataset_contract,
         "episodes": episode_reports,
     }
 

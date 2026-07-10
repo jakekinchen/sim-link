@@ -21,6 +21,11 @@ from scenesmith.robot_lab.autolearn_cycle import (
     CycleRunner,
     StageResult,
 )
+from scenesmith.robot_lab.pi05_dataset_contract import (
+    build_dataset_contract,
+    validate_merge_contracts,
+)
+from scenesmith.robot_lab.so101_coordinates import coordinate_contract
 from scripts.robot_lab.export_intervention_dataset import (
     _features,
     _frame_task,
@@ -211,6 +216,44 @@ class DaggerFrameTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "lacks the exact policy_task"):
             _frame_task({}, summary, require_frame_task=True)
         self.assertEqual(_frame_task({}, summary, require_frame_task=False), "generic sort")
+
+    def test_pi05_dataset_contract_requires_exact_tasks_and_matching_coordinates(self):
+        base = {
+            "coordinate_contract": coordinate_contract(),
+            "action_representation": "absolute_joint_degrees_plus_gripper_percent",
+            "task_conditioning": "frame_stage_task",
+            "temporal_segmentation": "contiguous_source_frames",
+            "fps": 30,
+        }
+        corrections = {**base, "task_conditioning": "frame_policy_task"}
+        validate_merge_contracts(base, corrections)
+
+        corrections["coordinate_contract"] = {"schema_version": "wrong"}
+        with self.assertRaisesRegex(ValueError, "differ for coordinate_contract"):
+            validate_merge_contracts(base, corrections)
+
+        corrections = {**base, "task_conditioning": "episode_task"}
+        with self.assertRaisesRegex(ValueError, "exact frame-level task"):
+            validate_merge_contracts(base, corrections)
+
+    def test_pi05_dataset_contract_hashes_dataset_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            meta = root / "meta"
+            meta.mkdir()
+            (meta / "info.json").write_text(
+                json.dumps({"fps": 30, "total_episodes": 2, "total_frames": 20}),
+                encoding="utf-8",
+            )
+            (meta / "stats.json").write_text(
+                json.dumps({"action": {}, "observation.state": {}}), encoding="utf-8"
+            )
+
+            contract = build_dataset_contract(root, task_conditioning="frame_policy_task")
+
+            self.assertEqual(contract["total_frames"], 20)
+            self.assertEqual(contract["task_conditioning"], "frame_policy_task")
+            self.assertEqual(len(contract["info_sha256"]), 64)
 
 
 class PromotionTests(unittest.TestCase):

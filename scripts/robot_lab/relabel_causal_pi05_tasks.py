@@ -16,6 +16,10 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from scenesmith.robot_lab.pi05_dataset_contract import write_dataset_contract
+
 
 TASKS = (
     "Sort each colored block onto the plate of the matching color.",
@@ -95,6 +99,10 @@ def main() -> int:
     info = json.loads(info_path.read_text(encoding="utf-8"))
     info["total_tasks"] = len(TASKS)
     info_path.write_text(json.dumps(info, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    dataset_contract = write_dataset_contract(
+        args.output_root,
+        task_conditioning="frame_stage_task",
+    )
 
     report = {
         "status": "pass",
@@ -107,6 +115,7 @@ def main() -> int:
             for index in range(len(TASKS))
         },
         "hub_pushed": args.push_to_hub,
+        "dataset_contract": dataset_contract,
     }
     (args.output_root / "stage_task_relabel_summary.json").write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"

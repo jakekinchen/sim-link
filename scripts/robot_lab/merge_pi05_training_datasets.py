@@ -12,8 +12,16 @@ import sys
 from pathlib import Path
 from typing import Any
 
-
 REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scenesmith.robot_lab.pi05_dataset_contract import (
+    load_dataset_contract,
+    validate_merge_contracts,
+    write_dataset_contract,
+)
+
+
 LEROBOT_SRC = REPO_ROOT / "external" / "lerobot" / "src"
 REQUIRED_FEATURES = {
     "observation.images.top",
@@ -43,6 +51,9 @@ def main() -> int:
     base_info = _load_info(args.base_root)
     correction_info = _load_info(args.corrections_root)
     _validate_compatible(base_info, correction_info)
+    base_contract = load_dataset_contract(args.base_root)
+    correction_contract = load_dataset_contract(args.corrections_root)
+    validate_merge_contracts(base_contract, correction_contract)
     if args.output_root.exists():
         if not args.overwrite:
             parser.error(f"{args.output_root} exists; pass --overwrite to replace it")
@@ -75,6 +86,10 @@ def main() -> int:
         args.normalization_root or args.base_root,
         args.output_root,
     )
+    output_contract = write_dataset_contract(
+        args.output_root,
+        task_conditioning="frame_exact_task_mixture",
+    )
 
     summary = {
         "schema_version": "scenesmith.pi05_training_merge.v1",
@@ -89,6 +104,11 @@ def main() -> int:
         "total_frames": int(output_info["total_frames"]),
         "features": sorted(output_info["features"]),
         "normalization_contract": normalization,
+        "dataset_contracts": {
+            "base": base_contract,
+            "corrections": correction_contract,
+            "output": output_contract,
+        },
     }
     summary_path = args.output_root / "scenesmith_merge_summary.json"
     summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")

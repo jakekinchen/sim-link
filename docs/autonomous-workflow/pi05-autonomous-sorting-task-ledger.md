@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ## Program Status
 
 ```text
-Current state: research complete; unsafe production recipe stopped
-Completed: pipeline bootstrap, research audit, goal mandate, canonical coordinate contract
-Evidence: cycle manifests; 28 passing intervention tests
-Remaining: M10-M15 below
+Current state: M10 trusted-data gate verified; M11 replay balancing active
+Completed: pipeline bootstrap, research audit, goal mandate, trusted PI0.5 data contract
+Evidence: 51 tests; MPS canary; four valid correction segments; pinned stats hash
+Remaining: M11-M15 below
 Blockers: none for local P0 implementation
-Next step: T10.5 merge enforcement and regenerated canary
+Next step: T11.1 source- and phase-balanced sampling
 ```
 
 ## Tasks
@@ -21,8 +21,8 @@ Next step: T10.5 merge enforcement and regenerated canary
 | T10.2 | M10 | verified | Preserve accepted normalization or version an explicit migration | 18 tests; V10 processor equality; pinned stats hash |
 | T10.3 | M10 | verified | Split correction runs at temporal/source boundaries | 20 tests; chunks cannot cross selected-frame gaps |
 | T10.4 | M10 | verified | Persist the exact per-frame PI0.5 task prompt | 49 tests; legacy unlabeled DAgger frames rejected |
-| T10.5 | M10 | in_progress | Harden dataset merge compatibility and regenerate corrections | Merge refuses incompatible contracts; regenerated stats pass |
-| T11.1 | M11 | pending | Add source- and phase-balanced sampling | Logged sample counts match configured ratios |
+| T10.5 | M10 | verified | Harden dataset merge compatibility and regenerate corrections | Old corrections rejected; 12-episode/11,316-frame canary merge passes |
+| T11.1 | M11 | in_progress | Add source- and phase-balanced sampling | Logged sample counts match configured ratios |
 | T11.2 | M11 | pending | Export pre-intervention and post-recovery context | Context windows remain temporally valid |
 | T11.3 | M11 | pending | Add pre-contact progress/stall intervention triggers | Deterministic trigger tests and rollout evidence |
 | T11.4 | M11 | pending | Add cumulative bounded replay registry | Prior accepted corrections retained or sampled by policy |
@@ -47,11 +47,11 @@ Next step: T10.5 merge enforcement and regenerated canary
 ### 2026-07-10 - Goal-loop rebaseline
 
 ```text
-Status: in_progress
-Completed: goal-loop mandate and T10.1 canonical coordinate contract
-Evidence: 28 intervention tests; shared transform used by expert, exporter, and server
-Commit: 56003aa mandate; 4cd49ce T10.1; 4dfbe38 T10.2; 7468a90 T10.3
-Remaining: implement and verify T10.5
+Status: M10 verified; M11 in_progress
+Completed: trusted coordinate, normalization, segmentation, task, and merge contracts
+Evidence: 51 tests; seed-6204 MPS canary; 660 correction frames in four contiguous episodes
+Commit: 56003aa mandate; 4cd49ce T10.1; 4dfbe38 T10.2; 7468a90 T10.3; 25ddc84 T10.4
+Remaining: implement M11 balanced failure-focused replay
 Blockers: none
-Next step: reject incompatible merges and run a corrected export/merge canary
+Next step: deterministic source/phase sampler with auditable exposure counts
 ```

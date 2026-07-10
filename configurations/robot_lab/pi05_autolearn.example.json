@@ -66,6 +66,7 @@
       "timeout_s": 7200,
       "required_artifacts": [
         "outputs/robot_lab/autolearn/{cycle_id}/dagger-dataset/meta/info.json",
+        "outputs/robot_lab/autolearn/{cycle_id}/dagger-dataset/scenesmith_pi05_dataset_contract.json",
         "outputs/robot_lab/autolearn/{cycle_id}/dagger-dataset/scenesmith_intervention_export_summary.json"
       ],
       "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/export-corrections.log"
@@ -84,6 +85,7 @@
       "timeout_s": 7200,
       "required_artifacts": [
         "outputs/robot_lab/autolearn/{cycle_id}/training-dataset/meta/info.json",
+        "outputs/robot_lab/autolearn/{cycle_id}/training-dataset/scenesmith_pi05_dataset_contract.json",
         "outputs/robot_lab/autolearn/{cycle_id}/training-dataset/scenesmith_merge_summary.json"
       ],
       "log_path": "outputs/robot_lab/autolearn/{cycle_id}/logs/aggregate-dataset.log"
@@ -183,11 +185,18 @@
       "experiments/pi05_autolearn",
       "scenesmith/robot_lab/autolearn.py",
       "scenesmith/robot_lab/autolearn_cycle.py",
+      "scenesmith/robot_lab/intervention_supervisor.py",
+      "scenesmith/robot_lab/pi05_dataset_contract.py",
+      "scenesmith/robot_lab/so101_coordinates.py",
       "scripts/robot_lab/export_intervention_dataset.py",
       "scripts/robot_lab/finalize_pi05_checkpoint.py",
+      "scripts/robot_lab/generate_causal_pi05_dataset.py",
       "scripts/robot_lab/merge_pi05_training_datasets.py",
+      "scripts/robot_lab/pi05_local_server.py",
+      "scripts/robot_lab/relabel_causal_pi05_tasks.py",
       "scripts/robot_lab/run_pi05_autolearn_cycle.py",
       "scripts/robot_lab/run_pi05_eval_with_server.py",
+      "scripts/robot_lab/stamp_pi05_dataset_contract.py",
       "tests/unit/test_pi05_autolearn.py"
     ]
   },

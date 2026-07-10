@@ -16,13 +16,13 @@ proof states must remain distinct.
 
 ## Current Milestone
 
-M10 - Trusted PI0.5 training data contract
+M11 - Balanced failure-focused replay
 
 ## Current Slice
 
-Centralize the MuJoCo-to-LeRobot SO-101 calibration transform and make dataset
-export/merge reject coordinate, normalization, task-label, or temporal-chunk
-incompatibility. Regenerate correction data only after deterministic tests pass.
+Add deterministic source- and phase-balanced sampling so each bounded training
+run receives meaningful exposure to trusted base behavior and sparse correction
+windows. Log actual sample counts and preserve cumulative accepted corrections.
 
 ## Durable State
 
@@ -65,7 +65,6 @@ incompatibility. Regenerate correction data only after deterministic tests pass.
 - PI0.5 inference, five-step LoRA training, save, finalize, reload, evaluation,
   and rollback are proven on an MPS-backed runtime.
 - Hybrid controller-assisted sorting is proven; strict autonomous sorting is not.
-- The bootstrap correction aggregate is invalid as learning evidence because its
-  correction coordinates, task labels, temporal chunks, and normalizer contract
-  do not match the accepted base dataset.
+- M10 now rejects the malformed bootstrap aggregate and proves a corrected
+  12-episode canary merge with exact frame tasks and pinned normalization.
 - `cycle-001-mps` is interrupted and must not resume under its current recipe.

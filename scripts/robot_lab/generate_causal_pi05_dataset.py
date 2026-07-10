@@ -28,6 +28,7 @@ from scenesmith.robot_lab.causal_sort_expert import (
     CausalSortExpertConfig,
 )
 from scenesmith.robot_lab.domain_randomization import apply_mujoco_randomization, randomize_scene
+from scenesmith.robot_lab.pi05_dataset_contract import write_dataset_contract
 
 
 DEFAULT_DESCRIPTION = (
@@ -179,6 +180,7 @@ def main() -> int:
             )
 
     dataset.finalize()
+    dataset_contract = write_dataset_contract(dataset_root, task_conditioning="episode_task")
     if args.push_to_hub:
         dataset.push_to_hub(
             private=True,
@@ -204,6 +206,7 @@ def main() -> int:
         "all_grasps_contact_gated": all(report["all_grasps_contact_gated"] for report in episode_reports),
         "hub_pushed": args.push_to_hub,
         "sidecar": str(sidecar_path),
+        "dataset_contract": dataset_contract,
         "episode_summaries": [
             str(
                 args.output_root
