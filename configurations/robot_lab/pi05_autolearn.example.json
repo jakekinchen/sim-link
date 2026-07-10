@@ -1,14 +1,14 @@
 {
   "schema_version": "scenesmith.pi05_autolearn.v1",
-  "cycle_id": "cycle-001-mps",
-  "train_seeds": [7200, 7201, 7202, 7203],
-  "eval_seeds": [7300, 7301, 7302, 7303],
+  "cycle_id": "cycle-000-bootstrap-mps",
+  "train_seeds": [6204],
+  "eval_seeds": [6301],
   "accepted_model": "outputs/robot_lab/so101_desk_cube_sort/models/pi05-scenesmith-so101-sort-lora-v10-red-balanced-250",
-  "candidate_model": "outputs/robot_lab/autolearn/cycle-001-mps/train/checkpoints/000025/pretrained_model",
-  "manifest_path": "experiments/pi05_autolearn/cycles/cycle-001-mps.json",
+  "candidate_model": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/train/checkpoints/000005/pretrained_model",
+  "manifest_path": "experiments/pi05_autolearn/cycles/cycle-000-bootstrap-mps.json",
   "accepted_pointer_path": "experiments/pi05_autolearn/accepted.json",
-  "baseline_evaluation": "outputs/robot_lab/autolearn/cycle-001-mps/baseline-eval/intervention_batch_summary.json",
-  "candidate_evaluation": "outputs/robot_lab/autolearn/cycle-001-mps/candidate-eval/intervention_batch_summary.json",
+  "baseline_evaluation": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/baseline-eval/intervention_batch_summary.json",
+  "candidate_evaluation": "outputs/robot_lab/autolearn/cycle-000-bootstrap-mps/candidate-eval/intervention_batch_summary.json",
   "stages": [
     {
       "name": "baseline_eval",
@@ -22,7 +22,7 @@
         "--device", "mps",
         "--policy-port", "8840",
         "--grasp-assist-mode", "policy_gripper",
-        "--max-policy-steps", "6000"
+        "--max-policy-steps", "200"
       ],
       "timeout_s": 43200,
       "required_artifacts": [
@@ -42,7 +42,7 @@
         "--device", "mps",
         "--policy-port", "8840",
         "--grasp-assist-mode", "policy_gripper_tray_transfer",
-        "--max-policy-steps", "6000"
+        "--max-policy-steps", "3500"
       ],
       "timeout_s": 43200,
       "required_artifacts": [
@@ -57,7 +57,7 @@
         "scripts/robot_lab/export_intervention_dataset.py",
         "--batch-summary", "outputs/robot_lab/autolearn/{cycle_id}/collection/intervention_batch_summary.json",
         "--output-root", "outputs/robot_lab/autolearn/{cycle_id}/dagger-dataset",
-        "--repo-id", "local/pi05-dagger-cycle-001-mps",
+        "--repo-id", "local/pi05-dagger-cycle-000-bootstrap-mps",
         "--fps", "30",
         "--frame-selection", "dagger_corrections",
         "--dataset-schema", "pi05_causal",
@@ -78,7 +78,7 @@
         "--base-root", "outputs/robot_lab/so101_desk_cube_sort/datasets/causal_pi05_tail_v2_stage_tasks/dataset",
         "--corrections-root", "outputs/robot_lab/autolearn/{cycle_id}/dagger-dataset",
         "--output-root", "outputs/robot_lab/autolearn/{cycle_id}/training-dataset",
-        "--repo-id", "local/pi05-autolearn-cycle-001-mps"
+        "--repo-id", "local/pi05-autolearn-cycle-000-bootstrap-mps"
       ],
       "timeout_s": 7200,
       "required_artifacts": [
@@ -92,7 +92,7 @@
       "argv": [
         "external/leLab/.venv/bin/python",
         "-m", "lerobot.scripts.lerobot_train",
-        "--dataset.repo_id=local/pi05-autolearn-cycle-001-mps",
+        "--dataset.repo_id=local/pi05-autolearn-cycle-000-bootstrap-mps",
         "--dataset.root=outputs/robot_lab/autolearn/{cycle_id}/training-dataset",
         "--dataset.eval_split=0.0",
         "--dataset.return_uint8=true",
@@ -142,7 +142,7 @@
         "--device", "mps",
         "--policy-port", "8840",
         "--grasp-assist-mode", "policy_gripper",
-        "--max-policy-steps", "6000"
+        "--max-policy-steps", "200"
       ],
       "timeout_s": 43200,
       "required_artifacts": [
@@ -153,7 +153,7 @@
   ],
   "training": {
     "stage": "train",
-    "max_steps": 25
+    "max_steps": 5
   },
   "git": {
     "auto_commit": true,
@@ -174,7 +174,7 @@
     ]
   },
   "promotion": {
-    "min_pure_success_rate": 0.75,
+    "min_pure_success_rate": 1.0,
     "min_success_rate_delta": 0.0,
     "allow_contact_gated_grasp_assist": true
   }

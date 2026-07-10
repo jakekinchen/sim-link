@@ -431,13 +431,14 @@ class CycleRunner:
             _write_json(manifest_path, manifest)
             self._commit_paths(commit_paths, "promotion" if decision.accepted else "rejection")
             return manifest
-        except Exception as exc:
+        except BaseException as exc:
             if training_attempted and not self.external_cleaned:
                 self._cleanup_external(manifest)
-            manifest["status"] = "failed"
+            manifest["status"] = "interrupted" if isinstance(exc, KeyboardInterrupt) else "failed"
             manifest["error"] = {"type": type(exc).__name__, "message": str(exc)}
             _write_json(manifest_path, manifest)
-            self._commit_paths([manifest_path], "failure")
+            boundary = "interruption" if isinstance(exc, KeyboardInterrupt) else "failure"
+            self._commit_paths([manifest_path], boundary)
             raise
 
     def _cleanup_external(self, manifest: dict[str, Any]) -> str | None:

@@ -180,12 +180,15 @@ class PromotionTests(unittest.TestCase):
 
 
 class _FakeStageRunner:
-    def __init__(self, exit_codes=None):
+    def __init__(self, exit_codes=None, raises=None):
         self.exit_codes = exit_codes or {}
+        self.raises = raises or {}
         self.calls = []
 
     def run(self, stage, *, repo_root):
         self.calls.append(stage.name)
+        if stage.name in self.raises:
+            raise self.raises[stage.name]
         return StageResult(
             exit_code=self.exit_codes.get(stage.name, 0),
             duration_s=0.01,
@@ -303,6 +306,28 @@ class CycleConfigTests(unittest.TestCase):
             with self.assertRaisesRegex(Exception, "Stage train exited 2"):
                 runner.run()
             self.assertEqual(fake.calls, ["train", "brev_cleanup", "brev_inventory"])
+
+    def test_keyboard_interrupt_is_recorded(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            payload = _cycle_payload()
+            config_path = root / "cycle.json"
+            config_path.write_text(json.dumps(payload), encoding="utf-8")
+            fake = _FakeStageRunner(raises={"train": KeyboardInterrupt()})
+            runner = CycleRunner(
+                CycleConfig.from_dict(payload),
+                repo_root=root,
+                config_path=config_path,
+                stage_runner=fake,
+                enforce_git=False,
+            )
+            with self.assertRaises(KeyboardInterrupt):
+                runner.run()
+            manifest = json.loads(
+                (root / "experiments/pi05_autolearn/cycles/test-cycle.json").read_text()
+            )
+            self.assertEqual(manifest["status"], "interrupted")
+            self.assertEqual(manifest["error"]["type"], "KeyboardInterrupt")
 
 
 if __name__ == "__main__":
