@@ -21,11 +21,12 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute brief `docs/briefs/029-synthetic-ready-compiler-happy-path.md`
-to keep T16.4 moving. Add a bounded `synthetic_test_only` ready compiler path
-with deterministic golden mass/COM/inertia and stable identity while keeping
-the checked-in real current-arm artifacts truthfully blocked. Do not open
-hardware, qualification, or training.
+Execute brief `docs/briefs/030-synthetic-ready-negative-matrix.md`
+to keep T16.4 moving. Extend the bounded `synthetic_test_only` ready compiler
+from happy-path proof to fail-closed exact-cover ambiguity, reused-evidence,
+and invalid transform/inertia rejection while keeping the checked-in real
+current-arm artifacts truthfully blocked. Do not open hardware,
+qualification, or training.
 
 ## Durable State
 
