@@ -9,7 +9,7 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "710960b756553a40fd5fc9c67d7bd598281722be",
+  "current_head_commit": "383557b0bdb1dc17725b4eac0db37d19c902b1c0",
   "last_reviewed_commit": "710960b756553a40fd5fc9c67d7bd598281722be",
   "source_review": {
     "commit": "710960b756553a40fd5fc9c67d7bd598281722be",
@@ -82,8 +82,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M16",
-  "current_task": "T16.2b",
-  "next_eligible_task": "T16.2b",
+  "current_task": "T16.5a",
+  "next_eligible_task": "T16.5a",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -118,10 +118,13 @@
       "authority_not_granted": ["optimizer_run", "simulation_training_ready"]
     },
     "T16.2": {
-      "state": "reopened",
-      "result": "schema scaffold verified",
-      "missing": ["mechanically computed qualification decisions"],
-      "authority_granted": ["schema_validation"],
+      "state": "verified",
+      "result": "schema scaffold plus mechanically generated and independently recomputed qualification decisions verified on declared fixture evidence",
+      "missing": [],
+      "authority_granted": [
+        "schema_validation",
+        "twin_qualification_computation_valid"
+      ],
       "authority_not_granted": ["physical_twin_qualified", "promotion_eligible"]
     },
     "T16.2b-A": {
@@ -160,11 +163,11 @@
       ]
     },
     "T16.2b": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T16.1b", "T16.2", "T16.2b-A", "T16.4b"],
       "brief_id": "037",
-      "result": "reviewer 046 accepts the mechanically computed qualification generator and independent verifier locally; remote preservation remains",
-      "execution_note": "Implementation 710960b is accepted locally after 16 focused and 147 broad tests; T16.2b remains in progress until review evidence is remotely preserved",
+      "result": "mechanically computed qualification generator and independent verifier remotely preserved on declared fixture evidence",
+      "execution_note": "Implementation 710960b and reviewer 046 are remotely preserved through 383557b after 16 focused and 147 broad tests",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_computed_twin_qualification",
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
@@ -281,9 +284,10 @@
       "authority_not_granted": ["live_hardware_census", "hardware_qualification"]
     },
     "T16.5a": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["T16.1b", "T16.2b", "T16.4b"],
-      "result": "offline no-write transport and lifecycle preflight pending",
+      "brief_id": "038",
+      "result": "offline no-write transport, lifecycle, identity, retry, exception-cleanup, and recorded-trace preflight in progress",
       "authority_not_granted": ["live_hardware_access", "register_write", "motion"]
     },
     "T16.5b": {

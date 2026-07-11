@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.2b computed-qualification remote closeout
-completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.2b-A central authority composition; T16.4/T16.4b production measured-inertial compiler and numerical hardening
-evidence: T16.2b implementation 710960b/reviewer 046 pass 16 focused and 147 broad tests; v2 spec eff5a15e... -> fixture input 5c942916... -> report 7ed02c6e... -> denial composition 41a4d731...; remote preservation pending
-remaining: remotely preserve reviewer 046 and close T16.2b; T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
+current_task: T16.5a offline no-write transport and lifecycle preflight
+completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening
+evidence: T16.2b implementation 710960b and reviewer 046 are remotely preserved through 383557b after 16 focused and 147 broad tests; v2 spec eff5a15e... -> input 5c942916... -> report 7ed02c6e... -> denial composition 41a4d731...
+remaining: T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
 blockers: no offline blocker; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
-next_step: push and confirm implementation 710960b plus reviewer 046, then open T16.5a offline-only
+next_step: execute Brief 038 entirely offline; no live object construction before its remote closeout
 ```
 
 ## Rules
@@ -40,14 +40,14 @@ next_step: push and confirm implementation 710960b plus reviewer 046, then open 
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
 | T16.1 | verified | T16.0 | Inventory LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Dependency inventory and source evidence verified; executable resolution completed separately by T16.1b |
 | T16.1b | verified | T16.1 | Unify the executable LeRobot/preprocessing revision used by every robotics stage | `dca2b45`; stack identity `c8e903e7...`; exact base + tracked patch + environment lock + saved-sample stage parity |
-| T16.2 | reopened | T16.1b | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Schema scaffold verified; qualification `pass` is not yet mechanically derived from the specification |
+| T16.2 | verified | T16.1b | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Schema scaffold plus T16.2b computed decision path verified on fixture evidence; no physical qualification |
 | T16.2b-A | verified | T16.1b,T16.2,T16.4 | Define the only central composer for global authority from scoped component capabilities | `c0b9629`; reviewer 043; contract `6d04b205...`; 101-test broad gate; remote through `e1d59ca`; grants contract validity only |
 | T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
 | T16.4 | verified | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Production compiler valid on declared fixture evidence; current-arm physical input remains blocked |
 | T16.4b | verified | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | `7d05629`/reviewer 045/remote `dbdd1ef`; normalized Jacobi convergence/residual checks; scale-relative adversarial coverage; 17 focused and 131 broad tests |
-| T16.2b | in_progress | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046 locally accept v2 evidence/spec/generator/independent verifier; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld; remote preservation pending |
+| T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
-| T16.5a | pending | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Narrow read-only interface; fake/recorded traces; construct/connect/read/decode/close/retry/cleanup; zero writes; identity/alias rejection; `physical_follower_commanded=false` |
+| T16.5a | in_progress | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Brief 038; narrow injected interface; fake/recorded traces; construct/connect/read/decode/close/retry/cleanup; zero writes/torque/motion; identity/alias rejection; `physical_follower_commanded=false` |
 | T16.5b | pending | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Stable USB/bus/six-servo identity; camera frames/timestamps; content-addressed trace; zero configuration/torque/register writes or motion; `live_read_only_census_observed` only |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
@@ -130,6 +130,20 @@ next_step: push and confirm implementation 710960b plus reviewer 046, then open 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.2b remotely verified; T16.5a opened offline
+
+```text
+Current task: T16.5a
+State: in_progress
+Completed: T16.2b mechanically computed qualification remotely preserved with its same-agent review
+Evidence: local HEAD, origin tracking, and git ls-remote all matched 383557b0bdb1dc17725b4eac0db37d19c902b1c0; implementation 710960b and reviewer 046 are ancestors
+Commit: 710960b implementation; 383557b reviewer boundary
+Remaining: offline read-only transport/lifecycle preflight before any live discovery
+Blockers: none for offline work; live hardware remains closed
+Training lock: closed
+Next step: execute Brief 038 using fake/recorded transports only
+```
 
 ### 2026-07-11 - T16.2b mechanically computed qualification locally reviewed
 

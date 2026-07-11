@@ -51,11 +51,17 @@ Review-time hardening pinned rules and paths, intersected freshness with source
 evidence, classified fixture paths, and gated physical proof state on the exact
 profile. Final focused, broad, product, compile, and diff gates were rerun.
 
-Reviewer decision 046 accepts the implementation locally. T16.2b remains
-`in_progress` until implementation and review evidence are pushed and
-independently confirmed on `origin/codex/pi05-autolearn-loop`.
+Reviewer decision 046 accepted the implementation locally before push. The
+remote closeout below then satisfied the final T16.2b verification condition.
 
 ## Remote closeout
 
-Pending scoped reviewer-evidence commit, push, and independent remote
-confirmation.
+- Pushed only to `origin/codex/pi05-autolearn-loop`.
+- Fresh fetch, remote-tracking ref, and `git ls-remote` all resolved to
+  `383557b0bdb1dc17725b4eac0db37d19c902b1c0`.
+- Ancestry checks confirmed implementation
+  `710960b756553a40fd5fc9c67d7bd598281722be` and reviewer decision 046 on the
+  named remote.
+- T16.2b is verified on declared fixture evidence only. No current simulation or
+  physical prerequisite is satisfied, every global decision remains withheld,
+  and T16.5a is next as an offline-only gate.

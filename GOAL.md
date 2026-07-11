@@ -30,14 +30,15 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Preserve Brief 037 implementation `710960b` and reviewer decision 046 on
-`origin/codex/pi05-autolearn-loop`, then close T16.2b. The versioned v2 path now
-computes results from content-addressed evidence and the code-pinned spec,
-independently recomputes every serialized decision, rejects caller status and
-fixture relabeling, and routes its false fixture claims through the central
-composer. After remote confirmation, open the smallest precise T16.5a offline
-no-write transport/lifecycle brief. Do not open hardware before T16.5a itself is
-verified and remotely preserved.
+Execute Brief 038,
+`docs/briefs/038-offline-no-write-servo-census-preflight.md`, under T16.5a.
+T16.2b implementation `710960b` and reviewer decision 046 are remotely
+preserved through `383557b`. Build only the offline, injected fake/recorded-
+trace path: a narrow read-only transport, exact follower-role and six-servo
+identity contract, connect/read/decode/retry/exception/close lifecycle, and
+mechanical zero-write/zero-torque-change/zero-motion counts. Do not enumerate,
+open, import-construct, or otherwise touch a live serial, camera, robot, or
+motor-bus object during this slice.
 
 ## Durable State
 
@@ -138,11 +139,12 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   scale-relative physical-inertia tolerances, and the adversarial NumPy corpus
   pass. The implementation and review are preserved on the named remote through
   `dbdd1ef`; T16.4b is closed on declared fixture evidence only.
-- Reviewer decision 046 accepts Brief 037 implementation `710960b` locally:
+- Reviewer decision 046 verifies Brief 037 implementation `710960b`:
   caller-declared execution is closed, v2 qualification results are generated
   and independently recomputed, freshness is bounded by source evidence, and
-  fixture numeric passes remain authority-withheld. T16.2b remains in progress
-  only until implementation and review are preserved on the named remote.
+  fixture numeric passes remain authority-withheld. Implementation and review
+  are preserved on the named remote through `383557b`; T16.2b is closed on
+  declared fixture evidence only.
 - The owner is physically present and has granted conditional read-only
   hardware/camera authority after verified T16.5a plus final operator
   confirmation for exactly one initial session-scoped `supervised_micro_motion`
