@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4 measured-mass intake and assembly inertia/COM compiler
+current_task: T16.4 truthful missing-measurements intake and assembly inertia/COM compiler
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
 evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: T16.4-T16.5, M17-M19 prerequisites, and Gates C-D
+remaining: implement T16.4 awaiting/blocked real artifacts plus synthetic compiler proof, then T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 023 to compile measured-part mass evidence into a deterministic assembly inertia/COM artifact without altering the verified structural baseline
+next_step: execute brief 024; never relabel the seven CAD/MJCF mass priors as measured physical evidence
 ```
 
 ## Rules
@@ -32,7 +32,7 @@ next_step: execute brief 023 to compile measured-part mass evidence into a deter
 | T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
 | T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
 | T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
-| T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
+| T16.4 | in_progress | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Current real intake/result must be `awaiting_measurements` / `blocked_missing_measurements`; synthetic parallel-axis golden tests; ambiguity and double counting fail closed |
 | T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -113,6 +113,20 @@ next_step: execute brief 023 to compile measured-part mass evidence into a deter
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.4 manager truth correction before implementation
+
+```text
+Current task: T16.4
+State: in_progress
+Completed: repo/history audit found no genuine physical SO-101 piece-weight evidence; seven MJCF masses totaling 0.632006 kg are CAD-derived priors only
+Evidence: manager intervention 009; TwinProfile leaves full_arm_mass_kg null; no measured-mass source file exists
+Commit: pending
+Remaining: checked-in awaiting-measurements intake, blocked current-arm result, synthetic-only ready compiler proof, binding/tamper/double-count tests, and fresh review
+Blockers: real current-arm inertials remain blocked until physical measurements are supplied, but the offline compiler capability is implementable now
+Training lock: closed
+Next step: execute brief 024; do not execute superseded brief 023
+```
 
 ### 2026-07-10 - T16.3 manager reopen after adversarial identity checks
 

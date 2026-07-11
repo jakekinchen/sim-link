@@ -21,10 +21,11 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute T16.4 measured-part mass intake and assembly inertia/COM compilation
-against the verified simulation-only twin baseline. Consume the pinned
-dependency lock, TwinProfile, and structural-diff artifact identities, fail
-closed on missing or ambiguous evidence, and do not open hardware,
+Execute T16.4 as a truthful measured-mass intake and assembly inertia/COM
+compiler capability. No genuine physical piece-weight evidence exists in repo
+state, so the checked-in real intake must say `awaiting_measurements` and the
+compiled real result must say `blocked_missing_measurements`; prove the ready
+math only with a clearly synthetic fixture. Do not open hardware,
 qualification, or training work.
 
 ## Durable State
@@ -89,4 +90,5 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`.
 - T16.4 is now the active offline prerequisite: measured-part mass intake and
   assembly inertia/COM compilation against the verified simulation-only twin
-  baseline.
+  baseline. CAD/MJCF masses remain priors and cannot be relabeled as physical
+  measurements; current-arm aggregate mass, COM, and inertia remain unknown.
