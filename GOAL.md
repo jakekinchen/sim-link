@@ -30,15 +30,14 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute Brief 036,
-`docs/briefs/036-inertial-eigensolver-numerical-hardening.md`, as the final
-T16.4b gate. T16.2b-A is verified at `c0b9629`; the production hierarchical
-compiler is verified at `a93ff05` with reviewer 044 and remote preservation
-through `bc5d4fe`. Add convergence/residual validation, scale-relative
-tolerances, randomized NumPy parity, rotation/scale/near-singular adversarial
-coverage, and non-finite rejection without changing the local-capability
-boundary. Do not start an optimizer, open hardware, use paid compute, or begin
-T16.5.
+Preserve Brief 036 implementation `7d05629` and reviewer decision 045 on
+`origin/codex/pi05-autolearn-loop`, then close T16.4b. The deterministic
+eigensolver now has convergence/residual validation, scale-relative tolerances,
+randomized NumPy parity, rotation/scale/near-singular adversarial coverage, and
+non-finite rejection without changing the local-capability boundary. After
+remote confirmation, open the smallest precise T16.2b mechanically computed
+qualification brief. Do not start an optimizer, open hardware, use paid
+compute, or begin T16.5.
 
 ## Durable State
 
@@ -134,6 +133,11 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   facts only, and the checked-in fixture composition mechanically withholds all
   global decisions. The remote preserves the implementation and review through
   `e1d59ca`; `training_lock` remains closed.
+- Reviewer decision 045 accepts Brief 036 implementation `7d05629` locally:
+  deterministic normalized Jacobi convergence, eigenpair residuals,
+  scale-relative physical-inertia tolerances, and the adversarial NumPy corpus
+  pass. T16.4b remains in progress only until that implementation and review
+  are confirmed on the named remote.
 - The owner is physically present and has granted conditional read-only
   hardware/camera authority after verified T16.5a plus final operator
   confirmation for exactly one initial session-scoped `supervised_micro_motion`

@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "bc5d4fe331db1c4dcc22326b0c012951212b148b",
-  "last_reviewed_commit": "a93ff057f8cf4f966d4edc8dc0098c3526a14def",
+  "current_head_commit": "7d0562916c836810fc15c68ac51af20089a26dd7",
+  "last_reviewed_commit": "7d0562916c836810fc15c68ac51af20089a26dd7",
   "source_review": {
-    "commit": "a93ff057f8cf4f966d4edc8dc0098c3526a14def",
-    "decision": "CONTINUE_T16_4B_NUMERICAL_HARDENING",
-    "reviewer_decision": "docs/reviewer-messages/044-production-inertial-compiler-reviewed.md"
+    "commit": "7d0562916c836810fc15c68ac51af20089a26dd7",
+    "decision": "CLOSE_T16_4B_AFTER_REMOTE_PRESERVATION",
+    "reviewer_decision": "docs/reviewer-messages/045-inertial-eigensolver-numerical-hardening-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -185,7 +185,7 @@
       "state": "in_progress",
       "depends_on": ["T16.2", "T16.4", "T16.2b-A"],
       "brief_id": "036",
-      "execution_note": "Brief 035 production compiler is reviewed and remotely preserved; Brief 036 owns the final deterministic eigensolver numerical-hardening gate",
+      "execution_note": "Reviewer 045 accepts Brief 036 implementation 7d05629; T16.4b remains in progress until the implementation and review are remotely preserved",
       "completed_subslices": [
         {
           "source_commit": "69df54d",
@@ -201,9 +201,16 @@
           "source_commit": "a93ff05",
           "review_decision_id": "044",
           "result": "production hierarchical mixed-source compiler and fixture reviewed and remotely preserved through bc5d4fe"
+        },
+        {
+          "source_commit": "7d05629",
+          "review_decision_id": "045",
+          "result": "deterministic scale-normalized eigensolver, convergence and residual checks, and adversarial numerical corpus accepted locally pending remote preservation"
         }
       ],
       "test_commands": [
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_inertia_numerics tests.unit.test_artifact_contract",
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
         "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_production_inertial_compiler",
         "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_authority_composer tests.unit.test_artifact_contract tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack tests.unit.test_robotics_dependency_lock",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_production_inertial_fixture.py --verify",
@@ -220,7 +227,7 @@
         "blocked_current_arm_identity_sha256": "8b8aab8e769167531776e38d76c545cec99277b69783d57c9db78f1020297ffc"
       },
       "known_limitations": [
-        "deterministic eigensolver convergence, residual, and scale-relative tolerance hardening remains before T16.4b can close",
+        "reviewer 045 accepted numerical hardening; remote preservation remains before T16.4b can close",
         "fixture evidence proves the production path but is not current-arm physical evidence"
       ],
       "authority_granted": [

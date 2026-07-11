@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4b production measured-inertial compiler
+current_task: T16.4b numerical hardening remote closeout
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.2b-A central authority composition; T16.4 blocked real template and synthetic compiler scaffold; T16.4b strict artifact and scoped-gate sub-slice
-evidence: production compiler a93ff05 and reviewer 044 are preserved on origin through bc5d4fe with 122 broad tests; fixture fe9dbd54... -> b8d7c5d2...; every global decision withheld
-remaining: remaining T16.4b production compiler; T16.2b computed qualification; T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
+evidence: production compiler a93ff05/reviewer 044 are remotely preserved; numerical hardening 7d05629/reviewer 045 passes 17 focused and 131 broad tests plus extreme-scale stress; every global decision remains withheld
+remaining: remotely preserve reviewer 045 and close T16.4b; T16.2b computed qualification; T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
 blockers: no offline blocker; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
-next_step: execute Brief 036 deterministic eigensolver convergence/residual and scale-relative numerical hardening, then close T16.4b
+next_step: push and confirm implementation 7d05629 plus reviewer 045, then open T16.2b
 ```
 
 ## Rules
@@ -44,7 +44,7 @@ next_step: execute Brief 036 deterministic eigensolver convergence/residual and 
 | T16.2b-A | verified | T16.1b,T16.2,T16.4 | Define the only central composer for global authority from scoped component capabilities | `c0b9629`; reviewer 043; contract `6d04b205...`; 101-test broad gate; remote through `e1d59ca`; grants contract validity only |
 | T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
 | T16.4 | reopened | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Blocked real template and synthetic compiler scaffold verified; production measurement ingestion and authority separation missing |
-| T16.4b | in_progress | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | `a93ff05`/reviewer 044/remote `bc5d4fe` verify hierarchy, units/calibration, all source modes, full-precision aggregation, and fixture `fe9dbd54...` -> `b8d7c5d2...`; Brief 036 numerical hardening remains |
+| T16.4b | in_progress | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | `7d05629`/reviewer 045 locally accept normalized Jacobi convergence/residual checks and scale-relative adversarial coverage; 17 focused and 131 broad tests; remote preservation remains before closeout |
 | T16.2b | pending | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | Units, finite values, trials, split IDs, conditions, uncertainty, content-addressed evidence, and recomputed tolerances |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | pending | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Narrow read-only interface; fake/recorded traces; construct/connect/read/decode/close/retry/cleanup; zero writes; identity/alias rejection; `physical_follower_commanded=false` |
@@ -130,6 +130,20 @@ next_step: execute Brief 036 deterministic eigensolver convergence/residual and 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.4b numerical hardening locally reviewed
+
+```text
+Current task: T16.4b
+State: in_progress
+Completed: deterministic scale-normalized symmetric eigensolver; fixed iteration bound; eigenvector residual and orthogonality checks; scale-relative symmetry/PSD/triangle tolerances; finite-intermediate rejection; deterministic NumPy corpus
+Evidence: implementation 7d05629; reviewer 045; 17 focused and 131 broad tests; 20,000 extreme-scale eigensystems and 2,000 randomized physical tensors; product identities unchanged; every global composer decision withheld
+Commit: 7d05629; review/remote preservation pending
+Remaining: preserve implementation and reviewer evidence on origin, then close T16.4b and start T16.2b
+Blockers: no offline blocker
+Training lock: closed
+Next step: commit reviewer evidence, push only the named branch, and confirm the remote
+```
 
 ### 2026-07-11 - T16.4b production compiler locally reviewed
 
