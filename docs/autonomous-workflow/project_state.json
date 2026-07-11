@@ -10,12 +10,12 @@
     "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "4fd1f3a1a3333ab9494786da30ee121511f2113f",
-  "last_reviewed_implementation_commit": "4fd1f3a1a3333ab9494786da30ee121511f2113f",
+  "verified_through_commit": "4f75a7a2e8f08bc07acdfb20967bc9117dc483bb",
+  "last_reviewed_implementation_commit": "4f75a7a2e8f08bc07acdfb20967bc9117dc483bb",
   "source_review": {
-    "commit": "4fd1f3a1a3333ab9494786da30ee121511f2113f",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_049_STATIC_POSE_BRACKET_CONTRACT_OFFLINE_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/075-accept-brief-049-static-pose-contract.md"
+    "commit": "4f75a7a2e8f08bc07acdfb20967bc9117dc483bb",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_050_FIXTURE_RUNTIME_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/076-accept-brief-050-fixture-runtime.md"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -1165,10 +1165,9 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "050",
-      "latest_verified_brief_id": "049",
-      "completed_brief_ids": ["048", "049"],
-      "result": "Briefs 048-049 are verified and remotely preserved: CalibrationProfile b360b4f6... binds six exact live identities and static-pose contract 90e7baea... defines strict q_before/camera/q_after timing, coordinate drift, holder, lifecycle, and no-write requirements on fixture evidence only",
+      "latest_verified_brief_id": "050",
+      "completed_brief_ids": ["048", "049", "050"],
+      "result": "Briefs 048-050 are verified and remotely preserved: signed calibration and static-pose contracts plus an injected fixture runtime prove exact holder/connect/read/camera/read/no-torque-close ordering and exception-safe cleanup without allowing a live-marked transport",
       "artifact": {
         "path": "configurations/robot_lab/pi05_calibration_profile.json",
         "schema_version": "scenesmith.calibration_profile.v1",
@@ -1188,6 +1187,16 @@
         "maximum_bracket_duration_ns": 5000000000,
         "evidence_class": "deterministic_fixture"
       },
+      "static_pose_fixture_runtime": {
+        "implementation_commit": "4f75a7a2e8f08bc07acdfb20967bc9117dc483bb",
+        "result_schema_version": "scenesmith.static_pose_bracket_runtime_result.v1",
+        "capability": "fixture_static_pose_bracket_runtime_conformant",
+        "focused_test_count": 27,
+        "broad_test_count": 265,
+        "hardware_opened": false,
+        "live_transport_refused_before_connect": true,
+        "physical_follower_commanded": false
+      },
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_calibration_profile",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_calibration_profile.py --verify",
@@ -1195,7 +1204,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/calibration_profile.py scripts/robot_lab/write_calibration_profile.py tests/unit/test_calibration_profile.py",
         "git diff --check"
       ],
-      "next_action": "implement and verify Brief 050 bounded static-pose runtime with injected fake transports and complete cleanup; do not reopen hardware or run policy preprocessing/inference",
+      "next_action": "open a separate offline brief for a source-bound live-candidate contract/runner that composes fresh discovery, owner-presence lease, exact camera resolution, holder snapshots, and the verified bracket runtime; do not reopen hardware until its implementation and a later gate transition are separately reviewed",
       "conditional_authority": [
         "physical_observation_preprocessing",
         "pi05_policy_shadow_no_actuation",
@@ -1204,7 +1213,8 @@
       "authority_granted": [
         "calibration_profile_semantically_valid",
         "static_pose_bracket_contract_valid",
-        "fixture_static_pose_bracket_conformant"
+        "fixture_static_pose_bracket_conformant",
+        "fixture_static_pose_bracket_runtime_conformant"
       ],
       "authority_not_granted": [
         "static_pose_bracketed_observation",

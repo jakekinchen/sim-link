@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress under Brief 050 offline fake-transport runtime integration
+current_task: T16.5c in progress; Brief 050 fixture runtime verified and remote at 4f75a7a
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: calibration profile b360b4f6...; static-pose contract 90e7baea...; fixture observation/result 84d0aa12.../6ebb9bd6...; 11 focused in two runtimes and 249 broad tests; no hardware/policy access
+evidence: calibration/profile contract 90e7baea...; Brief 050 runtime 4f75a7a; 27 focused in two runtimes and 265 broad tests; live-marked adapter refused pre-connect; all cleanup failures preserved; no hardware/policy access
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: T16.5b none; T16.5c static-pose-bracketed synchronized-enough observation and policy-shadow input parity remain unverified
-next_step: implement and verify Brief 050 fake-transport lifecycle and cleanup; do not reopen hardware, preprocess policy input, run shadow inference, or actuate
+next_step: open an offline source-bound live-candidate contract/runner brief; no hardware until implementation review and a later separate live-gate transition
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: implement and verify Brief 050 fake-transport lifecycle and cleanup; 
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; manifest `eff3c824...`; private `125de28f...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; reviewer 072; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-049 verified; Brief 050 active offline for injected fake transport/camera/holder lifecycle, exception cleanup, and fixture runtime evidence; real bracket, preprocessing, shadow, and replay remain pending |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-050 verified through `4f75a7a`; injected runtime proves fixture lifecycle/cleanup and refuses live transports; source-bound live candidate, real bracket, preprocessing, shadow, and replay remain pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -131,6 +131,22 @@ next_step: implement and verify Brief 050 fake-transport lifecycle and cleanup; 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 050 injected static-pose runtime verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 050 verified and remotely preserved; live gate closed
+Completed: source-verified contract entry; signed pre/post all-alias holder checks; exact construct/connect/q_before/two-camera/q_after/no-torque-close sequence; strict global monotonic clock; fixture transport and camera audits; nested observation/evaluation; exception grouping and cleanup
+Evidence: implementation 4f75a7a; runtime schema scenesmith.static_pose_bracket_runtime_result.v1; fixture_static_pose_bracket_runtime_conformant only
+Verification: 27 focused contract/runtime tests in .mujoco_venv; 27 in pinned LeLab runtime; py_compile; privacy/diff checks; 265 broad tests in 84.573 seconds
+Adversarial: live-adapter refusal before connect; construction/connect/before/after read failure; camera open/read/release and paired failures; close plus holder failure; nonzero holders; audit writes/torque/motion/unexpected operations; camera semantics/property writes/continuous capture; bus drop; clock regression; pose drift; resigned authority/holder/lifecycle/nested evidence
+Authority gained: fixture_static_pose_bracket_runtime_conformant only
+Authority withheld: live candidate/permit, static_pose_bracketed_observation, policy_shadow_input_valid, policy_shadow, actuation, qualification/transfer, promotion, training
+Hardware: none; no discovery/open, serial/camera/Studio access, reconnect, write, torque change, motion, policy, MuJoCo, optimizer, or paid compute
+Training lock: closed
+Next step: separate offline source-bound live-candidate contract and runner, then another review before any live-gate transition
+```
 
 ### 2026-07-11 - Brief 049 static-pose bracket contract verified offline
 

@@ -164,11 +164,14 @@ robotics runtimes and the 249-test offline authority/twin gate passes. No
 hardware or policy ran; no physical, policy-input-valid, shadow, motion, or
 qualification label is granted.
 
-Brief 050 is active offline to integrate that contract into a bounded runtime
-using injected fake buses, cameras, holder snapshots, and clocks. It must prove
-the exact open/read/capture/read/no-torque-close sequence and preserve every
-cleanup failure, while granting fixture runtime conformance only. The live gate
-remains closed.
+Brief 050 implementation `4f75a7a` is remotely preserved. The injected fixture
+runtime proves pre-open zero holders, exact connect/read/camera/read/no-torque-
+close ordering, post-close holder stability, strict global monotonic time, and
+preservation of construction, primary, camera-release, close, and holder
+failures. It refuses a live-marked adapter before connect and grants only
+`fixture_static_pose_bracket_runtime_conformant`. Twenty-seven focused tests
+pass in both pinned runtimes and the 265-test broad gate passes. No hardware or
+policy ran; the live gate remains closed.
 
 ## Durable State
 
