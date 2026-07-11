@@ -39,14 +39,21 @@ running, and the reviewed follower holder snapshot is empty with identity
 No retry, signal, motion command, safety-route change, leader disconnect, or
 general register write occurred.
 
-The disconnect/zero-holder boundary is remotely preserved at `b211562`. The
-separate reviewer-057 boundary opens the live gate only for a fresh session,
-metadata discovery, five-minute owner-presence lease, exact read-only contract,
-one bounded census, and two finite frames from each pinned camera. Every serial
-open still requires a fresh zero-holder check, every close is no-torque-write,
-and any mismatch fails closed. A later Studio reconnect is allowed only when
-exact device/calibration/current-pose state proves it mechanically no-motion-
-safe; otherwise leave the follower disconnected and torque off.
+The disconnect/zero-holder boundary is remotely preserved at `b211562`.
+Reviewer 057 opened one fresh session, but live attempt 002 failed closed during
+the first exact-name ffmpeg camera batch after the read-only census had closed
+and the post-close zero-holder guard passed. The subprocess returned nonzero;
+the implementation intentionally rejected the capture, but did not retain its
+bounded stderr diagnostic. No private evidence bundle, tracked manifest, or
+proof label was written. The follower remains disconnected, torque off, and
+holder-free; the leader remains connected.
+
+The live gate is closed again. Continue offline under Brief 042: retain a
+bounded, sanitized ffmpeg failure diagnostic without weakening strict stderr,
+finite-frame, cleanup, or content validation; add deterministic failure tests;
+review and remotely preserve the correction before any new live session. A
+later Studio reconnect remains deferred unless exact device/calibration/current-
+pose state proves it mechanically no-motion-safe.
 
 The last completed implementation slice was Brief 041,
 `docs/briefs/041-rejected-live-attempt-camera-identity-correction.md`, under
@@ -213,3 +220,8 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   `b211562` and a second zero-holder/torque-off check. The grant is one fresh
   session under the existing finite lease/contract and no-write guards; it does
   not itself grant a live proof label or any write/motion authority.
+- Reviewer decision 058 rejects live attempt 002 and recloses the gate. The
+  exact follower census closed with zero holders before exact-name camera
+  capture returned a nonzero ffmpeg status. No evidence bundle, manifest,
+  label, write beyond the earlier authorized disconnect, motion, or physical
+  qualification survived the attempt.

@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; live gate open for one fresh finite read-only session after remotely verified zero-holder disconnect
+current_task: T16.5b in progress; live attempt 002 rejected on named-camera subprocess failure; live gate closed for Brief 042 offline diagnostics correction
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: b211562 remotely preserves one-call disconnect proof; 09:01:09 CDT recheck still reports follower disconnected/torque false and empty holder 4f53cda1...; reviewer 057 opens one fresh session
+evidence: discovery 7766ed1c... and contract 51467ec7... were fresh; census closed and zero-holder postcheck passed; first named-camera ffmpeg returned nonzero; no bundle/manifest/label; cleanup recheck holder 4f53cda1... count 0 and torque false
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: owner explicitly authorizes virtual disconnect/reconnect because physical unplug is unavailable; immediate scope is one follower disconnect with inherent torque-disable plus response/status/zero-holder proof; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none for fresh metadata discovery and contract preparation; every live open remains fail-closed on identity, lease, calibration, and zero holders
-next_step: commit/push reviewer 057 live-gate boundary; confirm remote; create a new private discovery/session/lease/contract; run exactly one bounded read-only capture
+blockers: production camera failure currently loses the bounded stderr diagnostic needed to distinguish device contention, format negotiation, and command/backend faults
+next_step: commit/push rejected-attempt boundary; implement Brief 042 offline diagnostic retention and tests; keep live gate closed until correction review is remote
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: commit/push reviewer 057 live-gate boundary; confirm remote; create a
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | `b211562` disconnect/zero-holder proof remote; reviewer 057 opens one fresh finite lease/contract session; no live proof label yet |
+| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Attempt 002 rejected at first named-camera ffmpeg batch; no bundle/manifest/label; gate reclosed; Brief 042 offline diagnostic correction next |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,20 @@ next_step: commit/push reviewer 057 live-gate boundary; confirm remote; create a
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5b live attempt 002 rejected; gate reclosed
+
+```text
+Current task: T16.5b
+State: in_progress; live gate closed; attempt 002 rejected
+Session: t16-5b-20260711-0904-cdt; discovery 7766ed1c...; contract 51467ec7...; lease 980b555c...
+Reached: metadata discovery; exact contract verification; zero-holder precheck; read-only census; no-torque close; zero-holder postcheck; first exact-name camera batch
+Failure: ffmpeg subprocess returned nonzero; production exception retained neither bounded stderr text nor digest, so cause is not yet mechanically classified
+Cleanup: no ffmpeg process; follower disconnected/torque false; holder 4f53cda1... count 0; private bundle absent; tracked manifest absent
+Proof labels: none; physical_follower_commanded=false
+Training lock: closed
+Next step: commit/push rejection, implement Brief 042 offline bounded diagnostic evidence, review remotely, then reconsider a new session
+```
 
 ### 2026-07-11 - T16.5b live gate reopened for one fresh finite session
 
