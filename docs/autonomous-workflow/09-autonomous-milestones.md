@@ -402,15 +402,26 @@ held-out TwinQualificationReport, profile hash, and requalification triggers.
 **Required outcome:** Clean compiled single-cube data can be overfit by a small
 baseline and PI0.5; checkpoint, execution-horizon, and model-bakeoff experiments
 then establish repeatable nonzero strict competence before broader improvement.
+Terminal target occupancy is recorded separately from strict pick-and-place
+success, which requires a complete ordered grasp, lift, bounded transport,
+release, stable-placement, and retreat witness.
 
 **Why this is invariant:** A larger training run should not diagnose a data path
-that a tiny policy or tiny overfit cannot learn.
+that a tiny policy or tiny overfit cannot learn. A final-state-only success metric
+can also reward a putt, slide, throw, teleport, or assisted completion and thereby
+promote reward hacking as if it were autonomous manipulation.
 
 **Verification gate:** One immutable split and proof contract support ACT and
 PI0.5 overfit, the optimizer-update ladder, horizon sweep, and four-policy bakeoff.
+Deterministic adversarial traces preserve truthful terminal outcomes while
+rejecting strict success for missing or reordered stages, unsafe impact dynamics,
+scripted motion, assistance contamination, and evaluator-state leakage into actor
+inputs.
 
 **Completion evidence:** exact sampled windows, optimizer-update accounting,
-reloadable checkpoints, paired phase metrics, and promotion/rejection decision.
+reloadable checkpoints, a source-bound semantic-success contract, paired phase
+and outcome-versus-strict metrics, adversarial rejection evidence, and a
+promotion/rejection decision.
 
 ## M21 - Improve A Competent Policy
 
