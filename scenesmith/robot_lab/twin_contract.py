@@ -513,6 +513,11 @@ def verify_twin_qualification_report(
                 raise ValueError(f"Executed metric cannot use not_run evidence mode: {metric_id}")
             if not isinstance(metric.get("measured_value"), (int, float)):
                 raise ValueError(f"Executed metric requires a numeric measured value: {metric_id}")
+    if any(metric["status"] != "not_run" for metric in report_metrics):
+        raise ValueError(
+            "Legacy v1 reports cannot carry caller-declared execution; use the computed v2 "
+            "qualification generator and verifier"
+        )
     if set(metric_index) != seen_metric_ids:
         missing = sorted(set(metric_index) - seen_metric_ids)
         raise ValueError(f"Twin qualification report is missing metric results: {missing}")

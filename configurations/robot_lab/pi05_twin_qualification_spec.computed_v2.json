@@ -1,0 +1,102 @@
+{
+  "dependency_lock_ref": {
+    "file_sha256": "169f04ee953604193f1f0dc9a3821acbb2de7dc49fcce1aba066c338c1eb7f12",
+    "identity_sha256": "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
+    "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+    "schema_version": "scenesmith.robotics_dependency_lock.v2"
+  },
+  "identity_sha256": "eff5a15eb0ae211c6f09f7b87dec1018d1162652ab6d654dba388d0df5983f60",
+  "issuer": {
+    "authority_id": "scenesmith.twin_qualification_spec_authority.v2",
+    "authority_identity_sha256": "7d875c48aff554916e4ecfc578ccc2418c72392763e3a7065e38b7f08b0d0c43"
+  },
+  "maximum_evidence_age_seconds": 86400,
+  "metric_rules": [
+    {
+      "aggregation": "maximum",
+      "allowed_provenance_classes": [
+        "physical"
+      ],
+      "comparison": "less_than_or_equal",
+      "description": "Held-out physical contact latency remains inside the declared envelope.",
+      "metric_id": "physical_gripper_contact_latency",
+      "minimum_sample_count": 3,
+      "minimum_trajectory_count": 2,
+      "required_conditions": [
+        {
+          "condition_id": "ambient_temperature",
+          "maximum": 45.0,
+          "minimum": 10.0,
+          "units": "celsius"
+        },
+        {
+          "condition_id": "supply_voltage",
+          "maximum": 13.0,
+          "minimum": 11.0,
+          "units": "volt"
+        }
+      ],
+      "required_evidence_modes": [
+        "physical_run"
+      ],
+      "required_for_proof_states": [
+        "physical_qualified"
+      ],
+      "sample_minimum": 0.0,
+      "tolerance": {
+        "max_value": 35.0,
+        "units": "millisecond"
+      },
+      "uncertainty_mode": "absolute_upper_bound",
+      "units": "millisecond"
+    },
+    {
+      "aggregation": "maximum",
+      "allowed_provenance_classes": [
+        "simulation"
+      ],
+      "comparison": "less_than_or_equal",
+      "description": "Held-out simulator replay stays within joint-space error budget.",
+      "metric_id": "sim_joint_limit_projection_error",
+      "minimum_sample_count": 3,
+      "minimum_trajectory_count": 2,
+      "required_conditions": [
+        {
+          "condition_id": "simulation_timestep",
+          "maximum": 0.02,
+          "minimum": 0.001,
+          "units": "second"
+        }
+      ],
+      "required_evidence_modes": [
+        "simulation_trace"
+      ],
+      "required_for_proof_states": [
+        "physical_qualified",
+        "simulation_only"
+      ],
+      "sample_minimum": 0.0,
+      "tolerance": {
+        "max_value": 0.05,
+        "units": "radian"
+      },
+      "uncertainty_mode": "absolute_upper_bound",
+      "units": "radian"
+    }
+  ],
+  "profile_ref": {
+    "file_sha256": "09da7945144aa8cbdd6b67475d8da3c195b1e63a479128a1fbac591ef8e36b38",
+    "identity_sha256": "7775b3858aaf4f80dc51f9f824f73c28028f22fa3cba53e404772d8091354494",
+    "path": "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
+    "schema_version": "scenesmith.twin_profile.v1"
+  },
+  "schema_version": "scenesmith.twin_qualification_spec.v2",
+  "scope_id": "pi05_so101_authority",
+  "spec_name": "pi05_so101_mechanically_computed_qualification",
+  "subject_id": "pi05_so101_sorting_system",
+  "supported_proof_states": [
+    "physical_qualified",
+    "simulation_only"
+  ],
+  "unit_conversion_policy": "exact_match_only"
+}

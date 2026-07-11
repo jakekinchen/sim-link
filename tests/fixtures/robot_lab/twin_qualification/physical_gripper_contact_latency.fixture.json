@@ -1,0 +1,64 @@
+{
+  "conditions": [
+    {
+      "condition_id": "ambient_temperature",
+      "units": "celsius",
+      "value": 24.0
+    },
+    {
+      "condition_id": "supply_voltage",
+      "units": "volt",
+      "value": 12.0
+    }
+  ],
+  "declared_sample_count": 3,
+  "evidence_mode": "fixture_trace",
+  "held_out_trajectory_ids": [
+    "heldout-contact-trajectory-001",
+    "heldout-contact-trajectory-002"
+  ],
+  "identity_sha256": "526eedf3a5ea6eb41404f310edd47ddcdd95775aa34d6ae5682249374ca7dc18",
+  "issuer": {
+    "authority_id": "scenesmith.fixture_qualification_evidence.v1",
+    "authority_identity_sha256": "2251ccc043b81dff57356de3c51b03d30f9421d015bf06e1e681c4bb80a3fdcd"
+  },
+  "metric_id": "physical_gripper_contact_latency",
+  "provenance_class": "fixture",
+  "qualification_scope": "fixture_evidence",
+  "samples": [
+    {
+      "observed_at": "2026-07-11T02:11:00-05:00",
+      "sample_id": "contact-sample-001",
+      "trajectory_id": "heldout-contact-trajectory-001",
+      "value": 18.0
+    },
+    {
+      "observed_at": "2026-07-11T02:11:10-05:00",
+      "sample_id": "contact-sample-002",
+      "trajectory_id": "heldout-contact-trajectory-001",
+      "value": 21.0
+    },
+    {
+      "observed_at": "2026-07-11T02:11:20-05:00",
+      "sample_id": "contact-sample-003",
+      "trajectory_id": "heldout-contact-trajectory-002",
+      "value": 20.0
+    }
+  ],
+  "schema_version": "scenesmith.twin_metric_evidence.v1",
+  "scope_id": "pi05_so101_authority",
+  "subject_id": "pi05_so101_sorting_system",
+  "uncertainty": {
+    "confidence_level": 0.95,
+    "kind": "absolute_upper_bound",
+    "units": "millisecond",
+    "value": 2.0
+  },
+  "units": "millisecond",
+  "validity": {
+    "max_age_seconds": 86400,
+    "observed_at": "2026-07-11T02:10:00-05:00",
+    "valid_from": "2026-07-11T02:10:00-05:00",
+    "valid_until": "2026-07-12T02:10:00-05:00"
+  }
+}

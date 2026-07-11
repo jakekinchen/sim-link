@@ -1,0 +1,52 @@
+{
+  "composition_mode": "fixture",
+  "evaluation_time": "2026-07-11T02:14:07-05:00",
+  "identity_sha256": "5c94291694571fdf82c9a3f1e1ad2079b4ed22a217fdd6be717ac157f1231f97",
+  "input_name": "pi05_so101_qualification_input",
+  "issuer": {
+    "authority_id": "scenesmith.fixture_qualification_compiler.v1",
+    "authority_identity_sha256": "10b65d14e86fdf40e65cc27ce6144c492e4fb92cea03fb463fcb4eeab9213071"
+  },
+  "metric_evidence_refs": [
+    {
+      "artifact_ref": {
+        "file_sha256": "1b6c7d265003ca1fa5b03526fa5abf21c51d2c78e59b2608c3fb7b836c2cf18e",
+        "identity_sha256": "526eedf3a5ea6eb41404f310edd47ddcdd95775aa34d6ae5682249374ca7dc18",
+        "path": "tests/fixtures/robot_lab/twin_qualification/physical_gripper_contact_latency.fixture.json",
+        "schema_version": "scenesmith.twin_metric_evidence.v1"
+      },
+      "metric_id": "physical_gripper_contact_latency"
+    },
+    {
+      "artifact_ref": {
+        "file_sha256": "fd6db653ec11cd535b405a1682f74e5f64eee0edeaff11221c5c35a6462c1640",
+        "identity_sha256": "a92163390cb4d17fc7f1f4712258fdc1af60ead6e793a4946bf54beb984f7c50",
+        "path": "tests/fixtures/robot_lab/twin_qualification/sim_joint_limit_projection_error.fixture.json",
+        "schema_version": "scenesmith.twin_metric_evidence.v1"
+      },
+      "metric_id": "sim_joint_limit_projection_error"
+    }
+  ],
+  "profile_ref": {
+    "file_sha256": "09da7945144aa8cbdd6b67475d8da3c195b1e63a479128a1fbac591ef8e36b38",
+    "identity_sha256": "7775b3858aaf4f80dc51f9f824f73c28028f22fa3cba53e404772d8091354494",
+    "path": "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
+    "schema_version": "scenesmith.twin_profile.v1"
+  },
+  "requested_proof_state": "simulation_only",
+  "schema_version": "scenesmith.twin_qualification_input.v1",
+  "scope_id": "pi05_so101_authority",
+  "spec_ref": {
+    "file_sha256": "d4510fb068123080277b38210318921e85b6c6df5656144865cee5513cad9704",
+    "identity_sha256": "eff5a15eb0ae211c6f09f7b87dec1018d1162652ab6d654dba388d0df5983f60",
+    "path": "configurations/robot_lab/pi05_twin_qualification_spec.computed_v2.json",
+    "schema_version": "scenesmith.twin_qualification_spec.v2"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "validity": {
+    "max_age_seconds": 86400,
+    "observed_at": "2026-07-11T02:10:00-05:00",
+    "valid_from": "2026-07-11T02:10:00-05:00",
+    "valid_until": "2026-07-12T02:10:00-05:00"
+  }
+}

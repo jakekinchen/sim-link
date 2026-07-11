@@ -1,0 +1,59 @@
+{
+  "conditions": [
+    {
+      "condition_id": "simulation_timestep",
+      "units": "second",
+      "value": 0.01
+    }
+  ],
+  "declared_sample_count": 3,
+  "evidence_mode": "fixture_trace",
+  "held_out_trajectory_ids": [
+    "heldout-sim-trajectory-001",
+    "heldout-sim-trajectory-002"
+  ],
+  "identity_sha256": "a92163390cb4d17fc7f1f4712258fdc1af60ead6e793a4946bf54beb984f7c50",
+  "issuer": {
+    "authority_id": "scenesmith.fixture_qualification_evidence.v1",
+    "authority_identity_sha256": "2251ccc043b81dff57356de3c51b03d30f9421d015bf06e1e681c4bb80a3fdcd"
+  },
+  "metric_id": "sim_joint_limit_projection_error",
+  "provenance_class": "fixture",
+  "qualification_scope": "fixture_evidence",
+  "samples": [
+    {
+      "observed_at": "2026-07-11T02:11:00-05:00",
+      "sample_id": "sim-sample-001",
+      "trajectory_id": "heldout-sim-trajectory-001",
+      "value": 0.01
+    },
+    {
+      "observed_at": "2026-07-11T02:11:10-05:00",
+      "sample_id": "sim-sample-002",
+      "trajectory_id": "heldout-sim-trajectory-001",
+      "value": 0.015
+    },
+    {
+      "observed_at": "2026-07-11T02:11:20-05:00",
+      "sample_id": "sim-sample-003",
+      "trajectory_id": "heldout-sim-trajectory-002",
+      "value": 0.012
+    }
+  ],
+  "schema_version": "scenesmith.twin_metric_evidence.v1",
+  "scope_id": "pi05_so101_authority",
+  "subject_id": "pi05_so101_sorting_system",
+  "uncertainty": {
+    "confidence_level": 0.95,
+    "kind": "absolute_upper_bound",
+    "units": "radian",
+    "value": 0.002
+  },
+  "units": "radian",
+  "validity": {
+    "max_age_seconds": 86400,
+    "observed_at": "2026-07-11T02:10:00-05:00",
+    "valid_from": "2026-07-11T02:10:00-05:00",
+    "valid_until": "2026-07-12T02:10:00-05:00"
+  }
+}
