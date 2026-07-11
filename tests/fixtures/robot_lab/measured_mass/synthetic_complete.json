@@ -229,7 +229,7 @@
     "schema_version": "scenesmith.robotics_dependency_lock.v2"
   },
   "fixture_scope": "synthetic_test_only",
-  "identity_sha256": "72f7763a9e2e46fca7e19130ae51031c64b694c7df54c488571d93717721fb2e",
+  "identity_sha256": "5492af9eda42f6acc8abf7471a5e7ab5cbcf49cffc662c917855db086494af27",
   "intake_name": "synthetic_complete",
   "measurements": [
     {
@@ -240,7 +240,8 @@
       "evidence": [
         {
           "kind": "synthetic_scale_reading",
-          "ref": "alpha-scale-001"
+          "ref": "tests/fixtures/robot_lab/measured_mass/evidence/alpha-scale-001.json",
+          "sha256": "3b20be7551b0fd655d5d2fd47c9f829064f05ec3c37657aa13d25386a60bd587"
         }
       ],
       "measured_mass_kg": 3.0,
@@ -264,7 +265,8 @@
       "evidence": [
         {
           "kind": "synthetic_scale_reading",
-          "ref": "beta-scale-001"
+          "ref": "tests/fixtures/robot_lab/measured_mass/evidence/beta-scale-001.json",
+          "sha256": "828d30e33aeca8a5a3db3ebd00cd03fd72331e985df7be04fb6cb60d28b9f473"
         }
       ],
       "measured_mass_kg": 1.5,

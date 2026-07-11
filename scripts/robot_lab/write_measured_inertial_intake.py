@@ -15,7 +15,11 @@ sys.path.insert(0, str(REPO_ROOT))
 from scenesmith.robot_lab.measured_inertial_intake import (
     DEFAULT_ASSEMBLY_INERTIALS_PATH,
     DEFAULT_MEASURED_MASS_INTAKE_PATH,
+    require_compilation_ready,
+    require_physical_transfer_authority,
+    require_promotion_authority,
     require_ready_or_raise,
+    require_simulation_training_authority,
     verify_assembly_inertials,
     verify_measured_mass_intake,
     write_assembly_inertials,
@@ -50,8 +54,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--require-ready",
         action="store_true",
-        help="Exit nonzero unless the compiled output is ready.",
+        help="Deprecated ambiguous gate; always fails. Choose an explicit authority flag.",
     )
+    parser.add_argument("--require-compilation-ready", action="store_true")
+    parser.add_argument("--require-simulation-training-authority", action="store_true")
+    parser.add_argument("--require-physical-transfer-authority", action="store_true")
+    parser.add_argument("--require-promotion-authority", action="store_true")
     return parser.parse_args()
 
 
@@ -75,8 +83,7 @@ def main() -> int:
             intake_path=intake_rel,
         )
         try:
-            if args.require_ready:
-                require_ready_or_raise(output_payload)
+            _apply_requested_authority(args, output_payload)
         except ValueError as exc:
             print(
                 json.dumps(
@@ -120,8 +127,7 @@ def main() -> int:
         output_path=output_rel,
     )
     try:
-        if args.require_ready:
-            require_ready_or_raise(output_payload)
+        _apply_requested_authority(args, output_payload)
     except ValueError as exc:
         print(
             json.dumps(
@@ -164,6 +170,21 @@ def _relative_to_repo(path: Path) -> Path:
         return path.relative_to(REPO_ROOT)
     except ValueError:
         return path
+
+
+def _apply_requested_authority(args: argparse.Namespace, payload: dict) -> None:
+    gates = (
+        (args.require_ready, require_ready_or_raise),
+        (args.require_compilation_ready, require_compilation_ready),
+        (args.require_simulation_training_authority, require_simulation_training_authority),
+        (args.require_physical_transfer_authority, require_physical_transfer_authority),
+        (args.require_promotion_authority, require_promotion_authority),
+    )
+    selected = [gate for enabled, gate in gates if enabled]
+    if len(selected) > 1:
+        raise ValueError("Choose exactly one measured-inertial authority gate")
+    if selected:
+        selected[0](payload)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,8 @@
+{
+  "calibration_id": "synthetic-cal-001",
+  "device_id": "scale-alpha",
+  "mass_kg": 3.0,
+  "measurement_id": "synthetic_alpha_measurement",
+  "method": "bench_scale",
+  "uncertainty_mass_kg": 0.0001
+}

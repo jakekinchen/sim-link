@@ -14,7 +14,11 @@ from scenesmith.robot_lab.measured_inertial_intake import (
     DEFAULT_MEASURED_MASS_INTAKE_PATH,
     build_assembly_inertials,
     build_measured_mass_intake,
+    require_compilation_ready,
+    require_physical_transfer_authority,
+    require_promotion_authority,
     require_ready_or_raise,
+    require_simulation_training_authority,
     verify_assembly_inertials,
     verify_measured_mass_intake,
     write_assembly_inertials,
@@ -146,7 +150,7 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
                 output_path=output_path,
             )
 
-        with self.assertRaisesRegex(ValueError, "is not ready"):
+        with self.assertRaisesRegex(ValueError, "Generic ready authority was removed"):
             require_ready_or_raise(output)
 
     def test_cli_require_ready_rejects_checked_in_blocked_output(self):
@@ -155,7 +159,7 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
                 sys.executable,
                 str(SCRIPT_PATH),
                 "--verify",
-                "--require-ready",
+                "--require-compilation-ready",
             ],
             cwd=REPO_ROOT,
             capture_output=True,
@@ -267,7 +271,7 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
                     sys.executable,
                     str(SCRIPT_PATH),
                     "--verify",
-                    "--require-ready",
+                    "--require-compilation-ready",
                     "--intake",
                     str(intake_path),
                     "--output",
@@ -422,7 +426,7 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
                     str(SYNTHETIC_FIXTURE_PATH),
                     "--output",
                     str(output_path),
-                    "--require-ready",
+                    "--require-compilation-ready",
                 ],
                 cwd=REPO_ROOT,
                 capture_output=True,
@@ -437,6 +441,14 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
 
         self.assertEqual(compiled["status"], "ready")
         self.assertEqual(compiled["qualification_scope"], "synthetic_test_only")
+        require_compilation_ready(compiled)
+        for gate in (
+            require_simulation_training_authority,
+            require_physical_transfer_authority,
+            require_promotion_authority,
+        ):
+            with self.assertRaisesRegex(ValueError, "lacks"):
+                gate(compiled)
 
     def test_synthetic_exact_cover_rejects_missing_required_atom(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -455,7 +467,7 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
             payload = self._load_synthetic_fixture()
             duplicate = json.loads(json.dumps(payload["measurements"][0]))
             duplicate["measurement_id"] = "synthetic_alpha_measurement_duplicate"
-            duplicate["evidence"] = [{"kind": "synthetic_scale_reading", "ref": "alpha-scale-duplicate"}]
+            duplicate["evidence"] = json.loads(json.dumps(payload["measurements"][1]["evidence"]))
             payload["measurements"][1] = duplicate
             intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
 
@@ -524,6 +536,36 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
                 ValueError,
                 "synthetic_alpha_cad_prior source inertia must be symmetric",
             ):
+                build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
+
+    def test_synthetic_rejects_duplicate_measurement_ids(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            payload = self._load_synthetic_fixture()
+            payload["measurements"][1]["measurement_id"] = payload["measurements"][0][
+                "measurement_id"
+            ]
+            intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
+            with self.assertRaisesRegex(ValueError, "Duplicate measurement measurement_id"):
+                build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
+
+    def test_synthetic_rejects_cross_component_prior_swap(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            payload = self._load_synthetic_fixture()
+            payload["measurements"][0]["source_prior_id"] = "synthetic_beta_cad_prior"
+            intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
+            with self.assertRaisesRegex(ValueError, "prior/component linkage drifted"):
+                build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
+
+    def test_synthetic_rejects_symmetric_indefinite_inertia(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            payload = self._load_synthetic_fixture()
+            payload["cad_priors"][0]["source_inertia_about_com_body_frame_kg_m2"] = [
+                [1.0, 2.0, 0.0],
+                [2.0, 1.0, 0.0],
+                [0.0, 0.0, 1.0],
+            ]
+            intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
+            with self.assertRaisesRegex(ValueError, "positive semidefinite"):
                 build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
 
 

@@ -1,0 +1,8 @@
+{
+  "calibration_id": "synthetic-cal-002",
+  "device_id": "scale-beta",
+  "mass_kg": 1.5,
+  "measurement_id": "synthetic_beta_measurement",
+  "method": "bench_scale",
+  "uncertainty_mass_kg": 0.0001
+}

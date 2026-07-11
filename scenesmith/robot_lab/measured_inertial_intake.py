@@ -10,6 +10,19 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any
 
+from scenesmith.robot_lab.artifact_contract import (
+    artifact_ref,
+    dump_canonical_json,
+    load_strict_json,
+    require_finite_number,
+    require_nonblank,
+    sign_payload,
+    validate_content_addressed_evidence,
+    validate_inertia_tensor,
+    validate_unique_ids,
+    verify_signed_payload,
+)
+
 from scenesmith.robot_lab.robotics_dependency_lock import verify_robotics_dependency_lock
 from scenesmith.robot_lab.structural_twin_diff import (
     DEFAULT_STRUCTURAL_TWIN_DIFF_PATH,
@@ -209,6 +222,13 @@ def _build_blocked_assembly_inertials(*, intake: dict[str, Any]) -> dict[str, An
             },
             "physical_qualification_authority": False,
             "training_or_promotion_authority": False,
+            "authority": {
+                "schema_valid": True,
+                "synthetic_compilation_valid": False,
+                "simulation_training_ready": False,
+                "physical_twin_qualified": False,
+                "promotion_eligible": False,
+            },
         }
     )
 
@@ -232,6 +252,7 @@ def _build_synthetic_ready_assembly_inertials(*, intake: dict[str, Any]) -> dict
         payload["measurements"],
         key=lambda measurement: str(measurement["measurement_id"]),
     )
+    validate_unique_ids(selected_measurements, field="measurement_id", label="measurement")
     selected_atom_ids: list[str] = []
     selected_measurement_ids: list[str] = []
     seen_atoms: set[str] = set()
@@ -274,10 +295,18 @@ def _build_synthetic_ready_assembly_inertials(*, intake: dict[str, Any]) -> dict
             seen_evidence.add(evidence_key)
 
         prior = priors_by_id[prior_id]
-        source_mass = float(prior["source_mass_kg"])
-        measured_mass = float(measurement["measured_mass_kg"])
-        if source_mass <= 0.0 or measured_mass <= 0.0:
-            raise ValueError(f"Synthetic measurement masses must be positive: {measurement_id}")
+        if str(prior.get("component_id")) != component_id:
+            raise ValueError(f"Synthetic measurement prior/component mismatch: {measurement_id}")
+        if str(prior.get("atom_id")) != atom_id:
+            raise ValueError(f"Synthetic measurement prior/atom mismatch: {measurement_id}")
+        source_mass = require_finite_number(
+            prior["source_mass_kg"], label=f"{prior_id} source mass", positive=True
+        )
+        measured_mass = require_finite_number(
+            measurement["measured_mass_kg"],
+            label=f"{measurement_id} measured mass",
+            positive=True,
+        )
         rotation = _validate_rotation_matrix(
             prior["body_frame_to_assembly"]["rotation_matrix"],
             label=f"{prior_id} rotation",
@@ -374,6 +403,13 @@ def _build_synthetic_ready_assembly_inertials(*, intake: dict[str, Any]) -> dict
             },
             "physical_qualification_authority": False,
             "training_or_promotion_authority": False,
+            "authority": {
+                "schema_valid": True,
+                "synthetic_compilation_valid": True,
+                "simulation_training_ready": False,
+                "physical_twin_qualified": False,
+                "promotion_eligible": False,
+            },
         }
     )
 
@@ -601,9 +637,33 @@ def write_assembly_inertials(
 
 
 def require_ready_or_raise(payload: dict[str, Any]) -> None:
-    if payload.get("status") != "ready":
+    raise ValueError(
+        "Generic ready authority was removed; choose compilation, simulation training, "
+        "physical transfer, or promotion authority explicitly"
+    )
+
+
+def require_compilation_ready(payload: dict[str, Any]) -> None:
+    _require_authority(payload, "synthetic_compilation_valid", label="compilation")
+
+
+def require_simulation_training_authority(payload: dict[str, Any]) -> None:
+    _require_authority(payload, "simulation_training_ready", label="simulation training")
+
+
+def require_physical_transfer_authority(payload: dict[str, Any]) -> None:
+    _require_authority(payload, "physical_twin_qualified", label="physical transfer")
+
+
+def require_promotion_authority(payload: dict[str, Any]) -> None:
+    _require_authority(payload, "promotion_eligible", label="promotion")
+
+
+def _require_authority(payload: dict[str, Any], key: str, *, label: str) -> None:
+    authority = payload.get("authority")
+    if not isinstance(authority, dict) or authority.get(key) is not True:
         raise ValueError(
-            "Measured inertial compilation is not ready; current status is "
+            f"Measured inertial artifact lacks {label} authority; current status is "
             f"{payload.get('status')!r}"
         )
 
@@ -898,6 +958,7 @@ def _verify_synthetic_measured_mass_intake(
         raise ValueError("Synthetic intake CAD priors are required")
     if not isinstance(measurements, list) or not measurements:
         raise ValueError("Synthetic intake measurements are required")
+    validate_unique_ids(measurements, field="measurement_id", label="measurement")
     component_ids = {str(component["component_id"]) for component in components}
     atom_ids = {str(atom["atom_id"]) for atom in coverage_atoms}
     prior_ids = {str(prior["prior_id"]) for prior in cad_priors}
@@ -932,8 +993,11 @@ def _verify_synthetic_measured_mass_intake(
             prior["source_inertia_about_com_body_frame_kg_m2"],
             label=f"{prior['prior_id']} source inertia",
         )
-        if float(prior["source_mass_kg"]) <= 0.0:
-            raise ValueError("Synthetic prior source mass must be positive")
+        require_finite_number(
+            prior["source_mass_kg"],
+            label=f"{prior['prior_id']} source mass",
+            positive=True,
+        )
         has_nonzero_translation = has_nonzero_translation or any(abs(value) > 0.0 for value in translation)
         has_non_identity_rotation = has_non_identity_rotation or rotation != _identity_matrix()
     if not has_nonzero_translation:
@@ -947,16 +1011,34 @@ def _verify_synthetic_measured_mass_intake(
             raise ValueError("Synthetic measurement component linkage drifted")
         if str(measurement["source_prior_id"]) not in prior_ids:
             raise ValueError("Synthetic measurement prior linkage drifted")
-        if float(measurement["measured_mass_kg"]) <= 0.0:
-            raise ValueError("Synthetic measurement mass must be positive")
+        measurement_id = require_nonblank(
+            measurement.get("measurement_id"), label="measurement measurement_id"
+        )
+        require_finite_number(
+            measurement["measured_mass_kg"],
+            label=f"{measurement_id} measured mass",
+            positive=True,
+        )
         covered_atom_ids = measurement.get("covered_atom_ids")
         if not isinstance(covered_atom_ids, list) or len(covered_atom_ids) != 1:
             raise ValueError("Synthetic measurements must cover exactly one atom")
         if str(covered_atom_ids[0]) not in atom_ids:
             raise ValueError("Synthetic measurement atom linkage drifted")
+        prior = next(
+            prior for prior in cad_priors if str(prior["prior_id"]) == str(measurement["source_prior_id"])
+        )
+        if str(prior["component_id"]) != str(measurement["component_id"]):
+            raise ValueError("Synthetic measurement prior/component linkage drifted")
+        if str(prior["atom_id"]) != str(covered_atom_ids[0]):
+            raise ValueError("Synthetic measurement prior/atom linkage drifted")
         uncertainty = measurement.get("uncertainty")
-        if not isinstance(uncertainty, dict) or float(uncertainty.get("mass_kg", -1.0)) < 0.0:
+        if not isinstance(uncertainty, dict):
             raise ValueError("Synthetic measurement uncertainty is required")
+        uncertainty_mass = require_finite_number(
+            uncertainty.get("mass_kg"), label=f"{measurement_id} uncertainty mass"
+        )
+        if uncertainty_mass < 0.0:
+            raise ValueError("Synthetic measurement uncertainty must be nonnegative")
         provenance = measurement.get("provenance")
         if not isinstance(provenance, dict):
             raise ValueError("Synthetic measurement provenance is required")
@@ -964,8 +1046,13 @@ def _verify_synthetic_measured_mass_intake(
             if not str(provenance.get(field) or ""):
                 raise ValueError(f"Synthetic measurement provenance field is required: {field}")
         evidence = measurement.get("evidence")
-        if not isinstance(evidence, list) or not evidence:
-            raise ValueError("Synthetic measurement evidence is required")
+        validate_content_addressed_evidence(evidence, label=measurement_id)
+        for item in evidence:
+            evidence_path = repo_root / item["ref"]
+            if not evidence_path.is_file():
+                raise ValueError(f"Synthetic measurement evidence file is missing: {item['ref']}")
+            if _sha256(evidence_path) != item["sha256"]:
+                raise ValueError(f"Synthetic measurement evidence hash drifted: {item['ref']}")
 
 
 def _refuse_real_artifact_destination(*, repo_root: Path, output_path: Path) -> None:
@@ -1034,18 +1121,7 @@ def _validate_rotation_matrix(values: Any, *, label: str) -> list[list[float]]:
 
 
 def _validate_inertia_matrix(values: Any, *, label: str) -> list[list[float]]:
-    if not isinstance(values, list) or len(values) != 3:
-        raise ValueError(f"{label} must be a 3x3 matrix")
-    matrix = [_validate_vector(row, expected=3, label=label) for row in values]
-    rounded = _round_matrix(matrix)
-    if rounded != _round_matrix(_transpose(rounded)):
-        raise ValueError(f"{label} must be symmetric")
-    diagonal = [rounded[index][index] for index in range(3)]
-    if any(value < 0.0 for value in diagonal):
-        raise ValueError(f"{label} diagonal must be nonnegative")
-    if diagonal[0] > diagonal[1] + diagonal[2] or diagonal[1] > diagonal[0] + diagonal[2] or diagonal[2] > diagonal[0] + diagonal[1]:
-        raise ValueError(f"{label} violates triangle inequalities")
-    return rounded
+    return validate_inertia_tensor(values, label=label)
 
 
 def _transpose(matrix: list[list[float]]) -> list[list[float]]:
@@ -1152,15 +1228,7 @@ def _measured_mass_intake_ref(
 
 
 def _artifact_ref(*, path: Path, payload: dict[str, Any], repo_root: Path) -> dict[str, Any]:
-    identity = str(payload.get("identity_sha256") or "")
-    if not identity:
-        raise ValueError(f"Artifact is missing identity_sha256: {path}")
-    return {
-        "path": str(path),
-        "schema_version": str(payload["schema_version"]),
-        "identity_sha256": identity,
-        "file_sha256": _sha256(_resolve(repo_root=repo_root, path=path)),
-    }
+    return artifact_ref(path=path, payload=payload, repo_root=repo_root)
 
 
 def _verify_ref(payload: dict[str, Any] | None, expected: dict[str, Any], *, label: str) -> None:
@@ -1172,21 +1240,11 @@ def _verify_ref(payload: dict[str, Any] | None, expected: dict[str, Any], *, lab
 
 
 def _sign(payload: dict[str, Any]) -> dict[str, Any]:
-    signed = dict(payload)
-    unsigned = {key: value for key, value in signed.items() if key != "identity_sha256"}
-    signed["identity_sha256"] = hashlib.sha256(
-        json.dumps(unsigned, sort_keys=True, separators=(",", ":")).encode()
-    ).hexdigest()
-    return signed
+    return sign_payload(payload)
 
 
 def _verify_identity(payload: dict[str, Any], *, label: str) -> None:
-    unsigned = {key: value for key, value in payload.items() if key != "identity_sha256"}
-    actual = hashlib.sha256(
-        json.dumps(unsigned, sort_keys=True, separators=(",", ":")).encode()
-    ).hexdigest()
-    if payload.get("identity_sha256") != actual:
-        raise ValueError(f"{label} identity hash is invalid")
+    verify_signed_payload(payload, label=label)
 
 
 def _evidence(kind: str, ref: str) -> dict[str, str]:
@@ -1194,17 +1252,11 @@ def _evidence(kind: str, ref: str) -> dict[str, str]:
 
 
 def _read_json(path: Path) -> dict[str, Any]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(payload, dict):
-        raise ValueError(f"Expected JSON object: {path}")
-    return payload
+    return load_strict_json(path)
 
 
 def _write_json(path: Path, payload: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    temporary.replace(path)
+    dump_canonical_json(path, payload)
 
 
 def _resolve(*, repo_root: Path, path: Path) -> Path:

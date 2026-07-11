@@ -10,6 +10,13 @@
     "assembly_id": "pi05_current_arm",
     "frame_units": "meter"
   },
+  "authority": {
+    "physical_twin_qualified": false,
+    "promotion_eligible": false,
+    "schema_valid": true,
+    "simulation_training_ready": false,
+    "synthetic_compilation_valid": false
+  },
   "blocking_reasons": [
     "No measured-mass evidence is checked into repo state for the current arm.",
     "CAD/MJCF priors remain separate from measured coverage and cannot authorize readiness."
@@ -79,7 +86,7 @@
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
     "schema_version": "scenesmith.robotics_dependency_lock.v2"
   },
-  "identity_sha256": "8d6e13a4dd875d3016dfea2d2dae6160f376f0936e3c34356a27633fd151b9c9",
+  "identity_sha256": "f6ba9a72244e49bcafd4457faeb29dc32f1980cbf7e881083b54858e9eaeb6e6",
   "intake_ref": {
     "file_sha256": "4739b1f991a4f818a9f77d563c0128e184471208368795d7917507284d8f45cc",
     "identity_sha256": "f037d81ea6894239327094c636cad5d0127c97c7d00f50aee890315afbf29727",
