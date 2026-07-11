@@ -48,11 +48,17 @@ register drift, malformed/non-finite values, result nondeterminism, fixture
 relabeling, and authority escalation. Review-time hardening closed the findings
 and all final gates were rerun.
 
-Reviewer decision 047 accepts the implementation locally. T16.5a remains
-`in_progress` until implementation and review evidence are pushed and confirmed
-on `origin/codex/pi05-autolearn-loop`.
+Reviewer decision 047 accepted the implementation locally before push. The
+remote closeout below then satisfied the final T16.5a verification condition.
 
 ## Remote closeout
 
-Pending scoped reviewer-evidence commit, push, and independent remote
-confirmation. Live hardware remains closed until that boundary is complete.
+- Pushed only to `origin/codex/pi05-autolearn-loop`.
+- Fresh fetch, remote-tracking ref, and `git ls-remote` all resolved to
+  `d002c8038ac1e393c5c92f4a2f215c961b408bf2`.
+- Ancestry checks confirmed implementation
+  `f2000870775c175f1331bf42c0521d7067462a92` and reviewer decision 047 on the
+  named remote.
+- T16.5a is verified only as `census_trace_conformant` on declared offline
+  fixture evidence. No hardware was opened, no live observation was made, and
+  T16.5b is next under its separate owner-presence and read-only gates.

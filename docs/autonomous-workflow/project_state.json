@@ -9,7 +9,7 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "f2000870775c175f1331bf42c0521d7067462a92",
+  "current_head_commit": "d002c8038ac1e393c5c92f4a2f215c961b408bf2",
   "last_reviewed_commit": "f2000870775c175f1331bf42c0521d7067462a92",
   "source_review": {
     "commit": "f2000870775c175f1331bf42c0521d7067462a92",
@@ -82,8 +82,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M16",
-  "current_task": "T16.5a",
-  "next_eligible_task": "T16.5a",
+  "current_task": "T16.5b",
+  "next_eligible_task": "T16.5b",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -284,11 +284,13 @@
       "authority_not_granted": ["live_hardware_census", "hardware_qualification"]
     },
     "T16.5a": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T16.1b", "T16.2b", "T16.4b"],
       "brief_id": "038",
-      "result": "reviewer 047 accepts the offline no-write transport, lifecycle, identity, retry, exception-cleanup, and recorded-trace preflight locally; remote preservation remains",
-      "execution_note": "Implementation f200087 is accepted locally after 14 focused and 193 broad tests; T16.5a remains in progress until review evidence is remotely preserved",
+      "source_commit": "f200087",
+      "review_decision_id": "047",
+      "result": "offline no-write transport, lifecycle, identity, retry, exception-cleanup, and recorded-trace preflight remotely preserved on fixture evidence",
+      "execution_note": "Implementation f200087 and reviewer 047 are remotely preserved through d002c80 after 14 focused and 193 broad tests",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_readonly_servo_census",
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
@@ -312,9 +314,9 @@
         "live USB discovery, serial reads, cameras, and physical observation remain outside T16.5a",
         "the offline result grants no write, torque, motion, physical qualification, or system authority"
       ],
-      "candidate_capability_after_remote_preservation": "census_trace_conformant",
+      "authority_granted": ["census_trace_conformant"],
       "authority_not_granted": [
-        "live_hardware_access_before_remote_preservation",
+        "live_hardware_identity_observed",
         "register_write",
         "torque_change",
         "motion",
@@ -322,8 +324,10 @@
       ]
     },
     "T16.5b": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["T16.5a"],
+      "brief_id": "039",
+      "result": "live read-only adapter, discovery, camera, privacy, and evidence preflight in progress; no live object opened yet",
       "conditional_authority": [
         "live_hardware_discovery_after_T16.5a",
         "live_read_only_census_after_T16.5a",

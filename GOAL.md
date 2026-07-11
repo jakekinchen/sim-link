@@ -30,14 +30,15 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Preserve Brief 038 implementation `f200087` and reviewer decision 047 on
-`origin/codex/pi05-autolearn-loop`, then close T16.5a. The offline fixture now
-proves the narrow connect/read/decode/retry/exception/close lifecycle with exact
-follower/six-servo identity and mechanical zero-write, zero-torque-change,
-zero-motion, and no-follower-command counts. Do not enumerate or open a live
-serial, camera, robot, or motor-bus object until that remote boundary is
-confirmed. Then open the smallest T16.5b brief and revalidate the active
-owner-presence lease before any bounded live read-only operation.
+Execute Brief 039,
+`docs/briefs/039-live-readonly-census-and-observation.md`, under T16.5b.
+T16.5a implementation `f200087` and reviewer decision 047 are remotely
+preserved through `d002c80`. Build and pass the exact live adapter, discovery,
+camera, cleanup, privacy, and evidence tests offline first. Immediately before
+any live open, revalidate the session-scoped owner-presence lease and identity
+contract. Then permit only bounded USB/camera discovery, scalar allowlisted
+servo reads, finite camera frames, and explicit no-write teardown. Any ambiguity
+or unexpected condition returns the workflow to offline-only work.
 
 ## Durable State
 
@@ -144,13 +145,13 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   fixture numeric passes remain authority-withheld. Implementation and review
   are preserved on the named remote through `383557b`; T16.2b is closed on
   declared fixture evidence only.
-- Reviewer decision 047 accepts Brief 038 implementation `f200087` locally:
+- Reviewer decision 047 verifies Brief 038 implementation `f200087`:
   the injected census surface is read-only, lifecycle and retries are bounded,
   partial-connect cleanup closes without torque writes, exact follower and six-
   servo identity are checked, and the signed fixture remains
   `census_trace_conformant` with no hardware opened or follower commanded.
-  T16.5a remains in progress until implementation and review are preserved on
-  the named remote.
+  Implementation and review are preserved on the named remote through
+  `d002c80`; T16.5a is closed on declared fixture evidence only.
 - The owner is physically present and has granted conditional read-only
   hardware/camera authority after verified T16.5a plus final operator
   confirmation for exactly one initial session-scoped `supervised_micro_motion`
