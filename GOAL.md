@@ -30,14 +30,13 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute Brief 040,
-`docs/briefs/040-feetech-protocol-source-binding-correction.md`, under reopened
-T16.5a. Reviewer decision 048 found that the remotely preserved fixture declared
-Feetech protocol `1` while the pinned STS3215 runtime requires protocol `0`.
-Correct the protocol, bind the census constants to exact source hashes and
-independently parsed semantics, regenerate and reverify every fixture artifact,
-then repeat review and remote preservation. T16.5b and every live serial/camera
-operation remain closed until this correction completes.
+Preserve Brief 040 correction commits `5102422` and `eeb16e1` plus reviewer
+decision 049 on `origin/codex/pi05-autolearn-loop`, then reclose T16.5a. The v2
+contract now derives protocol 0, baud, model, resolution, register widths, and
+six-joint identity from independently parsed, hash-pinned runtime sources and
+proves the false handshake/torque flags still open/close the port without writes.
+T16.5b and every live serial/camera operation remain closed until this corrected
+review boundary is remotely confirmed.
 
 ## Durable State
 
@@ -155,6 +154,11 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   found protocol `1` in the fixture versus protocol `0` in the pinned STS3215
   runtime. T16.5a is reopened, `census_trace_conformant` is withdrawn, and
   T16.5b remains closed until Brief 040 is reviewed and remotely preserved.
+- Reviewer decision 049 accepts the Brief 040 correction locally: the v2
+  contract uses protocol 0 and independently verifies exact runtime source
+  hashes and semantics, including no-write open/close guards. T16.5a remains
+  in progress only until correction and review are preserved on the named
+  remote.
 - The owner is physically present and has granted conditional read-only
   hardware/camera authority after verified T16.5a plus final operator
   confirmation for exactly one initial session-scoped `supervised_micro_motion`

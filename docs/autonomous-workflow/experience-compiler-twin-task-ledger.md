@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5a Feetech protocol/source-binding correction
+current_task: T16.5a corrected protocol/source-binding remote closeout
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening
-evidence: reviewer 048 found fixture protocol 1 conflicts with pinned STS3215 protocol 0 before any live access; source hashes 0460413c.../71f7f7be...; prior census capability withdrawn
-remaining: Brief 040 offline correction and remote re-verification; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
+evidence: correction commits 5102422/eeb16e1 and reviewer 049 pass 16 focused and 195 broad tests; v2 contract 73652ffa... -> trace 17921a5f... -> result 4a83298b...; remote preservation pending
+remaining: remotely preserve corrected reviewer boundary and reclose T16.5a; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
 blockers: no offline blocker; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
-next_step: execute Brief 040 entirely offline and keep every live object closed
+next_step: push and confirm correction commits plus reviewer 049; only then reopen Brief 039
 ```
 
 ## Rules
@@ -47,7 +47,7 @@ next_step: execute Brief 040 entirely offline and keep every live object closed
 | T16.4b | verified | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | `7d05629`/reviewer 045/remote `dbdd1ef`; normalized Jacobi convergence/residual checks; scale-relative adversarial coverage; 17 focused and 131 broad tests |
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
-| T16.5a | in_progress | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Reviewer 048 reopens after protocol 1/0 runtime mismatch; Brief 040 must correct and independently bind pinned source semantics; prior `census_trace_conformant` withdrawn |
+| T16.5a | in_progress | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | `5102422`/`eeb16e1` plus reviewer 049 locally accept v2 protocol-0/hash/semantic binding after 16 focused and 195 broad tests; remote preservation pending |
 | T16.5b | pending | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Closed until corrected T16.5a is reviewed and remotely preserved; Brief 039 remains the future bounded live contract |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
@@ -130,6 +130,20 @@ next_step: execute Brief 040 entirely offline and keep every live object closed
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5a protocol/source correction locally reviewed
+
+```text
+Current task: T16.5a
+State: in_progress
+Completed: corrected protocol 0; v2 source-hash contract; independent protocol/baud/model/resolution/register/joint/lifecycle semantic parser; constants derived from verified semantics
+Evidence: commits 5102422/eeb16e1; reviewer 049; 16 focused and 195 broad tests; contract 73652ffa...; trace 17921a5f...; result 4a83298b...
+Commit: 5102422 and eeb16e1; review/remote preservation pending
+Remaining: preserve correction and reviewer on origin, then reclose T16.5a and reopen Brief 039
+Blockers: no offline blocker; all live hardware remains closed
+Training lock: closed
+Next step: commit reviewer evidence, push only the named branch, and confirm the remote
+```
 
 ### 2026-07-11 - T16.5a reopened before live access
 
