@@ -13,6 +13,7 @@ import zlib
 from pathlib import Path
 
 from scenesmith.robot_lab.artifact_contract import (
+    canonical_json_bytes,
     load_strict_json,
     sign_payload,
     verify_signed_payload,
@@ -37,12 +38,14 @@ from scenesmith.robot_lab.live_readonly_observation import (
     enumerate_serial_identity_holders,
     execute_live_servo_census,
     parse_avfoundation_video_devices,
+    parse_system_camera_supported_modes,
     parse_serial_device_holders,
     parse_system_camera_devices,
     require_no_serial_device_holders,
     require_no_serial_identity_holders,
     resolve_camera_selection,
     resolve_follower_identity,
+    select_camera_input_mode,
     verify_discovery_stability,
     verify_live_execution_contract,
     verify_operator_presence_lease,
@@ -111,13 +114,80 @@ def _system_cameras() -> list[dict]:
             "name": "Desk Side Camera",
             "unique_id": "side-camera-001",
             "model_id": "UVC Camera Vendor_1234 Product_0001",
+            "supported_modes": [
+                {
+                    "pixel_format": "uyvy422",
+                    "width": 640,
+                    "height": 480,
+                    "min_framerate_fps": 30.00003,
+                    "max_framerate_fps": 60.0,
+                },
+                {
+                    "pixel_format": "nv12",
+                    "width": 1280,
+                    "height": 720,
+                    "min_framerate_fps": 30.0,
+                    "max_framerate_fps": 30.0,
+                },
+            ],
         },
         {
             "name": "Desk Overhead Camera",
             "unique_id": "overhead-camera-001",
             "model_id": "UVC Camera Vendor_1234 Product_0002",
+            "supported_modes": [
+                {
+                    "pixel_format": "nv12",
+                    "width": 640,
+                    "height": 480,
+                    "min_framerate_fps": 15.0,
+                    "max_framerate_fps": 60.0,
+                }
+            ],
         },
     ]
+
+
+def _supported_modes_payload() -> dict:
+    return {
+        "cameras": [
+            {
+                "name": "Desk Side Camera",
+                "unique_id": "side-camera-001",
+                "model_id": "UVC Camera Vendor_1234 Product_0001",
+                "formats": [
+                    {
+                        "fourcc": "2vuy",
+                        "width": 640,
+                        "height": 480,
+                        "min_framerate_fps": 30.00003,
+                        "max_framerate_fps": 60.0,
+                    },
+                    {
+                        "fourcc": "420v",
+                        "width": 1280,
+                        "height": 720,
+                        "min_framerate_fps": 30.0,
+                        "max_framerate_fps": 30.0,
+                    },
+                ],
+            },
+            {
+                "name": "Desk Overhead Camera",
+                "unique_id": "overhead-camera-001",
+                "model_id": "UVC Camera Vendor_1234 Product_0002",
+                "formats": [
+                    {
+                        "fourcc": "420v",
+                        "width": 640,
+                        "height": 480,
+                        "min_framerate_fps": 15.0,
+                        "max_framerate_fps": 60.0,
+                    }
+                ],
+            },
+        ]
+    }
 
 
 def _lease() -> dict:
@@ -643,9 +713,29 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(
             parse_avfoundation_video_devices(ffmpeg), _avfoundation_devices()
         )
-        self.assertEqual(parse_system_camera_devices(system_payload), _system_cameras())
+        self.assertEqual(
+            parse_system_camera_devices(
+                system_payload,
+                supported_modes_payload=_supported_modes_payload(),
+            ),
+            _system_cameras(),
+        )
+        parsed_modes = parse_system_camera_supported_modes(
+            _supported_modes_payload()
+        )
+        self.assertEqual(len(parsed_modes), 2)
         selected = resolve_camera_selection(_discovery(), [1, 0])
         self.assertEqual([camera["index"] for camera in selected], [0, 1])
+        self.assertEqual(
+            selected[0]["input_mode"],
+            {
+                "pixel_format": "uyvy422",
+                "width": 640,
+                "height": 480,
+                "framerate_fps": CAMERA_FRAMERATE_FPS,
+            },
+        )
+        self.assertEqual(selected[1]["input_mode"]["pixel_format"], "nv12")
 
         duplicate = copy.deepcopy(_discovery())
         duplicate["system_cameras"].append(
@@ -654,6 +744,69 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         duplicate = sign_payload(duplicate)
         with self.assertRaisesRegex(ValueError, "exactly one|ambiguous"):
             resolve_camera_selection(duplicate, [0])
+
+    def test_supported_camera_modes_reject_duplicates_nonfinite_and_unknown(self):
+        duplicate = copy.deepcopy(_supported_modes_payload())
+        duplicate["cameras"][0]["formats"].append(
+            copy.deepcopy(duplicate["cameras"][0]["formats"][0])
+        )
+        with self.assertRaisesRegex(ValueError, "duplicates"):
+            parse_system_camera_supported_modes(duplicate)
+
+        nonfinite = copy.deepcopy(_supported_modes_payload())
+        nonfinite["cameras"][0]["formats"][0]["max_framerate_fps"] = float("nan")
+        with self.assertRaisesRegex(ValueError, "framerate"):
+            parse_system_camera_supported_modes(nonfinite)
+
+        unknown = copy.deepcopy(_supported_modes_payload())
+        unknown["cameras"][0]["formats"] = [
+            {
+                "fourcc": "JPEG",
+                "width": 640,
+                "height": 480,
+                "min_framerate_fps": 30.0,
+                "max_framerate_fps": 30.0,
+            }
+        ]
+        with self.assertRaisesRegex(ValueError, "no supported reviewed"):
+            parse_system_camera_supported_modes(unknown)
+
+    def test_contract_rejects_cross_camera_mode_and_legacy_discovery(self):
+        contract = _execution_contract()
+        substituted = copy.deepcopy(contract)
+        substituted["cameras"][1]["input_mode"] = copy.deepcopy(
+            substituted["cameras"][0]["input_mode"]
+        )
+        substituted = sign_payload(substituted)
+        with self.assertRaisesRegex(ValueError, "camera identity"):
+            verify_live_execution_contract(
+                substituted,
+                project_state=PROJECT_STATE,
+                now="2026-07-11T04:47:00-05:00",
+            )
+
+        legacy = copy.deepcopy(_discovery())
+        legacy["schema_version"] = "scenesmith.live_readonly_discovery.v1"
+        for camera in legacy["system_cameras"]:
+            del camera["supported_modes"]
+        legacy = sign_payload(legacy)
+        verify_discovery_stability(legacy, legacy)
+        with self.assertRaisesRegex(ValueError, "supported-mode discovery"):
+            build_live_execution_contract(
+                project_state=PROJECT_STATE,
+                presence_lease=_lease(),
+                discovery=legacy,
+                camera_indexes=[0, 1],
+                calibration_path=(
+                    Path.home()
+                    / (
+                        ".cache/huggingface/lerobot/calibration/robots/"
+                        "so_follower/follower_arm.json"
+                    )
+                ),
+                issued_at=ISSUED_AT,
+                expires_at=VALID_UNTIL,
+            )
 
     def test_live_contract_is_protocol_zero_and_rejects_resigned_drift(self):
         discovery = _discovery()
@@ -687,7 +840,7 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(contract["frame_count_per_camera"], 2)
         self.assertEqual(
             contract["schema_version"],
-            "scenesmith.live_readonly_observation_contract.v2",
+            "scenesmith.live_readonly_observation_contract.v3",
         )
         self.assertEqual(contract["camera_framerate_fps"], CAMERA_FRAMERATE_FPS)
         self.assertEqual(contract["camera_read_timeout_seconds"], 5)
@@ -922,6 +1075,23 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         )
         input_index = invocation["command"].index("-i") + 1
         self.assertLess(framerate_index, input_index - 1)
+        pixel_format_index = invocation["command"].index("-pixel_format")
+        video_size_index = invocation["command"].index("-video_size")
+        self.assertEqual(invocation["command"].count("-pixel_format"), 1)
+        self.assertEqual(invocation["command"].count("-video_size"), 1)
+        self.assertLess(pixel_format_index, input_index - 1)
+        self.assertLess(video_size_index, input_index - 1)
+        self.assertEqual(
+            invocation["command"][pixel_format_index + 1],
+            camera_identity["input_mode"]["pixel_format"],
+        )
+        self.assertEqual(
+            invocation["command"][video_size_index + 1],
+            (
+                f"{camera_identity['input_mode']['width']}x"
+                f"{camera_identity['input_mode']['height']}"
+            ),
+        )
         self.assertEqual(
             invocation["command"][input_index],
             f"{camera_identity['name']}:none",
@@ -932,6 +1102,7 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             audit["requested_framerate_fps"],
             CAMERA_FRAMERATE_FPS,
         )
+        self.assertEqual(audit["requested_input_mode"], camera_identity["input_mode"])
         self.assertEqual(audit["subprocess_start_successes"], 1)
         self.assertEqual(audit["subprocess_communicate_successes"], 1)
         self.assertEqual(audit["subprocess_wait_successes"], 1)
@@ -1040,7 +1211,7 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         verify_signed_payload(diagnostic, label="Named camera failure diagnostic")
         self.assertEqual(
             diagnostic["schema_version"],
-            "scenesmith.named_camera_failure_diagnostic.v2",
+            "scenesmith.named_camera_failure_diagnostic.v3",
         )
         self.assertEqual(diagnostic["stage"], "subprocess_nonzero_exit")
         self.assertEqual(diagnostic["return_code"], 7)
@@ -1069,12 +1240,20 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             diagnostic["subprocess_audit"]["requested_framerate_fps"],
             CAMERA_FRAMERATE_FPS,
         )
+        self.assertEqual(
+            diagnostic["subprocess_audit"]["requested_input_mode"],
+            camera_identity["input_mode"],
+        )
         self.assertFalse(diagnostic["physical_follower_commanded"])
         self.assertEqual(diagnostic["proof_labels"], [])
         legacy = copy.deepcopy(diagnostic)
-        legacy["schema_version"] = "scenesmith.named_camera_failure_diagnostic.v1"
-        del legacy["subprocess_audit"]["requested_framerate_fps"]
+        legacy["schema_version"] = "scenesmith.named_camera_failure_diagnostic.v2"
+        del legacy["subprocess_audit"]["requested_input_mode"]
         NamedCameraCaptureError(sign_payload(legacy))
+        oldest = copy.deepcopy(legacy)
+        oldest["schema_version"] = "scenesmith.named_camera_failure_diagnostic.v1"
+        del oldest["subprocess_audit"]["requested_framerate_fps"]
+        NamedCameraCaptureError(sign_payload(oldest))
 
     def test_named_ffmpeg_failure_preserves_primary_and_cleanup_errors(self):
         contract = _execution_contract()
@@ -1191,6 +1370,13 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         framerate_tamper = sign_payload(framerate_tamper)
         with self.assertRaisesRegex(ValueError, "framerate"):
             NamedCameraCaptureError(framerate_tamper)
+        input_mode_tamper = copy.deepcopy(diagnostic)
+        input_mode_tamper["subprocess_audit"]["requested_input_mode"][
+            "framerate_fps"
+        ] = 29
+        input_mode_tamper = sign_payload(input_mode_tamper)
+        with self.assertRaisesRegex(ValueError, "input|mode|dimensions"):
+            NamedCameraCaptureError(input_mode_tamper)
 
     def test_private_camera_failure_record_is_signed_immutable_and_label_free(self):
         contract = _execution_contract()
@@ -1237,7 +1423,7 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         verify_private_capture_failure_evidence(failure)
         self.assertEqual(
             failure["schema_version"],
-            "scenesmith.live_readonly_capture_failure_private.v3",
+            "scenesmith.live_readonly_capture_failure_private.v4",
         )
         self.assertEqual(failure["execution_contract"], contract)
         self.assertEqual(failure["servo_result"], servo_result)
@@ -1276,6 +1462,9 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         )
         del legacy_failure["camera_failure_diagnostic"]["subprocess_audit"][
             "requested_framerate_fps"
+        ]
+        del legacy_failure["camera_failure_diagnostic"]["subprocess_audit"][
+            "requested_input_mode"
         ]
         legacy_failure["camera_failure_diagnostic"] = sign_payload(
             legacy_failure["camera_failure_diagnostic"]
@@ -1322,6 +1511,44 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         mode_tamper = sign_payload(mode_tamper)
         with self.assertRaisesRegex(ValueError, "camera mode"):
             verify_private_capture_failure_evidence(mode_tamper)
+
+        coordinated_mode_tamper = copy.deepcopy(failure)
+        changed_camera = coordinated_mode_tamper["execution_contract"]["cameras"][0]
+        changed_camera["input_mode"]["width"] += 1
+        coordinated_mode_tamper["execution_contract"] = sign_payload(
+            coordinated_mode_tamper["execution_contract"]
+        )
+        coordinated_mode_tamper["execution_contract_identity_sha256"] = (
+            coordinated_mode_tamper["execution_contract"]["identity_sha256"]
+        )
+        coordinated_mode_tamper["servo_result"][
+            "execution_contract_identity_sha256"
+        ] = coordinated_mode_tamper["execution_contract"]["identity_sha256"]
+        coordinated_mode_tamper["servo_result"] = sign_payload(
+            coordinated_mode_tamper["servo_result"]
+        )
+        coordinated_mode_tamper["servo_result_identity_sha256"] = (
+            coordinated_mode_tamper["servo_result"]["identity_sha256"]
+        )
+        diagnostic = coordinated_mode_tamper["camera_failure_diagnostic"]
+        diagnostic["camera_identity_sha256"] = hashlib.sha256(
+            canonical_json_bytes(changed_camera)
+        ).hexdigest()
+        diagnostic["subprocess_audit"]["camera_identity_sha256"] = diagnostic[
+            "camera_identity_sha256"
+        ]
+        diagnostic["subprocess_audit"]["requested_input_mode"] = copy.deepcopy(
+            changed_camera["input_mode"]
+        )
+        coordinated_mode_tamper["camera_failure_diagnostic"] = sign_payload(
+            diagnostic
+        )
+        coordinated_mode_tamper["camera_failure_diagnostic_identity_sha256"] = (
+            coordinated_mode_tamper["camera_failure_diagnostic"]["identity_sha256"]
+        )
+        coordinated_mode_tamper = sign_payload(coordinated_mode_tamper)
+        with self.assertRaisesRegex(ValueError, "contract camera modes"):
+            verify_private_capture_failure_evidence(coordinated_mode_tamper)
 
         missing_result = copy.deepcopy(failure)
         del missing_result["servo_result"]
@@ -1433,6 +1660,10 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             )
         self.assertTrue(
             all(camera["camera_backend_audit_sha256"] for camera in manifest["cameras"])
+        )
+        self.assertEqual(
+            [camera["input_mode"] for camera in manifest["cameras"]],
+            [camera["input_mode"] for camera in contract["cameras"]],
         )
 
     def test_camera_primary_and_release_errors_are_both_preserved(self):
@@ -1582,6 +1813,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             )
             self.assertTrue({"SOFollower", "SO101Follower"}.isdisjoint(called_names))
             self.assertNotIn("VideoCapture", source)
+            self.assertNotIn("AVCaptureSession", source)
+            self.assertNotIn("startRunning", source)
 
 
 if __name__ == "__main__":

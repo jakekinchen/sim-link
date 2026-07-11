@@ -138,6 +138,10 @@ def main() -> int:
                     "identity_sha256": discovery["identity_sha256"],
                     "serial_candidate_count": len(discovery["serial_candidates"]),
                     "camera_candidate_count": len(discovery["avfoundation_devices"]),
+                    "camera_supported_mode_counts": {
+                        camera["name"]: len(camera["supported_modes"])
+                        for camera in discovery["system_cameras"]
+                    },
                     "serial_ports_opened": 0,
                     "cameras_opened": 0,
                 },
@@ -183,6 +187,13 @@ def main() -> int:
                     "valid_until": contract["expires_at"],
                     "camera_indexes": [
                         camera["index"] for camera in contract["cameras"]
+                    ],
+                    "camera_input_modes": [
+                        {
+                            "index": camera["index"],
+                            "input_mode": camera["input_mode"],
+                        }
+                        for camera in contract["cameras"]
                     ],
                     "physical_follower_commanded": False,
                 },

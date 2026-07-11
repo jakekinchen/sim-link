@@ -45,20 +45,30 @@ from scenesmith.robot_lab.readonly_servo_census import (
 
 
 OPERATOR_PRESENCE_LEASE_SCHEMA_VERSION = "scenesmith.operator_presence_lease.v1"
-LIVE_DISCOVERY_SCHEMA_VERSION = "scenesmith.live_readonly_discovery.v1"
+LIVE_DISCOVERY_SCHEMA_VERSION = "scenesmith.live_readonly_discovery.v2"
+LEGACY_LIVE_DISCOVERY_SCHEMA_VERSION = "scenesmith.live_readonly_discovery.v1"
 LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION = (
+    "scenesmith.live_readonly_observation_contract.v3"
+)
+LEGACY_LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION = (
     "scenesmith.live_readonly_observation_contract.v2"
 )
 LIVE_SERVO_RESULT_SCHEMA_VERSION = "scenesmith.live_readonly_servo_result.v2"
-PRIVATE_OBSERVATION_SCHEMA_VERSION = "scenesmith.live_readonly_observation_private.v3"
-REDACTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v3"
+PRIVATE_OBSERVATION_SCHEMA_VERSION = "scenesmith.live_readonly_observation_private.v4"
+REDACTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v4"
 CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION = (
-    "scenesmith.named_camera_failure_diagnostic.v2"
+    "scenesmith.named_camera_failure_diagnostic.v3"
 )
 LEGACY_CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION = (
+    "scenesmith.named_camera_failure_diagnostic.v2"
+)
+OLDEST_CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION = (
     "scenesmith.named_camera_failure_diagnostic.v1"
 )
 PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION = (
+    "scenesmith.live_readonly_capture_failure_private.v4"
+)
+LEGACY_FULL_PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION = (
     "scenesmith.live_readonly_capture_failure_private.v3"
 )
 LEGACY_PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION = (
@@ -73,6 +83,59 @@ MAX_EXECUTION_DURATION_SECONDS = 120
 DEFAULT_FRAME_COUNT_PER_CAMERA = 2
 CAMERA_READ_TIMEOUT_SECONDS = 5
 CAMERA_FRAMERATE_FPS = 30
+CAMERA_FRAMERATE_MATCH_TOLERANCE_FPS = 0.01
+CAMERA_PIXEL_FORMAT_PRIORITY = ("uyvy422", "yuyv422", "nv12", "0rgb", "bgr0")
+CAMERA_PIXEL_FORMAT_BY_FOURCC = {
+    "2vuy": "uyvy422",
+    "yuvs": "yuyv422",
+    "420v": "nv12",
+    "ARGB": "0rgb",
+    "BGRA": "bgr0",
+}
+_SWIFT_CAMERA_MODE_METADATA_SOURCE = r'''
+import AVFoundation
+import CoreMedia
+import Foundation
+
+var cameras: [[String: Any]] = []
+let discovery = AVCaptureDevice.DiscoverySession(
+    deviceTypes: [.external],
+    mediaType: .video,
+    position: .unspecified
+)
+for device in discovery.devices {
+    var formats: [[String: Any]] = []
+    for format in device.formats {
+        let description = format.formatDescription
+        let dimensions = CMVideoFormatDescriptionGetDimensions(description)
+        let subtype = CMFormatDescriptionGetMediaSubType(description)
+        let bytes: [UInt8] = [
+            UInt8((subtype >> 24) & 0xff),
+            UInt8((subtype >> 16) & 0xff),
+            UInt8((subtype >> 8) & 0xff),
+            UInt8(subtype & 0xff),
+        ]
+        let fourcc = String(bytes: bytes, encoding: .macOSRoman) ?? ""
+        for range in format.videoSupportedFrameRateRanges {
+            formats.append([
+                "fourcc": fourcc,
+                "width": Int(dimensions.width),
+                "height": Int(dimensions.height),
+                "min_framerate_fps": range.minFrameRate,
+                "max_framerate_fps": range.maxFrameRate,
+            ])
+        }
+    }
+    cameras.append([
+        "name": device.localizedName,
+        "unique_id": device.uniqueID,
+        "model_id": device.modelID,
+        "formats": formats,
+    ])
+}
+let data = try JSONSerialization.data(withJSONObject: ["cameras": cameras])
+print(String(data: data, encoding: .utf8)!)
+'''
 FFMPEG_EXECUTABLE = Path("/opt/homebrew/bin/ffmpeg")
 MAX_PNG_FRAME_BYTES = 64 * 1024 * 1024
 MAX_CAMERA_FAILURE_PREVIEW_BYTES = 2048
@@ -379,7 +442,11 @@ def parse_avfoundation_video_devices(output: str) -> list[dict[str, Any]]:
     return [_normalize_avfoundation_device(device) for device in devices]
 
 
-def parse_system_camera_devices(payload: dict[str, Any]) -> list[dict[str, Any]]:
+def parse_system_camera_devices(
+    payload: dict[str, Any],
+    *,
+    supported_modes_payload: dict[str, Any],
+) -> list[dict[str, Any]]:
     if not isinstance(payload, dict):
         raise ValueError("System camera discovery payload must be an object")
     observed: list[dict[str, Any]] = []
@@ -401,11 +468,87 @@ def parse_system_camera_devices(payload: dict[str, Any]) -> list[dict[str, Any]]
                 visit(child)
 
     visit(payload.get("SPCameraDataType", payload))
-    normalized = [_normalize_system_camera(camera) for camera in observed]
+    supported_modes = parse_system_camera_supported_modes(supported_modes_payload)
+    normalized = []
+    for camera in observed:
+        key = (camera["name"], camera["unique_id"], camera["model_id"])
+        normalized.append(
+            _normalize_system_camera(
+                {
+                    **camera,
+                    "supported_modes": supported_modes.get(key, []),
+                }
+            )
+        )
     unique: dict[tuple[str, str, str], dict[str, Any]] = {}
     for camera in normalized:
-        unique[(camera["name"], camera["unique_id"], camera["model_id"])] = camera
+        key = (camera["name"], camera["unique_id"], camera["model_id"])
+        if key in unique:
+            raise ValueError("System camera identity is duplicated")
+        unique[key] = camera
+    if set(supported_modes) != set(unique):
+        raise ValueError("System camera supported-mode identities do not match")
     return list(unique.values())
+
+
+def parse_system_camera_supported_modes(
+    payload: dict[str, Any],
+) -> dict[tuple[str, str, str], list[dict[str, Any]]]:
+    if not isinstance(payload, dict) or set(payload) != {"cameras"}:
+        raise ValueError("System camera supported-mode payload is malformed")
+    cameras = payload.get("cameras")
+    if not isinstance(cameras, list) or not cameras:
+        raise ValueError("System camera supported-mode list is empty")
+    result: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
+    for camera in cameras:
+        if not isinstance(camera, dict) or set(camera) != {
+            "name",
+            "unique_id",
+            "model_id",
+            "formats",
+        }:
+            raise ValueError("System camera supported-mode record is malformed")
+        key = (
+            require_nonblank(camera.get("name"), label="mode camera name"),
+            require_nonblank(camera.get("unique_id"), label="mode camera unique_id"),
+            require_nonblank(camera.get("model_id"), label="mode camera model_id"),
+        )
+        if key in result:
+            raise ValueError("System camera supported-mode identity is duplicated")
+        formats = camera.get("formats")
+        if not isinstance(formats, list) or not formats:
+            raise ValueError("System camera supported modes are empty")
+        normalized = []
+        for item in formats:
+            if not isinstance(item, dict) or set(item) != {
+                "fourcc",
+                "width",
+                "height",
+                "min_framerate_fps",
+                "max_framerate_fps",
+            }:
+                raise ValueError("System camera format metadata is malformed")
+            pixel_format = CAMERA_PIXEL_FORMAT_BY_FOURCC.get(item.get("fourcc"))
+            if pixel_format is None:
+                continue
+            normalized.append(
+                _normalize_camera_supported_mode(
+                    {
+                        "pixel_format": pixel_format,
+                        "width": item["width"],
+                        "height": item["height"],
+                        "min_framerate_fps": item["min_framerate_fps"],
+                        "max_framerate_fps": item["max_framerate_fps"],
+                    }
+                )
+            )
+        if not normalized:
+            raise ValueError("System camera has no supported reviewed pixel format")
+        ordered = sorted(normalized, key=_camera_supported_mode_sort_key)
+        if len({_camera_supported_mode_key(item) for item in ordered}) != len(ordered):
+            raise ValueError("System camera supported modes contain duplicates")
+        result[key] = ordered
+    return result
 
 
 def resolve_camera_selection(
@@ -458,6 +601,7 @@ def resolve_camera_selection(
                 "name": av_device["name"],
                 "unique_id": matches[0]["unique_id"],
                 "model_id": matches[0]["model_id"],
+                "input_mode": select_camera_input_mode(matches[0]),
             }
         )
     if len({camera["unique_id"] for camera in result}) != len(result):
@@ -482,6 +626,8 @@ def build_live_execution_contract(
         now=issued_at,
     )
     _verify_discovery_snapshot(discovery)
+    if discovery.get("schema_version") != LIVE_DISCOVERY_SCHEMA_VERSION:
+        raise ValueError("New live execution requires supported-mode discovery v2")
     if presence_lease["session_id"] != discovery["session_id"]:
         raise ValueError("Lease and discovery session identities differ")
     follower_identity = resolve_follower_identity(discovery)
@@ -1095,12 +1241,17 @@ def verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
         "physical_follower_commanded",
         "identity_sha256",
     }
-    if failure_schema == PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION:
+    full_failure_schemas = {
+        PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION,
+        LEGACY_FULL_PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION,
+    }
+    if failure_schema in full_failure_schemas:
         allowed_fields.update({"execution_contract", "servo_result"})
     if not isinstance(payload, dict) or set(payload) != allowed_fields:
         raise ValueError("Private capture failure evidence fields are malformed")
     if failure_schema not in {
         PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION,
+        LEGACY_FULL_PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION,
         LEGACY_PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION,
     }:
         raise ValueError("Unsupported private capture failure evidence schema")
@@ -1133,7 +1284,7 @@ def verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
         != diagnostic.get("identity_sha256")
     ):
         raise ValueError("Private capture failure diagnostic identity drifted")
-    if failure_schema == PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION:
+    if failure_schema in full_failure_schemas:
         execution_contract = payload.get("execution_contract")
         if not isinstance(execution_contract, dict):
             raise ValueError("Private capture failure execution contract is missing")
@@ -1141,9 +1292,13 @@ def verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
             execution_contract,
             label="Private capture failure execution contract",
         )
+        expected_contract_schema = (
+            LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION
+            if failure_schema == PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION
+            else LEGACY_LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION
+        )
         if (
-            execution_contract.get("schema_version")
-            != LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION
+            execution_contract.get("schema_version") != expected_contract_schema
             or payload.get("execution_contract_identity_sha256")
             != execution_contract.get("identity_sha256")
             or payload.get("session_id") != execution_contract.get("session_id")
@@ -1153,6 +1308,20 @@ def verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
             != execution_contract.get("discovery_identity_sha256")
         ):
             raise ValueError("Private capture failure execution contract drifted")
+        if failure_schema == PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION:
+            embedded_discovery = execution_contract.get("discovery")
+            _verify_discovery_snapshot(embedded_discovery)
+            expected_cameras = resolve_camera_selection(
+                embedded_discovery,
+                [
+                    camera.get("index")
+                    for camera in execution_contract.get("cameras", [])
+                ],
+            )
+            if execution_contract.get("cameras") != expected_cameras:
+                raise ValueError(
+                    "Private capture failure contract camera modes drifted"
+                )
         servo_result = payload.get("servo_result")
         if not isinstance(servo_result, dict):
             raise ValueError("Private capture failure servo result is missing")
@@ -1168,17 +1337,28 @@ def verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
             or payload.get("operation_counts") != servo_result.get("operation_counts")
         ):
             raise ValueError("Private capture failure servo result linkage drifted")
-        camera_identities = {
-            _sha256_payload(camera) for camera in execution_contract["cameras"]
+        cameras_by_identity = {
+            _sha256_payload(camera): camera
+            for camera in execution_contract["cameras"]
         }
+        diagnostic_camera = cameras_by_identity.get(
+            diagnostic.get("camera_identity_sha256")
+        )
         if (
-            diagnostic.get("camera_identity_sha256") not in camera_identities
+            diagnostic_camera is None
             or diagnostic.get("subprocess_audit", {}).get(
                 "requested_framerate_fps"
             )
             != execution_contract.get("camera_framerate_fps")
         ):
             raise ValueError("Private capture failure camera mode linkage drifted")
+        if (
+            execution_contract.get("schema_version")
+            == LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION
+            and diagnostic.get("subprocess_audit", {}).get("requested_input_mode")
+            != diagnostic_camera.get("input_mode")
+        ):
+            raise ValueError("Private capture failure camera input mode drifted")
     holders = payload.get("serial_identity_holder_snapshots")
     counts = payload.get("serial_identity_holder_counts")
     holder_hashes = payload.get("serial_identity_holder_snapshot_sha256")
@@ -1532,6 +1712,7 @@ def build_redacted_observation_manifest(
             {
                 "camera_identity_sha256": _sha256_payload(camera),
                 "camera_backend_audit_sha256": _sha256_payload(matching_audits[0]),
+                "input_mode": copy.deepcopy(camera["input_mode"]),
                 "frames": camera_frames,
             }
         )
@@ -1982,11 +2163,23 @@ def enumerate_camera_metadata() -> tuple[list[dict[str, Any]], list[dict[str, An
         text=True,
         timeout=30,
     )
+    supported_modes = subprocess.run(
+        ["/usr/bin/xcrun", "swift", "-e", _SWIFT_CAMERA_MODE_METADATA_SOURCE],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    if supported_modes.stderr.strip():
+        raise RuntimeError("Camera supported-mode metadata emitted stderr")
     return (
         parse_avfoundation_video_devices(
             "\n".join((avfoundation.stdout, avfoundation.stderr))
         ),
-        parse_system_camera_devices(json.loads(profiler.stdout)),
+        parse_system_camera_devices(
+            json.loads(profiler.stdout),
+            supported_modes_payload=json.loads(supported_modes.stdout),
+        ),
     )
 
 
@@ -2062,6 +2255,7 @@ class FFmpegNamedFiniteCamera:
             "name",
             "unique_id",
             "model_id",
+            "input_mode",
         }:
             raise ValueError("Named camera identity fields are malformed")
         name = require_nonblank(camera.get("name"), label="named camera name")
@@ -2087,7 +2281,11 @@ class FFmpegNamedFiniteCamera:
             or framerate_fps != CAMERA_FRAMERATE_FPS
         ):
             raise ValueError("Named camera framerate is not the reviewed mode")
+        input_mode = _normalize_camera_input_mode(camera.get("input_mode"))
+        if input_mode["framerate_fps"] != framerate_fps:
+            raise ValueError("Named camera input mode and framerate differ")
         self._camera = copy.deepcopy(camera)
+        self._input_mode = input_mode
         self._expected_frame_count = expected_frame_count
         self._framerate_fps = framerate_fps
         self._read_timeout_seconds = read_timeout_seconds
@@ -2104,6 +2302,7 @@ class FFmpegNamedFiniteCamera:
             "backend": "ffmpeg_named_avfoundation",
             "camera_identity_sha256": _sha256_payload(self._camera),
             "requested_framerate_fps": self._framerate_fps,
+            "requested_input_mode": copy.deepcopy(self._input_mode),
             "subprocess_start_attempts": 0,
             "subprocess_start_successes": 0,
             "subprocess_communicate_attempts": 0,
@@ -2133,6 +2332,10 @@ class FFmpegNamedFiniteCamera:
             "-nostdin",
             "-f",
             "avfoundation",
+            "-pixel_format",
+            self._input_mode["pixel_format"],
+            "-video_size",
+            f"{self._input_mode['width']}x{self._input_mode['height']}",
             "-framerate",
             str(self._framerate_fps),
             "-i",
@@ -2448,6 +2651,7 @@ def _verify_named_camera_failure_diagnostic(payload: dict[str, Any]) -> None:
         not in {
             CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
             LEGACY_CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
+            OLDEST_CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
         }
         or payload.get("diagnostic_name")
         != "pi05_named_camera_capture_failure"
@@ -2543,8 +2747,13 @@ def _verify_named_camera_failure_diagnostic(payload: dict[str, Any]) -> None:
         "continuous_recording_sessions",
     }
     audit_allowed_fields = {"backend", "camera_identity_sha256", *count_fields}
-    if diagnostic_schema == CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION:
+    if diagnostic_schema in {
+        CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
+        LEGACY_CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
+    }:
         audit_allowed_fields.add("requested_framerate_fps")
+    if diagnostic_schema == CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION:
+        audit_allowed_fields.add("requested_input_mode")
     if (
         not isinstance(audit, dict)
         or set(audit) != audit_allowed_fields
@@ -2558,11 +2767,16 @@ def _verify_named_camera_failure_diagnostic(payload: dict[str, Any]) -> None:
         )
     ):
         raise ValueError("Named camera failure subprocess audit is malformed")
-    if diagnostic_schema == CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION and (
+    if diagnostic_schema in {
+        CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
+        LEGACY_CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
+    } and (
         isinstance(audit.get("requested_framerate_fps"), bool)
         or audit.get("requested_framerate_fps") != CAMERA_FRAMERATE_FPS
     ):
         raise ValueError("Named camera failure subprocess framerate drifted")
+    if diagnostic_schema == CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION:
+        _normalize_camera_input_mode(audit.get("requested_input_mode"))
     if (
         not isinstance(payload.get("primary_error_type"), str)
         or not payload["primary_error_type"]
@@ -2723,6 +2937,7 @@ def _injected_camera_backend_audit(
         "backend": "injected_finite_camera",
         "camera_identity_sha256": _sha256_payload(camera),
         "requested_framerate_fps": framerate_fps,
+        "requested_input_mode": copy.deepcopy(camera["input_mode"]),
         "subprocess_start_attempts": 0,
         "subprocess_start_successes": 0,
         "subprocess_communicate_attempts": 0,
@@ -2769,6 +2984,7 @@ def _verify_camera_backend_audit(
         "backend",
         "camera_identity_sha256",
         "requested_framerate_fps",
+        "requested_input_mode",
         *count_fields,
     }
     if not isinstance(payload, dict) or set(payload) != allowed_fields:
@@ -2786,6 +3002,9 @@ def _verify_camera_backend_audit(
         or expected_framerate_fps != CAMERA_FRAMERATE_FPS
     ):
         raise ValueError("Camera backend audit framerate drifted")
+    if payload.get("requested_input_mode") != camera.get("input_mode"):
+        raise ValueError("Camera backend audit input mode drifted")
+    _normalize_camera_input_mode(payload["requested_input_mode"])
     if any(
         isinstance(payload.get(field), bool)
         or not isinstance(payload.get(field), int)
@@ -2836,7 +3055,11 @@ def _verify_discovery_snapshot(payload: dict[str, Any]) -> None:
     }
     if not isinstance(payload, dict) or set(payload) != allowed_fields:
         raise ValueError("Live discovery snapshot fields are malformed")
-    if payload.get("schema_version") != LIVE_DISCOVERY_SCHEMA_VERSION:
+    discovery_schema = payload.get("schema_version")
+    if discovery_schema not in {
+        LIVE_DISCOVERY_SCHEMA_VERSION,
+        LEGACY_LIVE_DISCOVERY_SCHEMA_VERSION,
+    }:
         raise ValueError("Unsupported live discovery snapshot schema")
     verify_signed_payload(payload, label="Live discovery snapshot")
     if payload.get("discovery_name") != "pi05_live_readonly_metadata_discovery":
@@ -2860,7 +3083,16 @@ def _verify_discovery_snapshot(payload: dict[str, Any]) -> None:
         raise ValueError("Live discovery AVFoundation devices are malformed")
     if (
         not isinstance(system_cameras, list)
-        or [_normalize_system_camera(item) for item in system_cameras] != system_cameras
+        or [
+            _normalize_system_camera(
+                item,
+                allow_legacy=(
+                    discovery_schema == LEGACY_LIVE_DISCOVERY_SCHEMA_VERSION
+                ),
+            )
+            for item in system_cameras
+        ]
+        != system_cameras
     ):
         raise ValueError("Live discovery system cameras are malformed")
 
@@ -2925,14 +3157,17 @@ def _normalize_avfoundation_device(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _normalize_system_camera(payload: dict[str, Any]) -> dict[str, Any]:
-    if not isinstance(payload, dict) or set(payload) != {
-        "name",
-        "unique_id",
-        "model_id",
-    }:
+def _normalize_system_camera(
+    payload: dict[str, Any],
+    *,
+    allow_legacy: bool = False,
+) -> dict[str, Any]:
+    expected_fields = {"name", "unique_id", "model_id"}
+    if not allow_legacy:
+        expected_fields.add("supported_modes")
+    if not isinstance(payload, dict) or set(payload) != expected_fields:
         raise ValueError("System camera fields are malformed")
-    return {
+    result = {
         "name": require_nonblank(payload.get("name"), label="system camera name"),
         "unique_id": require_nonblank(
             payload.get("unique_id"), label="system camera unique_id"
@@ -2940,6 +3175,138 @@ def _normalize_system_camera(payload: dict[str, Any]) -> dict[str, Any]:
         "model_id": require_nonblank(
             payload.get("model_id"), label="system camera model_id"
         ),
+    }
+    if allow_legacy:
+        return result
+    modes = payload.get("supported_modes")
+    if not isinstance(modes, list) or not modes:
+        raise ValueError("System camera supported modes are empty")
+    normalized = [_normalize_camera_supported_mode(mode) for mode in modes]
+    ordered = sorted(normalized, key=_camera_supported_mode_sort_key)
+    if normalized != ordered:
+        raise ValueError("System camera supported modes are not normalized")
+    if len({_camera_supported_mode_key(item) for item in ordered}) != len(ordered):
+        raise ValueError("System camera supported modes contain duplicates")
+    result["supported_modes"] = ordered
+    return result
+
+
+def _normalize_camera_supported_mode(payload: dict[str, Any]) -> dict[str, Any]:
+    fields = {
+        "pixel_format",
+        "width",
+        "height",
+        "min_framerate_fps",
+        "max_framerate_fps",
+    }
+    if not isinstance(payload, dict) or set(payload) != fields:
+        raise ValueError("Camera supported-mode fields are malformed")
+    pixel_format = payload.get("pixel_format")
+    if pixel_format not in CAMERA_PIXEL_FORMAT_PRIORITY:
+        raise ValueError("Camera supported pixel format is not reviewed")
+    width = payload.get("width")
+    height = payload.get("height")
+    if any(
+        isinstance(value, bool) or not isinstance(value, int) or not 1 <= value <= 8192
+        for value in (width, height)
+    ):
+        raise ValueError("Camera supported-mode dimensions are invalid")
+    minimum = payload.get("min_framerate_fps")
+    maximum = payload.get("max_framerate_fps")
+    if any(
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not math.isfinite(float(value))
+        for value in (minimum, maximum)
+    ):
+        raise ValueError("Camera supported-mode framerate bounds are invalid")
+    minimum = float(minimum)
+    maximum = float(maximum)
+    if minimum <= 0 or maximum < minimum or maximum > 240:
+        raise ValueError("Camera supported-mode framerate bounds are invalid")
+    return {
+        "pixel_format": pixel_format,
+        "width": width,
+        "height": height,
+        "min_framerate_fps": minimum,
+        "max_framerate_fps": maximum,
+    }
+
+
+def _camera_supported_mode_key(mode: dict[str, Any]) -> tuple[Any, ...]:
+    return (
+        mode["pixel_format"],
+        mode["width"],
+        mode["height"],
+        mode["min_framerate_fps"],
+        mode["max_framerate_fps"],
+    )
+
+
+def _camera_supported_mode_sort_key(mode: dict[str, Any]) -> tuple[Any, ...]:
+    return (
+        mode["width"] * mode["height"],
+        mode["width"],
+        mode["height"],
+        CAMERA_PIXEL_FORMAT_PRIORITY.index(mode["pixel_format"]),
+        mode["min_framerate_fps"],
+        mode["max_framerate_fps"],
+    )
+
+
+def select_camera_input_mode(camera: dict[str, Any]) -> dict[str, Any]:
+    normalized = _normalize_system_camera(camera)
+    candidates = [
+        mode
+        for mode in normalized["supported_modes"]
+        if (
+            mode["min_framerate_fps"] - CAMERA_FRAMERATE_MATCH_TOLERANCE_FPS
+            <= CAMERA_FRAMERATE_FPS
+            <= mode["max_framerate_fps"]
+            + CAMERA_FRAMERATE_MATCH_TOLERANCE_FPS
+        )
+    ]
+    if not candidates:
+        raise ValueError("Camera has no signed supported mode at exact 30 fps")
+    selected = min(candidates, key=_camera_supported_mode_sort_key)
+    return _normalize_camera_input_mode({
+        "pixel_format": selected["pixel_format"],
+        "width": selected["width"],
+        "height": selected["height"],
+        "framerate_fps": CAMERA_FRAMERATE_FPS,
+    })
+
+
+def _normalize_camera_input_mode(payload: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(payload, dict) or set(payload) != {
+        "pixel_format",
+        "width",
+        "height",
+        "framerate_fps",
+    }:
+        raise ValueError("Selected camera input-mode fields are malformed")
+    pixel_format = payload.get("pixel_format")
+    width = payload.get("width")
+    height = payload.get("height")
+    framerate = payload.get("framerate_fps")
+    if pixel_format not in CAMERA_PIXEL_FORMAT_PRIORITY:
+        raise ValueError("Selected camera input pixel format is not reviewed")
+    if any(
+        isinstance(value, bool) or not isinstance(value, int) or not 1 <= value <= 8192
+        for value in (width, height)
+    ):
+        raise ValueError("Selected camera input dimensions are invalid")
+    if (
+        isinstance(framerate, bool)
+        or not isinstance(framerate, int)
+        or framerate != CAMERA_FRAMERATE_FPS
+    ):
+        raise ValueError("Selected camera input framerate drifted")
+    return {
+        "pixel_format": pixel_format,
+        "width": width,
+        "height": height,
+        "framerate_fps": framerate,
     }
 
 
