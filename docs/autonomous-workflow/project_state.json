@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "e68068a6331723e46f09edd82531b964dffd9f5c",
-  "last_reviewed_implementation_commit": "e68068a6331723e46f09edd82531b964dffd9f5c",
+  "verified_through_commit": "700be05468c15e3660bf481931f77e49af49d527",
+  "last_reviewed_implementation_commit": "700be05468c15e3660bf481931f77e49af49d527",
   "source_review": {
-    "commit": "68e11b952638cf1c9a7150a0c9d5211abf79ddbc",
-    "decision": "ACCEPT_LIVE_ATTEMPT_006_FINITE_READ_ONLY_CENSUS_AND_PHYSICAL_OBSERVATION_CAPTURE",
-    "reviewer_decision": "docs/reviewer-messages/072-accept-live-attempt-006.md"
+    "commit": "700be05468c15e3660bf481931f77e49af49d527",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_048_SIGNED_CALIBRATION_PROFILE_OFFLINE_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/073-accept-brief-048-calibration-profile.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -130,7 +130,7 @@
   "training_lock": "closed",
   "current_milestone": "M16",
   "current_task": "T16.5c",
-  "next_eligible_task": "T16.5b",
+  "next_eligible_task": "T16.5c",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -1145,20 +1145,43 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "048",
-      "result": "T16.5b accepted finite sequential evidence; Brief 048 is active offline to parse and semantically validate the pinned six-joint calibration into a signed profile bound to the accepted manifest",
-      "next_action": "implement signed CalibrationProfile validation offline; do not claim synchronized observation or run policy shadow yet",
+      "latest_verified_brief_id": "048",
+      "completed_brief_ids": ["048"],
+      "result": "Brief 048 is verified and remotely preserved: signed CalibrationProfile b360b4f6... binds pinned calibration 192404b6..., accepted live manifest eff3c824..., and six exact live servo identities; body degree and gripper 0-closed/100-open semantics validate offline without hardware or policy execution",
+      "artifact": {
+        "path": "configurations/robot_lab/pi05_calibration_profile.json",
+        "schema_version": "scenesmith.calibration_profile.v1",
+        "identity_sha256": "b360b4f60077846c62128fe4d4cc33d1ee4e6e72aa7831fcb7c6706e6b6599b4",
+        "source_calibration_sha256": "192404b6d3c1337495d69649969459aa9d3f66816cd916c67da2588815e93ec4",
+        "accepted_live_manifest_identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
+        "servo_identity_sha256": "66e9d3630578242deaeb24d97eb1627131db23ea6f5c2d44735c4af2fc967463"
+      },
+      "test_commands": [
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_calibration_profile",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_calibration_profile.py --verify",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_calibration_profile tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/calibration_profile.py scripts/robot_lab/write_calibration_profile.py tests/unit/test_calibration_profile.py",
+        "git diff --check"
+      ],
+      "next_action": "after closeout, open a new offline brief for static-pose-bracketed camera observation and parsed-profile coordinate validation before any PI0.5 preprocessing or shadow inference",
       "conditional_authority": [
         "physical_observation_preprocessing",
         "pi05_policy_shadow_no_actuation",
         "matched_mujoco_replay"
       ],
-      "authority_not_granted": ["physical_actuation", "physical_qualification"]
+      "authority_granted": ["calibration_profile_semantically_valid"],
+      "authority_not_granted": [
+        "static_pose_bracketed_observation",
+        "policy_shadow_input_valid",
+        "policy_shadow",
+        "physical_actuation",
+        "physical_qualification"
+      ]
     },
     "T16.6": {
       "state": "pending",
       "depends_on": ["T16.5a", "T16.5b", "T16.5c"],
-      "result": "final operator confirmation granted for one exact initial micro-motion permit; T16.5c and all permit-specific calibration, pose, limit, telemetry, watchdog, and shutdown prerequisites remain pending",
+      "result": "final operator confirmation granted for one exact initial micro-motion permit; the offline calibration profile is semantically valid, but T16.5c static-pose bracket, preprocessing/shadow/replay and all permit-specific current-pose, limit, telemetry, watchdog, stop, and shutdown prerequisites remain pending",
       "no_second_prompt_required": true,
       "pre_execution_requirements": [
         "T16.5a_T16.5b_T16.5c_verified",

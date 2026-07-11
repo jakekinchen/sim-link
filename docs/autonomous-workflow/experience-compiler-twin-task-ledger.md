@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress under Brief 048 offline; signed parsed calibration profile bound to accepted T16.5b evidence
+current_task: T16.5c in progress; Brief 048 signed parsed calibration profile verified and remote at 700be05
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: manifest eff3c824...; private 125de28f...; contract cf1ad99c...; four exact 640x480 PNGs; 54 reads; six Torque_Enable=0; both aliases zero; no writes/torque/motion; cleanup complete
-remaining: T16.5c parsed calibration/static-pose-bracket/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
+evidence: live manifest eff3c824...; calibration profile b360b4f6...; source 192404b6...; servo digest 66e9d363...; 6 focused and 238 broad tests; no hardware/policy access in Brief 048
+remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: T16.5b none; T16.5c calibration semantics and static-pose-bracketed synchronized-enough observation remain unverified
-next_step: implement and verify Brief 048 signed calibration profile offline; do not reopen hardware, preprocess policy input, or actuate
+blockers: T16.5b none; T16.5c static-pose-bracketed synchronized-enough observation and policy-shadow input parity remain unverified
+next_step: after closeout, open an offline static-pose-bracket brief; do not reopen hardware, preprocess policy input, run shadow inference, or actuate until its exact gate is reviewed
 ```
 
 ## Rules
@@ -49,7 +49,7 @@ next_step: implement and verify Brief 048 signed calibration profile offline; do
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; manifest `eff3c824...`; private `125de28f...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; reviewer 072; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Brief 048 active offline: signed parsed calibration profile first; static-pose bracket and policy shadow remain pending; requested actions never sent |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Brief 048 / `700be05`: profile `b360b4f6...` validates six live-bound joints and explicit body/gripper normalization offline; static-pose bracket and policy shadow remain pending; requested actions never sent |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -130,6 +130,22 @@ next_step: implement and verify Brief 048 signed calibration profile offline; do
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 048 signed calibration profile verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 048 verified and remotely preserved; live gate closed
+Completed: strict parsing of exactly six named joints/IDs; signed STS3215 homing-offset and raw-range bounds; drive mode zero; live model/firmware binding; body degree normalization; gripper 0=closed and 100=open semantics
+Evidence: profile b360b4f60077846c62128fe4d4cc33d1ee4e6e72aa7831fcb7c6706e6b6599b4; calibration 192404b6.../770 bytes; manifest eff3c824.../file cd4120f0...; servo digest 66e9d363...; commit 700be05 remote
+Verification: 6 focused adversarial tests; offline artifact rebuild; py_compile; git diff check; 238-test authority/twin regression in 87.588 seconds
+Adversarial: missing/extra/duplicate/wrong joint identity; booleans/nonintegers; inverted/out-of-domain ranges; invalid homing offset/drive mode; calibration or manifest substitution; resigned normalization/polarity/global-authority drift
+Authority gained: local calibration_profile_semantically_valid only
+Authority withheld: static_pose_bracketed_observation, policy_shadow_input_valid, policy_shadow, actuation, physical qualification, transfer, promotion, training
+Hardware: none; no serial/camera/Studio access, reconnect, write, torque change, motion, policy inference, optimizer, or paid compute
+Training lock: closed
+Next step: close out the run, then design the static-pose-bracket and coordinate-validation slice before any preprocessing or shadow inference
+```
 
 ### 2026-07-11 - T16.5b attempt 006 accepted
 

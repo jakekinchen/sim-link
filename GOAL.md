@@ -30,7 +30,9 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-T16.5b remains `in_progress`. Brief 043 implementation
+T16.5b is `verified`, and T16.5c is `in_progress`. The following paragraphs
+retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
+history that constrains later hardware work. Brief 043 implementation
 `7ea26651e921eee55dad6fcbb26cb58c45c7b290` is remotely preserved. The tracked
 disconnect proof identity is
 `627de4fd5715e281007ab5f19a37b0cb610b4d3b637b7b37933a41396ba3859b`;
@@ -135,12 +137,17 @@ sequential host-timestamp evidence is not synchronized or policy-shadow-input-
 valid. T16.5c remains a separate no-actuation prerequisite; no motion or
 physical qualification is granted.
 
-T16.5c is now `in_progress` under Brief 048 offline. The current slice parses
-the pinned calibration into a signed six-joint profile bound to accepted
-manifest `eff3c824...`; it must validate names, IDs, finite homing offsets,
-ranges, drive modes, duplicates, and explicit gripper normalization semantics.
-It does not reopen hardware, make the sequential evidence synchronized, run a
-policy, or grant actuation.
+T16.5c remains `in_progress`. Brief 048 implementation `700be05` is remotely
+preserved and independently verifies signed CalibrationProfile `b360b4f6...`.
+The profile binds pinned calibration `192404b6...`, accepted manifest
+`eff3c824...`, and the six exact live servo identities; it validates signed
+STS3215 homing-offset bounds, raw position ranges, drive mode zero, body-degree
+normalization, and gripper range-min=0/closed to range-max=100/open semantics.
+Six focused tests, the offline artifact verifier, compilation, and the
+238-test authority/twin regression gate passed. No hardware was accessed and
+no policy was run. Static-pose bracketing, policy-input validity,
+preprocessing/shadow/replay, actuation, and physical qualification remain
+unverified; the live gate and training lock stay closed.
 
 ## Durable State
 
