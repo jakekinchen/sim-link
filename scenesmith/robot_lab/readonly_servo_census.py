@@ -14,9 +14,14 @@ from scenesmith.robot_lab.artifact_contract import (
     sign_payload,
     verify_signed_payload,
 )
+from scenesmith.robot_lab.census_runtime_binding import (
+    EXPECTED_RUNTIME_SEMANTICS,
+    RUNTIME_SOURCE_BINDINGS as _RUNTIME_SOURCE_BINDINGS,
+    verify_census_runtime_source_bindings,
+)
 
 
-CENSUS_CONTRACT_SCHEMA_VERSION = "scenesmith.readonly_servo_census_contract.v1"
+CENSUS_CONTRACT_SCHEMA_VERSION = "scenesmith.readonly_servo_census_contract.v2"
 CENSUS_TRACE_SCHEMA_VERSION = "scenesmith.readonly_servo_census_trace.v1"
 CENSUS_RESULT_SCHEMA_VERSION = "scenesmith.readonly_servo_census_result.v1"
 
@@ -40,6 +45,7 @@ _JOINTS = (
 )
 _MODEL_NAME = "sts3215"
 _MODEL_NUMBER = 777
+_PROTOCOL_VERSION = 0
 _BAUDRATE_CODE_TO_VALUE = {0: 1_000_000}
 _READ_PLAN = (
     ("Model_Number", 2),
@@ -320,7 +326,7 @@ def build_census_contract() -> dict[str, Any]:
             },
             "bus": {
                 "protocol_family": "feetech",
-                "protocol_version": 1,
+                "protocol_version": _PROTOCOL_VERSION,
                 "baudrate": 1_000_000,
             },
         },
@@ -346,6 +352,10 @@ def build_census_contract() -> dict[str, Any]:
             "retryable_error_codes": ["crc_mismatch", "timeout"],
         },
         "forbidden_operations": list(_FORBIDDEN_OPERATIONS),
+        "runtime_source_bindings": [
+            dict(binding) for binding in _RUNTIME_SOURCE_BINDINGS
+        ],
+        "runtime_semantics": copy.deepcopy(EXPECTED_RUNTIME_SEMANTICS),
     }
     return sign_payload(payload)
 
@@ -681,6 +691,7 @@ def write_census_fixture_artifacts(
     trace_path: Path = DEFAULT_CENSUS_TRACE_PATH,
     result_path: Path = DEFAULT_CENSUS_RESULT_PATH,
 ) -> dict[str, Any]:
+    verify_census_runtime_source_bindings(repo_root=repo_root)
     contract = build_census_contract()
     trace = build_recorded_census_trace(contract)
     result = replay_recorded_census(contract, trace)
@@ -697,6 +708,7 @@ def verify_census_fixture_artifacts(
     trace_path: Path = DEFAULT_CENSUS_TRACE_PATH,
     result_path: Path = DEFAULT_CENSUS_RESULT_PATH,
 ) -> dict[str, Any]:
+    verify_census_runtime_source_bindings(repo_root=repo_root)
     contract = load_strict_json(_resolve(repo_root, contract_path))
     trace = load_strict_json(_resolve(repo_root, trace_path))
     result = load_strict_json(_resolve(repo_root, result_path))

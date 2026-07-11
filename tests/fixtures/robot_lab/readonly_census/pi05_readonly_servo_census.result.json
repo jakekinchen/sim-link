@@ -1,9 +1,9 @@
 {
   "conformance_state": "census_trace_conformant",
-  "contract_identity_sha256": "17e8c712d88877fd508266fa85cd34bd14da8fbdd7bc98ac5ff7955bd708c2a0",
+  "contract_identity_sha256": "0e2b1522bbf7ae05e57c527b4b5b1b8fa87d40983d03c6b12a5f5e99fd486c4b",
   "evidence_mode": "recorded_trace_replay",
   "hardware_opened": false,
-  "identity_sha256": "e7c0ecfc53328571fa4e695fcb53d50b54acaa24a1d34cbe8c45eb709efbc394",
+  "identity_sha256": "6fe8c0ec7b5476138f2406e8a4684bcf091926353c684dc1a611c06545d0247c",
   "lifecycle_state": "closed",
   "operation_counts": {
     "close_attempts": 1,
@@ -157,7 +157,7 @@
     "bus": {
       "baudrate": 1000000,
       "protocol_family": "feetech",
-      "protocol_version": 1
+      "protocol_version": 0
     },
     "device_role": "so101_follower_observation_target",
     "usb": {
@@ -170,5 +170,5 @@
       "vendor_id_hex": "ffff"
     }
   },
-  "trace_identity_sha256": "25cbac27c7e86aed9ae14cf691f14f4293c14b8c85db9ee500e993650c59e27c"
+  "trace_identity_sha256": "67c38a34a47a3cfd459004463371251d77718c54fa2be30e2a7ba73b46366422"
 }

@@ -1,5 +1,5 @@
 {
-  "contract_identity_sha256": "17e8c712d88877fd508266fa85cd34bd14da8fbdd7bc98ac5ff7955bd708c2a0",
+  "contract_identity_sha256": "0e2b1522bbf7ae05e57c527b4b5b1b8fa87d40983d03c6b12a5f5e99fd486c4b",
   "events": [
     {
       "error_code": null,
@@ -512,12 +512,12 @@
     }
   ],
   "hardware_opened": false,
-  "identity_sha256": "25cbac27c7e86aed9ae14cf691f14f4293c14b8c85db9ee500e993650c59e27c",
+  "identity_sha256": "67c38a34a47a3cfd459004463371251d77718c54fa2be30e2a7ba73b46366422",
   "observed_device_identity": {
     "bus": {
       "baudrate": 1000000,
       "protocol_family": "feetech",
-      "protocol_version": 1
+      "protocol_version": 0
     },
     "device_role": "so101_follower_observation_target",
     "usb": {

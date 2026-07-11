@@ -54,7 +54,7 @@
     "write_calibration",
     "write_register"
   ],
-  "identity_sha256": "17e8c712d88877fd508266fa85cd34bd14da8fbdd7bc98ac5ff7955bd708c2a0",
+  "identity_sha256": "0e2b1522bbf7ae05e57c527b4b5b1b8fa87d40983d03c6b12a5f5e99fd486c4b",
   "proof_label": "census_trace_conformant",
   "qualification_scope": "fixture_evidence",
   "read_plan": [
@@ -106,12 +106,89 @@
       "timeout"
     ]
   },
-  "schema_version": "scenesmith.readonly_servo_census_contract.v1",
+  "runtime_semantics": {
+    "connect_handshake_default": true,
+    "connect_handshake_guarded_by_flag": true,
+    "constructor_protocol_default": 0,
+    "default_baudrate": 1000000,
+    "default_protocol_version": 0,
+    "disconnect_disable_torque_default": true,
+    "disconnect_torque_write_guarded_by_flag": true,
+    "follower_joint_map": [
+      {
+        "joint_name": "shoulder_pan",
+        "model": "sts3215",
+        "servo_id": 1
+      },
+      {
+        "joint_name": "shoulder_lift",
+        "model": "sts3215",
+        "servo_id": 2
+      },
+      {
+        "joint_name": "elbow_flex",
+        "model": "sts3215",
+        "servo_id": 3
+      },
+      {
+        "joint_name": "wrist_flex",
+        "model": "sts3215",
+        "servo_id": 4
+      },
+      {
+        "joint_name": "wrist_roll",
+        "model": "sts3215",
+        "servo_id": 5
+      },
+      {
+        "joint_name": "gripper",
+        "model": "sts3215",
+        "servo_id": 6
+      }
+    ],
+    "read_register_widths": {
+      "Baud_Rate": 1,
+      "Firmware_Major_Version": 1,
+      "Firmware_Minor_Version": 1,
+      "ID": 1,
+      "Model_Number": 2,
+      "Present_Position": 2,
+      "Present_Temperature": 1,
+      "Present_Voltage": 1
+    },
+    "sts3215_baud_code": 0,
+    "sts3215_model_number": 777,
+    "sts3215_protocol_version": 0,
+    "sts3215_resolution": 4096
+  },
+  "runtime_source_bindings": [
+    {
+      "binding_id": "feetech_implementation",
+      "path": "external/lerobot/src/lerobot/motors/feetech/feetech.py",
+      "sha256": "0460413cd6a641cede015ac19ac53d2cfe9c343af1bd18ed74e1951229f64ff2"
+    },
+    {
+      "binding_id": "feetech_tables",
+      "path": "external/lerobot/src/lerobot/motors/feetech/tables.py",
+      "sha256": "71f7f7beb17169781bd26a33b165ed4c5c3df7b9c477d36860f9d6011eb00428"
+    },
+    {
+      "binding_id": "motor_bus_lifecycle",
+      "path": "external/lerobot/src/lerobot/motors/motors_bus.py",
+      "sha256": "ade55d42046f1f0fa737eb61c360d76ed98211f200e10918dc2e6fcfd640a688"
+    },
+    {
+      "binding_id": "so_follower_joint_map",
+      "path": "external/lerobot/src/lerobot/robots/so_follower/so_follower.py",
+      "sha256": "d09a2e63ad916f3a9e69740b1033e8c1f2dd5b025d61e5b0baacf1767ca6b8d1"
+    }
+  ],
+  "schema_version": "scenesmith.readonly_servo_census_contract.v2",
   "target_device_identity": {
     "bus": {
       "baudrate": 1000000,
       "protocol_family": "feetech",
-      "protocol_version": 1
+      "protocol_version": 0
     },
     "device_role": "so101_follower_observation_target",
     "usb": {

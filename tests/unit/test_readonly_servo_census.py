@@ -2,11 +2,17 @@ from __future__ import annotations
 
 import ast
 import copy
+import hashlib
+import shutil
+import tempfile
 import unittest
 
 from pathlib import Path
+from unittest import mock
 
 from scenesmith.robot_lab.artifact_contract import sign_payload
+from scenesmith.robot_lab import census_runtime_binding as runtime_binding
+from scenesmith.robot_lab import readonly_servo_census as census_module
 from scenesmith.robot_lab.readonly_servo_census import (
     DEFAULT_CENSUS_CONTRACT_PATH,
     DEFAULT_CENSUS_RESULT_PATH,
@@ -19,6 +25,7 @@ from scenesmith.robot_lab.readonly_servo_census import (
     run_readonly_census,
     verify_census_contract,
     verify_census_fixture_artifacts,
+    verify_census_runtime_source_bindings,
     verify_recorded_census_trace,
 )
 
@@ -107,6 +114,12 @@ class ReadonlyServoCensusTests(unittest.TestCase):
         contract = build_census_contract()
         mutations = (
             (
+                "protocol",
+                lambda value: value["target_device_identity"]["bus"].__setitem__(
+                    "protocol_version", 1
+                ),
+            ),
+            (
                 "role",
                 lambda value: value["target_device_identity"].__setitem__(
                     "device_role", "leader"
@@ -154,6 +167,91 @@ class ReadonlyServoCensusTests(unittest.TestCase):
                     ValueError, "code-pinned|identity|read plan"
                 ):
                     verify_census_contract(changed)
+
+    def test_contract_is_bound_to_pinned_runtime_source_semantics(self):
+        verified = verify_census_runtime_source_bindings(repo_root=REPO_ROOT)
+        contract = build_census_contract()
+
+        self.assertEqual(
+            contract["schema_version"],
+            "scenesmith.readonly_servo_census_contract.v2",
+        )
+        self.assertEqual(
+            contract["target_device_identity"]["bus"],
+            {
+                "protocol_family": "feetech",
+                "protocol_version": 0,
+                "baudrate": 1_000_000,
+            },
+        )
+        self.assertEqual(
+            contract["runtime_source_bindings"], verified["source_bindings"]
+        )
+        self.assertEqual(contract["runtime_semantics"], verified["semantics"])
+        self.assertEqual(verified["semantics"]["sts3215_protocol_version"], 0)
+        self.assertEqual(verified["semantics"]["sts3215_model_number"], 777)
+        self.assertEqual(verified["semantics"]["sts3215_resolution"], 4096)
+        self.assertEqual(
+            verified["semantics"]["follower_joint_map"],
+            [
+                {"joint_name": name, "servo_id": servo_id, "model": "sts3215"}
+                for servo_id, name in enumerate(
+                    (
+                        "shoulder_pan",
+                        "shoulder_lift",
+                        "elbow_flex",
+                        "wrist_flex",
+                        "wrist_roll",
+                        "gripper",
+                    ),
+                    start=1,
+                )
+            ],
+        )
+
+    def test_source_binding_rejects_hash_and_rehashed_semantic_drift(self):
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            for binding in census_module._RUNTIME_SOURCE_BINDINGS:
+                relative_path = Path(binding["path"])
+                target = root / relative_path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(REPO_ROOT / relative_path, target)
+
+            feetech_binding = next(
+                item
+                for item in census_module._RUNTIME_SOURCE_BINDINGS
+                if item["binding_id"] == "feetech_implementation"
+            )
+            feetech_path = root / feetech_binding["path"]
+            original = feetech_path.read_text(encoding="utf-8")
+            feetech_path.write_text(
+                original.replace(
+                    "DEFAULT_PROTOCOL_VERSION = 0",
+                    "DEFAULT_PROTOCOL_VERSION = 1",
+                    1,
+                ),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "source hash"):
+                verify_census_runtime_source_bindings(repo_root=root)
+
+            rebound = copy.deepcopy(census_module._RUNTIME_SOURCE_BINDINGS)
+            changed_binding = next(
+                item
+                for item in rebound
+                if item["binding_id"] == "feetech_implementation"
+            )
+            changed_binding["sha256"] = hashlib.sha256(
+                feetech_path.read_bytes()
+            ).hexdigest()
+            with mock.patch.object(
+                runtime_binding,
+                "RUNTIME_SOURCE_BINDINGS",
+                rebound,
+            ):
+                with self.assertRaisesRegex(ValueError, "runtime semantics"):
+                    verify_census_runtime_source_bindings(repo_root=root)
 
     def test_trace_rejects_write_torque_motion_unknown_and_bad_lifecycle(self):
         contract = build_census_contract()
