@@ -42,7 +42,7 @@ reconstructed from executor operation output rather than a contemporaneous raw
 HTTP transcript.
 
 The signed serial identity now requires both canonical and paired TTY paths.
-The latest all-alias holder snapshot at `2026-07-11T09:37:56-05:00` checked two
+The latest all-alias holder snapshot at `2026-07-11T10:07:17-05:00` checked two
 paths, observed counts `[0, 0]`, deduplicated to zero, and has identity
 `b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c`.
 Future live evidence must bind full pre-open and post-close signed snapshots;
@@ -60,18 +60,23 @@ both offline runtime verifiers, deterministic fixture and disconnect-proof
 verification, compilation, privacy checks, and diff checks. No serial or camera
 was opened, and no Studio request, reconnect, process signal, write, torque
 change, motion, policy actuation, or training occurred. Reviewer 060 accepted
-the offline boundary, and reviewer 061 now opens the live gate for at most one
-fresh finite T16.5b session after its own state-transition commit is remotely
-confirmed. The gate expires at `2026-07-11T10:43:00-05:00` and must reclose
-immediately on success or failure.
+the offline boundary, and reviewer 061 opened one remotely preserved finite
+session. Attempt 003 completed 54 allowlisted reads with zero retries/writes/
+torque changes/motion, closed without torque change, and proved both aliases
+holder-free before and after. The first named-camera subprocess then returned
+251; the retained diagnostic shows AVFoundation selected unsupported 29.970030
+fps while advertising 30.000030 fps. Release and process cleanup passed, no
+success manifest was written, and the gate reclosed at
+`2026-07-11T10:07:17-05:00`.
 
-Live attempts 001 and 002 remain permanently rejected and grant no proof label.
-Attempt 002 cannot be retro-diagnosed because it predates bounded diagnostic
-retention. Sequential census then camera capture may prove only finite physical
-capture; T16.5c must add a parsed calibration profile and static-pose bracket
-before any policy-shadow-input-valid claim. Studio reconnect remains deferred
-unless exact device, calibration, and current-pose evidence proves it
-mechanically no-motion-safe.
+Live attempts 001-003 remain rejected and grant no proof label. Attempt 003
+retained private failure identity `e7f8eb21...` and diagnostic `482064ad...`,
+but failure schema v2 stores only the servo-result identity/counts rather than
+the complete decoded result. Brief 044 is active offline to bind explicit 30
+fps in the contract/command/audit and retain the complete verified servo result
+on camera failure. Sequential capture is not synchronized or policy-input-valid.
+Studio reconnect remains deferred unless exact device, calibration, and
+current-pose evidence proves it mechanically no-motion-safe.
 
 ## Durable State
 

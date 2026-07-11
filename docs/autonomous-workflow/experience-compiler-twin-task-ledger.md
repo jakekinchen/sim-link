@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; Brief 043 verified offline at 7ea26651; reviewer 061 opens at most one fresh finite session through 10:43 CDT after remote confirmation
+current_task: T16.5b in progress; attempt 003 rejected at camera framerate; live gate closed; Brief 044 active offline
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: 7ea26651 remotely preserves disconnect proof 627de4fd..., consumed permit 85f91cea..., all-alias zero-holder snapshot b33a7cc0..., and source-bound six-servo Torque_Enable capability; 50 focused and 229 broad tests
+evidence: attempt 003 discovery 7a187d11..., contract 63979ed4..., private failure e7f8eb21..., diagnostic 482064ad...; 54 no-write reads and clean close; ffmpeg 251 reports 29.970030 unsupported and 30.000030 supported
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none at the gate boundary; any live identity, holder, torque, camera, lease, cleanup, or evidence mismatch immediately recloses the gate
-next_step: confirm the gate-transition commit remotely; create fresh discovery; prove both aliases holder-free; create five-minute lease and exact contract; execute once; reclose
+blockers: explicit camera framerate is absent from the contract; private camera-failure schema does not embed the complete servo result
+next_step: commit/push attempt-003 rejection; implement and verify Brief 044 offline; keep live gate closed
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: confirm the gate-transition commit remotely; create fresh discovery; 
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 043 `7ea26651` verified; reviewer 061 opens one fresh session through 10:43 CDT; Torque_Enable required live for all six; reclose on any outcome |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 003 rejected after 54-read clean census; retained diagnostic proves 29.970030/30.000030 mismatch; gate closed; Brief 044 explicit-mode/evidence fix active |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,21 @@ next_step: confirm the gate-transition commit remotely; create fresh discovery; 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5b live attempt 003 rejected; framerate cause retained
+
+```text
+Current task: T16.5b
+State: in_progress offline; live gate closed; Brief 044 active
+Session: t16-5b-20260711-1005-cdt; discovery 7a187d11...; contract 63979ed4...; lease 527ad754...
+Census: 54 read successes; zero retries/writes/torque changes/motion; no-torque close success; pre/post/final holder counts [0,0]
+Failure: first named-camera ffmpeg returned 251; diagnostic 482064ad...; stderr 13,548 bytes/64a8d5ff...; 29.970030 fps unsupported and 30.000030 advertised
+Evidence: private rejection e7f8eb21.../6148b56e... retained; release success; zero ffmpeg processes; no success manifest; proof labels empty; physical_follower_commanded=false
+Limitation: failure schema v2 binds servo result identity 2128192c... and counts but not full decoded servo/trace evidence
+Safety: follower not reconnected; no Studio request, signal, write, torque transition, motion, policy, training, or paid compute
+Training lock: closed
+Next step: commit/push rejection; implement Brief 044 explicit 30 fps contract and full failure-servo evidence offline
+```
 
 ### 2026-07-11 - Brief 043 live gate opened for one fresh session
 

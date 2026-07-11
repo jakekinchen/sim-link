@@ -13,8 +13,8 @@
   "last_reviewed_implementation_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
   "source_review": {
     "commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
-    "decision": "OPEN_ONE_FRESH_FINITE_T16_5B_SESSION_AFTER_VERIFIED_BRIEF_043",
-    "reviewer_decision": "docs/reviewer-messages/061-open-live-gate-after-brief-043.md"
+    "decision": "REJECT_LIVE_ATTEMPT_003_AND_OPEN_OFFLINE_CAMERA_MODE_CORRECTION",
+    "reviewer_decision": "docs/reviewer-messages/062-reject-live-attempt-003-framerate.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -385,6 +385,7 @@
       "metadata_review_decision_id": "051",
       "correction_brief_id": "041",
       "completed_correction_brief_id": "043",
+      "active_correction_brief_id": "044",
       "rejected_attempt_review_decision_ids": ["052", "058"],
       "camera_identity_correction_commits": [
         "ea99ec9",
@@ -393,9 +394,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "061",
-      "result": "Brief 043 state-integrity prerequisites are verified and remotely preserved; the live gate is open for at most one fresh finite T16.5b discovery, all-alias holder check, five-minute lease, exact no-write census, and named-camera capture session",
-      "execution_note": "The gate transition itself performed no hardware enumeration or open; implementation evidence remains 50 focused and 229 broad tests plus both offline verifiers, deterministic artifact checks, compilation, privacy checks, and diff checks",
+      "live_gate_review_decision_id": "062",
+      "result": "Live attempt 003 is rejected after a successful 54-read no-write census and cleanup because the first named-camera ffmpeg subprocess selected unsupported 29.970030 fps; bounded private diagnostics were retained and the live gate is closed for Brief 044",
+      "execution_note": "Attempt 003 used fresh discovery and a five-minute exact contract; both alias holder gates were zero, all required reads completed, no-write close succeeded, camera capture failed with return 251, private failure evidence was retained, no tracked success manifest or proof label was written, and post-failure both-alias holder plus ffmpeg cleanup checks passed",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
@@ -455,6 +456,59 @@
           "tracked_manifest_written": false,
           "proof_labels_granted": [],
           "physical_follower_commanded": false
+        },
+        {
+          "attempt_id": "t16-5b-live-attempt-003",
+          "session_id": "t16-5b-20260711-1005-cdt",
+          "started_at": "2026-07-11T10:05:55-05:00",
+          "failed_at": "2026-07-11T10:06:51-05:00",
+          "discovery_private_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-1005-cdt/discovery.json",
+          "discovery_identity_sha256": "7a187d11f43aad4032b54c9c6e35f99b327002e2edd3a01d0aed48966a73f0bd",
+          "discovery_file_sha256": "4fe3fcd57c32a5457324ee870403384aec5d2056d49fd1b403ecc01069f5e118",
+          "contract_private_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-1005-cdt/contract.json",
+          "contract_identity_sha256": "63979ed40e4597bc75ce681b95febb22bdfc9982c6e72394ac60550caa3923f7",
+          "contract_file_sha256": "78350b9e0dfe76f8a0cf28ca7cee3aaa06b478a85a0d4224e8c6a50e5f46e266",
+          "presence_lease_identity_sha256": "527ad75402a25ffdd77d025596bca9e344b63b03baaa464ee89b378c5d767075",
+          "live_census_contract_identity_sha256": "862fbd6e187ca5af5f9d54dfdd5b0f7637aece259bf52f9d3c9eb8d4ff792ff5",
+          "private_failure_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-1005-cdt/capture/private_capture_failure.json",
+          "private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v2",
+          "private_failure_identity_sha256": "e7f8eb21e531a8013a034cb53a8c9f93713039c63d44932bd5d51e0c53c25714",
+          "private_failure_file_sha256": "6148b56ec656490ebb910f58bcc83d1ba08eb92e505606eb016aee1a387b3108",
+          "private_failure_size_bytes": 8045,
+          "servo_result_identity_sha256": "2128192c6a1d0181f7906002bf9d2468451d44ec60ad320ccc5557fac7ae4b43",
+          "operation_counts": {
+            "construct_attempts": 1,
+            "construct_successes": 1,
+            "connect_attempts": 1,
+            "connect_successes": 1,
+            "read_attempts": 54,
+            "read_successes": 54,
+            "read_retries": 0,
+            "close_attempts": 1,
+            "close_successes": 1,
+            "motor_register_writes": 0,
+            "torque_changes": 0,
+            "motion_commands": 0,
+            "unexpected_operations": 0
+          },
+          "pre_open_per_path_holder_counts": [0, 0],
+          "post_close_per_path_holder_counts": [0, 0],
+          "holder_snapshot_identity_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
+          "status": "rejected",
+          "failure_stage": "first_named_camera_subprocess_nonzero_exit",
+          "camera_failure_diagnostic_identity_sha256": "482064ad86290cfcf7f92469a68c7e0376b501896465f63a5ad1aaccb9d459e3",
+          "camera_return_code": 251,
+          "camera_stderr_byte_count": 13548,
+          "camera_stderr_sha256": "64a8d5ff3b771f90db0b1b9d7a825e3d3b7a64b839f9edd076976c81bd93064d",
+          "failure_reason": "avfoundation_default_29_970030_fps_not_supported_camera_advertises_30_000030_fps",
+          "camera_release_successes": 1,
+          "post_failure_ffmpeg_process_count": 0,
+          "post_failure_deduplicated_holder_count": 0,
+          "private_success_bundle_written": false,
+          "tracked_manifest_written": false,
+          "proof_labels_granted": [],
+          "physical_follower_commanded": false,
+          "preflight_invocation_correction": "mujoco_test_venv_missing_pyserial_failed_before_enumeration_or_artifact_then_same_session_used_pinned_lelab_runtime"
         }
       ],
       "virtual_disconnect_proof": {
@@ -491,7 +545,7 @@
         "exclusive_bus_ownership_proven": true,
         "canonical_path_zero_holder_observed": true,
         "all_signed_aliases_checked": true,
-        "last_revalidated_at": "2026-07-11T09:37:56-05:00",
+        "last_revalidated_at": "2026-07-11T10:07:17-05:00",
         "last_revalidated_holder_count": 0,
         "last_revalidated_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
         "read_only_server_status_observed_at": "2026-07-11T08:57:17-05:00",
@@ -526,7 +580,18 @@
           "schema_version": "scenesmith.named_camera_failure_diagnostic.v1",
           "private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v2",
           "stderr_preview_max_bytes": 2048,
-          "attempt_002_retroactive_diagnostic_available": false
+          "attempt_002_retroactive_diagnostic_available": false,
+          "latest_live_failure": {
+            "attempt_id": "t16-5b-live-attempt-003",
+            "diagnostic_identity_sha256": "482064ad86290cfcf7f92469a68c7e0376b501896465f63a5ad1aaccb9d459e3",
+            "stage": "subprocess_nonzero_exit",
+            "return_code": 251,
+            "stderr_byte_count": 13548,
+            "stderr_sha256": "64a8d5ff3b771f90db0b1b9d7a825e3d3b7a64b839f9edd076976c81bd93064d",
+            "bounded_root_cause": "selected_29_970030_fps_not_supported_30_000030_fps_advertised",
+            "release_successes": 1,
+            "post_failure_process_count": 0
+          }
         }
       },
       "serial_ownership_gate": {
@@ -537,7 +602,7 @@
         "required_post_close_holder_count": 0,
         "stops_or_signals_holders": false,
         "last_observed_holder_count": 0,
-        "last_observed_at": "2026-07-11T09:37:56-05:00",
+        "last_observed_at": "2026-07-11T10:07:17-05:00",
         "last_observed_per_path_holder_counts": [0, 0],
         "last_observed_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
         "current_gate_result": "verified_zero_holders_across_all_signed_aliases"
@@ -553,6 +618,9 @@
         "fixture_trace_identity_sha256": "41526a67d2e119f70357f7182b28688a11dc0af0f3235906d3de3d2ae938a61f",
         "fixture_result_identity_sha256": "d58f0e8d166c4bdb8c6631e94e3202b17f98c2267c697c5740d50eae0d887111",
         "live_requirement": "all_six_servos_must_report_Torque_Enable_zero",
+        "last_rejected_attempt_servo_result_identity_sha256": "2128192c6a1d0181f7906002bf9d2468451d44ec60ad320ccc5557fac7ae4b43",
+        "last_rejected_attempt_read_successes": 54,
+        "last_rejected_attempt_full_servo_result_retained": false,
         "configuration_or_torque_writes": 0,
         "physical_follower_commanded": false
       },
@@ -560,12 +628,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "open",
+      "live_gate": "closed",
       "live_gate_opened_at": "2026-07-11T10:03:00-05:00",
       "live_gate_valid_until": "2026-07-11T10:43:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 0,
-      "live_gate_reconsideration_state": "opened_for_one_fresh_finite_session",
+      "live_gate_sessions_started": 1,
+      "live_gate_closed_at": "2026-07-11T10:07:17-05:00",
+      "live_gate_close_reason": "live_attempt_003_named_camera_ffmpeg_subprocess_nonzero",
+      "live_gate_reconsideration_state": "attempt_003_rejected_offline_diagnosis_required",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -584,6 +654,11 @@
           "at": "2026-07-11T10:03:00-05:00",
           "review_decision_id": "061",
           "result": "one_fresh_finite_session_authorized_after_brief_043"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-11T10:07:17-05:00",
+          "reason": "live_attempt_003_named_camera_ffmpeg_subprocess_nonzero"
         }
       ],
       "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
@@ -609,15 +684,19 @@
       ],
       "known_limitations": [
         "attempt 001 produced no accepted live evidence because post-close camera index identity drift invalidated the capture",
-        "the corrected stable named-camera path is verified only with fake subprocess evidence and has not been reopened live",
+        "the corrected stable named-camera path was reopened in attempt 003 and rejected because AVFoundation defaulted to unsupported 29.970030 fps",
         "the owner-authorized disconnect is represented by an honest reconstructed operation proof rather than a contemporaneous raw HTTP transcript",
         "live attempt 002 was rejected because the first named-camera ffmpeg subprocess returned nonzero",
         "attempt 002 predates Brief 042 diagnostic retention and cannot be retroactively root-caused from discarded stderr",
         "the all-alias zero-holder observation is a time-bounded prerequisite and must be repeated before serial open and after close in any future session",
         "Torque_Enable is now mandatory and verified offline, but no accepted live result yet records all six physical values",
+        "attempt 003 retained the servo result identity and operation counts but not the full decoded servo result, so it cannot grant a live torque or census proof label",
         "sequential census then camera evidence is finite physical capture, not synchronized observation or policy-shadow-input-valid"
       ],
-      "blocked_on": [],
+      "blocked_on": [
+        "camera_framerate_not_explicit_in_execution_contract",
+        "private_failure_evidence_does_not_embed_full_servo_result"
+      ],
       "owner_decision_required": {
         "state": "granted",
         "pre_disconnect_observed_server_state": {
@@ -714,7 +793,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "after remote confirmation, create one fresh metadata discovery, prove zero holders across both signed aliases, create a five-minute presence lease and exact contract, execute once, and immediately reclose the gate on success or failure",
+      "next_action": "implement Brief 044 offline: bind explicit 30 fps camera mode into the contract/command/audit and embed the complete verified servo result in private camera-failure evidence; keep the live gate closed",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
