@@ -57,6 +57,19 @@ QUATERNION_SEMANTIC_CATEGORIES = {
 }
 QUATERNION_TOLERANCE = 1e-7
 FRICTION_RELEVANT_KEYS = {"damping", "frictionloss", "armature", "condim", "friction", "solref", "priority"}
+UNNAMED_GEOM_IDENTITY_VERSION = "scenesmith.structural_twin_diff.unnamed_geom_identity.v1"
+UNNAMED_GEOM_IDENTITY_FIELDS = (
+    "type",
+    "mesh",
+    "size",
+    "fromto",
+    "pos",
+    "quat",
+    "axisangle",
+    "euler",
+    "xyaxes",
+    "zaxis",
+)
 
 
 def build_structural_twin_diff(
@@ -98,6 +111,12 @@ def build_structural_twin_diff(
         "artifact_name": "pi05_structural_twin_diff_simulation_only",
         "dependency_lock_ref": dependency_lock["ref"],
         "twin_profile_ref": twin_profile["ref"],
+        "identifier_strategy": {
+            "unnamed_geom_identity": {
+                "version": UNNAMED_GEOM_IDENTITY_VERSION,
+                "key_fields": list(UNNAMED_GEOM_IDENTITY_FIELDS),
+            }
+        },
         "sources": {
             "runtime": _artifact_source_record(runtime_source),
             "menagerie": _artifact_source_record(menagerie_source),
@@ -405,10 +424,7 @@ def _extract_collision_geoms(
         )
         if in_gripper != gripper_only:
             continue
-        for index, geom in enumerate(body.findall("./geom")):
-            if not _is_collision_geom(geom):
-                continue
-            key_name = geom.attrib.get("name") or f"{body.attrib.get('name', 'body')}[{index}]"
+        for key_name, geom in _iter_collision_geom_keys(body_path, body):
             attrs = _normalize_attrs(geom.attrib)
             class_name = geom.attrib.get("class")
             effective = _resolved_default_attrs(class_name, "geom", defaults)
@@ -460,9 +476,7 @@ def _extract_friction(
             if filtered:
                 joint_name = joint.attrib.get("name") or class_name or "unnamed_joint"
                 records[f"joint:{body_path}:{joint_name}"] = filtered
-        for index, geom in enumerate(body.findall("./geom")):
-            if not _is_collision_geom(geom):
-                continue
+        for geom_name, geom in _iter_collision_geom_keys(body_path, body):
             class_name = geom.attrib.get("class")
             if class_name:
                 attached_geom_classes.add(class_name)
@@ -470,7 +484,6 @@ def _extract_friction(
             effective.update(_normalize_attrs(geom.attrib))
             filtered = {key: value for key, value in effective.items() if key in FRICTION_RELEVANT_KEYS}
             if filtered:
-                geom_name = geom.attrib.get("name") or f"{body.attrib.get('name', 'body')}[{index}]"
                 records[f"geom:{body_path}:{geom_name}"] = filtered
 
     for class_name, class_attrs in sorted(defaults.items()):
@@ -537,6 +550,38 @@ def _iter_bodies(root: ET.Element) -> list[tuple[str, ET.Element]]:
     for body in root.findall("./worldbody/body"):
         walk(body, "")
     return bodies
+
+
+def _iter_collision_geom_keys(body_path: str, body: ET.Element) -> list[tuple[str, ET.Element]]:
+    named: list[tuple[str, ET.Element]] = []
+    unnamed_groups: dict[str, list[ET.Element]] = {}
+    for geom in body.findall("./geom"):
+        if not _is_collision_geom(geom):
+            continue
+        geom_name = geom.attrib.get("name")
+        if geom_name:
+            named.append((geom_name, geom))
+            continue
+        stem = _unnamed_geom_identity_stem(body_path, geom)
+        unnamed_groups.setdefault(stem, []).append(geom)
+
+    keys = list(named)
+    for stem in sorted(unnamed_groups):
+        geoms = unnamed_groups[stem]
+        for occurrence_index, geom in enumerate(geoms, start=1):
+            keys.append((f"{stem}#{occurrence_index}", geom))
+    return keys
+
+
+def _unnamed_geom_identity_stem(body_path: str, geom: ET.Element) -> str:
+    identity_payload = {
+        key: _normalize_attr_value(geom.attrib[key])
+        for key in UNNAMED_GEOM_IDENTITY_FIELDS
+        if key in geom.attrib
+    }
+    canonical = json.dumps(identity_payload, sort_keys=True, separators=(",", ":"))
+    digest = hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:12]
+    return f"unnamed:{digest}"
 
 
 def _compare_category(

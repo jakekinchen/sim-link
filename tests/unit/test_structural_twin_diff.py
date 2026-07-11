@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
@@ -53,6 +54,167 @@ def _model_from_xml(xml_text: str) -> dict:
 
 
 class StructuralTwinDiffTests(unittest.TestCase):
+    def test_extract_collision_and_friction_records_are_order_invariant_for_unnamed_geoms(self):
+        base_xml = """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0" friction="1 0.1 0.01"/>
+                  <geom type="capsule" size="0.05" fromto="0 0 0 0 0 1" friction="2 0.1 0.01"/>
+                </body>
+              </worldbody>
+            </mujoco>
+        """
+        reordered_xml = """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="capsule" size="0.05" fromto="0 0 0 0 0 1" friction="2 0.1 0.01"/>
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0" friction="1 0.1 0.01"/>
+                </body>
+              </worldbody>
+            </mujoco>
+        """
+
+        base_model = _model_from_xml(base_xml)
+        reordered_model = _model_from_xml(reordered_xml)
+
+        self.assertEqual(
+            base_model["categories"]["arm_collisions"],
+            reordered_model["categories"]["arm_collisions"],
+        )
+        self.assertEqual(
+            base_model["categories"]["friction"],
+            reordered_model["categories"]["friction"],
+        )
+
+    def test_extract_collision_identities_ignore_visual_only_sibling_insertions(self):
+        base_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                  <geom type="capsule" size="0.05" fromto="0 0 0 0 0 1"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+        with_visual_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom name="visual_mesh" type="mesh" mesh="pretty" material="mat"/>
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                  <geom type="capsule" size="0.05" fromto="0 0 0 0 0 1"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+
+        self.assertEqual(
+            base_model["categories"]["arm_collisions"],
+            with_visual_model["categories"]["arm_collisions"],
+        )
+
+    def test_compare_category_keeps_semantic_unnamed_geom_pairings_when_siblings_reverse(self):
+        runtime_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                  <geom type="capsule" size="0.05" fromto="0 0 0 0 0 1"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+        menagerie_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="capsule" size="0.05" fromto="0 0 0 0 0 1"/>
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+
+        category = _compare_extracted_category(
+            "arm_collisions",
+            runtime_model["categories"]["arm_collisions"],
+            menagerie_model["categories"]["arm_collisions"],
+        )
+
+        self.assertEqual(len(category["matched"]), 2)
+        self.assertFalse(category["mismatched"])
+        self.assertFalse(category["missing"])
+        self.assertFalse(category["extra"])
+
+    def test_extract_unnamed_geom_identities_preserve_duplicate_multiplicity_deterministically(self):
+        model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+
+        keys = sorted(model["categories"]["arm_collisions"]["records"])
+        self.assertEqual(len(keys), 2)
+        self.assertTrue(keys[0].endswith("#1"))
+        self.assertTrue(keys[1].endswith("#2"))
+        self.assertEqual(
+            model["categories"]["arm_collisions"]["records"][keys[0]],
+            model["categories"]["arm_collisions"]["records"][keys[1]],
+        )
+
+    def test_compare_category_leaves_incompatible_unnamed_geom_structures_as_missing_and_extra(self):
+        runtime_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="mesh" class="collision" mesh="runtime_part" pos="0 0 0" quat="1 0 0 0"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+        menagerie_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0" quat="1 0 0 0"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+
+        category = _compare_extracted_category(
+            "arm_collisions",
+            runtime_model["categories"]["arm_collisions"],
+            menagerie_model["categories"]["arm_collisions"],
+        )
+
+        self.assertFalse(category["matched"])
+        self.assertFalse(category["mismatched"])
+        self.assertEqual(len(category["missing"]), 1)
+        self.assertEqual(len(category["extra"]), 1)
+
     def test_build_and_verify_current_repo_diff(self):
         payload = build_structural_twin_diff(repo_root=REPO_ROOT)
 
@@ -110,6 +272,26 @@ class StructuralTwinDiffTests(unittest.TestCase):
                 record["key"] == "joint:wrist_roll"
                 for record in payload["categories"]["joint_limits"]["mismatched"]
             )
+        )
+        self.assertEqual(
+            payload["identifier_strategy"],
+            {
+                "unnamed_geom_identity": {
+                    "version": "scenesmith.structural_twin_diff.unnamed_geom_identity.v1",
+                    "key_fields": [
+                        "type",
+                        "mesh",
+                        "size",
+                        "fromto",
+                        "pos",
+                        "quat",
+                        "axisangle",
+                        "euler",
+                        "xyaxes",
+                        "zaxis",
+                    ],
+                },
+            },
         )
         self.assertTrue(payload["summary"]["mismatched_records"] > 0)
 
@@ -367,6 +549,19 @@ class StructuralTwinDiffTests(unittest.TestCase):
 
         self.assertEqual(written, expected)
         self.assertEqual(verified, expected)
+
+    def test_build_repo_diff_has_no_ordinal_fallback_geom_keys(self):
+        payload = build_structural_twin_diff(repo_root=REPO_ROOT)
+        old_key_pattern = re.compile(r":[^:]+\[\d+\](?:#\d+)?$")
+
+        for category_name in ("arm_collisions", "gripper_collisions", "friction"):
+            with self.subTest(category_name=category_name):
+                for bucket_name in ("matched", "mismatched", "missing", "extra"):
+                    for record in payload["categories"][category_name][bucket_name]:
+                        key = record["key"]
+                        if not key.startswith("geom:"):
+                            continue
+                        self.assertIsNone(old_key_pattern.search(key), key)
 
     def test_verify_rejects_artifact_identity_tamper(self):
         payload = build_structural_twin_diff(repo_root=REPO_ROOT)

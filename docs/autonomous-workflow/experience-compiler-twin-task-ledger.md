@@ -6,11 +6,11 @@ Updated: 2026-07-10
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.3 semantic structural diff correction
-completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete quaternion normalization, and truthful inertial/contact evidence
-evidence: commits 7bebf55, 936dd2f, fb54e64, and d31cdc3; manager audits 005-007 keep semantic acceptance open until order-invariant unnamed-geom identity closes
-remaining: deterministic unnamed-geom limits, then M16-M19 prerequisites and Gates C-D
+completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete quaternion normalization, truthful inertial/contact evidence, and order-invariant unnamed-geom identity
+evidence: commits 7bebf55, 936dd2f, fb54e64, and d31cdc3; artifact identity 5b070b1b1f98aad3eaf00d4bd9d153ab78f53ec4046b0948ef2cf5ae93387683 records shared unnamed-geom identity strategy and honest non-pairing
+remaining: reviewer confirmation for T16.3 closeout, then M16-M19 prerequisites and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: replace sibling-index geom pairing with semantic order-invariant identity and re-review T16.3
+next_step: review brief 020 evidence and, if accepted, advance to T16.4 measured-mass intake
 ```
 
 ## Rules
@@ -31,7 +31,7 @@ next_step: replace sibling-index geom pairing with semantic order-invariant iden
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
 | T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
 | T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
-| T16.3 | in_progress | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` mechanical baseline retained; semantic corrections now narrow to deterministic unnamed-geom limits after inertial/contact truthfulness slice |
+| T16.3 | in_progress | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through artifact `5b070b1b1f98aad3eaf00d4bd9d153ab78f53ec4046b0948ef2cf5ae93387683`; reviewer closeout still required before T16.4 |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
 | T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
 
@@ -113,6 +113,20 @@ next_step: replace sibling-index geom pairing with semantic order-invariant iden
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.3 semantic unnamed-geom identity
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: structural diff now derives unnamed collision identities from a shared semantic key helper used by both collision and friction extraction, records the identifier strategy in the artifact, ignores visual-only sibling insertions, preserves duplicate multiplicity deterministically, and leaves incompatible runtime-vs-Menagerie structures as explicit missing/extra evidence instead of ordinal pairings
+Evidence: configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json identity 5b070b1b1f98aad3eaf00d4bd9d153ab78f53ec4046b0948ef2cf5ae93387683; 21 focused structural-diff tests; live CLI write+verify pass; 46 broad robot-lab tests
+Commit: pending
+Remaining: reviewer confirmation for T16.3 closeout
+Blockers: none for offline correction
+Training lock: closed
+Next step: obtain a reviewer decision on brief 020 and, if accepted, reopen T16.4 measured-mass intake
+```
 
 ### 2026-07-10 - T16.3 unnamed-geom proof strengthened
 

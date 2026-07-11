@@ -259,7 +259,55 @@
       "extra": [
         {
           "decision": "retain",
-          "key": "geom:base/shoulder/upper_arm/lower_arm:lower_arm[5]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:3acdaa39606e#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
+          "runtime": {
+            "class": "collision",
+            "group": 3.0,
+            "material": "sts3215_03a_no_horn_v1_material",
+            "mesh": "sts3215_03a_no_horn_v1",
+            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist",
+            "pos": [
+              0.0,
+              -0.0424,
+              0.0306
+            ],
+            "quat": [
+              0.5,
+              0.5,
+              0.5,
+              -0.5
+            ],
+            "type": "mesh"
+          }
+        },
+        {
+          "decision": "retain",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:fce6505327b4#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
+          "runtime": {
+            "class": "collision",
+            "group": 3.0,
+            "material": "wrist_roll_pitch_so101_v2_material",
+            "mesh": "wrist_roll_pitch_so101_v2",
+            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist",
+            "pos": [
+              0.0,
+              -0.028,
+              0.0181
+            ],
+            "quat": [
+              0.5,
+              -0.5,
+              -0.5,
+              -0.5
+            ],
+            "type": "mesh"
+          }
+        },
+        {
+          "decision": "retain",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:54a51445ba3e#1",
           "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
@@ -283,7 +331,103 @@
         },
         {
           "decision": "retain",
-          "key": "geom:base/shoulder:shoulder[5]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:93338ec406c4#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
+          "runtime": {
+            "class": "collision",
+            "group": 3.0,
+            "material": "under_arm_so101_v1_material",
+            "mesh": "under_arm_so101_v1",
+            "parent_body": "base/shoulder/upper_arm/lower_arm",
+            "pos": [
+              -0.0648499,
+              -0.032,
+              0.0182
+            ],
+            "quat": [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            "type": "mesh"
+          }
+        },
+        {
+          "decision": "retain",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:c30712816739#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
+          "runtime": {
+            "class": "collision",
+            "group": 3.0,
+            "material": "motor_holder_so101_wrist_v1_material",
+            "mesh": "motor_holder_so101_wrist_v1",
+            "parent_body": "base/shoulder/upper_arm/lower_arm",
+            "pos": [
+              -0.0648499,
+              -0.032,
+              0.018
+            ],
+            "quat": [
+              0.0,
+              -1.0,
+              -0.0,
+              -0.0
+            ],
+            "type": "mesh"
+          }
+        },
+        {
+          "decision": "retain",
+          "key": "geom:base/shoulder/upper_arm:unnamed:1bc0c025ec92#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
+          "runtime": {
+            "class": "collision",
+            "group": 3.0,
+            "material": "sts3215_03a_v1_material",
+            "mesh": "sts3215_03a_v1",
+            "parent_body": "base/shoulder/upper_arm",
+            "pos": [
+              -0.11257,
+              -0.0155,
+              0.0187
+            ],
+            "quat": [
+              0.0,
+              -0.707107,
+              0.707107,
+              -0.0
+            ],
+            "type": "mesh"
+          }
+        },
+        {
+          "decision": "retain",
+          "key": "geom:base/shoulder/upper_arm:unnamed:31b454abeae1#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
+          "runtime": {
+            "class": "collision",
+            "group": 3.0,
+            "material": "upper_arm_so101_v1_material",
+            "mesh": "upper_arm_so101_v1",
+            "parent_body": "base/shoulder/upper_arm",
+            "pos": [
+              -0.065085,
+              0.012,
+              0.0182
+            ],
+            "quat": [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            "type": "mesh"
+          }
+        },
+        {
+          "decision": "retain",
+          "key": "geom:base/shoulder:unnamed:98ee4ec596e5#1",
           "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
@@ -304,31 +448,62 @@
             ],
             "type": "mesh"
           }
+        },
+        {
+          "decision": "retain",
+          "key": "geom:base/shoulder:unnamed:bd47eb9bc796#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
+          "runtime": {
+            "class": "collision",
+            "group": 3.0,
+            "material": "motor_holder_so101_base_v1_material",
+            "mesh": "motor_holder_so101_base_v1",
+            "parent_body": "base/shoulder",
+            "pos": [
+              -0.0675992,
+              -0.000177759,
+              0.0158499
+            ],
+            "quat": [
+              0.5,
+              0.5,
+              -0.5,
+              0.5
+            ],
+            "type": "mesh"
+          }
+        },
+        {
+          "decision": "retain",
+          "key": "geom:base/shoulder:unnamed:fca1698fe424#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
+          "runtime": {
+            "class": "collision",
+            "group": 3.0,
+            "material": "sts3215_03a_v1_material",
+            "mesh": "sts3215_03a_v1",
+            "parent_body": "base/shoulder",
+            "pos": [
+              -0.0303992,
+              0.000422241,
+              -0.0417
+            ],
+            "quat": [
+              0.5,
+              0.5,
+              0.5,
+              -0.5
+            ],
+            "type": "mesh"
+          }
         }
       ],
       "matched": [],
-      "mismatched": [
+      "mismatched": [],
+      "missing": [
         {
-          "compared_values": {
-            "menagerie": {
-              "quat": [
-                0.5,
-                0.5,
-                0.5,
-                -0.5
-              ]
-            },
-            "runtime": {
-              "quat": [
-                0.5,
-                0.5,
-                0.5,
-                -0.5
-              ]
-            }
-          },
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:wrist[1]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:8ddacc8fc951#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -352,55 +527,11 @@
             ],
             "type": "box"
           },
-          "numeric_deltas": {
-            "pos": [
-              0.0,
-              0.0,
-              0.005
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
-          "runtime": {
-            "class": "collision",
-            "group": 3.0,
-            "material": "sts3215_03a_no_horn_v1_material",
-            "mesh": "sts3215_03a_no_horn_v1",
-            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist",
-            "pos": [
-              0.0,
-              -0.0424,
-              0.0306
-            ],
-            "quat": [
-              0.5,
-              0.5,
-              0.5,
-              -0.5
-            ],
-            "type": "mesh"
-          }
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
-          "compared_values": {
-            "menagerie": {
-              "quat": [
-                0.5,
-                -0.5,
-                -0.5,
-                -0.5
-              ]
-            },
-            "runtime": {
-              "quat": [
-                0.5,
-                -0.5,
-                -0.5,
-                -0.5
-              ]
-            }
-          },
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:wrist[3]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:e82f85951511#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -424,37 +555,11 @@
             ],
             "type": "box"
           },
-          "numeric_deltas": {
-            "pos": [
-              0.0,
-              -0.008,
-              -0.001
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
-          "runtime": {
-            "class": "collision",
-            "group": 3.0,
-            "material": "wrist_roll_pitch_so101_v2_material",
-            "mesh": "wrist_roll_pitch_so101_v2",
-            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist",
-            "pos": [
-              0.0,
-              -0.028,
-              0.0181
-            ],
-            "quat": [
-              0.5,
-              -0.5,
-              -0.5,
-              -0.5
-            ],
-            "type": "mesh"
-          }
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm:lower_arm[1]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:2456dfb6f16c#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -478,55 +583,11 @@
             ],
             "type": "box"
           },
-          "numeric_deltas": {
-            "pos": [
-              -0.0148499,
-              -0.032,
-              0.0
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
-          "runtime": {
-            "class": "collision",
-            "group": 3.0,
-            "material": "under_arm_so101_v1_material",
-            "mesh": "under_arm_so101_v1",
-            "parent_body": "base/shoulder/upper_arm/lower_arm",
-            "pos": [
-              -0.0648499,
-              -0.032,
-              0.0182
-            ],
-            "quat": [
-              0.0,
-              1.0,
-              0.0,
-              0.0
-            ],
-            "type": "mesh"
-          }
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
-          "compared_values": {
-            "menagerie": {
-              "quat": [
-                -0.0,
-                1.0,
-                -0.0,
-                -0.0
-              ]
-            },
-            "runtime": {
-              "quat": [
-                -0.0,
-                1.0,
-                0.0,
-                0.0
-              ]
-            }
-          },
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm:lower_arm[3]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:78b04d5b8c16#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -550,55 +611,11 @@
             ],
             "type": "box"
           },
-          "numeric_deltas": {
-            "pos": [
-              0.0601501,
-              -0.037,
-              0.0
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
-          "runtime": {
-            "class": "collision",
-            "group": 3.0,
-            "material": "motor_holder_so101_wrist_v1_material",
-            "mesh": "motor_holder_so101_wrist_v1",
-            "parent_body": "base/shoulder/upper_arm/lower_arm",
-            "pos": [
-              -0.0648499,
-              -0.032,
-              0.018
-            ],
-            "quat": [
-              0.0,
-              -1.0,
-              -0.0,
-              -0.0
-            ],
-            "type": "mesh"
-          }
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
-          "compared_values": {
-            "menagerie": {
-              "quat": [
-                -0.0,
-                0.707106781,
-                -0.707106781,
-                -0.0
-              ]
-            },
-            "runtime": {
-              "quat": [
-                -0.0,
-                0.707106781,
-                -0.707106781,
-                0.0
-              ]
-            }
-          },
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm:upper_arm[1]",
+          "key": "geom:base/shoulder/upper_arm:unnamed:8f513c520bb7#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -622,37 +639,11 @@
             ],
             "type": "box"
           },
-          "numeric_deltas": {
-            "pos": [
-              -0.05257,
-              -0.0155,
-              -0.0013
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
-          "runtime": {
-            "class": "collision",
-            "group": 3.0,
-            "material": "sts3215_03a_v1_material",
-            "mesh": "sts3215_03a_v1",
-            "parent_body": "base/shoulder/upper_arm",
-            "pos": [
-              -0.11257,
-              -0.0155,
-              0.0187
-            ],
-            "quat": [
-              0.0,
-              -0.707107,
-              0.707107,
-              -0.0
-            ],
-            "type": "mesh"
-          }
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm:upper_arm[3]",
+          "key": "geom:base/shoulder/upper_arm:unnamed:a33c76a2d145#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -676,55 +667,11 @@
             ],
             "type": "box"
           },
-          "numeric_deltas": {
-            "pos": [
-              0.054915,
-              0.026,
-              0.0
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
-          "runtime": {
-            "class": "collision",
-            "group": 3.0,
-            "material": "upper_arm_so101_v1_material",
-            "mesh": "upper_arm_so101_v1",
-            "parent_body": "base/shoulder/upper_arm",
-            "pos": [
-              -0.065085,
-              0.012,
-              0.0182
-            ],
-            "quat": [
-              0.0,
-              1.0,
-              0.0,
-              0.0
-            ],
-            "type": "mesh"
-          }
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
-          "compared_values": {
-            "menagerie": {
-              "quat": [
-                0.5,
-                0.5,
-                0.5,
-                -0.5
-              ]
-            },
-            "runtime": {
-              "quat": [
-                0.5,
-                0.5,
-                0.5,
-                -0.5
-              ]
-            }
-          },
           "decision": "adapt",
-          "key": "geom:base/shoulder:shoulder[1]",
+          "key": "geom:base/shoulder:unnamed:054f8bc41b5a#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -748,55 +695,11 @@
             ],
             "type": "box"
           },
-          "numeric_deltas": {
-            "pos": [
-              -2e-07,
-              2.41e-07,
-              -0.003
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
-          "runtime": {
-            "class": "collision",
-            "group": 3.0,
-            "material": "sts3215_03a_v1_material",
-            "mesh": "sts3215_03a_v1",
-            "parent_body": "base/shoulder",
-            "pos": [
-              -0.0303992,
-              0.000422241,
-              -0.0417
-            ],
-            "quat": [
-              0.5,
-              0.5,
-              0.5,
-              -0.5
-            ],
-            "type": "mesh"
-          }
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
-          "compared_values": {
-            "menagerie": {
-              "quat": [
-                0.5,
-                0.5,
-                -0.5,
-                0.5
-              ]
-            },
-            "runtime": {
-              "quat": [
-                0.5,
-                0.5,
-                -0.5,
-                0.5
-              ]
-            }
-          },
           "decision": "adapt",
-          "key": "geom:base/shoulder:shoulder[3]",
+          "key": "geom:base/shoulder:unnamed:92c40e93be93#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -820,36 +723,9 @@
             ],
             "type": "box"
           },
-          "numeric_deltas": {
-            "pos": [
-              -0.0425992,
-              -0.000177759,
-              0.0158499
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
-          "runtime": {
-            "class": "collision",
-            "group": 3.0,
-            "material": "motor_holder_so101_base_v1_material",
-            "mesh": "motor_holder_so101_base_v1",
-            "parent_body": "base/shoulder",
-            "pos": [
-              -0.0675992,
-              -0.000177759,
-              0.0158499
-            ],
-            "quat": [
-              0.5,
-              0.5,
-              -0.5,
-              0.5
-            ],
-            "type": "mesh"
-          }
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         }
       ],
-      "missing": [],
       "unknown": []
     },
     "backlash": {
@@ -1084,42 +960,6 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_so101_v1[1]",
-          "menagerie": {
-            "condim": 6.0,
-            "friction": [
-              1.0,
-              0.005,
-              0.0005
-            ],
-            "priority": 1.0,
-            "solref": [
-              0.01,
-              1.0
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
-        },
-        {
-          "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_so101_v1[2]",
-          "menagerie": {
-            "condim": 6.0,
-            "friction": [
-              1.0,
-              0.005,
-              0.0005
-            ],
-            "priority": 1.0,
-            "solref": [
-              0.01,
-              1.0
-            ]
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
-        },
-        {
-          "decision": "adapt",
           "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_sph_tip1",
           "menagerie": {
             "condim": 6.0,
@@ -1157,6 +997,42 @@
         {
           "decision": "adapt",
           "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_sph_tip3",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:unnamed:50b0842b0050#1",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:unnamed:6f023245c946#1",
           "menagerie": {
             "condim": 6.0,
             "friction": [
@@ -1354,7 +1230,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:gripper[2]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:unnamed:d3bc9caadfe0#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1362,7 +1238,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:gripper[8]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:unnamed:f9f3c2eafcd9#1",
           "menagerie": {
             "condim": 6.0,
             "friction": [
@@ -1380,7 +1256,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:wrist[1]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:8ddacc8fc951#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1388,7 +1264,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:wrist[3]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:e82f85951511#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1396,7 +1272,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm:lower_arm[1]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:2456dfb6f16c#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1404,7 +1280,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm:lower_arm[3]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:78b04d5b8c16#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1412,7 +1288,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm:upper_arm[1]",
+          "key": "geom:base/shoulder/upper_arm:unnamed:8f513c520bb7#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1420,7 +1296,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm:upper_arm[3]",
+          "key": "geom:base/shoulder/upper_arm:unnamed:a33c76a2d145#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1428,7 +1304,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder:shoulder[1]",
+          "key": "geom:base/shoulder:unnamed:054f8bc41b5a#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1436,7 +1312,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder:shoulder[3]",
+          "key": "geom:base/shoulder:unnamed:92c40e93be93#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1580,31 +1456,31 @@
       "extra": [
         {
           "decision": "retain",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:gripper[1]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:unnamed:1895b7be566b#1",
           "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
             "group": 3.0,
-            "material": "sts3215_03a_v1_material",
-            "mesh": "sts3215_03a_v1",
-            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist/gripper",
+            "material": "moving_jaw_so101_v1_material",
+            "mesh": "moving_jaw_so101_v1",
+            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1",
             "pos": [
-              0.0077,
-              0.0001,
-              -0.0234
+              -0.0,
+              -0.0,
+              0.0189
             ],
             "quat": [
-              0.707107,
-              -0.707107,
+              1.0,
+              -0.0,
               0.0,
-              0.0
+              -0.0
             ],
             "type": "mesh"
           }
         },
         {
           "decision": "retain",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:gripper[3]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:unnamed:505b54400a9f#1",
           "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
@@ -1625,74 +1501,34 @@
             ],
             "type": "mesh"
           }
-        }
-      ],
-      "matched": [],
-      "mismatched": [
+        },
         {
-          "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_so101_v1[1]",
-          "menagerie": {
-            "class": "collision_gripper_mesh",
-            "condim": 6.0,
-            "friction": [
-              1.0,
-              0.005,
-              0.0005
-            ],
-            "group": 4.0,
-            "mass": 0.0,
-            "mesh": "moving_jaw_so101_gripper_part0_v1",
-            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1",
-            "pos": [
-              0.0,
-              0.0,
-              0.0189
-            ],
-            "priority": 1.0,
-            "quat": [
-              1.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "rgba": [
-              1.0,
-              0.0,
-              0.0,
-              1.0
-            ],
-            "solref": [
-              0.01,
-              1.0
-            ],
-            "type": "mesh"
-          },
-          "numeric_deltas": {
-            "group": -1.0
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently.",
+          "decision": "retain",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:unnamed:6fe4614fc52d#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
             "group": 3.0,
-            "material": "moving_jaw_so101_v1_material",
-            "mesh": "moving_jaw_so101_v1",
-            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1",
+            "material": "sts3215_03a_v1_material",
+            "mesh": "sts3215_03a_v1",
+            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist/gripper",
             "pos": [
-              -0.0,
-              -0.0,
-              0.0189
+              0.0077,
+              0.0001,
+              -0.0234
             ],
             "quat": [
-              1.0,
-              -0.0,
+              0.707107,
+              -0.707107,
               0.0,
-              -0.0
+              0.0
             ],
             "type": "mesh"
           }
         }
       ],
+      "matched": [],
+      "mismatched": [],
       "missing": [
         {
           "decision": "adapt",
@@ -1901,47 +1737,6 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_so101_v1[2]",
-          "menagerie": {
-            "class": "collision_gripper_mesh",
-            "condim": 6.0,
-            "friction": [
-              1.0,
-              0.005,
-              0.0005
-            ],
-            "group": 4.0,
-            "mass": 0.0,
-            "mesh": "moving_jaw_so101_gripper_part1_v1",
-            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1",
-            "pos": [
-              0.0,
-              0.0,
-              0.0189
-            ],
-            "priority": 1.0,
-            "quat": [
-              1.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "rgba": [
-              1.0,
-              0.0,
-              0.0,
-              1.0
-            ],
-            "solref": [
-              0.01,
-              1.0
-            ],
-            "type": "mesh"
-          },
-          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
-        },
-        {
-          "decision": "adapt",
           "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_sph_tip1",
           "menagerie": {
             "class": "collision_gripper",
@@ -2045,6 +1840,88 @@
               1.0
             ],
             "type": "sphere"
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:unnamed:50b0842b0050#1",
+          "menagerie": {
+            "class": "collision_gripper_mesh",
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "group": 4.0,
+            "mass": 0.0,
+            "mesh": "moving_jaw_so101_gripper_part1_v1",
+            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1",
+            "pos": [
+              0.0,
+              0.0,
+              0.0189
+            ],
+            "priority": 1.0,
+            "quat": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "rgba": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "solref": [
+              0.01,
+              1.0
+            ],
+            "type": "mesh"
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:unnamed:6f023245c946#1",
+          "menagerie": {
+            "class": "collision_gripper_mesh",
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "group": 4.0,
+            "mass": 0.0,
+            "mesh": "moving_jaw_so101_gripper_part0_v1",
+            "parent_body": "base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1",
+            "pos": [
+              0.0,
+              0.0,
+              0.0189
+            ],
+            "priority": 1.0,
+            "quat": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "rgba": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "solref": [
+              0.01,
+              1.0
+            ],
+            "type": "mesh"
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
@@ -2442,7 +2319,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:gripper[2]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:unnamed:d3bc9caadfe0#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -2470,7 +2347,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:gripper[8]",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:unnamed:f9f3c2eafcd9#1",
           "menagerie": {
             "class": "collision_gripper_mesh",
             "condim": 6.0,
@@ -3313,7 +3190,24 @@
     "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json"
   },
-  "identity_sha256": "fe9177e07a597e9db57c1896f5295f84b7ae9ff313219e33afa83b41c46fd08d",
+  "identifier_strategy": {
+    "unnamed_geom_identity": {
+      "key_fields": [
+        "type",
+        "mesh",
+        "size",
+        "fromto",
+        "pos",
+        "quat",
+        "axisangle",
+        "euler",
+        "xyaxes",
+        "zaxis"
+      ],
+      "version": "scenesmith.structural_twin_diff.unnamed_geom_identity.v1"
+    }
+  },
+  "identity_sha256": "5b070b1b1f98aad3eaf00d4bd9d153ab78f53ec4046b0948ef2cf5ae93387683",
   "schema_version": "scenesmith.structural_twin_diff.v1",
   "sources": {
     "menagerie": {
@@ -3337,10 +3231,10 @@
         "unknown": 0
       },
       "arm_collisions": {
-        "extra": 2,
+        "extra": 10,
         "matched": 0,
-        "mismatched": 8,
-        "missing": 0,
+        "mismatched": 0,
+        "missing": 8,
         "unknown": 0
       },
       "backlash": {
@@ -3365,10 +3259,10 @@
         "unknown": 10
       },
       "gripper_collisions": {
-        "extra": 2,
+        "extra": 3,
         "matched": 0,
-        "mismatched": 1,
-        "missing": 21,
+        "mismatched": 0,
+        "missing": 22,
         "unknown": 0
       },
       "inertials": {
@@ -3407,10 +3301,10 @@
         "unknown": 0
       }
     },
-    "extra_records": 4,
+    "extra_records": 13,
     "matched_records": 16,
-    "mismatched_records": 29,
-    "missing_records": 52,
+    "mismatched_records": 20,
+    "missing_records": 61,
     "unknown_records": 11
   },
   "twin_profile_ref": {
