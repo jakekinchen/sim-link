@@ -12,8 +12,10 @@ configuration, calibration, torque, register-write, goal, or motion operations.
 
 ## Entry and presence gate
 
-- T16.5a implementation `f200087` and reviewer decision 047 must be ancestors of
-  the confirmed `origin/codex/pi05-autolearn-loop` boundary `d002c80`.
+- Corrected T16.5a commits `5102422`/`eeb16e1` and reviewer decision 049 must be
+  ancestors of the confirmed `origin/codex/pi05-autolearn-loop` boundary
+  `2407299`. The superseded protocol-1 fixture boundary is not a valid live
+  prerequisite.
 - Immediately before the first live open, recheck local time against the
   12:14:07 CDT hard closeout and create a short session-scoped presence lease
   bound to owner authority `owner_supervised_physical_poc_2026_07_11`. The lease

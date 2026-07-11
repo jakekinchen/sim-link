@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "240729968ee1956cab489ea49501768156b16777",
-  "last_reviewed_commit": "eeb16e1c1ad93eec26f972177d758e6a6d1a3b7e",
+  "current_head_commit": "16d24ea0c4ced2b62d3ba2c0297f1816981efee3",
+  "last_reviewed_commit": "16d24ea0c4ced2b62d3ba2c0297f1816981efee3",
   "source_review": {
-    "commit": "eeb16e1c1ad93eec26f972177d758e6a6d1a3b7e",
-    "decision": "CLOSE_CORRECTED_T16_5A_AFTER_REMOTE_PRESERVATION",
-    "reviewer_decision": "docs/reviewer-messages/049-feetech-protocol-source-binding-reviewed.md"
+    "commit": "16d24ea0c4ced2b62d3ba2c0297f1816981efee3",
+    "decision": "ACCEPT_T16_5B_OFFLINE_HARNESS_AUTHORIZE_METADATA_DISCOVERY_ONLY_AFTER_REMOTE_PRESERVATION",
+    "reviewer_decision": "docs/reviewer-messages/050-live-readonly-observation-harness-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -332,13 +332,38 @@
       "state": "in_progress",
       "depends_on": ["T16.5a"],
       "brief_id": "039",
-      "result": "live read-only adapter, discovery, camera, privacy, and evidence preflight in progress; no live object opened",
+      "source_commit": "16d24ea",
+      "review_decision_id": "050",
+      "result": "offline live read-only adapter, metadata discovery, finite camera, privacy, and evidence harness verified; no hardware enumerated or opened",
+      "execution_note": "Implementation 16d24ea passed 14 dedicated, 30 combined census, and 209 broad tests plus both supported offline runtime verifiers; reviewer 050 authorizes only metadata discovery after remote preservation",
+      "test_commands": [
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census",
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python scripts/robot_lab/run_live_readonly_observation.py verify-offline",
+        "external/leLab/.venv/bin/python scripts/robot_lab/run_live_readonly_observation.py verify-offline",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/live_readonly_observation.py scenesmith/robot_lab/readonly_servo_census.py scripts/robot_lab/run_live_readonly_observation.py tests/unit/test_live_readonly_observation.py",
+        "git diff --check"
+      ],
+      "hardware_enumerated": false,
+      "hardware_opened": false,
+      "proof_labels_granted": [],
+      "authority_granted": [
+        "live_readonly_harness_offline_verified"
+      ],
       "conditional_authority": [
         "live_hardware_discovery_after_T16.5a",
         "live_read_only_census_after_T16.5a",
         "synchronized_camera_capture_after_T16.5a"
       ],
+      "known_limitations": [
+        "the accepted harness is offline proof only and contains no observed live identity, telemetry, or camera frame",
+        "metadata discovery must resolve one exact follower and camera selection before a short owner-presence lease and execution contract can be prepared",
+        "serial and camera opens remain closed until discovery is remotely preceded by this reviewed harness and every live contract check passes"
+      ],
       "authority_not_granted": [
+        "live_read_only_census_observed",
+        "physical_observation_capture",
         "configuration_write",
         "torque_write",
         "register_write",

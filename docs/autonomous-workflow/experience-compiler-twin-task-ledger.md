@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b live read-only adapter and evidence preflight
+current_task: T16.5b reviewed offline harness; metadata discovery is next after remote preservation
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: T16.5a correction commits 5102422/eeb16e1 and reviewer 049 are remotely preserved through 2407299 after 16 focused and 195 broad tests; v2 contract 73652ffa... -> trace 17921a5f... -> result 4a83298b...
+evidence: T16.5b harness commit 16d24ea and reviewer 050 passed 14 dedicated, 30 combined census, and 209 broad tests plus both supported offline runtime verifiers; no hardware enumerated or opened
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
-blockers: no offline blocker; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
-next_step: execute Brief 039 tests and dry-run offline; revalidate the lease immediately before any bounded live open
+blockers: no metadata-discovery blocker after the reviewed harness is remotely preserved; serial/camera open still fails closed on identity, calibration, lease, or contract ambiguity; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
+next_step: remotely preserve commit 16d24ea and reviewer 050, then perform metadata-only discovery with zero serial or camera opens
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: execute Brief 039 tests and dry-run offline; revalidate the lease imm
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Brief 039; offline code/test gate first; stable USB/bus/six-servo identity; finite camera frames/host timestamps; private raw evidence plus redacted content-addressed manifest; zero configuration/torque/register writes or motion |
+| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | `16d24ea`; reviewer 050; offline harness accepted after 14 dedicated/30 combined/209 broad tests; metadata-only discovery next after remote preservation; no live proof label yet |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,21 @@ next_step: execute Brief 039 tests and dry-run offline; revalidate the lease imm
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5b offline live-readonly harness locally reviewed
+
+```text
+Current task: T16.5b
+State: in_progress
+Completed: bounded metadata-discovery, exact identity/lease contract, no-write bus, finite camera, private evidence, and redacted manifest harness reviewed offline
+Evidence: implementation 16d24ea; reviewer 050; 14 dedicated, 30 combined census, and 209 broad tests; both .mujoco_venv and external/leLab offline verifiers; Black, py_compile, static no-write inspection, and diff checks
+Commit: 16d24ea; review/canonical preservation pending
+Remaining: commit and remotely preserve reviewer boundary; metadata-only discovery; exact lease/contract; one bounded read-only census/camera attempt
+Blockers: no offline blocker; live open fails closed on any identity, calibration, lease, camera, source, or contract ambiguity
+Hardware state: not enumerated and not opened
+Training lock: closed
+Next step: commit reviewer 050 and canonical state, push only the named branch, confirm remote, then run metadata discovery only
+```
 
 ### 2026-07-11 - Corrected T16.5a remotely verified; T16.5b reopened
 
