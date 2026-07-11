@@ -21,11 +21,10 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute T16.4 as a truthful measured-mass intake and assembly inertia/COM
-compiler capability. No genuine physical piece-weight evidence exists in repo
-state, so the checked-in real intake must say `awaiting_measurements` and the
-compiled real result must say `blocked_missing_measurements`; prove the ready
-math only with a clearly synthetic fixture. Do not open hardware,
+Execute brief `docs/briefs/025-synthetic-measured-inertial-ready-proof.md` to
+finish T16.4. Keep the checked-in real current-arm intake/output truthfully
+`awaiting_measurements` / `blocked_missing_measurements`, and prove the ready
+compiler only with a `synthetic_test_only` fixture. Do not open hardware,
 qualification, or training work.
 
 ## Durable State
