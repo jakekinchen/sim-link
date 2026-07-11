@@ -78,12 +78,19 @@ places exactly one `-framerate 30` before its input, audits and tracked/private
 v3 success evidence bind the mode, and v3 private failures embed and replay the
 complete signed contract and servo result. Legacy attempt-003 v1/v2 evidence
 remains verifiable. Reviewer 064 authorizes exactly one fresh finite v2-contract
-session after its gate-transition commit is confirmed on origin. The gate runs
-from `2026-07-11T10:33:00-05:00` through `2026-07-11T11:13:00-05:00`, has a
-session limit of one, and must reclose on every outcome. Sequential capture is
-not synchronized or policy-input-valid. Studio reconnect remains deferred
-unless exact device, calibration, and current-pose evidence proves it
-mechanically no-motion-safe.
+session after its gate-transition commit is confirmed on origin. Attempt 004
+used that session and is rejected. Its v3 private artifact verifies the full v2
+contract, 54 successful reads, all six `Torque_Enable=0` values, zero writes,
+zero torque changes, zero motion, one no-torque close, and zero holders across
+both signed aliases before and after. The first exact-name camera returned zero
+but emitted 339 stderr bytes because AVFoundation defaulted to unsupported
+`yuv420p`; it advertised `uyvy422`, `yuyv422`, `nv12`, `0rgb`, and `bgr0`.
+Release and process cleanup passed, no success manifest or proof label was
+written, and the live gate reclosed at `2026-07-11T10:37:42-05:00`. Brief 045
+is active offline to bind exact per-camera input formats from signed supported-
+mode metadata. Sequential capture is not synchronized or policy-input-valid.
+Studio reconnect remains deferred unless exact device, calibration, and
+current-pose evidence proves it mechanically no-motion-safe.
 
 ## Durable State
 

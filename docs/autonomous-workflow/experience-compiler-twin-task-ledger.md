@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; reviewer 064 authorizes one fresh finite v2-contract session after the scoped transition is remotely confirmed
+current_task: T16.5b in progress; attempt 004 rejected at first-camera input pixel format; live gate closed; Brief 045 active offline
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: 4ae0521c implementation and cee8240 canonical closeout remote; v2 contract and diagnostic; v3 private/tracked success and failure; reviewer 064 one-session gate
+evidence: attempt 004 discovery 2e63871a..., v2 contract b9b3c7ec..., v3 private failure 785241af..., diagnostic bd722dd7...; 54 no-write reads, six Torque_Enable=0, clean close, zero alias holders; yuv420p unsupported
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none for the bounded read-only session; gate becomes effective only after the transition commit is remotely confirmed
-next_step: run exactly one fresh discovery/holder/lease/v2-contract/census/camera/finalization session, reclose on every outcome, then review and remotely preserve it
+blockers: exact per-camera input pixel formats and signed supported-mode metadata are not contract-bound
+next_step: commit/push attempt-004 rejection; implement and verify Brief 045 offline; keep live gate closed
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: run exactly one fresh discovery/holder/lease/v2-contract/census/camer
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 044 `4ae0521c` and closeout `cee8240` remote; reviewer 064 permits exactly one fresh finite v2-contract session after gate commit confirmation |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 004 rejected after verified full six-servo no-write census; first camera defaulted to unsupported yuv420p; gate closed; Brief 045 exact per-camera mode correction active |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,22 @@ next_step: run exactly one fresh discovery/holder/lease/v2-contract/census/camer
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5b live attempt 004 rejected; pixel-format cause retained
+
+```text
+Current task: T16.5b
+State: in_progress; live gate closed; Brief 045 active offline
+Discovery: session t16-5b-20260711-1036-cdt; identity 2e63871a...; four serial candidates and two exact-name cameras; zero devices opened during discovery
+Contract: v2 b9b3c7ec...; five-minute lease f993a7c7...; integer 30 fps; two frames per pinned camera
+Servo result: f5c6d17e...; 54 reads, zero retries/writes/torque changes/motion; six model 777 servos; all six Torque_Enable=0; one successful no-torque close
+Serial ownership: both signed paths [0,0] before open, after close, and after failure; snapshot b33a7cc0...
+Camera failure: first exact-name camera; return 0; strict subprocess_stderr rejection; 339 stderr bytes hash 80b01de5...; 5,244,174 stdout bytes hash 11bcb1c0...; yuv420p unsupported; supported list uyvy422/yuyv422/nv12/0rgb/bgr0
+Private evidence: v3 identity 785241af...; file 305c42fb...; 40,640 bytes; complete contract/result independently verified; diagnostic bd722dd7...
+Cleanup: release succeeded; no ffmpeg process; no success bundle, tracked manifest, proof label, reconnect, Studio POST, signal, write, torque change, motion, policy, optimizer, or paid compute
+Training lock: closed
+Next step: canonical rejection closeout, then Brief 045 offline per-camera supported-mode contract
+```
 
 ### 2026-07-11 - One fresh v2-contract live session gated
 

@@ -12,9 +12,9 @@
   "verified_through_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
   "last_reviewed_implementation_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
   "source_review": {
-    "commit": "cee8240f87dbc9a02dce35d5c71a2482f699dd0d",
-    "decision": "OPEN_ONE_FRESH_FINITE_V2_CONTRACT_LIVE_SESSION_AFTER_REMOTE_CONFIRMATION",
-    "reviewer_decision": "docs/reviewer-messages/064-open-live-gate-after-brief-044.md"
+    "commit": "26a282476263fbaf976e7bd26e412d5967de2fef",
+    "decision": "REJECT_LIVE_ATTEMPT_004_AND_OPEN_OFFLINE_EXACT_PIXEL_FORMAT_CORRECTION",
+    "reviewer_decision": "docs/reviewer-messages/065-reject-live-attempt-004-pixel-format.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -385,7 +385,8 @@
       "metadata_review_decision_id": "051",
       "correction_brief_id": "041",
       "completed_correction_brief_id": "044",
-      "rejected_attempt_review_decision_ids": ["052", "058"],
+      "active_correction_brief_id": "045",
+      "rejected_attempt_review_decision_ids": ["052", "058", "062", "065"],
       "camera_identity_correction_commits": [
         "ea99ec9",
         "66003d8",
@@ -393,9 +394,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "064",
-      "result": "Reviewer 064 authorizes exactly one fresh finite v2-contract session after the scoped gate transition is confirmed on origin; no live operation is authorized before that confirmation",
-      "execution_note": "The gate transition itself performs no hardware discovery or open and grants no proof label; the one allowed session must use fresh discovery, all-alias holder proofs, a five-minute lease, explicit 30-fps v2 contract, complete v3 success/failure evidence, and immediate gate reclosure on every outcome",
+      "live_gate_review_decision_id": "065",
+      "result": "Live attempt 004 is rejected after a complete 54-read no-write census because the first exact-name camera emitted stderr showing default yuv420p was unsupported; v3 private evidence verifies the full contract, servo result, both holder snapshots, and clean camera release while the live gate remains closed for Brief 045",
+      "execution_note": "Attempt 004 used fresh discovery, a five-minute v2 contract with exact 30 fps, zero holders across both signed aliases, all six Torque_Enable values zero, zero writes/torque changes/motion, and a successful no-torque close; the first camera returned zero but strict stderr rejection retained a complete label-free v3 failure artifact, no tracked success manifest, and no remaining ffmpeg process",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
@@ -509,6 +510,68 @@
           "proof_labels_granted": [],
           "physical_follower_commanded": false,
           "preflight_invocation_correction": "mujoco_test_venv_missing_pyserial_failed_before_enumeration_or_artifact_then_same_session_used_pinned_lelab_runtime"
+        },
+        {
+          "attempt_id": "t16-5b-live-attempt-004",
+          "session_id": "t16-5b-20260711-1036-cdt",
+          "started_at": "2026-07-11T10:36:41-05:00",
+          "failed_at": "2026-07-11T10:37:32-05:00",
+          "gate_closed_at": "2026-07-11T10:37:42-05:00",
+          "discovery_private_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-1036-cdt/discovery.json",
+          "discovery_identity_sha256": "2e63871a0dccd403e02e337741593e8e108f82685d08e6ce5f6c177d76bb8f77",
+          "discovery_file_sha256": "f31f99af5588cbe3f0c53dc191bb66a86dd21e88f0444e94047912ac3a4deb5d",
+          "discovery_size_bytes": 2472,
+          "contract_private_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-1036-cdt/contract.json",
+          "contract_schema_version": "scenesmith.live_readonly_observation_contract.v2",
+          "contract_identity_sha256": "b9b3c7ecf70cadc269fd703e81df18fea56669fa7e40db6d7c721f87b8e2a358",
+          "contract_file_sha256": "90314322850f92a54ceaa5403afdd3530834c05fd0bc48efe173c7b3be8baf84",
+          "contract_size_bytes": 11617,
+          "contract_camera_framerate_fps": 30,
+          "presence_lease_identity_sha256": "f993a7c714c39ce3e47c3ac7f3963478efc0aff26d08813776cbae87d0b581dd",
+          "live_census_contract_identity_sha256": "70cdb6a10312469cd922c5a2e79b7009cc2d37e6b7f8e5259648b5794019d22f",
+          "private_failure_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-1036-cdt/capture/private_capture_failure.json",
+          "private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v3",
+          "private_failure_identity_sha256": "785241af1d0ccc6c06a5a71cf2a1cf5f91073b91704d83402b15ce313a8fd4cb",
+          "private_failure_file_sha256": "305c42fbf3a83d2de1be2076e4661725fbc81be5218bc0721acc8772854fc689",
+          "private_failure_size_bytes": 40640,
+          "private_failure_verified": true,
+          "servo_result_identity_sha256": "f5c6d17e61ed09f6b84a5a40d9545cc95661b292e0e63055f98e6384c686fd34",
+          "torque_enable_raw_values": [0, 0, 0, 0, 0, 0],
+          "servo_model_numbers": [777, 777, 777, 777, 777, 777],
+          "operation_counts": {
+            "construct_attempts": 1,
+            "construct_successes": 1,
+            "connect_attempts": 1,
+            "connect_successes": 1,
+            "read_attempts": 54,
+            "read_successes": 54,
+            "read_retries": 0,
+            "close_attempts": 1,
+            "close_successes": 1,
+            "motor_register_writes": 0,
+            "torque_changes": 0,
+            "motion_commands": 0,
+            "unexpected_operations": 0
+          },
+          "pre_open_per_path_holder_counts": [0, 0],
+          "post_close_per_path_holder_counts": [0, 0],
+          "holder_snapshot_identity_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
+          "status": "rejected",
+          "failure_stage": "first_named_camera_subprocess_stderr",
+          "camera_failure_diagnostic_identity_sha256": "bd722dd787dd7b4f26aa9735dd8c5d0e78aed9551d5aedf45f4caa799c86aab9",
+          "camera_return_code": 0,
+          "camera_stderr_byte_count": 339,
+          "camera_stderr_sha256": "80b01de51996190fd63ced6b7f49837c539c5955f24f2c1823a07d03ef97105c",
+          "camera_stdout_byte_count": 5244174,
+          "camera_stdout_sha256": "11bcb1c08d2690bd97b1f7db86cb3e4c81b28223e736374ff6f29854124cc6d0",
+          "failure_reason": "avfoundation_default_yuv420p_not_supported_first_camera_advertises_uyvy422_yuyv422_nv12_0rgb_bgr0",
+          "camera_release_successes": 1,
+          "post_failure_ffmpeg_process_count": 0,
+          "post_failure_deduplicated_holder_count": 0,
+          "private_success_bundle_written": false,
+          "tracked_manifest_written": false,
+          "proof_labels_granted": [],
+          "physical_follower_commanded": false
         }
       ],
       "virtual_disconnect_proof": {
@@ -545,7 +608,7 @@
         "exclusive_bus_ownership_proven": true,
         "canonical_path_zero_holder_observed": true,
         "all_signed_aliases_checked": true,
-        "last_revalidated_at": "2026-07-11T10:07:17-05:00",
+        "last_revalidated_at": "2026-07-11T10:37:42-05:00",
         "last_revalidated_holder_count": 0,
         "last_revalidated_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
         "read_only_server_status_observed_at": "2026-07-11T08:57:17-05:00",
@@ -554,7 +617,7 @@
         "routing_state_sha256": "620cb845cb8f1507263fdf7b6aec651a69e4b028d90628c935b0af0b533fdcb4"
       },
       "camera_capture_backend": {
-        "state": "offline_verified_explicit_30fps",
+        "state": "live_rejected_exact_input_pixel_format_missing",
         "backend": "ffmpeg_named_avfoundation",
         "explicit_mode_binding_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
         "execution_contract_schema_version": "scenesmith.live_readonly_observation_contract.v2",
@@ -598,13 +661,16 @@
           "stderr_preview_max_bytes": 2048,
           "attempt_002_retroactive_diagnostic_available": false,
           "latest_live_failure": {
-            "attempt_id": "t16-5b-live-attempt-003",
-            "diagnostic_identity_sha256": "482064ad86290cfcf7f92469a68c7e0376b501896465f63a5ad1aaccb9d459e3",
-            "stage": "subprocess_nonzero_exit",
-            "return_code": 251,
-            "stderr_byte_count": 13548,
-            "stderr_sha256": "64a8d5ff3b771f90db0b1b9d7a825e3d3b7a64b839f9edd076976c81bd93064d",
-            "bounded_root_cause": "selected_29_970030_fps_not_supported_30_000030_fps_advertised",
+            "attempt_id": "t16-5b-live-attempt-004",
+            "diagnostic_identity_sha256": "bd722dd787dd7b4f26aa9735dd8c5d0e78aed9551d5aedf45f4caa799c86aab9",
+            "stage": "subprocess_stderr",
+            "return_code": 0,
+            "requested_framerate_fps": 30,
+            "stderr_byte_count": 339,
+            "stderr_sha256": "80b01de51996190fd63ced6b7f49837c539c5955f24f2c1823a07d03ef97105c",
+            "stdout_byte_count": 5244174,
+            "stdout_sha256": "11bcb1c08d2690bd97b1f7db86cb3e4c81b28223e736374ff6f29854124cc6d0",
+            "bounded_root_cause": "default_yuv420p_unsupported_first_camera_advertises_uyvy422_yuyv422_nv12_0rgb_bgr0",
             "release_successes": 1,
             "post_failure_process_count": 0
           }
@@ -618,13 +684,13 @@
         "required_post_close_holder_count": 0,
         "stops_or_signals_holders": false,
         "last_observed_holder_count": 0,
-        "last_observed_at": "2026-07-11T10:07:17-05:00",
+        "last_observed_at": "2026-07-11T10:37:42-05:00",
         "last_observed_per_path_holder_counts": [0, 0],
         "last_observed_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
         "current_gate_result": "verified_zero_holders_across_all_signed_aliases"
       },
       "torque_enable_gate": {
-        "state": "offline_verified_live_evidence_required",
+        "state": "live_values_verified_in_rejected_attempt_no_session_label",
         "implementation_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
         "register": "Torque_Enable",
         "width_bytes": 1,
@@ -634,9 +700,11 @@
         "fixture_trace_identity_sha256": "41526a67d2e119f70357f7182b28688a11dc0af0f3235906d3de3d2ae938a61f",
         "fixture_result_identity_sha256": "d58f0e8d166c4bdb8c6631e94e3202b17f98c2267c697c5740d50eae0d887111",
         "live_requirement": "all_six_servos_must_report_Torque_Enable_zero",
-        "last_rejected_attempt_servo_result_identity_sha256": "2128192c6a1d0181f7906002bf9d2468451d44ec60ad320ccc5557fac7ae4b43",
+        "last_rejected_attempt_id": "t16-5b-live-attempt-004",
+        "last_rejected_attempt_servo_result_identity_sha256": "f5c6d17e61ed09f6b84a5a40d9545cc95661b292e0e63055f98e6384c686fd34",
         "last_rejected_attempt_read_successes": 54,
-        "last_rejected_attempt_full_servo_result_retained": false,
+        "last_rejected_attempt_full_servo_result_retained": true,
+        "last_rejected_attempt_torque_enable_raw_values": [0, 0, 0, 0, 0, 0],
         "future_private_failure_full_servo_result_retained": true,
         "future_private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v3",
         "configuration_or_torque_writes": 0,
@@ -646,12 +714,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "open",
+      "live_gate": "closed",
       "live_gate_opened_at": "2026-07-11T10:33:00-05:00",
       "live_gate_valid_until": "2026-07-11T11:13:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 0,
-      "live_gate_reconsideration_state": "one_fresh_v2_session_authorized_after_remote_confirmation",
+      "live_gate_sessions_started": 1,
+      "live_gate_closed_at": "2026-07-11T10:37:42-05:00",
+      "live_gate_close_reason": "live_attempt_004_named_camera_ffmpeg_stderr",
+      "live_gate_reconsideration_state": "attempt_004_rejected_offline_diagnosis_required",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -681,6 +751,11 @@
           "at": "2026-07-11T10:33:00-05:00",
           "review_decision_id": "064",
           "result": "one_fresh_finite_v2_contract_session_authorized_after_brief_044"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-11T10:37:42-05:00",
+          "reason": "live_attempt_004_named_camera_ffmpeg_stderr"
         }
       ],
       "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
@@ -692,7 +767,7 @@
         "holder_count": 0,
         "holder_path_count": 2,
         "holder_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
-        "torque_enable_read_capability": "offline_verified_live_values_required",
+        "torque_enable_read_capability": "live_values_verified_in_rejected_attempt_no_session_label",
         "follower_connected": false,
         "follower_torque": false,
         "owner_present": true,
@@ -706,16 +781,20 @@
       ],
       "known_limitations": [
         "attempt 001 produced no accepted live evidence because post-close camera index identity drift invalidated the capture",
-        "attempt 003 was rejected because AVFoundation defaulted to unsupported 29.970030 fps; Brief 044 now requests 30 fps explicitly but has not yet been exercised live",
+        "attempt 003 was rejected because AVFoundation defaulted to unsupported 29.970030 fps; Brief 044 corrected and attempt 004 exercised exact 30 fps",
+        "attempt 004 was rejected because the first camera defaulted to unsupported yuv420p; its diagnostic advertises uyvy422, yuyv422, nv12, 0rgb, and bgr0 but no exact input pixel format is yet contract-bound",
         "the owner-authorized disconnect is represented by an honest reconstructed operation proof rather than a contemporaneous raw HTTP transcript",
         "live attempt 002 was rejected because the first named-camera ffmpeg subprocess returned nonzero",
         "attempt 002 predates Brief 042 diagnostic retention and cannot be retroactively root-caused from discarded stderr",
         "the all-alias zero-holder observation is a time-bounded prerequisite and must be repeated before serial open and after close in any future session",
-        "Torque_Enable is now mandatory and verified offline, but no accepted live result yet records all six physical values",
+        "all six live Torque_Enable values are retained and independently verified as zero in attempt 004 private failure evidence, but the rejected session grants no live census proof label",
         "attempt 003 retained the servo result identity and operation counts but not the full decoded servo result; Brief 044 preserves legacy verification and requires full result embedding only for future failures",
         "sequential census then camera evidence is finite physical capture, not synchronized observation or policy-shadow-input-valid"
       ],
-      "blocked_on": [],
+      "blocked_on": [
+        "camera_input_pixel_format_not_bound",
+        "per_camera_supported_mode_metadata_not_contract_bound"
+      ],
       "owner_decision_required": {
         "state": "granted",
         "pre_disconnect_observed_server_state": {
@@ -812,7 +891,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "after the scoped gate transition is confirmed on origin, execute exactly one fresh finite v2-contract live session and immediately reclose the gate on every outcome",
+      "next_action": "commit and remotely preserve attempt 004 rejection, then implement Brief 045 offline to bind exact per-camera input pixel formats from signed supported-mode metadata; keep the live gate closed",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
@@ -834,7 +913,8 @@
         "all_signed_follower_aliases_zero_holder_verified",
         "per_servo_torque_enable_read_gate_offline_verified",
         "explicit_30fps_named_camera_mode_offline_verified",
-        "complete_failure_servo_evidence_offline_verified"
+        "complete_failure_servo_evidence_offline_verified",
+        "attempt_004_complete_six_servo_torque_off_evidence_verified_without_session_label"
       ]
     },
     "T16.5c": {

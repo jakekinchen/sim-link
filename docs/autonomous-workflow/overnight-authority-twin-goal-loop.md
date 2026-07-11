@@ -376,6 +376,13 @@ with the owner physically present.
   the same value. Any private camera-failure artifact must embed and
   independently verify the complete signed execution contract and servo result,
   including all six `Torque_Enable=0` values and the exact no-write trace.
+- After rejected attempt 004, no new camera contract may rely on a default input
+  pixel format. Each selected camera must expose signed normalized supported-
+  mode metadata bound to its exact name/system identity, and the contract must
+  select one of that camera's own modes. Exact pixel format, dimensions, and
+  framerate arguments precede the AVFoundation input and remain bound through
+  audit, failure, private-success, and tracked-manifest verification. Never
+  infer the second camera's mode from the first camera's diagnostic.
 - This task grants observation evidence only, never physical qualification.
 
 ### T16.5c - No-actuation observation, shadow, and replay
