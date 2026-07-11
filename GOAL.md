@@ -276,12 +276,15 @@ inference, replay, policy label, or actuation is permitted. Only
 `pi05_policy_input_preprocessing_source_contract_conformant` is newly granted;
 the live gate and training lock stay closed.
 
-Brief 057 is active offline to define the separate reviewed-input issuance gate
-for the missing live-session acceptance decision, stable-camera role binding,
-and exact task prompt. It will emit only a fixture
-`blocked_missing_reviewed_inputs` artifact and will not create or accept any of
-those real inputs, construct a policy input, load weights, preprocess, infer,
-replay, access hardware, or transition the live gate.
+Brief 057 is verified and remotely preserved at implementation `44dd871`. The
+separate reviewed-input issuance gate mechanically requires same-session,
+same-source, issuer-allowlisted, review-record-bound, time-valid acceptance,
+camera-role, and task inputs while keeping fixture and production evidence
+distinct. Its checked artifact remains `blocked_missing_reviewed_inputs`: no
+real acceptance, role assignment, or task prompt exists. Only
+`pi05_reviewed_input_issuance_gate_conformant` is newly granted; no policy input,
+weight load, preprocessing, inference, replay, policy label, hardware access,
+or live-gate transition is permitted.
 
 ## Durable State
 

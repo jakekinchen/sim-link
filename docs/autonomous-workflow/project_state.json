@@ -10,13 +10,13 @@
     "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "fd4982097961d8df34435e2db5fd7c4397f050d4",
-  "last_reviewed_implementation_commit": "fd4982097961d8df34435e2db5fd7c4397f050d4",
+  "verified_through_commit": "44dd871745efcc3490321a3ada92b4ddf138ba6c",
+  "last_reviewed_implementation_commit": "44dd871745efcc3490321a3ada92b4ddf138ba6c",
   "source_review": {
-    "commit": "fd4982097961d8df34435e2db5fd7c4397f050d4",
-    "implementation_commit": "fd4982097961d8df34435e2db5fd7c4397f050d4",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_056_PI05_PREPROCESSING_SOURCE_CONTRACT_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/082-accept-brief-056-pi05-preprocessing-source-contract.md"
+    "commit": "44dd871745efcc3490321a3ada92b4ddf138ba6c",
+    "implementation_commit": "44dd871745efcc3490321a3ada92b4ddf138ba6c",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_057_PI05_REVIEWED_INPUT_ISSUANCE_GATE_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/083-accept-brief-057-pi05-reviewed-input-issuance-gate.md"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -1171,10 +1171,10 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "057",
-      "latest_verified_brief_id": "056",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056"],
-      "result": "Briefs 048-056 are verified and remotely preserved: exact PI0.5 preprocessing sources, cached processor/tokenizer revisions, normalizer statistics, coordinate semantics, and the sole CUDA-to-CPU preprocessing override are pinned, but production preprocessing remains blocked on an accepted live review decision, reviewed camera-role binding, and reviewed task prompt; the live gate remains closed",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "057",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057"],
+      "result": "Briefs 048-057 are verified and remotely preserved: the exact PI0.5 source contract and a strict reviewed-input issuance gate now exist, but the checked gate remains blocked because no accepted live-session decision, reviewed camera-role binding, or reviewed task prompt was created; no policy input or execution authority is granted and the live gate remains closed",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1416,9 +1416,38 @@
         "broad_test_count": 313,
         "broad_test_duration_seconds": 70.328
       },
+      "pi05_reviewed_input_issuance_gate": {
+        "implementation_commit": "44dd871745efcc3490321a3ada92b4ddf138ba6c",
+        "artifact_path": "configurations/robot_lab/pi05_reviewed_inputs.blocked_missing_reviewed_inputs.json",
+        "schema_version": "scenesmith.pi05_reviewed_input_gate.v1",
+        "identity_sha256": "0f6362f69be4b9083f9bab45828a93f0c1c8e4f04132eed9fc54f8a30e1bfed3",
+        "status": "blocked_missing_reviewed_inputs",
+        "source_contract_identity_sha256": "f6b216684f6bb3f895b3d1761d72e80b5e93a5ec7be8f44b04cc277e7a871afa",
+        "required_inputs": [
+          "accepted_live_session_review_decision",
+          "reviewed_stable_camera_role_binding",
+          "reviewed_task_prompt"
+        ],
+        "real_input_artifacts_created": false,
+        "production_input_issuance_allowed": false,
+        "accepted_live_policy_input": false,
+        "policy_input_built": false,
+        "model_instantiated": false,
+        "model_weights_read": false,
+        "preprocessing_run": false,
+        "policy_shadow_run": false,
+        "policy_inference_run": false,
+        "mujoco_replay_run": false,
+        "hardware_accessed": false,
+        "physical_follower_commanded": false,
+        "capability": "pi05_reviewed_input_issuance_gate_conformant",
+        "focused_test_count_per_runtime": 123,
+        "broad_test_count": 322,
+        "broad_test_duration_seconds": 69.292
+      },
       "test_commands": [
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
-        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_execution_sources.py",
         "external/leLab/.venv/bin/python scripts/robot_lab/verify_static_pose_live_execution_sources.py",
         "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_candidate_sources.py",
@@ -1427,11 +1456,13 @@
         "./.mujoco_venv/bin/python scripts/robot_lab/write_static_pose_bracket_fixture.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_pi05_preprocessing_contract.py --verify",
         "external/leLab/.venv/bin/python scripts/robot_lab/write_pi05_preprocessing_contract.py --verify",
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
-        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_preprocessing_contract.py",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_pi05_reviewed_input_gate.py --verify",
+        "external/leLab/.venv/bin/python scripts/robot_lab/write_pi05_reviewed_input_gate.py --verify",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "implement and verify Brief 057 fixture-only PI0.5 reviewed-input issuance gate for the accepted live-session decision, stable-camera role binding, and exact task prompt; emit only a blocked artifact and do not create real inputs, preprocess, load weights, infer, access hardware, or transition the live gate",
+      "next_action": "remain offline until a separately reviewed slice either implements fixture-only preprocessing conformance or supplies all three real reviewed inputs; do not treat fixture gate tests as a live bundle, and do not load weights, infer, access hardware, or transition the live gate",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
@@ -1457,7 +1488,8 @@
         "hardware_supervised_runtime_profile_validator_conformant",
         "fail_closed_static_pose_live_session_orchestrator_conformant",
         "redacted_static_pose_live_candidate_session_review_conformant",
-        "pi05_policy_input_preprocessing_source_contract_conformant"
+        "pi05_policy_input_preprocessing_source_contract_conformant",
+        "pi05_reviewed_input_issuance_gate_conformant"
       ],
       "authority_not_granted": [
         "actual_live_review_manifest",

@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress under Brief 057 PI0.5 reviewed-input issuance gate
+current_task: T16.5c in progress after verified Brief 057 PI0.5 reviewed-input issuance gate
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Brief 056 fd49820; signed PI0.5 preprocessing source contract f6b21668...; exact stack/checkpoint/tokenizer/normalizer/coordinate/device bindings; 114 focused in each runtime; 313 broad tests; no weights/preprocessing/inference/hardware access
+evidence: Brief 057 44dd871; signed reviewed-input gate 0f6362f6... remains blocked with all three real inputs absent; 123 focused in each runtime; 322 broad tests; no weights/preprocessing/inference/hardware access
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: T16.5b none; the current parent thread is mechanically rejected because its persisted approval policy is never; live T16.5c requires a new hardware-supervised on-request parent, fresh finite run window, separate reviewed gate transition, fresh lease, and fresh discovery/zero-holder snapshots; static-pose observation and policy-shadow parity remain unverified
-next_step: implement and verify Brief 057 fixture-only reviewed-input issuance gate with all real inputs absent; no weights, preprocessing, inference, hardware, or live-gate transition
+next_step: remain offline until a reviewed slice implements fixture-only preprocessing conformance or all three real reviewed inputs exist; no weights, inference, hardware, or live-gate transition
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: implement and verify Brief 057 fixture-only reviewed-input issuance g
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-056 verified; Brief 057 active offline to define the reviewed-input issuance gate while all three real inputs remain absent; current thread remains live-ineligible |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-057 verified; source and reviewed-input gates exist but all three real reviewed inputs remain absent, so preprocessing is blocked and the current thread remains live-ineligible |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -136,6 +136,23 @@ hardware authority.
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 057 PI0.5 reviewed-input issuance gate verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 057 verified and remotely preserved; live gate closed
+Completed: strict signed schemas and composition gate for future live-session acceptance, stable-camera-to-top/wrist role binding, and exact reviewed task prompt; exact source/session/issuer/review-record/validity/evidence-class consistency; fixture/production separation
+Evidence: implementation 44dd871; artifact configurations/robot_lab/pi05_reviewed_inputs.blocked_missing_reviewed_inputs.json; schema scenesmith.pi05_reviewed_input_gate.v1; identity 0f6362f6...; all three input slots absent
+Verification: 123 focused tests in .mujoco_venv; 123 in pinned LeLab runtime; Brief 056 and Brief 057 writers/verifiers in both runtimes; py_compile; whitespace/privacy/source/diff checks; 322 broad tests in 69.292 seconds
+Adversarial: self-signed authority and extra-field escalation; source/issuer/scope/subject/session/review-decision drift; future/expired/boolean/oversized validity; manifest substitution; fixture/production mixing; partial bundles; camera identity/role/model ambiguity; numeric-index/raw-identity leakage; missing private-review hash; task whitespace/underscore/multiline/control/Unicode-normalization/hash drift; review-record path/hash/marker and input path alias substitution
+Real inputs created: none; no live-session acceptance artifact, stable-camera role assignment, or reviewed task prompt exists
+Authority gained: pi05_reviewed_input_issuance_gate_conformant only
+Authority withheld: pi05_reviewed_input_bundle_valid, accepted_live_policy_input, static_pose_bracketed_observation, policy_shadow_input_valid, model/tokenizer/processor construction, model-weight load, preprocessing, inference, policy shadow, MuJoCo replay, actuation, qualification/transfer, promotion, training
+Hardware: none; no enumeration/open, serial/camera/Studio access, reconnect, write, torque change, motion, policy, model weight, optimizer, or paid compute
+Training lock: closed
+Next step: separately reviewed offline fixture preprocessing conformance or later real reviewed inputs; production preprocessing and live gate remain closed
+```
 
 ### 2026-07-11 - Brief 056 PI0.5 preprocessing source contract verified offline
 
