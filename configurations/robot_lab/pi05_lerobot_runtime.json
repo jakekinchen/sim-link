@@ -1,0 +1,37 @@
+{
+  "schema_version": "scenesmith.lerobot_runtime.v1",
+  "base_revision": "e40b58a8dfa9e7b86918c374791599d070518d11",
+  "source_root": "external/lerobot/src",
+  "environment_lock": "external/lerobot/uv.lock",
+  "patches": [
+    "scripts/robot_lab/patches/pi05_gripper_loss_weight.patch"
+  ],
+  "critical_environment": {
+    "SCENESMITH_GRIPPER_LOSS_WEIGHT": "1",
+    "SCENESMITH_GRIPPER_ONLY_LOSS": "0",
+    "SCENESMITH_TRAINABLE_PARAMETER_SUBSTRING": "",
+    "SCENESMITH_TRAINABLE_OUTPUT_ROWS": "",
+    "SCENESMITH_RED_TASK_WEIGHT": "1"
+  },
+  "processor_contract": {
+    "joint_names": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "input_units": "radians",
+    "lerobot_units": "degrees",
+    "tensor_width": 32,
+    "padding_value": 0.0
+  },
+  "roles": [
+    "collection",
+    "training",
+    "finalization",
+    "inference",
+    "lelab"
+  ]
+}

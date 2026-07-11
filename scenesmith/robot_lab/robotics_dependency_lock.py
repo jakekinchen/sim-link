@@ -11,10 +11,11 @@ import tomllib
 from pathlib import Path
 from typing import Any
 
+from scenesmith.robot_lab.lerobot_stack import build_stack_identity
 from scenesmith.robot_lab.spec import RobotLabRobot
 
 
-ROBOTICS_DEPENDENCY_LOCK_SCHEMA_VERSION = "scenesmith.robotics_dependency_lock.v1"
+ROBOTICS_DEPENDENCY_LOCK_SCHEMA_VERSION = "scenesmith.robotics_dependency_lock.v2"
 OPENPI_REPOSITORY_URL = "https://github.com/Physical-Intelligence/openpi"
 MENAGERIE_REPOSITORY_URL = "https://github.com/google-deepmind/mujoco_menagerie"
 MENAGERIE_MODEL_PATH = "robotstudio_so101"
@@ -84,6 +85,7 @@ def build_robotics_dependency_lock(*, repo_root: Path) -> dict[str, Any]:
     lelab_project = _read_toml(lelab_root / "pyproject.toml")
     lerobot_project = _read_toml(lerobot_root / "pyproject.toml")
     lelab_lerobot_dependency = _extract_lerobot_git_dependency(lelab_project)
+    executable_stack = build_stack_identity(repo_root=repo_root)
     active_mjcf = repo_root / robot.source_mjcf
     active_urdf = repo_root / robot.source_urdf
     payload: dict[str, Any] = {
@@ -111,15 +113,16 @@ def build_robotics_dependency_lock(*, repo_root: Path) -> dict[str, Any]:
                     "license_file": _file_evidence(lelab_root / "LICENSE", repo_root=repo_root),
                 },
                 "runtime_lerobot_dependency": lelab_lerobot_dependency,
+                "effective_lerobot_runtime": {
+                    "resolution": "scenesmith_unified_stack_override",
+                    "base_revision": executable_stack["base_revision"],
+                    "stack_identity_sha256": executable_stack["identity_sha256"],
+                },
                 "active_urdf": _file_evidence(active_urdf, repo_root=repo_root),
             },
             "local_lerobot_checkout": {
-                "role": "local_patch_checkout",
-                "resolution": "split_runtime_unresolved",
-                "resolution_reason": (
-                    "LeLab pins lerobot by tag for runtime, but this repo also carries a "
-                    "separate local lerobot checkout with uncommitted PI0.5 changes."
-                ),
+                "role": "unified_executable_runtime",
+                "resolution": "exact_base_plus_tracked_patchset",
                 "repository_url": _project_source_url(
                     lerobot_project,
                     default="https://github.com/huggingface/lerobot",
@@ -143,6 +146,7 @@ def build_robotics_dependency_lock(*, repo_root: Path) -> dict[str, Any]:
                         "src/lerobot/scripts/lerobot_train.py",
                     ],
                 ),
+                "executable_stack": executable_stack,
             },
             "openpi_semantic_reference": {
                 "role": "semantic_reference_only",
@@ -248,16 +252,22 @@ def _verify_lelab_runtime(entry: dict[str, Any], *, repo_root: Path) -> None:
     current_dependency = _extract_lerobot_git_dependency(project)
     if current_dependency != entry["runtime_lerobot_dependency"]:
         raise ValueError("LeLab runtime lerobot dependency drifted")
+    effective = entry.get("effective_lerobot_runtime") or {}
+    stack = build_stack_identity(repo_root=repo_root)
+    if effective != {
+        "resolution": "scenesmith_unified_stack_override",
+        "base_revision": stack["base_revision"],
+        "stack_identity_sha256": stack["identity_sha256"],
+    }:
+        raise ValueError("LeLab effective runtime is not bound to the unified stack")
     _verify_file_evidence(entry["active_urdf"], repo_root=repo_root)
 
 
 def _verify_local_lerobot_checkout(entry: dict[str, Any], *, repo_root: Path) -> None:
     lerobot_root = repo_root / "external/lerobot"
     project = _read_toml(lerobot_root / "pyproject.toml")
-    if entry["resolution"] != "split_runtime_unresolved":
+    if entry["resolution"] != "exact_base_plus_tracked_patchset":
         raise ValueError("Local LeRobot resolution state drifted")
-    if not entry.get("resolution_reason"):
-        raise ValueError("Local LeRobot split state must explain why it is unresolved")
     if entry["repository_url"] != _project_source_url(project, default=entry["repository_url"]):
         raise ValueError("Local LeRobot repository URL drifted")
     if entry["license_id"] != _project_license_id(project):
@@ -266,6 +276,8 @@ def _verify_local_lerobot_checkout(entry: dict[str, Any], *, repo_root: Path) ->
     _verify_file_evidence(entry["package"]["pyproject"], repo_root=repo_root)
     _verify_file_evidence(entry["package"]["license_file"], repo_root=repo_root)
     _verify_path_set_evidence(entry["relevant_sources"], repo_root=repo_root)
+    if entry.get("executable_stack") != build_stack_identity(repo_root=repo_root):
+        raise ValueError("Unified executable LeRobot stack identity drifted")
 
 
 def _verify_robotstudio_so101(entry: dict[str, Any], *, repo_root: Path) -> None:

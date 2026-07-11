@@ -26,7 +26,6 @@ from scenesmith.robot_lab.replay_registry import (
 )
 
 
-LEROBOT_SRC = REPO_ROOT / "external" / "lerobot" / "src"
 REQUIRED_FEATURES = {
     "observation.images.top",
     "observation.images.wrist",
@@ -75,7 +74,9 @@ def main() -> int:
             parser.error(f"{args.output_root} exists; pass --overwrite to replace it")
         shutil.rmtree(args.output_root)
 
-    sys.path.insert(0, str(LEROBOT_SRC))
+    from scenesmith.robot_lab.lerobot_stack import activate_lerobot_stack
+
+    activate_lerobot_stack(repo_root=REPO_ROOT, stage="collection")
     from lerobot.datasets import LeRobotDataset, merge_datasets
 
     base_repo = "local/pi05-base"

@@ -10,9 +10,10 @@ index aabd04c..5c6dd9a 100644
  from collections import deque
  from pathlib import Path
  from typing import TYPE_CHECKING, Literal, TypedDict, Unpack
-@@ -1277,6 +1278,22 @@ class PI05Policy(PreTrainedPolicy):
+@@ -1277,8 +1278,24 @@ class PI05Policy(PreTrainedPolicy):
          original_action_dim = self.config.output_features[ACTION].shape[0]
          losses = losses[:, :, :original_action_dim]
+ 
 +        gripper_loss_weight = float(os.environ.get("SCENESMITH_GRIPPER_LOSS_WEIGHT", "1"))
 +        if not math.isfinite(gripper_loss_weight) or gripper_loss_weight <= 0:
 +            raise ValueError("SCENESMITH_GRIPPER_LOSS_WEIGHT must be finite and positive")
@@ -32,21 +33,24 @@ index aabd04c..5c6dd9a 100644
 +            "gripper_loss_weight": gripper_loss_weight,
 +            "gripper_only_loss": gripper_only_loss,
          }
+ 
          if reduction == "none":
 diff --git a/src/lerobot/scripts/lerobot_train.py b/src/lerobot/scripts/lerobot_train.py
-index 6e84585..32a75c7 100644
+index 6e84585..82a2371 100644
 --- a/src/lerobot/scripts/lerobot_train.py
 +++ b/src/lerobot/scripts/lerobot_train.py
-@@ -20,5 +20,6 @@ Requires: pip install 'lerobot[training]'  (includes dataset + accelerate + wand
+@@ -20,6 +20,7 @@ Requires: pip install 'lerobot[training]'  (includes dataset + accelerate + wand
+ 
  import dataclasses
  import logging
 +import os
  import sys
  import time
  from contextlib import nullcontext
-@@ -308,4 +309,53 @@ def train(cfg: TrainPipelineConfig, accelerator: "Accelerator | None" = None):
+@@ -308,6 +309,55 @@ def train(cfg: TrainPipelineConfig, accelerator: "Accelerator | None" = None):
              peft_cli_overrides = dataclasses.asdict(cfg.peft)
              policy = policy.wrap_with_peft(peft_cli_overrides=peft_cli_overrides)
+ 
 +    trainable_parameter_substring = os.environ.get(
 +        "SCENESMITH_TRAINABLE_PARAMETER_SUBSTRING", ""
 +    )
@@ -98,3 +102,32 @@ index 6e84585..32a75c7 100644
 +
      # Wait for all processes to finish model creation before continuing
      accelerator.wait_for_everyone()
+ 
+@@ -426,6 +476,27 @@ def train(cfg: TrainPipelineConfig, accelerator: "Accelerator | None" = None):
+             seed=cfg.seed if cfg.seed is not None else 0,
+             absolute_to_relative_idx=dataset.absolute_to_relative_idx,
+         )
++        red_task_weight = float(os.environ.get("SCENESMITH_RED_TASK_WEIGHT", "1"))
++        if red_task_weight > 1:
++            task_indices = dataset.hf_dataset["task_index"]
++            sample_weights = torch.ones(len(dataset), dtype=torch.double)
++            red_samples = 0
++            for sample_index, task_index in enumerate(task_indices):
++                if int(task_index) == 1:
++                    sample_weights[sample_index] = red_task_weight
++                    red_samples += 1
++            sampler = torch.utils.data.WeightedRandomSampler(
++                sample_weights,
++                num_samples=len(dataset),
++                replacement=True,
++                generator=torch.Generator().manual_seed(cfg.seed or 0),
++            )
++            if is_main_process:
++                logging.info(
++                    "SceneSmith red-task sampling weight %.2f across %d frames",
++                    red_task_weight,
++                    red_samples,
++                )
+         if cfg.resume and step > 0:
+             # The resume offset depends on the (num_processes, batch_size) that produced `step`, so
+             # use the values recorded in the checkpoint (falling back to the current ones for older

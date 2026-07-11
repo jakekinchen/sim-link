@@ -128,9 +128,10 @@ def main() -> int:
 
 def _add_lerobot_to_path() -> None:
     repo_root = Path(__file__).resolve().parents[2]
-    lerobot_src = repo_root / "external" / "lerobot" / "src"
-    if lerobot_src.exists():
-        sys.path.insert(0, str(lerobot_src))
+    sys.path.insert(0, str(repo_root))
+    from scenesmith.robot_lab.lerobot_stack import activate_lerobot_stack
+
+    activate_lerobot_stack(repo_root=repo_root, stage="collection")
 
 
 def _features() -> dict[str, dict[str, Any]]:

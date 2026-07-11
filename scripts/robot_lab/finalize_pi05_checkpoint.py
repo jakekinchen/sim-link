@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import math
+import sys
 
 from pathlib import Path
 from typing import Any
@@ -29,6 +30,13 @@ def main() -> int:
     parser.add_argument("--source-config", type=Path, required=True)
     parser.add_argument("--normalization-stats", type=Path, required=True)
     args = parser.parse_args()
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+    from scenesmith.robot_lab.lerobot_stack import activate_lerobot_stack
+
+    stack_identity = activate_lerobot_stack(
+        repo_root=Path(__file__).resolve().parents[2], stage="finalization"
+    )
 
     missing = [name for name in REQUIRED_FILES if not (args.checkpoint_root / name).is_file()]
     if missing:
@@ -70,6 +78,7 @@ def main() -> int:
         "dtype": finalized.get("dtype"),
         "input_features": sorted((finalized.get("input_features") or {}).keys()),
         "output_features": finalized.get("output_features"),
+        "lerobot_stack_identity_sha256": stack_identity["identity_sha256"],
     }
     _write_json(args.checkpoint_root / "scenesmith_finalize_summary.json", summary)
     print(json.dumps(summary, indent=2, sort_keys=True))

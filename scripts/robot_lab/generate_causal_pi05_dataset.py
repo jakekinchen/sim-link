@@ -248,8 +248,9 @@ def _features(image_size: int) -> dict[str, dict[str, Any]]:
 
 
 def _add_lerobot_to_path() -> None:
-    source = Path(__file__).resolve().parents[2] / "external" / "lerobot" / "src"
-    sys.path.insert(0, str(source))
+    from scenesmith.robot_lab.lerobot_stack import activate_lerobot_stack
+
+    activate_lerobot_stack(repo_root=Path(__file__).resolve().parents[2], stage="collection")
 
 
 def _save_image(path: Path, pixels: np.ndarray) -> None:

@@ -61,6 +61,11 @@ def main() -> int:
     )
     args = parser.parse_args()
 
+    sys.path.insert(0, str(REPO_ROOT))
+    from scenesmith.robot_lab.lerobot_stack import activate_lerobot_stack
+
+    stack_identity = activate_lerobot_stack(repo_root=REPO_ROOT, stage="inference")
+
     output_json = args.output_json or args.output_dir / "lerobot" / "policy_probe.json"
     output_json.parent.mkdir(parents=True, exist_ok=True)
     started = time.time()
@@ -71,6 +76,7 @@ def main() -> int:
         "output_dir": str(args.output_dir),
         "policy_repos": list(args.policy_repos or DEFAULT_POLICY_REPOS),
         "attempts": [],
+        "lerobot_stack_identity_sha256": stack_identity["identity_sha256"],
     }
 
     try:

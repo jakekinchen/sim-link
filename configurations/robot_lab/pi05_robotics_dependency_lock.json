@@ -6,6 +6,11 @@
         "sha256": "443d38d756e01bac7d3455b24430047ddc6427105e0d3454b2003116f5f67236",
         "size_bytes": 16309
       },
+      "effective_lerobot_runtime": {
+        "base_revision": "e40b58a8dfa9e7b86918c374791599d070518d11",
+        "resolution": "scenesmith_unified_stack_override",
+        "stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4"
+      },
       "git": {
         "is_dirty": true,
         "path": "external/leLab",
@@ -48,6 +53,53 @@
       }
     },
     "local_lerobot_checkout": {
+      "executable_stack": {
+        "base_revision": "e40b58a8dfa9e7b86918c374791599d070518d11",
+        "critical_environment": {
+          "SCENESMITH_GRIPPER_LOSS_WEIGHT": "1",
+          "SCENESMITH_GRIPPER_ONLY_LOSS": "0",
+          "SCENESMITH_RED_TASK_WEIGHT": "1",
+          "SCENESMITH_TRAINABLE_OUTPUT_ROWS": "",
+          "SCENESMITH_TRAINABLE_PARAMETER_SUBSTRING": ""
+        },
+        "environment_lock": {
+          "path": "external/lerobot/uv.lock",
+          "sha256": "367f3d6635ce0975bff459a02ea01ecd847836f491223c5394253d7d054b9280",
+          "size_bytes": 1158222
+        },
+        "identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+        "patch_set_sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+        "patches": [
+          {
+            "path": "scripts/robot_lab/patches/pi05_gripper_loss_weight.patch",
+            "sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+            "size_bytes": 6275
+          }
+        ],
+        "processor_contract": {
+          "input_units": "radians",
+          "joint_names": [
+            "shoulder_pan",
+            "shoulder_lift",
+            "elbow_flex",
+            "wrist_flex",
+            "wrist_roll",
+            "gripper"
+          ],
+          "lerobot_units": "degrees",
+          "padding_value": 0.0,
+          "tensor_width": 32
+        },
+        "roles": [
+          "collection",
+          "training",
+          "finalization",
+          "inference",
+          "lelab"
+        ],
+        "schema_version": "scenesmith.lerobot_stack_identity.v1",
+        "source_root": "external/lerobot/src"
+      },
       "git": {
         "is_dirty": true,
         "path": "external/lerobot",
@@ -114,9 +166,8 @@
         "tree_sha256": "54bdc2f215fe744903f1a8d8a1df5042b839c2c52c13bd9b159798d8ea34b21a"
       },
       "repository_url": "https://github.com/huggingface/lerobot",
-      "resolution": "split_runtime_unresolved",
-      "resolution_reason": "LeLab pins lerobot by tag for runtime, but this repo also carries a separate local lerobot checkout with uncommitted PI0.5 changes.",
-      "role": "local_patch_checkout"
+      "resolution": "exact_base_plus_tracked_patchset",
+      "role": "unified_executable_runtime"
     },
     "menagerie_robotstudio_so101": {
       "license_file": {
@@ -245,7 +296,7 @@
       "role": "active_structural_model"
     }
   },
-  "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
+  "identity_sha256": "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
   "runtime_contract": {
     "joint_names": [
       "shoulder_pan",
@@ -267,7 +318,7 @@
       "size_bytes": 16309
     }
   },
-  "schema_version": "scenesmith.robotics_dependency_lock.v1",
+  "schema_version": "scenesmith.robotics_dependency_lock.v2",
   "spec_sources": [
     {
       "path": "scenesmith/robot_lab/spec.py",

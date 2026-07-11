@@ -35,7 +35,15 @@ class RoboticsDependencyLockTests(unittest.TestCase):
 
         self.assertEqual(
             payload["dependencies"]["local_lerobot_checkout"]["resolution"],
-            "split_runtime_unresolved",
+            "exact_base_plus_tracked_patchset",
+        )
+        self.assertEqual(
+            payload["dependencies"]["lelab_runtime"]["effective_lerobot_runtime"][
+                "stack_identity_sha256"
+            ],
+            payload["dependencies"]["local_lerobot_checkout"]["executable_stack"][
+                "identity_sha256"
+            ],
         )
         self.assertEqual(
             payload["dependencies"]["openpi_semantic_reference"]["revision"],
@@ -160,6 +168,7 @@ license = "Apache-2.0"
 source = "https://github.com/huggingface/lerobot"
 """.strip()
             + "\n",
+            "external/lerobot/uv.lock": "fixture lock\n",
             "external/lerobot/docs/source/policy_pi05_README.md": "pi05 readme\n",
             "external/lerobot/src/lerobot/policies/pi05/configuration_pi05.py": "cfg = 1\n",
             "external/lerobot/src/lerobot/policies/pi05/modeling_pi05.py": "model = 1\n",
@@ -190,6 +199,40 @@ source = "https://github.com/huggingface/lerobot"
             root / "external/SO-ARM100",
             remote_url="https://github.com/TheRobotStudio/SO-ARM100.git",
         )
+        lerobot_root = root / "external/lerobot"
+        base_revision = self._git(lerobot_root, "rev-parse", "HEAD").strip()
+        (lerobot_root / "src/lerobot/policies/pi05/modeling_pi05.py").write_text(
+            "model = 2\n", encoding="utf-8"
+        )
+        patch_path = root / "scripts/robot_lab/patches/fixture.patch"
+        patch_path.parent.mkdir(parents=True, exist_ok=True)
+        patch_path.write_text(self._git(lerobot_root, "diff", "--binary", "HEAD", "--"), encoding="utf-8")
+        runtime_config = {
+            "schema_version": "scenesmith.lerobot_runtime.v1",
+            "base_revision": base_revision,
+            "source_root": "external/lerobot/src",
+            "environment_lock": "external/lerobot/uv.lock",
+            "patches": ["scripts/robot_lab/patches/fixture.patch"],
+            "critical_environment": {},
+            "processor_contract": {
+                "joint_names": [
+                    "shoulder_pan",
+                    "shoulder_lift",
+                    "elbow_flex",
+                    "wrist_flex",
+                    "wrist_roll",
+                    "gripper",
+                ],
+                "input_units": "radians",
+                "lerobot_units": "degrees",
+                "tensor_width": 32,
+                "padding_value": 0.0,
+            },
+            "roles": ["collection", "training", "finalization", "inference", "lelab"],
+        }
+        config_path = root / "configurations/robot_lab/pi05_lerobot_runtime.json"
+        config_path.parent.mkdir(parents=True, exist_ok=True)
+        config_path.write_text(json.dumps(runtime_config, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     def _init_repo(self, path: Path, *, remote_url: str) -> None:
         self._git(path, "init")
@@ -199,11 +242,11 @@ source = "https://github.com/huggingface/lerobot"
         self._git(path, "add", ".")
         self._git(path, "commit", "-m", "fixture")
 
-    def _git(self, path: Path, *args: str) -> None:
+    def _git(self, path: Path, *args: str) -> str:
         env = os.environ.copy()
         env["GIT_AUTHOR_DATE"] = "2026-01-01T00:00:00+00:00"
         env["GIT_COMMITTER_DATE"] = "2026-01-01T00:00:00+00:00"
-        subprocess.run(
+        result = subprocess.run(
             ["git", *args],
             cwd=path,
             check=True,
@@ -211,6 +254,7 @@ source = "https://github.com/huggingface/lerobot"
             text=True,
             env=env,
         )
+        return result.stdout
 
 
 if __name__ == "__main__":

@@ -121,7 +121,11 @@ def main() -> int:
         json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     if args.push_to_hub:
-        sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "external/lerobot/src"))
+        from scenesmith.robot_lab.lerobot_stack import activate_lerobot_stack
+
+        activate_lerobot_stack(
+            repo_root=Path(__file__).resolve().parents[2], stage="collection"
+        )
         from lerobot.datasets import LeRobotDataset
 
         dataset = LeRobotDataset(repo_id=args.repo_id, root=args.output_root)

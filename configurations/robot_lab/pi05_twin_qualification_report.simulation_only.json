@@ -1,11 +1,11 @@
 {
   "dependency_lock_ref": {
-    "file_sha256": "dad1fd6b7d02e87348c39b46377b0b3d57ee5f88ca62317ae0608598431561dd",
-    "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
+    "file_sha256": "169f04ee953604193f1f0dc9a3821acbb2de7dc49fcce1aba066c338c1eb7f12",
+    "identity_sha256": "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
-    "schema_version": "scenesmith.robotics_dependency_lock.v1"
+    "schema_version": "scenesmith.robotics_dependency_lock.v2"
   },
-  "identity_sha256": "47d868863f7b57579f228ee49178633d3b8ab855d115f7f56e8f33894a3c2223",
+  "identity_sha256": "feeff5e9249d97863b029598c5a35ea617390690a8f9672368db6a3538a69416",
   "metrics": [
     {
       "evidence_mode": "not_run",
@@ -24,11 +24,11 @@
       "units": "millisecond"
     }
   ],
-  "profile_identity_sha256": "77a942306a012263d4f5f886eca692980c973de939c3e3ce06f1781567d34826",
+  "profile_identity_sha256": "7775b3858aaf4f80dc51f9f824f73c28028f22fa3cba53e404772d8091354494",
   "proof_state": "simulation_only",
   "qualification_state": "simulation_only_unqualified",
   "report_name": "pi05_twin_qualification_report_simulation_only",
   "schema_version": "scenesmith.twin_qualification_report.v1",
-  "spec_identity_sha256": "6788303150a4b1b9c29e328a15b305ea397d1e7e84d2f4aa9a60324c08b0d2cc",
+  "spec_identity_sha256": "063fcd154c835efb71ffe131cb15e1c6626edf40867f7889cd9ca538ecee1001",
   "summary": "Simulation-only structural twin artifact. Physical qualification has not run and must not be inferred from this report."
 }

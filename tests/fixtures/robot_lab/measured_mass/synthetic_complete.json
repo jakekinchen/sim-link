@@ -223,13 +223,13 @@
     }
   ],
   "dependency_lock_ref": {
-    "file_sha256": "dad1fd6b7d02e87348c39b46377b0b3d57ee5f88ca62317ae0608598431561dd",
-    "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
+    "file_sha256": "169f04ee953604193f1f0dc9a3821acbb2de7dc49fcce1aba066c338c1eb7f12",
+    "identity_sha256": "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
-    "schema_version": "scenesmith.robotics_dependency_lock.v1"
+    "schema_version": "scenesmith.robotics_dependency_lock.v2"
   },
   "fixture_scope": "synthetic_test_only",
-  "identity_sha256": "412825dfedd4c5b015b81a2f4d32d208e6d1dbd6de547a665a8f92005acf8388",
+  "identity_sha256": "72f7763a9e2e46fca7e19130ae51031c64b694c7df54c488571d93717721fb2e",
   "intake_name": "synthetic_complete",
   "measurements": [
     {
@@ -284,14 +284,14 @@
   "schema_version": "scenesmith.measured_mass_intake.v1",
   "status": "synthetic_test_only",
   "structural_diff_ref": {
-    "file_sha256": "ddf6d830016e9d714a0f11a9ccd37defef66eb3f1b5ad99abf2c417a7c4ac18d",
-    "identity_sha256": "fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9",
+    "file_sha256": "d8dd9670be2125be171b8b2dce91b271920d45865dc19cb424b851e9c91a1be1",
+    "identity_sha256": "34200be34fe6c0dbe7a6a1b608a49af74d08e111dd52b43ee1d181df71e767cf",
     "path": "configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json",
     "schema_version": "scenesmith.structural_twin_diff.v1"
   },
   "twin_profile_ref": {
-    "file_sha256": "cc122e1ad9a85a6f9bab0895753c35ec28c5ea0aeb21def93169ba4a4f77226f",
-    "identity_sha256": "77a942306a012263d4f5f886eca692980c973de939c3e3ce06f1781567d34826",
+    "file_sha256": "09da7945144aa8cbdd6b67475d8da3c195b1e63a479128a1fbac591ef8e36b38",
+    "identity_sha256": "7775b3858aaf4f80dc51f9f824f73c28028f22fa3cba53e404772d8091354494",
     "path": "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
     "schema_version": "scenesmith.twin_profile.v1"
   }

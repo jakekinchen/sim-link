@@ -21,6 +21,9 @@ def main() -> int:
     args, remaining = parser.parse_known_args()
 
     from scenesmith.robot_lab.balanced_replay import AuditedReplaySampler
+    from scenesmith.robot_lab.lerobot_stack import activate_lerobot_stack
+
+    activate_lerobot_stack(repo_root=REPO_ROOT, stage="training")
 
     plan = json.loads(args.replay_plan.read_text(encoding="utf-8"))
     expected_frames = int(plan["dataset_total_frames"])

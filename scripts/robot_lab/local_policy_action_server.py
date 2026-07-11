@@ -352,9 +352,9 @@ def _handler_factory(runtime: LocalPolicyRuntime):
 
 
 def _add_lerobot_to_path() -> None:
-    source = REPO_ROOT / "external" / "lerobot" / "src"
-    if str(source) not in sys.path:
-        sys.path.insert(0, str(source))
+    from scenesmith.robot_lab.lerobot_stack import activate_lerobot_stack
+
+    activate_lerobot_stack(repo_root=REPO_ROOT, stage="inference")
 
 
 def _load_policy_model(policy_cls, repo_id: str, config):
