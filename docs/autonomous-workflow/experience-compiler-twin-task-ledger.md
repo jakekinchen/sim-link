@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.3 unnamed-geom identity v2 correction
-completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction
-evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and 07a652e; manager intervention 008 supplied the v1 counterexamples; brief 022 now passes 24 focused structural-diff tests, py_compile, live artifact write+verify, and 49 broad robot-lab tests with identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: reviewer re-audit for T16.3 closeout, then T16.4-T16.5, M17-M19 prerequisites, and Gates C-D
+current_task: T16.4 measured-mass intake and assembly inertia/COM compiler
+completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
+evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
+remaining: T16.4-T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 022 and obtain a new independent T16.3 reviewer decision
+next_step: execute brief 023 to compile measured-part mass evidence into a deterministic assembly inertia/COM artifact without altering the verified structural baseline
 ```
 
 ## Rules
@@ -31,7 +31,7 @@ next_step: execute brief 022 and obtain a new independent T16.3 reviewer decisio
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
 | T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
 | T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
-| T16.3 | in_progress | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `07a652e`; reviewer decision 032 superseded by manager intervention 008 after direct v1 identity counterexamples |
+| T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
 | T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
 
@@ -420,4 +420,17 @@ Remaining: vendor or otherwise track the pinned Menagerie structural XML sources
 Blockers: brief 011 requires a CLI that resolves both runtime and Menagerie sources from repo state, which is impossible while only remote hashes are tracked locally
 Training lock: closed
 Next step: add the pinned Menagerie `robotstudio_so101` source files to repo state under a tracked path and resume T16.3 without switching the active runtime inputs
+```
+### 2026-07-10 - T16.3 reviewer closeout after v2 identity correction
+
+```text
+Current task: T16.4
+State: pending
+Completed: independent reviewer reruns confirmed equivalent quaternion spellings now hash to the same unnamed identities, same-stem duplicates are occurrence-assigned independent of sibling order, py_compile stayed clean, live artifact verify stayed bound to the checked-in baseline, and the broad robot-lab gate remained green
+Evidence: reviewer decision 033; commit cadc0f3; configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json identity fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9; 24 focused structural-diff tests; live CLI verify pass; 49 broad robot-lab tests
+Commit: cadc0f3
+Remaining: measured-part mass intake, offline qualification harness, then M17 compiler truth gate
+Blockers: none for offline T16.4 implementation
+Training lock: closed
+Next step: compile measured-part mass inputs and fail closed on ambiguous assembly inertia/COM evidence through brief 023
 ```
