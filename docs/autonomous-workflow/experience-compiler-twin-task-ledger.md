@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; Brief 044 explicit 30-fps/full failure-servo correction verified at 4ae0521c; live gate closed for separate review
+current_task: T16.5b in progress; reviewer 064 authorizes one fresh finite v2-contract session after the scoped transition is remotely confirmed
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: 4ae0521c remote; v2 contract and diagnostic; v3 private/tracked success and private failure; 50 focused, 30 LeLab-runtime camera, and 229 broad tests; attempt-003 legacy evidence still verifies
+evidence: 4ae0521c implementation and cee8240 canonical closeout remote; v2 contract and diagnostic; v3 private/tracked success and failure; reviewer 064 one-session gate
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none in Brief 044; live gate remains closed until a separate reviewed remote transition
-next_step: close Brief 044 canonically; separately review and remotely preserve at most one fresh finite v2-contract session
+blockers: none for the bounded read-only session; gate becomes effective only after the transition commit is remotely confirmed
+next_step: run exactly one fresh discovery/holder/lease/v2-contract/census/camera/finalization session, reclose on every outcome, then review and remotely preserve it
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: close Brief 044 canonically; separately review and remotely preserve 
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 044 `4ae0521c` verified; explicit 30 fps before input; full failure servo result; legacy evidence supported; live gate closed for separate review |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 044 `4ae0521c` and closeout `cee8240` remote; reviewer 064 permits exactly one fresh finite v2-contract session after gate commit confirmation |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,20 @@ next_step: close Brief 044 canonically; separately review and remotely preserve 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - One fresh v2-contract live session gated
+
+```text
+Current task: T16.5b
+State: in_progress; one-session gate effective only after scoped transition commit is confirmed on origin
+Window: 2026-07-11T10:33:00-05:00 through 2026-07-11T11:13:00-05:00; session limit one; fresh five-minute owner-presence lease required
+Scope: fresh discovery; zero holders across both signed aliases; v2 exact 30-fps contract; 54-read six-servo census with all Torque_Enable=0; no-write close; zero holders; two finite exact-name PNG frames per pinned camera; stable rediscovery and evidence finalization
+Failure: any mismatch rejects, writes no success manifest or proof label, cleans up, and immediately recloses the gate; no retry implied
+Forbidden: reconnect, Studio POST, signal, register/configuration write, torque transition, motion, policy actuation, qualification, optimizer, or paid compute
+Evidence: implementation 4ae0521c; canonical closeout cee8240; reviewer 064; disconnect proof 627de4fd...; all-alias holder snapshot b33a7cc0...
+Training lock: closed
+Next step: remotely confirm transition, then execute exactly once and reclose
+```
 
 ### 2026-07-11 - Brief 044 explicit camera mode verified offline
 

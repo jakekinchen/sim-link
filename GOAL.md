@@ -77,10 +77,13 @@ preserved: the v2 execution contract requires integer 30 fps, the ffmpeg command
 places exactly one `-framerate 30` before its input, audits and tracked/private
 v3 success evidence bind the mode, and v3 private failures embed and replay the
 complete signed contract and servo result. Legacy attempt-003 v1/v2 evidence
-remains verifiable. The live gate is closed pending a separate review commit.
-Sequential capture is not synchronized or policy-input-valid. Studio reconnect
-remains deferred unless exact device, calibration, and current-pose evidence
-proves it mechanically no-motion-safe.
+remains verifiable. Reviewer 064 authorizes exactly one fresh finite v2-contract
+session after its gate-transition commit is confirmed on origin. The gate runs
+from `2026-07-11T10:33:00-05:00` through `2026-07-11T11:13:00-05:00`, has a
+session limit of one, and must reclose on every outcome. Sequential capture is
+not synchronized or policy-input-valid. Studio reconnect remains deferred
+unless exact device, calibration, and current-pose evidence proves it
+mechanically no-motion-safe.
 
 ## Durable State
 

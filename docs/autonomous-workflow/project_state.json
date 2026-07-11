@@ -12,9 +12,9 @@
   "verified_through_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
   "last_reviewed_implementation_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
   "source_review": {
-    "commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
-    "decision": "VERIFY_BRIEF_044_OFFLINE_AND_KEEP_LIVE_GATE_CLOSED_FOR_SEPARATE_REVIEW",
-    "reviewer_decision": "docs/reviewer-messages/063-brief-044-camera-mode-reviewed.md"
+    "commit": "cee8240f87dbc9a02dce35d5c71a2482f699dd0d",
+    "decision": "OPEN_ONE_FRESH_FINITE_V2_CONTRACT_LIVE_SESSION_AFTER_REMOTE_CONFIRMATION",
+    "reviewer_decision": "docs/reviewer-messages/064-open-live-gate-after-brief-044.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -393,9 +393,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "063",
-      "result": "Brief 044 explicit camera-mode and complete failure-servo evidence correction is verified offline at 4ae0521c; the live gate remains closed for a separate review commit",
-      "execution_note": "Brief 044 passed 50 focused tests, 30 camera tests under the pinned LeLab runtime, and 229 broad robot-lab tests; both offline verifiers, deterministic proof/fixture checks, legacy attempt-003 artifact verification, py_compile, and diff checks passed with no hardware access",
+      "live_gate_review_decision_id": "064",
+      "result": "Reviewer 064 authorizes exactly one fresh finite v2-contract session after the scoped gate transition is confirmed on origin; no live operation is authorized before that confirmation",
+      "execution_note": "The gate transition itself performs no hardware discovery or open and grants no proof label; the one allowed session must use fresh discovery, all-alias holder proofs, a five-minute lease, explicit 30-fps v2 contract, complete v3 success/failure evidence, and immediate gate reclosure on every outcome",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
@@ -646,14 +646,12 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-11T10:03:00-05:00",
-      "live_gate_valid_until": "2026-07-11T10:43:00-05:00",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-11T10:33:00-05:00",
+      "live_gate_valid_until": "2026-07-11T11:13:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 1,
-      "live_gate_closed_at": "2026-07-11T10:07:17-05:00",
-      "live_gate_close_reason": "live_attempt_003_named_camera_ffmpeg_subprocess_nonzero",
-      "live_gate_reconsideration_state": "brief_044_verified_separate_live_gate_review_required",
+      "live_gate_sessions_started": 0,
+      "live_gate_reconsideration_state": "one_fresh_v2_session_authorized_after_remote_confirmation",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -677,6 +675,12 @@
           "state": "closed",
           "at": "2026-07-11T10:07:17-05:00",
           "reason": "live_attempt_003_named_camera_ffmpeg_subprocess_nonzero"
+        },
+        {
+          "state": "open",
+          "at": "2026-07-11T10:33:00-05:00",
+          "review_decision_id": "064",
+          "result": "one_fresh_finite_v2_contract_session_authorized_after_brief_044"
         }
       ],
       "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
@@ -808,7 +812,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "perform a separate closed-state review and remote commit for at most one fresh finite session using the v2 30-fps contract; keep the gate closed until that commit is confirmed",
+      "next_action": "after the scoped gate transition is confirmed on origin, execute exactly one fresh finite v2-contract live session and immediately reclose the gate on every outcome",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
