@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress under Brief 049 offline static-pose-bracket and parsed-coordinate contract
+current_task: T16.5c in progress; Brief 049 static-pose contract verified and remote at 4fd1f3a
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: live manifest eff3c824...; calibration profile b360b4f6...; source 192404b6...; servo digest 66e9d363...; 6 focused and 238 broad tests; no hardware/policy access in Brief 048
+evidence: calibration profile b360b4f6...; static-pose contract 90e7baea...; fixture observation/result 84d0aa12.../6ebb9bd6...; 11 focused in two runtimes and 249 broad tests; no hardware/policy access
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: T16.5b none; T16.5c static-pose-bracketed synchronized-enough observation and policy-shadow input parity remain unverified
-next_step: implement and verify Brief 049 offline; do not reopen hardware, preprocess policy input, run shadow inference, or actuate until its exact gate is reviewed
+next_step: open a separate offline live-orchestrator integration brief using fake transports and cleanup proofs; do not reopen hardware, preprocess policy input, run shadow inference, or actuate
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: implement and verify Brief 049 offline; do not reopen hardware, prepr
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; manifest `eff3c824...`; private `125de28f...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; reviewer 072; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Brief 048 / `700be05` profile verified; Brief 049 active offline for signed static-pose bracket, parsed coordinates, strict timing/counts, and fixture-only conformance; requested actions never sent |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Brief 048 profile plus Brief 049 / `4fd1f3a` contract `90e7baea...` verified on fixture evidence; live integration, real bracket, preprocessing, shadow, and replay remain pending; requested actions never sent |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -131,6 +131,22 @@ next_step: implement and verify Brief 049 offline; do not reopen hardware, prepr
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 049 static-pose bracket contract verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 049 verified and remotely preserved; live gate closed
+Completed: exact six-joint q_before/camera/q_after contract; profile-based degree/percent conversion; 0.5-degree/0.5-percent drift limits; strict monotonic enclosure; five-second bracket cap; exact no-write lifecycle counts; two accepted camera identities/modes; all-alias holder and no-torque teardown requirements
+Evidence: contract 90e7baea43ebc059c09ef45b615c5808cf74abbbab87948a23536666acb43ceb; fixture observation 84d0aa12...; fixture result 6ebb9bd6...; implementation 4fd1f3a remote
+Verification: 11 focused tests in .mujoco_venv; 11 focused tests in pinned LeLab runtime; independent fixture/profile rebuild; py_compile; privacy/diff checks; 249 broad tests in 75.655 seconds
+Adversarial: source/tolerance/authority substitution; extra observation/nested fields; missing/duplicate/wrong identities; boolean/noninteger/out-of-range positions; body/gripper drift; time order/duration; camera identity/mode/dimension/hash; writes/torque/motion/count drift
+Authority gained: static_pose_bracket_contract_valid and fixture_static_pose_bracket_conformant only
+Authority withheld: real static_pose_bracketed_observation, policy_shadow_input_valid, policy_shadow, actuation, physical qualification/transfer, promotion, training
+Hardware: none; no enumeration/open, serial/camera/Studio access, reconnect, write, torque change, motion, policy, simulation replay, optimizer, or paid compute
+Training lock: closed
+Next step: separate offline fake-transport integration into the bounded live orchestrator, followed by independent review before any live-gate reconsideration
+```
 
 ### 2026-07-11 - Overnight authority/twin run closeout
 

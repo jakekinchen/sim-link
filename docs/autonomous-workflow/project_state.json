@@ -10,12 +10,12 @@
     "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "700be05468c15e3660bf481931f77e49af49d527",
-  "last_reviewed_implementation_commit": "700be05468c15e3660bf481931f77e49af49d527",
+  "verified_through_commit": "4fd1f3a1a3333ab9494786da30ee121511f2113f",
+  "last_reviewed_implementation_commit": "4fd1f3a1a3333ab9494786da30ee121511f2113f",
   "source_review": {
-    "commit": "700be05468c15e3660bf481931f77e49af49d527",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_048_SIGNED_CALIBRATION_PROFILE_OFFLINE_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/073-accept-brief-048-calibration-profile.md"
+    "commit": "4fd1f3a1a3333ab9494786da30ee121511f2113f",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_049_STATIC_POSE_BRACKET_CONTRACT_OFFLINE_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/075-accept-brief-049-static-pose-contract.md"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -1165,10 +1165,9 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "049",
-      "latest_verified_brief_id": "048",
-      "completed_brief_ids": ["048"],
-      "result": "Brief 048 is verified and remotely preserved: signed CalibrationProfile b360b4f6... binds pinned calibration 192404b6..., accepted live manifest eff3c824..., and six exact live servo identities; body degree and gripper 0-closed/100-open semantics validate offline without hardware or policy execution",
+      "latest_verified_brief_id": "049",
+      "completed_brief_ids": ["048", "049"],
+      "result": "Briefs 048-049 are verified and remotely preserved: CalibrationProfile b360b4f6... binds six exact live identities and static-pose contract 90e7baea... defines strict q_before/camera/q_after timing, coordinate drift, holder, lifecycle, and no-write requirements on fixture evidence only",
       "artifact": {
         "path": "configurations/robot_lab/pi05_calibration_profile.json",
         "schema_version": "scenesmith.calibration_profile.v1",
@@ -1177,6 +1176,17 @@
         "accepted_live_manifest_identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
         "servo_identity_sha256": "66e9d3630578242deaeb24d97eb1627131db23ea6f5c2d44735c4af2fc967463"
       },
+      "static_pose_bracket": {
+        "contract_path": "configurations/robot_lab/pi05_static_pose_bracket_contract.json",
+        "contract_schema_version": "scenesmith.static_pose_bracket_contract.v1",
+        "contract_identity_sha256": "90e7baea43ebc059c09ef45b615c5808cf74abbbab87948a23536666acb43ceb",
+        "fixture_observation_identity_sha256": "84d0aa12687574be6bae575f74dcb7e68c9b5643e4e086c9e1461f4e91bb64a4",
+        "fixture_result_identity_sha256": "6ebb9bd63c7267f193f4754af11012ac6e768404749891f4033381fa4ad0a410",
+        "body_tolerance_degrees": 0.5,
+        "gripper_tolerance_percent": 0.5,
+        "maximum_bracket_duration_ns": 5000000000,
+        "evidence_class": "deterministic_fixture"
+      },
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_calibration_profile",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_calibration_profile.py --verify",
@@ -1184,13 +1194,17 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/calibration_profile.py scripts/robot_lab/write_calibration_profile.py tests/unit/test_calibration_profile.py",
         "git diff --check"
       ],
-      "next_action": "implement and verify Brief 049 static-pose-bracket and parsed-coordinate contract offline; do not reopen hardware or run policy preprocessing/inference",
+      "next_action": "open a separate offline brief to integrate the verified bracket contract into the bounded live-readonly orchestrator with fake transports and complete cleanup; do not reopen hardware or run policy preprocessing/inference",
       "conditional_authority": [
         "physical_observation_preprocessing",
         "pi05_policy_shadow_no_actuation",
         "matched_mujoco_replay"
       ],
-      "authority_granted": ["calibration_profile_semantically_valid"],
+      "authority_granted": [
+        "calibration_profile_semantically_valid",
+        "static_pose_bracket_contract_valid",
+        "fixture_static_pose_bracket_conformant"
+      ],
       "authority_not_granted": [
         "static_pose_bracketed_observation",
         "policy_shadow_input_valid",

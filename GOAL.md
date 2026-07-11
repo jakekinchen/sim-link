@@ -153,12 +153,16 @@ no policy was run. Static-pose bracketing, policy-input validity,
 preprocessing/shadow/replay, actuation, and physical qualification remain
 unverified; the live gate and training lock stay closed.
 
-Brief 049 is active offline for the next dependency-ready boundary. It defines
-a signed `q_before -> finite camera batch -> q_after` contract bound to the
-accepted camera modes and CalibrationProfile, with strict time enclosure,
-parsed-coordinate drift tolerances, exact no-write operation counts, and
-fixture-only evidence. It cannot reopen hardware or grant a physical,
-policy-input-valid, shadow, motion, or qualification label.
+Brief 049 implementation `4fd1f3a` is remotely preserved. Signed contract
+`90e7baea...` binds the accepted camera modes and CalibrationProfile, exact
+`q_before -> finite camera batch -> q_after` time enclosure, 0.5-degree body
+and 0.5-percent gripper drift limits, stable all-alias zero-holder requirements,
+and a teardown that cannot write, change torque, or command motion. Fixture
+observation `84d0aa12...` and result `6ebb9bd6...` verify only
+`fixture_static_pose_bracket_conformant`. Eleven focused tests pass in both
+robotics runtimes and the 249-test offline authority/twin gate passes. No
+hardware or policy ran; no physical, policy-input-valid, shadow, motion, or
+qualification label is granted.
 
 ## Durable State
 
