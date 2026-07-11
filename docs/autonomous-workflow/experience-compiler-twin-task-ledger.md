@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; attempt 004 rejected at first-camera input pixel format; live gate closed; Brief 045 active offline
+current_task: T16.5b in progress; Brief 045 signed per-camera input modes verified at 820a40f; live gate closed for separate review
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: attempt 004 discovery 2e63871a..., v2 contract b9b3c7ec..., v3 private failure 785241af..., diagnostic bd722dd7...; 54 no-write reads, six Torque_Enable=0, clean close, zero alias holders; yuv420p unsupported
+evidence: 820a40f remote; discovery v2, contract/diagnostic v3, private/tracked success and private failure v4; 52 focused, 32 LeLab-runtime camera, and 231 broad tests; attempt-003/004 legacy evidence verifies
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: exact per-camera input pixel formats and signed supported-mode metadata are not contract-bound
-next_step: commit/push attempt-004 rejection; implement and verify Brief 045 offline; keep live gate closed
+blockers: none in Brief 045; live gate remains closed until a separate reviewed remote transition
+next_step: close Brief 045 canonically; separately review and remotely preserve at most one fresh finite discovery-v2/contract-v3 session
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: commit/push attempt-004 rejection; implement and verify Brief 045 off
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 004 rejected after verified full six-servo no-write census; first camera defaulted to unsupported yuv420p; gate closed; Brief 045 exact per-camera mode correction active |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 045 `820a40f` verified; signed per-camera formats/dimensions/rates, exact pre-input mode, legacy rejection support; live gate closed for separate review |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,22 @@ next_step: commit/push attempt-004 rejection; implement and verify Brief 045 off
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 045 signed per-camera input modes verified offline
+
+```text
+Current task: T16.5b
+State: in_progress; Brief 045 verified offline; live gate closed for separate review
+Discovery: v2 binds exact name/unique ID/model ID plus normalized finite pixel format, dimensions, and frame-rate ranges from AVCaptureDevice format metadata without AVCaptureSession or frame streaming
+Selection: smallest frame area, then reviewed pixel-format priority; integer 30 fps must fall within signed range using only 0.01-fps AVFoundation matcher tolerance
+Contract/command: v3 selects each camera from its own signed modes; exactly one -pixel_format, -video_size, and -framerate precedes each AVFoundation input
+Evidence: diagnostic v3, private success v4, private failure v4, and tracked manifest v4 bind exact input mode; attempt-003 v2 and attempt-004 v3 private failures still verify
+Adversarial: empty/unknown/duplicate/non-finite modes, identity mismatch, legacy discovery reuse, cross-camera substitution, malformed mode, coordinated resigned contract/diagnostic/result substitution, command reordering/duplication, stderr/nonzero/PNG/cleanup failures
+Verification: 820a40f remote; 52 focused tests; 32 LeLab-runtime camera tests; 231 broad tests in 74.938 seconds; both offline verifiers; Swift typecheck; legacy artifact verification; pycompile; authority-surface/privacy/diff checks
+Hardware: none during Brief 045; no discovery/open, Studio request, reconnect, signal, write, torque change, motion, policy, optimizer, or paid compute
+Training lock: closed
+Next step: canonical closeout, then separate one-fresh-session live-gate review
+```
 
 ### 2026-07-11 - T16.5b live attempt 004 rejected; pixel-format cause retained
 

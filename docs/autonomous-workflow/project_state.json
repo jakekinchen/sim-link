@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
-  "last_reviewed_implementation_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
+  "verified_through_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
+  "last_reviewed_implementation_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
   "source_review": {
-    "commit": "26a282476263fbaf976e7bd26e412d5967de2fef",
-    "decision": "REJECT_LIVE_ATTEMPT_004_AND_OPEN_OFFLINE_EXACT_PIXEL_FORMAT_CORRECTION",
-    "reviewer_decision": "docs/reviewer-messages/065-reject-live-attempt-004-pixel-format.md"
+    "commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
+    "decision": "VERIFY_BRIEF_045_OFFLINE_AND_KEEP_LIVE_GATE_CLOSED_FOR_SEPARATE_REVIEW",
+    "reviewer_decision": "docs/reviewer-messages/066-brief-045-per-camera-mode-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -384,8 +384,7 @@
       "metadata_compatibility_correction_commit": "b85a253",
       "metadata_review_decision_id": "051",
       "correction_brief_id": "041",
-      "completed_correction_brief_id": "044",
-      "active_correction_brief_id": "045",
+      "completed_correction_brief_id": "045",
       "rejected_attempt_review_decision_ids": ["052", "058", "062", "065"],
       "camera_identity_correction_commits": [
         "ea99ec9",
@@ -394,9 +393,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "065",
-      "result": "Live attempt 004 is rejected after a complete 54-read no-write census because the first exact-name camera emitted stderr showing default yuv420p was unsupported; v3 private evidence verifies the full contract, servo result, both holder snapshots, and clean camera release while the live gate remains closed for Brief 045",
-      "execution_note": "Attempt 004 used fresh discovery, a five-minute v2 contract with exact 30 fps, zero holders across both signed aliases, all six Torque_Enable values zero, zero writes/torque changes/motion, and a successful no-torque close; the first camera returned zero but strict stderr rejection retained a complete label-free v3 failure artifact, no tracked success manifest, and no remaining ffmpeg process",
+      "live_gate_review_decision_id": "066",
+      "result": "Brief 045 signed per-camera supported-mode and exact pre-input mode binding is verified offline at 820a40f; the live gate remains closed for a separate review commit",
+      "execution_note": "Brief 045 passed 52 focused tests, 32 camera tests under the pinned LeLab runtime, and 231 broad robot-lab tests; both offline verifiers, Swift metadata-source typecheck, legacy attempt-003/004 verification, pycompile, authority-surface, privacy, and diff checks passed with no hardware access",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
@@ -405,6 +404,8 @@
         "./.mujoco_venv/bin/python scripts/robot_lab/write_readonly_servo_census_fixture.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/run_live_readonly_observation.py verify-offline",
         "external/leLab/.venv/bin/python scripts/robot_lab/run_live_readonly_observation.py verify-offline",
+        "./.mujoco_venv/bin/python -c 'print Swift camera metadata source' | /usr/bin/xcrun swiftc -typecheck -",
+        "external/leLab/.venv/bin/python -c 'verify attempt-003 v2 and attempt-004 v3 private failure artifacts'",
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/census_runtime_binding.py scenesmith/robot_lab/readonly_servo_census.py scenesmith/robot_lab/live_readonly_observation.py scenesmith/robot_lab/virtual_follower_disconnect_proof.py scripts/robot_lab/run_live_readonly_observation.py scripts/robot_lab/write_virtual_follower_disconnect_proof.py tests/unit/test_readonly_servo_census.py tests/unit/test_live_readonly_observation.py tests/unit/test_virtual_follower_disconnect_proof.py",
         "git diff --check"
       ],
@@ -617,18 +618,41 @@
         "routing_state_sha256": "620cb845cb8f1507263fdf7b6aec651a69e4b028d90628c935b0af0b533fdcb4"
       },
       "camera_capture_backend": {
-        "state": "live_rejected_exact_input_pixel_format_missing",
+        "state": "offline_verified_signed_per_camera_input_modes",
         "backend": "ffmpeg_named_avfoundation",
         "explicit_mode_binding_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
-        "execution_contract_schema_version": "scenesmith.live_readonly_observation_contract.v2",
-        "private_success_schema_version": "scenesmith.live_readonly_observation_private.v3",
-        "redacted_success_schema_version": "scenesmith.live_readonly_observation_manifest.v3",
+        "signed_per_camera_mode_binding_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
+        "discovery_schema_version": "scenesmith.live_readonly_discovery.v2",
+        "execution_contract_schema_version": "scenesmith.live_readonly_observation_contract.v3",
+        "private_success_schema_version": "scenesmith.live_readonly_observation_private.v4",
+        "redacted_success_schema_version": "scenesmith.live_readonly_observation_manifest.v4",
         "requested_framerate_fps": 30,
         "ffmpeg_version": "8.0.1",
         "installed_default_framerate": "ntsc",
         "avfoundation_match_tolerance_fps": 0.01,
         "attempt_003_advertised_framerate_fps": 30.00003,
         "identity_binding": "exact_avfoundation_name_plus_system_unique_id_and_model_id",
+        "supported_mode_source": "AVCaptureDevice_format_metadata_without_AVCaptureSession_or_frame_stream",
+        "supported_mode_fields": [
+          "pixel_format",
+          "width",
+          "height",
+          "min_framerate_fps",
+          "max_framerate_fps"
+        ],
+        "reviewed_input_pixel_formats": [
+          "uyvy422",
+          "yuyv422",
+          "nv12",
+          "0rgb",
+          "bgr0"
+        ],
+        "selection_rule": "smallest_frame_area_then_reviewed_pixel_format_priority_supporting_integer_30fps_with_0_01fps_tolerance",
+        "pre_input_arguments": [
+          "pixel_format",
+          "video_size",
+          "framerate"
+        ],
         "numeric_index_authority": false,
         "frame_count_per_camera": 2,
         "batch_timeout_seconds": 5,
@@ -650,11 +674,14 @@
           "implementation_commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
           "all_alias_holder_binding_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
           "explicit_mode_and_full_servo_binding_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
-          "schema_version": "scenesmith.named_camera_failure_diagnostic.v2",
-          "private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v3",
+          "signed_per_camera_mode_binding_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
+          "schema_version": "scenesmith.named_camera_failure_diagnostic.v3",
+          "private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v4",
           "legacy_schema_versions_verified": [
             "scenesmith.named_camera_failure_diagnostic.v1",
-            "scenesmith.live_readonly_capture_failure_private.v2"
+            "scenesmith.named_camera_failure_diagnostic.v2",
+            "scenesmith.live_readonly_capture_failure_private.v2",
+            "scenesmith.live_readonly_capture_failure_private.v3"
           ],
           "complete_execution_contract_embedded": true,
           "complete_servo_result_embedded": true,
@@ -721,7 +748,7 @@
       "live_gate_sessions_started": 1,
       "live_gate_closed_at": "2026-07-11T10:37:42-05:00",
       "live_gate_close_reason": "live_attempt_004_named_camera_ffmpeg_stderr",
-      "live_gate_reconsideration_state": "attempt_004_rejected_offline_diagnosis_required",
+      "live_gate_reconsideration_state": "brief_045_verified_separate_live_gate_review_required",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -782,7 +809,7 @@
       "known_limitations": [
         "attempt 001 produced no accepted live evidence because post-close camera index identity drift invalidated the capture",
         "attempt 003 was rejected because AVFoundation defaulted to unsupported 29.970030 fps; Brief 044 corrected and attempt 004 exercised exact 30 fps",
-        "attempt 004 was rejected because the first camera defaulted to unsupported yuv420p; its diagnostic advertises uyvy422, yuyv422, nv12, 0rgb, and bgr0 but no exact input pixel format is yet contract-bound",
+        "attempt 004 was rejected because the first camera defaulted to unsupported yuv420p; Brief 045 now binds exact per-camera pixel format, dimensions, and 30-fps mode from signed supported metadata but has not yet been exercised live",
         "the owner-authorized disconnect is represented by an honest reconstructed operation proof rather than a contemporaneous raw HTTP transcript",
         "live attempt 002 was rejected because the first named-camera ffmpeg subprocess returned nonzero",
         "attempt 002 predates Brief 042 diagnostic retention and cannot be retroactively root-caused from discarded stderr",
@@ -791,10 +818,7 @@
         "attempt 003 retained the servo result identity and operation counts but not the full decoded servo result; Brief 044 preserves legacy verification and requires full result embedding only for future failures",
         "sequential census then camera evidence is finite physical capture, not synchronized observation or policy-shadow-input-valid"
       ],
-      "blocked_on": [
-        "camera_input_pixel_format_not_bound",
-        "per_camera_supported_mode_metadata_not_contract_bound"
-      ],
+      "blocked_on": [],
       "owner_decision_required": {
         "state": "granted",
         "pre_disconnect_observed_server_state": {
@@ -891,7 +915,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "commit and remotely preserve attempt 004 rejection, then implement Brief 045 offline to bind exact per-camera input pixel formats from signed supported-mode metadata; keep the live gate closed",
+      "next_action": "perform a separate closed-state review and remote commit for at most one fresh finite session using discovery v2 and contract v3; keep the gate closed until that commit is confirmed",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
@@ -914,7 +938,9 @@
         "per_servo_torque_enable_read_gate_offline_verified",
         "explicit_30fps_named_camera_mode_offline_verified",
         "complete_failure_servo_evidence_offline_verified",
-        "attempt_004_complete_six_servo_torque_off_evidence_verified_without_session_label"
+        "attempt_004_complete_six_servo_torque_off_evidence_verified_without_session_label",
+        "signed_per_camera_supported_modes_offline_verified",
+        "exact_pre_input_pixel_format_size_and_framerate_offline_verified"
       ]
     },
     "T16.5c": {

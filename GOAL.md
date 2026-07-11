@@ -87,10 +87,16 @@ but emitted 339 stderr bytes because AVFoundation defaulted to unsupported
 `yuv420p`; it advertised `uyvy422`, `yuyv422`, `nv12`, `0rgb`, and `bgr0`.
 Release and process cleanup passed, no success manifest or proof label was
 written, and the live gate reclosed at `2026-07-11T10:37:42-05:00`. Brief 045
-is active offline to bind exact per-camera input formats from signed supported-
-mode metadata. Sequential capture is not synchronized or policy-input-valid.
-Studio reconnect remains deferred unless exact device, calibration, and
-current-pose evidence proves it mechanically no-motion-safe.
+implementation `820a40f` is remotely preserved. Discovery v2 binds normalized
+pixel format, dimensions, and rate ranges from AVFoundation device metadata
+without a capture session or frame stream. Contract v3 selects the smallest
+reviewed per-camera mode that supports integer 30 fps within 0.01 fps and places
+exact `-pixel_format`, `-video_size`, and `-framerate` options before input.
+Diagnostics v3, private success/failure v4, and tracked manifest v4 bind the
+same mode; legacy attempt-003/004 failures still verify. The live gate remains
+closed pending a separate review commit. Sequential capture is not synchronized
+or policy-input-valid. Studio reconnect remains deferred unless exact device,
+calibration, and current-pose evidence proves it mechanically no-motion-safe.
 
 ## Durable State
 
