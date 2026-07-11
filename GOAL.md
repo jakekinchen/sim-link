@@ -290,21 +290,22 @@ Brief 058 is verified and remotely preserved at implementation `77724e1`. An
 accepted-review-shaped deterministic static fixture now becomes exact
 model-ready PI0.5 bytes and tensors through the pinned CPU preprocessor and
 image transform, including three ordered image tensors/masks and exact prompt
-tokens. The fixture also exposes wrist-flex and gripper normalization outside
-the declared tokenizer domain, so `policy_shadow_input_valid` remains false.
+tokens. Brief 059 supersedes its initial range interpretation: wrist-flex and
+gripper exceed mean±std, but `[-1, 1]` is not a hard domain for this serialized
+MEAN_STD checkpoint and gripper remains inside observed training support.
 Only `fixture_pi05_model_ready_tensor_parity_conformant` is newly granted. The
 real Brief 057 gate, live gate, model/weight/inference/replay, hardware,
 policy-shadow, motion, and training authorities remain closed; the decisive
 live experiment requires a fresh hardware-supervised on-request parent.
 
-Brief 059 is in progress to correct one overbroad Brief 058 interpretation.
-The checkpoint deliberately uses mean/std normalization, so values beyond one
-standard deviation are not automatically outside training support and the
-fixed `[-1, 1]` bins must not be treated as a hard processor domain. Exact
-statistics show only fixture wrist-flex is outside the observed training
-min-max envelope; fixture gripper remains inside q01-q99 and min-max support.
-This correction must preserve every tensor and prompt byte and grants no new
-live, shadow, model, replay, hardware, motion, or training authority.
+Brief 059 is verified and remotely preserved at implementation `f6b6c08`. The
+v2 artifact binds all training-support statistics and preserves serialized
+mean/std normalization, exact textual bins, and every Brief 058 model-facing
+byte. Only fixture wrist-flex is outside observed training min-max; gripper is
+inside q01-q99 and min-max support. The new local capability is only
+`fixture_pi05_training_support_audit_conformant`; it grants no real input,
+shadow, model, replay, hardware, motion, or training authority. The next live
+experiment still requires a fresh hardware-supervised on-request parent.
 
 ## Durable State
 

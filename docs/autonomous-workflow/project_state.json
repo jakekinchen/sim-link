@@ -10,13 +10,13 @@
     "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "77724e14ba499fadb981c4099b334a19a235c51d",
-  "last_reviewed_implementation_commit": "77724e14ba499fadb981c4099b334a19a235c51d",
+  "verified_through_commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
+  "last_reviewed_implementation_commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
   "source_review": {
-    "commit": "77724e14ba499fadb981c4099b334a19a235c51d",
-    "implementation_commit": "77724e14ba499fadb981c4099b334a19a235c51d",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_058_FIXTURE_MODEL_READY_TENSOR_PARITY_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/084-accept-brief-058-pi05-fixture-model-ready-tensor-parity.md"
+    "commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
+    "implementation_commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_059_TRAINING_SUPPORT_CORRECTION_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/085-accept-brief-059-pi05-training-support-semantics-correction.md"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -1171,10 +1171,10 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "059",
-      "latest_verified_brief_id": "058",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058"],
-      "result": "Briefs 048-058 are verified and remotely preserved; Brief 059 is correcting the fixture range interpretation so serialized MEAN_STD and textual discretizer saturation remain exact while true observed training-support violations are classified per joint",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "059",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059"],
+      "result": "Briefs 048-059 are verified and remotely preserved: exact fixture model-input parity is unchanged, serialized MEAN_STD and textual bin saturation are preserved, wrist_flex alone is outside observed training support, and no real live/shadow/replay/model/hardware/motion/training authority is granted",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1446,11 +1446,12 @@
         "broad_test_duration_seconds": 69.292
       },
       "pi05_fixture_model_ready_tensor_parity": {
-        "implementation_commit": "77724e14ba499fadb981c4099b334a19a235c51d",
+        "implementation_commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
+        "original_v1_implementation_commit": "77724e14ba499fadb981c4099b334a19a235c51d",
         "artifact_path": "configurations/robot_lab/pi05_fixture_model_ready_tensor_parity.json",
-        "schema_version": "scenesmith.pi05_fixture_model_ready_tensor_parity.v1",
-        "identity_sha256": "559b9dbd112d9df460b000e6c127d6f16200d9e89a2d418b3e8a8179e1af8732",
-        "runtime_identity_sha256": "4c89ca10c3adaae0a623461b245d1dfc2ee53329e7b083927426961149ca583f",
+        "schema_version": "scenesmith.pi05_fixture_model_ready_tensor_parity.v2",
+        "identity_sha256": "b20e078242af31227c6d77bedc08bd8d54a1be2df5540a8e5140b30a3e2bf25e",
+        "runtime_identity_sha256": "1642f75c3801df58a7978b3e1d6c0a255641388b11a338f3bc2987fdb584f21a",
         "evidence_class": "deterministic_fixture_preprocessing",
         "selected_state": "q_after",
         "selected_frame_rule": "highest_complete_frame_index",
@@ -1460,7 +1461,15 @@
         "tokenizer_length": 200,
         "nonpadding_token_count": 56,
         "discretized_state": [110, 140, 105, -1, 249, 255],
-        "normalized_state_out_of_domain_joints": ["wrist_flex", "gripper"],
+        "normalization_mode": "MEAN_STD",
+        "normalization_mode_mutated": false,
+        "clipping_applied": false,
+        "discretizer_reference_interval": [-1.0, 1.0],
+        "discretizer_reference_interval_is_hard_validity_domain": false,
+        "outside_mean_plus_minus_std_joints": ["wrist_flex", "gripper"],
+        "outside_q01_q99_joints": ["wrist_flex"],
+        "outside_observed_training_min_max_joints": ["wrist_flex"],
+        "gripper_support_class": "within_q01_q99",
         "model_call_argument_order": ["images", "img_masks", "tokens", "masks"],
         "separate_state_tensor_passed_to_model": false,
         "state_semantics_embedded_in_prompt_tokens": true,
@@ -1476,12 +1485,14 @@
         "network_accessed": false,
         "hardware_accessed": false,
         "physical_follower_commanded": false,
-        "capability": "fixture_pi05_model_ready_tensor_parity_conformant",
-        "focused_test_count_per_runtime": 153,
-        "broad_test_count": 352,
-        "broad_test_duration_seconds": 82.674
+        "capabilities": ["fixture_pi05_model_ready_tensor_parity_conformant", "fixture_pi05_training_support_audit_conformant"],
+        "focused_test_count_per_runtime": 175,
+        "broad_test_count": 374,
+        "broad_test_duration_seconds": 86.332
       },
       "test_commands": [
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_training_support tests.unit.test_pi05_fixture_preprocessing tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_pi05_training_support tests.unit.test_pi05_fixture_preprocessing tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_fixture_preprocessing tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_pi05_fixture_preprocessing tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python scripts/robot_lab/write_pi05_fixture_preprocessing.py --verify",
@@ -1497,11 +1508,11 @@
         "external/leLab/.venv/bin/python scripts/robot_lab/write_pi05_preprocessing_contract.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_pi05_reviewed_input_gate.py --verify",
         "external/leLab/.venv/bin/python scripts/robot_lab/write_pi05_reviewed_input_gate.py --verify",
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_fixture_preprocessing tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
-        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_fixture_preprocessing.py scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_fixture_preprocessing.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_fixture_preprocessing.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_training_support tests.unit.test_pi05_fixture_preprocessing tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_training_support.py scenesmith/robot_lab/pi05_fixture_preprocessing.py scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_fixture_preprocessing.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_training_support.py tests/unit/test_pi05_fixture_preprocessing.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "execute Brief 059 offline only: correct mean/std discretizer versus observed training-support semantics without changing preprocessing bytes, loading weights, inferring, replaying, accessing hardware, or transitioning the live gate",
+      "next_action": "stop at the current parent boundary; begin the decisive live static-pose bracket only in a fresh hardware-supervised on-request parent with a finite window, separate reviewed live-gate transition, fresh owner-presence lease, discovery, and all-alias zero-holder evidence; audit any live state against the v2 training-support contract before policy shadow",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
@@ -1529,7 +1540,8 @@
         "redacted_static_pose_live_candidate_session_review_conformant",
         "pi05_policy_input_preprocessing_source_contract_conformant",
         "pi05_reviewed_input_issuance_gate_conformant",
-        "fixture_pi05_model_ready_tensor_parity_conformant"
+        "fixture_pi05_model_ready_tensor_parity_conformant",
+        "fixture_pi05_training_support_audit_conformant"
       ],
       "authority_not_granted": [
         "actual_live_review_manifest",
