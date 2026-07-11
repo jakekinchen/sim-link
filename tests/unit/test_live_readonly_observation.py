@@ -727,6 +727,64 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(audit["subprocess_communicate_attempts"], 3)
         self.assertEqual(audit["subprocess_wait_attempts"], 3)
 
+    def test_named_ffmpeg_audits_flow_into_private_and_redacted_evidence(self):
+        contract = _execution_contract()
+        clock = _TickingClock(start=2_000_000_000)
+
+        def camera_factory(camera_identity: dict) -> FFmpegNamedFiniteCamera:
+            process = _FakeFFmpegProcess(
+                stdout=_png_frame(marker=b"one") + _png_frame(marker=b"two")
+            )
+            return FFmpegNamedFiniteCamera(
+                camera_identity,
+                expected_frame_count=2,
+                monotonic_ns=clock,
+                popen_factory=lambda *args, process=process, **kwargs: process,
+            )
+
+        frames = capture_finite_camera_frames(
+            contract,
+            project_state=PROJECT_STATE,
+            now="2026-07-11T04:47:00-05:00",
+            camera_factory=camera_factory,
+            monotonic_ns=clock,
+            wall_time=lambda: "2026-07-11T04:47:00-05:00",
+        )
+        servo_result = execute_live_servo_census(
+            contract,
+            project_state=PROJECT_STATE,
+            now="2026-07-11T04:47:00-05:00",
+            bus_factory=lambda census_contract: _FakeBus(),
+            monotonic_ns=_TickingClock(),
+        )
+        private = build_private_observation_evidence(
+            execution_contract=contract,
+            servo_result=servo_result,
+            frames=frames,
+            pre_open_discovery=_discovery(),
+            post_close_discovery=_discovery(),
+        )
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            refs = write_private_observation_bundle(
+                output_directory=Path(temporary_directory) / "bundle",
+                private_evidence=private,
+                frames=frames,
+            )
+            manifest = build_redacted_observation_manifest(
+                private_evidence=private,
+                private_bundle_refs=refs,
+            )
+        counts = private["camera_operation_counts"]
+        self.assertEqual(counts["subprocess_start_successes"], 2)
+        self.assertEqual(counts["subprocess_communicate_successes"], 2)
+        self.assertEqual(counts["subprocess_wait_successes"], 2)
+        self.assertEqual(counts["subprocess_terminate_attempts"], 0)
+        self.assertEqual(counts["subprocess_kill_attempts"], 0)
+        self.assertEqual(counts["capture_property_writes"], 0)
+        self.assertTrue(
+            all(camera["camera_backend_audit_sha256"] for camera in manifest["cameras"])
+        )
+
     def test_camera_primary_and_release_errors_are_both_preserved(self):
         contract = _execution_contract()
 
