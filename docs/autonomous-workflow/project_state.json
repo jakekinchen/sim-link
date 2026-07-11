@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "2da4817e215fade48b30c6ca67052ac2bb765668",
-  "last_reviewed_commit": "2da4817e215fade48b30c6ca67052ac2bb765668",
+  "verified_through_commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
+  "last_reviewed_implementation_commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
   "source_review": {
-    "commit": "2da4817e215fade48b30c6ca67052ac2bb765668",
-    "decision": "REJECT_T16_5B_LIVE_ATTEMPT_002_AND_RECLOSE_GATE",
-    "reviewer_decision": "docs/reviewer-messages/058-reject-live-attempt-002-camera-subprocess.md"
+    "commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
+    "decision": "VERIFY_BRIEF_042_OFFLINE_AND_REQUIRE_P0_STATE_INTEGRITY_GATES",
+    "reviewer_decision": "docs/reviewer-messages/059-brief-042-offline-diagnostics-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -51,6 +51,9 @@
         "response": {"connected": false},
         "retry_count": 0
       },
+      "permit_consumed": true,
+      "observed_call_count": 1,
+      "additional_calls_allowed": 0,
       "reconnect_scope": "allowed_only_after_exact_identity_calibration_and_current_pose_prove_mechanically_no_motion_safe",
       "not_granted": [
         "motion_command",
@@ -382,7 +385,8 @@
       "metadata_compatibility_correction_commit": "b85a253",
       "metadata_review_decision_id": "051",
       "correction_brief_id": "041",
-      "active_correction_brief_id": "042",
+      "completed_correction_brief_id": "042",
+      "active_correction_brief_id": "043",
       "rejected_attempt_review_decision_id": "052",
       "camera_identity_correction_commits": [
         "ea99ec9",
@@ -391,9 +395,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "058",
-      "result": "Owner-authorized disconnect and zero-holder proof remain verified; live attempt 002 is rejected on a nonzero exact-name ffmpeg subprocess and the live gate is reclosed for Brief 042 offline correction",
-      "execution_note": "Commits ea99ec9/66003d8/fd13bf6/01802a0 passed 19 dedicated, 35 combined census, and 214 broad tests; no hardware was reopened during the correction",
+      "live_gate_review_decision_id": "059",
+      "result": "Brief 042 bounded camera-failure diagnostics are verified offline at 2d1cd97; live gate remains closed for Brief 043 machine disconnect proof, all-alias holder coverage, and Torque_Enable evidence",
+      "execution_note": "Brief 042 passed 24 dedicated, 40 combined census, and 219 broad robot-lab tests with both offline verifiers; no hardware was reopened during implementation",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census",
@@ -461,7 +465,9 @@
         "predates_goal_attempt": true,
         "preserved_untouched": false,
         "owner_authorized_disconnect_completed": true,
-        "exclusive_bus_ownership_proven": true,
+        "exclusive_bus_ownership_proven": false,
+        "canonical_path_zero_holder_observed": true,
+        "all_signed_aliases_checked": false,
         "last_revalidated_at": "2026-07-11T09:01:09-05:00",
         "last_revalidated_holder_count": 0,
         "last_revalidated_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
@@ -489,18 +495,26 @@
           "no_trailing_bytes",
           "subprocess_exit_and_stderr",
           "terminate_kill_wait_cleanup_counts"
-        ]
+        ],
+        "failure_diagnostics": {
+          "state": "offline_verified",
+          "implementation_commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
+          "schema_version": "scenesmith.named_camera_failure_diagnostic.v1",
+          "private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v1",
+          "stderr_preview_max_bytes": 2048,
+          "attempt_002_retroactive_diagnostic_available": false
+        }
       },
       "serial_ownership_gate": {
         "state": "offline_verified",
-        "mechanism": "normalized_lsof_holder_snapshot",
+        "mechanism": "canonical_path_only_normalized_lsof_holder_snapshot",
         "required_pre_open_holder_count": 0,
         "required_post_close_holder_count": 0,
         "stops_or_signals_holders": false,
         "last_observed_holder_count": 0,
         "last_observed_at": "2026-07-11T09:01:09-05:00",
         "last_observed_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "current_gate_result": "passed_zero_holder"
+        "current_gate_result": "insufficient_until_all_signed_aliases_are_checked"
       },
       "hardware_enumerated": true,
       "hardware_opened": true,
@@ -531,10 +545,17 @@
         "the corrected stable named-camera path is verified only with fake subprocess evidence and has not been reopened live",
         "the owner-authorized disconnect re-established exclusive follower bus ownership, but no corrected live capture has yet been accepted",
         "live attempt 002 was rejected because the first named-camera ffmpeg subprocess returned nonzero",
-        "the production failure path does not yet retain a bounded sanitized stderr diagnostic or digest, preventing mechanical root-cause classification",
-        "the live gate remains closed until Brief 042 corrects and reviews diagnostic retention without weakening strict capture validation"
+        "attempt 002 predates Brief 042 diagnostic retention and cannot be retroactively root-caused from discarded stderr",
+        "the canonical-path-only holder snapshot does not prove every /dev alias is free",
+        "no tracked independently verified disconnect-proof artifact yet binds private raw references and consumes the permit",
+        "per-servo Torque_Enable is not yet present in the read-only census",
+        "sequential census then camera evidence is finite physical capture, not synchronized observation or policy-shadow-input-valid"
       ],
-      "blocked_on": [],
+      "blocked_on": [
+        "tracked_virtual_disconnect_proof_missing",
+        "all_signed_serial_alias_holder_gate_missing",
+        "per_servo_torque_enable_evidence_missing"
+      ],
       "owner_decision_required": {
         "state": "granted",
         "pre_disconnect_observed_server_state": {
@@ -568,6 +589,9 @@
           "path": "/api/hardware/disconnect",
           "body": {"role": "follower"},
           "maximum_call_count": 1,
+          "observed_call_count": 1,
+          "permit_consumed": true,
+          "additional_calls_allowed": 0,
           "expected_effect": "release_follower_torque_then_close_follower_serial_bus",
           "forbidden_effects": [
             "motion_command",
@@ -585,7 +609,7 @@
           "call_safety_disarm_or_estop",
           "reopen_serial_or_camera_live_gate_before_zero_holder_proof"
         ],
-        "post_choice_requirement": "satisfied and remotely preserved at b211562; reviewer 057 opens one fresh finite T16.5b session"
+        "post_choice_requirement": "disconnect occurred once; machine-verifiable proof artifact and all-alias holder evidence remain required before another live-gate review"
       },
       "blocked_audit": {
         "classification": "resolved_by_owner_authority",
@@ -628,7 +652,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "commit and remotely preserve reviewer 058; implement Brief 042 bounded sanitized ffmpeg failure diagnostics and deterministic tests offline; keep live gate closed",
+      "next_action": "implement Brief 043 machine-verifiable disconnect proof, consumed-permit verifier, all-signed-alias holder gate, and per-servo Torque_Enable evidence offline; keep live gate closed",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
@@ -644,7 +668,8 @@
         "stable_named_camera_capture_offline_verified",
         "exclusive_serial_holder_gate_offline_verified",
         "owner_authorized_virtual_follower_disconnect_verified",
-        "exclusive_follower_bus_ownership_reestablished"
+        "canonical_follower_path_zero_holder_observed",
+        "bounded_camera_failure_diagnostics_offline_verified"
       ]
     },
     "T16.5c": {

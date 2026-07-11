@@ -48,12 +48,21 @@ bounded stderr diagnostic. No private evidence bundle, tracked manifest, or
 proof label was written. The follower remains disconnected, torque off, and
 holder-free; the leader remains connected.
 
-The live gate is closed again. Continue offline under Brief 042: retain a
-bounded, sanitized ffmpeg failure diagnostic without weakening strict stderr,
-finite-frame, cleanup, or content validation; add deterministic failure tests;
-review and remotely preserve the correction before any new live session. A
-later Studio reconnect remains deferred unless exact device/calibration/current-
-pose state proves it mechanically no-motion-safe.
+The live gate is closed. Brief 042 implementation `2d1cd97` now retains a typed,
+signed, bounded, sanitized ffmpeg diagnostic and immutable ignored-private
+failure record without weakening nonzero/stderr/timeout/PNG rejection. It
+passed 24 dedicated, 40 combined, and 219 broad tests. Attempt 002 remains
+permanently rejected and cannot be retro-diagnosed.
+
+Continue offline under Brief 043 and manager intervention 015. Before any new
+serial or camera open: generate and independently verify a machine-readable
+disconnect proof with private content references; mark the exact one-call permit
+consumed with zero additional calls; replace self-staling canonical HEAD fields;
+check the canonical serial path and every signed alias as one identity; and add
+per-servo `Torque_Enable` to the read-only census. Only a separate reviewed,
+remotely preserved commit may reconsider `live_gate=open`. A later Studio
+reconnect remains deferred unless exact device/calibration/current-pose state
+proves it mechanically no-motion-safe.
 
 The last completed implementation slice was Brief 041,
 `docs/briefs/041-rejected-live-attempt-camera-identity-correction.md`, under
@@ -225,3 +234,7 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   capture returned a nonzero ffmpeg status. No evidence bundle, manifest,
   label, write beyond the earlier authorized disconnect, motion, or physical
   qualification survived the attempt.
+- Reviewer decision 059 accepts Brief 042 implementation `2d1cd97` on offline
+  evidence only. Manager intervention 015 applies the owner review: canonical
+  disconnect proof, consumed-permit state, all-alias holder coverage, and
+  `Torque_Enable` evidence are mandatory before another live-gate review.

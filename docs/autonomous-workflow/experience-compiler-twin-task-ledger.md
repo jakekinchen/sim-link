@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; live attempt 002 rejected on named-camera subprocess failure; live gate closed for Brief 042 offline diagnostics correction
+current_task: T16.5b in progress; Brief 042 verified offline; live gate closed for Brief 043 disconnect-proof, all-alias-holder, and Torque_Enable prerequisites
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: discovery 7766ed1c... and contract 51467ec7... were fresh; census closed and zero-holder postcheck passed; first named-camera ffmpeg returned nonzero; no bundle/manifest/label; cleanup recheck holder 4f53cda1... count 0 and torque false
+evidence: 2d1cd97 remotely preserves typed bounded camera failure diagnostics; 24 dedicated, 40 combined, 219 broad tests; owner review conditionally continues T16.5b but rejects canonical-path-only holder proof as sufficient to reopen
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: owner explicitly authorizes virtual disconnect/reconnect because physical unplug is unavailable; immediate scope is one follower disconnect with inherent torque-disable plus response/status/zero-holder proof; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: production camera failure currently loses the bounded stderr diagnostic needed to distinguish device contention, format negotiation, and command/backend faults
-next_step: commit/push rejected-attempt boundary; implement Brief 042 offline diagnostic retention and tests; keep live gate closed until correction review is remote
+blockers: no tracked disconnect-proof artifact; one-call permit not yet mechanically consumed in a verifier; holder gate covers only /dev/cu path; Torque_Enable absent from census
+next_step: implement Brief 043 offline, run focused/broad gates, review/commit/push; only then consider a separate live-gate commit
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: commit/push rejected-attempt boundary; implement Brief 042 offline di
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Attempt 002 rejected at first named-camera ffmpeg batch; no bundle/manifest/label; gate reclosed; Brief 042 offline diagnostic correction next |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 042 `2d1cd97` offline verified; live gate closed; Brief 043 machine disconnect proof, consumed permit, all-alias holders, and per-servo Torque_Enable required |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,19 @@ next_step: commit/push rejected-attempt boundary; implement Brief 042 offline di
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 042 verified; owner review hardens next live gate
+
+```text
+Current task: T16.5b
+State: in_progress; Brief 042 offline verified; live gate closed
+Completed: typed signed camera failure diagnostic; bounded sanitized stderr preview; full stream counts/digests; primary+cleanup preservation; atomic immutable private failure record; no success manifest/label path
+Evidence: 2d1cd97; 24 dedicated tests; 40 combined census tests; 219 broad robot-lab tests; both offline verifiers; py_compile; git diff --check
+Owner review: conditional continue; canonical disconnect artifact, consumed permit, all signed serial aliases, and per-servo Torque_Enable are hard prerequisites
+Proof wording: sequential census then camera is finite physical camera capture only, not synchronized or policy-shadow-input-valid
+Training lock: closed
+Next step: Brief 043 offline implementation and review; no live reopen in this boundary
+```
 
 ### 2026-07-11 - T16.5b live attempt 002 rejected; gate reclosed
 

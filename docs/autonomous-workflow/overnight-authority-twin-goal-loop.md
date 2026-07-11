@@ -360,6 +360,15 @@ with the owner physically present.
 - Virtual reconnect is a separate restoration step, never a prerequisite for
   the read-only census. Execute it only if reconnect cannot move from a stale
   goal; otherwise retain the safer disconnected/torque-off state for T16.6.
+- After the owner review recorded at `2026-07-11T09:22:17-05:00`, no new live
+  gate may open until a tracked independently verified disconnect-proof artifact
+  binds private raw references and mechanically consumes the one-call permit;
+  holder discovery covers the canonical serial path plus every signed alias;
+  and the census includes per-servo `Torque_Enable`. Derive actual Git HEAD at
+  runtime; canonical state records only reviewed-through implementation SHAs.
+- The sequential census-then-camera evidence may grant finite physical camera
+  capture only. It is not synchronized or policy-shadow-input-valid. T16.5c
+  requires a static-pose bracket around capture and explicit pose tolerance.
 - This task grants observation evidence only, never physical qualification.
 
 ### T16.5c - No-actuation observation, shadow, and replay
