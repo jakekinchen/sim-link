@@ -20,9 +20,16 @@ from scenesmith.robot_lab.census_runtime_binding import (
     RUNTIME_SOURCE_BINDINGS as _RUNTIME_SOURCE_BINDINGS,
     verify_census_runtime_source_bindings,
 )
+from scenesmith.robot_lab.leader_arm_bridge import (
+    DEFAULT_LEADER_PORT,
+    KNOWN_PHYSICAL_FOLLOWER_PORT,
+)
 
 
 CENSUS_CONTRACT_SCHEMA_VERSION = "scenesmith.readonly_servo_census_contract.v2"
+LIVE_CENSUS_CONTRACT_SCHEMA_VERSION = (
+    "scenesmith.live_readonly_servo_census_contract.v1"
+)
 CENSUS_TRACE_SCHEMA_VERSION = "scenesmith.readonly_servo_census_trace.v1"
 CENSUS_RESULT_SCHEMA_VERSION = "scenesmith.readonly_servo_census_result.v1"
 
@@ -325,37 +332,65 @@ def build_census_contract() -> dict[str, Any]:
                 "baudrate": _DEFAULT_BAUDRATE,
             },
         },
-        "expected_servos": [
-            {
-                "servo_id": servo_id,
-                "joint_name": joint_name,
-                "model": _MODEL_NAME,
-                "model_number": _MODEL_NUMBER,
-            }
-            for servo_id, joint_name in _JOINTS
-        ],
-        "read_plan": [
-            {
-                "register": register,
-                "width_bytes": width,
-                "raw_type": "integer",
-            }
-            for register, width in _READ_PLAN
-        ],
-        "retry_policy": {
-            "max_read_retries": 1,
-            "retryable_error_codes": ["crc_mismatch", "timeout"],
-        },
-        "forbidden_operations": list(_FORBIDDEN_OPERATIONS),
-        "runtime_source_bindings": [
-            dict(binding) for binding in _RUNTIME_SOURCE_BINDINGS
-        ],
-        "runtime_semantics": copy.deepcopy(EXPECTED_RUNTIME_SEMANTICS),
+        **_base_contract_fields(),
     }
     return sign_payload(payload)
 
 
+def build_live_census_contract(
+    *,
+    observed_device_identity: dict[str, Any],
+    session_id: str,
+    presence_lease_identity_sha256: str,
+    discovery_identity_sha256: str,
+    calibration_file_sha256: str,
+    issued_at: str,
+    expires_at: str,
+) -> dict[str, Any]:
+    require_nonblank(session_id, label="live census session_id")
+    usb = observed_device_identity.get("usb")
+    if not isinstance(usb, dict):
+        raise ValueError("Live census observed USB identity is required")
+    target_identity = {
+        "device_role": observed_device_identity.get("device_role"),
+        "usb": {
+            "vendor_id_hex": usb.get("vendor_id_hex"),
+            "product_id_hex": usb.get("product_id_hex"),
+            "serial_number": usb.get("serial_number"),
+            "canonical_path": usb.get("canonical_path"),
+            "allowed_aliases": copy.deepcopy(usb.get("observed_aliases")),
+            "forbidden_aliases": sorted(
+                {
+                    DEFAULT_LEADER_PORT,
+                    _paired_tty_alias(DEFAULT_LEADER_PORT),
+                }
+            ),
+        },
+        "bus": copy.deepcopy(observed_device_identity.get("bus")),
+    }
+    payload = {
+        "schema_version": LIVE_CENSUS_CONTRACT_SCHEMA_VERSION,
+        "contract_name": "pi05_so101_live_readonly_servo_census",
+        "qualification_scope": "physical_observation",
+        "proof_label": "live_read_only_census_observed",
+        "session_id": session_id,
+        "presence_lease_identity_sha256": presence_lease_identity_sha256,
+        "discovery_identity_sha256": discovery_identity_sha256,
+        "calibration_file_sha256": calibration_file_sha256,
+        "issued_at": issued_at,
+        "expires_at": expires_at,
+        "target_device_identity": target_identity,
+        **_base_contract_fields(),
+    }
+    signed = sign_payload(payload)
+    verify_live_census_contract(signed)
+    return signed
+
+
 def verify_census_contract(payload: dict[str, Any]) -> None:
+    if payload.get("schema_version") == LIVE_CENSUS_CONTRACT_SCHEMA_VERSION:
+        verify_live_census_contract(payload)
+        return
     if payload.get("schema_version") != CENSUS_CONTRACT_SCHEMA_VERSION:
         raise ValueError("Unsupported read-only census contract schema")
     verify_signed_payload(payload, label="Read-only census contract")
@@ -364,6 +399,97 @@ def verify_census_contract(payload: dict[str, Any]) -> None:
         raise ValueError(
             "Read-only census contract drifted from the code-pinned identity/read plan"
         )
+
+
+def verify_live_census_contract(payload: dict[str, Any]) -> None:
+    allowed_fields = {
+        "schema_version",
+        "contract_name",
+        "qualification_scope",
+        "proof_label",
+        "session_id",
+        "presence_lease_identity_sha256",
+        "discovery_identity_sha256",
+        "calibration_file_sha256",
+        "issued_at",
+        "expires_at",
+        "target_device_identity",
+        "expected_servos",
+        "read_plan",
+        "retry_policy",
+        "forbidden_operations",
+        "runtime_source_bindings",
+        "runtime_semantics",
+        "identity_sha256",
+    }
+    if not isinstance(payload, dict) or set(payload) != allowed_fields:
+        raise ValueError("Live read-only census contract fields are malformed")
+    if payload.get("schema_version") != LIVE_CENSUS_CONTRACT_SCHEMA_VERSION:
+        raise ValueError("Unsupported live read-only census contract schema")
+    verify_signed_payload(payload, label="Live read-only census contract")
+    if payload.get("contract_name") != "pi05_so101_live_readonly_servo_census":
+        raise ValueError("Live read-only census contract name is invalid")
+    if payload.get("qualification_scope") != "physical_observation":
+        raise ValueError("Live read-only census contract scope is invalid")
+    if payload.get("proof_label") != "live_read_only_census_observed":
+        raise ValueError("Live read-only census proof label is invalid")
+    require_nonblank(payload.get("session_id"), label="live census session_id")
+    for field in (
+        "presence_lease_identity_sha256",
+        "discovery_identity_sha256",
+        "calibration_file_sha256",
+    ):
+        _require_sha256(payload.get(field), label=f"live census {field}")
+    require_nonblank(payload.get("issued_at"), label="live census issued_at")
+    require_nonblank(payload.get("expires_at"), label="live census expires_at")
+    target = payload.get("target_device_identity")
+    if not isinstance(target, dict) or set(target) != {"device_role", "usb", "bus"}:
+        raise ValueError("Live census target identity fields are malformed")
+    if target.get("device_role") != "so101_follower_observation_target":
+        raise ValueError("Live census target must be the follower observation role")
+    if target.get("bus") != {
+        "protocol_family": "feetech",
+        "protocol_version": _PROTOCOL_VERSION,
+        "baudrate": _DEFAULT_BAUDRATE,
+    }:
+        raise ValueError("Live census bus protocol or baud drifted")
+    usb = target.get("usb")
+    if not isinstance(usb, dict) or set(usb) != {
+        "vendor_id_hex",
+        "product_id_hex",
+        "serial_number",
+        "canonical_path",
+        "allowed_aliases",
+        "forbidden_aliases",
+    }:
+        raise ValueError("Live census USB identity is incomplete")
+    for field in ("vendor_id_hex", "product_id_hex"):
+        value = require_nonblank(usb.get(field), label=f"live census USB {field}")
+        if (
+            len(value) != 4
+            or value.lower() != value
+            or any(character not in "0123456789abcdef" for character in value)
+        ):
+            raise ValueError(
+                f"Live census USB {field} must be lowercase four-digit hex"
+            )
+    require_nonblank(usb.get("serial_number"), label="live census USB serial")
+    if usb.get("canonical_path") != KNOWN_PHYSICAL_FOLLOWER_PORT:
+        raise ValueError("Live census canonical path is not the pinned follower path")
+    aliases = usb.get("allowed_aliases")
+    if not isinstance(aliases, list) or aliases != sorted(set(aliases)):
+        raise ValueError("Live census allowed aliases are malformed")
+    expected_forbidden = sorted(
+        {DEFAULT_LEADER_PORT, _paired_tty_alias(DEFAULT_LEADER_PORT)}
+    )
+    if usb.get("forbidden_aliases") != expected_forbidden:
+        raise ValueError("Live census forbidden leader aliases drifted")
+    if set(aliases) & set(expected_forbidden):
+        raise ValueError("Live census follower aliases collide with the leader role")
+    base_fields = _base_contract_fields()
+    for field, expected in base_fields.items():
+        if payload.get(field) != expected:
+            raise ValueError(f"Live census code-pinned field drifted: {field}")
 
 
 def build_recorded_census_trace(contract: dict[str, Any]) -> dict[str, Any]:
@@ -980,6 +1106,50 @@ def _validate_transport_audit(payload: Any) -> dict[str, Any]:
             "Read-only census transport follower command flag must be boolean"
         )
     return payload
+
+
+def _base_contract_fields() -> dict[str, Any]:
+    return {
+        "expected_servos": [
+            {
+                "servo_id": servo_id,
+                "joint_name": joint_name,
+                "model": _MODEL_NAME,
+                "model_number": _MODEL_NUMBER,
+            }
+            for servo_id, joint_name in _JOINTS
+        ],
+        "read_plan": [
+            {
+                "register": register,
+                "width_bytes": width,
+                "raw_type": "integer",
+            }
+            for register, width in _READ_PLAN
+        ],
+        "retry_policy": {
+            "max_read_retries": 1,
+            "retryable_error_codes": ["crc_mismatch", "timeout"],
+        },
+        "forbidden_operations": list(_FORBIDDEN_OPERATIONS),
+        "runtime_source_bindings": [
+            dict(binding) for binding in _RUNTIME_SOURCE_BINDINGS
+        ],
+        "runtime_semantics": copy.deepcopy(EXPECTED_RUNTIME_SEMANTICS),
+    }
+
+
+def _paired_tty_alias(path: str) -> str:
+    return path.replace("/dev/cu.", "/dev/tty.", 1)
+
+
+def _require_sha256(value: Any, *, label: str) -> str:
+    digest = require_nonblank(value, label=label)
+    if len(digest) != 64 or any(
+        character not in "0123456789abcdef" for character in digest
+    ):
+        raise ValueError(f"{label} must be lowercase SHA-256")
+    return digest
 
 
 def _resolve(repo_root: Path, path: Path) -> Path:
