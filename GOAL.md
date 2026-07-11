@@ -72,11 +72,15 @@ success manifest was written, and the gate reclosed at
 Live attempts 001-003 remain rejected and grant no proof label. Attempt 003
 retained private failure identity `e7f8eb21...` and diagnostic `482064ad...`,
 but failure schema v2 stores only the servo-result identity/counts rather than
-the complete decoded result. Brief 044 is active offline to bind explicit 30
-fps in the contract/command/audit and retain the complete verified servo result
-on camera failure. Sequential capture is not synchronized or policy-input-valid.
-Studio reconnect remains deferred unless exact device, calibration, and
-current-pose evidence proves it mechanically no-motion-safe.
+the complete decoded result. Brief 044 implementation `4ae0521c` is now remotely
+preserved: the v2 execution contract requires integer 30 fps, the ffmpeg command
+places exactly one `-framerate 30` before its input, audits and tracked/private
+v3 success evidence bind the mode, and v3 private failures embed and replay the
+complete signed contract and servo result. Legacy attempt-003 v1/v2 evidence
+remains verifiable. The live gate is closed pending a separate review commit.
+Sequential capture is not synchronized or policy-input-valid. Studio reconnect
+remains deferred unless exact device, calibration, and current-pose evidence
+proves it mechanically no-motion-safe.
 
 ## Durable State
 

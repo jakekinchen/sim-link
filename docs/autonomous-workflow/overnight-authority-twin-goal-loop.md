@@ -370,6 +370,12 @@ with the owner physically present.
 - The sequential census-then-camera evidence may grant finite physical camera
   capture only. It is not synchronized or policy-shadow-input-valid. T16.5c
   requires a static-pose bracket around capture and explicit pose tolerance.
+- After rejected attempt 003, every new camera contract must bind integer 30 fps
+  and the production ffmpeg command must place exactly one `-framerate 30`
+  before the AVFoundation input. Camera audits and private/tracked evidence bind
+  the same value. Any private camera-failure artifact must embed and
+  independently verify the complete signed execution contract and servo result,
+  including all six `Torque_Enable=0` values and the exact no-write trace.
 - This task grants observation evidence only, never physical qualification.
 
 ### T16.5c - No-actuation observation, shadow, and replay
