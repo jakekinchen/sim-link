@@ -186,6 +186,13 @@ verifiers pass, and the 266-test authority/twin gate passes. This grants only
 capabilities. No hardware or policy ran; the live gate and training lock remain
 closed.
 
+Brief 052 is active offline to build the source-bound static-pose live-candidate
+contract and bounded runner. It must resolve fresh numeric camera indexes from
+the stable v5 digests, bind the exact follower USB/alias identity, operator-
+presence lease, project-state gate snapshot, and verified static contract, and
+return candidate-only evidence with no physical proof label. All execution tests
+use fake transports and cameras; the live gate remains closed.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`

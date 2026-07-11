@@ -1170,6 +1170,7 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
+      "active_brief_id": "052",
       "latest_verified_brief_id": "051",
       "completed_brief_ids": ["048", "049", "050", "051"],
       "result": "Briefs 048-051 are verified and remotely preserved: the accepted physical evidence retains its complete capture-selection audit digest while manifest v5 and all dependent offline artifacts now consume a separate name/unique-ID/model-ID/input-mode digest that excludes only the volatile numeric AVFoundation index",
@@ -1228,7 +1229,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/live_readonly_observation.py scenesmith/robot_lab/calibration_profile.py scenesmith/robot_lab/static_pose_bracket.py scenesmith/robot_lab/static_pose_bracket_runtime.py scripts/robot_lab/migrate_live_manifest_camera_identity.py scripts/robot_lab/write_calibration_profile.py scripts/robot_lab/write_static_pose_bracket_fixture.py",
         "git diff --check"
       ],
-      "next_action": "open a separate offline source-bound live-candidate contract/runner that composes fresh discovery, owner-presence lease, stable camera resolution, all-alias holder snapshots, and the verified bracket runtime; do not reopen hardware until its implementation and a later gate transition are separately reviewed",
+      "next_action": "implement and verify Brief 052 source-bound live-candidate contract/runner with fake transports and accepted private discovery resolution only; do not access hardware or reopen the live gate",
       "conditional_authority": [
         "physical_observation_preprocessing",
         "pi05_policy_shadow_no_actuation",
