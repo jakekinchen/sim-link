@@ -68,7 +68,24 @@
         "promotion_eligible"
       ]
     },
-    "T16.4b": {"state": "in_progress", "depends_on": ["T16.2", "T16.4"]},
+    "T16.4b": {
+      "state": "in_progress",
+      "depends_on": ["T16.2", "T16.4"],
+      "brief_id": "033",
+      "completed_subslices": [
+        {
+          "source_commit": "69df54d",
+          "review_decision_id": "041",
+          "result": "strict artifact, physical inertia, content-addressed evidence, and authority-gate layer"
+        }
+      ],
+      "authority_granted": ["synthetic_compilation_valid"],
+      "authority_not_granted": [
+        "simulation_training_ready",
+        "physical_twin_qualified",
+        "promotion_eligible"
+      ]
+    },
     "T16.5": {
       "state": "pending",
       "depends_on": ["T16.1b", "T16.2b", "T16.4b"],

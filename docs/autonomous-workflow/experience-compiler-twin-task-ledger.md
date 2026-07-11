@@ -117,6 +117,20 @@ next_step: execute brief 033; no generic ready gate may grant training, physical
 
 ## Milestone Log
 
+### 2026-07-10 - T16.4b strict artifact and authority sub-slice
+
+```text
+Current task: T16.4b
+State: in_progress
+Completed: strict finite JSON/signing/reference layer; PSD and principal-moment inertia validation; unique measurement and exact prior graph checks; content-addressed synthetic evidence; explicit compilation/simulation/physical/promotion authority gates
+Evidence: implementation commit 69df54d; reviewer decision 041; 35 focused tests; product CLI proves synthetic compilation succeeds while synthetic simulation-training authority fails
+Commit: 69df54d
+Remaining: production non-synthetic mixed-source measured intake, hierarchical BOM exact cover, explicit units/calibration, full-precision aggregation, golden fixture, and broad review
+Blockers: none for offline continuation
+Training lock: closed
+Next step: continue brief 033 with the production mixed-source compiler path
+```
+
 ### 2026-07-10 - T16.1b unified executable stack verified
 
 ```text
