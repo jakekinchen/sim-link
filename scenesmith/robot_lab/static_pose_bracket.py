@@ -357,7 +357,12 @@ def evaluate_static_pose_bracket_measurements(
     """Compute classification-free bracket measurements from exact evidence."""
 
     _validate_contract_invariants(contract)
-    if operation_counts != EXPECTED_OPERATION_COUNTS:
+    if (
+        not isinstance(operation_counts, dict)
+        or set(operation_counts) != set(EXPECTED_OPERATION_COUNTS)
+        or any(type(value) is not int for value in operation_counts.values())
+        or operation_counts != EXPECTED_OPERATION_COUNTS
+    ):
         raise ValueError("Static pose bracket operation counts drifted")
     before = _validate_positions(
         q_before,
@@ -604,7 +609,10 @@ def _validate_cameras(values: Any, *, contract: dict[str, Any]) -> None:
                 "encoding",
             }:
                 raise ValueError("Static pose bracket frame fields are invalid")
-            if frame.get("frame_index") != frame_index:
+            if (
+                type(frame.get("frame_index")) is not int
+                or frame.get("frame_index") != frame_index
+            ):
                 raise ValueError("Static pose bracket frame index mismatch")
             frame_hash = _require_sha256(
                 frame.get("frame_sha256"),

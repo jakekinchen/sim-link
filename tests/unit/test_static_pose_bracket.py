@@ -289,6 +289,13 @@ class StaticPoseBracketTests(unittest.TestCase):
                 ),
                 "frame hashes must be unique",
             ),
+            (
+                "boolean frame index",
+                lambda payload: payload["cameras"][0]["frames"][0].__setitem__(
+                    "frame_index", False
+                ),
+                "frame index mismatch",
+            ),
         )
         for label, mutate, message in cases:
             with self.subTest(label=label):
@@ -304,6 +311,13 @@ class StaticPoseBracketTests(unittest.TestCase):
 
     def test_rejects_operation_count_write_torque_motion_and_command_drift(self):
         cases = (
+            (
+                "boolean count",
+                lambda payload: payload["operation_counts"].__setitem__(
+                    "construct_attempts", True
+                ),
+                "operation counts drifted",
+            ),
             (
                 "reads",
                 lambda payload: payload["operation_counts"].__setitem__(
