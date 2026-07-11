@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "b85a2532de0913d54a9b73f71ae4e5d92b665632",
-  "last_reviewed_commit": "b85a2532de0913d54a9b73f71ae4e5d92b665632",
+  "current_head_commit": "e351f697f4f91494bf5a171309ff7a7cfc0ec284",
+  "last_reviewed_commit": "e351f697f4f91494bf5a171309ff7a7cfc0ec284",
   "source_review": {
-    "commit": "b85a2532de0913d54a9b73f71ae4e5d92b665632",
-    "decision": "ACCEPT_T16_5B_METADATA_COMPATIBILITY_CORRECTION_AND_DISCOVERY_AUTHORIZE_EXACT_LEASE_CONTRACT_AFTER_REMOTE_PRESERVATION",
-    "reviewer_decision": "docs/reviewer-messages/051-live-readonly-metadata-discovery-reviewed.md"
+    "commit": "e351f697f4f91494bf5a171309ff7a7cfc0ec284",
+    "decision": "REJECT_T16_5B_LIVE_ATTEMPT_001_CLOSE_LIVE_GATE_CONTINUE_OFFLINE_BRIEF_041",
+    "reviewer_decision": "docs/reviewer-messages/052-rejected-live-attempt-camera-identity-redirect.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -335,9 +335,11 @@
       "source_commit": "16d24ea",
       "offline_review_decision_id": "050",
       "metadata_compatibility_correction_commit": "b85a253",
-      "review_decision_id": "051",
-      "result": "offline live read-only harness and metadata compatibility correction verified; one exact follower, six-joint calibration identity, and two exact camera identities resolved from metadata with zero device opens",
-      "execution_note": "Implementation 16d24ea plus correction b85a253 passed 14 dedicated, 30 combined census, and 209 broad tests; reviewer 051 permits exact short lease/contract preparation after remote preservation",
+      "metadata_review_decision_id": "051",
+      "correction_brief_id": "041",
+      "review_decision_id": "052",
+      "result": "live attempt 001 rejected after post-close camera identity drift; live gate closed while camera identity capture is corrected offline and a pre-existing serial holder remains unresolved",
+      "execution_note": "Attempt contract 2102227c... reached post-close discovery with no write-capable surface, then failed on an AVFoundation index-to-name swap; no evidence bundle, manifest, or live proof label was emitted",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census",
@@ -360,8 +362,39 @@
         "serial_ports_opened": 0,
         "cameras_opened": 0
       },
+      "live_attempts": [
+        {
+          "attempt_id": "t16-5b-live-attempt-001",
+          "started_at": "2026-07-11T05:17:41-05:00",
+          "contract_identity_sha256": "2102227cedc18e0b21152863424817781eff9bba139c986c8496e898bf2c22e9",
+          "presence_lease_identity_sha256": "c9c9a88d3b5e6ebb905777e35ba82566a9bdce0cd661ef02b014be5643f24046",
+          "status": "rejected",
+          "failure_stage": "post_close_discovery_stability",
+          "failure_reason": "avfoundation_index_to_camera_identity_mapping_swapped",
+          "runtime_reached_post_close_discovery": true,
+          "stable_serial_candidate_set": true,
+          "stable_camera_name_set": true,
+          "stable_system_camera_record_set": true,
+          "stable_camera_index_mapping": false,
+          "private_evidence_bundle_written": false,
+          "tracked_manifest_written": false,
+          "proof_labels_granted": [],
+          "physical_follower_commanded": false
+        }
+      ],
+      "preexisting_serial_holder": {
+        "observed_after_attempt": true,
+        "process_role": "studio_server",
+        "process_started_at": "2026-07-08T17:32:39-05:00",
+        "predates_goal_attempt": true,
+        "preserved_untouched": true,
+        "exclusive_bus_ownership_proven": false
+      },
       "hardware_enumerated": true,
-      "hardware_opened": false,
+      "hardware_opened": true,
+      "hardware_cleanup_completed_before_rejection": true,
+      "physical_follower_commanded": false,
+      "live_gate": "closed",
       "proof_labels_granted": [],
       "authority_granted": [
         "live_readonly_harness_offline_verified",
@@ -373,9 +406,10 @@
         "synchronized_camera_capture_after_T16.5a"
       ],
       "known_limitations": [
-        "metadata discovery is read-only operating-system evidence and contains no servo response, telemetry, or camera frame",
-        "the OS omitted the non-authoritative descriptive manufacturer label while all stable required follower identity fields remained complete and signed",
-        "serial and camera opens remain closed until the correction/review is remote, a short owner-presence lease is active, and the exact execution contract validates"
+        "attempt 001 produced no accepted live evidence because post-close camera index identity drift invalidated the capture",
+        "AVFoundation numeric indexes are ephemeral and cannot remain authority-bearing for camera identity",
+        "a pre-existing Studio server still holds the follower serial device, so exclusive bus ownership is not established",
+        "all further serial and camera opens are closed pending Brief 041 correction, review, remote preservation, and resolution of the independent serial holder"
       ],
       "authority_not_granted": [
         "live_read_only_census_observed",

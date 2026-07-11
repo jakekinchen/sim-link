@@ -30,14 +30,15 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute Brief 039,
-`docs/briefs/039-live-readonly-census-and-observation.md`, under T16.5b. The
-corrected T16.5a commits `5102422`/`eeb16e1` and reviewer decision 049 are
-remotely preserved through `2407299`; the v2 contract is bound to STS3215
-protocol 0 and exact pinned runtime semantics. Build and pass the live adapter,
-discovery, camera, cleanup, privacy, and evidence tests offline first. Revalidate
-the owner-presence lease immediately before any bounded live open, and fail back
-to offline-only work on any identity or safety ambiguity.
+Execute Brief 041,
+`docs/briefs/041-rejected-live-attempt-camera-identity-correction.md`, under
+T16.5b. Attempt 001 was rejected after post-close discovery detected a camera
+index-to-identity swap; a pre-existing Studio server also holds the follower
+serial device. Keep the live gate closed, preserve that process untouched, and
+replace index-authoritative camera capture with a stable name/unique-ID-bound
+finite path offline. Do not open a serial port or camera again until the
+correction is reviewed, remotely preserved, and the independent serial holder
+blocker is resolved under explicit owner authority.
 
 ## Durable State
 
@@ -165,3 +166,9 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   confirmation for exactly one initial session-scoped `supervised_micro_motion`
   permit after T16.5a-T16.5c. No second prompt is required; every permit and
   lease check remains mandatory, and any expansion remains unauthorized.
+- Reviewer decision 052 rejects T16.5b live attempt 001: the no-write serial and
+  finite-camera path reached post-close discovery, but AVFoundation swapped the
+  two index-to-name mappings and a pre-existing July 8 Studio server still held
+  the follower serial device. No evidence bundle, tracked manifest, live proof
+  label, write, torque change, or motion claim survived. Brief 041 keeps all
+  further live access closed while the camera path is corrected offline.
