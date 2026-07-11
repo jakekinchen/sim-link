@@ -307,23 +307,23 @@
         },
         {
           "decision": "retain",
-          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:54a51445ba3e#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:02ea6ece7a35#1",
           "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
             "group": 3.0,
-            "material": "sts3215_03a_v1_material",
-            "mesh": "sts3215_03a_v1",
+            "material": "motor_holder_so101_wrist_v1_material",
+            "mesh": "motor_holder_so101_wrist_v1",
             "parent_body": "base/shoulder/upper_arm/lower_arm",
             "pos": [
-              -0.1224,
-              0.0052,
-              0.0187
+              -0.0648499,
+              -0.032,
+              0.018
             ],
             "quat": [
               0.0,
-              0.0,
-              1.0,
+              -1.0,
+              -0.0,
               -0.0
             ],
             "type": "mesh"
@@ -355,47 +355,23 @@
         },
         {
           "decision": "retain",
-          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:c30712816739#1",
-          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
-          "runtime": {
-            "class": "collision",
-            "group": 3.0,
-            "material": "motor_holder_so101_wrist_v1_material",
-            "mesh": "motor_holder_so101_wrist_v1",
-            "parent_body": "base/shoulder/upper_arm/lower_arm",
-            "pos": [
-              -0.0648499,
-              -0.032,
-              0.018
-            ],
-            "quat": [
-              0.0,
-              -1.0,
-              -0.0,
-              -0.0
-            ],
-            "type": "mesh"
-          }
-        },
-        {
-          "decision": "retain",
-          "key": "geom:base/shoulder/upper_arm:unnamed:1bc0c025ec92#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:cf5ea70651ad#1",
           "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
             "group": 3.0,
             "material": "sts3215_03a_v1_material",
             "mesh": "sts3215_03a_v1",
-            "parent_body": "base/shoulder/upper_arm",
+            "parent_body": "base/shoulder/upper_arm/lower_arm",
             "pos": [
-              -0.11257,
-              -0.0155,
+              -0.1224,
+              0.0052,
               0.0187
             ],
             "quat": [
               0.0,
-              -0.707107,
-              0.707107,
+              0.0,
+              1.0,
               -0.0
             ],
             "type": "mesh"
@@ -427,24 +403,24 @@
         },
         {
           "decision": "retain",
-          "key": "geom:base/shoulder:unnamed:98ee4ec596e5#1",
+          "key": "geom:base/shoulder/upper_arm:unnamed:8b528cefbb6a#1",
           "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
             "group": 3.0,
-            "material": "rotation_pitch_so101_v1_material",
-            "mesh": "rotation_pitch_so101_v1",
-            "parent_body": "base/shoulder",
+            "material": "sts3215_03a_v1_material",
+            "mesh": "sts3215_03a_v1",
+            "parent_body": "base/shoulder/upper_arm",
             "pos": [
-              0.0122008,
-              2.2241e-05,
-              0.0464
+              -0.11257,
+              -0.0155,
+              0.0187
             ],
             "quat": [
-              0.707107,
+              0.0,
               -0.707107,
-              -0.0,
-              0.0
+              0.707107,
+              -0.0
             ],
             "type": "mesh"
           }
@@ -496,6 +472,30 @@
             ],
             "type": "mesh"
           }
+        },
+        {
+          "decision": "retain",
+          "key": "geom:base/shoulder:unnamed:fcbbdb3d6ee5#1",
+          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
+          "runtime": {
+            "class": "collision",
+            "group": 3.0,
+            "material": "rotation_pitch_so101_v1_material",
+            "mesh": "rotation_pitch_so101_v1",
+            "parent_body": "base/shoulder",
+            "pos": [
+              0.0122008,
+              2.2241e-05,
+              0.0464
+            ],
+            "quat": [
+              0.707107,
+              -0.707107,
+              -0.0,
+              0.0
+            ],
+            "type": "mesh"
+          }
         }
       ],
       "matched": [],
@@ -503,7 +503,7 @@
       "missing": [
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:8ddacc8fc951#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:309bf43220aa#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -531,7 +531,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:e82f85951511#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:af5747107af1#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -587,7 +587,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:78b04d5b8c16#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:287bd38659b8#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -615,7 +615,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm:unnamed:8f513c520bb7#1",
+          "key": "geom:base/shoulder/upper_arm:unnamed:0f77ae68d6a9#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -671,7 +671,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder:unnamed:054f8bc41b5a#1",
+          "key": "geom:base/shoulder:unnamed:797ceab66a1d#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -699,7 +699,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder:unnamed:92c40e93be93#1",
+          "key": "geom:base/shoulder:unnamed:a7344184585e#1",
           "menagerie": {
             "class": "collision",
             "condim": 3.0,
@@ -1256,7 +1256,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:8ddacc8fc951#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:309bf43220aa#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1264,7 +1264,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:e82f85951511#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:unnamed:af5747107af1#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1280,7 +1280,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:78b04d5b8c16#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:unnamed:287bd38659b8#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1288,7 +1288,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder/upper_arm:unnamed:8f513c520bb7#1",
+          "key": "geom:base/shoulder/upper_arm:unnamed:0f77ae68d6a9#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1304,7 +1304,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder:unnamed:054f8bc41b5a#1",
+          "key": "geom:base/shoulder:unnamed:797ceab66a1d#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1312,7 +1312,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:base/shoulder:unnamed:92c40e93be93#1",
+          "key": "geom:base/shoulder:unnamed:a7344184585e#1",
           "menagerie": {
             "condim": 3.0
           },
@@ -1456,7 +1456,7 @@
       "extra": [
         {
           "decision": "retain",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:unnamed:1895b7be566b#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:unnamed:7a152785b9e7#1",
           "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
@@ -1504,7 +1504,7 @@
         },
         {
           "decision": "retain",
-          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:unnamed:6fe4614fc52d#1",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:unnamed:d9888afab412#1",
           "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
           "runtime": {
             "class": "collision",
@@ -2770,16 +2770,16 @@
           "compared_values": {
             "menagerie": {
               "quat": [
-                -0.0,
-                -0.0,
+                0.0,
+                0.0,
                 1.0,
-                -0.0
+                0.0
               ]
             },
             "runtime": {
               "quat": [
-                -0.0,
-                -0.0,
+                0.0,
+                0.0,
                 1.0,
                 0.0
               ]
@@ -3097,9 +3097,9 @@
             "runtime": {
               "quat": [
                 0.707106781,
-                -0.0,
+                0.0,
                 0.707106781,
-                -0.0
+                0.0
               ]
             }
           },
@@ -3204,10 +3204,10 @@
         "xyaxes",
         "zaxis"
       ],
-      "version": "scenesmith.structural_twin_diff.unnamed_geom_identity.v1"
+      "version": "scenesmith.structural_twin_diff.unnamed_geom_identity.v2"
     }
   },
-  "identity_sha256": "5b070b1b1f98aad3eaf00d4bd9d153ab78f53ec4046b0948ef2cf5ae93387683",
+  "identity_sha256": "fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9",
   "schema_version": "scenesmith.structural_twin_diff.v1",
   "sources": {
     "menagerie": {

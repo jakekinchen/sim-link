@@ -6,9 +6,9 @@ Updated: 2026-07-10
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.3 unnamed-geom identity v2 correction
-completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, and truthful inertial/contact evidence
-evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and 07a652e; manager intervention 008 supplies direct counterexamples to the v1 identity claim despite 21 focused and 46 broad passing tests
-remaining: canonical quaternion identity hashing and deterministic same-stem duplicate ordering, then T16.4-T16.5, M17-M19 prerequisites, and Gates C-D
+completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction
+evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and 07a652e; manager intervention 008 supplied the v1 counterexamples; brief 022 now passes 24 focused structural-diff tests, py_compile, live artifact write+verify, and 49 broad robot-lab tests with identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
+remaining: reviewer re-audit for T16.3 closeout, then T16.4-T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
 next_step: execute brief 022 and obtain a new independent T16.3 reviewer decision
 ```
@@ -126,6 +126,20 @@ Remaining: canonical quaternion identity hashing, deterministic full-attribute d
 Blockers: none for offline correction
 Training lock: closed
 Next step: execute brief 022; do not execute deferred brief 021
+```
+
+### 2026-07-10 - T16.3 unnamed-geom identity v2 correction
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: unnamed collision-key hashing now canonicalizes equivalent explicit quaternions, same-stem duplicate occurrence suffixes are assigned after deterministic full-attribute sorting, signed-zero quaternion spellings collapse to the same canonical payload, and the tracked artifact now declares identity strategy v2
+Evidence: configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json identity fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9; 24 focused structural-diff tests; py_compile of structural diff, tests, and CLI; live CLI write+verify pass; 49 broad robot-lab tests
+Commit: pending
+Remaining: fresh reviewer rerun of the adversarial fixtures and live verify path to close T16.3
+Blockers: none for offline correction
+Training lock: closed
+Next step: obtain a reviewer decision on brief 022 before reopening deferred brief 021 / T16.4
 ```
 
 ### 2026-07-10 - T16.3 reviewer closeout (superseded by manager intervention 008)

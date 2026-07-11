@@ -54,6 +54,45 @@ def _model_from_xml(xml_text: str) -> dict:
 
 
 class StructuralTwinDiffTests(unittest.TestCase):
+    def test_extract_unnamed_geom_identities_canonicalize_equivalent_quaternions(self):
+        runtime_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0" quat="1 0 1 0"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+        menagerie_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0" quat="-0.5 0 -0.5 0"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+
+        runtime_records = runtime_model["categories"]["arm_collisions"]["records"]
+        menagerie_records = menagerie_model["categories"]["arm_collisions"]["records"]
+        self.assertEqual(sorted(runtime_records), sorted(menagerie_records))
+
+        category = _compare_extracted_category(
+            "arm_collisions",
+            runtime_model["categories"]["arm_collisions"],
+            menagerie_model["categories"]["arm_collisions"],
+        )
+
+        self.assertEqual(len(category["matched"]), 1)
+        self.assertFalse(category["mismatched"])
+        self.assertFalse(category["missing"])
+        self.assertFalse(category["extra"])
+
     def test_extract_collision_and_friction_records_are_order_invariant_for_unnamed_geoms(self):
         base_xml = """
             <mujoco>
@@ -78,6 +117,92 @@ class StructuralTwinDiffTests(unittest.TestCase):
 
         base_model = _model_from_xml(base_xml)
         reordered_model = _model_from_xml(reordered_xml)
+
+        self.assertEqual(
+            base_model["categories"]["arm_collisions"],
+            reordered_model["categories"]["arm_collisions"],
+        )
+        self.assertEqual(
+            base_model["categories"]["friction"],
+            reordered_model["categories"]["friction"],
+        )
+
+    def test_extract_collision_and_friction_records_are_order_invariant_for_same_stem_explicit_friction_duplicates(self):
+        base_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0" friction="1 0.1 0.01"/>
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0" friction="2 0.1 0.01"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+        reordered_model = _model_from_xml(
+            """
+            <mujoco>
+              <worldbody>
+                <body name="arm">
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0" friction="2 0.1 0.01"/>
+                  <geom type="box" size="0.1 0.2 0.3" pos="0 0 0" friction="1 0.1 0.01"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+
+        self.assertEqual(
+            base_model["categories"]["arm_collisions"],
+            reordered_model["categories"]["arm_collisions"],
+        )
+        self.assertEqual(
+            base_model["categories"]["friction"],
+            reordered_model["categories"]["friction"],
+        )
+
+    def test_extract_collision_and_friction_records_are_order_invariant_for_same_stem_class_duplicates(self):
+        base_model = _model_from_xml(
+            """
+            <mujoco>
+              <default>
+                <default class="low_friction">
+                  <geom friction="1 0.1 0.01"/>
+                </default>
+                <default class="high_friction">
+                  <geom friction="2 0.1 0.01"/>
+                </default>
+              </default>
+              <worldbody>
+                <body name="arm">
+                  <geom class="low_friction" type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                  <geom class="high_friction" type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+        reordered_model = _model_from_xml(
+            """
+            <mujoco>
+              <default>
+                <default class="low_friction">
+                  <geom friction="1 0.1 0.01"/>
+                </default>
+                <default class="high_friction">
+                  <geom friction="2 0.1 0.01"/>
+                </default>
+              </default>
+              <worldbody>
+                <body name="arm">
+                  <geom class="high_friction" type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                  <geom class="low_friction" type="box" size="0.1 0.2 0.3" pos="0 0 0"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
 
         self.assertEqual(
             base_model["categories"]["arm_collisions"],
@@ -277,7 +402,7 @@ class StructuralTwinDiffTests(unittest.TestCase):
             payload["identifier_strategy"],
             {
                 "unnamed_geom_identity": {
-                    "version": "scenesmith.structural_twin_diff.unnamed_geom_identity.v1",
+                    "version": "scenesmith.structural_twin_diff.unnamed_geom_identity.v2",
                     "key_fields": [
                         "type",
                         "mesh",

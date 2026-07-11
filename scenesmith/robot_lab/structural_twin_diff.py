@@ -57,7 +57,7 @@ QUATERNION_SEMANTIC_CATEGORIES = {
 }
 QUATERNION_TOLERANCE = 1e-7
 FRICTION_RELEVANT_KEYS = {"damping", "frictionloss", "armature", "condim", "friction", "solref", "priority"}
-UNNAMED_GEOM_IDENTITY_VERSION = "scenesmith.structural_twin_diff.unnamed_geom_identity.v1"
+UNNAMED_GEOM_IDENTITY_VERSION = "scenesmith.structural_twin_diff.unnamed_geom_identity.v2"
 UNNAMED_GEOM_IDENTITY_FIELDS = (
     "type",
     "mesh",
@@ -567,21 +567,42 @@ def _iter_collision_geom_keys(body_path: str, body: ET.Element) -> list[tuple[st
 
     keys = list(named)
     for stem in sorted(unnamed_groups):
-        geoms = unnamed_groups[stem]
+        geoms = sorted(unnamed_groups[stem], key=_unnamed_geom_ordering_key)
         for occurrence_index, geom in enumerate(geoms, start=1):
             keys.append((f"{stem}#{occurrence_index}", geom))
     return keys
 
 
 def _unnamed_geom_identity_stem(body_path: str, geom: ET.Element) -> str:
-    identity_payload = {
-        key: _normalize_attr_value(geom.attrib[key])
-        for key in UNNAMED_GEOM_IDENTITY_FIELDS
-        if key in geom.attrib
-    }
+    identity_payload = _canonicalize_geom_attrs(geom, keys=UNNAMED_GEOM_IDENTITY_FIELDS)
     canonical = json.dumps(identity_payload, sort_keys=True, separators=(",", ":"))
     digest = hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:12]
     return f"unnamed:{digest}"
+
+
+def _unnamed_geom_ordering_key(geom: ET.Element) -> str:
+    return json.dumps(
+        _canonicalize_geom_attrs(geom, keys=tuple(sorted(geom.attrib))),
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _canonicalize_geom_attrs(geom: ET.Element, *, keys: tuple[str, ...]) -> dict[str, Any]:
+    payload: dict[str, Any] = {}
+    for key in keys:
+        if key not in geom.attrib:
+            continue
+        payload[key] = _canonicalize_geom_attr(key, geom.attrib[key])
+    return payload
+
+
+def _canonicalize_geom_attr(key: str, value: str) -> Any:
+    normalized = _normalize_attr_value(value)
+    if key != "quat":
+        return normalized
+    canonical = _canonicalize_quaternion(normalized)
+    return canonical if canonical is not None else normalized
 
 
 def _compare_category(
@@ -784,9 +805,13 @@ def _canonicalize_quaternion(value: Any, *, use_identity_default: bool = False) 
     norm = math.sqrt(sum(float(item) * float(item) for item in value))
     if norm == 0:
         return None
-    normalized = [round(float(item) / norm, 9) for item in value]
+    normalized = [_canonicalize_zero(round(float(item) / norm, 9)) for item in value]
     sign = _canonical_quaternion_sign(normalized)
-    return [round(item * sign, 9) for item in normalized]
+    return [_canonicalize_zero(round(item * sign, 9)) for item in normalized]
+
+
+def _canonicalize_zero(value: float) -> float:
+    return 0.0 if value == 0 else value
 
 
 def _canonical_quaternion_sign(value: list[float]) -> float:
