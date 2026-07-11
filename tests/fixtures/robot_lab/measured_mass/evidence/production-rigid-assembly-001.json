@@ -1,0 +1,6 @@
+{
+  "calibration_id": "fixture-rigid-assembly-cal-001",
+  "device_id": "fixture-rigid-assembly-rig-001",
+  "evidence_class": "fixture",
+  "measurement": "rigid assembly mass center of mass and inertia tensor"
+}

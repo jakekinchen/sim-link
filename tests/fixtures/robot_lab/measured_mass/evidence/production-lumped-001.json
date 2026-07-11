@@ -1,0 +1,6 @@
+{
+  "calibration_id": "fixture-lumped-cal-001",
+  "device_id": "fixture-lumped-estimator-001",
+  "evidence_class": "fixture",
+  "measurement": "lumped component mass center of mass and estimated inertia"
+}

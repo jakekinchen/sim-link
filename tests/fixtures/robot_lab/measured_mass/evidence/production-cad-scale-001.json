@@ -1,0 +1,7 @@
+{
+  "calibration_id": "fixture-scale-cal-cad-001",
+  "device_id": "fixture-scale-cad-001",
+  "evidence_class": "fixture",
+  "measurement": "cad_scaled mass only",
+  "reading_grams": 1000.0
+}

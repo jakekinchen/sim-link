@@ -24,6 +24,13 @@ from scenesmith.robot_lab.artifact_contract import (
 )
 
 from scenesmith.robot_lab.robotics_dependency_lock import verify_robotics_dependency_lock
+from scenesmith.robot_lab.production_inertial_compiler import (
+    PRODUCTION_FIXTURE_STATUS,
+    PRODUCTION_INTAKE_SCHEMA_VERSION,
+    compile_production_inertials,
+    verify_production_intake,
+    verify_production_output,
+)
 from scenesmith.robot_lab.structural_twin_diff import (
     DEFAULT_STRUCTURAL_TWIN_DIFF_PATH,
     verify_structural_twin_diff,
@@ -168,6 +175,8 @@ def build_assembly_inertials(
         twin_profile_path=twin_profile_path,
         structural_diff_path=structural_diff_path,
     )
+    if intake["payload"].get("schema_version") == PRODUCTION_INTAKE_SCHEMA_VERSION:
+        return compile_production_inertials(intake["payload"], repo_root=repo_root)
     if intake["payload"].get("status") == SYNTHETIC_TEST_ONLY_STATUS:
         return _build_synthetic_ready_assembly_inertials(intake=intake)
     return _build_blocked_assembly_inertials(intake=intake)
@@ -416,6 +425,9 @@ def verify_measured_mass_intake(
     twin_profile_path: Path = DEFAULT_TWIN_PROFILE_PATH,
     structural_diff_path: Path = DEFAULT_STRUCTURAL_TWIN_DIFF_PATH,
 ) -> None:
+    if payload.get("schema_version") == PRODUCTION_INTAKE_SCHEMA_VERSION:
+        verify_production_intake(payload, repo_root=repo_root)
+        return
     if payload.get("schema_version") != MEASURED_MASS_INTAKE_SCHEMA_VERSION:
         raise ValueError("Unsupported measured mass intake schema")
     _verify_identity(payload, label="Measured mass intake")
@@ -553,6 +565,13 @@ def verify_assembly_inertials(
         twin_profile_path=twin_profile_path,
         structural_diff_path=structural_diff_path,
     )
+    if intake["payload"].get("schema_version") == PRODUCTION_INTAKE_SCHEMA_VERSION:
+        verify_production_output(
+            payload,
+            intake=intake["payload"],
+            repo_root=repo_root,
+        )
+        return
     _verify_ref(payload.get("dependency_lock_ref"), intake["payload"]["dependency_lock_ref"], label="Dependency lock")
     _verify_ref(payload.get("twin_profile_ref"), intake["payload"]["twin_profile_ref"], label="Twin profile")
     _verify_ref(payload.get("structural_diff_ref"), intake["payload"]["structural_diff_ref"], label="Structural diff")
@@ -628,7 +647,13 @@ def write_assembly_inertials(
         structural_diff_path=structural_diff_path,
     )
     intake_payload = _read_json(_resolve(repo_root=repo_root, path=intake_path))
-    if intake_payload.get("status") == SYNTHETIC_TEST_ONLY_STATUS:
+    if (
+        intake_payload.get("schema_version") == PRODUCTION_INTAKE_SCHEMA_VERSION
+        or intake_payload.get("status") in {
+            SYNTHETIC_TEST_ONLY_STATUS,
+            PRODUCTION_FIXTURE_STATUS,
+        }
+    ):
         _refuse_real_artifact_destination(repo_root=repo_root, output_path=output_path)
     _write_json(_resolve(repo_root=repo_root, path=output_path), payload)
     return payload
@@ -1098,7 +1123,9 @@ def _refuse_real_artifact_destination(*, repo_root: Path, output_path: Path) -> 
         _resolve(repo_root=repo_root, path=DEFAULT_ASSEMBLY_INERTIALS_PATH).resolve(),
     }
     if resolved_output.resolve() in forbidden:
-        raise ValueError("Synthetic test-only compilation cannot write to checked-in real artifact destinations")
+        raise ValueError(
+            "Fixture compilation cannot write to checked-in real artifact destinations"
+        )
 
 
 def _synthetic_intake_semantic_ref(payload: dict[str, Any]) -> dict[str, Any]:

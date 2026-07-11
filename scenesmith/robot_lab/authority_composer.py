@@ -761,11 +761,13 @@ def _inertial_capability_claims(
         raise ValueError("Assembly inertials must expose local capabilities")
     if set(capabilities) != set(LOCAL_CAPABILITY_IDS):
         raise ValueError("Assembly inertials local capability set drifted")
-    provenance_class = (
-        "fixture"
-        if artifact.get("qualification_scope") == "synthetic_test_only"
-        else "repository"
-    )
+    qualification_scope = artifact.get("qualification_scope")
+    if qualification_scope in {"synthetic_test_only", "fixture_evidence"}:
+        provenance_class = "fixture"
+    elif qualification_scope == "physical_measurement_evidence":
+        provenance_class = "physical"
+    else:
+        provenance_class = "repository"
     issuer = _authority_registry()["scenesmith.measured_inertial_compiler.v2"]
     evidence = build_evidence_ref(
         artifact_kind="assembly_inertials",

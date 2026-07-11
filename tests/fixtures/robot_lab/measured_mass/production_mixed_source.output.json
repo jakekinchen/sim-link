@@ -1,0 +1,1122 @@
+{
+  "aggregate_physical_properties": {
+    "center_of_mass_target_frame_m": [
+      0.016875,
+      0.4184375,
+      0.0
+    ],
+    "inertia_about_com_target_frame_kg_m2": [
+      [
+        0.418985520833,
+        0.051635625,
+        0.0
+      ],
+      [
+        0.051635625,
+        0.020303194444,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.437746493056
+      ]
+    ],
+    "mass_kg": 3.2
+  },
+  "artifact_name": "production_mixed_source_fixture_output",
+  "assembly": {
+    "assembly_id": "production_fixture_arm",
+    "canonical_units": {
+      "inertia": "kilogram_meter_squared",
+      "length": "meter",
+      "mass": "kilogram"
+    },
+    "root_component_id": "fixture_root",
+    "target_rigid_body_frame_id": "production_fixture_arm_base_frame"
+  },
+  "authority_limitations": [
+    "Fixture evidence proves the production compiler path only.",
+    "No current-arm physical measurement or global authority is established."
+  ],
+  "bom": {
+    "acyclic": true,
+    "component_count": 12,
+    "exact_cover_valid": true,
+    "required_leaf_component_ids": [
+      "cad_link",
+      "finger_left",
+      "finger_right",
+      "lumped_cable",
+      "point_payload",
+      "primitive_link",
+      "tensor_link"
+    ],
+    "root_component_id": "fixture_root",
+    "selected_component_ids": [
+      "cad_link",
+      "gripper_assembly",
+      "lumped_cable",
+      "point_payload",
+      "primitive_link",
+      "tensor_link"
+    ],
+    "unique_transform_paths": true
+  },
+  "capabilities": {
+    "artifact_schema_valid": true,
+    "inertial_compilation_valid": true,
+    "inertial_model_usable_for_simulation": true,
+    "physical_measurement_evidence_verified": false
+  },
+  "consumed_evidence_identities": [
+    "0227cdfff3fac135d457bce5ce2c781d595c1a9de27e43594b316282f9005728",
+    "1ebdea79ffaa9ad045fa39a3bc11c9add723061e6ed62da4dbd8879bb06e0765",
+    "539f47b470112ee21e2c3c6d60d427abf7b45de67f5c61981f8fb0ea014ff2b9",
+    "64e59e02459c82d866a0e12c486d89d49050121c020e8d0fbebd979073c8a5f2",
+    "8e0eddf4b43948bc9d04712f7bbcead1bb12e440ac7e87d47d4cc5459ac0a1ed",
+    "8eb650b76dfdb2620303d84584b48b10f8383b50dc5212ba7bfc0c3e9c235600"
+  ],
+  "dependency_lock_ref": {
+    "file_sha256": "169f04ee953604193f1f0dc9a3821acbb2de7dc49fcce1aba066c338c1eb7f12",
+    "identity_sha256": "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
+    "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+    "schema_version": "scenesmith.robotics_dependency_lock.v2"
+  },
+  "evidence_class": "fixture",
+  "identity_sha256": "b8d7c5d287051aa863c3ef08597deefb9dd7685ad2c89d820456f92491fef25d",
+  "intake_ref": {
+    "identity_sha256": "842215a8ba9d96be0bcec4ceafb88c99b9d293657bf2c13dcc715cf6f03a9223",
+    "path": "fixture_evidence://production_mixed_source_fixture",
+    "schema_version": "scenesmith.measured_inertial_intake.v2"
+  },
+  "qualification_scope": "fixture_evidence",
+  "schema_version": "scenesmith.assembly_inertials.v2",
+  "selected_component_results": [
+    {
+      "center_of_mass_target_frame_m": [
+        0.11,
+        0.0,
+        0.0
+      ],
+      "component_id": "cad_link",
+      "covered_required_leaf_component_ids": [
+        "cad_link"
+      ],
+      "evidence_identities": [
+        "8e0eddf4b43948bc9d04712f7bbcead1bb12e440ac7e87d47d4cc5459ac0a1ed"
+      ],
+      "inertia_about_component_com_target_frame_kg_m2": [
+        [
+          1e-05,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.1111111e-05,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.2222222e-05
+        ]
+      ],
+      "mass_kg": 1.0,
+      "measurement_id": "fixture_cad_scaled",
+      "source_mode": "cad_scaled",
+      "source_trace": {
+        "canonical_units": {
+          "inertia": "kilogram_meter_squared",
+          "length": "meter",
+          "mass": "kilogram"
+        },
+        "derivation": {
+          "center_of_mass": "cad_reference",
+          "inertia": "cad_reference_mass_scaled",
+          "mass": "measured_scale"
+        },
+        "evidence": [
+          {
+            "kind": "production_fixture_measurement",
+            "ref": "tests/fixtures/robot_lab/measured_mass/evidence/production-cad-scale-001.json",
+            "sha256": "8e0eddf4b43948bc9d04712f7bbcead1bb12e440ac7e87d47d4cc5459ac0a1ed"
+          }
+        ],
+        "evidence_class": "fixture",
+        "metrology_native": {
+          "approximation_uncertainty": {
+            "inertia": 500.0,
+            "length": 1.0,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "CAD center of mass is inherited without geometric rescaling.",
+            "CAD inertia is scaled linearly by measured-to-reference mass ratio."
+          ],
+          "repeatability": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "resolution": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "uncertainty": {
+            "inertia": 2.0,
+            "length": 0.2,
+            "mass": 0.2
+          }
+        },
+        "metrology_si": {
+          "approximation_uncertainty": {
+            "inertia": 5e-07,
+            "length": 0.001,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "CAD center of mass is inherited without geometric rescaling.",
+            "CAD inertia is scaled linearly by measured-to-reference mass ratio."
+          ],
+          "repeatability": {
+            "inertia": 1e-09,
+            "length": 0.0001,
+            "mass": 0.0001
+          },
+          "resolution": {
+            "inertia": 1e-09,
+            "length": 0.0001,
+            "mass": 0.0001
+          },
+          "uncertainty": {
+            "inertia": 2e-09,
+            "length": 0.0002,
+            "mass": 0.0002
+          }
+        },
+        "native_units": {
+          "inertia": "gram_millimeter_squared",
+          "length": "millimeter",
+          "mass": "gram"
+        },
+        "provenance": {
+          "calibration_id": "fixture-scale-cal-cad-001",
+          "device_id": "fixture-scale-cad-001",
+          "method": "bench_scale_plus_cad"
+        },
+        "raw_values_native": {
+          "cad_reference": {
+            "center_of_mass": [
+              10.0,
+              0.0,
+              0.0
+            ],
+            "inertia_about_com": [
+              [
+                9000.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                10000.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                11000.0
+              ]
+            ],
+            "mass": 900.0
+          },
+          "mass": 1000.0
+        },
+        "si_values": {
+          "cad_reference_mass_kg": 0.9,
+          "center_of_mass_component_frame_m": [
+            0.01,
+            0.0,
+            0.0
+          ],
+          "inertia_about_com_component_frame_kg_m2": [
+            [
+              1e-05,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.1111111e-05,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.2222222e-05
+            ]
+          ],
+          "mass_kg": 1.0,
+          "mass_scale_ratio": 1.111111111111
+        }
+      },
+      "transform_path_component_ids": [
+        "fixture_root",
+        "base_group",
+        "cad_link"
+      ]
+    },
+    {
+      "center_of_mass_target_frame_m": [
+        0.0,
+        0.62,
+        0.0
+      ],
+      "component_id": "tensor_link",
+      "covered_required_leaf_component_ids": [
+        "tensor_link"
+      ],
+      "evidence_identities": [
+        "539f47b470112ee21e2c3c6d60d427abf7b45de67f5c61981f8fb0ea014ff2b9"
+      ],
+      "inertia_about_component_com_target_frame_kg_m2": [
+        [
+          0.003,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.002,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.004
+        ]
+      ],
+      "mass_kg": 0.8,
+      "measurement_id": "fixture_direct_tensor",
+      "source_mode": "direct_inertia_tensor",
+      "source_trace": {
+        "canonical_units": {
+          "inertia": "kilogram_meter_squared",
+          "length": "meter",
+          "mass": "kilogram"
+        },
+        "derivation": {
+          "center_of_mass": "direct_measurement",
+          "inertia": "direct_tensor_measurement",
+          "mass": "measured_scale"
+        },
+        "evidence": [
+          {
+            "kind": "production_fixture_measurement",
+            "ref": "tests/fixtures/robot_lab/measured_mass/evidence/production-direct-tensor-001.json",
+            "sha256": "539f47b470112ee21e2c3c6d60d427abf7b45de67f5c61981f8fb0ea014ff2b9"
+          }
+        ],
+        "evidence_class": "fixture",
+        "metrology_native": {
+          "approximation_uncertainty": {
+            "inertia": 5e-05,
+            "length": 0.0005,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "Tensor is expressed about the measured COM in the component frame."
+          ],
+          "repeatability": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "resolution": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "uncertainty": {
+            "inertia": 2.0,
+            "length": 0.2,
+            "mass": 0.2
+          }
+        },
+        "metrology_si": {
+          "approximation_uncertainty": {
+            "inertia": 5e-05,
+            "length": 0.0005,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "Tensor is expressed about the measured COM in the component frame."
+          ],
+          "repeatability": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "resolution": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "uncertainty": {
+            "inertia": 2.0,
+            "length": 0.2,
+            "mass": 0.2
+          }
+        },
+        "native_units": {
+          "inertia": "kilogram_meter_squared",
+          "length": "meter",
+          "mass": "kilogram"
+        },
+        "provenance": {
+          "calibration_id": "fixture-inertia-cal-001",
+          "device_id": "fixture-inertia-rig-001",
+          "method": "direct_inertia_fixture"
+        },
+        "raw_values_native": {
+          "center_of_mass": [
+            0.02,
+            0.0,
+            0.0
+          ],
+          "inertia_about_com": [
+            [
+              0.002,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.003,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.004
+            ]
+          ],
+          "mass": 0.8
+        },
+        "si_values": {
+          "center_of_mass_component_frame_m": [
+            0.02,
+            0.0,
+            0.0
+          ],
+          "inertia_about_com_component_frame_kg_m2": [
+            [
+              0.002,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.003,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.004
+            ]
+          ],
+          "mass_kg": 0.8
+        }
+      },
+      "transform_path_component_ids": [
+        "fixture_root",
+        "arm_group",
+        "tensor_link"
+      ]
+    },
+    {
+      "center_of_mass_target_frame_m": [
+        -0.12,
+        0.79,
+        0.0
+      ],
+      "component_id": "lumped_cable",
+      "covered_required_leaf_component_ids": [
+        "lumped_cable"
+      ],
+      "evidence_identities": [
+        "8eb650b76dfdb2620303d84584b48b10f8383b50dc5212ba7bfc0c3e9c235600"
+      ],
+      "inertia_about_component_com_target_frame_kg_m2": [
+        [
+          0.0003,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0002,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0004
+        ]
+      ],
+      "mass_kg": 0.3,
+      "measurement_id": "fixture_lumped_component",
+      "source_mode": "lumped_component",
+      "source_trace": {
+        "canonical_units": {
+          "inertia": "kilogram_meter_squared",
+          "length": "meter",
+          "mass": "kilogram"
+        },
+        "derivation": {
+          "center_of_mass": "lumped_estimate",
+          "inertia": "lumped_tensor_estimate",
+          "mass": "measured_scale"
+        },
+        "evidence": [
+          {
+            "kind": "production_fixture_measurement",
+            "ref": "tests/fixtures/robot_lab/measured_mass/evidence/production-lumped-001.json",
+            "sha256": "8eb650b76dfdb2620303d84584b48b10f8383b50dc5212ba7bfc0c3e9c235600"
+          }
+        ],
+        "evidence_class": "fixture",
+        "metrology_native": {
+          "approximation_uncertainty": {
+            "inertia": 0.0001,
+            "length": 0.005,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "Cable bundle is represented by one lumped rigid component."
+          ],
+          "repeatability": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "resolution": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "uncertainty": {
+            "inertia": 2.0,
+            "length": 0.2,
+            "mass": 0.2
+          }
+        },
+        "metrology_si": {
+          "approximation_uncertainty": {
+            "inertia": 0.0001,
+            "length": 0.005,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "Cable bundle is represented by one lumped rigid component."
+          ],
+          "repeatability": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "resolution": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "uncertainty": {
+            "inertia": 2.0,
+            "length": 0.2,
+            "mass": 0.2
+          }
+        },
+        "native_units": {
+          "inertia": "kilogram_meter_squared",
+          "length": "meter",
+          "mass": "kilogram"
+        },
+        "provenance": {
+          "calibration_id": "fixture-lumped-cal-001",
+          "device_id": "fixture-lumped-estimator-001",
+          "method": "lumped_component_fixture"
+        },
+        "raw_values_native": {
+          "center_of_mass": [
+            -0.01,
+            0.02,
+            0.0
+          ],
+          "inertia_about_com": [
+            [
+              0.0002,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0003,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0004
+            ]
+          ],
+          "mass": 0.3
+        },
+        "si_values": {
+          "center_of_mass_component_frame_m": [
+            -0.01,
+            0.02,
+            0.0
+          ],
+          "inertia_about_com_component_frame_kg_m2": [
+            [
+              0.0002,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0003,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0004
+            ]
+          ],
+          "mass_kg": 0.3
+        }
+      },
+      "transform_path_component_ids": [
+        "fixture_root",
+        "arm_group",
+        "wrist_group",
+        "lumped_cable"
+      ]
+    },
+    {
+      "center_of_mass_target_frame_m": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "component_id": "gripper_assembly",
+      "covered_required_leaf_component_ids": [
+        "finger_left",
+        "finger_right"
+      ],
+      "evidence_identities": [
+        "64e59e02459c82d866a0e12c486d89d49050121c020e8d0fbebd979073c8a5f2"
+      ],
+      "inertia_about_component_com_target_frame_kg_m2": [
+        [
+          0.0006,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0005,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0007
+        ]
+      ],
+      "mass_kg": 0.4,
+      "measurement_id": "fixture_measured_rigid_assembly",
+      "source_mode": "measured_rigid_assembly",
+      "source_trace": {
+        "canonical_units": {
+          "inertia": "kilogram_meter_squared",
+          "length": "meter",
+          "mass": "kilogram"
+        },
+        "derivation": {
+          "center_of_mass": "rigid_assembly_measurement",
+          "inertia": "rigid_assembly_tensor_measurement",
+          "mass": "measured_scale"
+        },
+        "evidence": [
+          {
+            "kind": "production_fixture_measurement",
+            "ref": "tests/fixtures/robot_lab/measured_mass/evidence/production-rigid-assembly-001.json",
+            "sha256": "64e59e02459c82d866a0e12c486d89d49050121c020e8d0fbebd979073c8a5f2"
+          }
+        ],
+        "evidence_class": "fixture",
+        "metrology_native": {
+          "approximation_uncertainty": {
+            "inertia": 5000.0,
+            "length": 0.5,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "Both required finger leaves are rigidly installed during assembly measurement."
+          ],
+          "repeatability": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "resolution": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "uncertainty": {
+            "inertia": 2.0,
+            "length": 0.2,
+            "mass": 0.2
+          }
+        },
+        "metrology_si": {
+          "approximation_uncertainty": {
+            "inertia": 5e-06,
+            "length": 0.0005,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "Both required finger leaves are rigidly installed during assembly measurement."
+          ],
+          "repeatability": {
+            "inertia": 1e-09,
+            "length": 0.0001,
+            "mass": 0.0001
+          },
+          "resolution": {
+            "inertia": 1e-09,
+            "length": 0.0001,
+            "mass": 0.0001
+          },
+          "uncertainty": {
+            "inertia": 2e-09,
+            "length": 0.0002,
+            "mass": 0.0002
+          }
+        },
+        "native_units": {
+          "inertia": "gram_millimeter_squared",
+          "length": "millimeter",
+          "mass": "gram"
+        },
+        "provenance": {
+          "calibration_id": "fixture-rigid-assembly-cal-001",
+          "device_id": "fixture-rigid-assembly-rig-001",
+          "method": "rigid_assembly_fixture"
+        },
+        "raw_values_native": {
+          "center_of_mass": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "inertia_about_com": [
+            [
+              500000.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              600000.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              700000.0
+            ]
+          ],
+          "mass": 400.0
+        },
+        "si_values": {
+          "center_of_mass_component_frame_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "inertia_about_com_component_frame_kg_m2": [
+            [
+              0.0005,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0006,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0007
+            ]
+          ],
+          "mass_kg": 0.4
+        }
+      },
+      "transform_path_component_ids": [
+        "fixture_root",
+        "arm_group",
+        "wrist_group",
+        "gripper_assembly"
+      ]
+    },
+    {
+      "center_of_mass_target_frame_m": [
+        -0.1,
+        0.03,
+        0.0
+      ],
+      "component_id": "point_payload",
+      "covered_required_leaf_component_ids": [
+        "point_payload"
+      ],
+      "evidence_identities": [
+        "1ebdea79ffaa9ad045fa39a3bc11c9add723061e6ed62da4dbd8879bb06e0765"
+      ],
+      "inertia_about_component_com_target_frame_kg_m2": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "mass_kg": 0.2,
+      "measurement_id": "fixture_point_mass",
+      "source_mode": "point_mass",
+      "source_trace": {
+        "canonical_units": {
+          "inertia": "kilogram_meter_squared",
+          "length": "meter",
+          "mass": "kilogram"
+        },
+        "derivation": {
+          "center_of_mass": "direct_measurement",
+          "inertia": "point_mass_zero_about_com",
+          "mass": "measured_scale"
+        },
+        "evidence": [
+          {
+            "kind": "production_fixture_measurement",
+            "ref": "tests/fixtures/robot_lab/measured_mass/evidence/production-point-mass-001.json",
+            "sha256": "1ebdea79ffaa9ad045fa39a3bc11c9add723061e6ed62da4dbd8879bb06e0765"
+          }
+        ],
+        "evidence_class": "fixture",
+        "metrology_native": {
+          "approximation_uncertainty": {
+            "inertia": 1e-05,
+            "length": 0.001,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "The component is represented as a point mass about its own COM."
+          ],
+          "repeatability": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "resolution": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "uncertainty": {
+            "inertia": 2.0,
+            "length": 0.2,
+            "mass": 0.2
+          }
+        },
+        "metrology_si": {
+          "approximation_uncertainty": {
+            "inertia": 1e-05,
+            "length": 0.001,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "The component is represented as a point mass about its own COM."
+          ],
+          "repeatability": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "resolution": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "uncertainty": {
+            "inertia": 2.0,
+            "length": 0.2,
+            "mass": 0.2
+          }
+        },
+        "native_units": {
+          "inertia": "kilogram_meter_squared",
+          "length": "meter",
+          "mass": "kilogram"
+        },
+        "provenance": {
+          "calibration_id": "fixture-scale-cal-point-001",
+          "device_id": "fixture-scale-point-001",
+          "method": "bench_scale_and_location_fixture"
+        },
+        "raw_values_native": {
+          "center_of_mass": [
+            0.0,
+            0.03,
+            0.0
+          ],
+          "mass": 0.2
+        },
+        "si_values": {
+          "center_of_mass_component_frame_m": [
+            0.0,
+            0.03,
+            0.0
+          ],
+          "inertia_about_com_component_frame_kg_m2": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "mass_kg": 0.2
+        }
+      },
+      "transform_path_component_ids": [
+        "fixture_root",
+        "base_group",
+        "point_payload"
+      ]
+    },
+    {
+      "center_of_mass_target_frame_m": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "component_id": "primitive_link",
+      "covered_required_leaf_component_ids": [
+        "primitive_link"
+      ],
+      "evidence_identities": [
+        "0227cdfff3fac135d457bce5ce2c781d595c1a9de27e43594b316282f9005728"
+      ],
+      "inertia_about_component_com_target_frame_kg_m2": [
+        [
+          0.000433333333,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          8.3333333e-05,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.000483333333
+        ]
+      ],
+      "mass_kg": 0.5,
+      "measurement_id": "fixture_primitive_geometry",
+      "source_mode": "primitive_geometry",
+      "source_trace": {
+        "canonical_units": {
+          "inertia": "kilogram_meter_squared",
+          "length": "meter",
+          "mass": "kilogram"
+        },
+        "derivation": {
+          "center_of_mass": "direct_measurement",
+          "inertia": "primitive_geometry",
+          "mass": "measured_scale"
+        },
+        "evidence": [
+          {
+            "kind": "production_fixture_measurement",
+            "ref": "tests/fixtures/robot_lab/measured_mass/evidence/production-primitive-001.json",
+            "sha256": "0227cdfff3fac135d457bce5ce2c781d595c1a9de27e43594b316282f9005728"
+          }
+        ],
+        "evidence_class": "fixture",
+        "metrology_native": {
+          "approximation_uncertainty": {
+            "inertia": 200.0,
+            "length": 0.5,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "Uniform-density rectangular box approximation."
+          ],
+          "repeatability": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "resolution": {
+            "inertia": 1.0,
+            "length": 0.1,
+            "mass": 0.1
+          },
+          "uncertainty": {
+            "inertia": 2.0,
+            "length": 0.2,
+            "mass": 0.2
+          }
+        },
+        "metrology_si": {
+          "approximation_uncertainty": {
+            "inertia": 2e-07,
+            "length": 0.0005,
+            "mass": 0.0
+          },
+          "inherited_assumptions": [
+            "Uniform-density rectangular box approximation."
+          ],
+          "repeatability": {
+            "inertia": 1e-09,
+            "length": 0.0001,
+            "mass": 0.0001
+          },
+          "resolution": {
+            "inertia": 1e-09,
+            "length": 0.0001,
+            "mass": 0.0001
+          },
+          "uncertainty": {
+            "inertia": 2e-09,
+            "length": 0.0002,
+            "mass": 0.0002
+          }
+        },
+        "native_units": {
+          "inertia": "gram_millimeter_squared",
+          "length": "millimeter",
+          "mass": "gram"
+        },
+        "provenance": {
+          "calibration_id": "fixture-caliper-scale-cal-001",
+          "device_id": "fixture-caliper-scale-001",
+          "method": "bench_scale_and_caliper_fixture"
+        },
+        "raw_values_native": {
+          "center_of_mass": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "geometry": {
+            "dimensions": [
+              100.0,
+              40.0,
+              20.0
+            ],
+            "shape": "box"
+          },
+          "mass": 500.0
+        },
+        "si_values": {
+          "center_of_mass_component_frame_m": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "inertia_about_com_component_frame_kg_m2": [
+            [
+              8.3333333e-05,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.000433333333,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.000483333333
+            ]
+          ],
+          "mass_kg": 0.5,
+          "primitive_dimensions_m": [
+            0.1,
+            0.04,
+            0.02
+          ],
+          "primitive_shape": "box"
+        }
+      },
+      "transform_path_component_ids": [
+        "fixture_root",
+        "arm_group",
+        "primitive_link"
+      ]
+    }
+  ],
+  "source_mode_counts": {
+    "cad_scaled": 1,
+    "direct_inertia_tensor": 1,
+    "lumped_component": 1,
+    "measured_rigid_assembly": 1,
+    "point_mass": 1,
+    "primitive_geometry": 1
+  },
+  "status": "ready",
+  "structural_diff_ref": {
+    "file_sha256": "d8dd9670be2125be171b8b2dce91b271920d45865dc19cb424b851e9c91a1be1",
+    "identity_sha256": "34200be34fe6c0dbe7a6a1b608a49af74d08e111dd52b43ee1d181df71e767cf",
+    "path": "configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json",
+    "schema_version": "scenesmith.structural_twin_diff.v1"
+  },
+  "twin_profile_ref": {
+    "file_sha256": "09da7945144aa8cbdd6b67475d8da3c195b1e63a479128a1fbac591ef8e36b38",
+    "identity_sha256": "7775b3858aaf4f80dc51f9f824f73c28028f22fa3cba53e404772d8091354494",
+    "path": "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
+    "schema_version": "scenesmith.twin_profile.v1"
+  }
+}

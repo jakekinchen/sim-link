@@ -1,0 +1,6 @@
+{
+  "calibration_id": "fixture-inertia-cal-001",
+  "device_id": "fixture-inertia-rig-001",
+  "evidence_class": "fixture",
+  "measurement": "direct mass center of mass and inertia tensor"
+}
