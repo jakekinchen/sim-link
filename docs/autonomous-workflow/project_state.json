@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
-  "last_reviewed_implementation_commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
+  "verified_through_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
+  "last_reviewed_implementation_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
   "source_review": {
-    "commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
-    "decision": "VERIFY_BRIEF_042_OFFLINE_AND_REQUIRE_P0_STATE_INTEGRITY_GATES",
-    "reviewer_decision": "docs/reviewer-messages/059-brief-042-offline-diagnostics-reviewed.md"
+    "commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
+    "decision": "VERIFY_BRIEF_043_OFFLINE_AND_KEEP_LIVE_GATE_CLOSED_FOR_SEPARATE_REVIEW",
+    "reviewer_decision": "docs/reviewer-messages/060-brief-043-state-integrity-gates-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -78,8 +78,7 @@
       "execution_disposition": "treat owner messages as the documented resumed run and continue the fresh blocked audit without falsely completing or replacing the goal"
     },
     "immediately_authorized": [
-      "prepare_finite_supervised_motion_plan",
-      "exact_virtual_follower_disconnect_and_zero_holder_verification"
+      "prepare_finite_supervised_motion_plan"
     ],
     "conditional_authority": [
       {
@@ -87,7 +86,7 @@
         "allows": [
           "live_hardware_discovery",
           "live_read_only_census",
-          "synchronized_camera_capture"
+          "finite_physical_camera_capture"
         ]
       },
       {
@@ -385,9 +384,8 @@
       "metadata_compatibility_correction_commit": "b85a253",
       "metadata_review_decision_id": "051",
       "correction_brief_id": "041",
-      "completed_correction_brief_id": "042",
-      "active_correction_brief_id": "043",
-      "rejected_attempt_review_decision_id": "052",
+      "completed_correction_brief_id": "043",
+      "rejected_attempt_review_decision_ids": ["052", "058"],
       "camera_identity_correction_commits": [
         "ea99ec9",
         "66003d8",
@@ -395,16 +393,17 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "059",
-      "result": "Brief 042 bounded camera-failure diagnostics are verified offline at 2d1cd97; live gate remains closed for Brief 043 machine disconnect proof, all-alias holder coverage, and Torque_Enable evidence",
-      "execution_note": "Brief 042 passed 24 dedicated, 40 combined census, and 219 broad robot-lab tests with both offline verifiers; no hardware was reopened during implementation",
+      "live_gate_review_decision_id": "060",
+      "result": "Brief 043 state-integrity prerequisites are verified offline at 7ea26651; the machine disconnect proof, all-signed-alias holder gate, and Torque_Enable census capability are remotely preserved while the live gate remains closed for a separate review commit",
+      "execution_note": "Brief 043 passed 50 focused and 229 broad robot-lab tests, both offline runtime verifiers, deterministic fixture and disconnect-proof verification, py_compile, privacy checks, and git diff checks; no serial or camera was opened and no Studio request, reconnect, write, torque change, motion, policy actuation, or training occurred",
       "test_commands": [
-        "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
-        "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census",
-        "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_virtual_follower_disconnect_proof.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_readonly_servo_census_fixture.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/run_live_readonly_observation.py verify-offline",
         "external/leLab/.venv/bin/python scripts/robot_lab/run_live_readonly_observation.py verify-offline",
-        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/live_readonly_observation.py scenesmith/robot_lab/readonly_servo_census.py scripts/robot_lab/run_live_readonly_observation.py tests/unit/test_live_readonly_observation.py",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/census_runtime_binding.py scenesmith/robot_lab/readonly_servo_census.py scenesmith/robot_lab/live_readonly_observation.py scenesmith/robot_lab/virtual_follower_disconnect_proof.py scripts/robot_lab/run_live_readonly_observation.py scripts/robot_lab/write_virtual_follower_disconnect_proof.py tests/unit/test_readonly_servo_census.py tests/unit/test_live_readonly_observation.py tests/unit/test_virtual_follower_disconnect_proof.py",
         "git diff --check"
       ],
       "metadata_discovery": {
@@ -458,6 +457,30 @@
           "physical_follower_commanded": false
         }
       ],
+      "virtual_disconnect_proof": {
+        "state": "verified",
+        "implementation_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
+        "tracked_artifact": "configurations/robot_lab/pi05_virtual_follower_disconnect.redacted.json",
+        "schema_version": "scenesmith.virtual_follower_disconnect_proof.v1",
+        "proof_identity_sha256": "627de4fd5715e281007ab5f19a37b0cb610b4d3b637b7b37933a41396ba3859b",
+        "private_artifact": "outputs/robot_lab/virtual_disconnect/private/20260711-0857/private_virtual_disconnect.json",
+        "private_schema_version": "scenesmith.virtual_follower_disconnect_private.v1",
+        "private_identity_sha256": "a9941b849657055037a016842e6622e30055bd25b0505a103ef4e55217a0bf4c",
+        "private_file_sha256": "9b45502b38a6e0d0413cd3d9c1927966715389cf7f19dc14c3f6069246e8618f",
+        "private_size_bytes": 5507,
+        "permit_identity_sha256": "85f91ceae787d86bc0faeb87bbf35c77ecae988baf6fcc19eb1581229d4aef43",
+        "provenance_class": "reconstructed_from_executor_operation_output",
+        "observed_call_count": 1,
+        "additional_calls_allowed": 0,
+        "all_signed_aliases_checked": true,
+        "path_count": 2,
+        "per_path_holder_counts": [0, 0],
+        "deduplicated_holder_count": 0,
+        "holder_snapshot_identity_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
+        "holder_revalidated_at": "2026-07-11T09:37:56-05:00",
+        "physical_motion_commanded": false,
+        "physical_follower_commanded": false
+      },
       "preexisting_serial_holder": {
         "observed_after_attempt": true,
         "process_role": "studio_server",
@@ -465,12 +488,12 @@
         "predates_goal_attempt": true,
         "preserved_untouched": false,
         "owner_authorized_disconnect_completed": true,
-        "exclusive_bus_ownership_proven": false,
+        "exclusive_bus_ownership_proven": true,
         "canonical_path_zero_holder_observed": true,
-        "all_signed_aliases_checked": false,
-        "last_revalidated_at": "2026-07-11T09:01:09-05:00",
+        "all_signed_aliases_checked": true,
+        "last_revalidated_at": "2026-07-11T09:37:56-05:00",
         "last_revalidated_holder_count": 0,
-        "last_revalidated_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "last_revalidated_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
         "read_only_server_status_observed_at": "2026-07-11T08:57:17-05:00",
         "hardware_status_sha256": "d58a7549bfb030a2036c9b45cbc7e4c383d235c8e1bf8da718561f9f85267e83",
         "safety_state_sha256": "8c425d38bd0ba65416df488252d8642168cc49bddf5b6fe31a516caa782da655",
@@ -499,22 +522,39 @@
         "failure_diagnostics": {
           "state": "offline_verified",
           "implementation_commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
+          "all_alias_holder_binding_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
           "schema_version": "scenesmith.named_camera_failure_diagnostic.v1",
-          "private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v1",
+          "private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v2",
           "stderr_preview_max_bytes": 2048,
           "attempt_002_retroactive_diagnostic_available": false
         }
       },
       "serial_ownership_gate": {
         "state": "offline_verified",
-        "mechanism": "canonical_path_only_normalized_lsof_holder_snapshot",
+        "mechanism": "signed_serial_identity_all_alias_lsof_holder_snapshot",
+        "required_signed_path_count": 2,
         "required_pre_open_holder_count": 0,
         "required_post_close_holder_count": 0,
         "stops_or_signals_holders": false,
         "last_observed_holder_count": 0,
-        "last_observed_at": "2026-07-11T09:01:09-05:00",
-        "last_observed_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-        "current_gate_result": "insufficient_until_all_signed_aliases_are_checked"
+        "last_observed_at": "2026-07-11T09:37:56-05:00",
+        "last_observed_per_path_holder_counts": [0, 0],
+        "last_observed_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
+        "current_gate_result": "verified_zero_holders_across_all_signed_aliases"
+      },
+      "torque_enable_gate": {
+        "state": "offline_verified_live_evidence_required",
+        "implementation_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
+        "register": "Torque_Enable",
+        "width_bytes": 1,
+        "expected_raw_value": 0,
+        "expected_servo_count": 6,
+        "fixture_contract_identity_sha256": "28d087fec96c1f79202e36e943756a0cb8dff821855e6784cdfae36881168da9",
+        "fixture_trace_identity_sha256": "41526a67d2e119f70357f7182b28688a11dc0af0f3235906d3de3d2ae938a61f",
+        "fixture_result_identity_sha256": "d58f0e8d166c4bdb8c6631e94e3202b17f98c2267c697c5740d50eae0d887111",
+        "live_requirement": "all_six_servos_must_report_Torque_Enable_zero",
+        "configuration_or_torque_writes": 0,
+        "physical_follower_commanded": false
       },
       "hardware_enumerated": true,
       "hardware_opened": true,
@@ -524,11 +564,17 @@
       "live_gate_opened_at": "2026-07-11T09:01:09-05:00",
       "live_gate_closed_at": "2026-07-11T09:04:30-05:00",
       "live_gate_close_reason": "live_attempt_002_named_camera_ffmpeg_subprocess_nonzero",
+      "live_gate_reconsideration_state": "brief_043_verified_but_separate_live_gate_review_commit_required",
       "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
       "live_gate_basis": {
-        "disconnect_proof_commit": "b211562c0a7f88fffb934a24b61d7ade39e64a50",
+        "disconnect_proof_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
+        "disconnect_proof_identity_sha256": "627de4fd5715e281007ab5f19a37b0cb610b4d3b637b7b37933a41396ba3859b",
+        "permit_consumed": true,
+        "additional_disconnect_calls_allowed": 0,
         "holder_count": 0,
-        "holder_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "holder_path_count": 2,
+        "holder_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
+        "torque_enable_read_capability": "offline_verified_live_values_required",
         "follower_connected": false,
         "follower_torque": false,
         "owner_present": true,
@@ -538,24 +584,19 @@
       "conditional_authority": [
         "live_hardware_discovery_after_T16.5a",
         "live_read_only_census_after_T16.5a",
-        "synchronized_camera_capture_after_T16.5a"
+        "finite_physical_camera_capture_after_T16.5a"
       ],
       "known_limitations": [
         "attempt 001 produced no accepted live evidence because post-close camera index identity drift invalidated the capture",
         "the corrected stable named-camera path is verified only with fake subprocess evidence and has not been reopened live",
-        "the owner-authorized disconnect re-established exclusive follower bus ownership, but no corrected live capture has yet been accepted",
+        "the owner-authorized disconnect is represented by an honest reconstructed operation proof rather than a contemporaneous raw HTTP transcript",
         "live attempt 002 was rejected because the first named-camera ffmpeg subprocess returned nonzero",
         "attempt 002 predates Brief 042 diagnostic retention and cannot be retroactively root-caused from discarded stderr",
-        "the canonical-path-only holder snapshot does not prove every /dev alias is free",
-        "no tracked independently verified disconnect-proof artifact yet binds private raw references and consumes the permit",
-        "per-servo Torque_Enable is not yet present in the read-only census",
+        "the all-alias zero-holder observation is a time-bounded prerequisite and must be repeated before serial open and after close in any future session",
+        "Torque_Enable is now mandatory and verified offline, but no accepted live result yet records all six physical values",
         "sequential census then camera evidence is finite physical capture, not synchronized observation or policy-shadow-input-valid"
       ],
-      "blocked_on": [
-        "tracked_virtual_disconnect_proof_missing",
-        "all_signed_serial_alias_holder_gate_missing",
-        "per_servo_torque_enable_evidence_missing"
-      ],
+      "blocked_on": [],
       "owner_decision_required": {
         "state": "granted",
         "pre_disconnect_observed_server_state": {
@@ -607,9 +648,9 @@
         "agent_actions_still_prohibited": [
           "signal_or_stop_studio_server",
           "call_safety_disarm_or_estop",
-          "reopen_serial_or_camera_live_gate_before_zero_holder_proof"
+          "reopen_serial_or_camera_live_gate_without_a_separate_reviewed_remote_commit"
         ],
-        "post_choice_requirement": "disconnect occurred once; machine-verifiable proof artifact and all-alias holder evidence remain required before another live-gate review"
+        "post_choice_requirement": "disconnect occurred once; machine-verifiable proof artifact, consumed permit, all-alias holder evidence, and Torque_Enable capability are verified through 7ea26651; a separate live-gate review commit remains required"
       },
       "blocked_audit": {
         "classification": "resolved_by_owner_authority",
@@ -652,7 +693,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "implement Brief 043 machine-verifiable disconnect proof, consumed-permit verifier, all-signed-alias holder gate, and per-servo Torque_Enable evidence offline; keep live gate closed",
+      "next_action": "perform a separate closed-state review and remote commit that opens at most one fresh finite T16.5b session; derive actual HEAD at runtime and create new discovery, lease, and contract artifacts",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
@@ -669,7 +710,10 @@
         "exclusive_serial_holder_gate_offline_verified",
         "owner_authorized_virtual_follower_disconnect_verified",
         "canonical_follower_path_zero_holder_observed",
-        "bounded_camera_failure_diagnostics_offline_verified"
+        "bounded_camera_failure_diagnostics_offline_verified",
+        "machine_virtual_disconnect_proof_verified",
+        "all_signed_follower_aliases_zero_holder_verified",
+        "per_servo_torque_enable_read_gate_offline_verified"
       ]
     },
     "T16.5c": {

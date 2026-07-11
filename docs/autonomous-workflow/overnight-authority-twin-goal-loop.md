@@ -20,7 +20,7 @@ verified, dependency-correct slices as the fixed window safely permits. Begin
 with the central authority-composition foundation, then finish the production
 measured-inertial compiler, then mechanically computed qualification, then the
 offline no-write servo-census preflight. If those gates pass, perform the
-owner-authorized live read-only census and synchronized observation, then
+owner-authorized live read-only census and finite camera observation, then
 no-actuation preprocessing/policy-shadow/matched-replay proof. Prepare a finite
 supervised micro-motion permit and plan. The latest owner message is the final
 operator confirmation for that exact initial gate, so no second prompt is
@@ -197,9 +197,9 @@ You may:
   `origin/codex/pi05-autolearn-loop`.
 - Correct stale project documentation when repository evidence proves it.
 - After T16.5a is verified, and only while the owner remains present, perform
-  bounded hardware discovery, a live read-only census, synchronized camera
-  observation, real-observation preprocessing, policy shadow, and matched
-  MuJoCo replay with no actuation or writes.
+  bounded hardware discovery, a live read-only census, and finite camera
+  observation with no actuation or writes. Real-observation preprocessing,
+  policy shadow, and matched MuJoCo replay require verified T16.5b.
 - Prepare the exact finite T16.6 supervised-motion plan and generate the required
   session permit. The latest owner message supplies final confirmation for the
   exact initial permit, so execute only after the permit and every prerequisite
@@ -336,7 +336,7 @@ Begin only after T16.2b and T16.4b satisfy their declared gates.
   physically qualified.
 - Never open live hardware during T16.5a.
 
-### T16.5b - Live read-only census and synchronized observation
+### T16.5b - Live read-only census and finite camera observation
 
 Begin only after verified, committed, pushed, and remotely confirmed T16.5a,
 with the owner physically present.
@@ -350,8 +350,9 @@ with the owner physically present.
   and the reviewed holder guard proves zero follower serial holders.
 - Read identity/telemetry registers only. Record exact operation counts and
   prove zero configuration, torque, or register writes and no motion.
-- Capture synchronized camera frames and timestamps without changing device or
-  robot configuration.
+- Capture finite named-camera frames and host timestamps without changing
+  device or robot configuration. Do not call them synchronized without the
+  T16.5c static-pose bracket.
 - Emit a content-addressed immutable trace with
   `physical_follower_commanded=false` and the proof label
   `live_read_only_census_observed`.
@@ -518,7 +519,8 @@ commit, and remote preservation agree.
 
 Maintain, with truthful semantics:
 
-- branch and observed HEAD;
+- branch plus reviewed-through implementation commit; derive actual HEAD from
+  Git at runtime;
 - last reviewed implementation commit;
 - current task and dependency state;
 - `training_lock`;

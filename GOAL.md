@@ -30,50 +30,46 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-T16.5b is resumed and `in_progress`. The owner-authorized virtual follower
-disconnect completed exactly once at `2026-07-11T08:57:17-05:00`: HTTP 200
-reported disconnected, Studio reports follower disconnected and torque off,
-the leader remains connected, safety/routing are unchanged, no jobs are
-running, and the reviewed follower holder snapshot is empty with identity
-`4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945`.
-No retry, signal, motion command, safety-route change, leader disconnect, or
-general register write occurred.
+T16.5b remains `in_progress`. Brief 043 implementation
+`7ea26651e921eee55dad6fcbb26cb58c45c7b290` is remotely preserved. The tracked
+disconnect proof identity is
+`627de4fd5715e281007ab5f19a37b0cb610b4d3b637b7b37933a41396ba3859b`;
+it binds the ignored private evidence, exact POST method/path/body, HTTP 200
+response, before/after hardware and invariant snapshots, one observed call,
+the consumed permit, zero additional calls, zero forbidden effects, and no
+physical motion or follower command. Its provenance is explicitly labeled
+reconstructed from executor operation output rather than a contemporaneous raw
+HTTP transcript.
 
-The disconnect/zero-holder boundary is remotely preserved at `b211562`.
-Reviewer 057 opened one fresh session, but live attempt 002 failed closed during
-the first exact-name ffmpeg camera batch after the read-only census had closed
-and the post-close zero-holder guard passed. The subprocess returned nonzero;
-the implementation intentionally rejected the capture, but did not retain its
-bounded stderr diagnostic. No private evidence bundle, tracked manifest, or
-proof label was written. The follower remains disconnected, torque off, and
-holder-free; the leader remains connected.
+The signed serial identity now requires both canonical and paired TTY paths.
+The latest all-alias holder snapshot at `2026-07-11T09:37:56-05:00` checked two
+paths, observed counts `[0, 0]`, deduplicated to zero, and has identity
+`b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c`.
+Future live evidence must bind full pre-open and post-close signed snapshots;
+an alias holder or path-existence change fails closed.
 
-The live gate is closed. Brief 042 implementation `2d1cd97` now retains a typed,
-signed, bounded, sanitized ffmpeg diagnostic and immutable ignored-private
-failure record without weakening nonzero/stderr/timeout/PNG rejection. It
-passed 24 dedicated, 40 combined, and 219 broad tests. Attempt 002 remains
-permanently rejected and cannot be retro-diagnosed.
+`Torque_Enable` is now a source-bound one-byte read for all six servos. The
+offline fixture requires six zero values, 54 successful reads plus one bounded
+retry, zero configuration/torque/register writes, and
+`physical_follower_commanded=false`. A live result must independently replay
+the exact read trace and match all decoded values; no live six-servo torque
+claim exists yet.
 
-Continue offline under Brief 043 and manager intervention 015. Before any new
-serial or camera open: generate and independently verify a machine-readable
-disconnect proof with private content references; mark the exact one-call permit
-consumed with zero additional calls; replace self-staling canonical HEAD fields;
-check the canonical serial path and every signed alias as one identity; and add
-per-servo `Torque_Enable` to the read-only census. Only a separate reviewed,
-remotely preserved commit may reconsider `live_gate=open`. A later Studio
-reconnect remains deferred unless exact device/calibration/current-pose state
-proves it mechanically no-motion-safe.
+The live gate remains closed. Brief 043 passed 50 focused and 229 broad tests,
+both offline runtime verifiers, deterministic fixture and disconnect-proof
+verification, compilation, privacy checks, and diff checks. No serial or camera
+was opened, and no Studio request, reconnect, process signal, write, torque
+change, motion, policy actuation, or training occurred. Reviewer 060 accepts
+this offline boundary only. A separate reviewed, remotely preserved state
+transition is required before at most one new finite T16.5b session.
 
-The last completed implementation slice was Brief 041,
-`docs/briefs/041-rejected-live-attempt-camera-identity-correction.md`, under
-T16.5b. The offline correction now binds finite capture to stable camera
-name/unique ID, validates exact PNG bytes, rejects numeric-index churn as an
-authority field, and fails before serial open unless holder counts are zero.
-Keep the live gate closed through the disconnect and zero-holder proof.
-Reviewer decision 053 is remotely preserved, while reviewer 055 and manager
-intervention 014 record the narrow owner-authorized virtual-disconnect resume.
-Do not SIGTERM the server, disconnect the leader, or infer broader write/motion
-authority from this exception.
+Live attempts 001 and 002 remain permanently rejected and grant no proof label.
+Attempt 002 cannot be retro-diagnosed because it predates bounded diagnostic
+retention. Sequential census then camera capture may prove only finite physical
+capture; T16.5c must add a parsed calibration profile and static-pose bracket
+before any policy-shadow-input-valid claim. Studio reconnect remains deferred
+unless exact device, calibration, and current-pose evidence proves it
+mechanically no-motion-safe.
 
 ## Durable State
 
