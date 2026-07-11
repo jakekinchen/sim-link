@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b live attempt 001 rejected; Brief 041 camera-identity correction offline
+current_task: T16.5b Brief 041 offline correction reviewed; live gate closed on pre-existing serial holder
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: attempt contract 2102227c... reached post-close discovery but AVFoundation swapped camera index/name mappings; no bundle/manifest/proof label emitted; a pre-existing July 8 studio_server holds the follower serial device
+evidence: commits ea99ec9/66003d8/fd13bf6/01802a0 and reviewer 053 provide stable named-camera capture, exact PNG/subprocess evidence, and zero-holder serial gates after 19 dedicated, 35 combined, and 214 broad tests
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
-blockers: live gate closed on ephemeral camera index identity and unproven exclusive bus ownership; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
-next_step: execute Brief 041 offline; bind camera capture by stable name/unique ID, test cleanup/evidence, preserve the pre-existing Studio server, and do not reopen hardware
+blockers: camera index defect is corrected offline; live gate remains closed because the pre-existing July 8 Studio server was last observed holding the follower serial device and exclusive ownership has not been re-proven; physical motion remains closed
+next_step: remotely preserve reviewer 053, then obtain owner direction before stopping/releasing the Studio server; continue offline and do not reopen hardware
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: execute Brief 041 offline; bind camera capture by stable name/unique 
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Attempt 001 rejected by reviewer 052: camera indexes swapped identities after capture; pre-existing Studio server holds serial device; no bundle/manifest/proof label; Brief 041 offline correction, live gate closed |
+| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Brief 041 commits `ea99ec9`/`66003d8`/`fd13bf6`/`01802a0`; reviewer 053; 19 dedicated/35 combined/214 broad tests; stable named camera + zero-holder gates offline-verified; live gate closed on existing Studio server; no live proof label |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,21 @@ next_step: execute Brief 041 offline; bind camera capture by stable name/unique 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 041 offline correction reviewed; live gate remains closed
+
+```text
+Current task: T16.5b
+State: in_progress; offline correction verified; live gate closed
+Completed: stable exact-name/unique-ID camera binding; finite ffmpeg PNG batch parser; decompressed pixel/scanline validation; subprocess cleanup/evidence counts; pre-open/post-close zero-holder serial gate
+Evidence: ea99ec9/66003d8/fd13bf6/01802a0; reviewer 053; 19 dedicated, 35 combined census, and 214 broad tests; both runtime offline verifiers; no hardware reopened
+Authority: offline harness capabilities only; attempt 001 remains rejected; proof labels remain empty
+Remaining: remote preservation; explicit owner resolution of the pre-existing Studio server; only then reconsider a new session/lease under the closed-by-default gate
+Blockers: one pre-existing Studio server was last observed holding the follower serial device; capture code will now reject any holder before serial open
+Hardware state: no new enumeration/open during Brief 041; historical attempt 001 remains rejected and closed
+Training lock: closed
+Next step: commit/push reviewer 053 and canonical state, confirm remote, then request owner direction for the independent holder while continuing offline
+```
 
 ### 2026-07-11 - T16.5b live attempt 001 rejected; live gate closed
 

@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "e351f697f4f91494bf5a171309ff7a7cfc0ec284",
-  "last_reviewed_commit": "e351f697f4f91494bf5a171309ff7a7cfc0ec284",
+  "current_head_commit": "01802a0fd6a93eee658dbd945830a47acf916913",
+  "last_reviewed_commit": "01802a0fd6a93eee658dbd945830a47acf916913",
   "source_review": {
-    "commit": "e351f697f4f91494bf5a171309ff7a7cfc0ec284",
-    "decision": "REJECT_T16_5B_LIVE_ATTEMPT_001_CLOSE_LIVE_GATE_CONTINUE_OFFLINE_BRIEF_041",
-    "reviewer_decision": "docs/reviewer-messages/052-rejected-live-attempt-camera-identity-redirect.md"
+    "commit": "01802a0fd6a93eee658dbd945830a47acf916913",
+    "decision": "ACCEPT_BRIEF_041_OFFLINE_CORRECTION_AFTER_REMOTE_PRESERVATION_KEEP_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/053-stable-camera-and-exclusive-serial-gates-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -337,9 +337,16 @@
       "metadata_compatibility_correction_commit": "b85a253",
       "metadata_review_decision_id": "051",
       "correction_brief_id": "041",
-      "review_decision_id": "052",
-      "result": "live attempt 001 rejected after post-close camera identity drift; live gate closed while camera identity capture is corrected offline and a pre-existing serial holder remains unresolved",
-      "execution_note": "Attempt contract 2102227c... reached post-close discovery with no write-capable surface, then failed on an AVFoundation index-to-name swap; no evidence bundle, manifest, or live proof label was emitted",
+      "rejected_attempt_review_decision_id": "052",
+      "camera_identity_correction_commits": [
+        "ea99ec9",
+        "66003d8",
+        "fd13bf6",
+        "01802a0"
+      ],
+      "review_decision_id": "053",
+      "result": "Brief 041 stable named-camera capture, finite PNG validation, evidence accounting, and exclusive serial-holder gates verified offline; live gate remains closed on the pre-existing Studio server",
+      "execution_note": "Commits ea99ec9/66003d8/fd13bf6/01802a0 passed 19 dedicated, 35 combined census, and 214 broad tests; no hardware was reopened during the correction",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census",
@@ -390,6 +397,37 @@
         "preserved_untouched": true,
         "exclusive_bus_ownership_proven": false
       },
+      "camera_capture_backend": {
+        "state": "offline_verified",
+        "backend": "ffmpeg_named_avfoundation",
+        "identity_binding": "exact_avfoundation_name_plus_system_unique_id_and_model_id",
+        "numeric_index_authority": false,
+        "frame_count_per_camera": 2,
+        "batch_timeout_seconds": 5,
+        "output_encoding": "png_rgb24",
+        "validates": [
+          "signature",
+          "chunk_bounds",
+          "chunk_crc",
+          "ihdr_shape",
+          "zlib_pixel_stream",
+          "scanline_shape_and_filters",
+          "exact_frame_count",
+          "no_trailing_bytes",
+          "subprocess_exit_and_stderr",
+          "terminate_kill_wait_cleanup_counts"
+        ]
+      },
+      "serial_ownership_gate": {
+        "state": "offline_verified",
+        "mechanism": "normalized_lsof_holder_snapshot",
+        "required_pre_open_holder_count": 0,
+        "required_post_close_holder_count": 0,
+        "stops_or_signals_holders": false,
+        "last_observed_holder_count": 1,
+        "last_observed_at": "2026-07-11T05:18:22-05:00",
+        "current_gate_result": "closed"
+      },
       "hardware_enumerated": true,
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
@@ -398,7 +436,9 @@
       "proof_labels_granted": [],
       "authority_granted": [
         "live_readonly_harness_offline_verified",
-        "metadata_discovery_exact"
+        "metadata_discovery_exact",
+        "stable_named_camera_capture_offline_verified",
+        "exclusive_serial_holder_gate_offline_verified"
       ],
       "conditional_authority": [
         "live_hardware_discovery_after_T16.5a",
@@ -407,10 +447,14 @@
       ],
       "known_limitations": [
         "attempt 001 produced no accepted live evidence because post-close camera index identity drift invalidated the capture",
-        "AVFoundation numeric indexes are ephemeral and cannot remain authority-bearing for camera identity",
-        "a pre-existing Studio server still holds the follower serial device, so exclusive bus ownership is not established",
-        "all further serial and camera opens are closed pending Brief 041 correction, review, remote preservation, and resolution of the independent serial holder"
+        "the corrected stable named-camera path is verified only with fake subprocess evidence and has not been reopened live",
+        "a pre-existing Studio server was last observed holding the follower serial device, so exclusive bus ownership has not been re-established",
+        "all further serial and camera opens are closed pending remote preservation of reviewer 053 and explicit owner resolution of the independent serial holder"
       ],
+      "blocked_on": [
+        "preexisting_studio_server_serial_holder_owner_resolution"
+      ],
+      "next_action": "preserve reviewer 053 remotely, then request owner direction before stopping or releasing the pre-existing Studio server",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",

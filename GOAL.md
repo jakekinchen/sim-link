@@ -32,13 +32,14 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 Execute Brief 041,
 `docs/briefs/041-rejected-live-attempt-camera-identity-correction.md`, under
-T16.5b. Attempt 001 was rejected after post-close discovery detected a camera
-index-to-identity swap; a pre-existing Studio server also holds the follower
-serial device. Keep the live gate closed, preserve that process untouched, and
-replace index-authoritative camera capture with a stable name/unique-ID-bound
-finite path offline. Do not open a serial port or camera again until the
-correction is reviewed, remotely preserved, and the independent serial holder
-blocker is resolved under explicit owner authority.
+T16.5b. The offline correction now binds finite capture to stable camera
+name/unique ID, validates exact PNG bytes, rejects numeric-index churn as an
+authority field, and fails before serial open unless holder counts are zero.
+Keep the live gate closed and preserve the last-observed pre-existing Studio
+server untouched.
+After reviewer decision 053 is remotely preserved, prepare the smallest owner
+decision packet for resolving that independent holder; continue safe offline
+work until explicit direction allows its release or shutdown.
 
 ## Durable State
 
@@ -172,3 +173,10 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   the follower serial device. No evidence bundle, tracked manifest, live proof
   label, write, torque change, or motion claim survived. Brief 041 keeps all
   further live access closed while the camera path is corrected offline.
+- Reviewer decision 053 accepts the Brief 041 offline correction at commits
+  `ea99ec9`/`66003d8`/`fd13bf6`/`01802a0`: exact-name ffmpeg capture replaces
+  OpenCV indexes, PNG framing and pixel streams are finite and validated,
+  subprocess/evidence counts are content-bound, and zero-holder checks run
+  immediately before and after the serial census. The live gate remains closed
+  because exclusive ownership has not been re-established after the
+  pre-existing Studio server was observed holding the follower device.

@@ -23,6 +23,10 @@ offline. Do not reopen a serial port or camera in this slice.
   follower serial device. Preserve it untouched. Do not infer exclusive bus
   ownership or perform another live open until the owner explicitly resolves
   that independent holder.
+- A future capture must run a normalized `lsof` ownership check immediately
+  before serial open and immediately after no-write close. Either snapshot must
+  contain zero holders; command failure, malformed output, or any holder fails
+  closed and the zero counts must be bound into accepted evidence.
 
 ## Stable camera contract
 
@@ -70,6 +74,8 @@ offline. Do not reopen a serial port or camera in this slice.
 - Deterministic fake ffmpeg process/pipe tests for exact two-frame success,
   swapped discovery indexes, duplicate names, truncation, extra PNG, timeout,
   nonzero exit, primary plus cleanup failure, and content/hash drift.
+- Deterministic holder-parser and pre-open/post-close zero-holder evidence tests;
+  never stop or signal a holder from the capture path.
 - Existing live harness, T16.5a census, authority, qualification, twin,
   dependency-lock, LeRobot, static forbidden-call, formatter, `py_compile`, and
   `git diff --check` gates.
