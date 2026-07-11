@@ -203,6 +203,12 @@ actual `on-request` approval policy, separate reviewed remote gate transition,
 fresh lease, and fresh discovery/zero-holder snapshots remain missing. The live
 gate and training lock stay closed.
 
+Brief 053 is active offline to add the exact pinned Feetech/FFmpeg factory
+boundary, immutable content-addressed private success/failure evidence, and a
+machine-checked hardware-supervised Codex runtime profile. Tests must inject
+fake constructors and subprocesses; this slice cannot enumerate or open
+hardware, run a policy, or transition the live gate.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`

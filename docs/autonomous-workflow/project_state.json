@@ -1171,6 +1171,7 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
+      "active_brief_id": "053",
       "latest_verified_brief_id": "052",
       "completed_brief_ids": ["048", "049", "050", "051", "052"],
       "result": "Briefs 048-052 are verified and remotely preserved: stable physical source bindings now feed a candidate-only contract and runner that fail closed on gate, lease, source, holder, lifecycle, evidence-class, and authority drift without granting a live bracket or physical proof label",
@@ -1257,7 +1258,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/static_pose_live_candidate.py scenesmith/robot_lab/static_pose_bracket.py scenesmith/robot_lab/static_pose_bracket_runtime.py scripts/robot_lab/verify_static_pose_live_candidate_sources.py tests/unit/test_static_pose_live_candidate.py",
         "git diff --check"
       ],
-      "next_action": "open a separate offline brief for exact pinned Feetech/FFmpeg factory adapters, immutable private success/failure evidence, and a machine-checked hardware-supervised execution profile; do not transition the live gate until a fresh finite run window and the actual on-request profile are active",
+      "next_action": "implement and verify Brief 053 exact pinned Feetech/FFmpeg factories, immutable private success/failure evidence, and machine-checked hardware-supervised execution profile with injected fakes only; do not access hardware or transition the live gate",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "actual_hardware_supervised_on_request_execution_profile",
