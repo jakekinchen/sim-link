@@ -1171,6 +1171,7 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
+      "active_brief_id": "054",
       "latest_verified_brief_id": "053",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053"],
       "result": "Briefs 048-053 are verified and remotely preserved: the candidate-only runner now requires a same-thread on-request runtime proof, exact code-pinned one-shot factories, and immutable one-artifact-per-session private evidence while the live gate remains closed",
@@ -1320,7 +1321,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/hardware_execution_profile.py scenesmith/robot_lab/static_pose_live_execution.py scenesmith/robot_lab/static_pose_live_candidate.py scripts/robot_lab/verify_static_pose_live_execution_sources.py tests/unit/test_static_pose_live_execution.py tests/unit/test_static_pose_live_candidate.py",
         "git diff --check"
       ],
-      "next_action": "open a separate offline Brief 054 for a single fail-closed production session orchestrator that must persist exactly one private success or failure artifact; do not access hardware or transition the live gate in the current never-policy thread",
+      "next_action": "implement and verify Brief 054 fail-closed production session orchestration with every constructor and runner patched; do not access hardware or transition the live gate in the current never-policy thread",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",

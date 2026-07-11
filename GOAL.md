@@ -226,6 +226,11 @@ private-evidence, and runtime-profile conformance is granted. A separate offline
 production-session orchestrator remains next; the live gate and training lock
 stay closed.
 
+Brief 054 is active offline to compose the verified profile, contract, pinned
+factories, candidate runner, and immutable evidence into one fail-closed
+production-session path. Tests patch every production constructor and runner;
+the current parent remains live-ineligible and the live gate stays closed.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
