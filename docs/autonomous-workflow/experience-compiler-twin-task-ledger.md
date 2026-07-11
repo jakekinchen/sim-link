@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress after verified Brief 058 fixture PI0.5 model-ready tensor parity
+current_task: T16.5c Brief 059 PI0.5 training-support semantics correction in progress
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Brief 058 implementation 77724e1; artifact 559b9dbd...; runtime 4c89ca10...; 153 focused in each runtime; 352 broad in 82.674 seconds; no model/weight/inference/hardware access
+evidence: Brief 058 implementation 77724e1 remains exact at the tensor boundary; read-only diagnosis proves serialized MEAN_STD is deliberate, [-1,1] is a discretizer reference interval, only wrist_flex is outside observed training min-max, and gripper remains within support
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: the current parent thread is mechanically rejected because its persisted approval policy is never; live T16.5c requires a new hardware-supervised on-request parent, fresh finite run window, separate reviewed gate transition, fresh lease, and fresh discovery/zero-holder snapshots; real reviewed inputs and static-pose evidence remain absent
-next_step: stop this parent at the verified fixture boundary; open the real static-pose experiment only through the separately reviewed hardware-supervised parent transition
+blockers: none for Brief 059 offline semantic correction; the current parent remains live-ineligible and all real static-pose/shadow prerequisites remain absent
+next_step: correct and verify Brief 058's range interpretation without mutating the trained processor or opening any live gate
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: stop this parent at the verified fixture boundary; open the real stat
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-058 verified; deterministic fixture model-input parity earned, including an explicit state-range concern; real static-pose acceptance/shadow/replay remain pending and this thread is live-ineligible |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-058 verified; Brief 059 correcting mean/std discretizer versus observed training-support semantics; real static-pose acceptance/shadow/replay remain pending and this thread is live-ineligible |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -136,6 +136,19 @@ hardware authority.
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 059 PI0.5 training-support semantics correction started offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 059 started; live gate closed
+Diagnosis: checkpoint MEAN_STD is deliberate and unchanged between training/inference; [-1,1] is a textual bin reference, not a hard domain; fixture wrist_flex is below observed training min while gripper remains within q01-q99 and min-max support
+Authority gained: none at start
+Authority withheld: real reviewed input, static_pose_bracketed_observation, policy_shadow_input_valid, model/weight load, inference, shadow, replay, hardware, actuation, qualification/transfer, promotion, training
+Hardware: none; current parent remains live-ineligible
+Training lock: closed
+Next step: tests first, versioned artifact correction, focused/broad gates, same-agent review, scoped remote preservation
+```
 
 ### 2026-07-11 - Brief 058 fixture PI0.5 model-ready tensor parity verified offline
 

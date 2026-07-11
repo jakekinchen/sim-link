@@ -31,7 +31,7 @@
   "continuation_run": {
     "started_at": "2026-07-11T12:52:56-05:00",
     "trigger": "owner_proceed_with_next_milestone",
-    "scope": "T16.5c offline static-pose, reviewed-input, and fixture model-ready tensor parity continuation through Brief 058",
+    "scope": "T16.5c offline static-pose, reviewed-input, fixture model-ready tensor parity, and training-support semantic correction through Brief 059",
     "starting_head": "32c29480a314ce3f731dda0d9a50156c1832da63",
     "live_gate": "closed",
     "training_lock": "closed",
@@ -1171,10 +1171,10 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": null,
+      "active_brief_id": "059",
       "latest_verified_brief_id": "058",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058"],
-      "result": "Briefs 048-058 are verified and remotely preserved: fixture-only PI0.5 model-ready bytes and tensors are deterministic through the exact cached CPU preprocessor and image transform, while the real reviewed-input gate remains blocked and no live, shadow, replay, model-weight, hardware, motion, or training authority is granted",
+      "result": "Briefs 048-058 are verified and remotely preserved; Brief 059 is correcting the fixture range interpretation so serialized MEAN_STD and textual discretizer saturation remain exact while true observed training-support violations are classified per joint",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1501,7 +1501,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_fixture_preprocessing.py scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_fixture_preprocessing.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_fixture_preprocessing.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "stop at the current parent boundary; begin the decisive live static-pose bracket only in a fresh hardware-supervised on-request parent with a finite window, separate reviewed live-gate transition, fresh owner-presence lease, discovery, and all-alias zero-holder evidence",
+      "next_action": "execute Brief 059 offline only: correct mean/std discretizer versus observed training-support semantics without changing preprocessing bytes, loading weights, inferring, replaying, accessing hardware, or transitioning the live gate",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",

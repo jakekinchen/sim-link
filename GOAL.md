@@ -297,6 +297,15 @@ real Brief 057 gate, live gate, model/weight/inference/replay, hardware,
 policy-shadow, motion, and training authorities remain closed; the decisive
 live experiment requires a fresh hardware-supervised on-request parent.
 
+Brief 059 is in progress to correct one overbroad Brief 058 interpretation.
+The checkpoint deliberately uses mean/std normalization, so values beyond one
+standard deviation are not automatically outside training support and the
+fixed `[-1, 1]` bins must not be treated as a hard processor domain. Exact
+statistics show only fixture wrist-flex is outside the observed training
+min-max envelope; fixture gripper remains inside q01-q99 and min-max support.
+This correction must preserve every tensor and prompt byte and grants no new
+live, shadow, model, replay, hardware, motion, or training authority.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
