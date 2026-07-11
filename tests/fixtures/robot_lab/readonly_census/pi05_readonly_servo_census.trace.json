@@ -1,0 +1,537 @@
+{
+  "contract_identity_sha256": "17e8c712d88877fd508266fa85cd34bd14da8fbdd7bc98ac5ff7955bd708c2a0",
+  "events": [
+    {
+      "error_code": null,
+      "operation": "construct",
+      "outcome": "success",
+      "sequence": 0
+    },
+    {
+      "error_code": null,
+      "operation": "connect",
+      "outcome": "success",
+      "sequence": 1
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 777,
+      "register": "Model_Number",
+      "sequence": 2,
+      "servo_id": 1
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 3,
+      "register": "Firmware_Major_Version",
+      "sequence": 3,
+      "servo_id": 1
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 11,
+      "register": "Firmware_Minor_Version",
+      "sequence": 4,
+      "servo_id": 1
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 1,
+      "register": "ID",
+      "sequence": 5,
+      "servo_id": 1
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 0,
+      "register": "Baud_Rate",
+      "sequence": 6,
+      "servo_id": 1
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 2048,
+      "register": "Present_Position",
+      "sequence": 7,
+      "servo_id": 1
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 120,
+      "register": "Present_Voltage",
+      "sequence": 8,
+      "servo_id": 1
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 25,
+      "register": "Present_Temperature",
+      "sequence": 9,
+      "servo_id": 1
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 777,
+      "register": "Model_Number",
+      "sequence": 10,
+      "servo_id": 2
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 3,
+      "register": "Firmware_Major_Version",
+      "sequence": 11,
+      "servo_id": 2
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 12,
+      "register": "Firmware_Minor_Version",
+      "sequence": 12,
+      "servo_id": 2
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 2,
+      "register": "ID",
+      "sequence": 13,
+      "servo_id": 2
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 0,
+      "register": "Baud_Rate",
+      "sequence": 14,
+      "servo_id": 2
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 1984,
+      "register": "Present_Position",
+      "sequence": 15,
+      "servo_id": 2
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 120,
+      "register": "Present_Voltage",
+      "sequence": 16,
+      "servo_id": 2
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 26,
+      "register": "Present_Temperature",
+      "sequence": 17,
+      "servo_id": 2
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 777,
+      "register": "Model_Number",
+      "sequence": 18,
+      "servo_id": 3
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 3,
+      "register": "Firmware_Major_Version",
+      "sequence": 19,
+      "servo_id": 3
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 13,
+      "register": "Firmware_Minor_Version",
+      "sequence": 20,
+      "servo_id": 3
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 3,
+      "register": "ID",
+      "sequence": 21,
+      "servo_id": 3
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 0,
+      "register": "Baud_Rate",
+      "sequence": 22,
+      "servo_id": 3
+    },
+    {
+      "attempt": 1,
+      "error_code": "timeout",
+      "operation": "read",
+      "outcome": "transient_error",
+      "raw_value": null,
+      "register": "Present_Position",
+      "sequence": 23,
+      "servo_id": 3
+    },
+    {
+      "attempt": 2,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 2112,
+      "register": "Present_Position",
+      "sequence": 24,
+      "servo_id": 3
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 120,
+      "register": "Present_Voltage",
+      "sequence": 25,
+      "servo_id": 3
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 27,
+      "register": "Present_Temperature",
+      "sequence": 26,
+      "servo_id": 3
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 777,
+      "register": "Model_Number",
+      "sequence": 27,
+      "servo_id": 4
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 3,
+      "register": "Firmware_Major_Version",
+      "sequence": 28,
+      "servo_id": 4
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 14,
+      "register": "Firmware_Minor_Version",
+      "sequence": 29,
+      "servo_id": 4
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 4,
+      "register": "ID",
+      "sequence": 30,
+      "servo_id": 4
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 0,
+      "register": "Baud_Rate",
+      "sequence": 31,
+      "servo_id": 4
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 2016,
+      "register": "Present_Position",
+      "sequence": 32,
+      "servo_id": 4
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 120,
+      "register": "Present_Voltage",
+      "sequence": 33,
+      "servo_id": 4
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 28,
+      "register": "Present_Temperature",
+      "sequence": 34,
+      "servo_id": 4
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 777,
+      "register": "Model_Number",
+      "sequence": 35,
+      "servo_id": 5
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 3,
+      "register": "Firmware_Major_Version",
+      "sequence": 36,
+      "servo_id": 5
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 15,
+      "register": "Firmware_Minor_Version",
+      "sequence": 37,
+      "servo_id": 5
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 5,
+      "register": "ID",
+      "sequence": 38,
+      "servo_id": 5
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 0,
+      "register": "Baud_Rate",
+      "sequence": 39,
+      "servo_id": 5
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 2056,
+      "register": "Present_Position",
+      "sequence": 40,
+      "servo_id": 5
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 120,
+      "register": "Present_Voltage",
+      "sequence": 41,
+      "servo_id": 5
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 29,
+      "register": "Present_Temperature",
+      "sequence": 42,
+      "servo_id": 5
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 777,
+      "register": "Model_Number",
+      "sequence": 43,
+      "servo_id": 6
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 3,
+      "register": "Firmware_Major_Version",
+      "sequence": 44,
+      "servo_id": 6
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 16,
+      "register": "Firmware_Minor_Version",
+      "sequence": 45,
+      "servo_id": 6
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 6,
+      "register": "ID",
+      "sequence": 46,
+      "servo_id": 6
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 0,
+      "register": "Baud_Rate",
+      "sequence": 47,
+      "servo_id": 6
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 1024,
+      "register": "Present_Position",
+      "sequence": 48,
+      "servo_id": 6
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 120,
+      "register": "Present_Voltage",
+      "sequence": 49,
+      "servo_id": 6
+    },
+    {
+      "attempt": 1,
+      "error_code": null,
+      "operation": "read",
+      "outcome": "success",
+      "raw_value": 30,
+      "register": "Present_Temperature",
+      "sequence": 50,
+      "servo_id": 6
+    },
+    {
+      "disable_torque": false,
+      "error_code": null,
+      "operation": "close",
+      "outcome": "success",
+      "sequence": 51
+    }
+  ],
+  "hardware_opened": false,
+  "identity_sha256": "25cbac27c7e86aed9ae14cf691f14f4293c14b8c85db9ee500e993650c59e27c",
+  "observed_device_identity": {
+    "bus": {
+      "baudrate": 1000000,
+      "protocol_family": "feetech",
+      "protocol_version": 1
+    },
+    "device_role": "so101_follower_observation_target",
+    "usb": {
+      "canonical_path": "/dev/cu.fixture-so101-follower",
+      "observed_aliases": [
+        "/dev/tty.fixture-so101-follower"
+      ],
+      "product_id_hex": "0001",
+      "serial_number": "fixture-so101-follower-001",
+      "vendor_id_hex": "ffff"
+    }
+  },
+  "qualification_scope": "fixture_evidence",
+  "schema_version": "scenesmith.readonly_servo_census_trace.v1",
+  "trace_name": "pi05_so101_offline_readonly_servo_census",
+  "transport_kind": "recorded_trace"
+}

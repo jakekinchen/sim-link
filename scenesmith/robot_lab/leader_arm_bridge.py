@@ -146,7 +146,7 @@ class PhysicalLeaderCorrectionSource:
     def close(self) -> None:
         teleop = getattr(self, "_teleop", None)
         if teleop is not None and teleop.bus.is_connected:
-            teleop.bus.disconnect()
+            teleop.bus.disconnect(disable_torque=False)
 
     def safety_report(self) -> dict[str, Any]:
         return {
@@ -156,6 +156,7 @@ class PhysicalLeaderCorrectionSource:
             "hardware_opened": True,
             "allowed_operations": ["serial_connect", "present_position_sync_read"],
             "motor_register_writes": 0,
+            "teardown_disable_torque": False,
             "physical_follower_commanded": False,
         }
 

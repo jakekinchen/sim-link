@@ -1,0 +1,131 @@
+{
+  "contract_name": "pi05_so101_offline_readonly_servo_census",
+  "expected_servos": [
+    {
+      "joint_name": "shoulder_pan",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 1
+    },
+    {
+      "joint_name": "shoulder_lift",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 2
+    },
+    {
+      "joint_name": "elbow_flex",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 3
+    },
+    {
+      "joint_name": "wrist_flex",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 4
+    },
+    {
+      "joint_name": "wrist_roll",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 5
+    },
+    {
+      "joint_name": "gripper",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 6
+    }
+  ],
+  "forbidden_operations": [
+    "calibrate",
+    "configure",
+    "disable_torque",
+    "enable_torque",
+    "goal_position",
+    "motion",
+    "scan",
+    "send_action",
+    "setup_motor",
+    "sync_write",
+    "torque_disabled",
+    "write",
+    "write_calibration",
+    "write_register"
+  ],
+  "identity_sha256": "17e8c712d88877fd508266fa85cd34bd14da8fbdd7bc98ac5ff7955bd708c2a0",
+  "proof_label": "census_trace_conformant",
+  "qualification_scope": "fixture_evidence",
+  "read_plan": [
+    {
+      "raw_type": "integer",
+      "register": "Model_Number",
+      "width_bytes": 2
+    },
+    {
+      "raw_type": "integer",
+      "register": "Firmware_Major_Version",
+      "width_bytes": 1
+    },
+    {
+      "raw_type": "integer",
+      "register": "Firmware_Minor_Version",
+      "width_bytes": 1
+    },
+    {
+      "raw_type": "integer",
+      "register": "ID",
+      "width_bytes": 1
+    },
+    {
+      "raw_type": "integer",
+      "register": "Baud_Rate",
+      "width_bytes": 1
+    },
+    {
+      "raw_type": "integer",
+      "register": "Present_Position",
+      "width_bytes": 2
+    },
+    {
+      "raw_type": "integer",
+      "register": "Present_Voltage",
+      "width_bytes": 1
+    },
+    {
+      "raw_type": "integer",
+      "register": "Present_Temperature",
+      "width_bytes": 1
+    }
+  ],
+  "retry_policy": {
+    "max_read_retries": 1,
+    "retryable_error_codes": [
+      "crc_mismatch",
+      "timeout"
+    ]
+  },
+  "schema_version": "scenesmith.readonly_servo_census_contract.v1",
+  "target_device_identity": {
+    "bus": {
+      "baudrate": 1000000,
+      "protocol_family": "feetech",
+      "protocol_version": 1
+    },
+    "device_role": "so101_follower_observation_target",
+    "usb": {
+      "allowed_aliases": [
+        "/dev/tty.fixture-so101-follower"
+      ],
+      "canonical_path": "/dev/cu.fixture-so101-follower",
+      "forbidden_aliases": [
+        "/dev/cu.fixture-so101-leader",
+        "/dev/tty.fixture-so101-leader"
+      ],
+      "product_id_hex": "0001",
+      "serial_number": "fixture-so101-follower-001",
+      "vendor_id_hex": "ffff"
+    }
+  }
+}
