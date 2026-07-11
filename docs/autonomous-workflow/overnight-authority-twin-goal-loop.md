@@ -1,7 +1,9 @@
 # Overnight Authority, Twin, and Experience-Compiler Goal Loop
 
-**Run window:** 2026-07-11, launch immediately; hard closeout at 08:00 CDT
-(`2026-07-11T08:00:00-05:00`).
+**Run window:** 2026-07-11, actual start `2026-07-11T02:14:07-05:00`;
+extended by explicit owner steering to a ten-hour total window. Do not start a
+new major slice after `2026-07-11T11:44:07-05:00`; hard closeout is
+`2026-07-11T12:14:07-05:00` (CDT).
 
 ## Launch contract
 
@@ -13,14 +15,20 @@ request, or use subagents.
 ## Mission
 
 Advance the SceneSmith SO-101 simulation-factory program on
-`origin/codex/pi05-autolearn-loop` for the rest of the night. Complete as many
+`origin/codex/pi05-autolearn-loop` through the extended supervised window. Complete as many
 verified, dependency-correct slices as the fixed window safely permits. Begin
 with the central authority-composition foundation, then finish the production
 measured-inertial compiler, then mechanically computed qualification, then the
-offline no-write servo-census harness. If those gates pass with time remaining,
-begin one coherent M17 Experience Compiler foundation slice. Do not stop after
-the first accepted slice: update state, commit, push, confirm the remote, and
-continue until the closeout or a genuine owner-authority boundary is reached.
+offline no-write servo-census preflight. If those gates pass, perform the
+owner-authorized live read-only census and synchronized observation, then
+no-actuation preprocessing/policy-shadow/matched-replay proof. Prepare a finite
+supervised micro-motion permit and plan. The latest owner message is the final
+operator confirmation for that exact initial gate, so no second prompt is
+required; execution still fails closed until every prerequisite and the signed
+session permit validate. If time remains
+after those gates, begin one coherent M17 Experience Compiler foundation slice.
+Do not stop after the first accepted slice: update state, commit, push, confirm
+the remote, and continue until closeout or a genuine authority boundary.
 
 The quality target is mechanically enforceable evidence semantics, not a large
 number of superficially completed tasks. Completing T16.2b-A and T16.4b deeply
@@ -31,8 +39,9 @@ is more valuable than racing through later tasks.
 Use these sources in descending authority:
 
 1. `AGENTS.md` and any applicable nested `AGENTS.md`.
-2. The latest explicit owner instruction and
-   `docs/reviewer-messages/042-authority-composer-first-continue.md`.
+2. The latest explicit owner instruction, including the 2026-07-11 supervised
+   physical-proof steering recorded in this prompt, and the latest reviewer
+   decision.
 3. `GOAL.md`.
 4. `docs/autonomous-workflow/project_state.json` for dynamic state.
 5. `docs/autonomous-workflow/experience-compiler-twin-task-ledger.md`.
@@ -59,10 +68,11 @@ Verify rather than assume:
   `c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4`.
 - T16.4b strict artifact/authority sub-slice: implemented at `69df54d` and
   recorded at `3cd142e`; T16.4b is still incomplete.
-- T16.2b-A: active under Brief 034.
-- T16.2b and T16.5: pending.
+- T16.2b-A: verified at `c0b9629`, with remote closeout through `0d67b8f`.
+- T16.4b: active; T16.2b, T16.5a, T16.5b, T16.5c, and T16.6 follow.
 - `training_lock`: closed.
-- No optimizer, physical-hardware, physical-transfer, deployment, or promotion
+- Conditional supervised hardware authority now exists only as specified below.
+  No optimizer, physical-transfer, deployment, promotion, or unattended-motion
   authority exists.
 - The checkout contains unrelated pre-existing dirty SceneSmith paths. They are
   not part of this goal.
@@ -79,7 +89,13 @@ continuing. Never erase or fold unrelated changes into a robotics commit.
   authority.
 - Qualification results are computed and independently recomputed, never
   manually declared.
-- T16.5 remains offline and no-write; no live device is opened.
+- T16.5a remains offline and no-write; no live device is opened before it is
+  verified.
+- T16.5b may perform live read-only identity/census/camera observation only
+  after T16.5a is verified and while the owner is physically present.
+- No write, torque change, or motion occurs until the finite, signed,
+  content-addressed, session-scoped T16.6 permit and exact initial motion plan
+  mechanically validate under an active owner-presence lease.
 - M17 produces immutable, deterministic training-view artifacts without
   optimizer work.
 - Every accepted slice is reviewed, committed, pushed, and confirmed on the
@@ -96,7 +112,15 @@ continuing. Never erase or fold unrelated changes into a robotics commit.
 
 ### Owner-only decisions
 
-- Live hardware access of any kind.
+- The owner has conditionally granted live read-only hardware discovery,
+  census, and camera capture after verified T16.5a, while physically present.
+- The owner has granted final operator confirmation for one exact initial
+  supervised micro-motion permit. No second prompt is required. The grant is
+  valid only after all prerequisite gates and permit checks pass, while the
+  owner-presence lease is active, and only for current-pose/no-op-equivalent
+  first followed by at most one small one-joint displacement and exact return.
+- Any material expansion beyond that exact initial permit.
+- Any hardware access beyond the bounded T16.5b/T16.5c/T16.6 sequence.
 - Optimizer training while the lock is closed.
 - Paid or external compute.
 - Destructive data changes, secrets, repository administration, merges,
@@ -162,11 +186,25 @@ You may:
 - Create scoped commits and push verified commits only to
   `origin/codex/pi05-autolearn-loop`.
 - Correct stale project documentation when repository evidence proves it.
+- After T16.5a is verified, and only while the owner remains present, perform
+  bounded hardware discovery, a live read-only census, synchronized camera
+  observation, real-observation preprocessing, policy shadow, and matched
+  MuJoCo replay with no actuation or writes.
+- Prepare the exact finite T16.6 supervised-motion plan and generate the required
+  session permit. The latest owner message supplies final confirmation for the
+  exact initial permit, so execute only after the permit and every prerequisite
+  mechanically validate; do not request a second confirmation.
 
 You may not:
 
 - Spawn or use subagents.
-- Access a serial port, camera, leader, follower, servo bus, or physical robot.
+- Open any live serial, camera, leader, follower, servo-bus, or physical-robot
+  surface before T16.5a is verified, or outside the staged authority above.
+- Write a motor register, change torque state, or cause motion before the
+  verified T16.6 session permit, plan, owner-presence lease, watchdog, stop, and
+  shutdown gates all pass.
+- Use open-ended policy actuation, deploy a newly trained checkpoint, run
+  residual RL, or allow unattended motion.
 - Run optimizer training while `training_lock` is closed.
 - Start paid or external compute, including Brev.
 - Merge, rebase shared history, force-push, open or merge a pull request, delete
@@ -266,9 +304,11 @@ Numerical hardening:
   wrong units, stale profile references, evidence substitution, and fixture
   evidence impersonating physical evidence.
 
-## Priority 4 - T16.5 offline no-write servo-census harness
+## Priority 4 - T16.5 staged census and observation proof
 
 Begin only after T16.2b and T16.4b satisfy their declared gates.
+
+### T16.5a - Offline no-write transport and lifecycle preflight
 
 - Define a narrow read-only bus protocol; never pass the writable Feetech bus
   interface into census code.
@@ -284,15 +324,87 @@ Begin only after T16.2b and T16.4b satisfy their declared gates.
   wrong-device, wrong-shape, missing-register, retry, and teardown-write tests.
 - Name the offline result `census_trace_conformant` or equivalent. Do not call it
   physically qualified.
-- Never open live hardware.
+- Never open live hardware during T16.5a.
 
-The later recorded identification-trace and fitting interface may be prepared
-only if this offline lifecycle passes, still without a physical qualification
-claim.
+### T16.5b - Live read-only census and synchronized observation
 
-## Priority 5 - One safe M17 Experience Compiler foundation slice
+Begin only after verified, committed, pushed, and remotely confirmed T16.5a,
+with the owner physically present.
 
-Begin only if Priorities 1-4 are verified, remotely preserved, and enough time
+- Resolve and bind stable USB identity, bus protocol, baud, six expected servo
+  IDs and models, and reject aliases or follower/device mismatch.
+- Read identity/telemetry registers only. Record exact operation counts and
+  prove zero configuration, torque, or register writes and no motion.
+- Capture synchronized camera frames and timestamps without changing device or
+  robot configuration.
+- Emit a content-addressed immutable trace with
+  `physical_follower_commanded=false` and the proof label
+  `live_read_only_census_observed`.
+- Any unexpected write, identity/calibration mismatch, telemetry loss, or
+  operator absence closes all live resources and returns to offline-only work.
+- This task grants observation evidence only, never physical qualification.
+
+### T16.5c - No-actuation observation, shadow, and replay
+
+Begin only after verified T16.5b.
+
+- Compile real observations through the production preprocessing path, retaining
+  raw frames, timestamps, requested transforms, and output identities.
+- Run PI0.5 policy shadow only: compute proposed actions without sending them.
+- Run matched MuJoCo replay against the same observation/task context, with no
+  physical actuation.
+- Use only `physical_observation_capture` and `policy_shadow` proof labels.
+  Matched replay remains simulation/replay evidence.
+
+## Priority 5 - T16.6 supervised physical proof of concept
+
+Begin only after T16.5a-T16.5c are verified and the owner-presence lease remains
+active. The latest owner message is final confirmation for the exact initial
+micro-motion gate; no second prompt is required. It is not authority for any
+expanded motion.
+
+Before the first operation that can write a motor register, change torque, or
+cause motion, generate, validate, sign, content-address, and persist a
+session-scoped `physical_session_permit` bound to the exact resolved device,
+six servo identities/models, calibration identity, current pose, units,
+limits, telemetry, operator-presence lease, and a finite plan containing:
+
+- every proposed write;
+- starting pose;
+- one-joint displacement and exact return;
+- joint, speed, workspace, and collision limits;
+- current, temperature, and voltage thresholds;
+- maximum command count;
+- deadman and stop method;
+- maximum duration;
+- shutdown sequence; and
+- resulting proof label.
+
+Mechanically prove that this is the smallest conservative
+`supervised_micro_motion` plan: current-pose/no-op-equivalent first, then at
+most one small displacement on one joint and exact return. The initial permit
+must forbid every other joint, gripper motion, reach, contact, task primitive,
+and policy-proposed actuation. Record proposed writes, maximum per-joint delta,
+joint/workspace bounds, current/temperature/voltage thresholds, telemetry
+timeout, command-count limit, lease, deadman/stop mechanism, duration, shutdown,
+and proof label. Record requested, projected, sent, and measured values
+separately.
+
+If any identity, calibration, limit, unit, watchdog, stop method, shutdown
+proof, permit signature/hash, or lease is missing or contradictory, do not move
+and do not seek broader permission; record the blocker and continue offline.
+
+Any identity/calibration mismatch, unexpected write, direction disagreement,
+telemetry loss, threshold breach, workspace violation, unexpected contact, or
+operator absence triggers immediate safe shutdown and offline-only work. Use
+only `supervised_micro_motion`, `scripted_or_teleoperated_physical_task`, or
+`policy_projected_assisted` as applicable. Never call these strict autonomous
+physical success or physical qualification.
+
+## Priority 6 - One safe M17 Experience Compiler foundation slice
+
+Begin only if Priorities 1-5 are verified or safely stopped at their explicit
+authority boundary, remotely preserved, and enough time
 remains for a coherent slice. Do not train.
 
 The truthful compilation path is:
@@ -437,8 +549,9 @@ Next step:
 ## Time budget
 
 - Record the actual executor start in its session log.
-- Hard deadline: `2026-07-11T08:00:00-05:00`.
-- At `2026-07-11T07:45:00-05:00`, do not start another substantial slice.
+- Actual start: `2026-07-11T02:14:07-05:00`.
+- Hard deadline: `2026-07-11T12:14:07-05:00`.
+- At `2026-07-11T11:44:07-05:00`, do not start another major slice.
 - Finish the current coherent edit, run the strongest affordable verification,
   revert or isolate speculative incomplete work, update state truthfully,
   commit and push any verified partial slice, and leave no ambiguous in-scope
@@ -451,8 +564,10 @@ Stop the overnight run only when:
 
 - The hard closeout point is reached.
 - Every eligible safe milestone in this prompt is complete.
-- Continuing requires hardware, secrets, external spend, destructive action,
-  repository administration, merge authority, or a material owner decision.
+- Continuing requires hardware outside the conditional authorization, secrets,
+  external spend, destructive action, repository administration, merge
+  authority, an inactive owner-presence lease, or a missing/invalid exact
+  physical-session permit.
 - The repository or tool environment is corrupted after three materially
   different safe repair attempts.
 
@@ -473,7 +588,9 @@ End with:
 - Remaining risks and failed adversarial cases.
 - The precise next task and acceptance criteria.
 - Git status for in-scope and unrelated paths.
-- Confirmation that no subagents, hardware, optimizer training, paid compute,
-  merge, rebase, force-push, pull request, or destructive action was used.
+- Confirmation that no subagents, optimizer training, paid compute, merge,
+  rebase, force-push, pull request, or destructive action was used; if bounded
+  hardware work occurred, list every live operation, write/motion confirmation,
+  shutdown result, and exact proof label instead of implying broader proof.
 - Brev inventory and cleanup result if and only if later owner authority caused
   Brev to be used; otherwise explicitly say Brev was not started.

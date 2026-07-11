@@ -11,9 +11,18 @@ reward-aware cloning, and competence-gated residual learning only after those
 prerequisites pass. Update the active ledger at every verified slice and continue
 until the acceptance criteria are met or a genuine human-authority blocker is recorded.
 
-The physical SO-101 follower must never be instantiated or commanded by this
-path. Neural-policy, contact-stabilized, controller-assisted, and physical-robot
+The physical SO-101 follower must never be opened before verified T16.5a or
+commanded outside the exact verified T16.6 session permit. The final owner
+confirmation covers only the initial no-op-equivalent then one-small-joint-
+delta-and-return permit under an active owner-presence lease. Neural-policy,
+contact-stabilized, controller-assisted, supervised-motion, and physical-robot
 proof states must remain distinct.
+
+## Active Run Window
+
+- Actual start: `2026-07-11T02:14:07-05:00`.
+- No new major slice after: `2026-07-11T11:44:07-05:00`.
+- Hard closeout: `2026-07-11T12:14:07-05:00`.
 
 ## Current Milestone
 
@@ -62,7 +71,14 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
 
 ## Stop Conditions
 
-- Stop before any code path opens or writes to the physical follower port.
+- Stop before any live hardware path until T16.5a is verified and remotely
+  preserved.
+- Stop before any write, torque change, or motion unless T16.5a-T16.5c and the
+  exact signed/content-addressed T16.6 session permit, owner-presence lease,
+  watchdog, stop, and shutdown gates all validate.
+- Under the initial confirmed permit, stop before any second joint, gripper,
+  reach, contact, task primitive, policy-proposed actuation, or other material
+  expansion.
 - Stop before destructive dataset replacement without an explicit overwrite flag.
 - Stop training if coordinate transforms, normalization, preprocessing, task
   labels, temporal continuity, source weighting, or dataset identity are not
@@ -117,3 +133,8 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   facts only, and the checked-in fixture composition mechanically withholds all
   global decisions. The remote preserves the implementation and review through
   `e1d59ca`; `training_lock` remains closed.
+- The owner is physically present and has granted conditional read-only
+  hardware/camera authority after verified T16.5a plus final operator
+  confirmation for exactly one initial session-scoped `supervised_micro_motion`
+  permit after T16.5a-T16.5c. No second prompt is required; every permit and
+  lease check remains mandatory, and any expansion remains unauthorized.

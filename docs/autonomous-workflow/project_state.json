@@ -1,6 +1,13 @@
 {
   "schema_version": "scenesmith.project_state.v1",
   "updated": "2026-07-11",
+  "run_window": {
+    "actual_start": "2026-07-11T02:14:07-05:00",
+    "total_duration_hours": 10,
+    "no_new_major_slice_after": "2026-07-11T11:44:07-05:00",
+    "hard_closeout": "2026-07-11T12:14:07-05:00",
+    "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
+  },
   "branch": "codex/pi05-autolearn-loop",
   "current_head_commit": "e1d59cacecf6306088382493b1bf5b7d486b6ad8",
   "last_reviewed_commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
@@ -8,6 +15,70 @@
     "commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
     "decision": "CONTINUE_T16_4B",
     "reviewer_decision": "docs/reviewer-messages/043-central-authority-composition-reviewed.md"
+  },
+  "owner_authority": {
+    "authority_id": "owner_supervised_physical_poc_2026_07_11",
+    "operator_presence_required": true,
+    "final_operator_confirmation": {
+      "state": "granted",
+      "recorded_at": "2026-07-11T02:47:00-05:00",
+      "no_second_prompt_required": true,
+      "scope": "exact_initial_supervised_micro_motion_permit_only",
+      "valid_only_while": [
+        "owner_presence_lease_active",
+        "all_T16.5a_T16.5b_T16.5c_gates_verified",
+        "physical_session_permit_valid"
+      ]
+    },
+    "immediately_authorized": [
+      "prepare_finite_supervised_motion_plan"
+    ],
+    "conditional_authority": [
+      {
+        "requires": ["T16.5a_verified", "owner_present"],
+        "allows": [
+          "live_hardware_discovery",
+          "live_read_only_census",
+          "synchronized_camera_capture"
+        ]
+      },
+      {
+        "requires": ["T16.5b_verified", "owner_present"],
+        "allows": [
+          "physical_observation_preprocessing",
+          "pi05_policy_shadow_no_actuation",
+          "matched_mujoco_replay"
+        ]
+      },
+      {
+        "requires": [
+          "T16.5a_T16.5b_T16.5c_verified",
+          "signed_content_addressed_physical_session_permit_valid",
+          "exact_initial_motion_plan_valid",
+          "owner_present"
+        ],
+        "allows": ["confirmed_supervised_micro_motion_only"]
+      }
+    ],
+    "not_authorized": [
+      "motor_register_write_before_verified_session_permit",
+      "torque_change_before_verified_session_permit",
+      "motion_before_verified_session_permit",
+      "material_expansion_beyond_initial_permit",
+      "open_ended_policy_actuation",
+      "new_checkpoint_deployment",
+      "residual_rl",
+      "unattended_motion",
+      "physical_qualification_claim"
+    ],
+    "allowed_proof_labels": [
+      "live_read_only_census_observed",
+      "physical_observation_capture",
+      "supervised_micro_motion",
+      "scripted_or_teleoperated_physical_task",
+      "policy_shadow",
+      "policy_projected_assisted"
+    ]
   },
   "training_lock": "closed",
   "current_milestone": "M16",
@@ -135,9 +206,67 @@
       ]
     },
     "T16.5": {
+      "state": "superseded",
+      "depends_on": ["T16.1b", "T16.2b", "T16.4b"],
+      "superseded_by": ["T16.5a", "T16.5b", "T16.5c", "T16.6"],
+      "authority_not_granted": ["live_hardware_census", "hardware_qualification"]
+    },
+    "T16.5a": {
       "state": "pending",
       "depends_on": ["T16.1b", "T16.2b", "T16.4b"],
-      "authority_not_granted": ["live_hardware_census", "hardware_qualification"]
+      "result": "offline no-write transport and lifecycle preflight pending",
+      "authority_not_granted": ["live_hardware_access", "register_write", "motion"]
+    },
+    "T16.5b": {
+      "state": "pending",
+      "depends_on": ["T16.5a"],
+      "conditional_authority": [
+        "live_hardware_discovery_after_T16.5a",
+        "live_read_only_census_after_T16.5a",
+        "synchronized_camera_capture_after_T16.5a"
+      ],
+      "authority_not_granted": [
+        "configuration_write",
+        "torque_write",
+        "register_write",
+        "motion",
+        "physical_qualification"
+      ]
+    },
+    "T16.5c": {
+      "state": "pending",
+      "depends_on": ["T16.5b"],
+      "conditional_authority": [
+        "physical_observation_preprocessing",
+        "pi05_policy_shadow_no_actuation",
+        "matched_mujoco_replay"
+      ],
+      "authority_not_granted": ["physical_actuation", "physical_qualification"]
+    },
+    "T16.6": {
+      "state": "pending",
+      "depends_on": ["T16.5a", "T16.5b", "T16.5c"],
+      "result": "final operator confirmation granted for one exact initial micro-motion permit; offline and read-only prerequisites still pending",
+      "no_second_prompt_required": true,
+      "pre_execution_requirements": [
+        "T16.5a_T16.5b_T16.5c_verified",
+        "exact_device_role_and_six_servo_identities_resolved",
+        "calibration_pose_units_limits_and_telemetry_resolved",
+        "signed_content_addressed_session_scoped_physical_session_permit_valid",
+        "smallest_noop_then_one_joint_delta_and_exact_return_plan_valid",
+        "owner_presence_lease_active",
+        "watchdog_deadman_stop_and_shutdown_proven"
+      ],
+      "authority_not_granted": [
+        "motion_before_verified_session_permit",
+        "any_other_joint_or_gripper_motion_under_initial_permit",
+        "reach_contact_task_or_policy_actuation_under_initial_permit",
+        "material_expansion_beyond_initial_permit",
+        "open_ended_policy_actuation",
+        "unattended_motion",
+        "strict_autonomous_physical_success",
+        "physical_qualification"
+      ]
     }
   }
 }

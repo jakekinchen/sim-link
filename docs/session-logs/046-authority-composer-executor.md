@@ -5,8 +5,12 @@
 ## Run window
 
 - Actual executor start: `2026-07-11T02:14:07-05:00` (CDT).
-- No-new-substantial-slice threshold: `2026-07-11T07:45:00-05:00`.
-- Hard closeout deadline: `2026-07-11T08:00:00-05:00`.
+- Original no-new-substantial-slice threshold:
+  `2026-07-11T07:45:00-05:00`, superseded by owner steering below.
+- Original hard closeout deadline: `2026-07-11T08:00:00-05:00`, superseded by
+  the ten-hour owner extension below.
+- Active no-new-major-slice threshold: `2026-07-11T11:44:07-05:00`.
+- Active hard closeout deadline: `2026-07-11T12:14:07-05:00`.
 
 ## Observed starting state
 
@@ -73,3 +77,25 @@ named remote is independently confirmed.
   `authority_composition_contract_valid`; every global decision and optimizer
   authority remains withheld, and `training_lock` remains closed.
 - Next task: resume T16.4b under Brief 033.
+
+## Owner steering boundary
+
+At `2026-07-11T02:43:13-05:00`, while physically present beside the
+desk-mounted SO-101 and cameras, the owner extended this run to ten hours from
+the recorded start: no new major slice after `11:44:07-05:00`, hard closeout at
+`12:14:07-05:00`.
+
+The durable dependency path is now T16.4b, T16.2b, T16.5a offline no-write
+preflight, T16.5b live read-only census/camera observation, T16.5c no-actuation
+preprocessing/policy-shadow/matched replay, then T16.6. The final owner message
+is operator confirmation for one exact initial T16.6 session permit only:
+current-pose/no-op-equivalent followed by at most one small one-joint
+displacement and exact return. No second prompt is required. Live access still
+waits on verified prerequisite gates; write or motion still waits on a signed,
+content-addressed, mechanically valid session permit, exact identities and
+calibration, thresholds/watchdog/stop/shutdown proof, and an active
+owner-presence lease. Any expansion remains unauthorized.
+
+The persisted Goal was rechecked and remained `active` on thread
+`019f5006-2455-7941-bc76-b992dd96f8a8`. The prompt file referenced by that Goal
+now carries the extended closeout and corrected owner authority.

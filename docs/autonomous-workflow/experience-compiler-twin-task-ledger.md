@@ -4,12 +4,14 @@ Updated: 2026-07-11
 
 ```text
 training_lock: closed
+run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.4b production measured-inertial compiler
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.2b-A central authority composition; T16.4 blocked real template and synthetic compiler scaffold; T16.4b strict artifact and scoped-gate sub-slice
 evidence: T16.2b-A implementation c0b9629 and reviewer decision 043 are preserved on origin through e1d59ca; contract 6d04b205... and denied fixture composition d1206c5c... withhold all global authority
-remaining: remaining T16.4b production compiler; T16.2b computed qualification; revised T16.5 offline no-write census conformance
-blockers: no offline blocker; physical M19 still requires separate read and motion authority
+remaining: remaining T16.4b production compiler; T16.2b computed qualification; T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
+owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
+blockers: no offline blocker; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
 next_step: resume brief 033 with hierarchical BOM exact cover, explicit units/calibration, all source modes, full-precision aggregation, numerical hardening, and a production-schema fixture
 ```
 
@@ -21,7 +23,14 @@ next_step: resume brief 033 with hierarchical BOM exact cover, explicit units/ca
 - `recovery` is a control mode, never a task phase.
 - Unknown coordinate, owner, prompt, or temporal semantics are quarantined.
 - No M20-M22 task may start while `training_lock` is `closed`.
-- Physical census, motion, or contact tasks require explicit owner authorization.
+- Live read-only census/camera capture is conditionally owner-authorized only
+  after verified T16.5a while the owner-presence lease is active.
+- The latest owner message is final confirmation for one exact initial
+  no-op-equivalent then one-joint displacement-and-return permit. No second
+  prompt is required, but no write or motion occurs unless the signed,
+  content-addressed, session-scoped permit and every prerequisite validate.
+- Any additional joint, gripper, reach, contact, task, policy actuation, or
+  material permit expansion is unauthorized.
 - States are `pending`, `in_progress`, `verified`, `blocked`, `deferred`, and `superseded`.
 
 ## M16 - Twin And Dependency Foundation
@@ -37,7 +46,11 @@ next_step: resume brief 033 with hierarchical BOM exact cover, explicit units/ca
 | T16.4 | reopened | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Blocked real template and synthetic compiler scaffold verified; production measurement ingestion and authority separation missing |
 | T16.4b | in_progress | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | Strict artifact/gate sub-slice accepted; hierarchical BOM, units/calibration, all source modes, precision hardening, and production fixture resume after T16.2b-A |
 | T16.2b | pending | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | Units, finite values, trials, split IDs, conditions, uncertainty, content-addressed evidence, and recomputed tolerances |
-| T16.5 | pending | T16.1b,T16.2b,T16.4b | Build full-lifecycle fake-bus/recorded-trace census conformance harness | Construct/connect/read/decode/close/failure cleanup prove zero writes; hardware identity registry; offline result is `census_trace_conformant` only |
+| T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
+| T16.5a | pending | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Narrow read-only interface; fake/recorded traces; construct/connect/read/decode/close/retry/cleanup; zero writes; identity/alias rejection; `physical_follower_commanded=false` |
+| T16.5b | pending | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Stable USB/bus/six-servo identity; camera frames/timestamps; content-addressed trace; zero configuration/torque/register writes or motion; `live_read_only_census_observed` only |
+| T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
+| T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
 
@@ -117,6 +130,20 @@ next_step: resume brief 033 with hierarchical BOM exact cover, explicit units/ca
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Owner-supervised physical proof steering
+
+```text
+Current task: T16.4b
+State: in_progress
+Completed: recorded ten-hour window extension and staged T16.5a/T16.5b/T16.5c/T16.6 authority; final operator confirmation granted for one exact initial micro-motion permit
+Evidence: explicit owner steering while physically present beside the desk-mounted SO-101; persisted Goal remains active
+Commit: pending scoped steering commit
+Remaining: finish T16.4b and T16.2b before any T16.5a; no live hardware before verified T16.5a; no write/motion before exact session permit gates
+Blockers: none for offline continuation
+Training lock: closed
+Next step: preserve steering on origin, then resume Brief 033
+```
 
 ### 2026-07-11 - T16.2b-A central authority composition verified
 
