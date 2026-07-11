@@ -16,6 +16,15 @@ Complete T16.2b-A under Brief 034 before extending the production output schema.
 Preserve safe compatibility where possible; otherwise bump the schema version
 and regenerate deterministic fixtures explicitly.
 
+T16.2b-A establishes `scenesmith.assembly_inertials.v2` as that boundary. The
+assembly artifact now exposes exactly these local facts under `capabilities`:
+`artifact_schema_valid`, `inertial_compilation_valid`,
+`inertial_model_usable_for_simulation`, and
+`physical_measurement_evidence_verified`. Legacy component-level global
+authority fields are forbidden, and the retained compatibility gate functions
+fail closed with a route to `scenesmith.robot_lab.authority_composer`. All
+future production output from this brief must preserve that v2 separation.
+
 ## Acceptance Criteria
 
 - Add `scenesmith/robot_lab/artifact_contract.py` with strict JSON load,

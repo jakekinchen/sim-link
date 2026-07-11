@@ -1,0 +1,439 @@
+{
+  "capabilities": [
+    {
+      "capability_id": "actuator_and_timing_qualification_passed",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "appropriate_evaluation_tier_passed",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "artifact_schema_valid",
+      "kind": "local_component_fact"
+    },
+    {
+      "capability_id": "camera_qualification_passed",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "contact_qualification_passed",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "coordinate_contract_valid",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "executable_stack_valid",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "experience_compiler_valid",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "held_out_twin_metrics_passed",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "inertial_compilation_valid",
+      "kind": "local_component_fact"
+    },
+    {
+      "capability_id": "inertial_model_usable_for_simulation",
+      "kind": "local_component_fact"
+    },
+    {
+      "capability_id": "no_safety_or_proof_state_violation",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "normalization_contract_valid",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "physical_hardware_identity_verified",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "physical_measurement_evidence_verified",
+      "kind": "local_component_fact"
+    },
+    {
+      "capability_id": "policy_artifact_and_training_provenance_valid",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "required_deployment_authority_present",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "required_simulation_properties_available",
+      "kind": "global_prerequisite_fact"
+    },
+    {
+      "capability_id": "structural_contract_valid",
+      "kind": "global_prerequisite_fact"
+    }
+  ],
+  "contract_id": "pi05_so101_central_authority_composition",
+  "denial_reasons": {
+    "CLAIM_FALSE": "The scoped component capability was explicitly false.",
+    "EVIDENCE_EXPIRED": "The claim validity interval ended before composition.",
+    "EVIDENCE_NOT_YET_VALID": "The claim was not valid at composition time.",
+    "EVIDENCE_STALE": "The evidence exceeded its declared freshness window.",
+    "EVIDENCE_SUBSTITUTION": "Evidence metadata did not bind to the claim subject, scope, or provenance.",
+    "FORGED_GLOBAL_AUTHORITY_FIELD": "A component payload carried a forbidden global-authority field.",
+    "ISSUER_NOT_AUTHORIZED": "The claim issuer was not authorized for the prerequisite.",
+    "MISSING_PREREQUISITE": "One or more required prerequisite facts were not satisfied.",
+    "NON_AUTHORIZING_COMPOSITION_MODE": "The composition was explicitly generated as non-authorizing fixture evidence.",
+    "PROVENANCE_CLASS_NOT_ALLOWED": "The evidence provenance class was not allowed for the prerequisite.",
+    "SCOPE_MISMATCH": "The claim scope did not match the composition scope.",
+    "SUBJECT_MISMATCH": "The claim subject did not match the composition subject.",
+    "UPSTREAM_DECISION_DENIED": "A prerequisite global decision was denied."
+  },
+  "forbidden_component_fields": [
+    "authority",
+    "physical_qualification_authority",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "simulation_training_ready",
+    "training_or_promotion_authority"
+  ],
+  "global_decisions": [
+    {
+      "decision_id": "simulation_training_ready",
+      "expression": {
+        "operator": "all",
+        "terms": [
+          {
+            "id": "structural_contract_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "executable_stack_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "coordinate_contract_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "normalization_contract_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "experience_compiler_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "required_simulation_properties_available",
+            "kind": "prerequisite"
+          }
+        ]
+      }
+    },
+    {
+      "decision_id": "physical_transfer_ready",
+      "expression": {
+        "operator": "all",
+        "terms": [
+          {
+            "id": "simulation_training_ready",
+            "kind": "decision"
+          },
+          {
+            "id": "physical_hardware_identity_verified",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "actuator_and_timing_qualification_passed",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "camera_qualification_passed",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "contact_qualification_passed",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "held_out_twin_metrics_passed",
+            "kind": "prerequisite"
+          }
+        ]
+      }
+    },
+    {
+      "decision_id": "promotion_eligible",
+      "expression": {
+        "operator": "all",
+        "terms": [
+          {
+            "id": "policy_artifact_and_training_provenance_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "appropriate_evaluation_tier_passed",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "required_deployment_authority_present",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "no_safety_or_proof_state_violation",
+            "kind": "prerequisite"
+          }
+        ]
+      }
+    }
+  ],
+  "identity_sha256": "6d04b20547a9391c4e695b5a337ee292410a2a13a8a3efdf34cb7033feda6ba1",
+  "issuer_registry": [
+    {
+      "authority_id": "scenesmith.deployment_authority.v1",
+      "authority_identity_sha256": "5df225ad4cce10f60884923a2f8acbc23f5f6469c2329418e1ebb813c4929214"
+    },
+    {
+      "authority_id": "scenesmith.measured_inertial_compiler.v2",
+      "authority_identity_sha256": "f4648e5e1384a46acf631c9f557053681034ba9cc65dbd6cae9bca9c7b848108"
+    },
+    {
+      "authority_id": "scenesmith.physical_qualification_authority.v1",
+      "authority_identity_sha256": "98d8b2c4049ae7f783296a8c7d2323bc7e0dc3f1bb8ebe64ded67fd0a238f83d"
+    },
+    {
+      "authority_id": "scenesmith.policy_evaluation_authority.v1",
+      "authority_identity_sha256": "442b35dde518e043e62d8b9d9cd3587da18582b5b58a9ce099c58c6e65be7700"
+    },
+    {
+      "authority_id": "scenesmith.repository_verifier.v1",
+      "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+    },
+    {
+      "authority_id": "scenesmith.safety_authority.v1",
+      "authority_identity_sha256": "e10eef0fb5cfd1882169a8b74b2d62d8db6acdc5cca507a158f940a913f14c76"
+    },
+    {
+      "authority_id": "scenesmith.simulation_qualification_authority.v1",
+      "authority_identity_sha256": "4397f6817aec9d1fc8ea4dd6a2b536db18b1a6e51115bd8f8572479cbd37dcfc"
+    }
+  ],
+  "prerequisites": [
+    {
+      "allowed_provenance_classes": [
+        "repository",
+        "simulation"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.repository_verifier.v1",
+          "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+        }
+      ],
+      "capability_id": "structural_contract_valid",
+      "prerequisite_id": "structural_contract_valid"
+    },
+    {
+      "allowed_provenance_classes": [
+        "repository"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.repository_verifier.v1",
+          "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+        }
+      ],
+      "capability_id": "executable_stack_valid",
+      "prerequisite_id": "executable_stack_valid"
+    },
+    {
+      "allowed_provenance_classes": [
+        "repository",
+        "simulation"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.repository_verifier.v1",
+          "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+        }
+      ],
+      "capability_id": "coordinate_contract_valid",
+      "prerequisite_id": "coordinate_contract_valid"
+    },
+    {
+      "allowed_provenance_classes": [
+        "repository",
+        "simulation"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.repository_verifier.v1",
+          "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+        }
+      ],
+      "capability_id": "normalization_contract_valid",
+      "prerequisite_id": "normalization_contract_valid"
+    },
+    {
+      "allowed_provenance_classes": [
+        "repository",
+        "simulation"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.repository_verifier.v1",
+          "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+        }
+      ],
+      "capability_id": "experience_compiler_valid",
+      "prerequisite_id": "experience_compiler_valid"
+    },
+    {
+      "allowed_provenance_classes": [
+        "simulation"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.simulation_qualification_authority.v1",
+          "authority_identity_sha256": "4397f6817aec9d1fc8ea4dd6a2b536db18b1a6e51115bd8f8572479cbd37dcfc"
+        }
+      ],
+      "capability_id": "required_simulation_properties_available",
+      "prerequisite_id": "required_simulation_properties_available"
+    },
+    {
+      "allowed_provenance_classes": [
+        "physical"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.physical_qualification_authority.v1",
+          "authority_identity_sha256": "98d8b2c4049ae7f783296a8c7d2323bc7e0dc3f1bb8ebe64ded67fd0a238f83d"
+        }
+      ],
+      "capability_id": "physical_hardware_identity_verified",
+      "prerequisite_id": "physical_hardware_identity_verified"
+    },
+    {
+      "allowed_provenance_classes": [
+        "physical"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.physical_qualification_authority.v1",
+          "authority_identity_sha256": "98d8b2c4049ae7f783296a8c7d2323bc7e0dc3f1bb8ebe64ded67fd0a238f83d"
+        }
+      ],
+      "capability_id": "actuator_and_timing_qualification_passed",
+      "prerequisite_id": "actuator_and_timing_qualification_passed"
+    },
+    {
+      "allowed_provenance_classes": [
+        "physical"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.physical_qualification_authority.v1",
+          "authority_identity_sha256": "98d8b2c4049ae7f783296a8c7d2323bc7e0dc3f1bb8ebe64ded67fd0a238f83d"
+        }
+      ],
+      "capability_id": "camera_qualification_passed",
+      "prerequisite_id": "camera_qualification_passed"
+    },
+    {
+      "allowed_provenance_classes": [
+        "physical"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.physical_qualification_authority.v1",
+          "authority_identity_sha256": "98d8b2c4049ae7f783296a8c7d2323bc7e0dc3f1bb8ebe64ded67fd0a238f83d"
+        }
+      ],
+      "capability_id": "contact_qualification_passed",
+      "prerequisite_id": "contact_qualification_passed"
+    },
+    {
+      "allowed_provenance_classes": [
+        "physical"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.physical_qualification_authority.v1",
+          "authority_identity_sha256": "98d8b2c4049ae7f783296a8c7d2323bc7e0dc3f1bb8ebe64ded67fd0a238f83d"
+        }
+      ],
+      "capability_id": "held_out_twin_metrics_passed",
+      "prerequisite_id": "held_out_twin_metrics_passed"
+    },
+    {
+      "allowed_provenance_classes": [
+        "policy_evaluation"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.policy_evaluation_authority.v1",
+          "authority_identity_sha256": "442b35dde518e043e62d8b9d9cd3587da18582b5b58a9ce099c58c6e65be7700"
+        }
+      ],
+      "capability_id": "policy_artifact_and_training_provenance_valid",
+      "prerequisite_id": "policy_artifact_and_training_provenance_valid"
+    },
+    {
+      "allowed_provenance_classes": [
+        "policy_evaluation"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.policy_evaluation_authority.v1",
+          "authority_identity_sha256": "442b35dde518e043e62d8b9d9cd3587da18582b5b58a9ce099c58c6e65be7700"
+        }
+      ],
+      "capability_id": "appropriate_evaluation_tier_passed",
+      "prerequisite_id": "appropriate_evaluation_tier_passed"
+    },
+    {
+      "allowed_provenance_classes": [
+        "deployment_authority"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.deployment_authority.v1",
+          "authority_identity_sha256": "5df225ad4cce10f60884923a2f8acbc23f5f6469c2329418e1ebb813c4929214"
+        }
+      ],
+      "capability_id": "required_deployment_authority_present",
+      "prerequisite_id": "required_deployment_authority_present"
+    },
+    {
+      "allowed_provenance_classes": [
+        "safety_review"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.safety_authority.v1",
+          "authority_identity_sha256": "e10eef0fb5cfd1882169a8b74b2d62d8db6acdc5cca507a158f940a913f14c76"
+        }
+      ],
+      "capability_id": "no_safety_or_proof_state_violation",
+      "prerequisite_id": "no_safety_or_proof_state_violation"
+    }
+  ],
+  "provenance_classes": [
+    "repository",
+    "simulation",
+    "synthetic",
+    "fixture",
+    "replay",
+    "physical",
+    "policy_evaluation",
+    "deployment_authority",
+    "safety_review"
+  ],
+  "schema_version": "scenesmith.authority_composition_contract.v1"
+}

@@ -59,8 +59,15 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
         self.assertEqual(intake["status"], "awaiting_measurements")
         self.assertEqual(output["status"], "blocked_missing_measurements")
         self.assertIsNone(output["aggregate_physical_properties"]["mass_kg"])
-        self.assertFalse(output["physical_qualification_authority"])
-        self.assertFalse(output["training_or_promotion_authority"])
+        self.assertEqual(
+            output["capabilities"],
+            {
+                "artifact_schema_valid": True,
+                "inertial_compilation_valid": False,
+                "inertial_model_usable_for_simulation": False,
+                "physical_measurement_evidence_verified": False,
+            },
+        )
         self.assertEqual(len(intake["measurements"]), 0)
 
     def test_checked_in_artifacts_match_deterministic_build(self):
@@ -447,8 +454,23 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
             require_physical_transfer_authority,
             require_promotion_authority,
         ):
-            with self.assertRaisesRegex(ValueError, "lacks"):
+            with self.assertRaisesRegex(ValueError, "cannot grant global authority"):
                 gate(compiled)
+
+    def test_resigned_forged_global_authority_fields_are_rejected(self):
+        output = build_assembly_inertials(
+            repo_root=REPO_ROOT,
+            intake_path=SYNTHETIC_FIXTURE_PATH,
+        )
+        output["authority"] = {"simulation_training_ready": True}
+        output["identity_sha256"] = _resign(output)
+
+        with self.assertRaisesRegex(ValueError, "forbidden global-authority fields"):
+            verify_assembly_inertials(
+                output,
+                repo_root=REPO_ROOT,
+                intake_path=SYNTHETIC_FIXTURE_PATH,
+            )
 
     def test_synthetic_exact_cover_rejects_missing_required_atom(self):
         with tempfile.TemporaryDirectory() as tmpdir:

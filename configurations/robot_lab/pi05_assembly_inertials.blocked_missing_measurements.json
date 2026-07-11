@@ -10,13 +10,6 @@
     "assembly_id": "pi05_current_arm",
     "frame_units": "meter"
   },
-  "authority": {
-    "physical_twin_qualified": false,
-    "promotion_eligible": false,
-    "schema_valid": true,
-    "simulation_training_ready": false,
-    "synthetic_compilation_valid": false
-  },
   "blocking_reasons": [
     "No measured-mass evidence is checked into repo state for the current arm.",
     "CAD/MJCF priors remain separate from measured coverage and cannot authorize readiness."
@@ -25,6 +18,12 @@
     "origin": "CAD",
     "prior_count": 7,
     "source_mass_total_kg": 0.632006
+  },
+  "capabilities": {
+    "artifact_schema_valid": true,
+    "inertial_compilation_valid": false,
+    "inertial_model_usable_for_simulation": false,
+    "physical_measurement_evidence_verified": false
   },
   "coverage": {
     "missing_atom_ids": [
@@ -86,17 +85,16 @@
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
     "schema_version": "scenesmith.robotics_dependency_lock.v2"
   },
-  "identity_sha256": "f6ba9a72244e49bcafd4457faeb29dc32f1980cbf7e881083b54858e9eaeb6e6",
+  "identity_sha256": "8b8aab8e769167531776e38d76c545cec99277b69783d57c9db78f1020297ffc",
   "intake_ref": {
     "file_sha256": "4739b1f991a4f818a9f77d563c0128e184471208368795d7917507284d8f45cc",
     "identity_sha256": "f037d81ea6894239327094c636cad5d0127c97c7d00f50aee890315afbf29727",
     "path": "configurations/robot_lab/pi05_measured_mass_intake.awaiting_measurements.json",
     "schema_version": "scenesmith.measured_mass_intake.v1"
   },
-  "physical_qualification_authority": false,
   "rejected_evidence": [],
   "rejected_measurements": [],
-  "schema_version": "scenesmith.assembly_inertials.v1",
+  "schema_version": "scenesmith.assembly_inertials.v2",
   "status": "blocked_missing_measurements",
   "structural_diff_ref": {
     "file_sha256": "d8dd9670be2125be171b8b2dce91b271920d45865dc19cb424b851e9c91a1be1",
@@ -104,7 +102,6 @@
     "path": "configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json",
     "schema_version": "scenesmith.structural_twin_diff.v1"
   },
-  "training_or_promotion_authority": false,
   "twin_profile_ref": {
     "file_sha256": "09da7945144aa8cbdd6b67475d8da3c195b1e63a479128a1fbac591ef8e36b38",
     "identity_sha256": "7775b3858aaf4f80dc51f9f824f73c28028f22fa3cba53e404772d8091354494",

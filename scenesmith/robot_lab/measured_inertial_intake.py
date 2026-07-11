@@ -36,7 +36,7 @@ from scenesmith.robot_lab.twin_contract import (
 
 
 MEASURED_MASS_INTAKE_SCHEMA_VERSION = "scenesmith.measured_mass_intake.v1"
-ASSEMBLY_INERTIALS_SCHEMA_VERSION = "scenesmith.assembly_inertials.v1"
+ASSEMBLY_INERTIALS_SCHEMA_VERSION = "scenesmith.assembly_inertials.v2"
 DEFAULT_MEASURED_MASS_INTAKE_PATH = Path(
     "configurations/robot_lab/pi05_measured_mass_intake.awaiting_measurements.json"
 )
@@ -220,14 +220,11 @@ def _build_blocked_assembly_inertials(*, intake: dict[str, Any]) -> dict[str, An
                 "source_mass_total_kg": cad_prior_total_mass_kg,
                 "origin": "CAD",
             },
-            "physical_qualification_authority": False,
-            "training_or_promotion_authority": False,
-            "authority": {
-                "schema_valid": True,
-                "synthetic_compilation_valid": False,
-                "simulation_training_ready": False,
-                "physical_twin_qualified": False,
-                "promotion_eligible": False,
+            "capabilities": {
+                "artifact_schema_valid": True,
+                "inertial_compilation_valid": False,
+                "inertial_model_usable_for_simulation": False,
+                "physical_measurement_evidence_verified": False,
             },
         }
     )
@@ -401,14 +398,11 @@ def _build_synthetic_ready_assembly_inertials(*, intake: dict[str, Any]) -> dict
                 ),
                 "origin": "CAD",
             },
-            "physical_qualification_authority": False,
-            "training_or_promotion_authority": False,
-            "authority": {
-                "schema_valid": True,
-                "synthetic_compilation_valid": True,
-                "simulation_training_ready": False,
-                "physical_twin_qualified": False,
-                "promotion_eligible": False,
+            "capabilities": {
+                "artifact_schema_valid": True,
+                "inertial_compilation_valid": True,
+                "inertial_model_usable_for_simulation": True,
+                "physical_measurement_evidence_verified": False,
             },
         }
     )
@@ -551,6 +545,7 @@ def verify_assembly_inertials(
     if payload.get("schema_version") != ASSEMBLY_INERTIALS_SCHEMA_VERSION:
         raise ValueError("Unsupported assembly inertials schema")
     _verify_identity(payload, label="Assembly inertials")
+    _reject_global_authority_fields(payload)
     intake = _measured_mass_intake_ref(
         repo_root=repo_root,
         intake_path=intake_path,
@@ -572,10 +567,13 @@ def verify_assembly_inertials(
     if intake["payload"].get("status") != SYNTHETIC_TEST_ONLY_STATUS:
         if payload.get("status") != BLOCKED_ASSEMBLY_STATUS:
             raise ValueError("Assembly inertials status must remain blocked_missing_measurements")
-        if payload.get("physical_qualification_authority") is not False:
-            raise ValueError("Blocked assembly inertials must not grant physical qualification authority")
-        if payload.get("training_or_promotion_authority") is not False:
-            raise ValueError("Blocked assembly inertials must not grant training or promotion authority")
+        if payload.get("capabilities") != {
+            "artifact_schema_valid": True,
+            "inertial_compilation_valid": False,
+            "inertial_model_usable_for_simulation": False,
+            "physical_measurement_evidence_verified": False,
+        }:
+            raise ValueError("Blocked assembly inertials local capabilities drifted")
         aggregate = payload.get("aggregate_physical_properties") or {}
         if aggregate.get("mass_kg") is not None:
             raise ValueError("Blocked assembly inertials mass_kg must remain null")
@@ -644,27 +642,65 @@ def require_ready_or_raise(payload: dict[str, Any]) -> None:
 
 
 def require_compilation_ready(payload: dict[str, Any]) -> None:
-    _require_authority(payload, "synthetic_compilation_valid", label="compilation")
+    _require_local_capability(payload, "inertial_compilation_valid", label="compilation")
 
 
 def require_simulation_training_authority(payload: dict[str, Any]) -> None:
-    _require_authority(payload, "simulation_training_ready", label="simulation training")
+    _reject_direct_global_authority("simulation_training_ready")
 
 
 def require_physical_transfer_authority(payload: dict[str, Any]) -> None:
-    _require_authority(payload, "physical_twin_qualified", label="physical transfer")
+    _reject_direct_global_authority("physical_transfer_ready")
 
 
 def require_promotion_authority(payload: dict[str, Any]) -> None:
-    _require_authority(payload, "promotion_eligible", label="promotion")
+    _reject_direct_global_authority("promotion_eligible")
 
 
-def _require_authority(payload: dict[str, Any], key: str, *, label: str) -> None:
-    authority = payload.get("authority")
-    if not isinstance(authority, dict) or authority.get(key) is not True:
+def _require_local_capability(payload: dict[str, Any], key: str, *, label: str) -> None:
+    capabilities = payload.get("capabilities")
+    if not isinstance(capabilities, dict) or capabilities.get(key) is not True:
         raise ValueError(
-            f"Measured inertial artifact lacks {label} authority; current status is "
+            f"Measured inertial artifact lacks local {label} capability; current status is "
             f"{payload.get('status')!r}"
+        )
+
+
+def _reject_direct_global_authority(decision_id: str) -> None:
+    raise ValueError(
+        "Measured inertial artifacts cannot grant global authority; require "
+        f"{decision_id!r} from scenesmith.robot_lab.authority_composer"
+    )
+
+
+def _reject_global_authority_fields(payload: Any) -> None:
+    forbidden = {
+        "authority",
+        "physical_qualification_authority",
+        "physical_twin_qualified",
+        "physical_transfer_ready",
+        "promotion_eligible",
+        "simulation_training_ready",
+        "training_or_promotion_authority",
+    }
+
+    def visit(value: Any) -> set[str]:
+        found: set[str] = set()
+        if isinstance(value, dict):
+            for key, child in value.items():
+                if key in forbidden:
+                    found.add(key)
+                found.update(visit(child))
+        elif isinstance(value, list):
+            for child in value:
+                found.update(visit(child))
+        return found
+
+    found = sorted(visit(payload))
+    if found:
+        raise ValueError(
+            "Assembly inertials carry forbidden global-authority fields: "
+            + ", ".join(found)
         )
 
 
