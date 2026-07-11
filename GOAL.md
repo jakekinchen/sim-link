@@ -1,7 +1,5 @@
 # GOAL
 
-<stop-orchestrator/>
-
 ## Active Mission
 
 Complete the SceneSmith PI0.5 autonomous sorting program through a bounded,
@@ -32,27 +30,31 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-T16.5b is blocked at the owner-authority gate after three consecutive Goal
-turns observed the identical pre-existing Studio follower connection: one
-serial holder, follower torque reported on, safety armed, no route, and no jobs.
-Do not execute another slice or touch hardware until the owner chooses manual
-follower disconnect, explicitly authorizes the exact torque-release disconnect,
-or elects to keep Studio active. After a permitted disconnect, remove this stop
-sentinel only after a fresh zero-holder check and explicit canonical reopen.
+T16.5b is resumed and `in_progress`. At `2026-07-11T08:53:51-05:00`, the
+owner explicitly authorized virtual disconnect and reconnect because the arm
+cannot be physically unplugged. This resolves the prior three-turn authority
+block and authorizes exactly one Studio follower disconnect call, including the
+torque-disable write inherent in that route, followed by response, status, and
+zero-holder verification. It grants no motion command, safety-route change,
+leader disconnect, general register-write authority, or policy actuation.
+
+Keep the live read-only gate closed until the authorized follower disconnect is
+durably recorded and the reviewed holder guard proves zero follower holders.
+Only then may a fresh session, discovery, five-minute owner-presence lease, and
+exact T16.5b read-only contract be prepared. A later Studio reconnect is allowed
+only when exact device/calibration/current-pose state proves it mechanically
+no-motion-safe; otherwise leave the follower disconnected and torque off.
 
 The last completed implementation slice was Brief 041,
 `docs/briefs/041-rejected-live-attempt-camera-identity-correction.md`, under
 T16.5b. The offline correction now binds finite capture to stable camera
 name/unique ID, validates exact PNG bytes, rejects numeric-index churn as an
 authority field, and fails before serial open unless holder counts are zero.
-Keep the live gate closed and preserve the last-observed pre-existing Studio
-server untouched.
-Reviewer decision 053 is remotely preserved, and manager intervention 012
-records the smallest owner decision packet. The server currently
-reports follower torque on and safety armed; do not SIGTERM it or call its
-torque-changing disconnect route without a narrow owner choice. Continue safe
-offline work until the owner manually disconnects the follower, authorizes that
-exact disconnect, or elects to keep the server active.
+Keep the live gate closed through the disconnect and zero-holder proof.
+Reviewer decision 053 is remotely preserved, while reviewer 055 and manager
+intervention 014 record the narrow owner-authorized virtual-disconnect resume.
+Do not SIGTERM the server, disconnect the leader, or infer broader write/motion
+authority from this exception.
 
 ## Durable State
 
@@ -88,9 +90,10 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
 
 - Stop before any live hardware path until T16.5a is verified and remotely
   preserved.
-- Stop before any write, torque change, or motion unless T16.5a-T16.5c and the
-  exact signed/content-addressed T16.6 session permit, owner-presence lease,
-  watchdog, stop, and shutdown gates all validate.
+- Stop before any write, torque change, or motion unless it is the exact
+  owner-authorized one-call follower disconnect recorded above, or T16.5a-
+  T16.5c and the exact signed/content-addressed T16.6 session permit, owner-
+  presence lease, watchdog, stop, and shutdown gates all validate.
 - Under the initial confirmed permit, stop before any second joint, gripper,
   reach, contact, task primitive, policy-proposed actuation, or other material
   expansion.
@@ -193,3 +196,9 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   immediately before and after the serial census. The live gate remains closed
   because exclusive ownership has not been re-established after the
   pre-existing Studio server was observed holding the follower device.
+- Reviewer decision 055 resumes T16.5b after the owner explicitly authorized
+  virtual disconnect/reconnect. The accepted immediate action is one exact
+  follower disconnect call plus response/status/zero-holder proof; reconnect is
+  deferred unless it can be proven no-motion-safe. No live proof label, motion,
+  general register-write authority, or physical qualification is granted by
+  the resumption itself.

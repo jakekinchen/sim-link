@@ -95,7 +95,9 @@ continuing. Never erase or fold unrelated changes into a robotics commit.
   after T16.5a is verified and while the owner is physically present.
 - No write, torque change, or motion occurs until the finite, signed,
   content-addressed, session-scoped T16.6 permit and exact initial motion plan
-  mechanically validate under an active owner-presence lease.
+  mechanically validate under an active owner-presence lease, except for the
+  owner's `2026-07-11T08:53:51-05:00` narrow authorization for exactly one
+  virtual Studio follower disconnect and its inherent torque-disable write.
 - M17 produces immutable, deterministic training-view artifacts without
   optimizer work.
 - Every accepted slice is reviewed, committed, pushed, and confirmed on the
@@ -119,6 +121,14 @@ continuing. Never erase or fold unrelated changes into a robotics commit.
   valid only after all prerequisite gates and permit checks pass, while the
   owner-presence lease is active, and only for current-pose/no-op-equivalent
   first followed by at most one small one-joint displacement and exact return.
+- Because the physical arm cannot be unplugged, the owner has explicitly
+  authorized virtual disconnect and reconnect. The immediate grant is exactly
+  one Studio follower disconnect call, its inherent torque-disable write, and
+  response/status/zero-holder verification. It does not authorize a motion
+  command, leader disconnect, safety-route mutation, arbitrary register write,
+  or policy actuation. Reconnect is allowed only after exact identity,
+  calibration, and current-pose evidence proves it mechanically no-motion-safe;
+  otherwise it remains deferred with the follower disconnected and torque off.
 - Any material expansion beyond that exact initial permit.
 - Any hardware access beyond the bounded T16.5b/T16.5c/T16.6 sequence.
 - Optimizer training while the lock is closed.
@@ -333,6 +343,11 @@ with the owner physically present.
 
 - Resolve and bind stable USB identity, bus protocol, baud, six expected servo
   IDs and models, and reject aliases or follower/device mismatch.
+- When a pre-existing Studio follower holder prevents exclusive access, use at
+  most the exact owner-authorized follower disconnect route; do not signal the
+  server or disconnect the leader. Keep the live gate closed until the response
+  reports disconnected, status reports follower disconnected and torque off,
+  and the reviewed holder guard proves zero follower serial holders.
 - Read identity/telemetry registers only. Record exact operation counts and
   prove zero configuration, torque, or register writes and no motion.
 - Capture synchronized camera frames and timestamps without changing device or
@@ -342,6 +357,9 @@ with the owner physically present.
   `live_read_only_census_observed`.
 - Any unexpected write, identity/calibration mismatch, telemetry loss, or
   operator absence closes all live resources and returns to offline-only work.
+- Virtual reconnect is a separate restoration step, never a prerequisite for
+  the read-only census. Execute it only if reconnect cannot move from a stale
+  goal; otherwise retain the safer disconnected/torque-off state for T16.6.
 - This task grants observation evidence only, never physical qualification.
 
 ### T16.5c - No-actuation observation, shadow, and replay

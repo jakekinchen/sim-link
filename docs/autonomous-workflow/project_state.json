@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "c06188bd159e55301f591b1089a9e044fae6875c",
-  "last_reviewed_commit": "c06188bd159e55301f591b1089a9e044fae6875c",
+  "current_head_commit": "ee2ccfe2d17337eb41507b4a66ef68683bd8dd85",
+  "last_reviewed_commit": "ee2ccfe2d17337eb41507b4a66ef68683bd8dd85",
   "source_review": {
-    "commit": "c06188bd159e55301f591b1089a9e044fae6875c",
-    "decision": "STOP_T16_5B_ON_THREE_TURN_OWNER_AUTHORITY_BLOCKER",
-    "reviewer_decision": "docs/reviewer-messages/054-t16-5b-owner-authority-blocked.md"
+    "commit": "ee2ccfe2d17337eb41507b4a66ef68683bd8dd85",
+    "decision": "RESUME_T16_5B_ON_OWNER_AUTHORIZED_VIRTUAL_FOLLOWER_DISCONNECT",
+    "reviewer_decision": "docs/reviewer-messages/055-owner-authorized-virtual-disconnect-resume.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -30,8 +30,29 @@
         "physical_session_permit_valid"
       ]
     },
+    "virtual_connection_authority": {
+      "state": "granted",
+      "recorded_at": "2026-07-11T08:53:51-05:00",
+      "owner_statement": "we can't unplug it but you can do whatever you can to disconnect and reconnect virtually",
+      "immediate_scope": [
+        "one_exact_studio_follower_disconnect_call",
+        "inherent_follower_torque_disable",
+        "disconnect_response_verification",
+        "post_disconnect_status_verification",
+        "zero_follower_serial_holder_verification"
+      ],
+      "reconnect_scope": "allowed_only_after_exact_identity_calibration_and_current_pose_prove_mechanically_no_motion_safe",
+      "not_granted": [
+        "motion_command",
+        "leader_disconnect",
+        "safety_route_mutation",
+        "general_register_write",
+        "policy_actuation"
+      ]
+    },
     "immediately_authorized": [
-      "prepare_finite_supervised_motion_plan"
+      "prepare_finite_supervised_motion_plan",
+      "exact_virtual_follower_disconnect_and_zero_holder_verification"
     ],
     "conditional_authority": [
       {
@@ -61,8 +82,8 @@
       }
     ],
     "not_authorized": [
-      "motor_register_write_before_verified_session_permit",
-      "torque_change_before_verified_session_permit",
+      "motor_register_write_except_exact_owner_authorized_virtual_disconnect_or_verified_session_permit",
+      "torque_change_except_exact_owner_authorized_virtual_disconnect_or_verified_session_permit",
       "motion_before_verified_session_permit",
       "material_expansion_beyond_initial_permit",
       "open_ended_policy_actuation",
@@ -83,7 +104,7 @@
   "training_lock": "closed",
   "current_milestone": "M16",
   "current_task": "T16.5b",
-  "next_eligible_task": null,
+  "next_eligible_task": "T16.5b",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -329,7 +350,7 @@
       ]
     },
     "T16.5b": {
-      "state": "blocked",
+      "state": "in_progress",
       "depends_on": ["T16.5a"],
       "brief_id": "039",
       "source_commit": "16d24ea",
@@ -345,7 +366,7 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "result": "Brief 041 stable named-camera capture, finite PNG validation, evidence accounting, and exclusive serial-holder gates verified offline; live gate remains closed on the pre-existing Studio server",
+      "result": "Brief 041 stable named-camera capture, finite PNG validation, evidence accounting, and exclusive serial-holder gates verified offline; owner-authorized virtual follower disconnect now pending with live gate closed",
       "execution_note": "Commits ea99ec9/66003d8/fd13bf6/01802a0 passed 19 dedicated, 35 combined census, and 214 broad tests; no hardware was reopened during the correction",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
@@ -396,7 +417,7 @@
         "predates_goal_attempt": true,
         "preserved_untouched": true,
         "exclusive_bus_ownership_proven": false,
-        "last_revalidated_at": "2026-07-11T05:47:27-05:00",
+        "last_revalidated_at": "2026-07-11T08:53:51-05:00",
         "last_revalidated_holder_count": 1,
         "last_revalidated_snapshot_sha256": "642305133b602477840e31d756e52b11cf5d97e689eda15ae2741291ed47106c",
         "read_only_server_status_observed_at": "2026-07-11T05:52:03-05:00",
@@ -432,7 +453,7 @@
         "required_post_close_holder_count": 0,
         "stops_or_signals_holders": false,
         "last_observed_holder_count": 1,
-        "last_observed_at": "2026-07-11T05:47:27-05:00",
+        "last_observed_at": "2026-07-11T08:53:51-05:00",
         "last_observed_snapshot_sha256": "642305133b602477840e31d756e52b11cf5d97e689eda15ae2741291ed47106c",
         "current_gate_result": "closed"
       },
@@ -457,13 +478,13 @@
         "attempt 001 produced no accepted live evidence because post-close camera index identity drift invalidated the capture",
         "the corrected stable named-camera path is verified only with fake subprocess evidence and has not been reopened live",
         "a pre-existing Studio server was last observed holding the follower serial device, so exclusive bus ownership has not been re-established",
-        "all further serial and camera opens are closed pending remote preservation of reviewer 053 and explicit owner resolution of the independent serial holder"
+        "all further serial and camera opens remain closed until the owner-authorized disconnect and zero-holder proof are durably preserved and the live gate is separately reopened"
       ],
       "blocked_on": [
-        "preexisting_studio_server_serial_holder_owner_resolution"
+        "owner_authorized_virtual_follower_disconnect_pending_execution"
       ],
       "owner_decision_required": {
-        "state": "blocking",
+        "state": "granted",
         "observed_server_state": {
           "leader_connected": true,
           "follower_connected": true,
@@ -476,39 +497,54 @@
         },
         "sigterm_effect": "releases_process_file_descriptor_without_explicit_hardware_disconnect_or_torque_release",
         "hardware_disconnect_effect": "releases_follower_torque_then_closes_serial_bus_and_is_a_motor_register_write",
-        "requested_owner_choice": [
-          "owner_manually_disconnects_follower_in_existing_studio",
-          "owner_explicitly_authorizes_exact_follower_torque_release_and_disconnect_api_call",
-          "owner_keeps_existing_studio_connection_and_goal_remains_offline"
-        ],
-        "agent_actions_prohibited_pending_choice": [
+        "owner_choice": "exact_virtual_follower_torque_release_and_disconnect_api_call",
+        "granted_at": "2026-07-11T08:53:51-05:00",
+        "disconnect_plan": {
+          "method": "POST",
+          "path": "/api/hardware/disconnect",
+          "body": {"role": "follower"},
+          "maximum_call_count": 1,
+          "expected_effect": "release_follower_torque_then_close_follower_serial_bus",
+          "forbidden_effects": [
+            "motion_command",
+            "leader_disconnect",
+            "safety_route_mutation"
+          ],
+          "required_postconditions": [
+            "response_reports_follower_disconnected",
+            "hardware_status_reports_follower_disconnected_and_torque_off",
+            "follower_serial_holder_count_zero"
+          ]
+        },
+        "agent_actions_still_prohibited": [
           "signal_or_stop_studio_server",
-          "call_hardware_disconnect",
           "call_safety_disarm_or_estop",
-          "reopen_serial_or_camera_live_gate"
+          "reopen_serial_or_camera_live_gate_before_zero_holder_proof"
         ],
-        "post_choice_requirement": "verify_zero_follower_serial_holders_before_any_live_gate_reconsideration"
+        "post_choice_requirement": "durably_record_disconnect_and_zero_holder_proof_before_any_live_gate_reconsideration"
       },
       "blocked_audit": {
-        "classification": "missing_input",
+        "classification": "resolved_by_owner_authority",
         "human_authority_boundary": true,
         "consecutive_goal_turns": 3,
         "first_observed_at": "2026-07-11T05:18:22-05:00",
-        "last_revalidated_at": "2026-07-11T05:54:27-05:00",
+        "last_revalidated_at": "2026-07-11T08:53:51-05:00",
         "holder_snapshot_sha256": "642305133b602477840e31d756e52b11cf5d97e689eda15ae2741291ed47106c",
         "hardware_status_sha256": "79f4ce89e6f4bcd2e7bb9bc03ba17b9007454f3af21ef02eaee90e98e26b8040",
         "safety_state_sha256": "8c425d38bd0ba65416df488252d8642168cc49bddf5b6fe31a516caa782da655",
         "routing_state_sha256": "620cb845cb8f1507263fdf7b6aec651a69e4b028d90628c935b0af0b533fdcb4",
         "stable_observation": "one_holder_follower_connected_torque_reported_on_safety_armed_route_none_zero_jobs",
         "meaningful_offline_work_exhausted_for_current_dependency_path": true,
-        "unblock_action": "owner chooses manual follower disconnect, exact authorized torque-release disconnect, or offline-only disposition"
+        "resolved_at": "2026-07-11T08:53:51-05:00",
+        "resolution": "owner authorized virtual disconnect/reconnect; exact follower disconnect is the immediate bounded action",
+        "fresh_resumed_blocked_audit_turns": 0
       },
-      "next_action": "request owner choice: manually disconnect follower, explicitly authorize exact torque-release disconnect, or keep Studio active and remain offline",
+      "next_action": "commit and remotely preserve the owner-authorized disconnect plan; execute the exact follower disconnect once; verify response, disconnected torque-off status, and zero holders",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
         "configuration_write",
-        "torque_write",
+        "torque_write_beyond_exact_owner_authorized_virtual_disconnect",
         "register_write",
         "motion",
         "physical_qualification"
