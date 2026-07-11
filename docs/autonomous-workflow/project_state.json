@@ -13,8 +13,8 @@
   "last_reviewed_commit": "f2000870775c175f1331bf42c0521d7067462a92",
   "source_review": {
     "commit": "f2000870775c175f1331bf42c0521d7067462a92",
-    "decision": "CLOSE_T16_5A_AFTER_REMOTE_PRESERVATION",
-    "reviewer_decision": "docs/reviewer-messages/047-offline-no-write-servo-census-reviewed.md"
+    "decision": "REOPEN_T16_5A_PROTOCOL_SOURCE_BINDING_CORRECTION",
+    "reviewer_decision": "docs/reviewer-messages/048-feetech-protocol-binding-reopen.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -82,8 +82,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M16",
-  "current_task": "T16.5b",
-  "next_eligible_task": "T16.5b",
+  "current_task": "T16.5a",
+  "next_eligible_task": "T16.5a",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -284,13 +284,15 @@
       "authority_not_granted": ["live_hardware_census", "hardware_qualification"]
     },
     "T16.5a": {
-      "state": "verified",
+      "state": "in_progress",
       "depends_on": ["T16.1b", "T16.2b", "T16.4b"],
       "brief_id": "038",
+      "correction_brief_id": "040",
       "source_commit": "f200087",
       "review_decision_id": "047",
-      "result": "offline no-write transport, lifecycle, identity, retry, exception-cleanup, and recorded-trace preflight remotely preserved on fixture evidence",
-      "execution_note": "Implementation f200087 and reviewer 047 are remotely preserved through d002c80 after 14 focused and 193 broad tests",
+      "reopen_review_decision_id": "048",
+      "result": "reopened by reviewer 048 because fixture protocol 1 contradicts pinned STS3215 protocol 0; offline correction Brief 040 in progress",
+      "execution_note": "The prior implementation/review remain historically preserved through d002c80 but census_trace_conformant is withdrawn until corrected review and remote preservation",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_readonly_servo_census",
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
@@ -314,9 +316,14 @@
         "live USB discovery, serial reads, cameras, and physical observation remain outside T16.5a",
         "the offline result grants no write, torque, motion, physical qualification, or system authority"
       ],
-      "authority_granted": ["census_trace_conformant"],
+      "missing": [
+        "correct Feetech protocol 0 binding",
+        "independently verified pinned source hashes and semantics",
+        "corrected artifact review and remote preservation"
+      ],
+      "authority_granted": [],
       "authority_not_granted": [
-        "live_hardware_identity_observed",
+        "live_hardware_access",
         "register_write",
         "torque_change",
         "motion",
@@ -324,10 +331,10 @@
       ]
     },
     "T16.5b": {
-      "state": "in_progress",
+      "state": "pending",
       "depends_on": ["T16.5a"],
       "brief_id": "039",
-      "result": "live read-only adapter, discovery, camera, privacy, and evidence preflight in progress; no live object opened yet",
+      "result": "closed until corrected T16.5a protocol/source binding is reviewed and remotely preserved; no live object opened",
       "conditional_authority": [
         "live_hardware_discovery_after_T16.5a",
         "live_read_only_census_after_T16.5a",

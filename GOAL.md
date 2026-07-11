@@ -30,15 +30,14 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute Brief 039,
-`docs/briefs/039-live-readonly-census-and-observation.md`, under T16.5b.
-T16.5a implementation `f200087` and reviewer decision 047 are remotely
-preserved through `d002c80`. Build and pass the exact live adapter, discovery,
-camera, cleanup, privacy, and evidence tests offline first. Immediately before
-any live open, revalidate the session-scoped owner-presence lease and identity
-contract. Then permit only bounded USB/camera discovery, scalar allowlisted
-servo reads, finite camera frames, and explicit no-write teardown. Any ambiguity
-or unexpected condition returns the workflow to offline-only work.
+Execute Brief 040,
+`docs/briefs/040-feetech-protocol-source-binding-correction.md`, under reopened
+T16.5a. Reviewer decision 048 found that the remotely preserved fixture declared
+Feetech protocol `1` while the pinned STS3215 runtime requires protocol `0`.
+Correct the protocol, bind the census constants to exact source hashes and
+independently parsed semantics, regenerate and reverify every fixture artifact,
+then repeat review and remote preservation. T16.5b and every live serial/camera
+operation remain closed until this correction completes.
 
 ## Durable State
 
@@ -152,6 +151,10 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   `census_trace_conformant` with no hardware opened or follower commanded.
   Implementation and review are preserved on the named remote through
   `d002c80`; T16.5a is closed on declared fixture evidence only.
+- Reviewer decision 048 supersedes that closeout after a pre-live source audit
+  found protocol `1` in the fixture versus protocol `0` in the pinned STS3215
+  runtime. T16.5a is reopened, `census_trace_conformant` is withdrawn, and
+  T16.5b remains closed until Brief 040 is reviewed and remotely preserved.
 - The owner is physically present and has granted conditional read-only
   hardware/camera authority after verified T16.5a plus final operator
   confirmation for exactly one initial session-scoped `supervised_micro_motion`
