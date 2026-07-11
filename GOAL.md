@@ -246,10 +246,25 @@ The current parent remains mechanically live-ineligible; the live gate and
 training lock stay closed. A separate offline redacted candidate-session review
 manifest is next.
 
-Brief 055 is active offline to define that deterministic redaction boundary.
-It may produce only fixture conformance for a manifest class; no actual live
-manifest, proof label, policy-input validity, or physical acceptance can exist
-without a future verified private success artifact and separate review.
+Brief 055 implementation `411e5cc` is remotely preserved. A future successful
+private candidate and Brief 054 receipt can now be fully reverified and reduced
+to a deterministic signed review manifest containing only source/receipt
+identities, private-artifact hashes without its path, high-level drift/timing/
+operation summaries, stable camera and frame hashes, all-alias zero-holder
+summaries, and lifecycle/audit hashes. The exclusive writer permits only a new,
+session-named, non-aliased file beneath `configurations/robot_lab`, rereads the
+stored bytes, and rejects escape, overwrite, alias, or corruption.
+
+The manifest explicitly remains `candidate_observed_pending_review`; it embeds
+no private path/root, contract/profile/result/evidence, doctor report, rollout
+path, USB serial, device path, raw camera identity/index, raw joint position, or
+frame bytes. Same-agent review also corrected boolean-as-integer acceptance in
+the underlying static-pose operation counts and frame indexes. One hundred
+seven focused tests pass in both robotics runtimes, all offline source/artifact
+verifiers pass, and the 306-test broad gate passes in 69.782 seconds. No actual
+live review manifest was created or accepted. Only
+`redacted_static_pose_live_candidate_session_review_conformant` is newly
+granted; the live gate and training lock stay closed.
 
 ## Durable State
 
