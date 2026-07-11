@@ -21,12 +21,11 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute brief `docs/briefs/030-synthetic-ready-negative-matrix.md`
-to keep T16.4 moving. Extend the bounded `synthetic_test_only` ready compiler
-from happy-path proof to fail-closed exact-cover ambiguity, reused-evidence,
-and invalid transform/inertia rejection while keeping the checked-in real
-current-arm artifacts truthfully blocked. Do not open hardware,
-qualification, or training.
+Execute brief `docs/briefs/031-fake-bus-readonly-census-harness.md`
+to start T16.5. Add the first offline fake-bus/recorded-trace qualification
+harness slice by replaying a recorded read-only servo census through a bounded
+contract that proves no write/motion operations are required. Do not open real
+hardware, claim qualification, or start training.
 
 ## Durable State
 
@@ -88,7 +87,8 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   strategy closes the quaternion-spelling and sibling-order gaps, with tracked
   structural artifact identity
   `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`.
-- T16.4 is now the active offline prerequisite: measured-part mass intake and
-  assembly inertia/COM compilation against the verified simulation-only twin
-  baseline. CAD/MJCF masses remain priors and cannot be relabeled as physical
-  measurements; current-arm aggregate mass, COM, and inertia remain unknown.
+- T16.4 is reviewer-verified: measured-part mass intake and assembly inertia/COM
+  compilation now prove both the blocked real current-arm path and a bounded
+  synthetic ready path with fail-closed negative coverage. T16.5 is now the
+  active offline prerequisite: build the fake-bus/recorded-trace qualification
+  harness without opening hardware or claiming physical qualification.

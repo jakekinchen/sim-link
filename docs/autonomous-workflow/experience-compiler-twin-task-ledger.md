@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4 synthetic measured-inertial negative matrix verified pending review
+current_task: T16.5 fake-bus read-only census trace harness
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
 evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: reviewer-close the synthetic `synthetic_test_only` ready compiler negative matrix, then continue to T16.5, M17-M19 prerequisites, and Gates C-D
+remaining: build the offline fake-bus/recorded-trace qualification harness for T16.5, then continue to M17-M19 prerequisites and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: obtain reviewer closeout for brief 030, then scope the smallest T16.5 fake-bus/recorded-trace qualification harness slice
+next_step: execute brief 031 and prove a recorded read-only servo census can replay through a no-write harness before broader fitting or qualification work
 ```
 
 ## Rules
@@ -32,8 +32,8 @@ next_step: obtain reviewer closeout for brief 030, then scope the smallest T16.5
 | T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
 | T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
 | T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
-| T16.4 | in_progress | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Current real intake/result must be `awaiting_measurements` / `blocked_missing_measurements`; synthetic parallel-axis golden tests; ambiguity and double counting fail closed |
-| T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
+| T16.4 | verified | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Current real intake/result must be `awaiting_measurements` / `blocked_missing_measurements`; synthetic parallel-axis golden tests; ambiguity and double counting fail closed |
+| T16.5 | in_progress | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
 
 ## M17 / Gate A - Truthful Experience Compiler
 
@@ -113,6 +113,20 @@ next_step: obtain reviewer closeout for brief 030, then scope the smallest T16.5
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - Reviewer closeout T16.4 and open T16.5
+
+```text
+Current task: T16.5
+State: in_progress
+Completed: reviewer reran brief 030 and confirmed the bounded synthetic_test_only measured-inertial compiler now preserves the ready happy path while failing closed for exact-cover ambiguity, reused evidence, and invalid rotation/inertia inputs; T16.4 is accepted as verified
+Evidence: reviewer decision 038; independent reruns reproduced 24 focused measured-inertial tests, 69 broad robot-lab tests, blocked real identities 35571daca435bb191313c9b22594c9fecaaef7abc68c8e7e2faa362692653b88 / 5816faa0d05dd309a2768551cd50b845932ff5abbc355c11f146371d868580c4, and synthetic ready identity 9638e5abded29b948f0ef28b80e52e3ecd0a6adca58bb0e3d4899b984a64071d
+Commit: pending
+Remaining: first fake-bus/recorded-trace harness slice for a read-only servo census replay, then broader T16.5 fitting/qualification scaffolding
+Blockers: none for offline continuation
+Training lock: closed
+Next step: execute brief 031 without opening hardware or claiming physical qualification
+```
 
 ### 2026-07-10 - T16.4 synthetic ready negative matrix
 
