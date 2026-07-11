@@ -24,6 +24,7 @@ from scenesmith.robot_lab.measured_inertial_intake import (
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SCRIPT_PATH = REPO_ROOT / "scripts/robot_lab/write_measured_inertial_intake.py"
+SYNTHETIC_FIXTURE_PATH = REPO_ROOT / "tests/fixtures/robot_lab/measured_mass/synthetic_complete.json"
 
 
 class MeasuredInertialIntakeTests(unittest.TestCase):
@@ -322,6 +323,111 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("drifted from deterministic repo rebuild", result.stderr)
             self.assertEqual(output_path.read_bytes(), original_bytes)
+
+    def test_synthetic_fixture_compiles_ready_with_golden_aggregates(self):
+        intake = json.loads(SYNTHETIC_FIXTURE_PATH.read_text(encoding="utf-8"))
+        verify_measured_mass_intake(intake, repo_root=REPO_ROOT)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_path = Path(tmpdir) / "synthetic-ready.json"
+            output = write_assembly_inertials(
+                repo_root=REPO_ROOT,
+                intake_path=SYNTHETIC_FIXTURE_PATH,
+                output_path=output_path,
+            )
+            verify_assembly_inertials(
+                output,
+                repo_root=REPO_ROOT,
+                intake_path=SYNTHETIC_FIXTURE_PATH,
+            )
+
+        self.assertEqual(output["status"], "ready")
+        self.assertEqual(output["qualification_scope"], "synthetic_test_only")
+        self.assertEqual(output["aggregate_physical_properties"]["mass_kg"], 4.5)
+        self.assertEqual(
+            output["aggregate_physical_properties"]["center_of_mass_assembly_frame_m"],
+            [0.35, 0.283333333, 0.033333333],
+        )
+        self.assertEqual(
+            output["aggregate_physical_properties"]["inertia_about_com_assembly_frame_kg_m2"],
+            [
+                [0.073625, -0.053025, 0.26218125],
+                [-0.053025, 1.1719375, 0.0126125],
+                [0.26218125, 0.0126125, 1.11475],
+            ],
+        )
+
+    def test_synthetic_ready_identity_is_stable_and_order_invariant(self):
+        baseline = build_assembly_inertials(
+            repo_root=REPO_ROOT,
+            intake_path=SYNTHETIC_FIXTURE_PATH,
+        )
+        repeat = build_assembly_inertials(
+            repo_root=REPO_ROOT,
+            intake_path=SYNTHETIC_FIXTURE_PATH,
+        )
+
+        self.assertEqual(repeat, baseline)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            reordered_path = Path(tmpdir) / "synthetic-reordered.json"
+            payload = json.loads(SYNTHETIC_FIXTURE_PATH.read_text(encoding="utf-8"))
+            payload["components"] = list(reversed(payload["components"]))
+            payload["coverage_atoms"] = list(reversed(payload["coverage_atoms"]))
+            payload["cad_priors"] = list(reversed(payload["cad_priors"]))
+            payload["measurements"] = list(reversed(payload["measurements"]))
+            payload["identity_sha256"] = _resign(payload)
+            reordered_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+            reordered = build_assembly_inertials(
+                repo_root=REPO_ROOT,
+                intake_path=reordered_path,
+            )
+
+        self.assertEqual(reordered, baseline)
+        self.assertEqual(reordered["identity_sha256"], baseline["identity_sha256"])
+
+    def test_synthetic_path_refuses_checked_in_real_destinations(self):
+        with self.assertRaisesRegex(ValueError, "cannot write to checked-in real artifact destinations"):
+            write_assembly_inertials(
+                repo_root=REPO_ROOT,
+                intake_path=SYNTHETIC_FIXTURE_PATH,
+                output_path=DEFAULT_ASSEMBLY_INERTIALS_PATH,
+            )
+
+        with self.assertRaisesRegex(ValueError, "cannot write to checked-in real artifact destinations"):
+            write_assembly_inertials(
+                repo_root=REPO_ROOT,
+                intake_path=SYNTHETIC_FIXTURE_PATH,
+                output_path=DEFAULT_MEASURED_MASS_INTAKE_PATH,
+            )
+
+    def test_cli_synthetic_fixture_reaches_ready_through_bounded_path(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_path = Path(tmpdir) / "synthetic-ready.json"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT_PATH),
+                    "--intake",
+                    str(SYNTHETIC_FIXTURE_PATH),
+                    "--output",
+                    str(output_path),
+                    "--require-ready",
+                ],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, msg=result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["status"], "written")
+            compiled = json.loads(output_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(compiled["status"], "ready")
+        self.assertEqual(compiled["qualification_scope"], "synthetic_test_only")
 
 
 def _resign(payload: dict) -> str:

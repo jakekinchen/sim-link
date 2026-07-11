@@ -35,6 +35,8 @@ CURRENT_ASSEMBLY_FRAME_ID = "pi05_current_arm_base_frame"
 BODY_FRAME_SUFFIX = "_frame"
 MEASURED_INTAKE_STATUS = "awaiting_measurements"
 BLOCKED_ASSEMBLY_STATUS = "blocked_missing_measurements"
+READY_ASSEMBLY_STATUS = "ready"
+SYNTHETIC_TEST_ONLY_STATUS = "synthetic_test_only"
 KNOWN_MISSING_CATEGORY_SPECS = (
     (
         "servo_actuators",
@@ -153,6 +155,12 @@ def build_assembly_inertials(
         twin_profile_path=twin_profile_path,
         structural_diff_path=structural_diff_path,
     )
+    if intake["payload"].get("status") == SYNTHETIC_TEST_ONLY_STATUS:
+        return _build_synthetic_ready_assembly_inertials(intake=intake)
+    return _build_blocked_assembly_inertials(intake=intake)
+
+
+def _build_blocked_assembly_inertials(*, intake: dict[str, Any]) -> dict[str, Any]:
     required_atom_ids = [
         atom["atom_id"] for atom in intake["payload"]["coverage_atoms"] if atom["required_for_ready"]
     ]
@@ -205,6 +213,171 @@ def build_assembly_inertials(
     )
 
 
+def _build_synthetic_ready_assembly_inertials(*, intake: dict[str, Any]) -> dict[str, Any]:
+    payload = intake["payload"]
+    assembly = payload["assembly"]
+    components_by_id = {
+        str(component["component_id"]): component for component in payload["components"]
+    }
+    atoms_by_id = {
+        str(atom["atom_id"]): atom for atom in payload["coverage_atoms"]
+    }
+    priors_by_id = {
+        str(prior["prior_id"]): prior for prior in payload["cad_priors"]
+    }
+    required_atom_ids = sorted(
+        atom_id for atom_id, atom in atoms_by_id.items() if bool(atom.get("required_for_ready"))
+    )
+    selected_measurements = sorted(
+        payload["measurements"],
+        key=lambda measurement: str(measurement["measurement_id"]),
+    )
+    selected_atom_ids: list[str] = []
+    selected_measurement_ids: list[str] = []
+    seen_atoms: set[str] = set()
+    seen_evidence: set[tuple[str, str]] = set()
+    component_results: list[dict[str, Any]] = []
+    total_mass = 0.0
+    weighted_com = [0.0, 0.0, 0.0]
+    for measurement in selected_measurements:
+        measurement_id = str(measurement["measurement_id"])
+        component_id = str(measurement["component_id"])
+        if component_id not in components_by_id:
+            raise ValueError(f"Synthetic measurement references unknown component: {measurement_id}")
+        prior_id = str(measurement["source_prior_id"])
+        if prior_id not in priors_by_id:
+            raise ValueError(f"Synthetic measurement references unknown prior: {measurement_id}")
+        if measurement.get("origin") != "measured":
+            raise ValueError(f"Synthetic measurement origin must be measured: {measurement_id}")
+        covered_atom_ids = sorted(str(atom_id) for atom_id in measurement.get("covered_atom_ids", []))
+        if len(covered_atom_ids) != 1:
+            raise ValueError(f"Synthetic measurement must cover exactly one atom: {measurement_id}")
+        atom_id = covered_atom_ids[0]
+        if atom_id in seen_atoms:
+            raise ValueError(f"Synthetic coverage atom was selected more than once: {atom_id}")
+        atom = atoms_by_id.get(atom_id)
+        if atom is None:
+            raise ValueError(f"Synthetic measurement references unknown atom: {measurement_id}")
+        if atom.get("component_id") != component_id:
+            raise ValueError(f"Synthetic measurement component/atom mismatch: {measurement_id}")
+        if atom.get("assembly_id") != assembly["assembly_id"]:
+            raise ValueError(f"Synthetic measurement assembly drifted: {measurement_id}")
+        if atom.get("assembly_frame_id") != assembly["assembly_frame_id"]:
+            raise ValueError(f"Synthetic measurement frame drifted: {measurement_id}")
+        evidence_items = measurement.get("evidence")
+        if not isinstance(evidence_items, list) or not evidence_items:
+            raise ValueError(f"Synthetic measurement evidence is required: {measurement_id}")
+        for evidence in evidence_items:
+            evidence_key = (str(evidence.get("kind")), str(evidence.get("ref")))
+            if evidence_key in seen_evidence:
+                raise ValueError(f"Synthetic measurement evidence was reused: {measurement_id}")
+            seen_evidence.add(evidence_key)
+
+        prior = priors_by_id[prior_id]
+        source_mass = float(prior["source_mass_kg"])
+        measured_mass = float(measurement["measured_mass_kg"])
+        if source_mass <= 0.0 or measured_mass <= 0.0:
+            raise ValueError(f"Synthetic measurement masses must be positive: {measurement_id}")
+        rotation = _validate_rotation_matrix(
+            prior["body_frame_to_assembly"]["rotation_matrix"],
+            label=f"{prior_id} rotation",
+        )
+        translation = _validate_vector(
+            prior["body_frame_to_assembly"]["translation_m"],
+            expected=3,
+            label=f"{prior_id} translation",
+        )
+        com_body = _validate_vector(
+            prior["source_center_of_mass_body_frame_m"],
+            expected=3,
+            label=f"{prior_id} source COM",
+        )
+        inertia_body = _validate_inertia_matrix(
+            prior["source_inertia_about_com_body_frame_kg_m2"],
+            label=f"{prior_id} source inertia",
+        )
+        scaled_inertia = _matrix_scale(inertia_body, measured_mass / source_mass)
+        component_com = _vector_add(translation, _matrix_vector_multiply(rotation, com_body))
+        component_inertia = _rotate_inertia(rotation, scaled_inertia)
+
+        selected_atom_ids.append(atom_id)
+        selected_measurement_ids.append(measurement_id)
+        seen_atoms.add(atom_id)
+        total_mass += measured_mass
+        weighted_com = [
+            weighted_com[index] + measured_mass * component_com[index] for index in range(3)
+        ]
+        component_results.append(
+            {
+                "measurement_id": measurement_id,
+                "component_id": component_id,
+                "atom_id": atom_id,
+                "mass_kg": measured_mass,
+                "center_of_mass_assembly_frame_m": _round_vector(component_com),
+                "inertia_about_component_com_assembly_frame_kg_m2": _round_matrix(component_inertia),
+            }
+        )
+    if selected_atom_ids != required_atom_ids:
+        raise ValueError("Synthetic measurements did not form an exact cover of required atoms")
+    aggregate_com = [weighted_com[index] / total_mass for index in range(3)]
+    aggregate_inertia = _zero_matrix()
+    for component_result in component_results:
+        component_mass = float(component_result["mass_kg"])
+        component_com = component_result["center_of_mass_assembly_frame_m"]
+        displacement = [
+            component_com[index] - aggregate_com[index] for index in range(3)
+        ]
+        aggregate_inertia = _matrix_add(
+            aggregate_inertia,
+            _matrix_add(
+                component_result["inertia_about_component_com_assembly_frame_kg_m2"],
+                _parallel_axis_term(component_mass, displacement),
+            ),
+        )
+    component_results.sort(key=lambda item: item["measurement_id"])
+    return _sign(
+        {
+            "schema_version": ASSEMBLY_INERTIALS_SCHEMA_VERSION,
+            "artifact_name": "synthetic_measured_inertials_ready",
+            "status": READY_ASSEMBLY_STATUS,
+            "qualification_scope": SYNTHETIC_TEST_ONLY_STATUS,
+            "assembly": dict(assembly),
+            "dependency_lock_ref": payload["dependency_lock_ref"],
+            "twin_profile_ref": payload["twin_profile_ref"],
+            "structural_diff_ref": payload["structural_diff_ref"],
+            "intake_ref": _synthetic_intake_semantic_ref(payload),
+            "coverage": {
+                "required_atom_ids": required_atom_ids,
+                "selected_measurement_ids": selected_measurement_ids,
+                "selected_atom_ids": selected_atom_ids,
+                "missing_atom_ids": [],
+                "unresolved_inventory_ids": [],
+                "missing_inventory_categories": [],
+            },
+            "aggregate_physical_properties": {
+                "mass_kg": round(total_mass, 9),
+                "center_of_mass_assembly_frame_m": _round_vector(aggregate_com),
+                "inertia_about_com_assembly_frame_kg_m2": _round_matrix(aggregate_inertia),
+            },
+            "selected_component_results": component_results,
+            "rejected_measurements": [],
+            "rejected_evidence": [],
+            "unresolved_evidence": [],
+            "blocking_reasons": [],
+            "cad_prior_summary": {
+                "prior_count": len(payload["cad_priors"]),
+                "source_mass_total_kg": round(
+                    sum(float(entry["source_mass_kg"]) for entry in payload["cad_priors"]),
+                    9,
+                ),
+                "origin": "CAD",
+            },
+            "physical_qualification_authority": False,
+            "training_or_promotion_authority": False,
+        }
+    )
+
+
 def verify_measured_mass_intake(
     payload: dict[str, Any],
     *,
@@ -216,6 +389,15 @@ def verify_measured_mass_intake(
     if payload.get("schema_version") != MEASURED_MASS_INTAKE_SCHEMA_VERSION:
         raise ValueError("Unsupported measured mass intake schema")
     _verify_identity(payload, label="Measured mass intake")
+    if payload.get("status") == SYNTHETIC_TEST_ONLY_STATUS:
+        _verify_synthetic_measured_mass_intake(
+            payload,
+            repo_root=repo_root,
+            dependency_lock_path=dependency_lock_path,
+            twin_profile_path=twin_profile_path,
+            structural_diff_path=structural_diff_path,
+        )
+        return
     if payload.get("status") != MEASURED_INTAKE_STATUS:
         raise ValueError("Measured mass intake status must remain awaiting_measurements")
     if payload.get("measurements") != []:
@@ -333,20 +515,6 @@ def verify_assembly_inertials(
     if payload.get("schema_version") != ASSEMBLY_INERTIALS_SCHEMA_VERSION:
         raise ValueError("Unsupported assembly inertials schema")
     _verify_identity(payload, label="Assembly inertials")
-    if payload.get("status") != BLOCKED_ASSEMBLY_STATUS:
-        raise ValueError("Assembly inertials status must remain blocked_missing_measurements")
-    if payload.get("physical_qualification_authority") is not False:
-        raise ValueError("Blocked assembly inertials must not grant physical qualification authority")
-    if payload.get("training_or_promotion_authority") is not False:
-        raise ValueError("Blocked assembly inertials must not grant training or promotion authority")
-    aggregate = payload.get("aggregate_physical_properties") or {}
-    if aggregate.get("mass_kg") is not None:
-        raise ValueError("Blocked assembly inertials mass_kg must remain null")
-    if aggregate.get("center_of_mass_assembly_frame_m") is not None:
-        raise ValueError("Blocked assembly inertials center of mass must remain null")
-    if aggregate.get("inertia_about_com_assembly_frame_kg_m2") is not None:
-        raise ValueError("Blocked assembly inertials inertia must remain null")
-
     intake = _measured_mass_intake_ref(
         repo_root=repo_root,
         intake_path=intake_path,
@@ -357,7 +525,28 @@ def verify_assembly_inertials(
     _verify_ref(payload.get("dependency_lock_ref"), intake["payload"]["dependency_lock_ref"], label="Dependency lock")
     _verify_ref(payload.get("twin_profile_ref"), intake["payload"]["twin_profile_ref"], label="Twin profile")
     _verify_ref(payload.get("structural_diff_ref"), intake["payload"]["structural_diff_ref"], label="Structural diff")
-    _verify_ref(payload.get("intake_ref"), intake["ref"], label="Measured mass intake")
+    if intake["payload"].get("status") == SYNTHETIC_TEST_ONLY_STATUS:
+        _verify_ref(
+            payload.get("intake_ref"),
+            _synthetic_intake_semantic_ref(intake["payload"]),
+            label="Measured mass intake",
+        )
+    else:
+        _verify_ref(payload.get("intake_ref"), intake["ref"], label="Measured mass intake")
+    if intake["payload"].get("status") != SYNTHETIC_TEST_ONLY_STATUS:
+        if payload.get("status") != BLOCKED_ASSEMBLY_STATUS:
+            raise ValueError("Assembly inertials status must remain blocked_missing_measurements")
+        if payload.get("physical_qualification_authority") is not False:
+            raise ValueError("Blocked assembly inertials must not grant physical qualification authority")
+        if payload.get("training_or_promotion_authority") is not False:
+            raise ValueError("Blocked assembly inertials must not grant training or promotion authority")
+        aggregate = payload.get("aggregate_physical_properties") or {}
+        if aggregate.get("mass_kg") is not None:
+            raise ValueError("Blocked assembly inertials mass_kg must remain null")
+        if aggregate.get("center_of_mass_assembly_frame_m") is not None:
+            raise ValueError("Blocked assembly inertials center of mass must remain null")
+        if aggregate.get("inertia_about_com_assembly_frame_kg_m2") is not None:
+            raise ValueError("Blocked assembly inertials inertia must remain null")
 
     expected = build_assembly_inertials(
         repo_root=repo_root,
@@ -404,6 +593,9 @@ def write_assembly_inertials(
         twin_profile_path=twin_profile_path,
         structural_diff_path=structural_diff_path,
     )
+    intake_payload = _read_json(_resolve(repo_root=repo_root, path=intake_path))
+    if intake_payload.get("status") == SYNTHETIC_TEST_ONLY_STATUS:
+        _refuse_real_artifact_destination(repo_root=repo_root, output_path=output_path)
     _write_json(_resolve(repo_root=repo_root, path=output_path), payload)
     return payload
 
@@ -662,6 +854,245 @@ def _parse_vector(
 
 def _parse_scalar(value: str) -> float:
     return round(float(value), 9)
+
+
+def _verify_synthetic_measured_mass_intake(
+    payload: dict[str, Any],
+    *,
+    repo_root: Path,
+    dependency_lock_path: Path,
+    twin_profile_path: Path,
+    structural_diff_path: Path,
+) -> None:
+    dependency_lock = _dependency_lock_ref(repo_root=repo_root, dependency_lock_path=dependency_lock_path)
+    twin_profile = _twin_profile_ref(
+        repo_root=repo_root,
+        twin_profile_path=twin_profile_path,
+        dependency_lock_path=dependency_lock_path,
+    )
+    structural_diff = _structural_diff_ref(
+        repo_root=repo_root,
+        structural_diff_path=structural_diff_path,
+        dependency_lock_path=dependency_lock_path,
+        twin_profile_path=twin_profile_path,
+    )
+    _verify_ref(payload.get("dependency_lock_ref"), dependency_lock["ref"], label="Dependency lock")
+    _verify_ref(payload.get("twin_profile_ref"), twin_profile["ref"], label="Twin profile")
+    _verify_ref(payload.get("structural_diff_ref"), structural_diff["ref"], label="Structural diff")
+    if payload.get("status") != SYNTHETIC_TEST_ONLY_STATUS:
+        raise ValueError("Synthetic intake status drifted")
+    if payload.get("intake_name") != "synthetic_complete":
+        raise ValueError("Synthetic intake name drifted")
+    assembly = payload.get("assembly")
+    if not isinstance(assembly, dict):
+        raise ValueError("Synthetic intake assembly metadata is missing")
+    components = payload.get("components")
+    coverage_atoms = payload.get("coverage_atoms")
+    cad_priors = payload.get("cad_priors")
+    measurements = payload.get("measurements")
+    if not isinstance(components, list) or len(components) < 2:
+        raise ValueError("Synthetic intake components are required")
+    if not isinstance(coverage_atoms, list) or len(coverage_atoms) < 2:
+        raise ValueError("Synthetic intake coverage atoms are required")
+    if not isinstance(cad_priors, list) or len(cad_priors) < 2:
+        raise ValueError("Synthetic intake CAD priors are required")
+    if not isinstance(measurements, list) or len(measurements) < 2:
+        raise ValueError("Synthetic intake measurements are required")
+    component_ids = {str(component["component_id"]) for component in components}
+    atom_ids = {str(atom["atom_id"]) for atom in coverage_atoms}
+    prior_ids = {str(prior["prior_id"]) for prior in cad_priors}
+    if len(component_ids) != len(components):
+        raise ValueError("Synthetic intake component IDs must be unique")
+    if len(atom_ids) != len(coverage_atoms):
+        raise ValueError("Synthetic intake atom IDs must be unique")
+    if len(prior_ids) != len(cad_priors):
+        raise ValueError("Synthetic intake prior IDs must be unique")
+    has_nonzero_translation = False
+    has_non_identity_rotation = False
+    for prior in cad_priors:
+        if prior.get("origin") != "CAD":
+            raise ValueError("Synthetic intake priors must remain CAD-origin")
+        if str(prior["component_id"]) not in component_ids or str(prior["atom_id"]) not in atom_ids:
+            raise ValueError("Synthetic prior linkage drifted")
+        translation = _validate_vector(
+            prior["body_frame_to_assembly"]["translation_m"],
+            expected=3,
+            label=f"{prior['prior_id']} translation",
+        )
+        rotation = _validate_rotation_matrix(
+            prior["body_frame_to_assembly"]["rotation_matrix"],
+            label=f"{prior['prior_id']} rotation",
+        )
+        _validate_vector(
+            prior["source_center_of_mass_body_frame_m"],
+            expected=3,
+            label=f"{prior['prior_id']} source COM",
+        )
+        _validate_inertia_matrix(
+            prior["source_inertia_about_com_body_frame_kg_m2"],
+            label=f"{prior['prior_id']} source inertia",
+        )
+        if float(prior["source_mass_kg"]) <= 0.0:
+            raise ValueError("Synthetic prior source mass must be positive")
+        has_nonzero_translation = has_nonzero_translation or any(abs(value) > 0.0 for value in translation)
+        has_non_identity_rotation = has_non_identity_rotation or rotation != _identity_matrix()
+    if not has_nonzero_translation:
+        raise ValueError("Synthetic intake must include a nonzero translation")
+    if not has_non_identity_rotation:
+        raise ValueError("Synthetic intake must include a non-identity rotation")
+    for measurement in measurements:
+        if measurement.get("origin") != "measured":
+            raise ValueError("Synthetic measurements must remain measured-origin")
+        if str(measurement["component_id"]) not in component_ids:
+            raise ValueError("Synthetic measurement component linkage drifted")
+        if str(measurement["source_prior_id"]) not in prior_ids:
+            raise ValueError("Synthetic measurement prior linkage drifted")
+        if float(measurement["measured_mass_kg"]) <= 0.0:
+            raise ValueError("Synthetic measurement mass must be positive")
+        covered_atom_ids = measurement.get("covered_atom_ids")
+        if not isinstance(covered_atom_ids, list) or len(covered_atom_ids) != 1:
+            raise ValueError("Synthetic measurements must cover exactly one atom")
+        if str(covered_atom_ids[0]) not in atom_ids:
+            raise ValueError("Synthetic measurement atom linkage drifted")
+        uncertainty = measurement.get("uncertainty")
+        if not isinstance(uncertainty, dict) or float(uncertainty.get("mass_kg", -1.0)) < 0.0:
+            raise ValueError("Synthetic measurement uncertainty is required")
+        provenance = measurement.get("provenance")
+        if not isinstance(provenance, dict):
+            raise ValueError("Synthetic measurement provenance is required")
+        for field in ("method", "device_id", "calibration_id"):
+            if not str(provenance.get(field) or ""):
+                raise ValueError(f"Synthetic measurement provenance field is required: {field}")
+        evidence = measurement.get("evidence")
+        if not isinstance(evidence, list) or not evidence:
+            raise ValueError("Synthetic measurement evidence is required")
+
+
+def _refuse_real_artifact_destination(*, repo_root: Path, output_path: Path) -> None:
+    resolved_output = _resolve(repo_root=repo_root, path=output_path)
+    forbidden = {
+        _resolve(repo_root=repo_root, path=DEFAULT_MEASURED_MASS_INTAKE_PATH).resolve(),
+        _resolve(repo_root=repo_root, path=DEFAULT_ASSEMBLY_INERTIALS_PATH).resolve(),
+    }
+    if resolved_output.resolve() in forbidden:
+        raise ValueError("Synthetic test-only compilation cannot write to checked-in real artifact destinations")
+
+
+def _synthetic_intake_semantic_ref(payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "path": f"synthetic_test_only://{payload['intake_name']}",
+        "schema_version": str(payload["schema_version"]),
+        "identity_sha256": _synthetic_intake_semantic_identity(payload),
+    }
+
+
+def _synthetic_intake_semantic_identity(payload: dict[str, Any]) -> str:
+    normalized = {
+        "schema_version": payload["schema_version"],
+        "status": payload["status"],
+        "intake_name": payload["intake_name"],
+        "fixture_scope": payload.get("fixture_scope"),
+        "assembly": payload["assembly"],
+        "dependency_lock_ref": payload["dependency_lock_ref"],
+        "twin_profile_ref": payload["twin_profile_ref"],
+        "structural_diff_ref": payload["structural_diff_ref"],
+        "components": sorted(payload["components"], key=lambda item: str(item["component_id"])),
+        "coverage_atoms": sorted(payload["coverage_atoms"], key=lambda item: str(item["atom_id"])),
+        "cad_priors": sorted(payload["cad_priors"], key=lambda item: str(item["prior_id"])),
+        "measurements": sorted(payload["measurements"], key=lambda item: str(item["measurement_id"])),
+    }
+    return hashlib.sha256(
+        json.dumps(normalized, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+
+
+def _validate_vector(values: Any, *, expected: int, label: str) -> list[float]:
+    if not isinstance(values, list) or len(values) != expected:
+        raise ValueError(f"{label} must contain {expected} finite values")
+    output = [float(value) for value in values]
+    if not all(math.isfinite(value) for value in output):
+        raise ValueError(f"{label} must be finite")
+    return output
+
+
+def _validate_rotation_matrix(values: Any, *, label: str) -> list[list[float]]:
+    if not isinstance(values, list) or len(values) != 3:
+        raise ValueError(f"{label} must be a 3x3 matrix")
+    matrix = [_validate_vector(row, expected=3, label=label) for row in values]
+    transpose = _transpose(matrix)
+    product = _matrix_multiply(transpose, matrix)
+    if _round_matrix(product) != _identity_matrix():
+        raise ValueError(f"{label} must be orthonormal")
+    determinant = (
+        matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1])
+        - matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0])
+        + matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0])
+    )
+    if round(determinant, 9) != 1.0:
+        raise ValueError(f"{label} must be a proper rotation")
+    return _round_matrix(matrix)
+
+
+def _validate_inertia_matrix(values: Any, *, label: str) -> list[list[float]]:
+    if not isinstance(values, list) or len(values) != 3:
+        raise ValueError(f"{label} must be a 3x3 matrix")
+    matrix = [_validate_vector(row, expected=3, label=label) for row in values]
+    rounded = _round_matrix(matrix)
+    if rounded != _round_matrix(_transpose(rounded)):
+        raise ValueError(f"{label} must be symmetric")
+    diagonal = [rounded[index][index] for index in range(3)]
+    if any(value < 0.0 for value in diagonal):
+        raise ValueError(f"{label} diagonal must be nonnegative")
+    if diagonal[0] > diagonal[1] + diagonal[2] or diagonal[1] > diagonal[0] + diagonal[2] or diagonal[2] > diagonal[0] + diagonal[1]:
+        raise ValueError(f"{label} violates triangle inequalities")
+    return rounded
+
+
+def _transpose(matrix: list[list[float]]) -> list[list[float]]:
+    return [[matrix[row][column] for row in range(len(matrix))] for column in range(len(matrix[0]))]
+
+
+def _matrix_scale(matrix: list[list[float]], scalar: float) -> list[list[float]]:
+    return [[round(value * scalar, 9) for value in row] for row in matrix]
+
+
+def _matrix_add(left: list[list[float]], right: list[list[float]]) -> list[list[float]]:
+    return [
+        [round(left[row][column] + right[row][column], 9) for column in range(len(left[row]))]
+        for row in range(len(left))
+    ]
+
+
+def _rotate_inertia(rotation: list[list[float]], inertia: list[list[float]]) -> list[list[float]]:
+    return _round_matrix(_matrix_multiply(_matrix_multiply(rotation, inertia), _transpose(rotation)))
+
+
+def _parallel_axis_term(mass: float, displacement: list[float]) -> list[list[float]]:
+    dx, dy, dz = displacement
+    norm_sq = dx * dx + dy * dy + dz * dz
+    outer = [
+        [dx * dx, dx * dy, dx * dz],
+        [dy * dx, dy * dy, dy * dz],
+        [dz * dx, dz * dy, dz * dz],
+    ]
+    return _round_matrix(
+        [
+            [mass * ((norm_sq if row == column else 0.0) - outer[row][column]) for column in range(3)]
+            for row in range(3)
+        ]
+    )
+
+
+def _zero_matrix() -> list[list[float]]:
+    return [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+
+
+def _round_vector(values: list[float]) -> list[float]:
+    return [round(value, 9) for value in values]
+
+
+def _round_matrix(values: list[list[float]]) -> list[list[float]]:
+    return [[round(value, 9) for value in row] for row in values]
 
 
 def _dependency_lock_ref(*, repo_root: Path, dependency_lock_path: Path) -> dict[str, Any]:

@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4 synthetic measured-inertial ready proof after CLI path-safety correction
+current_task: T16.4 synthetic measured-inertial happy-path proof after CLI path-safety correction
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
 evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: implement the synthetic `synthetic_test_only` ready compiler, golden mass/COM/inertia proof, and hard-fail coverage/inertia validation, then T16.5, M17-M19 prerequisites, and Gates C-D
+remaining: extend the synthetic `synthetic_test_only` ready compiler from happy-path proof to the full negative matrix, then T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: continue brief 028 with the synthetic_test_only ready compiler, golden mass/COM/inertia proof, and hard-fail coverage/inertia matrix
+next_step: continue brief 029/next follow-up with the synthetic_test_only negative matrix, especially exact-cover ambiguity, reused-evidence, and invalid transform/inertia rejection
 ```
 
 ## Rules
@@ -113,6 +113,20 @@ next_step: continue brief 028 with the synthetic_test_only ready compiler, golde
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.4 synthetic ready happy path
+
+```text
+Current task: T16.4
+State: in_progress
+Completed: added a bounded synthetic_test_only measured-inertial fixture and ready compiler branch; proved deterministic golden aggregate mass/COM/full inertia, stable semantic ready identity under reordered synthetic input, and hard-refused writes to either checked-in real current-arm destination
+Evidence: tests/fixtures/robot_lab/measured_mass/synthetic_complete.json identity 412825dfedd4c5b015b81a2f4d32d208e6d1dbd6de547a665a8f92005acf8388; live synthetic CLI output identity 9638e5abded29b948f0ef28b80e52e3ecd0a6adca58bb0e3d4899b984a64071d with mass 4.5 kg, COM [0.35, 0.283333333, 0.033333333], inertia [[0.073625, -0.053025, 0.26218125], [-0.053025, 1.1719375, 0.0126125], [0.26218125, 0.0126125, 1.11475]]; default blocked identities remained 35571daca435bb191313c9b22594c9fecaaef7abc68c8e7e2faa362692653b88 / 5816faa0d05dd309a2768551cd50b845932ff5abbc355c11f146371d868580c4; focused measured-inertial suite passed 18 tests; broad robot-lab gate passed 63 tests
+Commit: pending
+Remaining: expand the synthetic path from happy-path proof to the full negative matrix for exact-cover ambiguity, reused evidence, and invalid transform/inertia failures
+Blockers: none for offline continuation
+Training lock: closed
+Next step: keep T16.4 open and land the negative matrix in the next slice without changing the default blocked real current-arm path
+```
 
 ### 2026-07-10 - T16.4 custom absolute-path CLI safety correction
 

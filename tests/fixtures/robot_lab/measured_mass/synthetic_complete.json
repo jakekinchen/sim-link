@@ -1,0 +1,298 @@
+{
+  "assembly": {
+    "assembly_frame_id": "synthetic_demo_arm_base_frame",
+    "assembly_id": "synthetic_demo_arm",
+    "frame_units": "meter"
+  },
+  "cad_priors": [
+    {
+      "assumptions": [
+        "Synthetic CAD prior for compiler proof only.",
+        "This prior does not satisfy measured coverage on its own."
+      ],
+      "atom_id": "alpha_structure_mass",
+      "body_frame_to_assembly": {
+        "rotation_matrix": [
+          [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "translation_m": [
+          0.5,
+          0.2,
+          -0.1
+        ]
+      },
+      "body_name": "alpha_body",
+      "component_id": "alpha_structure",
+      "origin": "CAD",
+      "prior_id": "synthetic_alpha_cad_prior",
+      "source_center_of_mass_body_frame_m": [
+        0.1,
+        -0.2,
+        0.05
+      ],
+      "source_inertia_about_com_body_frame_kg_m2": [
+        [
+          0.004,
+          0.0003,
+          0.0001
+        ],
+        [
+          0.0003,
+          0.005,
+          0.0002
+        ],
+        [
+          0.0001,
+          0.0002,
+          0.006
+        ]
+      ],
+      "source_mass_kg": 2.0,
+      "source_path": "tests/fixtures/robot_lab/measured_mass/synthetic_complete.json",
+      "source_path_sha256": "self",
+      "source_path_size_bytes": 0,
+      "units": {
+        "inertia": "kilogram_meter_squared",
+        "length": "meter",
+        "mass": "kilogram"
+      }
+    },
+    {
+      "assumptions": [
+        "Synthetic CAD prior for compiler proof only.",
+        "This prior does not satisfy measured coverage on its own."
+      ],
+      "atom_id": "beta_structure_mass",
+      "body_frame_to_assembly": {
+        "rotation_matrix": [
+          [
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        ],
+        "translation_m": [
+          -0.3,
+          0.4,
+          0.2
+        ]
+      },
+      "body_name": "beta_body",
+      "component_id": "beta_structure",
+      "origin": "CAD",
+      "prior_id": "synthetic_beta_cad_prior",
+      "source_center_of_mass_body_frame_m": [
+        -0.05,
+        0.15,
+        0.0
+      ],
+      "source_inertia_about_com_body_frame_kg_m2": [
+        [
+          0.003,
+          0.0002,
+          5e-05
+        ],
+        [
+          0.0002,
+          0.0025,
+          -0.0001
+        ],
+        [
+          5e-05,
+          -0.0001,
+          0.002
+        ]
+      ],
+      "source_mass_kg": 4.0,
+      "source_path": "tests/fixtures/robot_lab/measured_mass/synthetic_complete.json",
+      "source_path_sha256": "self",
+      "source_path_size_bytes": 0,
+      "units": {
+        "inertia": "kilogram_meter_squared",
+        "length": "meter",
+        "mass": "kilogram"
+      }
+    }
+  ],
+  "components": [
+    {
+      "assembly_id": "synthetic_demo_arm",
+      "canonical_body_id": "alpha_body",
+      "canonical_frame_id": "alpha_body_frame",
+      "category_id": "synthetic_structures",
+      "component_id": "alpha_structure",
+      "coverage_atom_ids": [
+        "alpha_structure_mass"
+      ],
+      "evidence": [
+        {
+          "kind": "synthetic_fixture",
+          "ref": "alpha_structure"
+        },
+        {
+          "kind": "cad_prior_id",
+          "ref": "synthetic_alpha_cad_prior"
+        }
+      ],
+      "installed_state": "synthetic_present",
+      "required_for_ready": true
+    },
+    {
+      "assembly_id": "synthetic_demo_arm",
+      "canonical_body_id": "beta_body",
+      "canonical_frame_id": "beta_body_frame",
+      "category_id": "synthetic_structures",
+      "component_id": "beta_structure",
+      "coverage_atom_ids": [
+        "beta_structure_mass"
+      ],
+      "evidence": [
+        {
+          "kind": "synthetic_fixture",
+          "ref": "beta_structure"
+        },
+        {
+          "kind": "cad_prior_id",
+          "ref": "synthetic_beta_cad_prior"
+        }
+      ],
+      "installed_state": "synthetic_present",
+      "required_for_ready": true
+    }
+  ],
+  "coverage_atoms": [
+    {
+      "assembly_frame_id": "synthetic_demo_arm_base_frame",
+      "assembly_id": "synthetic_demo_arm",
+      "atom_id": "alpha_structure_mass",
+      "canonical_body_id": "alpha_body",
+      "canonical_frame_id": "alpha_body_frame",
+      "category_id": "synthetic_structures",
+      "component_id": "alpha_structure",
+      "evidence": [
+        {
+          "kind": "synthetic_fixture",
+          "ref": "alpha_structure_mass"
+        }
+      ],
+      "installed_state": "synthetic_present",
+      "origin_namespace": "synthetic_required_coverage",
+      "required_for_ready": true
+    },
+    {
+      "assembly_frame_id": "synthetic_demo_arm_base_frame",
+      "assembly_id": "synthetic_demo_arm",
+      "atom_id": "beta_structure_mass",
+      "canonical_body_id": "beta_body",
+      "canonical_frame_id": "beta_body_frame",
+      "category_id": "synthetic_structures",
+      "component_id": "beta_structure",
+      "evidence": [
+        {
+          "kind": "synthetic_fixture",
+          "ref": "beta_structure_mass"
+        }
+      ],
+      "installed_state": "synthetic_present",
+      "origin_namespace": "synthetic_required_coverage",
+      "required_for_ready": true
+    }
+  ],
+  "dependency_lock_ref": {
+    "file_sha256": "dad1fd6b7d02e87348c39b46377b0b3d57ee5f88ca62317ae0608598431561dd",
+    "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
+    "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+    "schema_version": "scenesmith.robotics_dependency_lock.v1"
+  },
+  "fixture_scope": "synthetic_test_only",
+  "identity_sha256": "412825dfedd4c5b015b81a2f4d32d208e6d1dbd6de547a665a8f92005acf8388",
+  "intake_name": "synthetic_complete",
+  "measurements": [
+    {
+      "component_id": "alpha_structure",
+      "covered_atom_ids": [
+        "alpha_structure_mass"
+      ],
+      "evidence": [
+        {
+          "kind": "synthetic_scale_reading",
+          "ref": "alpha-scale-001"
+        }
+      ],
+      "measured_mass_kg": 3.0,
+      "measurement_id": "synthetic_alpha_measurement",
+      "origin": "measured",
+      "provenance": {
+        "calibration_id": "synthetic-cal-001",
+        "device_id": "scale-alpha",
+        "method": "bench_scale"
+      },
+      "source_prior_id": "synthetic_alpha_cad_prior",
+      "uncertainty": {
+        "mass_kg": 0.0001
+      }
+    },
+    {
+      "component_id": "beta_structure",
+      "covered_atom_ids": [
+        "beta_structure_mass"
+      ],
+      "evidence": [
+        {
+          "kind": "synthetic_scale_reading",
+          "ref": "beta-scale-001"
+        }
+      ],
+      "measured_mass_kg": 1.5,
+      "measurement_id": "synthetic_beta_measurement",
+      "origin": "measured",
+      "provenance": {
+        "calibration_id": "synthetic-cal-002",
+        "device_id": "scale-beta",
+        "method": "bench_scale"
+      },
+      "source_prior_id": "synthetic_beta_cad_prior",
+      "uncertainty": {
+        "mass_kg": 0.0001
+      }
+    }
+  ],
+  "schema_version": "scenesmith.measured_mass_intake.v1",
+  "status": "synthetic_test_only",
+  "structural_diff_ref": {
+    "file_sha256": "ddf6d830016e9d714a0f11a9ccd37defef66eb3f1b5ad99abf2c417a7c4ac18d",
+    "identity_sha256": "fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9",
+    "path": "configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json",
+    "schema_version": "scenesmith.structural_twin_diff.v1"
+  },
+  "twin_profile_ref": {
+    "file_sha256": "cc122e1ad9a85a6f9bab0895753c35ec28c5ea0aeb21def93169ba4a4f77226f",
+    "identity_sha256": "77a942306a012263d4f5f886eca692980c973de939c3e3ce06f1781567d34826",
+    "path": "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
+    "schema_version": "scenesmith.twin_profile.v1"
+  }
+}
