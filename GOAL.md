@@ -164,6 +164,12 @@ robotics runtimes and the 249-test offline authority/twin gate passes. No
 hardware or policy ran; no physical, policy-input-valid, shadow, motion, or
 qualification label is granted.
 
+Brief 050 is active offline to integrate that contract into a bounded runtime
+using injected fake buses, cameras, holder snapshots, and clocks. It must prove
+the exact open/read/capture/read/no-torque-close sequence and preserve every
+cleanup failure, while granting fixture runtime conformance only. The live gate
+remains closed.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
