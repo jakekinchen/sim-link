@@ -95,7 +95,10 @@ class Pi05FixturePreprocessingTests(unittest.TestCase):
         self.assertEqual(self.payload["qualification_scope"], "fixture_pi05_model_input_parity")
         self.assertEqual(
             self.payload["local_capabilities"],
-            ["fixture_pi05_model_ready_tensor_parity_conformant"],
+            [
+                "fixture_pi05_model_ready_tensor_parity_conformant",
+                "fixture_pi05_training_support_audit_conformant",
+            ],
         )
         self.assertEqual(self.payload["proof_labels"], [])
         self.assertFalse(self.payload["production_eligible"])
@@ -133,13 +136,58 @@ class Pi05FixturePreprocessingTests(unittest.TestCase):
         self.assertFalse(action["queue_reset_executed"])
         self.assertFalse(action["action_proposal_created"])
 
-    def test_state_range_audit_is_explicit_and_non_authorizing(self) -> None:
-        audit = self.payload["runtime_result"]["state_range_audit"]
-        self.assertEqual(audit["declared_tokenizer_input_domain"], [-1.0, 1.0])
-        self.assertEqual(audit["out_of_domain_indices"], [3, 5])
-        self.assertEqual(audit["out_of_domain_joint_names"], ["wrist_flex", "gripper"])
-        self.assertFalse(audit["all_values_within_declared_domain"])
-        self.assertFalse(audit["policy_input_valid_granted"])
+    def test_state_support_audit_corrects_mean_std_semantics(self) -> None:
+        audit = self.payload["runtime_result"]["state_support_audit"]
+        self.assertEqual(audit["normalization_mode"], "MEAN_STD")
+        self.assertFalse(audit["normalization_mode_mutated"])
+        self.assertFalse(audit["clipping_applied"])
+        self.assertEqual(audit["discretizer"]["reference_interval"], [-1.0, 1.0])
+        self.assertFalse(
+            audit["discretizer"]["reference_interval_is_hard_validity_domain"]
+        )
+        summary = audit["summary"]
+        self.assertEqual(
+            summary["outside_mean_plus_minus_std_joints"],
+            ["wrist_flex", "gripper"],
+        )
+        self.assertEqual(summary["outside_q01_q99_joints"], ["wrist_flex"])
+        self.assertEqual(summary["outside_observed_min_max_joints"], ["wrist_flex"])
+        self.assertIn("gripper", summary["within_observed_support_joints"])
+        self.assertFalse(summary["policy_shadow_input_valid_granted"])
+
+    def test_wrist_is_outside_support_but_gripper_is_not(self) -> None:
+        joints = {
+            item["joint_name"]: item
+            for item in self.payload["runtime_result"]["state_support_audit"]["joints"]
+        }
+        self.assertEqual(
+            joints["wrist_flex"]["support_class"],
+            "outside_observed_training_min_max",
+        )
+        self.assertFalse(joints["wrist_flex"]["within_observed_min_max"])
+        self.assertEqual(joints["gripper"]["support_class"], "within_q01_q99")
+        self.assertTrue(joints["gripper"]["within_observed_min_max"])
+        self.assertTrue(joints["gripper"]["within_q01_q99"])
+
+    def test_corrected_metadata_preserves_all_model_facing_tensor_hashes(self) -> None:
+        runtime = self.payload["runtime_result"]
+        outputs = runtime["preprocessor_outputs"]
+        self.assertEqual(
+            outputs["observation.state"]["sha256"],
+            "586d37596d287f396c09f4adb072506daeddbee574196c6338825fc55830c3fd",
+        )
+        self.assertEqual(
+            outputs["observation.language.tokens"]["sha256"],
+            "29f09d673f6c1ee8e3e7e00453e609af118ca9d33d6ccd7d22d8f19d91b104df",
+        )
+        self.assertEqual(
+            [entry["tensor"]["sha256"] for entry in runtime["model_image_inputs"]["entries"]],
+            [
+                "763cfd8b6e6137318f45be30231daf37d577deb54f7c5ce4ca04161cd16c0b66",
+                "b45244549a2fda21698707efabd79659d5a92527c1787199c36082cb4029cfee",
+                "811b0abfb7b806545700b3a1b9513d4ff52fd7da3ac337ae9ca69772f74e8415",
+            ],
+        )
 
     def test_model_call_contract_has_no_separate_state_or_execution(self) -> None:
         contract = self.payload["runtime_result"]["model_call_contract"]
@@ -235,11 +283,46 @@ class Pi05FixturePreprocessingTests(unittest.TestCase):
             lambda item: item["runtime_result"]["action_contract"].__setitem__("n_action_steps", 49)
         )
 
-    def test_state_range_audit_escalation_is_rejected(self) -> None:
+    def test_state_support_audit_escalation_is_rejected(self) -> None:
         self.assert_resigned_rejected(
-            lambda item: item["runtime_result"]["state_range_audit"].__setitem__(
-                "policy_input_valid_granted", True
+            lambda item: item["runtime_result"]["state_support_audit"]["summary"].__setitem__(
+                "policy_shadow_input_valid_granted", True
             )
+        )
+
+    def test_silent_normalization_mode_change_is_rejected(self) -> None:
+        self.assert_resigned_rejected(
+            lambda item: item["runtime_result"]["state_support_audit"].__setitem__(
+                "normalization_mode", "QUANTILES"
+            )
+        )
+
+    def test_silent_clipping_is_rejected(self) -> None:
+        self.assert_resigned_rejected(
+            lambda item: item["runtime_result"]["state_support_audit"].__setitem__(
+                "clipping_applied", True
+            )
+        )
+
+    def test_discretizer_reference_interval_hard_domain_relabel_is_rejected(self) -> None:
+        self.assert_resigned_rejected(
+            lambda item: item["runtime_result"]["state_support_audit"]["discretizer"].__setitem__(
+                "reference_interval_is_hard_validity_domain", True
+            )
+        )
+
+    def test_gripper_false_rejection_is_rejected(self) -> None:
+        self.assert_resigned_rejected(
+            lambda item: item["runtime_result"]["state_support_audit"]["summary"][
+                "outside_observed_min_max_joints"
+            ].append("gripper")
+        )
+
+    def test_wrist_false_acceptance_is_rejected(self) -> None:
+        self.assert_resigned_rejected(
+            lambda item: item["runtime_result"]["state_support_audit"]["summary"][
+                "outside_observed_min_max_joints"
+            ].remove("wrist_flex")
         )
 
     def test_model_call_execution_claim_is_rejected(self) -> None:

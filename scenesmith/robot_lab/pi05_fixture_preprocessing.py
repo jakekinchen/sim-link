@@ -35,6 +35,10 @@ from scenesmith.robot_lab.pi05_preprocessing_contract import (
 from scenesmith.robot_lab.pi05_reviewed_input_gate import (
     verify_pi05_reviewed_input_gate,
 )
+from scenesmith.robot_lab.pi05_training_support import (
+    build_state_support_audit,
+    verify_state_support_audit,
+)
 from scenesmith.robot_lab.static_pose_bracket import (
     build_fixture_static_pose_observation,
     evaluate_static_pose_bracket,
@@ -43,10 +47,10 @@ from scenesmith.robot_lab.static_pose_bracket import (
 
 
 PI05_FIXTURE_MODEL_READY_PARITY_SCHEMA_VERSION = (
-    "scenesmith.pi05_fixture_model_ready_tensor_parity.v1"
+    "scenesmith.pi05_fixture_model_ready_tensor_parity.v2"
 )
 PI05_FIXTURE_PREPROCESSING_RUNTIME_SCHEMA_VERSION = (
-    "scenesmith.pi05_fixture_preprocessing_runtime.v1"
+    "scenesmith.pi05_fixture_preprocessing_runtime.v2"
 )
 PI05_FIXTURE_INPUT_SPEC_SCHEMA_VERSION = "scenesmith.pi05_fixture_input_spec.v1"
 
@@ -54,7 +58,7 @@ PI05_FIXTURE_INPUT_SPEC_SCHEMA_VERSION = "scenesmith.pi05_fixture_input_spec.v1"
 # The pure-Python verifier uses the golden identity to reject a re-signed opaque
 # tokenizer or Torch tensor substitution in runtimes that intentionally lack Torch.
 EXPECTED_RUNTIME_RESULT_IDENTITY = (
-    "4c89ca10c3adaae0a623461b245d1dfc2ee53329e7b083927426961149ca583f"
+    "1642f75c3801df58a7978b3e1d6c0a255641388b11a338f3bc2987fdb584f21a"
 )
 
 _SOURCE_CONTRACT_PATH = Path(
@@ -106,7 +110,10 @@ _HEIGHT = 480
 _CHANNELS = 3
 _FRAME_COUNT_PER_CAMERA = 2
 _SELECTED_FRAME_INDEX = 1
-_LOCAL_CAPABILITIES = ["fixture_pi05_model_ready_tensor_parity_conformant"]
+_LOCAL_CAPABILITIES = [
+    "fixture_pi05_model_ready_tensor_parity_conformant",
+    "fixture_pi05_training_support_audit_conformant",
+]
 _AUTHORITY_NOT_GRANTED = [
     "accepted_live_session_review_decision",
     "pi05_reviewed_input_bundle_valid",
@@ -412,11 +419,16 @@ def execute_pi05_fixture_preprocessing(
     normalized_state_values = [
         float(value) for value in output["observation.state"][0].tolist()
     ]
-    out_of_domain_indices = [
-        index
-        for index, value in enumerate(normalized_state_values)
-        if value < -1.0 or value > 1.0
-    ]
+    state_stats = getattr(processor.steps[2], "stats", {}).get(
+        "observation.state"
+    )
+    state_support_audit = build_state_support_audit(
+        state_stats,
+        state_values=fixture["state_values"],
+        normalized_values=normalized_state_values,
+        discretized_values=discretized_state,
+        source_contract=source_contract,
+    )
 
     token_ids = output["observation.language.tokens"]
     attention = output["observation.language.attention_mask"]
@@ -521,16 +533,7 @@ def execute_pi05_fixture_preprocessing(
         "prompt_text": prompt_text,
         "prompt_utf8_sha256": hashlib.sha256(prompt_text.encode("utf-8")).hexdigest(),
         "discretized_state": discretized_state,
-        "state_range_audit": {
-            "declared_tokenizer_input_domain": [-1.0, 1.0],
-            "normalized_values": normalized_state_values,
-            "out_of_domain_indices": out_of_domain_indices,
-            "out_of_domain_joint_names": [
-                _JOINT_ORDER[index] for index in out_of_domain_indices
-            ],
-            "all_values_within_declared_domain": not out_of_domain_indices,
-            "policy_input_valid_granted": False,
-        },
+        "state_support_audit": state_support_audit,
         "preprocessor_outputs": preprocessor_outputs,
         "tokenizer_output": tokenizer_output,
         "model_image_inputs": {
@@ -555,7 +558,10 @@ def execute_pi05_fixture_preprocessing(
         "tokenizer_instantiated": True,
         "preprocessing_run": True,
         **_FALSE_RUNTIME_FACTS,
-        "local_capabilities": ["fixture_pi05_preprocessing_runtime_observed"],
+        "local_capabilities": [
+            "fixture_pi05_preprocessing_runtime_observed",
+            "fixture_pi05_training_support_audit_runtime_observed",
+        ],
         "proof_labels": [],
         "authority_not_granted": list(_AUTHORITY_NOT_GRANTED),
     }
@@ -723,7 +729,10 @@ def _verify_runtime_result(
         or runtime.get("tokenizer_instantiated") is not True
         or runtime.get("preprocessing_run") is not True
         or runtime.get("local_capabilities")
-        != ["fixture_pi05_preprocessing_runtime_observed"]
+        != [
+            "fixture_pi05_preprocessing_runtime_observed",
+            "fixture_pi05_training_support_audit_runtime_observed",
+        ]
         or runtime.get("proof_labels") != []
         or runtime.get("authority_not_granted") != _AUTHORITY_NOT_GRANTED
     ):
@@ -790,30 +799,12 @@ def _verify_runtime_result(
     ):
         raise ValueError("PI0.5 fixture prompt output drifted")
 
-    range_audit = runtime.get("state_range_audit")
-    normalized_values = range_audit.get("normalized_values") if isinstance(range_audit, dict) else None
-    if (
-        not isinstance(range_audit, dict)
-        or range_audit.get("declared_tokenizer_input_domain") != [-1.0, 1.0]
-        or not isinstance(normalized_values, list)
-        or len(normalized_values) != 6
-        or any(isinstance(value, bool) or not isinstance(value, (int, float)) for value in normalized_values)
-        or range_audit.get("out_of_domain_indices")
-        != [
-            index
-            for index, value in enumerate(normalized_values)
-            if value < -1.0 or value > 1.0
-        ]
-        or range_audit.get("out_of_domain_joint_names")
-        != [
-            _JOINT_ORDER[index]
-            for index in range_audit.get("out_of_domain_indices", [])
-        ]
-        or range_audit.get("all_values_within_declared_domain")
-        is not (not range_audit.get("out_of_domain_indices"))
-        or range_audit.get("policy_input_valid_granted") is not False
-    ):
-        raise ValueError("PI0.5 fixture normalized-state range audit drifted")
+    verify_state_support_audit(
+        runtime.get("state_support_audit"),
+        state_values=fixture["state_values"],
+        discretized_values=runtime["discretized_state"],
+        source=source,
+    )
 
     outputs = runtime.get("preprocessor_outputs")
     expected_output_keys = {

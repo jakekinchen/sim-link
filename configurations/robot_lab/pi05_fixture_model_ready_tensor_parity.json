@@ -183,9 +183,10 @@
     "task_prompt_fixture_bound": true
   },
   "hardware_accessed": false,
-  "identity_sha256": "559b9dbd112d9df460b000e6c127d6f16200d9e89a2d418b3e8a8179e1af8732",
+  "identity_sha256": "b20e078242af31227c6d77bedc08bd8d54a1be2df5540a8e5140b30a3e2bf25e",
   "local_capabilities": [
-    "fixture_pi05_model_ready_tensor_parity_conformant"
+    "fixture_pi05_model_ready_tensor_parity_conformant",
+    "fixture_pi05_training_support_audit_conformant"
   ],
   "model_instantiated": false,
   "model_ready_tensor_hashes_recorded": true,
@@ -294,9 +295,10 @@
     "evidence_mode": "deterministic_fixture_preprocessing_runtime",
     "fixture_input_spec_identity_sha256": "7711364303be0a5dbb689bf29c2a8bc9c472c5047f2d97c37c248cf67b441956",
     "hardware_accessed": false,
-    "identity_sha256": "4c89ca10c3adaae0a623461b245d1dfc2ee53329e7b083927426961149ca583f",
+    "identity_sha256": "1642f75c3801df58a7978b3e1d6c0a255641388b11a338f3bc2987fdb584f21a",
     "local_capabilities": [
-      "fixture_pi05_preprocessing_runtime_observed"
+      "fixture_pi05_preprocessing_runtime_observed",
+      "fixture_pi05_training_support_audit_runtime_observed"
     ],
     "model_call_contract": {
       "image_count": 3,
@@ -556,7 +558,7 @@
       "torch_version": "2.11.0",
       "transformers_version": "5.5.4"
     },
-    "schema_version": "scenesmith.pi05_fixture_preprocessing_runtime.v1",
+    "schema_version": "scenesmith.pi05_fixture_preprocessing_runtime.v2",
     "source_contract_identity_sha256": "f6b216684f6bb3f895b3d1761d72e80b5e93a5ec7be8f44b04cc277e7a871afa",
     "state_input": {
       "joint_order": [
@@ -597,12 +599,122 @@
         50.0
       ]
     },
-    "state_range_audit": {
-      "all_values_within_declared_domain": false,
-      "declared_tokenizer_input_domain": [
-        -1.0,
-        1.0
+    "state_support_audit": {
+      "clipping_applied": false,
+      "discretizer": {
+        "at_or_above_last_bin_value": 255,
+        "below_reference_interval_value": -1,
+        "bin_count": 256,
+        "clipping_applied": false,
+        "implementation": "numpy_digitize_minus_one",
+        "last_bin_lower_edge": 0.9921875,
+        "reference_interval": [
+          -1.0,
+          1.0
+        ],
+        "reference_interval_is_hard_validity_domain": false
+      },
+      "joints": [
+        {
+          "discretized_value": 110,
+          "joint_name": "shoulder_pan",
+          "mean_minus_std": -24.777878880500793,
+          "mean_plus_std": 28.533305048942566,
+          "normalized_mean_std_value": -0.13310688734054565,
+          "observed_max": 71.4512939453125,
+          "observed_min": -68.986083984375,
+          "q01": -42.3471565246582,
+          "q99": 45.22834396362305,
+          "support_class": "within_q01_q99",
+          "value": -1.6703296703296704,
+          "within_mean_plus_minus_std": true,
+          "within_observed_min_max": true,
+          "within_q01_q99": true
+        },
+        {
+          "discretized_value": 140,
+          "joint_name": "shoulder_lift",
+          "mean_minus_std": -52.93089771270752,
+          "mean_plus_std": 41.76369762420654,
+          "normalized_mean_std_value": 0.09564759582281113,
+          "observed_max": 77.9675521850586,
+          "observed_min": -99.65840911865234,
+          "q01": -98.12874603271484,
+          "q99": 55.94004821777344,
+          "support_class": "within_q01_q99",
+          "value": -1.054945054945055,
+          "within_mean_plus_minus_std": true,
+          "within_observed_min_max": true,
+          "within_q01_q99": true
+        },
+        {
+          "discretized_value": 105,
+          "joint_name": "elbow_flex",
+          "mean_minus_std": -39.98931312561035,
+          "mean_plus_std": 54.60949516296387,
+          "normalized_mean_std_value": -0.17406493425369263,
+          "observed_max": 99.9097900390625,
+          "observed_min": -95.7600326538086,
+          "q01": -69.54084014892578,
+          "q99": 99.01190185546875,
+          "support_class": "within_q01_q99",
+          "value": -0.9230769230769231,
+          "within_mean_plus_minus_std": true,
+          "within_observed_min_max": true,
+          "within_q01_q99": true
+        },
+        {
+          "discretized_value": -1,
+          "joint_name": "wrist_flex",
+          "mean_minus_std": 48.04985809326172,
+          "mean_plus_std": 76.16654205322266,
+          "normalized_mean_std_value": -4.777458667755127,
+          "observed_max": 99.65768432617188,
+          "observed_min": 20.2396240234375,
+          "q01": 40.86196517944336,
+          "q99": 88.07508087158203,
+          "support_class": "outside_observed_training_min_max",
+          "value": -5.054945054945055,
+          "within_mean_plus_minus_std": false,
+          "within_observed_min_max": false,
+          "within_q01_q99": false
+        },
+        {
+          "discretized_value": 249,
+          "joint_name": "wrist_roll",
+          "mean_minus_std": -8.501120805740356,
+          "mean_plus_std": 0.6426169872283936,
+          "normalized_mean_std_value": 0.9459711909294128,
+          "observed_max": 7.838827610015869,
+          "observed_min": -28.644689559936523,
+          "q01": -12.739949226379395,
+          "q99": 1.1153502464294434,
+          "support_class": "within_q01_q99",
+          "value": 0.3956043956043956,
+          "within_mean_plus_minus_std": true,
+          "within_observed_min_max": true,
+          "within_q01_q99": true
+        },
+        {
+          "discretized_value": 255,
+          "joint_name": "gripper",
+          "mean_minus_std": 3.0107383728027344,
+          "mean_plus_std": 47.73481369018555,
+          "normalized_mean_std_value": 1.101296067237854,
+          "observed_max": 79.93506622314453,
+          "observed_min": 0.7792207598686218,
+          "q01": 1.4654124975204468,
+          "q99": 59.614234924316406,
+          "support_class": "within_q01_q99",
+          "value": 50.0,
+          "within_mean_plus_minus_std": false,
+          "within_observed_min_max": true,
+          "within_q01_q99": true
+        }
       ],
+      "normalization_mode": "MEAN_STD",
+      "normalization_mode_mutated": false,
+      "normalization_mode_source": "serialized_checkpoint_config_and_preprocessor",
       "normalized_values": [
         -0.13310688734054565,
         0.09564759582281113,
@@ -611,15 +723,116 @@
         0.9459711909294128,
         1.101296067237854
       ],
-      "out_of_domain_indices": [
-        3,
-        5
+      "normalizer_file_sha256": "8dc4c304b136dc66eca1b3156059b3d2bbd296864fff99e8453ed5fc128d070f",
+      "sample_count": 94568,
+      "statistic_order": [
+        "min",
+        "q01",
+        "q10",
+        "q50",
+        "q90",
+        "q99",
+        "max",
+        "mean",
+        "std"
       ],
-      "out_of_domain_joint_names": [
-        "wrist_flex",
-        "gripper"
-      ],
-      "policy_input_valid_granted": false
+      "statistics": {
+        "max": [
+          71.4512939453125,
+          77.9675521850586,
+          99.9097900390625,
+          99.65768432617188,
+          7.838827610015869,
+          79.93506622314453
+        ],
+        "mean": [
+          1.8777130842208862,
+          -5.583600044250488,
+          7.310091018676758,
+          62.10820007324219,
+          -3.9292519092559814,
+          25.37277603149414
+        ],
+        "min": [
+          -68.986083984375,
+          -99.65840911865234,
+          -95.7600326538086,
+          20.2396240234375,
+          -28.644689559936523,
+          0.7792207598686218
+        ],
+        "q01": [
+          -42.3471565246582,
+          -98.12874603271484,
+          -69.54084014892578,
+          40.86196517944336,
+          -12.739949226379395,
+          1.4654124975204468
+        ],
+        "q10": [
+          -30.621009826660156,
+          -97.0576171875,
+          -48.52473449707031,
+          47.30120849609375,
+          -9.388565063476562,
+          1.5646932125091553
+        ],
+        "q50": [
+          2.889874219894409,
+          8.577838897705078,
+          -0.8198460936546326,
+          60.714881896972656,
+          -3.0470993518829346,
+          10.15744686126709
+        ],
+        "q90": [
+          36.35276412963867,
+          41.468894958496094,
+          92.75396728515625,
+          78.6228256225586,
+          -0.03619758412241936,
+          55.52505111694336
+        ],
+        "q99": [
+          45.22834396362305,
+          55.94004821777344,
+          99.01190185546875,
+          88.07508087158203,
+          1.1153502464294434,
+          59.614234924316406
+        ],
+        "std": [
+          26.65559196472168,
+          47.34729766845703,
+          47.29940414428711,
+          14.058341979980469,
+          4.571868896484375,
+          22.362037658691406
+        ]
+      },
+      "summary": {
+        "actual_live_input_present": false,
+        "out_of_support_disposition": "record_and_allow_no_actuation_shadow_analysis_only_after_independent_live_acceptance;block_policy_actuation",
+        "outside_mean_plus_minus_std_joints": [
+          "wrist_flex",
+          "gripper"
+        ],
+        "outside_observed_min_max_joints": [
+          "wrist_flex"
+        ],
+        "outside_q01_q99_joints": [
+          "wrist_flex"
+        ],
+        "physical_policy_actuation_eligible": false,
+        "policy_shadow_input_valid_granted": false,
+        "within_observed_support_joints": [
+          "shoulder_pan",
+          "shoulder_lift",
+          "elbow_flex",
+          "wrist_roll",
+          "gripper"
+        ]
+      }
     },
     "tokenizer_instantiated": true,
     "tokenizer_output": {
@@ -688,7 +901,7 @@
     },
     "training_authority_granted": false
   },
-  "schema_version": "scenesmith.pi05_fixture_model_ready_tensor_parity.v1",
+  "schema_version": "scenesmith.pi05_fixture_model_ready_tensor_parity.v2",
   "source_contract": {
     "identity_sha256": "f6b216684f6bb3f895b3d1761d72e80b5e93a5ec7be8f44b04cc277e7a871afa",
     "path": "configurations/robot_lab/pi05_policy_input_preprocessing.blocked_missing_inputs.json",
