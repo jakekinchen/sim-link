@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "16d24ea0c4ced2b62d3ba2c0297f1816981efee3",
-  "last_reviewed_commit": "16d24ea0c4ced2b62d3ba2c0297f1816981efee3",
+  "current_head_commit": "b85a2532de0913d54a9b73f71ae4e5d92b665632",
+  "last_reviewed_commit": "b85a2532de0913d54a9b73f71ae4e5d92b665632",
   "source_review": {
-    "commit": "16d24ea0c4ced2b62d3ba2c0297f1816981efee3",
-    "decision": "ACCEPT_T16_5B_OFFLINE_HARNESS_AUTHORIZE_METADATA_DISCOVERY_ONLY_AFTER_REMOTE_PRESERVATION",
-    "reviewer_decision": "docs/reviewer-messages/050-live-readonly-observation-harness-reviewed.md"
+    "commit": "b85a2532de0913d54a9b73f71ae4e5d92b665632",
+    "decision": "ACCEPT_T16_5B_METADATA_COMPATIBILITY_CORRECTION_AND_DISCOVERY_AUTHORIZE_EXACT_LEASE_CONTRACT_AFTER_REMOTE_PRESERVATION",
+    "reviewer_decision": "docs/reviewer-messages/051-live-readonly-metadata-discovery-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -333,9 +333,11 @@
       "depends_on": ["T16.5a"],
       "brief_id": "039",
       "source_commit": "16d24ea",
-      "review_decision_id": "050",
-      "result": "offline live read-only adapter, metadata discovery, finite camera, privacy, and evidence harness verified; no hardware enumerated or opened",
-      "execution_note": "Implementation 16d24ea passed 14 dedicated, 30 combined census, and 209 broad tests plus both supported offline runtime verifiers; reviewer 050 authorizes only metadata discovery after remote preservation",
+      "offline_review_decision_id": "050",
+      "metadata_compatibility_correction_commit": "b85a253",
+      "review_decision_id": "051",
+      "result": "offline live read-only harness and metadata compatibility correction verified; one exact follower, six-joint calibration identity, and two exact camera identities resolved from metadata with zero device opens",
+      "execution_note": "Implementation 16d24ea plus correction b85a253 passed 14 dedicated, 30 combined census, and 209 broad tests; reviewer 051 permits exact short lease/contract preparation after remote preservation",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census",
@@ -345,11 +347,25 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/live_readonly_observation.py scenesmith/robot_lab/readonly_servo_census.py scripts/robot_lab/run_live_readonly_observation.py tests/unit/test_live_readonly_observation.py",
         "git diff --check"
       ],
-      "hardware_enumerated": false,
+      "metadata_discovery": {
+        "session_id": "t16-5b-20260711-0512-cdt",
+        "private_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-0512-cdt/discovery.json",
+        "discovery_identity_sha256": "53440393505ef25a27fc84cb1c736a49e9c8456f3b9ffff56140e03304d7b6e3",
+        "follower_identity_sha256": "321be886b3a9599b7181c21df242d2dc7259bb05908c7ccc058d2058dbc640ca",
+        "camera_set_identity_sha256": "427eaa2903590d64b39bb65fe2a4683623ec675b2faa9479f56e1cdc25338197",
+        "calibration_file_sha256": "192404b6d3c1337495d69649969459aa9d3f66816cd916c67da2588815e93ec4",
+        "serial_candidate_count": 4,
+        "selected_camera_count": 2,
+        "calibration_joint_count": 6,
+        "serial_ports_opened": 0,
+        "cameras_opened": 0
+      },
+      "hardware_enumerated": true,
       "hardware_opened": false,
       "proof_labels_granted": [],
       "authority_granted": [
-        "live_readonly_harness_offline_verified"
+        "live_readonly_harness_offline_verified",
+        "metadata_discovery_exact"
       ],
       "conditional_authority": [
         "live_hardware_discovery_after_T16.5a",
@@ -357,9 +373,9 @@
         "synchronized_camera_capture_after_T16.5a"
       ],
       "known_limitations": [
-        "the accepted harness is offline proof only and contains no observed live identity, telemetry, or camera frame",
-        "metadata discovery must resolve one exact follower and camera selection before a short owner-presence lease and execution contract can be prepared",
-        "serial and camera opens remain closed until discovery is remotely preceded by this reviewed harness and every live contract check passes"
+        "metadata discovery is read-only operating-system evidence and contains no servo response, telemetry, or camera frame",
+        "the OS omitted the non-authoritative descriptive manufacturer label while all stable required follower identity fields remained complete and signed",
+        "serial and camera opens remain closed until the correction/review is remote, a short owner-presence lease is active, and the exact execution contract validates"
       ],
       "authority_not_granted": [
         "live_read_only_census_observed",
