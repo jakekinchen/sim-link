@@ -94,9 +94,12 @@ reviewed per-camera mode that supports integer 30 fps within 0.01 fps and places
 exact `-pixel_format`, `-video_size`, and `-framerate` options before input.
 Diagnostics v3, private success/failure v4, and tracked manifest v4 bind the
 same mode; legacy attempt-003/004 failures still verify. The live gate remains
-closed pending a separate review commit. Sequential capture is not synchronized
-or policy-input-valid. Studio reconnect remains deferred unless exact device,
-calibration, and current-pose evidence proves it mechanically no-motion-safe.
+closed until reviewer 067's scoped transition is remotely confirmed, then
+exactly one fresh discovery-v2/contract-v3 session is permitted from
+`2026-07-11T11:04:00-05:00` through `2026-07-11T11:34:00-05:00`. It must reclose
+on every outcome. Sequential capture is not synchronized or policy-input-valid.
+Studio reconnect remains deferred unless exact device, calibration, and
+current-pose evidence proves it mechanically no-motion-safe.
 
 ## Durable State
 

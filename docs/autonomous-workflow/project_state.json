@@ -12,9 +12,9 @@
   "verified_through_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
   "last_reviewed_implementation_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
   "source_review": {
-    "commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
-    "decision": "VERIFY_BRIEF_045_OFFLINE_AND_KEEP_LIVE_GATE_CLOSED_FOR_SEPARATE_REVIEW",
-    "reviewer_decision": "docs/reviewer-messages/066-brief-045-per-camera-mode-reviewed.md"
+    "commit": "a6da4b458895808b3bfb703319722f333350c63f",
+    "decision": "OPEN_ONE_FRESH_FINITE_DISCOVERY_V2_CONTRACT_V3_SESSION_AFTER_REMOTE_CONFIRMATION",
+    "reviewer_decision": "docs/reviewer-messages/067-open-live-gate-after-brief-045.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -393,9 +393,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "066",
-      "result": "Brief 045 signed per-camera supported-mode and exact pre-input mode binding is verified offline at 820a40f; the live gate remains closed for a separate review commit",
-      "execution_note": "Brief 045 passed 52 focused tests, 32 camera tests under the pinned LeLab runtime, and 231 broad robot-lab tests; both offline verifiers, Swift metadata-source typecheck, legacy attempt-003/004 verification, pycompile, authority-surface, privacy, and diff checks passed with no hardware access",
+      "live_gate_review_decision_id": "067",
+      "result": "Reviewer 067 authorizes exactly one fresh finite discovery-v2/contract-v3 session after the scoped gate transition is confirmed on origin; no live operation is authorized before that confirmation",
+      "execution_note": "The gate transition itself performs no hardware discovery or open and grants no proof label; the one allowed session must use metadata-only signed per-camera modes, all-alias holder proofs, a five-minute lease, exact pre-input mode, complete v4 success/failure evidence, and immediate gate reclosure on every outcome",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
@@ -741,14 +741,12 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-11T10:33:00-05:00",
-      "live_gate_valid_until": "2026-07-11T11:13:00-05:00",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-11T11:04:00-05:00",
+      "live_gate_valid_until": "2026-07-11T11:34:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 1,
-      "live_gate_closed_at": "2026-07-11T10:37:42-05:00",
-      "live_gate_close_reason": "live_attempt_004_named_camera_ffmpeg_stderr",
-      "live_gate_reconsideration_state": "brief_045_verified_separate_live_gate_review_required",
+      "live_gate_sessions_started": 0,
+      "live_gate_reconsideration_state": "one_fresh_discovery_v2_contract_v3_session_authorized_after_remote_confirmation",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -783,6 +781,12 @@
           "state": "closed",
           "at": "2026-07-11T10:37:42-05:00",
           "reason": "live_attempt_004_named_camera_ffmpeg_stderr"
+        },
+        {
+          "state": "open",
+          "at": "2026-07-11T11:04:00-05:00",
+          "review_decision_id": "067",
+          "result": "one_fresh_finite_discovery_v2_contract_v3_session_authorized_after_brief_045"
         }
       ],
       "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
@@ -915,7 +919,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "perform a separate closed-state review and remote commit for at most one fresh finite session using discovery v2 and contract v3; keep the gate closed until that commit is confirmed",
+      "next_action": "after the scoped gate transition is confirmed on origin, execute exactly one fresh finite discovery-v2/contract-v3 session and immediately reclose the gate on every outcome",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
