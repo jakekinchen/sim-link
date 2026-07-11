@@ -49,11 +49,16 @@ non-finite intermediates, and downstream authority escalation. Review-time
 correction symmetrized only after the declared asymmetry bound was validated.
 All final gates were rerun.
 
-Reviewer decision 045 accepts the implementation locally. T16.4b remains
-`in_progress` until implementation and reviewer evidence are pushed and
-independently confirmed on `origin/codex/pi05-autolearn-loop`.
+Reviewer decision 045 accepted the implementation locally before push. The
+remote closeout below then satisfied the final T16.4b verification condition.
 
 ## Remote closeout
 
-Pending scoped reviewer-evidence commit, push, and independent remote
-confirmation.
+- Pushed only to `origin/codex/pi05-autolearn-loop`.
+- Fresh fetch, remote-tracking ref, and `git ls-remote` all resolved to
+  `dbdd1ef019961cc6d7deba81f69a873c11efac5a`.
+- Ancestry checks confirmed implementation
+  `7d0562916c836810fc15c68ac51af20089a26dd7` and reviewer decision 045 on the
+  named remote.
+- T16.4b is verified on declared fixture evidence only. The current-arm artifact
+  remains blocked, every global decision remains withheld, and T16.2b is next.

@@ -9,7 +9,7 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "7d0562916c836810fc15c68ac51af20089a26dd7",
+  "current_head_commit": "dbdd1ef019961cc6d7deba81f69a873c11efac5a",
   "last_reviewed_commit": "7d0562916c836810fc15c68ac51af20089a26dd7",
   "source_review": {
     "commit": "7d0562916c836810fc15c68ac51af20089a26dd7",
@@ -82,8 +82,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M16",
-  "current_task": "T16.4b",
-  "next_eligible_task": "T16.4b",
+  "current_task": "T16.2b",
+  "next_eligible_task": "T16.2b",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -160,21 +160,26 @@
       ]
     },
     "T16.2b": {
-      "state": "pending",
-      "depends_on": ["T16.1b", "T16.2", "T16.2b-A", "T16.4b"]
+      "state": "in_progress",
+      "depends_on": ["T16.1b", "T16.2", "T16.2b-A", "T16.4b"],
+      "brief_id": "037",
+      "result": "mechanically computed qualification generator and independent verifier in progress",
+      "authority_not_granted": [
+        "physical_twin_qualified",
+        "simulation_training_ready",
+        "physical_transfer_ready",
+        "promotion_eligible"
+      ]
     },
     "T16.3": {"state": "verified", "authority_granted": ["structural_baseline"]},
     "T16.4": {
-      "state": "reopened",
-      "result": "blocked real template and synthetic compiler scaffold verified",
-      "missing": [
-        "production measurement ingestion",
-        "strict numerical and JSON validation",
-        "BOM graph linkage",
-        "immutable provenance",
-        "authority separation"
+      "state": "verified",
+      "result": "strict production measured-inertial compiler and numerical contract verified on declared fixture evidence; current-arm physical input remains blocked",
+      "missing": [],
+      "authority_granted": [
+        "synthetic_compilation_valid",
+        "production_inertial_compiler_valid"
       ],
-      "authority_granted": ["synthetic_compilation_valid"],
       "authority_not_granted": [
         "simulation_training_ready",
         "physical_twin_qualified",
@@ -182,10 +187,10 @@
       ]
     },
     "T16.4b": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T16.2", "T16.4", "T16.2b-A"],
       "brief_id": "036",
-      "execution_note": "Reviewer 045 accepts Brief 036 implementation 7d05629; T16.4b remains in progress until the implementation and review are remotely preserved",
+      "execution_note": "Brief 036 implementation 7d05629 and reviewer 045 are remotely preserved through dbdd1ef; T16.4b is verified on fixture evidence",
       "completed_subslices": [
         {
           "source_commit": "69df54d",
@@ -205,7 +210,7 @@
         {
           "source_commit": "7d05629",
           "review_decision_id": "045",
-          "result": "deterministic scale-normalized eigensolver, convergence and residual checks, and adversarial numerical corpus accepted locally pending remote preservation"
+          "result": "deterministic scale-normalized eigensolver, convergence and residual checks, and adversarial numerical corpus remotely preserved through dbdd1ef"
         }
       ],
       "test_commands": [
@@ -227,17 +232,18 @@
         "blocked_current_arm_identity_sha256": "8b8aab8e769167531776e38d76c545cec99277b69783d57c9db78f1020297ffc"
       },
       "known_limitations": [
-        "reviewer 045 accepted numerical hardening; remote preservation remains before T16.4b can close",
         "fixture evidence proves the production path but is not current-arm physical evidence"
       ],
       "authority_granted": [
         "synthetic_compilation_valid",
-        "production_inertial_compiler_fixture_valid"
+        "production_inertial_compiler_fixture_valid",
+        "production_inertial_compiler_valid"
       ],
       "authority_not_granted": [
         "simulation_training_ready",
         "physical_twin_qualified",
-        "promotion_eligible"
+        "promotion_eligible",
+        "optimizer_run"
       ]
     },
     "T16.5": {

@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4b numerical hardening remote closeout
-completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.2b-A central authority composition; T16.4 blocked real template and synthetic compiler scaffold; T16.4b strict artifact and scoped-gate sub-slice
-evidence: production compiler a93ff05/reviewer 044 are remotely preserved; numerical hardening 7d05629/reviewer 045 passes 17 focused and 131 broad tests plus extreme-scale stress; every global decision remains withheld
-remaining: remotely preserve reviewer 045 and close T16.4b; T16.2b computed qualification; T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
+current_task: T16.2b mechanically computed qualification
+completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.2b-A central authority composition; T16.4/T16.4b production measured-inertial compiler and numerical hardening
+evidence: T16.4b implementation 7d05629 and reviewer 045 are remotely preserved through dbdd1ef after 17 focused and 131 broad tests plus extreme-scale stress; every global decision remains withheld
+remaining: T16.2b computed qualification; T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
 blockers: no offline blocker; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
-next_step: push and confirm implementation 7d05629 plus reviewer 045, then open T16.2b
+next_step: execute Brief 037 mechanically computed qualification without caller-declared pass status
 ```
 
 ## Rules
@@ -43,9 +43,9 @@ next_step: push and confirm implementation 7d05629 plus reviewer 045, then open 
 | T16.2 | reopened | T16.1b | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Schema scaffold verified; qualification `pass` is not yet mechanically derived from the specification |
 | T16.2b-A | verified | T16.1b,T16.2,T16.4 | Define the only central composer for global authority from scoped component capabilities | `c0b9629`; reviewer 043; contract `6d04b205...`; 101-test broad gate; remote through `e1d59ca`; grants contract validity only |
 | T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
-| T16.4 | reopened | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Blocked real template and synthetic compiler scaffold verified; production measurement ingestion and authority separation missing |
-| T16.4b | in_progress | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | `7d05629`/reviewer 045 locally accept normalized Jacobi convergence/residual checks and scale-relative adversarial coverage; 17 focused and 131 broad tests; remote preservation remains before closeout |
-| T16.2b | pending | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | Units, finite values, trials, split IDs, conditions, uncertainty, content-addressed evidence, and recomputed tolerances |
+| T16.4 | verified | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Production compiler valid on declared fixture evidence; current-arm physical input remains blocked |
+| T16.4b | verified | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | `7d05629`/reviewer 045/remote `dbdd1ef`; normalized Jacobi convergence/residual checks; scale-relative adversarial coverage; 17 focused and 131 broad tests |
+| T16.2b | in_progress | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | Brief 037; units, finite values, trials, split IDs, conditions, uncertainty, content-addressed evidence, recomputed tolerances, central-composer-only authority |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | pending | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Narrow read-only interface; fake/recorded traces; construct/connect/read/decode/close/retry/cleanup; zero writes; identity/alias rejection; `physical_follower_commanded=false` |
 | T16.5b | pending | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Stable USB/bus/six-servo identity; camera frames/timestamps; content-addressed trace; zero configuration/torque/register writes or motion; `live_read_only_census_observed` only |
@@ -130,6 +130,20 @@ next_step: push and confirm implementation 7d05629 plus reviewer 045, then open 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.4b remotely verified; T16.2b opened
+
+```text
+Current task: T16.2b
+State: in_progress
+Completed: T16.4b deterministic numerical hardening remotely preserved with its same-agent review
+Evidence: local HEAD, origin tracking, and git ls-remote all matched dbdd1ef019961cc6d7deba81f69a873c11efac5a; implementation 7d05629 and reviewer 045 are ancestors
+Commit: 7d05629 implementation; dbdd1ef reviewer boundary
+Remaining: mechanically generated and independently recomputed qualification results; offline T16.5a follows
+Blockers: none for offline T16.2b
+Training lock: closed
+Next step: execute Brief 037
+```
 
 ### 2026-07-11 - T16.4b numerical hardening locally reviewed
 

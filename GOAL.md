@@ -30,14 +30,15 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Preserve Brief 036 implementation `7d05629` and reviewer decision 045 on
-`origin/codex/pi05-autolearn-loop`, then close T16.4b. The deterministic
-eigensolver now has convergence/residual validation, scale-relative tolerances,
-randomized NumPy parity, rotation/scale/near-singular adversarial coverage, and
-non-finite rejection without changing the local-capability boundary. After
-remote confirmation, open the smallest precise T16.2b mechanically computed
-qualification brief. Do not start an optimizer, open hardware, use paid
-compute, or begin T16.5.
+Execute Brief 037,
+`docs/briefs/037-mechanically-computed-twin-qualification.md`, under T16.2b.
+T16.4b implementation `7d05629` and reviewer decision 045 are remotely
+preserved through `dbdd1ef`. Replace caller-declared metric status with a
+versioned evidence-input contract, deterministic report generator, and
+independent recomputation verifier; bind exact units, samples, held-out IDs,
+conditions, uncertainty, content hashes, profile/spec identities, and central
+composer claims. Do not start an optimizer, open hardware, use paid compute, or
+begin T16.5.
 
 ## Durable State
 
@@ -133,11 +134,11 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   facts only, and the checked-in fixture composition mechanically withholds all
   global decisions. The remote preserves the implementation and review through
   `e1d59ca`; `training_lock` remains closed.
-- Reviewer decision 045 accepts Brief 036 implementation `7d05629` locally:
+- Reviewer decision 045 verifies Brief 036 implementation `7d05629`:
   deterministic normalized Jacobi convergence, eigenpair residuals,
   scale-relative physical-inertia tolerances, and the adversarial NumPy corpus
-  pass. T16.4b remains in progress only until that implementation and review
-  are confirmed on the named remote.
+  pass. The implementation and review are preserved on the named remote through
+  `dbdd1ef`; T16.4b is closed on declared fixture evidence only.
 - The owner is physically present and has granted conditional read-only
   hardware/camera authority after verified T16.5a plus final operator
   confirmation for exactly one initial session-scoped `supervised_micro_motion`
