@@ -30,15 +30,14 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute Brief 037,
-`docs/briefs/037-mechanically-computed-twin-qualification.md`, under T16.2b.
-T16.4b implementation `7d05629` and reviewer decision 045 are remotely
-preserved through `dbdd1ef`. Replace caller-declared metric status with a
-versioned evidence-input contract, deterministic report generator, and
-independent recomputation verifier; bind exact units, samples, held-out IDs,
-conditions, uncertainty, content hashes, profile/spec identities, and central
-composer claims. Do not start an optimizer, open hardware, use paid compute, or
-begin T16.5.
+Preserve Brief 037 implementation `710960b` and reviewer decision 046 on
+`origin/codex/pi05-autolearn-loop`, then close T16.2b. The versioned v2 path now
+computes results from content-addressed evidence and the code-pinned spec,
+independently recomputes every serialized decision, rejects caller status and
+fixture relabeling, and routes its false fixture claims through the central
+composer. After remote confirmation, open the smallest precise T16.5a offline
+no-write transport/lifecycle brief. Do not open hardware before T16.5a itself is
+verified and remotely preserved.
 
 ## Durable State
 
@@ -139,6 +138,11 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   scale-relative physical-inertia tolerances, and the adversarial NumPy corpus
   pass. The implementation and review are preserved on the named remote through
   `dbdd1ef`; T16.4b is closed on declared fixture evidence only.
+- Reviewer decision 046 accepts Brief 037 implementation `710960b` locally:
+  caller-declared execution is closed, v2 qualification results are generated
+  and independently recomputed, freshness is bounded by source evidence, and
+  fixture numeric passes remain authority-withheld. T16.2b remains in progress
+  only until implementation and review are preserved on the named remote.
 - The owner is physically present and has granted conditional read-only
   hardware/camera authority after verified T16.5a plus final operator
   confirmation for exactly one initial session-scoped `supervised_micro_motion`

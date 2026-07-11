@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.2b mechanically computed qualification
+current_task: T16.2b computed-qualification remote closeout
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.2b-A central authority composition; T16.4/T16.4b production measured-inertial compiler and numerical hardening
-evidence: T16.4b implementation 7d05629 and reviewer 045 are remotely preserved through dbdd1ef after 17 focused and 131 broad tests plus extreme-scale stress; every global decision remains withheld
-remaining: T16.2b computed qualification; T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
+evidence: T16.2b implementation 710960b/reviewer 046 pass 16 focused and 147 broad tests; v2 spec eff5a15e... -> fixture input 5c942916... -> report 7ed02c6e... -> denial composition 41a4d731...; remote preservation pending
+remaining: remotely preserve reviewer 046 and close T16.2b; T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
 blockers: no offline blocker; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
-next_step: execute Brief 037 mechanically computed qualification without caller-declared pass status
+next_step: push and confirm implementation 710960b plus reviewer 046, then open T16.5a offline-only
 ```
 
 ## Rules
@@ -45,7 +45,7 @@ next_step: execute Brief 037 mechanically computed qualification without caller-
 | T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
 | T16.4 | verified | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Production compiler valid on declared fixture evidence; current-arm physical input remains blocked |
 | T16.4b | verified | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | `7d05629`/reviewer 045/remote `dbdd1ef`; normalized Jacobi convergence/residual checks; scale-relative adversarial coverage; 17 focused and 131 broad tests |
-| T16.2b | in_progress | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | Brief 037; units, finite values, trials, split IDs, conditions, uncertainty, content-addressed evidence, recomputed tolerances, central-composer-only authority |
+| T16.2b | in_progress | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046 locally accept v2 evidence/spec/generator/independent verifier; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld; remote preservation pending |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | pending | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Narrow read-only interface; fake/recorded traces; construct/connect/read/decode/close/retry/cleanup; zero writes; identity/alias rejection; `physical_follower_commanded=false` |
 | T16.5b | pending | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Stable USB/bus/six-servo identity; camera frames/timestamps; content-addressed trace; zero configuration/torque/register writes or motion; `live_read_only_census_observed` only |
@@ -130,6 +130,20 @@ next_step: execute Brief 037 mechanically computed qualification without caller-
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.2b mechanically computed qualification locally reviewed
+
+```text
+Current task: T16.2b
+State: in_progress
+Completed: code-pinned v2 metric rules; signed/content-addressed evidence and input; deterministic conservative aggregation; independent report recomputation; legacy caller-status closure; central-composer-only claims
+Evidence: implementation 710960b; reviewer 046; 16 focused and 147 broad tests; spec eff5a15e...; input 5c942916...; report 7ed02c6e...; denial composition 41a4d731...; all global decisions withheld
+Commit: 710960b; review/remote preservation pending
+Remaining: preserve implementation and reviewer evidence on origin, then close T16.2b and start offline T16.5a
+Blockers: no offline blocker
+Training lock: closed
+Next step: commit reviewer evidence, push only the named branch, and confirm the remote
+```
 
 ### 2026-07-11 - T16.4b remotely verified; T16.2b opened
 

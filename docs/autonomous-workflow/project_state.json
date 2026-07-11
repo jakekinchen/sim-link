@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "dbdd1ef019961cc6d7deba81f69a873c11efac5a",
-  "last_reviewed_commit": "7d0562916c836810fc15c68ac51af20089a26dd7",
+  "current_head_commit": "710960b756553a40fd5fc9c67d7bd598281722be",
+  "last_reviewed_commit": "710960b756553a40fd5fc9c67d7bd598281722be",
   "source_review": {
-    "commit": "7d0562916c836810fc15c68ac51af20089a26dd7",
-    "decision": "CLOSE_T16_4B_AFTER_REMOTE_PRESERVATION",
-    "reviewer_decision": "docs/reviewer-messages/045-inertial-eigensolver-numerical-hardening-reviewed.md"
+    "commit": "710960b756553a40fd5fc9c67d7bd598281722be",
+    "decision": "CLOSE_T16_2B_AFTER_REMOTE_PRESERVATION",
+    "reviewer_decision": "docs/reviewer-messages/046-mechanically-computed-twin-qualification-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -163,12 +163,40 @@
       "state": "in_progress",
       "depends_on": ["T16.1b", "T16.2", "T16.2b-A", "T16.4b"],
       "brief_id": "037",
-      "result": "mechanically computed qualification generator and independent verifier in progress",
+      "result": "reviewer 046 accepts the mechanically computed qualification generator and independent verifier locally; remote preservation remains",
+      "execution_note": "Implementation 710960b is accepted locally after 16 focused and 147 broad tests; T16.2b remains in progress until review evidence is remotely preserved",
+      "test_commands": [
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_computed_twin_qualification",
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_computed_twin_qualification_fixture.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_twin_contract_examples.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/compose_robot_authority.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_production_inertial_fixture.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_measured_inertial_intake.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_robotics_dependency_lock.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_structural_twin_diff.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/verify_lerobot_stack.py",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/computed_twin_qualification.py scenesmith/robot_lab/twin_contract.py scripts/robot_lab/write_computed_twin_qualification_fixture.py tests/unit/test_computed_twin_qualification.py",
+        "git diff --check"
+      ],
+      "production_artifact_ids": {
+        "computed_spec_identity_sha256": "eff5a15eb0ae211c6f09f7b87dec1018d1162652ab6d654dba388d0df5983f60",
+        "fixture_input_identity_sha256": "5c94291694571fdf82c9a3f1e1ad2079b4ed22a217fdd6be717ac157f1231f97",
+        "fixture_report_identity_sha256": "7ed02c6e30cfef6d5743661d7c09546a0e49a7e41da0612d9ddb361b50d2affa",
+        "fixture_denial_composition_identity_sha256": "41a4d731899cf7f3c9536e8197ec145345f099d2a2311e790caf6e8e491cc47e"
+      },
+      "known_limitations": [
+        "the checked-in evidence is fixture-only and numerically passes tolerances while qualification status remains withheld",
+        "the current simulation-only profile cannot request or pre-authorize a physical-qualified report",
+        "no current computed report satisfies a global composer prerequisite"
+      ],
+      "authority_granted": ["twin_qualification_computation_valid"],
       "authority_not_granted": [
         "physical_twin_qualified",
         "simulation_training_ready",
         "physical_transfer_ready",
-        "promotion_eligible"
+        "promotion_eligible",
+        "optimizer_run"
       ]
     },
     "T16.3": {"state": "verified", "authority_granted": ["structural_baseline"]},
