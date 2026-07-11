@@ -4,6 +4,7 @@ import hashlib
 import json
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 
 from pathlib import Path
 
@@ -12,6 +13,8 @@ from scenesmith.robot_lab.structural_twin_diff import (
     MUJOCO_OPTION_DEFAULTS,
     QUATERNION_SEMANTIC_CATEGORIES,
     _compare_category,
+    _compare_extracted_category,
+    _extract_model,
     build_structural_twin_diff,
     verify_structural_twin_diff,
     write_structural_twin_diff,
@@ -40,6 +43,13 @@ def _resign(payload: dict) -> None:
     payload["identity_sha256"] = hashlib.sha256(
         json.dumps(unsigned, sort_keys=True, separators=(",", ":")).encode()
     ).hexdigest()
+
+
+def _model_from_xml(xml_text: str) -> dict:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        xml_path = Path(temp_dir) / "model.xml"
+        xml_path.write_text(ET.tostring(ET.fromstring(xml_text), encoding="unicode"), encoding="utf-8")
+        return _extract_model(xml_path)
 
 
 class StructuralTwinDiffTests(unittest.TestCase):
@@ -102,6 +112,129 @@ class StructuralTwinDiffTests(unittest.TestCase):
             )
         )
         self.assertTrue(payload["summary"]["mismatched_records"] > 0)
+
+    def test_build_repo_diff_surfaces_camera_mount_inertial_as_unknown(self):
+        payload = build_structural_twin_diff(repo_root=REPO_ROOT)
+
+        unknown = payload["categories"]["inertials"]["unknown"]
+        camera_mount = next(
+            record
+            for record in unknown
+            if record["key"] == "body:base/shoulder/upper_arm/lower_arm/wrist/gripper/camera_mount"
+        )
+
+        self.assertEqual(camera_mount["side"], "menagerie")
+        self.assertEqual(camera_mount["kind"], "inferred_body_inertia")
+        self.assertEqual(camera_mount["decision"], "adapt")
+        self.assertEqual(camera_mount["evidence"]["geoms"][0]["mass"], 0.012)
+
+    def test_compare_extracted_category_keeps_declaration_only_friction_unknown(self):
+        runtime_model = _model_from_xml(
+            """
+            <mujoco>
+              <default>
+                <default class="ghost_contact">
+                  <geom friction="1 0.1 0.01" priority="1"/>
+                </default>
+                <default class="live_contact">
+                  <geom condim="3"/>
+                </default>
+              </default>
+              <worldbody>
+                <body name="base">
+                  <geom name="live" class="live_contact" type="box" size="0.1 0.1 0.1"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+        menagerie_model = _model_from_xml(
+            """
+            <mujoco>
+              <default>
+                <default class="live_contact">
+                  <geom condim="3"/>
+                </default>
+              </default>
+              <worldbody>
+                <body name="base">
+                  <geom name="live" class="live_contact" type="box" size="0.1 0.1 0.1"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+
+        category = _compare_extracted_category(
+            "friction",
+            runtime_model["categories"]["friction"],
+            menagerie_model["categories"]["friction"],
+        )
+
+        self.assertEqual(len(category["matched"]), 1)
+        self.assertFalse(category["missing"])
+        self.assertFalse(category["extra"])
+        self.assertFalse(category["mismatched"])
+        self.assertEqual(
+            category["unknown"],
+            [
+                {
+                    "decision": "retain",
+                    "evidence": {"friction": [1.0, 0.1, 0.01], "priority": 1.0},
+                    "key": "declaration:geom:ghost_contact",
+                    "kind": "declaration_only_default",
+                    "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+                    "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+                    "side": "runtime",
+                }
+            ],
+        )
+
+    def test_compare_extracted_category_surfaces_effective_friction_attachment_delta(self):
+        runtime_model = _model_from_xml(
+            """
+            <mujoco>
+              <default>
+                <default class="pad">
+                  <geom friction="1 0.1 0.01" priority="1"/>
+                </default>
+              </default>
+              <worldbody>
+                <body name="base">
+                  <geom name="finger_pad" class="pad" type="box" size="0.1 0.1 0.1"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+        menagerie_model = _model_from_xml(
+            """
+            <mujoco>
+              <default>
+                <default class="pad">
+                  <geom friction="2 0.1 0.01" priority="1"/>
+                </default>
+              </default>
+              <worldbody>
+                <body name="base">
+                  <geom name="finger_pad" class="pad" type="box" size="0.1 0.1 0.1"/>
+                </body>
+              </worldbody>
+            </mujoco>
+            """
+        )
+
+        category = _compare_extracted_category(
+            "friction",
+            runtime_model["categories"]["friction"],
+            menagerie_model["categories"]["friction"],
+        )
+
+        self.assertFalse(category["matched"])
+        self.assertFalse(category["unknown"])
+        mismatch = category["mismatched"][0]
+        self.assertEqual(mismatch["key"], "geom:base:finger_pad")
+        self.assertEqual(mismatch["numeric_deltas"], {"friction": [-1.0, 0.0, 0.0]})
 
     def test_compare_category_matches_equivalent_quaternions(self):
         category = _compare_category(

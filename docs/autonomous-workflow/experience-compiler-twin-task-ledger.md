@@ -6,11 +6,11 @@ Updated: 2026-07-10
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.3 semantic structural diff correction
-completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, and complete quaternion normalization
-evidence: commits 7bebf55, 936dd2f, and fb54e64; manager audits 005-006 keep semantic acceptance open until inferred-inertia/contact truthfulness closes
-remaining: inferred-inertia unknowns, effective friction/contact attachment semantics, deterministic unnamed-geom limits, then M16-M19 prerequisites and Gates C-D
+completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete quaternion normalization, and truthful inertial/contact evidence
+evidence: commits 7bebf55, 936dd2f, fb54e64, and pending inertial/contact truthfulness slice; manager audits 005-006 keep semantic acceptance open until deterministic unnamed-geom limits close
+remaining: deterministic unnamed-geom limits, then M16-M19 prerequisites and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute inertial/contact truthfulness from brief 016, then close the remaining deterministic identifier limits
+next_step: close the remaining deterministic unnamed-geom limits in T16.3 without reopening quaternion or inertial/contact truthfulness
 ```
 
 ## Rules
@@ -31,7 +31,7 @@ next_step: execute inertial/contact truthfulness from brief 016, then close the 
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
 | T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
 | T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
-| T16.3 | in_progress | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` mechanical baseline retained; semantic correction required by manager audit 005 |
+| T16.3 | in_progress | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` mechanical baseline retained; semantic corrections now narrow to deterministic unnamed-geom limits after inertial/contact truthfulness slice |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
 | T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
 
@@ -113,6 +113,20 @@ next_step: execute inertial/contact truthfulness from brief 016, then close the 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.3 inertial and contact truthfulness correction
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: structural diff now surfaces non-derivable mass-bearing inertials as explicit unknown evidence and compares friction/contact through real attached joints and collision geoms while keeping declaration-only defaults separate
+Evidence: configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json identity fe9177e07a597e9db57c1896f5295f84b7ae9ff313219e33afa83b41c46fd08d; 15 focused structural-diff tests; live CLI write+verify pass; 40 broad robot-lab tests
+Commit: pending
+Remaining: deterministic unnamed-geom limits
+Blockers: none for offline correction
+Training lock: closed
+Next step: finish the deterministic unnamed-geom handling needed to reopen T16.4
+```
 
 ### 2026-07-10 - T16.3 complete quaternion semantic coverage
 

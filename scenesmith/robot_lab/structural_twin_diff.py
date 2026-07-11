@@ -56,6 +56,7 @@ QUATERNION_SEMANTIC_CATEGORIES = {
     "named_sites",
 }
 QUATERNION_TOLERANCE = 1e-7
+FRICTION_RELEVANT_KEYS = {"damping", "frictionloss", "armature", "condim", "friction", "solref", "priority"}
 
 
 def build_structural_twin_diff(
@@ -102,7 +103,7 @@ def build_structural_twin_diff(
             "menagerie": _artifact_source_record(menagerie_source),
         },
         "categories": {
-            category_name: _compare_category(
+            category_name: _compare_extracted_category(
                 category_name,
                 runtime_model["categories"][category_name],
                 menagerie_model["categories"][category_name],
@@ -135,7 +136,7 @@ def verify_structural_twin_diff(
         category = payload["categories"][category_name]
         if set(category) != {"matched", "mismatched", "missing", "extra", "unknown"}:
             raise ValueError(f"Structural diff category buckets drifted: {category_name}")
-        for bucket_name in ("mismatched", "missing", "extra"):
+        for bucket_name in ("mismatched", "missing", "extra", "unknown"):
             for record in category[bucket_name]:
                 if record.get("decision") not in DIFF_DECISIONS:
                     raise ValueError(f"Structural diff record missing decision: {category_name}")
@@ -262,18 +263,32 @@ def _extract_model(xml_path: Path) -> dict[str, Any]:
     defaults = _collect_defaults(root)
     categories = {
         "inertials": _extract_inertials(root),
-        "joint_frames": _extract_joint_frames(root),
-        "joint_limits": _extract_joint_limits(root),
-        "actuators": _extract_actuators(root, defaults),
-        "arm_collisions": _extract_collision_geoms(root, defaults, gripper_only=False),
-        "gripper_collisions": _extract_collision_geoms(root, defaults, gripper_only=True),
-        "cameras": _extract_cameras(root),
-        "solver_settings": _extract_solver_settings(root),
+        "joint_frames": _category_records(_extract_joint_frames(root)),
+        "joint_limits": _category_records(_extract_joint_limits(root)),
+        "actuators": _category_records(_extract_actuators(root, defaults)),
+        "arm_collisions": _category_records(_extract_collision_geoms(root, defaults, gripper_only=False)),
+        "gripper_collisions": _category_records(_extract_collision_geoms(root, defaults, gripper_only=True)),
+        "cameras": _category_records(_extract_cameras(root)),
+        "solver_settings": _category_records(_extract_solver_settings(root)),
         "friction": _extract_friction(root, defaults),
-        "backlash": _extract_backlash(root, defaults),
-        "named_sites": _extract_named_sites(root),
+        "backlash": _category_records(_extract_backlash(root, defaults)),
+        "named_sites": _category_records(_extract_named_sites(root)),
     }
     return {"categories": categories}
+
+
+def _category_records(
+    records: dict[str, dict[str, Any]],
+    *,
+    unknown: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    return {
+        "records": records,
+        "unknown": sorted(
+            unknown or [],
+            key=lambda record: (record.get("key", ""), record.get("side", ""), record.get("kind", "")),
+        ),
+    }
 
 
 def _collect_defaults(root: ET.Element) -> dict[str, dict[str, dict[str, Any]]]:
@@ -303,14 +318,37 @@ def _walk_default(
         _walk_default(child, inherited=current, classes=classes)
 
 
-def _extract_inertials(root: ET.Element) -> dict[str, dict[str, Any]]:
+def _extract_inertials(root: ET.Element) -> dict[str, Any]:
     records: dict[str, dict[str, Any]] = {}
+    unknown: list[dict[str, Any]] = []
     for body_path, body in _iter_bodies(root):
         inertial = body.find("./inertial")
-        if inertial is None:
+        if inertial is not None:
+            records[f"body:{body_path}"] = _normalize_attrs(inertial.attrib)
             continue
-        records[f"body:{body_path}"] = _normalize_attrs(inertial.attrib)
-    return records
+        inferred_geoms = []
+        for index, geom in enumerate(body.findall("./geom")):
+            if "mass" not in geom.attrib and "density" not in geom.attrib:
+                continue
+            inferred_geoms.append(
+                {
+                    "geom": geom.attrib.get("name") or f"geom[{index}]",
+                    "mass": _normalize_attr_value(geom.attrib["mass"]) if "mass" in geom.attrib else None,
+                    "density": _normalize_attr_value(geom.attrib["density"]) if "density" in geom.attrib else None,
+                    "class": geom.attrib.get("class"),
+                    "type": geom.attrib.get("type"),
+                }
+            )
+        if inferred_geoms:
+            unknown.append(
+                {
+                    "key": f"body:{body_path}",
+                    "kind": "inferred_body_inertia",
+                    "evidence": {"geoms": inferred_geoms},
+                    "reason": "This body carries mass through attached geoms but no explicit inertial, so a truthful body inertia cannot be derived from the available XML alone.",
+                }
+            )
+    return _category_records(records, unknown=unknown)
 
 
 def _extract_joint_frames(root: ET.Element) -> dict[str, dict[str, Any]]:
@@ -405,22 +443,54 @@ def _extract_solver_settings(root: ET.Element) -> dict[str, dict[str, Any]]:
 def _extract_friction(
     root: ET.Element,
     defaults: dict[str, dict[str, dict[str, Any]]],
-) -> dict[str, dict[str, Any]]:
+) -> dict[str, Any]:
     records: dict[str, dict[str, Any]] = {}
-    for class_name in ("so101", "so101_new_calib", "sts3215", "collision", "collision_gripper", "collision_gripper_mesh"):
-        class_attrs = defaults.get(class_name, {})
-        for tag_name in ("joint", "geom"):
-            attrs = class_attrs.get(tag_name)
-            if not attrs:
+    unknown: list[dict[str, Any]] = []
+    attached_joint_classes: set[str] = set()
+    attached_geom_classes: set[str] = set()
+
+    for body_path, body in _iter_bodies(root):
+        for joint in body.findall("./joint"):
+            class_name = joint.attrib.get("class")
+            if class_name:
+                attached_joint_classes.add(class_name)
+            effective = _resolved_default_attrs(class_name, "joint", defaults)
+            effective.update(_normalize_attrs(joint.attrib))
+            filtered = {key: value for key, value in effective.items() if key in FRICTION_RELEVANT_KEYS}
+            if filtered:
+                joint_name = joint.attrib.get("name") or class_name or "unnamed_joint"
+                records[f"joint:{body_path}:{joint_name}"] = filtered
+        for index, geom in enumerate(body.findall("./geom")):
+            if not _is_collision_geom(geom):
                 continue
+            class_name = geom.attrib.get("class")
+            if class_name:
+                attached_geom_classes.add(class_name)
+            effective = _resolved_default_attrs(class_name, "geom", defaults)
+            effective.update(_normalize_attrs(geom.attrib))
+            filtered = {key: value for key, value in effective.items() if key in FRICTION_RELEVANT_KEYS}
+            if filtered:
+                geom_name = geom.attrib.get("name") or f"{body.attrib.get('name', 'body')}[{index}]"
+                records[f"geom:{body_path}:{geom_name}"] = filtered
+
+    for class_name, class_attrs in sorted(defaults.items()):
+        for tag_name, attached_classes in (("joint", attached_joint_classes), ("geom", attached_geom_classes)):
             filtered = {
                 key: value
-                for key, value in attrs.items()
-                if key in {"damping", "frictionloss", "armature", "condim", "friction", "solref", "priority"}
+                for key, value in class_attrs.get(tag_name, {}).items()
+                if key in FRICTION_RELEVANT_KEYS
             }
-            if filtered:
-                records[f"{tag_name}:{class_name}"] = filtered
-    return records
+            if not filtered or class_name in attached_classes:
+                continue
+            unknown.append(
+                {
+                    "key": f"declaration:{tag_name}:{class_name}",
+                    "kind": "declaration_only_default",
+                    "evidence": filtered,
+                    "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+                }
+            )
+    return _category_records(records, unknown=unknown)
 
 
 def _extract_backlash(
@@ -526,6 +596,39 @@ def _compare_category(
     }
 
 
+def _compare_extracted_category(
+    category_name: str,
+    runtime_category: dict[str, Any],
+    menagerie_category: dict[str, Any],
+) -> dict[str, list[dict[str, Any]]]:
+    compared = _compare_category(
+        category_name,
+        runtime_category["records"],
+        menagerie_category["records"],
+    )
+    compared["unknown"] = sorted(
+        [
+            _annotate_unknown_record(category_name, record, side="runtime")
+            for record in runtime_category.get("unknown", [])
+        ]
+        + [
+            _annotate_unknown_record(category_name, record, side="menagerie")
+            for record in menagerie_category.get("unknown", [])
+        ],
+        key=lambda record: (record["key"], record["side"], record.get("kind", "")),
+    )
+    return compared
+
+
+def _annotate_unknown_record(category_name: str, record: dict[str, Any], *, side: str) -> dict[str, Any]:
+    annotated = dict(record)
+    annotated["side"] = side
+    decision = _unknown_decision(category_name, side=side)
+    annotated["decision"] = annotated.get("decision", decision["decision"])
+    annotated["rationale"] = annotated.get("rationale", decision["rationale"])
+    return annotated
+
+
 def _reconciliation_decision(
     category_name: str,
     key: str,
@@ -557,6 +660,25 @@ def _reconciliation_decision(
     return {
         "decision": "retain",
         "rationale": "This slice records the active runtime as the declared baseline and defers any structural replacement.",
+    }
+
+
+def _unknown_decision(category_name: str, *, side: str) -> dict[str, str]:
+    if category_name == "inertials":
+        decision = "adapt" if side == "menagerie" else "retain"
+        return {
+            "decision": decision,
+            "rationale": "This body needs a measured or compiled inertia source before the structural diff can claim a truthful body-level inertial comparison.",
+        }
+    if category_name == "friction":
+        decision = "adapt" if side == "menagerie" else "retain"
+        return {
+            "decision": decision,
+            "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+        }
+    return {
+        "decision": "retain",
+        "rationale": "This evidence remains explicit without claiming a resolved structural comparison.",
     }
 
 

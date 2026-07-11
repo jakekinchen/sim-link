@@ -939,29 +939,50 @@
       "unknown": []
     },
     "friction": {
-      "extra": [
-        {
-          "decision": "retain",
-          "key": "joint:so101_new_calib",
-          "rationale": "The active runtime remains the baseline until a later qualified adaptation supersedes it.",
-          "runtime": {
-            "armature": 0.005,
-            "damping": 1.0,
-            "frictionloss": 0.1
-          }
-        }
-      ],
+      "extra": [],
       "matched": [
         {
-          "key": "joint:collision",
+          "key": "joint:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:gripper",
           "value": {
-            "armature": 0.005,
-            "damping": 1.0,
-            "frictionloss": 0.1
+            "armature": 0.028,
+            "damping": 0.6,
+            "frictionloss": 0.052
           }
         },
         {
-          "key": "joint:sts3215",
+          "key": "joint:base/shoulder/upper_arm/lower_arm/wrist/gripper:wrist_roll",
+          "value": {
+            "armature": 0.028,
+            "damping": 0.6,
+            "frictionloss": 0.052
+          }
+        },
+        {
+          "key": "joint:base/shoulder/upper_arm/lower_arm/wrist:wrist_flex",
+          "value": {
+            "armature": 0.028,
+            "damping": 0.6,
+            "frictionloss": 0.052
+          }
+        },
+        {
+          "key": "joint:base/shoulder/upper_arm/lower_arm:elbow_flex",
+          "value": {
+            "armature": 0.028,
+            "damping": 0.6,
+            "frictionloss": 0.052
+          }
+        },
+        {
+          "key": "joint:base/shoulder/upper_arm:shoulder_lift",
+          "value": {
+            "armature": 0.028,
+            "damping": 0.6,
+            "frictionloss": 0.052
+          }
+        },
+        {
+          "key": "joint:base/shoulder:shoulder_pan",
           "value": {
             "armature": 0.028,
             "damping": 0.6,
@@ -973,7 +994,367 @@
       "missing": [
         {
           "decision": "adapt",
-          "key": "geom:collision",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/camera_mount:camera_box1",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/camera_mount:camera_box2",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_box1",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_box2",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_box3",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_so101_v1[1]",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_so101_v1[2]",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_sph_tip1",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_sph_tip2",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper/moving_jaw_so101_v1:moving_jaw_sph_tip3",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_box1",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_box2",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_box3",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_box4",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_box5",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_box6",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_box7",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_sph_tip1",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_sph_tip2",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:fixed_jaw_sph_tip3",
+          "menagerie": {
+            "condim": 6.0,
+            "friction": [
+              1.0,
+              0.005,
+              0.0005
+            ],
+            "priority": 1.0,
+            "solref": [
+              0.01,
+              1.0
+            ]
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:gripper[2]",
           "menagerie": {
             "condim": 3.0
           },
@@ -981,7 +1362,7 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:collision_gripper",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist/gripper:gripper[8]",
           "menagerie": {
             "condim": 6.0,
             "friction": [
@@ -999,54 +1380,201 @@
         },
         {
           "decision": "adapt",
-          "key": "geom:collision_gripper_mesh",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:wrist[1]",
           "menagerie": {
-            "condim": 6.0,
-            "friction": [
-              1.0,
-              0.005,
-              0.0005
-            ],
-            "priority": 1.0,
-            "solref": [
-              0.01,
-              1.0
-            ]
+            "condim": 3.0
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
           "decision": "adapt",
-          "key": "joint:collision_gripper",
+          "key": "geom:base/shoulder/upper_arm/lower_arm/wrist:wrist[3]",
           "menagerie": {
-            "armature": 0.005,
-            "damping": 1.0,
-            "frictionloss": 0.1
+            "condim": 3.0
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
           "decision": "adapt",
-          "key": "joint:collision_gripper_mesh",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:lower_arm[1]",
           "menagerie": {
-            "armature": 0.005,
-            "damping": 1.0,
-            "frictionloss": 0.1
+            "condim": 3.0
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         },
         {
           "decision": "adapt",
-          "key": "joint:so101",
+          "key": "geom:base/shoulder/upper_arm/lower_arm:lower_arm[3]",
           "menagerie": {
-            "armature": 0.005,
-            "damping": 1.0,
-            "frictionloss": 0.1
+            "condim": 3.0
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm:upper_arm[1]",
+          "menagerie": {
+            "condim": 3.0
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder/upper_arm:upper_arm[3]",
+          "menagerie": {
+            "condim": 3.0
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder:shoulder[1]",
+          "menagerie": {
+            "condim": 3.0
+          },
+          "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
+        },
+        {
+          "decision": "adapt",
+          "key": "geom:base/shoulder:shoulder[3]",
+          "menagerie": {
+            "condim": 3.0
           },
           "rationale": "Menagerie encodes additional structure that should be reviewed explicitly rather than switched in silently."
         }
       ],
-      "unknown": []
+      "unknown": [
+        {
+          "decision": "adapt",
+          "evidence": {
+            "armature": 0.01,
+            "damping": 0.01,
+            "frictionloss": 0.0
+          },
+          "key": "declaration:joint:backlash",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "menagerie"
+        },
+        {
+          "decision": "retain",
+          "evidence": {
+            "armature": 0.01,
+            "damping": 0.01,
+            "frictionloss": 0.0
+          },
+          "key": "declaration:joint:backlash",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "runtime"
+        },
+        {
+          "decision": "adapt",
+          "evidence": {
+            "armature": 0.005,
+            "damping": 1.0,
+            "frictionloss": 0.1
+          },
+          "key": "declaration:joint:collision",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "menagerie"
+        },
+        {
+          "decision": "retain",
+          "evidence": {
+            "armature": 0.005,
+            "damping": 1.0,
+            "frictionloss": 0.1
+          },
+          "key": "declaration:joint:collision",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "runtime"
+        },
+        {
+          "decision": "adapt",
+          "evidence": {
+            "armature": 0.005,
+            "damping": 1.0,
+            "frictionloss": 0.1
+          },
+          "key": "declaration:joint:collision_gripper",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "menagerie"
+        },
+        {
+          "decision": "adapt",
+          "evidence": {
+            "armature": 0.005,
+            "damping": 1.0,
+            "frictionloss": 0.1
+          },
+          "key": "declaration:joint:collision_gripper_mesh",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "menagerie"
+        },
+        {
+          "decision": "adapt",
+          "evidence": {
+            "armature": 0.005,
+            "damping": 1.0,
+            "frictionloss": 0.1
+          },
+          "key": "declaration:joint:so101",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "menagerie"
+        },
+        {
+          "decision": "retain",
+          "evidence": {
+            "armature": 0.005,
+            "damping": 1.0,
+            "frictionloss": 0.1
+          },
+          "key": "declaration:joint:so101_new_calib",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "runtime"
+        },
+        {
+          "decision": "adapt",
+          "evidence": {
+            "armature": 0.005,
+            "damping": 1.0,
+            "frictionloss": 0.1
+          },
+          "key": "declaration:joint:visual",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "menagerie"
+        },
+        {
+          "decision": "retain",
+          "evidence": {
+            "armature": 0.005,
+            "damping": 1.0,
+            "frictionloss": 0.1
+          },
+          "key": "declaration:joint:visual",
+          "kind": "declaration_only_default",
+          "rationale": "Declaration-only contact defaults stay explicit, but they are not compared as effective attachment behavior until they are actually attached in the source model.",
+          "reason": "This default class carries contact-related settings but is not attached to a compared joint or geom, so it remains declaration-only evidence rather than effective runtime behavior.",
+          "side": "runtime"
+        }
+      ]
     },
     "gripper_collisions": {
       "extra": [
@@ -2249,7 +2777,27 @@
         }
       ],
       "missing": [],
-      "unknown": []
+      "unknown": [
+        {
+          "decision": "adapt",
+          "evidence": {
+            "geoms": [
+              {
+                "class": "visual",
+                "density": null,
+                "geom": "geom[0]",
+                "mass": 0.012,
+                "type": "mesh"
+              }
+            ]
+          },
+          "key": "body:base/shoulder/upper_arm/lower_arm/wrist/gripper/camera_mount",
+          "kind": "inferred_body_inertia",
+          "rationale": "This body needs a measured or compiled inertia source before the structural diff can claim a truthful body-level inertial comparison.",
+          "reason": "This body carries mass through attached geoms but no explicit inertial, so a truthful body inertia cannot be derived from the available XML alone.",
+          "side": "menagerie"
+        }
+      ]
     },
     "joint_frames": {
       "extra": [],
@@ -2765,7 +3313,7 @@
     "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
     "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json"
   },
-  "identity_sha256": "a90ffc8b347ae8b6d4a7a4bde0d60c3be64af7a41fb77b543e2c6c9beb6b9331",
+  "identity_sha256": "fe9177e07a597e9db57c1896f5295f84b7ae9ff313219e33afa83b41c46fd08d",
   "schema_version": "scenesmith.structural_twin_diff.v1",
   "sources": {
     "menagerie": {
@@ -2810,11 +3358,11 @@
         "unknown": 0
       },
       "friction": {
-        "extra": 1,
-        "matched": 2,
+        "extra": 0,
+        "matched": 6,
         "mismatched": 0,
-        "missing": 6,
-        "unknown": 0
+        "missing": 30,
+        "unknown": 10
       },
       "gripper_collisions": {
         "extra": 2,
@@ -2828,7 +3376,7 @@
         "matched": 2,
         "mismatched": 5,
         "missing": 0,
-        "unknown": 0
+        "unknown": 1
       },
       "joint_frames": {
         "extra": 0,
@@ -2859,11 +3407,11 @@
         "unknown": 0
       }
     },
-    "extra_records": 5,
-    "matched_records": 12,
+    "extra_records": 4,
+    "matched_records": 16,
     "mismatched_records": 29,
-    "missing_records": 28,
-    "unknown_records": 0
+    "missing_records": 52,
+    "unknown_records": 11
   },
   "twin_profile_ref": {
     "file_sha256": "cc122e1ad9a85a6f9bab0895753c35ec28c5ea0aeb21def93169ba4a4f77226f",
