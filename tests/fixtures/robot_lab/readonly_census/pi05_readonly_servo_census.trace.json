@@ -1,5 +1,5 @@
 {
-  "contract_identity_sha256": "0e2b1522bbf7ae05e57c527b4b5b1b8fa87d40983d03c6b12a5f5e99fd486c4b",
+  "contract_identity_sha256": "73652ffa885f159da0412e4e151203805b5d9ce12138e137d4fd951f82276978",
   "events": [
     {
       "error_code": null,
@@ -512,7 +512,7 @@
     }
   ],
   "hardware_opened": false,
-  "identity_sha256": "67c38a34a47a3cfd459004463371251d77718c54fa2be30e2a7ba73b46366422",
+  "identity_sha256": "17921a5f7a406aba6b05efca56697a692969fc16f268c863260f2c6274b542d1",
   "observed_device_identity": {
     "bus": {
       "baudrate": 1000000,

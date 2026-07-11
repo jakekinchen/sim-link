@@ -53,8 +53,10 @@ EXPECTED_RUNTIME_SEMANTICS = {
     "sts3215_resolution": 4096,
     "connect_handshake_default": True,
     "connect_handshake_guarded_by_flag": True,
+    "connect_open_port_outside_handshake_guard": True,
     "disconnect_disable_torque_default": True,
     "disconnect_torque_write_guarded_by_flag": True,
+    "disconnect_close_port_outside_torque_guard": True,
     "read_register_widths": EXPECTED_READ_REGISTER_WIDTHS,
     "follower_joint_map": [
         {"joint_name": "shoulder_pan", "servo_id": 1, "model": "sts3215"},
@@ -189,6 +191,11 @@ def _extract_runtime_semantics(
             guard_name="handshake",
             call_name="_handshake",
         ),
+        "connect_open_port_outside_handshake_guard": _contains_call_outside_guard(
+            internal_connect,
+            guard_name="handshake",
+            call_name="openPort",
+        ),
         "disconnect_disable_torque_default": _function_parameter_default(
             disconnect,
             "disable_torque",
@@ -198,6 +205,11 @@ def _extract_runtime_semantics(
             disconnect,
             guard_name="disable_torque",
             call_name="disable_torque",
+        ),
+        "disconnect_close_port_outside_torque_guard": _contains_call_outside_guard(
+            disconnect,
+            guard_name="disable_torque",
+            call_name="closePort",
         ),
         "read_register_widths": read_widths,
         "follower_joint_map": _extract_follower_joint_map(follower_tree),
@@ -325,6 +337,34 @@ def _guard_contains_call(
                 ):
                     return True
     return False
+
+
+def _contains_call_outside_guard(
+    function: ast.FunctionDef,
+    *,
+    guard_name: str,
+    call_name: str,
+) -> bool:
+    def visit(node: ast.AST, *, guarded: bool) -> bool:
+        if isinstance(node, ast.Call):
+            function_node = node.func
+            observed_name = (
+                function_node.attr
+                if isinstance(function_node, ast.Attribute)
+                else function_node.id if isinstance(function_node, ast.Name) else None
+            )
+            if observed_name == call_name and not guarded:
+                return True
+        if isinstance(node, ast.If) and isinstance(node.test, ast.Name):
+            if node.test.id == guard_name:
+                return any(visit(child, guarded=True) for child in node.body) or any(
+                    visit(child, guarded=guarded) for child in node.orelse
+                )
+        return any(
+            visit(child, guarded=guarded) for child in ast.iter_child_nodes(node)
+        )
+
+    return visit(function, guarded=False)
 
 
 def _extract_follower_joint_map(tree: ast.Module) -> list[dict[str, Any]]:

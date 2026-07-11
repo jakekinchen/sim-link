@@ -1,9 +1,9 @@
 {
   "conformance_state": "census_trace_conformant",
-  "contract_identity_sha256": "0e2b1522bbf7ae05e57c527b4b5b1b8fa87d40983d03c6b12a5f5e99fd486c4b",
+  "contract_identity_sha256": "73652ffa885f159da0412e4e151203805b5d9ce12138e137d4fd951f82276978",
   "evidence_mode": "recorded_trace_replay",
   "hardware_opened": false,
-  "identity_sha256": "6fe8c0ec7b5476138f2406e8a4684bcf091926353c684dc1a611c06545d0247c",
+  "identity_sha256": "4a83298bb0c6cb4d4416e99e7976598de3455644a6841d1550f0362109804986",
   "lifecycle_state": "closed",
   "operation_counts": {
     "close_attempts": 1,
@@ -170,5 +170,5 @@
       "vendor_id_hex": "ffff"
     }
   },
-  "trace_identity_sha256": "67c38a34a47a3cfd459004463371251d77718c54fa2be30e2a7ba73b46366422"
+  "trace_identity_sha256": "17921a5f7a406aba6b05efca56697a692969fc16f268c863260f2c6274b542d1"
 }

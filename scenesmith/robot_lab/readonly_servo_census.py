@@ -15,6 +15,7 @@ from scenesmith.robot_lab.artifact_contract import (
     verify_signed_payload,
 )
 from scenesmith.robot_lab.census_runtime_binding import (
+    EXPECTED_READ_REGISTER_WIDTHS,
     EXPECTED_RUNTIME_SEMANTICS,
     RUNTIME_SOURCE_BINDINGS as _RUNTIME_SOURCE_BINDINGS,
     verify_census_runtime_source_bindings,
@@ -35,28 +36,22 @@ DEFAULT_CENSUS_RESULT_PATH = Path(
     "tests/fixtures/robot_lab/readonly_census/pi05_readonly_servo_census.result.json"
 )
 
-_JOINTS = (
-    (1, "shoulder_pan"),
-    (2, "shoulder_lift"),
-    (3, "elbow_flex"),
-    (4, "wrist_flex"),
-    (5, "wrist_roll"),
-    (6, "gripper"),
-)
-_MODEL_NAME = "sts3215"
-_MODEL_NUMBER = 777
-_PROTOCOL_VERSION = 0
-_BAUDRATE_CODE_TO_VALUE = {0: 1_000_000}
-_READ_PLAN = (
-    ("Model_Number", 2),
-    ("Firmware_Major_Version", 1),
-    ("Firmware_Minor_Version", 1),
-    ("ID", 1),
-    ("Baud_Rate", 1),
-    ("Present_Position", 2),
-    ("Present_Voltage", 1),
-    ("Present_Temperature", 1),
-)
+_FOLLOWER_JOINT_MAP = tuple(EXPECTED_RUNTIME_SEMANTICS["follower_joint_map"])
+_JOINTS = tuple((item["servo_id"], item["joint_name"]) for item in _FOLLOWER_JOINT_MAP)
+_MODEL_NAMES = tuple(dict.fromkeys(item["model"] for item in _FOLLOWER_JOINT_MAP))
+if _MODEL_NAMES != ("sts3215",):
+    raise RuntimeError(
+        "Pinned census runtime semantics contain an unexpected model set"
+    )
+_MODEL_NAME = _MODEL_NAMES[0]
+_MODEL_NUMBER = EXPECTED_RUNTIME_SEMANTICS["sts3215_model_number"]
+_MODEL_RESOLUTION = EXPECTED_RUNTIME_SEMANTICS["sts3215_resolution"]
+_PROTOCOL_VERSION = EXPECTED_RUNTIME_SEMANTICS["sts3215_protocol_version"]
+_DEFAULT_BAUDRATE = EXPECTED_RUNTIME_SEMANTICS["default_baudrate"]
+_BAUDRATE_CODE_TO_VALUE = {
+    EXPECTED_RUNTIME_SEMANTICS["sts3215_baud_code"]: _DEFAULT_BAUDRATE
+}
+_READ_PLAN = tuple(EXPECTED_READ_REGISTER_WIDTHS.items())
 _READ_REGISTER_NAMES = {item[0] for item in _READ_PLAN}
 _FORBIDDEN_OPERATIONS = (
     "calibrate",
@@ -327,7 +322,7 @@ def build_census_contract() -> dict[str, Any]:
             "bus": {
                 "protocol_family": "feetech",
                 "protocol_version": _PROTOCOL_VERSION,
-                "baudrate": 1_000_000,
+                "baudrate": _DEFAULT_BAUDRATE,
             },
         },
         "expected_servos": [
@@ -911,7 +906,7 @@ def _validate_raw_value(register: str, value: Any, *, width_bytes: int) -> int:
         raise ValueError(f"Read-only census servo ID register is invalid: {value}")
     if register == "Baud_Rate" and value not in _BAUDRATE_CODE_TO_VALUE:
         raise ValueError(f"Read-only census baud code is unsupported: {value}")
-    if register == "Present_Position" and value > 4095:
+    if register == "Present_Position" and value >= _MODEL_RESOLUTION:
         raise ValueError(
             f"Read-only census position is outside STS3215 resolution: {value}"
         )

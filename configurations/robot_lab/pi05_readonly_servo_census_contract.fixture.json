@@ -54,7 +54,7 @@
     "write_calibration",
     "write_register"
   ],
-  "identity_sha256": "0e2b1522bbf7ae05e57c527b4b5b1b8fa87d40983d03c6b12a5f5e99fd486c4b",
+  "identity_sha256": "73652ffa885f159da0412e4e151203805b5d9ce12138e137d4fd951f82276978",
   "proof_label": "census_trace_conformant",
   "qualification_scope": "fixture_evidence",
   "read_plan": [
@@ -109,9 +109,11 @@
   "runtime_semantics": {
     "connect_handshake_default": true,
     "connect_handshake_guarded_by_flag": true,
+    "connect_open_port_outside_handshake_guard": true,
     "constructor_protocol_default": 0,
     "default_baudrate": 1000000,
     "default_protocol_version": 0,
+    "disconnect_close_port_outside_torque_guard": true,
     "disconnect_disable_torque_default": true,
     "disconnect_torque_write_guarded_by_flag": true,
     "follower_joint_map": [
