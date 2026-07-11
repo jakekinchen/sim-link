@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4 measured inertial intake
-completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete quaternion normalization, truthful inertial/contact evidence, and order-invariant unnamed-geom identity verified
-evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and 07a652e; artifact identity 5b070b1b1f98aad3eaf00d4bd9d153ab78f53ec4046b0948ef2cf5ae93387683 records shared unnamed-geom identity strategy and honest non-pairing
-remaining: T16.4 measured inertial intake, T16.5 offline qualification harness, then M17-M19 prerequisites and Gates C-D
+current_task: T16.3 unnamed-geom identity v2 correction
+completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, and truthful inertial/contact evidence
+evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and 07a652e; manager intervention 008 supplies direct counterexamples to the v1 identity claim despite 21 focused and 46 broad passing tests
+remaining: canonical quaternion identity hashing and deterministic same-stem duplicate ordering, then T16.4-T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 021 for measured-part mass intake and assembly inertia/COM compilation
+next_step: execute brief 022 and obtain a new independent T16.3 reviewer decision
 ```
 
 ## Rules
@@ -31,7 +31,7 @@ next_step: execute brief 021 for measured-part mass intake and assembly inertia/
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
 | T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
 | T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
-| T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through commit `07a652e` and artifact `5b070b1b1f98aad3eaf00d4bd9d153ab78f53ec4046b0948ef2cf5ae93387683`; reviewer closeout recorded |
+| T16.3 | in_progress | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `07a652e`; reviewer decision 032 superseded by manager intervention 008 after direct v1 identity counterexamples |
 | T16.4 | pending | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Parallel-axis golden tests; ambiguous/missing weights fail closed |
 | T16.5 | pending | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
 
@@ -114,7 +114,21 @@ next_step: execute brief 021 for measured-part mass intake and assembly inertia/
 
 ## Milestone Log
 
-### 2026-07-10 - T16.3 reviewer closeout
+### 2026-07-10 - T16.3 manager reopen after adversarial identity checks
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: independent manager audit reproduced the accepted v1 implementation and tested semantic invariants outside the executor suite
+Evidence: scaled-equivalent quaternion spellings produced different unnamed keys; reversing same-stem duplicates with friction 1 versus 2 changed both collision and friction records; manager intervention 008
+Commit: pending
+Remaining: canonical quaternion identity hashing, deterministic full-attribute duplicate ordering, v2 strategy declaration, artifact regeneration, and fresh review
+Blockers: none for offline correction
+Training lock: closed
+Next step: execute brief 022; do not execute deferred brief 021
+```
+
+### 2026-07-10 - T16.3 reviewer closeout (superseded by manager intervention 008)
 
 ```text
 Current task: T16.4

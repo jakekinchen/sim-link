@@ -21,10 +21,10 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Start T16.4 by compiling measured-part mass intake and assembly inertia/COM
-evidence against the verified simulation-only twin baseline. Fail closed on
-missing, duplicated, ambiguous, or inconsistent mass evidence. Do not open
-hardware, qualification, or training work.
+Reopen T16.3 and finish semantic unnamed-geom identity. Canonicalize equivalent
+quaternion spellings before identity hashing and make duplicate occurrence
+assignment invariant to sibling order. Do not open measured-mass, hardware,
+qualification, or training work until the strengthened regressions pass.
 
 ## Durable State
 
@@ -79,9 +79,11 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
 - The corrected 250-step rung is retained as historical evidence of a narrow
   reach improvement; rungs 500/1,000 are suspended behind M16-M19.
 - The current T16.3 artifact proves deterministic source/hash plumbing,
-  TwinProfile binding, effective solver defaults, full quaternion semantics,
-  explicit inertial unknown evidence, effective friction/contact attachment
-  truthfulness, and order-invariant unnamed-geom identity.
-- T16.4 is the next offline prerequisite: compile measured-part mass intake and
-  assembly inertia/COM evidence from repo-state inputs before any qualification
-  or training work resumes.
+  TwinProfile binding, effective solver defaults, full comparison-time
+  quaternion semantics, explicit inertial unknown evidence, and effective
+  friction/contact attachment truthfulness.
+- Manager counterexamples show the v1 unnamed-geom identity is not yet fully
+  order-invariant: scaled-equivalent quaternion spellings hash differently and
+  same-stem duplicates with different contact attributes retain sibling order.
+- T16.4 remains closed until the v2 identity strategy and direct regressions are
+  independently verified.
