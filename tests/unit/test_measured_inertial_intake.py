@@ -90,6 +90,41 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "must not carry measurements"):
             verify_measured_mass_intake(intake, repo_root=REPO_ROOT)
 
+    def test_verify_rejects_resigned_cad_prior_mass_tampering(self):
+        intake = build_measured_mass_intake(repo_root=REPO_ROOT)
+        intake["cad_priors"][0]["source_mass_kg"] = 99.0
+        intake["identity_sha256"] = _resign(intake)
+
+        with self.assertRaisesRegex(ValueError, "drifted from deterministic repo rebuild"):
+            verify_measured_mass_intake(intake, repo_root=REPO_ROOT)
+
+    def test_verify_rejects_duplicate_component_ids(self):
+        intake = build_measured_mass_intake(repo_root=REPO_ROOT)
+        duplicate = json.loads(json.dumps(intake["components"][0]))
+        intake["components"].append(duplicate)
+        intake["identity_sha256"] = _resign(intake)
+
+        with self.assertRaisesRegex(ValueError, "Duplicate measured mass intake component_id"):
+            verify_measured_mass_intake(intake, repo_root=REPO_ROOT)
+
+    def test_write_assembly_inertials_refuses_forged_intake_without_output(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            intake_path = Path(tmpdir) / "intake.json"
+            output_path = Path(tmpdir) / "output.json"
+            payload = write_measured_mass_intake(repo_root=REPO_ROOT, output_path=intake_path)
+            payload["cad_priors"][0]["source_mass_kg"] = 99.0
+            payload["identity_sha256"] = _resign(payload)
+            intake_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "drifted from deterministic repo rebuild"):
+                write_assembly_inertials(
+                    repo_root=REPO_ROOT,
+                    intake_path=intake_path,
+                    output_path=output_path,
+                )
+
+            self.assertFalse(output_path.exists())
+
     def test_require_ready_rejects_blocked_output(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             intake_path = Path(tmpdir) / "intake.json"

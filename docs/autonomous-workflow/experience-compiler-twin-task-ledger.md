@@ -8,9 +8,9 @@ current_milestone: M16 Twin and dependency foundation
 current_task: T16.4 embedded-prior integrity correction plus synthetic measured-inertial ready proof
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
 evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: reject re-signed embedded-prior tampering, then implement the synthetic ready compiler and hard-fail coverage/inertia validation, T16.5, M17-M19 prerequisites, and Gates C-D
+remaining: implement the synthetic ready compiler and hard-fail coverage/inertia validation, then T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 026; a forged embedded 99 kg CAD prior must fail before any ready-path proof can close T16.4
+next_step: execute brief 026 Part B; keep the default real arm blocked and prove readiness only with a synthetic_test_only fixture
 ```
 
 ## Rules
@@ -126,6 +126,20 @@ Remaining: deterministic embedded-prior reconstruction/evidence validation and d
 Blockers: none for offline correction; real measurements remain absent by design
 Training lock: closed
 Next step: execute brief 026; brief 025 is superseded
+```
+
+### 2026-07-10 - T16.4 embedded prior integrity correction
+
+```text
+Current task: T16.4
+State: in_progress
+Completed: awaiting-measurements verification now rejects re-signed nested CAD-prior tampering and duplicate component IDs by requiring deterministic equality with the repo rebuild before blocked assembly compilation can read the intake
+Evidence: 10 focused measured-inertial tests including forged 99 kg CAD prior, duplicate component ID, and no-output-written regression; py_compile on module/tests/CLI; live CLI --write-intake and --verify preserved identities 35571daca435bb191313c9b22594c9fecaaef7abc68c8e7e2faa362692653b88 / 5816faa0d05dd309a2768551cd50b845932ff5abbc355c11f146371d868580c4; 55-test broad robot-lab gate passed
+Commit: pending
+Remaining: synthetic_test_only ready compiler, exact-cover selection, overlap/reused-evidence rejection, inertia math golden fixture, and order-invariance checks
+Blockers: none for offline implementation; real current-arm measurements remain absent by design
+Training lock: closed
+Next step: implement Part B of brief 026 without changing the default blocked real-artifact paths
 ```
 
 ### 2026-07-10 - T16.4 manager truth correction before implementation

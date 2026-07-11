@@ -258,6 +258,8 @@ def verify_measured_mass_intake(
         raise ValueError("Measured mass intake unresolved inventory is required")
 
     component_ids = {component["component_id"] for component in components}
+    if len(component_ids) != len(components):
+        raise ValueError("Duplicate measured mass intake component_id")
     coverage_atom_ids: set[str] = set()
     for atom in coverage_atoms:
         atom_id = str(atom.get("atom_id") or "")
@@ -308,6 +310,15 @@ def verify_measured_mass_intake(
         raise ValueError("Measured mass intake missing inventory categories are required")
     if {entry["category_id"] for entry in unresolved_inventory} != set(missing_inventory_categories):
         raise ValueError("Measured mass intake unresolved inventory categories drifted")
+
+    expected = build_measured_mass_intake(
+        repo_root=repo_root,
+        dependency_lock_path=dependency_lock_path,
+        twin_profile_path=twin_profile_path,
+        structural_diff_path=structural_diff_path,
+    )
+    if payload != expected:
+        raise ValueError("Measured mass intake drifted from deterministic repo rebuild")
 
 
 def verify_assembly_inertials(
