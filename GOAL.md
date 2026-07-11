@@ -30,14 +30,15 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Resume Brief 033,
-`docs/briefs/033-production-measured-inertial-authority.md`, as the remaining
-T16.4b production compiler work. T16.2b-A is verified at `c0b9629` with
-reviewer decision 043 and remote preservation through `e1d59ca`. Preserve the
-assembly-inertials v2 local-capability boundary while adding the hierarchical
-BOM, explicit units/calibration, supported source modes, precision hardening,
-and truthful production-schema fixture. Do not start an optimizer, open
-hardware, use paid compute, or begin T16.5.
+Execute Brief 036,
+`docs/briefs/036-inertial-eigensolver-numerical-hardening.md`, as the final
+T16.4b gate. T16.2b-A is verified at `c0b9629`; the production hierarchical
+compiler is verified at `a93ff05` with reviewer 044 and remote preservation
+through `bc5d4fe`. Add convergence/residual validation, scale-relative
+tolerances, randomized NumPy parity, rotation/scale/near-singular adversarial
+coverage, and non-finite rejection without changing the local-capability
+boundary. Do not start an optimizer, open hardware, use paid compute, or begin
+T16.5.
 
 ## Durable State
 

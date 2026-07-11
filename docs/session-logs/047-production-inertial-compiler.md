@@ -59,3 +59,15 @@ all custom production inputs from overwriting checked-in current-arm artifacts.
 Reviewer decision 044 accepts the sub-slice locally. T16.4b remains
 `in_progress`: remote preservation is pending, followed by the separate
 numerical-hardening sub-slice.
+
+## Remote closeout
+
+- Pushed only to `origin/codex/pi05-autolearn-loop`.
+- Fresh fetch, remote-tracking ref, and `git ls-remote` agreed at
+  `bc5d4fe331db1c4dcc22326b0c012951212b148b`.
+- Ancestry checks confirmed implementation
+  `a93ff057f8cf4f966d4edc8dc0098c3526a14def` and reviewer evidence
+  `bc5d4fe331db1c4dcc22326b0c012951212b148b` on the named remote.
+- The production-compiler sub-slice is verified and grants only
+  `production_inertial_compiler_fixture_valid`. T16.4b remains in progress for
+  Brief 036 numerical hardening; all global decisions remain withheld.

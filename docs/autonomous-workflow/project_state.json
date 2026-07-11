@@ -9,11 +9,11 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "a93ff057f8cf4f966d4edc8dc0098c3526a14def",
+  "current_head_commit": "bc5d4fe331db1c4dcc22326b0c012951212b148b",
   "last_reviewed_commit": "a93ff057f8cf4f966d4edc8dc0098c3526a14def",
   "source_review": {
     "commit": "a93ff057f8cf4f966d4edc8dc0098c3526a14def",
-    "decision": "CONTINUE_T16_4B_NUMERICAL_HARDENING_AFTER_REMOTE_PRESERVATION",
+    "decision": "CONTINUE_T16_4B_NUMERICAL_HARDENING",
     "reviewer_decision": "docs/reviewer-messages/044-production-inertial-compiler-reviewed.md"
   },
   "owner_authority": {
@@ -184,8 +184,8 @@
     "T16.4b": {
       "state": "in_progress",
       "depends_on": ["T16.2", "T16.4", "T16.2b-A"],
-      "brief_id": "035",
-      "execution_note": "Brief 035 production compiler passed local implementation and review; remote preservation is pending before the final numerical-hardening sub-slice",
+      "brief_id": "036",
+      "execution_note": "Brief 035 production compiler is reviewed and remotely preserved; Brief 036 owns the final deterministic eigensolver numerical-hardening gate",
       "completed_subslices": [
         {
           "source_commit": "69df54d",
@@ -200,7 +200,7 @@
         {
           "source_commit": "a93ff05",
           "review_decision_id": "044",
-          "result": "production hierarchical mixed-source compiler and fixture passed local review; remote preservation pending"
+          "result": "production hierarchical mixed-source compiler and fixture reviewed and remotely preserved through bc5d4fe"
         }
       ],
       "test_commands": [
@@ -221,10 +221,12 @@
       },
       "known_limitations": [
         "deterministic eigensolver convergence, residual, and scale-relative tolerance hardening remains before T16.4b can close",
-        "fixture evidence proves the production path but is not current-arm physical evidence",
-        "remote preservation of a93ff05 and reviewer decision 044 is pending"
+        "fixture evidence proves the production path but is not current-arm physical evidence"
       ],
-      "authority_granted": ["synthetic_compilation_valid"],
+      "authority_granted": [
+        "synthetic_compilation_valid",
+        "production_inertial_compiler_fixture_valid"
+      ],
       "authority_not_granted": [
         "simulation_training_ready",
         "physical_twin_qualified",
