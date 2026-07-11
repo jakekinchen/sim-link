@@ -266,12 +266,15 @@ live review manifest was created or accepted. Only
 `redacted_static_pose_live_candidate_session_review_conformant` is newly
 granted; the live gate and training lock stay closed.
 
-Brief 056 is active offline to pin the executable PI0.5 preprocessing source,
-checkpoint-processor, tokenizer, coordinate, and device-override semantics. It
-will emit only a fixture `blocked_missing_inputs` contract: no accepted live
-review artifact, camera-role binding, or task prompt exists, so no live input,
-tokenizer/model load, preprocessing, inference, replay, or policy label is
-permitted.
+Brief 056 is verified and remotely preserved at implementation `fd49820`. The
+signed `blocked_missing_inputs` contract pins the executable PI0.5 source,
+checkpoint processor, tokenizer, coordinate, normalizer, and sole CUDA-to-CPU
+preprocessing override without naming or reading model weights. No accepted
+live review decision, reviewed camera-role binding, or reviewed task prompt
+exists, so no policy input, tokenizer/model construction, preprocessing,
+inference, replay, policy label, or actuation is permitted. Only
+`pi05_policy_input_preprocessing_source_contract_conformant` is newly granted;
+the live gate and training lock stay closed.
 
 ## Durable State
 

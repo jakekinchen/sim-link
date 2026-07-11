@@ -10,13 +10,13 @@
     "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "411e5cc7fae454f31a386829780b267c5eca04bc",
-  "last_reviewed_implementation_commit": "411e5cc7fae454f31a386829780b267c5eca04bc",
+  "verified_through_commit": "fd4982097961d8df34435e2db5fd7c4397f050d4",
+  "last_reviewed_implementation_commit": "fd4982097961d8df34435e2db5fd7c4397f050d4",
   "source_review": {
-    "commit": "411e5cc7fae454f31a386829780b267c5eca04bc",
-    "implementation_commit": "411e5cc7fae454f31a386829780b267c5eca04bc",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_055_REDACTED_LIVE_SESSION_REVIEW_MANIFEST_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/081-accept-brief-055-redacted-live-session-review.md"
+    "commit": "fd4982097961d8df34435e2db5fd7c4397f050d4",
+    "implementation_commit": "fd4982097961d8df34435e2db5fd7c4397f050d4",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_056_PI05_PREPROCESSING_SOURCE_CONTRACT_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/082-accept-brief-056-pi05-preprocessing-source-contract.md"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -31,7 +31,7 @@
   "continuation_run": {
     "started_at": "2026-07-11T12:52:56-05:00",
     "trigger": "owner_proceed_with_next_milestone",
-    "scope": "T16.5c offline static-pose and source-binding continuation through Brief 055",
+    "scope": "T16.5c offline static-pose and source-binding continuation through Brief 056",
     "starting_head": "32c29480a314ce3f731dda0d9a50156c1832da63",
     "live_gate": "closed",
     "training_lock": "closed",
@@ -1171,10 +1171,10 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "056",
-      "latest_verified_brief_id": "055",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055"],
-      "result": "Briefs 048-055 are verified and remotely preserved: future successful private candidate evidence now has a deterministic source-reverified redaction and exclusive tracked-writer boundary that remains pending separate acceptance and grants no physical proof label; the live gate remains closed",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "056",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056"],
+      "result": "Briefs 048-056 are verified and remotely preserved: exact PI0.5 preprocessing sources, cached processor/tokenizer revisions, normalizer statistics, coordinate semantics, and the sole CUDA-to-CPU preprocessing override are pinned, but production preprocessing remains blocked on an accepted live review decision, reviewed camera-role binding, and reviewed task prompt; the live gate remains closed",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1378,20 +1378,60 @@
         "broad_test_count": 306,
         "broad_test_duration_seconds": 69.782
       },
+      "pi05_preprocessing_source_contract": {
+        "implementation_commit": "fd4982097961d8df34435e2db5fd7c4397f050d4",
+        "artifact_path": "configurations/robot_lab/pi05_policy_input_preprocessing.blocked_missing_inputs.json",
+        "schema_version": "scenesmith.pi05_preprocessing_source_contract.v1",
+        "identity_sha256": "f6b216684f6bb3f895b3d1761d72e80b5e93a5ec7be8f44b04cc277e7a871afa",
+        "status": "blocked_missing_inputs",
+        "stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+        "checkpoint_repository_id": "Cache-SCA/pi05_teleop_sort_block",
+        "checkpoint_revision": "84b551af1303e92d97d6752d43cc3c9f1a090778",
+        "tokenizer_repository_id": "google/paligemma-3b-pt-224",
+        "tokenizer_revision": "35e4f46485b4d07967e7e9935bc3786aad50687c",
+        "normalizer_sample_count": 94568,
+        "normalizer_state_width": 6,
+        "normalizer_action_width": 6,
+        "normalizer_complete_file_coverage_verified": true,
+        "source_device": "cuda",
+        "effective_preprocessing_device": "cpu",
+        "device_override_is_only_mutation": true,
+        "missing_inputs": [
+          "accepted_live_session_review_decision",
+          "reviewed_stable_camera_role_binding",
+          "reviewed_task_prompt"
+        ],
+        "capability": "pi05_policy_input_preprocessing_source_contract_conformant",
+        "production_preprocessing_allowed": false,
+        "policy_input_built": false,
+        "model_instantiated": false,
+        "model_weights_read": false,
+        "preprocessing_run": false,
+        "policy_shadow_run": false,
+        "policy_inference_run": false,
+        "mujoco_replay_run": false,
+        "hardware_accessed": false,
+        "physical_follower_commanded": false,
+        "focused_test_count_per_runtime": 114,
+        "broad_test_count": 313,
+        "broad_test_duration_seconds": 70.328
+      },
       "test_commands": [
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
-        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_execution_sources.py",
         "external/leLab/.venv/bin/python scripts/robot_lab/verify_static_pose_live_execution_sources.py",
         "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_candidate_sources.py",
         "./.mujoco_venv/bin/python scripts/robot_lab/migrate_live_manifest_camera_identity.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_calibration_profile.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_static_pose_bracket_fixture.py --verify",
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
-        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/hardware_execution_profile.py scenesmith/robot_lab/static_pose_bracket.py scenesmith/robot_lab/static_pose_live_execution.py scenesmith/robot_lab/static_pose_live_candidate.py scenesmith/robot_lab/static_pose_live_session.py scenesmith/robot_lab/static_pose_session_review.py scripts/robot_lab/verify_static_pose_live_execution_sources.py tests/unit/test_static_pose_bracket.py tests/unit/test_static_pose_live_execution.py tests/unit/test_static_pose_live_candidate.py tests/unit/test_static_pose_live_session.py tests/unit/test_static_pose_session_review.py",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_pi05_preprocessing_contract.py --verify",
+        "external/leLab/.venv/bin/python scripts/robot_lab/write_pi05_preprocessing_contract.py --verify",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "implement and verify Brief 056 fixture-only PI0.5 preprocessing source contract with exact local source, checkpoint-processor, tokenizer, coordinate, device-override, and missing-input bindings; do not load weights, preprocess, infer, access hardware, or transition the live gate",
+      "next_action": "define and verify a separate fixture-only PI0.5 reviewed-input issuance gate for the accepted live-session decision, stable-camera role binding, and exact task prompt; keep the production artifact blocked and do not preprocess, load weights, infer, access hardware, or transition the live gate",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
@@ -1416,14 +1456,18 @@
         "private_static_pose_live_candidate_evidence_conformant",
         "hardware_supervised_runtime_profile_validator_conformant",
         "fail_closed_static_pose_live_session_orchestrator_conformant",
-        "redacted_static_pose_live_candidate_session_review_conformant"
+        "redacted_static_pose_live_candidate_session_review_conformant",
+        "pi05_policy_input_preprocessing_source_contract_conformant"
       ],
       "authority_not_granted": [
         "actual_live_review_manifest",
         "live_candidate_session_accepted",
+        "accepted_live_policy_input",
         "static_pose_bracketed_observation",
         "policy_shadow_input_valid",
         "policy_shadow",
+        "model_weight_load",
+        "policy_inference",
         "physical_actuation",
         "physical_qualification"
       ]

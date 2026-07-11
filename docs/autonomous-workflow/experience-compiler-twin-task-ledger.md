@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress under Brief 056 PI0.5 preprocessing source contract
+current_task: T16.5c in progress after verified Brief 056 PI0.5 preprocessing source contract
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Brief 055 411e5cc; deterministic private-to-redacted candidate review schema; exclusive tracked writer; 107 focused in each runtime; 306 broad tests; no live manifest/hardware/policy access
+evidence: Brief 056 fd49820; signed PI0.5 preprocessing source contract f6b21668...; exact stack/checkpoint/tokenizer/normalizer/coordinate/device bindings; 114 focused in each runtime; 313 broad tests; no weights/preprocessing/inference/hardware access
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: T16.5b none; the current parent thread is mechanically rejected because its persisted approval policy is never; live T16.5c requires a new hardware-supervised on-request parent, fresh finite run window, separate reviewed gate transition, fresh lease, and fresh discovery/zero-holder snapshots; static-pose observation and policy-shadow parity remain unverified
-next_step: implement and verify Brief 056 exact PI0.5 source/checkpoint-processor/tokenizer/coordinate contract with unresolved real inputs fail-closed; no weights, preprocessing, inference, hardware, or live-gate transition
+next_step: define a separate fixture-only reviewed-input issuance gate for the live-session acceptance decision, stable-camera role binding, and exact task prompt; no weights, preprocessing, inference, hardware, or live-gate transition
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: implement and verify Brief 056 exact PI0.5 source/checkpoint-processo
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-055 verified; Brief 056 active offline to pin exact PI0.5 preprocessing sources while real review/camera-role/task inputs remain missing; current thread remains live-ineligible |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-056 verified; exact PI0.5 source contract is pinned but remains `blocked_missing_inputs` on live-review acceptance, camera-role binding, and task prompt; current thread remains live-ineligible |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -136,6 +136,23 @@ hardware authority.
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 056 PI0.5 preprocessing source contract verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 056 verified and remotely preserved; live gate closed
+Completed: deterministic signed source contract for the exact PI0.5 executable files, cached checkpoint processor and tokenizer revisions, six-wide normalizer statistics, physical coordinate semantics, prompt template, and sole CUDA-to-CPU preprocessing override
+Evidence: implementation fd49820; artifact configurations/robot_lab/pi05_policy_input_preprocessing.blocked_missing_inputs.json; schema scenesmith.pi05_preprocessing_source_contract.v1; identity f6b21668...; checkpoint revision 84b551af...; tokenizer revision 35e4f464...
+Verification: 114 focused tests in .mujoco_venv; 114 in pinned LeLab runtime; all execution/candidate/camera/calibration/static-fixture/dependency/source-contract verifiers in both runtimes; py_compile; whitespace/privacy/source/diff checks; 313 broad tests in 70.328 seconds
+Adversarial: executable source and runtime drift; cache revision/escape/file and ancestor alias substitution; checkpoint config/order/device drift; safetensors malformed header/offset/overlap/gap/boolean/non-finite/wrong-width/nonpositive/fractional statistics; tokenizer/coordinate drift; fixture/live relabeling; blocker, camera-role, task, acceptance, and authority fabrication
+Blocked inputs: accepted_live_session_review_decision; reviewed_stable_camera_role_binding; reviewed_task_prompt
+Authority gained: pi05_policy_input_preprocessing_source_contract_conformant only
+Authority withheld: accepted_live_policy_input, static_pose_bracketed_observation, policy_shadow_input_valid, model/tokenizer/processor construction, model-weight load, preprocessing, inference, policy shadow, MuJoCo replay, actuation, qualification/transfer, promotion, training
+Hardware: none; no enumeration/open, serial/camera/Studio access, reconnect, write, torque change, motion, policy, model weight, optimizer, or paid compute
+Training lock: closed
+Next step: separate fixture-only reviewed-input issuance gate; production preprocessing and live gate remain closed
+```
 
 ### 2026-07-11 - Brief 055 redacted live-session review manifest verified offline
 
