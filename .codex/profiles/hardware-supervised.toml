@@ -1,0 +1,7 @@
+# Apply these exact semantics only to an owner-present, separately reviewed
+# hardware session. The live verifier checks the effective runtime independently.
+sandbox_mode = "danger-full-access"
+approval_policy = "on-request"
+
+[features]
+multi_agent = false

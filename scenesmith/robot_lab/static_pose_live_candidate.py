@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import os
 
 from datetime import datetime
 from pathlib import Path
@@ -25,6 +26,9 @@ from scenesmith.robot_lab.live_readonly_observation import (
     stable_camera_identity_sha256,
     verify_operator_presence_lease,
 )
+from scenesmith.robot_lab.hardware_execution_profile import (
+    verify_hardware_execution_profile_evidence,
+)
 from scenesmith.robot_lab.static_pose_bracket import (
     ACCEPTED_CALIBRATION_PROFILE_IDENTITY,
     ACCEPTED_STATIC_POSE_BRACKET_CONTRACT_IDENTITY,
@@ -44,7 +48,7 @@ STATIC_POSE_LIVE_CANDIDATE_CONTRACT_SCHEMA_VERSION = (
     "scenesmith.static_pose_live_candidate_contract.v1"
 )
 STATIC_POSE_LIVE_CANDIDATE_RESULT_SCHEMA_VERSION = (
-    "scenesmith.static_pose_live_candidate_result.v1"
+    "scenesmith.static_pose_live_candidate_result.v2"
 )
 EXPECTED_ACCEPTED_MANIFEST_IDENTITY = (
     "5218c3bd0ee0b34aca9aa32e5e1912c284a2dfffcdbc86ba7fa34f08f4433ed4"
@@ -504,6 +508,7 @@ def resolve_static_pose_candidate_cameras(
 def run_static_pose_live_candidate(
     candidate_contract: dict[str, Any],
     *,
+    hardware_execution_profile: dict[str, Any],
     project_state: dict[str, Any],
     static_pose_contract: dict[str, Any],
     calibration_path: Path,
@@ -520,6 +525,21 @@ def run_static_pose_live_candidate(
 ) -> dict[str, Any]:
     """Run one live-marked candidate lifecycle with no physical proof label."""
 
+    current_thread_id = require_nonblank(
+        os.environ.get("CODEX_THREAD_ID"),
+        label="active Codex hardware thread ID",
+    )
+    verify_hardware_execution_profile_evidence(
+        hardware_execution_profile,
+        repo_root=REPO_ROOT,
+        now=now,
+        expected_thread_id=current_thread_id,
+    )
+    hardware_profile_identity = _require_sha256(
+        hardware_execution_profile.get("identity_sha256"),
+        label="hardware execution profile identity",
+    )
+
     return _run_static_pose_candidate(
         candidate_contract,
         project_state=project_state,
@@ -534,6 +554,7 @@ def run_static_pose_live_candidate(
         post_close_holder_snapshot_factory=post_close_holder_snapshot_factory,
         monotonic_ns=monotonic_ns,
         execution_class="live_candidate",
+        hardware_execution_profile_identity_sha256=hardware_profile_identity,
     )
 
 
@@ -570,6 +591,7 @@ def run_static_pose_live_candidate_fixture(
         post_close_holder_snapshot_factory=post_close_holder_snapshot_factory,
         monotonic_ns=monotonic_ns,
         execution_class="deterministic_candidate_fixture",
+        hardware_execution_profile_identity_sha256=None,
     )
 
 
@@ -590,6 +612,7 @@ def _run_static_pose_candidate(
     post_close_holder_snapshot_factory: Callable[[], dict[str, Any]],
     monotonic_ns: Callable[[], int],
     execution_class: str,
+    hardware_execution_profile_identity_sha256: str | None,
 ) -> dict[str, Any]:
     """Run one candidate lifecycle after every source and gate check passes."""
 
@@ -683,6 +706,9 @@ def _run_static_pose_candidate(
             "discovery_identity_sha256": candidate_contract[
                 "discovery_identity_sha256"
             ],
+            "hardware_execution_profile_identity_sha256": (
+                hardware_execution_profile_identity_sha256
+            ),
             "capture": copy.deepcopy(capture),
             "measurements": measurements,
             "resolved_camera_binding": [
@@ -806,6 +832,7 @@ def _verify_static_pose_candidate_result(
         "project_state_identity_sha256",
         "presence_lease_identity_sha256",
         "discovery_identity_sha256",
+        "hardware_execution_profile_identity_sha256",
         "capture",
         "measurements",
         "resolved_camera_binding",
@@ -832,6 +859,11 @@ def _verify_static_pose_candidate_result(
     if result.get("execution_class") != expected_execution_class:
         raise ValueError("Static pose live candidate result execution class drifted")
     classification = _candidate_execution_classification(expected_execution_class)
+    profile_identity = result.get("hardware_execution_profile_identity_sha256")
+    if expected_execution_class == "live_candidate":
+        _require_sha256(profile_identity, label="hardware execution profile identity")
+    elif profile_identity is not None:
+        raise ValueError("Fixture candidate cannot bind a hardware execution profile")
     if result.get("verified_at") != now:
         raise ValueError("Static pose live candidate verification time drifted")
     contract_verifier = (
@@ -1153,6 +1185,15 @@ def _parse_time(value: Any, *, label: str) -> datetime:
     if parsed.tzinfo is None or parsed.utcoffset() is None:
         raise ValueError(f"{label} must include a UTC offset")
     return parsed
+
+
+def _require_sha256(value: Any, *, label: str) -> str:
+    digest = require_nonblank(value, label=label)
+    if len(digest) != 64 or any(
+        character not in "0123456789abcdef" for character in digest
+    ):
+        raise ValueError(f"{label} must be lowercase SHA-256")
+    return digest
 
 
 def _sha256_payload(payload: Any) -> str:

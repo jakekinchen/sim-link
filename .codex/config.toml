@@ -4,12 +4,13 @@
 model = "gpt-5.6-sol"
 model_reasoning_effort = "max"
 
-# The overnight loop must create Git commits. Codex protects `.git` as read-only
-# in workspace-write mode, so use the machine's existing unattended full-access
-# profile and enforce the narrower authority boundary through root AGENTS.md.
-# `never` prevents the loop from pausing for a sleeping human.
-sandbox_mode = "danger-full-access"
-approval_policy = "never"
+# Keep the committed project default owner-interactive and workspace-bounded.
+# Autonomous offline work must opt into the separately reviewed
+# `.codex/profiles/offline-autonomous.toml` semantics. Hardware work must use
+# `.codex/profiles/hardware-supervised.toml` and independently prove the active
+# runtime through the robot-lab hardware-execution-profile verifier.
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
 
 [features]
 goals = true

@@ -16,11 +16,13 @@ runtime profile. Keep the live gate closed.
   fragments. The project default must be owner-interactive, and hardware
   execution must require `approval_policy=on-request`; `never` is valid only for
   the separate offline profile.
-- Capture the actual active Codex runtime from the exact `codex doctor --json
-  --summary --no-color` command and bind the thread ID, Codex executable/version,
-  approval policy, filesystem sandbox, project profile hash, timestamp, and raw
-  report digest into signed evidence. Reject synthetic, stale, cross-thread,
-  non-on-request, malformed, re-signed, or config-drifted hardware evidence.
+- Capture the requested Codex hardware profile through an exact `codex doctor`
+  command and independently cross-check the latest persisted `turn_context` of
+  the active `CODEX_THREAD_ID`. Bind the turn ID/context digest, Codex
+  executable/version, effective approval and filesystem policies, project
+  profile hashes, timestamp, and raw doctor-report digest into signed evidence.
+  Reject synthetic, stale, cross-thread, non-on-request, malformed, re-signed,
+  parent/child-policy-mismatched, or config-drifted hardware evidence.
 - Build the production Feetech transport only from the code-pinned LeRobot
   source tree and the candidate's exact follower path/protocol and six static-
   contract servo identities. Wrap it behind the existing read-only audited

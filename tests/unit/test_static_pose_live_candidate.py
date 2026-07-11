@@ -346,6 +346,10 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
                 return self.manifest["usb_identity_sha256"]
             return original_payload_hash(payload)
 
+        def verify_profile(payload: dict, **kwargs) -> None:
+            if payload != self._hardware_profile():
+                raise ValueError("fixture hardware profile drifted")
+
         with patch.object(
             candidate_module,
             "stable_camera_identity_sha256",
@@ -354,6 +358,10 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
             candidate_module,
             "_sha256_payload",
             side_effect=payload_hash,
+        ), patch.object(
+            candidate_module,
+            "verify_hardware_execution_profile_evidence",
+            side_effect=verify_profile,
         ):
             yield
 
@@ -385,6 +393,9 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
             run_command=runner,
             path_exists=lambda path: True,
         )
+
+    def _hardware_profile(self) -> dict:
+        return {"fixture_profile": SESSION_ID, "identity_sha256": "f" * 64}
 
     def _run(self) -> tuple[dict, dict]:
         contract = self._contract()
@@ -576,7 +587,34 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
         ):
             run_static_pose_live_candidate(
                 contract,
+                hardware_execution_profile=self._hardware_profile(),
                 project_state=state,
+                static_pose_contract=self.static_contract,
+                calibration_path=CALIBRATION_PATH,
+                calibration_profile_path=PROFILE_PATH,
+                manifest_path=MANIFEST_PATH,
+                now="2026-07-11T14:01:00-05:00",
+                transport_factory=lambda contract: constructed.append(True),
+                camera_factory=lambda resolved, static: None,
+                pre_open_holder_snapshot=self._holder_snapshot(),
+                post_close_holder_snapshot_factory=self._holder_snapshot,
+                monotonic_ns=_Clock(),
+            )
+        self.assertEqual(constructed, [])
+
+    def test_hardware_profile_revalidation_precedes_transport_construction(self):
+        with self._accepted_identity_patches():
+            contract = self._contract(live=True)
+        constructed = []
+        with self._accepted_identity_patches(), patch.object(
+            candidate_module,
+            "verify_hardware_execution_profile_evidence",
+            side_effect=ValueError("hardware profile is not on-request"),
+        ), self.assertRaisesRegex(ValueError, "profile.*on-request"):
+            run_static_pose_live_candidate(
+                contract,
+                hardware_execution_profile=self._hardware_profile(),
+                project_state=self.project_state,
                 static_pose_contract=self.static_contract,
                 calibration_path=CALIBRATION_PATH,
                 calibration_profile_path=PROFILE_PATH,
@@ -599,6 +637,7 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
         ):
             run_static_pose_live_candidate(
                 contract,
+                hardware_execution_profile=self._hardware_profile(),
                 project_state=self.project_state,
                 static_pose_contract=self.static_contract,
                 calibration_path=CALIBRATION_PATH,
@@ -620,6 +659,7 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
         ):
             run_static_pose_live_candidate(
                 contract,
+                hardware_execution_profile=self._hardware_profile(),
                 project_state=self.project_state,
                 static_pose_contract=self.static_contract,
                 calibration_path=CALIBRATION_PATH,
@@ -694,6 +734,7 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
         ):
             run_static_pose_live_candidate(
                 contract,
+                hardware_execution_profile=self._hardware_profile(),
                 project_state=self.project_state,
                 static_pose_contract=self.static_contract,
                 calibration_path=CALIBRATION_PATH,
@@ -732,6 +773,7 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
         ):
             run_static_pose_live_candidate(
                 contract,
+                hardware_execution_profile=self._hardware_profile(),
                 project_state=self.project_state,
                 static_pose_contract=self.static_contract,
                 calibration_path=CALIBRATION_PATH,

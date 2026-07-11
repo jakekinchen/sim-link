@@ -1,0 +1,6 @@
+# Apply these semantics only after the hardware gate is mechanically closed.
+sandbox_mode = "danger-full-access"
+approval_policy = "never"
+
+[features]
+multi_agent = false
