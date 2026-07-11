@@ -701,16 +701,13 @@ def write_private_static_pose_candidate_evidence(
         filename = "private_failure.json"
     else:
         raise ValueError("Private static-pose evidence schema is unsupported")
-    root_path = Path(private_root)
-    if _path_has_symlink_component(root_path):
-        raise ValueError("Private static-pose evidence root cannot be a symlink")
-    if not root_path.exists() or not root_path.is_dir():
-        raise ValueError("Private static-pose evidence root must already exist")
-    root = root_path.resolve()
     session_id = _validated_session_id(evidence.get("session_id"))
+    verify_private_static_pose_candidate_evidence_destination(
+        private_root=private_root,
+        session_id=session_id,
+    )
+    root = Path(private_root).resolve()
     session_directory = root / session_id
-    if session_directory.is_symlink():
-        raise ValueError("Private static-pose session directory cannot be a symlink")
     try:
         session_directory.mkdir(mode=0o700, exist_ok=False)
     except FileExistsError as exc:
@@ -741,6 +738,27 @@ def write_private_static_pose_candidate_evidence(
         "file_sha256": hashlib.sha256(output_path.read_bytes()).hexdigest(),
         "size_bytes": output_path.stat().st_size,
     }
+
+
+def verify_private_static_pose_candidate_evidence_destination(
+    *,
+    private_root: Path,
+    session_id: str,
+) -> None:
+    """Verify a new immutable session destination without creating it."""
+
+    root_path = Path(private_root)
+    if _path_has_symlink_component(root_path):
+        raise ValueError(
+            "Private static-pose evidence root cannot contain a symlink"
+        )
+    if not root_path.exists() or not root_path.is_dir():
+        raise ValueError("Private static-pose evidence root must already exist")
+    session_directory = root_path.resolve() / _validated_session_id(session_id)
+    if session_directory.exists() or session_directory.is_symlink():
+        raise ValueError(
+            "Private static-pose session already has immutable evidence"
+        )
 
 
 def verify_private_static_pose_candidate_evidence_reference(
@@ -915,8 +933,7 @@ def _validated_session_id(value: Any) -> str:
 def _path_has_symlink_component(path: Path) -> bool:
     absolute = Path(path).absolute()
     return any(
-        candidate.exists() and candidate.is_symlink()
-        for candidate in (absolute, absolute.parent)
+        candidate.is_symlink() for candidate in (absolute, *absolute.parents)
     )
 
 

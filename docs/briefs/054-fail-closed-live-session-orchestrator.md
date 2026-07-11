@@ -14,6 +14,9 @@ exactly one private artifact is durably written and independently reverified.
 
 - Reverify the active same-thread hardware profile and complete candidate
   contract before starting a session or exposing a production constructor.
+- Reject a missing, aliased, or previously consumed private-evidence destination
+  during preflight, while retaining exclusive creation as the final race-safe
+  write boundary.
 - Build only the exact Brief 053 one-shot Feetech and two-camera factories and
   pass them to the fixed production live-candidate runner.
 - Define the session start boundary after all non-hardware preflight succeeds.
@@ -29,6 +32,9 @@ exactly one private artifact is durably written and independently reverified.
 - If evidence construction, write, or reference verification fails, preserve
   both the primary and evidence error when both exist, make no second write
   attempt, and fail closed without a success return.
+- If outcome timestamp acquisition fails or regresses after session start,
+  preserve that failure (and the candidate failure when both exist), use the
+  trusted start time only for the rejection record, and never return a result.
 - Bind the result, hardware-profile identity, private-evidence identity, and
   private-reference hash into a candidate-only session receipt. The receipt
   grants no physical proof label or global authority.

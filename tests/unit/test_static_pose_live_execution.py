@@ -846,7 +846,7 @@ class PrivateCandidateEvidenceTests(unittest.TestCase):
             completed_at=VERIFIED_AT,
         )
         with tempfile.TemporaryDirectory() as directory:
-            private_root = Path(directory) / "private"
+            private_root = Path(directory).resolve() / "private"
             private_root.mkdir()
             reference = write_private_static_pose_candidate_evidence(
                 private_root=private_root,
@@ -895,7 +895,7 @@ class PrivateCandidateEvidenceTests(unittest.TestCase):
             failed_at=VERIFIED_AT,
         )
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             real = root / "real"
             real.mkdir()
             link = root / "private"
@@ -906,7 +906,7 @@ class PrivateCandidateEvidenceTests(unittest.TestCase):
                     evidence=evidence,
                 )
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             real_parent = root / "real-parent"
             real_private = real_parent / "private"
             real_private.mkdir(parents=True)
@@ -915,6 +915,21 @@ class PrivateCandidateEvidenceTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "symlink"):
                 write_private_static_pose_candidate_evidence(
                     private_root=linked_parent / "private",
+                    evidence=evidence,
+                )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            real_grandparent = root / "real-grandparent"
+            real_private = real_grandparent / "nested" / "private"
+            real_private.mkdir(parents=True)
+            linked_grandparent = root / "linked-grandparent"
+            linked_grandparent.symlink_to(
+                real_grandparent,
+                target_is_directory=True,
+            )
+            with self.assertRaisesRegex(ValueError, "symlink"):
+                write_private_static_pose_candidate_evidence(
+                    private_root=linked_grandparent / "nested" / "private",
                     evidence=evidence,
                 )
         changed_contract = copy.deepcopy(self.contract)
