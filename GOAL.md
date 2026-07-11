@@ -21,12 +21,13 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute Brief 034,
-`docs/briefs/034-central-authority-composition-foundation.md`, as T16.2b-A.
-Introduce the only code path allowed to compose whole-system readiness from
-scoped component capabilities and content-addressed evidence. T16.4b remains
-valid partial progress and resumes only after this contract prevents component
-artifacts from granting global authority. Do not start an optimizer, open
+Resume Brief 033,
+`docs/briefs/033-production-measured-inertial-authority.md`, as the remaining
+T16.4b production compiler work. T16.2b-A is verified at `c0b9629` with
+reviewer decision 043 and remote preservation through `e1d59ca`. Preserve the
+assembly-inertials v2 local-capability boundary while adding the hierarchical
+BOM, explicit units/calibration, supported source modes, precision hardening,
+and truthful production-schema fixture. Do not start an optimizer, open
 hardware, use paid compute, or begin T16.5.
 
 ## Durable State
@@ -111,3 +112,8 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   slice. Component artifacts may report local capabilities only; the central
   composer owns global readiness. No optimizer, hardware, transfer, or
   promotion authority is granted.
+- Reviewer decision 043 verifies T16.2b-A at `c0b9629`: the central composer is
+  the only global-decision path, assembly-inertials v2 carries local capability
+  facts only, and the checked-in fixture composition mechanically withholds all
+  global decisions. The remote preserves the implementation and review through
+  `e1d59ca`; `training_lock` remains closed.

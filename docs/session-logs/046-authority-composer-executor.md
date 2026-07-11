@@ -60,3 +60,16 @@ pull request, or perform destructive actions.
 Reviewer decision 043 accepts the implementation locally. T16.2b-A remains
 `in_progress` until the implementation and review evidence are pushed and the
 named remote is independently confirmed.
+
+## T16.2b-A remote closeout
+
+- Pushed only to `origin/codex/pi05-autolearn-loop`.
+- Fresh fetch, remote-tracking ref, and `git ls-remote` agreed at
+  `e1d59cacecf6306088382493b1bf5b7d486b6ad8`.
+- Ancestry checks confirmed both implementation
+  `c0b96291e27c5612016d9451b6cbc8f3b5c320e9` and review evidence
+  `e1d59cacecf6306088382493b1bf5b7d486b6ad8` on the named remote.
+- T16.2b-A is verified. It grants only
+  `authority_composition_contract_valid`; every global decision and optimizer
+  authority remains withheld, and `training_lock` remains closed.
+- Next task: resume T16.4b under Brief 033.

@@ -5,12 +5,12 @@ Updated: 2026-07-11
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.2b-A central authority-composition foundation
-completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.4 blocked real template and synthetic compiler scaffold; T16.4b strict artifact and scoped-gate sub-slice
-evidence: T16.2b-A implementation c0b9629 and reviewer decision 043 pass locally; remote preservation remains required before verification
-remaining: T16.2b-A authority composition; remaining T16.4b production compiler; T16.2b computed qualification; revised T16.5 offline no-write census conformance
-blockers: T16.2b-A remote preservation pending; physical M19 still requires separate read and motion authority
-next_step: push c0b9629 plus reviewer evidence, confirm origin, then resume brief 033
+current_task: T16.4b production measured-inertial compiler
+completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.2b-A central authority composition; T16.4 blocked real template and synthetic compiler scaffold; T16.4b strict artifact and scoped-gate sub-slice
+evidence: T16.2b-A implementation c0b9629 and reviewer decision 043 are preserved on origin through e1d59ca; contract 6d04b205... and denied fixture composition d1206c5c... withhold all global authority
+remaining: remaining T16.4b production compiler; T16.2b computed qualification; revised T16.5 offline no-write census conformance
+blockers: no offline blocker; physical M19 still requires separate read and motion authority
+next_step: resume brief 033 with hierarchical BOM exact cover, explicit units/calibration, all source modes, full-precision aggregation, numerical hardening, and a production-schema fixture
 ```
 
 ## Rules
@@ -32,7 +32,7 @@ next_step: push c0b9629 plus reviewer evidence, confirm origin, then resume brie
 | T16.1 | verified | T16.0 | Inventory LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Dependency inventory and source evidence verified; executable resolution completed separately by T16.1b |
 | T16.1b | verified | T16.1 | Unify the executable LeRobot/preprocessing revision used by every robotics stage | `dca2b45`; stack identity `c8e903e7...`; exact base + tracked patch + environment lock + saved-sample stage parity |
 | T16.2 | reopened | T16.1b | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Schema scaffold verified; qualification `pass` is not yet mechanically derived from the specification |
-| T16.2b-A | in_progress | T16.1b,T16.2,T16.4 | Define the only central composer for global authority from scoped component capabilities | Brief 034; stable prerequisites, deterministic decisions, denial reasons, evidence scope/freshness, and forged-authority adversarial matrix |
+| T16.2b-A | verified | T16.1b,T16.2,T16.4 | Define the only central composer for global authority from scoped component capabilities | `c0b9629`; reviewer 043; contract `6d04b205...`; 101-test broad gate; remote through `e1d59ca`; grants contract validity only |
 | T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
 | T16.4 | reopened | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Blocked real template and synthetic compiler scaffold verified; production measurement ingestion and authority separation missing |
 | T16.4b | in_progress | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | Strict artifact/gate sub-slice accepted; hierarchical BOM, units/calibration, all source modes, precision hardening, and production fixture resume after T16.2b-A |
@@ -117,6 +117,20 @@ next_step: push c0b9629 plus reviewer evidence, confirm origin, then resume brie
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.2b-A central authority composition verified
+
+```text
+Current task: T16.4b
+State: in_progress
+Completed: versioned central authority contract and fail-closed composer; assembly-inertials v2 local-capability boundary; non-authorizing deterministic fixture decision
+Evidence: implementation c0b9629; reviewer 043; 101-test broad gate; contract identity 6d04b20547a9391c4e695b5a337ee292410a2a13a8a3efdf34cb7033feda6ba1; denied composition d1206c5c710a280e4f7c5c448fd9ba59793b9850c2e9fd1bf962999ec82bc8ab; origin confirmed through e1d59ca
+Commit: c0b9629 implementation; e1d59ca review evidence
+Remaining: production hierarchical measured-inertial compiler, mechanically computed qualification, and offline census conformance
+Blockers: none for offline T16.4b
+Training lock: closed
+Next step: resume Brief 033 without granting any global readiness from inertial output
+```
 
 ### 2026-07-11 - Authority-composer-first redirect and overnight launch
 

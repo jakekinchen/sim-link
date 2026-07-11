@@ -2,17 +2,17 @@
   "schema_version": "scenesmith.project_state.v1",
   "updated": "2026-07-11",
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
+  "current_head_commit": "e1d59cacecf6306088382493b1bf5b7d486b6ad8",
   "last_reviewed_commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
   "source_review": {
     "commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
-    "decision": "CONTINUE_T16_4B_AFTER_REMOTE_PRESERVATION",
+    "decision": "CONTINUE_T16_4B",
     "reviewer_decision": "docs/reviewer-messages/043-central-authority-composition-reviewed.md"
   },
   "training_lock": "closed",
   "current_milestone": "M16",
-  "current_task": "T16.2b-A",
-  "next_eligible_task": "T16.2b-A",
+  "current_task": "T16.4b",
+  "next_eligible_task": "T16.4b",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -54,12 +54,12 @@
       "authority_not_granted": ["physical_twin_qualified", "promotion_eligible"]
     },
     "T16.2b-A": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T16.1b", "T16.2", "T16.4"],
       "source_commit": "c0b9629",
       "brief_id": "034",
       "review_decision_id": "043",
-      "result": "implementation and same-agent adversarial review passed; remote preservation pending",
+      "result": "central authority-composition contract, adversarial fail-closed composer, and assembly-inertials v2 local-capability boundary verified and remotely preserved",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_authority_composer tests.unit.test_artifact_contract tests.unit.test_measured_inertial_intake tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack tests.unit.test_robotics_dependency_lock",
         "./.mujoco_venv/bin/python scripts/robot_lab/compose_robot_authority.py --verify",
@@ -75,7 +75,7 @@
         "denied_composition_identity_sha256": "d1206c5c710a280e4f7c5c448fd9ba59793b9850c2e9fd1bf962999ec82bc8ab",
         "assembly_inertials_v2_identity_sha256": "8b8aab8e769167531776e38d76c545cec99277b69783d57c9db78f1020297ffc"
       },
-      "authority_granted": [],
+      "authority_granted": ["authority_composition_contract_valid"],
       "authority_not_granted": [
         "simulation_training_ready",
         "physical_transfer_ready",
@@ -85,7 +85,7 @@
       "known_limitations": [
         "the checked-in composition is explicit non-authorizing fixture evidence and withholds every global decision",
         "issuer authorization is a code-pinned content identity contract; external key-backed attestation is not implemented by this foundation",
-        "remote preservation is pending and this task remains in_progress until confirmed"
+        "no current evidence set satisfies simulation-training, physical-transfer, or promotion prerequisites"
       ]
     },
     "T16.2b": {
@@ -114,12 +114,17 @@
       "state": "in_progress",
       "depends_on": ["T16.2", "T16.4", "T16.2b-A"],
       "brief_id": "033",
-      "execution_note": "strict artifact sub-slice is accepted; remaining production output resumes after T16.2b-A",
+      "execution_note": "strict artifact sub-slice and v2 authority boundary are accepted; remaining production compiler work resumed after verified T16.2b-A",
       "completed_subslices": [
         {
           "source_commit": "69df54d",
           "review_decision_id": "041",
           "result": "strict artifact, physical inertia, content-addressed evidence, and authority-gate layer"
+        },
+        {
+          "source_commit": "c0b9629",
+          "review_decision_id": "043",
+          "result": "central composer and assembly-inertials v2 local-capability boundary"
         }
       ],
       "authority_granted": ["synthetic_compilation_valid"],
