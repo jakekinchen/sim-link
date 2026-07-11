@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "383557b0bdb1dc17725b4eac0db37d19c902b1c0",
-  "last_reviewed_commit": "710960b756553a40fd5fc9c67d7bd598281722be",
+  "current_head_commit": "f2000870775c175f1331bf42c0521d7067462a92",
+  "last_reviewed_commit": "f2000870775c175f1331bf42c0521d7067462a92",
   "source_review": {
-    "commit": "710960b756553a40fd5fc9c67d7bd598281722be",
-    "decision": "CLOSE_T16_2B_AFTER_REMOTE_PRESERVATION",
-    "reviewer_decision": "docs/reviewer-messages/046-mechanically-computed-twin-qualification-reviewed.md"
+    "commit": "f2000870775c175f1331bf42c0521d7067462a92",
+    "decision": "CLOSE_T16_5A_AFTER_REMOTE_PRESERVATION",
+    "reviewer_decision": "docs/reviewer-messages/047-offline-no-write-servo-census-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -287,8 +287,39 @@
       "state": "in_progress",
       "depends_on": ["T16.1b", "T16.2b", "T16.4b"],
       "brief_id": "038",
-      "result": "offline no-write transport, lifecycle, identity, retry, exception-cleanup, and recorded-trace preflight in progress",
-      "authority_not_granted": ["live_hardware_access", "register_write", "motion"]
+      "result": "reviewer 047 accepts the offline no-write transport, lifecycle, identity, retry, exception-cleanup, and recorded-trace preflight locally; remote preservation remains",
+      "execution_note": "Implementation f200087 is accepted locally after 14 focused and 193 broad tests; T16.5a remains in progress until review evidence is remotely preserved",
+      "test_commands": [
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_readonly_servo_census",
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_readonly_servo_census_fixture.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_computed_twin_qualification_fixture.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/compose_robot_authority.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_twin_contract_examples.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_structural_twin_diff.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_robotics_dependency_lock.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/verify_lerobot_stack.py",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/readonly_servo_census.py scenesmith/robot_lab/leader_arm_bridge.py scripts/robot_lab/write_readonly_servo_census_fixture.py tests/unit/test_readonly_servo_census.py",
+        "git diff --check"
+      ],
+      "production_artifact_ids": {
+        "offline_census_contract_identity_sha256": "17e8c712d88877fd508266fa85cd34bd14da8fbdd7bc98ac5ff7955bd708c2a0",
+        "recorded_census_trace_identity_sha256": "25cbac27c7e86aed9ae14cf691f14f4293c14b8c85db9ee500e993650c59e27c",
+        "offline_census_result_identity_sha256": "e7c0ecfc53328571fa4e695fcb53d50b54acaa24a1d34cbe8c45eb709efbc394"
+      },
+      "known_limitations": [
+        "the checked-in identity and observations are fixture-only and do not establish a live device identity",
+        "live USB discovery, serial reads, cameras, and physical observation remain outside T16.5a",
+        "the offline result grants no write, torque, motion, physical qualification, or system authority"
+      ],
+      "candidate_capability_after_remote_preservation": "census_trace_conformant",
+      "authority_not_granted": [
+        "live_hardware_access_before_remote_preservation",
+        "register_write",
+        "torque_change",
+        "motion",
+        "physical_qualification"
+      ]
     },
     "T16.5b": {
       "state": "pending",

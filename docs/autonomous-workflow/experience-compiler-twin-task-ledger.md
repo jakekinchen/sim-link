@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5a offline no-write transport and lifecycle preflight
+current_task: T16.5a offline preflight remote closeout
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening
-evidence: T16.2b implementation 710960b and reviewer 046 are remotely preserved through 383557b after 16 focused and 147 broad tests; v2 spec eff5a15e... -> input 5c942916... -> report 7ed02c6e... -> denial composition 41a4d731...
-remaining: T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
+evidence: T16.5a implementation f200087/reviewer 047 pass 14 focused and 193 broad tests; offline contract 17e8c712... -> recorded trace 25cbac27... -> result e7c0ecfc...; hardware_opened=false; physical_follower_commanded=false; remote preservation pending
+remaining: remotely preserve reviewer 047 and close T16.5a; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
 blockers: no offline blocker; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
-next_step: execute Brief 038 entirely offline; no live object construction before its remote closeout
+next_step: push and confirm implementation f200087 plus reviewer 047; only then prepare T16.5b and revalidate the owner-presence lease
 ```
 
 ## Rules
@@ -47,7 +47,7 @@ next_step: execute Brief 038 entirely offline; no live object construction befor
 | T16.4b | verified | T16.2,T16.4,T16.2b-A | Implement strict production measured-inertial intake with local capability output | `7d05629`/reviewer 045/remote `dbdd1ef`; normalized Jacobi convergence/residual checks; scale-relative adversarial coverage; 17 focused and 131 broad tests |
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
-| T16.5a | in_progress | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Brief 038; narrow injected interface; fake/recorded traces; construct/connect/read/decode/close/retry/cleanup; zero writes/torque/motion; identity/alias rejection; `physical_follower_commanded=false` |
+| T16.5a | in_progress | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | `f200087`/reviewer 047 locally accept exact identity, narrow injected lifecycle, bounded retry and no-write cleanup after 14 focused and 193 broad tests; remote preservation pending |
 | T16.5b | pending | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Stable USB/bus/six-servo identity; camera frames/timestamps; content-addressed trace; zero configuration/torque/register writes or motion; `live_read_only_census_observed` only |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
@@ -130,6 +130,20 @@ next_step: execute Brief 038 entirely offline; no live object construction befor
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5a offline no-write census locally reviewed
+
+```text
+Current task: T16.5a
+State: in_progress
+Completed: code-pinned follower/six-servo fixture contract; narrow injected and recorded transports; complete ordered read lifecycle; bounded retry; dual-error cleanup; signed no-write trace/result; safe leader teardown
+Evidence: implementation f200087; reviewer 047; 14 focused and 193 broad tests; contract 17e8c712...; trace 25cbac27...; result e7c0ecfc...; hardware_opened=false; physical_follower_commanded=false
+Commit: f200087; review/remote preservation pending
+Remaining: preserve implementation and reviewer evidence on origin, then close T16.5a and prepare the separately gated live read-only brief
+Blockers: no offline blocker; live hardware remains closed until remote confirmation and lease revalidation
+Training lock: closed
+Next step: commit reviewer evidence, push only the named branch, and confirm the remote
+```
 
 ### 2026-07-11 - T16.2b remotely verified; T16.5a opened offline
 
