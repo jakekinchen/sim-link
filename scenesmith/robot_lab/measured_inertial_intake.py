@@ -896,7 +896,7 @@ def _verify_synthetic_measured_mass_intake(
         raise ValueError("Synthetic intake coverage atoms are required")
     if not isinstance(cad_priors, list) or len(cad_priors) < 2:
         raise ValueError("Synthetic intake CAD priors are required")
-    if not isinstance(measurements, list) or len(measurements) < 2:
+    if not isinstance(measurements, list) or not measurements:
         raise ValueError("Synthetic intake measurements are required")
     component_ids = {str(component["component_id"]) for component in components}
     atom_ids = {str(atom["atom_id"]) for atom in coverage_atoms}

@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4 synthetic measured-inertial happy-path proof after CLI path-safety correction
+current_task: T16.4 synthetic measured-inertial negative matrix verified pending review
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
 evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: extend the synthetic `synthetic_test_only` ready compiler from happy-path proof to the full negative matrix, then T16.5, M17-M19 prerequisites, and Gates C-D
+remaining: reviewer-close the synthetic `synthetic_test_only` ready compiler negative matrix, then continue to T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: continue brief 029/next follow-up with the synthetic_test_only negative matrix, especially exact-cover ambiguity, reused-evidence, and invalid transform/inertia rejection
+next_step: obtain reviewer closeout for brief 030, then scope the smallest T16.5 fake-bus/recorded-trace qualification harness slice
 ```
 
 ## Rules
@@ -113,6 +113,20 @@ next_step: continue brief 029/next follow-up with the synthetic_test_only negati
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.4 synthetic ready negative matrix
+
+```text
+Current task: T16.4
+State: in_progress
+Completed: extended the bounded synthetic_test_only proof with explicit negative-matrix regressions for missing exact-cover atoms, duplicate active atom coverage, ambiguous multi-atom measurement selection, reused measurement evidence, invalid rotation matrices, and invalid inertia matrices; relaxed only the synthetic verifier precheck needed so incomplete-but-well-formed synthetic inputs fail through the exact-cover compiler path
+Evidence: focused measured-inertial suite passed 24 tests including the six new negative cases; py_compile passed for measured_inertial_intake module/tests/CLI; live default --verify preserved blocked real identities 35571daca435bb191313c9b22594c9fecaaef7abc68c8e7e2faa362692653b88 / 5816faa0d05dd309a2768551cd50b845932ff5abbc355c11f146371d868580c4; live default --verify --require-ready still exited nonzero with blocked_missing_measurements; live synthetic CLI write to /private/tmp/scenesmith-next-synthetic-ready.json still reached ready identity 9638e5abded29b948f0ef28b80e52e3ecd0a6adca58bb0e3d4899b984a64071d; broad robot-lab gate passed 69 tests
+Commit: pending
+Remaining: reviewer confirmation that brief 030 fully closes T16.4, then begin T16.5
+Blockers: none for offline continuation
+Training lock: closed
+Next step: reviewer rerun of the negative matrix and bounded CLI paths, then open the smallest fake-bus/recorded-trace harness slice
+```
 
 ### 2026-07-10 - T16.4 synthetic ready happy path
 

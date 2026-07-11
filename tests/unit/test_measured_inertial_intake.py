@@ -28,6 +28,15 @@ SYNTHETIC_FIXTURE_PATH = REPO_ROOT / "tests/fixtures/robot_lab/measured_mass/syn
 
 
 class MeasuredInertialIntakeTests(unittest.TestCase):
+    def _load_synthetic_fixture(self) -> dict:
+        return json.loads(SYNTHETIC_FIXTURE_PATH.read_text(encoding="utf-8"))
+
+    def _write_temp_synthetic_fixture(self, tmpdir: str, payload: dict) -> Path:
+        fixture_path = Path(tmpdir) / "synthetic-variant.json"
+        payload["identity_sha256"] = _resign(payload)
+        fixture_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        return fixture_path
+
     def test_build_and_verify_blocked_artifacts(self):
         intake = build_measured_mass_intake(repo_root=REPO_ROOT)
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -428,6 +437,94 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
 
         self.assertEqual(compiled["status"], "ready")
         self.assertEqual(compiled["qualification_scope"], "synthetic_test_only")
+
+    def test_synthetic_exact_cover_rejects_missing_required_atom(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            payload = self._load_synthetic_fixture()
+            payload["measurements"] = [payload["measurements"][0]]
+            intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "Synthetic measurements did not form an exact cover of required atoms",
+            ):
+                build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
+
+    def test_synthetic_exact_cover_rejects_duplicate_active_atom_coverage(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            payload = self._load_synthetic_fixture()
+            duplicate = json.loads(json.dumps(payload["measurements"][0]))
+            duplicate["measurement_id"] = "synthetic_alpha_measurement_duplicate"
+            duplicate["evidence"] = [{"kind": "synthetic_scale_reading", "ref": "alpha-scale-duplicate"}]
+            payload["measurements"][1] = duplicate
+            intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "Synthetic coverage atom was selected more than once: alpha_structure_mass",
+            ):
+                build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
+
+    def test_synthetic_exact_cover_rejects_ambiguous_multi_atom_measurement(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            payload = self._load_synthetic_fixture()
+            payload["measurements"][0]["covered_atom_ids"] = [
+                "alpha_structure_mass",
+                "beta_structure_mass",
+            ]
+            intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "Synthetic measurements must cover exactly one atom",
+            ):
+                build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
+
+    def test_synthetic_exact_cover_rejects_reused_measurement_evidence(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            payload = self._load_synthetic_fixture()
+            payload["measurements"][1]["evidence"] = json.loads(
+                json.dumps(payload["measurements"][0]["evidence"])
+            )
+            intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "Synthetic measurement evidence was reused: synthetic_beta_measurement",
+            ):
+                build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
+
+    def test_synthetic_exact_cover_rejects_invalid_rotation(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            payload = self._load_synthetic_fixture()
+            payload["cad_priors"][0]["body_frame_to_assembly"]["rotation_matrix"] = [
+                [1.0, 0.0, 0.0],
+                [0.0, 1.0, 0.0],
+                [0.0, 0.0, 2.0],
+            ]
+            intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "synthetic_alpha_cad_prior rotation must be orthonormal",
+            ):
+                build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
+
+    def test_synthetic_exact_cover_rejects_invalid_inertia_matrix(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            payload = self._load_synthetic_fixture()
+            payload["cad_priors"][0]["source_inertia_about_com_body_frame_kg_m2"] = [
+                [0.004, 0.0003, 0.0001],
+                [0.9, 0.005, 0.0002],
+                [0.0001, 0.0002, 0.006],
+            ]
+            intake_path = self._write_temp_synthetic_fixture(tmpdir, payload)
+
+            with self.assertRaisesRegex(
+                ValueError,
+                "synthetic_alpha_cad_prior source inertia must be symmetric",
+            ):
+                build_assembly_inertials(repo_root=REPO_ROOT, intake_path=intake_path)
 
 
 def _resign(payload: dict) -> str:
