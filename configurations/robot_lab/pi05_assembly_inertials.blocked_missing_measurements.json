@@ -1,0 +1,158 @@
+{
+  "aggregate_physical_properties": {
+    "center_of_mass_assembly_frame_m": null,
+    "inertia_about_com_assembly_frame_kg_m2": null,
+    "mass_kg": null
+  },
+  "artifact_name": "pi05_assembly_inertials_current_arm",
+  "assembly": {
+    "assembly_frame_id": "pi05_current_arm_base_frame",
+    "assembly_id": "pi05_current_arm",
+    "frame_units": "meter"
+  },
+  "blocking_reasons": [
+    "No measured-mass evidence is checked into repo state for the current arm.",
+    "CAD/MJCF priors remain separate from measured coverage and cannot authorize readiness."
+  ],
+  "cad_prior_summary": {
+    "origin": "CAD",
+    "prior_count": 7,
+    "source_mass_total_kg": 0.632006
+  },
+  "coverage": {
+    "missing_atom_ids": [
+      "base_structure_mass",
+      "gripper_structure_mass",
+      "lower_arm_structure_mass",
+      "moving_jaw_so101_v1_structure_mass",
+      "shoulder_structure_mass",
+      "upper_arm_structure_mass",
+      "wrist_structure_mass",
+      "servo_actuators_bundle_mass",
+      "horns_and_bearings_bundle_mass",
+      "fasteners_bundle_mass",
+      "wrist_camera_and_mount_bundle_mass",
+      "wiring_and_cable_bundles_bundle_mass",
+      "gripper_fingertips_and_pads_bundle_mass",
+      "attachments_and_payloads_bundle_mass"
+    ],
+    "missing_inventory_categories": [
+      "servo_actuators",
+      "horns_and_bearings",
+      "fasteners",
+      "wrist_camera_and_mount",
+      "wiring_and_cable_bundles",
+      "gripper_fingertips_and_pads",
+      "attachments_and_payloads"
+    ],
+    "required_atom_ids": [
+      "base_structure_mass",
+      "gripper_structure_mass",
+      "lower_arm_structure_mass",
+      "moving_jaw_so101_v1_structure_mass",
+      "shoulder_structure_mass",
+      "upper_arm_structure_mass",
+      "wrist_structure_mass",
+      "servo_actuators_bundle_mass",
+      "horns_and_bearings_bundle_mass",
+      "fasteners_bundle_mass",
+      "wrist_camera_and_mount_bundle_mass",
+      "wiring_and_cable_bundles_bundle_mass",
+      "gripper_fingertips_and_pads_bundle_mass",
+      "attachments_and_payloads_bundle_mass"
+    ],
+    "selected_atom_ids": [],
+    "selected_measurement_ids": [],
+    "unresolved_inventory_ids": [
+      "missing_servo_actuators",
+      "missing_horns_and_bearings",
+      "missing_fasteners",
+      "missing_wrist_camera_and_mount",
+      "missing_wiring_and_cable_bundles",
+      "missing_gripper_fingertips_and_pads",
+      "missing_attachments_and_payloads"
+    ]
+  },
+  "dependency_lock_ref": {
+    "file_sha256": "dad1fd6b7d02e87348c39b46377b0b3d57ee5f88ca62317ae0608598431561dd",
+    "identity_sha256": "8f291d678ba8c68f737daf9fa8939fd461dae519355d1ebdca21becbac5c02ae",
+    "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+    "schema_version": "scenesmith.robotics_dependency_lock.v1"
+  },
+  "identity_sha256": "5816faa0d05dd309a2768551cd50b845932ff5abbc355c11f146371d868580c4",
+  "intake_ref": {
+    "file_sha256": "7411a1edeaff3a2cbcc918fdd0e84585b5583fcf391f62a2583ee0ffd750f50d",
+    "identity_sha256": "35571daca435bb191313c9b22594c9fecaaef7abc68c8e7e2faa362692653b88",
+    "path": "configurations/robot_lab/pi05_measured_mass_intake.awaiting_measurements.json",
+    "schema_version": "scenesmith.measured_mass_intake.v1"
+  },
+  "physical_qualification_authority": false,
+  "rejected_evidence": [],
+  "rejected_measurements": [],
+  "schema_version": "scenesmith.assembly_inertials.v1",
+  "status": "blocked_missing_measurements",
+  "structural_diff_ref": {
+    "file_sha256": "ddf6d830016e9d714a0f11a9ccd37defef66eb3f1b5ad99abf2c417a7c4ac18d",
+    "identity_sha256": "fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9",
+    "path": "configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json",
+    "schema_version": "scenesmith.structural_twin_diff.v1"
+  },
+  "training_or_promotion_authority": false,
+  "twin_profile_ref": {
+    "file_sha256": "cc122e1ad9a85a6f9bab0895753c35ec28c5ea0aeb21def93169ba4a4f77226f",
+    "identity_sha256": "77a942306a012263d4f5f886eca692980c973de939c3e3ce06f1781567d34826",
+    "path": "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
+    "schema_version": "scenesmith.twin_profile.v1"
+  },
+  "unresolved_evidence": [
+    {
+      "category_id": "servo_actuators",
+      "category_label": "per-axis servos/actuators",
+      "inventory_id": "missing_servo_actuators",
+      "reason": "The repository does not prove the installed servo BOM or the measured servo masses.",
+      "required_for_ready": true
+    },
+    {
+      "category_id": "horns_and_bearings",
+      "category_label": "horns/bearings",
+      "inventory_id": "missing_horns_and_bearings",
+      "reason": "The repository does not prove the installed horn and bearing part counts or masses.",
+      "required_for_ready": true
+    },
+    {
+      "category_id": "fasteners",
+      "category_label": "fasteners",
+      "inventory_id": "missing_fasteners",
+      "reason": "The repository does not prove the installed fastener inventory or masses.",
+      "required_for_ready": true
+    },
+    {
+      "category_id": "wrist_camera_and_mount",
+      "category_label": "wrist camera and mount",
+      "inventory_id": "missing_wrist_camera_and_mount",
+      "reason": "The repository does not carry measured wrist-camera or mount masses for the current arm.",
+      "required_for_ready": true
+    },
+    {
+      "category_id": "wiring_and_cable_bundles",
+      "category_label": "wiring/cable bundles",
+      "inventory_id": "missing_wiring_and_cable_bundles",
+      "reason": "The repository does not prove the installed wire/cable routing or masses.",
+      "required_for_ready": true
+    },
+    {
+      "category_id": "gripper_fingertips_and_pads",
+      "category_label": "gripper fingertips/pads",
+      "inventory_id": "missing_gripper_fingertips_and_pads",
+      "reason": "The repository does not prove the installed fingertip or pad masses.",
+      "required_for_ready": true
+    },
+    {
+      "category_id": "attachments_and_payloads",
+      "category_label": "attachments/payloads",
+      "inventory_id": "missing_attachments_and_payloads",
+      "reason": "The repository does not prove any installed attachment or payload mass inventory.",
+      "required_for_ready": true
+    }
+  ]
+}

@@ -8,7 +8,7 @@ current_milestone: M16 Twin and dependency foundation
 current_task: T16.4 truthful missing-measurements intake and assembly inertia/COM compiler
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
 evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: implement T16.4 awaiting/blocked real artifacts plus synthetic compiler proof, then T16.5, M17-M19 prerequisites, and Gates C-D
+remaining: implement T16.4 synthetic ready-state compiler proof and hard-fail coverage/inertia validation, then T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
 next_step: execute brief 024; never relabel the seven CAD/MJCF mass priors as measured physical evidence
 ```
@@ -126,6 +126,20 @@ Remaining: checked-in awaiting-measurements intake, blocked current-arm result, 
 Blockers: real current-arm inertials remain blocked until physical measurements are supplied, but the offline compiler capability is implementable now
 Training lock: closed
 Next step: execute brief 024; do not execute superseded brief 023
+```
+
+### 2026-07-10 - T16.4 blocked real-artifact baseline
+
+```text
+Current task: T16.4
+State: in_progress
+Completed: added deterministic measured-mass intake and assembly inertials artifacts for the checked-in current arm; normal CLI write emits `awaiting_measurements` intake plus `blocked_missing_measurements` output bound to the dependency lock, TwinProfile, structural diff, and intake file hash; `--verify` passes and `--require-ready` rejects nonzero
+Evidence: configurations/robot_lab/pi05_measured_mass_intake.awaiting_measurements.json identity 35571daca435bb191313c9b22594c9fecaaef7abc68c8e7e2faa362692653b88; configurations/robot_lab/pi05_assembly_inertials.blocked_missing_measurements.json identity 5816faa0d05dd309a2768551cd50b845932ff5abbc355c11f146371d868580c4; 7 focused measured-inertial tests; live CLI write+verify; 52 broad robot-lab tests
+Commit: pending
+Remaining: synthetic_test_only ready-state compiler math, golden mass/COM/inertia fixture, overlap/double-count/tamper hard-fail coverage, and order-invariance checks
+Blockers: real current-arm physical inertials remain blocked until future measurements exist; offline synthetic compiler proof is still implementable
+Training lock: closed
+Next step: extend `scenesmith.robot_lab.measured_inertial_intake` to compile a synthetic ready fixture without changing the default blocked real artifact
 ```
 
 ### 2026-07-10 - T16.3 manager reopen after adversarial identity checks
