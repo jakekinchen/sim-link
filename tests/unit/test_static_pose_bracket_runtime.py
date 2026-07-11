@@ -179,6 +179,10 @@ class _FakeCamera:
         self.release_calls = 0
         self.release_successes = 0
 
+    @property
+    def evidence_mode(self) -> str:
+        return "deterministic_fixture"
+
     def open(self) -> None:
         self.events.append(
             f"camera:{self.camera['stable_camera_identity_sha256']}:open"
