@@ -27,7 +27,9 @@ from scenesmith.robot_lab.live_readonly_observation import (
     capture_finite_camera_frames,
     execute_live_servo_census,
     parse_avfoundation_video_devices,
+    parse_serial_device_holders,
     parse_system_camera_devices,
+    require_no_serial_device_holders,
     resolve_camera_selection,
     resolve_follower_identity,
     verify_discovery_stability,
@@ -443,6 +445,25 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "ambiguous"):
             resolve_camera_selection(duplicate_name, [0])
 
+    def test_serial_holder_parser_and_zero_holder_gate_fail_closed(self):
+        holders = parse_serial_device_holders("p62234\ncpython3.13\nf15\ntCHR\n")
+        self.assertEqual(
+            holders,
+            [
+                {
+                    "pid": 62234,
+                    "command": "python3.13",
+                    "file_descriptors": ["15"],
+                    "file_types": ["CHR"],
+                }
+            ],
+        )
+        with self.assertRaisesRegex(ValueError, "independent holder"):
+            require_no_serial_device_holders(holders)
+        require_no_serial_device_holders([])
+        with self.assertRaisesRegex(ValueError, "unknown field"):
+            parse_serial_device_holders("p1\ncbus\nzunexpected\n")
+
     def test_camera_metadata_parsers_and_selection_are_exact(self):
         ffmpeg = """
 [AVFoundation indev @ 0x1] AVFoundation video devices:
@@ -607,6 +628,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
                 ),
                 pre_open_discovery=_discovery(),
                 post_close_discovery=_discovery(),
+                pre_open_serial_holders=[],
+                post_close_serial_holders=[],
             )
 
     def test_camera_capture_is_finite_timestamped_and_releases_once(self):
@@ -763,6 +786,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             frames=frames,
             pre_open_discovery=_discovery(),
             post_close_discovery=_discovery(),
+            pre_open_serial_holders=[],
+            post_close_serial_holders=[],
         )
         with tempfile.TemporaryDirectory() as temporary_directory:
             refs = write_private_observation_bundle(
@@ -781,6 +806,17 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(counts["subprocess_terminate_attempts"], 0)
         self.assertEqual(counts["subprocess_kill_attempts"], 0)
         self.assertEqual(counts["capture_property_writes"], 0)
+        self.assertEqual(
+            private["serial_device_holder_counts"],
+            {
+                "pre_open": 0,
+                "post_close": 0,
+            },
+        )
+        self.assertEqual(
+            manifest["serial_device_holder_counts"],
+            private["serial_device_holder_counts"],
+        )
         self.assertTrue(
             all(camera["camera_backend_audit_sha256"] for camera in manifest["cameras"])
         )
@@ -857,6 +893,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             frames=frames,
             pre_open_discovery=_discovery(),
             post_close_discovery=_discovery(),
+            pre_open_serial_holders=[],
+            post_close_serial_holders=[],
         )
         with tempfile.TemporaryDirectory() as temporary_directory:
             refs = write_private_observation_bundle(

@@ -886,11 +886,15 @@ def build_private_observation_evidence(
     frames: list[dict[str, Any]],
     pre_open_discovery: dict[str, Any],
     post_close_discovery: dict[str, Any],
+    pre_open_serial_holders: list[dict[str, Any]],
+    post_close_serial_holders: list[dict[str, Any]],
 ) -> dict[str, Any]:
     _verify_live_servo_result(servo_result, execution_contract=execution_contract)
     _verify_captured_frames(frames, execution_contract=execution_contract)
     verify_discovery_stability(execution_contract["discovery"], pre_open_discovery)
     verify_discovery_stability(execution_contract["discovery"], post_close_discovery)
+    require_no_serial_device_holders(pre_open_serial_holders)
+    require_no_serial_device_holders(post_close_serial_holders)
     servo_midpoint = (
         servo_result["observation_started_monotonic_ns"]
         + servo_result["observation_finished_monotonic_ns"]
@@ -928,6 +932,10 @@ def build_private_observation_evidence(
         "discovery_identity_sha256": execution_contract["discovery_identity_sha256"],
         "pre_open_discovery_identity_sha256": pre_open_discovery["identity_sha256"],
         "post_close_discovery_identity_sha256": post_close_discovery["identity_sha256"],
+        "serial_device_holder_counts": {
+            "pre_open": len(pre_open_serial_holders),
+            "post_close": len(post_close_serial_holders),
+        },
         "discovery_stability": (
             "exact_serial_and_stable_camera_identity_match_"
             "numeric_index_churn_allowed"
@@ -1130,6 +1138,9 @@ def build_redacted_observation_manifest(
         "post_close_discovery_identity_sha256": private_evidence[
             "post_close_discovery_identity_sha256"
         ],
+        "serial_device_holder_counts": copy.deepcopy(
+            private_evidence["serial_device_holder_counts"]
+        ),
         "cameras": cameras,
         "max_host_observed_skew_ns": private_evidence["max_host_observed_skew_ns"],
         "timestamp_scope": private_evidence["timestamp_scope"],
@@ -1182,6 +1193,120 @@ def enumerate_serial_candidates() -> list[dict[str, Any]]:
             }
         )
     return _merge_serial_aliases(records)
+
+
+def parse_serial_device_holders(output: str) -> list[dict[str, Any]]:
+    if not isinstance(output, str):
+        raise ValueError("Serial holder discovery output must be text")
+    records: list[dict[str, Any]] = []
+    current: dict[str, Any] | None = None
+    for line in output.splitlines():
+        if not line:
+            continue
+        tag, value = line[0], line[1:]
+        if tag == "p":
+            if current is not None:
+                records.append(current)
+            try:
+                pid = int(value)
+            except ValueError as exc:
+                raise ValueError("Serial holder PID is malformed") from exc
+            if pid <= 0:
+                raise ValueError("Serial holder PID is invalid")
+            current = {
+                "pid": pid,
+                "command": None,
+                "file_descriptors": [],
+                "file_types": [],
+            }
+        elif current is None:
+            raise ValueError("Serial holder discovery field precedes its process")
+        elif tag == "c":
+            if current["command"] is not None:
+                raise ValueError("Serial holder command is duplicated")
+            current["command"] = require_nonblank(
+                value,
+                label="serial holder command",
+            )
+        elif tag == "f":
+            current["file_descriptors"].append(
+                require_nonblank(value, label="serial holder file descriptor")
+            )
+        elif tag == "t":
+            current["file_types"].append(
+                require_nonblank(value, label="serial holder file type")
+            )
+        else:
+            raise ValueError("Serial holder discovery contains an unknown field")
+    if current is not None:
+        records.append(current)
+    for record in records:
+        if (
+            record["command"] is None
+            or not record["file_descriptors"]
+            or len(record["file_descriptors"]) != len(record["file_types"])
+        ):
+            raise ValueError("Serial holder discovery record is incomplete")
+        record["file_descriptors"] = sorted(record["file_descriptors"])
+        record["file_types"] = sorted(record["file_types"])
+    if len({record["pid"] for record in records}) != len(records):
+        raise ValueError("Serial holder discovery repeats a process")
+    return sorted(records, key=lambda record: record["pid"])
+
+
+def enumerate_serial_device_holders(device_path: str) -> list[dict[str, Any]]:
+    if device_path != KNOWN_PHYSICAL_FOLLOWER_PORT:
+        raise ValueError("Serial holder discovery path is not the pinned follower")
+    result = subprocess.run(
+        ["/usr/sbin/lsof", "-nP", "-F", "pcft", device_path],
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    )
+    if result.returncode not in {0, 1}:
+        raise RuntimeError("Serial holder discovery command failed")
+    if result.stderr.strip():
+        raise RuntimeError("Serial holder discovery command emitted stderr")
+    holders = parse_serial_device_holders(result.stdout)
+    if result.returncode == 1 and holders:
+        raise ValueError("Serial holder discovery status contradicts its output")
+    return holders
+
+
+def require_no_serial_device_holders(holders: list[dict[str, Any]]) -> None:
+    if not isinstance(holders, list):
+        raise ValueError("Serial holder snapshot must be a list")
+    if any(
+        not isinstance(record, dict)
+        or set(record) != {"pid", "command", "file_descriptors", "file_types"}
+        or isinstance(record["pid"], bool)
+        or not isinstance(record["pid"], int)
+        or record["pid"] <= 0
+        or not isinstance(record["command"], str)
+        or not record["command"]
+        or not isinstance(record["file_descriptors"], list)
+        or not record["file_descriptors"]
+        or record["file_descriptors"] != sorted(record["file_descriptors"])
+        or any(
+            not isinstance(value, str) or not value
+            for value in record["file_descriptors"]
+        )
+        or not isinstance(record["file_types"], list)
+        or len(record["file_types"]) != len(record["file_descriptors"])
+        or record["file_types"] != sorted(record["file_types"])
+        or any(
+            not isinstance(value, str) or not value for value in record["file_types"]
+        )
+        for record in holders
+    ) or holders != sorted(holders, key=lambda record: record["pid"]):
+        raise ValueError("Serial holder snapshot is not normalized")
+    if len({record["pid"] for record in holders}) != len(holders):
+        raise ValueError("Serial holder snapshot repeats a process")
+    if holders:
+        raise ValueError(
+            f"Follower serial device has {len(holders)} independent holder(s)"
+        )
 
 
 def enumerate_camera_metadata() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:

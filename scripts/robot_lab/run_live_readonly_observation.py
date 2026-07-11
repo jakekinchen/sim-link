@@ -32,9 +32,11 @@ from scenesmith.robot_lab.live_readonly_observation import (
     capture_live_discovery,
     construct_pinned_feetech_bus,
     execute_live_servo_census,
+    enumerate_serial_device_holders,
     verify_discovery_stability,
     verify_live_execution_contract,
     verify_redacted_observation_manifest,
+    require_no_serial_device_holders,
     write_private_observation_bundle,
 )
 
@@ -195,6 +197,11 @@ def main() -> int:
         captured_at=_now_iso(),
     )
     verify_discovery_stability(contract["discovery"], before)
+    serial_path = contract["live_census_contract"]["target_device_identity"]["usb"][
+        "canonical_path"
+    ]
+    pre_open_serial_holders = enumerate_serial_device_holders(serial_path)
+    require_no_serial_device_holders(pre_open_serial_holders)
     servo_result = execute_live_servo_census(
         contract,
         project_state=state,
@@ -205,6 +212,8 @@ def main() -> int:
         ),
         monotonic_ns=time.monotonic_ns,
     )
+    post_close_serial_holders = enumerate_serial_device_holders(serial_path)
+    require_no_serial_device_holders(post_close_serial_holders)
     frames = capture_finite_camera_frames(
         contract,
         project_state=state,
@@ -234,6 +243,8 @@ def main() -> int:
         frames=frames,
         pre_open_discovery=before,
         post_close_discovery=after,
+        pre_open_serial_holders=pre_open_serial_holders,
+        post_close_serial_holders=post_close_serial_holders,
     )
     private_output = _resolve_private_directory(args.private_output_dir)
     refs = write_private_observation_bundle(
