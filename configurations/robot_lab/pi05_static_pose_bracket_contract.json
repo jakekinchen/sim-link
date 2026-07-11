@@ -1,0 +1,185 @@
+{
+  "accepted_live_manifest": {
+    "file_sha256": "cd4120f0eca6b8e53de7cbc4bafb8e1a74bb5f7119b2e4db0570a401b29e9a40",
+    "identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
+    "logical_path": "configurations/robot_lab/pi05_live_readonly_observation.redacted.json",
+    "schema_version": "scenesmith.live_readonly_observation_manifest.v4",
+    "size_bytes": 8860
+  },
+  "authority_not_granted": [
+    "static_pose_bracketed_observation",
+    "policy_shadow_input_valid",
+    "policy_shadow",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "simulation_training_ready",
+    "supervised_micro_motion"
+  ],
+  "calibration_profile": {
+    "file_sha256": "317cf26de4a09d674cd1bbb69209c17fced398d707a6305e2baac75ff1498df1",
+    "identity_sha256": "b360b4f60077846c62128fe4d4cc33d1ee4e6e72aa7831fcb7c6706e6b6599b4",
+    "logical_path": "configurations/robot_lab/pi05_calibration_profile.json",
+    "schema_version": "scenesmith.calibration_profile.v1",
+    "size_bytes": 6543
+  },
+  "camera_count": 2,
+  "cameras": [
+    {
+      "camera_identity_sha256": "e2b9b6eb486fcef57503e1ac567f67b271435dd2b6212fcbb82ebbb8d088903a",
+      "input_mode": {
+        "framerate_fps": 30,
+        "height": 480,
+        "pixel_format": "uyvy422",
+        "width": 640
+      },
+      "required_channels": 3,
+      "required_encoding": "png",
+      "required_frame_count": 2
+    },
+    {
+      "camera_identity_sha256": "e3b8b82c1ed6436c4fd9a7e01fadf08cb9ba3248bda26ebafa43bb5190c2d6a7",
+      "input_mode": {
+        "framerate_fps": 30,
+        "height": 480,
+        "pixel_format": "yuyv422",
+        "width": 640
+      },
+      "required_channels": 3,
+      "required_encoding": "png",
+      "required_frame_count": 2
+    }
+  ],
+  "contract_name": "pi05_static_pose_bracket_contract",
+  "evidence_mode": "offline_contract_bound_to_accepted_physical_identities",
+  "hardware_accessed": false,
+  "identity_sha256": "90e7baea43ebc059c09ef45b615c5808cf74abbbab87948a23536666acb43ceb",
+  "joint_count": 6,
+  "joints": [
+    {
+      "coordinate_units": "degrees",
+      "joint_name": "shoulder_pan",
+      "normalization_mode": "degrees",
+      "range_max": 3491,
+      "range_min": 755,
+      "raw_units": "raw_position_ticks",
+      "servo_id": 1,
+      "tolerance": 0.5
+    },
+    {
+      "coordinate_units": "degrees",
+      "joint_name": "shoulder_lift",
+      "normalization_mode": "degrees",
+      "range_max": 3229,
+      "range_min": 803,
+      "raw_units": "raw_position_ticks",
+      "servo_id": 2,
+      "tolerance": 0.5
+    },
+    {
+      "coordinate_units": "degrees",
+      "joint_name": "elbow_flex",
+      "normalization_mode": "degrees",
+      "range_max": 3076,
+      "range_min": 753,
+      "raw_units": "raw_position_ticks",
+      "servo_id": 3,
+      "tolerance": 0.5
+    },
+    {
+      "coordinate_units": "degrees",
+      "joint_name": "wrist_flex",
+      "normalization_mode": "degrees",
+      "range_max": 3284,
+      "range_min": 839,
+      "raw_units": "raw_position_ticks",
+      "servo_id": 4,
+      "tolerance": 0.5
+    },
+    {
+      "coordinate_units": "degrees",
+      "joint_name": "wrist_roll",
+      "normalization_mode": "degrees",
+      "range_max": 4095,
+      "range_min": 0,
+      "raw_units": "raw_position_ticks",
+      "servo_id": 5,
+      "tolerance": 0.5
+    },
+    {
+      "coordinate_units": "percent",
+      "joint_name": "gripper",
+      "normalization_mode": "range_0_100",
+      "range_max": 2324,
+      "range_min": 1482,
+      "raw_units": "raw_position_ticks",
+      "servo_id": 6,
+      "tolerance": 0.5
+    }
+  ],
+  "lifecycle_constraints": {
+    "disconnect_disable_torque": false,
+    "handshake": false,
+    "teardown_may_change_torque": false,
+    "teardown_may_command_motion": false,
+    "teardown_may_write_register": false
+  },
+  "local_capabilities": [
+    "static_pose_bracket_contract_valid"
+  ],
+  "motion_authority_granted": false,
+  "operation_counts": {
+    "camera_batch_attempts": 2,
+    "camera_batch_successes": 2,
+    "camera_frame_reads": 4,
+    "close_attempts": 1,
+    "close_successes": 1,
+    "configuration_writes": 0,
+    "connect_attempts": 1,
+    "connect_successes": 1,
+    "construct_attempts": 1,
+    "construct_successes": 1,
+    "motion_commands": 0,
+    "motor_register_writes": 0,
+    "position_read_attempts": 12,
+    "position_read_successes": 12,
+    "read_retries": 0,
+    "torque_changes": 0,
+    "unexpected_operations": 0
+  },
+  "physical_follower_commanded": false,
+  "policy_inference_run": false,
+  "privacy": {
+    "raw_calibration_path_included": false,
+    "raw_camera_name_included": false,
+    "raw_device_path_included": false,
+    "raw_usb_serial_included": false
+  },
+  "qualification_scope": "local_static_pose_bracket_contract",
+  "read_plan": {
+    "phase_order": [
+      "q_before",
+      "finite_camera_batch",
+      "q_after"
+    ],
+    "position_reads_per_phase": 6,
+    "raw_values_must_be_within_calibrated_range": true,
+    "register": "Present_Position",
+    "register_width_bytes": 2,
+    "total_position_reads": 12
+  },
+  "schema_version": "scenesmith.static_pose_bracket_contract.v1",
+  "serial_holder_contract": {
+    "canonical_and_observed_aliases_required": true,
+    "path_set_must_remain_stable": true,
+    "post_close_deduplicated_holder_count": 0,
+    "pre_open_deduplicated_holder_count": 0,
+    "signed_snapshot_required": true
+  },
+  "timing_contract": {
+    "clock": "host_monotonic_ns",
+    "maximum_bracket_duration_ns": 5000000000,
+    "strict_camera_interval_enclosure": true
+  },
+  "training_authority_granted": false
+}

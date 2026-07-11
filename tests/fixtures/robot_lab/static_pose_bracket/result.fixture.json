@@ -1,0 +1,132 @@
+{
+  "authority_not_granted": [
+    "static_pose_bracketed_observation",
+    "policy_shadow_input_valid",
+    "policy_shadow",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "simulation_training_ready",
+    "supervised_micro_motion"
+  ],
+  "contract_identity_sha256": "90e7baea43ebc059c09ef45b615c5808cf74abbbab87948a23536666acb43ceb",
+  "evidence_mode": "deterministic_fixture_evaluation",
+  "gripper_drift_percent": 0.3562945368171029,
+  "hardware_accessed": false,
+  "identity_sha256": "6ebb9bd63c7267f193f4754af11012ac6e768404749891f4033381fa4ad0a410",
+  "joint_drift": [
+    {
+      "absolute_delta": 0.3516483516483515,
+      "coordinate_after": -1.6703296703296704,
+      "coordinate_before": -2.021978021978022,
+      "coordinate_units": "degrees",
+      "joint_name": "shoulder_pan",
+      "raw_after": 2104,
+      "raw_before": 2100,
+      "servo_id": 1,
+      "tolerance": 0.5,
+      "within_tolerance": true
+    },
+    {
+      "absolute_delta": 0.35164835164835173,
+      "coordinate_after": -1.054945054945055,
+      "coordinate_before": -1.4065934065934067,
+      "coordinate_units": "degrees",
+      "joint_name": "shoulder_lift",
+      "raw_after": 2004,
+      "raw_before": 2000,
+      "servo_id": 2,
+      "tolerance": 0.5,
+      "within_tolerance": true
+    },
+    {
+      "absolute_delta": 0.3516483516483515,
+      "coordinate_after": -0.9230769230769231,
+      "coordinate_before": -1.2747252747252746,
+      "coordinate_units": "degrees",
+      "joint_name": "elbow_flex",
+      "raw_after": 1904,
+      "raw_before": 1900,
+      "servo_id": 3,
+      "tolerance": 0.5,
+      "within_tolerance": true
+    },
+    {
+      "absolute_delta": 0.3516483516483522,
+      "coordinate_after": -5.054945054945055,
+      "coordinate_before": -5.406593406593407,
+      "coordinate_units": "degrees",
+      "joint_name": "wrist_flex",
+      "raw_after": 2004,
+      "raw_before": 2000,
+      "servo_id": 4,
+      "tolerance": 0.5,
+      "within_tolerance": true
+    },
+    {
+      "absolute_delta": 0.3516483516483516,
+      "coordinate_after": 0.3956043956043956,
+      "coordinate_before": 0.04395604395604396,
+      "coordinate_units": "degrees",
+      "joint_name": "wrist_roll",
+      "raw_after": 2052,
+      "raw_before": 2048,
+      "servo_id": 5,
+      "tolerance": 0.5,
+      "within_tolerance": true
+    },
+    {
+      "absolute_delta": 0.3562945368171029,
+      "coordinate_after": 50.0,
+      "coordinate_before": 49.6437054631829,
+      "coordinate_units": "percent",
+      "joint_name": "gripper",
+      "raw_after": 1903,
+      "raw_before": 1900,
+      "servo_id": 6,
+      "tolerance": 0.5,
+      "within_tolerance": true
+    }
+  ],
+  "local_capabilities": [
+    "fixture_static_pose_bracket_conformant"
+  ],
+  "maximum_body_drift_degrees": 0.3516483516483522,
+  "motion_authority_granted": false,
+  "observation_identity_sha256": "84d0aa12687574be6bae575f74dcb7e68c9b5643e4e086c9e1461f4e91bb64a4",
+  "operation_counts": {
+    "camera_batch_attempts": 2,
+    "camera_batch_successes": 2,
+    "camera_frame_reads": 4,
+    "close_attempts": 1,
+    "close_successes": 1,
+    "configuration_writes": 0,
+    "connect_attempts": 1,
+    "connect_successes": 1,
+    "construct_attempts": 1,
+    "construct_successes": 1,
+    "motion_commands": 0,
+    "motor_register_writes": 0,
+    "position_read_attempts": 12,
+    "position_read_successes": 12,
+    "read_retries": 0,
+    "torque_changes": 0,
+    "unexpected_operations": 0
+  },
+  "physical_follower_commanded": false,
+  "policy_inference_run": false,
+  "qualification_scope": "fixture_static_pose_bracket",
+  "result_name": "pi05_static_pose_bracket_fixture_result",
+  "schema_version": "scenesmith.static_pose_bracket_result.v1",
+  "static_pose_within_tolerance": true,
+  "timing": {
+    "bracket_duration_ns": 1320000000,
+    "bracket_finished_monotonic_ns": 2320000000,
+    "bracket_started_monotonic_ns": 1000000000,
+    "camera_receive_duration_ns": 1100000000,
+    "camera_receive_finished_monotonic_ns": 2200000000,
+    "camera_receive_started_monotonic_ns": 1100000000,
+    "maximum_bracket_duration_ns": 5000000000
+  },
+  "training_authority_granted": false
+}

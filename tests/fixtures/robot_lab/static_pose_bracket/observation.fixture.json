@@ -1,0 +1,158 @@
+{
+  "cameras": [
+    {
+      "camera_identity_sha256": "e2b9b6eb486fcef57503e1ac567f67b271435dd2b6212fcbb82ebbb8d088903a",
+      "frames": [
+        {
+          "channels": 3,
+          "encoding": "png",
+          "frame_index": 0,
+          "frame_sha256": "68fb64defaf8e64505dfe76a125e6f28ab9bdad9a0c8639b358e1a677a0c6ce0",
+          "height": 480,
+          "width": 640
+        },
+        {
+          "channels": 3,
+          "encoding": "png",
+          "frame_index": 1,
+          "frame_sha256": "79493314e9a5c090ff7b0cebe5be24144aa6bf8b3ad4f3af927c6c1244df0999",
+          "height": 480,
+          "width": 640
+        }
+      ],
+      "input_mode": {
+        "framerate_fps": 30,
+        "height": 480,
+        "pixel_format": "uyvy422",
+        "width": 640
+      }
+    },
+    {
+      "camera_identity_sha256": "e3b8b82c1ed6436c4fd9a7e01fadf08cb9ba3248bda26ebafa43bb5190c2d6a7",
+      "frames": [
+        {
+          "channels": 3,
+          "encoding": "png",
+          "frame_index": 0,
+          "frame_sha256": "e653556870790398d0bcc94b211881bc73a8212597b70c72602ca475e033579c",
+          "height": 480,
+          "width": 640
+        },
+        {
+          "channels": 3,
+          "encoding": "png",
+          "frame_index": 1,
+          "frame_sha256": "c96458f147f1dc6a029d5ee0bd054893eba61ad38ee26b03f78742bdb4122d85",
+          "height": 480,
+          "width": 640
+        }
+      ],
+      "input_mode": {
+        "framerate_fps": 30,
+        "height": 480,
+        "pixel_format": "yuyv422",
+        "width": 640
+      }
+    }
+  ],
+  "contract_identity_sha256": "90e7baea43ebc059c09ef45b615c5808cf74abbbab87948a23536666acb43ceb",
+  "evidence_mode": "deterministic_fixture",
+  "fixture_only": true,
+  "hardware_accessed": false,
+  "identity_sha256": "84d0aa12687574be6bae575f74dcb7e68c9b5643e4e086c9e1461f4e91bb64a4",
+  "observation_name": "pi05_static_pose_bracket_fixture_observation",
+  "operation_counts": {
+    "camera_batch_attempts": 2,
+    "camera_batch_successes": 2,
+    "camera_frame_reads": 4,
+    "close_attempts": 1,
+    "close_successes": 1,
+    "configuration_writes": 0,
+    "connect_attempts": 1,
+    "connect_successes": 1,
+    "construct_attempts": 1,
+    "construct_successes": 1,
+    "motion_commands": 0,
+    "motor_register_writes": 0,
+    "position_read_attempts": 12,
+    "position_read_successes": 12,
+    "read_retries": 0,
+    "torque_changes": 0,
+    "unexpected_operations": 0
+  },
+  "physical_follower_commanded": false,
+  "policy_inference_run": false,
+  "q_after": [
+    {
+      "joint_name": "shoulder_pan",
+      "raw_position": 2104,
+      "servo_id": 1
+    },
+    {
+      "joint_name": "shoulder_lift",
+      "raw_position": 2004,
+      "servo_id": 2
+    },
+    {
+      "joint_name": "elbow_flex",
+      "raw_position": 1904,
+      "servo_id": 3
+    },
+    {
+      "joint_name": "wrist_flex",
+      "raw_position": 2004,
+      "servo_id": 4
+    },
+    {
+      "joint_name": "wrist_roll",
+      "raw_position": 2052,
+      "servo_id": 5
+    },
+    {
+      "joint_name": "gripper",
+      "raw_position": 1903,
+      "servo_id": 6
+    }
+  ],
+  "q_before": [
+    {
+      "joint_name": "shoulder_pan",
+      "raw_position": 2100,
+      "servo_id": 1
+    },
+    {
+      "joint_name": "shoulder_lift",
+      "raw_position": 2000,
+      "servo_id": 2
+    },
+    {
+      "joint_name": "elbow_flex",
+      "raw_position": 1900,
+      "servo_id": 3
+    },
+    {
+      "joint_name": "wrist_flex",
+      "raw_position": 2000,
+      "servo_id": 4
+    },
+    {
+      "joint_name": "wrist_roll",
+      "raw_position": 2048,
+      "servo_id": 5
+    },
+    {
+      "joint_name": "gripper",
+      "raw_position": 1900,
+      "servo_id": 6
+    }
+  ],
+  "schema_version": "scenesmith.static_pose_bracket_observation.v1",
+  "timing": {
+    "camera_receive_finished_monotonic_ns": 2200000000,
+    "camera_receive_started_monotonic_ns": 1100000000,
+    "q_after_finished_monotonic_ns": 2320000000,
+    "q_after_started_monotonic_ns": 2300000000,
+    "q_before_finished_monotonic_ns": 1020000000,
+    "q_before_started_monotonic_ns": 1000000000
+  }
+}
