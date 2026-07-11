@@ -21,11 +21,11 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute brief `docs/briefs/027-synthetic-measured-inertial-ready-closeout.md`
-to finish T16.4. Keep the checked-in real current-arm artifacts truthfully
-blocked, and prove ready-state compilation only with a `synthetic_test_only`
-fixture plus deterministic golden mass/COM/inertia evidence. Do not open
-hardware, qualification, or training work.
+Execute brief `docs/briefs/028-synthetic-ready-closeout-and-cli-path-safety.md`
+to finish T16.4. Repair custom absolute-path handling, keep the checked-in real
+current-arm artifacts truthfully blocked, and prove ready-state compilation
+only with a `synthetic_test_only` fixture plus deterministic golden
+mass/COM/inertia evidence. Do not open hardware, qualification, or training.
 
 ## Durable State
 

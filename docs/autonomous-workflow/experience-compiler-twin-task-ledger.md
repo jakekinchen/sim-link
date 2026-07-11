@@ -10,7 +10,7 @@ completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins veri
 evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
 remaining: implement the synthetic ready compiler and hard-fail coverage/inertia validation, then T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 026 Part B; keep the default real arm blocked and prove readiness only with a synthetic_test_only fixture
+next_step: execute brief 028 for custom-path safety plus the synthetic_test_only ready compiler, golden mass/COM/inertia proof, and hard-fail coverage/inertia matrix
 ```
 
 ## Rules
@@ -113,6 +113,20 @@ next_step: execute brief 026 Part B; keep the default real arm blocked and prove
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.4 custom CLI path defect added to closeout
+
+```text
+Current task: T16.4
+State: in_progress
+Completed: independent rerun confirmed all embedded-prior attacks fail and existing outputs remain unchanged
+Evidence: valid canonical intake copied outside repo fails before CLI write/verify because _relative_to_repo unconditionally calls relative_to(REPO_ROOT) on absolute paths
+Commit: pending
+Remaining: support bounded absolute custom paths with correct artifact refs, then complete synthetic ready math and negative matrix
+Blockers: none for offline correction
+Training lock: closed
+Next step: execute brief 028; brief 027 is superseded
+```
 
 ### 2026-07-10 - T16.4 embedded CAD prior integrity gap
 
