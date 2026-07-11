@@ -109,10 +109,13 @@ is remotely preserved and the corrected capture/private/manifest verifiers
 reject the actual attempt-005 candidate. Both cameras' signed discovery sets
 contain 640x480 modes at 30.000030 fps. Brief 047 is active offline to require
 at least 640x480 and choose the smallest qualifying signed mode, avoiding the
-already disproven sub-640 RealSense selection. Sequential capture is not
-synchronized or policy-input-valid. Studio reconnect remains deferred unless
-exact device, calibration, and current-pose evidence proves it mechanically
-no-motion-safe.
+already disproven sub-640 RealSense selection. Implementation `e68068a` is
+remotely preserved: actual discovery now resolves C922 YUYV 640x480 and
+RealSense UYVY 640x480 at integer 30 fps, and sub-floor-only cameras reject.
+The live gate remains closed pending a separate review commit. Sequential
+capture is not synchronized or policy-input-valid. Studio reconnect remains
+deferred unless exact device, calibration, and current-pose evidence proves it
+mechanically no-motion-safe.
 
 ## Durable State
 

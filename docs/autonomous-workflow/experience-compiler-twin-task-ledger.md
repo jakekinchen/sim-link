@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; Brief 046 exact output-dimension enforcement verified at 6eb5f89; live gate closed; Brief 047 signed 640x480-minimum selection active offline
+current_task: T16.5b in progress; Brief 047 signed 640x480-minimum selection verified at e68068a; live gate closed for separate review
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: 6eb5f89 remote; 53 focused, 33 LeLab-runtime camera, and 232 broad tests; corrected verifier rejects actual attempt-005 candidate; both signed camera mode sets include 640x480@30.000030
+evidence: e68068a remote; actual discovery selects C922 yuyv422 640x480 and RealSense uyvy422 640x480; 53 focused, 33 LeLab-runtime camera, and 232 broad tests
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: current selection can choose the live-disproven sub-640 RealSense mode
-next_step: implement and verify Brief 047 signed 640x480-minimum selection offline; keep live gate closed
+blockers: none in Brief 047; live gate remains closed until a separate reviewed remote transition
+next_step: close Brief 047 canonically; separately review whether one final finite read-only session fits the safe closeout window
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: implement and verify Brief 047 signed 640x480-minimum selection offli
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 046 `6eb5f89` verifies exact decoded dimensions and rejects actual attempt 005; Brief 047 requires signed >=640x480 selection; gate closed |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 047 `e68068a` selects signed >=640x480 exact modes; both actual cameras resolve at 640x480@30; gate closed for separate review |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,19 @@ next_step: implement and verify Brief 047 signed 640x480-minimum selection offli
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 047 signed 640x480 mode floor verified offline
+
+```text
+Current task: T16.5b
+State: in_progress; Brief 047 verified offline; live gate closed for separate review
+Selection: signed modes must be at least 640x480 and support integer 30 fps within 0.01; then choose smallest area and reviewed pixel-format priority; no default or cross-camera fallback
+Actual discovery regression: C922 yuyv422 640x480@30; RealSense uyvy422 640x480@30; sub-floor 160x90 and 424x240 excluded
+Evidence: e68068a remote; 53 focused tests; 33 LeLab-runtime camera tests; 232 broad tests in 71.477 seconds; actual discovery selection; offline/compile/diff checks
+Hardware: none during Brief 047; live gate closed; no discovery/open, Studio request, reconnect, write, torque change, motion, policy, optimizer, or paid compute
+Training lock: closed
+Next step: canonical closeout, then separate final-session gate decision only if safe window remains
+```
 
 ### 2026-07-11 - Brief 046 exact output dimensions verified offline
 
