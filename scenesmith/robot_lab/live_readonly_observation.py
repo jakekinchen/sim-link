@@ -84,6 +84,8 @@ DEFAULT_FRAME_COUNT_PER_CAMERA = 2
 CAMERA_READ_TIMEOUT_SECONDS = 5
 CAMERA_FRAMERATE_FPS = 30
 CAMERA_FRAMERATE_MATCH_TOLERANCE_FPS = 0.01
+CAMERA_MIN_WIDTH = 640
+CAMERA_MIN_HEIGHT = 480
 CAMERA_PIXEL_FORMAT_PRIORITY = ("uyvy422", "yuyv422", "nv12", "0rgb", "bgr0")
 CAMERA_PIXEL_FORMAT_BY_FOURCC = {
     "2vuy": "uyvy422",
@@ -3271,14 +3273,20 @@ def select_camera_input_mode(camera: dict[str, Any]) -> dict[str, Any]:
         mode
         for mode in normalized["supported_modes"]
         if (
-            mode["min_framerate_fps"] - CAMERA_FRAMERATE_MATCH_TOLERANCE_FPS
+            mode["width"] >= CAMERA_MIN_WIDTH
+            and mode["height"] >= CAMERA_MIN_HEIGHT
+            and mode["min_framerate_fps"]
+            - CAMERA_FRAMERATE_MATCH_TOLERANCE_FPS
             <= CAMERA_FRAMERATE_FPS
             <= mode["max_framerate_fps"]
             + CAMERA_FRAMERATE_MATCH_TOLERANCE_FPS
         )
     ]
     if not candidates:
-        raise ValueError("Camera has no signed supported mode at exact 30 fps")
+        raise ValueError(
+            "Camera has no signed supported mode at exact 30 fps and minimum "
+            f"{CAMERA_MIN_WIDTH}x{CAMERA_MIN_HEIGHT}"
+        )
     selected = min(candidates, key=_camera_supported_mode_sort_key)
     return _normalize_camera_input_mode({
         "pixel_format": selected["pixel_format"],

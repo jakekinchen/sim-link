@@ -116,6 +116,13 @@ def _system_cameras() -> list[dict]:
             "model_id": "UVC Camera Vendor_1234 Product_0001",
             "supported_modes": [
                 {
+                    "pixel_format": "yuyv422",
+                    "width": 160,
+                    "height": 90,
+                    "min_framerate_fps": 30.0,
+                    "max_framerate_fps": 30.0,
+                },
+                {
                     "pixel_format": "uyvy422",
                     "width": 640,
                     "height": 480,
@@ -137,6 +144,13 @@ def _system_cameras() -> list[dict]:
             "model_id": "UVC Camera Vendor_1234 Product_0002",
             "supported_modes": [
                 {
+                    "pixel_format": "yuyv422",
+                    "width": 424,
+                    "height": 240,
+                    "min_framerate_fps": 30.0,
+                    "max_framerate_fps": 30.0,
+                },
+                {
                     "pixel_format": "nv12",
                     "width": 640,
                     "height": 480,
@@ -156,6 +170,13 @@ def _supported_modes_payload() -> dict:
                 "unique_id": "side-camera-001",
                 "model_id": "UVC Camera Vendor_1234 Product_0001",
                 "formats": [
+                    {
+                        "fourcc": "yuvs",
+                        "width": 160,
+                        "height": 90,
+                        "min_framerate_fps": 30.0,
+                        "max_framerate_fps": 30.0,
+                    },
                     {
                         "fourcc": "2vuy",
                         "width": 640,
@@ -177,6 +198,13 @@ def _supported_modes_payload() -> dict:
                 "unique_id": "overhead-camera-001",
                 "model_id": "UVC Camera Vendor_1234 Product_0002",
                 "formats": [
+                    {
+                        "fourcc": "yuvs",
+                        "width": 424,
+                        "height": 240,
+                        "min_framerate_fps": 30.0,
+                        "max_framerate_fps": 30.0,
+                    },
                     {
                         "fourcc": "420v",
                         "width": 640,
@@ -770,6 +798,14 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         ]
         with self.assertRaisesRegex(ValueError, "no supported reviewed"):
             parse_system_camera_supported_modes(unknown)
+
+        sub_floor = copy.deepcopy(_discovery())
+        sub_floor["system_cameras"][0]["supported_modes"] = [
+            copy.deepcopy(sub_floor["system_cameras"][0]["supported_modes"][0])
+        ]
+        sub_floor = sign_payload(sub_floor)
+        with self.assertRaisesRegex(ValueError, "minimum 640x480"):
+            resolve_camera_selection(sub_floor, [0])
 
     def test_contract_rejects_cross_camera_mode_and_legacy_discovery(self):
         contract = _execution_contract()
