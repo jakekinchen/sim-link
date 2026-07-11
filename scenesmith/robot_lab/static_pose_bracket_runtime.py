@@ -62,6 +62,9 @@ class StaticPoseTransport(Protocol):
 
 
 class FiniteStaticPoseCamera(Protocol):
+    @property
+    def evidence_mode(self) -> str: ...
+
     def open(self) -> None: ...
 
     def read(self) -> dict[str, Any]: ...
@@ -164,6 +167,101 @@ def run_static_pose_bracket_fixture_runtime(
 ) -> dict[str, Any]:
     """Execute the complete fixture lifecycle with cleanup on every failure."""
 
+    capture = _capture_static_pose_bracket_runtime(
+        contract,
+        calibration_path=calibration_path,
+        calibration_profile_path=calibration_profile_path,
+        manifest_path=manifest_path,
+        transport_factory=transport_factory,
+        camera_factory=camera_factory,
+        pre_open_holder_snapshot=pre_open_holder_snapshot,
+        post_close_holder_snapshot_factory=post_close_holder_snapshot_factory,
+        monotonic_ns=monotonic_ns,
+        expected_transport_evidence_mode="deterministic_fixture",
+        expected_camera_evidence_mode="deterministic_fixture",
+        expected_hardware_opened=False,
+    )
+    observation = sign_payload(
+        {
+            "schema_version": STATIC_POSE_BRACKET_OBSERVATION_SCHEMA_VERSION,
+            "observation_name": "pi05_static_pose_bracket_fixture_observation",
+            "evidence_mode": "deterministic_fixture",
+            "contract_identity_sha256": contract["identity_sha256"],
+            "timing": copy.deepcopy(capture["timing"]),
+            "q_before": copy.deepcopy(capture["q_before"]),
+            "cameras": copy.deepcopy(capture["cameras"]),
+            "q_after": copy.deepcopy(capture["q_after"]),
+            "operation_counts": copy.deepcopy(capture["operation_counts"]),
+            "hardware_accessed": False,
+            "physical_follower_commanded": False,
+            "policy_inference_run": False,
+            "fixture_only": True,
+        }
+    )
+    evaluation = evaluate_static_pose_bracket(
+        contract=contract,
+        observation=observation,
+    )
+    result = _build_runtime_result(
+        contract=contract,
+        pre_open_holder_snapshot=capture["pre_open_holder_snapshot"],
+        post_close_holder_snapshot=capture["post_close_holder_snapshot"],
+        observation=observation,
+        evaluation=evaluation,
+        transport_audit=capture["transport_audit"],
+        camera_audits=capture["camera_audits"],
+        lifecycle_events=capture["lifecycle_events"],
+        operation_counts=capture["operation_counts"],
+    )
+    verify_static_pose_bracket_runtime_result(
+        result,
+        contract=contract,
+        pre_open_holder_snapshot=capture["pre_open_holder_snapshot"],
+        post_close_holder_snapshot=capture["post_close_holder_snapshot"],
+    )
+    return result
+
+
+def _capture_static_pose_bracket_runtime(
+    contract: dict[str, Any],
+    *,
+    calibration_path: Path,
+    calibration_profile_path: Path,
+    manifest_path: Path,
+    transport_factory: Callable[[], StaticPoseTransport],
+    camera_factory: Callable[[dict[str, Any]], FiniteStaticPoseCamera],
+    pre_open_holder_snapshot: dict[str, Any],
+    post_close_holder_snapshot_factory: Callable[[], dict[str, Any]],
+    monotonic_ns: Callable[[], int],
+    expected_transport_evidence_mode: str,
+    expected_camera_evidence_mode: str,
+    expected_hardware_opened: bool,
+) -> dict[str, Any]:
+    """Capture an unclassified lifecycle after the caller establishes authority."""
+
+    supported_classifications = {
+        (
+            "deterministic_fixture",
+            "deterministic_fixture",
+            False,
+        ),
+        (
+            "source_bound_candidate_fixture_transport",
+            "source_bound_candidate_fixture_camera",
+            False,
+        ),
+        (
+            "live_injected_transport",
+            "live_injected_camera",
+            True,
+        ),
+    }
+    if (
+        expected_transport_evidence_mode,
+        expected_camera_evidence_mode,
+        expected_hardware_opened,
+    ) not in supported_classifications:
+        raise ValueError("Static pose runtime evidence/hardware classification conflicts")
     verify_static_pose_bracket_contract(
         contract,
         calibration_path=calibration_path,
@@ -172,6 +270,7 @@ def run_static_pose_bracket_fixture_runtime(
     )
     require_no_serial_identity_holders(pre_open_holder_snapshot)
     strict_clock = _StrictMonotonicClock(monotonic_ns)
+    runtime_started_monotonic_ns = _monotonic(strict_clock)
     lifecycle_events = ["pre_open_holder"]
     counts = {field: 0 for field in EXPECTED_OPERATION_COUNTS}
     transport: StaticPoseTransport | None = None
@@ -190,10 +289,12 @@ def run_static_pose_bracket_fixture_runtime(
         transport = transport_factory()
         counts["construct_successes"] += 1
         lifecycle_events.append("construct")
-        if transport.evidence_mode != "deterministic_fixture":
-            raise ValueError(
-                "Static pose fixture runtime refuses a non-fixture transport"
-            )
+        if transport.evidence_mode != expected_transport_evidence_mode:
+            if expected_transport_evidence_mode == "deterministic_fixture":
+                raise ValueError(
+                    "Static pose fixture runtime refuses a non-fixture transport"
+                )
+            raise ValueError("Static pose runtime transport evidence mode drifted")
 
         counts["connect_attempts"] += 1
         transport.connect()
@@ -221,6 +322,7 @@ def run_static_pose_bracket_fixture_runtime(
                 camera_factory=camera_factory,
                 monotonic_ns=strict_clock,
                 lifecycle_events=lifecycle_events,
+                expected_camera_evidence_mode=expected_camera_evidence_mode,
             )
             counts["camera_batch_successes"] += 1
             counts["camera_frame_reads"] += len(batch["frames"])
@@ -281,7 +383,7 @@ def run_static_pose_bracket_fixture_runtime(
 
     transport_audit = _validate_transport_audit(
         transport.audit(),
-        expected_hardware_opened=False,
+        expected_hardware_opened=expected_hardware_opened,
     )
     _apply_transport_audit_counts(counts, audit=transport_audit)
     if counts != EXPECTED_OPERATION_COUNTS:
@@ -289,46 +391,111 @@ def run_static_pose_bracket_fixture_runtime(
     _validate_camera_audits(camera_audits, contract=contract)
     if lifecycle_events != _expected_lifecycle_events(contract):
         raise ValueError("Static pose runtime lifecycle order drifted")
+    runtime_finished_monotonic_ns = _monotonic(strict_clock)
 
-    observation = sign_payload(
-        {
-            "schema_version": STATIC_POSE_BRACKET_OBSERVATION_SCHEMA_VERSION,
-            "observation_name": "pi05_static_pose_bracket_fixture_observation",
-            "evidence_mode": "deterministic_fixture",
-            "contract_identity_sha256": contract["identity_sha256"],
-            "timing": timing,
-            "q_before": q_before,
-            "cameras": camera_batches,
-            "q_after": q_after,
-            "operation_counts": dict(counts),
-            "hardware_accessed": False,
-            "physical_follower_commanded": False,
-            "policy_inference_run": False,
-            "fixture_only": True,
-        }
-    )
-    evaluation = evaluate_static_pose_bracket(
+    capture = {
+        "runtime_started_monotonic_ns": runtime_started_monotonic_ns,
+        "runtime_finished_monotonic_ns": runtime_finished_monotonic_ns,
+        "runtime_duration_ns": (
+            runtime_finished_monotonic_ns - runtime_started_monotonic_ns
+        ),
+        "transport_evidence_mode": expected_transport_evidence_mode,
+        "camera_evidence_mode": expected_camera_evidence_mode,
+        "pre_open_holder_snapshot": copy.deepcopy(pre_open_holder_snapshot),
+        "post_close_holder_snapshot": copy.deepcopy(post_close_holder_snapshot),
+        "timing": timing,
+        "q_before": q_before,
+        "cameras": camera_batches,
+        "q_after": q_after,
+        "operation_counts": dict(counts),
+        "transport_audit": transport_audit,
+        "camera_audits": camera_audits,
+        "lifecycle_events": lifecycle_events,
+        "hardware_opened": expected_hardware_opened,
+        "physical_follower_commanded": False,
+    }
+    verify_static_pose_runtime_capture(
+        capture,
         contract=contract,
-        observation=observation,
+        expected_transport_evidence_mode=expected_transport_evidence_mode,
+        expected_camera_evidence_mode=expected_camera_evidence_mode,
+        expected_hardware_opened=expected_hardware_opened,
     )
-    result = _build_runtime_result(
-        contract=contract,
-        pre_open_holder_snapshot=pre_open_holder_snapshot,
-        post_close_holder_snapshot=post_close_holder_snapshot,
-        observation=observation,
-        evaluation=evaluation,
-        transport_audit=transport_audit,
-        camera_audits=camera_audits,
-        lifecycle_events=lifecycle_events,
-        operation_counts=counts,
+    return capture
+
+
+def verify_static_pose_runtime_capture(
+    capture: dict[str, Any],
+    *,
+    contract: dict[str, Any],
+    expected_transport_evidence_mode: str,
+    expected_camera_evidence_mode: str,
+    expected_hardware_opened: bool,
+) -> None:
+    """Verify an unclassified fixture or candidate runtime capture."""
+
+    allowed_fields = {
+        "runtime_started_monotonic_ns",
+        "runtime_finished_monotonic_ns",
+        "runtime_duration_ns",
+        "transport_evidence_mode",
+        "camera_evidence_mode",
+        "pre_open_holder_snapshot",
+        "post_close_holder_snapshot",
+        "timing",
+        "q_before",
+        "cameras",
+        "q_after",
+        "operation_counts",
+        "transport_audit",
+        "camera_audits",
+        "lifecycle_events",
+        "hardware_opened",
+        "physical_follower_commanded",
+    }
+    if not isinstance(capture, dict) or set(capture) != allowed_fields:
+        raise ValueError("Static pose runtime capture fields are invalid")
+    started = capture.get("runtime_started_monotonic_ns")
+    finished = capture.get("runtime_finished_monotonic_ns")
+    duration = capture.get("runtime_duration_ns")
+    if (
+        type(started) is not int
+        or type(finished) is not int
+        or type(duration) is not int
+        or started < 0
+        or finished <= started
+        or duration != finished - started
+    ):
+        raise ValueError("Static pose runtime capture duration is invalid")
+    if (
+        capture.get("transport_evidence_mode")
+        != expected_transport_evidence_mode
+        or capture.get("camera_evidence_mode") != expected_camera_evidence_mode
+    ):
+        raise ValueError("Static pose runtime capture evidence mode drifted")
+    pre_open = capture.get("pre_open_holder_snapshot")
+    post_close = capture.get("post_close_holder_snapshot")
+    require_no_serial_identity_holders(pre_open)
+    require_no_serial_identity_holders(post_close)
+    verify_serial_identity_holder_stability(pre_open, post_close)
+    transport_audit = _validate_transport_audit(
+        capture.get("transport_audit"),
+        expected_hardware_opened=expected_hardware_opened,
     )
-    verify_static_pose_bracket_runtime_result(
-        result,
-        contract=contract,
-        pre_open_holder_snapshot=pre_open_holder_snapshot,
-        post_close_holder_snapshot=post_close_holder_snapshot,
-    )
-    return result
+    _validate_camera_audits(capture.get("camera_audits"), contract=contract)
+    if capture.get("lifecycle_events") != _expected_lifecycle_events(contract):
+        raise ValueError("Static pose runtime capture lifecycle drifted")
+    if capture.get("operation_counts") != EXPECTED_OPERATION_COUNTS:
+        raise ValueError("Static pose runtime capture operation counts drifted")
+    counts = dict(capture["operation_counts"])
+    _apply_transport_audit_counts(counts, audit=transport_audit)
+    if counts != EXPECTED_OPERATION_COUNTS:
+        raise ValueError("Static pose runtime capture transport/count drifted")
+    if (
+        capture.get("hardware_opened") is not expected_hardware_opened
+        or capture.get("physical_follower_commanded") is not False
+    ):
+        raise ValueError("Static pose runtime capture authority fields drifted")
 
 
 def verify_static_pose_bracket_runtime_result(
@@ -460,6 +627,7 @@ def _capture_camera_batch(
     camera_factory: Callable[[dict[str, Any]], FiniteStaticPoseCamera],
     monotonic_ns: Callable[[], int],
     lifecycle_events: list[str],
+    expected_camera_evidence_mode: str,
 ) -> tuple[dict[str, Any], dict[str, Any], tuple[int, int]]:
     instance: FiniteStaticPoseCamera | None = None
     primary_error: BaseException | None = None
@@ -471,6 +639,8 @@ def _capture_camera_batch(
         if not transport.is_connected:
             raise RuntimeError("Static pose camera began with transport disconnected")
         instance = camera_factory(copy.deepcopy(camera))
+        if instance.evidence_mode != expected_camera_evidence_mode:
+            raise ValueError("Static pose camera evidence mode drifted")
         instance.open()
         lifecycle_events.append(f"camera_{camera_index}:open")
         for frame_index in range(camera["required_frame_count"]):

@@ -317,18 +317,60 @@ def evaluate_static_pose_bracket(
     _validate_contract_invariants(contract)
     verify_signed_payload(observation, label="Static pose bracket observation")
     _validate_observation_envelope(observation, contract=contract)
+    measurements = evaluate_static_pose_bracket_measurements(
+        contract=contract,
+        timing=observation.get("timing"),
+        q_before=observation.get("q_before"),
+        cameras=observation.get("cameras"),
+        q_after=observation.get("q_after"),
+        operation_counts=observation.get("operation_counts"),
+    )
+
+    result = {
+        "schema_version": STATIC_POSE_BRACKET_RESULT_SCHEMA_VERSION,
+        "result_name": "pi05_static_pose_bracket_fixture_result",
+        "evidence_mode": "deterministic_fixture_evaluation",
+        "qualification_scope": "fixture_static_pose_bracket",
+        "contract_identity_sha256": contract["identity_sha256"],
+        "observation_identity_sha256": observation["identity_sha256"],
+        **measurements,
+        "local_capabilities": ["fixture_static_pose_bracket_conformant"],
+        "authority_not_granted": list(_AUTHORITY_NOT_GRANTED),
+        "hardware_accessed": False,
+        "physical_follower_commanded": False,
+        "policy_inference_run": False,
+        "motion_authority_granted": False,
+        "training_authority_granted": False,
+    }
+    return sign_payload(result)
+
+
+def evaluate_static_pose_bracket_measurements(
+    *,
+    contract: dict[str, Any],
+    timing: Any,
+    q_before: Any,
+    cameras: Any,
+    q_after: Any,
+    operation_counts: Any,
+) -> dict[str, Any]:
+    """Compute classification-free bracket measurements from exact evidence."""
+
+    _validate_contract_invariants(contract)
+    if operation_counts != EXPECTED_OPERATION_COUNTS:
+        raise ValueError("Static pose bracket operation counts drifted")
     before = _validate_positions(
-        observation.get("q_before"),
+        q_before,
         contract=contract,
         label="q_before",
     )
     after = _validate_positions(
-        observation.get("q_after"),
+        q_after,
         contract=contract,
         label="q_after",
     )
-    timing_result = _validate_timing(observation.get("timing"), contract=contract)
-    _validate_cameras(observation.get("cameras"), contract=contract)
+    timing_result = _validate_timing(timing, contract=contract)
+    _validate_cameras(cameras, contract=contract)
 
     joint_drift = []
     for joint in contract["joints"]:
@@ -356,28 +398,14 @@ def evaluate_static_pose_bracket(
         )
 
     body_drift = [item["absolute_delta"] for item in joint_drift[:-1]]
-    result = {
-        "schema_version": STATIC_POSE_BRACKET_RESULT_SCHEMA_VERSION,
-        "result_name": "pi05_static_pose_bracket_fixture_result",
-        "evidence_mode": "deterministic_fixture_evaluation",
-        "qualification_scope": "fixture_static_pose_bracket",
-        "contract_identity_sha256": contract["identity_sha256"],
-        "observation_identity_sha256": observation["identity_sha256"],
+    return {
         "joint_drift": joint_drift,
         "maximum_body_drift_degrees": max(body_drift),
         "gripper_drift_percent": joint_drift[-1]["absolute_delta"],
         "timing": timing_result,
-        "operation_counts": dict(observation["operation_counts"]),
+        "operation_counts": dict(operation_counts),
         "static_pose_within_tolerance": True,
-        "local_capabilities": ["fixture_static_pose_bracket_conformant"],
-        "authority_not_granted": list(_AUTHORITY_NOT_GRANTED),
-        "hardware_accessed": False,
-        "physical_follower_commanded": False,
-        "policy_inference_run": False,
-        "motion_authority_granted": False,
-        "training_authority_granted": False,
     }
-    return sign_payload(result)
 
 
 def verify_static_pose_bracket_result(
