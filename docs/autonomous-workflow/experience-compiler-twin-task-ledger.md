@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4 embedded-prior integrity correction plus synthetic measured-inertial ready proof
+current_task: T16.4 synthetic measured-inertial ready proof after CLI path-safety correction
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
 evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: implement the synthetic ready compiler and hard-fail coverage/inertia validation, then T16.5, M17-M19 prerequisites, and Gates C-D
+remaining: implement the synthetic `synthetic_test_only` ready compiler, golden mass/COM/inertia proof, and hard-fail coverage/inertia validation, then T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 028 for custom-path safety plus the synthetic_test_only ready compiler, golden mass/COM/inertia proof, and hard-fail coverage/inertia matrix
+next_step: continue brief 028 with the synthetic_test_only ready compiler, golden mass/COM/inertia proof, and hard-fail coverage/inertia matrix
 ```
 
 ## Rules
@@ -113,6 +113,20 @@ next_step: execute brief 028 for custom-path safety plus the synthetic_test_only
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.4 custom absolute-path CLI safety correction
+
+```text
+Current task: T16.4
+State: in_progress
+Completed: preserved caller-provided absolute intake/output paths outside the repo for the measured-inertial CLI; added direct external-path write, verify, require-ready, and invalid-input no-overwrite regressions
+Evidence: python -m unittest tests.unit.test_measured_inertial_intake (14 tests); python -m py_compile scenesmith/robot_lab/measured_inertial_intake.py scripts/robot_lab/write_measured_inertial_intake.py tests/unit/test_measured_inertial_intake.py; python scripts/robot_lab/write_measured_inertial_intake.py --verify kept blocked identities 35571daca435bb191313c9b22594c9fecaaef7abc68c8e7e2faa362692653b88 / 5816faa0d05dd309a2768551cd50b845932ff5abbc355c11f146371d868580c4; external temp-path live CLI write+verify succeeded with output identity e92738a2b9f450a72c693d67903eb75cbaa40a483a35c18f4a46cf09521e1478; external --require-ready rejected nonzero; forged external intake failed before overwrite and left output sha256 7fe752efca565caca826dbd1c12b052899b72235115cf7a3663eae9b1666b35e unchanged; broad gate ./.mujoco_venv/bin/python -m unittest tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff passed 59 tests
+Commit: pending
+Remaining: synthetic_test_only ready fixture/compiler, exact-cover overlap and reused-evidence rejection, golden aggregate inertia proof, and stable ready identity checks
+Blockers: none for offline continuation
+Training lock: closed
+Next step: keep T16.4 open and implement the bounded synthetic ready-state compiler path from brief 028
+```
 
 ### 2026-07-10 - T16.4 custom CLI path defect added to closeout
 

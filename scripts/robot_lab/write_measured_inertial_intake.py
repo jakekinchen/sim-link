@@ -158,7 +158,12 @@ def _resolve(path: Path) -> Path:
 
 
 def _relative_to_repo(path: Path) -> Path:
-    return path.relative_to(REPO_ROOT) if path.is_absolute() else path
+    if not path.is_absolute():
+        return path
+    try:
+        return path.relative_to(REPO_ROOT)
+    except ValueError:
+        return path
 
 
 if __name__ == "__main__":

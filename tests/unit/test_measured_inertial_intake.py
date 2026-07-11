@@ -158,6 +158,171 @@ class MeasuredInertialIntakeTests(unittest.TestCase):
         self.assertEqual(payload["status"], "blocked_missing_measurements")
         self.assertFalse(payload["ready"])
 
+    def test_cli_supports_external_absolute_write(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            intake_path = tmp_path / "external-intake.json"
+            output_path = tmp_path / "external-output.json"
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT_PATH),
+                    "--write-intake",
+                    "--intake",
+                    str(intake_path),
+                    "--output",
+                    str(output_path),
+                ],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, msg=result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["status"], "written")
+            self.assertEqual(payload["intake"], str(intake_path))
+            self.assertEqual(payload["output"], str(output_path))
+            self.assertTrue(intake_path.exists())
+            self.assertTrue(output_path.exists())
+
+    def test_cli_supports_external_absolute_verify(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            intake_path = tmp_path / "external-intake.json"
+            output_path = tmp_path / "external-output.json"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT_PATH),
+                    "--write-intake",
+                    "--intake",
+                    str(intake_path),
+                    "--output",
+                    str(output_path),
+                ],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT_PATH),
+                    "--verify",
+                    "--intake",
+                    str(intake_path),
+                    "--output",
+                    str(output_path),
+                ],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 0, msg=result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["status"], "verified")
+            self.assertEqual(payload["intake"], str(intake_path))
+            self.assertEqual(payload["output"], str(output_path))
+
+    def test_cli_supports_external_absolute_require_ready_failure(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            intake_path = tmp_path / "external-intake.json"
+            output_path = tmp_path / "external-output.json"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT_PATH),
+                    "--write-intake",
+                    "--intake",
+                    str(intake_path),
+                    "--output",
+                    str(output_path),
+                ],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT_PATH),
+                    "--verify",
+                    "--require-ready",
+                    "--intake",
+                    str(intake_path),
+                    "--output",
+                    str(output_path),
+                ],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(result.returncode, 1)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["status"], "blocked_missing_measurements")
+            self.assertEqual(payload["artifact"], str(output_path))
+            self.assertFalse(payload["ready"])
+
+    def test_cli_invalid_external_input_does_not_overwrite_existing_output(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+            intake_path = tmp_path / "external-intake.json"
+            output_path = tmp_path / "external-output.json"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT_PATH),
+                    "--write-intake",
+                    "--intake",
+                    str(intake_path),
+                    "--output",
+                    str(output_path),
+                ],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            original_bytes = output_path.read_bytes()
+            intake_payload = json.loads(intake_path.read_text(encoding="utf-8"))
+            intake_payload["cad_priors"][0]["source_mass_kg"] = 99.0
+            intake_payload["identity_sha256"] = _resign(intake_payload)
+            intake_path.write_text(
+                json.dumps(intake_payload, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT_PATH),
+                    "--intake",
+                    str(intake_path),
+                    "--output",
+                    str(output_path),
+                ],
+                cwd=REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("drifted from deterministic repo rebuild", result.stderr)
+            self.assertEqual(output_path.read_bytes(), original_bytes)
+
 
 def _resign(payload: dict) -> str:
     unsigned = {key: value for key, value in payload.items() if key != "identity_sha256"}
