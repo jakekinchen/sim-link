@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; owner-authorized virtual follower disconnect verified; live gate closed pending remote preservation
+current_task: T16.5b in progress; live gate open for one fresh finite read-only session after remotely verified zero-holder disconnect
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: one POST at 08:57:17 CDT returned connected false; hardware d58a7549... reports follower disconnected/torque false; empty holder 4f53cda1...; safety/routing unchanged; leader retained; jobs 0
+evidence: b211562 remotely preserves one-call disconnect proof; 09:01:09 CDT recheck still reports follower disconnected/torque false and empty holder 4f53cda1...; reviewer 057 opens one fresh session
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: owner explicitly authorizes virtual disconnect/reconnect because physical unplug is unavailable; immediate scope is one follower disconnect with inherent torque-disable plus response/status/zero-holder proof; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none for exclusive follower ownership; live gate remains closed until this verified boundary is committed/pushed and a separate canonical reopen is reviewed
-next_step: commit/push disconnect proof; confirm remote; then separately reopen the live gate for one fresh bounded T16.5b session
+blockers: none for fresh metadata discovery and contract preparation; every live open remains fail-closed on identity, lease, calibration, and zero holders
+next_step: commit/push reviewer 057 live-gate boundary; confirm remote; create a new private discovery/session/lease/contract; run exactly one bounded read-only capture
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: commit/push disconnect proof; confirm remote; then separately reopen 
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | One-call virtual follower disconnect verified: disconnected/torque off/zero holders, leader retained; live gate closed pending remote proof and separate reopen; no live proof label yet |
+| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | `b211562` disconnect/zero-holder proof remote; reviewer 057 opens one fresh finite lease/contract session; no live proof label yet |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,19 @@ next_step: commit/push disconnect proof; confirm remote; then separately reopen 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5b live gate reopened for one fresh finite session
+
+```text
+Current task: T16.5b
+State: in_progress; live gate open only for one fresh session
+Prerequisites: b211562 remote; follower disconnected/torque false; holder 4f53cda1... count 0 at 09:01:09 CDT; T16.5a verified; owner present and resume authority explicit
+Allowed: metadata-only discovery; five-minute owner-presence lease; exact content-addressed contract; one no-write census; two finite named-camera frames each
+Mandatory guards: stable device/camera/calibration identity; zero holders before serial open and after close; handshake false; 48 allowlisted reads; disconnect disable_torque false; no configuration/torque/register writes; physical_follower_commanded=false
+Withheld: proof labels until accepted evidence verifies; reconnect without no-motion proof; motion; policy actuation; physical qualification; training
+Training lock: closed
+Next step: commit/push this gate, confirm remote, then prepare and execute a brand-new session once
+```
 
 ### 2026-07-11 - Virtual follower disconnect and zero-holder proof verified
 

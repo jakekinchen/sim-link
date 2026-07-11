@@ -39,12 +39,14 @@ running, and the reviewed follower holder snapshot is empty with identity
 No retry, signal, motion command, safety-route change, leader disconnect, or
 general register write occurred.
 
-Keep the live read-only gate closed until this disconnect/zero-holder boundary
-is remotely preserved. Only then may a separate canonical boundary open the
-gate for a fresh session, discovery, five-minute owner-presence lease, and exact
-T16.5b read-only contract. A later Studio reconnect is allowed only when exact
-device/calibration/current-pose state proves it mechanically no-motion-safe;
-otherwise leave the follower disconnected and torque off.
+The disconnect/zero-holder boundary is remotely preserved at `b211562`. The
+separate reviewer-057 boundary opens the live gate only for a fresh session,
+metadata discovery, five-minute owner-presence lease, exact read-only contract,
+one bounded census, and two finite frames from each pinned camera. Every serial
+open still requires a fresh zero-holder check, every close is no-torque-write,
+and any mismatch fails closed. A later Studio reconnect is allowed only when
+exact device/calibration/current-pose state proves it mechanically no-motion-
+safe; otherwise leave the follower disconnected and torque off.
 
 The last completed implementation slice was Brief 041,
 `docs/briefs/041-rejected-live-attempt-camera-identity-correction.md`, under
@@ -207,3 +209,7 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   follower disconnected, follower torque off, leader retained, unchanged
   safety/routing, zero jobs, and zero follower holders. The live gate remains
   closed pending remote preservation and a separate reopen decision.
+- Reviewer decision 057 opens the T16.5b live gate after remote confirmation of
+  `b211562` and a second zero-holder/torque-off check. The grant is one fresh
+  session under the existing finite lease/contract and no-write guards; it does
+  not itself grant a live proof label or any write/motion authority.

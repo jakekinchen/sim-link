@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "59f09d1576d777ee8e186ff885b58ac69c2a253d",
-  "last_reviewed_commit": "59f09d1576d777ee8e186ff885b58ac69c2a253d",
+  "current_head_commit": "b211562c0a7f88fffb934a24b61d7ade39e64a50",
+  "last_reviewed_commit": "b211562c0a7f88fffb934a24b61d7ade39e64a50",
   "source_review": {
-    "commit": "59f09d1576d777ee8e186ff885b58ac69c2a253d",
-    "decision": "VERIFY_OWNER_AUTHORIZED_VIRTUAL_FOLLOWER_DISCONNECT",
-    "reviewer_decision": "docs/reviewer-messages/056-virtual-follower-disconnect-verified.md"
+    "commit": "b211562c0a7f88fffb934a24b61d7ade39e64a50",
+    "decision": "OPEN_T16_5B_LIVE_GATE_FOR_ONE_FRESH_FINITE_SESSION",
+    "reviewer_decision": "docs/reviewer-messages/057-open-live-gate-after-zero-holder-proof.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -390,7 +390,8 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "result": "Brief 041 offline gates plus the owner-authorized virtual follower disconnect and zero-holder proof are verified; live gate remains closed pending remote preservation and separate reopen",
+      "live_gate_review_decision_id": "057",
+      "result": "Brief 041 offline gates plus the owner-authorized virtual follower disconnect and zero-holder proof are remotely verified; live gate is open for one fresh finite read-only session",
       "execution_note": "Commits ea99ec9/66003d8/fd13bf6/01802a0 passed 19 dedicated, 35 combined census, and 214 broad tests; no hardware was reopened during the correction",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
@@ -442,7 +443,7 @@
         "preserved_untouched": false,
         "owner_authorized_disconnect_completed": true,
         "exclusive_bus_ownership_proven": true,
-        "last_revalidated_at": "2026-07-11T08:57:17-05:00",
+        "last_revalidated_at": "2026-07-11T09:01:09-05:00",
         "last_revalidated_holder_count": 0,
         "last_revalidated_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         "read_only_server_status_observed_at": "2026-07-11T08:57:17-05:00",
@@ -478,7 +479,7 @@
         "required_post_close_holder_count": 0,
         "stops_or_signals_holders": false,
         "last_observed_holder_count": 0,
-        "last_observed_at": "2026-07-11T08:57:17-05:00",
+        "last_observed_at": "2026-07-11T09:01:09-05:00",
         "last_observed_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
         "current_gate_result": "passed_zero_holder"
       },
@@ -486,7 +487,18 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-11T09:01:09-05:00",
+      "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
+      "live_gate_basis": {
+        "disconnect_proof_commit": "b211562c0a7f88fffb934a24b61d7ade39e64a50",
+        "holder_count": 0,
+        "holder_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "follower_connected": false,
+        "follower_torque": false,
+        "owner_present": true,
+        "owner_resume_authority": true
+      },
       "proof_labels_granted": [],
       "conditional_authority": [
         "live_hardware_discovery_after_T16.5a",
@@ -497,7 +509,7 @@
         "attempt 001 produced no accepted live evidence because post-close camera index identity drift invalidated the capture",
         "the corrected stable named-camera path is verified only with fake subprocess evidence and has not been reopened live",
         "the owner-authorized disconnect re-established exclusive follower bus ownership, but no corrected live capture has yet been accepted",
-        "all further serial and camera opens remain closed until the owner-authorized disconnect and zero-holder proof are durably preserved and the live gate is separately reopened"
+        "the live gate is scoped to one fresh session and closes again after success, expiry, mismatch, or any exception"
       ],
       "blocked_on": [],
       "owner_decision_required": {
@@ -550,7 +562,7 @@
           "call_safety_disarm_or_estop",
           "reopen_serial_or_camera_live_gate_before_zero_holder_proof"
         ],
-        "post_choice_requirement": "satisfied; disconnect and zero-holder proof pending remote preservation before separate live-gate reconsideration"
+        "post_choice_requirement": "satisfied and remotely preserved at b211562; reviewer 057 opens one fresh finite T16.5b session"
       },
       "blocked_audit": {
         "classification": "resolved_by_owner_authority",
@@ -593,7 +605,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "commit and remotely preserve the verified disconnect and zero-holder boundary; then separately review and open a fresh-session-only T16.5b live gate",
+      "next_action": "commit and remotely preserve reviewer 057; create a new private session/discovery, five-minute owner-presence lease, and exact execution contract; execute the bounded capture once",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
@@ -609,7 +621,8 @@
         "stable_named_camera_capture_offline_verified",
         "exclusive_serial_holder_gate_offline_verified",
         "owner_authorized_virtual_follower_disconnect_verified",
-        "exclusive_follower_bus_ownership_reestablished"
+        "exclusive_follower_bus_ownership_reestablished",
+        "live_gate_open_for_one_fresh_finite_session"
       ]
     },
     "T16.5c": {
