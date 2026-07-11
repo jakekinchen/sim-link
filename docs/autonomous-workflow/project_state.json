@@ -27,6 +27,15 @@
     "reason": "the no-new-major-slice cutoff was reached with Brief 048 verified; remaining T16.5c work requires a new reviewed slice and T16.6 prerequisites are incomplete",
     "final_head_derived_at_runtime": true
   },
+  "continuation_run": {
+    "started_at": "2026-07-11T12:52:56-05:00",
+    "trigger": "owner_proceed_with_next_milestone",
+    "scope": "T16.5c Brief 049 offline static-pose-bracket and parsed-coordinate contract",
+    "starting_head": "32c29480a314ce3f731dda0d9a50156c1832da63",
+    "live_gate": "closed",
+    "training_lock": "closed",
+    "deadline": null
+  },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
     "operator_presence_required": true,
@@ -1156,6 +1165,7 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
+      "active_brief_id": "049",
       "latest_verified_brief_id": "048",
       "completed_brief_ids": ["048"],
       "result": "Brief 048 is verified and remotely preserved: signed CalibrationProfile b360b4f6... binds pinned calibration 192404b6..., accepted live manifest eff3c824..., and six exact live servo identities; body degree and gripper 0-closed/100-open semantics validate offline without hardware or policy execution",
@@ -1174,7 +1184,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/calibration_profile.py scripts/robot_lab/write_calibration_profile.py tests/unit/test_calibration_profile.py",
         "git diff --check"
       ],
-      "next_action": "after closeout, open a new offline brief for static-pose-bracketed camera observation and parsed-profile coordinate validation before any PI0.5 preprocessing or shadow inference",
+      "next_action": "implement and verify Brief 049 static-pose-bracket and parsed-coordinate contract offline; do not reopen hardware or run policy preprocessing/inference",
       "conditional_authority": [
         "physical_observation_preprocessing",
         "pi05_policy_shadow_no_actuation",

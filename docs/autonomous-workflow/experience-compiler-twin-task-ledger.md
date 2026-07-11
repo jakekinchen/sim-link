@@ -5,15 +5,15 @@ Updated: 2026-07-11
 ```text
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
-run_state: closeout recorded 2026-07-11T11:44:39-05:00; T16.5c remains in progress for the next reviewed session
+run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress; Brief 048 signed parsed calibration profile verified and remote at 700be05
+current_task: T16.5c in progress under Brief 049 offline static-pose-bracket and parsed-coordinate contract
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: live manifest eff3c824...; calibration profile b360b4f6...; source 192404b6...; servo digest 66e9d363...; 6 focused and 238 broad tests; no hardware/policy access in Brief 048
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: T16.5b none; T16.5c static-pose-bracketed synchronized-enough observation and policy-shadow input parity remain unverified
-next_step: after closeout, open an offline static-pose-bracket brief; do not reopen hardware, preprocess policy input, run shadow inference, or actuate until its exact gate is reviewed
+next_step: implement and verify Brief 049 offline; do not reopen hardware, preprocess policy input, run shadow inference, or actuate until its exact gate is reviewed
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: after closeout, open an offline static-pose-bracket brief; do not reo
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; manifest `eff3c824...`; private `125de28f...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; reviewer 072; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Brief 048 / `700be05`: profile `b360b4f6...` validates six live-bound joints and explicit body/gripper normalization offline; static-pose bracket and policy shadow remain pending; requested actions never sent |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Brief 048 / `700be05` profile verified; Brief 049 active offline for signed static-pose bracket, parsed coordinates, strict timing/counts, and fixture-only conformance; requested actions never sent |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler

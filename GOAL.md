@@ -25,6 +25,8 @@ proof states must remain distinct.
 - Hard closeout: `2026-07-11T12:14:07-05:00`.
 - Closeout recorded: `2026-07-11T11:44:39-05:00`, after the no-new-major-
   slice cutoff and before the hard deadline.
+- New owner-triggered continuation: `2026-07-11T12:52:56-05:00`, beginning
+  from remotely preserved HEAD `32c2948`; no deadline was specified.
 
 ## Current Milestone
 
@@ -150,6 +152,13 @@ Six focused tests, the offline artifact verifier, compilation, and the
 no policy was run. Static-pose bracketing, policy-input validity,
 preprocessing/shadow/replay, actuation, and physical qualification remain
 unverified; the live gate and training lock stay closed.
+
+Brief 049 is active offline for the next dependency-ready boundary. It defines
+a signed `q_before -> finite camera batch -> q_after` contract bound to the
+accepted camera modes and CalibrationProfile, with strict time enclosure,
+parsed-coordinate drift tolerances, exact no-write operation counts, and
+fixture-only evidence. It cannot reopen hardware or grant a physical,
+policy-input-valid, shadow, motion, or qualification label.
 
 ## Durable State
 
