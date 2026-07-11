@@ -266,6 +266,13 @@ live review manifest was created or accepted. Only
 `redacted_static_pose_live_candidate_session_review_conformant` is newly
 granted; the live gate and training lock stay closed.
 
+Brief 056 is active offline to pin the executable PI0.5 preprocessing source,
+checkpoint-processor, tokenizer, coordinate, and device-override semantics. It
+will emit only a fixture `blocked_missing_inputs` contract: no accepted live
+review artifact, camera-role binding, or task prompt exists, so no live input,
+tokenizer/model load, preprocessing, inference, replay, or policy label is
+permitted.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`

@@ -1171,6 +1171,7 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
+      "active_brief_id": "056",
       "latest_verified_brief_id": "055",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055"],
       "result": "Briefs 048-055 are verified and remotely preserved: future successful private candidate evidence now has a deterministic source-reverified redaction and exclusive tracked-writer boundary that remains pending separate acceptance and grants no physical proof label; the live gate remains closed",
@@ -1390,7 +1391,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/hardware_execution_profile.py scenesmith/robot_lab/static_pose_bracket.py scenesmith/robot_lab/static_pose_live_execution.py scenesmith/robot_lab/static_pose_live_candidate.py scenesmith/robot_lab/static_pose_live_session.py scenesmith/robot_lab/static_pose_session_review.py scripts/robot_lab/verify_static_pose_live_execution_sources.py tests/unit/test_static_pose_bracket.py tests/unit/test_static_pose_live_execution.py tests/unit/test_static_pose_live_candidate.py tests/unit/test_static_pose_live_session.py tests/unit/test_static_pose_session_review.py",
         "git diff --check"
       ],
-      "next_action": "define and verify a fixture-only PI0.5 policy-input preprocessing source contract that pins the executable processor/checkpoint semantics and consumes only an accepted static-pose review artifact; do not preprocess a live observation, run policy inference, access hardware, or transition the live gate in the current thread",
+      "next_action": "implement and verify Brief 056 fixture-only PI0.5 preprocessing source contract with exact local source, checkpoint-processor, tokenizer, coordinate, device-override, and missing-input bindings; do not load weights, preprocess, infer, access hardware, or transition the live gate",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
