@@ -8,11 +8,11 @@ run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5b Brief 041 offline correction reviewed; live gate closed on pre-existing serial holder
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: commits ea99ec9/66003d8/fd13bf6/01802a0 and reviewer 053 provide stable named-camera capture, exact PNG/subprocess evidence, and zero-holder serial gates after 19 dedicated, 35 combined, and 214 broad tests
+evidence: Brief 041 is remote through c686ab6; fresh read-only holder snapshot 64230513... at 05:47:27 CDT still contains one holder and opened no device
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
 blockers: camera index defect is corrected offline; live gate remains closed because the pre-existing July 8 Studio server was last observed holding the follower serial device and exclusive ownership has not been re-proven; physical motion remains closed
-next_step: remotely preserve reviewer 053, then obtain owner direction before stopping/releasing the Studio server; continue offline and do not reopen hardware
+next_step: request owner authority for graceful Studio server stop only; no force kill; after any granted stop, verify zero holders before reconsidering the live gate
 ```
 
 ## Rules
@@ -130,6 +130,21 @@ next_step: remotely preserve reviewer 053, then obtain owner direction before st
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Fresh serial-holder gate remains closed; owner decision required
+
+```text
+Current task: T16.5b
+State: in_progress; live gate closed; owner decision pending
+Completed: remote confirmation through c686ab6; fresh read-only holder check using the reviewed guard
+Evidence: snapshot 642305133b602477840e31d756e52b11cf5d97e689eda15ae2741291ed47106c at 2026-07-11T05:47:27-05:00; holder count 1; serial device opened by check false
+Authority: no process stop/signal has been performed; no force-kill authority requested or inferred
+Remaining: owner choice on graceful Studio server stop; zero-holder verification; only then a separately recorded live-gate reopen decision
+Blockers: one independent holder remains
+Hardware state: no serial/camera open during the recheck
+Training lock: closed
+Next step: ask owner for narrow graceful-stop authority
+```
 
 ### 2026-07-11 - Brief 041 offline correction reviewed; live gate remains closed
 

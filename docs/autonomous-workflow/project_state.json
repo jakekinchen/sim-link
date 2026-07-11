@@ -9,7 +9,7 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "01802a0fd6a93eee658dbd945830a47acf916913",
+  "current_head_commit": "c686ab61e81677da2bd8d1b8faa733ae62c874a6",
   "last_reviewed_commit": "01802a0fd6a93eee658dbd945830a47acf916913",
   "source_review": {
     "commit": "01802a0fd6a93eee658dbd945830a47acf916913",
@@ -395,7 +395,10 @@
         "process_started_at": "2026-07-08T17:32:39-05:00",
         "predates_goal_attempt": true,
         "preserved_untouched": true,
-        "exclusive_bus_ownership_proven": false
+        "exclusive_bus_ownership_proven": false,
+        "last_revalidated_at": "2026-07-11T05:47:27-05:00",
+        "last_revalidated_holder_count": 1,
+        "last_revalidated_snapshot_sha256": "642305133b602477840e31d756e52b11cf5d97e689eda15ae2741291ed47106c"
       },
       "camera_capture_backend": {
         "state": "offline_verified",
@@ -425,7 +428,8 @@
         "required_post_close_holder_count": 0,
         "stops_or_signals_holders": false,
         "last_observed_holder_count": 1,
-        "last_observed_at": "2026-07-11T05:18:22-05:00",
+        "last_observed_at": "2026-07-11T05:47:27-05:00",
+        "last_observed_snapshot_sha256": "642305133b602477840e31d756e52b11cf5d97e689eda15ae2741291ed47106c",
         "current_gate_result": "closed"
       },
       "hardware_enumerated": true,
@@ -454,7 +458,16 @@
       "blocked_on": [
         "preexisting_studio_server_serial_holder_owner_resolution"
       ],
-      "next_action": "preserve reviewer 053 remotely, then request owner direction before stopping or releasing the pre-existing Studio server",
+      "owner_decision_required": {
+        "state": "pending",
+        "requested_action": "gracefully_stop_preexisting_studio_server_to_release_follower_serial_device",
+        "constraints": [
+          "graceful_stop_only",
+          "no_force_kill_without_new_owner_authority",
+          "verify_zero_holders_before_reopening_live_gate"
+        ]
+      },
+      "next_action": "request owner direction for graceful Studio server stop; if granted, stop gracefully and verify zero holders before any live-gate reconsideration",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
