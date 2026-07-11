@@ -38,6 +38,7 @@ EXPECTED_READ_REGISTER_WIDTHS = {
     "Firmware_Minor_Version": 1,
     "ID": 1,
     "Baud_Rate": 1,
+    "Torque_Enable": 1,
     "Present_Position": 2,
     "Present_Voltage": 1,
     "Present_Temperature": 1,

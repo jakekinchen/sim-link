@@ -98,9 +98,9 @@ class ReadonlyServoCensusTests(unittest.TestCase):
         counts = result["operation_counts"]
         self.assertEqual(counts["construct_attempts"], 1)
         self.assertEqual(counts["connect_attempts"], 1)
-        self.assertEqual(counts["read_successes"], 48)
+        self.assertEqual(counts["read_successes"], 54)
         self.assertEqual(counts["read_retries"], 1)
-        self.assertEqual(counts["read_attempts"], 49)
+        self.assertEqual(counts["read_attempts"], 55)
         self.assertEqual(counts["close_attempts"], 1)
         for key in (
             "motor_register_writes",
@@ -174,7 +174,7 @@ class ReadonlyServoCensusTests(unittest.TestCase):
 
         self.assertEqual(
             contract["schema_version"],
-            "scenesmith.readonly_servo_census_contract.v2",
+            "scenesmith.readonly_servo_census_contract.v3",
         )
         self.assertEqual(
             contract["target_device_identity"]["bus"],
@@ -191,6 +191,7 @@ class ReadonlyServoCensusTests(unittest.TestCase):
         self.assertEqual(verified["semantics"]["sts3215_protocol_version"], 0)
         self.assertEqual(verified["semantics"]["sts3215_model_number"], 777)
         self.assertEqual(verified["semantics"]["sts3215_resolution"], 4096)
+        self.assertEqual(verified["semantics"]["read_register_widths"]["Torque_Enable"], 1)
         self.assertEqual(
             verified["semantics"]["follower_joint_map"],
             [
@@ -328,6 +329,17 @@ class ReadonlyServoCensusTests(unittest.TestCase):
                 ).__setitem__("raw_value", 1),
                 "servo ID",
             ),
+            (
+                "torque_enabled",
+                lambda value: next(
+                    event
+                    for event in value["events"]
+                    if event.get("operation") == "read"
+                    and event.get("servo_id") == 4
+                    and event.get("register") == "Torque_Enable"
+                ).__setitem__("raw_value", 1),
+                "torque",
+            ),
         )
         for label, mutate, message in mutations:
             with self.subTest(label=label):
@@ -368,6 +380,18 @@ class ReadonlyServoCensusTests(unittest.TestCase):
         self.assertNotEqual(
             replay_recorded_census(contract, changed)["identity_sha256"],
             replay_recorded_census(contract, trace)["identity_sha256"],
+        )
+
+    def test_all_six_servos_report_torque_disabled(self):
+        result = self._bundle()["result"]
+        self.assertEqual(len(result["servos"]), 6)
+        self.assertTrue(
+            all(
+                servo["torque_enable_raw"] == 0
+                and servo["torque_enabled"] is False
+                and servo["raw_registers"]["Torque_Enable"] == 0
+                for servo in result["servos"]
+            )
         )
 
     def test_retry_exhaustion_closes_exactly_once(self):

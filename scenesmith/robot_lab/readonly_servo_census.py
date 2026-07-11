@@ -26,12 +26,12 @@ from scenesmith.robot_lab.leader_arm_bridge import (
 )
 
 
-CENSUS_CONTRACT_SCHEMA_VERSION = "scenesmith.readonly_servo_census_contract.v2"
+CENSUS_CONTRACT_SCHEMA_VERSION = "scenesmith.readonly_servo_census_contract.v3"
 LIVE_CENSUS_CONTRACT_SCHEMA_VERSION = (
-    "scenesmith.live_readonly_servo_census_contract.v1"
+    "scenesmith.live_readonly_servo_census_contract.v2"
 )
-CENSUS_TRACE_SCHEMA_VERSION = "scenesmith.readonly_servo_census_trace.v1"
-CENSUS_RESULT_SCHEMA_VERSION = "scenesmith.readonly_servo_census_result.v1"
+CENSUS_TRACE_SCHEMA_VERSION = "scenesmith.readonly_servo_census_trace.v2"
+CENSUS_RESULT_SCHEMA_VERSION = "scenesmith.readonly_servo_census_result.v2"
 
 DEFAULT_CENSUS_CONTRACT_PATH = Path(
     "configurations/robot_lab/pi05_readonly_servo_census_contract.fixture.json"
@@ -479,6 +479,9 @@ def verify_live_census_contract(payload: dict[str, Any]) -> None:
     aliases = usb.get("allowed_aliases")
     if not isinstance(aliases, list) or aliases != sorted(set(aliases)):
         raise ValueError("Live census allowed aliases are malformed")
+    expected_aliases = [_paired_tty_alias(KNOWN_PHYSICAL_FOLLOWER_PORT)]
+    if aliases != expected_aliases:
+        raise ValueError("Live census must bind the paired follower TTY alias")
     expected_forbidden = sorted(
         {DEFAULT_LEADER_PORT, _paired_tty_alias(DEFAULT_LEADER_PORT)}
     )
@@ -529,6 +532,7 @@ def build_recorded_census_trace(contract: dict[str, Any]) -> dict[str, Any]:
             "Firmware_Minor_Version": 10 + servo_id,
             "ID": servo_id,
             "Baud_Rate": 0,
+            "Torque_Enable": 0,
             "Present_Position": positions[servo_id],
             "Present_Voltage": 120,
             "Present_Temperature": 24 + servo_id,
@@ -747,10 +751,10 @@ def run_readonly_census(
             raise ValueError(f"Read-only census transport audit is nonzero: {field}")
     if audit["physical_follower_commanded"] is not False:
         raise ValueError("Read-only census transport reported a follower command")
-    decoded = [
-        _decode_servo(raw_by_servo[servo["servo_id"]], expected=servo)
-        for servo in contract["expected_servos"]
-    ]
+    decoded = decode_readonly_servo_observations(
+        contract=contract,
+        raw_by_servo=raw_by_servo,
+    )
     operation_counts = {
         **counts,
         "motor_register_writes": audit["motor_register_writes"],
@@ -766,6 +770,40 @@ def run_readonly_census(
         "physical_follower_commanded": audit["physical_follower_commanded"],
         "lifecycle_state": "closed",
     }
+
+
+def decode_readonly_servo_observations(
+    *,
+    contract: dict[str, Any],
+    raw_by_servo: dict[int, dict[str, int]],
+) -> list[dict[str, Any]]:
+    """Validate and decode an exact contract-shaped set of raw servo reads."""
+
+    verify_census_contract(contract)
+    expected_ids = [servo["servo_id"] for servo in contract["expected_servos"]]
+    if not isinstance(raw_by_servo, dict) or set(raw_by_servo) != set(expected_ids):
+        raise ValueError("Read-only census raw servo identity set is incomplete")
+    read_widths = {
+        plan["register"]: plan["width_bytes"] for plan in contract["read_plan"]
+    }
+    decoded = []
+    for servo in contract["expected_servos"]:
+        raw = raw_by_servo[servo["servo_id"]]
+        if not isinstance(raw, dict) or set(raw) != set(read_widths):
+            raise ValueError(
+                "Read-only census raw register set is incomplete for "
+                f"servo {servo['servo_id']}"
+            )
+        validated = {
+            register: _validate_raw_value(
+                register,
+                raw[register],
+                width_bytes=read_widths[register],
+            )
+            for register in read_widths
+        }
+        decoded.append(_decode_servo(validated, expected=servo))
+    return decoded
 
 
 def replay_recorded_census(
@@ -1032,6 +1070,10 @@ def _validate_raw_value(register: str, value: Any, *, width_bytes: int) -> int:
         raise ValueError(f"Read-only census servo ID register is invalid: {value}")
     if register == "Baud_Rate" and value not in _BAUDRATE_CODE_TO_VALUE:
         raise ValueError(f"Read-only census baud code is unsupported: {value}")
+    if register == "Torque_Enable" and value != 0:
+        raise ValueError(
+            f"Read-only census torque is not disabled for the observed servo: {value}"
+        )
     if register == "Present_Position" and value >= _MODEL_RESOLUTION:
         raise ValueError(
             f"Read-only census position is outside STS3215 resolution: {value}"
@@ -1064,6 +1106,8 @@ def _decode_servo(raw: dict[str, int], *, expected: dict[str, Any]) -> dict[str,
             f"{raw['Firmware_Major_Version']}.{raw['Firmware_Minor_Version']}"
         ),
         "baudrate": baudrate,
+        "torque_enable_raw": raw["Torque_Enable"],
+        "torque_enabled": False,
         "present_position_raw": raw["Present_Position"],
         "present_voltage_volts": round(raw["Present_Voltage"] / 10.0, 3),
         "present_temperature_celsius": raw["Present_Temperature"],

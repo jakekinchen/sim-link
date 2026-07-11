@@ -33,17 +33,21 @@ from scenesmith.robot_lab.live_readonly_observation import (
     build_private_observation_evidence,
     build_redacted_observation_manifest,
     capture_finite_camera_frames,
+    enumerate_serial_identity_holders,
     execute_live_servo_census,
     parse_avfoundation_video_devices,
     parse_serial_device_holders,
     parse_system_camera_devices,
     require_no_serial_device_holders,
+    require_no_serial_identity_holders,
     resolve_camera_selection,
     resolve_follower_identity,
     verify_discovery_stability,
     verify_live_execution_contract,
     verify_operator_presence_lease,
     verify_redacted_observation_manifest,
+    verify_serial_identity_holder_stability,
+    verify_serial_identity_holder_snapshot,
     write_private_capture_failure_record,
     write_private_observation_bundle,
 )
@@ -149,6 +153,18 @@ def _execution_contract() -> dict:
     )
 
 
+def _zero_holder_snapshot() -> dict:
+    def runner(command: list[str], **kwargs) -> subprocess.CompletedProcess:
+        return subprocess.CompletedProcess(command, 1, "", "")
+
+    return enumerate_serial_identity_holders(
+        KNOWN_PHYSICAL_FOLLOWER_PORT,
+        [FOLLOWER_TTY_ALIAS],
+        run_command=runner,
+        path_exists=lambda path: True,
+    )
+
+
 def _png_frame(
     *,
     width: int = 4,
@@ -231,6 +247,7 @@ class _FakeBus:
             "Firmware_Minor_Version": 10 + servo_id,
             "ID": servo_id,
             "Baud_Rate": 0,
+            "Torque_Enable": 0,
             "Present_Position": 1900 + servo_id * 10,
             "Present_Voltage": 120,
             "Present_Temperature": 24 + servo_id,
@@ -332,6 +349,26 @@ class _WrongIdentityBus(_FakeBus):
         return value
 
 
+class _TorqueEnabledBus(_FakeBus):
+    def read(
+        self,
+        register: str,
+        motor: str,
+        *,
+        normalize: bool,
+        num_retry: int,
+    ) -> int:
+        value = super().read(
+            register,
+            motor,
+            normalize=normalize,
+            num_retry=num_retry,
+        )
+        if register == "Torque_Enable" and motor == "wrist_flex":
+            return 1
+        return value
+
+
 class LiveReadonlyObservationTests(unittest.TestCase):
     def test_presence_lease_is_short_scoped_and_fails_closed(self):
         lease = _lease()
@@ -378,6 +415,7 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             identity["usb"]["canonical_path"], KNOWN_PHYSICAL_FOLLOWER_PORT
         )
         self.assertEqual(identity["usb"]["serial_number"], "5B3D0406411")
+        self.assertEqual(identity["usb"]["observed_aliases"], [FOLLOWER_TTY_ALIAS])
         self.assertEqual(identity["bus"]["protocol_version"], 0)
 
         missing_optional_label = copy.deepcopy(discovery)
@@ -472,6 +510,111 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         require_no_serial_device_holders([])
         with self.assertRaisesRegex(ValueError, "unknown field"):
             parse_serial_device_holders("p1\ncbus\nzunexpected\n")
+
+    def test_serial_identity_holder_gate_checks_canonical_and_tty_alias(self):
+        alias = FOLLOWER_TTY_ALIAS
+        outputs = {
+            KNOWN_PHYSICAL_FOLLOWER_PORT: (1, ""),
+            alias: (0, "p62234\ncpython3.13\nf15\ntCHR\n"),
+        }
+
+        def runner(command: list[str], **kwargs) -> subprocess.CompletedProcess:
+            returncode, stdout = outputs[command[-1]]
+            return subprocess.CompletedProcess(command, returncode, stdout, "")
+
+        snapshot = enumerate_serial_identity_holders(
+            KNOWN_PHYSICAL_FOLLOWER_PORT,
+            [alias],
+            run_command=runner,
+            path_exists=lambda path: True,
+        )
+        verify_serial_identity_holder_snapshot(snapshot)
+        self.assertEqual(snapshot["paths_checked"], [KNOWN_PHYSICAL_FOLLOWER_PORT, alias])
+        self.assertEqual(snapshot["per_path_holder_counts"], [0, 1])
+        self.assertEqual(snapshot["deduplicated_holder_count"], 1)
+        self.assertEqual(snapshot["deduplicated_holders"][0]["paths"], [alias])
+        with self.assertRaisesRegex(ValueError, "1 independent holder"):
+            require_no_serial_identity_holders(snapshot)
+
+    def test_serial_identity_holder_gate_deduplicates_same_fd_across_aliases(self):
+        output = "p62234\ncpython3.13\nf15\ntCHR\n"
+
+        def runner(command: list[str], **kwargs) -> subprocess.CompletedProcess:
+            return subprocess.CompletedProcess(command, 0, output, "")
+
+        snapshot = enumerate_serial_identity_holders(
+            KNOWN_PHYSICAL_FOLLOWER_PORT,
+            [FOLLOWER_TTY_ALIAS],
+            run_command=runner,
+            path_exists=lambda path: True,
+        )
+        self.assertEqual(snapshot["per_path_holder_counts"], [1, 1])
+        self.assertEqual(snapshot["deduplicated_holder_count"], 1)
+        self.assertEqual(
+            snapshot["deduplicated_holders"][0]["paths"],
+            [KNOWN_PHYSICAL_FOLLOWER_PORT, FOLLOWER_TTY_ALIAS],
+        )
+
+    def test_serial_identity_holder_gate_preserves_distinct_processes(self):
+        outputs = {
+            KNOWN_PHYSICAL_FOLLOWER_PORT: "p10\ncone\nf3\ntCHR\n",
+            FOLLOWER_TTY_ALIAS: "p11\nctwo\nf4\ntCHR\n",
+        }
+
+        def runner(command: list[str], **kwargs) -> subprocess.CompletedProcess:
+            return subprocess.CompletedProcess(command, 0, outputs[command[-1]], "")
+
+        snapshot = enumerate_serial_identity_holders(
+            KNOWN_PHYSICAL_FOLLOWER_PORT,
+            [FOLLOWER_TTY_ALIAS],
+            run_command=runner,
+            path_exists=lambda path: True,
+        )
+        self.assertEqual(snapshot["deduplicated_holder_count"], 2)
+        self.assertEqual(
+            [holder["pid"] for holder in snapshot["deduplicated_holders"]],
+            [10, 11],
+        )
+
+    def test_serial_identity_holder_stability_rejects_alias_existence_drift(self):
+        def runner(command: list[str], **kwargs) -> subprocess.CompletedProcess:
+            return subprocess.CompletedProcess(command, 1, "", "")
+
+        before = enumerate_serial_identity_holders(
+            KNOWN_PHYSICAL_FOLLOWER_PORT,
+            [FOLLOWER_TTY_ALIAS],
+            run_command=runner,
+            path_exists=lambda path: True,
+        )
+        after = enumerate_serial_identity_holders(
+            KNOWN_PHYSICAL_FOLLOWER_PORT,
+            [FOLLOWER_TTY_ALIAS],
+            run_command=runner,
+            path_exists=lambda path: path == KNOWN_PHYSICAL_FOLLOWER_PORT,
+        )
+        require_no_serial_identity_holders(before)
+        with self.assertRaisesRegex(ValueError, "existence drift"):
+            verify_serial_identity_holder_stability(before, after)
+
+    def test_serial_identity_holder_gate_rejects_alias_and_command_drift(self):
+        with self.assertRaisesRegex(ValueError, "signed follower alias"):
+            enumerate_serial_identity_holders(
+                KNOWN_PHYSICAL_FOLLOWER_PORT,
+                [],
+                run_command=lambda *args, **kwargs: None,
+                path_exists=lambda path: True,
+            )
+
+        def failed_runner(command: list[str], **kwargs) -> subprocess.CompletedProcess:
+            return subprocess.CompletedProcess(command, 2, "", "failure")
+
+        with self.assertRaisesRegex(RuntimeError, "command failed"):
+            enumerate_serial_identity_holders(
+                KNOWN_PHYSICAL_FOLLOWER_PORT,
+                [FOLLOWER_TTY_ALIAS],
+                run_command=failed_runner,
+                path_exists=lambda path: True,
+            )
 
     def test_camera_metadata_parsers_and_selection_are_exact(self):
         ffmpeg = """
@@ -596,9 +739,12 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(result["proof_label"], "live_read_only_census_observed")
         self.assertTrue(result["hardware_opened"])
         self.assertFalse(result["physical_follower_commanded"])
-        self.assertEqual(result["operation_counts"]["read_attempts"], 49)
+        self.assertEqual(result["operation_counts"]["read_attempts"], 55)
         self.assertEqual(result["operation_counts"]["read_retries"], 1)
         self.assertEqual(result["operation_counts"]["motor_register_writes"], 0)
+        self.assertTrue(
+            all(servo["torque_enabled"] is False for servo in result["servos"])
+        )
         self.assertEqual(bus.calls[0], ("connect", False))
         self.assertEqual(bus.calls[-1], ("disconnect", False))
 
@@ -620,6 +766,14 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             bus_factory=lambda census_contract: _FakeBus(),
             monotonic_ns=_TickingClock(),
         )
+        frames = capture_finite_camera_frames(
+            contract,
+            project_state=PROJECT_STATE,
+            now="2026-07-11T04:47:00-05:00",
+            camera_factory=lambda camera: _FakeCamera(camera["index"]),
+            monotonic_ns=_TickingClock(start=2_000_000_000),
+            wall_time=lambda: "2026-07-11T04:47:00-05:00",
+        )
         tampered = copy.deepcopy(result)
         tampered["transport_trace"][1]["operation"] = "write"
         tampered = sign_payload(tampered)
@@ -627,19 +781,59 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             build_private_observation_evidence(
                 execution_contract=contract,
                 servo_result=tampered,
-                frames=capture_finite_camera_frames(
-                    contract,
-                    project_state=PROJECT_STATE,
-                    now="2026-07-11T04:47:00-05:00",
-                    camera_factory=lambda camera: _FakeCamera(camera["index"]),
-                    monotonic_ns=_TickingClock(start=2_000_000_000),
-                    wall_time=lambda: "2026-07-11T04:47:00-05:00",
-                ),
+                frames=frames,
                 pre_open_discovery=_discovery(),
                 post_close_discovery=_discovery(),
-                pre_open_serial_holders=[],
-                post_close_serial_holders=[],
+                pre_open_serial_holder_snapshot=_zero_holder_snapshot(),
+                post_close_serial_holder_snapshot=_zero_holder_snapshot(),
             )
+
+        torque_trace = copy.deepcopy(result)
+        torque_event = next(
+            event
+            for event in torque_trace["transport_trace"]
+            if event.get("operation") == "read"
+            and event.get("motor") == "wrist_flex"
+            and event.get("register") == "Torque_Enable"
+        )
+        torque_event["raw_value"] = 1
+        with self.assertRaisesRegex(ValueError, "torque is not disabled"):
+            build_private_observation_evidence(
+                execution_contract=contract,
+                servo_result=sign_payload(torque_trace),
+                frames=frames,
+                pre_open_discovery=_discovery(),
+                post_close_discovery=_discovery(),
+                pre_open_serial_holder_snapshot=_zero_holder_snapshot(),
+                post_close_serial_holder_snapshot=_zero_holder_snapshot(),
+            )
+
+        decoded_tamper = copy.deepcopy(result)
+        decoded_tamper["servos"][3]["torque_enabled"] = True
+        with self.assertRaisesRegex(ValueError, "decoded evidence"):
+            build_private_observation_evidence(
+                execution_contract=contract,
+                servo_result=sign_payload(decoded_tamper),
+                frames=frames,
+                pre_open_discovery=_discovery(),
+                post_close_discovery=_discovery(),
+                pre_open_serial_holder_snapshot=_zero_holder_snapshot(),
+                post_close_serial_holder_snapshot=_zero_holder_snapshot(),
+            )
+
+    def test_live_servo_census_rejects_one_enabled_servo_and_closes_no_write(self):
+        contract = _execution_contract()
+        bus = _TorqueEnabledBus()
+        with self.assertRaisesRegex(ValueError, "torque is not disabled"):
+            execute_live_servo_census(
+                contract,
+                project_state=PROJECT_STATE,
+                now="2026-07-11T04:47:00-05:00",
+                bus_factory=lambda census_contract: bus,
+                monotonic_ns=_TickingClock(),
+            )
+        self.assertEqual(bus.calls[-1], ("disconnect", False))
+        self.assertFalse(any(call[0] == "write" for call in bus.calls))
 
     def test_camera_capture_is_finite_timestamped_and_releases_once(self):
         contract = _execution_contract()
@@ -971,8 +1165,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             servo_result=servo_result,
             error=captured.exception,
             pre_open_discovery=_discovery(),
-            pre_open_serial_holders=[],
-            post_close_serial_holders=[],
+            pre_open_serial_holder_snapshot=_zero_holder_snapshot(),
+            post_close_serial_holder_snapshot=_zero_holder_snapshot(),
             failed_at="2026-07-11T04:47:01-05:00",
             elapsed_seconds=1.25,
         )
@@ -981,7 +1175,7 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertFalse(failure["tracked_success_manifest_written"])
         self.assertFalse(failure["physical_follower_commanded"])
         self.assertEqual(
-            failure["serial_device_holder_counts"],
+            failure["serial_identity_holder_counts"],
             {"pre_open": 0, "post_close": 0},
         )
         self.assertEqual(
@@ -1044,8 +1238,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             frames=frames,
             pre_open_discovery=_discovery(),
             post_close_discovery=_discovery(),
-            pre_open_serial_holders=[],
-            post_close_serial_holders=[],
+            pre_open_serial_holder_snapshot=_zero_holder_snapshot(),
+            post_close_serial_holder_snapshot=_zero_holder_snapshot(),
         )
         with tempfile.TemporaryDirectory() as temporary_directory:
             refs = write_private_observation_bundle(
@@ -1065,16 +1259,30 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(counts["subprocess_kill_attempts"], 0)
         self.assertEqual(counts["capture_property_writes"], 0)
         self.assertEqual(
-            private["serial_device_holder_counts"],
+            private["serial_identity_holder_counts"],
             {
                 "pre_open": 0,
                 "post_close": 0,
             },
         )
         self.assertEqual(
-            manifest["serial_device_holder_counts"],
-            private["serial_device_holder_counts"],
+            {
+                stage: evidence["deduplicated_holder_count"]
+                for stage, evidence in manifest[
+                    "serial_identity_holder_evidence"
+                ].items()
+            },
+            private["serial_identity_holder_counts"],
         )
+        for stage, evidence in manifest["serial_identity_holder_evidence"].items():
+            self.assertEqual(evidence["path_count"], 2)
+            self.assertEqual(evidence["per_path_holder_counts"], [0, 0])
+            self.assertEqual(len(evidence["path_identity_sha256"]), 2)
+            self.assertTrue(evidence["paths_all_existed"])
+            self.assertEqual(
+                evidence["snapshot_identity_sha256"],
+                private["serial_identity_holder_snapshot_sha256"][stage],
+            )
         self.assertTrue(
             all(camera["camera_backend_audit_sha256"] for camera in manifest["cameras"])
         )
@@ -1151,8 +1359,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             frames=frames,
             pre_open_discovery=_discovery(),
             post_close_discovery=_discovery(),
-            pre_open_serial_holders=[],
-            post_close_serial_holders=[],
+            pre_open_serial_holder_snapshot=_zero_holder_snapshot(),
+            post_close_serial_holder_snapshot=_zero_holder_snapshot(),
         )
         with tempfile.TemporaryDirectory() as temporary_directory:
             refs = write_private_observation_bundle(
@@ -1179,6 +1387,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         manifest_json = json.dumps(manifest, sort_keys=True)
         self.assertIn("5B3D0406411", private_json)
         self.assertNotIn("5B3D0406411", manifest_json)
+        self.assertNotIn(KNOWN_PHYSICAL_FOLLOWER_PORT, manifest_json)
+        self.assertNotIn(FOLLOWER_TTY_ALIAS, manifest_json)
         self.assertNotIn("side-camera-001", manifest_json)
         self.assertNotIn('"frame_bytes":', manifest_json)
         self.assertEqual(

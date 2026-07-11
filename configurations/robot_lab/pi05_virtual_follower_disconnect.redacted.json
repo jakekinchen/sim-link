@@ -1,0 +1,77 @@
+{
+  "additional_calls_allowed": 0,
+  "authority_id": "owner_supervised_physical_poc_2026_07_11",
+  "evidence_mode": "tracked_redacted_reconstructed_operation_proof",
+  "finished_at": "2026-07-11T08:57:17-05:00",
+  "forbidden_effects_observed": [],
+  "identity_sha256": "627de4fd5715e281007ab5f19a37b0cb610b4d3b637b7b37933a41396ba3859b",
+  "invariants": {
+    "routing_state_unchanged": true,
+    "running_job_count_after": 0,
+    "running_job_count_before": 0,
+    "safety_state_unchanged": true
+  },
+  "maximum_call_count": 1,
+  "observed_call_count": 1,
+  "permit_consumed": true,
+  "permit_identity_sha256": "85f91ceae787d86bc0faeb87bbf35c77ecae988baf6fcc19eb1581229d4aef43",
+  "permit_source_commit": "59f09d1576d777ee8e186ff885b58ac69c2a253d",
+  "permit_source_file_sha256": "3cb304c0951a19f9f6cdb5535342465398280134ab53226244812ce595ab03ea",
+  "physical_follower_commanded": false,
+  "physical_motion_commanded": false,
+  "postconditions": {
+    "follower_connected": false,
+    "follower_holder_count": 0,
+    "follower_torque_reported": false,
+    "leader_connected": true
+  },
+  "preconditions": {
+    "follower_connected": true,
+    "follower_torque_reported": true,
+    "leader_connected": true
+  },
+  "privacy": {
+    "private_evidence_required": true,
+    "raw_device_paths_included": false,
+    "raw_response_body_included": false,
+    "raw_usb_serial_included": false
+  },
+  "private_evidence_reference": {
+    "file_sha256": "9b45502b38a6e0d0413cd3d9c1927966715389cf7f19dc14c3f6069246e8618f",
+    "identity_sha256": "a9941b849657055037a016842e6622e30055bd25b0505a103ef4e55217a0bf4c",
+    "path": "outputs/robot_lab/virtual_disconnect/private/20260711-0857/private_virtual_disconnect.json",
+    "schema_version": "scenesmith.virtual_follower_disconnect_private.v1",
+    "size_bytes": 5507
+  },
+  "proof_label": "virtual_follower_disconnect_observed",
+  "proof_name": "pi05_virtual_follower_disconnect_redacted",
+  "qualification_scope": "physical_observation",
+  "request": {
+    "body": {
+      "role": "follower"
+    },
+    "method": "POST",
+    "path": "/api/hardware/disconnect"
+  },
+  "response": {
+    "body_sha256": "b934a6b880ec50cbba5820ad487fc9e9840ef241a69b5a5a1017422cb59eb8fe",
+    "http_status": 200
+  },
+  "schema_version": "scenesmith.virtual_follower_disconnect_proof.v1",
+  "serial_holder_evidence": {
+    "deduplicated_holder_count": 0,
+    "normalized_holder_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
+    "path_identity_sha256": [
+      "373a6ad7001fecaea9aed92891d6c536b34f9869192e30e039ad4a56edfb4f77",
+      "e3bcae7063cd589f8182bafe5abfcd5624493ea84481fc59c5db9600121136a1"
+    ],
+    "paths_checked_count": 2,
+    "per_path_holder_counts": [
+      0,
+      0
+    ],
+    "revalidated_at": "2026-07-11T09:37:56-05:00"
+  },
+  "started_at": "2026-07-11T08:57:17-05:00",
+  "timestamp_resolution_seconds": 1
+}

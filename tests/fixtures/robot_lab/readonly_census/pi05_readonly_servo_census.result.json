@@ -1,9 +1,9 @@
 {
   "conformance_state": "census_trace_conformant",
-  "contract_identity_sha256": "73652ffa885f159da0412e4e151203805b5d9ce12138e137d4fd951f82276978",
+  "contract_identity_sha256": "28d087fec96c1f79202e36e943756a0cb8dff821855e6784cdfae36881168da9",
   "evidence_mode": "recorded_trace_replay",
   "hardware_opened": false,
-  "identity_sha256": "4a83298bb0c6cb4d4416e99e7976598de3455644a6841d1550f0362109804986",
+  "identity_sha256": "d58f0e8d166c4bdb8c6631e94e3202b17f98c2267c697c5740d50eae0d887111",
   "lifecycle_state": "closed",
   "operation_counts": {
     "close_attempts": 1,
@@ -14,9 +14,9 @@
     "construct_successes": 1,
     "motion_commands": 0,
     "motor_register_writes": 0,
-    "read_attempts": 49,
+    "read_attempts": 55,
     "read_retries": 1,
-    "read_successes": 48,
+    "read_successes": 54,
     "torque_changes": 0,
     "unexpected_operations": 0
   },
@@ -24,7 +24,7 @@
   "proof_label": "census_trace_conformant",
   "qualification_scope": "fixture_evidence",
   "result_name": "pi05_so101_offline_readonly_servo_census",
-  "schema_version": "scenesmith.readonly_servo_census_result.v1",
+  "schema_version": "scenesmith.readonly_servo_census_result.v2",
   "servos": [
     {
       "baudrate": 1000000,
@@ -43,9 +43,12 @@
         "Model_Number": 777,
         "Present_Position": 2048,
         "Present_Temperature": 25,
-        "Present_Voltage": 120
+        "Present_Voltage": 120,
+        "Torque_Enable": 0
       },
-      "servo_id": 1
+      "servo_id": 1,
+      "torque_enable_raw": 0,
+      "torque_enabled": false
     },
     {
       "baudrate": 1000000,
@@ -64,9 +67,12 @@
         "Model_Number": 777,
         "Present_Position": 1984,
         "Present_Temperature": 26,
-        "Present_Voltage": 120
+        "Present_Voltage": 120,
+        "Torque_Enable": 0
       },
-      "servo_id": 2
+      "servo_id": 2,
+      "torque_enable_raw": 0,
+      "torque_enabled": false
     },
     {
       "baudrate": 1000000,
@@ -85,9 +91,12 @@
         "Model_Number": 777,
         "Present_Position": 2112,
         "Present_Temperature": 27,
-        "Present_Voltage": 120
+        "Present_Voltage": 120,
+        "Torque_Enable": 0
       },
-      "servo_id": 3
+      "servo_id": 3,
+      "torque_enable_raw": 0,
+      "torque_enabled": false
     },
     {
       "baudrate": 1000000,
@@ -106,9 +115,12 @@
         "Model_Number": 777,
         "Present_Position": 2016,
         "Present_Temperature": 28,
-        "Present_Voltage": 120
+        "Present_Voltage": 120,
+        "Torque_Enable": 0
       },
-      "servo_id": 4
+      "servo_id": 4,
+      "torque_enable_raw": 0,
+      "torque_enabled": false
     },
     {
       "baudrate": 1000000,
@@ -127,9 +139,12 @@
         "Model_Number": 777,
         "Present_Position": 2056,
         "Present_Temperature": 29,
-        "Present_Voltage": 120
+        "Present_Voltage": 120,
+        "Torque_Enable": 0
       },
-      "servo_id": 5
+      "servo_id": 5,
+      "torque_enable_raw": 0,
+      "torque_enabled": false
     },
     {
       "baudrate": 1000000,
@@ -148,9 +163,12 @@
         "Model_Number": 777,
         "Present_Position": 1024,
         "Present_Temperature": 30,
-        "Present_Voltage": 120
+        "Present_Voltage": 120,
+        "Torque_Enable": 0
       },
-      "servo_id": 6
+      "servo_id": 6,
+      "torque_enable_raw": 0,
+      "torque_enabled": false
     }
   ],
   "target_device_identity": {
@@ -170,5 +188,5 @@
       "vendor_id_hex": "ffff"
     }
   },
-  "trace_identity_sha256": "17921a5f7a406aba6b05efca56697a692969fc16f268c863260f2c6274b542d1"
+  "trace_identity_sha256": "41526a67d2e119f70357f7182b28688a11dc0af0f3235906d3de3d2ae938a61f"
 }

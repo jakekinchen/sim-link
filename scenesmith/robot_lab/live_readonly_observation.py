@@ -38,6 +38,7 @@ from scenesmith.robot_lab.readonly_servo_census import (
     InjectedReadOnlyBusAdapter,
     TransientReadError,
     build_live_census_contract,
+    decode_readonly_servo_observations,
     run_readonly_census,
     verify_live_census_contract,
 )
@@ -48,14 +49,17 @@ LIVE_DISCOVERY_SCHEMA_VERSION = "scenesmith.live_readonly_discovery.v1"
 LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION = (
     "scenesmith.live_readonly_observation_contract.v1"
 )
-LIVE_SERVO_RESULT_SCHEMA_VERSION = "scenesmith.live_readonly_servo_result.v1"
-PRIVATE_OBSERVATION_SCHEMA_VERSION = "scenesmith.live_readonly_observation_private.v1"
-REDACTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v1"
+LIVE_SERVO_RESULT_SCHEMA_VERSION = "scenesmith.live_readonly_servo_result.v2"
+PRIVATE_OBSERVATION_SCHEMA_VERSION = "scenesmith.live_readonly_observation_private.v2"
+REDACTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v2"
 CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION = (
     "scenesmith.named_camera_failure_diagnostic.v1"
 )
 PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION = (
-    "scenesmith.live_readonly_capture_failure_private.v1"
+    "scenesmith.live_readonly_capture_failure_private.v2"
+)
+SERIAL_IDENTITY_HOLDER_SNAPSHOT_SCHEMA_VERSION = (
+    "scenesmith.serial_identity_holder_snapshot.v1"
 )
 
 MAX_PRESENCE_LEASE_SECONDS = 600
@@ -304,7 +308,10 @@ def resolve_follower_identity(discovery: dict[str, Any]) -> dict[str, Any]:
         for candidate in leader_candidates
     ):
         raise ValueError("Follower and leader role identities share one USB serial")
-    aliases = sorted(follower_paths - {KNOWN_PHYSICAL_FOLLOWER_PORT})
+    aliases = sorted(
+        (follower_paths - {KNOWN_PHYSICAL_FOLLOWER_PORT})
+        | {_paired_tty_alias(KNOWN_PHYSICAL_FOLLOWER_PORT)}
+    )
     return {
         "device_role": "so101_follower_observation_target",
         "usb": {
@@ -927,16 +934,20 @@ def build_private_capture_failure_evidence(
     servo_result: dict[str, Any],
     error: BaseException,
     pre_open_discovery: dict[str, Any],
-    pre_open_serial_holders: list[dict[str, Any]],
-    post_close_serial_holders: list[dict[str, Any]],
+    pre_open_serial_holder_snapshot: dict[str, Any],
+    post_close_serial_holder_snapshot: dict[str, Any],
     failed_at: str,
     elapsed_seconds: float,
 ) -> dict[str, Any]:
     verify_signed_payload(execution_contract, label="Live execution contract")
     _verify_live_servo_result(servo_result, execution_contract=execution_contract)
     verify_discovery_stability(execution_contract["discovery"], pre_open_discovery)
-    require_no_serial_device_holders(pre_open_serial_holders)
-    require_no_serial_device_holders(post_close_serial_holders)
+    require_no_serial_identity_holders(pre_open_serial_holder_snapshot)
+    require_no_serial_identity_holders(post_close_serial_holder_snapshot)
+    verify_serial_identity_holder_stability(
+        pre_open_serial_holder_snapshot,
+        post_close_serial_holder_snapshot,
+    )
     diagnostic = _extract_named_camera_failure_diagnostic(error)
     verify_signed_payload(diagnostic, label="Named camera failure diagnostic")
     if (
@@ -969,17 +980,21 @@ def build_private_capture_failure_evidence(
         "camera_failure_diagnostic": copy.deepcopy(diagnostic),
         "camera_failure_diagnostic_identity_sha256": diagnostic["identity_sha256"],
         "error_types": _flatten_error_types(error),
-        "serial_device_holders": {
-            "pre_open": copy.deepcopy(pre_open_serial_holders),
-            "post_close": copy.deepcopy(post_close_serial_holders),
+        "serial_identity_holder_snapshots": {
+            "pre_open": copy.deepcopy(pre_open_serial_holder_snapshot),
+            "post_close": copy.deepcopy(post_close_serial_holder_snapshot),
         },
-        "serial_device_holder_counts": {
-            "pre_open": len(pre_open_serial_holders),
-            "post_close": len(post_close_serial_holders),
+        "serial_identity_holder_counts": {
+            "pre_open": pre_open_serial_holder_snapshot[
+                "deduplicated_holder_count"
+            ],
+            "post_close": post_close_serial_holder_snapshot[
+                "deduplicated_holder_count"
+            ],
         },
-        "serial_device_holder_snapshot_sha256": {
-            "pre_open": _sha256_payload(pre_open_serial_holders),
-            "post_close": _sha256_payload(post_close_serial_holders),
+        "serial_identity_holder_snapshot_sha256": {
+            "pre_open": pre_open_serial_holder_snapshot["identity_sha256"],
+            "post_close": post_close_serial_holder_snapshot["identity_sha256"],
         },
         "failed_at": _validated_wall_time(failed_at),
         "elapsed_seconds": float(elapsed_seconds),
@@ -1045,9 +1060,9 @@ def _verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
         "camera_failure_diagnostic",
         "camera_failure_diagnostic_identity_sha256",
         "error_types",
-        "serial_device_holders",
-        "serial_device_holder_counts",
-        "serial_device_holder_snapshot_sha256",
+        "serial_identity_holder_snapshots",
+        "serial_identity_holder_counts",
+        "serial_identity_holder_snapshot_sha256",
         "failed_at",
         "elapsed_seconds",
         "private_success_bundle_written",
@@ -1090,9 +1105,9 @@ def _verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
         != diagnostic.get("identity_sha256")
     ):
         raise ValueError("Private capture failure diagnostic identity drifted")
-    holders = payload.get("serial_device_holders")
-    counts = payload.get("serial_device_holder_counts")
-    holder_hashes = payload.get("serial_device_holder_snapshot_sha256")
+    holders = payload.get("serial_identity_holder_snapshots")
+    counts = payload.get("serial_identity_holder_counts")
+    holder_hashes = payload.get("serial_identity_holder_snapshot_sha256")
     if (
         not isinstance(holders, dict)
         or set(holders) != {"pre_open", "post_close"}
@@ -1103,11 +1118,15 @@ def _verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
     ):
         raise ValueError("Private capture failure holder evidence is malformed")
     for stage in ("pre_open", "post_close"):
-        require_no_serial_device_holders(holders[stage])
-        if counts[stage] != len(holders[stage]):
+        require_no_serial_identity_holders(holders[stage])
+        if counts[stage] != holders[stage]["deduplicated_holder_count"]:
             raise ValueError("Private capture failure holder count drifted")
-        if holder_hashes[stage] != _sha256_payload(holders[stage]):
+        if holder_hashes[stage] != holders[stage]["identity_sha256"]:
             raise ValueError("Private capture failure holder identity drifted")
+    verify_serial_identity_holder_stability(
+        holders["pre_open"],
+        holders["post_close"],
+    )
     elapsed = payload.get("elapsed_seconds")
     if (
         isinstance(elapsed, bool)
@@ -1169,15 +1188,19 @@ def build_private_observation_evidence(
     frames: list[dict[str, Any]],
     pre_open_discovery: dict[str, Any],
     post_close_discovery: dict[str, Any],
-    pre_open_serial_holders: list[dict[str, Any]],
-    post_close_serial_holders: list[dict[str, Any]],
+    pre_open_serial_holder_snapshot: dict[str, Any],
+    post_close_serial_holder_snapshot: dict[str, Any],
 ) -> dict[str, Any]:
     _verify_live_servo_result(servo_result, execution_contract=execution_contract)
     _verify_captured_frames(frames, execution_contract=execution_contract)
     verify_discovery_stability(execution_contract["discovery"], pre_open_discovery)
     verify_discovery_stability(execution_contract["discovery"], post_close_discovery)
-    require_no_serial_device_holders(pre_open_serial_holders)
-    require_no_serial_device_holders(post_close_serial_holders)
+    require_no_serial_identity_holders(pre_open_serial_holder_snapshot)
+    require_no_serial_identity_holders(post_close_serial_holder_snapshot)
+    verify_serial_identity_holder_stability(
+        pre_open_serial_holder_snapshot,
+        post_close_serial_holder_snapshot,
+    )
     servo_midpoint = (
         servo_result["observation_started_monotonic_ns"]
         + servo_result["observation_finished_monotonic_ns"]
@@ -1215,9 +1238,21 @@ def build_private_observation_evidence(
         "discovery_identity_sha256": execution_contract["discovery_identity_sha256"],
         "pre_open_discovery_identity_sha256": pre_open_discovery["identity_sha256"],
         "post_close_discovery_identity_sha256": post_close_discovery["identity_sha256"],
-        "serial_device_holder_counts": {
-            "pre_open": len(pre_open_serial_holders),
-            "post_close": len(post_close_serial_holders),
+        "serial_identity_holder_snapshots": {
+            "pre_open": copy.deepcopy(pre_open_serial_holder_snapshot),
+            "post_close": copy.deepcopy(post_close_serial_holder_snapshot),
+        },
+        "serial_identity_holder_counts": {
+            "pre_open": pre_open_serial_holder_snapshot[
+                "deduplicated_holder_count"
+            ],
+            "post_close": post_close_serial_holder_snapshot[
+                "deduplicated_holder_count"
+            ],
+        },
+        "serial_identity_holder_snapshot_sha256": {
+            "pre_open": pre_open_serial_holder_snapshot["identity_sha256"],
+            "post_close": post_close_serial_holder_snapshot["identity_sha256"],
         },
         "discovery_stability": (
             "exact_serial_and_stable_camera_identity_match_"
@@ -1351,8 +1386,33 @@ def build_redacted_observation_manifest(
     private_evidence: dict[str, Any],
     private_bundle_refs: dict[str, Any],
 ) -> dict[str, Any]:
+    if private_evidence.get("schema_version") != PRIVATE_OBSERVATION_SCHEMA_VERSION:
+        raise ValueError("Unsupported private observation evidence schema")
     verify_signed_payload(private_evidence, label="Private observation evidence")
     _verify_private_bundle_refs(private_bundle_refs, private_evidence=private_evidence)
+    holder_snapshots = private_evidence.get("serial_identity_holder_snapshots")
+    holder_counts = private_evidence.get("serial_identity_holder_counts")
+    holder_hashes = private_evidence.get("serial_identity_holder_snapshot_sha256")
+    if (
+        not isinstance(holder_snapshots, dict)
+        or set(holder_snapshots) != {"pre_open", "post_close"}
+        or not isinstance(holder_counts, dict)
+        or set(holder_counts) != {"pre_open", "post_close"}
+        or not isinstance(holder_hashes, dict)
+        or set(holder_hashes) != {"pre_open", "post_close"}
+    ):
+        raise ValueError("Private observation serial holder evidence is malformed")
+    for stage in ("pre_open", "post_close"):
+        snapshot = holder_snapshots[stage]
+        require_no_serial_identity_holders(snapshot)
+        if holder_counts[stage] != snapshot["deduplicated_holder_count"]:
+            raise ValueError("Private observation serial holder count drifted")
+        if holder_hashes[stage] != snapshot["identity_sha256"]:
+            raise ValueError("Private observation serial holder identity drifted")
+    verify_serial_identity_holder_stability(
+        holder_snapshots["pre_open"],
+        holder_snapshots["post_close"],
+    )
     usb = private_evidence["target_device_identity"]["usb"]
     servo_identity = [
         {
@@ -1421,9 +1481,10 @@ def build_redacted_observation_manifest(
         "post_close_discovery_identity_sha256": private_evidence[
             "post_close_discovery_identity_sha256"
         ],
-        "serial_device_holder_counts": copy.deepcopy(
-            private_evidence["serial_device_holder_counts"]
-        ),
+        "serial_identity_holder_evidence": {
+            stage: _redacted_serial_identity_holder_evidence(snapshot)
+            for stage, snapshot in holder_snapshots.items()
+        },
         "cameras": cameras,
         "max_host_observed_skew_ns": private_evidence["max_host_observed_skew_ns"],
         "timestamp_scope": private_evidence["timestamp_scope"],
@@ -1462,10 +1523,15 @@ def enumerate_serial_candidates() -> list[dict[str, Any]]:
 
     records = []
     for port in list_ports.comports():
+        paired_alias = _paired_tty_alias(port.device)
         records.append(
             {
                 "device": port.device,
-                "aliases": [],
+                "aliases": (
+                    [paired_alias]
+                    if paired_alias != port.device and Path(paired_alias).exists()
+                    else []
+                ),
                 "vid": port.vid,
                 "pid": port.pid,
                 "serial_number": port.serial_number,
@@ -1530,8 +1596,11 @@ def parse_serial_device_holders(output: str) -> list[dict[str, Any]]:
             or len(record["file_descriptors"]) != len(record["file_types"])
         ):
             raise ValueError("Serial holder discovery record is incomplete")
-        record["file_descriptors"] = sorted(record["file_descriptors"])
-        record["file_types"] = sorted(record["file_types"])
+        descriptor_types = sorted(
+            zip(record["file_descriptors"], record["file_types"], strict=True)
+        )
+        record["file_descriptors"] = [item[0] for item in descriptor_types]
+        record["file_types"] = [item[1] for item in descriptor_types]
     if len({record["pid"] for record in records}) != len(records):
         raise ValueError("Serial holder discovery repeats a process")
     return sorted(records, key=lambda record: record["pid"])
@@ -1540,7 +1609,181 @@ def parse_serial_device_holders(output: str) -> list[dict[str, Any]]:
 def enumerate_serial_device_holders(device_path: str) -> list[dict[str, Any]]:
     if device_path != KNOWN_PHYSICAL_FOLLOWER_PORT:
         raise ValueError("Serial holder discovery path is not the pinned follower")
-    result = subprocess.run(
+    return _enumerate_serial_holders_for_path(
+        device_path,
+        run_command=subprocess.run,
+    )
+
+
+def enumerate_serial_identity_holders(
+    canonical_path: str,
+    observed_aliases: list[str],
+    *,
+    run_command: Callable[..., Any] = subprocess.run,
+    path_exists: Callable[[str], bool] | None = None,
+) -> dict[str, Any]:
+    if canonical_path != KNOWN_PHYSICAL_FOLLOWER_PORT:
+        raise ValueError("Serial identity canonical path is not the pinned follower")
+    expected_aliases = [_paired_tty_alias(KNOWN_PHYSICAL_FOLLOWER_PORT)]
+    if observed_aliases != expected_aliases:
+        raise ValueError("Serial identity signed follower alias set is incomplete")
+    exists = path_exists or (lambda path: Path(path).exists())
+    paths_checked = [canonical_path, *observed_aliases]
+    per_path = []
+    for path in paths_checked:
+        holders = _enumerate_serial_holders_for_path(
+            path,
+            run_command=run_command,
+        )
+        per_path.append(
+            {
+                "path": path,
+                "path_exists": bool(exists(path)),
+                "holders": holders,
+                "holder_count": len(holders),
+            }
+        )
+    deduplicated = _deduplicate_identity_holders(per_path)
+    payload = {
+        "schema_version": SERIAL_IDENTITY_HOLDER_SNAPSHOT_SCHEMA_VERSION,
+        "snapshot_name": "pi05_follower_serial_identity_holders",
+        "canonical_path": canonical_path,
+        "observed_aliases": list(observed_aliases),
+        "paths_checked": paths_checked,
+        "per_path": per_path,
+        "per_path_holder_counts": [item["holder_count"] for item in per_path],
+        "deduplicated_holders": deduplicated,
+        "deduplicated_holder_count": len(deduplicated),
+    }
+    signed = sign_payload(payload)
+    verify_serial_identity_holder_snapshot(signed)
+    return signed
+
+
+def verify_serial_identity_holder_snapshot(payload: dict[str, Any]) -> None:
+    allowed_fields = {
+        "schema_version",
+        "snapshot_name",
+        "canonical_path",
+        "observed_aliases",
+        "paths_checked",
+        "per_path",
+        "per_path_holder_counts",
+        "deduplicated_holders",
+        "deduplicated_holder_count",
+        "identity_sha256",
+    }
+    if not isinstance(payload, dict) or set(payload) != allowed_fields:
+        raise ValueError("Serial identity holder snapshot fields are malformed")
+    if (
+        payload.get("schema_version")
+        != SERIAL_IDENTITY_HOLDER_SNAPSHOT_SCHEMA_VERSION
+        or payload.get("snapshot_name")
+        != "pi05_follower_serial_identity_holders"
+    ):
+        raise ValueError("Serial identity holder snapshot classification drifted")
+    verify_signed_payload(payload, label="Serial identity holder snapshot")
+    canonical = payload.get("canonical_path")
+    aliases = payload.get("observed_aliases")
+    expected_aliases = [_paired_tty_alias(KNOWN_PHYSICAL_FOLLOWER_PORT)]
+    expected_paths = [KNOWN_PHYSICAL_FOLLOWER_PORT, *expected_aliases]
+    if canonical != KNOWN_PHYSICAL_FOLLOWER_PORT or aliases != expected_aliases:
+        raise ValueError("Serial identity holder snapshot path identity drifted")
+    if payload.get("paths_checked") != expected_paths:
+        raise ValueError("Serial identity holder snapshot path coverage drifted")
+    per_path = payload.get("per_path")
+    if not isinstance(per_path, list) or len(per_path) != len(expected_paths):
+        raise ValueError("Serial identity per-path holder evidence is incomplete")
+    for expected_path, record in zip(expected_paths, per_path, strict=True):
+        if not isinstance(record, dict) or set(record) != {
+            "path",
+            "path_exists",
+            "holders",
+            "holder_count",
+        }:
+            raise ValueError("Serial identity per-path holder record is malformed")
+        if record.get("path") != expected_path or not isinstance(
+            record.get("path_exists"), bool
+        ):
+            raise ValueError("Serial identity per-path path evidence drifted")
+        holders = record.get("holders")
+        _verify_normalized_serial_device_holders(holders)
+        if record.get("holder_count") != len(holders):
+            raise ValueError("Serial identity per-path holder count drifted")
+    counts = [record["holder_count"] for record in per_path]
+    if payload.get("per_path_holder_counts") != counts:
+        raise ValueError("Serial identity holder count vector drifted")
+    deduplicated = _deduplicate_identity_holders(per_path)
+    if payload.get("deduplicated_holders") != deduplicated or payload.get(
+        "deduplicated_holder_count"
+    ) != len(deduplicated):
+        raise ValueError("Serial identity deduplicated holder evidence drifted")
+
+
+def require_no_serial_identity_holders(payload: dict[str, Any]) -> None:
+    verify_serial_identity_holder_snapshot(payload)
+    if not all(record["path_exists"] for record in payload["per_path"]):
+        raise ValueError("Follower serial identity path does not exist")
+    count = payload["deduplicated_holder_count"]
+    if count:
+        raise ValueError(
+            f"Follower serial identity has {count} independent holder(s)"
+        )
+
+
+def verify_serial_identity_holder_stability(
+    before: dict[str, Any],
+    after: dict[str, Any],
+) -> None:
+    verify_serial_identity_holder_snapshot(before)
+    verify_serial_identity_holder_snapshot(after)
+    for field in ("canonical_path", "observed_aliases", "paths_checked"):
+        if before[field] != after[field]:
+            raise ValueError("Serial identity holder path set drifted")
+    before_exists = [record["path_exists"] for record in before["per_path"]]
+    after_exists = [record["path_exists"] for record in after["per_path"]]
+    if before_exists != after_exists:
+        raise ValueError("Serial identity holder path existence drifted")
+
+
+def _redacted_serial_identity_holder_evidence(
+    snapshot: dict[str, Any],
+) -> dict[str, Any]:
+    require_no_serial_identity_holders(snapshot)
+    return {
+        "snapshot_identity_sha256": snapshot["identity_sha256"],
+        "serial_identity_sha256": _sha256_payload(
+            {
+                "canonical_path": snapshot["canonical_path"],
+                "observed_aliases": snapshot["observed_aliases"],
+                "paths_checked": snapshot["paths_checked"],
+            }
+        ),
+        "path_count": len(snapshot["paths_checked"]),
+        "path_identity_sha256": [
+            hashlib.sha256(path.encode("utf-8")).hexdigest()
+            for path in snapshot["paths_checked"]
+        ],
+        "paths_all_existed": all(
+            record["path_exists"] for record in snapshot["per_path"]
+        ),
+        "per_path_holder_counts": list(snapshot["per_path_holder_counts"]),
+        "per_path_holder_snapshot_sha256": [
+            _sha256_payload(record["holders"]) for record in snapshot["per_path"]
+        ],
+        "deduplicated_holder_count": snapshot["deduplicated_holder_count"],
+        "normalized_holder_snapshot_sha256": _sha256_payload(
+            snapshot["deduplicated_holders"]
+        ),
+    }
+
+
+def _enumerate_serial_holders_for_path(
+    device_path: str,
+    *,
+    run_command: Callable[..., Any],
+) -> list[dict[str, Any]]:
+    result = run_command(
         ["/usr/sbin/lsof", "-nP", "-F", "pcft", device_path],
         check=False,
         capture_output=True,
@@ -1557,7 +1800,56 @@ def enumerate_serial_device_holders(device_path: str) -> list[dict[str, Any]]:
     return holders
 
 
+def _deduplicate_identity_holders(
+    per_path: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    units: dict[tuple[int, str, str], dict[str, Any]] = {}
+    for record in per_path:
+        path = record["path"]
+        for holder in record["holders"]:
+            for descriptor, file_type in zip(
+                holder["file_descriptors"],
+                holder["file_types"],
+                strict=True,
+            ):
+                key = (holder["pid"], descriptor, file_type)
+                unit = units.setdefault(
+                    key,
+                    {"command": holder["command"], "paths": set()},
+                )
+                if unit["command"] != holder["command"]:
+                    raise ValueError(
+                        "Serial identity holder command drifted for one PID/file descriptor"
+                    )
+                unit["paths"].add(path)
+    return [
+        {
+            "pid": pid,
+            "command": unit["command"],
+            "file_descriptor": descriptor,
+            "file_type": file_type,
+            "paths": [
+                path
+                for path in [
+                    KNOWN_PHYSICAL_FOLLOWER_PORT,
+                    _paired_tty_alias(KNOWN_PHYSICAL_FOLLOWER_PORT),
+                ]
+                if path in unit["paths"]
+            ],
+        }
+        for (pid, descriptor, file_type), unit in sorted(units.items())
+    ]
+
+
 def require_no_serial_device_holders(holders: list[dict[str, Any]]) -> None:
+    _verify_normalized_serial_device_holders(holders)
+    if holders:
+        raise ValueError(
+            f"Follower serial device has {len(holders)} independent holder(s)"
+        )
+
+
+def _verify_normalized_serial_device_holders(holders: Any) -> None:
     if not isinstance(holders, list):
         raise ValueError("Serial holder snapshot must be a list")
     if any(
@@ -1586,10 +1878,6 @@ def require_no_serial_device_holders(holders: list[dict[str, Any]]) -> None:
         raise ValueError("Serial holder snapshot is not normalized")
     if len({record["pid"] for record in holders}) != len(holders):
         raise ValueError("Serial holder snapshot repeats a process")
-    if holders:
-        raise ValueError(
-            f"Follower serial device has {len(holders)} independent holder(s)"
-        )
 
 
 def enumerate_camera_metadata() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -2633,6 +2921,21 @@ def _verify_live_servo_result(
         != execution_contract["live_census_contract"]["identity_sha256"]
     ):
         raise ValueError("Live servo result census linkage drifted")
+    census_contract = execution_contract["live_census_contract"]
+    target = census_contract["target_device_identity"]
+    expected_device_identity = {
+        "device_role": target["device_role"],
+        "usb": {
+            "vendor_id_hex": target["usb"]["vendor_id_hex"],
+            "product_id_hex": target["usb"]["product_id_hex"],
+            "serial_number": target["usb"]["serial_number"],
+            "canonical_path": target["usb"]["canonical_path"],
+            "observed_aliases": target["usb"]["allowed_aliases"],
+        },
+        "bus": target["bus"],
+    }
+    if payload.get("target_device_identity") != expected_device_identity:
+        raise ValueError("Live servo result target device identity drifted")
     if payload.get("hardware_opened") is not True:
         raise ValueError("Live servo result must record hardware opened")
     if payload.get("physical_follower_commanded") is not False:
@@ -2650,8 +2953,37 @@ def _verify_live_servo_result(
     ):
         raise ValueError("Live servo observation interval is invalid")
     counts = payload.get("operation_counts")
-    if not isinstance(counts, dict):
+    expected_count_fields = {
+        "construct_attempts",
+        "construct_successes",
+        "connect_attempts",
+        "connect_successes",
+        "read_attempts",
+        "read_successes",
+        "read_retries",
+        "close_attempts",
+        "close_successes",
+        "motor_register_writes",
+        "torque_changes",
+        "motion_commands",
+        "unexpected_operations",
+    }
+    if not isinstance(counts, dict) or set(counts) != expected_count_fields:
         raise ValueError("Live servo operation counts are missing")
+    for field in expected_count_fields:
+        value = counts[field]
+        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+            raise ValueError(f"Live servo result count is invalid: {field}")
+    for field in (
+        "construct_attempts",
+        "construct_successes",
+        "connect_attempts",
+        "connect_successes",
+        "close_attempts",
+        "close_successes",
+    ):
+        if counts[field] != 1:
+            raise ValueError(f"Live servo lifecycle count drifted: {field}")
     for field in (
         "motor_register_writes",
         "torque_changes",
@@ -2685,36 +3017,110 @@ def _verify_live_servo_result(
         operation not in {"connect", "read", "disconnect"} for operation in operations
     ):
         raise ValueError("Live servo transport trace contains an unexpected operation")
-    if trace[0].get("handshake") is not False:
+    if set(trace[0]) != {
+        "sequence",
+        "operation",
+        "monotonic_ns",
+        "handshake",
+        "outcome",
+    } or trace[0].get("handshake") is not False:
         raise ValueError("Live servo transport trace used a handshake")
-    if trace[-1].get("disable_torque") is not False:
+    if set(trace[-1]) != {
+        "sequence",
+        "operation",
+        "monotonic_ns",
+        "disable_torque",
+        "outcome",
+    } or trace[-1].get("disable_torque") is not False:
         raise ValueError("Live servo transport trace changed torque on close")
     if trace[0].get("outcome") != "success" or trace[-1].get("outcome") != "success":
         raise ValueError("Live servo transport connect or close failed")
-    read_events = [event for event in trace if event.get("operation") == "read"]
+    read_events = trace[1:-1]
     if len(read_events) != counts.get("read_attempts"):
         raise ValueError("Live servo read trace count drifted")
-    if sum(event.get("outcome") == "success" for event in read_events) != counts.get(
-        "read_successes"
+    raw_by_servo, reconstructed_retries = _reconstruct_live_servo_reads(
+        read_events,
+        census_contract=census_contract,
+    )
+    expected_read_successes = len(census_contract["expected_servos"]) * len(
+        census_contract["read_plan"]
+    )
+    if (
+        counts["read_successes"] != expected_read_successes
+        or counts["read_retries"] != reconstructed_retries
+        or counts["read_attempts"] != expected_read_successes + reconstructed_retries
     ):
-        raise ValueError("Live servo successful read count drifted")
-    if sum(
-        event.get("outcome") == "transient_error" for event in read_events
-    ) != counts.get("read_retries"):
-        raise ValueError("Live servo retry trace count drifted")
-    for event in read_events:
-        if event.get("register") not in EXPECTED_READ_REGISTER_WIDTHS:
-            raise ValueError("Live servo trace contains an unknown register")
-        if event.get("motor") not in _EXPECTED_SERVO_NAMES:
-            raise ValueError("Live servo trace contains an unknown motor")
-        if event.get("normalize") is not False or event.get("num_retry") != 0:
-            raise ValueError("Live servo trace read flags drifted")
-        if event.get("outcome") not in {"success", "transient_error"}:
-            raise ValueError("Live servo trace contains an invalid read outcome")
-        if event.get("outcome") == "success":
-            value = event.get("raw_value")
-            if isinstance(value, bool) or not isinstance(value, int):
-                raise ValueError("Live servo trace contains a malformed raw value")
+        raise ValueError("Live servo read and retry counts drifted")
+    decoded = decode_readonly_servo_observations(
+        contract=census_contract,
+        raw_by_servo=raw_by_servo,
+    )
+    if payload.get("servos") != decoded:
+        raise ValueError("Live servo decoded evidence drifted from the transport trace")
+
+
+def _reconstruct_live_servo_reads(
+    read_events: list[dict[str, Any]],
+    *,
+    census_contract: dict[str, Any],
+) -> tuple[dict[int, dict[str, int]], int]:
+    cursor = 0
+    retry_count = 0
+    raw_by_servo: dict[int, dict[str, int]] = {}
+    max_retries = census_contract["retry_policy"]["max_read_retries"]
+    for servo in census_contract["expected_servos"]:
+        servo_id = servo["servo_id"]
+        motor = servo["joint_name"]
+        raw_by_servo[servo_id] = {}
+        for plan in census_contract["read_plan"]:
+            register = plan["register"]
+            attempts = 0
+            while True:
+                if cursor >= len(read_events):
+                    raise ValueError("Live servo trace is missing an allowlisted read")
+                event = read_events[cursor]
+                cursor += 1
+                attempts += 1
+                common_fields = {
+                    "sequence",
+                    "operation",
+                    "monotonic_ns",
+                    "register",
+                    "motor",
+                    "normalize",
+                    "num_retry",
+                    "outcome",
+                }
+                if (
+                    event.get("operation") != "read"
+                    or event.get("motor") != motor
+                    or event.get("register") != register
+                    or event.get("normalize") is not False
+                    or event.get("num_retry") != 0
+                ):
+                    raise ValueError("Live servo trace read order or flags drifted")
+                outcome = event.get("outcome")
+                if outcome == "transient_error":
+                    if set(event) != common_fields | {"error_type"}:
+                        raise ValueError("Live servo transient read fields are malformed")
+                    require_nonblank(
+                        event.get("error_type"),
+                        label="live servo transient error type",
+                    )
+                    retry_count += 1
+                    if attempts > max_retries:
+                        raise ValueError("Live servo trace retry bound was exceeded")
+                    continue
+                if outcome != "success" or set(event) != common_fields | {"raw_value"}:
+                    raise ValueError("Live servo successful read fields are malformed")
+                raw_value = event.get("raw_value")
+                if isinstance(raw_value, bool) or not isinstance(raw_value, int):
+                    raise ValueError("Live servo trace contains a malformed raw value")
+                raw_by_servo[servo_id][register] = raw_value
+                break
+    if cursor != len(read_events):
+        raise ValueError("Live servo trace contains extra reads")
+    return raw_by_servo, retry_count
 
 
 def _verify_captured_frames(
