@@ -10,12 +10,13 @@
     "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
-  "last_reviewed_implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
+  "verified_through_commit": "2c0b903a72b04f2d83edd5855705992e09712bc1",
+  "last_reviewed_implementation_commit": "79eee894fe3aa60380664bb53821d7ad1482e174",
   "source_review": {
-    "commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_051_STABLE_CAMERA_IDENTITY_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/077-accept-brief-051-stable-camera-identity.md"
+    "commit": "2c0b903a72b04f2d83edd5855705992e09712bc1",
+    "implementation_commit": "79eee894fe3aa60380664bb53821d7ad1482e174",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_052_SOURCE_BOUND_CANDIDATE_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/078-accept-brief-052-source-bound-live-candidate.md"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -1170,10 +1171,9 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "052",
-      "latest_verified_brief_id": "051",
-      "completed_brief_ids": ["048", "049", "050", "051"],
-      "result": "Briefs 048-051 are verified and remotely preserved: the accepted physical evidence retains its complete capture-selection audit digest while manifest v5 and all dependent offline artifacts now consume a separate name/unique-ID/model-ID/input-mode digest that excludes only the volatile numeric AVFoundation index",
+      "latest_verified_brief_id": "052",
+      "completed_brief_ids": ["048", "049", "050", "051", "052"],
+      "result": "Briefs 048-052 are verified and remotely preserved: stable physical source bindings now feed a candidate-only contract and runner that fail closed on gate, lease, source, holder, lifecycle, evidence-class, and authority drift without granting a live bracket or physical proof label",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1219,17 +1219,52 @@
         "live_transport_refused_before_connect": true,
         "physical_follower_commanded": false
       },
+      "source_bound_live_candidate": {
+        "implementation_commit": "79eee894fe3aa60380664bb53821d7ad1482e174",
+        "verification_followup_commit": "2c0b903a72b04f2d83edd5855705992e09712bc1",
+        "contract_schema_version": "scenesmith.static_pose_live_candidate_contract.v1",
+        "result_schema_version": "scenesmith.static_pose_live_candidate_result.v1",
+        "accepted_discovery_identity_sha256": "b57fbec85db582fd29978d0fae227a5daee98ef74f80f50b8658cb1024b044b3",
+        "follower_usb_identity_sha256": "c5bd66ff2b0350c69ae0bc9b96afd3b2ef2d5ac501b3a3111e36fb35aece02c1",
+        "stable_camera_identity_sha256": [
+          "69d55167e318a97b7f38c2562366ba7c8798ded18397f466b083494cf4198cd9",
+          "9931d03025b4d9830ffda038ff0fd3a10d7badd2a3120e692fd13ce63325e180"
+        ],
+        "live_gate_scope_required": "one_static_pose_bracket_candidate_session",
+        "live_gate_session_limit_required": 1,
+        "live_gate_sessions_started_required": 0,
+        "hardware_execution_profile_required": "hardware_supervised_on_request",
+        "approval_policy_required": "on-request",
+        "fixture_execution_class": "deterministic_candidate_fixture",
+        "live_execution_class": "live_candidate",
+        "fixture_capability": "source_bound_static_pose_live_candidate_runtime_conformant",
+        "live_candidate_contract_issued": false,
+        "live_candidate_result_observed": false,
+        "hardware_enumerated": false,
+        "hardware_opened": false,
+        "physical_follower_commanded": false,
+        "focused_test_count_per_runtime": 77,
+        "broad_test_count": 276
+      },
       "test_commands": [
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
-        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_candidate_sources.py",
         "./.mujoco_venv/bin/python scripts/robot_lab/migrate_live_manifest_camera_identity.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_calibration_profile.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_static_pose_bracket_fixture.py --verify",
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
-        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/live_readonly_observation.py scenesmith/robot_lab/calibration_profile.py scenesmith/robot_lab/static_pose_bracket.py scenesmith/robot_lab/static_pose_bracket_runtime.py scripts/robot_lab/migrate_live_manifest_camera_identity.py scripts/robot_lab/write_calibration_profile.py scripts/robot_lab/write_static_pose_bracket_fixture.py",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/static_pose_live_candidate.py scenesmith/robot_lab/static_pose_bracket.py scenesmith/robot_lab/static_pose_bracket_runtime.py scripts/robot_lab/verify_static_pose_live_candidate_sources.py tests/unit/test_static_pose_live_candidate.py",
         "git diff --check"
       ],
-      "next_action": "implement and verify Brief 052 source-bound live-candidate contract/runner with fake transports and accepted private discovery resolution only; do not access hardware or reopen the live gate",
+      "next_action": "open a separate offline brief for exact pinned Feetech/FFmpeg factory adapters, immutable private success/failure evidence, and a machine-checked hardware-supervised execution profile; do not transition the live gate until a fresh finite run window and the actual on-request profile are active",
+      "live_execution_prerequisites_missing": [
+        "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
+        "actual_hardware_supervised_on_request_execution_profile",
+        "separate_reviewed_remote_live_gate_transition",
+        "fresh_operator_presence_lease",
+        "fresh_discovery_and_zero_holder_snapshots"
+      ],
       "conditional_authority": [
         "physical_observation_preprocessing",
         "pi05_policy_shadow_no_actuation",
@@ -1240,7 +1275,9 @@
         "calibration_profile_semantically_valid",
         "static_pose_bracket_contract_valid",
         "fixture_static_pose_bracket_conformant",
-        "fixture_static_pose_bracket_runtime_conformant"
+        "fixture_static_pose_bracket_runtime_conformant",
+        "static_pose_live_candidate_contract_valid",
+        "source_bound_static_pose_live_candidate_runtime_conformant"
       ],
       "authority_not_granted": [
         "static_pose_bracketed_observation",

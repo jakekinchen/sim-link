@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress under Brief 052 source-bound live-candidate contract/runner
+current_task: T16.5c in progress after verified Brief 052 source-bound live-candidate foundation
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: manifest v5 5218c3bd...; profile 24db6f24...; static contract/fixture 7260be3e.../9ad35d18.../6b40e275...; 67 focused in two runtimes and 266 broad tests; no hardware/policy access
+evidence: Brief 052 implementation 79eee89 plus verification 2c0b903; fixed fixture/live classes; 77 focused in each runtime; accepted private-discovery resolver; 276 broad tests; no hardware/policy access
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: T16.5b none; T16.5c static-pose-bracketed synchronized-enough observation and policy-shadow input parity remain unverified
-next_step: implement and verify Brief 052 entirely with fake transports plus accepted private discovery resolution; no hardware access or live-gate transition
+blockers: T16.5b none; live T16.5c requires a fresh finite run window, actual hardware-supervised on-request execution profile, separate reviewed gate transition, fresh lease, and fresh discovery/zero-holder snapshots; static-pose observation and policy-shadow parity remain unverified
+next_step: open an offline factory/evidence/profile slice; do not access hardware or transition the live gate
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: implement and verify Brief 052 entirely with fake transports plus acc
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-051 verified; Brief 052 active offline for exact fresh-discovery/lease/gate/follower/stable-camera binding and a candidate-only no-write runner; real bracket, preprocessing, shadow, and replay remain pending |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-052 verified; source-bound candidate contract/runner fixes fixture and live evidence classes and binds gate/lease/discovery/follower/stable-camera/no-write lifecycle; exact factories, immutable evidence, hardware-supervised profile, real bracket, preprocessing, shadow, and replay remain pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -131,6 +131,23 @@ next_step: implement and verify Brief 052 entirely with fake transports plus acc
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 052 source-bound static-pose candidate verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 052 verified and remotely preserved; live gate closed
+Completed: fixed production/fixture contract and result classes; exact project-state gate snapshot, lease, follower USB/all-alias, stable-camera fresh-index, calibration/static-source, operation-count, timing, and no-write lifecycle binding; candidate-only production result
+Evidence: implementation 79eee89; verification follow-up 2c0b903; contract/result schemas scenesmith.static_pose_live_candidate_contract.v1/scenesmith.static_pose_live_candidate_result.v1; accepted discovery b57fbec8...; follower USB c5bd66ff...; stable cameras 69d55167... and 9931d030...
+Verification: 77 focused tests in .mujoco_venv; 77 in pinned LeLab runtime; accepted private-discovery source resolver in both runtimes; manifest/profile/static/source verifiers; py_compile; safety/privacy/diff/JSON checks; 276 broad tests in 72.567 seconds
+Adversarial: fixture/live evidence-class re-signing; stale or consumed gate; scope/session/window/review drift; expired lease; project-state digest drift; follower USB/alias/path substitution; stable-camera ambiguity/index churn/mode drift; holder/lifecycle/count/timing/pose drift; write/torque/motion/unexpected-operation audit; constructor/primary/release/close/post-holder failure preservation
+Authority gained: static_pose_live_candidate_contract_valid and source_bound_static_pose_live_candidate_runtime_conformant only
+Authority withheld: live candidate result, static_pose_bracketed_observation, policy_shadow_input_valid, policy_shadow, actuation, qualification/transfer, promotion, training
+Hardware: none; no enumeration/open, serial/camera/Studio access, reconnect, write, torque change, motion, policy, MuJoCo, optimizer, or paid compute
+Training lock: closed
+Live prerequisites missing: fresh finite run window; actual hardware_supervised_on_request/on-request runtime; separate reviewed remote gate transition; fresh owner-presence lease; fresh discovery and all-alias zero-holder snapshots
+Next step: separate offline exact Feetech/FFmpeg factory, immutable private evidence, and execution-profile validator slice; live gate remains closed
+```
 
 ### 2026-07-11 - Brief 051 stable camera identity binding verified offline
 

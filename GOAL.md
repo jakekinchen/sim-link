@@ -186,12 +186,22 @@ verifiers pass, and the 266-test authority/twin gate passes. This grants only
 capabilities. No hardware or policy ran; the live gate and training lock remain
 closed.
 
-Brief 052 is active offline to build the source-bound static-pose live-candidate
-contract and bounded runner. It must resolve fresh numeric camera indexes from
-the stable v5 digests, bind the exact follower USB/alias identity, operator-
-presence lease, project-state gate snapshot, and verified static contract, and
-return candidate-only evidence with no physical proof label. All execution tests
-use fake transports and cameras; the live gate remains closed.
+Brief 052 implementation `79eee89` and verification follow-up `2c0b903` are
+remotely preserved. Its fixed production and deterministic-fixture classes bind
+fresh camera-index resolution to the stable v5 digests, the exact follower USB/
+alias identity, an active lease, an open one-session project-state gate snapshot,
+the pinned calibration/static sources, and a no-write lifecycle. The production
+runner can emit only a candidate result with no physical proof label; fixture
+execution records `hardware_opened=false` and cannot be relabeled live by
+re-signing. Seventy-seven focused tests pass in both robotics runtimes, the
+accepted private discovery resolver passes, and the 276-test authority/twin gate
+passes. No hardware or policy ran. Before any live-gate transition, a separate
+offline slice must implement the exact pinned Feetech/FFmpeg factories,
+immutable private success/failure evidence, and a machine-checked
+`hardware_supervised_on_request` execution profile. A fresh finite run window,
+actual `on-request` approval policy, separate reviewed remote gate transition,
+fresh lease, and fresh discovery/zero-holder snapshots remain missing. The live
+gate and training lock stay closed.
 
 ## Durable State
 
