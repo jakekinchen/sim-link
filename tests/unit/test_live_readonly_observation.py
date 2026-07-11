@@ -138,7 +138,13 @@ def _execution_contract() -> dict:
     )
 
 
-def _png_frame(*, width: int = 4, height: int = 3, marker: bytes = b"x") -> bytes:
+def _png_frame(
+    *,
+    width: int = 4,
+    height: int = 3,
+    marker: bytes = b"x",
+    valid_compression: bool = True,
+) -> bytes:
     def chunk(kind: bytes, payload: bytes) -> bytes:
         return (
             struct.pack(">I", len(payload))
@@ -148,10 +154,15 @@ def _png_frame(*, width: int = 4, height: int = 3, marker: bytes = b"x") -> byte
         )
 
     ihdr = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)
+    pixel = (marker or b"x")[0]
+    raw_scanlines = b"".join(
+        b"\x00" + bytes([pixel]) * (width * 3) for _ in range(height)
+    )
+    compressed = zlib.compress(raw_scanlines) if valid_compression else b"not-zlib"
     return (
         b"\x89PNG\r\n\x1a\n"
         + chunk(b"IHDR", ihdr)
-        + chunk(b"IDAT", marker)
+        + chunk(b"IDAT", compressed)
         + chunk(b"IEND", b"")
     )
 
@@ -670,6 +681,12 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         cases = (
             (valid[:-5], b"", 0, "truncated"),
             (valid + b"extra", b"", 0, "extra trailing"),
+            (
+                _png_frame(valid_compression=False) + _png_frame(),
+                b"",
+                0,
+                "compressed pixels",
+            ),
             (valid, b"", 1, "subprocess failed"),
             (valid, b"ffmpeg warning", 0, "emitted stderr"),
         )

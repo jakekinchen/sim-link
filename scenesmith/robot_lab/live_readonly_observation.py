@@ -1358,6 +1358,8 @@ class FFmpegNamedFiniteCamera:
             str(self._expected_frame_count),
             "-f",
             "image2pipe",
+            "-pix_fmt",
+            "rgb24",
             "-vcodec",
             "png",
             "pipe:1",
@@ -1460,7 +1462,6 @@ def _parse_exact_png_stream(
         raise ValueError("Named camera PNG stream exceeds its finite byte bound")
     frames = []
     offset = 0
-    channel_counts = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}
     for _ in range(expected_frame_count):
         frame_start = offset
         if payload[offset : offset + len(PNG_SIGNATURE)] != PNG_SIGNATURE:
@@ -1471,6 +1472,7 @@ def _parse_exact_png_stream(
         channels: int | None = None
         first_chunk = True
         seen_idat = False
+        compressed_scanlines = bytearray()
         while True:
             if offset + 12 > len(payload):
                 raise ValueError("Named camera PNG stream is truncated")
@@ -1505,21 +1507,22 @@ def _parse_exact_png_stream(
                     or height <= 0
                     or width > 16384
                     or height > 16384
-                    or bit_depth not in {8, 16}
-                    or color_type not in channel_counts
+                    or bit_depth != 8
+                    or color_type != 2
                     or compression != 0
                     or filtering != 0
-                    or interlace not in {0, 1}
+                    or interlace != 0
                 ):
                     raise ValueError(
                         "Named camera PNG dimensions or format are invalid"
                     )
-                channels = channel_counts[color_type]
+                channels = 3
                 first_chunk = False
             elif chunk_type == b"IHDR":
                 raise ValueError("Named camera PNG contains a duplicate IHDR")
             elif chunk_type == b"IDAT":
                 seen_idat = True
+                compressed_scanlines.extend(data)
             offset = chunk_end
             if chunk_type == b"IEND":
                 if length != 0 or not seen_idat:
@@ -1527,6 +1530,15 @@ def _parse_exact_png_stream(
                 break
             if offset - frame_start > MAX_PNG_FRAME_BYTES:
                 raise ValueError("Named camera PNG frame exceeds its byte bound")
+        try:
+            scanlines = zlib.decompress(bytes(compressed_scanlines))
+        except zlib.error as exc:
+            raise ValueError("Named camera PNG compressed pixels are invalid") from exc
+        row_size = 1 + width * channels
+        if len(scanlines) != height * row_size or any(
+            scanlines[row * row_size] > 4 for row in range(height)
+        ):
+            raise ValueError("Named camera PNG scanline shape is invalid")
         frame_bytes = payload[frame_start:offset]
         frames.append(
             {
