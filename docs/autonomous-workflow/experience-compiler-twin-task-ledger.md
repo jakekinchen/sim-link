@@ -7,10 +7,10 @@ training_lock: closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.3 semantic structural diff correction
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete quaternion normalization, and truthful inertial/contact evidence
-evidence: commits 7bebf55, 936dd2f, fb54e64, and pending inertial/contact truthfulness slice; manager audits 005-006 keep semantic acceptance open until deterministic unnamed-geom limits close
+evidence: commits 7bebf55, 936dd2f, fb54e64, and d31cdc3; manager audits 005-007 keep semantic acceptance open until order-invariant unnamed-geom identity closes
 remaining: deterministic unnamed-geom limits, then M16-M19 prerequisites and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: close the remaining deterministic unnamed-geom limits in T16.3 without reopening quaternion or inertial/contact truthfulness
+next_step: replace sibling-index geom pairing with semantic order-invariant identity and re-review T16.3
 ```
 
 ## Rules
@@ -113,6 +113,20 @@ next_step: close the remaining deterministic unnamed-geom limits in T16.3 withou
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.3 unnamed-geom proof strengthened
+
+```text
+Current task: T16.3
+State: in_progress
+Completed: source/profile binding, effective solver defaults, quaternion semantics, inferred-inertia unknowns, and effective contact/friction evidence
+Evidence: commit d31cdc3; manager audit 007 proves repeat-generation alone cannot detect sibling-index instability
+Commit: pending
+Remaining: order-invariant semantic unnamed-geom identity
+Blockers: none for offline correction
+Training lock: closed
+Next step: execute brief 020 and obtain a fresh reviewer decision
+```
 
 ### 2026-07-10 - T16.3 inertial and contact truthfulness correction
 

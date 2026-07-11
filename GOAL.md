@@ -21,9 +21,9 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Resume T16.3 by closing the remaining deterministic unnamed-geom limits in the
-structural twin diff. Do not reopen quaternion work, inertial/contact
-truthfulness, measured-mass intake, hardware, or training in this slice.
+Close T16.3 with order-invariant semantic identities for unnamed collision
+geoms, including honest non-pairing across incompatible structures. Do not
+reopen quaternion, inertial/contact, measured-mass, hardware, or training work.
 
 ## Durable State
 
