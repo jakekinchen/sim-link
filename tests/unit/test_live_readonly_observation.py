@@ -3,8 +3,11 @@ from __future__ import annotations
 import ast
 import copy
 import json
+import struct
+import subprocess
 import tempfile
 import unittest
+import zlib
 
 from pathlib import Path
 
@@ -15,6 +18,7 @@ from scenesmith.robot_lab.leader_arm_bridge import (
 )
 from scenesmith.robot_lab.live_readonly_observation import (
     AuditedReadOnlyBusBackend,
+    FFmpegNamedFiniteCamera,
     build_live_discovery_snapshot,
     build_live_execution_contract,
     build_operator_presence_lease,
@@ -39,9 +43,10 @@ from scenesmith.robot_lab.readonly_servo_census import (
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-PROJECT_STATE = load_strict_json(
-    REPO_ROOT / "docs" / "autonomous-workflow" / "project_state.json"
+PROJECT_STATE = copy.deepcopy(
+    load_strict_json(REPO_ROOT / "docs" / "autonomous-workflow" / "project_state.json")
 )
+PROJECT_STATE["tasks"]["T16.5b"]["live_gate"] = "open"
 SESSION_ID = "t16-5b-test-session"
 ISSUED_AT = "2026-07-11T04:45:00-05:00"
 VALID_UNTIL = "2026-07-11T04:50:00-05:00"
@@ -130,6 +135,24 @@ def _execution_contract() -> dict:
         issued_at=ISSUED_AT,
         expires_at=VALID_UNTIL,
         frame_count_per_camera=2,
+    )
+
+
+def _png_frame(*, width: int = 4, height: int = 3, marker: bytes = b"x") -> bytes:
+    def chunk(kind: bytes, payload: bytes) -> bytes:
+        return (
+            struct.pack(">I", len(payload))
+            + kind
+            + payload
+            + struct.pack(">I", zlib.crc32(kind + payload) & 0xFFFFFFFF)
+        )
+
+    ihdr = struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0)
+    return (
+        b"\x89PNG\r\n\x1a\n"
+        + chunk(b"IHDR", ihdr)
+        + chunk(b"IDAT", marker)
+        + chunk(b"IEND", b"")
     )
 
 
@@ -236,6 +259,37 @@ class _FakeCamera:
             raise RuntimeError("camera release failed")
 
 
+class _FakeFFmpegProcess:
+    def __init__(
+        self,
+        *,
+        stdout: bytes,
+        stderr: bytes = b"",
+        final_returncode: int = 0,
+        timeout_count: int = 0,
+    ):
+        self.stdout_payload = stdout
+        self.stderr_payload = stderr
+        self.final_returncode = final_returncode
+        self.timeout_count = timeout_count
+        self.returncode: int | None = None
+        self.calls: list[str] = []
+
+    def communicate(self, *, timeout: int) -> tuple[bytes, bytes]:
+        self.calls.append(f"communicate:{timeout}")
+        if self.timeout_count:
+            self.timeout_count -= 1
+            raise subprocess.TimeoutExpired(cmd="ffmpeg", timeout=timeout)
+        self.returncode = self.final_returncode
+        return self.stdout_payload, self.stderr_payload
+
+    def terminate(self) -> None:
+        self.calls.append("terminate")
+
+    def kill(self) -> None:
+        self.calls.append("kill")
+
+
 class _WrongIdentityBus(_FakeBus):
     def read(
         self,
@@ -284,6 +338,14 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             verify_operator_presence_lease(
                 too_long,
                 project_state=PROJECT_STATE,
+                now="2026-07-11T04:47:00-05:00",
+            )
+        closed_state = copy.deepcopy(PROJECT_STATE)
+        closed_state["tasks"]["T16.5b"]["live_gate"] = "closed"
+        with self.assertRaisesRegex(ValueError, "live gate"):
+            verify_operator_presence_lease(
+                lease,
+                project_state=closed_state,
                 now="2026-07-11T04:47:00-05:00",
             )
 
@@ -340,6 +402,35 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         missing_serial = sign_payload(missing_serial)
         with self.assertRaisesRegex(ValueError, "serial_number"):
             resolve_follower_identity(missing_serial)
+
+    def test_discovery_stability_uses_camera_names_not_ephemeral_indexes(self):
+        expected = _discovery()
+        swapped = copy.deepcopy(expected)
+        (
+            swapped["avfoundation_devices"][0]["name"],
+            swapped["avfoundation_devices"][1]["name"],
+        ) = (
+            swapped["avfoundation_devices"][1]["name"],
+            swapped["avfoundation_devices"][0]["name"],
+        )
+        swapped["system_cameras"].reverse()
+        swapped = sign_payload(swapped)
+        verify_discovery_stability(expected, swapped)
+
+        stable_drift = copy.deepcopy(swapped)
+        stable_drift["avfoundation_devices"][0]["name"] = "Replacement Camera"
+        stable_drift["system_cameras"][0]["name"] = "Replacement Camera"
+        stable_drift = sign_payload(stable_drift)
+        with self.assertRaisesRegex(ValueError, "stable camera identity"):
+            verify_discovery_stability(expected, stable_drift)
+
+        duplicate_name = copy.deepcopy(expected)
+        duplicate_name["avfoundation_devices"][1]["name"] = duplicate_name[
+            "avfoundation_devices"
+        ][0]["name"]
+        duplicate_name = sign_payload(duplicate_name)
+        with self.assertRaisesRegex(ValueError, "ambiguous"):
+            resolve_camera_selection(duplicate_name, [0])
 
     def test_camera_metadata_parsers_and_selection_are_exact(self):
         ffmpeg = """
@@ -529,6 +620,96 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         for camera in cameras.values():
             self.assertEqual(camera.calls, ["open", "read", "read", "release"])
 
+    def test_named_ffmpeg_camera_is_name_bound_finite_and_audited(self):
+        camera_identity = _execution_contract()["cameras"][0]
+        process = _FakeFFmpegProcess(
+            stdout=_png_frame(marker=b"one") + _png_frame(marker=b"two")
+        )
+        invocation: dict = {}
+
+        def popen_factory(command: list[str], **kwargs) -> _FakeFFmpegProcess:
+            invocation["command"] = command
+            invocation["kwargs"] = kwargs
+            return process
+
+        camera = FFmpegNamedFiniteCamera(
+            camera_identity,
+            expected_frame_count=2,
+            read_timeout_seconds=5,
+            monotonic_ns=_TickingClock(),
+            popen_factory=popen_factory,
+        )
+        camera.open()
+        first = camera.read()
+        second = camera.read()
+        with self.assertRaisesRegex(RuntimeError, "finite frame count"):
+            camera.read()
+        camera.release()
+
+        self.assertEqual(first["width"], 4)
+        self.assertEqual(first["height"], 3)
+        self.assertEqual(first["channels"], 3)
+        self.assertNotEqual(first["frame_bytes"], second["frame_bytes"])
+        input_index = invocation["command"].index("-i") + 1
+        self.assertEqual(
+            invocation["command"][input_index],
+            f"{camera_identity['name']}:none",
+        )
+        self.assertFalse(invocation["kwargs"]["shell"])
+        audit = camera.audit()
+        self.assertEqual(audit["subprocess_start_successes"], 1)
+        self.assertEqual(audit["subprocess_communicate_successes"], 1)
+        self.assertEqual(audit["subprocess_wait_successes"], 1)
+        self.assertEqual(audit["frames_delivered"], 2)
+        self.assertEqual(audit["release_successes"], 1)
+        self.assertEqual(audit["subprocess_terminate_attempts"], 0)
+
+    def test_named_ffmpeg_camera_rejects_bad_streams_and_cleans_timeout(self):
+        camera_identity = _execution_contract()["cameras"][0]
+        valid = _png_frame(marker=b"one") + _png_frame(marker=b"two")
+        cases = (
+            (valid[:-5], b"", 0, "truncated"),
+            (valid + b"extra", b"", 0, "extra trailing"),
+            (valid, b"", 1, "subprocess failed"),
+            (valid, b"ffmpeg warning", 0, "emitted stderr"),
+        )
+        for stdout, stderr, returncode, message in cases:
+            with self.subTest(message=message):
+                process = _FakeFFmpegProcess(
+                    stdout=stdout,
+                    stderr=stderr,
+                    final_returncode=returncode,
+                )
+                camera = FFmpegNamedFiniteCamera(
+                    camera_identity,
+                    expected_frame_count=2,
+                    monotonic_ns=_TickingClock(),
+                    popen_factory=lambda *args, process=process, **kwargs: process,
+                )
+                camera.open()
+                with self.assertRaisesRegex((ValueError, RuntimeError), message):
+                    camera.read()
+                camera.release()
+
+        timed_out = _FakeFFmpegProcess(stdout=valid, timeout_count=2)
+        camera = FFmpegNamedFiniteCamera(
+            camera_identity,
+            expected_frame_count=2,
+            monotonic_ns=_TickingClock(),
+            popen_factory=lambda *args, **kwargs: timed_out,
+        )
+        camera.open()
+        with self.assertRaisesRegex(TimeoutError, "exceeded"):
+            camera.read()
+        camera.release()
+        self.assertIn("terminate", timed_out.calls)
+        self.assertIn("kill", timed_out.calls)
+        audit = camera.audit()
+        self.assertEqual(audit["subprocess_terminate_attempts"], 1)
+        self.assertEqual(audit["subprocess_kill_attempts"], 1)
+        self.assertEqual(audit["subprocess_communicate_attempts"], 3)
+        self.assertEqual(audit["subprocess_wait_attempts"], 3)
+
     def test_camera_primary_and_release_errors_are_both_preserved(self):
         contract = _execution_contract()
 
@@ -671,6 +852,7 @@ class LiveReadonlyObservationTests(unittest.TestCase):
                 }.isdisjoint(called_attributes)
             )
             self.assertTrue({"SOFollower", "SO101Follower"}.isdisjoint(called_names))
+            self.assertNotIn("VideoCapture", source)
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ from scenesmith.robot_lab.census_runtime_binding import (
 )
 from scenesmith.robot_lab.live_readonly_observation import (
     DEFAULT_FOLLOWER_CALIBRATION_PATH,
-    OpenCVFiniteCamera,
+    FFmpegNamedFiniteCamera,
     build_live_execution_contract,
     build_operator_presence_lease,
     build_private_observation_evidence,
@@ -209,9 +209,11 @@ def main() -> int:
         contract,
         project_state=state,
         now=_now_iso(),
-        camera_factory=lambda camera: OpenCVFiniteCamera(
-            camera["index"],
+        camera_factory=lambda camera: FFmpegNamedFiniteCamera(
+            camera,
+            expected_frame_count=contract["frame_count_per_camera"],
             read_timeout_seconds=contract["camera_read_timeout_seconds"],
+            monotonic_ns=time.monotonic_ns,
         ),
         monotonic_ns=time.monotonic_ns,
         wall_time=_now_iso,

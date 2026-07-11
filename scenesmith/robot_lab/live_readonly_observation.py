@@ -6,11 +6,11 @@ import copy
 import hashlib
 import inspect
 import json
-import queue
 import re
+import struct
 import subprocess
 import sys
-import threading
+import zlib
 
 from datetime import datetime
 from pathlib import Path
@@ -54,6 +54,9 @@ MAX_PRESENCE_LEASE_SECONDS = 600
 MAX_EXECUTION_DURATION_SECONDS = 120
 DEFAULT_FRAME_COUNT_PER_CAMERA = 2
 CAMERA_READ_TIMEOUT_SECONDS = 5
+FFMPEG_EXECUTABLE = Path("/opt/homebrew/bin/ffmpeg")
+MAX_PNG_FRAME_BYTES = 64 * 1024 * 1024
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 DEFAULT_FOLLOWER_CALIBRATION_PATH = (
     Path.home()
     / ".cache/huggingface/lerobot/calibration/robots/so_follower/follower_arm.json"
@@ -172,6 +175,8 @@ def verify_operator_presence_lease(
         raise ValueError("Owner confirmation is not granted in project state")
     if project_state.get("tasks", {}).get("T16.5a", {}).get("state") != "verified":
         raise ValueError("T16.5a is not verified for a live read-only lease")
+    if project_state.get("tasks", {}).get("T16.5b", {}).get("live_gate") != "open":
+        raise ValueError("T16.5b live gate is not open")
     if payload.get("authority_id") != owner_authority.get("authority_id"):
         raise ValueError("Operator-presence lease authority drifted")
     if payload.get("presence_basis") != "owner_message_present_for_day":
@@ -305,13 +310,14 @@ def verify_discovery_stability(
     _verify_discovery_snapshot(observed)
     if expected["session_id"] != observed["session_id"]:
         raise ValueError("Discovery stability session identity drifted")
-    for field in (
-        "serial_candidates",
-        "avfoundation_devices",
-        "system_cameras",
+    if expected["serial_candidates"] != observed["serial_candidates"]:
+        raise ValueError("Discovery stability check detected serial_candidates drift")
+    if _stable_camera_discovery_identity(expected) != _stable_camera_discovery_identity(
+        observed
     ):
-        if expected[field] != observed[field]:
-            raise ValueError(f"Discovery stability check detected {field} drift")
+        raise ValueError(
+            "Discovery stability check detected stable camera identity drift"
+        )
 
 
 def parse_avfoundation_video_devices(output: str) -> list[dict[str, Any]]:
@@ -387,11 +393,22 @@ def resolve_camera_selection(
     av_by_index = {
         device["index"]: device for device in discovery["avfoundation_devices"]
     }
+    _stable_camera_discovery_identity(discovery)
     result: list[dict[str, Any]] = []
     for index in sorted(camera_indexes):
         av_device = av_by_index.get(index)
         if av_device is None:
             raise ValueError(f"Selected AVFoundation camera index is missing: {index}")
+        if (
+            sum(
+                device["name"] == av_device["name"]
+                for device in discovery["avfoundation_devices"]
+            )
+            != 1
+        ):
+            raise ValueError(
+                f"Selected AVFoundation camera name is ambiguous: {av_device['name']}"
+            )
         matches = [
             camera
             for camera in discovery["system_cameras"]
@@ -757,8 +774,9 @@ def capture_finite_camera_frames(
         now=now,
     )
     frames: list[dict[str, Any]] = []
-    previous_timestamp = -1
+    previous_interval: tuple[int, int] | None = None
     for camera in execution_contract["cameras"]:
+        first_camera_frame = len(frames)
         instance: FiniteCamera | None = None
         primary_error: BaseException | None = None
         release_error: BaseException | None = None
@@ -766,12 +784,30 @@ def capture_finite_camera_frames(
             instance = camera_factory(copy.deepcopy(camera))
             instance.open()
             for frame_index in range(execution_contract["frame_count_per_camera"]):
-                started = monotonic_ns()
+                call_started = monotonic_ns()
                 frame = instance.read()
-                finished = monotonic_ns()
-                if started <= previous_timestamp or finished < started:
+                call_finished = monotonic_ns()
+                started = frame.get(
+                    "receive_started_monotonic_ns",
+                    call_started,
+                )
+                finished = frame.get(
+                    "receive_finished_monotonic_ns",
+                    call_finished,
+                )
+                if (
+                    isinstance(started, bool)
+                    or not isinstance(started, int)
+                    or isinstance(finished, bool)
+                    or not isinstance(finished, int)
+                    or finished <= started
+                    or (
+                        previous_interval is not None
+                        and (started, finished) < previous_interval
+                    )
+                ):
                     raise ValueError("Camera timestamps regressed")
-                previous_timestamp = finished
+                previous_interval = (started, finished)
                 frame_bytes = (
                     frame.get("frame_bytes") if isinstance(frame, dict) else None
                 )
@@ -825,6 +861,21 @@ def capture_finite_camera_frames(
             raise primary_error
         if release_error is not None:
             raise release_error
+        audit_method = getattr(instance, "audit", None)
+        if callable(audit_method):
+            backend_audit = audit_method()
+        else:
+            backend_audit = _injected_camera_backend_audit(
+                camera=camera,
+                frame_count=execution_contract["frame_count_per_camera"],
+            )
+        _verify_camera_backend_audit(
+            backend_audit,
+            camera=camera,
+            expected_frame_count=execution_contract["frame_count_per_camera"],
+        )
+        for frame in frames[first_camera_frame:]:
+            frame["camera_backend_audit"] = copy.deepcopy(backend_audit)
     return frames
 
 
@@ -854,6 +905,16 @@ def build_private_observation_evidence(
             + frame["receive_finished_monotonic_ns"]
         ) // 2
         skews.append(abs(frame_midpoint - servo_midpoint))
+    camera_backend_audits = []
+    for camera in execution_contract["cameras"]:
+        matching = [
+            frame["camera_backend_audit"]
+            for frame in frames
+            if frame["camera"] == camera
+        ]
+        if not matching or any(audit != matching[0] for audit in matching[1:]):
+            raise ValueError("Camera backend audit drifted across captured frames")
+        camera_backend_audits.append(copy.deepcopy(matching[0]))
     payload = {
         "schema_version": PRIVATE_OBSERVATION_SCHEMA_VERSION,
         "evidence_name": "pi05_live_readonly_private_observation",
@@ -867,7 +928,10 @@ def build_private_observation_evidence(
         "discovery_identity_sha256": execution_contract["discovery_identity_sha256"],
         "pre_open_discovery_identity_sha256": pre_open_discovery["identity_sha256"],
         "post_close_discovery_identity_sha256": post_close_discovery["identity_sha256"],
-        "discovery_stability": "exact_metadata_match_before_open_and_after_close",
+        "discovery_stability": (
+            "exact_serial_and_stable_camera_identity_match_"
+            "numeric_index_churn_allowed"
+        ),
         "calibration": copy.deepcopy(execution_contract["calibration"]),
         "target_device_identity": copy.deepcopy(servo_result["target_device_identity"]),
         "servos": copy.deepcopy(servo_result["servos"]),
@@ -881,8 +945,49 @@ def build_private_observation_evidence(
             "read_successes": len(frames),
             "release_attempts": len(execution_contract["cameras"]),
             "release_successes": len(execution_contract["cameras"]),
-            "continuous_recording_sessions": 0,
+            "subprocess_start_attempts": sum(
+                audit["subprocess_start_attempts"] for audit in camera_backend_audits
+            ),
+            "subprocess_start_successes": sum(
+                audit["subprocess_start_successes"] for audit in camera_backend_audits
+            ),
+            "subprocess_communicate_attempts": sum(
+                audit["subprocess_communicate_attempts"]
+                for audit in camera_backend_audits
+            ),
+            "subprocess_communicate_successes": sum(
+                audit["subprocess_communicate_successes"]
+                for audit in camera_backend_audits
+            ),
+            "subprocess_wait_attempts": sum(
+                audit["subprocess_wait_attempts"] for audit in camera_backend_audits
+            ),
+            "subprocess_wait_successes": sum(
+                audit["subprocess_wait_successes"] for audit in camera_backend_audits
+            ),
+            "subprocess_terminate_attempts": sum(
+                audit["subprocess_terminate_attempts"]
+                for audit in camera_backend_audits
+            ),
+            "subprocess_terminate_successes": sum(
+                audit["subprocess_terminate_successes"]
+                for audit in camera_backend_audits
+            ),
+            "subprocess_kill_attempts": sum(
+                audit["subprocess_kill_attempts"] for audit in camera_backend_audits
+            ),
+            "subprocess_kill_successes": sum(
+                audit["subprocess_kill_successes"] for audit in camera_backend_audits
+            ),
+            "capture_property_writes": sum(
+                audit["capture_property_writes"] for audit in camera_backend_audits
+            ),
+            "continuous_recording_sessions": sum(
+                audit["continuous_recording_sessions"]
+                for audit in camera_backend_audits
+            ),
         },
+        "camera_backend_audits": camera_backend_audits,
         "transport_trace": copy.deepcopy(servo_result["transport_trace"]),
         "servo_observation_interval_monotonic_ns": [
             servo_result["observation_started_monotonic_ns"],
@@ -891,7 +996,9 @@ def build_private_observation_evidence(
         "cameras": copy.deepcopy(execution_contract["cameras"]),
         "frames": frame_metadata,
         "max_host_observed_skew_ns": max(skews),
-        "timestamp_scope": "host_receive_intervals_not_hardware_clock_sync",
+        "timestamp_scope": (
+            "host_ffmpeg_batch_receive_intervals_not_hardware_clock_sync"
+        ),
         "proof_labels": [
             "live_read_only_census_observed",
             "physical_observation_capture",
@@ -968,6 +1075,13 @@ def build_redacted_observation_manifest(
     ]
     cameras = []
     for camera in private_evidence["cameras"]:
+        matching_audits = [
+            audit
+            for audit in private_evidence["camera_backend_audits"]
+            if audit["camera_identity_sha256"] == _sha256_payload(camera)
+        ]
+        if len(matching_audits) != 1:
+            raise ValueError("Private camera backend audit identity is ambiguous")
         camera_frames = [
             {
                 key: frame[key]
@@ -989,6 +1103,7 @@ def build_redacted_observation_manifest(
         cameras.append(
             {
                 "camera_identity_sha256": _sha256_payload(camera),
+                "camera_backend_audit_sha256": _sha256_payload(matching_audits[0]),
                 "frames": camera_frames,
             }
         )
@@ -1155,71 +1270,401 @@ def construct_pinned_feetech_bus(
     )
 
 
-class OpenCVFiniteCamera:
-    """Open one AVFoundation camera without changing capture properties."""
+class FFmpegNamedFiniteCamera:
+    """Capture one finite PNG batch by exact AVFoundation camera name."""
 
     def __init__(
         self,
-        index: int,
+        camera: dict[str, Any],
         *,
+        expected_frame_count: int,
         read_timeout_seconds: int = CAMERA_READ_TIMEOUT_SECONDS,
+        monotonic_ns: Callable[[], int],
+        popen_factory: Callable[..., Any] = subprocess.Popen,
     ):
-        self._index = index
+        if not isinstance(camera, dict) or set(camera) != {
+            "index",
+            "name",
+            "unique_id",
+            "model_id",
+        }:
+            raise ValueError("Named camera identity fields are malformed")
+        name = require_nonblank(camera.get("name"), label="named camera name")
+        if any(character in name for character in ("\x00", "\n", "\r", ":")):
+            raise ValueError("Named camera name is unsafe for AVFoundation input")
+        require_nonblank(camera.get("unique_id"), label="named camera unique_id")
+        require_nonblank(camera.get("model_id"), label="named camera model_id")
+        if (
+            isinstance(expected_frame_count, bool)
+            or not isinstance(expected_frame_count, int)
+            or not 1 <= expected_frame_count <= 3
+        ):
+            raise ValueError("Named camera frame count is invalid")
+        if (
+            isinstance(read_timeout_seconds, bool)
+            or not isinstance(read_timeout_seconds, int)
+            or read_timeout_seconds <= 0
+        ):
+            raise ValueError("Named camera timeout is invalid")
+        self._camera = copy.deepcopy(camera)
+        self._expected_frame_count = expected_frame_count
         self._read_timeout_seconds = read_timeout_seconds
-        self._capture: Any = None
-        self._cv2: Any = None
-
-    def open(self) -> None:
-        import cv2
-
-        self._cv2 = cv2
-        self._capture = cv2.VideoCapture(self._index, cv2.CAP_AVFOUNDATION)
-        if not self._capture.isOpened():
-            raise ConnectionError(f"Failed to open AVFoundation camera {self._index}")
-
-    def read(self) -> dict[str, Any]:
-        if self._capture is None or self._cv2 is None:
-            raise RuntimeError("Camera is not open")
-        result_queue: queue.Queue[tuple[bool, Any] | BaseException] = queue.Queue(
-            maxsize=1
-        )
-
-        def worker() -> None:
-            try:
-                result_queue.put(self._capture.read())
-            except BaseException as exc:
-                result_queue.put(exc)
-
-        thread = threading.Thread(target=worker, daemon=True)
-        thread.start()
-        try:
-            result = result_queue.get(timeout=self._read_timeout_seconds)
-        except queue.Empty as exc:
-            raise TimeoutError(
-                f"AVFoundation camera {self._index} read exceeded "
-                f"{self._read_timeout_seconds}s"
-            ) from exc
-        if isinstance(result, BaseException):
-            raise result
-        success, frame = result
-        if not success or frame is None:
-            raise RuntimeError(f"AVFoundation camera {self._index} read failed")
-        success, encoded = self._cv2.imencode(".png", frame)
-        if not success:
-            raise RuntimeError(f"AVFoundation camera {self._index} PNG encoding failed")
-        height, width, channels = frame.shape
-        return {
-            "frame_bytes": encoded.tobytes(),
-            "encoding": "png",
-            "width": int(width),
-            "height": int(height),
-            "channels": int(channels),
+        self._monotonic_ns = monotonic_ns
+        self._popen_factory = popen_factory
+        self._process: Any = None
+        self._frames: list[dict[str, Any]] | None = None
+        self._read_index = 0
+        self._opened = False
+        self._released = False
+        self._communicated = False
+        self._audit = {
+            "backend": "ffmpeg_named_avfoundation",
+            "camera_identity_sha256": _sha256_payload(self._camera),
+            "subprocess_start_attempts": 0,
+            "subprocess_start_successes": 0,
+            "subprocess_communicate_attempts": 0,
+            "subprocess_communicate_successes": 0,
+            "subprocess_wait_attempts": 0,
+            "subprocess_wait_successes": 0,
+            "subprocess_terminate_attempts": 0,
+            "subprocess_terminate_successes": 0,
+            "subprocess_kill_attempts": 0,
+            "subprocess_kill_successes": 0,
+            "release_attempts": 0,
+            "release_successes": 0,
+            "frames_delivered": 0,
+            "capture_property_writes": 0,
+            "continuous_recording_sessions": 0,
         }
 
+    def open(self) -> None:
+        if self._opened or self._released:
+            raise RuntimeError("Named camera open lifecycle is invalid")
+        self._audit["subprocess_start_attempts"] += 1
+        command = [
+            str(FFMPEG_EXECUTABLE),
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-nostdin",
+            "-f",
+            "avfoundation",
+            "-i",
+            f"{self._camera['name']}:none",
+            "-an",
+            "-sn",
+            "-dn",
+            "-frames:v",
+            str(self._expected_frame_count),
+            "-f",
+            "image2pipe",
+            "-vcodec",
+            "png",
+            "pipe:1",
+        ]
+        self._process = self._popen_factory(
+            command,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=False,
+        )
+        self._audit["subprocess_start_successes"] += 1
+        self._opened = True
+
+    def read(self) -> dict[str, Any]:
+        if not self._opened or self._released or self._process is None:
+            raise RuntimeError("Named camera is not open")
+        if self._frames is None:
+            self._capture_batch()
+        if self._read_index >= self._expected_frame_count:
+            raise RuntimeError("Named camera read exceeded the finite frame count")
+        frame = copy.deepcopy(self._frames[self._read_index])
+        self._read_index += 1
+        self._audit["frames_delivered"] += 1
+        return frame
+
     def release(self) -> None:
-        if self._capture is not None:
-            self._capture.release()
-            self._capture = None
+        if self._released:
+            raise RuntimeError("Named camera release called more than once")
+        self._audit["release_attempts"] += 1
+        self._released = True
+        if self._process is not None and not self._communicated:
+            self._terminate_unfinished_process()
+        self._process = None
+        self._audit["release_successes"] += 1
+
+    def audit(self) -> dict[str, Any]:
+        return copy.deepcopy(self._audit)
+
+    def _capture_batch(self) -> None:
+        self._audit["subprocess_communicate_attempts"] += 1
+        self._audit["subprocess_wait_attempts"] += 1
+        started = self._monotonic_ns()
+        try:
+            stdout, stderr = self._process.communicate(
+                timeout=self._read_timeout_seconds
+            )
+        except subprocess.TimeoutExpired as exc:
+            raise TimeoutError(
+                "Named AVFoundation camera finite batch exceeded "
+                f"{self._read_timeout_seconds}s"
+            ) from exc
+        finished = self._monotonic_ns()
+        self._communicated = True
+        self._audit["subprocess_communicate_successes"] += 1
+        self._audit["subprocess_wait_successes"] += 1
+        if not isinstance(stdout, bytes) or not isinstance(stderr, bytes):
+            raise ValueError("Named camera subprocess output must be bytes")
+        if self._process.returncode != 0:
+            raise RuntimeError("Named camera ffmpeg subprocess failed")
+        if stderr.strip():
+            raise RuntimeError("Named camera ffmpeg emitted stderr")
+        parsed = _parse_exact_png_stream(
+            stdout,
+            expected_frame_count=self._expected_frame_count,
+        )
+        for frame in parsed:
+            frame["receive_started_monotonic_ns"] = started
+            frame["receive_finished_monotonic_ns"] = finished
+        self._frames = parsed
+
+    def _terminate_unfinished_process(self) -> None:
+        self._audit["subprocess_terminate_attempts"] += 1
+        self._process.terminate()
+        self._audit["subprocess_terminate_successes"] += 1
+        self._audit["subprocess_communicate_attempts"] += 1
+        self._audit["subprocess_wait_attempts"] += 1
+        try:
+            self._process.communicate(timeout=self._read_timeout_seconds)
+        except subprocess.TimeoutExpired:
+            self._audit["subprocess_kill_attempts"] += 1
+            self._process.kill()
+            self._audit["subprocess_kill_successes"] += 1
+            self._audit["subprocess_communicate_attempts"] += 1
+            self._audit["subprocess_wait_attempts"] += 1
+            self._process.communicate(timeout=self._read_timeout_seconds)
+        self._audit["subprocess_communicate_successes"] += 1
+        self._audit["subprocess_wait_successes"] += 1
+        self._communicated = True
+
+
+def _parse_exact_png_stream(
+    payload: bytes,
+    *,
+    expected_frame_count: int,
+) -> list[dict[str, Any]]:
+    if not isinstance(payload, bytes) or not payload:
+        raise ValueError("Named camera PNG stream is empty")
+    if len(payload) > expected_frame_count * MAX_PNG_FRAME_BYTES:
+        raise ValueError("Named camera PNG stream exceeds its finite byte bound")
+    frames = []
+    offset = 0
+    channel_counts = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}
+    for _ in range(expected_frame_count):
+        frame_start = offset
+        if payload[offset : offset + len(PNG_SIGNATURE)] != PNG_SIGNATURE:
+            raise ValueError("Named camera PNG signature is missing")
+        offset += len(PNG_SIGNATURE)
+        width: int | None = None
+        height: int | None = None
+        channels: int | None = None
+        first_chunk = True
+        seen_idat = False
+        while True:
+            if offset + 12 > len(payload):
+                raise ValueError("Named camera PNG stream is truncated")
+            length = struct.unpack(">I", payload[offset : offset + 4])[0]
+            chunk_type = payload[offset + 4 : offset + 8]
+            if length > MAX_PNG_FRAME_BYTES:
+                raise ValueError("Named camera PNG chunk exceeds its byte bound")
+            chunk_end = offset + 12 + length
+            if chunk_end > len(payload):
+                raise ValueError("Named camera PNG chunk is truncated")
+            data = payload[offset + 8 : offset + 8 + length]
+            observed_crc = struct.unpack(
+                ">I", payload[offset + 8 + length : chunk_end]
+            )[0]
+            expected_crc = zlib.crc32(chunk_type + data) & 0xFFFFFFFF
+            if observed_crc != expected_crc:
+                raise ValueError("Named camera PNG chunk CRC is invalid")
+            if first_chunk:
+                if chunk_type != b"IHDR" or length != 13:
+                    raise ValueError("Named camera PNG IHDR is malformed")
+                (
+                    width,
+                    height,
+                    bit_depth,
+                    color_type,
+                    compression,
+                    filtering,
+                    interlace,
+                ) = struct.unpack(">IIBBBBB", data)
+                if (
+                    width <= 0
+                    or height <= 0
+                    or width > 16384
+                    or height > 16384
+                    or bit_depth not in {8, 16}
+                    or color_type not in channel_counts
+                    or compression != 0
+                    or filtering != 0
+                    or interlace not in {0, 1}
+                ):
+                    raise ValueError(
+                        "Named camera PNG dimensions or format are invalid"
+                    )
+                channels = channel_counts[color_type]
+                first_chunk = False
+            elif chunk_type == b"IHDR":
+                raise ValueError("Named camera PNG contains a duplicate IHDR")
+            elif chunk_type == b"IDAT":
+                seen_idat = True
+            offset = chunk_end
+            if chunk_type == b"IEND":
+                if length != 0 or not seen_idat:
+                    raise ValueError("Named camera PNG IEND is malformed")
+                break
+            if offset - frame_start > MAX_PNG_FRAME_BYTES:
+                raise ValueError("Named camera PNG frame exceeds its byte bound")
+        frame_bytes = payload[frame_start:offset]
+        frames.append(
+            {
+                "frame_bytes": frame_bytes,
+                "encoding": "png",
+                "width": width,
+                "height": height,
+                "channels": channels,
+            }
+        )
+    if offset != len(payload):
+        raise ValueError("Named camera PNG stream has extra trailing bytes or frames")
+    return frames
+
+
+def _stable_camera_discovery_identity(payload: dict[str, Any]) -> dict[str, Any]:
+    avfoundation = payload.get("avfoundation_devices")
+    system_cameras = payload.get("system_cameras")
+    if not isinstance(avfoundation, list) or not isinstance(system_cameras, list):
+        raise ValueError("Stable camera discovery fields are missing")
+    names = [device.get("name") for device in avfoundation]
+    if any(not isinstance(name, str) or not name for name in names):
+        raise ValueError("Stable AVFoundation camera name is malformed")
+    if len(names) != len(set(names)):
+        raise ValueError("Stable AVFoundation camera names are ambiguous")
+    system_names = [camera.get("name") for camera in system_cameras]
+    unique_ids = [camera.get("unique_id") for camera in system_cameras]
+    if len(system_names) != len(set(system_names)):
+        raise ValueError("Stable system camera names are ambiguous")
+    if len(unique_ids) != len(set(unique_ids)):
+        raise ValueError("Stable system camera unique IDs are ambiguous")
+    if set(names) != set(system_names):
+        raise ValueError("AVFoundation and system stable camera names differ")
+    return {
+        "avfoundation_names": sorted(names),
+        "system_cameras": sorted(
+            [copy.deepcopy(camera) for camera in system_cameras],
+            key=lambda camera: (
+                camera["name"],
+                camera["unique_id"],
+                camera["model_id"],
+            ),
+        ),
+    }
+
+
+def _injected_camera_backend_audit(
+    *,
+    camera: dict[str, Any],
+    frame_count: int,
+) -> dict[str, Any]:
+    return {
+        "backend": "injected_finite_camera",
+        "camera_identity_sha256": _sha256_payload(camera),
+        "subprocess_start_attempts": 0,
+        "subprocess_start_successes": 0,
+        "subprocess_communicate_attempts": 0,
+        "subprocess_communicate_successes": 0,
+        "subprocess_wait_attempts": 0,
+        "subprocess_wait_successes": 0,
+        "subprocess_terminate_attempts": 0,
+        "subprocess_terminate_successes": 0,
+        "subprocess_kill_attempts": 0,
+        "subprocess_kill_successes": 0,
+        "release_attempts": 1,
+        "release_successes": 1,
+        "frames_delivered": frame_count,
+        "capture_property_writes": 0,
+        "continuous_recording_sessions": 0,
+    }
+
+
+def _verify_camera_backend_audit(
+    payload: dict[str, Any],
+    *,
+    camera: dict[str, Any],
+    expected_frame_count: int,
+) -> None:
+    count_fields = {
+        "subprocess_start_attempts",
+        "subprocess_start_successes",
+        "subprocess_communicate_attempts",
+        "subprocess_communicate_successes",
+        "subprocess_wait_attempts",
+        "subprocess_wait_successes",
+        "subprocess_terminate_attempts",
+        "subprocess_terminate_successes",
+        "subprocess_kill_attempts",
+        "subprocess_kill_successes",
+        "release_attempts",
+        "release_successes",
+        "frames_delivered",
+        "capture_property_writes",
+        "continuous_recording_sessions",
+    }
+    allowed_fields = {"backend", "camera_identity_sha256", *count_fields}
+    if not isinstance(payload, dict) or set(payload) != allowed_fields:
+        raise ValueError("Camera backend audit fields are malformed")
+    if payload.get("backend") not in {
+        "ffmpeg_named_avfoundation",
+        "injected_finite_camera",
+    }:
+        raise ValueError("Camera backend audit type is invalid")
+    if payload.get("camera_identity_sha256") != _sha256_payload(camera):
+        raise ValueError("Camera backend audit identity drifted")
+    if any(
+        isinstance(payload.get(field), bool)
+        or not isinstance(payload.get(field), int)
+        or payload[field] < 0
+        for field in count_fields
+    ):
+        raise ValueError("Camera backend audit count is malformed")
+    if (
+        payload["release_attempts"] != 1
+        or payload["release_successes"] != 1
+        or payload["frames_delivered"] != expected_frame_count
+        or payload["capture_property_writes"] != 0
+        or payload["continuous_recording_sessions"] != 0
+    ):
+        raise ValueError("Camera backend audit finite lifecycle drifted")
+    if payload["backend"] == "ffmpeg_named_avfoundation":
+        if (
+            payload["subprocess_start_attempts"] != 1
+            or payload["subprocess_start_successes"] != 1
+            or payload["subprocess_communicate_attempts"] != 1
+            or payload["subprocess_communicate_successes"] != 1
+            or payload["subprocess_wait_attempts"] != 1
+            or payload["subprocess_wait_successes"] != 1
+            or payload["subprocess_terminate_attempts"] != 0
+            or payload["subprocess_terminate_successes"] != 0
+            or payload["subprocess_kill_attempts"] != 0
+            or payload["subprocess_kill_successes"] != 0
+        ):
+            raise ValueError("Named camera accepted subprocess lifecycle drifted")
+    elif any(
+        payload[field] != 0 for field in count_fields if field.startswith("subprocess_")
+    ):
+        raise ValueError("Injected camera unexpectedly reported a subprocess")
 
 
 def _verify_discovery_snapshot(payload: dict[str, Any]) -> None:
@@ -1548,6 +1993,11 @@ def _verify_captured_frames(
             frame_bytes
         ).hexdigest() != frame.get("frame_sha256"):
             raise ValueError("Captured frame content hash is invalid")
+        _verify_camera_backend_audit(
+            frame.get("camera_backend_audit"),
+            camera=camera,
+            expected_frame_count=execution_contract["frame_count_per_camera"],
+        )
 
 
 def _verify_private_bundle_refs(
