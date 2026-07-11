@@ -10,13 +10,13 @@
     "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
-  "last_reviewed_implementation_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
+  "verified_through_commit": "ce7a794bb36de16c6a053608771cd5ecbd87575a",
+  "last_reviewed_implementation_commit": "ce7a794bb36de16c6a053608771cd5ecbd87575a",
   "source_review": {
-    "commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
-    "implementation_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_053_LIVE_EXECUTION_INTERLOCKS_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/079-accept-brief-053-live-execution-interlocks.md"
+    "commit": "ce7a794bb36de16c6a053608771cd5ecbd87575a",
+    "implementation_commit": "ce7a794bb36de16c6a053608771cd5ecbd87575a",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_054_FAIL_CLOSED_LIVE_SESSION_ORCHESTRATOR_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/080-accept-brief-054-fail-closed-live-session.md"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -31,7 +31,7 @@
   "continuation_run": {
     "started_at": "2026-07-11T12:52:56-05:00",
     "trigger": "owner_proceed_with_next_milestone",
-    "scope": "T16.5c offline static-pose and source-binding continuation through Brief 053",
+    "scope": "T16.5c offline static-pose and source-binding continuation through Brief 054",
     "starting_head": "32c29480a314ce3f731dda0d9a50156c1832da63",
     "live_gate": "closed",
     "training_lock": "closed",
@@ -1171,10 +1171,9 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "054",
-      "latest_verified_brief_id": "053",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053"],
-      "result": "Briefs 048-053 are verified and remotely preserved: the candidate-only runner now requires a same-thread on-request runtime proof, exact code-pinned one-shot factories, and immutable one-artifact-per-session private evidence while the live gate remains closed",
+      "latest_verified_brief_id": "054",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054"],
+      "result": "Briefs 048-054 are verified and remotely preserved: one fail-closed production session path composes the same-thread runtime proof, full candidate contract, exact one-shot factories, candidate runner, and one immutable private outcome before any result can be returned; the live gate remains closed",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1308,20 +1307,52 @@
         "broad_test_count": 289,
         "broad_test_duration_seconds": 73.993
       },
+      "fail_closed_live_session_orchestrator": {
+        "implementation_commit": "ce7a794bb36de16c6a053608771cd5ecbd87575a",
+        "receipt_schema_version": "scenesmith.static_pose_live_session_receipt.v1",
+        "capability": "fail_closed_static_pose_live_session_orchestrator_conformant",
+        "preflight_requirements": [
+          "active_same_thread_hardware_profile_reverified",
+          "complete_candidate_contract_reverified",
+          "new_nonaliased_private_session_destination_reverified",
+          "exact_pinned_transport_factory_built",
+          "exact_two_camera_factories_built"
+        ],
+        "outcome_requirements": [
+          "exactly_one_private_success_or_failure_artifact_attempted_after_session_start",
+          "private_reference_independently_reverified",
+          "candidate_result_withheld_until_success_artifact_and_receipt_verify",
+          "primary_and_persistence_errors_preserved_without_retry",
+          "timestamp_failure_or_regression_becomes_rejected_outcome",
+          "receipt_binds_contract_profile_result_evidence_reference_and_private_root"
+        ],
+        "private_destination_ancestor_alias_rejected": true,
+        "current_thread_live_profile_eligible": false,
+        "current_thread_rejection_reason": "active_persisted_turn_context_approval_policy_is_never",
+        "live_candidate_contract_issued": false,
+        "live_candidate_result_observed": false,
+        "private_live_evidence_written": false,
+        "hardware_enumerated": false,
+        "hardware_opened": false,
+        "physical_follower_commanded": false,
+        "focused_test_count_per_runtime": 101,
+        "broad_test_count": 300,
+        "broad_test_duration_seconds": 92.36
+      },
       "test_commands": [
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
-        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_execution_sources.py",
         "external/leLab/.venv/bin/python scripts/robot_lab/verify_static_pose_live_execution_sources.py",
         "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_candidate_sources.py",
         "./.mujoco_venv/bin/python scripts/robot_lab/migrate_live_manifest_camera_identity.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_calibration_profile.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_static_pose_bracket_fixture.py --verify",
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
-        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/hardware_execution_profile.py scenesmith/robot_lab/static_pose_live_execution.py scenesmith/robot_lab/static_pose_live_candidate.py scripts/robot_lab/verify_static_pose_live_execution_sources.py tests/unit/test_static_pose_live_execution.py tests/unit/test_static_pose_live_candidate.py",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/hardware_execution_profile.py scenesmith/robot_lab/static_pose_live_execution.py scenesmith/robot_lab/static_pose_live_candidate.py scenesmith/robot_lab/static_pose_live_session.py scripts/robot_lab/verify_static_pose_live_execution_sources.py tests/unit/test_static_pose_live_execution.py tests/unit/test_static_pose_live_candidate.py tests/unit/test_static_pose_live_session.py",
         "git diff --check"
       ],
-      "next_action": "implement and verify Brief 054 fail-closed production session orchestration with every constructor and runner patched; do not access hardware or transition the live gate in the current never-policy thread",
+      "next_action": "define and verify a separate offline redacted candidate-session review manifest that can be regenerated from a private success artifact and receipt without granting a physical proof label; do not access hardware or transition the live gate in the current never-policy thread",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
@@ -1344,7 +1375,8 @@
         "source_bound_static_pose_live_candidate_runtime_conformant",
         "pinned_static_pose_live_factory_spec_conformant",
         "private_static_pose_live_candidate_evidence_conformant",
-        "hardware_supervised_runtime_profile_validator_conformant"
+        "hardware_supervised_runtime_profile_validator_conformant",
+        "fail_closed_static_pose_live_session_orchestrator_conformant"
       ],
       "authority_not_granted": [
         "static_pose_bracketed_observation",

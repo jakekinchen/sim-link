@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress under Brief 054 fail-closed live-session orchestration
+current_task: T16.5c in progress; Brief 054 fail-closed live-session orchestrator verified
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Brief 053 d76baf5; active-turn-context plus doctor runtime proof; pinned Feetech/FFmpeg one-shot factories; exclusive private success/failure artifacts; 90 focused in each runtime; 289 broad tests; no hardware/policy access
+evidence: Brief 054 ce7a794; one preflight-gated production session entry point; exactly-one immutable private outcome; candidate-only receipt; 101 focused in each runtime; 300 broad tests; no hardware/policy access
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: T16.5b none; the current parent thread is mechanically rejected because its persisted approval policy is never; live T16.5c requires a new hardware-supervised on-request parent, fresh finite run window, separate reviewed gate transition, fresh lease, and fresh discovery/zero-holder snapshots; static-pose observation and policy-shadow parity remain unverified
-next_step: implement and verify Brief 054 with every production constructor/runner patched; no hardware access or live-gate transition
+next_step: define and verify an offline redacted candidate-session review manifest from private success plus receipt; no hardware access or live-gate transition
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: implement and verify Brief 054 with every production constructor/runn
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-053 verified; Brief 054 active offline to compose preflight, one-shot factories, runner, and exactly-one private success/failure artifact into a fail-closed session; current thread remains live-ineligible |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-054 verified; fail-closed production session entry point with exactly-one private outcome and candidate-only receipt remotely preserved at `ce7a794`; current thread remains live-ineligible |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -131,6 +131,23 @@ next_step: implement and verify Brief 054 with every production constructor/runn
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 054 fail-closed live-session orchestrator verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 054 verified and remotely preserved; live gate closed
+Completed: one production entry point that reverifies the active profile, complete candidate contract, new private destination, and exact one-shot factories before session start; exactly-one immutable private outcome; candidate result withholding; signed candidate-only receipt
+Evidence: implementation ce7a794; receipt schema scenesmith.static_pose_live_session_receipt.v1; private-reference digest plus contract/profile/result/evidence/root linkage; ancestor-symlink hardening
+Verification: 101 focused tests in .mujoco_venv; 101 in pinned LeLab runtime; all execution/candidate/camera/calibration/static-fixture source verifiers; py_compile; duplicate-dict/diff checks; current parent live-profile negative proof; 300 broad tests in 92.360 seconds
+Adversarial: profile/contract/destination/factory preflight rejection; private destination reuse and ancestor alias; candidate and cleanup error groups; failed or regressed outcome clocks; success/failure build, verify, write, and reference failures; receipt build/verification failure; contract/profile/result/evidence/reference/authority/time substitution; no retry or second write
+Authority gained: fail_closed_static_pose_live_session_orchestrator_conformant only
+Authority withheld: live candidate result, static_pose_bracketed_observation, policy_shadow_input_valid, policy_shadow, actuation, qualification/transfer, promotion, training
+Current runtime: live-ineligible because persisted active turn_context approval_policy is never
+Hardware: none; no enumeration/open, serial/camera/Studio access, reconnect, write, torque change, motion, policy, MuJoCo, optimizer, or paid compute
+Training lock: closed
+Next step: separate offline redacted candidate-session review manifest; live gate remains closed
+```
 
 ### 2026-07-11 - Brief 053 live-execution interlocks verified offline
 

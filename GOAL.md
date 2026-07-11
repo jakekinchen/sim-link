@@ -222,14 +222,29 @@ session, rejecting class drift, substitution, path escape, and symlinks.
 Ninety focused tests pass in both robotics runtimes, source verifiers agree, and
 289 broad tests pass. No production constructor, serial/camera/Studio path,
 policy, simulation replay, training, or paid compute ran. Only local factory,
-private-evidence, and runtime-profile conformance is granted. A separate offline
-production-session orchestrator remains next; the live gate and training lock
-stay closed.
+private-evidence, and runtime-profile conformance is granted.
 
-Brief 054 is active offline to compose the verified profile, contract, pinned
-factories, candidate runner, and immutable evidence into one fail-closed
-production-session path. Tests patch every production constructor and runner;
-the current parent remains live-ineligible and the live gate stays closed.
+Brief 054 implementation `ce7a794` is remotely preserved. One production
+session entry point now reverifies the active same-thread profile, full candidate
+contract, and a new non-aliased private destination before composing the exact
+one-shot factories and candidate runner. A started session attempts one
+immutable private success or failure artifact; result return is withheld until
+the success artifact, reference, and signed candidate-only receipt independently
+verify. Primary, cleanup, timing, and persistence failures remain visible
+without a second write attempt. The receipt binds the contract, profile, result,
+private evidence, canonical reference hash, and private-root identity while
+granting no proof label or global authority.
+
+Same-agent review strengthened outcome-clock failure handling and expanded
+private-root alias rejection across all path ancestors. One hundred one focused
+tests pass in both robotics runtimes, every offline source/artifact verifier
+passes, and the 300-test authority/twin regression gate passes in 92.360
+seconds. No production constructor, hardware path, policy, MuJoCo, training, or
+paid compute ran. Only
+`fail_closed_static_pose_live_session_orchestrator_conformant` is newly granted.
+The current parent remains mechanically live-ineligible; the live gate and
+training lock stay closed. A separate offline redacted candidate-session review
+manifest is next.
 
 ## Durable State
 
