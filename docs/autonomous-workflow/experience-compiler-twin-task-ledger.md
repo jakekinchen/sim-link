@@ -7,10 +7,10 @@ training_lock: closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.2b-A central authority-composition foundation
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.4 blocked real template and synthetic compiler scaffold; T16.4b strict artifact and scoped-gate sub-slice
-evidence: reviewer decision 042 preserves T16.1b at dca2b45 and T16.4b partial progress at 69df54d/3cd142e while requiring a central composer before production inertial output continues
+evidence: T16.2b-A implementation c0b9629 and reviewer decision 043 pass locally; remote preservation remains required before verification
 remaining: T16.2b-A authority composition; remaining T16.4b production compiler; T16.2b computed qualification; revised T16.5 offline no-write census conformance
-blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 034; component artifacts expose local capabilities only and cannot grant global readiness
+blockers: T16.2b-A remote preservation pending; physical M19 still requires separate read and motion authority
+next_step: push c0b9629 plus reviewer evidence, confirm origin, then resume brief 033
 ```
 
 ## Rules

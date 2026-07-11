@@ -2,12 +2,12 @@
   "schema_version": "scenesmith.project_state.v1",
   "updated": "2026-07-11",
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "3cd142e4050f1013e8bc0396c7e2867927ccfef9",
-  "last_reviewed_commit": "3cd142e4050f1013e8bc0396c7e2867927ccfef9",
+  "current_head_commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
+  "last_reviewed_commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
   "source_review": {
-    "commit": "3cd142e4050f1013e8bc0396c7e2867927ccfef9",
-    "decision": "CONTINUE_T16_4B_EXECUTE_T16_2B_A_FIRST",
-    "reviewer_decision": "docs/reviewer-messages/042-authority-composer-first-continue.md"
+    "commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
+    "decision": "CONTINUE_T16_4B_AFTER_REMOTE_PRESERVATION",
+    "reviewer_decision": "docs/reviewer-messages/043-central-authority-composition-reviewed.md"
   },
   "training_lock": "closed",
   "current_milestone": "M16",
@@ -56,10 +56,25 @@
     "T16.2b-A": {
       "state": "in_progress",
       "depends_on": ["T16.1b", "T16.2", "T16.4"],
-      "source_commit": "3cd142e",
+      "source_commit": "c0b9629",
       "brief_id": "034",
-      "review_decision_id": "042",
-      "result": "authority-composition foundation selected; implementation pending",
+      "review_decision_id": "043",
+      "result": "implementation and same-agent adversarial review passed; remote preservation pending",
+      "test_commands": [
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_authority_composer tests.unit.test_artifact_contract tests.unit.test_measured_inertial_intake tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack tests.unit.test_robotics_dependency_lock",
+        "./.mujoco_venv/bin/python scripts/robot_lab/compose_robot_authority.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_measured_inertial_intake.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_twin_contract_examples.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_structural_twin_diff.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/verify_lerobot_stack.py",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/authority_composer.py scenesmith/robot_lab/measured_inertial_intake.py scripts/robot_lab/compose_robot_authority.py tests/unit/test_authority_composer.py tests/unit/test_measured_inertial_intake.py",
+        "git diff --check"
+      ],
+      "production_artifact_ids": {
+        "authority_contract_identity_sha256": "6d04b20547a9391c4e695b5a337ee292410a2a13a8a3efdf34cb7033feda6ba1",
+        "denied_composition_identity_sha256": "d1206c5c710a280e4f7c5c448fd9ba59793b9850c2e9fd1bf962999ec82bc8ab",
+        "assembly_inertials_v2_identity_sha256": "8b8aab8e769167531776e38d76c545cec99277b69783d57c9db78f1020297ffc"
+      },
       "authority_granted": [],
       "authority_not_granted": [
         "simulation_training_ready",
@@ -68,8 +83,9 @@
         "optimizer_run"
       ],
       "known_limitations": [
-        "no central authority composer is implemented yet",
-        "existing component gates must not be treated as whole-system authority"
+        "the checked-in composition is explicit non-authorizing fixture evidence and withholds every global decision",
+        "issuer authorization is a code-pinned content identity contract; external key-backed attestation is not implemented by this foundation",
+        "remote preservation is pending and this task remains in_progress until confirmed"
       ]
     },
     "T16.2b": {
