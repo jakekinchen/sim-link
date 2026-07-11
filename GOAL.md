@@ -276,6 +276,13 @@ inference, replay, policy label, or actuation is permitted. Only
 `pi05_policy_input_preprocessing_source_contract_conformant` is newly granted;
 the live gate and training lock stay closed.
 
+Brief 057 is active offline to define the separate reviewed-input issuance gate
+for the missing live-session acceptance decision, stable-camera role binding,
+and exact task prompt. It will emit only a fixture
+`blocked_missing_reviewed_inputs` artifact and will not create or accept any of
+those real inputs, construct a policy input, load weights, preprocess, infer,
+replay, access hardware, or transition the live gate.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`

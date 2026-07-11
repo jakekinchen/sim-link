@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress after verified Brief 056 PI0.5 preprocessing source contract
+current_task: T16.5c in progress under Brief 057 PI0.5 reviewed-input issuance gate
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: Brief 056 fd49820; signed PI0.5 preprocessing source contract f6b21668...; exact stack/checkpoint/tokenizer/normalizer/coordinate/device bindings; 114 focused in each runtime; 313 broad tests; no weights/preprocessing/inference/hardware access
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: T16.5b none; the current parent thread is mechanically rejected because its persisted approval policy is never; live T16.5c requires a new hardware-supervised on-request parent, fresh finite run window, separate reviewed gate transition, fresh lease, and fresh discovery/zero-holder snapshots; static-pose observation and policy-shadow parity remain unverified
-next_step: define a separate fixture-only reviewed-input issuance gate for the live-session acceptance decision, stable-camera role binding, and exact task prompt; no weights, preprocessing, inference, hardware, or live-gate transition
+next_step: implement and verify Brief 057 fixture-only reviewed-input issuance gate with all real inputs absent; no weights, preprocessing, inference, hardware, or live-gate transition
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: define a separate fixture-only reviewed-input issuance gate for the l
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-056 verified; exact PI0.5 source contract is pinned but remains `blocked_missing_inputs` on live-review acceptance, camera-role binding, and task prompt; current thread remains live-ineligible |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-056 verified; Brief 057 active offline to define the reviewed-input issuance gate while all three real inputs remain absent; current thread remains live-ineligible |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler

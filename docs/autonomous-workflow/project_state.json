@@ -31,7 +31,7 @@
   "continuation_run": {
     "started_at": "2026-07-11T12:52:56-05:00",
     "trigger": "owner_proceed_with_next_milestone",
-    "scope": "T16.5c offline static-pose and source-binding continuation through Brief 056",
+    "scope": "T16.5c offline static-pose and reviewed-input continuation through Brief 057",
     "starting_head": "32c29480a314ce3f731dda0d9a50156c1832da63",
     "live_gate": "closed",
     "training_lock": "closed",
@@ -1171,7 +1171,7 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": null,
+      "active_brief_id": "057",
       "latest_verified_brief_id": "056",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056"],
       "result": "Briefs 048-056 are verified and remotely preserved: exact PI0.5 preprocessing sources, cached processor/tokenizer revisions, normalizer statistics, coordinate semantics, and the sole CUDA-to-CPU preprocessing override are pinned, but production preprocessing remains blocked on an accepted live review decision, reviewed camera-role binding, and reviewed task prompt; the live gate remains closed",
@@ -1431,7 +1431,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "define and verify a separate fixture-only PI0.5 reviewed-input issuance gate for the accepted live-session decision, stable-camera role binding, and exact task prompt; keep the production artifact blocked and do not preprocess, load weights, infer, access hardware, or transition the live gate",
+      "next_action": "implement and verify Brief 057 fixture-only PI0.5 reviewed-input issuance gate for the accepted live-session decision, stable-camera role binding, and exact task prompt; emit only a blocked artifact and do not create real inputs, preprocess, load weights, infer, access hardware, or transition the live gate",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
