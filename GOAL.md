@@ -38,8 +38,11 @@ authority field, and fails before serial open unless holder counts are zero.
 Keep the live gate closed and preserve the last-observed pre-existing Studio
 server untouched.
 After reviewer decision 053 is remotely preserved, prepare the smallest owner
-decision packet for resolving that independent holder; continue safe offline
-work until explicit direction allows its release or shutdown.
+decision packet for resolving that independent holder. The server currently
+reports follower torque on and safety armed; do not SIGTERM it or call its
+torque-changing disconnect route without a narrow owner choice. Continue safe
+offline work until the owner manually disconnects the follower, authorizes that
+exact disconnect, or elects to keep the server active.
 
 ## Durable State
 

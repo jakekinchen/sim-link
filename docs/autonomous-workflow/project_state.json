@@ -398,7 +398,11 @@
         "exclusive_bus_ownership_proven": false,
         "last_revalidated_at": "2026-07-11T05:47:27-05:00",
         "last_revalidated_holder_count": 1,
-        "last_revalidated_snapshot_sha256": "642305133b602477840e31d756e52b11cf5d97e689eda15ae2741291ed47106c"
+        "last_revalidated_snapshot_sha256": "642305133b602477840e31d756e52b11cf5d97e689eda15ae2741291ed47106c",
+        "read_only_server_status_observed_at": "2026-07-11T05:52:03-05:00",
+        "hardware_status_sha256": "79f4ce89e6f4bcd2e7bb9bc03ba17b9007454f3af21ef02eaee90e98e26b8040",
+        "safety_state_sha256": "8c425d38bd0ba65416df488252d8642168cc49bddf5b6fe31a516caa782da655",
+        "routing_state_sha256": "620cb845cb8f1507263fdf7b6aec651a69e4b028d90628c935b0af0b533fdcb4"
       },
       "camera_capture_backend": {
         "state": "offline_verified",
@@ -460,14 +464,32 @@
       ],
       "owner_decision_required": {
         "state": "pending",
-        "requested_action": "gracefully_stop_preexisting_studio_server_to_release_follower_serial_device",
-        "constraints": [
-          "graceful_stop_only",
-          "no_force_kill_without_new_owner_authority",
-          "verify_zero_holders_before_reopening_live_gate"
-        ]
+        "observed_server_state": {
+          "leader_connected": true,
+          "follower_connected": true,
+          "follower_torque_reported": true,
+          "safety_armed": true,
+          "safety_estopped": false,
+          "follower_route_source": "none",
+          "running_job_count": 0,
+          "running_hardware_job_count": 0
+        },
+        "sigterm_effect": "releases_process_file_descriptor_without_explicit_hardware_disconnect_or_torque_release",
+        "hardware_disconnect_effect": "releases_follower_torque_then_closes_serial_bus_and_is_a_motor_register_write",
+        "requested_owner_choice": [
+          "owner_manually_disconnects_follower_in_existing_studio",
+          "owner_explicitly_authorizes_exact_follower_torque_release_and_disconnect_api_call",
+          "owner_keeps_existing_studio_connection_and_goal_remains_offline"
+        ],
+        "agent_actions_prohibited_pending_choice": [
+          "signal_or_stop_studio_server",
+          "call_hardware_disconnect",
+          "call_safety_disarm_or_estop",
+          "reopen_serial_or_camera_live_gate"
+        ],
+        "post_choice_requirement": "verify_zero_follower_serial_holders_before_any_live_gate_reconsideration"
       },
-      "next_action": "request owner direction for graceful Studio server stop; if granted, stop gracefully and verify zero holders before any live-gate reconsideration",
+      "next_action": "request owner choice: manually disconnect follower, explicitly authorize exact torque-release disconnect, or keep Studio active and remain offline",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",

@@ -8,11 +8,11 @@ run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5b Brief 041 offline correction reviewed; live gate closed on pre-existing serial holder
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Brief 041 is remote through c686ab6; fresh read-only holder snapshot 64230513... at 05:47:27 CDT still contains one holder and opened no device
+evidence: read-only Studio GET audit at 05:52:03 CDT reports leader/follower connected, follower torque true, safety armed, route none, and zero jobs; status hashes 79f4ce89.../8c425d38.../620cb845...
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
-blockers: camera index defect is corrected offline; live gate remains closed because the pre-existing July 8 Studio server was last observed holding the follower serial device and exclusive ownership has not been re-proven; physical motion remains closed
-next_step: request owner authority for graceful Studio server stop only; no force kill; after any granted stop, verify zero holders before reconsidering the live gate
+blockers: SIGTERM would close the process without explicit torque release, while the Studio disconnect route would torque-disable and is a motor-register write; neither is authorized without a narrow owner choice; physical motion remains closed
+next_step: ask owner to manually disconnect follower in Studio, explicitly authorize the exact torque-release disconnect, or keep Studio active and remain offline; verify zero holders after either disconnect path
 ```
 
 ## Rules
@@ -130,6 +130,21 @@ next_step: request owner authority for graceful Studio server stop only; no forc
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Studio reports torque on; disconnect choice escalated to owner
+
+```text
+Current task: T16.5b
+State: in_progress; live gate closed; owner authority decision pending
+Completed: read-only source audit of Studio shutdown/disconnect semantics; GET-only health/hardware/safety/routing/jobs status audit
+Evidence: hardware hash 79f4ce89...; safety hash 8c425d38...; routing hash 620cb845...; follower connected true; follower torque true; safety armed true; running jobs 0; follower route none
+Safety finding: SIGTERM does not call hardware disconnect/torque release; HTTP follower disconnect does release torque and is a motor-register write
+Authority: neither process signal nor torque-changing endpoint was invoked
+Remaining: owner manually disconnects follower, explicitly authorizes exact disconnect, or keeps Studio active and accepts offline-only continuation
+Blockers: exclusive follower bus ownership cannot be established while Studio remains connected
+Training lock: closed
+Next step: present the exact three-way owner choice
+```
 
 ### 2026-07-11 - Fresh serial-holder gate remains closed; owner decision required
 
