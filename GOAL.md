@@ -21,16 +21,17 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute brief `docs/briefs/031-fake-bus-readonly-census-harness.md`
-to start T16.5. Add the first offline fake-bus/recorded-trace qualification
-harness slice by replaying a recorded read-only servo census through a bounded
-contract that proves no write/motion operations are required. Do not open real
-hardware, claim qualification, or start training.
+Execute brief `docs/briefs/032-unify-executable-robotics-stack.md` to complete
+T16.1b. Replace the accepted `split_runtime_unresolved` state with one
+deterministic LeRobot base revision plus a reproducible SceneSmith patch-set,
+and bind collection, training, finalization, and inference to that executable
+stack identity. Do not start an optimizer, open hardware, or continue T16.5.
 
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
 - Active execution ledger: `docs/autonomous-workflow/experience-compiler-twin-task-ledger.md`
+- Authoritative machine-readable state: `docs/autonomous-workflow/project_state.json`
 - Rebased loop prompt: `docs/autonomous-workflow/experience-compiler-twin-goal-loop.md`
 - Incremental task ledger: `docs/autonomous-workflow/pi05-autonomous-sorting-task-ledger.md`
 - Invariant milestones: `docs/autonomous-workflow/09-autonomous-milestones.md`
@@ -87,8 +88,9 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   strategy closes the quaternion-spelling and sibling-order gaps, with tracked
   structural artifact identity
   `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`.
-- T16.4 is reviewer-verified: measured-part mass intake and assembly inertia/COM
-  compilation now prove both the blocked real current-arm path and a bounded
-  synthetic ready path with fail-closed negative coverage. T16.5 is now the
-  active offline prerequisite: build the fake-bus/recorded-trace qualification
-  harness without opening hardware or claiming physical qualification.
+- Reviewer decision 039 reopens T16.1, T16.2, and T16.4 at their production
+  authority boundaries. T16.1 retains a verified dependency inventory but not
+  a unified executable stack; T16.2 retains a verified schema scaffold but not
+  mechanically computed qualification decisions; T16.4 retains a verified
+  synthetic compiler scaffold and truthful blocked real template but not a
+  production measured-input path or downstream authority. T16.5 is pending.

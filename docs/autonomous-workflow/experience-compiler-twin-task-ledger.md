@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5 fake-bus read-only census trace harness
-completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
-evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: build the offline fake-bus/recorded-trace qualification harness for T16.5, then continue to M17-M19 prerequisites and Gates C-D
+current_task: T16.1b unified executable LeRobot and preprocessing stack
+completed: T16.0 guard; T16.3 structural and semantic twin baseline reviewer-verified; T16.1 dependency inventory verified; T16.2 schema scaffold verified; T16.4 blocked real template and synthetic compiler scaffold verified
+evidence: external review of exact commit df9ed0a recorded in reviewer decision 039; prior accepted evidence remains historical scaffold evidence and grants no broader authority
+remaining: T16.1b executable unification; T16.4b strict production measured-inertial path; T16.2b computed qualification decisions; revised T16.5 full-lifecycle read-only census conformance
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 031 and prove a recorded read-only servo census can replay through a no-write harness before broader fitting or qualification work
+next_step: execute brief 032; no optimizer run is authorized before the unified stack and processor conformance gate pass
 ```
 
 ## Rules
@@ -29,11 +29,14 @@ next_step: execute brief 031 and prove a recorded read-only servo census can rep
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
-| T16.1 | verified | T16.0 | Pin LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | 92adde5 + addcafd + cd5ab42; portable exact pins include Menagerie so101.xml |
-| T16.2 | verified | T16.1 | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | bc5187c + ae6fe04; unknown/not-run truth gates; 94 tests |
+| T16.1 | reopened | T16.0 | Inventory LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Dependency inventory and source evidence verified; executable resolution remains split |
+| T16.1b | in_progress | T16.1 | Unify the executable LeRobot/preprocessing revision used by every robotics stage | Exact base revision, deterministic patch-set, environment lock identity, and collection/training/inference tensor conformance |
+| T16.2 | reopened | T16.1b | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Schema scaffold verified; qualification `pass` is not yet mechanically derived from the specification |
+| T16.2b | pending | T16.1b,T16.2 | Compute qualification results from the specification and independently verify them | Units, finite values, trials, split IDs, conditions, uncertainty, content-addressed evidence, and recomputed tolerances |
 | T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
-| T16.4 | verified | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Current real intake/result must be `awaiting_measurements` / `blocked_missing_measurements`; synthetic parallel-axis golden tests; ambiguity and double counting fail closed |
-| T16.5 | in_progress | T16.2-T16.4 | Build fake-bus/recorded-trace identification and qualification harness | Offline census, fitting, qualification, and no-hardware safety tests |
+| T16.4 | reopened | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Blocked real template and synthetic compiler scaffold verified; production measurement ingestion and authority separation missing |
+| T16.4b | pending | T16.2b-T16.4 | Implement strict production measured-inertial intake and authority gates | Strict JSON, finite/PSD physics, BOM graph linkage, immutable evidence, multiple inertia source modes, full-precision aggregation, split authority gates |
+| T16.5 | pending | T16.1b,T16.2b,T16.4b | Build full-lifecycle fake-bus/recorded-trace census conformance harness | Construct/connect/read/decode/close/failure cleanup prove zero writes; hardware identity registry; offline result is `census_trace_conformant` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
 
@@ -72,14 +75,14 @@ next_step: execute brief 031 and prove a recorded read-only servo census can rep
 
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
-| T20.1 | pending | M17-M19 | Freeze one clean single-cube dataset, split, twin, prompts, and seeds | Immutable train/evaluation specification |
+| T20.1 | pending | M17-M18 | Freeze one clean simulation-only single-cube dataset, split, structural twin, prompts, and seeds | Immutable train/evaluation specification with explicit `simulation_only` authority |
 | T20.2 | pending | T20.1 | Overfit one to three episodes with ACT | Near-zero train error plus closed-loop behavior change |
 | T20.3 | pending | T20.1 | Repeat tiny overfit with PI0.5 | Same falsification evidence and physical semantics |
 | T20.4 | pending | T20.2-T20.3 | Add explicit accumulation and run 250/500/1,000 optimizer-update MPS ladder | Updates distinct from microbatches; finite gradients; exact sample audit |
 | T20.5 | pending | T20.4 | Sweep PI0.5 execution horizons 5/10/15 with chunk size 50 | Same weights/seeds; queue resets and open-loop duration recorded |
 | T20.6 | pending | T20.2-T20.5 | Run fixed one-cube phase-level evaluation | Approach through stable post-release and retreat metrics |
 | T20.7 | pending | T20.1, T20.6 | Bake off PI0.5, SmolVLA, ACT, and Diffusion Policy | Same semantics, splits, samples seen, seeds, and proof modes |
-| T20.8 | pending | T20.6-T20.7 | Promote or reject | Stable nonzero strict success; locked audit remains one-use |
+| T20.8 | pending | T20.6-T20.7 | Accept or reject simulation policy; separately evaluate transfer eligibility | `simulation_policy_accepted` may pass under simulation authority; `physical_transfer_eligible` remains false until M19 passes |
 
 ## M21 / Gate D - Improve A Competent Policy
 
@@ -113,6 +116,20 @@ next_step: execute brief 031 and prove a recorded read-only servo census can rep
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - External review reopens production-authority boundaries
+
+```text
+Current task: T16.1b
+State: in_progress
+Completed: preserved exact df9ed0a branch and dirty-worktree evidence; accepted prior T16.1, T16.2, and T16.4 results only as inventory/schema/synthetic scaffold evidence
+Evidence: reviewer decision 039; origin/codex/pi05-autolearn-loop points at df9ed0a4d2212819382a4701a33c263f2cdee32e; local status, binary patch, and integrity-checked untracked archive written outside the repo
+Commit: pending
+Remaining: unify executable stack, harden production measured-inertial authority, compute qualification mechanically, then restart revised T16.5
+Blockers: none for offline T16.1b
+Training lock: closed
+Next step: execute brief 032
+```
 
 ### 2026-07-10 - Reviewer closeout T16.4 and open T16.5
 

@@ -1,0 +1,59 @@
+{
+  "schema_version": "scenesmith.project_state.v1",
+  "updated": "2026-07-10",
+  "source_review": {
+    "commit": "df9ed0a4d2212819382a4701a33c263f2cdee32e",
+    "decision": "CONDITIONAL_CONTINUE",
+    "reviewer_decision": "docs/reviewer-messages/039-production-authority-boundary-redirect.md"
+  },
+  "training_lock": "closed",
+  "current_milestone": "M16",
+  "current_task": "T16.1b",
+  "tasks": {
+    "T16.1": {
+      "state": "reopened",
+      "result": "dependency inventory and source pins verified",
+      "missing": ["one unified executable LeRobot and preprocessing revision"],
+      "authority_granted": ["dependency_inventory_evidence"],
+      "authority_not_granted": ["optimizer_run", "executable_stack_resolved"]
+    },
+    "T16.1b": {
+      "state": "in_progress",
+      "depends_on": ["T16.1"],
+      "authority_granted": [],
+      "authority_not_granted": ["optimizer_run"]
+    },
+    "T16.2": {
+      "state": "reopened",
+      "result": "schema scaffold verified",
+      "missing": ["mechanically computed qualification decisions"],
+      "authority_granted": ["schema_validation"],
+      "authority_not_granted": ["physical_twin_qualified", "promotion_eligible"]
+    },
+    "T16.2b": {"state": "pending", "depends_on": ["T16.1b", "T16.2"]},
+    "T16.3": {"state": "verified", "authority_granted": ["structural_baseline"]},
+    "T16.4": {
+      "state": "reopened",
+      "result": "blocked real template and synthetic compiler scaffold verified",
+      "missing": [
+        "production measurement ingestion",
+        "strict numerical and JSON validation",
+        "BOM graph linkage",
+        "immutable provenance",
+        "authority separation"
+      ],
+      "authority_granted": ["synthetic_compilation_valid"],
+      "authority_not_granted": [
+        "simulation_training_ready",
+        "physical_twin_qualified",
+        "promotion_eligible"
+      ]
+    },
+    "T16.4b": {"state": "pending", "depends_on": ["T16.2b", "T16.4"]},
+    "T16.5": {
+      "state": "pending",
+      "depends_on": ["T16.1b", "T16.2b", "T16.4b"],
+      "authority_not_granted": ["live_hardware_census", "hardware_qualification"]
+    }
+  }
+}
