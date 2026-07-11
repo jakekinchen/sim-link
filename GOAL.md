@@ -195,19 +195,36 @@ runner can emit only a candidate result with no physical proof label; fixture
 execution records `hardware_opened=false` and cannot be relabeled live by
 re-signing. Seventy-seven focused tests pass in both robotics runtimes, the
 accepted private discovery resolver passes, and the 276-test authority/twin gate
-passes. No hardware or policy ran. Before any live-gate transition, a separate
-offline slice must implement the exact pinned Feetech/FFmpeg factories,
-immutable private success/failure evidence, and a machine-checked
-`hardware_supervised_on_request` execution profile. A fresh finite run window,
-actual `on-request` approval policy, separate reviewed remote gate transition,
-fresh lease, and fresh discovery/zero-holder snapshots remain missing. The live
-gate and training lock stay closed.
+passes. No hardware or policy ran. Brief 053 now satisfies the separate offline
+factory/evidence/profile prerequisite. A fresh finite run window, a new parent
+whose active persisted policy is actually `on-request`, a separate reviewed
+remote gate transition, fresh lease, and fresh discovery/zero-holder snapshots
+remain missing. The live gate and training lock stay closed.
 
-Brief 053 is active offline to add the exact pinned Feetech/FFmpeg factory
-boundary, immutable content-addressed private success/failure evidence, and a
-machine-checked hardware-supervised Codex runtime profile. Tests must inject
-fake constructors and subprocesses; this slice cannot enumerate or open
-hardware, run a policy, or transition the live gate.
+Brief 053 implementation `d76baf5` is remotely preserved. The committed project
+default is now `workspace-write`/`on-request`; separate content-addressed
+hardware-supervised and offline-autonomous profile fragments encode
+`danger-full-access`/`on-request` and `danger-full-access`/`never`. Hardware
+profile evidence cross-checks the exact explicitly configured `codex doctor`
+report against the latest persisted `turn_context` for the active
+`CODEX_THREAD_ID`, before and after capture. A child config can no longer mask a
+`never` parent. The current thread is therefore mechanically live-ineligible.
+
+The Feetech and FFmpeg factories reverify the full candidate contract and active
+same-thread profile before exposing a one-shot constructor. Feetech sources,
+protocol 0, the follower canonical/TTY identity, no-handshake raw position reads,
+and no-torque close are pinned; FFmpeg 8.0.1 is path- and hash-pinned and each
+exact named camera can be consumed once. Candidate result schema v2 binds the
+hardware-profile identity. Fixed private success/failure artifacts embed the
+contract and profile and use one exclusive content-addressed artifact per
+session, rejecting class drift, substitution, path escape, and symlinks.
+
+Ninety focused tests pass in both robotics runtimes, source verifiers agree, and
+289 broad tests pass. No production constructor, serial/camera/Studio path,
+policy, simulation replay, training, or paid compute ran. Only local factory,
+private-evidence, and runtime-profile conformance is granted. A separate offline
+production-session orchestrator remains next; the live gate and training lock
+stay closed.
 
 ## Durable State
 

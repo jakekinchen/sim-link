@@ -10,13 +10,13 @@
     "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "2c0b903a72b04f2d83edd5855705992e09712bc1",
-  "last_reviewed_implementation_commit": "79eee894fe3aa60380664bb53821d7ad1482e174",
+  "verified_through_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
+  "last_reviewed_implementation_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
   "source_review": {
-    "commit": "2c0b903a72b04f2d83edd5855705992e09712bc1",
-    "implementation_commit": "79eee894fe3aa60380664bb53821d7ad1482e174",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_052_SOURCE_BOUND_CANDIDATE_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/078-accept-brief-052-source-bound-live-candidate.md"
+    "commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
+    "implementation_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_053_LIVE_EXECUTION_INTERLOCKS_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/079-accept-brief-053-live-execution-interlocks.md"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -31,7 +31,7 @@
   "continuation_run": {
     "started_at": "2026-07-11T12:52:56-05:00",
     "trigger": "owner_proceed_with_next_milestone",
-    "scope": "T16.5c offline static-pose and source-binding continuation through Brief 051",
+    "scope": "T16.5c offline static-pose and source-binding continuation through Brief 053",
     "starting_head": "32c29480a314ce3f731dda0d9a50156c1832da63",
     "live_gate": "closed",
     "training_lock": "closed",
@@ -1171,10 +1171,9 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "053",
-      "latest_verified_brief_id": "052",
-      "completed_brief_ids": ["048", "049", "050", "051", "052"],
-      "result": "Briefs 048-052 are verified and remotely preserved: stable physical source bindings now feed a candidate-only contract and runner that fail closed on gate, lease, source, holder, lifecycle, evidence-class, and authority drift without granting a live bracket or physical proof label",
+      "latest_verified_brief_id": "053",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053"],
+      "result": "Briefs 048-053 are verified and remotely preserved: the candidate-only runner now requires a same-thread on-request runtime proof, exact code-pinned one-shot factories, and immutable one-artifact-per-session private evidence while the live gate remains closed",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1224,7 +1223,8 @@
         "implementation_commit": "79eee894fe3aa60380664bb53821d7ad1482e174",
         "verification_followup_commit": "2c0b903a72b04f2d83edd5855705992e09712bc1",
         "contract_schema_version": "scenesmith.static_pose_live_candidate_contract.v1",
-        "result_schema_version": "scenesmith.static_pose_live_candidate_result.v1",
+        "result_schema_version": "scenesmith.static_pose_live_candidate_result.v2",
+        "hardware_profile_linkage_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
         "accepted_discovery_identity_sha256": "b57fbec85db582fd29978d0fae227a5daee98ef74f80f50b8658cb1024b044b3",
         "follower_usb_identity_sha256": "c5bd66ff2b0350c69ae0bc9b96afd3b2ef2d5ac501b3a3111e36fb35aece02c1",
         "stable_camera_identity_sha256": [
@@ -1247,21 +1247,83 @@
         "focused_test_count_per_runtime": 77,
         "broad_test_count": 276
       },
+      "pinned_live_execution_interlocks": {
+        "implementation_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
+        "hardware_execution_profile_schema_version": "scenesmith.hardware_execution_profile_evidence.v1",
+        "candidate_result_schema_version": "scenesmith.static_pose_live_candidate_result.v2",
+        "private_success_schema_version": "scenesmith.static_pose_live_candidate_private_success.v1",
+        "private_failure_schema_version": "scenesmith.static_pose_live_candidate_private_failure.v1",
+        "project_default_profile": {
+          "sandbox_mode": "workspace-write",
+          "approval_policy": "on-request",
+          "sha256": "977e1b42689eae2e613412dff0e1f8917b0592194017446f843d01bbc5d497f0"
+        },
+        "hardware_supervised_profile": {
+          "sandbox_mode": "danger-full-access",
+          "approval_policy": "on-request",
+          "sha256": "dfce70f4b37aee7a1f1fee5e1c92818ea89e98f25fabbe71e94c11b46b4489fd"
+        },
+        "offline_autonomous_profile": {
+          "sandbox_mode": "danger-full-access",
+          "approval_policy": "never",
+          "sha256": "76c188c5a1ebf6864ac6102740e35cdf27d8524390374d7dd92299482464e933"
+        },
+        "pinned_ffmpeg": {
+          "path": "/opt/homebrew/bin/ffmpeg",
+          "resolved_path": "/opt/homebrew/Cellar/ffmpeg/8.0.1_4/bin/ffmpeg",
+          "version": "8.0.1",
+          "sha256": "0a96da2735695308d964e25fa6f4a0db2e9d24031390360f4c5ff96a4f8938e5"
+        },
+        "active_runtime_sources_required": [
+          "codex_doctor_explicit_hardware_profile",
+          "latest_persisted_turn_context_for_CODEX_THREAD_ID"
+        ],
+        "factory_requirements": [
+          "full_candidate_contract_reverified",
+          "active_same_thread_hardware_profile_reverified",
+          "code_pinned_feetech_sources",
+          "exact_follower_canonical_and_tty_alias_identity",
+          "one_shot_transport_factory",
+          "exact_named_finite_ffmpeg_camera_factory"
+        ],
+        "private_evidence_requirements": [
+          "fixed_success_or_failure_class",
+          "candidate_and_hardware_profile_embedded",
+          "candidate_result_profile_identity_linked",
+          "one_artifact_per_session",
+          "exclusive_create",
+          "content_addressed_path",
+          "symlink_and_path_escape_rejected"
+        ],
+        "current_thread_live_profile_eligible": false,
+        "current_thread_rejection_reason": "active_persisted_turn_context_approval_policy_is_never",
+        "live_candidate_contract_issued": false,
+        "live_candidate_result_observed": false,
+        "private_live_evidence_written": false,
+        "hardware_enumerated": false,
+        "hardware_opened": false,
+        "physical_follower_commanded": false,
+        "focused_test_count_per_runtime": 90,
+        "broad_test_count": 289,
+        "broad_test_duration_seconds": 73.993
+      },
       "test_commands": [
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
-        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_execution_sources.py",
+        "external/leLab/.venv/bin/python scripts/robot_lab/verify_static_pose_live_execution_sources.py",
         "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_candidate_sources.py",
         "./.mujoco_venv/bin/python scripts/robot_lab/migrate_live_manifest_camera_identity.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_calibration_profile.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_static_pose_bracket_fixture.py --verify",
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
-        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/static_pose_live_candidate.py scenesmith/robot_lab/static_pose_bracket.py scenesmith/robot_lab/static_pose_bracket_runtime.py scripts/robot_lab/verify_static_pose_live_candidate_sources.py tests/unit/test_static_pose_live_candidate.py",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/hardware_execution_profile.py scenesmith/robot_lab/static_pose_live_execution.py scenesmith/robot_lab/static_pose_live_candidate.py scripts/robot_lab/verify_static_pose_live_execution_sources.py tests/unit/test_static_pose_live_execution.py tests/unit/test_static_pose_live_candidate.py",
         "git diff --check"
       ],
-      "next_action": "implement and verify Brief 053 exact pinned Feetech/FFmpeg factories, immutable private success/failure evidence, and machine-checked hardware-supervised execution profile with injected fakes only; do not access hardware or transition the live gate",
+      "next_action": "open a separate offline Brief 054 for a single fail-closed production session orchestrator that must persist exactly one private success or failure artifact; do not access hardware or transition the live gate in the current never-policy thread",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
-        "actual_hardware_supervised_on_request_execution_profile",
+        "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
         "separate_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
@@ -1278,7 +1340,10 @@
         "fixture_static_pose_bracket_conformant",
         "fixture_static_pose_bracket_runtime_conformant",
         "static_pose_live_candidate_contract_valid",
-        "source_bound_static_pose_live_candidate_runtime_conformant"
+        "source_bound_static_pose_live_candidate_runtime_conformant",
+        "pinned_static_pose_live_factory_spec_conformant",
+        "private_static_pose_live_candidate_evidence_conformant",
+        "hardware_supervised_runtime_profile_validator_conformant"
       ],
       "authority_not_granted": [
         "static_pose_bracketed_observation",
