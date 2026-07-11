@@ -239,8 +239,8 @@ def _zero_holder_snapshot() -> dict:
 
 def _png_frame(
     *,
-    width: int = 4,
-    height: int = 3,
+    width: int = 640,
+    height: int = 480,
     marker: bytes = b"x",
     valid_compression: bool = True,
 ) -> bytes:
@@ -1063,8 +1063,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             camera.read()
         camera.release()
 
-        self.assertEqual(first["width"], 4)
-        self.assertEqual(first["height"], 3)
+        self.assertEqual(first["width"], 640)
+        self.assertEqual(first["height"], 480)
         self.assertEqual(first["channels"], 3)
         self.assertNotEqual(first["frame_bytes"], second["frame_bytes"])
         self.assertEqual(invocation["command"].count("-framerate"), 1)
@@ -1125,6 +1125,13 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         cases = (
             (valid[:-5], b"", 0, "truncated"),
             (valid + b"extra", b"", 0, "extra trailing"),
+            (
+                _png_frame(width=800, height=600, marker=b"one")
+                + _png_frame(width=800, height=600, marker=b"two"),
+                b"",
+                0,
+                "dimensions drifted",
+            ),
             (
                 _png_frame(valid_compression=False) + _png_frame(),
                 b"",
@@ -1684,6 +1691,60 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(len(captured.exception.exceptions), 2)
         self.assertIn("read", str(captured.exception.exceptions[0]))
         self.assertIn("release", str(captured.exception.exceptions[1]))
+
+    def test_frame_and_manifest_dimensions_must_match_signed_camera_mode(self):
+        contract = _execution_contract()
+        frames = capture_finite_camera_frames(
+            contract,
+            project_state=PROJECT_STATE,
+            now="2026-07-11T04:47:00-05:00",
+            camera_factory=lambda camera: _FakeCamera(camera["index"]),
+            monotonic_ns=_TickingClock(start=2_000_000_000),
+            wall_time=lambda: "2026-07-11T04:47:00-05:00",
+        )
+        servo_result = execute_live_servo_census(
+            contract,
+            project_state=PROJECT_STATE,
+            now="2026-07-11T04:47:00-05:00",
+            bus_factory=lambda census_contract: _FakeBus(),
+            monotonic_ns=_TickingClock(),
+        )
+        changed_frames = copy.deepcopy(frames)
+        changed_frames[0]["width"] = 800
+        with self.assertRaisesRegex(ValueError, "dimensions drifted"):
+            build_private_observation_evidence(
+                execution_contract=contract,
+                servo_result=servo_result,
+                frames=changed_frames,
+                pre_open_discovery=_discovery(),
+                post_close_discovery=_discovery(),
+                pre_open_serial_holder_snapshot=_zero_holder_snapshot(),
+                post_close_serial_holder_snapshot=_zero_holder_snapshot(),
+            )
+
+        private = build_private_observation_evidence(
+            execution_contract=contract,
+            servo_result=servo_result,
+            frames=frames,
+            pre_open_discovery=_discovery(),
+            post_close_discovery=_discovery(),
+            pre_open_serial_holder_snapshot=_zero_holder_snapshot(),
+            post_close_serial_holder_snapshot=_zero_holder_snapshot(),
+        )
+        tampered_private = copy.deepcopy(private)
+        tampered_private["frames"][0]["width"] = 800
+        tampered_private = sign_payload(tampered_private)
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            refs = write_private_observation_bundle(
+                output_directory=Path(temporary_directory) / "bundle",
+                private_evidence=tampered_private,
+                frames=frames,
+            )
+            with self.assertRaisesRegex(ValueError, "dimensions drifted"):
+                build_redacted_observation_manifest(
+                    private_evidence=tampered_private,
+                    private_bundle_refs=refs,
+                )
 
     def test_camera_timestamp_and_private_frame_hash_fail_closed(self):
         contract = _execution_contract()

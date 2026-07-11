@@ -1690,6 +1690,13 @@ def build_redacted_observation_manifest(
         ]
         if len(matching_audits) != 1:
             raise ValueError("Private camera backend audit identity is ambiguous")
+        matching_frames = [
+            frame
+            for frame in private_evidence["frames"]
+            if frame["camera"]["index"] == camera["index"]
+        ]
+        for frame in matching_frames:
+            _require_frame_dimensions_match_camera(frame, camera=camera)
         camera_frames = [
             {
                 key: frame[key]
@@ -1705,8 +1712,7 @@ def build_redacted_observation_manifest(
                     "frame_sha256",
                 )
             }
-            for frame in private_evidence["frames"]
-            if frame["camera"]["index"] == camera["index"]
+            for frame in matching_frames
         ]
         cameras.append(
             {
@@ -2483,6 +2489,11 @@ class FFmpegNamedFiniteCamera:
                 stdout,
                 expected_frame_count=self._expected_frame_count,
             )
+            for frame in parsed:
+                _require_frame_dimensions_match_camera(
+                    frame,
+                    camera=self._camera,
+                )
         except BaseException:
             self._set_failure_context(
                 stage="png_validation",
@@ -3310,6 +3321,26 @@ def _normalize_camera_input_mode(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _require_frame_dimensions_match_camera(
+    frame: dict[str, Any],
+    *,
+    camera: dict[str, Any],
+) -> None:
+    if not isinstance(frame, dict):
+        raise ValueError("Captured camera frame metadata is malformed")
+    input_mode = _normalize_camera_input_mode(camera.get("input_mode"))
+    dimensions = (frame.get("width"), frame.get("height"))
+    if any(
+        isinstance(value, bool) or not isinstance(value, int) or value <= 0
+        for value in dimensions
+    ):
+        raise ValueError("Captured camera frame dimensions are malformed")
+    if dimensions != (input_mode["width"], input_mode["height"]):
+        raise ValueError(
+            "Captured camera frame dimensions drifted from the signed input mode"
+        )
+
+
 def _merge_serial_aliases(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     groups: dict[tuple[Any, ...], list[dict[str, Any]]] = {}
     for record in records:
@@ -3632,6 +3663,7 @@ def _verify_captured_frames(
             frame_bytes
         ).hexdigest() != frame.get("frame_sha256"):
             raise ValueError("Captured frame content hash is invalid")
+        _require_frame_dimensions_match_camera(frame, camera=camera)
         _verify_camera_backend_audit(
             frame.get("camera_backend_audit"),
             camera=camera,
