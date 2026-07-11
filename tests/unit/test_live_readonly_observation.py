@@ -296,6 +296,14 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(identity["usb"]["serial_number"], "5B3D0406411")
         self.assertEqual(identity["bus"]["protocol_version"], 0)
 
+        missing_optional_label = copy.deepcopy(discovery)
+        missing_optional_label["serial_candidates"][0]["manufacturer"] = None
+        missing_optional_label = sign_payload(missing_optional_label)
+        self.assertEqual(
+            resolve_follower_identity(missing_optional_label),
+            identity,
+        )
+
         ambiguous = copy.deepcopy(discovery)
         duplicate = copy.deepcopy(ambiguous["serial_candidates"][0])
         duplicate["aliases"] = []

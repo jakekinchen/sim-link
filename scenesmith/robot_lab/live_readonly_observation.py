@@ -252,7 +252,10 @@ def resolve_follower_identity(discovery: dict[str, Any]) -> dict[str, Any]:
     if len(matches) != 1:
         raise ValueError("Discovery must resolve exactly one pinned follower candidate")
     follower = matches[0]
-    for field in ("serial_number", "manufacturer", "product", "location", "hwid"):
+    # macOS may omit the descriptive manufacturer label even when the stable
+    # VID/PID/serial/path/location/HWID identity is complete. Keep that label in
+    # the signed discovery record, but do not make it an authority prerequisite.
+    for field in ("serial_number", "product", "location", "hwid"):
         require_nonblank(follower.get(field), label=f"follower discovery {field}")
     for field in ("vid", "pid"):
         value = follower.get(field)
