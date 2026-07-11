@@ -123,6 +123,18 @@ transition commit is confirmed on origin. The window is
 limit is one, both selected modes must be signed 640x480 or larger, decoded
 dimensions must match exactly, and the gate must reclose on every outcome.
 
+Attempt 006 consumed that session and is accepted. Fresh discovery tolerated
+numeric index churn while preserving exact identities; contract `cf1ad99c...`
+selected RealSense UYVY 640x480 and C922 YUYV 640x480. Manifest
+`eff3c824...` independently verifies four matching PNGs, 54 allowlisted reads,
+all six `Torque_Enable=0`, zero writes/torque changes/motion, no-torque close,
+zero holders across both aliases, and complete cleanup. The gate reclosed at
+`2026-07-11T11:24:24-05:00`. T16.5b grants only
+`live_read_only_census_observed` and `physical_observation_capture`. Its
+sequential host-timestamp evidence is not synchronized or policy-shadow-input-
+valid. T16.5c remains a separate no-actuation prerequisite; no motion or
+physical qualification is granted.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`

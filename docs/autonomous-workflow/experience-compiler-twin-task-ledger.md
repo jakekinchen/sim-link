@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; reviewer 071 authorizes one final signed-640x480 exact-dimension session after remote transition confirmation
+current_task: T16.5b verified by attempt 006; live gate closed; T16.5c pending as a separate offline/no-actuation slice
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: e68068a remote; actual discovery selects C922 yuyv422 640x480 and RealSense uyvy422 640x480; 53 focused, 33 LeLab-runtime camera, and 232 broad tests
-remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
+evidence: manifest eff3c824...; private 125de28f...; contract cf1ad99c...; four exact 640x480 PNGs; 54 reads; six Torque_Enable=0; both aliases zero; no writes/torque/motion; cleanup complete
+remaining: T16.5c parsed calibration/static-pose-bracket/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none for one final bounded read-only session; gate becomes effective only after remote transition confirmation
-next_step: execute exactly one final discovery/holder/lease/contract/census/camera session, reclose on every outcome, then preserve and close out
+blockers: T16.5b none; T16.5c calibration semantics and static-pose-bracketed synchronized-enough observation remain unverified
+next_step: preserve attempt-006 acceptance; begin T16.5c only as a separate offline slice; do not reopen hardware or motion
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: execute exactly one final discovery/holder/lease/contract/census/came
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 047 `e68068a` and closeout `4b8d1d5` remote; reviewer 071 permits exactly one final signed-640x480 exact-dimension session after gate commit |
+| T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; manifest `eff3c824...`; private `125de28f...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; reviewer 072; sequential evidence only |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,20 @@ next_step: execute exactly one final discovery/holder/lease/contract/census/came
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5b attempt 006 accepted
+
+```text
+State: verified; live gate closed at 2026-07-11T11:24:24-05:00
+Discovery/contract: b57fbec8... / cf1ad99c...; fresh lease 3d9494b6...; RealSense uyvy422 640x480@30 and C922 yuyv422 640x480@30
+Servo: 54 reads, zero retries/writes/torque changes/motion; all six Torque_Enable=0; no-torque close
+Camera: four PNGs, all decoded 640x480 and exact-mode matched; two finite subprocesses; release/wait success; no stderr, terminate, kill, or residual process
+Ownership: both signed serial aliases [0,0] before and after; snapshot b33a7cc0...
+Evidence: tracked manifest eff3c824.../file cd4120f0...; private 125de28f.../file 02a264bd...; all bundle refs independently rehashed
+Labels: live_read_only_census_observed; physical_observation_capture
+Limits: sequential host receive intervals only; not synchronized, not policy-shadow-input-valid, not physical qualification, not motion authority
+Next: T16.5c offline parsed calibration, static-pose bracket design/capture gate, PI0.5 preprocessing/shadow, matched MuJoCo replay; no actuation
+```
 
 ### 2026-07-11 - Brief 047 signed 640x480 mode floor verified offline
 

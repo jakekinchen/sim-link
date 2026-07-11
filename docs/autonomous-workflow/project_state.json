@@ -12,9 +12,9 @@
   "verified_through_commit": "e68068a6331723e46f09edd82531b964dffd9f5c",
   "last_reviewed_implementation_commit": "e68068a6331723e46f09edd82531b964dffd9f5c",
   "source_review": {
-    "commit": "4b8d1d5f72d0f5552906a3e896a0de4d8c2f99f3",
-    "decision": "OPEN_ONE_FINAL_FINITE_SIGNED_640X480_EXACT_DIMENSION_SESSION_AFTER_REMOTE_CONFIRMATION",
-    "reviewer_decision": "docs/reviewer-messages/071-open-final-live-gate-after-brief-047.md"
+    "commit": "68e11b952638cf1c9a7150a0c9d5211abf79ddbc",
+    "decision": "ACCEPT_LIVE_ATTEMPT_006_FINITE_READ_ONLY_CENSUS_AND_PHYSICAL_OBSERVATION_CAPTURE",
+    "reviewer_decision": "docs/reviewer-messages/072-accept-live-attempt-006.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -129,7 +129,7 @@
   },
   "training_lock": "closed",
   "current_milestone": "M16",
-  "current_task": "T16.5b",
+  "current_task": "T16.5c",
   "next_eligible_task": "T16.5b",
   "tasks": {
     "T16.1": {
@@ -376,7 +376,7 @@
       ]
     },
     "T16.5b": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T16.5a"],
       "brief_id": "039",
       "source_commit": "16d24ea",
@@ -393,9 +393,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "071",
-      "result": "Reviewer 071 authorizes exactly one final finite signed-640x480 exact-dimension session after the scoped transition is confirmed on origin",
-      "execution_note": "The transition performs no hardware access and grants no label; the session must use fresh discovery and lease, both-alias zero-holder proofs, contract-v3 modes at least 640x480, exact decoded dimensions, all six Torque_Enable zero, v4 evidence, and immediate reclosure",
+      "live_gate_review_decision_id": "072",
+      "result": "Live attempt 006 is accepted for live_read_only_census_observed and physical_observation_capture: both exact signed 640x480 modes match four decoded PNGs, all six Torque_Enable values are zero, every operation/holder/hash/cleanup check passes, and the live gate is closed",
+      "execution_note": "The accepted evidence is finite sequential physical observation only; it is not synchronized, policy-shadow-input-valid, physical qualification, transfer readiness, autonomous policy success, or motion authority",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
@@ -648,6 +648,70 @@
           ],
           "post_failure_ffmpeg_process_count": 0,
           "physical_follower_commanded": false
+        },
+        {
+          "attempt_id": "t16-5b-live-attempt-006",
+          "session_id": "t16-5b-20260711-1124-cdt",
+          "started_at": "2026-07-11T11:23:44-05:00",
+          "completed_at": "2026-07-11T11:24:19-05:00",
+          "gate_closed_at": "2026-07-11T11:24:24-05:00",
+          "discovery_private_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-1124-cdt/discovery.json",
+          "discovery_identity_sha256": "b57fbec85db582fd29978d0fae227a5daee98ef74f80f50b8658cb1024b044b3",
+          "discovery_file_sha256": "3372b817e7e39844130daa0b6fd46843df98dca17abf82ed791e661d4d3caba5",
+          "discovery_size_bytes": 47511,
+          "contract_private_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-1124-cdt/contract.json",
+          "contract_identity_sha256": "cf1ad99cce746cafcf6da3e75a742af77c8ba7e8f864c376b663da5a9a856cf6",
+          "contract_file_sha256": "1cd8528f996a75b84f6eb8894113ba31d266c982412aaa92d982156b80e9c723",
+          "contract_size_bytes": 60232,
+          "presence_lease_identity_sha256": "3d9494b696ac3525193fcf9a0cb31ae4c9dd0244c0e5fd29e7658a04cdd2c2dd",
+          "live_census_contract_identity_sha256": "f2945445a53224261d59c9ff9e65a4674a359349e6148b45bf2ebe25fb912261",
+          "private_artifact": "outputs/robot_lab/live_readonly/private/t16-5b-20260711-1124-cdt/capture/private_observation.json",
+          "private_identity_sha256": "125de28fbc9f6a66177e0bc83284728667c2324da75c1ef748a87c814c3d9d82",
+          "private_file_sha256": "02a264bd2dc49a0efcd1e0601afdcb30277fcece4032e11c3537c7f7de8cc2dc",
+          "private_size_bytes": 33749,
+          "tracked_manifest": "configurations/robot_lab/pi05_live_readonly_observation.redacted.json",
+          "manifest_identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
+          "manifest_file_sha256": "cd4120f0eca6b8e53de7cbc4bafb8e1a74bb5f7119b2e4db0570a401b29e9a40",
+          "manifest_size_bytes": 8860,
+          "operation_counts": {
+            "construct_attempts": 1,
+            "construct_successes": 1,
+            "connect_attempts": 1,
+            "connect_successes": 1,
+            "read_attempts": 54,
+            "read_successes": 54,
+            "read_retries": 0,
+            "close_attempts": 1,
+            "close_successes": 1,
+            "motor_register_writes": 0,
+            "torque_changes": 0,
+            "motion_commands": 0,
+            "unexpected_operations": 0
+          },
+          "torque_enable_raw_values": [0, 0, 0, 0, 0, 0],
+          "per_path_holder_counts": [0, 0],
+          "holder_snapshot_identity_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
+          "camera_modes": [
+            {"camera_index": 0, "pixel_format": "uyvy422", "width": 640, "height": 480, "framerate_fps": 30},
+            {"camera_index": 1, "pixel_format": "yuyv422", "width": 640, "height": 480, "framerate_fps": 30}
+          ],
+          "decoded_frame_dimensions": [[640, 480], [640, 480], [640, 480], [640, 480]],
+          "frame_sha256": [
+            "6f1c01849aad643a5b5d763bf89dd11ffd801b68615b4e0c252fa8ba1a2a91ec",
+            "c77e4c7e54a40a9efdd3ccc3c3ecfc73f8b993e2fbe5adc64e6264bfa72bbbdc",
+            "b859ff8b4ac21690dc7ca67445f7bc2310a32be35d5ee823fe79473f362567e4",
+            "caab2f5d943fce53ccaaf05cf2b5c7e5ecf737f8088fabf2cc80f207dff0f544"
+          ],
+          "status": "accepted",
+          "proof_labels_granted": [
+            "live_read_only_census_observed",
+            "physical_observation_capture"
+          ],
+          "timestamp_scope": "host_ffmpeg_batch_receive_intervals_not_hardware_clock_sync",
+          "synchronized_observation": false,
+          "policy_shadow_input_valid": false,
+          "post_failure_ffmpeg_process_count": 0,
+          "physical_follower_commanded": false
         }
       ],
       "virtual_disconnect_proof": {
@@ -684,7 +748,7 @@
         "exclusive_bus_ownership_proven": true,
         "canonical_path_zero_holder_observed": true,
         "all_signed_aliases_checked": true,
-        "last_revalidated_at": "2026-07-11T11:05:47-05:00",
+        "last_revalidated_at": "2026-07-11T11:24:24-05:00",
         "last_revalidated_holder_count": 0,
         "last_revalidated_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
         "read_only_server_status_observed_at": "2026-07-11T08:57:17-05:00",
@@ -693,7 +757,7 @@
         "routing_state_sha256": "620cb845cb8f1507263fdf7b6aec651a69e4b028d90628c935b0af0b533fdcb4"
       },
       "camera_capture_backend": {
-        "state": "offline_verified_exact_output_dimension_enforcement",
+        "state": "live_verified_signed_640x480_exact_dimensions",
         "backend": "ffmpeg_named_avfoundation",
         "explicit_mode_binding_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
         "signed_per_camera_mode_binding_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
@@ -761,6 +825,17 @@
           "tracked_manifest_removed": true,
           "accepted_proof_labels": []
         },
+        "latest_accepted_live_evidence": {
+          "attempt_id": "t16-5b-live-attempt-006",
+          "manifest_identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
+          "private_identity_sha256": "125de28fbc9f6a66177e0bc83284728667c2324da75c1ef748a87c814c3d9d82",
+          "camera_count": 2,
+          "frame_count": 4,
+          "all_decoded_dimensions": [640, 480],
+          "exact_dimensions_verified": true,
+          "synchronized_observation": false,
+          "policy_shadow_input_valid": false
+        },
         "failure_diagnostics": {
           "state": "offline_verified",
           "implementation_commit": "2d1cd97d79c0d081178e109b10d2fd33d38afe34",
@@ -803,13 +878,13 @@
         "required_post_close_holder_count": 0,
         "stops_or_signals_holders": false,
         "last_observed_holder_count": 0,
-        "last_observed_at": "2026-07-11T11:05:47-05:00",
+        "last_observed_at": "2026-07-11T11:24:24-05:00",
         "last_observed_per_path_holder_counts": [0, 0],
         "last_observed_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
         "current_gate_result": "verified_zero_holders_across_all_signed_aliases"
       },
       "torque_enable_gate": {
-        "state": "live_values_verified_in_rejected_attempt_no_session_label",
+        "state": "live_verified_accepted_session",
         "implementation_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
         "register": "Torque_Enable",
         "width_bytes": 1,
@@ -824,6 +899,9 @@
         "last_rejected_attempt_read_successes": 54,
         "last_rejected_attempt_full_servo_result_retained": true,
         "last_rejected_attempt_torque_enable_raw_values": [0, 0, 0, 0, 0, 0],
+        "accepted_attempt_id": "t16-5b-live-attempt-006",
+        "accepted_private_evidence_identity_sha256": "125de28fbc9f6a66177e0bc83284728667c2324da75c1ef748a87c814c3d9d82",
+        "accepted_torque_enable_raw_values": [0, 0, 0, 0, 0, 0],
         "future_private_failure_full_servo_result_retained": true,
         "future_private_failure_schema_version": "scenesmith.live_readonly_capture_failure_private.v3",
         "configuration_or_torque_writes": 0,
@@ -833,12 +911,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "open",
+      "live_gate": "closed",
       "live_gate_opened_at": "2026-07-11T11:23:00-05:00",
       "live_gate_valid_until": "2026-07-11T11:38:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 0,
-      "live_gate_reconsideration_state": "one_final_signed_640x480_exact_dimension_session_authorized_after_remote_confirmation",
+      "live_gate_sessions_started": 1,
+      "live_gate_closed_at": "2026-07-11T11:24:24-05:00",
+      "live_gate_close_reason": "live_attempt_006_accepted_and_closed",
+      "live_gate_reconsideration_state": "t16_5b_verified_gate_closed",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -890,6 +970,12 @@
           "at": "2026-07-11T11:23:00-05:00",
           "review_decision_id": "071",
           "result": "one_final_signed_640x480_exact_dimension_session_authorized"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-11T11:24:24-05:00",
+          "review_decision_id": "072",
+          "reason": "live_attempt_006_accepted_and_closed"
         }
       ],
       "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
@@ -907,7 +993,10 @@
         "owner_present": true,
         "owner_resume_authority": true
       },
-      "proof_labels_granted": [],
+      "proof_labels_granted": [
+        "live_read_only_census_observed",
+        "physical_observation_capture"
+      ],
       "conditional_authority": [
         "live_hardware_discovery_after_T16.5a",
         "live_read_only_census_after_T16.5a",
@@ -1023,10 +1112,8 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "after remote transition confirmation execute exactly one final finite signed-640x480 exact-dimension session and immediately reclose on every outcome",
+      "next_action": "begin T16.5c only as a separate offline slice: parsed calibration validation, static-pose-bracketed observation, PI0.5 preprocessing/shadow, and matched MuJoCo replay with no actuation",
       "authority_not_granted": [
-        "live_read_only_census_observed",
-        "physical_observation_capture",
         "configuration_write",
         "torque_write_beyond_exact_owner_authorized_virtual_disconnect",
         "register_write",
@@ -1050,7 +1137,9 @@
         "signed_per_camera_supported_modes_offline_verified",
         "exact_pre_input_pixel_format_size_and_framerate_offline_verified",
         "exact_decoded_output_dimensions_offline_verified",
-        "signed_640x480_minimum_camera_modes_offline_verified"
+        "signed_640x480_minimum_camera_modes_offline_verified",
+        "live_read_only_census_observed",
+        "physical_observation_capture"
       ]
     },
     "T16.5c": {
@@ -1066,7 +1155,7 @@
     "T16.6": {
       "state": "pending",
       "depends_on": ["T16.5a", "T16.5b", "T16.5c"],
-      "result": "final operator confirmation granted for one exact initial micro-motion permit; offline and read-only prerequisites still pending",
+      "result": "final operator confirmation granted for one exact initial micro-motion permit; T16.5c and all permit-specific calibration, pose, limit, telemetry, watchdog, and shutdown prerequisites remain pending",
       "no_second_prompt_required": true,
       "pre_execution_requirements": [
         "T16.5a_T16.5b_T16.5c_verified",

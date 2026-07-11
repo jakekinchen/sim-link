@@ -1,0 +1,252 @@
+{
+  "calibration_file_sha256": "192404b6d3c1337495d69649969459aa9d3f66816cd916c67da2588815e93ec4",
+  "camera_framerate_fps": 30,
+  "camera_operation_counts": {
+    "capture_property_writes": 0,
+    "construct_attempts": 2,
+    "construct_successes": 2,
+    "continuous_recording_sessions": 0,
+    "open_attempts": 2,
+    "open_successes": 2,
+    "read_attempts": 4,
+    "read_successes": 4,
+    "release_attempts": 2,
+    "release_successes": 2,
+    "subprocess_communicate_attempts": 2,
+    "subprocess_communicate_successes": 2,
+    "subprocess_kill_attempts": 0,
+    "subprocess_kill_successes": 0,
+    "subprocess_start_attempts": 2,
+    "subprocess_start_successes": 2,
+    "subprocess_terminate_attempts": 0,
+    "subprocess_terminate_successes": 0,
+    "subprocess_wait_attempts": 2,
+    "subprocess_wait_successes": 2
+  },
+  "cameras": [
+    {
+      "camera_backend_audit_sha256": "0b81b45a09257343bf7417d847672fdbee312fd6763b5ea79261093a027eabaf",
+      "camera_identity_sha256": "e2b9b6eb486fcef57503e1ac567f67b271435dd2b6212fcbb82ebbb8d088903a",
+      "frames": [
+        {
+          "channels": 3,
+          "encoding": "png",
+          "frame_index": 0,
+          "frame_sha256": "6f1c01849aad643a5b5d763bf89dd11ffd801b68615b4e0c252fa8ba1a2a91ec",
+          "height": 480,
+          "host_wall_time": "2026-07-11T11:24:12-05:00",
+          "receive_finished_monotonic_ns": 362872472329000,
+          "receive_started_monotonic_ns": 362871606777375,
+          "width": 640
+        },
+        {
+          "channels": 3,
+          "encoding": "png",
+          "frame_index": 1,
+          "frame_sha256": "c77e4c7e54a40a9efdd3ccc3c3ecfc73f8b993e2fbe5adc64e6264bfa72bbbdc",
+          "height": 480,
+          "host_wall_time": "2026-07-11T11:24:12-05:00",
+          "receive_finished_monotonic_ns": 362872472329000,
+          "receive_started_monotonic_ns": 362871606777375,
+          "width": 640
+        }
+      ],
+      "input_mode": {
+        "framerate_fps": 30,
+        "height": 480,
+        "pixel_format": "uyvy422",
+        "width": 640
+      }
+    },
+    {
+      "camera_backend_audit_sha256": "760fd79c65b96d5aa35fa944d3ed3e14c9aad40b9277e966afe945f066726220",
+      "camera_identity_sha256": "e3b8b82c1ed6436c4fd9a7e01fadf08cb9ba3248bda26ebafa43bb5190c2d6a7",
+      "frames": [
+        {
+          "channels": 3,
+          "encoding": "png",
+          "frame_index": 0,
+          "frame_sha256": "b859ff8b4ac21690dc7ca67445f7bc2310a32be35d5ee823fe79473f362567e4",
+          "height": 480,
+          "host_wall_time": "2026-07-11T11:24:13-05:00",
+          "receive_finished_monotonic_ns": 362873508260958,
+          "receive_started_monotonic_ns": 362872482516208,
+          "width": 640
+        },
+        {
+          "channels": 3,
+          "encoding": "png",
+          "frame_index": 1,
+          "frame_sha256": "caab2f5d943fce53ccaaf05cf2b5c7e5ecf737f8088fabf2cc80f207dff0f544",
+          "height": 480,
+          "host_wall_time": "2026-07-11T11:24:13-05:00",
+          "receive_finished_monotonic_ns": 362873508260958,
+          "receive_started_monotonic_ns": 362872482516208,
+          "width": 640
+        }
+      ],
+      "input_mode": {
+        "framerate_fps": 30,
+        "height": 480,
+        "pixel_format": "yuyv422",
+        "width": 640
+      }
+    }
+  ],
+  "discovery_stability": "exact_serial_and_stable_camera_identity_match_numeric_index_churn_allowed",
+  "evidence_mode": "tracked_redacted_physical_read_only_manifest",
+  "hardware_opened": true,
+  "identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
+  "manifest_name": "pi05_live_readonly_observation_redacted",
+  "max_host_observed_skew_ns": 2252560146,
+  "operation_counts": {
+    "close_attempts": 1,
+    "close_successes": 1,
+    "connect_attempts": 1,
+    "connect_successes": 1,
+    "construct_attempts": 1,
+    "construct_successes": 1,
+    "motion_commands": 0,
+    "motor_register_writes": 0,
+    "read_attempts": 54,
+    "read_retries": 0,
+    "read_successes": 54,
+    "torque_changes": 0,
+    "unexpected_operations": 0
+  },
+  "physical_follower_commanded": false,
+  "post_close_discovery_identity_sha256": "32bcb80c693d2308774e1a3152a8ecc700f173d634d2e17c1c110e337fee4b2e",
+  "pre_open_discovery_identity_sha256": "ffd7030aabd3e97c60e0eb607b4de6356bf18bb6361af93f95467517291c4c60",
+  "privacy": {
+    "raw_camera_identity_included": false,
+    "raw_device_path_included": false,
+    "raw_frame_bytes_included": false,
+    "raw_usb_serial_included": false
+  },
+  "private_bundle_refs": {
+    "evidence": {
+      "filename": "private_observation.json",
+      "sha256": "02a264bd2dc49a0efcd1e0601afdcb30277fcece4032e11c3537c7f7de8cc2dc",
+      "size_bytes": 33749
+    },
+    "frames": [
+      {
+        "filename": "camera-0-frame-0.png",
+        "sha256": "6f1c01849aad643a5b5d763bf89dd11ffd801b68615b4e0c252fa8ba1a2a91ec",
+        "size_bytes": 469199
+      },
+      {
+        "filename": "camera-0-frame-1.png",
+        "sha256": "c77e4c7e54a40a9efdd3ccc3c3ecfc73f8b993e2fbe5adc64e6264bfa72bbbdc",
+        "size_bytes": 469211
+      },
+      {
+        "filename": "camera-1-frame-0.png",
+        "sha256": "b859ff8b4ac21690dc7ca67445f7bc2310a32be35d5ee823fe79473f362567e4",
+        "size_bytes": 424846
+      },
+      {
+        "filename": "camera-1-frame-1.png",
+        "sha256": "caab2f5d943fce53ccaaf05cf2b5c7e5ecf737f8088fabf2cc80f207dff0f544",
+        "size_bytes": 422693
+      }
+    ]
+  },
+  "private_evidence_identity_sha256": "125de28fbc9f6a66177e0bc83284728667c2324da75c1ef748a87c814c3d9d82",
+  "proof_labels": [
+    "live_read_only_census_observed",
+    "physical_observation_capture"
+  ],
+  "qualification_scope": "physical_observation",
+  "schema_version": "scenesmith.live_readonly_observation_manifest.v4",
+  "serial_identity_holder_evidence": {
+    "post_close": {
+      "deduplicated_holder_count": 0,
+      "normalized_holder_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "path_count": 2,
+      "path_identity_sha256": [
+        "5f995975640aa3f2903d84115d5e13176c7feb54106ad485af6a2e4b1235e1fc",
+        "fc22519fd023f984f19702d0a3263ad2a7996b78b34d970086f2a21d78d908a7"
+      ],
+      "paths_all_existed": true,
+      "per_path_holder_counts": [
+        0,
+        0
+      ],
+      "per_path_holder_snapshot_sha256": [
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      ],
+      "serial_identity_sha256": "7b7978a3c03a8772b80b0e15a41aae2c0b1bcf907fd8364b24f5b37903e51154",
+      "snapshot_identity_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c"
+    },
+    "pre_open": {
+      "deduplicated_holder_count": 0,
+      "normalized_holder_snapshot_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "path_count": 2,
+      "path_identity_sha256": [
+        "5f995975640aa3f2903d84115d5e13176c7feb54106ad485af6a2e4b1235e1fc",
+        "fc22519fd023f984f19702d0a3263ad2a7996b78b34d970086f2a21d78d908a7"
+      ],
+      "paths_all_existed": true,
+      "per_path_holder_counts": [
+        0,
+        0
+      ],
+      "per_path_holder_snapshot_sha256": [
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      ],
+      "serial_identity_sha256": "7b7978a3c03a8772b80b0e15a41aae2c0b1bcf907fd8364b24f5b37903e51154",
+      "snapshot_identity_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c"
+    }
+  },
+  "servo_identity": [
+    {
+      "firmware_version": "3.9",
+      "joint_name": "shoulder_pan",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 1
+    },
+    {
+      "firmware_version": "3.9",
+      "joint_name": "shoulder_lift",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 2
+    },
+    {
+      "firmware_version": "3.9",
+      "joint_name": "elbow_flex",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 3
+    },
+    {
+      "firmware_version": "3.9",
+      "joint_name": "wrist_flex",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 4
+    },
+    {
+      "firmware_version": "3.9",
+      "joint_name": "wrist_roll",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 5
+    },
+    {
+      "firmware_version": "3.9",
+      "joint_name": "gripper",
+      "model": "sts3215",
+      "model_number": 777,
+      "servo_id": 6
+    }
+  ],
+  "servo_observation_sha256": "ef8ca2188b78a2a2e03306787279ac74d1389c8b919174439e05d2243c6e88db",
+  "session_id": "t16-5b-20260711-1124-cdt",
+  "timestamp_scope": "host_ffmpeg_batch_receive_intervals_not_hardware_clock_sync",
+  "usb_identity_sha256": "c5bd66ff2b0350c69ae0bc9b96afd3b2ef2d5ac501b3a3111e36fb35aece02c1"
+}
