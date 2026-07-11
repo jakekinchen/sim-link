@@ -6,7 +6,8 @@
     "total_duration_hours": 10,
     "no_new_major_slice_after": "2026-07-11T11:44:07-05:00",
     "hard_closeout": "2026-07-11T12:14:07-05:00",
-    "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
+    "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00",
+    "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
   "verified_through_commit": "700be05468c15e3660bf481931f77e49af49d527",
@@ -15,6 +16,16 @@
     "commit": "700be05468c15e3660bf481931f77e49af49d527",
     "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_048_SIGNED_CALIBRATION_PROFILE_OFFLINE_LIVE_GATE_CLOSED",
     "reviewer_decision": "docs/reviewer-messages/073-accept-brief-048-calibration-profile.md"
+  },
+  "closeout_review": {
+    "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
+    "evidence_anchor": 100,
+    "recorded_at": "2026-07-11T11:44:39-05:00",
+    "pre_closeout_head": "7100c1cf75f4f50771140893a0eefb1ba8e687e6",
+    "reviewer_decision": "docs/reviewer-messages/074-overnight-closeout.md",
+    "session_log": "docs/session-logs/078-overnight-authority-twin-closeout.md",
+    "reason": "the no-new-major-slice cutoff was reached with Brief 048 verified; remaining T16.5c work requires a new reviewed slice and T16.6 prerequisites are incomplete",
+    "final_head_derived_at_runtime": true
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",

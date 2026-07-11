@@ -23,6 +23,8 @@ proof states must remain distinct.
 - Actual start: `2026-07-11T02:14:07-05:00`.
 - No new major slice after: `2026-07-11T11:44:07-05:00`.
 - Hard closeout: `2026-07-11T12:14:07-05:00`.
+- Closeout recorded: `2026-07-11T11:44:39-05:00`, after the no-new-major-
+  slice cutoff and before the hard deadline.
 
 ## Current Milestone
 

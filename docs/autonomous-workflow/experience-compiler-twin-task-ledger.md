@@ -5,6 +5,7 @@ Updated: 2026-07-11
 ```text
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
+run_state: closeout recorded 2026-07-11T11:44:39-05:00; T16.5c remains in progress for the next reviewed session
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress; Brief 048 signed parsed calibration profile verified and remote at 700be05
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
@@ -130,6 +131,19 @@ next_step: after closeout, open an offline static-pose-bracket brief; do not reo
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Overnight authority/twin run closeout
+
+```text
+State: scheduled closeout after the 11:44:07 no-new-major-slice cutoff; T16.5c remains in progress
+Verified tasks: T16.2b-A central composer; T16.4b production compiler on fixture evidence; T16.2b computed qualification on fixture evidence; T16.5a offline no-write conformance; T16.5b live read-only census/capture
+Latest partial: Brief 048 signed calibration profile b360b4f6... verified and remote at 700be05; canonical closeout remote through 7100c1c
+Accepted physical labels: live_read_only_census_observed; physical_observation_capture
+Authority withheld: synchronized/policy-valid observation, policy_shadow, motion, physical qualification/transfer, promotion, training
+Safety: live gate closed; training lock closed; follower remained virtually disconnected with torque reported off; no motion command was sent
+Remaining: static-pose bracket and coordinate validation; PI0.5 preprocessing/shadow; matched MuJoCo replay; only then separately gated T16.6 permit work
+Next: open one offline static-pose-bracket/coordinate-contract brief in a new session; do not inherit a live session or motion permit
+```
 
 ### 2026-07-11 - Brief 048 signed calibration profile verified offline
 
