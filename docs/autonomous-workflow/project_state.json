@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "e1d59cacecf6306088382493b1bf5b7d486b6ad8",
-  "last_reviewed_commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
+  "current_head_commit": "a93ff057f8cf4f966d4edc8dc0098c3526a14def",
+  "last_reviewed_commit": "a93ff057f8cf4f966d4edc8dc0098c3526a14def",
   "source_review": {
-    "commit": "c0b96291e27c5612016d9451b6cbc8f3b5c320e9",
-    "decision": "CONTINUE_T16_4B",
-    "reviewer_decision": "docs/reviewer-messages/043-central-authority-composition-reviewed.md"
+    "commit": "a93ff057f8cf4f966d4edc8dc0098c3526a14def",
+    "decision": "CONTINUE_T16_4B_NUMERICAL_HARDENING_AFTER_REMOTE_PRESERVATION",
+    "reviewer_decision": "docs/reviewer-messages/044-production-inertial-compiler-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -184,8 +184,8 @@
     "T16.4b": {
       "state": "in_progress",
       "depends_on": ["T16.2", "T16.4", "T16.2b-A"],
-      "brief_id": "033",
-      "execution_note": "strict artifact sub-slice and v2 authority boundary are accepted; remaining production compiler work resumed after verified T16.2b-A",
+      "brief_id": "035",
+      "execution_note": "Brief 035 production compiler passed local implementation and review; remote preservation is pending before the final numerical-hardening sub-slice",
       "completed_subslices": [
         {
           "source_commit": "69df54d",
@@ -196,7 +196,33 @@
           "source_commit": "c0b9629",
           "review_decision_id": "043",
           "result": "central composer and assembly-inertials v2 local-capability boundary"
+        },
+        {
+          "source_commit": "a93ff05",
+          "review_decision_id": "044",
+          "result": "production hierarchical mixed-source compiler and fixture passed local review; remote preservation pending"
         }
+      ],
+      "test_commands": [
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_production_inertial_compiler",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_authority_composer tests.unit.test_artifact_contract tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack tests.unit.test_robotics_dependency_lock",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_production_inertial_fixture.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_measured_inertial_intake.py --verify",
+        "./.mujoco_venv/bin/python scripts/robot_lab/write_measured_inertial_intake.py --verify --intake tests/fixtures/robot_lab/measured_mass/production_mixed_source.fixture.json --output tests/fixtures/robot_lab/measured_mass/production_mixed_source.output.json --require-compilation-ready",
+        "./.mujoco_venv/bin/python scripts/robot_lab/compose_robot_authority.py --intake tests/fixtures/robot_lab/measured_mass/production_mixed_source.fixture.json --inertial-artifact tests/fixtures/robot_lab/measured_mass/production_mixed_source.output.json",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/production_inertial_compiler.py scenesmith/robot_lab/measured_inertial_intake.py scenesmith/robot_lab/authority_composer.py scripts/robot_lab/write_production_inertial_fixture.py tests/unit/test_production_inertial_compiler.py",
+        "git diff --check"
+      ],
+      "production_artifact_ids": {
+        "production_fixture_intake_identity_sha256": "fe9dbd5468a606019db735dc8664c05d5fc207d94bdcbc84243f58cfa98f869f",
+        "production_fixture_output_identity_sha256": "b8d7c5d287051aa863c3ef08597deefb9dd7685ad2c89d820456f92491fef25d",
+        "fixture_authority_denial_composition_identity_sha256": "72eb3f4039cba26ffc449067cf038e4561a26fefe4c4b1f08e4cad29f033f0c6",
+        "blocked_current_arm_identity_sha256": "8b8aab8e769167531776e38d76c545cec99277b69783d57c9db78f1020297ffc"
+      },
+      "known_limitations": [
+        "deterministic eigensolver convergence, residual, and scale-relative tolerance hardening remains before T16.4b can close",
+        "fixture evidence proves the production path but is not current-arm physical evidence",
+        "remote preservation of a93ff05 and reviewer decision 044 is pending"
       ],
       "authority_granted": ["synthetic_compilation_valid"],
       "authority_not_granted": [

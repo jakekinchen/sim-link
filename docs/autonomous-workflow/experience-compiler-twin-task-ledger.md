@@ -8,11 +8,11 @@ run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.4b production measured-inertial compiler
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.2b-A central authority composition; T16.4 blocked real template and synthetic compiler scaffold; T16.4b strict artifact and scoped-gate sub-slice
-evidence: T16.2b-A implementation c0b9629 and reviewer decision 043 are preserved on origin through e1d59ca; contract 6d04b205... and denied fixture composition d1206c5c... withhold all global authority
+evidence: production compiler a93ff05 and reviewer decision 044 pass locally with 122 broad tests; fixture fe9dbd54... -> b8d7c5d2...; remote preservation pending
 remaining: remaining T16.4b production compiler; T16.2b computed qualification; T16.5a offline preflight; T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
-blockers: no offline blocker; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
-next_step: resume brief 033 with hierarchical BOM exact cover, explicit units/calibration, all source modes, full-precision aggregation, numerical hardening, and a production-schema fixture
+blockers: production-compiler sub-slice remote preservation pending; live read-only work waits on verified T16.5a; physical motion waits on verified T16.5a-T16.5c plus an exact valid permit and active owner-presence lease
+next_step: push a93ff05 plus reviewer evidence, confirm origin, then execute the final T16.4b numerical-hardening brief
 ```
 
 ## Rules
@@ -130,6 +130,20 @@ next_step: resume brief 033 with hierarchical BOM exact cover, explicit units/ca
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.4b production compiler locally reviewed
+
+```text
+Current task: T16.4b
+State: in_progress
+Completed: rooted hierarchical exact-cover BOM; six production source modes; explicit units/calibration/metrology; content-addressed evidence; full-precision transforms/aggregation; fixture-only mixed-source artifact; current arm remains blocked
+Evidence: implementation a93ff05; reviewer 044; 21 focused and 122 broad tests; fixture fe9dbd5468a606019db735dc8664c05d5fc207d94bdcbc84243f58cfa98f869f -> b8d7c5d287051aa863c3ef08597deefb9dd7685ad2c89d820456f92491fef25d; composer withholds all global decisions
+Commit: a93ff05; remote preservation pending
+Remaining: deterministic eigensolver convergence/residual and scale-relative numerical hardening before T16.4b closes
+Blockers: remote preservation pending; no offline implementation blocker
+Training lock: closed
+Next step: preserve implementation/review on origin, then execute numerical-hardening brief
+```
 
 ### 2026-07-11 - Owner-supervised physical proof steering
 
