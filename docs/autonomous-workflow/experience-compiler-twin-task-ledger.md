@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; Brief 047 signed 640x480-minimum selection verified at e68068a; live gate closed for separate review
+current_task: T16.5b in progress; reviewer 071 authorizes one final signed-640x480 exact-dimension session after remote transition confirmation
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: e68068a remote; actual discovery selects C922 yuyv422 640x480 and RealSense uyvy422 640x480; 53 focused, 33 LeLab-runtime camera, and 232 broad tests
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none in Brief 047; live gate remains closed until a separate reviewed remote transition
-next_step: close Brief 047 canonically; separately review whether one final finite read-only session fits the safe closeout window
+blockers: none for one final bounded read-only session; gate becomes effective only after remote transition confirmation
+next_step: execute exactly one final discovery/holder/lease/contract/census/camera session, reclose on every outcome, then preserve and close out
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: close Brief 047 canonically; separately review whether one final fini
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 047 `e68068a` selects signed >=640x480 exact modes; both actual cameras resolve at 640x480@30; gate closed for separate review |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 047 `e68068a` and closeout `4b8d1d5` remote; reviewer 071 permits exactly one final signed-640x480 exact-dimension session after gate commit |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 

@@ -117,6 +117,12 @@ capture is not synchronized or policy-input-valid. Studio reconnect remains
 deferred unless exact device, calibration, and current-pose evidence proves it
 mechanically no-motion-safe.
 
+Reviewer 071 permits exactly one final finite read-only session only after its
+transition commit is confirmed on origin. The window is
+`2026-07-11T11:23:00-05:00` through `2026-07-11T11:38:00-05:00`, the session
+limit is one, both selected modes must be signed 640x480 or larger, decoded
+dimensions must match exactly, and the gate must reclose on every outcome.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`

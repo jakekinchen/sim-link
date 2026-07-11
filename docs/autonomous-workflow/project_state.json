@@ -12,9 +12,9 @@
   "verified_through_commit": "e68068a6331723e46f09edd82531b964dffd9f5c",
   "last_reviewed_implementation_commit": "e68068a6331723e46f09edd82531b964dffd9f5c",
   "source_review": {
-    "commit": "e68068a6331723e46f09edd82531b964dffd9f5c",
-    "decision": "VERIFY_BRIEF_047_OFFLINE_AND_KEEP_LIVE_GATE_CLOSED_FOR_SEPARATE_REVIEW",
-    "reviewer_decision": "docs/reviewer-messages/070-brief-047-camera-floor-reviewed.md"
+    "commit": "4b8d1d5f72d0f5552906a3e896a0de4d8c2f99f3",
+    "decision": "OPEN_ONE_FINAL_FINITE_SIGNED_640X480_EXACT_DIMENSION_SESSION_AFTER_REMOTE_CONFIRMATION",
+    "reviewer_decision": "docs/reviewer-messages/071-open-final-live-gate-after-brief-047.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -393,9 +393,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "070",
-      "result": "Brief 047 signed 640x480-minimum selection is verified offline at e68068a; both actual camera identities resolve to qualifying exact 30-fps modes and the live gate remains closed for a separate review commit",
-      "execution_note": "Brief 047 passed 53 focused tests, 33 camera tests under the pinned LeLab runtime, and 232 broad robot-lab tests; actual attempt-005 discovery now selects C922 yuyv422 640x480 and RealSense uyvy422 640x480 while sub-floor-only cameras fail closed",
+      "live_gate_review_decision_id": "071",
+      "result": "Reviewer 071 authorizes exactly one final finite signed-640x480 exact-dimension session after the scoped transition is confirmed on origin",
+      "execution_note": "The transition performs no hardware access and grants no label; the session must use fresh discovery and lease, both-alias zero-holder proofs, contract-v3 modes at least 640x480, exact decoded dimensions, all six Torque_Enable zero, v4 evidence, and immediate reclosure",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
@@ -833,14 +833,12 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-11T11:04:00-05:00",
-      "live_gate_valid_until": "2026-07-11T11:34:00-05:00",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-11T11:23:00-05:00",
+      "live_gate_valid_until": "2026-07-11T11:38:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 1,
-      "live_gate_closed_at": "2026-07-11T11:05:47-05:00",
-      "live_gate_close_reason": "live_attempt_005_completed",
-      "live_gate_reconsideration_state": "attempt_005_rejected_brief_046_offline_required",
+      "live_gate_sessions_started": 0,
+      "live_gate_reconsideration_state": "one_final_signed_640x480_exact_dimension_session_authorized_after_remote_confirmation",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -886,6 +884,12 @@
           "state": "closed",
           "at": "2026-07-11T11:05:47-05:00",
           "reason": "live_attempt_005_completed"
+        },
+        {
+          "state": "open",
+          "at": "2026-07-11T11:23:00-05:00",
+          "review_decision_id": "071",
+          "result": "one_final_signed_640x480_exact_dimension_session_authorized"
         }
       ],
       "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
@@ -1019,7 +1023,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "perform a separate closed-state review and remote commit for at most one final fresh finite session using signed 640x480-minimum modes and exact output-dimension enforcement; keep the gate closed until confirmed",
+      "next_action": "after remote transition confirmation execute exactly one final finite signed-640x480 exact-dimension session and immediately reclose on every outcome",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
