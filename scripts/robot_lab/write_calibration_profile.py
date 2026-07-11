@@ -27,11 +27,16 @@ DEFAULT_MANIFEST = Path(
     "configurations/robot_lab/pi05_live_readonly_observation.redacted.json"
 )
 DEFAULT_OUTPUT = Path("configurations/robot_lab/pi05_calibration_profile.json")
+EXPECTED_PREDECESSOR_IDENTITY = (
+    "b360b4f60077846c62128fe4d4cc33d1ee4e6e72aa7831fcb7c6706e6b6599b4"
+)
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--verify", action="store_true")
+    action = parser.add_mutually_exclusive_group()
+    action.add_argument("--verify", action="store_true")
+    action.add_argument("--refresh-derived", action="store_true")
     parser.add_argument("--calibration", type=Path, default=DEFAULT_CALIBRATION)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
@@ -51,6 +56,21 @@ def main() -> int:
             manifest_path=manifest_path,
         )
         status = "verified"
+    elif args.refresh_derived:
+        predecessor = load_strict_json(output_path)
+        if predecessor.get("identity_sha256") != EXPECTED_PREDECESSOR_IDENTITY:
+            raise ValueError("Tracked calibration profile is not the exact predecessor")
+        profile = build_calibration_profile(
+            calibration_path=calibration_path,
+            manifest_path=manifest_path,
+        )
+        dump_canonical_json(output_path, profile)
+        verify_calibration_profile(
+            profile,
+            calibration_path=calibration_path,
+            manifest_path=manifest_path,
+        )
+        status = "refreshed"
     else:
         if output_path.exists():
             raise ValueError("Tracked calibration profile already exists; use --verify")

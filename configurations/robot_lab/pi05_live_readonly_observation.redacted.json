@@ -1,6 +1,25 @@
 {
   "calibration_file_sha256": "192404b6d3c1337495d69649969459aa9d3f66816cd916c67da2588815e93ec4",
   "camera_framerate_fps": 30,
+  "camera_identity_binding": {
+    "capture_identity_fields": [
+      "index",
+      "name",
+      "unique_id",
+      "model_id",
+      "input_mode"
+    ],
+    "excluded_from_stable_identity": [
+      "index"
+    ],
+    "local_capability": "stable_camera_identity_binding_valid",
+    "stable_identity_fields": [
+      "name",
+      "unique_id",
+      "model_id",
+      "input_mode"
+    ]
+  },
   "camera_operation_counts": {
     "capture_property_writes": 0,
     "construct_attempts": 2,
@@ -26,7 +45,7 @@
   "cameras": [
     {
       "camera_backend_audit_sha256": "0b81b45a09257343bf7417d847672fdbee312fd6763b5ea79261093a027eabaf",
-      "camera_identity_sha256": "e2b9b6eb486fcef57503e1ac567f67b271435dd2b6212fcbb82ebbb8d088903a",
+      "capture_camera_identity_sha256": "e2b9b6eb486fcef57503e1ac567f67b271435dd2b6212fcbb82ebbb8d088903a",
       "frames": [
         {
           "channels": 3,
@@ -56,11 +75,12 @@
         "height": 480,
         "pixel_format": "uyvy422",
         "width": 640
-      }
+      },
+      "stable_camera_identity_sha256": "69d55167e318a97b7f38c2562366ba7c8798ded18397f466b083494cf4198cd9"
     },
     {
       "camera_backend_audit_sha256": "760fd79c65b96d5aa35fa944d3ed3e14c9aad40b9277e966afe945f066726220",
-      "camera_identity_sha256": "e3b8b82c1ed6436c4fd9a7e01fadf08cb9ba3248bda26ebafa43bb5190c2d6a7",
+      "capture_camera_identity_sha256": "e3b8b82c1ed6436c4fd9a7e01fadf08cb9ba3248bda26ebafa43bb5190c2d6a7",
       "frames": [
         {
           "channels": 3,
@@ -90,13 +110,14 @@
         "height": 480,
         "pixel_format": "yuyv422",
         "width": 640
-      }
+      },
+      "stable_camera_identity_sha256": "9931d03025b4d9830ffda038ff0fd3a10d7badd2a3120e692fd13ce63325e180"
     }
   ],
   "discovery_stability": "exact_serial_and_stable_camera_identity_match_numeric_index_churn_allowed",
   "evidence_mode": "tracked_redacted_physical_read_only_manifest",
   "hardware_opened": true,
-  "identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
+  "identity_sha256": "5218c3bd0ee0b34aca9aa32e5e1912c284a2dfffcdbc86ba7fa34f08f4433ed4",
   "manifest_name": "pi05_live_readonly_observation_redacted",
   "max_host_observed_skew_ns": 2252560146,
   "operation_counts": {
@@ -158,7 +179,7 @@
     "physical_observation_capture"
   ],
   "qualification_scope": "physical_observation",
-  "schema_version": "scenesmith.live_readonly_observation_manifest.v4",
+  "schema_version": "scenesmith.live_readonly_observation_manifest.v5",
   "serial_identity_holder_evidence": {
     "post_close": {
       "deduplicated_holder_count": 0,

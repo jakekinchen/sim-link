@@ -22,17 +22,17 @@ from scenesmith.robot_lab.calibration_profile import (
 
 
 STATIC_POSE_BRACKET_CONTRACT_SCHEMA_VERSION = (
-    "scenesmith.static_pose_bracket_contract.v1"
+    "scenesmith.static_pose_bracket_contract.v2"
 )
 STATIC_POSE_BRACKET_OBSERVATION_SCHEMA_VERSION = (
-    "scenesmith.static_pose_bracket_observation.v1"
+    "scenesmith.static_pose_bracket_observation.v2"
 )
-STATIC_POSE_BRACKET_RESULT_SCHEMA_VERSION = "scenesmith.static_pose_bracket_result.v1"
+STATIC_POSE_BRACKET_RESULT_SCHEMA_VERSION = "scenesmith.static_pose_bracket_result.v2"
 ACCEPTED_CALIBRATION_PROFILE_IDENTITY = (
-    "b360b4f60077846c62128fe4d4cc33d1ee4e6e72aa7831fcb7c6706e6b6599b4"
+    "24db6f2457e9638866234cb795a413f4b855266a64878f77c1db51c39f9b7cea"
 )
 ACCEPTED_STATIC_POSE_BRACKET_CONTRACT_IDENTITY = (
-    "90e7baea43ebc059c09ef45b615c5808cf74abbbab87948a23536666acb43ceb"
+    "7260be3e1ab5f1ea6a5f5d399b1217baf42b8eb4657497fa983595e8e0646504"
 )
 BODY_TOLERANCE_DEGREES = 0.5
 GRIPPER_TOLERANCE_PERCENT = 0.5
@@ -131,22 +131,22 @@ def build_static_pose_bracket_contract(
         raise ValueError("Accepted live manifest must contain two cameras")
     cameras = []
     for camera in manifest_cameras:
-        identity = _require_sha256(
-            camera.get("camera_identity_sha256"),
-            label="accepted camera identity",
+        stable_identity = _require_sha256(
+            camera.get("stable_camera_identity_sha256"),
+            label="accepted stable camera identity",
         )
         mode = _validate_input_mode(camera.get("input_mode"), label="accepted camera")
         cameras.append(
             {
-                "camera_identity_sha256": identity,
+                "stable_camera_identity_sha256": stable_identity,
                 "input_mode": mode,
                 "required_frame_count": EXPECTED_FRAME_COUNT_PER_CAMERA,
                 "required_encoding": "png",
                 "required_channels": 3,
             }
         )
-    if len({camera["camera_identity_sha256"] for camera in cameras}) != 2:
-        raise ValueError("Accepted camera identities must be unique")
+    if len({camera["stable_camera_identity_sha256"] for camera in cameras}) != 2:
+        raise ValueError("Accepted stable camera identities must be unique")
 
     contract = {
         "schema_version": STATIC_POSE_BRACKET_CONTRACT_SCHEMA_VERSION,
@@ -274,7 +274,9 @@ def build_fixture_static_pose_observation(
             )
         cameras.append(
             {
-                "camera_identity_sha256": camera["camera_identity_sha256"],
+                "stable_camera_identity_sha256": camera[
+                    "stable_camera_identity_sha256"
+                ],
                 "input_mode": dict(camera["input_mode"]),
                 "frames": frames,
             }
@@ -549,13 +551,16 @@ def _validate_cameras(values: Any, *, contract: dict[str, Any]) -> None:
     all_hashes = []
     for observed, expected in zip(values, contract["cameras"], strict=True):
         if not isinstance(observed, dict) or set(observed) != {
-            "camera_identity_sha256",
+            "stable_camera_identity_sha256",
             "input_mode",
             "frames",
         }:
             raise ValueError("Static pose bracket camera fields are invalid")
-        if observed.get("camera_identity_sha256") != expected["camera_identity_sha256"]:
-            raise ValueError("Static pose bracket camera identity mismatch")
+        if (
+            observed.get("stable_camera_identity_sha256")
+            != expected["stable_camera_identity_sha256"]
+        ):
+            raise ValueError("Static pose bracket stable camera identity mismatch")
         if observed.get("input_mode") != expected["input_mode"]:
             raise ValueError("Static pose bracket camera input mode mismatch")
         frames = observed.get("frames")

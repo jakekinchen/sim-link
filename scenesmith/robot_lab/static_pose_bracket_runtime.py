@@ -21,6 +21,7 @@ from scenesmith.robot_lab.live_readonly_observation import (
 )
 from scenesmith.robot_lab.static_pose_bracket import (
     EXPECTED_OPERATION_COUNTS,
+    STATIC_POSE_BRACKET_OBSERVATION_SCHEMA_VERSION,
     evaluate_static_pose_bracket,
     verify_static_pose_bracket_contract,
     verify_static_pose_bracket_result,
@@ -28,7 +29,7 @@ from scenesmith.robot_lab.static_pose_bracket import (
 
 
 STATIC_POSE_BRACKET_RUNTIME_RESULT_SCHEMA_VERSION = (
-    "scenesmith.static_pose_bracket_runtime_result.v1"
+    "scenesmith.static_pose_bracket_runtime_result.v2"
 )
 MAX_FIXTURE_FRAME_BYTES = 8 * 1024 * 1024
 
@@ -291,7 +292,7 @@ def run_static_pose_bracket_fixture_runtime(
 
     observation = sign_payload(
         {
-            "schema_version": "scenesmith.static_pose_bracket_observation.v1",
+            "schema_version": STATIC_POSE_BRACKET_OBSERVATION_SCHEMA_VERSION,
             "observation_name": "pi05_static_pose_bracket_fixture_observation",
             "evidence_mode": "deterministic_fixture",
             "contract_identity_sha256": contract["identity_sha256"],
@@ -513,7 +514,9 @@ def _capture_camera_batch(
     )
     return (
         {
-            "camera_identity_sha256": camera["camera_identity_sha256"],
+            "stable_camera_identity_sha256": camera[
+                "stable_camera_identity_sha256"
+            ],
             "input_mode": copy.deepcopy(camera["input_mode"]),
             "frames": frames,
         },
@@ -669,7 +672,9 @@ def _validate_camera_audit(
     if not isinstance(value, dict) or value != expected:
         raise ValueError("Static pose camera audit drifted")
     return {
-        "camera_identity_sha256": camera["camera_identity_sha256"],
+        "stable_camera_identity_sha256": camera[
+            "stable_camera_identity_sha256"
+        ],
         **copy.deepcopy(value),
     }
 
@@ -679,7 +684,9 @@ def _validate_camera_audits(value: Any, *, contract: dict[str, Any]) -> None:
         raise ValueError("Static pose camera audit set is incomplete")
     for audit, camera in zip(value, contract["cameras"], strict=True):
         expected = {
-            "camera_identity_sha256": camera["camera_identity_sha256"],
+            "stable_camera_identity_sha256": camera[
+                "stable_camera_identity_sha256"
+            ],
             "open_attempts": 1,
             "open_successes": 1,
             "read_attempts": camera["required_frame_count"],

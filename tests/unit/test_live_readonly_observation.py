@@ -26,8 +26,10 @@ from scenesmith.robot_lab.live_readonly_observation import (
     AuditedReadOnlyBusBackend,
     CAMERA_FRAMERATE_FPS,
     FFmpegNamedFiniteCamera,
+    LEGACY_REDACTED_MANIFEST_SCHEMA_VERSION,
     MAX_CAMERA_FAILURE_PREVIEW_BYTES,
     NamedCameraCaptureError,
+    REDACTED_MANIFEST_SCHEMA_VERSION,
     build_live_discovery_snapshot,
     build_live_execution_contract,
     build_operator_presence_lease,
@@ -46,6 +48,7 @@ from scenesmith.robot_lab.live_readonly_observation import (
     resolve_camera_selection,
     resolve_follower_identity,
     select_camera_input_mode,
+    stable_camera_identity_sha256,
     verify_discovery_stability,
     verify_live_execution_contract,
     verify_operator_presence_lease,
@@ -1708,6 +1711,140 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             [camera["input_mode"] for camera in manifest["cameras"]],
             [camera["input_mode"] for camera in contract["cameras"]],
         )
+
+    def test_manifest_separates_capture_and_index_stable_camera_identities(self):
+        contract = _execution_contract()
+        frames = capture_finite_camera_frames(
+            contract,
+            project_state=PROJECT_STATE,
+            now="2026-07-11T04:47:00-05:00",
+            camera_factory=lambda camera: _FakeCamera(camera["index"]),
+            monotonic_ns=_TickingClock(start=2_000_000_000),
+            wall_time=lambda: "2026-07-11T04:47:00-05:00",
+        )
+        servo_result = execute_live_servo_census(
+            contract,
+            project_state=PROJECT_STATE,
+            now="2026-07-11T04:47:00-05:00",
+            bus_factory=lambda census_contract: _FakeBus(),
+            monotonic_ns=_TickingClock(),
+        )
+        private = build_private_observation_evidence(
+            execution_contract=contract,
+            servo_result=servo_result,
+            frames=frames,
+            pre_open_discovery=_discovery(),
+            post_close_discovery=_discovery(),
+            pre_open_serial_holder_snapshot=_zero_holder_snapshot(),
+            post_close_serial_holder_snapshot=_zero_holder_snapshot(),
+        )
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            refs = write_private_observation_bundle(
+                output_directory=Path(temporary_directory) / "bundle",
+                private_evidence=private,
+                frames=frames,
+            )
+            manifest = build_redacted_observation_manifest(
+                private_evidence=private,
+                private_bundle_refs=refs,
+            )
+            verify_redacted_observation_manifest(
+                manifest,
+                private_evidence=private,
+                private_bundle_refs=refs,
+            )
+
+            self.assertEqual(
+                manifest["schema_version"], REDACTED_MANIFEST_SCHEMA_VERSION
+            )
+            self.assertEqual(
+                manifest["camera_identity_binding"],
+                {
+                    "capture_identity_fields": [
+                        "index",
+                        "name",
+                        "unique_id",
+                        "model_id",
+                        "input_mode",
+                    ],
+                    "stable_identity_fields": [
+                        "name",
+                        "unique_id",
+                        "model_id",
+                        "input_mode",
+                    ],
+                    "excluded_from_stable_identity": ["index"],
+                    "local_capability": "stable_camera_identity_binding_valid",
+                },
+            )
+            for raw_camera, redacted_camera in zip(
+                private["cameras"], manifest["cameras"], strict=True
+            ):
+                self.assertEqual(
+                    redacted_camera["capture_camera_identity_sha256"],
+                    hashlib.sha256(canonical_json_bytes(raw_camera)).hexdigest(),
+                )
+                self.assertEqual(
+                    redacted_camera["stable_camera_identity_sha256"],
+                    stable_camera_identity_sha256(raw_camera),
+                )
+                self.assertNotIn("camera_identity_sha256", redacted_camera)
+
+            legacy = copy.deepcopy(manifest)
+            legacy["schema_version"] = LEGACY_REDACTED_MANIFEST_SCHEMA_VERSION
+            del legacy["camera_identity_binding"]
+            for camera in legacy["cameras"]:
+                camera["camera_identity_sha256"] = camera.pop(
+                    "capture_camera_identity_sha256"
+                )
+                del camera["stable_camera_identity_sha256"]
+            legacy = sign_payload(legacy)
+            verify_redacted_observation_manifest(
+                legacy,
+                private_evidence=private,
+                private_bundle_refs=refs,
+            )
+
+            for field in (
+                "stable_camera_identity_sha256",
+                "capture_camera_identity_sha256",
+            ):
+                tampered = copy.deepcopy(manifest)
+                tampered["cameras"][0][field] = "f" * 64
+                with self.assertRaisesRegex(ValueError, "drifted"):
+                    verify_redacted_observation_manifest(
+                        sign_payload(tampered),
+                        private_evidence=private,
+                        private_bundle_refs=refs,
+                    )
+
+        camera = copy.deepcopy(contract["cameras"][0])
+        stable_identity = stable_camera_identity_sha256(camera)
+        capture_identity = hashlib.sha256(canonical_json_bytes(camera)).hexdigest()
+        camera["index"] += 9
+        self.assertEqual(stable_camera_identity_sha256(camera), stable_identity)
+        self.assertNotEqual(
+            hashlib.sha256(canonical_json_bytes(camera)).hexdigest(), capture_identity
+        )
+        for field, replacement in (
+            ("name", "Different Camera"),
+            ("unique_id", "different-camera-id"),
+            ("model_id", "different-model-id"),
+        ):
+            changed = copy.deepcopy(camera)
+            changed[field] = replacement
+            self.assertNotEqual(
+                stable_camera_identity_sha256(changed), stable_identity, msg=field
+            )
+        changed_mode = copy.deepcopy(camera)
+        changed_mode["input_mode"]["width"] += 1
+        self.assertNotEqual(
+            stable_camera_identity_sha256(changed_mode), stable_identity
+        )
+        malformed = copy.deepcopy(camera)
+        malformed["unexpected"] = True
+        with self.assertRaisesRegex(ValueError, "fields"):
+            stable_camera_identity_sha256(malformed)
 
     def test_camera_primary_and_release_errors_are_both_preserved(self):
         contract = _execution_contract()

@@ -180,7 +180,9 @@ class _FakeCamera:
         self.release_successes = 0
 
     def open(self) -> None:
-        self.events.append(f"camera:{self.camera['camera_identity_sha256']}:open")
+        self.events.append(
+            f"camera:{self.camera['stable_camera_identity_sha256']}:open"
+        )
         self.open_calls += 1
         if not self.transport.is_connected:
             raise AssertionError("camera opened while transport was closed")
@@ -189,7 +191,9 @@ class _FakeCamera:
         self.open_successes += 1
 
     def read(self) -> dict:
-        self.events.append(f"camera:{self.camera['camera_identity_sha256']}:read")
+        self.events.append(
+            f"camera:{self.camera['stable_camera_identity_sha256']}:read"
+        )
         self.read_calls += 1
         if not self.transport.is_connected:
             raise AssertionError("camera read while transport was closed")
@@ -198,7 +202,8 @@ class _FakeCamera:
         self.read_successes += 1
         payload = {
             "frame_bytes": (
-                f"fixture-{self.camera['camera_identity_sha256']}-{self.read_calls}"
+                "fixture-"
+                f"{self.camera['stable_camera_identity_sha256']}-{self.read_calls}"
             ).encode(),
             "encoding": "png",
             "width": self.camera["input_mode"]["width"],
@@ -210,7 +215,9 @@ class _FakeCamera:
         return payload
 
     def release(self) -> None:
-        self.events.append(f"camera:{self.camera['camera_identity_sha256']}:release")
+        self.events.append(
+            f"camera:{self.camera['stable_camera_identity_sha256']}:release"
+        )
         self.release_calls += 1
         if self.drop_transport_on_release:
             self.transport.is_connected = False

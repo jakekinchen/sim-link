@@ -39,11 +39,18 @@ DEFAULT_OBSERVATION = Path(
 DEFAULT_RESULT = Path(
     "tests/fixtures/robot_lab/static_pose_bracket/result.fixture.json"
 )
+EXPECTED_PREDECESSOR_IDENTITIES = {
+    "contract": "90e7baea43ebc059c09ef45b615c5808cf74abbbab87948a23536666acb43ceb",
+    "observation": "84d0aa12687574be6bae575f74dcb7e68c9b5643e4e086c9e1461f4e91bb64a4",
+    "result": "6ebb9bd63c7267f193f4754af11012ac6e768404749891f4033381fa4ad0a410",
+}
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--verify", action="store_true")
+    action = parser.add_mutually_exclusive_group()
+    action.add_argument("--verify", action="store_true")
+    action.add_argument("--refresh-derived", action="store_true")
     parser.add_argument("--calibration", type=Path, default=DEFAULT_CALIBRATION)
     parser.add_argument("--profile", type=Path, default=DEFAULT_PROFILE)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
@@ -81,6 +88,31 @@ def main() -> int:
             observation=observation,
         )
         status = "verified"
+    elif args.refresh_derived:
+        predecessor = {
+            "contract": load_strict_json(contract_path),
+            "observation": load_strict_json(observation_path),
+            "result": load_strict_json(result_path),
+        }
+        if {
+            name: payload.get("identity_sha256")
+            for name, payload in predecessor.items()
+        } != EXPECTED_PREDECESSOR_IDENTITIES:
+            raise ValueError("Static pose artifacts are not the exact predecessors")
+        contract = build_static_pose_bracket_contract(
+            calibration_path=calibration_path,
+            calibration_profile_path=profile_path,
+            manifest_path=manifest_path,
+        )
+        observation = build_fixture_static_pose_observation(contract)
+        result = evaluate_static_pose_bracket(
+            contract=contract,
+            observation=observation,
+        )
+        dump_canonical_json(contract_path, contract)
+        dump_canonical_json(observation_path, observation)
+        dump_canonical_json(result_path, result)
+        status = "refreshed"
     else:
         outputs = (contract_path, observation_path, result_path)
         if any(path.exists() for path in outputs):

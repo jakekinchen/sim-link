@@ -263,7 +263,7 @@ class StaticPoseBracketTests(unittest.TestCase):
             (
                 "identity",
                 lambda payload: payload["cameras"][0].__setitem__(
-                    "camera_identity_sha256", "f" * 64
+                    "stable_camera_identity_sha256", "f" * 64
                 ),
                 "camera identity mismatch",
             ),

@@ -55,7 +55,10 @@ LEGACY_LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION = (
 )
 LIVE_SERVO_RESULT_SCHEMA_VERSION = "scenesmith.live_readonly_servo_result.v2"
 PRIVATE_OBSERVATION_SCHEMA_VERSION = "scenesmith.live_readonly_observation_private.v4"
-REDACTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v4"
+REDACTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v5"
+LEGACY_REDACTED_MANIFEST_SCHEMA_VERSION = (
+    "scenesmith.live_readonly_observation_manifest.v4"
+)
 CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION = (
     "scenesmith.named_camera_failure_diagnostic.v3"
 )
@@ -1643,6 +1646,24 @@ def build_redacted_observation_manifest(
     private_evidence: dict[str, Any],
     private_bundle_refs: dict[str, Any],
 ) -> dict[str, Any]:
+    return _build_redacted_observation_manifest(
+        private_evidence=private_evidence,
+        private_bundle_refs=private_bundle_refs,
+        schema_version=REDACTED_MANIFEST_SCHEMA_VERSION,
+    )
+
+
+def _build_redacted_observation_manifest(
+    *,
+    private_evidence: dict[str, Any],
+    private_bundle_refs: dict[str, Any],
+    schema_version: str,
+) -> dict[str, Any]:
+    if schema_version not in {
+        REDACTED_MANIFEST_SCHEMA_VERSION,
+        LEGACY_REDACTED_MANIFEST_SCHEMA_VERSION,
+    }:
+        raise ValueError("Unsupported redacted observation manifest schema")
     if private_evidence.get("schema_version") != PRIVATE_OBSERVATION_SCHEMA_VERSION:
         raise ValueError("Unsupported private observation evidence schema")
     verify_signed_payload(private_evidence, label="Private observation evidence")
@@ -1716,16 +1737,28 @@ def build_redacted_observation_manifest(
             }
             for frame in matching_frames
         ]
-        cameras.append(
-            {
-                "camera_identity_sha256": _sha256_payload(camera),
-                "camera_backend_audit_sha256": _sha256_payload(matching_audits[0]),
-                "input_mode": copy.deepcopy(camera["input_mode"]),
-                "frames": camera_frames,
-            }
-        )
+        stable_identity = stable_camera_identity_sha256(camera)
+        camera_record = {
+            "camera_backend_audit_sha256": _sha256_payload(matching_audits[0]),
+            "input_mode": copy.deepcopy(camera["input_mode"]),
+            "frames": camera_frames,
+        }
+        if schema_version == REDACTED_MANIFEST_SCHEMA_VERSION:
+            camera_record.update(
+                {
+                    "capture_camera_identity_sha256": _sha256_payload(camera),
+                    "stable_camera_identity_sha256": stable_identity,
+                }
+            )
+        else:
+            camera_record["camera_identity_sha256"] = _sha256_payload(camera)
+        cameras.append(camera_record)
+    if schema_version == REDACTED_MANIFEST_SCHEMA_VERSION and len(
+        {camera["stable_camera_identity_sha256"] for camera in cameras}
+    ) != len(cameras):
+        raise ValueError("Private stable camera identities are ambiguous")
     payload = {
-        "schema_version": REDACTED_MANIFEST_SCHEMA_VERSION,
+        "schema_version": schema_version,
         "manifest_name": "pi05_live_readonly_observation_redacted",
         "qualification_scope": "physical_observation",
         "evidence_mode": "tracked_redacted_physical_read_only_manifest",
@@ -1765,6 +1798,24 @@ def build_redacted_observation_manifest(
         "hardware_opened": True,
         "physical_follower_commanded": False,
     }
+    if schema_version == REDACTED_MANIFEST_SCHEMA_VERSION:
+        payload["camera_identity_binding"] = {
+            "capture_identity_fields": [
+                "index",
+                "name",
+                "unique_id",
+                "model_id",
+                "input_mode",
+            ],
+            "stable_identity_fields": [
+                "name",
+                "unique_id",
+                "model_id",
+                "input_mode",
+            ],
+            "excluded_from_stable_identity": ["index"],
+            "local_capability": "stable_camera_identity_binding_valid",
+        }
     return sign_payload(payload)
 
 
@@ -1774,12 +1825,17 @@ def verify_redacted_observation_manifest(
     private_evidence: dict[str, Any],
     private_bundle_refs: dict[str, Any],
 ) -> None:
-    if payload.get("schema_version") != REDACTED_MANIFEST_SCHEMA_VERSION:
+    schema_version = payload.get("schema_version")
+    if schema_version not in {
+        REDACTED_MANIFEST_SCHEMA_VERSION,
+        LEGACY_REDACTED_MANIFEST_SCHEMA_VERSION,
+    }:
         raise ValueError("Unsupported redacted observation manifest schema")
     verify_signed_payload(payload, label="Redacted observation manifest")
-    expected = build_redacted_observation_manifest(
+    expected = _build_redacted_observation_manifest(
         private_evidence=private_evidence,
         private_bundle_refs=private_bundle_refs,
+        schema_version=schema_version,
     )
     if payload != expected:
         raise ValueError("Redacted observation manifest drifted from private evidence")
@@ -2937,6 +2993,31 @@ def _stable_camera_discovery_identity(payload: dict[str, Any]) -> dict[str, Any]
                 camera["model_id"],
             ),
         ),
+    }
+
+
+def stable_camera_identity_sha256(camera: dict[str, Any]) -> str:
+    """Hash an exact selected-camera identity while excluding only its index."""
+
+    return _sha256_payload(_stable_camera_selection_payload(camera))
+
+
+def _stable_camera_selection_payload(camera: dict[str, Any]) -> dict[str, Any]:
+    fields = {"index", "name", "unique_id", "model_id", "input_mode"}
+    if not isinstance(camera, dict) or set(camera) != fields:
+        raise ValueError("Selected camera identity fields are malformed")
+    index = camera.get("index")
+    if isinstance(index, bool) or not isinstance(index, int) or index < 0:
+        raise ValueError("Selected camera index is invalid")
+    return {
+        "name": require_nonblank(camera.get("name"), label="selected camera name"),
+        "unique_id": require_nonblank(
+            camera.get("unique_id"), label="selected camera unique_id"
+        ),
+        "model_id": require_nonblank(
+            camera.get("model_id"), label="selected camera model_id"
+        ),
+        "input_mode": _normalize_camera_input_mode(camera.get("input_mode")),
     }
 
 

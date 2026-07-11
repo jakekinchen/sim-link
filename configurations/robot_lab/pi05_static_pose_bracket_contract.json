@@ -1,10 +1,10 @@
 {
   "accepted_live_manifest": {
-    "file_sha256": "cd4120f0eca6b8e53de7cbc4bafb8e1a74bb5f7119b2e4db0570a401b29e9a40",
-    "identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
+    "file_sha256": "4311ffc280a46a1d78edab2756ffd4d68f4311032b82ca000d547920db4d9184",
+    "identity_sha256": "5218c3bd0ee0b34aca9aa32e5e1912c284a2dfffcdbc86ba7fa34f08f4433ed4",
     "logical_path": "configurations/robot_lab/pi05_live_readonly_observation.redacted.json",
-    "schema_version": "scenesmith.live_readonly_observation_manifest.v4",
-    "size_bytes": 8860
+    "schema_version": "scenesmith.live_readonly_observation_manifest.v5",
+    "size_bytes": 9483
   },
   "authority_not_granted": [
     "static_pose_bracketed_observation",
@@ -17,8 +17,8 @@
     "supervised_micro_motion"
   ],
   "calibration_profile": {
-    "file_sha256": "317cf26de4a09d674cd1bbb69209c17fced398d707a6305e2baac75ff1498df1",
-    "identity_sha256": "b360b4f60077846c62128fe4d4cc33d1ee4e6e72aa7831fcb7c6706e6b6599b4",
+    "file_sha256": "fe1e2e124f6f1b96990aa7a65b31c885325fbdd901707cf4976e31553f53b550",
+    "identity_sha256": "24db6f2457e9638866234cb795a413f4b855266a64878f77c1db51c39f9b7cea",
     "logical_path": "configurations/robot_lab/pi05_calibration_profile.json",
     "schema_version": "scenesmith.calibration_profile.v1",
     "size_bytes": 6543
@@ -26,7 +26,6 @@
   "camera_count": 2,
   "cameras": [
     {
-      "camera_identity_sha256": "e2b9b6eb486fcef57503e1ac567f67b271435dd2b6212fcbb82ebbb8d088903a",
       "input_mode": {
         "framerate_fps": 30,
         "height": 480,
@@ -35,10 +34,10 @@
       },
       "required_channels": 3,
       "required_encoding": "png",
-      "required_frame_count": 2
+      "required_frame_count": 2,
+      "stable_camera_identity_sha256": "69d55167e318a97b7f38c2562366ba7c8798ded18397f466b083494cf4198cd9"
     },
     {
-      "camera_identity_sha256": "e3b8b82c1ed6436c4fd9a7e01fadf08cb9ba3248bda26ebafa43bb5190c2d6a7",
       "input_mode": {
         "framerate_fps": 30,
         "height": 480,
@@ -47,13 +46,14 @@
       },
       "required_channels": 3,
       "required_encoding": "png",
-      "required_frame_count": 2
+      "required_frame_count": 2,
+      "stable_camera_identity_sha256": "9931d03025b4d9830ffda038ff0fd3a10d7badd2a3120e692fd13ce63325e180"
     }
   ],
   "contract_name": "pi05_static_pose_bracket_contract",
   "evidence_mode": "offline_contract_bound_to_accepted_physical_identities",
   "hardware_accessed": false,
-  "identity_sha256": "90e7baea43ebc059c09ef45b615c5808cf74abbbab87948a23536666acb43ceb",
+  "identity_sha256": "7260be3e1ab5f1ea6a5f5d399b1217baf42b8eb4657497fa983595e8e0646504",
   "joint_count": 6,
   "joints": [
     {
@@ -168,7 +168,7 @@
     "register_width_bytes": 2,
     "total_position_reads": 12
   },
-  "schema_version": "scenesmith.static_pose_bracket_contract.v1",
+  "schema_version": "scenesmith.static_pose_bracket_contract.v2",
   "serial_holder_contract": {
     "canonical_and_observed_aliases_required": true,
     "path_set_must_remain_stable": true,

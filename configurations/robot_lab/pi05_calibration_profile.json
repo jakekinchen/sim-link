@@ -1,10 +1,10 @@
 {
   "accepted_live_manifest": {
-    "file_sha256": "cd4120f0eca6b8e53de7cbc4bafb8e1a74bb5f7119b2e4db0570a401b29e9a40",
-    "identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
+    "file_sha256": "4311ffc280a46a1d78edab2756ffd4d68f4311032b82ca000d547920db4d9184",
+    "identity_sha256": "5218c3bd0ee0b34aca9aa32e5e1912c284a2dfffcdbc86ba7fa34f08f4433ed4",
     "logical_path": "configurations/robot_lab/pi05_live_readonly_observation.redacted.json",
-    "schema_version": "scenesmith.live_readonly_observation_manifest.v4",
-    "size_bytes": 8860
+    "schema_version": "scenesmith.live_readonly_observation_manifest.v5",
+    "size_bytes": 9483
   },
   "authority_not_granted": [
     "physical_twin_qualified",
@@ -16,7 +16,7 @@
   ],
   "evidence_mode": "tracked_content_addressed_offline_semantic_validation",
   "hardware_accessed": false,
-  "identity_sha256": "b360b4f60077846c62128fe4d4cc33d1ee4e6e72aa7831fcb7c6706e6b6599b4",
+  "identity_sha256": "24db6f2457e9638866234cb795a413f4b855266a64878f77c1db51c39f9b7cea",
   "joint_count": 6,
   "joints": [
     {

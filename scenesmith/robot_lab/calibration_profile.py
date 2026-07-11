@@ -18,9 +18,9 @@ from scenesmith.robot_lab.artifact_contract import (
 
 
 CALIBRATION_PROFILE_SCHEMA_VERSION = "scenesmith.calibration_profile.v1"
-ACCEPTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v4"
+ACCEPTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v5"
 ACCEPTED_LIVE_MANIFEST_IDENTITY = (
-    "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f"
+    "5218c3bd0ee0b34aca9aa32e5e1912c284a2dfffcdbc86ba7fa34f08f4433ed4"
 )
 EXPECTED_CALIBRATION_FILE_SHA256 = (
     "192404b6d3c1337495d69649969459aa9d3f66816cd916c67da2588815e93ec4"
@@ -49,6 +49,18 @@ _CALIBRATION_FIELDS = {
 _REQUIRED_LIVE_PROOF_LABELS = {
     "live_read_only_census_observed",
     "physical_observation_capture",
+}
+_REQUIRED_CAMERA_IDENTITY_BINDING = {
+    "capture_identity_fields": [
+        "index",
+        "name",
+        "unique_id",
+        "model_id",
+        "input_mode",
+    ],
+    "stable_identity_fields": ["name", "unique_id", "model_id", "input_mode"],
+    "excluded_from_stable_identity": ["index"],
+    "local_capability": "stable_camera_identity_binding_valid",
 }
 
 
@@ -228,6 +240,27 @@ def _validate_accepted_manifest(payload: dict[str, Any]) -> list[dict[str, Any]]
         raise ValueError("Accepted live manifest commanded the physical follower")
     if set(payload.get("proof_labels", [])) != _REQUIRED_LIVE_PROOF_LABELS:
         raise ValueError("Accepted live manifest proof labels drifted")
+    if payload.get("camera_identity_binding") != _REQUIRED_CAMERA_IDENTITY_BINDING:
+        raise ValueError("Accepted live manifest camera identity binding drifted")
+    cameras = payload.get("cameras")
+    if not isinstance(cameras, list) or len(cameras) != 2:
+        raise ValueError("Accepted live manifest requires two camera identities")
+    stable_camera_identities = []
+    for camera in cameras:
+        if not isinstance(camera, dict) or "camera_identity_sha256" in camera:
+            raise ValueError("Accepted live manifest camera identity is malformed")
+        _require_sha256(
+            camera.get("capture_camera_identity_sha256"),
+            label="accepted capture camera identity",
+        )
+        stable_camera_identities.append(
+            _require_sha256(
+                camera.get("stable_camera_identity_sha256"),
+                label="accepted stable camera identity",
+            )
+        )
+    if len(set(stable_camera_identities)) != len(stable_camera_identities):
+        raise ValueError("Accepted stable camera identities are ambiguous")
 
     servo_identity = payload.get("servo_identity")
     if not isinstance(servo_identity, list) or len(servo_identity) != 6:
@@ -300,6 +333,16 @@ def _gripper_normalization() -> dict[str, Any]:
 def _require_integer(value: Any, *, label: str) -> int:
     if type(value) is not int:
         raise ValueError(f"{label} must be an integer")
+    return value
+
+
+def _require_sha256(value: Any, *, label: str) -> str:
+    if (
+        not isinstance(value, str)
+        or len(value) != 64
+        or any(character not in "0123456789abcdef" for character in value)
+    ):
+        raise ValueError(f"{label} must be lowercase SHA-256")
     return value
 
 

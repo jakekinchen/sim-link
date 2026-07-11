@@ -9,11 +9,11 @@
     "simulation_training_ready",
     "supervised_micro_motion"
   ],
-  "contract_identity_sha256": "90e7baea43ebc059c09ef45b615c5808cf74abbbab87948a23536666acb43ceb",
+  "contract_identity_sha256": "7260be3e1ab5f1ea6a5f5d399b1217baf42b8eb4657497fa983595e8e0646504",
   "evidence_mode": "deterministic_fixture_evaluation",
   "gripper_drift_percent": 0.3562945368171029,
   "hardware_accessed": false,
-  "identity_sha256": "6ebb9bd63c7267f193f4754af11012ac6e768404749891f4033381fa4ad0a410",
+  "identity_sha256": "6b40e2758039ee316d062b8605ea538eecd9bd17bc16aae44948a80240ff4ec1",
   "joint_drift": [
     {
       "absolute_delta": 0.3516483516483515,
@@ -93,7 +93,7 @@
   ],
   "maximum_body_drift_degrees": 0.3516483516483522,
   "motion_authority_granted": false,
-  "observation_identity_sha256": "84d0aa12687574be6bae575f74dcb7e68c9b5643e4e086c9e1461f4e91bb64a4",
+  "observation_identity_sha256": "9ad35d185eee917972d2f935a151de9ba21cea237de5f6fcf46e803020c77c17",
   "operation_counts": {
     "camera_batch_attempts": 2,
     "camera_batch_successes": 2,
@@ -117,7 +117,7 @@
   "policy_inference_run": false,
   "qualification_scope": "fixture_static_pose_bracket",
   "result_name": "pi05_static_pose_bracket_fixture_result",
-  "schema_version": "scenesmith.static_pose_bracket_result.v1",
+  "schema_version": "scenesmith.static_pose_bracket_result.v2",
   "static_pose_within_tolerance": true,
   "timing": {
     "bracket_duration_ns": 1320000000,
