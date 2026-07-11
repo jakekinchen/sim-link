@@ -6,7 +6,9 @@ import copy
 import hashlib
 import inspect
 import json
+import math
 import re
+import shutil
 import struct
 import subprocess
 import sys
@@ -49,6 +51,12 @@ LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION = (
 LIVE_SERVO_RESULT_SCHEMA_VERSION = "scenesmith.live_readonly_servo_result.v1"
 PRIVATE_OBSERVATION_SCHEMA_VERSION = "scenesmith.live_readonly_observation_private.v1"
 REDACTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v1"
+CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION = (
+    "scenesmith.named_camera_failure_diagnostic.v1"
+)
+PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION = (
+    "scenesmith.live_readonly_capture_failure_private.v1"
+)
 
 MAX_PRESENCE_LEASE_SECONDS = 600
 MAX_EXECUTION_DURATION_SECONDS = 120
@@ -56,6 +64,7 @@ DEFAULT_FRAME_COUNT_PER_CAMERA = 2
 CAMERA_READ_TIMEOUT_SECONDS = 5
 FFMPEG_EXECUTABLE = Path("/opt/homebrew/bin/ffmpeg")
 MAX_PNG_FRAME_BYTES = 64 * 1024 * 1024
+MAX_CAMERA_FAILURE_PREVIEW_BYTES = 2048
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 DEFAULT_FOLLOWER_CALIBRATION_PATH = (
     Path.home()
@@ -99,6 +108,17 @@ class FiniteCamera(Protocol):
     def read(self) -> dict[str, Any]: ...
 
     def release(self) -> None: ...
+
+
+class NamedCameraCaptureError(RuntimeError):
+    """Generic public failure carrying bounded, signed private diagnostics."""
+
+    def __init__(self, diagnostic: dict[str, Any]):
+        _verify_named_camera_failure_diagnostic(diagnostic)
+        self.diagnostic = copy.deepcopy(diagnostic)
+        super().__init__(
+            f"Named camera capture failed at {diagnostic.get('stage', 'unknown')}"
+        )
 
 
 def build_operator_presence_lease(
@@ -852,15 +872,37 @@ def capture_finite_camera_frames(
                     instance.release()
                 except BaseException as exc:
                     release_error = exc
-        if primary_error is not None and release_error is not None:
+        diagnostic_error: BaseException | None = None
+        if primary_error is not None and instance is not None:
+            diagnostic_method = getattr(instance, "failure_diagnostic", None)
+            if callable(diagnostic_method):
+                original_primary = primary_error
+                try:
+                    diagnostic = diagnostic_method(
+                        primary_error=original_primary,
+                        cleanup_error=release_error,
+                    )
+                    wrapped = NamedCameraCaptureError(diagnostic)
+                    wrapped.__cause__ = original_primary
+                    primary_error = wrapped
+                except BaseException as exc:
+                    diagnostic_error = exc
+        grouped_errors = [
+            error
+            for error in (primary_error, release_error, diagnostic_error)
+            if error is not None
+        ]
+        if len(grouped_errors) > 1:
             raise BaseExceptionGroup(
-                "Camera capture failed and release also failed",
-                [primary_error, release_error],
+                "Camera capture, cleanup, or diagnostic construction failed",
+                grouped_errors,
             )
         if primary_error is not None:
             raise primary_error
         if release_error is not None:
             raise release_error
+        if diagnostic_error is not None:
+            raise diagnostic_error
         audit_method = getattr(instance, "audit", None)
         if callable(audit_method):
             backend_audit = audit_method()
@@ -877,6 +919,247 @@ def capture_finite_camera_frames(
         for frame in frames[first_camera_frame:]:
             frame["camera_backend_audit"] = copy.deepcopy(backend_audit)
     return frames
+
+
+def build_private_capture_failure_evidence(
+    *,
+    execution_contract: dict[str, Any],
+    servo_result: dict[str, Any],
+    error: BaseException,
+    pre_open_discovery: dict[str, Any],
+    pre_open_serial_holders: list[dict[str, Any]],
+    post_close_serial_holders: list[dict[str, Any]],
+    failed_at: str,
+    elapsed_seconds: float,
+) -> dict[str, Any]:
+    verify_signed_payload(execution_contract, label="Live execution contract")
+    _verify_live_servo_result(servo_result, execution_contract=execution_contract)
+    verify_discovery_stability(execution_contract["discovery"], pre_open_discovery)
+    require_no_serial_device_holders(pre_open_serial_holders)
+    require_no_serial_device_holders(post_close_serial_holders)
+    diagnostic = _extract_named_camera_failure_diagnostic(error)
+    verify_signed_payload(diagnostic, label="Named camera failure diagnostic")
+    if (
+        isinstance(elapsed_seconds, bool)
+        or not isinstance(elapsed_seconds, (int, float))
+        or not math.isfinite(float(elapsed_seconds))
+        or elapsed_seconds < 0
+    ):
+        raise ValueError("Private capture failure elapsed time is invalid")
+    payload = {
+        "schema_version": PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION,
+        "evidence_name": "pi05_live_readonly_private_capture_failure",
+        "qualification_scope": "physical_observation",
+        "evidence_mode": "local_private_rejected_physical_read_only_attempt",
+        "status": "rejected",
+        "session_id": execution_contract["session_id"],
+        "execution_contract_identity_sha256": execution_contract["identity_sha256"],
+        "presence_lease_identity_sha256": execution_contract[
+            "presence_lease_identity_sha256"
+        ],
+        "discovery_identity_sha256": execution_contract[
+            "discovery_identity_sha256"
+        ],
+        "pre_open_discovery_identity_sha256": pre_open_discovery["identity_sha256"],
+        "servo_result_identity_sha256": servo_result["identity_sha256"],
+        "target_device_identity_sha256": _sha256_payload(
+            servo_result["target_device_identity"]
+        ),
+        "operation_counts": copy.deepcopy(servo_result["operation_counts"]),
+        "camera_failure_diagnostic": copy.deepcopy(diagnostic),
+        "camera_failure_diagnostic_identity_sha256": diagnostic["identity_sha256"],
+        "error_types": _flatten_error_types(error),
+        "serial_device_holders": {
+            "pre_open": copy.deepcopy(pre_open_serial_holders),
+            "post_close": copy.deepcopy(post_close_serial_holders),
+        },
+        "serial_device_holder_counts": {
+            "pre_open": len(pre_open_serial_holders),
+            "post_close": len(post_close_serial_holders),
+        },
+        "serial_device_holder_snapshot_sha256": {
+            "pre_open": _sha256_payload(pre_open_serial_holders),
+            "post_close": _sha256_payload(post_close_serial_holders),
+        },
+        "failed_at": _validated_wall_time(failed_at),
+        "elapsed_seconds": float(elapsed_seconds),
+        "private_success_bundle_written": False,
+        "tracked_success_manifest_written": False,
+        "proof_labels": [],
+        "hardware_opened": True,
+        "physical_follower_commanded": False,
+    }
+    signed = sign_payload(payload)
+    _verify_private_capture_failure_evidence(signed)
+    return signed
+
+
+def write_private_capture_failure_record(
+    *,
+    output_directory: Path,
+    failure_evidence: dict[str, Any],
+) -> dict[str, Any]:
+    _verify_private_capture_failure_evidence(failure_evidence)
+    if output_directory.exists():
+        raise ValueError(
+            "Private capture failure output directory must be new and immutable"
+        )
+    temporary_directory = output_directory.with_name(
+        output_directory.name + ".tmp"
+    )
+    if temporary_directory.exists():
+        raise ValueError("Private capture failure temporary directory already exists")
+    try:
+        temporary_directory.mkdir(parents=True, exist_ok=False)
+        temporary_path = temporary_directory / "private_capture_failure.json"
+        dump_canonical_json(temporary_path, failure_evidence)
+        reference = {
+            "filename": temporary_path.name,
+            "sha256": hashlib.sha256(temporary_path.read_bytes()).hexdigest(),
+            "size_bytes": temporary_path.stat().st_size,
+            "identity_sha256": failure_evidence["identity_sha256"],
+        }
+        temporary_directory.replace(output_directory)
+    except BaseException:
+        if temporary_directory.exists():
+            shutil.rmtree(temporary_directory, ignore_errors=True)
+        raise
+    return reference
+
+
+def _verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
+    allowed_fields = {
+        "schema_version",
+        "evidence_name",
+        "qualification_scope",
+        "evidence_mode",
+        "status",
+        "session_id",
+        "execution_contract_identity_sha256",
+        "presence_lease_identity_sha256",
+        "discovery_identity_sha256",
+        "pre_open_discovery_identity_sha256",
+        "servo_result_identity_sha256",
+        "target_device_identity_sha256",
+        "operation_counts",
+        "camera_failure_diagnostic",
+        "camera_failure_diagnostic_identity_sha256",
+        "error_types",
+        "serial_device_holders",
+        "serial_device_holder_counts",
+        "serial_device_holder_snapshot_sha256",
+        "failed_at",
+        "elapsed_seconds",
+        "private_success_bundle_written",
+        "tracked_success_manifest_written",
+        "proof_labels",
+        "hardware_opened",
+        "physical_follower_commanded",
+        "identity_sha256",
+    }
+    if not isinstance(payload, dict) or set(payload) != allowed_fields:
+        raise ValueError("Private capture failure evidence fields are malformed")
+    if payload.get("schema_version") != PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION:
+        raise ValueError("Unsupported private capture failure evidence schema")
+    verify_signed_payload(payload, label="Private capture failure evidence")
+    if (
+        payload.get("evidence_name")
+        != "pi05_live_readonly_private_capture_failure"
+        or payload.get("qualification_scope") != "physical_observation"
+        or payload.get("evidence_mode")
+        != "local_private_rejected_physical_read_only_attempt"
+        or payload.get("status") != "rejected"
+    ):
+        raise ValueError("Private capture failure evidence classification drifted")
+    for field in (
+        "session_id",
+        "execution_contract_identity_sha256",
+        "presence_lease_identity_sha256",
+        "discovery_identity_sha256",
+        "pre_open_discovery_identity_sha256",
+        "servo_result_identity_sha256",
+        "target_device_identity_sha256",
+    ):
+        require_nonblank(payload.get(field), label=f"capture failure {field}")
+    diagnostic = payload.get("camera_failure_diagnostic")
+    if not isinstance(diagnostic, dict):
+        raise ValueError("Private capture failure diagnostic is missing")
+    verify_signed_payload(diagnostic, label="Named camera failure diagnostic")
+    if (
+        payload.get("camera_failure_diagnostic_identity_sha256")
+        != diagnostic.get("identity_sha256")
+    ):
+        raise ValueError("Private capture failure diagnostic identity drifted")
+    holders = payload.get("serial_device_holders")
+    counts = payload.get("serial_device_holder_counts")
+    holder_hashes = payload.get("serial_device_holder_snapshot_sha256")
+    if (
+        not isinstance(holders, dict)
+        or set(holders) != {"pre_open", "post_close"}
+        or not isinstance(counts, dict)
+        or set(counts) != {"pre_open", "post_close"}
+        or not isinstance(holder_hashes, dict)
+        or set(holder_hashes) != {"pre_open", "post_close"}
+    ):
+        raise ValueError("Private capture failure holder evidence is malformed")
+    for stage in ("pre_open", "post_close"):
+        require_no_serial_device_holders(holders[stage])
+        if counts[stage] != len(holders[stage]):
+            raise ValueError("Private capture failure holder count drifted")
+        if holder_hashes[stage] != _sha256_payload(holders[stage]):
+            raise ValueError("Private capture failure holder identity drifted")
+    elapsed = payload.get("elapsed_seconds")
+    if (
+        isinstance(elapsed, bool)
+        or not isinstance(elapsed, (int, float))
+        or not math.isfinite(float(elapsed))
+        or elapsed < 0
+    ):
+        raise ValueError("Private capture failure elapsed time is invalid")
+    _validated_wall_time(payload.get("failed_at"))
+    error_types = payload.get("error_types")
+    if (
+        not isinstance(error_types, list)
+        or not error_types
+        or any(not isinstance(value, str) or not value for value in error_types)
+    ):
+        raise ValueError("Private capture failure error types are malformed")
+    if (
+        payload.get("private_success_bundle_written") is not False
+        or payload.get("tracked_success_manifest_written") is not False
+        or payload.get("proof_labels") != []
+        or payload.get("hardware_opened") is not True
+        or payload.get("physical_follower_commanded") is not False
+    ):
+        raise ValueError("Private capture failure authority fields drifted")
+
+
+def _extract_named_camera_failure_diagnostic(error: BaseException) -> dict[str, Any]:
+    if isinstance(error, NamedCameraCaptureError):
+        return copy.deepcopy(error.diagnostic)
+    if isinstance(error, BaseExceptionGroup):
+        matches = []
+        for child in error.exceptions:
+            try:
+                matches.append(_extract_named_camera_failure_diagnostic(child))
+            except ValueError:
+                continue
+        if len(matches) == 1:
+            return matches[0]
+        if matches:
+            raise ValueError("Capture failure contains ambiguous camera diagnostics")
+    raise ValueError("Capture failure does not contain a named-camera diagnostic")
+
+
+def _flatten_error_types(error: BaseException) -> list[str]:
+    result = [type(error).__name__]
+    if isinstance(error, BaseExceptionGroup):
+        for child in error.exceptions:
+            result.extend(_flatten_error_types(child))
+    cause = error.__cause__
+    if cause is not None:
+        result.extend(_flatten_error_types(cause))
+    return result
 
 
 def build_private_observation_evidence(
@@ -1442,6 +1725,7 @@ class FFmpegNamedFiniteCamera:
         self._opened = False
         self._released = False
         self._communicated = False
+        self._failure_context: dict[str, Any] | None = None
         self._audit = {
             "backend": "ffmpeg_named_avfoundation",
             "camera_identity_sha256": _sha256_payload(self._camera),
@@ -1489,13 +1773,22 @@ class FFmpegNamedFiniteCamera:
             "png",
             "pipe:1",
         ]
-        self._process = self._popen_factory(
-            command,
-            stdin=subprocess.DEVNULL,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=False,
-        )
+        try:
+            self._process = self._popen_factory(
+                command,
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                shell=False,
+            )
+        except BaseException:
+            self._set_failure_context(
+                stage="subprocess_start",
+                return_code=None,
+                stdout=b"",
+                stderr=b"",
+            )
+            raise
         self._audit["subprocess_start_successes"] += 1
         self._opened = True
 
@@ -1524,6 +1817,40 @@ class FFmpegNamedFiniteCamera:
     def audit(self) -> dict[str, Any]:
         return copy.deepcopy(self._audit)
 
+    def failure_diagnostic(
+        self,
+        *,
+        primary_error: BaseException,
+        cleanup_error: BaseException | None,
+    ) -> dict[str, Any]:
+        context = copy.deepcopy(self._failure_context)
+        if context is None:
+            context = self._failure_context_payload(
+                stage="camera_lifecycle",
+                return_code=getattr(self._process, "returncode", None),
+                stdout=b"",
+                stderr=b"",
+            )
+        payload = {
+            "schema_version": CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
+            "diagnostic_name": "pi05_named_camera_capture_failure",
+            "stage": context["stage"],
+            "camera_identity_sha256": _sha256_payload(self._camera),
+            "return_code": context["return_code"],
+            "stdout": context["stdout"],
+            "stderr": context["stderr"],
+            "subprocess_audit": copy.deepcopy(self._audit),
+            "primary_error_type": type(primary_error).__name__,
+            "cleanup_error_type": (
+                type(cleanup_error).__name__ if cleanup_error is not None else None
+            ),
+            "proof_labels": [],
+            "physical_follower_commanded": False,
+        }
+        signed = sign_payload(payload)
+        _verify_named_camera_failure_diagnostic(signed)
+        return signed
+
     def _capture_batch(self) -> None:
         self._audit["subprocess_communicate_attempts"] += 1
         self._audit["subprocess_wait_attempts"] += 1
@@ -1533,6 +1860,12 @@ class FFmpegNamedFiniteCamera:
                 timeout=self._read_timeout_seconds
             )
         except subprocess.TimeoutExpired as exc:
+            self._set_failure_context(
+                stage="subprocess_timeout",
+                return_code=getattr(self._process, "returncode", None),
+                stdout=b"",
+                stderr=b"",
+            )
             raise TimeoutError(
                 "Named AVFoundation camera finite batch exceeded "
                 f"{self._read_timeout_seconds}s"
@@ -1542,15 +1875,42 @@ class FFmpegNamedFiniteCamera:
         self._audit["subprocess_communicate_successes"] += 1
         self._audit["subprocess_wait_successes"] += 1
         if not isinstance(stdout, bytes) or not isinstance(stderr, bytes):
+            self._set_failure_context(
+                stage="subprocess_output_type",
+                return_code=getattr(self._process, "returncode", None),
+                stdout=stdout if isinstance(stdout, bytes) else b"",
+                stderr=stderr if isinstance(stderr, bytes) else b"",
+            )
             raise ValueError("Named camera subprocess output must be bytes")
         if self._process.returncode != 0:
+            self._set_failure_context(
+                stage="subprocess_nonzero_exit",
+                return_code=self._process.returncode,
+                stdout=stdout,
+                stderr=stderr,
+            )
             raise RuntimeError("Named camera ffmpeg subprocess failed")
         if stderr.strip():
+            self._set_failure_context(
+                stage="subprocess_stderr",
+                return_code=self._process.returncode,
+                stdout=stdout,
+                stderr=stderr,
+            )
             raise RuntimeError("Named camera ffmpeg emitted stderr")
-        parsed = _parse_exact_png_stream(
-            stdout,
-            expected_frame_count=self._expected_frame_count,
-        )
+        try:
+            parsed = _parse_exact_png_stream(
+                stdout,
+                expected_frame_count=self._expected_frame_count,
+            )
+        except BaseException:
+            self._set_failure_context(
+                stage="png_validation",
+                return_code=self._process.returncode,
+                stdout=stdout,
+                stderr=stderr,
+            )
+            raise
         for frame in parsed:
             frame["receive_started_monotonic_ns"] = started
             frame["receive_finished_monotonic_ns"] = finished
@@ -1563,17 +1923,270 @@ class FFmpegNamedFiniteCamera:
         self._audit["subprocess_communicate_attempts"] += 1
         self._audit["subprocess_wait_attempts"] += 1
         try:
-            self._process.communicate(timeout=self._read_timeout_seconds)
+            stdout, stderr = self._process.communicate(
+                timeout=self._read_timeout_seconds
+            )
         except subprocess.TimeoutExpired:
             self._audit["subprocess_kill_attempts"] += 1
             self._process.kill()
             self._audit["subprocess_kill_successes"] += 1
             self._audit["subprocess_communicate_attempts"] += 1
             self._audit["subprocess_wait_attempts"] += 1
-            self._process.communicate(timeout=self._read_timeout_seconds)
+            stdout, stderr = self._process.communicate(
+                timeout=self._read_timeout_seconds
+            )
         self._audit["subprocess_communicate_successes"] += 1
         self._audit["subprocess_wait_successes"] += 1
         self._communicated = True
+        if isinstance(stdout, bytes) and isinstance(stderr, bytes):
+            stage = (
+                self._failure_context["stage"]
+                if self._failure_context is not None
+                else "subprocess_cleanup"
+            )
+            self._set_failure_context(
+                stage=stage,
+                return_code=getattr(self._process, "returncode", None),
+                stdout=stdout,
+                stderr=stderr,
+            )
+
+    def _set_failure_context(
+        self,
+        *,
+        stage: str,
+        return_code: int | None,
+        stdout: bytes,
+        stderr: bytes,
+    ) -> None:
+        self._failure_context = self._failure_context_payload(
+            stage=stage,
+            return_code=return_code,
+            stdout=stdout,
+            stderr=stderr,
+        )
+
+    def _failure_context_payload(
+        self,
+        *,
+        stage: str,
+        return_code: int | None,
+        stdout: bytes,
+        stderr: bytes,
+    ) -> dict[str, Any]:
+        return {
+            "stage": require_nonblank(stage, label="camera failure stage"),
+            "return_code": return_code,
+            "stdout": _camera_failure_stream_summary(
+                stdout,
+                camera=self._camera,
+                include_preview=False,
+            ),
+            "stderr": _camera_failure_stream_summary(
+                stderr,
+                camera=self._camera,
+                include_preview=True,
+            ),
+        }
+
+
+def _camera_failure_stream_summary(
+    payload: bytes,
+    *,
+    camera: dict[str, Any],
+    include_preview: bool,
+) -> dict[str, Any]:
+    if not isinstance(payload, bytes):
+        raise ValueError("Camera failure subprocess stream must be bytes")
+    summary: dict[str, Any] = {
+        "byte_count": len(payload),
+        "sha256": hashlib.sha256(payload).hexdigest(),
+    }
+    if not include_preview:
+        return summary
+    preview_bytes = payload[:MAX_CAMERA_FAILURE_PREVIEW_BYTES]
+    preview = preview_bytes.decode("utf-8", errors="replace")
+    preview = preview.replace("\r\n", "\n").replace("\r", "\n")
+    preview = "".join(
+        character
+        if character in {"\n", "\t"} or 0x20 <= ord(character) <= 0x7E
+        else "?"
+        for character in preview
+    )
+    for field in ("name", "unique_id", "model_id"):
+        sensitive = camera.get(field)
+        if isinstance(sensitive, str) and sensitive:
+            preview = preview.replace(sensitive, f"<redacted-camera-{field}>")
+    preview = re.sub(
+        r"/(?:Users|dev|private|tmp|Volumes)(?:/[^\s'\"]+)+",
+        "<redacted-path>",
+        preview,
+    )
+    preview = re.sub(
+        r"\b(?=[A-Za-z0-9_-]{10,}\b)(?=[A-Za-z0-9_-]*\d)[A-Za-z0-9_-]+\b",
+        "<redacted-token>",
+        preview,
+    )
+    redaction_truncated = len(preview) > MAX_CAMERA_FAILURE_PREVIEW_BYTES
+    preview = preview[:MAX_CAMERA_FAILURE_PREVIEW_BYTES]
+    summary.update(
+        {
+            "preview_source_byte_count": len(preview_bytes),
+            "preview_max_bytes": MAX_CAMERA_FAILURE_PREVIEW_BYTES,
+            "preview_truncated": (
+                len(payload) > MAX_CAMERA_FAILURE_PREVIEW_BYTES
+                or redaction_truncated
+            ),
+            "sanitized_preview": preview,
+            "sanitization": (
+                "utf8_replace_control_normalize_exact_camera_path_"
+                "and_serial_like_token_redaction"
+            ),
+        }
+    )
+    return summary
+
+
+def _verify_named_camera_failure_diagnostic(payload: dict[str, Any]) -> None:
+    allowed_fields = {
+        "schema_version",
+        "diagnostic_name",
+        "stage",
+        "camera_identity_sha256",
+        "return_code",
+        "stdout",
+        "stderr",
+        "subprocess_audit",
+        "primary_error_type",
+        "cleanup_error_type",
+        "proof_labels",
+        "physical_follower_commanded",
+        "identity_sha256",
+    }
+    if not isinstance(payload, dict) or set(payload) != allowed_fields:
+        raise ValueError("Named camera failure diagnostic fields are malformed")
+    if (
+        payload.get("schema_version") != CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION
+        or payload.get("diagnostic_name")
+        != "pi05_named_camera_capture_failure"
+        or payload.get("stage")
+        not in {
+            "subprocess_start",
+            "subprocess_timeout",
+            "subprocess_output_type",
+            "subprocess_nonzero_exit",
+            "subprocess_stderr",
+            "subprocess_cleanup",
+            "png_validation",
+            "camera_lifecycle",
+        }
+    ):
+        raise ValueError("Named camera failure diagnostic classification drifted")
+    verify_signed_payload(payload, label="Named camera failure diagnostic")
+    camera_identity = payload.get("camera_identity_sha256")
+    if not isinstance(camera_identity, str) or re.fullmatch(
+        r"[0-9a-f]{64}", camera_identity
+    ) is None:
+        raise ValueError("Named camera failure identity is malformed")
+    return_code = payload.get("return_code")
+    if (
+        return_code is not None
+        and (isinstance(return_code, bool) or not isinstance(return_code, int))
+    ):
+        raise ValueError("Named camera failure return code is malformed")
+    stdout = payload.get("stdout")
+    stderr = payload.get("stderr")
+    if not isinstance(stdout, dict) or set(stdout) != {"byte_count", "sha256"}:
+        raise ValueError("Named camera failure stdout summary is malformed")
+    stderr_fields = {
+        "byte_count",
+        "sha256",
+        "preview_source_byte_count",
+        "preview_max_bytes",
+        "preview_truncated",
+        "sanitized_preview",
+        "sanitization",
+    }
+    if not isinstance(stderr, dict) or set(stderr) != stderr_fields:
+        raise ValueError("Named camera failure stderr summary is malformed")
+    for label, stream in (("stdout", stdout), ("stderr", stderr)):
+        count = stream.get("byte_count")
+        digest = stream.get("sha256")
+        if (
+            isinstance(count, bool)
+            or not isinstance(count, int)
+            or count < 0
+            or not isinstance(digest, str)
+            or re.fullmatch(r"[0-9a-f]{64}", digest) is None
+        ):
+            raise ValueError(f"Named camera failure {label} summary is invalid")
+    if (
+        isinstance(stderr.get("preview_source_byte_count"), bool)
+        or not isinstance(stderr.get("preview_source_byte_count"), int)
+        or not 0
+        <= stderr["preview_source_byte_count"]
+        <= min(stderr["byte_count"], MAX_CAMERA_FAILURE_PREVIEW_BYTES)
+        or stderr.get("preview_max_bytes") != MAX_CAMERA_FAILURE_PREVIEW_BYTES
+        or not isinstance(stderr.get("preview_truncated"), bool)
+        or not isinstance(stderr.get("sanitized_preview"), str)
+        or len(stderr["sanitized_preview"]) > MAX_CAMERA_FAILURE_PREVIEW_BYTES
+        or stderr.get("sanitization")
+        != (
+            "utf8_replace_control_normalize_exact_camera_path_"
+            "and_serial_like_token_redaction"
+        )
+    ):
+        raise ValueError("Named camera failure stderr preview is invalid")
+    if (
+        stderr["byte_count"] > MAX_CAMERA_FAILURE_PREVIEW_BYTES
+        and stderr["preview_truncated"] is not True
+    ):
+        raise ValueError("Named camera failure stderr truncation is invalid")
+    audit = payload.get("subprocess_audit")
+    count_fields = {
+        "subprocess_start_attempts",
+        "subprocess_start_successes",
+        "subprocess_communicate_attempts",
+        "subprocess_communicate_successes",
+        "subprocess_wait_attempts",
+        "subprocess_wait_successes",
+        "subprocess_terminate_attempts",
+        "subprocess_terminate_successes",
+        "subprocess_kill_attempts",
+        "subprocess_kill_successes",
+        "release_attempts",
+        "release_successes",
+        "frames_delivered",
+        "capture_property_writes",
+        "continuous_recording_sessions",
+    }
+    if (
+        not isinstance(audit, dict)
+        or set(audit) != {"backend", "camera_identity_sha256", *count_fields}
+        or audit.get("backend") != "ffmpeg_named_avfoundation"
+        or audit.get("camera_identity_sha256") != camera_identity
+        or any(
+            isinstance(audit.get(field), bool)
+            or not isinstance(audit.get(field), int)
+            or audit[field] < 0
+            for field in count_fields
+        )
+    ):
+        raise ValueError("Named camera failure subprocess audit is malformed")
+    if (
+        not isinstance(payload.get("primary_error_type"), str)
+        or not payload["primary_error_type"]
+        or (
+            payload.get("cleanup_error_type") is not None
+            and (
+                not isinstance(payload["cleanup_error_type"], str)
+                or not payload["cleanup_error_type"]
+            )
+        )
+        or payload.get("proof_labels") != []
+        or payload.get("physical_follower_commanded") is not False
+    ):
+        raise ValueError("Named camera failure authority fields drifted")
 
 
 def _parse_exact_png_stream(

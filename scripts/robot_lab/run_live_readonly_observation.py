@@ -26,6 +26,7 @@ from scenesmith.robot_lab.live_readonly_observation import (
     FFmpegNamedFiniteCamera,
     build_live_execution_contract,
     build_operator_presence_lease,
+    build_private_capture_failure_evidence,
     build_private_observation_evidence,
     build_redacted_observation_manifest,
     capture_finite_camera_frames,
@@ -37,6 +38,7 @@ from scenesmith.robot_lab.live_readonly_observation import (
     verify_live_execution_contract,
     verify_redacted_observation_manifest,
     require_no_serial_device_holders,
+    write_private_capture_failure_record,
     write_private_observation_bundle,
 )
 
@@ -214,19 +216,58 @@ def main() -> int:
     )
     post_close_serial_holders = enumerate_serial_device_holders(serial_path)
     require_no_serial_device_holders(post_close_serial_holders)
-    frames = capture_finite_camera_frames(
-        contract,
-        project_state=state,
-        now=_now_iso(),
-        camera_factory=lambda camera: FFmpegNamedFiniteCamera(
-            camera,
-            expected_frame_count=contract["frame_count_per_camera"],
-            read_timeout_seconds=contract["camera_read_timeout_seconds"],
+    private_output = _resolve_private_directory(args.private_output_dir)
+    try:
+        frames = capture_finite_camera_frames(
+            contract,
+            project_state=state,
+            now=_now_iso(),
+            camera_factory=lambda camera: FFmpegNamedFiniteCamera(
+                camera,
+                expected_frame_count=contract["frame_count_per_camera"],
+                read_timeout_seconds=contract["camera_read_timeout_seconds"],
+                monotonic_ns=time.monotonic_ns,
+            ),
             monotonic_ns=time.monotonic_ns,
-        ),
-        monotonic_ns=time.monotonic_ns,
-        wall_time=_now_iso,
-    )
+            wall_time=_now_iso,
+        )
+    except BaseException as capture_error:
+        elapsed_seconds = (time.monotonic_ns() - started_ns) / 1_000_000_000
+        try:
+            failure = build_private_capture_failure_evidence(
+                execution_contract=contract,
+                servo_result=servo_result,
+                error=capture_error,
+                pre_open_discovery=before,
+                pre_open_serial_holders=pre_open_serial_holders,
+                post_close_serial_holders=post_close_serial_holders,
+                failed_at=_now_iso(),
+                elapsed_seconds=elapsed_seconds,
+            )
+            failure_reference = write_private_capture_failure_record(
+                output_directory=private_output,
+                failure_evidence=failure,
+            )
+        except BaseException as evidence_error:
+            raise BaseExceptionGroup(
+                "Live camera capture failed and failure evidence also failed",
+                [capture_error, evidence_error],
+            )
+        print(
+            json.dumps(
+                {
+                    "status": "live_read_only_observation_rejected",
+                    "private_failure_output": str(private_output),
+                    "failure_reference": failure_reference,
+                    "tracked_manifest_written": False,
+                    "proof_labels": [],
+                    "physical_follower_commanded": False,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        raise
     after = capture_live_discovery(
         session_id=contract["session_id"],
         captured_at=_now_iso(),
@@ -246,7 +287,6 @@ def main() -> int:
         pre_open_serial_holders=pre_open_serial_holders,
         post_close_serial_holders=post_close_serial_holders,
     )
-    private_output = _resolve_private_directory(args.private_output_dir)
     refs = write_private_observation_bundle(
         output_directory=private_output,
         private_evidence=private,

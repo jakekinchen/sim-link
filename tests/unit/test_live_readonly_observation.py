@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import ast
 import copy
+import hashlib
 import json
 import struct
 import subprocess
@@ -11,7 +12,11 @@ import zlib
 
 from pathlib import Path
 
-from scenesmith.robot_lab.artifact_contract import load_strict_json, sign_payload
+from scenesmith.robot_lab.artifact_contract import (
+    load_strict_json,
+    sign_payload,
+    verify_signed_payload,
+)
 from scenesmith.robot_lab.leader_arm_bridge import (
     DEFAULT_LEADER_PORT,
     KNOWN_PHYSICAL_FOLLOWER_PORT,
@@ -19,9 +24,12 @@ from scenesmith.robot_lab.leader_arm_bridge import (
 from scenesmith.robot_lab.live_readonly_observation import (
     AuditedReadOnlyBusBackend,
     FFmpegNamedFiniteCamera,
+    MAX_CAMERA_FAILURE_PREVIEW_BYTES,
+    NamedCameraCaptureError,
     build_live_discovery_snapshot,
     build_live_execution_contract,
     build_operator_presence_lease,
+    build_private_capture_failure_evidence,
     build_private_observation_evidence,
     build_redacted_observation_manifest,
     capture_finite_camera_frames,
@@ -36,6 +44,7 @@ from scenesmith.robot_lab.live_readonly_observation import (
     verify_live_execution_contract,
     verify_operator_presence_lease,
     verify_redacted_observation_manifest,
+    write_private_capture_failure_record,
     write_private_observation_bundle,
 )
 from scenesmith.robot_lab.readonly_servo_census import (
@@ -749,6 +758,255 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(audit["subprocess_kill_attempts"], 1)
         self.assertEqual(audit["subprocess_communicate_attempts"], 3)
         self.assertEqual(audit["subprocess_wait_attempts"], 3)
+
+    def test_named_ffmpeg_failure_diagnostic_is_bounded_redacted_and_signed(self):
+        contract = _execution_contract()
+        camera_identity = contract["cameras"][0]
+        stderr = (
+            b"camera="
+            + camera_identity["name"].encode()
+            + b" unique="
+            + camera_identity["unique_id"].encode()
+            + b" model="
+            + camera_identity["model_id"].encode()
+            + b" path=/Users/kelly/private/camera.log token=5B3D0406411\x00\xff "
+            + b"x" * (MAX_CAMERA_FAILURE_PREVIEW_BYTES * 2)
+        )
+        process = _FakeFFmpegProcess(
+            stdout=b"partial-png",
+            stderr=stderr,
+            final_returncode=7,
+        )
+
+        def factory(camera: dict) -> FFmpegNamedFiniteCamera:
+            return FFmpegNamedFiniteCamera(
+                camera,
+                expected_frame_count=2,
+                monotonic_ns=_TickingClock(),
+                popen_factory=lambda *args, **kwargs: process,
+            )
+
+        with self.assertRaises(NamedCameraCaptureError) as captured:
+            capture_finite_camera_frames(
+                contract,
+                project_state=PROJECT_STATE,
+                now="2026-07-11T04:47:00-05:00",
+                camera_factory=factory,
+                monotonic_ns=_TickingClock(),
+                wall_time=lambda: "2026-07-11T04:47:00-05:00",
+            )
+        diagnostic = captured.exception.diagnostic
+        verify_signed_payload(diagnostic, label="Named camera failure diagnostic")
+        self.assertEqual(diagnostic["stage"], "subprocess_nonzero_exit")
+        self.assertEqual(diagnostic["return_code"], 7)
+        self.assertEqual(diagnostic["stdout"]["byte_count"], len(b"partial-png"))
+        self.assertEqual(
+            diagnostic["stdout"]["sha256"], hashlib.sha256(b"partial-png").hexdigest()
+        )
+        self.assertEqual(diagnostic["stderr"]["byte_count"], len(stderr))
+        self.assertEqual(
+            diagnostic["stderr"]["sha256"], hashlib.sha256(stderr).hexdigest()
+        )
+        self.assertTrue(diagnostic["stderr"]["preview_truncated"])
+        preview = diagnostic["stderr"]["sanitized_preview"]
+        self.assertLessEqual(len(preview), MAX_CAMERA_FAILURE_PREVIEW_BYTES)
+        self.assertNotIn(camera_identity["name"], preview)
+        self.assertNotIn(camera_identity["unique_id"], preview)
+        self.assertNotIn(camera_identity["model_id"], preview)
+        self.assertNotIn("/Users/kelly", preview)
+        self.assertNotIn("5B3D0406411", preview)
+        self.assertNotIn("\x00", preview)
+        self.assertEqual(diagnostic["primary_error_type"], "RuntimeError")
+        self.assertIsNone(diagnostic["cleanup_error_type"])
+        self.assertIsInstance(captured.exception.__cause__, RuntimeError)
+        self.assertEqual(diagnostic["subprocess_audit"]["release_successes"], 1)
+        self.assertFalse(diagnostic["physical_follower_commanded"])
+        self.assertEqual(diagnostic["proof_labels"], [])
+
+    def test_named_ffmpeg_failure_preserves_primary_and_cleanup_errors(self):
+        contract = _execution_contract()
+        process = _FakeFFmpegProcess(
+            stdout=b"partial",
+            stderr=b"device unavailable",
+            final_returncode=3,
+        )
+
+        class FailingReleaseCamera(FFmpegNamedFiniteCamera):
+            def release(self) -> None:
+                super().release()
+                raise RuntimeError("release failed")
+
+        def factory(camera: dict) -> FFmpegNamedFiniteCamera:
+            return FailingReleaseCamera(
+                camera,
+                expected_frame_count=2,
+                monotonic_ns=_TickingClock(),
+                popen_factory=lambda *args, **kwargs: process,
+            )
+
+        with self.assertRaises(BaseExceptionGroup) as captured:
+            capture_finite_camera_frames(
+                contract,
+                project_state=PROJECT_STATE,
+                now="2026-07-11T04:47:00-05:00",
+                camera_factory=factory,
+                monotonic_ns=_TickingClock(),
+                wall_time=lambda: "2026-07-11T04:47:00-05:00",
+            )
+        self.assertEqual(len(captured.exception.exceptions), 2)
+        primary, cleanup = captured.exception.exceptions
+        self.assertIsInstance(primary, NamedCameraCaptureError)
+        self.assertIsInstance(primary.__cause__, RuntimeError)
+        self.assertEqual(primary.diagnostic["cleanup_error_type"], "RuntimeError")
+        self.assertIn("release failed", str(cleanup))
+
+    def test_named_ffmpeg_timeout_diagnostic_binds_terminate_kill_cleanup(self):
+        contract = _execution_contract()
+        process = _FakeFFmpegProcess(
+            stdout=_png_frame(marker=b"one") + _png_frame(marker=b"two"),
+            timeout_count=2,
+        )
+
+        def factory(camera: dict) -> FFmpegNamedFiniteCamera:
+            return FFmpegNamedFiniteCamera(
+                camera,
+                expected_frame_count=2,
+                monotonic_ns=_TickingClock(),
+                popen_factory=lambda *args, **kwargs: process,
+            )
+
+        with self.assertRaises(NamedCameraCaptureError) as captured:
+            capture_finite_camera_frames(
+                contract,
+                project_state=PROJECT_STATE,
+                now="2026-07-11T04:47:00-05:00",
+                camera_factory=factory,
+                monotonic_ns=_TickingClock(),
+                wall_time=lambda: "2026-07-11T04:47:00-05:00",
+            )
+        diagnostic = captured.exception.diagnostic
+        self.assertEqual(diagnostic["stage"], "subprocess_timeout")
+        self.assertIsInstance(captured.exception.__cause__, TimeoutError)
+        self.assertEqual(
+            diagnostic["subprocess_audit"]["subprocess_terminate_attempts"], 1
+        )
+        self.assertEqual(
+            diagnostic["subprocess_audit"]["subprocess_kill_attempts"], 1
+        )
+        self.assertIn("terminate", process.calls)
+        self.assertIn("kill", process.calls)
+
+    def test_named_ffmpeg_diagnostic_exact_bound_and_resigned_tamper_fail_closed(self):
+        contract = _execution_contract()
+        stderr = b"x" * MAX_CAMERA_FAILURE_PREVIEW_BYTES
+        process = _FakeFFmpegProcess(
+            stdout=b"partial",
+            stderr=stderr,
+            final_returncode=4,
+        )
+
+        def factory(camera: dict) -> FFmpegNamedFiniteCamera:
+            return FFmpegNamedFiniteCamera(
+                camera,
+                expected_frame_count=2,
+                monotonic_ns=_TickingClock(),
+                popen_factory=lambda *args, **kwargs: process,
+            )
+
+        with self.assertRaises(NamedCameraCaptureError) as captured:
+            capture_finite_camera_frames(
+                contract,
+                project_state=PROJECT_STATE,
+                now="2026-07-11T04:47:00-05:00",
+                camera_factory=factory,
+                monotonic_ns=_TickingClock(),
+                wall_time=lambda: "2026-07-11T04:47:00-05:00",
+            )
+        diagnostic = captured.exception.diagnostic
+        self.assertFalse(diagnostic["stderr"]["preview_truncated"])
+        self.assertEqual(
+            len(diagnostic["stderr"]["sanitized_preview"]),
+            MAX_CAMERA_FAILURE_PREVIEW_BYTES,
+        )
+        tampered = copy.deepcopy(diagnostic)
+        tampered["proof_labels"] = ["physical_observation_capture"]
+        tampered = sign_payload(tampered)
+        with self.assertRaisesRegex(ValueError, "authority fields"):
+            NamedCameraCaptureError(tampered)
+
+    def test_private_camera_failure_record_is_signed_immutable_and_label_free(self):
+        contract = _execution_contract()
+        process = _FakeFFmpegProcess(
+            stdout=b"partial",
+            stderr=b"camera input unavailable",
+            final_returncode=2,
+        )
+
+        def factory(camera: dict) -> FFmpegNamedFiniteCamera:
+            return FFmpegNamedFiniteCamera(
+                camera,
+                expected_frame_count=2,
+                monotonic_ns=_TickingClock(),
+                popen_factory=lambda *args, **kwargs: process,
+            )
+
+        with self.assertRaises(NamedCameraCaptureError) as captured:
+            capture_finite_camera_frames(
+                contract,
+                project_state=PROJECT_STATE,
+                now="2026-07-11T04:47:00-05:00",
+                camera_factory=factory,
+                monotonic_ns=_TickingClock(),
+                wall_time=lambda: "2026-07-11T04:47:00-05:00",
+            )
+        servo_result = execute_live_servo_census(
+            contract,
+            project_state=PROJECT_STATE,
+            now="2026-07-11T04:47:00-05:00",
+            bus_factory=lambda census_contract: _FakeBus(),
+            monotonic_ns=_TickingClock(),
+        )
+        failure = build_private_capture_failure_evidence(
+            execution_contract=contract,
+            servo_result=servo_result,
+            error=captured.exception,
+            pre_open_discovery=_discovery(),
+            pre_open_serial_holders=[],
+            post_close_serial_holders=[],
+            failed_at="2026-07-11T04:47:01-05:00",
+            elapsed_seconds=1.25,
+        )
+        verify_signed_payload(failure, label="Private capture failure evidence")
+        self.assertEqual(failure["proof_labels"], [])
+        self.assertFalse(failure["tracked_success_manifest_written"])
+        self.assertFalse(failure["physical_follower_commanded"])
+        self.assertEqual(
+            failure["serial_device_holder_counts"],
+            {"pre_open": 0, "post_close": 0},
+        )
+        self.assertEqual(
+            failure["camera_failure_diagnostic"]["identity_sha256"],
+            captured.exception.diagnostic["identity_sha256"],
+        )
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output = Path(temporary_directory) / "failure"
+            reference = write_private_capture_failure_record(
+                output_directory=output,
+                failure_evidence=failure,
+            )
+            written = load_strict_json(output / "private_capture_failure.json")
+            self.assertEqual(written, failure)
+            self.assertEqual(
+                reference["sha256"],
+                hashlib.sha256(
+                    (output / reference["filename"]).read_bytes()
+                ).hexdigest(),
+            )
+            with self.assertRaisesRegex(ValueError, "new and immutable"):
+                write_private_capture_failure_record(
+                    output_directory=output,
+                    failure_evidence=failure,
+                )
 
     def test_named_ffmpeg_audits_flow_into_private_and_redacted_evidence(self):
         contract = _execution_contract()
