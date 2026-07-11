@@ -30,13 +30,14 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Preserve Brief 040 correction commits `5102422` and `eeb16e1` plus reviewer
-decision 049 on `origin/codex/pi05-autolearn-loop`, then reclose T16.5a. The v2
-contract now derives protocol 0, baud, model, resolution, register widths, and
-six-joint identity from independently parsed, hash-pinned runtime sources and
-proves the false handshake/torque flags still open/close the port without writes.
-T16.5b and every live serial/camera operation remain closed until this corrected
-review boundary is remotely confirmed.
+Execute Brief 039,
+`docs/briefs/039-live-readonly-census-and-observation.md`, under T16.5b. The
+corrected T16.5a commits `5102422`/`eeb16e1` and reviewer decision 049 are
+remotely preserved through `2407299`; the v2 contract is bound to STS3215
+protocol 0 and exact pinned runtime semantics. Build and pass the live adapter,
+discovery, camera, cleanup, privacy, and evidence tests offline first. Revalidate
+the owner-presence lease immediately before any bounded live open, and fail back
+to offline-only work on any identity or safety ambiguity.
 
 ## Durable State
 
@@ -157,8 +158,8 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
 - Reviewer decision 049 accepts the Brief 040 correction locally: the v2
   contract uses protocol 0 and independently verifies exact runtime source
   hashes and semantics, including no-write open/close guards. T16.5a remains
-  in progress only until correction and review are preserved on the named
-  remote.
+  correction and review are preserved on the named remote through `2407299`;
+  T16.5a is reclosed as corrected `census_trace_conformant` fixture evidence.
 - The owner is physically present and has granted conditional read-only
   hardware/camera authority after verified T16.5a plus final operator
   confirmation for exactly one initial session-scoped `supervised_micro_motion`

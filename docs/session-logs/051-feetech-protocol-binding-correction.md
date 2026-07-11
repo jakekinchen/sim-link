@@ -41,11 +41,16 @@ pinned Feetech constructor and found protocol `1` in the fixture versus protocol
 
 ## Review
 
-Reviewer decision 049 accepts the correction locally. T16.5a remains
-`in_progress`, its capability remains withdrawn, and T16.5b remains closed until
-the correction and review are remotely preserved and confirmed.
+Reviewer decision 049 accepted the correction locally before push. The remote
+closeout below then satisfied the corrected T16.5a verification condition.
 
 ## Remote closeout
 
-Pending scoped reviewer-evidence commit, push, and remote confirmation.
-Hardware and `training_lock` remain closed.
+- Pushed only to `origin/codex/pi05-autolearn-loop`.
+- Fresh fetch, remote-tracking ref, and `git ls-remote` all resolved to
+  `240729968ee1956cab489ea49501768156b16777`.
+- Ancestry checks confirmed correction commits `5102422`/`eeb16e1` and reviewer
+  decision 049 on the named remote.
+- T16.5a is reverified only as corrected `census_trace_conformant` offline
+  fixture evidence. No hardware was enumerated or opened, and T16.5b is next
+  under its separate owner-presence and read-only gates.
