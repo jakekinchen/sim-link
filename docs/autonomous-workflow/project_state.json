@@ -13,8 +13,8 @@
   "last_reviewed_implementation_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
   "source_review": {
     "commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
-    "decision": "VERIFY_BRIEF_043_OFFLINE_AND_KEEP_LIVE_GATE_CLOSED_FOR_SEPARATE_REVIEW",
-    "reviewer_decision": "docs/reviewer-messages/060-brief-043-state-integrity-gates-reviewed.md"
+    "decision": "OPEN_ONE_FRESH_FINITE_T16_5B_SESSION_AFTER_VERIFIED_BRIEF_043",
+    "reviewer_decision": "docs/reviewer-messages/061-open-live-gate-after-brief-043.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -393,9 +393,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "060",
-      "result": "Brief 043 state-integrity prerequisites are verified offline at 7ea26651; the machine disconnect proof, all-signed-alias holder gate, and Torque_Enable census capability are remotely preserved while the live gate remains closed for a separate review commit",
-      "execution_note": "Brief 043 passed 50 focused and 229 broad robot-lab tests, both offline runtime verifiers, deterministic fixture and disconnect-proof verification, py_compile, privacy checks, and git diff checks; no serial or camera was opened and no Studio request, reconnect, write, torque change, motion, policy actuation, or training occurred",
+      "live_gate_review_decision_id": "061",
+      "result": "Brief 043 state-integrity prerequisites are verified and remotely preserved; the live gate is open for at most one fresh finite T16.5b discovery, all-alias holder check, five-minute lease, exact no-write census, and named-camera capture session",
+      "execution_note": "The gate transition itself performed no hardware enumeration or open; implementation evidence remains 50 focused and 229 broad tests plus both offline verifiers, deterministic artifact checks, compilation, privacy checks, and diff checks",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_live_readonly_observation tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
@@ -560,11 +560,32 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-11T09:01:09-05:00",
-      "live_gate_closed_at": "2026-07-11T09:04:30-05:00",
-      "live_gate_close_reason": "live_attempt_002_named_camera_ffmpeg_subprocess_nonzero",
-      "live_gate_reconsideration_state": "brief_043_verified_but_separate_live_gate_review_commit_required",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-11T10:03:00-05:00",
+      "live_gate_valid_until": "2026-07-11T10:43:00-05:00",
+      "live_gate_session_limit": 1,
+      "live_gate_sessions_started": 0,
+      "live_gate_reconsideration_state": "opened_for_one_fresh_finite_session",
+      "live_gate_transitions": [
+        {
+          "state": "open",
+          "at": "2026-07-11T09:01:09-05:00",
+          "review_decision_id": "057",
+          "result": "live_attempt_002_started"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-11T09:04:30-05:00",
+          "review_decision_id": "058",
+          "reason": "live_attempt_002_named_camera_ffmpeg_subprocess_nonzero"
+        },
+        {
+          "state": "open",
+          "at": "2026-07-11T10:03:00-05:00",
+          "review_decision_id": "061",
+          "result": "one_fresh_finite_session_authorized_after_brief_043"
+        }
+      ],
       "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
       "live_gate_basis": {
         "disconnect_proof_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
@@ -693,7 +714,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "perform a separate closed-state review and remote commit that opens at most one fresh finite T16.5b session; derive actual HEAD at runtime and create new discovery, lease, and contract artifacts",
+      "next_action": "after remote confirmation, create one fresh metadata discovery, prove zero holders across both signed aliases, create a five-minute presence lease and exact contract, execute once, and immediately reclose the gate on success or failure",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",

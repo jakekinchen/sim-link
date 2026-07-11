@@ -55,13 +55,15 @@ retry, zero configuration/torque/register writes, and
 the exact read trace and match all decoded values; no live six-servo torque
 claim exists yet.
 
-The live gate remains closed. Brief 043 passed 50 focused and 229 broad tests,
+Brief 043 passed 50 focused and 229 broad tests,
 both offline runtime verifiers, deterministic fixture and disconnect-proof
 verification, compilation, privacy checks, and diff checks. No serial or camera
 was opened, and no Studio request, reconnect, process signal, write, torque
-change, motion, policy actuation, or training occurred. Reviewer 060 accepts
-this offline boundary only. A separate reviewed, remotely preserved state
-transition is required before at most one new finite T16.5b session.
+change, motion, policy actuation, or training occurred. Reviewer 060 accepted
+the offline boundary, and reviewer 061 now opens the live gate for at most one
+fresh finite T16.5b session after its own state-transition commit is remotely
+confirmed. The gate expires at `2026-07-11T10:43:00-05:00` and must reclose
+immediately on success or failure.
 
 Live attempts 001 and 002 remain permanently rejected and grant no proof label.
 Attempt 002 cannot be retro-diagnosed because it predates bounded diagnostic

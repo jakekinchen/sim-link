@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; Brief 043 verified offline at 7ea26651; live gate closed pending a separate reviewed remote transition
+current_task: T16.5b in progress; Brief 043 verified offline at 7ea26651; reviewer 061 opens at most one fresh finite session through 10:43 CDT after remote confirmation
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: 7ea26651 remotely preserves disconnect proof 627de4fd..., consumed permit 85f91cea..., all-alias zero-holder snapshot b33a7cc0..., and source-bound six-servo Torque_Enable capability; 50 focused and 229 broad tests
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none in Brief 043; live_gate remains mechanically closed until a separate reviewed state-transition commit is remotely confirmed
-next_step: review and remotely preserve a separate one-fresh-session live-gate transition; then create new discovery, five-minute lease, and exact execution contract
+blockers: none at the gate boundary; any live identity, holder, torque, camera, lease, cleanup, or evidence mismatch immediately recloses the gate
+next_step: confirm the gate-transition commit remotely; create fresh discovery; prove both aliases holder-free; create five-minute lease and exact contract; execute once; reclose
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: review and remotely preserve a separate one-fresh-session live-gate t
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 043 `7ea26651` offline verified; proof `627de4fd...`; all-alias holder `b33a7cc0...`; Torque_Enable required live for all six; live gate closed for separate review commit |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 043 `7ea26651` verified; reviewer 061 opens one fresh session through 10:43 CDT; Torque_Enable required live for all six; reclose on any outcome |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,20 @@ next_step: review and remotely preserve a separate one-fresh-session live-gate t
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 043 live gate opened for one fresh session
+
+```text
+Current task: T16.5b
+State: in_progress; live gate open after remote confirmation only; one-session limit; valid through 10:43 CDT
+Prerequisites: 7ea26651 implementation and 37108426 canonical closeout remote; proof 627de4fd...; permit consumed; holder b33a7cc0... counts [0,0]; Torque_Enable trace gate verified offline
+Allowed sequence: fresh metadata discovery; zero holders across canonical plus paired TTY; five-minute owner-presence lease; exact content-addressed no-write contract; six-servo census; no-write close; zero holders; finite named-camera batches; stable discovery; private bundle and tracked redacted manifest
+Mandatory: all six Torque_Enable values zero; handshake false; disconnect disable_torque false; zero writes/motion; physical_follower_commanded=false; reclose gate on success or failure
+Withheld: reconnect, motion, policy actuation, synchronized/policy-input-valid claim, physical qualification, training
+Hardware: none during this state transition
+Training lock: closed
+Next step: commit/push/confirm transition, then execute exactly one fresh session
+```
 
 ### 2026-07-11 - Brief 043 state-integrity gates verified offline
 
