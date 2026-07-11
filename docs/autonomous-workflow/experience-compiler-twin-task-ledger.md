@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress; Brief 050 fixture runtime verified and remote at 4f75a7a
+current_task: T16.5c in progress under Brief 051 stable camera identity correction
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: calibration/profile contract 90e7baea...; Brief 050 runtime 4f75a7a; 27 focused in two runtimes and 265 broad tests; live-marked adapter refused pre-connect; all cleanup failures preserved; no hardware/policy access
+evidence: Briefs 048-050 remain remotely preserved; accepted v4 camera digest includes volatile numeric index and is quarantined from future live source binding pending migration
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: T16.5b none; T16.5c static-pose-bracketed synchronized-enough observation and policy-shadow input parity remain unverified
-next_step: open an offline source-bound live-candidate contract/runner brief; no hardware until implementation review and a later separate live-gate transition
+next_step: implement and verify Brief 051 manifest-v5 stable camera digest migration and rebind all dependent offline artifacts; no hardware access
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: open an offline source-bound live-candidate contract/runner brief; no
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; manifest `eff3c824...`; private `125de28f...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; reviewer 072; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-050 verified through `4f75a7a`; injected runtime proves fixture lifecycle/cleanup and refuses live transports; source-bound live candidate, real bracket, preprocessing, shadow, and replay remain pending |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-050 verified; Brief 051 active offline to separate attempt-specific camera audit identity from index-stable name/unique-ID/model-ID/mode identity before any live candidate |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler

@@ -1165,9 +1165,10 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
+      "active_brief_id": "051",
       "latest_verified_brief_id": "050",
       "completed_brief_ids": ["048", "049", "050"],
-      "result": "Briefs 048-050 are verified and remotely preserved: signed calibration and static-pose contracts plus an injected fixture runtime prove exact holder/connect/read/camera/read/no-torque-close ordering and exception-safe cleanup without allowing a live-marked transport",
+      "result": "Briefs 048-050 are verified and remotely preserved, but the accepted v4 manifest camera digest includes the volatile numeric AVFoundation index; Brief 051 quarantines that digest from future live source binding while an index-stable identity and all dependent artifacts are migrated offline",
       "artifact": {
         "path": "configurations/robot_lab/pi05_calibration_profile.json",
         "schema_version": "scenesmith.calibration_profile.v1",
@@ -1204,7 +1205,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/calibration_profile.py scripts/robot_lab/write_calibration_profile.py tests/unit/test_calibration_profile.py",
         "git diff --check"
       ],
-      "next_action": "open a separate offline brief for a source-bound live-candidate contract/runner that composes fresh discovery, owner-presence lease, exact camera resolution, holder snapshots, and the verified bracket runtime; do not reopen hardware until its implementation and a later gate transition are separately reviewed",
+      "next_action": "implement and verify Brief 051 manifest-v5 stable camera identity migration, then rebuild the calibration/static-pose artifact chain; do not access hardware",
       "conditional_authority": [
         "physical_observation_preprocessing",
         "pi05_policy_shadow_no_actuation",

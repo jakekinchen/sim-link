@@ -173,6 +173,14 @@ failures. It refuses a live-marked adapter before connect and grants only
 pass in both pinned runtimes and the 265-test broad gate passes. No hardware or
 policy ran; the live gate remains closed.
 
+Brief 051 is active offline because the accepted v4 manifest's
+`camera_identity_sha256` includes the capture-time numeric AVFoundation index.
+That digest is valid for attempt audit but is not stable across the index churn
+already observed in T16.5b. Before a live candidate exists, the manifest and
+all dependent calibration/static-pose artifacts must bind a separately verified
+name/unique-ID/model-ID/input-mode digest that excludes only the numeric index.
+The live gate remains closed.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
