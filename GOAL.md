@@ -97,9 +97,17 @@ same mode; legacy attempt-003/004 failures still verify. The live gate remains
 closed until reviewer 067's scoped transition is remotely confirmed, then
 exactly one fresh discovery-v2/contract-v3 session is permitted from
 `2026-07-11T11:04:00-05:00` through `2026-07-11T11:34:00-05:00`. It must reclose
-on every outcome. Sequential capture is not synchronized or policy-input-valid.
-Studio reconnect remains deferred unless exact device, calibration, and
-current-pose evidence proves it mechanically no-motion-safe.
+on every outcome. Attempt 005 consumed that session and is rejected in post-run
+adversarial review: camera 0 matched its signed 160x90 mode, but camera 1's
+424x240 contract silently produced two 640x480 PNGs and the current verifier
+incorrectly accepted them. The candidate manifest `0d7b4400...` was removed;
+private candidate `ebb4934c...` is retained only as rejected diagnostic evidence,
+and no proof label is granted. The gate reclosed at
+`2026-07-11T11:05:47-05:00`. Brief 046 is active offline to enforce captured
+frame dimensions against the signed per-camera mode. Sequential capture is not
+synchronized or policy-input-valid. Studio reconnect remains deferred unless
+exact device, calibration, and current-pose evidence proves it mechanically
+no-motion-safe.
 
 ## Durable State
 

@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; reviewer 067 authorizes one fresh discovery-v2/contract-v3 session after the scoped transition is remotely confirmed
+current_task: T16.5b in progress; attempt 005 rejected for silent second-camera output-dimension drift; live gate closed; Brief 046 active offline
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: 820a40f implementation and a6da4b4 canonical closeout remote; signed per-camera input modes; reviewer 067 one-session gate
+evidence: attempt 005 discovery b8b11e74..., contract f76ea66f..., private candidate ebb4934c...; camera 0 matched 160x90, camera 1 requested 424x240 but produced 640x480; candidate manifest removed; no accepted label
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none for the bounded read-only session; gate becomes effective only after the transition commit is remotely confirmed
-next_step: run exactly one fresh discovery-v2/holder/lease/contract-v3/census/camera/finalization session, reclose on every outcome, then review and remotely preserve it
+blockers: captured-frame dimensions are not verified against the signed per-camera input mode
+next_step: commit/push attempt-005 rejection; implement and verify Brief 046 offline; keep live gate closed
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: run exactly one fresh discovery-v2/holder/lease/contract-v3/census/ca
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 045 `820a40f` and closeout `a6da4b4` remote; reviewer 067 permits exactly one fresh finite discovery-v2/contract-v3 session after gate commit confirmation |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 005 rejected after post-run review found 424x240 contract/640x480 output drift on camera 1; candidate manifest removed; gate closed; Brief 046 active |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,22 @@ next_step: run exactly one fresh discovery-v2/holder/lease/contract-v3/census/ca
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5b live attempt 005 rejected; output-dimension drift
+
+```text
+Current task: T16.5b
+State: in_progress; live gate closed; Brief 046 active offline
+Discovery: v2 session t16-5b-20260711-1105-cdt; identity b8b11e74...; 209 C922 modes and 26 RealSense modes; zero devices opened during metadata discovery
+Contract: v3 f76ea66f...; lease 4680d13a...; camera 0 yuyv422 160x90@30; camera 1 yuyv422 424x240@30
+Servo/holder safety: 54 reads, zero retries/writes/torque changes/motion; all six Torque_Enable=0; no-torque close; both signed aliases [0,0] before and after; no ffmpeg process
+Candidate capture: four valid PNGs; camera 0 observed 160x90 and matched; camera 1 observed 640x480 and contradicted signed 424x240 mode
+Verifier gap: current v4 private/manifest verifier accepted the mismatched dimensions; post-run same-agent audit rejected the session
+Evidence: private candidate ebb4934c.../file c341fdf3... retained ignored; candidate manifest 0d7b4400.../file 095ea665... removed; accepted proof labels []
+Forbidden effects: no reconnect, Studio POST, signal, write, torque change, motion, policy, optimizer, paid compute, or physical qualification
+Training lock: closed
+Next step: canonical rejection closeout, then Brief 046 exact output-dimension enforcement offline
+```
 
 ### 2026-07-11 - One fresh discovery-v2/contract-v3 session gated
 

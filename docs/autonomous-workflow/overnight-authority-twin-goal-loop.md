@@ -383,6 +383,12 @@ with the owner physically present.
   framerate arguments precede the AVFoundation input and remain bound through
   audit, failure, private-success, and tracked-manifest verification. Never
   infer the second camera's mode from the first camera's diagnostic.
+- After rejected attempt 005, decoded PNG width and height must equal the signed
+  selected mode for that exact camera. Command/audit agreement is insufficient:
+  any captured-frame dimension drift rejects before private-success or tracked-
+  manifest construction, retains label-free failure evidence, and recloses the
+  gate. A post-run adversarial mismatch also invalidates and removes any
+  uncommitted candidate success manifest.
 - This task grants observation evidence only, never physical qualification.
 
 ### T16.5c - No-actuation observation, shadow, and replay
