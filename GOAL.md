@@ -286,13 +286,16 @@ real acceptance, role assignment, or task prompt exists. Only
 weight load, preprocessing, inference, replay, policy label, hardware access,
 or live-gate transition is permitted.
 
-Brief 058 is now in progress as the final justified offline preparation before
-the decisive live experiment. It may prove only that an accepted-review-shaped
-deterministic static fixture becomes exact model-ready PI0.5 bytes and tensors
-through the pinned CPU preprocessor and image transform. The real Brief 057
-gate remains blocked, and no model, weight, inference, replay, hardware,
-policy-shadow, live-gate, motion, or training authority follows from fixture
-parity.
+Brief 058 is verified and remotely preserved at implementation `77724e1`. An
+accepted-review-shaped deterministic static fixture now becomes exact
+model-ready PI0.5 bytes and tensors through the pinned CPU preprocessor and
+image transform, including three ordered image tensors/masks and exact prompt
+tokens. The fixture also exposes wrist-flex and gripper normalization outside
+the declared tokenizer domain, so `policy_shadow_input_valid` remains false.
+Only `fixture_pi05_model_ready_tensor_parity_conformant` is newly granted. The
+real Brief 057 gate, live gate, model/weight/inference/replay, hardware,
+policy-shadow, motion, and training authorities remain closed; the decisive
+live experiment requires a fresh hardware-supervised on-request parent.
 
 ## Durable State
 

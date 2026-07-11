@@ -10,13 +10,13 @@
     "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "44dd871745efcc3490321a3ada92b4ddf138ba6c",
-  "last_reviewed_implementation_commit": "44dd871745efcc3490321a3ada92b4ddf138ba6c",
+  "verified_through_commit": "77724e14ba499fadb981c4099b334a19a235c51d",
+  "last_reviewed_implementation_commit": "77724e14ba499fadb981c4099b334a19a235c51d",
   "source_review": {
-    "commit": "44dd871745efcc3490321a3ada92b4ddf138ba6c",
-    "implementation_commit": "44dd871745efcc3490321a3ada92b4ddf138ba6c",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_057_PI05_REVIEWED_INPUT_ISSUANCE_GATE_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/083-accept-brief-057-pi05-reviewed-input-issuance-gate.md"
+    "commit": "77724e14ba499fadb981c4099b334a19a235c51d",
+    "implementation_commit": "77724e14ba499fadb981c4099b334a19a235c51d",
+    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_058_FIXTURE_MODEL_READY_TENSOR_PARITY_LIVE_GATE_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/084-accept-brief-058-pi05-fixture-model-ready-tensor-parity.md"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -1171,10 +1171,10 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": "058",
-      "latest_verified_brief_id": "057",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057"],
-      "result": "Briefs 048-057 are verified and remotely preserved; Brief 058 is in progress to prove fixture-only model-ready tensor parity without accepting real reviewed inputs, loading weights, inferring, accessing hardware, or reopening the live gate",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "058",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058"],
+      "result": "Briefs 048-058 are verified and remotely preserved: fixture-only PI0.5 model-ready bytes and tensors are deterministic through the exact cached CPU preprocessor and image transform, while the real reviewed-input gate remains blocked and no live, shadow, replay, model-weight, hardware, motion, or training authority is granted",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1445,7 +1445,46 @@
         "broad_test_count": 322,
         "broad_test_duration_seconds": 69.292
       },
+      "pi05_fixture_model_ready_tensor_parity": {
+        "implementation_commit": "77724e14ba499fadb981c4099b334a19a235c51d",
+        "artifact_path": "configurations/robot_lab/pi05_fixture_model_ready_tensor_parity.json",
+        "schema_version": "scenesmith.pi05_fixture_model_ready_tensor_parity.v1",
+        "identity_sha256": "559b9dbd112d9df460b000e6c127d6f16200d9e89a2d418b3e8a8179e1af8732",
+        "runtime_identity_sha256": "4c89ca10c3adaae0a623461b245d1dfc2ee53329e7b083927426961149ca583f",
+        "evidence_class": "deterministic_fixture_preprocessing",
+        "selected_state": "q_after",
+        "selected_frame_rule": "highest_complete_frame_index",
+        "selected_camera_roles": ["observation.images.top", "observation.images.wrist"],
+        "model_image_order": ["observation.images.base_0_rgb", "observation.images.left_wrist_0_rgb", "observation.images.right_wrist_0_rgb"],
+        "model_image_masks": [true, true, false],
+        "tokenizer_length": 200,
+        "nonpadding_token_count": 56,
+        "discretized_state": [110, 140, 105, -1, 249, 255],
+        "normalized_state_out_of_domain_joints": ["wrist_flex", "gripper"],
+        "model_call_argument_order": ["images", "img_masks", "tokens", "masks"],
+        "separate_state_tensor_passed_to_model": false,
+        "state_semantics_embedded_in_prompt_tokens": true,
+        "chunk_size": 50,
+        "n_action_steps": 50,
+        "queue_reset_required_before_first_sample": true,
+        "model_instantiated": false,
+        "model_weights_named": false,
+        "model_weights_read": false,
+        "policy_inference_run": false,
+        "policy_shadow_run": false,
+        "mujoco_replay_run": false,
+        "network_accessed": false,
+        "hardware_accessed": false,
+        "physical_follower_commanded": false,
+        "capability": "fixture_pi05_model_ready_tensor_parity_conformant",
+        "focused_test_count_per_runtime": 153,
+        "broad_test_count": 352,
+        "broad_test_duration_seconds": 82.674
+      },
       "test_commands": [
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_fixture_preprocessing tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_pi05_fixture_preprocessing tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
+        "external/leLab/.venv/bin/python scripts/robot_lab/write_pi05_fixture_preprocessing.py --verify",
         "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python -m unittest -q tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_calibration_profile tests.unit.test_static_pose_bracket tests.unit.test_static_pose_bracket_runtime tests.unit.test_live_readonly_observation",
         "./.mujoco_venv/bin/python scripts/robot_lab/verify_static_pose_live_execution_sources.py",
@@ -1458,11 +1497,11 @@
         "external/leLab/.venv/bin/python scripts/robot_lab/write_pi05_preprocessing_contract.py --verify",
         "./.mujoco_venv/bin/python scripts/robot_lab/write_pi05_reviewed_input_gate.py --verify",
         "external/leLab/.venv/bin/python scripts/robot_lab/write_pi05_reviewed_input_gate.py --verify",
-        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
-        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
+        "./.mujoco_venv/bin/python -m unittest -q tests.unit.test_pi05_fixture_preprocessing tests.unit.test_pi05_reviewed_input_gate tests.unit.test_pi05_preprocessing_contract tests.unit.test_static_pose_session_review tests.unit.test_static_pose_live_session tests.unit.test_static_pose_live_execution tests.unit.test_static_pose_live_candidate tests.unit.test_static_pose_bracket_runtime tests.unit.test_static_pose_bracket tests.unit.test_calibration_profile tests.unit.test_live_readonly_observation tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_robot_lab_intervention tests.unit.test_computed_twin_qualification tests.unit.test_inertia_numerics tests.unit.test_artifact_contract tests.unit.test_authority_composer tests.unit.test_production_inertial_compiler tests.unit.test_measured_inertial_intake tests.unit.test_robotics_dependency_lock tests.unit.test_twin_contract tests.unit.test_structural_twin_diff tests.unit.test_lerobot_stack",
+        "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_fixture_preprocessing.py scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_fixture_preprocessing.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_fixture_preprocessing.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "execute Brief 058 fixture-only model-ready tensor parity through the exact cached CPU preprocessor and model-input image transform; do not treat fixture evidence as a live bundle, load weights, infer, access hardware, replay, or transition the live gate",
+      "next_action": "stop at the current parent boundary; begin the decisive live static-pose bracket only in a fresh hardware-supervised on-request parent with a finite window, separate reviewed live-gate transition, fresh owner-presence lease, discovery, and all-alias zero-holder evidence",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
@@ -1489,7 +1528,8 @@
         "fail_closed_static_pose_live_session_orchestrator_conformant",
         "redacted_static_pose_live_candidate_session_review_conformant",
         "pi05_policy_input_preprocessing_source_contract_conformant",
-        "pi05_reviewed_input_issuance_gate_conformant"
+        "pi05_reviewed_input_issuance_gate_conformant",
+        "fixture_pi05_model_ready_tensor_parity_conformant"
       ],
       "authority_not_granted": [
         "actual_live_review_manifest",
