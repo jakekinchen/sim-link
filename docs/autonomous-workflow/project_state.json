@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
-  "last_reviewed_implementation_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
+  "verified_through_commit": "6eb5f898f1f80fdde684b19027a8c63c391c3867",
+  "last_reviewed_implementation_commit": "6eb5f898f1f80fdde684b19027a8c63c391c3867",
   "source_review": {
-    "commit": "09fc35802374967f3cebfa2b9c72c8d3f7476c0e",
-    "decision": "REJECT_LIVE_ATTEMPT_005_OUTPUT_DIMENSION_DRIFT_AND_OPEN_OFFLINE_VERIFIER_CORRECTION",
-    "reviewer_decision": "docs/reviewer-messages/068-reject-live-attempt-005-output-dimensions.md"
+    "commit": "6eb5f898f1f80fdde684b19027a8c63c391c3867",
+    "decision": "VERIFY_BRIEF_046_OFFLINE_AND_OPEN_SIGNED_640X480_SELECTION_CORRECTION",
+    "reviewer_decision": "docs/reviewer-messages/069-brief-046-dimension-verifier-reviewed.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -384,8 +384,8 @@
       "metadata_compatibility_correction_commit": "b85a253",
       "metadata_review_decision_id": "051",
       "correction_brief_id": "041",
-      "completed_correction_brief_id": "045",
-      "active_correction_brief_id": "046",
+      "completed_correction_brief_id": "046",
+      "active_correction_brief_id": "047",
       "rejected_attempt_review_decision_ids": ["052", "058", "062", "065", "068"],
       "camera_identity_correction_commits": [
         "ea99ec9",
@@ -394,9 +394,9 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "068",
-      "result": "Live attempt 005 is rejected in post-execution adversarial review because the second camera contract requested 424x240 while both PNGs were 640x480; the current verifier incorrectly accepted silent output-dimension drift, so the candidate tracked manifest was removed and no proof label is granted",
-      "execution_note": "Attempt 005 completed 54 no-write reads with all six Torque_Enable values zero, clean no-torque close, zero holders across both aliases, and four finite PNGs; camera 0 matched 160x90, camera 1 silently drifted from requested 424x240 to observed 640x480, cleanup passed, the gate reclosed, and the ignored private candidate bundle remains only as rejected diagnostic evidence",
+      "live_gate_review_decision_id": "069",
+      "result": "Brief 046 exact decoded-dimension enforcement is verified offline at 6eb5f89; capture, private-success, and manifest layers now reject attempt 005's 424x240-to-640x480 drift, the live gate remains closed, and Brief 047 is active to require a signed 640x480 minimum mode",
+      "execution_note": "Brief 046 passed 53 focused tests, 33 camera tests under the pinned LeLab runtime, and 232 broad robot-lab tests; both offline verifiers, actual attempt-005 candidate rejection, pycompile, authority-surface, privacy, and diff checks passed with no hardware access",
       "test_commands": [
         "./.mujoco_venv/bin/python -m unittest tests.unit.test_virtual_follower_disconnect_proof tests.unit.test_readonly_servo_census tests.unit.test_live_readonly_observation",
         "external/leLab/.venv/bin/python -m unittest tests.unit.test_live_readonly_observation",
@@ -694,10 +694,11 @@
         "routing_state_sha256": "620cb845cb8f1507263fdf7b6aec651a69e4b028d90628c935b0af0b533fdcb4"
       },
       "camera_capture_backend": {
-        "state": "live_rejected_output_dimension_drift",
+        "state": "offline_verified_exact_output_dimension_enforcement",
         "backend": "ffmpeg_named_avfoundation",
         "explicit_mode_binding_commit": "4ae0521c1c34279b1464c151988ee5ae19e2fd7d",
         "signed_per_camera_mode_binding_commit": "820a40f0339ccd1c5cfd71789bbea6cdf1b4f036",
+        "exact_output_dimension_enforcement_commit": "6eb5f898f1f80fdde684b19027a8c63c391c3867",
         "discovery_schema_version": "scenesmith.live_readonly_discovery.v2",
         "execution_contract_schema_version": "scenesmith.live_readonly_observation_contract.v3",
         "private_success_schema_version": "scenesmith.live_readonly_observation_private.v4",
@@ -743,7 +744,8 @@
           "exact_frame_count",
           "no_trailing_bytes",
           "subprocess_exit_and_stderr",
-          "terminate_kill_wait_cleanup_counts"
+          "terminate_kill_wait_cleanup_counts",
+          "decoded_frame_dimensions_equal_signed_input_mode"
         ],
         "latest_post_execution_rejection": {
           "attempt_id": "t16-5b-live-attempt-005",
@@ -753,6 +755,7 @@
           "requested_dimensions": [424, 240],
           "observed_dimensions": [640, 480],
           "current_verifier_incorrectly_accepted": true,
+          "corrected_verifier_rejects_candidate": true,
           "tracked_manifest_removed": true,
           "accepted_proof_labels": []
         },
@@ -918,7 +921,7 @@
         "sequential census then camera evidence is finite physical capture, not synchronized observation or policy-shadow-input-valid"
       ],
       "blocked_on": [
-        "captured_frame_dimensions_not_enforced_against_signed_input_mode"
+        "selection_rule_can_choose_live_unhonored_sub_640_realSense_mode"
       ],
       "owner_decision_required": {
         "state": "granted",
@@ -1016,7 +1019,7 @@
           "physical_follower_commanded": false
         }
       ],
-      "next_action": "commit and remotely preserve attempt 005 rejection, then implement Brief 046 offline to reject captured-frame dimensions that differ from the signed camera input mode; keep the live gate closed",
+      "next_action": "implement Brief 047 offline to require a signed mode of at least 640x480 for each camera, choosing the smallest qualifying exact 30-fps mode; keep the live gate closed",
       "authority_not_granted": [
         "live_read_only_census_observed",
         "physical_observation_capture",
@@ -1041,7 +1044,8 @@
         "complete_failure_servo_evidence_offline_verified",
         "attempt_004_complete_six_servo_torque_off_evidence_verified_without_session_label",
         "signed_per_camera_supported_modes_offline_verified",
-        "exact_pre_input_pixel_format_size_and_framerate_offline_verified"
+        "exact_pre_input_pixel_format_size_and_framerate_offline_verified",
+        "exact_decoded_output_dimensions_offline_verified"
       ]
     },
     "T16.5c": {

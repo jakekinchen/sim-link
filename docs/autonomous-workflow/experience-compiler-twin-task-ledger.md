@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; attempt 005 rejected for silent second-camera output-dimension drift; live gate closed; Brief 046 active offline
+current_task: T16.5b in progress; Brief 046 exact output-dimension enforcement verified at 6eb5f89; live gate closed; Brief 047 signed 640x480-minimum selection active offline
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: attempt 005 discovery b8b11e74..., contract f76ea66f..., private candidate ebb4934c...; camera 0 matched 160x90, camera 1 requested 424x240 but produced 640x480; candidate manifest removed; no accepted label
+evidence: 6eb5f89 remote; 53 focused, 33 LeLab-runtime camera, and 232 broad tests; corrected verifier rejects actual attempt-005 candidate; both signed camera mode sets include 640x480@30.000030
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: captured-frame dimensions are not verified against the signed per-camera input mode
-next_step: commit/push attempt-005 rejection; implement and verify Brief 046 offline; keep live gate closed
+blockers: current selection can choose the live-disproven sub-640 RealSense mode
+next_step: implement and verify Brief 047 signed 640x480-minimum selection offline; keep live gate closed
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: commit/push attempt-005 rejection; implement and verify Brief 046 off
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 005 rejected after post-run review found 424x240 contract/640x480 output drift on camera 1; candidate manifest removed; gate closed; Brief 046 active |
+| T16.5b | in_progress | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Brief 046 `6eb5f89` verifies exact decoded dimensions and rejects actual attempt 005; Brief 047 requires signed >=640x480 selection; gate closed |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,20 @@ next_step: commit/push attempt-005 rejection; implement and verify Brief 046 off
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 046 exact output dimensions verified offline
+
+```text
+Current task: T16.5b
+State: in_progress; Brief 046 verified offline; live gate closed; Brief 047 active offline
+Completed: named FFmpeg capture rejects parsed PNG dimensions that differ from signed mode before frame return; captured-frame/private-success and manifest layers independently recheck exact dimensions
+Actual evidence: corrected manifest builder rejects attempt-005 private candidate ebb4934c... for 424x240-to-640x480 camera-1 drift
+Verification: 6eb5f89 remote; 53 focused tests; 33 LeLab-runtime camera tests; 232 broad tests in 71.943 seconds; both offline verifiers; actual candidate rejection; pycompile; authority/privacy/diff checks
+Hardware: none during Brief 046; live gate closed; no discovery/open, Studio request, reconnect, signal, write, torque change, motion, policy, optimizer, or paid compute
+Remaining practical gap: deterministic smallest-area selection chose a signed 424x240 RealSense mode that live capture did not honor; both cameras have signed 640x480@30.000030 alternatives
+Training lock: closed
+Next step: Brief 047 signed 640x480-minimum selection offline
+```
 
 ### 2026-07-11 - T16.5b live attempt 005 rejected; output-dimension drift
 

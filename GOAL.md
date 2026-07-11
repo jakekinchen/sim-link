@@ -104,7 +104,12 @@ incorrectly accepted them. The candidate manifest `0d7b4400...` was removed;
 private candidate `ebb4934c...` is retained only as rejected diagnostic evidence,
 and no proof label is granted. The gate reclosed at
 `2026-07-11T11:05:47-05:00`. Brief 046 is active offline to enforce captured
-frame dimensions against the signed per-camera mode. Sequential capture is not
+frame dimensions against the signed per-camera mode. Implementation `6eb5f89`
+is remotely preserved and the corrected capture/private/manifest verifiers
+reject the actual attempt-005 candidate. Both cameras' signed discovery sets
+contain 640x480 modes at 30.000030 fps. Brief 047 is active offline to require
+at least 640x480 and choose the smallest qualifying signed mode, avoiding the
+already disproven sub-640 RealSense selection. Sequential capture is not
 synchronized or policy-input-valid. Studio reconnect remains deferred unless
 exact device, calibration, and current-pose evidence proves it mechanically
 no-motion-safe.
