@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b Brief 041 offline correction reviewed; live gate closed on pre-existing serial holder
+current_task: T16.5b blocked after three identical owner-authority turns; stop sentinel active
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: read-only Studio GET audit at 05:52:03 CDT reports leader/follower connected, follower torque true, safety armed, route none, and zero jobs; status hashes 79f4ce89.../8c425d38.../620cb845...
+evidence: third audit at 05:54:27 CDT exactly repeats holder 64230513..., hardware 79f4ce89..., safety 8c425d38..., routing 620cb845...; reviewer 054 and manager 013 stop the loop
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: final operator confirmation is granted for one exact initial session-scoped supervised_micro_motion permit after T16.5a-T16.5c and every permit/lease gate pass; no second prompt is required; any expansion is unauthorized
-blockers: SIGTERM would close the process without explicit torque release, while the Studio disconnect route would torque-disable and is a motor-register write; neither is authorized without a narrow owner choice; physical motion remains closed
-next_step: ask owner to manually disconnect follower in Studio, explicitly authorize the exact torque-release disconnect, or keep Studio active and remain offline; verify zero holders after either disconnect path
+blockers: proven three-turn missing owner choice; SIGTERM leaves torque state unchanged, disconnect torque-disables via motor write, and no safe dependency-ready slice remains before T16.5b
+next_step: wait for owner choice 1/2/3; on resume, verify external state, remove stop sentinel only after zero-holder proof and canonical reopen
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: ask owner to manually disconnect follower in Studio, explicitly autho
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Brief 041 commits `ea99ec9`/`66003d8`/`fd13bf6`/`01802a0`; reviewer 053; 19 dedicated/35 combined/214 broad tests; stable named camera + zero-holder gates offline-verified; live gate closed on existing Studio server; no live proof label |
+| T16.5b | blocked | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Three-turn owner-authority blocker; reviewer 054/manager 013; one torque-on Studio holder unchanged; stop sentinel active; no live proof label |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,20 @@ next_step: ask owner to manually disconnect follower in Studio, explicitly autho
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - T16.5b blocked after third identical owner-authority audit
+
+```text
+Current task: T16.5b
+State: blocked; stop sentinel active
+Completed: third independent read-only holder/status audit; blocked-threshold review; durable owner choice packet
+Evidence: 05:54:27 CDT holder 64230513... count 1; hardware 79f4ce89... follower connected/torque true; safety 8c425d38... armed; routing 620cb845... none; jobs 0; reviewer 054; manager 013
+Blocked classification: missing_input at a proven human-authority boundary, repeated for three consecutive Goal turns
+Forbidden while blocked: process signal, Studio disconnect/safety POST, serial/camera open, register write, torque change, motion, policy actuation, training
+Unblock: owner manually disconnects follower, explicitly authorizes exact torque-release disconnect, or selects offline-only disposition
+Training lock: closed
+Next step: mark persisted Goal blocked and wait for owner choice
+```
 
 ### 2026-07-11 - Studio reports torque on; disconnect choice escalated to owner
 

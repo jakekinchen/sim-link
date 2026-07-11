@@ -1,5 +1,7 @@
 # GOAL
 
+<stop-orchestrator/>
+
 ## Active Mission
 
 Complete the SceneSmith PI0.5 autonomous sorting program through a bounded,
@@ -30,15 +32,23 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute Brief 041,
+T16.5b is blocked at the owner-authority gate after three consecutive Goal
+turns observed the identical pre-existing Studio follower connection: one
+serial holder, follower torque reported on, safety armed, no route, and no jobs.
+Do not execute another slice or touch hardware until the owner chooses manual
+follower disconnect, explicitly authorizes the exact torque-release disconnect,
+or elects to keep Studio active. After a permitted disconnect, remove this stop
+sentinel only after a fresh zero-holder check and explicit canonical reopen.
+
+The last completed implementation slice was Brief 041,
 `docs/briefs/041-rejected-live-attempt-camera-identity-correction.md`, under
 T16.5b. The offline correction now binds finite capture to stable camera
 name/unique ID, validates exact PNG bytes, rejects numeric-index churn as an
 authority field, and fails before serial open unless holder counts are zero.
 Keep the live gate closed and preserve the last-observed pre-existing Studio
 server untouched.
-After reviewer decision 053 is remotely preserved, prepare the smallest owner
-decision packet for resolving that independent holder. The server currently
+Reviewer decision 053 is remotely preserved, and manager intervention 012
+records the smallest owner decision packet. The server currently
 reports follower torque on and safety armed; do not SIGTERM it or call its
 torque-changing disconnect route without a narrow owner choice. Continue safe
 offline work until the owner manually disconnects the follower, authorizes that

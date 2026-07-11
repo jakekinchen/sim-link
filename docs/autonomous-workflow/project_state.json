@@ -9,12 +9,12 @@
     "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00"
   },
   "branch": "codex/pi05-autolearn-loop",
-  "current_head_commit": "c686ab61e81677da2bd8d1b8faa733ae62c874a6",
-  "last_reviewed_commit": "01802a0fd6a93eee658dbd945830a47acf916913",
+  "current_head_commit": "c06188bd159e55301f591b1089a9e044fae6875c",
+  "last_reviewed_commit": "c06188bd159e55301f591b1089a9e044fae6875c",
   "source_review": {
-    "commit": "01802a0fd6a93eee658dbd945830a47acf916913",
-    "decision": "ACCEPT_BRIEF_041_OFFLINE_CORRECTION_AFTER_REMOTE_PRESERVATION_KEEP_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/053-stable-camera-and-exclusive-serial-gates-reviewed.md"
+    "commit": "c06188bd159e55301f591b1089a9e044fae6875c",
+    "decision": "STOP_T16_5B_ON_THREE_TURN_OWNER_AUTHORITY_BLOCKER",
+    "reviewer_decision": "docs/reviewer-messages/054-t16-5b-owner-authority-blocked.md"
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
@@ -83,7 +83,7 @@
   "training_lock": "closed",
   "current_milestone": "M16",
   "current_task": "T16.5b",
-  "next_eligible_task": "T16.5b",
+  "next_eligible_task": null,
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -329,7 +329,7 @@
       ]
     },
     "T16.5b": {
-      "state": "in_progress",
+      "state": "blocked",
       "depends_on": ["T16.5a"],
       "brief_id": "039",
       "source_commit": "16d24ea",
@@ -463,7 +463,7 @@
         "preexisting_studio_server_serial_holder_owner_resolution"
       ],
       "owner_decision_required": {
-        "state": "pending",
+        "state": "blocking",
         "observed_server_state": {
           "leader_connected": true,
           "follower_connected": true,
@@ -488,6 +488,20 @@
           "reopen_serial_or_camera_live_gate"
         ],
         "post_choice_requirement": "verify_zero_follower_serial_holders_before_any_live_gate_reconsideration"
+      },
+      "blocked_audit": {
+        "classification": "missing_input",
+        "human_authority_boundary": true,
+        "consecutive_goal_turns": 3,
+        "first_observed_at": "2026-07-11T05:18:22-05:00",
+        "last_revalidated_at": "2026-07-11T05:54:27-05:00",
+        "holder_snapshot_sha256": "642305133b602477840e31d756e52b11cf5d97e689eda15ae2741291ed47106c",
+        "hardware_status_sha256": "79f4ce89e6f4bcd2e7bb9bc03ba17b9007454f3af21ef02eaee90e98e26b8040",
+        "safety_state_sha256": "8c425d38bd0ba65416df488252d8642168cc49bddf5b6fe31a516caa782da655",
+        "routing_state_sha256": "620cb845cb8f1507263fdf7b6aec651a69e4b028d90628c935b0af0b533fdcb4",
+        "stable_observation": "one_holder_follower_connected_torque_reported_on_safety_armed_route_none_zero_jobs",
+        "meaningful_offline_work_exhausted_for_current_dependency_path": true,
+        "unblock_action": "owner chooses manual follower disconnect, exact authorized torque-release disconnect, or offline-only disposition"
       },
       "next_action": "request owner choice: manually disconnect follower, explicitly authorize exact torque-release disconnect, or keep Studio active and remain offline",
       "authority_not_granted": [
