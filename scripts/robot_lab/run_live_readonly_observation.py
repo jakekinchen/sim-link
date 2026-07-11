@@ -236,6 +236,7 @@ def main() -> int:
             camera_factory=lambda camera: FFmpegNamedFiniteCamera(
                 camera,
                 expected_frame_count=contract["frame_count_per_camera"],
+                framerate_fps=contract["camera_framerate_fps"],
                 read_timeout_seconds=contract["camera_read_timeout_seconds"],
                 monotonic_ns=time.monotonic_ns,
             ),

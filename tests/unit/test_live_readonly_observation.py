@@ -23,6 +23,7 @@ from scenesmith.robot_lab.leader_arm_bridge import (
 )
 from scenesmith.robot_lab.live_readonly_observation import (
     AuditedReadOnlyBusBackend,
+    CAMERA_FRAMERATE_FPS,
     FFmpegNamedFiniteCamera,
     MAX_CAMERA_FAILURE_PREVIEW_BYTES,
     NamedCameraCaptureError,
@@ -45,6 +46,7 @@ from scenesmith.robot_lab.live_readonly_observation import (
     verify_discovery_stability,
     verify_live_execution_contract,
     verify_operator_presence_lease,
+    verify_private_capture_failure_evidence,
     verify_redacted_observation_manifest,
     verify_serial_identity_holder_stability,
     verify_serial_identity_holder_snapshot,
@@ -683,6 +685,11 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             now="2026-07-11T04:47:00-05:00",
         )
         self.assertEqual(contract["frame_count_per_camera"], 2)
+        self.assertEqual(
+            contract["schema_version"],
+            "scenesmith.live_readonly_observation_contract.v2",
+        )
+        self.assertEqual(contract["camera_framerate_fps"], CAMERA_FRAMERATE_FPS)
         self.assertEqual(contract["camera_read_timeout_seconds"], 5)
         self.assertEqual([camera["index"] for camera in contract["cameras"]], [0, 1])
         self.assertEqual(
@@ -697,6 +704,26 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "lease"):
             verify_live_execution_contract(
                 changed,
+                project_state=PROJECT_STATE,
+                now="2026-07-11T04:47:00-05:00",
+            )
+        for invalid_framerate in (29, True, "30"):
+            with self.subTest(invalid_framerate=invalid_framerate):
+                changed = copy.deepcopy(contract)
+                changed["camera_framerate_fps"] = invalid_framerate
+                changed = sign_payload(changed)
+                with self.assertRaisesRegex(ValueError, "framerate"):
+                    verify_live_execution_contract(
+                        changed,
+                        project_state=PROJECT_STATE,
+                        now="2026-07-11T04:47:00-05:00",
+                    )
+        missing_framerate = copy.deepcopy(contract)
+        del missing_framerate["camera_framerate_fps"]
+        missing_framerate = sign_payload(missing_framerate)
+        with self.assertRaisesRegex(ValueError, "fields"):
+            verify_live_execution_contract(
+                missing_framerate,
                 project_state=PROJECT_STATE,
                 now="2026-07-11T04:47:00-05:00",
             )
@@ -887,19 +914,39 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(first["height"], 3)
         self.assertEqual(first["channels"], 3)
         self.assertNotEqual(first["frame_bytes"], second["frame_bytes"])
+        self.assertEqual(invocation["command"].count("-framerate"), 1)
+        framerate_index = invocation["command"].index("-framerate")
+        self.assertEqual(
+            invocation["command"][framerate_index + 1],
+            str(CAMERA_FRAMERATE_FPS),
+        )
         input_index = invocation["command"].index("-i") + 1
+        self.assertLess(framerate_index, input_index - 1)
         self.assertEqual(
             invocation["command"][input_index],
             f"{camera_identity['name']}:none",
         )
         self.assertFalse(invocation["kwargs"]["shell"])
         audit = camera.audit()
+        self.assertEqual(
+            audit["requested_framerate_fps"],
+            CAMERA_FRAMERATE_FPS,
+        )
         self.assertEqual(audit["subprocess_start_successes"], 1)
         self.assertEqual(audit["subprocess_communicate_successes"], 1)
         self.assertEqual(audit["subprocess_wait_successes"], 1)
         self.assertEqual(audit["frames_delivered"], 2)
         self.assertEqual(audit["release_successes"], 1)
         self.assertEqual(audit["subprocess_terminate_attempts"], 0)
+        for invalid_framerate in (29, True, 30.0):
+            with self.subTest(invalid_framerate=invalid_framerate):
+                with self.assertRaisesRegex(ValueError, "reviewed mode"):
+                    FFmpegNamedFiniteCamera(
+                        camera_identity,
+                        expected_frame_count=2,
+                        framerate_fps=invalid_framerate,
+                        monotonic_ns=_TickingClock(),
+                    )
 
     def test_named_ffmpeg_camera_rejects_bad_streams_and_cleans_timeout(self):
         camera_identity = _execution_contract()["cameras"][0]
@@ -991,6 +1038,10 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             )
         diagnostic = captured.exception.diagnostic
         verify_signed_payload(diagnostic, label="Named camera failure diagnostic")
+        self.assertEqual(
+            diagnostic["schema_version"],
+            "scenesmith.named_camera_failure_diagnostic.v2",
+        )
         self.assertEqual(diagnostic["stage"], "subprocess_nonzero_exit")
         self.assertEqual(diagnostic["return_code"], 7)
         self.assertEqual(diagnostic["stdout"]["byte_count"], len(b"partial-png"))
@@ -1014,8 +1065,16 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertIsNone(diagnostic["cleanup_error_type"])
         self.assertIsInstance(captured.exception.__cause__, RuntimeError)
         self.assertEqual(diagnostic["subprocess_audit"]["release_successes"], 1)
+        self.assertEqual(
+            diagnostic["subprocess_audit"]["requested_framerate_fps"],
+            CAMERA_FRAMERATE_FPS,
+        )
         self.assertFalse(diagnostic["physical_follower_commanded"])
         self.assertEqual(diagnostic["proof_labels"], [])
+        legacy = copy.deepcopy(diagnostic)
+        legacy["schema_version"] = "scenesmith.named_camera_failure_diagnostic.v1"
+        del legacy["subprocess_audit"]["requested_framerate_fps"]
+        NamedCameraCaptureError(sign_payload(legacy))
 
     def test_named_ffmpeg_failure_preserves_primary_and_cleanup_errors(self):
         contract = _execution_contract()
@@ -1127,6 +1186,11 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         tampered = sign_payload(tampered)
         with self.assertRaisesRegex(ValueError, "authority fields"):
             NamedCameraCaptureError(tampered)
+        framerate_tamper = copy.deepcopy(diagnostic)
+        framerate_tamper["subprocess_audit"]["requested_framerate_fps"] = 29
+        framerate_tamper = sign_payload(framerate_tamper)
+        with self.assertRaisesRegex(ValueError, "framerate"):
+            NamedCameraCaptureError(framerate_tamper)
 
     def test_private_camera_failure_record_is_signed_immutable_and_label_free(self):
         contract = _execution_contract()
@@ -1170,7 +1234,26 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             failed_at="2026-07-11T04:47:01-05:00",
             elapsed_seconds=1.25,
         )
-        verify_signed_payload(failure, label="Private capture failure evidence")
+        verify_private_capture_failure_evidence(failure)
+        self.assertEqual(
+            failure["schema_version"],
+            "scenesmith.live_readonly_capture_failure_private.v3",
+        )
+        self.assertEqual(failure["execution_contract"], contract)
+        self.assertEqual(failure["servo_result"], servo_result)
+        self.assertTrue(
+            all(
+                servo["torque_enable_raw"] == 0
+                and servo["torque_enabled"] is False
+                for servo in failure["servo_result"]["servos"]
+            )
+        )
+        self.assertEqual(
+            failure["camera_failure_diagnostic"]["subprocess_audit"][
+                "requested_framerate_fps"
+            ],
+            CAMERA_FRAMERATE_FPS,
+        )
         self.assertEqual(failure["proof_labels"], [])
         self.assertFalse(failure["tracked_success_manifest_written"])
         self.assertFalse(failure["physical_follower_commanded"])
@@ -1182,6 +1265,69 @@ class LiveReadonlyObservationTests(unittest.TestCase):
             failure["camera_failure_diagnostic"]["identity_sha256"],
             captured.exception.diagnostic["identity_sha256"],
         )
+        legacy_failure = copy.deepcopy(failure)
+        legacy_failure["schema_version"] = (
+            "scenesmith.live_readonly_capture_failure_private.v2"
+        )
+        del legacy_failure["execution_contract"]
+        del legacy_failure["servo_result"]
+        legacy_failure["camera_failure_diagnostic"]["schema_version"] = (
+            "scenesmith.named_camera_failure_diagnostic.v1"
+        )
+        del legacy_failure["camera_failure_diagnostic"]["subprocess_audit"][
+            "requested_framerate_fps"
+        ]
+        legacy_failure["camera_failure_diagnostic"] = sign_payload(
+            legacy_failure["camera_failure_diagnostic"]
+        )
+        legacy_failure["camera_failure_diagnostic_identity_sha256"] = (
+            legacy_failure["camera_failure_diagnostic"]["identity_sha256"]
+        )
+        verify_private_capture_failure_evidence(sign_payload(legacy_failure))
+
+        torque_tamper = copy.deepcopy(failure)
+        torque_event = next(
+            event
+            for event in torque_tamper["servo_result"]["transport_trace"]
+            if event.get("operation") == "read"
+            and event.get("motor") == "wrist_flex"
+            and event.get("register") == "Torque_Enable"
+        )
+        torque_event["raw_value"] = 1
+        torque_tamper["servo_result"] = sign_payload(
+            torque_tamper["servo_result"]
+        )
+        torque_tamper["servo_result_identity_sha256"] = torque_tamper[
+            "servo_result"
+        ]["identity_sha256"]
+        torque_tamper = sign_payload(torque_tamper)
+        with self.assertRaisesRegex(ValueError, "torque is not disabled"):
+            verify_private_capture_failure_evidence(torque_tamper)
+
+        mode_tamper = copy.deepcopy(failure)
+        mode_tamper["execution_contract"]["camera_framerate_fps"] = 29
+        mode_tamper["execution_contract"] = sign_payload(
+            mode_tamper["execution_contract"]
+        )
+        mode_tamper["execution_contract_identity_sha256"] = mode_tamper[
+            "execution_contract"
+        ]["identity_sha256"]
+        mode_tamper["servo_result"]["execution_contract_identity_sha256"] = (
+            mode_tamper["execution_contract"]["identity_sha256"]
+        )
+        mode_tamper["servo_result"] = sign_payload(mode_tamper["servo_result"])
+        mode_tamper["servo_result_identity_sha256"] = mode_tamper[
+            "servo_result"
+        ]["identity_sha256"]
+        mode_tamper = sign_payload(mode_tamper)
+        with self.assertRaisesRegex(ValueError, "camera mode"):
+            verify_private_capture_failure_evidence(mode_tamper)
+
+        missing_result = copy.deepcopy(failure)
+        del missing_result["servo_result"]
+        missing_result = sign_payload(missing_result)
+        with self.assertRaisesRegex(ValueError, "fields"):
+            verify_private_capture_failure_evidence(missing_result)
         with tempfile.TemporaryDirectory() as temporary_directory:
             output = Path(temporary_directory) / "failure"
             reference = write_private_capture_failure_record(
@@ -1258,6 +1404,8 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         self.assertEqual(counts["subprocess_terminate_attempts"], 0)
         self.assertEqual(counts["subprocess_kill_attempts"], 0)
         self.assertEqual(counts["capture_property_writes"], 0)
+        self.assertEqual(private["camera_framerate_fps"], CAMERA_FRAMERATE_FPS)
+        self.assertEqual(manifest["camera_framerate_fps"], CAMERA_FRAMERATE_FPS)
         self.assertEqual(
             private["serial_identity_holder_counts"],
             {

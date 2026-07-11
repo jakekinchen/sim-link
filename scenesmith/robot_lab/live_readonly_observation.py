@@ -47,15 +47,21 @@ from scenesmith.robot_lab.readonly_servo_census import (
 OPERATOR_PRESENCE_LEASE_SCHEMA_VERSION = "scenesmith.operator_presence_lease.v1"
 LIVE_DISCOVERY_SCHEMA_VERSION = "scenesmith.live_readonly_discovery.v1"
 LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION = (
-    "scenesmith.live_readonly_observation_contract.v1"
+    "scenesmith.live_readonly_observation_contract.v2"
 )
 LIVE_SERVO_RESULT_SCHEMA_VERSION = "scenesmith.live_readonly_servo_result.v2"
-PRIVATE_OBSERVATION_SCHEMA_VERSION = "scenesmith.live_readonly_observation_private.v2"
-REDACTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v2"
+PRIVATE_OBSERVATION_SCHEMA_VERSION = "scenesmith.live_readonly_observation_private.v3"
+REDACTED_MANIFEST_SCHEMA_VERSION = "scenesmith.live_readonly_observation_manifest.v3"
 CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION = (
+    "scenesmith.named_camera_failure_diagnostic.v2"
+)
+LEGACY_CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION = (
     "scenesmith.named_camera_failure_diagnostic.v1"
 )
 PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION = (
+    "scenesmith.live_readonly_capture_failure_private.v3"
+)
+LEGACY_PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION = (
     "scenesmith.live_readonly_capture_failure_private.v2"
 )
 SERIAL_IDENTITY_HOLDER_SNAPSHOT_SCHEMA_VERSION = (
@@ -66,6 +72,7 @@ MAX_PRESENCE_LEASE_SECONDS = 600
 MAX_EXECUTION_DURATION_SECONDS = 120
 DEFAULT_FRAME_COUNT_PER_CAMERA = 2
 CAMERA_READ_TIMEOUT_SECONDS = 5
+CAMERA_FRAMERATE_FPS = 30
 FFMPEG_EXECUTABLE = Path("/opt/homebrew/bin/ffmpeg")
 MAX_PNG_FRAME_BYTES = 64 * 1024 * 1024
 MAX_CAMERA_FAILURE_PREVIEW_BYTES = 2048
@@ -501,6 +508,7 @@ def build_live_execution_contract(
         "calibration": calibration,
         "cameras": cameras,
         "frame_count_per_camera": frame_count_per_camera,
+        "camera_framerate_fps": CAMERA_FRAMERATE_FPS,
         "camera_read_timeout_seconds": CAMERA_READ_TIMEOUT_SECONDS,
         "issued_at": issued_at,
         "expires_at": expires_at,
@@ -537,6 +545,7 @@ def verify_live_execution_contract(
         "calibration",
         "cameras",
         "frame_count_per_camera",
+        "camera_framerate_fps",
         "camera_read_timeout_seconds",
         "issued_at",
         "expires_at",
@@ -580,6 +589,13 @@ def verify_live_execution_contract(
         raise ValueError("Live execution duration bound drifted")
     if payload.get("camera_read_timeout_seconds") != CAMERA_READ_TIMEOUT_SECONDS:
         raise ValueError("Live execution camera read timeout drifted")
+    framerate = payload.get("camera_framerate_fps")
+    if (
+        isinstance(framerate, bool)
+        or not isinstance(framerate, int)
+        or framerate != CAMERA_FRAMERATE_FPS
+    ):
+        raise ValueError("Live execution camera framerate drifted")
     frame_count = payload.get("frame_count_per_camera")
     if (
         isinstance(frame_count, bool)
@@ -917,11 +933,13 @@ def capture_finite_camera_frames(
             backend_audit = _injected_camera_backend_audit(
                 camera=camera,
                 frame_count=execution_contract["frame_count_per_camera"],
+                framerate_fps=execution_contract["camera_framerate_fps"],
             )
         _verify_camera_backend_audit(
             backend_audit,
             camera=camera,
             expected_frame_count=execution_contract["frame_count_per_camera"],
+            expected_framerate_fps=execution_contract["camera_framerate_fps"],
         )
         for frame in frames[first_camera_frame:]:
             frame["camera_backend_audit"] = copy.deepcopy(backend_audit)
@@ -964,6 +982,7 @@ def build_private_capture_failure_evidence(
         "evidence_mode": "local_private_rejected_physical_read_only_attempt",
         "status": "rejected",
         "session_id": execution_contract["session_id"],
+        "execution_contract": copy.deepcopy(execution_contract),
         "execution_contract_identity_sha256": execution_contract["identity_sha256"],
         "presence_lease_identity_sha256": execution_contract[
             "presence_lease_identity_sha256"
@@ -972,6 +991,7 @@ def build_private_capture_failure_evidence(
             "discovery_identity_sha256"
         ],
         "pre_open_discovery_identity_sha256": pre_open_discovery["identity_sha256"],
+        "servo_result": copy.deepcopy(servo_result),
         "servo_result_identity_sha256": servo_result["identity_sha256"],
         "target_device_identity_sha256": _sha256_payload(
             servo_result["target_device_identity"]
@@ -1005,7 +1025,7 @@ def build_private_capture_failure_evidence(
         "physical_follower_commanded": False,
     }
     signed = sign_payload(payload)
-    _verify_private_capture_failure_evidence(signed)
+    verify_private_capture_failure_evidence(signed)
     return signed
 
 
@@ -1014,7 +1034,7 @@ def write_private_capture_failure_record(
     output_directory: Path,
     failure_evidence: dict[str, Any],
 ) -> dict[str, Any]:
-    _verify_private_capture_failure_evidence(failure_evidence)
+    verify_private_capture_failure_evidence(failure_evidence)
     if output_directory.exists():
         raise ValueError(
             "Private capture failure output directory must be new and immutable"
@@ -1042,7 +1062,10 @@ def write_private_capture_failure_record(
     return reference
 
 
-def _verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
+def verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
+    failure_schema = (
+        payload.get("schema_version") if isinstance(payload, dict) else None
+    )
     allowed_fields = {
         "schema_version",
         "evidence_name",
@@ -1072,9 +1095,14 @@ def _verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
         "physical_follower_commanded",
         "identity_sha256",
     }
+    if failure_schema == PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION:
+        allowed_fields.update({"execution_contract", "servo_result"})
     if not isinstance(payload, dict) or set(payload) != allowed_fields:
         raise ValueError("Private capture failure evidence fields are malformed")
-    if payload.get("schema_version") != PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION:
+    if failure_schema not in {
+        PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION,
+        LEGACY_PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION,
+    }:
         raise ValueError("Unsupported private capture failure evidence schema")
     verify_signed_payload(payload, label="Private capture failure evidence")
     if (
@@ -1099,12 +1127,58 @@ def _verify_private_capture_failure_evidence(payload: dict[str, Any]) -> None:
     diagnostic = payload.get("camera_failure_diagnostic")
     if not isinstance(diagnostic, dict):
         raise ValueError("Private capture failure diagnostic is missing")
-    verify_signed_payload(diagnostic, label="Named camera failure diagnostic")
+    _verify_named_camera_failure_diagnostic(diagnostic)
     if (
         payload.get("camera_failure_diagnostic_identity_sha256")
         != diagnostic.get("identity_sha256")
     ):
         raise ValueError("Private capture failure diagnostic identity drifted")
+    if failure_schema == PRIVATE_CAPTURE_FAILURE_SCHEMA_VERSION:
+        execution_contract = payload.get("execution_contract")
+        if not isinstance(execution_contract, dict):
+            raise ValueError("Private capture failure execution contract is missing")
+        verify_signed_payload(
+            execution_contract,
+            label="Private capture failure execution contract",
+        )
+        if (
+            execution_contract.get("schema_version")
+            != LIVE_EXECUTION_CONTRACT_SCHEMA_VERSION
+            or payload.get("execution_contract_identity_sha256")
+            != execution_contract.get("identity_sha256")
+            or payload.get("session_id") != execution_contract.get("session_id")
+            or payload.get("presence_lease_identity_sha256")
+            != execution_contract.get("presence_lease_identity_sha256")
+            or payload.get("discovery_identity_sha256")
+            != execution_contract.get("discovery_identity_sha256")
+        ):
+            raise ValueError("Private capture failure execution contract drifted")
+        servo_result = payload.get("servo_result")
+        if not isinstance(servo_result, dict):
+            raise ValueError("Private capture failure servo result is missing")
+        _verify_live_servo_result(
+            servo_result,
+            execution_contract=execution_contract,
+        )
+        if (
+            payload.get("servo_result_identity_sha256")
+            != servo_result.get("identity_sha256")
+            or payload.get("target_device_identity_sha256")
+            != _sha256_payload(servo_result.get("target_device_identity"))
+            or payload.get("operation_counts") != servo_result.get("operation_counts")
+        ):
+            raise ValueError("Private capture failure servo result linkage drifted")
+        camera_identities = {
+            _sha256_payload(camera) for camera in execution_contract["cameras"]
+        }
+        if (
+            diagnostic.get("camera_identity_sha256") not in camera_identities
+            or diagnostic.get("subprocess_audit", {}).get(
+                "requested_framerate_fps"
+            )
+            != execution_contract.get("camera_framerate_fps")
+        ):
+            raise ValueError("Private capture failure camera mode linkage drifted")
     holders = payload.get("serial_identity_holder_snapshots")
     counts = payload.get("serial_identity_holder_counts")
     holder_hashes = payload.get("serial_identity_holder_snapshot_sha256")
@@ -1238,6 +1312,7 @@ def build_private_observation_evidence(
         "discovery_identity_sha256": execution_contract["discovery_identity_sha256"],
         "pre_open_discovery_identity_sha256": pre_open_discovery["identity_sha256"],
         "post_close_discovery_identity_sha256": post_close_discovery["identity_sha256"],
+        "camera_framerate_fps": execution_contract["camera_framerate_fps"],
         "serial_identity_holder_snapshots": {
             "pre_open": copy.deepcopy(pre_open_serial_holder_snapshot),
             "post_close": copy.deepcopy(post_close_serial_holder_snapshot),
@@ -1413,6 +1488,8 @@ def build_redacted_observation_manifest(
         holder_snapshots["pre_open"],
         holder_snapshots["post_close"],
     )
+    if private_evidence.get("camera_framerate_fps") != CAMERA_FRAMERATE_FPS:
+        raise ValueError("Private observation camera framerate drifted")
     usb = private_evidence["target_device_identity"]["usb"]
     servo_identity = [
         {
@@ -1474,6 +1551,7 @@ def build_redacted_observation_manifest(
         "camera_operation_counts": copy.deepcopy(
             private_evidence["camera_operation_counts"]
         ),
+        "camera_framerate_fps": private_evidence["camera_framerate_fps"],
         "discovery_stability": private_evidence["discovery_stability"],
         "pre_open_discovery_identity_sha256": private_evidence[
             "pre_open_discovery_identity_sha256"
@@ -1974,6 +2052,7 @@ class FFmpegNamedFiniteCamera:
         camera: dict[str, Any],
         *,
         expected_frame_count: int,
+        framerate_fps: int = CAMERA_FRAMERATE_FPS,
         read_timeout_seconds: int = CAMERA_READ_TIMEOUT_SECONDS,
         monotonic_ns: Callable[[], int],
         popen_factory: Callable[..., Any] = subprocess.Popen,
@@ -2002,8 +2081,15 @@ class FFmpegNamedFiniteCamera:
             or read_timeout_seconds <= 0
         ):
             raise ValueError("Named camera timeout is invalid")
+        if (
+            isinstance(framerate_fps, bool)
+            or not isinstance(framerate_fps, int)
+            or framerate_fps != CAMERA_FRAMERATE_FPS
+        ):
+            raise ValueError("Named camera framerate is not the reviewed mode")
         self._camera = copy.deepcopy(camera)
         self._expected_frame_count = expected_frame_count
+        self._framerate_fps = framerate_fps
         self._read_timeout_seconds = read_timeout_seconds
         self._monotonic_ns = monotonic_ns
         self._popen_factory = popen_factory
@@ -2017,6 +2103,7 @@ class FFmpegNamedFiniteCamera:
         self._audit = {
             "backend": "ffmpeg_named_avfoundation",
             "camera_identity_sha256": _sha256_payload(self._camera),
+            "requested_framerate_fps": self._framerate_fps,
             "subprocess_start_attempts": 0,
             "subprocess_start_successes": 0,
             "subprocess_communicate_attempts": 0,
@@ -2046,6 +2133,8 @@ class FFmpegNamedFiniteCamera:
             "-nostdin",
             "-f",
             "avfoundation",
+            "-framerate",
+            str(self._framerate_fps),
             "-i",
             f"{self._camera['name']}:none",
             "-an",
@@ -2353,8 +2442,13 @@ def _verify_named_camera_failure_diagnostic(payload: dict[str, Any]) -> None:
     }
     if not isinstance(payload, dict) or set(payload) != allowed_fields:
         raise ValueError("Named camera failure diagnostic fields are malformed")
+    diagnostic_schema = payload.get("schema_version")
     if (
-        payload.get("schema_version") != CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION
+        diagnostic_schema
+        not in {
+            CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
+            LEGACY_CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION,
+        }
         or payload.get("diagnostic_name")
         != "pi05_named_camera_capture_failure"
         or payload.get("stage")
@@ -2448,9 +2542,12 @@ def _verify_named_camera_failure_diagnostic(payload: dict[str, Any]) -> None:
         "capture_property_writes",
         "continuous_recording_sessions",
     }
+    audit_allowed_fields = {"backend", "camera_identity_sha256", *count_fields}
+    if diagnostic_schema == CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION:
+        audit_allowed_fields.add("requested_framerate_fps")
     if (
         not isinstance(audit, dict)
-        or set(audit) != {"backend", "camera_identity_sha256", *count_fields}
+        or set(audit) != audit_allowed_fields
         or audit.get("backend") != "ffmpeg_named_avfoundation"
         or audit.get("camera_identity_sha256") != camera_identity
         or any(
@@ -2461,6 +2558,11 @@ def _verify_named_camera_failure_diagnostic(payload: dict[str, Any]) -> None:
         )
     ):
         raise ValueError("Named camera failure subprocess audit is malformed")
+    if diagnostic_schema == CAMERA_FAILURE_DIAGNOSTIC_SCHEMA_VERSION and (
+        isinstance(audit.get("requested_framerate_fps"), bool)
+        or audit.get("requested_framerate_fps") != CAMERA_FRAMERATE_FPS
+    ):
+        raise ValueError("Named camera failure subprocess framerate drifted")
     if (
         not isinstance(payload.get("primary_error_type"), str)
         or not payload["primary_error_type"]
@@ -2615,10 +2717,12 @@ def _injected_camera_backend_audit(
     *,
     camera: dict[str, Any],
     frame_count: int,
+    framerate_fps: int,
 ) -> dict[str, Any]:
     return {
         "backend": "injected_finite_camera",
         "camera_identity_sha256": _sha256_payload(camera),
+        "requested_framerate_fps": framerate_fps,
         "subprocess_start_attempts": 0,
         "subprocess_start_successes": 0,
         "subprocess_communicate_attempts": 0,
@@ -2642,6 +2746,7 @@ def _verify_camera_backend_audit(
     *,
     camera: dict[str, Any],
     expected_frame_count: int,
+    expected_framerate_fps: int,
 ) -> None:
     count_fields = {
         "subprocess_start_attempts",
@@ -2660,7 +2765,12 @@ def _verify_camera_backend_audit(
         "capture_property_writes",
         "continuous_recording_sessions",
     }
-    allowed_fields = {"backend", "camera_identity_sha256", *count_fields}
+    allowed_fields = {
+        "backend",
+        "camera_identity_sha256",
+        "requested_framerate_fps",
+        *count_fields,
+    }
     if not isinstance(payload, dict) or set(payload) != allowed_fields:
         raise ValueError("Camera backend audit fields are malformed")
     if payload.get("backend") not in {
@@ -2670,6 +2780,12 @@ def _verify_camera_backend_audit(
         raise ValueError("Camera backend audit type is invalid")
     if payload.get("camera_identity_sha256") != _sha256_payload(camera):
         raise ValueError("Camera backend audit identity drifted")
+    if (
+        isinstance(payload.get("requested_framerate_fps"), bool)
+        or payload.get("requested_framerate_fps") != expected_framerate_fps
+        or expected_framerate_fps != CAMERA_FRAMERATE_FPS
+    ):
+        raise ValueError("Camera backend audit framerate drifted")
     if any(
         isinstance(payload.get(field), bool)
         or not isinstance(payload.get(field), int)
@@ -3153,6 +3269,7 @@ def _verify_captured_frames(
             frame.get("camera_backend_audit"),
             camera=camera,
             expected_frame_count=execution_contract["frame_count_per_camera"],
+            expected_framerate_fps=execution_contract["camera_framerate_fps"],
         )
 
 
