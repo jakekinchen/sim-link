@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.4 truthful missing-measurements intake and assembly inertia/COM compiler
+current_task: T16.4 embedded-prior integrity correction plus synthetic measured-inertial ready proof
 completed: T16.0 guard; T16.1 portable OpenPI and Menagerie dependency pins verified; T16.2 simulation-only twin contract schemas verified; T16.3 mechanical baseline, TwinProfile binding, effective solver defaults, complete comparison-time quaternion normalization, truthful inertial/contact evidence, and v2 unnamed-geom identity correction reviewer-verified
 evidence: commits 7bebf55, 936dd2f, fb54e64, d31cdc3, and cadc0f3; manager intervention 008 supplied the v1 counterexamples; reviewer decision 033 independently reran the adversarial quaternion/duplicate-order fixtures, py_compile, live artifact verify, and the 49-test broad robot-lab gate against identity `fa86ce5c0ee89b2388759bc86a9a99b4ae23c9dbf7e750d2976587ee6fb0bea9`
-remaining: implement T16.4 synthetic ready-state compiler proof and hard-fail coverage/inertia validation, then T16.5, M17-M19 prerequisites, and Gates C-D
+remaining: reject re-signed embedded-prior tampering, then implement the synthetic ready compiler and hard-fail coverage/inertia validation, T16.5, M17-M19 prerequisites, and Gates C-D
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 024; never relabel the seven CAD/MJCF mass priors as measured physical evidence
+next_step: execute brief 026; a forged embedded 99 kg CAD prior must fail before any ready-path proof can close T16.4
 ```
 
 ## Rules
@@ -113,6 +113,20 @@ next_step: execute brief 024; never relabel the seven CAD/MJCF mass priors as me
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.4 embedded CAD prior integrity gap
+
+```text
+Current task: T16.4
+State: in_progress
+Completed: independent adversarial audit accepted the blocked proof state but tested re-signed nested evidence rather than only top-level refs
+Evidence: re-signed changes to cad_priors[0] source path/hash/mass/transform were accepted; a 99 kg forged prior compiled and verified with cad_prior_summary 99.485006 kg; duplicate component records were also accepted
+Commit: pending
+Remaining: deterministic embedded-prior reconstruction/evidence validation and duplicate-ID rejection, then the synthetic ready compiler and full negative matrix
+Blockers: none for offline correction; real measurements remain absent by design
+Training lock: closed
+Next step: execute brief 026; brief 025 is superseded
+```
 
 ### 2026-07-10 - T16.4 manager truth correction before implementation
 
