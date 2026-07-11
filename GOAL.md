@@ -246,6 +246,11 @@ The current parent remains mechanically live-ineligible; the live gate and
 training lock stay closed. A separate offline redacted candidate-session review
 manifest is next.
 
+Brief 055 is active offline to define that deterministic redaction boundary.
+It may produce only fixture conformance for a manifest class; no actual live
+manifest, proof label, policy-input validity, or physical acceptance can exist
+without a future verified private success artifact and separate review.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`

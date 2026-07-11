@@ -1171,6 +1171,7 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
+      "active_brief_id": "055",
       "latest_verified_brief_id": "054",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054"],
       "result": "Briefs 048-054 are verified and remotely preserved: one fail-closed production session path composes the same-thread runtime proof, full candidate contract, exact one-shot factories, candidate runner, and one immutable private outcome before any result can be returned; the live gate remains closed",
@@ -1352,7 +1353,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/hardware_execution_profile.py scenesmith/robot_lab/static_pose_live_execution.py scenesmith/robot_lab/static_pose_live_candidate.py scenesmith/robot_lab/static_pose_live_session.py scripts/robot_lab/verify_static_pose_live_execution_sources.py tests/unit/test_static_pose_live_execution.py tests/unit/test_static_pose_live_candidate.py tests/unit/test_static_pose_live_session.py",
         "git diff --check"
       ],
-      "next_action": "define and verify a separate offline redacted candidate-session review manifest that can be regenerated from a private success artifact and receipt without granting a physical proof label; do not access hardware or transition the live gate in the current never-policy thread",
+      "next_action": "implement and verify Brief 055 deterministic redacted candidate-session review manifest and exclusive tracked writer entirely on fixture evidence; do not access hardware or transition the live gate in the current never-policy thread",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
