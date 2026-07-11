@@ -131,7 +131,7 @@ dimensions must match exactly, and the gate must reclose on every outcome.
 
 Attempt 006 consumed that session and is accepted. Fresh discovery tolerated
 numeric index churn while preserving exact identities; contract `cf1ad99c...`
-selected RealSense UYVY 640x480 and C922 YUYV 640x480. Manifest
+selected RealSense UYVY 640x480 and C922 YUYV 640x480. Original v4 manifest
 `eff3c824...` independently verifies four matching PNGs, 54 allowlisted reads,
 all six `Torque_Enable=0`, zero writes/torque changes/motion, no-torque close,
 zero holders across both aliases, and complete cleanup. The gate reclosed at
@@ -173,13 +173,18 @@ failures. It refuses a live-marked adapter before connect and grants only
 pass in both pinned runtimes and the 265-test broad gate passes. No hardware or
 policy ran; the live gate remains closed.
 
-Brief 051 is active offline because the accepted v4 manifest's
-`camera_identity_sha256` includes the capture-time numeric AVFoundation index.
-That digest is valid for attempt audit but is not stable across the index churn
-already observed in T16.5b. Before a live candidate exists, the manifest and
-all dependent calibration/static-pose artifacts must bind a separately verified
-name/unique-ID/model-ID/input-mode digest that excludes only the numeric index.
-The live gate remains closed.
+Brief 051 implementation `bff160d` is remotely preserved. The accepted private
+attempt-006 evidence remains identity `125de28f...`; tracked manifest v5
+`5218c3bd...` retains the original full capture-selection digests for audit and
+adds stable camera digests `69d55167...` and `9931d030...` over exact name,
+unique ID, model ID, and input mode while excluding only the volatile numeric
+index. CalibrationProfile `24db6f24...`, static contract `7260be3e...`, fixture
+observation `9ad35d18...`, and fixture result `6b40e275...` are re-bound to that
+v5 source. Sixty-seven focused tests pass in both robotics runtimes, all offline
+verifiers pass, and the 266-test authority/twin gate passes. This grants only
+`stable_camera_identity_binding_valid` in addition to the prior local fixture
+capabilities. No hardware or policy ran; the live gate and training lock remain
+closed.
 
 ## Durable State
 

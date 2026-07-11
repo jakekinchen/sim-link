@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress under Brief 051 stable camera identity correction
+current_task: T16.5c in progress; Brief 051 stable camera identity correction verified and remote at bff160d
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Briefs 048-050 remain remotely preserved; accepted v4 camera digest includes volatile numeric index and is quarantined from future live source binding pending migration
+evidence: manifest v5 5218c3bd...; profile 24db6f24...; static contract/fixture 7260be3e.../9ad35d18.../6b40e275...; 67 focused in two runtimes and 266 broad tests; no hardware/policy access
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: T16.5b none; T16.5c static-pose-bracketed synchronized-enough observation and policy-shadow input parity remain unverified
-next_step: implement and verify Brief 051 manifest-v5 stable camera digest migration and rebind all dependent offline artifacts; no hardware access
+next_step: open a separate offline source-bound live-candidate contract/runner; no hardware until implementation review and a later separate live-gate transition
 ```
 
 ## Rules
@@ -49,8 +49,8 @@ next_step: implement and verify Brief 051 manifest-v5 stable camera digest migra
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; manifest `eff3c824...`; private `125de28f...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; reviewer 072; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-050 verified; Brief 051 active offline to separate attempt-specific camera audit identity from index-stable name/unique-ID/model-ID/mode identity before any live candidate |
+| T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-051 verified through `bff160d`; v5 separates full capture audit identity from index-stable name/unique-ID/model-ID/mode identity and rebinds the fixture chain; source-bound live candidate, real bracket, preprocessing, shadow, and replay remain pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -131,6 +131,22 @@ next_step: implement and verify Brief 051 manifest-v5 stable camera digest migra
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Brief 051 stable camera identity binding verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 051 verified and remotely preserved; live gate closed
+Completed: manifest v5 migration from exact accepted v4/private evidence; full capture-selection digest retained; stable name/unique-ID/model-ID/input-mode digest excludes only numeric index; calibration/static-pose/runtime source chain regenerated under v2 bracket schemas
+Evidence: implementation bff160d; private 125de28f... unchanged; manifest 5218c3bd.../file 4311ffc2...; stable cameras 69d55167... and 9931d030...; profile 24db6f24...; contract/observation/result 7260be3e.../9ad35d18.../6b40e275...
+Verification: 67 focused tests in .mujoco_venv; 67 in pinned LeLab runtime; four offline artifact/source verifiers; py_compile; privacy/diff/JSON checks; 266 broad tests in 79.568 seconds
+Adversarial: numeric index churn preserves only stable digest; name/unique-ID/model-ID/mode churn changes it; malformed/duplicate/re-signed digests reject; v4 compatibility grants no stable capability and cannot satisfy pinned v5 consumers; private file refs rehashed; path traversal and arbitrary migration sources rejected
+Authority gained: stable_camera_identity_binding_valid only; prior calibration and fixture capabilities preserved on regenerated identities
+Authority withheld: live bracket/permit, static_pose_bracketed_observation, policy_shadow_input_valid, policy_shadow, actuation, qualification/transfer, promotion, training
+Hardware: none; no enumeration/open, serial/camera/Studio access, reconnect, write, torque change, motion, policy, MuJoCo, optimizer, or paid compute
+Training lock: closed
+Next step: separate offline source-bound live-candidate contract/runner, then another review before any live-gate transition
+```
 
 ### 2026-07-11 - Brief 050 injected static-pose runtime verified offline
 
