@@ -135,6 +135,13 @@ sequential host-timestamp evidence is not synchronized or policy-shadow-input-
 valid. T16.5c remains a separate no-actuation prerequisite; no motion or
 physical qualification is granted.
 
+T16.5c is now `in_progress` under Brief 048 offline. The current slice parses
+the pinned calibration into a signed six-joint profile bound to accepted
+manifest `eff3c824...`; it must validate names, IDs, finite homing offsets,
+ranges, drive modes, duplicates, and explicit gripper normalization semantics.
+It does not reopen hardware, make the sequential evidence synchronized, run a
+policy, or grant actuation.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`

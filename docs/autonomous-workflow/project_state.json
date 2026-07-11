@@ -1143,8 +1143,11 @@
       ]
     },
     "T16.5c": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["T16.5b"],
+      "active_brief_id": "048",
+      "result": "T16.5b accepted finite sequential evidence; Brief 048 is active offline to parse and semantically validate the pinned six-joint calibration into a signed profile bound to the accepted manifest",
+      "next_action": "implement signed CalibrationProfile validation offline; do not claim synchronized observation or run policy shadow yet",
       "conditional_authority": [
         "physical_observation_preprocessing",
         "pi05_policy_shadow_no_actuation",
