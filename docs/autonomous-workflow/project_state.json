@@ -31,7 +31,7 @@
   "continuation_run": {
     "started_at": "2026-07-11T12:52:56-05:00",
     "trigger": "owner_proceed_with_next_milestone",
-    "scope": "T16.5c offline static-pose and reviewed-input continuation through Brief 057",
+    "scope": "T16.5c offline static-pose, reviewed-input, and fixture model-ready tensor parity continuation through Brief 058",
     "starting_head": "32c29480a314ce3f731dda0d9a50156c1832da63",
     "live_gate": "closed",
     "training_lock": "closed",
@@ -1171,10 +1171,10 @@
     "T16.5c": {
       "state": "in_progress",
       "depends_on": ["T16.5b"],
-      "active_brief_id": null,
+      "active_brief_id": "058",
       "latest_verified_brief_id": "057",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057"],
-      "result": "Briefs 048-057 are verified and remotely preserved: the exact PI0.5 source contract and a strict reviewed-input issuance gate now exist, but the checked gate remains blocked because no accepted live-session decision, reviewed camera-role binding, or reviewed task prompt was created; no policy input or execution authority is granted and the live gate remains closed",
+      "result": "Briefs 048-057 are verified and remotely preserved; Brief 058 is in progress to prove fixture-only model-ready tensor parity without accepting real reviewed inputs, loading weights, inferring, accessing hardware, or reopening the live gate",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1462,7 +1462,7 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "remain offline until a separately reviewed slice either implements fixture-only preprocessing conformance or supplies all three real reviewed inputs; do not treat fixture gate tests as a live bundle, and do not load weights, infer, access hardware, or transition the live gate",
+      "next_action": "execute Brief 058 fixture-only model-ready tensor parity through the exact cached CPU preprocessor and model-input image transform; do not treat fixture evidence as a live bundle, load weights, infer, access hardware, replay, or transition the live gate",
       "live_execution_prerequisites_missing": [
         "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
         "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",

@@ -286,6 +286,14 @@ real acceptance, role assignment, or task prompt exists. Only
 weight load, preprocessing, inference, replay, policy label, hardware access,
 or live-gate transition is permitted.
 
+Brief 058 is now in progress as the final justified offline preparation before
+the decisive live experiment. It may prove only that an accepted-review-shaped
+deterministic static fixture becomes exact model-ready PI0.5 bytes and tensors
+through the pinned CPU preprocessor and image transform. The real Brief 057
+gate remains blocked, and no model, weight, inference, replay, hardware,
+policy-shadow, live-gate, motion, or training authority follows from fixture
+parity.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
