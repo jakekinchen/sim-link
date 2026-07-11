@@ -21,11 +21,11 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute brief `docs/briefs/032-unify-executable-robotics-stack.md` to complete
-T16.1b. Replace the accepted `split_runtime_unresolved` state with one
-deterministic LeRobot base revision plus a reproducible SceneSmith patch-set,
-and bind collection, training, finalization, and inference to that executable
-stack identity. Do not start an optimizer, open hardware, or continue T16.5.
+Execute brief `docs/briefs/033-production-measured-inertial-authority.md` to
+complete T16.4b. Introduce the shared strict artifact layer, implement real
+measured-input ingestion with physically valid multi-source inertials and BOM
+linkage, and replace generic `ready` with explicit authority gates. Do not start
+an optimizer, open hardware, or continue T16.5.
 
 ## Durable State
 
@@ -94,3 +94,7 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   mechanically computed qualification decisions; T16.4 retains a verified
   synthetic compiler scaffold and truthful blocked real template but not a
   production measured-input path or downstream authority. T16.5 is pending.
+- Reviewer decision 040 verifies T16.1b at commit `dca2b45`: collection,
+  training, finalization, inference, and LeLab now share one pinned base plus
+  tracked patch-set identity. This grants executable-stack reproducibility only;
+  the training lock remains closed. T16.4b is active.

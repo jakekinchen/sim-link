@@ -5,12 +5,12 @@ Updated: 2026-07-10
 ```text
 training_lock: closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.1b unified executable LeRobot and preprocessing stack
-completed: T16.0 guard; T16.3 structural and semantic twin baseline reviewer-verified; T16.1 dependency inventory verified; T16.2 schema scaffold verified; T16.4 blocked real template and synthetic compiler scaffold verified
-evidence: external review of exact commit df9ed0a recorded in reviewer decision 039; prior accepted evidence remains historical scaffold evidence and grants no broader authority
-remaining: T16.1b executable unification; T16.4b strict production measured-inertial path; T16.2b computed qualification decisions; revised T16.5 full-lifecycle read-only census conformance
+current_task: T16.4b strict production measured-inertial intake and authority gates
+completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.3 structural and semantic twin baseline; T16.2 schema scaffold; T16.4 blocked real template and synthetic compiler scaffold
+evidence: reviewer decision 040 verifies T16.1b at dca2b45 with stack identity c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4; prior T16.2/T16.4 evidence remains scaffold-only
+remaining: T16.4b strict production measured-inertial path; T16.2b computed qualification decisions; revised T16.5 full-lifecycle read-only census conformance
 blockers: no offline blocker; physical M19 still requires separate read and motion authority
-next_step: execute brief 032; no optimizer run is authorized before the unified stack and processor conformance gate pass
+next_step: execute brief 033; no generic ready gate may grant training, physical-transfer, or promotion authority
 ```
 
 ## Rules
@@ -29,13 +29,13 @@ next_step: execute brief 032; no optimizer run is authorized before the unified 
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
 | T16.0 | verified | none | Add a scoped dirty-path guard, freeze rungs 500/1,000, and validate the repo goal-loop launch | 70 tests; 51 protected paths unchanged across pair dry-run; b5d056b |
-| T16.1 | reopened | T16.0 | Inventory LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Dependency inventory and source evidence verified; executable resolution remains split |
-| T16.1b | in_progress | T16.1 | Unify the executable LeRobot/preprocessing revision used by every robotics stage | Exact base revision, deterministic patch-set, environment lock identity, and collection/training/inference tensor conformance |
+| T16.1 | verified | T16.0 | Inventory LeRobot, OpenPI reference, Menagerie/Robot Studio SO-101, licenses, and local patches | Dependency inventory and source evidence verified; executable resolution completed separately by T16.1b |
+| T16.1b | verified | T16.1 | Unify the executable LeRobot/preprocessing revision used by every robotics stage | `dca2b45`; stack identity `c8e903e7...`; exact base + tracked patch + environment lock + saved-sample stage parity |
 | T16.2 | reopened | T16.1b | Define TwinProfile, TwinQualificationSpec, and TwinQualificationReport schemas | Schema scaffold verified; qualification `pass` is not yet mechanically derived from the specification |
 | T16.2b | pending | T16.1b,T16.2 | Compute qualification results from the specification and independently verify them | Units, finite values, trials, split IDs, conditions, uncertainty, content-addressed evidence, and recomputed tolerances |
 | T16.3 | verified | T16.1-T16.2 | Reconcile current Robot Studio MJCF with pinned Menagerie rather than replacing it silently | `7bebf55` baseline plus semantic corrections through `cadc0f3`; reviewer decision 033 closes the v2 identity reopen after manager intervention 008 |
 | T16.4 | reopened | T16.2-T16.3 | Add measured-part mass intake and assembly inertia/COM compiler | Blocked real template and synthetic compiler scaffold verified; production measurement ingestion and authority separation missing |
-| T16.4b | pending | T16.2b-T16.4 | Implement strict production measured-inertial intake and authority gates | Strict JSON, finite/PSD physics, BOM graph linkage, immutable evidence, multiple inertia source modes, full-precision aggregation, split authority gates |
+| T16.4b | in_progress | T16.2-T16.4 | Implement strict production measured-inertial intake and authority gates | Strict JSON, finite/PSD physics, BOM graph linkage, immutable evidence, multiple inertia source modes, full-precision aggregation, split authority gates |
 | T16.5 | pending | T16.1b,T16.2b,T16.4b | Build full-lifecycle fake-bus/recorded-trace census conformance harness | Construct/connect/read/decode/close/failure cleanup prove zero writes; hardware identity registry; offline result is `census_trace_conformant` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -116,6 +116,20 @@ next_step: execute brief 032; no optimizer run is authorized before the unified 
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-10 - T16.1b unified executable stack verified
+
+```text
+Current task: T16.4b
+State: in_progress
+Completed: T16.1b replaced split_runtime_unresolved with one exact LeRobot base plus tracked patch-set and routed collection, training, finalization, inference, and LeLab through a fail-closed stack identity
+Evidence: implementation commit dca2b45; reviewer decision 040; stack identity c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4; 13 stack/lock, 13 twin, 24 structural, and 24 measured-inertial tests passed
+Commit: dca2b45
+Remaining: T16.4b, T16.2b, revised T16.5
+Blockers: none for offline T16.4b
+Training lock: closed
+Next step: execute brief 033
+```
 
 ### 2026-07-10 - External review reopens production-authority boundaries
 

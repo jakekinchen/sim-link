@@ -8,20 +8,39 @@
   },
   "training_lock": "closed",
   "current_milestone": "M16",
-  "current_task": "T16.1b",
+  "current_task": "T16.4b",
   "tasks": {
     "T16.1": {
-      "state": "reopened",
+      "state": "verified",
       "result": "dependency inventory and source pins verified",
-      "missing": ["one unified executable LeRobot and preprocessing revision"],
+      "missing": [],
       "authority_granted": ["dependency_inventory_evidence"],
-      "authority_not_granted": ["optimizer_run", "executable_stack_resolved"]
+      "authority_not_granted": ["optimizer_run"]
     },
     "T16.1b": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T16.1"],
-      "authority_granted": [],
-      "authority_not_granted": ["optimizer_run"]
+      "source_commit": "dca2b45",
+      "brief_id": "032",
+      "review_decision_id": "040",
+      "test_commands": [
+        "python scripts/robot_lab/verify_lerobot_stack.py",
+        "python -m unittest tests.unit.test_lerobot_stack tests.unit.test_robotics_dependency_lock",
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_twin_contract",
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_structural_twin_diff",
+        "./.mujoco_venv/bin/python -m unittest tests.unit.test_measured_inertial_intake"
+      ],
+      "production_artifact_ids": {
+        "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+        "patch_set_sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+        "environment_lock_sha256": "367f3d6635ce0975bff459a02ea01ecd847836f491223c5394253d7d054b9280"
+      },
+      "known_limitations": [
+        "saved-sample parity covers the shared SO-101 tensor boundary, not model-specific normalization statistics",
+        "optimizer authority remains closed"
+      ],
+      "authority_granted": ["executable_stack_resolved"],
+      "authority_not_granted": ["optimizer_run", "simulation_training_ready"]
     },
     "T16.2": {
       "state": "reopened",
@@ -49,7 +68,7 @@
         "promotion_eligible"
       ]
     },
-    "T16.4b": {"state": "pending", "depends_on": ["T16.2b", "T16.4"]},
+    "T16.4b": {"state": "in_progress", "depends_on": ["T16.2", "T16.4"]},
     "T16.5": {
       "state": "pending",
       "depends_on": ["T16.1b", "T16.2b", "T16.4b"],
