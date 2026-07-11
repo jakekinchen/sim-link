@@ -1,0 +1,187 @@
+{
+  "accepted_live_manifest": {
+    "file_sha256": "cd4120f0eca6b8e53de7cbc4bafb8e1a74bb5f7119b2e4db0570a401b29e9a40",
+    "identity_sha256": "eff3c82444efd38b6a2e240b1137846ad835222fd86ed330cf274343e1e28c5f",
+    "logical_path": "configurations/robot_lab/pi05_live_readonly_observation.redacted.json",
+    "schema_version": "scenesmith.live_readonly_observation_manifest.v4",
+    "size_bytes": 8860
+  },
+  "authority_not_granted": [
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "policy_shadow_input_valid",
+    "promotion_eligible",
+    "simulation_training_ready",
+    "supervised_micro_motion"
+  ],
+  "evidence_mode": "tracked_content_addressed_offline_semantic_validation",
+  "hardware_accessed": false,
+  "identity_sha256": "b360b4f60077846c62128fe4d4cc33d1ee4e6e72aa7831fcb7c6706e6b6599b4",
+  "joint_count": 6,
+  "joints": [
+    {
+      "drive_mode": 0,
+      "firmware_version": "3.9",
+      "homing_offset": 1068,
+      "homing_offset_units": "decoded_sts3215_sign_magnitude_ticks",
+      "joint_name": "shoulder_pan",
+      "model": "sts3215",
+      "model_number": 777,
+      "normalization": {
+        "drive_mode_reversal_applied": false,
+        "formula": "(raw_value - ((range_min + range_max) / 2)) * 360 / 4095",
+        "input_clamping": "none_in_lerobot_degree_mode",
+        "input_units": "raw_position_ticks",
+        "mode": "degrees",
+        "output_units": "degrees",
+        "range_midpoint_defines_zero_degrees": true
+      },
+      "range_max": 3491,
+      "range_min": 755,
+      "range_units": "raw_position_ticks",
+      "servo_id": 1
+    },
+    {
+      "drive_mode": 0,
+      "firmware_version": "3.9",
+      "homing_offset": 495,
+      "homing_offset_units": "decoded_sts3215_sign_magnitude_ticks",
+      "joint_name": "shoulder_lift",
+      "model": "sts3215",
+      "model_number": 777,
+      "normalization": {
+        "drive_mode_reversal_applied": false,
+        "formula": "(raw_value - ((range_min + range_max) / 2)) * 360 / 4095",
+        "input_clamping": "none_in_lerobot_degree_mode",
+        "input_units": "raw_position_ticks",
+        "mode": "degrees",
+        "output_units": "degrees",
+        "range_midpoint_defines_zero_degrees": true
+      },
+      "range_max": 3229,
+      "range_min": 803,
+      "range_units": "raw_position_ticks",
+      "servo_id": 2
+    },
+    {
+      "drive_mode": 0,
+      "firmware_version": "3.9",
+      "homing_offset": 1879,
+      "homing_offset_units": "decoded_sts3215_sign_magnitude_ticks",
+      "joint_name": "elbow_flex",
+      "model": "sts3215",
+      "model_number": 777,
+      "normalization": {
+        "drive_mode_reversal_applied": false,
+        "formula": "(raw_value - ((range_min + range_max) / 2)) * 360 / 4095",
+        "input_clamping": "none_in_lerobot_degree_mode",
+        "input_units": "raw_position_ticks",
+        "mode": "degrees",
+        "output_units": "degrees",
+        "range_midpoint_defines_zero_degrees": true
+      },
+      "range_max": 3076,
+      "range_min": 753,
+      "range_units": "raw_position_ticks",
+      "servo_id": 3
+    },
+    {
+      "drive_mode": 0,
+      "firmware_version": "3.9",
+      "homing_offset": 1323,
+      "homing_offset_units": "decoded_sts3215_sign_magnitude_ticks",
+      "joint_name": "wrist_flex",
+      "model": "sts3215",
+      "model_number": 777,
+      "normalization": {
+        "drive_mode_reversal_applied": false,
+        "formula": "(raw_value - ((range_min + range_max) / 2)) * 360 / 4095",
+        "input_clamping": "none_in_lerobot_degree_mode",
+        "input_units": "raw_position_ticks",
+        "mode": "degrees",
+        "output_units": "degrees",
+        "range_midpoint_defines_zero_degrees": true
+      },
+      "range_max": 3284,
+      "range_min": 839,
+      "range_units": "raw_position_ticks",
+      "servo_id": 4
+    },
+    {
+      "drive_mode": 0,
+      "firmware_version": "3.9",
+      "homing_offset": 1072,
+      "homing_offset_units": "decoded_sts3215_sign_magnitude_ticks",
+      "joint_name": "wrist_roll",
+      "model": "sts3215",
+      "model_number": 777,
+      "normalization": {
+        "drive_mode_reversal_applied": false,
+        "formula": "(raw_value - ((range_min + range_max) / 2)) * 360 / 4095",
+        "input_clamping": "none_in_lerobot_degree_mode",
+        "input_units": "raw_position_ticks",
+        "mode": "degrees",
+        "output_units": "degrees",
+        "range_midpoint_defines_zero_degrees": true
+      },
+      "range_max": 4095,
+      "range_min": 0,
+      "range_units": "raw_position_ticks",
+      "servo_id": 5
+    },
+    {
+      "drive_mode": 0,
+      "firmware_version": "3.9",
+      "homing_offset": 658,
+      "homing_offset_units": "decoded_sts3215_sign_magnitude_ticks",
+      "joint_name": "gripper",
+      "model": "sts3215",
+      "model_number": 777,
+      "normalization": {
+        "drive_mode_reversal_applied": false,
+        "formula": "clamp((raw_value - range_min) / (range_max - range_min), 0, 1) * 100",
+        "input_clamping": "range_min_to_range_max",
+        "input_units": "raw_position_ticks",
+        "mode": "range_0_100",
+        "normalized_0_physical_meaning": "closed",
+        "normalized_0_raw_endpoint": "range_min",
+        "normalized_100_physical_meaning": "open",
+        "normalized_100_raw_endpoint": "range_max",
+        "output_units": "normalized_percent"
+      },
+      "range_max": 2324,
+      "range_min": 1482,
+      "range_units": "raw_position_ticks",
+      "servo_id": 6
+    }
+  ],
+  "local_capabilities": [
+    "calibration_profile_semantically_valid"
+  ],
+  "motion_authority_granted": false,
+  "normalization_contract": {
+    "body_mode": "degrees",
+    "gripper_mode": "range_0_100",
+    "gripper_polarity": "0_closed_100_open",
+    "lerobot_use_degrees": true,
+    "sts3215_resolution_ticks": 4096
+  },
+  "physical_follower_commanded": false,
+  "policy_inference_run": false,
+  "privacy": {
+    "raw_calibration_path_included": false,
+    "raw_device_path_included": false,
+    "raw_usb_serial_included": false
+  },
+  "profile_name": "pi05_follower_arm_calibration_profile",
+  "qualification_scope": "local_calibration_semantics",
+  "schema_version": "scenesmith.calibration_profile.v1",
+  "servo_identity_sha256": "66e9d3630578242deaeb24d97eb1627131db23ea6f5c2d44735c4af2fc967463",
+  "source_calibration": {
+    "logical_name": "lerobot_so_follower_follower_arm",
+    "raw_path_included": false,
+    "sha256": "192404b6d3c1337495d69649969459aa9d3f66816cd916c67da2588815e93ec4",
+    "size_bytes": 770
+  },
+  "training_authority_granted": false
+}
