@@ -1,14 +1,18 @@
 {
   "schema_version": "scenesmith.project_state.v1",
-  "updated": "2026-07-10",
+  "updated": "2026-07-11",
+  "branch": "codex/pi05-autolearn-loop",
+  "current_head_commit": "3cd142e4050f1013e8bc0396c7e2867927ccfef9",
+  "last_reviewed_commit": "3cd142e4050f1013e8bc0396c7e2867927ccfef9",
   "source_review": {
-    "commit": "df9ed0a4d2212819382a4701a33c263f2cdee32e",
-    "decision": "CONDITIONAL_CONTINUE",
-    "reviewer_decision": "docs/reviewer-messages/039-production-authority-boundary-redirect.md"
+    "commit": "3cd142e4050f1013e8bc0396c7e2867927ccfef9",
+    "decision": "CONTINUE_T16_4B_EXECUTE_T16_2B_A_FIRST",
+    "reviewer_decision": "docs/reviewer-messages/042-authority-composer-first-continue.md"
   },
   "training_lock": "closed",
   "current_milestone": "M16",
-  "current_task": "T16.4b",
+  "current_task": "T16.2b-A",
+  "next_eligible_task": "T16.2b-A",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -49,7 +53,29 @@
       "authority_granted": ["schema_validation"],
       "authority_not_granted": ["physical_twin_qualified", "promotion_eligible"]
     },
-    "T16.2b": {"state": "pending", "depends_on": ["T16.1b", "T16.2"]},
+    "T16.2b-A": {
+      "state": "in_progress",
+      "depends_on": ["T16.1b", "T16.2", "T16.4"],
+      "source_commit": "3cd142e",
+      "brief_id": "034",
+      "review_decision_id": "042",
+      "result": "authority-composition foundation selected; implementation pending",
+      "authority_granted": [],
+      "authority_not_granted": [
+        "simulation_training_ready",
+        "physical_transfer_ready",
+        "promotion_eligible",
+        "optimizer_run"
+      ],
+      "known_limitations": [
+        "no central authority composer is implemented yet",
+        "existing component gates must not be treated as whole-system authority"
+      ]
+    },
+    "T16.2b": {
+      "state": "pending",
+      "depends_on": ["T16.1b", "T16.2", "T16.2b-A", "T16.4b"]
+    },
     "T16.3": {"state": "verified", "authority_granted": ["structural_baseline"]},
     "T16.4": {
       "state": "reopened",
@@ -70,8 +96,9 @@
     },
     "T16.4b": {
       "state": "in_progress",
-      "depends_on": ["T16.2", "T16.4"],
+      "depends_on": ["T16.2", "T16.4", "T16.2b-A"],
       "brief_id": "033",
+      "execution_note": "strict artifact sub-slice is accepted; remaining production output resumes after T16.2b-A",
       "completed_subslices": [
         {
           "source_commit": "69df54d",

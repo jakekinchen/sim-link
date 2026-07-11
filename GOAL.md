@@ -21,15 +21,18 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-Execute brief `docs/briefs/033-production-measured-inertial-authority.md` to
-complete T16.4b. Introduce the shared strict artifact layer, implement real
-measured-input ingestion with physically valid multi-source inertials and BOM
-linkage, and replace generic `ready` with explicit authority gates. Do not start
-an optimizer, open hardware, or continue T16.5.
+Execute Brief 034,
+`docs/briefs/034-central-authority-composition-foundation.md`, as T16.2b-A.
+Introduce the only code path allowed to compose whole-system readiness from
+scoped component capabilities and content-addressed evidence. T16.4b remains
+valid partial progress and resumes only after this contract prevents component
+artifacts from granting global authority. Do not start an optimizer, open
+hardware, use paid compute, or begin T16.5.
 
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
+- Active overnight loop: `docs/autonomous-workflow/overnight-authority-twin-goal-loop.md`
 - Active execution ledger: `docs/autonomous-workflow/experience-compiler-twin-task-ledger.md`
 - Authoritative machine-readable state: `docs/autonomous-workflow/project_state.json`
 - Rebased loop prompt: `docs/autonomous-workflow/experience-compiler-twin-goal-loop.md`
@@ -42,14 +45,17 @@ an optimizer, open hardware, or continue T16.5.
 
 ## Execution Mandate
 
-1. Read the mandate, ledger, current milestone, active brief, and Git state.
+1. Read root `AGENTS.md`, the active overnight loop, canonical state, ledger,
+   current brief, latest reviewer decision, and Git state.
 2. Select the smallest useful unchecked task in the active milestone.
 3. Add deterministic tests first where practical.
 4. Implement only that slice and run its verification gate.
 5. Update the task ledger with status, evidence, commit, and next action.
 6. Write an executor log and reviewer decision.
-7. Commit only scoped robotics/workflow files at the milestone boundary.
-8. Continue immediately to the next ledger task unless a stop condition applies.
+7. Commit only explicitly staged robotics/workflow files at the slice boundary.
+8. Push only to `origin/codex/pi05-autolearn-loop` and confirm the remote commit.
+9. Continue immediately to the next dependency-ready task unless a stop
+   condition applies.
 
 No optimizer run is authorized while the active ledger says `training_lock: closed`.
 
@@ -97,4 +103,11 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
 - Reviewer decision 040 verifies T16.1b at commit `dca2b45`: collection,
   training, finalization, inference, and LeLab now share one pinned base plus
   tracked patch-set identity. This grants executable-stack reproducibility only;
-  the training lock remains closed. T16.4b is active.
+  the training lock remains closed.
+- Commit `69df54d` and reviewer decision 041 establish the strict finite artifact,
+  content-addressed evidence, physical inertia, graph-link, and scoped-gate
+  layer. T16.4b remains partial at `3cd142e`.
+- Reviewer decision 042 keeps T16.4b open but makes T16.2b-A the active first
+  slice. Component artifacts may report local capabilities only; the central
+  composer owns global readiness. No optimizer, hardware, transfer, or
+  promotion authority is granted.

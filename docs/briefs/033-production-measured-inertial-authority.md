@@ -6,7 +6,15 @@
 
 Complete T16.4b by turning the truthful blocked real template and synthetic
 compiler scaffold into a strict production measured-input compiler whose output
-can earn only explicitly scoped downstream authority.
+exposes only local inertial capabilities and content-addressed evidence for the
+central authority composer defined by Brief 034. The inertial compiler cannot
+grant whole-system readiness, physical qualification, or promotion authority.
+
+## Dependency amendment
+
+Complete T16.2b-A under Brief 034 before extending the production output schema.
+Preserve safe compatibility where possible; otherwise bump the schema version
+and regenerate deterministic fixtures explicitly.
 
 ## Acceptance Criteria
 
@@ -24,9 +32,13 @@ can earn only explicitly scoped downstream authority.
 - Require explicit mass/length/inertia/calibration units.
 - Preserve full precision during component and assembly aggregation; round only
   the final serialized artifact.
-- Replace `require_ready_or_raise` with explicit gates for compilation,
-  simulation training, physical transfer, and promotion. Synthetic output may
-  pass compilation only and must fail the latter three.
+- Replace `require_ready_or_raise` with explicit local capability facts such as
+  artifact-schema validity, inertial-compilation validity, simulation usability,
+  and verified physical-measurement evidence. Synthetic output may establish
+  only its truthful local compilation facts.
+- Reject or omit component fields that claim `simulation_training_ready`,
+  `physical_twin_qualified`, `physical_transfer_ready`, or
+  `promotion_eligible`. Only the Brief 034 composer may derive those states.
 - Add a non-synthetic production fixture that ingests measured masses and mixed
   inertia source modes without hardware access.
 
@@ -37,15 +49,19 @@ can earn only explicitly scoped downstream authority.
   tensor, blank evidence, and synthetic-authority tests.
 - Deterministic real measured-input happy path with golden aggregate values.
 - Existing blocked real template and synthetic scaffold regressions.
+- Adversarial proof that forged inertial component authority cannot grant a
+  global decision through the Brief 034 composer.
 - Broad twin/structural/measured-inertial artifact verification chain.
 
 ## Out Of Scope
 
-- Physical measurements, hardware access, qualification status computation,
-  T16.5 census work, optimizer runs, and unrelated dirty-worktree cleanup.
+- Physical measurements, hardware access, global authority composition,
+  qualification metric computation, T16.5 census work, optimizer runs, and
+  unrelated dirty-worktree cleanup.
 
 ## Stop Conditions
 
-- Stop if `status: ready` alone can authorize training or physical transfer.
+- Stop if `status: ready` or any inertial capability alone can authorize
+  training, physical qualification, transfer, deployment, or promotion.
 - Stop if any production-ready measurement depends on a test-only synthetic
   marker or non-content-addressed evidence.

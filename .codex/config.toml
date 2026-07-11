@@ -1,0 +1,17 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+# Pin the exact quality-first model requested for this unattended run.
+model = "gpt-5.6-sol"
+model_reasoning_effort = "max"
+
+# The overnight loop must create Git commits. Codex protects `.git` as read-only
+# in workspace-write mode, so use the machine's existing unattended full-access
+# profile and enforce the narrower authority boundary through root AGENTS.md.
+# `never` prevents the loop from pausing for a sleeping human.
+sandbox_mode = "danger-full-access"
+approval_policy = "never"
+
+[features]
+goals = true
+multi_agent = false
+prevent_idle_sleep = true
