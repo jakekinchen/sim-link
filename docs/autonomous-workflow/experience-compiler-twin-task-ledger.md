@@ -6,13 +6,13 @@ Updated: 2026-07-11
 training_lock: closed
 run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5b in progress; owner-authorized virtual follower disconnect pending; live gate closed
+current_task: T16.5b in progress; owner-authorized virtual follower disconnect verified; live gate closed pending remote preservation
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: resume audit at 08:53:51 CDT exactly repeats holder 64230513..., hardware 79f4ce89..., safety 8c425d38..., routing 620cb845...; owner now authorizes one exact virtual follower disconnect
+evidence: one POST at 08:57:17 CDT returned connected false; hardware d58a7549... reports follower disconnected/torque false; empty holder 4f53cda1...; safety/routing unchanged; leader retained; jobs 0
 remaining: T16.5b live read-only census; T16.5c no-actuation observation/shadow/replay; T16.6 exact initial supervised micro-motion permit
 owner_authority: owner explicitly authorizes virtual disconnect/reconnect because physical unplug is unavailable; immediate scope is one follower disconnect with inherent torque-disable plus response/status/zero-holder proof; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: none for the exact disconnect; live gate remains closed until follower disconnected/torque off and zero-holder evidence is durable
-next_step: commit/push this steering boundary, call exact follower disconnect once, verify response/status/zero holders, then record a separate live-gate decision
+blockers: none for exclusive follower ownership; live gate remains closed until this verified boundary is committed/pushed and a separate canonical reopen is reviewed
+next_step: commit/push disconnect proof; confirm remote; then separately reopen the live gate for one fresh bounded T16.5b session
 ```
 
 ## Rules
@@ -48,7 +48,7 @@ next_step: commit/push this steering boundary, call exact follower disconnect on
 | T16.2b | verified | T16.1b,T16.2,T16.2b-A,T16.4b | Compute qualification results from the specification and independently verify them | `710960b`/reviewer 046/remote `383557b`; 16 focused and 147 broad tests; fixture numeric pass remains qualification-withheld |
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
-| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | Owner-authorized one-call virtual follower disconnect pending; live gate closed until disconnected/torque-off/zero-holder proof; no live proof label yet |
+| T16.5b | in_progress | T16.5a | Live read-only census and synchronized observation while owner-present lease is active | One-call virtual follower disconnect verified: disconnected/torque off/zero holders, leader retained; live gate closed pending remote proof and separate reopen; no live proof label yet |
 | T16.5c | pending | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | `physical_observation_capture` and `policy_shadow`; requested policy actions never sent; replay remains simulation/replay evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
@@ -130,6 +130,20 @@ next_step: commit/push this steering boundary, call exact follower disconnect on
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-11 - Virtual follower disconnect and zero-holder proof verified
+
+```text
+Current task: T16.5b
+State: in_progress; exclusive follower ownership proven; live gate still closed
+Operation: one POST /api/hardware/disconnect with {"role":"follower"}; call count 1; HTTP 200; response {"connected":false}; no retry
+Postconditions: hardware d58a7549... follower disconnected/torque false; holder 4f53cda1... count 0; leader connected; safety 8c425d38... unchanged; routing 620cb845... unchanged; jobs 0
+Writes: only the owner-authorized torque-disable inherent in follower disconnect; no motion, goal, leader, safety, routing, policy, or training operation
+Authority gained: verified virtual follower disconnect; exclusive follower bus ownership
+Authority withheld: live proof labels, motion, reconnect without no-motion proof, general register writes, physical qualification, training
+Training lock: closed
+Next step: commit/push this boundary; confirm remote; then separately review and open a fresh-session-only live gate
+```
 
 ### 2026-07-11 - Owner-authorized virtual follower disconnect resumes T16.5b
 

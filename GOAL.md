@@ -30,20 +30,21 @@ M16 - Hardware Twin Foundation And Qualification Contract
 
 ## Current Slice
 
-T16.5b is resumed and `in_progress`. At `2026-07-11T08:53:51-05:00`, the
-owner explicitly authorized virtual disconnect and reconnect because the arm
-cannot be physically unplugged. This resolves the prior three-turn authority
-block and authorizes exactly one Studio follower disconnect call, including the
-torque-disable write inherent in that route, followed by response, status, and
-zero-holder verification. It grants no motion command, safety-route change,
-leader disconnect, general register-write authority, or policy actuation.
+T16.5b is resumed and `in_progress`. The owner-authorized virtual follower
+disconnect completed exactly once at `2026-07-11T08:57:17-05:00`: HTTP 200
+reported disconnected, Studio reports follower disconnected and torque off,
+the leader remains connected, safety/routing are unchanged, no jobs are
+running, and the reviewed follower holder snapshot is empty with identity
+`4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945`.
+No retry, signal, motion command, safety-route change, leader disconnect, or
+general register write occurred.
 
-Keep the live read-only gate closed until the authorized follower disconnect is
-durably recorded and the reviewed holder guard proves zero follower holders.
-Only then may a fresh session, discovery, five-minute owner-presence lease, and
-exact T16.5b read-only contract be prepared. A later Studio reconnect is allowed
-only when exact device/calibration/current-pose state proves it mechanically
-no-motion-safe; otherwise leave the follower disconnected and torque off.
+Keep the live read-only gate closed until this disconnect/zero-holder boundary
+is remotely preserved. Only then may a separate canonical boundary open the
+gate for a fresh session, discovery, five-minute owner-presence lease, and exact
+T16.5b read-only contract. A later Studio reconnect is allowed only when exact
+device/calibration/current-pose state proves it mechanically no-motion-safe;
+otherwise leave the follower disconnected and torque off.
 
 The last completed implementation slice was Brief 041,
 `docs/briefs/041-rejected-live-attempt-camera-identity-correction.md`, under
@@ -202,3 +203,7 @@ No optimizer run is authorized while the active ledger says `training_lock: clos
   deferred unless it can be proven no-motion-safe. No live proof label, motion,
   general register-write authority, or physical qualification is granted by
   the resumption itself.
+- Reviewer decision 056 verifies the one-call disconnect boundary: HTTP 200,
+  follower disconnected, follower torque off, leader retained, unchanged
+  safety/routing, zero jobs, and zero follower holders. The live gate remains
+  closed pending remote preservation and a separate reopen decision.
