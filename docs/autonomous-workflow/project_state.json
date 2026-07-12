@@ -66,6 +66,32 @@
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
+    "follower_release_correction_authority": {
+      "authority_id": "owner_follower_release_correction_2026_07_12_1814",
+      "state": "granted_pending_execution",
+      "recorded_at": "2026-07-12T18:14:45-05:00",
+      "owner_statement": "okay you can handle that for me, i authorize all actions from here on out until our next legitimate breakthrough of capabilities",
+      "scope": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8790/api/hardware/disconnect",
+        "body": {"role": "follower"},
+        "maximum_call_count": 1,
+        "inherent_follower_torque_disable_allowed": true,
+        "read_only_status_and_all_alias_holder_verification_allowed": true
+      },
+      "forbidden": [
+        "retry",
+        "reconnect",
+        "leader_change",
+        "register_or_configuration_write",
+        "motion",
+        "policy_actuation",
+        "training",
+        "paid_compute"
+      ],
+      "effective_only_after_review_decision": "095",
+      "call_count": 0
+    },
     "operator_presence_required": true,
     "final_operator_confirmation": {
       "state": "granted",
