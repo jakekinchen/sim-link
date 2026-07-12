@@ -20,13 +20,13 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Actual start: `2026-07-11T02:14:07-05:00`.
-- No new major slice after: `2026-07-11T11:44:07-05:00`.
-- Hard closeout: `2026-07-11T12:14:07-05:00`.
-- Closeout recorded: `2026-07-11T11:44:39-05:00`, after the no-new-major-
-  slice cutoff and before the hard deadline.
-- New owner-triggered continuation: `2026-07-11T12:52:56-05:00`, beginning
-  from remotely preserved HEAD `32c2948`; no deadline was specified.
+- Actual start: `2026-07-12T10:55:00-05:00`.
+- No new major slice after: `2026-07-12T13:25:00-05:00`.
+- Hard closeout: `2026-07-12T13:55:00-05:00`.
+- Owner-triggered continuation: the owner is physically present and resumed
+  the existing goal from remotely preserved HEAD `43959cf`.
+- Prior window: `2026-07-11T02:14:07-05:00` through its recorded closeout at
+  `2026-07-11T11:44:39-05:00`.
 
 ## Current Milestone
 

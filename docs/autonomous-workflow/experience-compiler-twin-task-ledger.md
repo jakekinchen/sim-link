@@ -1,19 +1,19 @@
 # Experience Compiler And Hardware Twin Task Ledger
 
-Updated: 2026-07-11
+Updated: 2026-07-12
 
 ```text
 training_lock: closed
-run_window: start 2026-07-11T02:14:07-05:00; no new major slice after 2026-07-11T11:44:07-05:00; hard closeout 2026-07-11T12:14:07-05:00
-run_state: owner-triggered continuation began 2026-07-11T12:52:56-05:00 from 32c2948; live gate and training lock closed
+run_window: start 2026-07-12T10:55:00-05:00; no new major slice after 2026-07-12T13:25:00-05:00; hard closeout 2026-07-12T13:55:00-05:00
+run_state: owner physically present; current thread verified danger-full-access/on-request; one static-pose candidate gate open only after remote preservation; training lock closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress after verified Brief 059 PI0.5 training-support correction
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: Brief 059 implementation f6b6c08; v2 artifact b20e0782...; runtime 1642f75c...; all model-facing bytes unchanged; 175 focused in each runtime; 374 broad in 86.332 seconds
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: the current parent remains live-ineligible; a real static-pose input, reviewed roles/task, live acceptance, and shadow/replay evidence remain absent
-next_step: stop this parent at the corrected fixture boundary; open the real static-pose experiment only through the separately reviewed hardware-supervised parent transition
+blockers: a real static-pose input, reviewed roles/task, live acceptance, and shadow/replay evidence remain absent
+next_step: after reviewer decision 086 is confirmed on origin, obtain a fresh five-minute owner-presence lease and discovery/zero-holder evidence, run exactly one read-only static-pose bracket, and reclose the gate
 ```
 
 ## Rules
@@ -136,6 +136,20 @@ hardware authority.
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-12 - Brief 060 one-session T16.5c live gate transition
+
+```text
+Current task: T16.5c
+State: in_progress; live gate open only after this transition commit is confirmed on origin
+Window: 2026-07-12T10:55:00-05:00 through 2026-07-12T11:25:00-05:00; one session; fresh five-minute owner-presence lease required
+Runtime: active thread 019f5372... independently observed danger-full-access, on-request, permission profile disabled
+Allowed: metadata discovery; canonical and TTY zero-holder checks; exact identity/calibration/640x480-at-30 verification; six Present_Position reads before; two frames per signed camera; six Present_Position reads after; no-torque close; post-close all-alias zero-holder check; one immutable private outcome artifact
+Forbidden: handshake, configuration or register writes, torque changes, motion commands, policy execution, training, retries of the overall session, reconnect, paid compute
+Authority gained: one fresh static-pose candidate session only after remote confirmation
+Authority withheld: static_pose_bracketed_observation, reviewed physical policy input, model load, inference, policy shadow, replay, actuation, qualification, training
+Next step: commit, push, confirm remote, then perform fresh profile/lease/discovery/holder preflight and the one decisive bracket
+```
 
 ### 2026-07-11 - Brief 059 PI0.5 training-support semantics correction verified offline
 

@@ -1,13 +1,19 @@
 {
   "schema_version": "scenesmith.project_state.v1",
-  "updated": "2026-07-11",
+  "updated": "2026-07-12",
   "run_window": {
-    "actual_start": "2026-07-11T02:14:07-05:00",
-    "total_duration_hours": 10,
-    "no_new_major_slice_after": "2026-07-11T11:44:07-05:00",
-    "hard_closeout": "2026-07-11T12:14:07-05:00",
-    "owner_extension_recorded_at": "2026-07-11T02:43:13-05:00",
-    "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
+    "actual_start": "2026-07-12T10:55:00-05:00",
+    "total_duration_hours": 3,
+    "no_new_major_slice_after": "2026-07-12T13:25:00-05:00",
+    "hard_closeout": "2026-07-12T13:55:00-05:00",
+    "owner_extension_recorded_at": "2026-07-12T10:55:00-05:00",
+    "closeout_recorded_at": null,
+    "prior_window": {
+      "actual_start": "2026-07-11T02:14:07-05:00",
+      "no_new_major_slice_after": "2026-07-11T11:44:07-05:00",
+      "hard_closeout": "2026-07-11T12:14:07-05:00",
+      "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
+    }
   },
   "branch": "codex/pi05-autolearn-loop",
   "verified_through_commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
@@ -414,7 +420,7 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "072",
+      "live_gate_review_decision_id": "086",
       "result": "Live attempt 006 is accepted for live_read_only_census_observed and physical_observation_capture: both exact signed 640x480 modes match four decoded PNGs, all six Torque_Enable values are zero, every operation/holder/hash/cleanup check passes, and the live gate is closed",
       "execution_note": "The accepted evidence is finite sequential physical observation only; it is not synchronized, policy-shadow-input-valid, physical qualification, transfer readiness, autonomous policy success, or motion authority",
       "test_commands": [
@@ -937,14 +943,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-11T11:23:00-05:00",
-      "live_gate_valid_until": "2026-07-11T11:38:00-05:00",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-12T10:55:00-05:00",
+      "live_gate_valid_until": "2026-07-12T11:25:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 1,
-      "live_gate_closed_at": "2026-07-11T11:24:24-05:00",
-      "live_gate_close_reason": "live_attempt_006_accepted_and_closed",
-      "live_gate_reconsideration_state": "t16_5b_verified_gate_closed",
+      "live_gate_sessions_started": 0,
+      "live_gate_closed_at": null,
+      "live_gate_close_reason": null,
+      "live_gate_reconsideration_state": "t16_5c_one_static_pose_candidate_gate_open",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1002,9 +1008,17 @@
           "at": "2026-07-11T11:24:24-05:00",
           "review_decision_id": "072",
           "reason": "live_attempt_006_accepted_and_closed"
+        },
+        {
+          "state": "open",
+          "at": "2026-07-12T10:55:00-05:00",
+          "review_decision_id": "086",
+          "result": "one_fresh_static_pose_bracket_candidate_session_authorized_after_brief_059"
         }
       ],
-      "live_gate_scope": "one_fresh_finite_session_discovery_lease_contract_census_and_two_frames_per_pinned_camera",
+      "live_gate_scope": "one_static_pose_bracket_candidate_session",
+      "live_gate_execution_profile": "hardware_supervised_on_request",
+      "live_gate_approval_policy": "on-request",
       "live_gate_basis": {
         "disconnect_proof_commit": "7ea26651e921eee55dad6fcbb26cb58c45c7b290",
         "disconnect_proof_identity_sha256": "627de4fd5715e281007ab5f19a37b0cb610b4d3b637b7b37933a41396ba3859b",
@@ -1017,7 +1031,13 @@
         "follower_connected": false,
         "follower_torque": false,
         "owner_present": true,
-        "owner_resume_authority": true
+        "owner_resume_authority": true,
+        "active_thread_id": "019f5372-6317-7112-a7bc-dd92914fa869",
+        "active_runtime_sandbox": "danger-full-access",
+        "active_runtime_approval_policy": "on-request",
+        "active_runtime_permission_profile": "disabled",
+        "profile_observed_at": "2026-07-12T10:54:55-05:00",
+        "candidate_session_authority": "read_only_static_pose_bracket_only"
       },
       "proof_labels_granted": [
         "live_read_only_census_observed",
@@ -1512,11 +1532,8 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_training_support.py scenesmith/robot_lab/pi05_fixture_preprocessing.py scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_fixture_preprocessing.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_training_support.py tests/unit/test_pi05_fixture_preprocessing.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "stop at the current parent boundary; begin the decisive live static-pose bracket only in a fresh hardware-supervised on-request parent with a finite window, separate reviewed live-gate transition, fresh owner-presence lease, discovery, and all-alias zero-holder evidence; audit any live state against the v2 training-support contract before policy shadow",
+      "next_action": "after remote confirmation of reviewer decision 086, capture a fresh hardware profile, five-minute owner-presence lease, discovery, exact identity and 640x480/30 modes, and all-alias zero-holder evidence; then execute exactly one static-pose bracket and reclose the gate",
       "live_execution_prerequisites_missing": [
-        "fresh_finite_run_window_after_2026_07_11T12_14_07_05_00",
-        "new_parent_thread_with_active_hardware_supervised_on_request_execution_profile",
-        "separate_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
       ],
