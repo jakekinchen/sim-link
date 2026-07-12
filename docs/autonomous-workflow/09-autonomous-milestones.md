@@ -383,19 +383,29 @@ registry, phase/progress predicates, branch linkage, and training-lock decision.
 ## M19 - Physical Hardware Twin Qualification
 
 **Required outcome:** Explicitly authorized read-only census and bounded physical
-experiments identify camera, kinematic, gripper, actuator, backlash, contact, and
-timing distributions well enough that held-out real behavior falls inside the
-simulated envelope.
+experiments use a preregistered instrumented privileged-state capture contract to
+identify camera, kinematic, gripper, actuator, backlash, contact, and timing
+distributions well enough that held-out real behavior falls inside the simulated
+envelope.
 
 **Why this is invariant:** CAD detail and simulated canaries cannot establish
 predictive equivalence to this particular printed, wired, calibrated arm.
 
 **Verification gate:** A preregistered TwinQualificationSpec passes on held-out
-real trajectories and contacts. Bus reads, commanded motion, and contact testing
-are separate authority boundaries.
+real trajectories and contacts. Calibration-fit and held-out sessions/objects are
+immutable and disjoint. Explicit parameter posteriors, units, uncertainty,
+identifiability limits, coordinate and clock lineage, and requalification triggers
+are required; task-latent or distillation loss cannot substitute for predictive
+real-to-sim evidence. Bus reads, camera/tracker opens, commanded motion, and
+contact testing are separate authority boundaries.
 
-**Completion evidence:** immutable census, calibration runs, fitted posterior,
-held-out TwinQualificationReport, profile hash, and requalification triggers.
+**Completion evidence:** immutable census, signed privileged-state capture
+contract, calibration runs, fitted posterior, held-out TwinQualificationReport,
+profile hash, and requalification triggers.
+
+The method disposition and proof boundaries are pinned in
+`docs/autonomous-workflow/ptld-privileged-sensing-adoption-decision.md`; they add
+no authority or dependency to the active T16.5c slice.
 
 ## M20 - Cheap Falsification And Clean Supervision
 
@@ -427,16 +437,23 @@ promotion/rejection decision.
 
 **Required outcome:** Exact-progress reward-aware cloning and, only after stable
 strict competence, a bounded deployment-honest residual policy improve held-out
-behavior across a one-factor-at-a-time curriculum.
+behavior across a one-factor-at-a-time curriculum. A PTLD-inspired auxiliary
+observer may be evaluated from privileged physical-cell labels, but its student
+uses only deployment-approved sensors and remains separately accepted or rejected
+before policy integration.
 
 **Why this is invariant:** RL must improve a competent prior rather than hide
 coordinate, temporal, normalization, ownership, or sparse-reward failures.
 
 **Verification gate:** Uniform/balanced/RA-BC ablation precedes the residual-RL
 readiness gate; every online run has residual, rollout, safety, and budget bounds.
+Any observer comparison includes the existing observation baseline, explicit
+state-target and latent-target variants when available, held-out session/object
+evaluation, uncertainty or abstention, and an actor-privilege leakage audit.
 
-**Completion evidence:** progress artifact, ablations, learner/client interface,
-paired residual result, curriculum decisions, and accepted-pointer integrity.
+**Completion evidence:** progress artifact, ablations, optional observer
+accept/reject decision, learner/client interface, paired residual result,
+curriculum decisions, and accepted-pointer integrity.
 
 ## M22 - Physical Shadow And Closeout
 
@@ -448,7 +465,9 @@ capability and sim-to-real readiness audit.
 different proof states, and command review must precede actuation.
 
 **Verification gate:** Read-only observation parity, no-actuation command review,
-deadman/workspace safeguards, and bounded physical evidence are recorded separately.
+deadman/workspace safeguards, and bounded physical evidence are recorded
+separately. Privileged trackers and simulator/evaluator state remain label-only
+and are absent from the deployed actor boundary.
 
 **Completion evidence:** physical proof artifacts, final proof matrix, Git
 history, and explicit unresolved safety/transfer gates.
