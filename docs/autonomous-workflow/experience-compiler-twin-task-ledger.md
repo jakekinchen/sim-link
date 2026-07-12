@@ -5,15 +5,15 @@ Updated: 2026-07-12
 ```text
 training_lock: closed
 run_window: start 2026-07-12T15:30:07-05:00; no new major slice after 2026-07-12T21:00:07-05:00; hard closeout 2026-07-12T21:30:07-05:00
-run_state: Reviewer 094 closed the gate on one Studio holder plus torque true; fresh owner authority now supports Reviewer 095's one exact corrective follower-disconnect call after remote confirmation; live gate and training lock closed
+run_state: Reviewer 096 accepts the one-call Studio follower release: HTTP 200, follower disconnected, torque false, leader unchanged, both aliases zero holders; permit consumed; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress after verified Brief 062 hardware-profile desktop-resume correction
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: fresh owner presence and profile 6e62e979... passed; holder snapshot b86802c1... records one Studio holder; read-only Studio status records follower connected/torque true; Reviewer 094 closes before lease/candidate/device open
+evidence: Reviewer 094 preserved the preflight failure; Reviewer 095 remotely authorized one call; post-status and holder snapshot b33a7cc... prove follower disconnected/torque false/zero holders; Reviewer 096 accepts the correction
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: Reviewer 095 is not yet remotely confirmed; after its one call, torque-off and both-alias zero-holder evidence must pass before a new gate; accepted static-pose bracket, reviewed input, shadow, and replay remain absent
-next_step: remotely preserve Reviewer 095, execute one exact follower-disconnect call, and verify status plus all-alias holders without retry
+blockers: a new remotely reviewed finite gate and fresh lease/preflight remain required; accepted static-pose bracket, reviewed input, shadow, and replay remain absent
+next_step: remotely preserve Reviewer 096, open one new finite gate, and immediately execute fresh no-write preflight
 ```
 
 ## Rules
