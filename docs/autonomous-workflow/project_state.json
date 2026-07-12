@@ -60,7 +60,7 @@
     "trigger": "owner_continue_t16_5c_actual_evidence_mission",
     "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
     "starting_head": "a514402f2dc0d4ba98fc1df9fc1a07db6ced72c3",
-    "live_gate": "open",
+    "live_gate": "closed",
     "training_lock": "closed",
     "deadline": null
   },
@@ -441,7 +441,7 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "093",
+      "live_gate_review_decision_id": "094",
       "result": "Live attempt 006 is accepted for live_read_only_census_observed and physical_observation_capture: both exact signed 640x480 modes match four decoded PNGs, all six Torque_Enable values are zero, every operation/holder/hash/cleanup check passes, and the live gate is closed",
       "execution_note": "The accepted evidence is finite sequential physical observation only; it is not synchronized, policy-shadow-input-valid, physical qualification, transfer readiness, autonomous policy success, or motion authority",
       "test_commands": [
@@ -964,14 +964,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "open",
+      "live_gate": "closed",
       "live_gate_opened_at": "2026-07-12T17:51:00-05:00",
       "live_gate_valid_until": "2026-07-12T18:21:00-05:00",
       "live_gate_session_limit": 1,
       "live_gate_sessions_started": 0,
-      "live_gate_closed_at": null,
-      "live_gate_close_reason": null,
-      "live_gate_reconsideration_state": "t16_5c_owner_present_one_static_pose_candidate_gate_open_effective_after_remote_confirmation",
+      "live_gate_closed_at": "2026-07-12T17:51:13-05:00",
+      "live_gate_close_reason": "preflight_rejected_studio_holder_and_follower_torque_true_before_lease_or_device_open",
+      "live_gate_reconsideration_state": "t16_5c_gate_closed_waiting_studio_follower_release_and_torque_off",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1071,6 +1071,12 @@
           "at": "2026-07-12T17:51:00-05:00",
           "review_decision_id": "093",
           "result": "one_owner_present_static_pose_bracket_candidate_session_authorized_only_after_remote_confirmation"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-12T17:51:13-05:00",
+          "review_decision_id": "094",
+          "reason": "preflight_rejected_studio_holder_and_follower_torque_true_before_lease_or_device_open"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1081,12 +1087,15 @@
         "disconnect_proof_identity_sha256": "627de4fd5715e281007ab5f19a37b0cb610b4d3b637b7b37933a41396ba3859b",
         "permit_consumed": true,
         "additional_disconnect_calls_allowed": 0,
-        "holder_count": 0,
+        "holder_count": 1,
         "holder_path_count": 2,
-        "holder_snapshot_sha256": "b33a7cc062bc73c666031f6f5b36d5f0e142bea7f541d77a0754fe04ae1d689c",
+        "holder_snapshot_sha256": "b86802c166f94845a39d5cbe04480126061373cb87b00c29199338ca64b519ef",
         "torque_enable_read_capability": "live_values_verified_in_rejected_attempt_no_session_label",
-        "follower_connected": false,
-        "follower_torque": false,
+        "follower_connected": true,
+        "follower_torque": true,
+        "holder_process_class": "so101_studio_server",
+        "holder_observed_at": "2026-07-12T17:50:43-05:00",
+        "studio_status_observed_at": "2026-07-12T17:50:55-05:00",
         "owner_present": true,
         "owner_resume_authority": true,
         "active_thread_id": "019f5372-6317-7112-a7bc-dd92914fa869",
@@ -1253,7 +1262,7 @@
       "active_brief_id": null,
       "latest_verified_brief_id": "062",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062"],
-      "result": "Briefs 048-059 and Brief 062 are verified and remotely preserved. Reviewer 092 closed Reviewer 091's unused gate. The owner then explicitly confirmed current presence; canonical profile 6e62e979... passes and Reviewer 093 opens one new finite candidate gate only after remote confirmation. Sessions started remains zero. Production reviewed-input issuance remains blocked until a newly accepted static-pose session is reviewed",
+      "result": "Briefs 048-059 and Brief 062 are verified and remotely preserved. Owner presence and profile 6e62e979... passed, but Reviewer 094 closes Reviewer 093's gate after fresh discovery found one Studio holder and read-only Studio status reported follower torque true. The candidate did not start, sessions-started is zero, and no private artifact or device open exists. Production reviewed-input issuance remains blocked",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1321,7 +1330,7 @@
         "fixture_capability": "source_bound_static_pose_live_candidate_runtime_conformant",
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
-        "hardware_enumerated": false,
+        "hardware_enumerated": true,
         "hardware_opened": false,
         "physical_follower_commanded": false,
         "focused_test_count_per_runtime": 77,
@@ -1388,7 +1397,7 @@
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
-        "hardware_enumerated": false,
+        "hardware_enumerated": true,
         "hardware_opened": false,
         "physical_follower_commanded": false,
         "focused_test_count_per_runtime": 90,
@@ -1625,9 +1634,12 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "remotely confirm Reviewer 093, then issue a fresh short owner-presence lease and perform exact discovery, all-alias zero-holder, follower/calibration/camera/mode, candidate-contract, and private-destination preflight before one candidate session",
+      "next_action": "release the follower from the separate Studio server and establish torque off without reusing the consumed disconnect permit; then remotely preserve a new reviewed gate and repeat fresh presence, discovery, all-alias zero-holder, and candidate preflight",
       "live_execution_prerequisites_missing": [
-        "remote_confirmation_of_reviewer_093_gate_transition",
+        "studio_follower_released",
+        "follower_torque_observed_disabled",
+        "zero_holders_across_all_signed_aliases",
+        "new_separately_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
       ],

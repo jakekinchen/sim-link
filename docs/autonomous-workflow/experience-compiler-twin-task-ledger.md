@@ -5,15 +5,15 @@ Updated: 2026-07-12
 ```text
 training_lock: closed
 run_window: start 2026-07-12T15:30:07-05:00; no new major slice after 2026-07-12T21:00:07-05:00; hard closeout 2026-07-12T21:30:07-05:00
-run_state: owner explicitly confirmed current presence; canonical profile 6e62e979... passes; Reviewer 093 opens one finite candidate gate effective only after remote confirmation; sessions started zero; training lock closed
+run_state: Reviewer 094 closes Reviewer 093's gate after fresh discovery found one Studio follower holder and read-only Studio status reported torque true; candidate/session never started; training lock closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress after verified Brief 062 hardware-profile desktop-resume correction
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Reviewer 092 safely closed the unused gate; fresh owner presence and canonical profile 6e62e979... now pass; Reviewer 089 retains the physical camera-role and exact-prompt decisions; Reviewer 093 bounds one candidate session
+evidence: fresh owner presence and profile 6e62e979... passed; holder snapshot b86802c1... records one Studio holder; read-only Studio status records follower connected/torque true; Reviewer 094 closes before lease/candidate/device open
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: Reviewer 093 is not yet remotely confirmed; short owner-presence lease, discovery/all-alias holder evidence, accepted static-pose bracket, production session-linked reviewed inputs, shadow, and replay evidence remain absent
-next_step: remotely confirm Reviewer 093, then issue the short lease and execute the no-write preflight
+blockers: Studio must release the follower, torque must be observed off, and both aliases must have zero holders without reusing the consumed disconnect permit; accepted static-pose bracket, reviewed input, shadow, and replay remain absent
+next_step: owner releases follower in Studio or explicitly grants one new scoped disconnect; then create a new reviewed finite gate and repeat fresh preflight
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: remotely confirm Reviewer 093, then issue the short lease and execute
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-059 and 062 verified; owner presence and profile 6e62e979... pass; Reviewer 093 opens one finite gate after remote confirmation; real static-pose acceptance/shadow/replay remain pending |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-059 and 062 verified; Reviewer 094 closes the gate on one Studio holder plus torque true before session start; real static-pose acceptance/shadow/replay remain pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
