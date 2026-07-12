@@ -1198,9 +1198,9 @@
       "state": "in_progress",
       "depends_on": ["T16.5b"],
       "active_brief_id": null,
-      "latest_verified_brief_id": "059",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059"],
-      "result": "Briefs 048-059 are verified and remotely preserved: exact fixture model-input parity is unchanged, serialized MEAN_STD and textual bin saturation are preserved, wrist_flex alone is outside observed training support, and no real live/shadow/replay/model/hardware/motion/training authority is granted",
+      "latest_verified_brief_id": "062",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062"],
+      "result": "Briefs 048-059 and the concrete Brief 062 desktop-resume profile correction are verified and remotely preserved: this exact current turn passes hardware-supervised on-request runtime capture, the live gate remains closed, and no real live/shadow/replay/model/hardware/motion/training authority is granted",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1276,6 +1276,10 @@
       },
       "pinned_live_execution_interlocks": {
         "implementation_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
+        "desktop_resume_correction_commit": "d404778509115290bf3a4918f52d6697b4b7faec",
+        "desktop_resume_additive_metadata_fields": ["memory_mode"],
+        "current_runtime_profile_identity_sha256": "4ade6d50d8183a404a7885c4f4d2dbdd33b7e8bfd0ee1523e312086e0c7d1278",
+        "current_runtime_turn_id": "7d245960-4f64-493d-a227-bcd82de32ef7",
         "hardware_execution_profile_schema_version": "scenesmith.hardware_execution_profile_evidence.v1",
         "candidate_result_schema_version": "scenesmith.static_pose_live_candidate_result.v2",
         "private_success_schema_version": "scenesmith.static_pose_live_candidate_private_success.v1",
@@ -1322,8 +1326,8 @@
           "content_addressed_path",
           "symlink_and_path_escape_rejected"
         ],
-        "current_thread_live_profile_eligible": false,
-        "current_thread_rejection_reason": "active_persisted_turn_context_approval_policy_is_never",
+        "current_thread_live_profile_eligible": true,
+        "current_thread_rejection_reason": null,
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
@@ -1354,8 +1358,8 @@
           "receipt_binds_contract_profile_result_evidence_reference_and_private_root"
         ],
         "private_destination_ancestor_alias_rejected": true,
-        "current_thread_live_profile_eligible": false,
-        "current_thread_rejection_reason": "active_persisted_turn_context_approval_policy_is_never",
+        "current_thread_live_profile_eligible": true,
+        "current_thread_rejection_reason": null,
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
@@ -1395,8 +1399,8 @@
         "exclusive_writer_scope": "configurations/robot_lab/pi05_static_pose_live_session_SESSION_ID.redacted.json",
         "actual_live_manifest_written": false,
         "actual_live_manifest_accepted": false,
-        "current_thread_live_profile_eligible": false,
-        "current_thread_rejection_reason": "active_persisted_turn_context_approval_policy_is_never",
+        "current_thread_live_profile_eligible": true,
+        "current_thread_rejection_reason": null,
         "hardware_enumerated": false,
         "hardware_opened": false,
         "physical_follower_commanded": false,
@@ -1538,9 +1542,8 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_training_support.py scenesmith/robot_lab/pi05_fixture_preprocessing.py scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_fixture_preprocessing.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_training_support.py tests/unit/test_pi05_fixture_preprocessing.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "finish the conflicting never-policy turn, start one unambiguous hardware-supervised on-request parent, verify exactly one active turn context, and open a new separately reviewed finite gate before any discovery or device access",
+      "next_action": "open and remotely preserve one new separately reviewed finite static-pose gate, then issue a fresh owner-presence lease and perform discovery plus all-alias zero-holder preflight before any device open",
       "live_execution_prerequisites_missing": [
-        "one_unambiguous_active_hardware_supervised_on_request_turn_context",
         "new_separately_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"

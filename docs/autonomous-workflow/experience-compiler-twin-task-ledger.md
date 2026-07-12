@@ -5,15 +5,15 @@ Updated: 2026-07-12
 ```text
 training_lock: closed
 run_window: start 2026-07-12T10:55:00-05:00; no new major slice after 2026-07-12T13:25:00-05:00; hard closeout 2026-07-12T13:55:00-05:00
-run_state: owner physically present; first static-pose preflight rejected before discovery because the rollout contained concurrent on-request and later never-policy turns; live gate and training lock closed
+run_state: owner physically present; exact current turn verifies danger-full-access/on-request after the identity-stable desktop-resume correction; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress after verified Brief 059 PI0.5 training-support correction
+current_task: T16.5c in progress after verified Brief 062 hardware-profile desktop-resume correction
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Brief 059 implementation f6b6c08; v2 artifact b20e0782...; runtime 1642f75c...; all model-facing bytes unchanged; 175 focused in each runtime; 374 broad in 86.332 seconds
+evidence: Brief 062 implementation d404778; exact current turn 7d245960...; on-request/danger-full-access profile evidence 4ade6d50...; 177 focused in each runtime; 376 broad in 102.558 seconds
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: a real static-pose input, reviewed roles/task, live acceptance, and shadow/replay evidence remain absent
-next_step: end the conflicting never-policy turn, start one unambiguous hardware-supervised on-request parent, verify exactly one active context, and open a new reviewed finite gate before discovery
+next_step: open and remotely preserve one new reviewed finite gate, then fresh lease/discovery/all-alias zero-holder preflight before any device open
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: end the conflicting never-policy turn, start one unambiguous hardware
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-059 verified; exact tensor parity plus corrected training-support semantics earned; wrist-flex alone is outside fixture training support; real static-pose acceptance/shadow/replay remain pending and this thread is live-ineligible |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-059 and 062 verified; exact current turn passes hardware-supervised runtime capture; live gate closed; real static-pose acceptance/shadow/replay remain pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler
@@ -136,6 +136,20 @@ hardware authority.
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-12 - Brief 062 desktop-resume hardware-profile correction verified
+
+```text
+Current task: T16.5c
+State: in_progress; exact current turn hardware-profile eligible; live gate closed; training lock closed
+Completed: resumed session metadata may repeat only when all existing fields remain exact and only memory_mode is added; latest exact turn still controls the runtime decision
+Evidence: implementation d404778; turn 7d245960...; profile 4ade6d50...; on-request; danger-full-access; hardware_accessed false
+Verification: 177 focused tests in each pinned runtime; live doctor/profile capture; py_compile; diff checks; 376 broad tests in 102.558 seconds
+Adversarial: changed thread, cwd, git, timestamp, source, CLI, provider, field removal, unexpected addition, existing-value mutation, stale never turn, profile drift, or before/after runtime drift still reject before hardware
+Authority gained: current same-thread hardware-supervised runtime eligibility only
+Authority withheld: live gate, device discovery/open, observation acceptance, reviewed input, tensors, model, inference, shadow, replay, actuation, qualification, and training
+Next step: separately review, commit, push, and remote-confirm one fresh finite static-pose gate before discovery
+```
 
 ### 2026-07-12 - Brief 061 preflight rejected; live gate closed unused
 
