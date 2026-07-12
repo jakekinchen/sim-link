@@ -1221,7 +1221,7 @@
       "active_brief_id": null,
       "latest_verified_brief_id": "062",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062"],
-      "result": "Briefs 048-059 and the concrete Brief 062 desktop-resume profile correction are verified and remotely preserved: this exact current turn passes hardware-supervised on-request runtime capture, the live gate remains closed, and no real live/shadow/replay/model/hardware/motion/training authority is granted",
+      "result": "Briefs 048-059 and Brief 062 are verified and remotely preserved. Current thread 019f5804-b684-7023-a599-4f803ac0aceb failed the formal pre-device profile check because approval is not on-request; the live gate remains closed. Accepted T16.5b frame review reverses the fixture camera-role hypothesis and pins the exact sorting prompt, but neither decision is a production reviewed-input artifact until linked to a newly accepted static-pose session",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1299,8 +1299,10 @@
         "implementation_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
         "desktop_resume_correction_commit": "d404778509115290bf3a4918f52d6697b4b7faec",
         "desktop_resume_additive_metadata_fields": ["memory_mode"],
-        "current_runtime_profile_identity_sha256": "4ade6d50d8183a404a7885c4f4d2dbdd33b7e8bfd0ee1523e312086e0c7d1278",
-        "current_runtime_turn_id": "7d245960-4f64-493d-a227-bcd82de32ef7",
+        "last_eligible_runtime_profile_identity_sha256": "4ade6d50d8183a404a7885c4f4d2dbdd33b7e8bfd0ee1523e312086e0c7d1278",
+        "last_eligible_runtime_turn_id": "7d245960-4f64-493d-a227-bcd82de32ef7",
+        "current_runtime_thread_id": "019f5804-b684-7023-a599-4f803ac0aceb",
+        "current_runtime_profile_identity_sha256": null,
         "hardware_execution_profile_schema_version": "scenesmith.hardware_execution_profile_evidence.v1",
         "candidate_result_schema_version": "scenesmith.static_pose_live_candidate_result.v2",
         "private_success_schema_version": "scenesmith.static_pose_live_candidate_private_success.v1",
@@ -1347,8 +1349,9 @@
           "content_addressed_path",
           "symlink_and_path_escape_rejected"
         ],
-        "current_thread_live_profile_eligible": true,
-        "current_thread_rejection_reason": null,
+        "current_thread_live_profile_eligible": false,
+        "current_thread_rejection_reason": "active_codex_thread_is_not_using_on_request_approval",
+        "current_thread_preflight_attempted_at": "2026-07-12T15:35:00-05:00",
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
@@ -1379,8 +1382,8 @@
           "receipt_binds_contract_profile_result_evidence_reference_and_private_root"
         ],
         "private_destination_ancestor_alias_rejected": true,
-        "current_thread_live_profile_eligible": true,
-        "current_thread_rejection_reason": null,
+        "current_thread_live_profile_eligible": false,
+        "current_thread_rejection_reason": "active_codex_thread_is_not_using_on_request_approval",
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
@@ -1420,8 +1423,8 @@
         "exclusive_writer_scope": "configurations/robot_lab/pi05_static_pose_live_session_SESSION_ID.redacted.json",
         "actual_live_manifest_written": false,
         "actual_live_manifest_accepted": false,
-        "current_thread_live_profile_eligible": true,
-        "current_thread_rejection_reason": null,
+        "current_thread_live_profile_eligible": false,
+        "current_thread_rejection_reason": "active_codex_thread_is_not_using_on_request_approval",
         "hardware_enumerated": false,
         "hardware_opened": false,
         "physical_follower_commanded": false,
@@ -1563,8 +1566,35 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_training_support.py scenesmith/robot_lab/pi05_fixture_preprocessing.py scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_fixture_preprocessing.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_training_support.py tests/unit/test_pi05_fixture_preprocessing.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "open and remotely preserve one new separately reviewed finite static-pose gate, then issue a fresh owner-presence lease and perform discovery plus all-alias zero-holder preflight before any device open",
+      "physical_camera_and_task_review": {
+        "review_decision_id": "089",
+        "evidence_class": "accepted_t16_5b_physical_frame_content_review",
+        "review_evidence_sha256": "2a5eac37a1f826b2f736e91d98f3603b77590f0ef40608b2f2c6a928f4029de5",
+        "fixture_hypothesis_rejected": true,
+        "assignments": [
+          {
+            "stable_camera_identity_sha256": "69d55167e318a97b7f38c2562366ba7c8798ded18397f466b083494cf4198cd9",
+            "physical_role": "rigid_wrist_mounted",
+            "source_key": "observation.images.wrist",
+            "model_key": "observation.images.left_wrist_0_rgb",
+            "review_frame_sha256": "c77e4c7e54a40a9efdd3ccc3c3ecfc73f8b993e2fbe5adc64e6264bfa72bbbdc"
+          },
+          {
+            "stable_camera_identity_sha256": "9931d03025b4d9830ffda038ff0fd3a10d7badd2a3120e692fd13ce63325e180",
+            "physical_role": "external_workcell_overview",
+            "source_key": "observation.images.top",
+            "model_key": "observation.images.base_0_rgb",
+            "review_frame_sha256": "caab2f5d943fce53ccaaf05cf2b5c7e5ecf737f8088fabf2cc80f207dff0f544"
+          }
+        ],
+        "checkpoint_task_prompt": "Sort each cube into the same-colored tray: red cubes into the red tray and blue cubes into the blue tray.",
+        "checkpoint_task_prompt_sha256": "6bf96b1858409892cd1596cc36a4ddf2a93a6656c60e77f16700bbd0c8e120a5",
+        "production_reviewed_input_issued": false,
+        "production_linkage_missing": "accepted_live_session_review_decision"
+      },
+      "next_action": "resume from a fresh exact danger-full-access/on-request thread, capture formal same-thread profile evidence, then open and remotely preserve one new separately reviewed finite static-pose gate before lease, discovery, holder census, or device open",
       "live_execution_prerequisites_missing": [
+        "active_same_thread_danger_full_access_on_request_profile",
         "new_separately_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"

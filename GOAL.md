@@ -315,6 +315,20 @@ live gate and grants no hardware authority to a later thread. The canonical
 state records implementation and review boundaries separately so a later
 documentation commit cannot become a stale self-reference.
 
+The current thread `019f5804...` failed its formal pre-device profile capture
+because its active approval policy is not `on-request`. The failure occurred
+before lease issuance, discovery, holder census, candidate-contract issuance,
+or any serial/camera/device access, so no live gate was opened and no candidate
+session started. Accepted T16.5b frame content nevertheless resolves the
+physical camera semantics: stable RealSense `69d55167...` is rigidly
+wrist-mounted and maps to `observation.images.left_wrist_0_rgb`; stable C922
+`9931d030...` is the external workcell overview and maps to
+`observation.images.base_0_rgb`. This reverses the fixture hypothesis. The
+checkpoint prompt is pinned exactly as: `Sort each cube into the same-colored
+tray: red cubes into the red tray and blue cubes into the blue tray.` These
+review decisions cannot become production inputs until bound to a newly
+accepted static-pose session.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
