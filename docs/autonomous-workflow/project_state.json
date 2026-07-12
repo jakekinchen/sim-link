@@ -1044,9 +1044,9 @@
         },
         {
           "state": "open_pending_remote_confirmation",
-          "at": "2026-07-12T17:35:00-05:00",
+          "at": "2026-07-12T17:31:50-05:00",
           "review_decision_id": "090",
-          "result": "one_fresh_static_pose_bracket_candidate_session_authorized_only_after_remote_confirmation"
+          "result": "proposed_one_fresh_static_pose_bracket_candidate_session_for_17_35_only_after_remote_confirmation"
         },
         {
           "state": "closed",
@@ -1074,9 +1074,10 @@
         "active_thread_id": "019f5804-b684-7023-a599-4f803ac0aceb",
         "active_runtime_sandbox": "workspace-write",
         "active_runtime_approval_policy": "on-request",
-        "active_runtime_permission_profile": "disabled",
+        "active_runtime_permission_profile": "managed",
         "profile_observed_at": "2026-07-12T17:34:16-05:00",
         "runtime_profile_identity_sha256": null,
+        "active_runtime_context_sha256": "9f768234f5447d95d66574d7134e58766a42643a3ff70d9db55a03b573a3efd5",
         "active_runtime_turn_id": "07d21379-e26c-47cb-8568-33e0454908a1",
         "candidate_session_authority": "read_only_static_pose_bracket_only"
       },
@@ -1366,7 +1367,7 @@
         ],
         "current_thread_live_profile_eligible": false,
         "current_thread_rejection_reason": "active_runtime_drifted_to_workspace_write_before_remote_gate_confirmation",
-        "current_thread_profile_captured_at": "2026-07-12T17:34:16-05:00",
+        "current_thread_preflight_attempted_at": "2026-07-12T17:34:16-05:00",
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
