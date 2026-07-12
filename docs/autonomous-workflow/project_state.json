@@ -60,7 +60,7 @@
     "trigger": "owner_continue_t16_5c_actual_evidence_mission",
     "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
     "starting_head": "a514402f2dc0d4ba98fc1df9fc1a07db6ced72c3",
-    "live_gate": "closed",
+    "live_gate": "open",
     "training_lock": "closed",
     "deadline": null
   },
@@ -441,7 +441,7 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "092",
+      "live_gate_review_decision_id": "093",
       "result": "Live attempt 006 is accepted for live_read_only_census_observed and physical_observation_capture: both exact signed 640x480 modes match four decoded PNGs, all six Torque_Enable values are zero, every operation/holder/hash/cleanup check passes, and the live gate is closed",
       "execution_note": "The accepted evidence is finite sequential physical observation only; it is not synchronized, policy-shadow-input-valid, physical qualification, transfer readiness, autonomous policy success, or motion authority",
       "test_commands": [
@@ -964,14 +964,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-12T17:45:00-05:00",
-      "live_gate_valid_until": "2026-07-12T18:15:00-05:00",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-12T17:51:00-05:00",
+      "live_gate_valid_until": "2026-07-12T18:21:00-05:00",
       "live_gate_session_limit": 1,
       "live_gate_sessions_started": 0,
-      "live_gate_closed_at": "2026-07-12T17:46:31-05:00",
-      "live_gate_close_reason": "fresh_owner_presence_lease_not_granted_after_three_continuations_before_discovery",
-      "live_gate_reconsideration_state": "t16_5c_gate_closed_waiting_fresh_explicit_owner_presence",
+      "live_gate_closed_at": null,
+      "live_gate_close_reason": null,
+      "live_gate_reconsideration_state": "t16_5c_owner_present_one_static_pose_candidate_gate_open_effective_after_remote_confirmation",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1065,6 +1065,12 @@
           "at": "2026-07-12T17:46:31-05:00",
           "review_decision_id": "092",
           "reason": "fresh_owner_presence_lease_not_granted_after_three_continuations_before_discovery"
+        },
+        {
+          "state": "open",
+          "at": "2026-07-12T17:51:00-05:00",
+          "review_decision_id": "093",
+          "result": "one_owner_present_static_pose_bracket_candidate_session_authorized_only_after_remote_confirmation"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1087,9 +1093,9 @@
         "active_runtime_sandbox": "danger-full-access",
         "active_runtime_approval_policy": "on-request",
         "active_runtime_permission_profile": "disabled",
-        "profile_observed_at": "2026-07-12T17:41:03-05:00",
-        "runtime_profile_identity_sha256": "80e4ce66d8687d4bc8631fdf2ccc2167ba87f329523a44a5f2067a2b0d006896",
-        "active_runtime_turn_id": "9395e4da-2d75-4063-9412-5da4ae2d2259",
+        "profile_observed_at": "2026-07-12T17:47:58-05:00",
+        "runtime_profile_identity_sha256": "6e62e979279caf32f92aeeab44454a3a44987860b1de1ba5bdd50324326fdee1",
+        "active_runtime_turn_id": "50844fd9-a577-4be1-8fdc-01ceeceb6d8f",
         "candidate_session_authority": "read_only_static_pose_bracket_only"
       },
       "proof_labels_granted": [
@@ -1247,7 +1253,7 @@
       "active_brief_id": null,
       "latest_verified_brief_id": "062",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062"],
-      "result": "Briefs 048-059 and Brief 062 are verified and remotely preserved. Reviewer 090 preserves a rejected transition; Reviewer 091's remotely effective gate closed unused under Reviewer 092 because no fresh owner-presence lease was granted after three continuations. Sessions started remains zero and no discovery or device access occurred. Accepted T16.5b frame review reverses the fixture camera-role hypothesis and pins the exact prompt, but production reviewed-input issuance remains blocked until linked to a newly accepted static-pose session",
+      "result": "Briefs 048-059 and Brief 062 are verified and remotely preserved. Reviewer 092 closed Reviewer 091's unused gate. The owner then explicitly confirmed current presence; canonical profile 6e62e979... passes and Reviewer 093 opens one new finite candidate gate only after remote confirmation. Sessions started remains zero. Production reviewed-input issuance remains blocked until a newly accepted static-pose session is reviewed",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1328,8 +1334,8 @@
         "last_eligible_runtime_profile_identity_sha256": "4ade6d50d8183a404a7885c4f4d2dbdd33b7e8bfd0ee1523e312086e0c7d1278",
         "last_eligible_runtime_turn_id": "7d245960-4f64-493d-a227-bcd82de32ef7",
         "current_runtime_thread_id": "019f5372-6317-7112-a7bc-dd92914fa869",
-        "current_runtime_turn_id": "9395e4da-2d75-4063-9412-5da4ae2d2259",
-        "current_runtime_profile_identity_sha256": "80e4ce66d8687d4bc8631fdf2ccc2167ba87f329523a44a5f2067a2b0d006896",
+        "current_runtime_turn_id": "50844fd9-a577-4be1-8fdc-01ceeceb6d8f",
+        "current_runtime_profile_identity_sha256": "6e62e979279caf32f92aeeab44454a3a44987860b1de1ba5bdd50324326fdee1",
         "hardware_execution_profile_schema_version": "scenesmith.hardware_execution_profile_evidence.v1",
         "candidate_result_schema_version": "scenesmith.static_pose_live_candidate_result.v2",
         "private_success_schema_version": "scenesmith.static_pose_live_candidate_private_success.v1",
@@ -1378,7 +1384,7 @@
         ],
         "current_thread_live_profile_eligible": true,
         "current_thread_rejection_reason": null,
-        "current_thread_profile_captured_at": "2026-07-12T17:41:03-05:00",
+        "current_thread_profile_captured_at": "2026-07-12T17:47:58-05:00",
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
@@ -1619,10 +1625,9 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "wait for a fresh explicit owner-present response, then create and remotely preserve a new finite gate before lease, discovery, holder census, candidate issuance, or device access",
+      "next_action": "remotely confirm Reviewer 093, then issue a fresh short owner-presence lease and perform exact discovery, all-alias zero-holder, follower/calibration/camera/mode, candidate-contract, and private-destination preflight before one candidate session",
       "live_execution_prerequisites_missing": [
-        "fresh_explicit_owner_present_response",
-        "new_separately_reviewed_remote_live_gate_transition",
+        "remote_confirmation_of_reviewer_093_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
       ],
