@@ -5,15 +5,15 @@ Updated: 2026-07-12
 ```text
 training_lock: closed
 run_window: start 2026-07-12T15:30:07-05:00; no new major slice after 2026-07-12T21:00:07-05:00; hard closeout 2026-07-12T21:30:07-05:00
-run_state: owner physically present; current thread 019f5804... failed the formal pre-device profile check because approval is not on-request; no live gate was opened; training lock closed
+run_state: profile db93b63c... passed briefly, then the continuation drifted to workspace-write before remote confirmation; Reviewer 090 rejects the proposed gate before effective open; sessions started zero; training lock closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress after verified Brief 062 hardware-profile desktop-resume correction
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Brief 062 implementation d404778 and earlier eligible profile 4ade6d50... remain valid only for their exact thread; current-thread preflight failed before lease/discovery/device access; Reviewer 089 reverses the camera-role hypothesis from accepted frame content and pins the exact checkpoint prompt
+evidence: Brief 062 implementation d404778 is remotely preserved; profile db93b63c... passed without hardware access but became stale on runtime drift; Reviewer 089 reverses the camera-role hypothesis and pins the exact checkpoint prompt; Reviewer 090 preserves the rejected gate transition
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: current thread is not on-request; a new accepted static-pose bracket, production session-linked reviewed inputs, shadow, and replay evidence remain absent
-next_step: resume in an exact danger-full-access/on-request thread, capture formal profile evidence, then open and remotely preserve one reviewed finite gate before any live preflight
+blockers: Reviewer 090 is not yet remotely preserved; a new separately reviewed remote gate, short owner-presence lease, discovery/all-alias holder evidence, accepted static-pose bracket, production session-linked reviewed inputs, shadow, and replay evidence remain absent
+next_step: preserve Reviewer 090 as a failed gate artifact, then retry one separately reviewed gate from the now-stable canonical hardware-supervised thread
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: resume in an exact danger-full-access/on-request thread, capture form
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-059 and 062 verified; current thread fails on-request preflight; Reviewer 089 reverses fixture camera-role hypothesis and pins exact prompt; live gate closed; real static-pose acceptance/shadow/replay remain pending |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-059 and 062 verified; Reviewer 089 reverses the fixture camera-role hypothesis and pins the exact prompt; Reviewer 090 rejects a proposed gate after runtime drift before effective open; real static-pose acceptance/shadow/replay remain pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ## M17 / Gate A - Truthful Experience Compiler

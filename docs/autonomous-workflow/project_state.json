@@ -441,7 +441,7 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "087",
+      "live_gate_review_decision_id": "090",
       "result": "Live attempt 006 is accepted for live_read_only_census_observed and physical_observation_capture: both exact signed 640x480 modes match four decoded PNGs, all six Torque_Enable values are zero, every operation/holder/hash/cleanup check passes, and the live gate is closed",
       "execution_note": "The accepted evidence is finite sequential physical observation only; it is not synchronized, policy-shadow-input-valid, physical qualification, transfer readiness, autonomous policy success, or motion authority",
       "test_commands": [
@@ -965,13 +965,13 @@
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
       "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-12T10:55:00-05:00",
-      "live_gate_valid_until": "2026-07-12T11:25:00-05:00",
+      "live_gate_opened_at": null,
+      "live_gate_valid_until": null,
       "live_gate_session_limit": 1,
       "live_gate_sessions_started": 0,
-      "live_gate_closed_at": "2026-07-12T11:08:20-05:00",
-      "live_gate_close_reason": "preflight_rejected_ambiguous_concurrent_active_turn_contexts_before_discovery",
-      "live_gate_reconsideration_state": "t16_5c_preflight_rejected_new_parent_required",
+      "live_gate_closed_at": "2026-07-12T17:34:16-05:00",
+      "live_gate_close_reason": "runtime_drifted_to_workspace_write_before_remote_confirmation_or_device_access",
+      "live_gate_reconsideration_state": "t16_5c_gate_transition_rejected_before_effective_open",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1041,6 +1041,18 @@
           "at": "2026-07-12T11:08:20-05:00",
           "review_decision_id": "087",
           "reason": "preflight_rejected_ambiguous_concurrent_active_turn_contexts_before_discovery"
+        },
+        {
+          "state": "open_pending_remote_confirmation",
+          "at": "2026-07-12T17:35:00-05:00",
+          "review_decision_id": "090",
+          "result": "one_fresh_static_pose_bracket_candidate_session_authorized_only_after_remote_confirmation"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-12T17:34:16-05:00",
+          "review_decision_id": "090",
+          "reason": "runtime_drifted_to_workspace_write_before_remote_confirmation_or_device_access; proposed_open_time_was_not_reached"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1059,11 +1071,13 @@
         "follower_torque": false,
         "owner_present": true,
         "owner_resume_authority": true,
-        "active_thread_id": "019f5372-6317-7112-a7bc-dd92914fa869",
-        "active_runtime_sandbox": "danger-full-access",
+        "active_thread_id": "019f5804-b684-7023-a599-4f803ac0aceb",
+        "active_runtime_sandbox": "workspace-write",
         "active_runtime_approval_policy": "on-request",
         "active_runtime_permission_profile": "disabled",
-        "profile_observed_at": "2026-07-12T10:54:55-05:00",
+        "profile_observed_at": "2026-07-12T17:34:16-05:00",
+        "runtime_profile_identity_sha256": null,
+        "active_runtime_turn_id": "07d21379-e26c-47cb-8568-33e0454908a1",
         "candidate_session_authority": "read_only_static_pose_bracket_only"
       },
       "proof_labels_granted": [
@@ -1221,7 +1235,7 @@
       "active_brief_id": null,
       "latest_verified_brief_id": "062",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062"],
-      "result": "Briefs 048-059 and Brief 062 are verified and remotely preserved. Current thread 019f5804-b684-7023-a599-4f803ac0aceb failed the formal pre-device profile check because approval is not on-request; the live gate remains closed. Accepted T16.5b frame review reverses the fixture camera-role hypothesis and pins the exact sorting prompt, but neither decision is a production reviewed-input artifact until linked to a newly accepted static-pose session",
+      "result": "Briefs 048-059 and Brief 062 are verified and remotely preserved. A formal profile capture passed at 17:31:43 as db93b63c..., but the continuation runtime drifted to workspace-write before remote confirmation; Reviewer 090 rejects the proposed gate before it became effective and no device was accessed. Accepted T16.5b frame review reverses the fixture camera-role hypothesis and pins the exact sorting prompt, but production reviewed-input issuance remains blocked until linked to a newly accepted static-pose session",
       "stable_camera_identity_binding": {
         "implementation_commit": "bff160d77003d4675f015fdaec1d9d839f3d9982",
         "manifest_schema_version": "scenesmith.live_readonly_observation_manifest.v5",
@@ -1302,6 +1316,7 @@
         "last_eligible_runtime_profile_identity_sha256": "4ade6d50d8183a404a7885c4f4d2dbdd33b7e8bfd0ee1523e312086e0c7d1278",
         "last_eligible_runtime_turn_id": "7d245960-4f64-493d-a227-bcd82de32ef7",
         "current_runtime_thread_id": "019f5804-b684-7023-a599-4f803ac0aceb",
+        "current_runtime_turn_id": "07d21379-e26c-47cb-8568-33e0454908a1",
         "current_runtime_profile_identity_sha256": null,
         "hardware_execution_profile_schema_version": "scenesmith.hardware_execution_profile_evidence.v1",
         "candidate_result_schema_version": "scenesmith.static_pose_live_candidate_result.v2",
@@ -1350,8 +1365,8 @@
           "symlink_and_path_escape_rejected"
         ],
         "current_thread_live_profile_eligible": false,
-        "current_thread_rejection_reason": "active_codex_thread_is_not_using_on_request_approval",
-        "current_thread_preflight_attempted_at": "2026-07-12T15:35:00-05:00",
+        "current_thread_rejection_reason": "active_runtime_drifted_to_workspace_write_before_remote_gate_confirmation",
+        "current_thread_profile_captured_at": "2026-07-12T17:34:16-05:00",
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
@@ -1383,7 +1398,7 @@
         ],
         "private_destination_ancestor_alias_rejected": true,
         "current_thread_live_profile_eligible": false,
-        "current_thread_rejection_reason": "active_codex_thread_is_not_using_on_request_approval",
+        "current_thread_rejection_reason": "active_runtime_drifted_to_workspace_write_before_remote_gate_confirmation",
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
@@ -1424,7 +1439,7 @@
         "actual_live_manifest_written": false,
         "actual_live_manifest_accepted": false,
         "current_thread_live_profile_eligible": false,
-        "current_thread_rejection_reason": "active_codex_thread_is_not_using_on_request_approval",
+        "current_thread_rejection_reason": "active_runtime_drifted_to_workspace_write_before_remote_gate_confirmation",
         "hardware_enumerated": false,
         "hardware_opened": false,
         "physical_follower_commanded": false,
@@ -1592,9 +1607,9 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "resume from a fresh exact danger-full-access/on-request thread, capture formal same-thread profile evidence, then open and remotely preserve one new separately reviewed finite static-pose gate before lease, discovery, holder census, or device open",
+      "next_action": "preserve Reviewer 090 remotely, then retry one separately reviewed one-session transition from the now-stable canonical danger-full-access/on-request thread before any lease, discovery, holder census, or device access",
       "live_execution_prerequisites_missing": [
-        "active_same_thread_danger_full_access_on_request_profile",
+        "fresh_stable_same_thread_danger_full_access_on_request_profile",
         "new_separately_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
