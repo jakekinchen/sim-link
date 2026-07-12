@@ -420,7 +420,7 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "086",
+      "live_gate_review_decision_id": "087",
       "result": "Live attempt 006 is accepted for live_read_only_census_observed and physical_observation_capture: both exact signed 640x480 modes match four decoded PNGs, all six Torque_Enable values are zero, every operation/holder/hash/cleanup check passes, and the live gate is closed",
       "execution_note": "The accepted evidence is finite sequential physical observation only; it is not synchronized, policy-shadow-input-valid, physical qualification, transfer readiness, autonomous policy success, or motion authority",
       "test_commands": [
@@ -943,14 +943,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "open",
+      "live_gate": "closed",
       "live_gate_opened_at": "2026-07-12T10:55:00-05:00",
       "live_gate_valid_until": "2026-07-12T11:25:00-05:00",
       "live_gate_session_limit": 1,
       "live_gate_sessions_started": 0,
-      "live_gate_closed_at": null,
-      "live_gate_close_reason": null,
-      "live_gate_reconsideration_state": "t16_5c_one_static_pose_candidate_gate_open",
+      "live_gate_closed_at": "2026-07-12T11:08:20-05:00",
+      "live_gate_close_reason": "preflight_rejected_ambiguous_concurrent_active_turn_contexts_before_discovery",
+      "live_gate_reconsideration_state": "t16_5c_preflight_rejected_new_parent_required",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1014,6 +1014,12 @@
           "at": "2026-07-12T10:55:00-05:00",
           "review_decision_id": "086",
           "result": "one_fresh_static_pose_bracket_candidate_session_authorized_after_brief_059"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-12T11:08:20-05:00",
+          "review_decision_id": "087",
+          "reason": "preflight_rejected_ambiguous_concurrent_active_turn_contexts_before_discovery"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1532,8 +1538,10 @@
         "./.mujoco_venv/bin/python -m py_compile scenesmith/robot_lab/pi05_training_support.py scenesmith/robot_lab/pi05_fixture_preprocessing.py scenesmith/robot_lab/pi05_reviewed_input_gate.py scenesmith/robot_lab/pi05_preprocessing_contract.py scripts/robot_lab/write_pi05_fixture_preprocessing.py scripts/robot_lab/write_pi05_reviewed_input_gate.py scripts/robot_lab/write_pi05_preprocessing_contract.py tests/unit/test_pi05_training_support.py tests/unit/test_pi05_fixture_preprocessing.py tests/unit/test_pi05_reviewed_input_gate.py tests/unit/test_pi05_preprocessing_contract.py",
         "git diff --check"
       ],
-      "next_action": "after remote confirmation of reviewer decision 086, capture a fresh hardware profile, five-minute owner-presence lease, discovery, exact identity and 640x480/30 modes, and all-alias zero-holder evidence; then execute exactly one static-pose bracket and reclose the gate",
+      "next_action": "finish the conflicting never-policy turn, start one unambiguous hardware-supervised on-request parent, verify exactly one active turn context, and open a new separately reviewed finite gate before any discovery or device access",
       "live_execution_prerequisites_missing": [
+        "one_unambiguous_active_hardware_supervised_on_request_turn_context",
+        "new_separately_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
       ],

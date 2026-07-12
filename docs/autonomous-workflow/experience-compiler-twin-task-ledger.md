@@ -5,7 +5,7 @@ Updated: 2026-07-12
 ```text
 training_lock: closed
 run_window: start 2026-07-12T10:55:00-05:00; no new major slice after 2026-07-12T13:25:00-05:00; hard closeout 2026-07-12T13:55:00-05:00
-run_state: owner physically present; current thread verified danger-full-access/on-request; one static-pose candidate gate open only after remote preservation; training lock closed
+run_state: owner physically present; first static-pose preflight rejected before discovery because the rollout contained concurrent on-request and later never-policy turns; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress after verified Brief 059 PI0.5 training-support correction
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
@@ -13,7 +13,7 @@ evidence: Brief 059 implementation f6b6c08; v2 artifact b20e0782...; runtime 164
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: a real static-pose input, reviewed roles/task, live acceptance, and shadow/replay evidence remain absent
-next_step: after reviewer decision 086 is confirmed on origin, obtain a fresh five-minute owner-presence lease and discovery/zero-holder evidence, run exactly one read-only static-pose bracket, and reclose the gate
+next_step: end the conflicting never-policy turn, start one unambiguous hardware-supervised on-request parent, verify exactly one active context, and open a new reviewed finite gate before discovery
 ```
 
 ## Rules
@@ -136,6 +136,19 @@ hardware authority.
 - M14-M15 move to M21-M22.
 
 ## Milestone Log
+
+### 2026-07-12 - Brief 061 preflight rejected; live gate closed unused
+
+```text
+Current task: T16.5c
+State: in_progress; live gate closed; session count zero
+Failure: formal hardware-profile capture rejected before discovery because one rollout contained repeated session metadata and concurrent active turn IDs with contradictory on-request and never policies
+Safety: no USB, serial, camera, servo bus, holder discovery, model, policy, replay, training, or paid compute access; no private session outcome artifact required because the session never started
+Correction: do not weaken the active-runtime verifier or select a favorable stale context; end the conflicting turn and start one unambiguous hardware-supervised on-request parent
+Authority gained: none
+Authority withheld: all live observation, reviewed input, tensor, model, shadow, replay, actuation, qualification, and training labels
+Next step: push this fail-closed transition, repair the app thread permission mode between turns, then open a new separately reviewed finite gate
+```
 
 ### 2026-07-12 - Brief 060 one-session T16.5c live gate transition
 
