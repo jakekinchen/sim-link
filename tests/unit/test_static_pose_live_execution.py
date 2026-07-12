@@ -442,6 +442,131 @@ class HardwareExecutionProfileTests(unittest.TestCase):
         self.assertEqual(evidence["active_runtime_context"]["turn_id"], context["turn_id"])
         self.assertNotIn("summary", evidence["active_runtime_context"])
 
+    def test_capture_accepts_identity_stable_desktop_resume_metadata(self):
+        with tempfile.TemporaryDirectory() as directory:
+            codex_home = Path(directory)
+            rollout = (
+                codex_home
+                / "sessions/2026/07/12"
+                / f"rollout-2026-07-12T11-21-00-{THREAD_ID}.jsonl"
+            )
+            rollout.parent.mkdir(parents=True)
+            session_meta = {
+                "id": THREAD_ID,
+                "session_id": THREAD_ID,
+                "timestamp": "2026-07-11T23:10:33.260Z",
+                "cwd": str(REPO_ROOT),
+                "originator": "Codex Desktop",
+                "cli_version": "0.144.0-alpha.4",
+                "source": "vscode",
+                "model_provider": "openai",
+                "git": {
+                    "commit_hash": "43959cf",
+                    "branch": "codex/pi05-autolearn-loop",
+                    "repository_url": "https://example.invalid/sim-link.git",
+                },
+            }
+            context = _runtime_capture()["active_runtime_context"]
+            resumed_meta = {**session_meta, "memory_mode": "enabled"}
+            records = [
+                {"type": "session_meta", "payload": session_meta},
+                {"type": "turn_context", "payload": {**context, "turn_id": "old"}},
+                {"type": "session_meta", "payload": resumed_meta},
+                {"type": "session_meta", "payload": resumed_meta},
+                {"type": "turn_context", "payload": context},
+            ]
+            rollout.write_text(
+                "".join(json.dumps(record) + "\n" for record in records),
+                encoding="utf-8",
+            )
+
+            def runner(command: list[str], **kwargs) -> subprocess.CompletedProcess:
+                return subprocess.CompletedProcess(
+                    command,
+                    0,
+                    json.dumps(_doctor_report()),
+                    "",
+                )
+
+            evidence = capture_hardware_execution_profile_evidence(
+                repo_root=REPO_ROOT,
+                captured_at=CAPTURED_AT,
+                environment={
+                    "CODEX_THREAD_ID": THREAD_ID,
+                    "CODEX_HOME": str(codex_home),
+                },
+                run_command=runner,
+            )
+        self.assertEqual(evidence["active_runtime_context"]["turn_id"], context["turn_id"])
+        self.assertEqual(evidence["rollout_reference"]["turn_context_line_number"], 5)
+
+    def test_capture_rejects_desktop_resume_metadata_identity_drift(self):
+        with tempfile.TemporaryDirectory() as directory:
+            codex_home = Path(directory)
+            rollout = (
+                codex_home
+                / "sessions/2026/07/12"
+                / f"rollout-2026-07-12T11-21-00-{THREAD_ID}.jsonl"
+            )
+            rollout.parent.mkdir(parents=True)
+            context = _runtime_capture()["active_runtime_context"]
+            records = [
+                {
+                    "type": "session_meta",
+                    "payload": {
+                        "id": THREAD_ID,
+                        "session_id": THREAD_ID,
+                        "timestamp": "2026-07-11T23:10:33.260Z",
+                        "cwd": str(REPO_ROOT),
+                        "originator": "Codex Desktop",
+                        "cli_version": "0.144.0-alpha.4",
+                        "source": "vscode",
+                        "model_provider": "openai",
+                        "git": {
+                            "commit_hash": "43959cf",
+                            "branch": "codex/pi05-autolearn-loop",
+                            "repository_url": "https://example.invalid/sim-link.git",
+                        },
+                    },
+                },
+                {
+                    "type": "session_meta",
+                    "payload": {
+                        "id": THREAD_ID,
+                        "session_id": THREAD_ID,
+                        "timestamp": "2026-07-11T23:10:33.260Z",
+                        "cwd": str(REPO_ROOT),
+                        "originator": "Codex Desktop",
+                        "cli_version": "0.144.0-alpha.4",
+                        "source": "vscode",
+                        "model_provider": "openai",
+                        "git": {
+                            "commit_hash": "substituted",
+                            "branch": "codex/pi05-autolearn-loop",
+                            "repository_url": "https://example.invalid/sim-link.git",
+                        },
+                    },
+                },
+                {"type": "turn_context", "payload": context},
+            ]
+            rollout.write_text(
+                "".join(json.dumps(record) + "\n" for record in records),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(ValueError, "session metadata.*drifted"):
+                capture_hardware_execution_profile_evidence(
+                    repo_root=REPO_ROOT,
+                    captured_at=CAPTURED_AT,
+                    environment={
+                        "CODEX_THREAD_ID": THREAD_ID,
+                        "CODEX_HOME": str(codex_home),
+                    },
+                    run_command=lambda *args, **kwargs: self.fail(
+                        "doctor must not run after session metadata drift"
+                    ),
+                )
+
     def test_never_stale_cross_thread_synthetic_and_profile_drift_reject(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

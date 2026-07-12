@@ -51,6 +51,7 @@ _AUTHORITY_NOT_GRANTED = [
     "simulation_training_ready",
     "supervised_micro_motion",
 ]
+_SESSION_META_RESUME_ADDITIVE_FIELDS = {"memory_mode"}
 
 
 def verify_codex_execution_profile_files(*, repo_root: Path) -> dict[str, Any]:
@@ -397,13 +398,13 @@ def _capture_active_thread_runtime(
                     raise ValueError("Codex active turn context is malformed")
                 contexts.append((line_number, context))
     if (
-        len(session_meta_records) != 1
-        or session_meta_records[0].get("id") != thread_id
+        not session_meta_records
+        or any(metadata.get("id") != thread_id for metadata in session_meta_records)
         or not contexts
     ):
         raise ValueError("Codex active rollout identity or turn context is missing")
+    session_meta = _resolve_resumed_session_metadata(session_meta_records)
     line_number, full_context = contexts[-1]
-    session_meta = session_meta_records[0]
     selected = {
         "turn_id": require_nonblank(
             full_context.get("turn_id"), label="Codex active turn ID"
@@ -433,6 +434,23 @@ def _capture_active_thread_runtime(
         "active_runtime_context": selected,
         "active_runtime_context_sha256": _sha256_payload(full_context),
     }
+
+
+def _resolve_resumed_session_metadata(
+    records: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Accept only monotonic, identity-stable Codex Desktop resume metadata."""
+
+    selected = copy.deepcopy(records[0])
+    for record in records[1:]:
+        added = set(record) - set(selected)
+        if not added.issubset(_SESSION_META_RESUME_ADDITIVE_FIELDS) or any(
+            field not in record or record[field] != value
+            for field, value in selected.items()
+        ):
+            raise ValueError("Codex active session metadata identity drifted")
+        selected = copy.deepcopy(record)
+    return selected
 
 
 def _validate_active_runtime_capture(
