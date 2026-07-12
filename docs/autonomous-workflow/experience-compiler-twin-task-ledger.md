@@ -81,17 +81,10 @@ next_step: resume in an exact danger-full-access/on-request thread, capture form
 |---|---|---|---|---|
 | T19.1 | pending | M16, read authority | Run read-only servo/firmware/register census | Immutable hardware snapshot; no writes or motion |
 | T19.2 | pending | T19.1, motion authority | Calibrate cameras, joint offsets, kinematics, timing, and gripper aperture | Held-out reprojection, pose, and timing tolerances |
-| T19.2a | pending | T19.1,T19.2, explicit bounded capture authority | Preregister the instrumented privileged-state capture contract before identification trajectories | Signed sensor/clock/frame/action/pose/uncertainty/proof schema; immutable fit/development/held-out split; no actor privilege |
-| T19.3 | pending | T19.2a, motion authority | Identify delay, saturation, settling, directionality, backlash, friction, compliance | Explicit per-joint posterior and identifiability limits; held-out trajectory evidence; latent loss is not calibration evidence |
-| T19.4 | pending | T19.2a,T19.3, contact authority | Identify fingertip/table friction, slip, force/current when available, and object profiles | Held-out grasp/lift/slip/release envelope; unavailable modalities remain explicit rather than inferred |
-| T19.5 | pending | T16.4,T19.2,T19.2a,T19.3,T19.4 | Fit posterior and run held-out qualification | Every TwinQualificationSpec metric passes or is explicitly failed; posterior may bound domain randomization only after fit/holdout separation verifies |
+| T19.3 | pending | T19.1-T19.2, motion authority | Identify delay, saturation, settling, directionality, backlash, friction, compliance | Per-joint fitted distributions and held-out trajectory evidence |
+| T19.4 | pending | T19.2-T19.3, contact authority | Identify fingertip/table friction, slip, force/current, and object profiles | Held-out grasp/lift/slip/release envelope |
+| T19.5 | pending | T16.4, T19.2-T19.4 | Fit posterior and run held-out qualification | Every TwinQualificationSpec metric passes or is explicitly failed |
 | T19.6 | pending | T19.5, M17 | Bind qualified twin hash and requalification triggers to all downstream artifacts | Contract/hardware drift blocks execution |
-
-The PTLD-inspired instrumented-cell disposition is recorded in
-`docs/autonomous-workflow/ptld-privileged-sensing-adoption-decision.md`. It
-adopts privileged sensing for explicit M19 measurement and identification, not
-latent matching as physical calibration, and adds no current hardware, runtime,
-training, or T16.5c authority.
 
 ## M20 / Gate C - Cheap Falsification And Clean Supervision
 
@@ -117,7 +110,6 @@ hardware authority.
 |---|---|---|---|---|
 | T21.1 | pending | M20 | Emit exact-state SARM-compatible progress data | Hashed progress artifact and predicate validation |
 | T21.2 | pending | T21.1 | Compare uniform BC, balanced BC, and balanced exact-progress RA-BC | Paired ablation on identical seeds |
-| T21.2a | pending | M19, T21.2, separate training authority | Evaluate an auxiliary privileged-state/latent-distilled deployment observer without actuation | Existing-observation versus state-target versus latent-target comparison on held-out sessions/objects; deployment sensors only; uncertainty/abstention and actor-leakage audit; explicit accept/reject |
 | T21.3 | pending | T21.2 | Add residual-RL readiness gate | Blocks without repeatable strict success and deployment-honest actor inputs |
 | T21.4 | pending | T21.3 | Adapt EXPO-style learner/client interfaces | Frozen base, bounded residual, privileged critic allowed, actor privilege rejected |
 | T21.5 | pending | T21.4 | Run bounded residual-RL experiment | Budget/safety logs and paired accept/reject evaluation |
@@ -128,7 +120,7 @@ hardware authority.
 
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
-| T22.1 | pending | M19, M21 | Run explicitly authorized read-only observation/tensor parity in shadow mode | Real versus compiled tensors; no actuation; any accepted observer uses deployment sensors only while privileged instrumentation remains evaluator-only |
+| T22.1 | pending | M19, M21 | Run explicitly authorized read-only observation/tensor parity in shadow mode | Real versus compiled tensors; no actuation |
 | T22.2 | pending | T22.1, motion authority | Review commands, then validate one low-risk phase at reduced speed | Deadman/workspace limits and physical evidence |
 | T22.3 | pending | T22.2 | Produce final sim-to-real capability audit | Honest proof matrix and remaining gates |
 
