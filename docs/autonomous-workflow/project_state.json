@@ -2,27 +2,48 @@
   "schema_version": "scenesmith.project_state.v1",
   "updated": "2026-07-12",
   "run_window": {
-    "actual_start": "2026-07-12T10:55:00-05:00",
-    "total_duration_hours": 3,
-    "no_new_major_slice_after": "2026-07-12T13:25:00-05:00",
-    "hard_closeout": "2026-07-12T13:55:00-05:00",
-    "owner_extension_recorded_at": "2026-07-12T10:55:00-05:00",
-    "closeout_recorded_at": null,
-    "prior_window": {
+    "actual_start": "2026-07-12T15:30:07-05:00",
+    "total_duration_hours": 6,
+    "no_new_major_slice_after": "2026-07-12T21:00:07-05:00",
+    "hard_closeout": "2026-07-12T21:30:07-05:00",
+    "owner_extension_recorded_at": "2026-07-12T15:30:07-05:00",
+    "closeout_recorded_at": null
+  },
+  "run_window_history": [
+    {
       "actual_start": "2026-07-11T02:14:07-05:00",
       "no_new_major_slice_after": "2026-07-11T11:44:07-05:00",
       "hard_closeout": "2026-07-11T12:14:07-05:00",
       "closeout_recorded_at": "2026-07-11T11:44:39-05:00"
+    },
+    {
+      "actual_start": "2026-07-12T10:55:00-05:00",
+      "total_duration_hours": 3,
+      "no_new_major_slice_after": "2026-07-12T13:25:00-05:00",
+      "hard_closeout": "2026-07-12T13:55:00-05:00",
+      "owner_extension_recorded_at": "2026-07-12T10:55:00-05:00",
+      "closeout_recorded_at": "2026-07-12T13:55:00-05:00",
+      "closeout_reason": "window_expired_before_current_owner_continuation"
     }
-  },
+  ],
   "branch": "codex/pi05-autolearn-loop",
-  "verified_through_commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
-  "last_reviewed_implementation_commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
+  "verified_implementation_boundary": {
+    "brief_id": "062",
+    "commit": "d404778509115290bf3a4918f52d6697b4b7faec",
+    "summary": "identity_stable_codex_desktop_resume_profile_correction"
+  },
+  "review_boundary": {
+    "reviewer_decision_id": "088",
+    "path": "docs/reviewer-messages/088-accept-brief-062-desktop-resume-profile-correction.md",
+    "review_commit": "a514402f2dc0d4ba98fc1df9fc1a07db6ced72c3",
+    "decision": "ACCEPT_BRIEF_062_CURRENT_THREAD_PROFILE_ELIGIBLE_LIVE_GATE_REMAINS_CLOSED"
+  },
+  "last_reviewed_implementation_commit": "d404778509115290bf3a4918f52d6697b4b7faec",
   "source_review": {
-    "commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
-    "implementation_commit": "f6b6c08299ddc9a460e6ec5c711fd0783cd2356a",
-    "decision": "CONTINUE_T16_5C_ACCEPT_BRIEF_059_TRAINING_SUPPORT_CORRECTION_LIVE_GATE_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/085-accept-brief-059-pi05-training-support-semantics-correction.md"
+    "implementation_commit": "d404778509115290bf3a4918f52d6697b4b7faec",
+    "decision": "ACCEPT_BRIEF_062_CURRENT_THREAD_PROFILE_ELIGIBLE_LIVE_GATE_REMAINS_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/088-accept-brief-062-desktop-resume-profile-correction.md",
+    "review_commit": "a514402f2dc0d4ba98fc1df9fc1a07db6ced72c3"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -35,10 +56,10 @@
     "final_head_derived_at_runtime": true
   },
   "continuation_run": {
-    "started_at": "2026-07-11T12:52:56-05:00",
-    "trigger": "owner_proceed_with_next_milestone",
-    "scope": "T16.5c offline static-pose, reviewed-input, fixture model-ready tensor parity, and training-support semantic correction through Brief 059",
-    "starting_head": "32c29480a314ce3f731dda0d9a50156c1832da63",
+    "started_at": "2026-07-12T15:30:07-05:00",
+    "trigger": "owner_continue_t16_5c_actual_evidence_mission",
+    "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
+    "starting_head": "a514402f2dc0d4ba98fc1df9fc1a07db6ced72c3",
     "live_gate": "closed",
     "training_lock": "closed",
     "deadline": null

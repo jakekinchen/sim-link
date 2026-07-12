@@ -20,13 +20,14 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Actual start: `2026-07-12T10:55:00-05:00`.
-- No new major slice after: `2026-07-12T13:25:00-05:00`.
-- Hard closeout: `2026-07-12T13:55:00-05:00`.
+- Actual start: `2026-07-12T15:30:07-05:00`.
+- No new major slice after: `2026-07-12T21:00:07-05:00`.
+- Hard closeout: `2026-07-12T21:30:07-05:00`.
 - Owner-triggered continuation: the owner is physically present and resumed
-  the existing goal from remotely preserved HEAD `43959cf`.
-- Prior window: `2026-07-11T02:14:07-05:00` through its recorded closeout at
-  `2026-07-11T11:44:39-05:00`.
+  the existing goal from remotely preserved HEAD `a514402`.
+- Prior windows are retained in
+  `docs/autonomous-workflow/project_state.json`; the immediately preceding
+  window expired at `2026-07-12T13:55:00-05:00`.
 
 ## Current Milestone
 
@@ -306,6 +307,13 @@ inside q01-q99 and min-max support. The new local capability is only
 `fixture_pi05_training_support_audit_conformant`; it grants no real input,
 shadow, model, replay, hardware, motion, or training authority. The next live
 experiment still requires a fresh hardware-supervised on-request parent.
+
+Brief 062 is the latest reviewed implementation boundary at `d4047785`.
+Reviewer 088 is remotely preserved in review commit `a514402f` and grants
+runtime-profile eligibility only to its exact earlier thread/turn; it opens no
+live gate and grants no hardware authority to a later thread. The canonical
+state records implementation and review boundaries separately so a later
+documentation commit cannot become a stale self-reference.
 
 ## Durable State
 

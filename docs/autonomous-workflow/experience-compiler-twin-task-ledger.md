@@ -4,8 +4,8 @@ Updated: 2026-07-12
 
 ```text
 training_lock: closed
-run_window: start 2026-07-12T10:55:00-05:00; no new major slice after 2026-07-12T13:25:00-05:00; hard closeout 2026-07-12T13:55:00-05:00
-run_state: owner physically present; exact current turn verifies danger-full-access/on-request after the identity-stable desktop-resume correction; live gate and training lock closed
+run_window: start 2026-07-12T15:30:07-05:00; no new major slice after 2026-07-12T21:00:07-05:00; hard closeout 2026-07-12T21:30:07-05:00
+run_state: owner physically present; Brief 062/Reviewer 088 verify only their exact earlier thread; the current thread must produce fresh profile evidence; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress after verified Brief 062 hardware-profile desktop-resume correction
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
