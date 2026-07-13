@@ -2,13 +2,12 @@
   "schema_version": "scenesmith.project_state.v1",
   "updated": "2026-07-13",
   "run_window": {
-    "actual_start": "2026-07-12T15:30:07-05:00",
-    "total_duration_hours": 6,
-    "no_new_major_slice_after": "2026-07-12T21:00:07-05:00",
-    "hard_closeout": "2026-07-12T21:30:07-05:00",
-    "owner_extension_recorded_at": "2026-07-12T15:30:07-05:00",
-    "closeout_recorded_at": "2026-07-12T21:30:07-05:00",
-    "closeout_reason": "window_expired_before_brief_071_offline_runtime_policy_transition"
+    "actual_start": "2026-07-13T08:21:09-05:00",
+    "total_duration_hours": 4,
+    "no_new_major_slice_after": "2026-07-13T11:51:09-05:00",
+    "hard_closeout": "2026-07-13T12:21:09-05:00",
+    "owner_extension_recorded_at": "2026-07-13T08:21:09-05:00",
+    "closeout_recorded_at": null
   },
   "run_window_history": [
     {
@@ -25,6 +24,15 @@
       "owner_extension_recorded_at": "2026-07-12T10:55:00-05:00",
       "closeout_recorded_at": "2026-07-12T13:55:00-05:00",
       "closeout_reason": "window_expired_before_current_owner_continuation"
+    },
+    {
+      "actual_start": "2026-07-12T15:30:07-05:00",
+      "total_duration_hours": 6,
+      "no_new_major_slice_after": "2026-07-12T21:00:07-05:00",
+      "hard_closeout": "2026-07-12T21:30:07-05:00",
+      "owner_extension_recorded_at": "2026-07-12T15:30:07-05:00",
+      "closeout_recorded_at": "2026-07-12T21:30:07-05:00",
+      "closeout_reason": "window_expired_before_brief_071_offline_runtime_policy_transition"
     }
   ],
   "branch": "codex/pi05-autolearn-loop",
@@ -57,11 +65,11 @@
     "final_head_derived_at_runtime": true
   },
   "continuation_run": {
-    "started_at": "2026-07-12T15:30:07-05:00",
-    "trigger": "owner_continue_t16_5c_actual_evidence_mission",
+    "started_at": "2026-07-13T08:21:09-05:00",
+    "trigger": "owner_present_full_access_no_prompt_t16_5c_physical_evidence_mission",
     "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
-    "starting_head": "a514402f2dc0d4ba98fc1df9fc1a07db6ced72c3",
-    "live_gate": "closed",
+    "starting_head": "738d0006601335bc68bcf4ffda005a19d34933cc",
+    "live_gate": "open_after_remote_confirmation",
     "training_lock": "closed",
     "deadline": null
   },
@@ -1003,14 +1011,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-12T17:51:00-05:00",
-      "live_gate_valid_until": "2026-07-12T18:21:00-05:00",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-13T08:30:00-05:00",
+      "live_gate_valid_until": "2026-07-13T09:15:00-05:00",
       "live_gate_session_limit": 1,
       "live_gate_sessions_started": 0,
-      "live_gate_closed_at": "2026-07-12T17:51:13-05:00",
-      "live_gate_close_reason": "preflight_rejected_studio_holder_and_follower_torque_true_before_lease_or_device_open",
-      "live_gate_reconsideration_state": "t16_5c_gate_closed_waiting_studio_follower_release_and_torque_off",
+      "live_gate_closed_at": null,
+      "live_gate_close_reason": null,
+      "live_gate_reconsideration_state": "one_t16_5c_candidate_session_open_only_after_remote_confirmation",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1116,6 +1124,12 @@
           "at": "2026-07-12T17:51:13-05:00",
           "review_decision_id": "094",
           "reason": "preflight_rejected_studio_holder_and_follower_torque_true_before_lease_or_device_open"
+        },
+        {
+          "state": "open",
+          "at": "2026-07-13T08:30:00-05:00",
+          "review_decision_id": "098",
+          "result": "one_full_access_no_prompt_static_pose_bracket_candidate_session_authorized_only_after_remote_confirmation"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1137,13 +1151,13 @@
         "studio_status_observed_at": "2026-07-12T18:15:58-05:00",
         "owner_present": true,
         "owner_resume_authority": true,
-        "active_thread_id": "019f5372-6317-7112-a7bc-dd92914fa869",
+        "active_thread_id": "019f5ba2-1ed7-7f92-a89d-e1fe1f12720b",
         "active_runtime_sandbox": "danger-full-access",
-        "active_runtime_approval_policy": "on-request",
+        "active_runtime_approval_policy": "never",
         "active_runtime_permission_profile": "disabled",
-        "profile_observed_at": "2026-07-12T17:47:58-05:00",
-        "runtime_profile_identity_sha256": "6e62e979279caf32f92aeeab44454a3a44987860b1de1ba5bdd50324326fdee1",
-        "active_runtime_turn_id": "50844fd9-a577-4be1-8fdc-01ceeceb6d8f",
+        "profile_observed_at": "2026-07-13T08:21:09-05:00",
+        "runtime_profile_identity_sha256": "77f39177b36f52d365045168072c8b717f5f8da0df6ad5f92c33ccdb6eccffa0",
+        "active_runtime_turn_id": "019f5ba2-24cf-7d03-8f54-7421a4276ccf",
         "candidate_session_authority": "read_only_static_pose_bracket_only"
       },
       "proof_labels_granted": [
@@ -1301,7 +1315,7 @@
       "active_brief_id": null,
       "latest_verified_brief_id": "071",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071"],
-      "result": "Briefs 048-059, 062, and 071 are verified and remotely preserved. Reviewer 096 accepts the one-call Studio follower release with follower disconnected, torque false, leader unchanged, and both aliases holder-free. Reviewer 097 accepts the owner-requested danger-full-access plus never future runtime policy without opening the live gate or changing robot authority. The current restricted task remains live-ineligible, and production reviewed-input issuance remains blocked pending an accepted new session",
+      "result": "Briefs 048-059, 062, and 071 are verified and remotely preserved. Reviewer 096 accepts the one-call Studio follower release with follower disconnected, torque false, leader unchanged, and both aliases holder-free. Reviewer 097 accepts danger-full-access plus never runtime policy. The current exact task formally passes that profile, and Reviewer 098 opens one finite candidate gate only after remote confirmation; production reviewed-input issuance remains blocked pending an accepted new session",
       "runtime_policy_transition": {
         "brief_id": "071",
         "implementation_commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
@@ -1314,11 +1328,11 @@
         "project_default_profile_sha256": "65edfaff0cd4b21c026fab8705ec2de114b8bf8bced32904de0773b509032772",
         "hardware_supervised_profile_sha256": "0fce3e517f215587389b6febb88a2d6852cc31ceedb6310aab45acb8eeb7abdc",
         "offline_autonomous_profile_sha256": "66378a47fd6d44d6d384c159e43412a721424160ad4a5d512676c5e80499392f",
-        "current_task_profile_eligible": false,
-        "current_task_rejection_reason": "managed_restricted_sandbox_policy_rejected_before_codex_doctor",
+        "current_task_profile_eligible": true,
+        "current_task_rejection_reason": null,
         "hardware_accessed": false,
         "physical_follower_commanded": false,
-        "live_gate_opened": false,
+        "live_gate_opened": true,
         "training_lock": "closed"
       },
       "stable_camera_identity_binding": {
@@ -1400,27 +1414,27 @@
         "desktop_resume_additive_metadata_fields": ["memory_mode"],
         "last_eligible_runtime_profile_identity_sha256": "4ade6d50d8183a404a7885c4f4d2dbdd33b7e8bfd0ee1523e312086e0c7d1278",
         "last_eligible_runtime_turn_id": "7d245960-4f64-493d-a227-bcd82de32ef7",
-        "current_runtime_thread_id": "019f5372-6317-7112-a7bc-dd92914fa869",
-        "current_runtime_turn_id": "50844fd9-a577-4be1-8fdc-01ceeceb6d8f",
-        "current_runtime_profile_identity_sha256": "6e62e979279caf32f92aeeab44454a3a44987860b1de1ba5bdd50324326fdee1",
+        "current_runtime_thread_id": "019f5ba2-1ed7-7f92-a89d-e1fe1f12720b",
+        "current_runtime_turn_id": "019f5ba2-24cf-7d03-8f54-7421a4276ccf",
+        "current_runtime_profile_identity_sha256": "77f39177b36f52d365045168072c8b717f5f8da0df6ad5f92c33ccdb6eccffa0",
         "hardware_execution_profile_schema_version": "scenesmith.hardware_execution_profile_evidence.v1",
         "candidate_result_schema_version": "scenesmith.static_pose_live_candidate_result.v2",
         "private_success_schema_version": "scenesmith.static_pose_live_candidate_private_success.v1",
         "private_failure_schema_version": "scenesmith.static_pose_live_candidate_private_failure.v1",
         "project_default_profile": {
-          "sandbox_mode": "workspace-write",
-          "approval_policy": "on-request",
-          "sha256": "977e1b42689eae2e613412dff0e1f8917b0592194017446f843d01bbc5d497f0"
+          "sandbox_mode": "danger-full-access",
+          "approval_policy": "never",
+          "sha256": "65edfaff0cd4b21c026fab8705ec2de114b8bf8bced32904de0773b509032772"
         },
         "hardware_supervised_profile": {
           "sandbox_mode": "danger-full-access",
-          "approval_policy": "on-request",
-          "sha256": "dfce70f4b37aee7a1f1fee5e1c92818ea89e98f25fabbe71e94c11b46b4489fd"
+          "approval_policy": "never",
+          "sha256": "0fce3e517f215587389b6febb88a2d6852cc31ceedb6310aab45acb8eeb7abdc"
         },
         "offline_autonomous_profile": {
           "sandbox_mode": "danger-full-access",
           "approval_policy": "never",
-          "sha256": "76c188c5a1ebf6864ac6102740e35cdf27d8524390374d7dd92299482464e933"
+          "sha256": "66378a47fd6d44d6d384c159e43412a721424160ad4a5d512676c5e80499392f"
         },
         "pinned_ffmpeg": {
           "path": "/opt/homebrew/bin/ffmpeg",
@@ -1451,7 +1465,7 @@
         ],
         "current_thread_live_profile_eligible": true,
         "current_thread_rejection_reason": null,
-        "current_thread_profile_captured_at": "2026-07-12T17:47:58-05:00",
+        "current_thread_profile_captured_at": "2026-07-13T08:21:09-05:00",
         "live_candidate_contract_issued": false,
         "live_candidate_result_observed": false,
         "private_live_evidence_written": false,
@@ -1692,9 +1706,9 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "remotely preserve Reviewer 096, then open a new finite reviewed gate and repeat fresh profile, owner-presence lease, discovery, torque-off, all-alias zero-holder, camera/mode, calibration, candidate, and private-destination preflight",
+      "next_action": "remotely confirm Reviewer 098, then issue a fresh short owner-presence lease and perform exact profile, discovery, Studio status, torque-off, all-alias zero-holder, camera/mode, calibration, candidate, and private-destination preflight before one candidate session",
       "live_execution_prerequisites_missing": [
-        "new_separately_reviewed_remote_live_gate_transition",
+        "remote_confirmation_of_reviewer_098_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
       ],

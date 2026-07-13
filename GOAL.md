@@ -18,13 +18,17 @@ delta-and-return permit under an active owner-presence lease. Neural-policy,
 contact-stabilized, controller-assisted, supervised-motion, and physical-robot
 proof states must remain distinct.
 
-## Run Window
+## Active Run Window
 
-- No live hardware run window or owner-presence lease is active.
-- The previous window closed at `2026-07-12T21:30:07-05:00`.
-- Brief 071 is an offline runtime-policy slice only. A future physical session
-  requires a fresh finite window and fresh owner-presence lease after the new
-  no-prompt runtime passes its formal same-thread verifier.
+- Actual start: `2026-07-13T08:21:09-05:00`.
+- No new major slice after: `2026-07-13T11:51:09-05:00`.
+- Hard closeout: `2026-07-13T12:21:09-05:00`.
+- The owner is physically present for the initial bounded session. The exact
+  current task passed the formal same-thread `danger-full-access`/`never`
+  verifier with profile identity `77f39177...` and no hardware access.
+- Reviewer 098 opens at most one read-only static-pose candidate session from
+  `08:30` through `09:15` CDT, effective only after remote confirmation and a
+  fresh short operator-presence lease.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -334,9 +338,10 @@ prompts. The future Codex runtime contract is `danger-full-access`/`never`
 across the project default, explicit hardware profile, formal doctor/active-turn
 verifier, candidate gate snapshot, and redacted review. Historical on-request
 evidence above remains historical.
-The current task is still restricted and cannot inherit the new settings; a
-fresh same-thread runtime must mechanically prove the no-prompt profile before
-any device access. The live gate and training lock remain closed.
+This exact current task now mechanically proves that profile as identity
+`77f39177...`. Reviewer 098 opens one finite candidate gate only after its
+scoped transition is confirmed on origin; the fresh lease and preflight remain
+mandatory, and the training lock remains closed.
 
 ## Durable State
 
