@@ -96,6 +96,31 @@ def apply_gripper_contact_identities(robot_xml_path: Path) -> dict[str, Any]:
     }
 
 
+def apply_explicit_pad_proxy_contact_model(robot_xml_path: Path) -> dict[str, Any]:
+    """Retain composite jaw meshes but make only explicit pads contact-active."""
+
+    change = apply_gripper_contact_identities(robot_xml_path)
+    tree = ET.parse(robot_xml_path)
+    root = tree.getroot()
+    disabled = []
+    for name in (FIXED_JAW_COMPOSITE_GEOM, MOVING_JAW_COMPOSITE_GEOM):
+        geom = root.find(f".//geom[@name='{name}']")
+        if geom is None:
+            raise ValueError(f"Composite jaw geom is missing: {name}")
+        geom.set("contype", "0")
+        geom.set("conaffinity", "0")
+        disabled.append(name)
+    ET.indent(tree, space="  ")
+    tree.write(robot_xml_path, encoding="utf-8", xml_declaration=True)
+    return {
+        **change,
+        "semantic_model_version": "scenesmith.so101_explicit_pad_proxy_contact.v2",
+        "contact_mask_disabled_composite_geoms": disabled,
+        "contact_active_pad_geoms": [FIXED_PAD_GEOM, MOVING_PAD_GEOM],
+        "geometry_removed": False,
+    }
+
+
 def build_gripper_geometry_audit() -> dict[str, Any]:
     """Compile the pinned grasp model and emit deterministic geometry evidence."""
 

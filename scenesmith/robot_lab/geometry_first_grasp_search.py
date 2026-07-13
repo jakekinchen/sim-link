@@ -18,6 +18,7 @@ from scenesmith.robot_lab.gripper_contact_semantics import (
     MOVING_PAD_SITE,
     aggregate_pad_contacts,
     apply_gripper_contact_identities,
+    apply_explicit_pad_proxy_contact_model,
     compiled_pad_geom_roles,
     extract_pad_contacts,
 )
@@ -95,23 +96,38 @@ def verify_geometry_first_grasp_search(payload: dict[str, Any]) -> None:
         raise ValueError("Geometry eligibility count drifted")
 
 
-def _candidate(index: int, *, holdout: bool) -> dict[str, Any]:
+def _candidate(
+    index: int,
+    *,
+    holdout: bool,
+    explicit_pad_proxy_only: bool = False,
+) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
     try:
-        result = _run_candidate(request)
+        result = _run_candidate(
+            request,
+            explicit_pad_proxy_only=explicit_pad_proxy_only,
+        )
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
     return {"candidate_index": index, "holdout": holdout, "request": request, **result}
 
 
-def _run_candidate(request: dict[str, float]) -> dict[str, Any]:
+def _run_candidate(
+    request: dict[str, float],
+    *,
+    explicit_pad_proxy_only: bool = False,
+) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
     with tempfile.TemporaryDirectory(prefix="scenesmith-geometry-search-") as directory:
         root = Path(directory)
         robot_xml = prepare_mujoco_so101_assets(root, scene.robot.base_position_m)
-        apply_gripper_contact_identities(robot_xml)
+        if explicit_pad_proxy_only:
+            apply_explicit_pad_proxy_contact_model(robot_xml)
+        else:
+            apply_gripper_contact_identities(robot_xml)
         scene_xml = root / "scene.xml"
         scene_xml.write_text(render_mujoco_xml(scene), encoding="utf-8")
         _bind_anchor_geometry(scene_xml)
@@ -130,6 +146,16 @@ def _run_candidate(request: dict[str, float]) -> dict[str, Any]:
             retained["pad_contacts"] = contacts
             retained["pad_contact_aggregate"] = aggregate
             retained["nonpad_robot_object_contacts"] = _nonpad_contacts(expert, object_body, set(pad_roles))
+            if explicit_pad_proxy_only:
+                retained["all_robot_object_contact_geoms"] = _all_robot_object_contact_geoms(
+                    expert,
+                    object_body,
+                )
+                retained["raw_pad_normal_forces_n"] = _raw_pad_normal_forces(
+                    expert,
+                    object_body,
+                    set(pad_roles),
+                )
             raw_frames.append(retained)
 
         expert = CausalSortExpert(scene, scene_xml, seed=1701 + index_hash(request), frame_sink=retain, config=CausalSortExpertConfig(image_size=16, capture_images=False))
@@ -163,7 +189,7 @@ def _run_candidate(request: dict[str, float]) -> dict[str, Any]:
     hold_valid = [_valid_contact(row, spec) for row in hold]
     aggregates = [row["pad_contact_aggregate"] for row in close + hold if row["pad_contact_aggregate"]]
     geometry_eligible = confirmation and len(hold_valid) == 8 and all(hold_valid)
-    return {
+    result = {
         "setup_valid": True,
         "achieved_object_yaw_rad": achieved_yaw,
         "approach_position_residual_m": approach_solution["position_residual_m"],
@@ -179,6 +205,24 @@ def _run_candidate(request: dict[str, float]) -> dict[str, Any]:
         "best_normal_alignment": max((min(row["fixed_normal_span_alignment"], row["moving_normal_span_alignment"]) for row in aggregates), default=None),
         "geometry_eligible": geometry_eligible,
     }
+    if explicit_pad_proxy_only:
+        result["observed_robot_object_contact_geoms"] = sorted(
+            {
+                name
+                for row in raw_frames
+                for name in row.get("all_robot_object_contact_geoms", [])
+            }
+        )
+        raw_pad_forces = [
+            force
+            for row in raw_frames
+            for force in row.get("raw_pad_normal_forces_n", [])
+        ]
+        result["raw_pad_contact_count"] = len(raw_pad_forces)
+        result["raw_pad_normal_force_range_n"] = (
+            [min(raw_pad_forces), max(raw_pad_forces)] if raw_pad_forces else None
+        )
+    return result
 
 
 def _valid_contact(frame: dict[str, Any], requirement: dict[str, Any]) -> bool:
@@ -199,6 +243,50 @@ def _nonpad_contacts(expert: CausalSortExpert, object_body: int, pad_geoms: set[
         if other_body in expert.robot_body_ids and other not in pad_geoms:
             rows.append(expert.mujoco.mj_id2name(expert.model, expert.mujoco.mjtObj.mjOBJ_GEOM, other) or f"geom:{other}")
     return sorted(set(rows))
+
+
+def _all_robot_object_contact_geoms(
+    expert: CausalSortExpert,
+    object_body: int,
+) -> list[str]:
+    rows = []
+    for index in range(expert.data.ncon):
+        contact = expert.data.contact[index]
+        geoms = (int(contact.geom1), int(contact.geom2))
+        bodies = tuple(int(expert.model.geom_bodyid[geom]) for geom in geoms)
+        if object_body not in bodies:
+            continue
+        other = geoms[1] if bodies[0] == object_body else geoms[0]
+        if int(expert.model.geom_bodyid[other]) in expert.robot_body_ids:
+            rows.append(
+                expert.mujoco.mj_id2name(
+                    expert.model,
+                    expert.mujoco.mjtObj.mjOBJ_GEOM,
+                    other,
+                )
+                or f"geom:{other}"
+            )
+    return sorted(set(rows))
+
+
+def _raw_pad_normal_forces(
+    expert: CausalSortExpert,
+    object_body: int,
+    pad_geoms: set[int],
+) -> list[float]:
+    rows = []
+    force = np.zeros(6, dtype=np.float64)
+    for index in range(expert.data.ncon):
+        contact = expert.data.contact[index]
+        geoms = (int(contact.geom1), int(contact.geom2))
+        bodies = tuple(int(expert.model.geom_bodyid[geom]) for geom in geoms)
+        if object_body not in bodies:
+            continue
+        other = geoms[1] if bodies[0] == object_body else geoms[0]
+        if other in pad_geoms:
+            expert.mujoco.mj_contactForce(expert.model, expert.data, index, force)
+            rows.append(round(float(force[0]), 9))
+    return rows
 
 
 def _rank(row: dict[str, Any]) -> tuple[Any, ...]:

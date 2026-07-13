@@ -58,10 +58,10 @@ M17/M19 - Grasp Experience And Hardware Twin Execution Track
 
 T16.5c is `verified` as a successful no-actuation diagnostic experiment with a
 negative sorting-checkpoint transfer result. T19.0 is `verified` through Brief
-095, T19.0b is `verified` through Brief 096, and T19.0c is `verified` as a
-negative geometry search through Brief 097. T19.0d is the next eligible offline
-slice: correct composite-jaw occlusion of the explicit pad proxies and rerun the
-identical search. The live gate and training lock remain closed. The
+095, T19.0b is `verified` through Brief 096, T19.0c is a verified negative
+geometry search, and T19.0d verifies unilateral fixed-pad proxy contact. T19.0e
+is the next eligible offline slice: center the object on the predicted pad
+midpoint and rerun the identical search. The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
 history that constrains later hardware work. Brief 043 implementation
