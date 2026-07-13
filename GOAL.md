@@ -64,10 +64,12 @@ is `verified` through Brief 099 with bilateral explicit-pad contact in two
 candidates but zero strict-v2 frames or geometry-eligible grasps. T19.0f is
 `verified` through Brief 100: passive yaw/table settling is separated from
 approach motion, six candidates pass the motion gate, but both bilateral
-candidates still fail strict contact geometry. T19.0g is the next eligible
-offline slice: align the compiled gripper closing axis with an anchor principal
-axis without tuning contact physics. The live gate and training lock remain
-closed. The
+candidates still fail strict contact geometry. T19.0g is `verified` through
+Brief 101: four wrist-roll-aligned candidates were reachable, two passed the
+motion gate, but preserved wrist-flex tilt prevented all moving-pad contact.
+T19.0h is the next eligible offline slice: jointly solve wrist flex and roll
+for a horizontal principal-axis closing vector without tuning contact physics.
+The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
 history that constrains later hardware work. Brief 043 implementation

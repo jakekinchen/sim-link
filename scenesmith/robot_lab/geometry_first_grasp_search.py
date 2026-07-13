@@ -41,6 +41,7 @@ RANGES = {
     "vertical_m": (0.014, 0.034),
     "close_target_rad": (-0.17, 0.12),
 }
+PRINCIPAL_AXIS_ALIGNMENT_MINIMUM = 0.8
 
 
 def build_geometry_first_grasp_search() -> dict[str, Any]:
@@ -103,6 +104,7 @@ def _candidate(
     explicit_pad_proxy_only: bool = False,
     pad_midpoint_targeting: bool = False,
     post_yaw_settle_seconds: float = 0.0,
+    principal_axis_alignment: bool = False,
 ) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
@@ -112,6 +114,7 @@ def _candidate(
             explicit_pad_proxy_only=explicit_pad_proxy_only,
             pad_midpoint_targeting=pad_midpoint_targeting,
             post_yaw_settle_seconds=post_yaw_settle_seconds,
+            principal_axis_alignment=principal_axis_alignment,
         )
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
@@ -124,6 +127,7 @@ def _run_candidate(
     explicit_pad_proxy_only: bool = False,
     pad_midpoint_targeting: bool = False,
     post_yaw_settle_seconds: float = 0.0,
+    principal_axis_alignment: bool = False,
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
@@ -202,30 +206,46 @@ def _run_candidate(
             anchor_start = expert.data.xpos[object_body].copy()
             target = anchor_start + np.asarray([request["lateral_x_m"], request["lateral_y_m"], request["vertical_m"]])
             approach = target + np.asarray([0.0, 0.0, 0.04])
-            if pad_midpoint_targeting:
-                approach_solution = _solve_pad_midpoint_target(
-                    expert,
-                    desired_midpoint=approach,
-                    request=request,
-                    fixed_site=fixed_site,
-                    moving_site=moving_site,
-                )
-            else:
-                approach_solution = solve_grasp_pose(expert.mujoco, expert.model, expert.data, gripper_site_id=expert.gripper_site_id, target_position_m=approach.tolist(), wrist_flex_rad=request["wrist_flex_rad"], wrist_roll_rad=request["wrist_roll_rad"])
-            expert._move_control("approach", approach_solution["qpos"][: expert.model.nu], 14)
-            if pad_midpoint_targeting:
-                pregrasp_solution = _solve_pad_midpoint_target(
+            effective_request = request
+            axis_alignment: dict[str, Any] | None = None
+            if principal_axis_alignment:
+                object_rotation = np.asarray(expert.data.xmat[object_body]).reshape(3, 3)
+                axis_alignment = _select_principal_axis_wrist_roll(
                     expert,
                     desired_midpoint=target,
                     request=request,
                     fixed_site=fixed_site,
                     moving_site=moving_site,
+                    object_axis_world=object_rotation[:, 0],
+                )
+                effective_request = {
+                    **request,
+                    "wrist_roll_rad": axis_alignment["selected_wrist_roll_rad"],
+                }
+            if pad_midpoint_targeting:
+                approach_solution = _solve_pad_midpoint_target(
+                    expert,
+                    desired_midpoint=approach,
+                    request=effective_request,
+                    fixed_site=fixed_site,
+                    moving_site=moving_site,
                 )
             else:
-                pregrasp_solution = solve_grasp_pose(expert.mujoco, expert.model, expert.data, gripper_site_id=expert.gripper_site_id, target_position_m=target.tolist(), wrist_flex_rad=request["wrist_flex_rad"], wrist_roll_rad=request["wrist_roll_rad"])
+                approach_solution = solve_grasp_pose(expert.mujoco, expert.model, expert.data, gripper_site_id=expert.gripper_site_id, target_position_m=approach.tolist(), wrist_flex_rad=effective_request["wrist_flex_rad"], wrist_roll_rad=effective_request["wrist_roll_rad"])
+            expert._move_control("approach", approach_solution["qpos"][: expert.model.nu], 14)
+            if pad_midpoint_targeting:
+                pregrasp_solution = _solve_pad_midpoint_target(
+                    expert,
+                    desired_midpoint=target,
+                    request=effective_request,
+                    fixed_site=fixed_site,
+                    moving_site=moving_site,
+                )
+            else:
+                pregrasp_solution = solve_grasp_pose(expert.mujoco, expert.model, expert.data, gripper_site_id=expert.gripper_site_id, target_position_m=target.tolist(), wrist_flex_rad=effective_request["wrist_flex_rad"], wrist_roll_rad=effective_request["wrist_roll_rad"])
             expert._move_control("pregrasp", pregrasp_solution["qpos"][: expert.model.nu], 18)
             preclose_displacement = float(np.linalg.norm(expert.data.xpos[object_body] - anchor_start))
-            expert._move_gripper("close", request["close_target_rad"], 36)
+            expert._move_gripper("close", effective_request["close_target_rad"], 36)
             expert._hold("grasp_hold", 8)
         finally:
             expert.close()
@@ -286,6 +306,9 @@ def _run_candidate(
         result["pregrasp_predicted_pad_midpoint_residual_m"] = pregrasp_solution[
             "predicted_pad_midpoint_residual_m"
         ]
+    if principal_axis_alignment:
+        assert axis_alignment is not None
+        result.update(axis_alignment)
     return result
 
 
@@ -341,6 +364,73 @@ def _solve_pad_midpoint_target(
     ] = 1.6
     output["predicted_pad_midpoint_residual_m"] = best[0]
     return output
+
+
+def _select_principal_axis_wrist_roll(
+    expert: CausalSortExpert,
+    *,
+    desired_midpoint: np.ndarray,
+    request: dict[str, float],
+    fixed_site: int,
+    moving_site: int,
+    object_axis_world: np.ndarray,
+) -> dict[str, Any]:
+    original_roll = request["wrist_roll_rad"]
+    roll_min, roll_max = RANGES["wrist_roll_rad"]
+    roll_grid = sorted(
+        {
+            original_roll,
+            *(float(value) for value in np.linspace(roll_min, roll_max, 33)),
+        }
+    )
+    object_axis = np.asarray(object_axis_world, dtype=np.float64)
+    object_axis /= np.linalg.norm(object_axis)
+    best: tuple[tuple[float, float, float], dict[str, Any]] | None = None
+    for roll in roll_grid:
+        trial_request = {**request, "wrist_roll_rad": roll}
+        try:
+            solved = _solve_pad_midpoint_target(
+                expert,
+                desired_midpoint=desired_midpoint,
+                request=trial_request,
+                fixed_site=fixed_site,
+                moving_site=moving_site,
+            )
+        except (RuntimeError, ValueError, np.linalg.LinAlgError):
+            continue
+        predicted = expert.mujoco.MjData(expert.model)
+        predicted.qpos[:] = solved["qpos"]
+        predicted.qpos[
+            int(
+                expert.model.jnt_qposadr[
+                    expert._id(expert.mujoco.mjtObj.mjOBJ_JOINT, "gripper")
+                ]
+            )
+        ] = request["close_target_rad"]
+        expert.mujoco.mj_forward(expert.model, predicted)
+        closing_axis = (
+            predicted.site_xpos[moving_site] - predicted.site_xpos[fixed_site]
+        )
+        closing_axis /= np.linalg.norm(closing_axis)
+        alignment = abs(float(np.dot(closing_axis, object_axis)))
+        score = (alignment, -abs(roll - original_roll), -roll)
+        evidence = {
+            "sampled_wrist_roll_rad": original_roll,
+            "selected_wrist_roll_rad": roll,
+            "object_x_axis_world": object_axis.tolist(),
+            "predicted_closing_axis_world": closing_axis.tolist(),
+            "predicted_principal_axis_alignment": alignment,
+            "wrist_roll_grid_count": len(roll_grid),
+        }
+        if best is None or score > best[0]:
+            best = (score, evidence)
+    if (
+        best is None
+        or best[1]["predicted_principal_axis_alignment"]
+        < PRINCIPAL_AXIS_ALIGNMENT_MINIMUM
+    ):
+        raise ValueError(f"No principal-axis-aligned wrist roll found: {best}")
+    return best[1]
 
 
 def _valid_contact(frame: dict[str, Any], requirement: dict[str, Any]) -> bool:

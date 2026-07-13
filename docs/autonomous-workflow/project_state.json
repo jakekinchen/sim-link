@@ -2446,9 +2446,38 @@
       ]
     },
     "T19.0g": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0f"],
-      "result": "derive gripper closing-axis orientation from compiled pad references and anchor principal axes, then rerun the bounded search without contact-physics tuning",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "101",
+      "review_decision_id": "127",
+      "result": "compiled wrist-roll selection aligned four reachable candidates to the settled anchor x-axis, but preserved wrist-flex tilt prevented all moving-pad and bilateral contact",
+      "artifact": {
+        "path": "configurations/robot_lab/principal_axis_grasp_search.json",
+        "identity_sha256": "34b2a47ce6391fffce5b8c30302fd985871b76a954af6620193e97c8db773ff3",
+        "file_sha256": "fed491622c142981aab54af9b21a6275719229caceea12fc49361e306dc3f7cc",
+        "size_bytes": 18283,
+        "aligned_candidate_count": 4,
+        "approach_motion_valid_candidate_count": 2,
+        "bilateral_contact_candidate_count": 0,
+        "geometry_eligible_count": 0,
+        "broad_test_count": 186
+      },
+      "authority_granted": [
+        "compiled_principal_axis_wrist_roll_alignment_observed"
+      ],
+      "authority_not_granted": [
+        "bilateral_pad_contact_observed",
+        "geometry_eligible_grasp_candidate",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_actuation"
+      ]
+    },
+    "T19.0h": {
+      "state": "pending",
+      "depends_on": ["T19.0g"],
+      "result": "jointly solve wrist flex and roll within existing ranges so the compiled pad closing axis is horizontal and aligned to an anchor principal axis",
       "authority_granted": [],
       "authority_not_granted": [
         "geometry_eligible_grasp_candidate",
