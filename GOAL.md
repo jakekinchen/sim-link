@@ -41,7 +41,9 @@ proof states must remain distinct.
   static-pose bracketed observation. Reviewer 109 issues its reviewed semantic
   input bundle. Brief 084 and Reviewer 110 verify private source-bound frame
   retention for a future session; the accepted 09:12 session remains v1 and
-  still has no current pixel bytes.
+  still has no current pixel bytes. Reviewer 111 opens one distinct fresh
+  current-frame session from 09:58 through 10:38 CDT only after its transition
+  is confirmed on origin.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -388,7 +390,9 @@ Brief 084 and Reviewer 110 now verify the smallest backward-compatible private
 retention correction. Future successful sessions can retain four exact
 source-bound PNGs in private-success v2 while candidate and tracked review
 artifacts stay hash-only. The accepted session remains v1; a fresh separately
-reviewed bracket is the next experiment.
+reviewed bracket is the next experiment. Reviewer 111 opens exactly one such
+session after remote confirmation, with complete fresh preflight and mandatory
+private-success v2 on success.
 
 ## Durable State
 

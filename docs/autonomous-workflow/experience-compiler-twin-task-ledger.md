@@ -5,15 +5,15 @@ Updated: 2026-07-13
 ```text
 training_lock: closed
 run_window: start 2026-07-13T08:21:09-05:00; no new major slice after 11:51:09; hard closeout 12:21:09 CDT
-run_state: Reviewer 110 private current-frame retention conformant; accepted session remains v1 without pixels; training lock closed
+run_state: Brief 084 verified; Reviewer 111 opens one fresh current-frame session only after remote confirmation; sessions started zero; training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress; open a fresh finite bracket under a separate reviewed gate
+current_task: T16.5c in progress; execute one fresh physical static-pose candidate with private-success v2
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: result 4a50b4c4..., manifest 75d8aae3..., reviewed-input gate d48165d1... valid; zero drift; frames [2,2]; 12 reads; zero writes/motion; holders [0,0]
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: current physical frame bytes remain absent until a fresh bracket emits verified private-success v2; accepted_live_policy_input, preprocessing, shadow, and replay unavailable
-next_step: commit and confirm Brief 084, then open and execute one separately reviewed finite static-pose gate
+blockers: Reviewer 111 remote confirmation, fresh lease/preflight, and a verified private-success v2 session remain required
+next_step: remotely confirm Reviewer 111, then execute fresh preflight and at most one current-frame candidate
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: commit and confirm Brief 084, then open and execute one separately re
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Reviewed-input gate d48165d1... production-valid; current pixel bytes/preprocessing/shadow/replay pending |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Brief 084 retention verified; Reviewer 111 opens one fresh v2 candidate after remote confirmation; current pixels/preprocessing/shadow/replay pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ### 2026-07-13 - Brief 084 private current-frame retention

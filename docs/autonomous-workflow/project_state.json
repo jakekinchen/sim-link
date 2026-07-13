@@ -69,7 +69,7 @@
     "trigger": "owner_present_full_access_no_prompt_t16_5c_physical_evidence_mission",
     "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
     "starting_head": "738d0006601335bc68bcf4ffda005a19d34933cc",
-    "live_gate": "closed",
+    "live_gate": "open_after_remote_confirmation",
     "training_lock": "closed",
     "deadline": null
   },
@@ -488,7 +488,7 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "106",
+      "live_gate_review_decision_id": "111",
       "result": "Live attempt 006 is accepted for live_read_only_census_observed and physical_observation_capture: both exact signed 640x480 modes match four decoded PNGs, all six Torque_Enable values are zero, every operation/holder/hash/cleanup check passes, and the live gate is closed",
       "execution_note": "The accepted evidence is finite sequential physical observation only; it is not synchronized, policy-shadow-input-valid, physical qualification, transfer readiness, autonomous policy success, or motion authority",
       "test_commands": [
@@ -1011,14 +1011,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-13T09:10:00-05:00",
-      "live_gate_valid_until": "2026-07-13T09:45:00-05:00",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-13T09:58:00-05:00",
+      "live_gate_valid_until": "2026-07-13T10:38:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 1,
-      "live_gate_closed_at": "2026-07-13T09:12:43-05:00",
-      "live_gate_close_reason": "candidate_observed_pending_redacted_review_schema_correction",
-      "live_gate_reconsideration_state": "t16_5c_candidate_observed_gate_consumed_review_fails_closed",
+      "live_gate_sessions_started": 0,
+      "live_gate_closed_at": null,
+      "live_gate_close_reason": null,
+      "live_gate_reconsideration_state": "one_post_brief_084_current_frame_candidate_open_only_after_remote_confirmation",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1160,6 +1160,12 @@
           "at": "2026-07-13T09:12:43-05:00",
           "review_decision_id": "107",
           "reason": "candidate_observed_pending_redacted_review_schema_correction"
+        },
+        {
+          "state": "open",
+          "at": "2026-07-13T09:58:00-05:00",
+          "review_decision_id": "111",
+          "result": "one_post_brief_084_current_frame_static_pose_candidate_session_authorized_only_after_remote_confirmation"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1867,8 +1873,11 @@
         "issued_at_unix_ns": 1783952714633307000,
         "valid_until_unix_ns": 1783995914633307000
       },
-      "next_action": "implement the smallest source-bound private current-frame retention contract required for real PI0.5 preprocessing, then collect a fresh bracket under a separately reviewed finite gate",
+      "next_action": "remotely confirm Reviewer 111, then repeat fresh full-access profile, presence lease, discovery, Studio status, and holder preflight before at most one current-frame candidate session",
       "live_execution_prerequisites_missing": [
+        "remote_confirmation_of_reviewer_111_gate_transition",
+        "fresh_operator_presence_lease",
+        "fresh_discovery_and_zero_holder_snapshots",
         "retained_current_physical_frame_bytes_for_model_input"
       ],
       "conditional_authority": [
@@ -1886,6 +1895,7 @@
         "source_bound_static_pose_live_candidate_runtime_conformant",
         "pinned_static_pose_live_factory_spec_conformant",
         "private_static_pose_live_candidate_evidence_conformant",
+        "private_source_bound_current_frame_retention_conformant",
         "hardware_supervised_runtime_profile_validator_conformant",
         "fail_closed_static_pose_live_session_orchestrator_conformant",
         "redacted_static_pose_live_candidate_session_review_conformant",
