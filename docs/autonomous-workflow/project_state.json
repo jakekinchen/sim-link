@@ -1319,9 +1319,9 @@
       "state": "in_progress",
       "depends_on": ["T16.5b"],
       "active_brief_id": null,
-      "latest_verified_brief_id": "074",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074"],
-      "result": "Briefs 048-059, 062, 071, and 074 are verified. Attempt t16-5c-20260713-0845-cdt consumed the one-session gate and is rejected: camera-frame normalization reported invalid fields after the session started. Immutable failure b117e797... verifies no physical command, policy inference, motion authority, or training; Studio remains follower-disconnected/torque-false and both aliases holder-free. No static-pose, reviewed-input, shadow, or replay label is granted",
+      "latest_verified_brief_id": "076",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076"],
+      "result": "Brief 076 corrects the exact rejected-session frame boundary offline: the pinned live camera adapter validates the generic reader's exact two receive timestamps, rejects drift or invalid intervals, and returns only the unchanged five semantic frame fields owned by the strict static-pose runtime. The consumed gate remains closed; no accepted static-pose, reviewed-input, shadow, or replay label is granted",
       "latest_rejected_live_candidate": {
         "session_id": "t16-5c-20260713-0845-cdt",
         "discovery_identity_sha256": "673ff2d201f48ffaa9ece6646901d9aa5137260015ebe187b6424cb788d59033",
@@ -1499,6 +1499,18 @@
         "hardware_enumerated": true,
         "hardware_opened": false,
         "physical_follower_commanded": false,
+        "live_static_pose_frame_metadata_adapter_conformant": true,
+        "validated_lower_level_frame_fields": [
+          "receive_started_monotonic_ns",
+          "receive_finished_monotonic_ns"
+        ],
+        "static_pose_semantic_frame_fields": [
+          "frame_bytes",
+          "encoding",
+          "width",
+          "height",
+          "channels"
+        ],
         "focused_test_count_per_runtime": 90,
         "broad_test_count": 289,
         "broad_test_duration_seconds": 73.993
@@ -1733,9 +1745,8 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "remotely preserve Reviewer 101 gate close, then perform one narrow offline correction for live FFmpeg frame metadata versus the static-pose normalization contract before any separately reviewed future gate",
+      "next_action": "remotely preserve Brief 076 and Reviewer 102, then separately review and open at most one fresh finite gate before repeating fresh profile, lease, discovery, status, and holder preflight",
       "live_execution_prerequisites_missing": [
-        "one_narrow_offline_frame_contract_correction",
         "new_separately_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
@@ -1762,7 +1773,8 @@
         "pi05_reviewed_input_issuance_gate_conformant",
         "fixture_pi05_model_ready_tensor_parity_conformant",
         "fixture_pi05_training_support_audit_conformant",
-        "unselected_avfoundation_source_tolerance_conformant"
+        "unselected_avfoundation_source_tolerance_conformant",
+        "live_static_pose_frame_metadata_adapter_conformant"
       ],
       "authority_not_granted": [
         "actual_live_review_manifest",

@@ -350,6 +350,10 @@ source rejects. Actual candidate construction now passes without hardware open;
 the subsequent one-shot live session is rejected by a separate frame-field
 contract mismatch. Failure `b117e797...` grants no observation or policy label;
 shutdown leaves the follower disconnected, torque false, and both aliases free.
+Brief 076 corrects that exact mismatch offline by validating and removing only
+the pinned reader's two lower-level receive timestamps at the live adapter
+boundary. The strict semantic frame contract is unchanged, and any new live
+attempt requires a separately reviewed remote gate.
 
 ## Durable State
 

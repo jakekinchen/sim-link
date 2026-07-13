@@ -77,9 +77,41 @@ _EXPECTED_JOINTS = copy.deepcopy(EXPECTED_RUNTIME_SEMANTICS["follower_joint_map"
 class PinnedFFmpegStaticPoseCamera(FFmpegNamedFiniteCamera):
     """Exact finite FFmpeg camera with the live static-pose evidence class."""
 
+    _SEMANTIC_FRAME_FIELDS = (
+        "frame_bytes",
+        "encoding",
+        "width",
+        "height",
+        "channels",
+    )
+    _RECEIVE_TIME_FIELDS = (
+        "receive_started_monotonic_ns",
+        "receive_finished_monotonic_ns",
+    )
+
     @property
     def evidence_mode(self) -> str:
         return "live_injected_camera"
+
+    def read(self) -> dict[str, Any]:
+        """Validate pinned receive metadata and return the strict frame view."""
+
+        frame = super().read()
+        expected_fields = set(self._SEMANTIC_FRAME_FIELDS) | set(
+            self._RECEIVE_TIME_FIELDS
+        )
+        if not isinstance(frame, dict) or set(frame) != expected_fields:
+            raise ValueError("Pinned static-pose camera frame fields drifted")
+        started = frame["receive_started_monotonic_ns"]
+        finished = frame["receive_finished_monotonic_ns"]
+        if (
+            type(started) is not int
+            or type(finished) is not int
+            or started < 0
+            or finished <= started
+        ):
+            raise ValueError("Pinned static-pose camera receive interval is invalid")
+        return {field: frame[field] for field in self._SEMANTIC_FRAME_FIELDS}
 
 
 def build_pinned_static_pose_bus_spec(

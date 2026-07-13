@@ -5,15 +5,15 @@ Updated: 2026-07-13
 ```text
 training_lock: closed
 run_window: start 2026-07-13T08:21:09-05:00; no new major slice after 11:51:09; hard closeout 12:21:09 CDT
-run_state: one live candidate started and rejected on camera frame fields; gate consumed/closed; failure b117e797... immutable; training lock closed
+run_state: Brief 076 live-frame adapter correction verified offline; consumed gate remains closed; training lock closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress; one fresh physical static-pose candidate is next
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: discovery 673ff2d2..., profile 69e86eda..., lease 43fc0c72..., contract e6bf4f62..., failure b117e797...; post-status follower disconnected/torque false; holder counts [0,0]
+evidence: rejected failure b117e797... reproduced exact 7-field-to-5-field mismatch; adapter test was red then green; 79 focused tests per runtime; 379 broad; source verifiers green
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: live FFmpeg frame fields do not satisfy the static-pose normalizer; accepted bracket/reviewed input/shadow/replay remain absent
-next_step: remotely preserve Reviewer 101 gate close, then implement one narrow offline frame-contract correction; no retry under the consumed gate
+blockers: new separately reviewed gate, fresh lease/preflight, and accepted bracket/reviewed input/shadow/replay remain absent
+next_step: remotely preserve Brief 076/Reviewer 102, then separately open at most one fresh finite gate
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: remotely preserve Reviewer 101 gate close, then implement one narrow 
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Attempt 20260713-0845 rejected on camera frame fields; gate consumed/closed; shutdown clean; acceptance/shadow/replay remain pending |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Brief 076 validates/strips pinned receive timestamps at the live adapter; prior gate remains consumed/closed; acceptance/shadow/replay pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ### 2026-07-13 - Brief 074 unselected AVFoundation source correction
@@ -78,6 +78,19 @@ Evidence: discovery 673ff2d2...; profile 69e86eda...; lease 43fc0c72...; contrac
 Shutdown: Studio follower disconnected; torque false; leader connected; canonical/TTY holders [0,0]
 Authority: no observation, reviewed input, policy, replay, motion, qualification, or training label
 Next step: one narrow offline frame-contract correction; any future live attempt requires a new reviewed gate
+```
+
+### 2026-07-13 - Brief 076 live frame metadata adapter verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; prior gate closed/consumed; training lock closed
+Reproduced mismatch: pinned generic reader returns 5 semantic fields plus exact receive-start/finish timestamps; strict runtime accepts exactly 5 semantic fields
+Correction: pinned live adapter validates exact field set and increasing nonnegative integer receive interval, rejects unknown/missing/invalid metadata, then returns unchanged semantic view
+Verification: targeted test red then green; 79 focused tests per pinned runtime; 379 broad in 124.646 seconds; both source verifiers in both runtimes; compile/diff checks
+Authority gained: live_static_pose_frame_metadata_adapter_conformant only
+Authority withheld: live gate/session, observation acceptance, reviewed input, model, inference, replay, motion, qualification, and training
+Next step: remote preservation, then a separately reviewed fresh gate and full preflight
 ```
 
 ### 2026-07-13 - Brief 071 Full Access/no-prompt runtime policy verified offline

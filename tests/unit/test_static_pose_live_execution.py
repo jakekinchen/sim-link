@@ -814,6 +814,72 @@ class PinnedLiveFactoryTests(unittest.TestCase):
         self.assertTrue(all(spec["framerate_fps"] == 30 for spec in created))
         self.assertTrue(all(spec["ffmpeg"] == executable for spec in created))
 
+    def test_pinned_camera_adapts_only_validated_receive_timestamps(self):
+        frame = {
+            "frame_bytes": b"png-frame",
+            "encoding": "png",
+            "width": 640,
+            "height": 480,
+            "channels": 3,
+            "receive_started_monotonic_ns": 100,
+            "receive_finished_monotonic_ns": 200,
+        }
+        instance = object.__new__(execution_module.PinnedFFmpegStaticPoseCamera)
+        with patch.object(
+            execution_module.FFmpegNamedFiniteCamera,
+            "read",
+            return_value=copy.deepcopy(frame),
+        ):
+            adapted = instance.read()
+        self.assertEqual(
+            adapted,
+            {
+                "frame_bytes": b"png-frame",
+                "encoding": "png",
+                "width": 640,
+                "height": 480,
+                "channels": 3,
+            },
+        )
+
+        for label, mutate in (
+            ("unknown", lambda value: value.__setitem__("unexpected", 1)),
+            (
+                "missing",
+                lambda value: value.pop("receive_started_monotonic_ns"),
+            ),
+            (
+                "boolean",
+                lambda value: value.__setitem__(
+                    "receive_started_monotonic_ns",
+                    True,
+                ),
+            ),
+            (
+                "negative",
+                lambda value: value.__setitem__(
+                    "receive_started_monotonic_ns",
+                    -1,
+                ),
+            ),
+            (
+                "non-increasing",
+                lambda value: value.__setitem__(
+                    "receive_finished_monotonic_ns",
+                    100,
+                ),
+            ),
+        ):
+            with self.subTest(label=label):
+                changed = copy.deepcopy(frame)
+                mutate(changed)
+                with patch.object(
+                    execution_module.FFmpegNamedFiniteCamera,
+                    "read",
+                    return_value=changed,
+                ), self.assertRaises(ValueError):
+                    instance.read()
+
     def test_active_runtime_change_during_doctor_capture_rejects(self):
         captures = iter(
             [
