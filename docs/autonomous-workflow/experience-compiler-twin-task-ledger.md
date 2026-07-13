@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-13T12:30:11-05:00; no new major slice after 19:45:11; hard closeout 20:30:11 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M17/M19 grasp execution track
-current_task: T19.0b pending; build orientation-controllable grasp IK and explicit object-yaw application before geometry search
+current_task: T19.0c pending; run bounded deterministic geometry-first grasp search through the corrected pad-qualified adapter
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: bracket 040305a7...; real MPS proposal c116f473...; v1 strict 4f0bad3c...; contact sweep 89c04062...; antipodal v2 strict 950e7568...; no new hardware or motion
 remaining: T19.0 truthful gripper/contact semantics; strict unassisted MuJoCo grasp; T19.2 bounded physical calibration under fresh permits; M17 Experience Compiler grasp episodes; simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; large policy proposal; two jaw bodies contact one local object region without force closure; no physical aperture/current mapping
-next_step: grasp-specific solver that fixes wrist flex/roll, solves shoulder/elbow position, and verifies requested versus achieved orientation and object yaw
+next_step: coarse deterministic wrist-flex/wrist-roll/object-yaw/lateral-offset/close-target search with untouched geometry holdout and no friction tuning
 ```
 
 ## Rules
@@ -258,7 +258,8 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
 | T19.0 | verified | T16.3,T16.5c | Establish truthful simulated gripper geometry and contact semantics before grasp search | Brief 095/Reviewer 121; audit `9bfce4c6...`; 3 bodies/12 geoms; original composite collisions non-pad; explicit pad boxes; 5.238-130.944 mm simulation reference aperture; order-independent inward-normal proof; 174-test broad gate |
-| T19.0b | pending | T19.0 | Make grasp orientation and object yaw independently controllable and verified before search | Requested/achieved wrist flex, wrist roll, object yaw, approach/closing axes, full rotation, residuals, limits, and collision rejection |
+| T19.0b | verified | T19.0 | Make grasp orientation and object yaw independently controllable and verified before search | Brief 096/Reviewer 122; fixture `cdcb2359...`; 4/4 candidates; exact wrist/yaw; max residual 0.538 mm; requested/achieved axes; collision-free; 176-test broad gate |
+| T19.0c | pending | T19.0,T19.0b | Run deterministic bounded geometry-first grasp search without friction/compliance tuning | Coarse reproducible design, pad-qualified hold eligibility, lexicographic refinement, untouched geometry holdout |
 | T19.1 | pending | M16, read authority | Run read-only servo/firmware/register census | Immutable hardware snapshot; no writes or motion |
 | T19.2 | pending | T19.1, motion authority | Calibrate cameras, joint offsets, kinematics, timing, and gripper aperture | Held-out reprojection, pose, and timing tolerances |
 | T19.3 | pending | T19.1-T19.2, motion authority | Identify delay, saturation, settling, directionality, backlash, friction, compliance | Per-joint fitted distributions and held-out trajectory evidence |

@@ -245,8 +245,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M17/M19 grasp execution track",
-  "current_task": "T19.0b",
-  "next_eligible_task": "T19.0b",
+  "current_task": "T19.0c",
+  "next_eligible_task": "T19.0c",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2301,12 +2301,41 @@
       ]
     },
     "T19.0b": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0"],
-      "result": "build a grasp-specific orientation-controllable solver that preserves requested wrist flex/roll and independently applies object yaw before geometry-first search",
-      "authority_granted": [],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "096",
+      "review_decision_id": "122",
+      "result": "fixed-wrist grasp position IK and independent free-joint object-yaw application verified on four deterministic collision-free candidates before contact simulation",
+      "artifact": {
+        "path": "configurations/robot_lab/grasp_pose_solver.fixture.json",
+        "schema_version": "scenesmith.grasp_pose_solver_fixture.v1",
+        "identity_sha256": "cdcb2359955dc590ba46e7f262835afd61106dfdc9b40844594f1190743ae51b",
+        "file_sha256": "9b6accc6d9288eff3d039c6ada6d6dc82037eeeff2ff8e8d7070c0da123a1c92",
+        "size_bytes": 8387,
+        "candidate_count": 4,
+        "accepted_candidate_count": 4,
+        "maximum_position_residual_m": 0.0005379373127127554,
+        "broad_test_count": 176
+      },
+      "authority_granted": [
+        "fixed_wrist_grasp_position_ik_valid",
+        "explicit_object_yaw_application_valid"
+      ],
       "authority_not_granted": [
         "orientation_search_executed",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_actuation"
+      ]
+    },
+    "T19.0c": {
+      "state": "pending",
+      "depends_on": ["T19.0", "T19.0b"],
+      "result": "run deterministic bounded geometry-first grasp search with pad-qualified contact aggregation, untouched geometry holdout, and no friction/compliance tuning",
+      "authority_granted": [],
+      "authority_not_granted": [
+        "geometry_eligible_grasp_candidate",
         "unassisted_mujoco_grasp_success",
         "simulation_training_ready",
         "physical_actuation"
