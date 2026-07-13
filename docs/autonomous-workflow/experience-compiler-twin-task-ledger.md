@@ -5,15 +5,15 @@ Updated: 2026-07-13
 ```text
 training_lock: closed
 run_window: start 2026-07-13T08:21:09-05:00; no new major slice after 11:51:09; hard closeout 12:21:09 CDT
-run_state: Reviewer 112 accepts current-frame private-v2 bracket and camera roles; sorting-scene match rejected; gate closed; training lock closed
+run_state: Reviewer 113 accepts exact preprocessing/inference/replay diagnostics but rejects policy shadow, matched replay, and motion; gate closed; training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress; run exact physical tensor preprocessing as a no-actuation diagnostic
+current_task: T16.5c in progress; reproduce and correct the measured-pose coordinate/twin mismatch offline
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: result 040305a7..., private v2 d985577e..., manifest 0930c3c9...; zero drift; four retained PNGs; 12 reads; zero writes/motion; holders [0,0]
+evidence: bracket 040305a7...; preprocessing 57acad57...; real MPS proposal c116f473... / chunk 4d350587...; 5/10/15 replay 42499e46...; no hardware or motion
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: exact sorting prompt does not match visible workcell; no red/blue trays or clear sorting cube set; accepted_live_policy_input remains false
-next_step: preserve Reviewer 112 remotely, then preprocess the exact selected current frames and state without relabeling the result as a valid sorting proposal
+blockers: sorting scene mismatch; wrist roll outside checkpoint support; large proposal deltas; measured pose clamps shoulder lift/elbow in current twin and yields shoulder/lower-arm self-contact
+next_step: preserve Reviewer 113 remotely, then reproduce the physical-to-MuJoCo mapping and collision at the measured q_after before any new physical attempt
 ```
 
 ## Rules
@@ -50,8 +50,23 @@ next_step: preserve Reviewer 112 remotely, then preprocess the exact selected cu
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Reviewer 112 accepts current private-v2 bracket and roles; sorting-scene match rejected; diagnostic preprocessing/shadow/replay pending |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Reviewer 113 accepts exact tensors, one real deterministic MPS proposal, and 5/10/15 prefix replays as diagnostics only; input/shadow/matched-replay/motion rejected on scene, support, delta, projection, and self-contact evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
+
+### 2026-07-13 - Brief 087 current physical preprocessing, shadow, and replay diagnostic
+
+```text
+Current task: T16.5c
+State: in_progress; live gate closed; training lock closed
+Inputs: accepted private-success v2 final frames, reviewed external/wrist roles, exact q_after, exact sorting prompt
+Preprocessing: 57acad57...; exact tensors 89644c19... / 8041d823... / missing 811b0abf...; wrist roll outside observed checkpoint min/max
+Inference: exact local revision 84b551af... and weights 471adf9a...; real MPS two-pass fixed-noise equality; finite 50x6 chunk 4d350587...
+Proposal finding: first wrist-roll delta 54.4099 degrees; maximum chunk deltas include 55.8645 wrist roll and 51.5712 elbow flex; DO_NOT_ACTUATE
+Replay: 42499e46...; horizons 5/10/15 twice exactly; no warnings; near-zero cube motion; shoulder lift/elbow start projection and every-action projection; shoulder/lower-arm self-contact
+Authority gained: diagnostic tensor, proposal, and prefix-control-replay observations only
+Authority withheld: accepted live input, accepted policy shadow, matched replay, safe_enough_to_prepare_t16_6, motion, qualification, training, Brev, and paid compute
+Next step: offline measured-pose coordinate and collision reproduction; do not open a motion gate
+```
 
 ### 2026-07-13 - Brief 084 private current-frame retention
 
