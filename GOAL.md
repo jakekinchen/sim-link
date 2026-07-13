@@ -69,9 +69,11 @@ Brief 101: four wrist-roll-aligned candidates were reachable, two passed the
 motion gate, but preserved wrist-flex tilt prevented all moving-pad contact.
 T19.0h is `verified` through Brief 102 as a bounded negative result: no wrist
 pose inside the existing ranges satisfies both the 0.95 anchor-x alignment and
-0.1 vertical-component gates. T19.0i is the next eligible offline slice:
-evaluate the equally valid anchor y principal axis under the same gates before
-changing any bounds or contact physics.
+0.1 vertical-component gates. T19.0i is `verified` through Brief 103:
+eight horizontal y-axis poses are valid and two retain bilateral contact, but
+both fail motion and strict contact geometry. T19.0j is the next eligible
+offline slice: remove only the target offset projected along the selected
+closing axis while preserving the transverse and vertical offsets.
 The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance

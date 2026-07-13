@@ -106,6 +106,7 @@ def _candidate(
     post_yaw_settle_seconds: float = 0.0,
     principal_axis_alignment: bool = False,
     joint_wrist_axis_alignment: bool = False,
+    best_principal_axis_alignment: bool = False,
 ) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
@@ -117,6 +118,7 @@ def _candidate(
             post_yaw_settle_seconds=post_yaw_settle_seconds,
             principal_axis_alignment=principal_axis_alignment,
             joint_wrist_axis_alignment=joint_wrist_axis_alignment,
+            best_principal_axis_alignment=best_principal_axis_alignment,
         )
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
@@ -131,6 +133,7 @@ def _run_candidate(
     post_yaw_settle_seconds: float = 0.0,
     principal_axis_alignment: bool = False,
     joint_wrist_axis_alignment: bool = False,
+    best_principal_axis_alignment: bool = False,
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
@@ -211,7 +214,22 @@ def _run_candidate(
             approach = target + np.asarray([0.0, 0.0, 0.04])
             effective_request = request
             axis_alignment: dict[str, Any] | None = None
-            if joint_wrist_axis_alignment:
+            if best_principal_axis_alignment:
+                object_rotation = np.asarray(expert.data.xmat[object_body]).reshape(3, 3)
+                axis_alignment = _select_best_horizontal_principal_axis_wrist_pose(
+                    expert,
+                    desired_midpoint=target,
+                    request=request,
+                    fixed_site=fixed_site,
+                    moving_site=moving_site,
+                    object_rotation_world=object_rotation,
+                )
+                effective_request = {
+                    **request,
+                    "wrist_flex_rad": axis_alignment["selected_wrist_flex_rad"],
+                    "wrist_roll_rad": axis_alignment["selected_wrist_roll_rad"],
+                }
+            elif joint_wrist_axis_alignment:
                 object_rotation = np.asarray(expert.data.xmat[object_body]).reshape(3, 3)
                 axis_alignment = _select_horizontal_principal_axis_wrist_pose(
                     expert,
@@ -324,7 +342,11 @@ def _run_candidate(
         result["pregrasp_predicted_pad_midpoint_residual_m"] = pregrasp_solution[
             "predicted_pad_midpoint_residual_m"
         ]
-    if principal_axis_alignment or joint_wrist_axis_alignment:
+    if (
+        principal_axis_alignment
+        or joint_wrist_axis_alignment
+        or best_principal_axis_alignment
+    ):
         assert axis_alignment is not None
         result.update(axis_alignment)
     return result
@@ -563,6 +585,45 @@ def _select_horizontal_principal_axis_wrist_pose(
         }
     )
     return best
+
+
+def _select_best_horizontal_principal_axis_wrist_pose(
+    expert: CausalSortExpert,
+    *,
+    desired_midpoint: np.ndarray,
+    request: dict[str, float],
+    fixed_site: int,
+    moving_site: int,
+    object_rotation_world: np.ndarray,
+) -> dict[str, Any]:
+    valid: list[dict[str, Any]] = []
+    failures: dict[str, str] = {}
+    for axis_label, column in (("x", 0), ("y", 1)):
+        try:
+            evidence = _select_horizontal_principal_axis_wrist_pose(
+                expert,
+                desired_midpoint=desired_midpoint,
+                request=request,
+                fixed_site=fixed_site,
+                moving_site=moving_site,
+                object_axis_world=object_rotation_world[:, column],
+            )
+        except ValueError as exc:
+            failures[axis_label] = str(exc)
+            continue
+        evidence["selected_object_principal_axis"] = axis_label
+        valid.append(evidence)
+    if not valid:
+        raise ValueError(f"No horizontal anchor principal axis found: {failures}")
+    selected = min(
+        valid,
+        key=lambda row: (
+            row["orientation_error"],
+            row["selected_object_principal_axis"],
+        ),
+    )
+    selected["rejected_principal_axis_failures"] = failures
+    return selected
 
 
 def _valid_contact(frame: dict[str, Any], requirement: dict[str, Any]) -> bool:

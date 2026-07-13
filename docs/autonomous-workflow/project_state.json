@@ -2503,9 +2503,39 @@
       ]
     },
     "T19.0i": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0h"],
-      "result": "evaluate both rectangular-anchor x and y principal axes under the unchanged horizontal alignment gate before changing any search or contact-physics bounds",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "103",
+      "review_decision_id": "129",
+      "result": "best-axis solve found eight horizontal anchor-y poses and two repeatable bilateral-contact candidates, but zero strict-v2 frames or geometry-eligible grasps",
+      "artifact": {
+        "path": "configurations/robot_lab/best_axis_grasp_search.json",
+        "identity_sha256": "06bc0f4abcc4d7eb151ea4148364032ac8e33d2168fc53fb0b22847c61e18402",
+        "file_sha256": "9f804d8360632ac4d65262ed7d71e480fa5f912e55d69ff81eed9aaea0d3dc22",
+        "size_bytes": 33396,
+        "aligned_candidate_count": 8,
+        "approach_motion_valid_candidate_count": 6,
+        "bilateral_contact_candidate_count": 2,
+        "geometry_eligible_count": 0,
+        "strict_v2_valid_hold_frame_count": 0,
+        "broad_test_count": 190
+      },
+      "authority_granted": [
+        "bounded_horizontal_anchor_y_pose_valid",
+        "bilateral_explicit_pad_contact_observed"
+      ],
+      "authority_not_granted": [
+        "geometry_eligible_grasp_candidate",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_actuation"
+      ]
+    },
+    "T19.0j": {
+      "state": "pending",
+      "depends_on": ["T19.0i"],
+      "result": "remove only the object-relative target offset projected along the selected closing axis, then rerun the otherwise identical best-axis search",
       "authority_granted": [],
       "authority_not_granted": [
         "geometry_eligible_grasp_candidate",
