@@ -2326,6 +2326,17 @@
         "physical_actuation"
       ]
     },
+    "T17.3": {
+      "state": "verified",
+      "depends_on": ["T17.2"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "109",
+      "review_decision_id": "135",
+      "result": "immutable fixture-scoped normalization/preprocessing bundle binds canonical processor, dependencies, actual cached checkpoint processor/tokenizer parity, statistics, cameras, runtime revisions, and tensor hashes without production or training escalation",
+      "artifact": {"path": "configurations/robot_lab/normalization_bundle.json", "identity_sha256": "c829e2ba79b3d6bca2b17a4e5dc45d665be020ef7f70b5bf91b53b5b6f30bfb6", "file_sha256": "7500b2cc7dc0d25653a3d3b7a03f5961c5af622d3cc66e1b3d3aacf546ae599c", "size_bytes": 8835, "sample_count": 94568, "normalization_mode": "MEAN_STD", "actual_cached_processor_executed": true, "production_eligible": false, "broad_test_count": 227},
+      "authority_granted": ["fixture_normalization_bundle_valid", "actual_cached_processor_fixture_parity_bound"],
+      "authority_not_granted": ["production_normalization_valid", "compiled_training_frames", "simulation_training_ready", "optimizer_training", "physical_actuation"]
+    },
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],

@@ -86,8 +86,11 @@ coordinate identities while quarantining the aggregate source projection
 rather than calling it training data. T17.2 is `verified` through Brief 108: a
 named canonical SO-101 processor keeps pure unclamped transform, fail-closed
 validation, and requested-versus-executed safety limiting mechanically
-separate. The next eligible offline slice is T17.3: an immutable normalization
-and preprocessing bundle bound to the processor and runtime identities.
+separate. T17.3 is `verified` through Brief 109 as an immutable fixture-scoped
+normalization/preprocessing bundle bound to actual cached processor parity; it
+remains production-ineligible. The next eligible offline slice is T17.4:
+source-bound frames and hard-boundary segments with incomplete projections
+quarantined from training.
 The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance

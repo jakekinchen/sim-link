@@ -1,0 +1,292 @@
+{
+  "actual_cached_processor_executed": true,
+  "authority_not_granted": [
+    "production_normalization_valid",
+    "compiled_training_frames",
+    "simulation_training_ready",
+    "optimizer_training",
+    "physical_actuation"
+  ],
+  "bundle_name": "so101_pi05_fixture_normalization_v1",
+  "compiled_training_frames": false,
+  "feature_order": [
+    "shoulder_pan",
+    "shoulder_lift",
+    "elbow_flex",
+    "wrist_flex",
+    "wrist_roll",
+    "gripper"
+  ],
+  "fixture_normalization_bundle_valid": true,
+  "hardware_accessed": false,
+  "identity_sha256": "c829e2ba79b3d6bca2b17a4e5dc45d665be020ef7f70b5bf91b53b5b6f30bfb6",
+  "model_call_executed": false,
+  "normalization": {
+    "mode": "MEAN_STD",
+    "mode_mutated": false,
+    "normalizer_file_sha256": "8dc4c304b136dc66eca1b3156059b3d2bbd296864fff99e8453ed5fc128d070f",
+    "sample_count": 94568,
+    "statistic_order": [
+      "min",
+      "q01",
+      "q10",
+      "q50",
+      "q90",
+      "q99",
+      "max",
+      "mean",
+      "std"
+    ],
+    "statistics": {
+      "max": [
+        71.4512939453125,
+        77.9675521850586,
+        99.9097900390625,
+        99.65768432617188,
+        7.838827610015869,
+        79.93506622314453
+      ],
+      "mean": [
+        1.8777130842208862,
+        -5.583600044250488,
+        7.310091018676758,
+        62.10820007324219,
+        -3.9292519092559814,
+        25.37277603149414
+      ],
+      "min": [
+        -68.986083984375,
+        -99.65840911865234,
+        -95.7600326538086,
+        20.2396240234375,
+        -28.644689559936523,
+        0.7792207598686218
+      ],
+      "q01": [
+        -42.3471565246582,
+        -98.12874603271484,
+        -69.54084014892578,
+        40.86196517944336,
+        -12.739949226379395,
+        1.4654124975204468
+      ],
+      "q10": [
+        -30.621009826660156,
+        -97.0576171875,
+        -48.52473449707031,
+        47.30120849609375,
+        -9.388565063476562,
+        1.5646932125091553
+      ],
+      "q50": [
+        2.889874219894409,
+        8.577838897705078,
+        -0.8198460936546326,
+        60.714881896972656,
+        -3.0470993518829346,
+        10.15744686126709
+      ],
+      "q90": [
+        36.35276412963867,
+        41.468894958496094,
+        92.75396728515625,
+        78.6228256225586,
+        -0.03619758412241936,
+        55.52505111694336
+      ],
+      "q99": [
+        45.22834396362305,
+        55.94004821777344,
+        99.01190185546875,
+        88.07508087158203,
+        1.1153502464294434,
+        59.614234924316406
+      ],
+      "std": [
+        26.65559196472168,
+        47.34729766845703,
+        47.29940414428711,
+        14.058341979980469,
+        4.571868896484375,
+        22.362037658691406
+      ]
+    }
+  },
+  "preprocessing": {
+    "camera_order": [
+      "observation.images.base_0_rgb",
+      "observation.images.left_wrist_0_rgb",
+      "observation.images.right_wrist_0_rgb"
+    ],
+    "checkpoint_snapshot_revision": "84b551af1303e92d97d6752d43cc3c9f1a090778",
+    "image_resolution": [
+      224,
+      224
+    ],
+    "input_range": [
+      0.0,
+      1.0
+    ],
+    "model_image_entries": [
+      {
+        "fill_value": null,
+        "mask": {
+          "byte_length": 1,
+          "device": "cpu",
+          "dtype": "bool",
+          "maximum": 1,
+          "minimum": 1,
+          "serialization": "little_endian_c_order_v1",
+          "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a",
+          "shape": [
+            1
+          ]
+        },
+        "mask_value": true,
+        "model_key": "observation.images.base_0_rgb",
+        "source_kind": "selected_fixture_png",
+        "tensor": {
+          "byte_length": 602112,
+          "device": "cpu",
+          "dtype": "float32",
+          "maximum": 0.9970389604568481,
+          "minimum": -1.0,
+          "serialization": "little_endian_c_order_v1",
+          "sha256": "763cfd8b6e6137318f45be30231daf37d577deb54f7c5ce4ca04161cd16c0b66",
+          "shape": [
+            1,
+            3,
+            224,
+            224
+          ]
+        }
+      },
+      {
+        "fill_value": null,
+        "mask": {
+          "byte_length": 1,
+          "device": "cpu",
+          "dtype": "bool",
+          "maximum": 1,
+          "minimum": 1,
+          "serialization": "little_endian_c_order_v1",
+          "sha256": "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a",
+          "shape": [
+            1
+          ]
+        },
+        "mask_value": true,
+        "model_key": "observation.images.left_wrist_0_rgb",
+        "source_kind": "selected_fixture_png",
+        "tensor": {
+          "byte_length": 602112,
+          "device": "cpu",
+          "dtype": "float32",
+          "maximum": 0.9989596605300903,
+          "minimum": -1.0,
+          "serialization": "little_endian_c_order_v1",
+          "sha256": "b45244549a2fda21698707efabd79659d5a92527c1787199c36082cb4029cfee",
+          "shape": [
+            1,
+            3,
+            224,
+            224
+          ]
+        }
+      },
+      {
+        "fill_value": -1.0,
+        "mask": {
+          "byte_length": 1,
+          "device": "cpu",
+          "dtype": "bool",
+          "maximum": 0,
+          "minimum": 0,
+          "serialization": "little_endian_c_order_v1",
+          "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+          "shape": [
+            1
+          ]
+        },
+        "mask_value": false,
+        "model_key": "observation.images.right_wrist_0_rgb",
+        "source_kind": "missing_optional_camera",
+        "tensor": {
+          "byte_length": 602112,
+          "device": "cpu",
+          "dtype": "float32",
+          "maximum": -1.0,
+          "minimum": -1.0,
+          "serialization": "little_endian_c_order_v1",
+          "sha256": "811b0abfb7b806545700b3a1b9513d4ff52fd7da3ac337ae9ca69772f74e8415",
+          "shape": [
+            1,
+            3,
+            224,
+            224
+          ]
+        }
+      }
+    ],
+    "model_range": [
+      -1.0,
+      1.0
+    ],
+    "preprocessor_output_sha256": {
+      "observation.images.base_0_rgb": "a5f534da3b51d55db5f984693a724b849490f716d68b3ac4a2453dcc78ffbc24",
+      "observation.images.left_wrist_0_rgb": "862027af256f210eadb230e298b2ddeccdd7287c192d765c758460d1511780a4",
+      "observation.language.attention_mask": "06744c251a89817407a1fb4630e9d9797121af8f8bcea418c63d2f0848f616f1",
+      "observation.language.tokens": "29f09d673f6c1ee8e3e7e00453e609af118ca9d33d6ccd7d22d8f19d91b104df",
+      "observation.state": "586d37596d287f396c09f4adb072506daeddbee574196c6338825fc55830c3fd"
+    },
+    "processor_step_classes": [
+      "RenameObservationsProcessorStep",
+      "AddBatchDimensionProcessorStep",
+      "NormalizerProcessorStep",
+      "Pi05PrepareStateTokenizerProcessorStep",
+      "TokenizerProcessorStep",
+      "DeviceProcessorStep"
+    ],
+    "processor_step_order": [
+      "rename_observations_processor",
+      "to_batch_processor",
+      "normalizer_processor",
+      "pi05_prepare_state_tokenizer_processor_step",
+      "tokenizer_processor",
+      "device_processor"
+    ],
+    "resize_mode": "bilinear_align_corners_false_with_zero_padding",
+    "stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+    "strict_offline": true,
+    "tokenizer": {
+      "max_length": 200,
+      "padding_side": "right",
+      "truncation": true
+    },
+    "tokenizer_snapshot_revision": "35e4f46485b4d07967e7e9935bc3786aad50687c"
+  },
+  "production_eligible": false,
+  "schema_version": "scenesmith.normalization_bundle.v1",
+  "scope": "actual_cached_processor_fixture_parity_not_production_input",
+  "simulation_training_ready": false,
+  "source_refs": {
+    "canonical_processor": {
+      "file_sha256": "cd60dce9f791f4c8becf7d33baa2382d96b843fe0af5b975a0ea0f796505d902",
+      "identity_sha256": "9800c873896eee63c10da7a4c02c964ff1faf28711d438c89731f3266d77a6f2",
+      "path": "configurations/robot_lab/so101_canonical_processor_contract.json",
+      "schema_version": "scenesmith.so101_canonical_processor_contract.v1"
+    },
+    "fixture_tensor_parity": {
+      "file_sha256": "071643a7f193cddaf9bbd9f849f316fa80e236132778eb9606de4321e86dd2af",
+      "identity_sha256": "b20e078242af31227c6d77bedc08bd8d54a1be2df5540a8e5140b30a3e2bf25e",
+      "path": "configurations/robot_lab/pi05_fixture_model_ready_tensor_parity.json",
+      "schema_version": "scenesmith.pi05_fixture_model_ready_tensor_parity.v2"
+    },
+    "robotics_dependency_lock": {
+      "file_sha256": "169f04ee953604193f1f0dc9a3821acbb2de7dc49fcce1aba066c338c1eb7f12",
+      "identity_sha256": "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
+      "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+      "schema_version": "scenesmith.robotics_dependency_lock.v2"
+    }
+  }
+}
