@@ -57,9 +57,9 @@ M17/M19 - Grasp Experience And Hardware Twin Execution Track
 ## Current Slice
 
 T16.5c is `verified` as a successful no-actuation diagnostic experiment with a
-negative sorting-checkpoint transfer result. T19.0 is the next eligible offline
-slice: correct the compiled gripper geometry and MuJoCo contact semantics before
-another grasp search. The live gate and training lock remain closed. The
+negative sorting-checkpoint transfer result. T19.0 is `verified` through Brief
+095; T19.0b is the next eligible offline slice for orientation-controllable
+grasp IK and explicit object yaw. The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
 history that constrains later hardware work. Brief 043 implementation

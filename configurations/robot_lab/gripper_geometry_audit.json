@@ -1,0 +1,1793 @@
+{
+  "actual_mujoco_grasp_success": false,
+  "aperture_reference": {
+    "maximum_m": 0.130944453,
+    "method": "distance_between_versioned_fingertip_reference_sites",
+    "minimum_m": 0.005237999,
+    "physical_calibration_claimed": false,
+    "samples": [
+      {
+        "fixed_to_moving_vector_world_m": [
+          0.002635116,
+          -0.000579506,
+          0.004489652
+        ],
+        "gripper_qpos_rad": -0.174532978,
+        "separation_m": 0.005237999
+      },
+      {
+        "fixed_to_moving_vector_world_m": [
+          0.01895094,
+          -0.003237891,
+          0.01255823
+        ],
+        "gripper_qpos_rad": 0.065449795,
+        "separation_m": 0.022963693
+      },
+      {
+        "fixed_to_moving_vector_world_m": [
+          0.032862158,
+          -0.005811683,
+          0.024315299
+        ],
+        "gripper_qpos_rad": 0.305432567,
+        "separation_m": 0.041290808
+      },
+      {
+        "fixed_to_moving_vector_world_m": [
+          0.043571436,
+          -0.008153364,
+          0.039086994
+        ],
+        "gripper_qpos_rad": 0.545415339,
+        "separation_m": 0.059099412
+      },
+      {
+        "fixed_to_moving_vector_world_m": [
+          0.050464963,
+          -0.010128718,
+          0.056026661
+        ],
+        "gripper_qpos_rad": 0.785398111,
+        "separation_m": 0.076080814
+      },
+      {
+        "fixed_to_moving_vector_world_m": [
+          0.053147631,
+          -0.011624527,
+          0.074163389
+        ],
+        "gripper_qpos_rad": 1.025380883,
+        "separation_m": 0.091978305
+      },
+      {
+        "fixed_to_moving_vector_world_m": [
+          0.051465679,
+          -0.012555057,
+          0.092457657
+        ],
+        "gripper_qpos_rad": 1.265363655,
+        "separation_m": 0.106558735
+      },
+      {
+        "fixed_to_moving_vector_world_m": [
+          0.045515511,
+          -0.012866973,
+          0.109860912
+        ],
+        "gripper_qpos_rad": 1.505346427,
+        "separation_m": 0.119610371
+      },
+      {
+        "fixed_to_moving_vector_world_m": [
+          0.035638166,
+          -0.012542398,
+          0.125375672
+        ],
+        "gripper_qpos_rad": 1.7453292,
+        "separation_m": 0.130944453
+      }
+    ]
+  },
+  "authority_not_granted": [
+    "unassisted_mujoco_grasp_success",
+    "simulation_training_ready",
+    "physical_twin_qualified",
+    "physical_actuation"
+  ],
+  "contact_normal_convention": "object_coordinates_inward_toward_object",
+  "evidence_mode": "compiled_mujoco_geometry_and_synthetic_contact_semantics",
+  "fixed_fingertip_pad_geom_names": [
+    "fixed_fingertip_pad_collision"
+  ],
+  "gripper_bodies": [
+    {
+      "id": 6,
+      "name": "gripper",
+      "parent_id": 5,
+      "parent_name": "wrist"
+    },
+    {
+      "id": 7,
+      "name": "wrist_camera",
+      "parent_id": 6,
+      "parent_name": "gripper"
+    },
+    {
+      "id": 8,
+      "name": "moving_jaw_so101_v1",
+      "parent_id": 6,
+      "parent_name": "gripper"
+    }
+  ],
+  "gripper_geoms": [
+    {
+      "body_id": 6,
+      "body_name": "gripper",
+      "conaffinity": 0,
+      "contype": 0,
+      "dimensions": [
+        0.012400004,
+        0.019828797,
+        0.024132921
+      ],
+      "id": 30,
+      "local_position_m": [
+        0.008771861,
+        0.000217643,
+        -0.023399997
+      ],
+      "local_quaternion_wxyz": [
+        0.707049751,
+        -0.008980478,
+        0.707049751,
+        0.008980478
+      ],
+      "mesh_name": "sts3215_03a_v1",
+      "name": null,
+      "semantic_role": "visual_or_other_non_pad",
+      "type": "mjGEOM_MESH",
+      "world_orientation_matrix": [
+        [
+          0.612087253,
+          0.110551516,
+          0.783024621
+        ],
+        [
+          -0.030898663,
+          0.992767237,
+          -0.116010714
+        ],
+        [
+          -0.79018635,
+          0.046814265,
+          0.611076065
+        ]
+      ],
+      "world_position_m": [
+        0.085191777,
+        -0.006223313,
+        0.423826448
+      ]
+    },
+    {
+      "body_id": 6,
+      "body_name": "gripper",
+      "conaffinity": 1,
+      "contype": 1,
+      "dimensions": [
+        0.012400004,
+        0.019828797,
+        0.024132921
+      ],
+      "id": 31,
+      "local_position_m": [
+        0.008771861,
+        0.000217643,
+        -0.023399997
+      ],
+      "local_quaternion_wxyz": [
+        0.707049751,
+        -0.008980478,
+        0.707049751,
+        0.008980478
+      ],
+      "mesh_name": "sts3215_03a_v1",
+      "name": "gripper_servo_shell_collision",
+      "semantic_role": "shell_non_pad",
+      "type": "mjGEOM_MESH",
+      "world_orientation_matrix": [
+        [
+          0.612087253,
+          0.110551516,
+          0.783024621
+        ],
+        [
+          -0.030898663,
+          0.992767237,
+          -0.116010714
+        ],
+        [
+          -0.79018635,
+          0.046814265,
+          0.611076065
+        ]
+      ],
+      "world_position_m": [
+        0.085191777,
+        -0.006223313,
+        0.423826448
+      ]
+    },
+    {
+      "body_id": 6,
+      "body_name": "gripper",
+      "conaffinity": 0,
+      "contype": 0,
+      "dimensions": [
+        0.029864172,
+        0.032606932,
+        0.071811427
+      ],
+      "id": 32,
+      "local_position_m": [
+        -0.009844678,
+        0.000185511,
+        -0.028197927
+      ],
+      "local_quaternion_wxyz": [
+        0.117895344,
+        0.743323058,
+        -0.644224599,
+        -0.13618438
+      ],
+      "mesh_name": "wrist_roll_follower_so101_v1",
+      "name": null,
+      "semantic_role": "visual_or_other_non_pad",
+      "type": "mjGEOM_MESH",
+      "world_orientation_matrix": [
+        [
+          0.005488924,
+          -0.955170338,
+          0.296005908
+        ],
+        [
+          -0.999772034,
+          0.000866072,
+          0.021333761
+        ],
+        [
+          -0.020633738,
+          -0.296055528,
+          -0.954947838
+        ]
+      ],
+      "world_position_m": [
+        0.073604105,
+        -0.003774923,
+        0.40868287
+      ]
+    },
+    {
+      "body_id": 6,
+      "body_name": "gripper",
+      "conaffinity": 1,
+      "contype": 1,
+      "dimensions": [
+        0.029864172,
+        0.032606932,
+        0.071811427
+      ],
+      "id": 33,
+      "local_position_m": [
+        -0.009844678,
+        0.000185511,
+        -0.028197927
+      ],
+      "local_quaternion_wxyz": [
+        0.117895344,
+        0.743323058,
+        -0.644224599,
+        -0.13618438
+      ],
+      "mesh_name": "wrist_roll_follower_so101_v1",
+      "name": "fixed_jaw_composite_collision",
+      "semantic_role": "fixed_jaw_link_non_pad",
+      "type": "mjGEOM_MESH",
+      "world_orientation_matrix": [
+        [
+          0.005488924,
+          -0.955170338,
+          0.296005908
+        ],
+        [
+          -0.999772034,
+          0.000866072,
+          0.021333761
+        ],
+        [
+          -0.020633738,
+          -0.296055528,
+          -0.954947838
+        ]
+      ],
+      "world_position_m": [
+        0.073604105,
+        -0.003774923,
+        0.40868287
+      ]
+    },
+    {
+      "body_id": 6,
+      "body_name": "gripper",
+      "conaffinity": 1,
+      "contype": 1,
+      "dimensions": [
+        0.001,
+        0.004,
+        0.004
+      ],
+      "id": 34,
+      "local_position_m": [
+        -0.009,
+        0.0,
+        -0.0982
+      ],
+      "local_quaternion_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mesh_name": null,
+      "name": "fixed_fingertip_pad_collision",
+      "semantic_role": "fixed_fingertip_pad",
+      "type": "mjGEOM_BOX",
+      "world_orientation_matrix": [
+        [
+          0.779964169,
+          0.130403564,
+          -0.612087253
+        ],
+        [
+          -0.141188165,
+          0.989500467,
+          0.030898663
+        ],
+        [
+          0.609689919,
+          0.062319626,
+          0.79018635
+        ]
+      ],
+      "world_position_m": [
+        0.117086109,
+        -0.006240714,
+        0.353871619
+      ]
+    },
+    {
+      "body_id": 7,
+      "body_name": "wrist_camera",
+      "conaffinity": 0,
+      "contype": 0,
+      "dimensions": [
+        0.016,
+        0.012,
+        0.009
+      ],
+      "id": 35,
+      "local_position_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_quaternion_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mesh_name": null,
+      "name": "wrist_camera_body",
+      "semantic_role": "visual_or_other_non_pad",
+      "type": "mjGEOM_BOX",
+      "world_orientation_matrix": [
+        [
+          0.779964169,
+          0.130403564,
+          -0.612087253
+        ],
+        [
+          -0.141188165,
+          0.989500467,
+          0.030898663
+        ],
+        [
+          0.609689919,
+          0.062319626,
+          0.79018635
+        ]
+      ],
+      "world_position_m": [
+        0.108820797,
+        -0.009794257,
+        0.427589303
+      ]
+    },
+    {
+      "body_id": 7,
+      "body_name": "wrist_camera",
+      "conaffinity": 0,
+      "contype": 0,
+      "dimensions": [
+        0.006,
+        0.028,
+        0.004
+      ],
+      "id": 36,
+      "local_position_m": [
+        0.0,
+        -0.034,
+        0.004
+      ],
+      "local_quaternion_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mesh_name": null,
+      "name": "wrist_camera_mount",
+      "semantic_role": "visual_or_other_non_pad",
+      "type": "mjGEOM_BOX",
+      "world_orientation_matrix": [
+        [
+          0.779964169,
+          0.130403564,
+          -0.612087253
+        ],
+        [
+          -0.141188165,
+          0.989500467,
+          0.030898663
+        ],
+        [
+          0.609689919,
+          0.062319626,
+          0.79018635
+        ]
+      ],
+      "world_position_m": [
+        0.101938727,
+        -0.043313679,
+        0.428631181
+      ]
+    },
+    {
+      "body_id": 7,
+      "body_name": "wrist_camera",
+      "conaffinity": 0,
+      "contype": 0,
+      "dimensions": [
+        0.014,
+        0.008,
+        0.004
+      ],
+      "id": 37,
+      "local_position_m": [
+        0.0,
+        -0.064,
+        0.004
+      ],
+      "local_quaternion_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mesh_name": null,
+      "name": "wrist_camera_mount_foot",
+      "semantic_role": "visual_or_other_non_pad",
+      "type": "mjGEOM_BOX",
+      "world_orientation_matrix": [
+        [
+          0.779964169,
+          0.130403564,
+          -0.612087253
+        ],
+        [
+          -0.141188165,
+          0.989500467,
+          0.030898663
+        ],
+        [
+          0.609689919,
+          0.062319626,
+          0.79018635
+        ]
+      ],
+      "world_position_m": [
+        0.09802662,
+        -0.072998693,
+        0.426761592
+      ]
+    },
+    {
+      "body_id": 7,
+      "body_name": "wrist_camera",
+      "conaffinity": 0,
+      "contype": 0,
+      "dimensions": [
+        0.0055,
+        0.004,
+        0.0
+      ],
+      "id": 38,
+      "local_position_m": [
+        0.0,
+        0.0,
+        -0.011
+      ],
+      "local_quaternion_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mesh_name": null,
+      "name": "wrist_camera_lens",
+      "semantic_role": "visual_or_other_non_pad",
+      "type": "mjGEOM_CYLINDER",
+      "world_orientation_matrix": [
+        [
+          0.779964169,
+          0.130403564,
+          -0.612087253
+        ],
+        [
+          -0.141188165,
+          0.989500467,
+          0.030898663
+        ],
+        [
+          0.609689919,
+          0.062319626,
+          0.79018635
+        ]
+      ],
+      "world_position_m": [
+        0.115553757,
+        -0.010134143,
+        0.418897253
+      ]
+    },
+    {
+      "body_id": 8,
+      "body_name": "moving_jaw_so101_v1",
+      "conaffinity": 0,
+      "contype": 0,
+      "dimensions": [
+        0.010456727,
+        0.024070623,
+        0.057874873
+      ],
+      "id": 39,
+      "local_position_m": [
+        -0.001411305,
+        -0.024708806,
+        0.01887488
+      ],
+      "local_quaternion_wxyz": [
+        0.707122343,
+        0.706091529,
+        -0.026435814,
+        -0.026718768
+      ],
+      "mesh_name": "moving_jaw_so101_v1",
+      "name": null,
+      "semantic_role": "visual_or_other_non_pad",
+      "type": "mjGEOM_MESH",
+      "world_orientation_matrix": [
+        [
+          -0.575540193,
+          -0.131790192,
+          0.807084154
+        ],
+        [
+          0.024717038,
+          -0.989281253,
+          -0.143915497
+        ],
+        [
+          0.817399874,
+          -0.062880424,
+          0.572628587
+        ]
+      ],
+      "world_position_m": [
+        0.11378494,
+        -0.0116405,
+        0.445314638
+      ]
+    },
+    {
+      "body_id": 8,
+      "body_name": "moving_jaw_so101_v1",
+      "conaffinity": 1,
+      "contype": 1,
+      "dimensions": [
+        0.010456727,
+        0.024070623,
+        0.057874873
+      ],
+      "id": 40,
+      "local_position_m": [
+        -0.001411305,
+        -0.024708806,
+        0.01887488
+      ],
+      "local_quaternion_wxyz": [
+        0.707122343,
+        0.706091529,
+        -0.026435814,
+        -0.026718768
+      ],
+      "mesh_name": "moving_jaw_so101_v1",
+      "name": "moving_jaw_composite_collision",
+      "semantic_role": "moving_jaw_link_non_pad",
+      "type": "mjGEOM_MESH",
+      "world_orientation_matrix": [
+        [
+          -0.575540193,
+          -0.131790192,
+          0.807084154
+        ],
+        [
+          0.024717038,
+          -0.989281253,
+          -0.143915497
+        ],
+        [
+          0.817399874,
+          -0.062880424,
+          0.572628587
+        ]
+      ],
+      "world_position_m": [
+        0.11378494,
+        -0.0116405,
+        0.445314638
+      ]
+    },
+    {
+      "body_id": 8,
+      "body_name": "moving_jaw_so101_v1",
+      "conaffinity": 1,
+      "contype": 1,
+      "dimensions": [
+        0.001,
+        0.004,
+        0.004
+      ],
+      "id": 41,
+      "local_position_m": [
+        -0.0113,
+        -0.076,
+        0.01875
+      ],
+      "local_quaternion_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mesh_name": null,
+      "name": "moving_fingertip_pad_collision",
+      "semantic_role": "moving_fingertip_pad",
+      "type": "mjGEOM_BOX",
+      "world_orientation_matrix": [
+        [
+          -0.634600882,
+          -0.761758906,
+          -0.130403564
+        ],
+        [
+          0.035008123,
+          0.140225735,
+          -0.989500467
+        ],
+        [
+          0.772046729,
+          -0.632503053,
+          -0.062319626
+        ]
+      ],
+      "world_position_m": [
+        0.159148123,
+        -0.019055461,
+        0.470129723
+      ]
+    }
+  ],
+  "hardware_accessed": false,
+  "historical_contact_methods": {
+    "body_contact_count": "diagnostic_only",
+    "minimum_pairwise_span": "diagnostic_only"
+  },
+  "identity_sha256": "9bfce4c6fab67cc9259414a2c3d1615b810e2ffb00e7c00070700a64992f6c88",
+  "local_capabilities": [
+    "compiled_gripper_geometry_audit_valid",
+    "object_oriented_contact_normal_adapter_valid",
+    "pad_qualified_contact_aggregation_valid"
+  ],
+  "moving_fingertip_pad_geom_names": [
+    "moving_fingertip_pad_collision"
+  ],
+  "moving_jaw_joint": {
+    "axis_local": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "id": 5,
+    "name": "gripper",
+    "qpos_address": 5,
+    "range_rad": [
+      -0.174532978,
+      1.7453292
+    ]
+  },
+  "nominal_object_dimensions_m": [
+    0.05,
+    0.035,
+    0.03
+  ],
+  "non_pad_contact_geom_names": [
+    "gripper_servo_shell_collision",
+    "fixed_jaw_composite_collision",
+    "moving_jaw_composite_collision"
+  ],
+  "object_relative_to_aperture": {
+    "fits_maximum_simulated_reference_aperture": true,
+    "maximum_object_width_m": 0.05,
+    "minimum_object_width_m": 0.03
+  },
+  "pad_reference_source": {
+    "path": "third_party/mujoco_menagerie/robotstudio_so101/so101.xml",
+    "sha256": "5ad49f2b45c083baac9ffe5d4d3213a5da7eac8039095bb2df177a697aae8308",
+    "size_bytes": 16670
+  },
+  "physical_follower_commanded": false,
+  "physical_twin_qualified": false,
+  "pinned_model": {
+    "path": "external/SO-ARM100/Simulation/SO101/so101_new_calib.xml",
+    "sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+    "size_bytes": 13921
+  },
+  "schema_version": "scenesmith.gripper_geometry_audit.v1",
+  "semantic_model_change": {
+    "added_noncolliding_reference_sites": [
+      "fixed_fingertip_pad_reference",
+      "moving_fingertip_pad_reference"
+    ],
+    "added_pad_collision_geoms": [
+      "fixed_fingertip_pad_collision",
+      "moving_fingertip_pad_collision"
+    ],
+    "collision_geometry_change_scope": "original_geoms_unchanged_plus_two_explicit_fingertip_pad_boxes",
+    "collision_geometry_digest_after": "e351912ebd1310e6cebb1ec1b8aeffee443fc1d0e54cfc4abc4dc37e2f8c0fab",
+    "collision_geometry_digest_before": "e351912ebd1310e6cebb1ec1b8aeffee443fc1d0e54cfc4abc4dc37e2f8c0fab",
+    "named_non_pad_geoms": [
+      "gripper_servo_shell_collision",
+      "fixed_jaw_composite_collision",
+      "moving_jaw_composite_collision"
+    ],
+    "named_pad_geoms": [
+      "fixed_fingertip_pad_collision",
+      "moving_fingertip_pad_collision"
+    ],
+    "original_collision_geometry_preserved": true,
+    "pad_half_size_m": [
+      0.001,
+      0.004,
+      0.004
+    ],
+    "semantic_model_version": "scenesmith.so101_gripper_contact_semantics.v1"
+  },
+  "simulation_training_ready": false,
+  "synthetic_contact_convention_proof": {
+    "aggregate_valid": true,
+    "canonical_convention": "object_coordinates_inward_toward_object",
+    "fixture": "symmetric_box_between_fixed_and_moving_pads",
+    "geom_order_independent": true,
+    "order_cases": [
+      {
+        "aggregate": {
+          "closing_axis_projected_span_m": 0.035,
+          "euclidean_span_m": 0.035,
+          "fixed_normal_span_alignment": 1.0,
+          "force_balance_min_over_max": 1.0,
+          "maximum_pairwise_span_m_diagnostic_only": 0.066520673,
+          "minimum_pairwise_span_m_diagnostic_only": 0.035,
+          "moving_normal_span_alignment": 1.0,
+          "normal_dot": -1.0,
+          "representative_contacts": {
+            "fixed_fingertip_pad": {
+              "centroid_object_m": [
+                -0.0175,
+                0.0,
+                0.0
+              ],
+              "contact_count": 4,
+              "normal_object_inward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "total_normal_force_n": 500.0
+            },
+            "moving_fingertip_pad": {
+              "centroid_object_m": [
+                0.0175,
+                0.0,
+                0.0
+              ],
+              "contact_count": 4,
+              "normal_object_inward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "total_normal_force_n": 500.0
+            }
+          },
+          "signed_contact_locations_on_closing_axis_m": {
+            "fixed": -0.0175,
+            "moving": 0.0175
+          },
+          "span_vector_object_m": [
+            0.035,
+            0.0,
+            0.0
+          ],
+          "strict_v2_witness": {
+            "contact_normals": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                0.0
+              ]
+            ],
+            "contact_points_m": [
+              [
+                -0.0175,
+                0.0,
+                0.0
+              ],
+              [
+                0.0175,
+                0.0,
+                0.0
+              ]
+            ],
+            "jaw_ids": [
+              "fixed_fingertip_pad",
+              "moving_fingertip_pad"
+            ],
+            "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+          }
+        },
+        "contacts": [
+          {
+            "body1_id": 1,
+            "body1_name": "object",
+            "body2_id": 2,
+            "body2_name": "fixed_pad",
+            "contact_index": 0,
+            "contact_normal_object_inward": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              -0.0175,
+              0.02,
+              -0.02
+            ],
+            "fingertip_side": "geom2",
+            "geom1_id": 0,
+            "geom1_name": "object_geom",
+            "geom2_id": 1,
+            "geom2_name": "fixed_pad_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom1",
+            "pad_geom_id": 1,
+            "pad_role": "fixed_fingertip_pad",
+            "raw_contact_frame": [
+              -1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "raw_normal_world": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              -0.0175,
+              0.02,
+              -0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              -0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "object",
+            "body2_id": 2,
+            "body2_name": "fixed_pad",
+            "contact_index": 1,
+            "contact_normal_object_inward": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              -0.0175,
+              -0.02,
+              0.02
+            ],
+            "fingertip_side": "geom2",
+            "geom1_id": 0,
+            "geom1_name": "object_geom",
+            "geom2_id": 1,
+            "geom2_name": "fixed_pad_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom1",
+            "pad_geom_id": 1,
+            "pad_role": "fixed_fingertip_pad",
+            "raw_contact_frame": [
+              -1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "raw_normal_world": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              -0.0175,
+              -0.02,
+              0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              -0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "object",
+            "body2_id": 2,
+            "body2_name": "fixed_pad",
+            "contact_index": 2,
+            "contact_normal_object_inward": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              -0.0175,
+              0.02,
+              0.02
+            ],
+            "fingertip_side": "geom2",
+            "geom1_id": 0,
+            "geom1_name": "object_geom",
+            "geom2_id": 1,
+            "geom2_name": "fixed_pad_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom1",
+            "pad_geom_id": 1,
+            "pad_role": "fixed_fingertip_pad",
+            "raw_contact_frame": [
+              -1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "raw_normal_world": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              -0.0175,
+              0.02,
+              0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              -0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "object",
+            "body2_id": 2,
+            "body2_name": "fixed_pad",
+            "contact_index": 3,
+            "contact_normal_object_inward": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              -0.0175,
+              -0.02,
+              -0.02
+            ],
+            "fingertip_side": "geom2",
+            "geom1_id": 0,
+            "geom1_name": "object_geom",
+            "geom2_id": 1,
+            "geom2_name": "fixed_pad_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom1",
+            "pad_geom_id": 1,
+            "pad_role": "fixed_fingertip_pad",
+            "raw_contact_frame": [
+              -1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "raw_normal_world": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              -0.0175,
+              -0.02,
+              -0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              -0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "object",
+            "body2_id": 3,
+            "body2_name": "moving_pad",
+            "contact_index": 4,
+            "contact_normal_object_inward": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              0.0175,
+              0.02,
+              -0.02
+            ],
+            "fingertip_side": "geom2",
+            "geom1_id": 0,
+            "geom1_name": "object_geom",
+            "geom2_id": 2,
+            "geom2_name": "moving_pad_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom1",
+            "pad_geom_id": 2,
+            "pad_role": "moving_fingertip_pad",
+            "raw_contact_frame": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "raw_normal_world": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              0.0175,
+              0.02,
+              -0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              -0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "object",
+            "body2_id": 3,
+            "body2_name": "moving_pad",
+            "contact_index": 5,
+            "contact_normal_object_inward": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              0.0175,
+              -0.02,
+              0.02
+            ],
+            "fingertip_side": "geom2",
+            "geom1_id": 0,
+            "geom1_name": "object_geom",
+            "geom2_id": 2,
+            "geom2_name": "moving_pad_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom1",
+            "pad_geom_id": 2,
+            "pad_role": "moving_fingertip_pad",
+            "raw_contact_frame": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "raw_normal_world": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              0.0175,
+              -0.02,
+              0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              -0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "object",
+            "body2_id": 3,
+            "body2_name": "moving_pad",
+            "contact_index": 6,
+            "contact_normal_object_inward": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              0.0175,
+              0.02,
+              0.02
+            ],
+            "fingertip_side": "geom2",
+            "geom1_id": 0,
+            "geom1_name": "object_geom",
+            "geom2_id": 2,
+            "geom2_name": "moving_pad_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom1",
+            "pad_geom_id": 2,
+            "pad_role": "moving_fingertip_pad",
+            "raw_contact_frame": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "raw_normal_world": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              0.0175,
+              0.02,
+              0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              -0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "object",
+            "body2_id": 3,
+            "body2_name": "moving_pad",
+            "contact_index": 7,
+            "contact_normal_object_inward": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              0.0175,
+              -0.02,
+              -0.02
+            ],
+            "fingertip_side": "geom2",
+            "geom1_id": 0,
+            "geom1_name": "object_geom",
+            "geom2_id": 2,
+            "geom2_name": "moving_pad_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom1",
+            "pad_geom_id": 2,
+            "pad_role": "moving_fingertip_pad",
+            "raw_contact_frame": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "raw_normal_world": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              0.0175,
+              -0.02,
+              -0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              -0.0
+            ]
+          }
+        ],
+        "object_declared_last": false
+      },
+      {
+        "aggregate": {
+          "closing_axis_projected_span_m": 0.035,
+          "euclidean_span_m": 0.035,
+          "fixed_normal_span_alignment": 1.0,
+          "force_balance_min_over_max": 1.0,
+          "maximum_pairwise_span_m_diagnostic_only": 0.066520673,
+          "minimum_pairwise_span_m_diagnostic_only": 0.035,
+          "moving_normal_span_alignment": 1.0,
+          "normal_dot": -1.0,
+          "representative_contacts": {
+            "fixed_fingertip_pad": {
+              "centroid_object_m": [
+                -0.0175,
+                0.0,
+                0.0
+              ],
+              "contact_count": 4,
+              "normal_object_inward": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "total_normal_force_n": 500.0
+            },
+            "moving_fingertip_pad": {
+              "centroid_object_m": [
+                0.0175,
+                0.0,
+                0.0
+              ],
+              "contact_count": 4,
+              "normal_object_inward": [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              "total_normal_force_n": 500.0
+            }
+          },
+          "signed_contact_locations_on_closing_axis_m": {
+            "fixed": -0.0175,
+            "moving": 0.0175
+          },
+          "span_vector_object_m": [
+            0.035,
+            0.0,
+            0.0
+          ],
+          "strict_v2_witness": {
+            "contact_normals": [
+              [
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                -1.0,
+                0.0,
+                0.0
+              ]
+            ],
+            "contact_points_m": [
+              [
+                -0.0175,
+                0.0,
+                0.0
+              ],
+              [
+                0.0175,
+                0.0,
+                0.0
+              ]
+            ],
+            "jaw_ids": [
+              "fixed_fingertip_pad",
+              "moving_fingertip_pad"
+            ],
+            "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+          }
+        },
+        "contacts": [
+          {
+            "body1_id": 1,
+            "body1_name": "fixed_pad",
+            "body2_id": 3,
+            "body2_name": "object",
+            "contact_index": 0,
+            "contact_normal_object_inward": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              -0.0175,
+              0.02,
+              -0.02
+            ],
+            "fingertip_side": "geom1",
+            "geom1_id": 0,
+            "geom1_name": "fixed_pad_geom",
+            "geom2_id": 2,
+            "geom2_name": "object_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom2",
+            "pad_geom_id": 0,
+            "pad_role": "fixed_fingertip_pad",
+            "raw_contact_frame": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "raw_normal_world": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              -0.0175,
+              0.02,
+              -0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "fixed_pad",
+            "body2_id": 3,
+            "body2_name": "object",
+            "contact_index": 1,
+            "contact_normal_object_inward": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              -0.0175,
+              -0.02,
+              0.02
+            ],
+            "fingertip_side": "geom1",
+            "geom1_id": 0,
+            "geom1_name": "fixed_pad_geom",
+            "geom2_id": 2,
+            "geom2_name": "object_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom2",
+            "pad_geom_id": 0,
+            "pad_role": "fixed_fingertip_pad",
+            "raw_contact_frame": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "raw_normal_world": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              -0.0175,
+              -0.02,
+              0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "fixed_pad",
+            "body2_id": 3,
+            "body2_name": "object",
+            "contact_index": 2,
+            "contact_normal_object_inward": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              -0.0175,
+              0.02,
+              0.02
+            ],
+            "fingertip_side": "geom1",
+            "geom1_id": 0,
+            "geom1_name": "fixed_pad_geom",
+            "geom2_id": 2,
+            "geom2_name": "object_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom2",
+            "pad_geom_id": 0,
+            "pad_role": "fixed_fingertip_pad",
+            "raw_contact_frame": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "raw_normal_world": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              -0.0175,
+              0.02,
+              0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "body1_id": 1,
+            "body1_name": "fixed_pad",
+            "body2_id": 3,
+            "body2_name": "object",
+            "contact_index": 3,
+            "contact_normal_object_inward": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              -0.0175,
+              -0.02,
+              -0.02
+            ],
+            "fingertip_side": "geom1",
+            "geom1_id": 0,
+            "geom1_name": "fixed_pad_geom",
+            "geom2_id": 2,
+            "geom2_name": "object_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom2",
+            "pad_geom_id": 0,
+            "pad_role": "fixed_fingertip_pad",
+            "raw_contact_frame": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "raw_normal_world": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              -0.0175,
+              -0.02,
+              -0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "body1_id": 2,
+            "body1_name": "moving_pad",
+            "body2_id": 3,
+            "body2_name": "object",
+            "contact_index": 4,
+            "contact_normal_object_inward": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              0.0175,
+              0.02,
+              -0.02
+            ],
+            "fingertip_side": "geom1",
+            "geom1_id": 1,
+            "geom1_name": "moving_pad_geom",
+            "geom2_id": 2,
+            "geom2_name": "object_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom2",
+            "pad_geom_id": 1,
+            "pad_role": "moving_fingertip_pad",
+            "raw_contact_frame": [
+              -1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "raw_normal_world": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              0.0175,
+              0.02,
+              -0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "body1_id": 2,
+            "body1_name": "moving_pad",
+            "body2_id": 3,
+            "body2_name": "object",
+            "contact_index": 5,
+            "contact_normal_object_inward": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              0.0175,
+              -0.02,
+              0.02
+            ],
+            "fingertip_side": "geom1",
+            "geom1_id": 1,
+            "geom1_name": "moving_pad_geom",
+            "geom2_id": 2,
+            "geom2_name": "object_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom2",
+            "pad_geom_id": 1,
+            "pad_role": "moving_fingertip_pad",
+            "raw_contact_frame": [
+              -1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "raw_normal_world": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              0.0175,
+              -0.02,
+              0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "body1_id": 2,
+            "body1_name": "moving_pad",
+            "body2_id": 3,
+            "body2_name": "object",
+            "contact_index": 6,
+            "contact_normal_object_inward": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              0.0175,
+              0.02,
+              0.02
+            ],
+            "fingertip_side": "geom1",
+            "geom1_id": 1,
+            "geom1_name": "moving_pad_geom",
+            "geom2_id": 2,
+            "geom2_name": "object_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom2",
+            "pad_geom_id": 1,
+            "pad_role": "moving_fingertip_pad",
+            "raw_contact_frame": [
+              -1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "raw_normal_world": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              0.0175,
+              0.02,
+              0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "body1_id": 2,
+            "body1_name": "moving_pad",
+            "body2_id": 3,
+            "body2_name": "object",
+            "contact_index": 7,
+            "contact_normal_object_inward": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "contact_point_object_m": [
+              0.0175,
+              -0.02,
+              -0.02
+            ],
+            "fingertip_side": "geom1",
+            "geom1_id": 1,
+            "geom1_name": "moving_pad_geom",
+            "geom2_id": 2,
+            "geom2_name": "object_geom",
+            "normal_force_n": 125.0,
+            "object_side": "geom2",
+            "pad_geom_id": 1,
+            "pad_role": "moving_fingertip_pad",
+            "raw_contact_frame": [
+              -1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "raw_normal_world": [
+              -1.0,
+              0.0,
+              0.0
+            ],
+            "raw_position_world_m": [
+              0.0175,
+              -0.02,
+              -0.02
+            ],
+            "tangential_force_contact_frame_n": [
+              0.0,
+              0.0
+            ]
+          }
+        ],
+        "object_declared_last": true
+      }
+    ]
+  }
+}

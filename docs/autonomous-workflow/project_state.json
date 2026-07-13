@@ -245,8 +245,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M17/M19 grasp execution track",
-  "current_task": "T19.0",
-  "next_eligible_task": "T19.0",
+  "current_task": "T19.0b",
+  "next_eligible_task": "T19.0b",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2267,15 +2267,48 @@
       ]
     },
     "T19.0": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],
-      "result": "grasp-focused simulation twin prerequisite: audit compiled gripper geometry, establish explicit fingertip-pad identities, correct object-oriented contact normals, and compute pad-qualified representative contact spans before another search",
-      "authority_granted": [],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "095",
+      "review_decision_id": "121",
+      "result": "compiled gripper geometry, explicit fingertip-pad identities, inward object-frame contact normals, and force-weighted pad representative witnesses verified without hardware or grasp claims",
+      "artifact": {
+        "path": "configurations/robot_lab/gripper_geometry_audit.json",
+        "schema_version": "scenesmith.gripper_geometry_audit.v1",
+        "identity_sha256": "9bfce4c6fab67cc9259414a2c3d1615b810e2ffb00e7c00070700a64992f6c88",
+        "file_sha256": "45d74b3d3e98fb361877ed6a754b6c9fc30f87aac655bf07681ad45e45532494",
+        "size_bytes": 42890,
+        "compiled_gripper_body_count": 3,
+        "compiled_gripper_geom_count": 12,
+        "minimum_simulation_reference_aperture_m": 0.005237999,
+        "maximum_simulation_reference_aperture_m": 0.130944453,
+        "physical_aperture_calibrated": false,
+        "synthetic_geom_order_independent": true,
+        "broad_test_count": 174
+      },
+      "authority_granted": [
+        "compiled_gripper_geometry_audit_valid",
+        "object_oriented_contact_normal_adapter_valid",
+        "pad_qualified_contact_aggregation_valid"
+      ],
       "authority_not_granted": [
         "unassisted_mujoco_grasp_success",
         "simulation_training_ready",
         "physical_transfer_ready",
         "physical_qualification",
+        "physical_actuation"
+      ]
+    },
+    "T19.0b": {
+      "state": "pending",
+      "depends_on": ["T19.0"],
+      "result": "build a grasp-specific orientation-controllable solver that preserves requested wrist flex/roll and independently applies object yaw before geometry-first search",
+      "authority_granted": [],
+      "authority_not_granted": [
+        "orientation_search_executed",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
         "physical_actuation"
       ]
     }
