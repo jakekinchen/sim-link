@@ -2981,7 +2981,7 @@ def _stable_camera_discovery_identity(payload: dict[str, Any]) -> dict[str, Any]
         raise ValueError("Stable system camera names are ambiguous")
     if len(unique_ids) != len(set(unique_ids)):
         raise ValueError("Stable system camera unique IDs are ambiguous")
-    if set(names) != set(system_names):
+    if not set(system_names).issubset(names):
         raise ValueError("AVFoundation and system stable camera names differ")
     return {
         "avfoundation_names": sorted(names),

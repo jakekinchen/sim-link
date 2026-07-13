@@ -489,6 +489,19 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
         self.assertEqual(runtime["backend"].disconnect_calls, [False])
         self.assertTrue(result["measurements"]["static_pose_within_tolerance"])
 
+    def test_contract_ignores_unselected_avfoundation_only_source(self):
+        discovery = copy.deepcopy(self.discovery)
+        discovery["avfoundation_devices"].append(
+            {"index": 2, "name": "Capture screen 0"}
+        )
+        self.discovery = sign_payload(discovery)
+        with self._accepted_identity_patches():
+            contract = self._contract()
+        self.assertEqual(
+            [camera["resolved_camera"]["index"] for camera in contract["cameras"]],
+            [0, 1],
+        )
+
     def test_fresh_numeric_index_churn_resolves_stable_camera_order(self):
         self.discovery = self._discovery(indexes=(9, 3))
         with self._accepted_identity_patches():

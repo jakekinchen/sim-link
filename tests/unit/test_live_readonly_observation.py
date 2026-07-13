@@ -768,6 +768,22 @@ class LiveReadonlyObservationTests(unittest.TestCase):
         )
         self.assertEqual(selected[1]["input_mode"]["pixel_format"], "nv12")
 
+        with_screen_capture = copy.deepcopy(_discovery())
+        with_screen_capture["avfoundation_devices"].append(
+            {"index": 2, "name": "Capture screen 0"}
+        )
+        with_screen_capture = sign_payload(with_screen_capture)
+        selected_with_screen = resolve_camera_selection(
+            with_screen_capture,
+            [0, 1],
+        )
+        self.assertEqual(
+            [camera["name"] for camera in selected_with_screen],
+            ["Desk Side Camera", "Desk Overhead Camera"],
+        )
+        with self.assertRaisesRegex(ValueError, "exactly one system device"):
+            resolve_camera_selection(with_screen_capture, [2])
+
         duplicate = copy.deepcopy(_discovery())
         duplicate["system_cameras"].append(
             copy.deepcopy(duplicate["system_cameras"][0])

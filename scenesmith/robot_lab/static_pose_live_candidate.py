@@ -472,9 +472,15 @@ def resolve_static_pose_candidate_cameras(
     avfoundation = discovery.get("avfoundation_devices")
     if not isinstance(avfoundation, list) or not avfoundation:
         raise ValueError("Fresh camera discovery has no AVFoundation devices")
+    system_camera_names = {
+        camera.get("name")
+        for camera in discovery.get("system_cameras", [])
+        if isinstance(camera, dict)
+    }
     selections = [
         resolve_camera_selection(discovery, [device.get("index")])[0]
         for device in avfoundation
+        if device.get("name") in system_camera_names
     ]
     resolved = []
     selected_indexes = []

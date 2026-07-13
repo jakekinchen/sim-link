@@ -343,6 +343,12 @@ This exact current task now mechanically proves that profile as identity
 scoped transition is confirmed on origin; the fresh lease and preflight remain
 mandatory, and the training lock remains closed.
 
+Fresh discovery later added an AVFoundation-only screen-capture source. Brief
+074 corrects only unselected-source handling: the exact signed RealSense and
+C922 still require unique system identities and modes, and selecting the screen
+source rejects. Actual candidate construction now passes without hardware open;
+the live session remains unconsumed pending remote preservation.
+
 ## Durable State
 
 - Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`

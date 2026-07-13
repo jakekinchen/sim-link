@@ -5,15 +5,15 @@ Updated: 2026-07-13
 ```text
 training_lock: closed
 run_window: start 2026-07-13T08:21:09-05:00; no new major slice after 11:51:09; hard closeout 12:21:09 CDT
-run_state: current exact task formally passes danger-full-access/never; Reviewer 098 gate is remotely confirmed and machine-linked; sessions started zero; training lock closed
+run_state: Brief 074 corrects AVFoundation-only source handling; actual discovery builds the exact two-camera candidate; sessions started zero; training lock closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress; one fresh physical static-pose candidate is next
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: implementation 19b7e766 and Reviewer 097 remote; current task/thread/cwd/profile 77f39177... formally accepted with hardware_accessed false; Reviewer 098 bounds one candidate
+evidence: current task/thread/cwd/profile 77f39177... accepted; actual discovery 4c29fe9c... resolves signed cameras and candidate preflight f8555cad... with hardware_accessed false; 78 focused tests per runtime; 378 broad
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: fresh short lease and accepted static-pose bracket remain absent; discovery and all-alias zero-holder preflight pass
-next_step: issue the lease, recapture the runtime profile, bind the candidate, then execute no more than one session
+blockers: Brief 074/Reviewer 100 remote confirmation, fresh short lease, and accepted static-pose bracket remain absent; discovery and all-alias zero-holder preflight pass
+next_step: remotely preserve the correction, issue the lease, recapture the runtime profile, bind the candidate, then execute no more than one session
 ```
 
 ## Rules
@@ -50,8 +50,22 @@ next_step: issue the lease, recapture the runtime profile, bind the candidate, t
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-059, 062, and 071 verified; current exact runtime accepted; Reviewer 098 opens one finite candidate after remote confirmation; acceptance/shadow/replay remain pending |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Brief 074 actual-discovery correction verified; exact RealSense/C922 candidate builds with unselected screen source ignored; live session/acceptance/shadow/replay remain pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
+
+### 2026-07-13 - Brief 074 unselected AVFoundation source correction
+
+```text
+Current task: T16.5c
+State: in_progress; live gate open; sessions started zero; training lock closed
+Failure: fresh macOS discovery added AVFoundation-only Capture screen 0; candidate construction rejected before contract or device open
+Correction: require system-camera names to be a subset of AVFoundation names; resolve static-pose selections only from sources with exact system identities; selecting the screen source still rejects
+Actual evidence: discovery 4c29fe9c... resolves RealSense index 0 and C922 index 1; candidate preflight f8555cad...; hardware_accessed false
+Verification: 78 focused tests per pinned runtime; 378 broad tests; both source verifiers in both runtimes; diff checks
+Authority gained: unselected_avfoundation_source_tolerance_conformant only
+Authority withheld: live observation acceptance, reviewed input, model, inference, replay, motion, qualification, and training
+Next step: remote confirmation, fresh profile and lease, then the one allowed candidate session
+```
 
 ### 2026-07-13 - Brief 071 Full Access/no-prompt runtime policy verified offline
 

@@ -1313,9 +1313,9 @@
       "state": "in_progress",
       "depends_on": ["T16.5b"],
       "active_brief_id": null,
-      "latest_verified_brief_id": "071",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071"],
-      "result": "Briefs 048-059, 062, and 071 are verified and remotely preserved. Reviewer 096 accepts the one-call Studio follower release with follower disconnected, torque false, leader unchanged, and both aliases holder-free. Reviewer 097 accepts danger-full-access plus never runtime policy. The current exact task formally passes that profile, and Reviewer 098 opens one finite candidate gate only after remote confirmation; production reviewed-input issuance remains blocked pending an accepted new session",
+      "latest_verified_brief_id": "074",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074"],
+      "result": "Briefs 048-059, 062, 071, and 074 are verified. Reviewer 097 accepts danger-full-access plus never runtime policy, Reviewer 098 opens one finite gate, and Reviewer 099 corrects its machine review linkage. Brief 074 permits unselected AVFoundation-only sources while preserving exact system identity for selected cameras; the actual fresh discovery now builds a candidate contract without hardware access. Production reviewed-input issuance remains blocked pending an accepted session",
       "runtime_policy_transition": {
         "brief_id": "071",
         "implementation_commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
@@ -1405,8 +1405,10 @@
         "hardware_enumerated": true,
         "hardware_opened": false,
         "physical_follower_commanded": false,
-        "focused_test_count_per_runtime": 77,
-        "broad_test_count": 276
+        "unselected_avfoundation_sources_ignored_after_system_identity_filter": true,
+        "actual_discovery_identity_sha256": "4c29fe9cc8746571098ca15c7c1d9681b1a317f706d12db4df9214793f6cbff5",
+        "focused_test_count_per_runtime": 78,
+        "broad_test_count": 378
       },
       "pinned_live_execution_interlocks": {
         "implementation_commit": "d76baf579739c919420aa94b54507f0e42aafc5e",
@@ -1706,7 +1708,7 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "issue a fresh short owner-presence lease and perform exact profile, discovery, Studio status, torque-off, all-alias zero-holder, camera/mode, calibration, candidate, and private-destination preflight before one candidate session",
+      "next_action": "remotely preserve Brief 074 and Reviewer 100, then recapture the exact profile, issue a fresh short lease, bind the corrected candidate, and execute no more than one session",
       "live_execution_prerequisites_missing": [
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
@@ -1732,7 +1734,8 @@
         "pi05_policy_input_preprocessing_source_contract_conformant",
         "pi05_reviewed_input_issuance_gate_conformant",
         "fixture_pi05_model_ready_tensor_parity_conformant",
-        "fixture_pi05_training_support_audit_conformant"
+        "fixture_pi05_training_support_audit_conformant",
+        "unselected_avfoundation_source_tolerance_conformant"
       ],
       "authority_not_granted": [
         "actual_live_review_manifest",
