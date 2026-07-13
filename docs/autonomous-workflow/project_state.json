@@ -1343,9 +1343,9 @@
       "state": "in_progress",
       "depends_on": ["T16.5b"],
       "active_brief_id": null,
-      "latest_verified_brief_id": "079",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079"],
-      "result": "Session t16-5c-20260713-0912-cdt produced a mechanically verified candidate observation with zero pose drift, four finite frames, exact no-write/no-motion counts, clean close, and zero holders. The gate is consumed and closed. Acceptance fails closed because the redacted-review validator requires a proof_labels field that the formal hardware-profile schema forbids; no accepted static-pose, reviewed-input, shadow, or replay label is granted yet",
+      "latest_verified_brief_id": "082",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082"],
+      "result": "Reviewer 108 accepts session t16-5c-20260713-0912-cdt as a static_pose_bracketed_observation after Brief 082 aligns the real hardware-profile review classification. The privacy-safe review manifest 75d8aae3... verifies zero drift, four finite frames, exact no-write/no-motion counts, clean close, and stable zero holders. Current frame bytes were not retained, so policy_shadow_input_valid, preprocessing, shadow, and replay remain withheld",
       "latest_observed_live_candidate": {
         "session_id": "t16-5c-20260713-0912-cdt",
         "discovery_identity_sha256": "fac2fb49e2bdad35b6f8dda4056b3a17c2603d1b40f444ff2fef9a6937ddbf1c",
@@ -1355,7 +1355,7 @@
         "candidate_result_identity_sha256": "4a50b4c4bff2b1fc178478c99a13e86abd2c7eac016c01ee80a9049b1f57a3fd",
         "session_receipt_identity_sha256": "20969971733337ba36537a163c37c2ca1daf8651680fed75865991f7dd18486a",
         "private_success_identity_sha256": "97eb44b3ed7512fe35558d480540d1dc442727a79b79f7967617cfa0f0226cfd",
-        "status": "candidate_observed_pending_review",
+        "status": "accepted_static_pose_bracketed_observation",
         "maximum_body_drift_degrees": 0.0,
         "gripper_drift_percent": 0.0,
         "static_pose_within_tolerance": true,
@@ -1374,9 +1374,18 @@
         "post_status_follower_torque": false,
         "physical_follower_commanded": false,
         "policy_inference_run": false,
-        "review_manifest_written": false,
-        "review_failure_class": "hardware_profile_schema_forbids_proof_labels_but_review_requires_empty_list",
-        "proof_labels": []
+        "review_manifest_written": true,
+        "review_failure_class": null,
+        "review_manifest": {
+          "path": "configurations/robot_lab/pi05_static_pose_live_session_t16-5c-20260713-0912-cdt.redacted.json",
+          "schema_version": "scenesmith.static_pose_live_session_review_manifest.v1",
+          "identity_sha256": "75d8aae327a986dba6d3c9c2cfe744408e8b8e7a0b14bf3d8d14e555f41bf704",
+          "file_sha256": "2180d0a4840f90a35cbe7d125d072bfc7347bbe3926e830781b19fe4f3cf4ff3",
+          "size_bytes": 9185,
+          "review_decision_id": "108"
+        },
+        "current_frame_bytes_retained": false,
+        "proof_labels": ["static_pose_bracketed_observation"]
       },
       "latest_rejected_live_candidate": {
         "session_id": "t16-5c-20260713-0855-cdt",
@@ -1801,13 +1810,16 @@
         ],
         "checkpoint_task_prompt": "Sort each cube into the same-colored tray: red cubes into the red tray and blue cubes into the blue tray.",
         "checkpoint_task_prompt_sha256": "6bf96b1858409892cd1596cc36a4ddf2a93a6656c60e77f16700bbd0c8e120a5",
+        "current_session_stable_identity_match": true,
+        "current_session_frame_content_directly_reviewable": false,
+        "current_session_semantics_basis": "Reviewer 089 physical content review carried by exact stable camera identity; current session retained hashes and dimensions but not pixel bytes",
         "production_reviewed_input_issued": false,
-        "production_linkage_missing": "accepted_live_session_review_decision"
+        "production_linkage_missing": "tracked production acceptance, camera-role, and prompt artifacts"
       },
-      "next_action": "remotely preserve Reviewer 107 gate close, then perform one narrow offline correction to align the redacted-review hardware-profile classification with the formal profile schema and review the existing candidate without retry",
+      "next_action": "issue the tracked PI0.5 acceptance, stable-camera role, and task-prompt artifacts for Reviewer 108's accepted bracket, then resolve current-frame byte retention before real preprocessing",
       "live_execution_prerequisites_missing": [
-        "redacted_session_review_hardware_profile_schema_correction",
-        "accepted_live_session_review_decision"
+        "tracked_production_reviewed_input_bundle",
+        "retained_current_physical_frame_bytes_for_model_input"
       ],
       "conditional_authority": [
         "physical_observation_preprocessing",
@@ -1833,13 +1845,14 @@
         "fixture_pi05_training_support_audit_conformant",
         "unselected_avfoundation_source_tolerance_conformant",
         "live_static_pose_frame_metadata_adapter_conformant",
-        "live_static_pose_camera_audit_adapter_conformant"
-      ],
-      "authority_not_granted": [
+        "live_static_pose_camera_audit_adapter_conformant",
+        "redacted_static_pose_live_session_review_real_profile_compatible",
         "actual_live_review_manifest",
         "live_candidate_session_accepted",
+        "static_pose_bracketed_observation"
+      ],
+      "authority_not_granted": [
         "accepted_live_policy_input",
-        "static_pose_bracketed_observation",
         "policy_shadow_input_valid",
         "policy_shadow",
         "model_weight_load",

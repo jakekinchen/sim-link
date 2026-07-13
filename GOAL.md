@@ -36,9 +36,9 @@ proof states must remain distinct.
   permitted narrow offline correction. Reviewer 106 opens one fresh finite
   session from `09:10` through `09:45` CDT only after remote confirmation and
   complete fresh preflight. That session produced a verified candidate at
-  `09:12` and closed cleanly; acceptance remains withheld because the redacted
-  review's hardware-profile classification is inconsistent with the formal
-  profile schema.
+  `09:12` and closed cleanly. Brief 082 corrects the exact redacted-review
+  hardware-profile contradiction, and Reviewer 108 accepts the session as a
+  static-pose bracketed observation.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -373,7 +373,10 @@ Session `t16-5c-20260713-0912-cdt` then observed zero q drift, two 640x480 frame
 per camera, 12 successful position reads, zero writes/torque changes/motion,
 and clean zero-holder shutdown. The receipt and private success verify, but the
 candidate is not accepted until the redacted review schema mismatch is fixed
-offline and reviewed.
+offline and reviewed. That review now passes with manifest `75d8aae3...` and
+accepts the bracket only. The current frames' hashes and dimensions were
+retained, but their pixel bytes were not, so no model input, preprocessing,
+shadow, or replay label follows from this acceptance.
 
 ## Durable State
 

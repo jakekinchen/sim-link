@@ -147,7 +147,6 @@ def _profile() -> dict:
             "local_capabilities": [
                 "hardware_supervised_runtime_profile_observed"
             ],
-            "proof_labels": [],
             "authority_not_granted": copy.deepcopy(AUTHORITY_NOT_GRANTED[1:]),
             "hardware_accessed": False,
             "physical_follower_commanded": False,

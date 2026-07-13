@@ -336,7 +336,6 @@ def _verify_review_sources(
         or hardware_execution_profile.get("sandbox_mode") != HARDWARE_SANDBOX_MODE
         or hardware_execution_profile.get("local_capabilities")
         != ["hardware_supervised_runtime_profile_observed"]
-        or hardware_execution_profile.get("proof_labels") != []
         or hardware_execution_profile.get("authority_not_granted")
         != _SOURCE_AUTHORITY_NOT_GRANTED
         or hardware_execution_profile.get("hardware_accessed") is not False
