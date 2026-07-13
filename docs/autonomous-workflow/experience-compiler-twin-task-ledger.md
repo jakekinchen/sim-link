@@ -1,19 +1,19 @@
 # Experience Compiler And Hardware Twin Task Ledger
 
-Updated: 2026-07-12
+Updated: 2026-07-13
 
 ```text
 training_lock: closed
-run_window: start 2026-07-12T15:30:07-05:00; no new major slice after 2026-07-12T21:00:07-05:00; hard closeout 2026-07-12T21:30:07-05:00
-run_state: Reviewer 096 accepts the one-call Studio follower release: HTTP 200, follower disconnected, torque false, leader unchanged, both aliases zero holders; permit consumed; live gate and training lock closed
+run_window: no live hardware window or owner-presence lease active; prior window closed 2026-07-12T21:30:07-05:00
+run_state: Reviewer 097 accepts Brief 071 Full Access/no-prompt runtime policy at implementation 19b7e766; current restricted task remains live-ineligible; live gate and training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress after verified Brief 062 hardware-profile desktop-resume correction
+current_task: T16.5c in progress after verified Brief 071 runtime-policy transition
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: Reviewer 094 preserved the preflight failure; Reviewer 095 remotely authorized one call; post-status and holder snapshot b33a7cc... prove follower disconnected/torque false/zero holders; Reviewer 096 accepts the correction
+evidence: implementation 19b7e766 remote; Reviewer 097; 96 proof-ladder tests per pinned runtime; 371 authority/twin tests; both source verifiers report danger-full-access/never with hashes 65edfaff.../0fce3e51.../66378a47...
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: a new remotely reviewed finite gate and fresh lease/preflight remain required; accepted static-pose bracket, reviewed input, shadow, and replay remain absent
-next_step: remotely preserve Reviewer 096, open one new finite gate, and immediately execute fresh no-write preflight
+blockers: current task is managed/restricted and cannot inherit the new runtime; a fresh Full Access/no-prompt task, remotely reviewed finite gate, and fresh lease/preflight remain required; accepted static-pose bracket, reviewed input, shadow, and replay remain absent
+next_step: remotely preserve Reviewer 097 and canonical reconciliation, then start a fresh task and run the formal no-prompt profile verifier before any device access
 ```
 
 ## Rules
@@ -52,6 +52,23 @@ next_step: remotely preserve Reviewer 096, open one new finite gate, and immedia
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
 | T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Briefs 048-059 and 062 verified; Reviewer 094 closes the gate on one Studio holder plus torque true before session start; real static-pose acceptance/shadow/replay remain pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
+
+### 2026-07-13 - Brief 071 Full Access/no-prompt runtime policy verified offline
+
+```text
+Current task: T16.5c
+State: in_progress; Brief 071 verified and remotely preserved; live gate closed
+Completed: trusted project default plus explicit hardware profile now require danger-full-access/never; formal doctor, same-thread runtime evidence, candidate gate, and redacted review require the same no-prompt semantics; profile-purpose instructions remain distinct
+Evidence: implementation 19b7e766f31e4bf5702e454c62606165bf023dc5; reviewer 097; profile hashes 65edfaff.../0fce3e51.../66378a47...
+Verification: 96 proof-ladder tests in each pinned runtime; 70 static-pose tests in each; 371-test authority/twin gate; both source verifiers in both runtimes; compile/JSON/workflow/state-alignment/diff checks
+Adversarial: restricted or interactive defaults; on-request profile/turn/doctor; stale/cross-thread/changed runtime; profile field/content drift; permissions cannot grant gate, lease, session, proof label, training, or motion authority
+Authority gained: full_access_no_prompt_runtime_profile_contract_conformant only
+Authority withheld: live candidate session, accepted static pose, reviewed production input, policy shadow, replay, actuation, T16.5c verification, T16.6 permit, qualification, training
+Current runtime: live-ineligible because this already-running task is managed/restricted; a fresh task must prove danger-full-access/never
+Hardware: none; no discovery/open, serial/camera/Studio, model, MuJoCo, motion, optimizer, training, Brev, or paid compute
+Training lock: closed
+Next step: canonical review reconciliation, then a fresh no-prompt Full Access task and separate remotely confirmed one-session gate
+```
 
 ## M17 / Gate A - Truthful Experience Compiler
 

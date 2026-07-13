@@ -328,11 +328,12 @@ tray: red cubes into the red tray and blue cubes into the blue tray.` These
 review decisions cannot become production inputs until bound to a newly
 accepted static-pose session.
 
-Brief 071 is active offline under the owner's explicit 2026-07-13 direction to
-use Full Access without approval prompts. It changes the future Codex runtime
-contract to `danger-full-access`/`never` across the project default, explicit
-hardware profile, formal doctor/active-turn verifier, candidate gate snapshot,
-and redacted review. Historical on-request evidence above remains historical.
+Brief 071 implementation `19b7e766` and Reviewer 097 are verified under the
+owner's explicit 2026-07-13 direction to use Full Access without approval
+prompts. The future Codex runtime contract is `danger-full-access`/`never`
+across the project default, explicit hardware profile, formal doctor/active-turn
+verifier, candidate gate snapshot, and redacted review. Historical on-request
+evidence above remains historical.
 The current task is still restricted and cannot inherit the new settings; a
 fresh same-thread runtime must mechanically prove the no-prompt profile before
 any device access. The live gate and training lock remain closed.
