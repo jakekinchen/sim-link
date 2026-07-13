@@ -28,7 +28,9 @@ proof states must remain distinct.
   verifier with profile identity `77f39177...` and no hardware access.
 - Reviewer 098's one-session gate was consumed and closed at `08:42` CDT after
   the candidate rejected live camera-frame fields. Reviewer 101 preserves the
-  rejected boundary; no second session is allowed under that gate.
+  rejected boundary; no second session is allowed under that gate. After the
+  verified Brief 076 correction, Reviewer 103 opens one new finite session from
+  `08:55` through `09:30` CDT only after remote confirmation and fresh preflight.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
