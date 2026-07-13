@@ -525,7 +525,12 @@ For every slice:
    adversarial test for each material issue found.
 9. Re-run verification.
 10. Update only `project_state.json`, the active ledger, the required session
-    log, and the reviewer decision. Avoid narrative duplication.
+    log, and the reviewer decision. Avoid narrative duplication. After the
+    ledger front matter and per-task entries are written, run
+    `python3 scripts/robot_lab/sync_project_state_pointers.py --apply` so the
+    top-level `current_task`, `next_eligible_task`, and
+    `latest_verified_task_implementation_boundary` pointers advance with the
+    boundary; a failing `--check` means the slice is not finished.
 11. Create a scoped commit using explicit paths.
 12. Push only to `origin/codex/pi05-autolearn-loop`.
 13. Confirm the remote branch contains the commit.
@@ -549,6 +554,12 @@ Maintain, with truthful semantics:
 - authority granted and explicitly not granted;
 - known limitations and blocker evidence;
 - precise next eligible task.
+
+The top-level pointers are derived mechanically:
+`scripts/robot_lab/sync_project_state_pointers.py` reads the active ledger
+front matter and the per-task entries, so appending a per-task entry without
+running `--apply` leaves the file self-contradictory and fails the pair-cycle
+pointer check.
 
 Resolve contradictions between canonical JSON and prose. A task cannot be
 verified with a pending commit, missing review decision, unrun test, missing

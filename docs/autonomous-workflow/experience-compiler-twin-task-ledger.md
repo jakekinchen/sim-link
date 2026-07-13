@@ -19,6 +19,11 @@ next_step: compile deterministic frame/segment tables from immutable records, em
 ## Rules
 
 - Update this ledger at task start and after every verification boundary.
+- After every ledger or per-task `project_state.json` update, run
+  `python3 scripts/robot_lab/sync_project_state_pointers.py --apply` so the
+  top-level `current_task`, `next_eligible_task`, and
+  `latest_verified_task_implementation_boundary` pointers never lag the
+  per-task entries; the pair-cycle wrapper fails closed on `--check` drift.
 - Commit feature, compiler-run, training, and evaluation boundaries separately.
 - Raw rollout bytes are append-only and never reinterpreted without a new compiled view.
 - `recovery` is a control mode, never a task phase.

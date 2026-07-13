@@ -7,9 +7,11 @@ BASELINE="${PI05_WORKTREE_BASELINE:-$RUNTIME_DIR/protected-worktree-baseline.jso
 GUARD="$ROOT/scripts/robot_lab/scoped_worktree_guard.py"
 SCOPE="$ROOT/configurations/robot_lab/pi05_goal_loop_scope.json"
 RUNNER="$ROOT/docs/autonomous-workflow/reusable/scripts/run-codex-pair-cycle.sh"
+POINTER_SYNC="$ROOT/scripts/robot_lab/sync_project_state_pointers.py"
 
 mkdir -p "$RUNTIME_DIR"
 python3 "$GUARD" verify --repo-root "$ROOT" --scope "$SCOPE" --baseline "$BASELINE"
+python3 "$POINTER_SYNC" --check
 
 has_model=0
 for argument in "$@"; do
@@ -28,4 +30,5 @@ runner_status=$?
 set -e
 
 python3 "$GUARD" verify --repo-root "$ROOT" --scope "$SCOPE" --baseline "$BASELINE"
+python3 "$POINTER_SYNC" --check
 exit "$runner_status"
