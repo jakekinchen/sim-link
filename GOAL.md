@@ -2,14 +2,14 @@
 
 ## Active Mission
 
-Complete the SceneSmith PI0.5 autonomous sorting program through a bounded,
-Git-tracked goal loop. Before any further training, qualify the simulation
-structure and build an Experience Compiler that turns immutable raw rollouts
-into semantically valid segments, action windows, mixture plans, and provenance-
-bound training views. Continue through cheap policy falsification, curriculum,
-reward-aware cloning, and competence-gated residual learning only after those
-prerequisites pass. Update the active ledger at every verified slice and continue
-until the acceptance criteria are met or a genuine human-authority blocker is recorded.
+Complete SceneSmith's first reliable SO-101 grasp of one lightweight anchor
+object through a bounded, Git-tracked goal loop. Correct the simulation's
+gripper/contact semantics, obtain a strict unassisted MuJoCo grasp, calibrate
+the physical twin under finite owner-present permits, and compile immutable
+grasp experience before any training. Continue through training and policy
+comparison only after the central authority composer grants readiness. Update
+the active ledger at every verified slice and continue until the acceptance
+criteria are met or a genuine human-authority blocker is recorded.
 
 The physical SO-101 follower must never be opened before verified T16.5a or
 commanded outside the exact verified T16.6 session permit. The final owner
@@ -20,9 +20,9 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Actual start: `2026-07-13T08:21:09-05:00`.
-- No new major slice after: `2026-07-13T11:51:09-05:00`.
-- Hard closeout: `2026-07-13T12:21:09-05:00`.
+- Actual start: `2026-07-13T12:30:11-05:00`.
+- No new major slice after: `2026-07-13T19:45:11-05:00`.
+- Hard closeout: `2026-07-13T20:30:11-05:00`.
 - The owner is physically present for the initial bounded session. The exact
   current task passed the formal same-thread `danger-full-access`/`never`
   verifier with profile identity `77f39177...` and no hardware access.
@@ -52,11 +52,15 @@ proof states must remain distinct.
 
 ## Current Milestone
 
-M16 - Hardware Twin Foundation And Qualification Contract
+M17/M19 - Grasp Experience And Hardware Twin Execution Track
 
 ## Current Slice
 
-T16.5b is `verified`, and T16.5c is `in_progress`. The following paragraphs
+T16.5c is `verified` as a successful no-actuation diagnostic experiment with a
+negative sorting-checkpoint transfer result. T19.0 is the next eligible offline
+slice: correct the compiled gripper geometry and MuJoCo contact semantics before
+another grasp search. The live gate and training lock remain closed. The
+following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
 history that constrains later hardware work. Brief 043 implementation
 `7ea26651e921eee55dad6fcbb26cb58c45c7b290` is remotely preserved. The tracked

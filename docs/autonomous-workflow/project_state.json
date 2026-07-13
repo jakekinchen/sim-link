@@ -2,11 +2,11 @@
   "schema_version": "scenesmith.project_state.v1",
   "updated": "2026-07-13",
   "run_window": {
-    "actual_start": "2026-07-13T08:21:09-05:00",
-    "total_duration_hours": 4,
-    "no_new_major_slice_after": "2026-07-13T11:51:09-05:00",
-    "hard_closeout": "2026-07-13T12:21:09-05:00",
-    "owner_extension_recorded_at": "2026-07-13T08:21:09-05:00",
+    "actual_start": "2026-07-13T12:30:11-05:00",
+    "total_duration_hours": 8,
+    "no_new_major_slice_after": "2026-07-13T19:45:11-05:00",
+    "hard_closeout": "2026-07-13T20:30:11-05:00",
+    "owner_extension_recorded_at": "2026-07-13T12:30:11-05:00",
     "closeout_recorded_at": null
   },
   "run_window_history": [
@@ -33,6 +33,15 @@
       "owner_extension_recorded_at": "2026-07-12T15:30:07-05:00",
       "closeout_recorded_at": "2026-07-12T21:30:07-05:00",
       "closeout_reason": "window_expired_before_brief_071_offline_runtime_policy_transition"
+    },
+    {
+      "actual_start": "2026-07-13T08:21:09-05:00",
+      "total_duration_hours": 4,
+      "no_new_major_slice_after": "2026-07-13T11:51:09-05:00",
+      "hard_closeout": "2026-07-13T12:21:09-05:00",
+      "owner_extension_recorded_at": "2026-07-13T08:21:09-05:00",
+      "closeout_recorded_at": "2026-07-13T12:21:09-05:00",
+      "closeout_reason": "window_expired_before_current_owner_continuation"
     }
   ],
   "branch": "codex/pi05-autolearn-loop",
@@ -40,6 +49,12 @@
     "brief_id": "071",
     "commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
     "summary": "full_access_no_prompt_hardware_runtime_policy"
+  },
+  "latest_verified_task_implementation_boundary": {
+    "brief_id": "093",
+    "commit": "0ff508c70c7ad3d165088baf26f170cb4dca9b5b",
+    "reviewer_decision_id": "119",
+    "summary": "analytic_antipodal_contact_gate_with_actual_grasp_withheld"
   },
   "review_boundary": {
     "reviewer_decision_id": "097",
@@ -223,9 +238,9 @@
     ]
   },
   "training_lock": "closed",
-  "current_milestone": "M16",
-  "current_task": "T16.5c",
-  "next_eligible_task": "T16.5c",
+  "current_milestone": "M17/M19 grasp execution track",
+  "current_task": "T19.0",
+  "next_eligible_task": "T19.0",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -1352,12 +1367,24 @@
       ]
     },
     "T16.5c": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T16.5b"],
       "active_brief_id": null,
-      "latest_verified_brief_id": "093",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082", "083", "084", "087", "088", "089", "090", "091", "092", "093"],
-      "result": "Reviewer 119 accepts a separately versioned analytic antipodal two-jaw contact-geometry gate only. V1 remains byte-identical. V2 requires distinct jaws, at least 0.02 m contact span, opposing normals, and contact-axis alignment; it rejects Brief 092's 0.004907838 m collapsed span and all 17 adversarial negatives. This is an antipodal proxy, not actual MuJoCo grasp or full 6D wrench closure. Metric physical aperture and physical anchor measurements remain unknown. Accepted policy input, accepted shadow, matched physical replay, T16.6 preparation, motion, twin qualification, and training remain withheld",
+      "latest_verified_brief_id": "094",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082", "083", "084", "087", "088", "089", "090", "091", "092", "093", "094"],
+      "result": "physical observation and deterministic no-actuation checkpoint diagnosis completed; sorting checkpoint rejected for this physical scene and camera domain",
+      "negative_transfer_closeout": {
+        "brief_id": "094",
+        "review_decision_id": "120",
+        "session_log_id": "124",
+        "checkpoint_disposition": "retained_as_preprocessing_and_failure_diagnosis_regression_fixture",
+        "diagnostic_result": "DO_NOT_ACTUATE",
+        "matched_physical_replay": false,
+        "physical_motion_occurred": false,
+        "focused_tests_per_runtime": 102,
+        "source_verifiers_passed": true,
+        "retained_diagnostic_file_hashes_verified": true
+      },
       "private_current_frame_retention": {
         "brief_id": "084",
         "review_decision_id": "110",
@@ -2151,6 +2178,11 @@
         "matched_mujoco_replay"
       ],
       "authority_granted": [
+        "physical_static_pose_observation_valid",
+        "physical_camera_role_mapping_valid",
+        "diagnostic_physical_preprocessing_valid",
+        "diagnostic_policy_proposal_observed",
+        "coordinate_corrected_simulation_consequence_replay_observed",
         "stable_camera_identity_binding_valid",
         "calibration_profile_semantically_valid",
         "static_pose_bracket_contract_valid",
@@ -2189,6 +2221,11 @@
         "strict_grasp_antipodal_contact_proxy_fixture_conformant"
       ],
       "authority_not_granted": [
+        "accepted_sorting_policy_input_for_deployment",
+        "matched_physical_replay",
+        "physical_transfer",
+        "simulation_training_ready",
+        "training_authority",
         "accepted_live_policy_input",
         "policy_shadow_input_valid",
         "policy_shadow",
@@ -2201,7 +2238,7 @@
     "T16.6": {
       "state": "pending",
       "depends_on": ["T16.5a", "T16.5b", "T16.5c"],
-      "result": "standing Stage A authority is recorded, but T16.5c is not verified. Brief 088 corrected the legacy-offset projection and false start collision, while Brief 090's nominal anchor attempt remains contact-gated assisted and fails strict impact, two-sided contact, hold, release, current, and aperture requirements. The physical transform is not metric-calibrated, policy-input and shadow validity remain rejected, and the proposal is unsuitable. Permit-specific current-pose, limit, telemetry, watchdog, stop, and shutdown prerequisites also remain pending",
+      "result": "T16.5c is verified as a negative no-actuation sorting-checkpoint transfer diagnosis, not as policy deployment or matched physical replay. T16.6 remains pending on a fresh finite physical permit, current owner-presence lease, runtime verification, current-pose/limit/telemetry checks, watchdog, stop, shutdown, and the exact bounded micro-motion plan",
       "no_second_prompt_required": true,
       "pre_execution_requirements": [
         "T16.5a_T16.5b_T16.5c_verified",
@@ -2221,6 +2258,19 @@
         "unattended_motion",
         "strict_autonomous_physical_success",
         "physical_qualification"
+      ]
+    },
+    "T19.0": {
+      "state": "pending",
+      "depends_on": ["T16.3", "T16.5c"],
+      "result": "grasp-focused simulation twin prerequisite: audit compiled gripper geometry, establish explicit fingertip-pad identities, correct object-oriented contact normals, and compute pad-qualified representative contact spans before another search",
+      "authority_granted": [],
+      "authority_not_granted": [
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_transfer_ready",
+        "physical_qualification",
+        "physical_actuation"
       ]
     }
   }

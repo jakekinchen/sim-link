@@ -4,16 +4,16 @@ Updated: 2026-07-13
 
 ```text
 training_lock: closed
-run_window: start 2026-07-13T08:21:09-05:00; no new major slice after 11:51:09; hard closeout 12:21:09 CDT
-run_state: Reviewer 119 accepts the analytic antipodal-contact v2 gate only; gate closed; training lock closed
-current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress; execute an orientation/lateral MuJoCo search through strict v2 while policy and motion gates remain closed
+run_window: start 2026-07-13T12:30:11-05:00; no new major slice after 19:45:11; hard closeout 20:30:11 CDT
+run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
+current_milestone: M17/M19 grasp execution track
+current_task: T19.0 pending; correct compiled gripper geometry and MuJoCo contact semantics before another search
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: bracket 040305a7...; real MPS proposal c116f473...; v1 strict 4f0bad3c...; contact sweep 89c04062...; antipodal v2 strict 950e7568...; no new hardware or motion
-remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
+remaining: T19.0 truthful gripper/contact semantics; strict unassisted MuJoCo grasp; T19.2 bounded physical calibration under fresh permits; M17 Experience Compiler grasp episodes; simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; large policy proposal; two jaw bodies contact one local object region without force closure; no physical aperture/current mapping
-next_step: bounded wrist-pitch/object-yaw/lateral-offset MuJoCo search compiled through v2 opposing-normal/span/alignment gates and full unassisted grasp phases
+next_step: deterministic GripperGeometryAudit and object-oriented contact-normal/representative-pad-span adapter before any new search
 ```
 
 ## Rules
@@ -50,7 +50,7 @@ next_step: bounded wrist-pitch/object-yaw/lateral-offset MuJoCo search compiled 
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Reviewer 119 additionally accepts analytic antipodal-contact v2 gate `950e7568...`; actual grasp, physical input/shadow/matched-replay/motion remain rejected |
+| T16.5c | verified | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Negative transfer diagnosis verified through Brief 094/Reviewer 120: physical bracket/camera roles and diagnostic preprocessing/proposal/corrected consequence replay observed; sorting deployment input, matched physical replay, motion, transfer, qualification, and training withheld |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
 
 ### 2026-07-13 - Brief 093 antipodal contact gate
@@ -257,6 +257,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
+| T19.0 | pending | T16.3,T16.5c | Establish truthful simulated gripper geometry and contact semantics before grasp search | Compiled GripperGeometryAudit; explicit fixed/moving fingertip pads; synthetic normal convention proof; pad-qualified weighted centroids and span witness |
 | T19.1 | pending | M16, read authority | Run read-only servo/firmware/register census | Immutable hardware snapshot; no writes or motion |
 | T19.2 | pending | T19.1, motion authority | Calibrate cameras, joint offsets, kinematics, timing, and gripper aperture | Held-out reprojection, pose, and timing tolerances |
 | T19.3 | pending | T19.1-T19.2, motion authority | Identify delay, saturation, settling, directionality, backlash, friction, compliance | Per-joint fitted distributions and held-out trajectory evidence |
