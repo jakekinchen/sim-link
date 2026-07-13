@@ -69,7 +69,7 @@
     "trigger": "owner_present_full_access_no_prompt_t16_5c_physical_evidence_mission",
     "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
     "starting_head": "738d0006601335bc68bcf4ffda005a19d34933cc",
-    "live_gate": "open_after_remote_confirmation",
+    "live_gate": "open",
     "training_lock": "closed",
     "deadline": null
   },
@@ -488,7 +488,7 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "094",
+      "live_gate_review_decision_id": "098",
       "result": "Live attempt 006 is accepted for live_read_only_census_observed and physical_observation_capture: both exact signed 640x480 modes match four decoded PNGs, all six Torque_Enable values are zero, every operation/holder/hash/cleanup check passes, and the live gate is closed",
       "execution_note": "The accepted evidence is finite sequential physical observation only; it is not synchronized, policy-shadow-input-valid, physical qualification, transfer readiness, autonomous policy success, or motion authority",
       "test_commands": [
@@ -1706,9 +1706,8 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "remotely confirm Reviewer 098, then issue a fresh short owner-presence lease and perform exact profile, discovery, Studio status, torque-off, all-alias zero-holder, camera/mode, calibration, candidate, and private-destination preflight before one candidate session",
+      "next_action": "issue a fresh short owner-presence lease and perform exact profile, discovery, Studio status, torque-off, all-alias zero-holder, camera/mode, calibration, candidate, and private-destination preflight before one candidate session",
       "live_execution_prerequisites_missing": [
-        "remote_confirmation_of_reviewer_098_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
       ],

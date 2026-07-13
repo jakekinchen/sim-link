@@ -5,15 +5,15 @@ Updated: 2026-07-13
 ```text
 training_lock: closed
 run_window: start 2026-07-13T08:21:09-05:00; no new major slice after 11:51:09; hard closeout 12:21:09 CDT
-run_state: current exact task formally passes danger-full-access/never; Reviewer 098 opens one finite candidate gate effective only after remote confirmation; sessions started zero; training lock closed
+run_state: current exact task formally passes danger-full-access/never; Reviewer 098 gate is remotely confirmed and machine-linked; sessions started zero; training lock closed
 current_milestone: M16 Twin and dependency foundation
 current_task: T16.5c in progress; one fresh physical static-pose candidate is next
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: implementation 19b7e766 and Reviewer 097 remote; current task/thread/cwd/profile 77f39177... formally accepted with hardware_accessed false; Reviewer 098 bounds one candidate
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: Reviewer 098 is not yet remotely confirmed; fresh short lease/discovery/all-alias holder evidence and accepted static-pose bracket remain absent
-next_step: remotely confirm Reviewer 098, issue the lease, run fresh preflight, then execute no more than one candidate session
+blockers: fresh short lease and accepted static-pose bracket remain absent; discovery and all-alias zero-holder preflight pass
+next_step: issue the lease, recapture the runtime profile, bind the candidate, then execute no more than one session
 ```
 
 ## Rules
