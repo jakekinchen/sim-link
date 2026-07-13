@@ -449,6 +449,14 @@ rejected. Future MuJoCo strict evaluation must require opposing contact normals,
 span, and wrench closure rather than a two-contact count alone; the next
 experiment searches wrist pitch, object yaw, and lateral pregrasp offset under
 those stricter geometry criteria.
+Brief 093 and Reviewer 119 now provide those criteria as a separate v2 analytic
+gate while preserving v1 byte-for-byte. V2 requires distinct jaws, at least 20
+mm contact span, normal dot at most -0.8, and contact-axis alignment at least
+0.8. It rejects the observed 4.907838 mm collapsed span plus same-jaw,
+same-side, misaligned, malformed, and non-finite witnesses. This is an
+antipodal two-jaw proxy, not actual MuJoCo grasp or full 6D wrench closure. The
+next simulation search must compile consistently oriented MuJoCo normals and
+complete unassisted lift, hold, lower, release, and retreat through v2.
 
 ## Durable State
 

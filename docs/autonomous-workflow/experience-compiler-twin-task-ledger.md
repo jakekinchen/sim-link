@@ -5,15 +5,15 @@ Updated: 2026-07-13
 ```text
 training_lock: closed
 run_window: start 2026-07-13T08:21:09-05:00; no new major slice after 11:51:09; hard closeout 12:21:09 CDT
-run_state: Reviewer 118 accepts contact-span/sweep evidence but rejects force closure and friction-only grasp; gate closed; training lock closed
+run_state: Reviewer 119 accepts the analytic antipodal-contact v2 gate only; gate closed; training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress; search opposing contact geometry after friction-only correction failed while policy and motion gates remain closed
+current_task: T16.5c in progress; execute an orientation/lateral MuJoCo search through strict v2 while policy and motion gates remain closed
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: bracket 040305a7...; real MPS proposal c116f473...; strict fixture 4f0bad3c...; two-jaw search 5a5de249...; rejected contact-property sweep 89c04062...; no new hardware or motion
+evidence: bracket 040305a7...; real MPS proposal c116f473...; v1 strict 4f0bad3c...; contact sweep 89c04062...; antipodal v2 strict 950e7568...; no new hardware or motion
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; large policy proposal; two jaw bodies contact one local object region without force closure; no physical aperture/current mapping
-next_step: bounded wrist-pitch/object-yaw/lateral-offset search scored by opposing normals, contact span, wrench closure, impact, and full unassisted grasp phases
+next_step: bounded wrist-pitch/object-yaw/lateral-offset MuJoCo search compiled through v2 opposing-normal/span/alignment gates and full unassisted grasp phases
 ```
 
 ## Rules
@@ -50,8 +50,23 @@ next_step: bounded wrist-pitch/object-yaw/lateral-offset search scored by opposi
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Reviewer 118 additionally accepts contact-span/sweep evidence `89c04062...` but rejects force closure and friction-only grasp; physical input/shadow/matched-replay/motion remain rejected |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Reviewer 119 additionally accepts analytic antipodal-contact v2 gate `950e7568...`; actual grasp, physical input/shadow/matched-replay/motion remain rejected |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
+
+### 2026-07-13 - Brief 093 antipodal contact gate
+
+```text
+Current task: T16.5c / Minimum Viable Grasping Twin
+State: v2 analytic antipodal gate verified; actual grasp still rejected; live gate closed; training lock closed
+V1 preservation: strict fixture remains byte-identical at 4f0bad3c...
+V2 requirements: distinct jaws; span >= 0.02 m; normal dot <= -0.8; contact-axis alignment >= 0.8
+Positive: declared analytic expert semantic success; not policy, MuJoCo, physical, or full-wrench proof
+Negatives: all 17 fail, including exact 4.907838 mm collapsed span, same jaw, same side, misalignment, malformed, and non-finite witnesses
+Artifact: 950e7568... identity; 5ac9c96e... file SHA-256; 246755 bytes
+Authority gained: strict_grasp_antipodal_contact_proxy_fixture_conformant only
+Authority withheld: actual grasp, full 6D wrench closure, strict policy, physical twin, simulation training, optimizer, and motion
+Next step: orientation/lateral MuJoCo search compiled through v2 and full unassisted phases
+```
 
 ### 2026-07-13 - Brief 092 contact span and friction/compliance sweep
 

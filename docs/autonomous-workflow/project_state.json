@@ -1355,9 +1355,9 @@
       "state": "in_progress",
       "depends_on": ["T16.5b"],
       "active_brief_id": null,
-      "latest_verified_brief_id": "092",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082", "083", "084", "087", "088", "089", "090", "091", "092"],
-      "result": "Reviewer 118 accepts a simulation-only MuJoCo contact-point span profile and bounded friction/compliance sweep but rejects force closure and grasp success. Nineteen simultaneous-jaw frames collapse from 0.03286691 m span during closure to 0.004907838 m during hold, showing that named-body contact count does not prove opposing contact. No 12-setting training candidate or untouched holdout retains lift. Metric physical aperture and physical anchor measurements remain unknown. Accepted policy input, accepted shadow, matched physical replay, T16.6 preparation, motion, twin qualification, and training remain withheld",
+      "latest_verified_brief_id": "093",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082", "083", "084", "087", "088", "089", "090", "091", "092", "093"],
+      "result": "Reviewer 119 accepts a separately versioned analytic antipodal two-jaw contact-geometry gate only. V1 remains byte-identical. V2 requires distinct jaws, at least 0.02 m contact span, opposing normals, and contact-axis alignment; it rejects Brief 092's 0.004907838 m collapsed span and all 17 adversarial negatives. This is an antipodal proxy, not actual MuJoCo grasp or full 6D wrench closure. Metric physical aperture and physical anchor measurements remain unknown. Accepted policy input, accepted shadow, matched physical replay, T16.6 preparation, motion, twin qualification, and training remain withheld",
       "private_current_frame_retention": {
         "brief_id": "084",
         "review_decision_id": "110",
@@ -2111,7 +2111,34 @@
         "motion_authority_granted": false,
         "training_authority_granted": false
       },
-      "next_action": "run a bounded wrist-pitch/object-yaw/pregrasp lateral-offset MuJoCo search scored by opposing contact normals, contact span, wrench closure, impact, and complete unassisted lift/hold/lower/release semantics",
+      "strict_grasp_antipodal_contact_gate": {
+        "brief_id": "093",
+        "review_decision_id": "119",
+        "artifact_path": "configurations/robot_lab/strict_anchor_grasp_evaluator_v2.fixture.json",
+        "schema_version": "scenesmith.strict_grasp_fixture.v2",
+        "identity_sha256": "950e7568025f4fe09b9e51633da71b3ee90212ee5ea9c86be8194863cea2e640",
+        "file_sha256": "5ac9c96e7efb1b9980cbc2159d58dda28b033e47e5d063e944367d5a42472e45",
+        "size_bytes": 246755,
+        "source_v1_fixture_identity_sha256": "4f0bad3c9f12fc648a7eed25a9f9fcaf7b8a1c63ca312e3a13f2c20d0f3120d8",
+        "source_contact_sweep_identity_sha256": "89c0406265f406002c1e0e2c61297f89a1e1db5962fa0b3c7ee1fed15f32a3ba",
+        "minimum_contact_span_m": 0.02,
+        "maximum_opposing_normal_dot": -0.8,
+        "minimum_contact_axis_alignment": 0.8,
+        "positive_proof_mode": "analytic_expert",
+        "positive_strict_grasp_success": true,
+        "positive_pure_policy_success": false,
+        "adversarial_negative_count": 17,
+        "all_negatives_rejected_for_expected_reason": true,
+        "actual_mujoco_grasp_success": false,
+        "full_6d_wrench_closure_proven": false,
+        "physical_twin_qualified": false,
+        "simulation_training_ready": false,
+        "hardware_accessed": false,
+        "physical_follower_commanded": false,
+        "motion_authority_granted": false,
+        "training_authority_granted": false
+      },
+      "next_action": "run the bounded wrist-pitch/object-yaw/pregrasp lateral-offset MuJoCo search compiled through strict v2 with consistently oriented contact normals, antipodal span/alignment, impact, and full unassisted lift/hold/lower/release semantics",
       "live_execution_prerequisites_missing": [
         "current_session_production_reviewed_input_bundle",
         "sorting_scene_semantics_accepted_for_policy_input",
@@ -2158,7 +2185,8 @@
         "deterministic_mujoco_anchor_grasp_attempt_observed",
         "low_impact_two_jaw_mujoco_contact_candidate_observed",
         "mujoco_contact_span_profile_observed",
-        "bounded_contact_property_sweep_observed"
+        "bounded_contact_property_sweep_observed",
+        "strict_grasp_antipodal_contact_proxy_fixture_conformant"
       ],
       "authority_not_granted": [
         "accepted_live_policy_input",

@@ -12,6 +12,8 @@ from scenesmith.robot_lab.artifact_contract import sign_payload, verify_signed_p
 
 STRICT_GRASP_SPEC_SCHEMA_VERSION = "scenesmith.strict_grasp_spec.v1"
 STRICT_GRASP_FIXTURE_SCHEMA_VERSION = "scenesmith.strict_grasp_fixture.v1"
+STRICT_GRASP_SPEC_V2_SCHEMA_VERSION = "scenesmith.strict_grasp_spec.v2"
+STRICT_GRASP_FIXTURE_V2_SCHEMA_VERSION = "scenesmith.strict_grasp_fixture.v2"
 STRICT_GRASP_PHASES = (
     "approach",
     "pregrasp",
@@ -58,6 +60,25 @@ def strict_grasp_spec() -> dict[str, Any]:
             "physical_measurement_claimed": False,
         }
     )
+
+
+def strict_grasp_spec_v2() -> dict[str, Any]:
+    """Return the v2 contract with an antipodal two-jaw geometry proxy."""
+
+    payload = copy.deepcopy(strict_grasp_spec())
+    payload.pop("identity_sha256")
+    payload["schema_version"] = STRICT_GRASP_SPEC_V2_SCHEMA_VERSION
+    payload["source_contact_sweep_identity_sha256"] = (
+        "89c0406265f406002c1e0e2c61297f89a1e1db5962fa0b3c7ee1fed15f32a3ba"
+    )
+    payload["antipodal_contact_requirement"] = {
+        "minimum_contact_span_m": 0.02,
+        "maximum_opposing_normal_dot": -0.8,
+        "minimum_contact_axis_alignment": 0.8,
+        "distinct_jaw_ids_required": True,
+        "scope": "antipodal_two_jaw_proxy_not_full_6d_wrench_closure",
+    }
+    return sign_payload(payload)
 
 
 def analytic_grasp_trajectory(
@@ -129,7 +150,7 @@ def analytic_grasp_trajectory(
         ("release", rest, [0.22, 0.0, 0.345], 0, True, 0.0, 0.1, 80.0, "release", 0.03),
         ("retreat", rest, [0.22, 0.0, 0.43], 0, True, 0.0, 0.0, 45.0, "free_motion", 0.03),
     ]
-    return [
+    trajectory = [
         {
             "timestamp_ns": (index + 1) * 100_000_000,
             "phase": phase,
@@ -163,6 +184,11 @@ def analytic_grasp_trajectory(
             aperture,
         ) in enumerate(rows)
     ]
+    if "antipodal_contact_requirement" in spec:
+        for frame in trajectory:
+            if frame["phase"] in {"grasp_confirmed", "lift", "stable_hold", "lower"}:
+                frame["contact_geometry_witness"] = _analytic_antipodal_witness()
+    return trajectory
 
 
 def evaluate_strict_grasp(
@@ -220,6 +246,22 @@ def evaluate_strict_grasp(
     confirmed = _phase_rows(trajectory, "grasp_confirmed")
     if not confirmed or confirmed[0]["fingertip_contacts"] < spec["minimum_fingertip_contacts"]:
         reasons.append("valid_grasp_contact_missing")
+    antipodal_valid: bool | None = None
+    antipodal_requirement = spec.get("antipodal_contact_requirement")
+    if antipodal_requirement is not None:
+        contact_rows = [*confirmed, *_phase_rows(trajectory, "stable_hold")]
+        witness_results = [
+            evaluate_antipodal_contact_witness(
+                frame.get("contact_geometry_witness"),
+                antipodal_requirement,
+            )
+            for frame in contact_rows
+        ]
+        antipodal_valid = bool(witness_results) and all(
+            result["valid"] for result in witness_results
+        )
+        if not antipodal_valid:
+            reasons.append("antipodal_contact_geometry_invalid")
     lift = _phase_rows(trajectory, "lift")
     required_z = (
         spec["table_top_z_m"]
@@ -282,13 +324,76 @@ def evaluate_strict_grasp(
     reasons = list(dict.fromkeys(reasons))
     success = not reasons
     proof_mode = claimed_proof_mode if success else "invalid"
-    return {
+    result = {
         "strict_grasp_success": success,
         "pure_policy_success": success and pure_trace,
         "proof_mode": proof_mode,
         "observed_phase_order": observed_phases,
         "failure_reasons": reasons,
     }
+    if antipodal_valid is not None:
+        result["antipodal_contact_proxy_valid"] = antipodal_valid
+    return result
+
+
+def evaluate_antipodal_contact_witness(
+    witness: Any,
+    requirement: dict[str, Any],
+) -> dict[str, Any]:
+    """Evaluate a bounded antipodal two-jaw proxy without claiming full closure."""
+
+    failures: list[str] = []
+    if not isinstance(witness, dict):
+        return _invalid_antipodal_result("witness_missing_or_malformed")
+    jaw_ids = witness.get("jaw_ids")
+    points = witness.get("contact_points_m")
+    normals = witness.get("contact_normals")
+    if (
+        not isinstance(jaw_ids, list)
+        or len(jaw_ids) != 2
+        or not all(isinstance(value, str) and value for value in jaw_ids)
+    ):
+        failures.append("jaw_ids_malformed")
+    elif requirement["distinct_jaw_ids_required"] and jaw_ids[0] == jaw_ids[1]:
+        failures.append("jaw_ids_not_distinct")
+    point_vectors = _two_finite_vectors(points)
+    normal_vectors = _two_finite_vectors(normals)
+    if point_vectors is None:
+        failures.append("contact_points_malformed")
+    if normal_vectors is None:
+        failures.append("contact_normals_malformed")
+    if failures:
+        return _antipodal_result(False, None, None, None, failures)
+
+    assert point_vectors is not None
+    assert normal_vectors is not None
+    span_vector = [right - left for left, right in zip(*point_vectors, strict=True)]
+    span = _norm(span_vector)
+    normal_norms = [_norm(vector) for vector in normal_vectors]
+    if span <= 0.0:
+        failures.append("contact_span_zero")
+    if any(value <= 0.0 for value in normal_norms):
+        failures.append("contact_normal_zero")
+    if failures:
+        return _antipodal_result(False, span, None, None, failures)
+
+    axis = [value / span for value in span_vector]
+    unit_normals = [
+        [value / length for value in vector]
+        for vector, length in zip(normal_vectors, normal_norms, strict=True)
+    ]
+    normal_dot = _dot(unit_normals[0], unit_normals[1])
+    alignment = min(
+        _dot(unit_normals[0], axis),
+        _dot(unit_normals[1], [-value for value in axis]),
+    )
+    if span < requirement["minimum_contact_span_m"]:
+        failures.append("contact_span_too_short")
+    if normal_dot > requirement["maximum_opposing_normal_dot"]:
+        failures.append("contact_normals_not_opposing")
+    if alignment < requirement["minimum_contact_axis_alignment"]:
+        failures.append("contact_normals_misaligned")
+    return _antipodal_result(not failures, span, normal_dot, alignment, failures)
 
 
 def build_strict_grasp_fixture() -> dict[str, Any]:
@@ -372,10 +477,166 @@ def build_strict_grasp_fixture() -> dict[str, Any]:
     )
 
 
+def build_strict_grasp_v2_fixture() -> dict[str, Any]:
+    """Build the separately versioned antipodal-contact evaluator fixture."""
+
+    spec = strict_grasp_spec_v2()
+    positive_trace = analytic_grasp_trajectory(spec)
+    positive = {
+        "trajectory": positive_trace,
+        "evaluation": evaluate_strict_grasp(
+            spec,
+            positive_trace,
+            claimed_proof_mode="analytic_expert",
+        ),
+    }
+    negatives = []
+    for case_id, expected, claimed, mutation in _negative_cases():
+        trajectory = copy.deepcopy(positive_trace)
+        _apply_negative_mutation(trajectory, mutation)
+        negatives.append(
+            _evaluated_negative(case_id, expected, claimed, trajectory, spec)
+        )
+
+    missing = copy.deepcopy(positive_trace)
+    missing[3].pop("contact_geometry_witness")
+    negatives.append(
+        _evaluated_negative(
+            "missing_antipodal_witness",
+            "antipodal_contact_geometry_invalid",
+            "analytic_expert",
+            missing,
+            spec,
+        )
+    )
+    same_side = copy.deepcopy(positive_trace)
+    same_side[3]["contact_geometry_witness"]["contact_normals"][1] = [1.0, 0.0, 0.0]
+    negatives.append(
+        _evaluated_negative(
+            "same_side_contact_normals",
+            "antipodal_contact_geometry_invalid",
+            "analytic_expert",
+            same_side,
+            spec,
+        )
+    )
+    short = copy.deepcopy(positive_trace)
+    short[3]["contact_geometry_witness"]["contact_points_m"] = [
+        [-0.002453919, 0.0, 0.0],
+        [0.002453919, 0.0, 0.0],
+    ]
+    negatives.append(
+        _evaluated_negative(
+            "observed_collapsed_contact_span",
+            "antipodal_contact_geometry_invalid",
+            "analytic_expert",
+            short,
+            spec,
+        )
+    )
+    same_jaw = copy.deepcopy(positive_trace)
+    same_jaw[3]["contact_geometry_witness"]["jaw_ids"] = [
+        "moving_jaw",
+        "moving_jaw",
+    ]
+    negatives.append(
+        _evaluated_negative(
+            "same_jaw_identity",
+            "antipodal_contact_geometry_invalid",
+            "analytic_expert",
+            same_jaw,
+            spec,
+        )
+    )
+    misaligned = copy.deepcopy(positive_trace)
+    misaligned[3]["contact_geometry_witness"]["contact_normals"] = [
+        [0.0, 1.0, 0.0],
+        [0.0, -1.0, 0.0],
+    ]
+    negatives.append(
+        _evaluated_negative(
+            "opposing_but_axis_misaligned",
+            "antipodal_contact_geometry_invalid",
+            "analytic_expert",
+            misaligned,
+            spec,
+        )
+    )
+    return sign_payload(
+        {
+            "schema_version": STRICT_GRASP_FIXTURE_V2_SCHEMA_VERSION,
+            "evidence_mode": "analytic_antipodal_contact_evaluator_fixture",
+            "source_v1_fixture_identity_sha256": (
+                "4f0bad3c9f12fc648a7eed25a9f9fcaf7b8a1c63ca312e3a13f2c20d0f3120d8"
+            ),
+            "source_contact_sweep_identity_sha256": (
+                "89c0406265f406002c1e0e2c61297f89a1e1db5962fa0b3c7ee1fed15f32a3ba"
+            ),
+            "qualification_scope": (
+                "antipodal_two_jaw_proxy_not_actual_mujoco_or_full_wrench_closure"
+            ),
+            "evaluator_spec": spec,
+            "positive": positive,
+            "adversarial_negatives": negatives,
+            "all_negatives_rejected_for_expected_reason": all(
+                not case["evaluation"]["strict_grasp_success"]
+                and case["expected_failure_reason"]
+                in case["evaluation"]["failure_reasons"]
+                for case in negatives
+            ),
+            "actual_mujoco_grasp_success": False,
+            "full_6d_wrench_closure_proven": False,
+            "physical_gripper_aperture_calibrated": False,
+            "physical_twin_qualified": False,
+            "simulation_training_ready": False,
+            "hardware_accessed": False,
+            "physical_follower_commanded": False,
+            "local_capabilities": [
+                "strict_grasp_antipodal_contact_proxy_fixture_conformant"
+            ],
+            "authority_not_granted": [
+                "actual_mujoco_grasp_success",
+                "full_6d_wrench_closure_proven",
+                "strict_policy_grasp_success",
+                "physical_gripper_aperture_calibrated",
+                "physical_twin_qualified",
+                "simulation_training_ready",
+                "physical_actuation",
+            ],
+        }
+    )
+
+
 def verify_strict_grasp_fixture(payload: dict[str, Any]) -> None:
     verify_signed_payload(payload, label="strict grasp fixture")
     if payload != build_strict_grasp_fixture():
         raise ValueError("Strict grasp fixture drifted from deterministic sources")
+
+
+def verify_strict_grasp_v2_fixture(payload: dict[str, Any]) -> None:
+    verify_signed_payload(payload, label="strict grasp v2 fixture")
+    if payload != build_strict_grasp_v2_fixture():
+        raise ValueError("Strict grasp v2 fixture drifted from deterministic sources")
+
+
+def _evaluated_negative(
+    case_id: str,
+    expected: str,
+    claimed: str,
+    trajectory: list[dict[str, Any]],
+    spec: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "case_id": case_id,
+        "expected_failure_reason": expected,
+        "claimed_proof_mode": claimed,
+        "trajectory": trajectory,
+        "evaluation": evaluate_strict_grasp(
+            spec,
+            trajectory,
+            claimed_proof_mode=claimed,
+        ),
+    }
 
 
 def _negative_cases() -> list[tuple[str, str, str, dict[str, Any]]]:
@@ -591,3 +852,57 @@ def _relative_position(frame: dict[str, Any]) -> list[float]:
 
 def _distance(left: list[float], right: list[float]) -> float:
     return math.sqrt(sum((a - b) ** 2 for a, b in zip(left, right, strict=True)))
+
+
+def _analytic_antipodal_witness() -> dict[str, Any]:
+    return {
+        "jaw_ids": ["fixed_jaw", "moving_jaw"],
+        "contact_points_m": [[-0.015, 0.0, 0.0], [0.015, 0.0, 0.0]],
+        "contact_normals": [[1.0, 0.0, 0.0], [-1.0, 0.0, 0.0]],
+        "source_mode": "analytic_fixture_declared_geometry",
+    }
+
+
+def _two_finite_vectors(value: Any) -> list[list[float]] | None:
+    if not isinstance(value, list) or len(value) != 2:
+        return None
+    output = []
+    try:
+        for vector in value:
+            if not isinstance(vector, list) or len(vector) != 3:
+                return None
+            output.append([_finite(item, label="contact_geometry") for item in vector])
+    except ValueError:
+        return None
+    return output
+
+
+def _norm(vector: list[float]) -> float:
+    return math.sqrt(sum(value * value for value in vector))
+
+
+def _dot(left: list[float], right: list[float]) -> float:
+    return sum(a * b for a, b in zip(left, right, strict=True))
+
+
+def _invalid_antipodal_result(reason: str) -> dict[str, Any]:
+    return _antipodal_result(False, None, None, None, [reason])
+
+
+def _antipodal_result(
+    valid: bool,
+    span: float | None,
+    normal_dot: float | None,
+    alignment: float | None,
+    failures: list[str],
+) -> dict[str, Any]:
+    return {
+        "valid": valid,
+        "contact_span_m": round(span, 9) if span is not None else None,
+        "normal_dot": round(normal_dot, 9) if normal_dot is not None else None,
+        "minimum_axis_alignment": (
+            round(alignment, 9) if alignment is not None else None
+        ),
+        "failure_reasons": failures,
+        "scope": "antipodal_two_jaw_proxy_not_full_6d_wrench_closure",
+    }
