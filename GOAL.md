@@ -400,6 +400,18 @@ physical bracket and shutdown boundary. Current pixel review confirms the wrist
 and external roles but finds the exact sorting prompt does not match the visible
 workcell; tensor preprocessing may continue diagnostically, but policy-input
 and actuation authority remain withheld.
+Brief 087 then produced exact current tensors, one deterministic real MPS
+proposal, and 5/10/15 MuJoCo prefix diagnostics, while Reviewer 113 rejected
+shadow, matched replay, and motion. Brief 088 and Reviewer 114 correct one
+diagnostic artifact from that rejection: the legacy simulation-policy offsets
+were inappropriate for the pinned midpoint-calibrated physical-pose model.
+Under the separately versioned midpoint-direct candidate, measured `q_after`
+and every proposal prefix require zero projection and remain robot-self-contact
+free. The candidate is accepted only for offline replay, not as a metric
+physical transform. Scene mismatch, missing metric camera/workcell calibration,
+checkpoint-support mismatch, the 54.4099-degree first wrist-roll change, and
+5.43238 rad/s maximum replay velocity keep `DO_NOT_ACTUATE`, T16.5c in progress,
+T16.6 pending, and the training lock closed.
 
 ## Durable State
 

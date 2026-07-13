@@ -5,15 +5,15 @@ Updated: 2026-07-13
 ```text
 training_lock: closed
 run_window: start 2026-07-13T08:21:09-05:00; no new major slice after 11:51:09; hard closeout 12:21:09 CDT
-run_state: Reviewer 113 accepts exact preprocessing/inference/replay diagnostics but rejects policy shadow, matched replay, and motion; gate closed; training lock closed
+run_state: Reviewer 114 accepts the midpoint coordinate correction but rejects matched replay, shadow, and motion; gate closed; training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress; reproduce and correct the measured-pose coordinate/twin mismatch offline
+current_task: T16.5c in progress; begin the offline Minimum Viable Grasping Twin while policy and motion gates remain closed
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: bracket 040305a7...; preprocessing 57acad57...; real MPS proposal c116f473... / chunk 4d350587...; 5/10/15 replay 42499e46...; no hardware or motion
+evidence: bracket 040305a7...; preprocessing 57acad57...; real MPS proposal c116f473... / chunk 4d350587...; corrected midpoint 5/10/15 replay a0179263...; no hardware or motion
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: sorting scene mismatch; wrist roll outside checkpoint support; large proposal deltas; measured pose clamps shoulder lift/elbow in current twin and yields shoulder/lower-arm self-contact
-next_step: preserve Reviewer 113 remotely, then reproduce the physical-to-MuJoCo mapping and collision at the measured q_after before any new physical attempt
+blockers: sorting scene mismatch; no metric camera/workcell transform; wrist roll outside checkpoint support; large and fast proposal
+next_step: preserve Reviewer 114 remotely, then build the smallest executable anchor-object grasping-twin contract and strict evaluator offline
 ```
 
 ## Rules
@@ -50,8 +50,24 @@ next_step: preserve Reviewer 113 remotely, then reproduce the physical-to-MuJoCo
 | T16.5 | superseded | T16.1b,T16.2b,T16.4b | Original combined census task | Split by owner steering into T16.5a/T16.5b/T16.5c/T16.6 so offline, live read-only, shadow, and supervised motion proof cannot collapse |
 | T16.5a | verified | T16.1b,T16.2b,T16.4b | Offline no-write transport/lifecycle preflight | Corrected `5102422`/`eeb16e1`; reviewer 049; remote `2407299`; v2 protocol-0/hash/semantic binding; 16 focused and 195 broad tests; `census_trace_conformant` only |
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
-| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Reviewer 113 accepts exact tensors, one real deterministic MPS proposal, and 5/10/15 prefix replays as diagnostics only; input/shadow/matched-replay/motion rejected on scene, support, delta, projection, and self-contact evidence |
+| T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Reviewer 114 corrects the legacy-offset projection/false collision and accepts a source-backed midpoint replay diagnostic; input/shadow/matched-replay/motion remain rejected on scene, metric-transform, support, speed, and delta evidence |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
+
+### 2026-07-13 - Brief 088 midpoint coordinate replay correction
+
+```text
+Current task: T16.5c
+State: in_progress; live gate closed; training lock closed
+Cause: legacy simulation-policy shoulder/elbow offsets were applied to the pinned midpoint-calibrated physical-pose model
+Correction: preserve legacy v1; add a separately versioned fail-closed midpoint-direct candidate for offline physical-pose diagnostics
+Candidate review: b98445cb...; direct identity selected for offline replay only; metric transform and twin qualification false
+Replay: a0179263...; horizons 5/10/15 twice exactly; zero start/action projection; zero robot self-contact; zero warnings; near-zero cube motion
+Remaining rejection: physical scene mismatch, no metric camera/workcell transform, invalid policy input, wrist-roll support mismatch, 54.4099-degree first wrist change, 5.43238 rad/s maximum simulated velocity
+Verification: 188 focused tests in each pinned runtime; 293-test broad authority/twin gate; legacy dependency/preprocessing/reviewed-input/fixture and twin/authority identities remain byte-stable
+Authority gained: midpoint pose candidate and corrected prefix-replay diagnostic observations only
+Authority withheld: accepted input/shadow, matched replay, safe_enough_to_prepare_t16_6, motion, qualification, training, Brev, and paid compute
+Next step: first executable offline Minimum Viable Grasping Twin slice around the visible turquoise anchor
+```
 
 ### 2026-07-13 - Brief 087 current physical preprocessing, shadow, and replay diagnostic
 
