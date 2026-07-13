@@ -80,9 +80,12 @@ contacts the side; normal convention and geom ordering are valid. T19.0l is
 `verified` through Brief 106: geometry-derived aperture, object-center pad
 height, and fixed-jaw clearance produce an exact two-pass unassisted MuJoCo
 grasp with strict-v2 contact through hold, 40 mm lift, unsupported hold, and
-lower, followed by a contact-clear final retreat. The next eligible offline
-slice is T17.1: immutable raw grasp rollout/frame provenance bound to the
-verified simulation artifact before any compiler or training transition.
+lower, followed by a contact-clear final retreat. T17.1 is `verified` through
+Brief 107: a signed immutable rollout/frame contract binds the grasp, twin, and
+coordinate identities while quarantining the aggregate source projection
+rather than calling it training data. The next eligible offline slice is
+T17.2: a named canonical SO-101 processor with pure transform, validation, and
+safety limiting kept mechanically separate.
 The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance

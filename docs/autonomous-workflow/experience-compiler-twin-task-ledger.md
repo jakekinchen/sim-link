@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-13T12:30:11-05:00; no new major slice after 19:45:11; hard closeout 20:30:11 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M17/M19 grasp execution track
-current_task: T17.1 pending after verified T19.0l; define immutable raw grasp rollout/frame records without opening training or live gates
+current_task: T17.2 pending after verified T17.1; implement the named canonical SO-101 processor without conflating transformation, validation, or safety limiting
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: bracket 040305a7...; antipodal v2 strict 950e7568...; geometry-derived grasp 30c5873a... proves 8/8 hold, 24/24 lift, 12/12 unsupported hold, and 24/24 lower strict-v2 frames with no assist or non-pad contact; no hardware or motion
-remaining: immutable M17 grasp experience compilation; T19.2 bounded physical calibration under fresh permits; central simulation-training authority
+evidence: geometry-derived grasp 30c5873a...; immutable experience contract f2b8b462... binds grasp/twin/coordinates and quarantines two source-projection frames for five explicit missing-data reasons; no compiled frames, hardware, or motion
+remaining: canonical SO-101 processor; normalization, segments/windows, real generated grasp episodes, compiler audit; T19.2 physical calibration under fresh permits; central simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; simulation training remains centrally withheld
-next_step: define immutable raw rollout/frame provenance for the verified simulation grasp cycle, preserving strict proof mode and source artifact identity before any compiler or training transition
+next_step: implement and parity-test the named canonical SO-101 processor as pure coordinate transformation, separate contract validation, and separate safety limiting with requested-versus-executed logging
 ```
 
 ## Rules
@@ -235,7 +235,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
-| T17.1 | pending | T16.2 | Define immutable raw rollout/frame records and provenance dictionaries | Schema includes rollout/segment IDs, timestamps, prompt, orthogonal semantics, action variants, reward/progress provenance |
+| T17.1 | verified | T16.2,T19.0l | Define immutable raw rollout/frame records and provenance dictionaries | Brief 107/Reviewer 133; contract f2b8b462...; grasp/twin/coordinate bound; stable rollout/frame identities; canonical/source phases; recovery only a control mode; five action variants remain distinct; two-frame fixture quarantined for five missing-data reasons; 210-test broad gate |
 | T17.2 | pending | T16.2-T16.3, T17.1 | Implement a named canonical SO-101 processor shared by collection, training, evaluation, and adapters | Permutation, randomized round-trip, bounds, action-mode, gripper-monotonicity, golden-pose tests |
 | T17.3 | pending | T17.2 | Generate immutable `normalization_bundle.json` | Feature order, algorithm, coordinates, cameras, tokenizer, processors, dependency SHAs pinned |
 | T17.4 | pending | T17.1-T17.3 | Compile `frames.parquet` and hard-boundary `segments.parquet` | Raw hashes retained; owner/reset/prompt/contract/gap changes split or fail |
