@@ -1,0 +1,510 @@
+{
+  "actual_mujoco_grasp_success": false,
+  "authority_not_granted": [
+    "unassisted_mujoco_grasp_success",
+    "simulation_training_ready",
+    "physical_actuation"
+  ],
+  "bilateral_contact_candidate_count": 2,
+  "candidate_design_identical_to_source": true,
+  "candidates": [
+    {
+      "achieved_object_yaw_rad": -0.42,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.00030192942314333476,
+      "approach_predicted_pad_midpoint_residual_m": 2.981387945661081e-05,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": -0.279906875,
+      "candidate_index": 1,
+      "close_pad_contact_frame_count": 3,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 8,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 5.784105077,
+      "maximum_representative_span_m": 0.007695141,
+      "minimum_representative_span_m": 0.00579594,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [
+        "fixed_fingertip_pad_collision",
+        "moving_fingertip_pad_collision"
+      ],
+      "preclose_object_displacement_m": 0.008474375331514385,
+      "pregrasp_position_residual_m": 8.783972549444765e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 2.3316496541507948e-05,
+      "raw_pad_contact_count": 105,
+      "raw_pad_normal_force_range_n": [
+        0.355599177,
+        5.783211485
+      ],
+      "request": {
+        "close_target_rad": -0.15294117647058825,
+        "lateral_x_m": -0.008571428571428572,
+        "lateral_y_m": -0.009818181818181818,
+        "object_yaw_rad": -0.42,
+        "vertical_m": 0.01553846153846154,
+        "wrist_flex_rad": 0.0,
+        "wrist_roll_rad": -0.5333333333333334
+      },
+      "setup_valid": true
+    },
+    {
+      "achieved_object_yaw_rad": -0.14,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.0003982480085643938,
+      "approach_predicted_pad_midpoint_residual_m": 4.549267182968439e-05,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 2,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 4.771499194,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [
+        "fixed_fingertip_pad_collision"
+      ],
+      "preclose_object_displacement_m": 0.0022366961658124166,
+      "pregrasp_position_residual_m": 8.696665783764851e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 3.5550814368324115e-05,
+      "raw_pad_contact_count": 94,
+      "raw_pad_normal_force_range_n": [
+        0.0,
+        4.771485651
+      ],
+      "request": {
+        "close_target_rad": -0.13588235294117648,
+        "lateral_x_m": -0.0051428571428571435,
+        "lateral_y_m": -0.0076363636363636364,
+        "object_yaw_rad": -0.14,
+        "vertical_m": 0.01707692307692308,
+        "wrist_flex_rad": -0.325,
+        "wrist_roll_rad": 0.5333333333333332
+      },
+      "setup_valid": true
+    },
+    {
+      "achieved_object_yaw_rad": 0.14000000000000012,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.000257099613038113,
+      "approach_predicted_pad_midpoint_residual_m": 5.1067981603896654e-05,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": -0.053688997,
+      "candidate_index": 3,
+      "close_pad_contact_frame_count": 5,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 8,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 2.404632749,
+      "maximum_representative_span_m": 0.014425432,
+      "minimum_representative_span_m": 0.00816711,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [
+        "fixed_fingertip_pad_collision",
+        "moving_fingertip_pad_collision"
+      ],
+      "preclose_object_displacement_m": 0.0021008249991028584,
+      "pregrasp_position_residual_m": 8.689800372247767e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 4.880912510633324e-05,
+      "raw_pad_contact_count": 119,
+      "raw_pad_normal_force_range_n": [
+        0.0,
+        2.40268097
+      ],
+      "request": {
+        "close_target_rad": -0.11882352941176472,
+        "lateral_x_m": -0.001714285714285715,
+        "lateral_y_m": -0.005454545454545455,
+        "object_yaw_rad": 0.14000000000000012,
+        "vertical_m": 0.018615384615384617,
+        "wrist_flex_rad": 0.32500000000000007,
+        "wrist_roll_rad": -1.2444444444444445
+      },
+      "setup_valid": true
+    },
+    {
+      "achieved_object_yaw_rad": 0.4199999999999999,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.00045651437036073355,
+      "approach_predicted_pad_midpoint_residual_m": 8.726476476990898e-05,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 4,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 2.467834505,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [
+        "fixed_fingertip_pad_collision"
+      ],
+      "preclose_object_displacement_m": 0.00832621446147104,
+      "pregrasp_position_residual_m": 8.549644059920135e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 6.889786038668509e-05,
+      "raw_pad_contact_count": 92,
+      "raw_pad_normal_force_range_n": [
+        0.0,
+        2.467831507
+      ],
+      "request": {
+        "close_target_rad": -0.10176470588235295,
+        "lateral_x_m": 0.0017142857142857133,
+        "lateral_y_m": -0.0032727272727272726,
+        "object_yaw_rad": 0.41999999999999993,
+        "vertical_m": 0.020153846153846154,
+        "wrist_flex_rad": -0.48750000000000004,
+        "wrist_roll_rad": -0.1777777777777778
+      },
+      "setup_valid": true
+    },
+    {
+      "achieved_object_yaw_rad": -0.6439999999999998,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.0002888867403696033,
+      "approach_predicted_pad_midpoint_residual_m": 8.749439331931517e-05,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 5,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.772956437,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [
+        "fixed_fingertip_pad_collision"
+      ],
+      "preclose_object_displacement_m": 0.01048937163006825,
+      "pregrasp_position_residual_m": 8.57160315544253e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 8.31032531736495e-05,
+      "raw_pad_contact_count": 47,
+      "raw_pad_normal_force_range_n": [
+        0.0,
+        0.772955475
+      ],
+      "request": {
+        "close_target_rad": -0.08470588235294117,
+        "lateral_x_m": 0.00514285714285714,
+        "lateral_y_m": -0.0010909090909090903,
+        "object_yaw_rad": -0.6439999999999999,
+        "vertical_m": 0.021692307692307695,
+        "wrist_flex_rad": 0.16249999999999998,
+        "wrist_roll_rad": 0.8888888888888888
+      },
+      "setup_valid": true
+    },
+    {
+      "achieved_object_yaw_rad": -0.36399999999999993,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.00036891435008626166,
+      "approach_predicted_pad_midpoint_residual_m": 0.00011949974903303677,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 6,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.076201012,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [
+        "fixed_fingertip_pad_collision"
+      ],
+      "preclose_object_displacement_m": 0.007206946734661613,
+      "pregrasp_position_residual_m": 8.509737872705157e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.0001090558064937514,
+      "raw_pad_contact_count": 44,
+      "raw_pad_normal_force_range_n": [
+        0.012936658,
+        0.075154535
+      ],
+      "request": {
+        "close_target_rad": -0.06764705882352942,
+        "lateral_x_m": 0.00857142857142857,
+        "lateral_y_m": 0.0010909090909090903,
+        "object_yaw_rad": -0.36399999999999993,
+        "vertical_m": 0.023230769230769235,
+        "wrist_flex_rad": -0.16249999999999998,
+        "wrist_roll_rad": -0.888888888888889
+      },
+      "setup_valid": true
+    },
+    {
+      "candidate_index": 7,
+      "geometry_eligible": false,
+      "holdout": false,
+      "rejection_reason": "Fixed-wrist grasp IK residual exceeds limit: (0.038500569741221013, array([-2.09789268e-02, -1.73532925e+00,  1.68000000e+00,  4.87500000e-01,\n        1.77777778e-01,  1.59999715e+00,  2.19000393e-01, -1.14341983e-19,\n        3.24974195e-01,  9.99118130e-01,  0.00000000e+00,  0.00000000e+00,\n       -4.19876531e-02]))",
+      "request": {
+        "close_target_rad": -0.050588235294117656,
+        "lateral_x_m": -0.011510204081632653,
+        "lateral_y_m": 0.0032727272727272726,
+        "object_yaw_rad": -0.08399999999999996,
+        "vertical_m": 0.024769230769230773,
+        "wrist_flex_rad": 0.48749999999999993,
+        "wrist_roll_rad": 0.1777777777777778
+      },
+      "setup_valid": false
+    },
+    {
+      "candidate_index": 8,
+      "geometry_eligible": false,
+      "holdout": false,
+      "rejection_reason": "Fixed-wrist grasp IK residual exceeds limit: (0.17589941008441037, array([-5.57016654e-02, -1.73532925e+00,  1.68000000e+00, -5.68750000e-01,\n        1.24444444e+00,  1.60000000e+00,  2.19000393e-01, -1.14341983e-19,\n        3.24974195e-01,  9.95201842e-01,  0.00000000e+00,  0.00000000e+00,\n        9.78432100e-02]))",
+      "request": {
+        "close_target_rad": -0.03352941176470589,
+        "lateral_x_m": -0.008081632653061225,
+        "lateral_y_m": 0.005454545454545455,
+        "object_yaw_rad": 0.19600000000000017,
+        "vertical_m": 0.02630769230769231,
+        "wrist_flex_rad": -0.56875,
+        "wrist_roll_rad": 1.2444444444444445
+      },
+      "setup_valid": false
+    },
+    {
+      "achieved_object_yaw_rad": 0.476,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.000265499012109684,
+      "approach_predicted_pad_midpoint_residual_m": 0.0002245844643383752,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 9,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [],
+      "preclose_object_displacement_m": 0.009445982120450367,
+      "pregrasp_position_residual_m": 8.645567418283236e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.00022170542861164595,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "request": {
+        "close_target_rad": -0.016470588235294098,
+        "lateral_x_m": -0.004653061224489796,
+        "lateral_y_m": 0.007636363636363639,
+        "object_yaw_rad": 0.476,
+        "vertical_m": 0.027846153846153847,
+        "wrist_flex_rad": 0.08125000000000004,
+        "wrist_roll_rad": -1.4814814814814816
+      },
+      "setup_valid": true
+    },
+    {
+      "achieved_object_yaw_rad": -0.588,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.0003543252747367755,
+      "approach_predicted_pad_midpoint_residual_m": 0.0002576731660216982,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 10,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [],
+      "preclose_object_displacement_m": 0.010413710631820955,
+      "pregrasp_position_residual_m": 8.43172744842153e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.00023362423854137408,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "request": {
+        "close_target_rad": 0.0005882352941176672,
+        "lateral_x_m": -0.0012244897959183682,
+        "lateral_y_m": 0.00981818181818182,
+        "object_yaw_rad": -0.588,
+        "vertical_m": 0.02938461538461539,
+        "wrist_flex_rad": -0.24375000000000002,
+        "wrist_roll_rad": -0.41481481481481497
+      },
+      "setup_valid": true
+    },
+    {
+      "achieved_object_yaw_rad": -0.30799999999999994,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.00022599366432653724,
+      "approach_predicted_pad_midpoint_residual_m": 0.00024018918166782594,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 11,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [],
+      "preclose_object_displacement_m": 0.0058666704844514755,
+      "pregrasp_position_residual_m": 8.372245777721408e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.00023789649944176266,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "request": {
+        "close_target_rad": 0.017647058823529432,
+        "lateral_x_m": 0.0022040816326530602,
+        "lateral_y_m": -0.011801652892561984,
+        "object_yaw_rad": -0.30799999999999994,
+        "vertical_m": 0.030923076923076928,
+        "wrist_flex_rad": 0.4062500000000001,
+        "wrist_roll_rad": 0.6518518518518519
+      },
+      "setup_valid": true
+    },
+    {
+      "achieved_object_yaw_rad": -0.027999999999999914,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.0004130862910096222,
+      "approach_predicted_pad_midpoint_residual_m": 0.0003515735732439068,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 12,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [],
+      "preclose_object_displacement_m": 0.0003905906122399572,
+      "pregrasp_position_residual_m": 8.409349889578845e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.0003382092993983787,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "request": {
+        "close_target_rad": 0.03470588235294117,
+        "lateral_x_m": 0.005632653061224489,
+        "lateral_y_m": -0.009619834710743801,
+        "object_yaw_rad": -0.027999999999999914,
+        "vertical_m": 0.032461538461538465,
+        "wrist_flex_rad": -0.40625,
+        "wrist_roll_rad": -1.125925925925926
+      },
+      "setup_valid": true
+    }
+  ],
+  "contact_physics_unchanged": true,
+  "evidence_mode": "identical_search_pad_midpoint_targeting",
+  "geometry_eligible_count": 0,
+  "hardware_accessed": false,
+  "holdout": {
+    "candidate": {
+      "achieved_object_yaw_rad": 0.252,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.00030228276977478674,
+      "approach_predicted_pad_midpoint_residual_m": 0.0003032748142519378,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 13,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": true,
+      "maximum_contact_force_n": 9.080796196,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "observed_robot_object_contact_geoms": [
+        "fixed_fingertip_pad_collision"
+      ],
+      "preclose_object_displacement_m": 0.004373013451164633,
+      "pregrasp_position_residual_m": 8.393871625752632e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.0002934388786500428,
+      "raw_pad_contact_count": 100,
+      "raw_pad_normal_force_range_n": [
+        0.103271357,
+        9.070642038
+      ],
+      "request": {
+        "close_target_rad": 0.051764705882352935,
+        "lateral_x_m": 0.009061224489795919,
+        "lateral_y_m": -0.00743801652892562,
+        "object_yaw_rad": 0.252,
+        "vertical_m": 0.014118343195266272,
+        "wrist_flex_rad": 0.24375000000000002,
+        "wrist_roll_rad": -0.059259259259259345
+      },
+      "setup_valid": true
+    },
+    "excluded_from_selection": true
+  },
+  "identity_sha256": "d18db60c63c67fc9f0c1a477d51b61bc45c0a22d217ef1660f4bd6ae14d660c8",
+  "physical_follower_commanded": false,
+  "ranges": {
+    "close_target_rad": [
+      -0.17,
+      0.12
+    ],
+    "lateral_x_m": [
+      -0.012,
+      0.012
+    ],
+    "lateral_y_m": [
+      -0.012,
+      0.012
+    ],
+    "object_yaw_rad": [
+      -0.7,
+      0.7
+    ],
+    "vertical_m": [
+      0.014,
+      0.034
+    ],
+    "wrist_flex_rad": [
+      -0.65,
+      0.65
+    ],
+    "wrist_roll_rad": [
+      -1.6,
+      1.6
+    ]
+  },
+  "schema_version": "scenesmith.pad_midpoint_grasp_search.v1",
+  "selected_candidate": null,
+  "simulation_training_ready": false,
+  "source_explicit_pad_search_identity_sha256": "015b605ea2c148aa59064b09126e280d829e9be8267ecb6235f603b8bcbfe715",
+  "training_candidate_count": 12
+}

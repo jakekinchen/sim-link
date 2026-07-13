@@ -7,9 +7,9 @@ training_lock: closed
 run_window: start 2026-07-13T12:30:11-05:00; no new major slice after 19:45:11; hard closeout 20:30:11 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M17/M19 grasp execution track
-current_task: T19.0e pending; correct object targeting from gripperframe-at-object to pad-midpoint-at-object and rerun the identical search
+current_task: T19.0f pending; settle the yawed object before anchoring the preclose-motion baseline and rerun the otherwise identical search
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: bracket 040305a7...; real MPS proposal c116f473...; v1 strict 4f0bad3c...; contact sweep 89c04062...; antipodal v2 strict 950e7568...; no new hardware or motion
+evidence: bracket 040305a7...; real MPS proposal c116f473...; antipodal v2 strict 950e7568...; pad-midpoint search d18db60c... with 2 bilateral candidates and zero strict-v2 frames; no new hardware or motion
 remaining: T19.0 truthful gripper/contact semantics; strict unassisted MuJoCo grasp; T19.2 bounded physical calibration under fresh permits; M17 Experience Compiler grasp episodes; simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; large policy proposal; two jaw bodies contact one local object region without force closure; no physical aperture/current mapping
@@ -261,7 +261,8 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T19.0b | verified | T19.0 | Make grasp orientation and object yaw independently controllable and verified before search | Brief 096/Reviewer 122; fixture `cdcb2359...`; 4/4 candidates; exact wrist/yaw; max residual 0.538 mm; requested/achieved axes; collision-free; 176-test broad gate |
 | T19.0c | verified | T19.0,T19.0b | Run deterministic bounded geometry-first grasp search without friction/compliance tuning | Brief 097/Reviewer 123; 12 Halton candidates + untouched holdout; 10 reachable; zero pad contacts/eligible; composite jaw occlusion isolated; 178-test broad gate |
 | T19.0d | verified | T19.0c | Correct explicit-pad collision occlusion without tuning friction or search ranges | Brief 098/Reviewer 124; identical rerun; 3 candidates/277 positive fixed-pad contacts up to 4.338 N; zero moving-pad/bilateral contacts; 180-test broad gate |
-| T19.0e | pending | T19.0d | Center object on predicted pad midpoint instead of gripperframe/fixed-pad reference | Per-close-target midpoint offset; identical design and holdout; approach-motion gate; bilateral pad/strict-v2 evidence |
+| T19.0e | verified | T19.0d | Center object on predicted pad midpoint instead of gripperframe/fixed-pad reference | Brief 099/Reviewer 125; identical 12 candidates + excluded holdout; 2 bilateral candidates through 8/8 hold frames; zero strict-v2/eligible; 182-test broad gate |
+| T19.0f | pending | T19.0e | Separate object-yaw/table settling from gripper-induced preclose motion | Settle after yaw before anchoring the approach-motion baseline; preserve search design, friction, compliance, ranges, evaluator, and holdout |
 | T19.1 | pending | M16, read authority | Run read-only servo/firmware/register census | Immutable hardware snapshot; no writes or motion |
 | T19.2 | pending | T19.1, motion authority | Calibrate cameras, joint offsets, kinematics, timing, and gripper aperture | Held-out reprojection, pose, and timing tolerances |
 | T19.3 | pending | T19.1-T19.2, motion authority | Identify delay, saturation, settling, directionality, backlash, friction, compliance | Per-joint fitted distributions and held-out trajectory evidence |

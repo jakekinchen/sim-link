@@ -101,6 +101,7 @@ def _candidate(
     *,
     holdout: bool,
     explicit_pad_proxy_only: bool = False,
+    pad_midpoint_targeting: bool = False,
 ) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
@@ -108,6 +109,7 @@ def _candidate(
         result = _run_candidate(
             request,
             explicit_pad_proxy_only=explicit_pad_proxy_only,
+            pad_midpoint_targeting=pad_midpoint_targeting,
         )
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
@@ -118,6 +120,7 @@ def _run_candidate(
     request: dict[str, float],
     *,
     explicit_pad_proxy_only: bool = False,
+    pad_midpoint_targeting: bool = False,
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
@@ -173,9 +176,27 @@ def _run_candidate(
             anchor_start = expert.data.xpos[object_body].copy()
             target = anchor_start + np.asarray([request["lateral_x_m"], request["lateral_y_m"], request["vertical_m"]])
             approach = target + np.asarray([0.0, 0.0, 0.04])
-            approach_solution = solve_grasp_pose(expert.mujoco, expert.model, expert.data, gripper_site_id=expert.gripper_site_id, target_position_m=approach.tolist(), wrist_flex_rad=request["wrist_flex_rad"], wrist_roll_rad=request["wrist_roll_rad"])
+            if pad_midpoint_targeting:
+                approach_solution = _solve_pad_midpoint_target(
+                    expert,
+                    desired_midpoint=approach,
+                    request=request,
+                    fixed_site=fixed_site,
+                    moving_site=moving_site,
+                )
+            else:
+                approach_solution = solve_grasp_pose(expert.mujoco, expert.model, expert.data, gripper_site_id=expert.gripper_site_id, target_position_m=approach.tolist(), wrist_flex_rad=request["wrist_flex_rad"], wrist_roll_rad=request["wrist_roll_rad"])
             expert._move_control("approach", approach_solution["qpos"][: expert.model.nu], 14)
-            pregrasp_solution = solve_grasp_pose(expert.mujoco, expert.model, expert.data, gripper_site_id=expert.gripper_site_id, target_position_m=target.tolist(), wrist_flex_rad=request["wrist_flex_rad"], wrist_roll_rad=request["wrist_roll_rad"])
+            if pad_midpoint_targeting:
+                pregrasp_solution = _solve_pad_midpoint_target(
+                    expert,
+                    desired_midpoint=target,
+                    request=request,
+                    fixed_site=fixed_site,
+                    moving_site=moving_site,
+                )
+            else:
+                pregrasp_solution = solve_grasp_pose(expert.mujoco, expert.model, expert.data, gripper_site_id=expert.gripper_site_id, target_position_m=target.tolist(), wrist_flex_rad=request["wrist_flex_rad"], wrist_roll_rad=request["wrist_roll_rad"])
             expert._move_control("pregrasp", pregrasp_solution["qpos"][: expert.model.nu], 18)
             preclose_displacement = float(np.linalg.norm(expert.data.xpos[object_body] - anchor_start))
             expert._move_gripper("close", request["close_target_rad"], 36)
@@ -222,7 +243,68 @@ def _run_candidate(
         result["raw_pad_normal_force_range_n"] = (
             [min(raw_pad_forces), max(raw_pad_forces)] if raw_pad_forces else None
         )
+    if pad_midpoint_targeting:
+        result["approach_predicted_pad_midpoint_residual_m"] = approach_solution[
+            "predicted_pad_midpoint_residual_m"
+        ]
+        result["pregrasp_predicted_pad_midpoint_residual_m"] = pregrasp_solution[
+            "predicted_pad_midpoint_residual_m"
+        ]
     return result
+
+
+def _solve_pad_midpoint_target(
+    expert: CausalSortExpert,
+    *,
+    desired_midpoint: np.ndarray,
+    request: dict[str, float],
+    fixed_site: int,
+    moving_site: int,
+) -> dict[str, Any]:
+    site_target = desired_midpoint.copy()
+    best: tuple[float, dict[str, Any]] | None = None
+    for _ in range(10):
+        solved = solve_grasp_pose(
+            expert.mujoco,
+            expert.model,
+            expert.data,
+            gripper_site_id=expert.gripper_site_id,
+            target_position_m=site_target.tolist(),
+            wrist_flex_rad=request["wrist_flex_rad"],
+            wrist_roll_rad=request["wrist_roll_rad"],
+        )
+        predicted = expert.mujoco.MjData(expert.model)
+        predicted.qpos[:] = solved["qpos"]
+        predicted.qpos[
+            int(
+                expert.model.jnt_qposadr[
+                    expert._id(expert.mujoco.mjtObj.mjOBJ_JOINT, "gripper")
+                ]
+            )
+        ] = request["close_target_rad"]
+        expert.mujoco.mj_forward(expert.model, predicted)
+        midpoint = 0.5 * (
+            predicted.site_xpos[fixed_site] + predicted.site_xpos[moving_site]
+        )
+        error = desired_midpoint - midpoint
+        residual = float(np.linalg.norm(error))
+        if best is None or residual < best[0]:
+            best = (residual, solved)
+        if residual <= 0.0005:
+            break
+        site_target += error
+    if best is None or best[0] > 0.001:
+        raise ValueError(f"Predicted pad midpoint residual exceeds limit: {best}")
+    output = best[1]
+    output["qpos"][
+        int(
+            expert.model.jnt_qposadr[
+                expert._id(expert.mujoco.mjtObj.mjOBJ_JOINT, "gripper")
+            ]
+        )
+    ] = 1.6
+    output["predicted_pad_midpoint_residual_m"] = best[0]
+    return output
 
 
 def _valid_contact(frame: dict[str, Any], requirement: dict[str, Any]) -> bool:

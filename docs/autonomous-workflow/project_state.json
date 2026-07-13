@@ -2390,15 +2390,42 @@
       ]
     },
     "T19.0e": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0d"],
-      "result": "target the object at the predicted midpoint between fixed and moving pad references for each close target, then rerun the identical search",
-      "authority_granted": [],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "099",
+      "review_decision_id": "125",
+      "result": "pad-midpoint targeting produced repeatable bilateral explicit-pad contact for two candidates but zero strict-v2 frames or geometry-eligible grasps; preclose displacement and contact geometry remain failing gates",
+      "artifact": {
+        "path": "configurations/robot_lab/pad_midpoint_search.json",
+        "identity_sha256": "d18db60c63c67fc9f0c1a477d51b61bc45c0a22d217ef1660f4bd6ae14d660c8",
+        "file_sha256": "10f55aca5d5312dbffcc08f6bcf94965e67742a890b2cb1f1ce42be51b0a36c3",
+        "size_bytes": 19752,
+        "bilateral_contact_candidate_count": 2,
+        "geometry_eligible_count": 0,
+        "strict_v2_valid_hold_frame_count": 0,
+        "broad_test_count": 182
+      },
+      "authority_granted": [
+        "bilateral_explicit_pad_contact_observed"
+      ],
       "authority_not_granted": [
-        "bilateral_pad_contact_observed",
         "geometry_eligible_grasp_candidate",
         "unassisted_mujoco_grasp_success",
-        "simulation_training_ready"
+        "simulation_training_ready",
+        "physical_actuation"
+      ]
+    },
+    "T19.0f": {
+      "state": "pending",
+      "depends_on": ["T19.0e"],
+      "result": "settle the yawed object deterministically on the table before defining the preclose motion baseline, then rerun the otherwise identical bounded search",
+      "authority_granted": [],
+      "authority_not_granted": [
+        "geometry_eligible_grasp_candidate",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_actuation"
       ]
     }
   }
