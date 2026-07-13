@@ -1331,9 +1331,9 @@
       "state": "in_progress",
       "depends_on": ["T16.5b"],
       "active_brief_id": null,
-      "latest_verified_brief_id": "076",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076"],
-      "result": "The post-Brief-076 session t16-5c-20260713-0855-cdt consumed its gate and is rejected at the next strict boundary: live camera audit fields drift from the static-pose audit contract. Immutable failure 33c8e4b1... verifies no physical command, policy inference, motion authority, or training; shutdown leaves follower disconnected/torque-false and both aliases free. No accepted static-pose, reviewed-input, shadow, or replay label is granted",
+      "latest_verified_brief_id": "079",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079"],
+      "result": "Brief 079 corrects the exact rejected-session audit boundary offline: the pinned live camera adapter validates the full successful finite FFmpeg backend audit and projects only the exact static-pose lifecycle fields. The consumed gate remains closed; no accepted static-pose, reviewed-input, shadow, or replay label is granted",
       "latest_rejected_live_candidate": {
         "session_id": "t16-5c-20260713-0855-cdt",
         "discovery_identity_sha256": "0cebaa894b26540811ef7292c3c3068686b4b946684856e5da610fd9c0c7d6ac",
@@ -1523,9 +1523,12 @@
           "height",
           "channels"
         ],
-        "focused_test_count_per_runtime": 90,
-        "broad_test_count": 289,
-        "broad_test_duration_seconds": 73.993
+        "live_static_pose_camera_audit_adapter_conformant": true,
+        "validated_backend_camera_audit": "exact_successful_finite_ffmpeg_lifecycle",
+        "static_pose_camera_audit_projection": "open_read_release_counts_and_zero_forbidden_operations",
+        "focused_test_count_per_runtime": 181,
+        "broad_test_count": 380,
+        "broad_test_duration_seconds": 131.297
       },
       "fail_closed_live_session_orchestrator": {
         "implementation_commit": "ce7a794bb36de16c6a053608771cd5ecbd87575a",
@@ -1757,9 +1760,8 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "remotely preserve Reviewer 104 gate close, then perform one narrow offline correction for the pinned live camera audit adapter before any separately reviewed future gate",
+      "next_action": "remotely preserve Brief 079 and Reviewer 105, then separately review at most one fresh finite gate before repeating complete fresh preflight",
       "live_execution_prerequisites_missing": [
-        "one_narrow_offline_camera_audit_adapter_correction",
         "new_separately_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
@@ -1787,7 +1789,8 @@
         "fixture_pi05_model_ready_tensor_parity_conformant",
         "fixture_pi05_training_support_audit_conformant",
         "unselected_avfoundation_source_tolerance_conformant",
-        "live_static_pose_frame_metadata_adapter_conformant"
+        "live_static_pose_frame_metadata_adapter_conformant",
+        "live_static_pose_camera_audit_adapter_conformant"
       ],
       "authority_not_granted": [
         "actual_live_review_manifest",

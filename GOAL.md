@@ -32,7 +32,9 @@ proof states must remain distinct.
   verified Brief 076 correction, Reviewer 103 opens one new finite session from
   `08:55` through `09:30` CDT only after remote confirmation and fresh preflight.
   That session was consumed and closed at `08:56` after the frame adapter passed
-  and the next strict camera-audit boundary rejected.
+  and the next strict camera-audit boundary rejected. Brief 079 verifies the one
+  permitted narrow offline correction; the live gate remains closed and any
+  future attempt requires a separately reviewed transition.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -360,6 +362,9 @@ boundary. The strict semantic frame contract is unchanged, and any new live
 attempt requires a separately reviewed remote gate. The post-correction attempt
 advanced to camera-audit validation and failed there; immutable failure
 `33c8e4b1...` grants no observation or policy label and shutdown remains clean.
+Brief 079 validates the complete successful finite FFmpeg backend audit before
+projecting the exact static-pose lifecycle view; it grants adapter conformance
+only and does not reopen the consumed gate.
 
 ## Durable State
 

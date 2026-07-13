@@ -113,6 +113,52 @@ class PinnedFFmpegStaticPoseCamera(FFmpegNamedFiniteCamera):
             raise ValueError("Pinned static-pose camera receive interval is invalid")
         return {field: frame[field] for field in self._SEMANTIC_FRAME_FIELDS}
 
+    def audit(self) -> dict[str, Any]:
+        """Validate the finite FFmpeg lifecycle and return its strict audit view."""
+
+        backend_audit = super().audit()
+        expected_backend_audit = {
+            "backend": "ffmpeg_named_avfoundation",
+            "camera_identity_sha256": hashlib.sha256(
+                canonical_json_bytes(self._camera)
+            ).hexdigest(),
+            "requested_framerate_fps": self._framerate_fps,
+            "requested_input_mode": copy.deepcopy(self._input_mode),
+            "subprocess_start_attempts": 1,
+            "subprocess_start_successes": 1,
+            "subprocess_communicate_attempts": 1,
+            "subprocess_communicate_successes": 1,
+            "subprocess_wait_attempts": 1,
+            "subprocess_wait_successes": 1,
+            "subprocess_terminate_attempts": 0,
+            "subprocess_terminate_successes": 0,
+            "subprocess_kill_attempts": 0,
+            "subprocess_kill_successes": 0,
+            "release_attempts": 1,
+            "release_successes": 1,
+            "frames_delivered": self._expected_frame_count,
+            "capture_property_writes": 0,
+            "continuous_recording_sessions": 0,
+        }
+        if (
+            not isinstance(backend_audit, dict)
+            or set(backend_audit) != set(expected_backend_audit)
+            or canonical_json_bytes(backend_audit)
+            != canonical_json_bytes(expected_backend_audit)
+        ):
+            raise ValueError("Pinned static-pose camera backend audit drifted")
+        return {
+            "open_attempts": 1,
+            "open_successes": 1,
+            "read_attempts": self._expected_frame_count,
+            "read_successes": self._expected_frame_count,
+            "release_attempts": 1,
+            "release_successes": 1,
+            "capture_property_writes": 0,
+            "continuous_recording_sessions": 0,
+            "unexpected_operations": 0,
+        }
+
 
 def build_pinned_static_pose_bus_spec(
     candidate_contract: dict[str, Any],

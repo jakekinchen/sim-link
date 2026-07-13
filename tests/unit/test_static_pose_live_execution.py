@@ -880,6 +880,92 @@ class PinnedLiveFactoryTests(unittest.TestCase):
                 ), self.assertRaises(ValueError):
                     instance.read()
 
+    def test_pinned_camera_adapts_only_exact_successful_backend_audit(self):
+        camera = _candidate_contract()["cameras"][0]["resolved_camera"]
+        instance = object.__new__(execution_module.PinnedFFmpegStaticPoseCamera)
+        instance._camera = copy.deepcopy(camera)
+        instance._input_mode = copy.deepcopy(camera["input_mode"])
+        instance._expected_frame_count = 2
+        instance._framerate_fps = 30
+        backend_audit = {
+            "backend": "ffmpeg_named_avfoundation",
+            "camera_identity_sha256": hashlib.sha256(
+                canonical_json_bytes(camera)
+            ).hexdigest(),
+            "requested_framerate_fps": 30,
+            "requested_input_mode": copy.deepcopy(camera["input_mode"]),
+            "subprocess_start_attempts": 1,
+            "subprocess_start_successes": 1,
+            "subprocess_communicate_attempts": 1,
+            "subprocess_communicate_successes": 1,
+            "subprocess_wait_attempts": 1,
+            "subprocess_wait_successes": 1,
+            "subprocess_terminate_attempts": 0,
+            "subprocess_terminate_successes": 0,
+            "subprocess_kill_attempts": 0,
+            "subprocess_kill_successes": 0,
+            "release_attempts": 1,
+            "release_successes": 1,
+            "frames_delivered": 2,
+            "capture_property_writes": 0,
+            "continuous_recording_sessions": 0,
+        }
+        with patch.object(
+            execution_module.FFmpegNamedFiniteCamera,
+            "audit",
+            return_value=copy.deepcopy(backend_audit),
+        ):
+            self.assertEqual(
+                instance.audit(),
+                {
+                    "open_attempts": 1,
+                    "open_successes": 1,
+                    "read_attempts": 2,
+                    "read_successes": 2,
+                    "release_attempts": 1,
+                    "release_successes": 1,
+                    "capture_property_writes": 0,
+                    "continuous_recording_sessions": 0,
+                    "unexpected_operations": 0,
+                },
+            )
+
+        for label, mutate in (
+            ("unknown", lambda value: value.__setitem__("unexpected", 0)),
+            ("missing", lambda value: value.pop("subprocess_wait_successes")),
+            (
+                "identity",
+                lambda value: value.__setitem__(
+                    "camera_identity_sha256",
+                    "0" * 64,
+                ),
+            ),
+            (
+                "boolean",
+                lambda value: value.__setitem__(
+                    "subprocess_start_attempts",
+                    True,
+                ),
+            ),
+            (
+                "terminate",
+                lambda value: value.__setitem__(
+                    "subprocess_terminate_attempts",
+                    1,
+                ),
+            ),
+            ("write", lambda value: value.__setitem__("capture_property_writes", 1)),
+        ):
+            with self.subTest(label=label):
+                changed = copy.deepcopy(backend_audit)
+                mutate(changed)
+                with patch.object(
+                    execution_module.FFmpegNamedFiniteCamera,
+                    "audit",
+                    return_value=changed,
+                ), self.assertRaises(ValueError):
+                    instance.audit()
+
     def test_active_runtime_change_during_doctor_capture_rejects(self):
         captures = iter(
             [
