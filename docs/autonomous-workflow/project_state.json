@@ -56,6 +56,12 @@
     "reviewer_decision_id": "119",
     "summary": "analytic_antipodal_contact_gate_with_actual_grasp_withheld"
   },
+  "t16_5c_negative_experiment_closeout_boundary": {
+    "brief_id": "094",
+    "commit": "a90ea91ad9eec23d6d1575696f0c8574724e01a5",
+    "reviewer_decision_id": "120",
+    "result": "physical observation and deterministic no-actuation checkpoint diagnosis completed; sorting checkpoint rejected for this physical scene and camera domain"
+  },
   "review_boundary": {
     "reviewer_decision_id": "097",
     "path": "docs/reviewer-messages/097-accept-brief-071-full-access-no-prompt-profile.md",
