@@ -76,11 +76,13 @@ both fail motion and strict contact geometry. T19.0j is
 candidate above the strict span threshold, but normal alignment and preclose
 motion still fail. T19.0k is `verified` through Brief 105: source-identical
 diagnostics prove the fixed pad contacts the anchor top while the moving pad
-contacts the side; normal convention and geom ordering are valid. T19.0l is the
-next eligible offline slice: build a geometry-derived unilateral-jaw grasp from
-the 35 mm anchor width, compiled aperture curve, object-center pad height, and
-bounded fixed-jaw clearance, then verify a full unassisted lift/lower/release
-trajectory under the unchanged strict evaluator.
+contacts the side; normal convention and geom ordering are valid. T19.0l is
+`verified` through Brief 106: geometry-derived aperture, object-center pad
+height, and fixed-jaw clearance produce an exact two-pass unassisted MuJoCo
+grasp with strict-v2 contact through hold, 40 mm lift, unsupported hold, and
+lower, followed by a contact-clear final retreat. The next eligible offline
+slice is T17.1: immutable raw grasp rollout/frame provenance bound to the
+verified simulation artifact before any compiler or training transition.
 The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance

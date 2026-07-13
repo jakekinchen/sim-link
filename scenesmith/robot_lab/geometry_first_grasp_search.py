@@ -109,6 +109,10 @@ def _candidate(
     best_principal_axis_alignment: bool = False,
     center_selected_axis_offset: bool = False,
     retain_contact_diagnostics: bool = False,
+    close_target_override_rad: float | None = None,
+    vertical_target_override_m: float | None = None,
+    selected_axis_clearance_m: float = 0.0,
+    execute_full_lift_cycle: bool = False,
 ) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
@@ -123,6 +127,10 @@ def _candidate(
             best_principal_axis_alignment=best_principal_axis_alignment,
             center_selected_axis_offset=center_selected_axis_offset,
             retain_contact_diagnostics=retain_contact_diagnostics,
+            close_target_override_rad=close_target_override_rad,
+            vertical_target_override_m=vertical_target_override_m,
+            selected_axis_clearance_m=selected_axis_clearance_m,
+            execute_full_lift_cycle=execute_full_lift_cycle,
         )
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
@@ -140,6 +148,10 @@ def _run_candidate(
     best_principal_axis_alignment: bool = False,
     center_selected_axis_offset: bool = False,
     retain_contact_diagnostics: bool = False,
+    close_target_override_rad: float | None = None,
+    vertical_target_override_m: float | None = None,
+    selected_axis_clearance_m: float = 0.0,
+    execute_full_lift_cycle: bool = False,
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
@@ -215,17 +227,21 @@ def _run_candidate(
                 math.sin(settled_yaw - achieved_yaw),
                 math.cos(settled_yaw - achieved_yaw),
             )
+            effective_base_request = dict(request)
+            if close_target_override_rad is not None:
+                effective_base_request["close_target_rad"] = close_target_override_rad
+            target_vertical = request["vertical_m"] if vertical_target_override_m is None else vertical_target_override_m
             anchor_start = expert.data.xpos[object_body].copy()
-            target = anchor_start + np.asarray([request["lateral_x_m"], request["lateral_y_m"], request["vertical_m"]])
+            target = anchor_start + np.asarray([request["lateral_x_m"], request["lateral_y_m"], target_vertical])
             approach = target + np.asarray([0.0, 0.0, 0.04])
-            effective_request = request
+            effective_request = effective_base_request
             axis_alignment: dict[str, Any] | None = None
             if best_principal_axis_alignment or center_selected_axis_offset:
                 object_rotation = np.asarray(expert.data.xmat[object_body]).reshape(3, 3)
                 axis_alignment = _select_best_horizontal_principal_axis_wrist_pose(
                     expert,
                     desired_midpoint=target,
-                    request=request,
+                    request=effective_base_request,
                     fixed_site=fixed_site,
                     moving_site=moving_site,
                     object_rotation_world=object_rotation,
@@ -242,13 +258,11 @@ def _run_candidate(
                     removed_projection = float(
                         np.dot(original_lateral, selected_axis)
                     )
-                    retained_lateral = (
-                        original_lateral - removed_projection * selected_axis
-                    )
+                    retained_lateral = original_lateral - removed_projection * selected_axis + selected_axis_clearance_m * selected_axis
                     target = (
                         anchor_start
                         + retained_lateral
-                        + np.asarray([0.0, 0.0, request["vertical_m"]])
+                        + np.asarray([0.0, 0.0, target_vertical])
                     )
                     approach = target + np.asarray([0.0, 0.0, 0.04])
                     selected_label = axis_alignment[
@@ -257,7 +271,7 @@ def _run_candidate(
                     final_alignment = _select_horizontal_principal_axis_wrist_pose(
                         expert,
                         desired_midpoint=target,
-                        request=request,
+                        request=effective_base_request,
                         fixed_site=fixed_site,
                         moving_site=moving_site,
                         object_axis_world=selected_axis,
@@ -270,9 +284,13 @@ def _run_candidate(
                             "retained_horizontal_target_offset_world_m": retained_lateral.tolist(),
                         }
                     )
+                    if selected_axis_clearance_m:
+                        final_alignment["selected_axis_clearance_m"] = selected_axis_clearance_m
+                    if vertical_target_override_m is not None:
+                        final_alignment["target_vertical_offset_m"] = target_vertical
                     axis_alignment = final_alignment
                 effective_request = {
-                    **request,
+                    **effective_base_request,
                     "wrist_flex_rad": axis_alignment["selected_wrist_flex_rad"],
                     "wrist_roll_rad": axis_alignment["selected_wrist_roll_rad"],
                 }
@@ -281,13 +299,13 @@ def _run_candidate(
                 axis_alignment = _select_horizontal_principal_axis_wrist_pose(
                     expert,
                     desired_midpoint=target,
-                    request=request,
+                    request=effective_base_request,
                     fixed_site=fixed_site,
                     moving_site=moving_site,
                     object_axis_world=object_rotation[:, 0],
                 )
                 effective_request = {
-                    **request,
+                    **effective_base_request,
                     "wrist_flex_rad": axis_alignment["selected_wrist_flex_rad"],
                     "wrist_roll_rad": axis_alignment["selected_wrist_roll_rad"],
                 }
@@ -296,13 +314,13 @@ def _run_candidate(
                 axis_alignment = _select_principal_axis_wrist_roll(
                     expert,
                     desired_midpoint=target,
-                    request=request,
+                    request=effective_base_request,
                     fixed_site=fixed_site,
                     moving_site=moving_site,
                     object_axis_world=object_rotation[:, 0],
                 )
                 effective_request = {
-                    **request,
+                    **effective_base_request,
                     "wrist_roll_rad": axis_alignment["selected_wrist_roll_rad"],
                 }
             if pad_midpoint_targeting:
@@ -330,6 +348,31 @@ def _run_candidate(
             preclose_displacement = float(np.linalg.norm(expert.data.xpos[object_body] - anchor_start))
             expert._move_gripper("close", effective_request["close_target_rad"], 36)
             expert._hold("grasp_hold", 8)
+            if execute_full_lift_cycle:
+                lift_solution = _solve_pad_midpoint_target(
+                    expert,
+                    desired_midpoint=target + np.asarray([0.0, 0.0, 0.04]),
+                    request=effective_request,
+                    fixed_site=fixed_site,
+                    moving_site=moving_site,
+                )
+                gripper_address = int(
+                    expert.model.jnt_qposadr[
+                        expert._id(expert.mujoco.mjtObj.mjOBJ_JOINT, "gripper")
+                    ]
+                )
+                lift_control = lift_solution["qpos"][: expert.model.nu].copy()
+                lift_control[gripper_address] = effective_request["close_target_rad"]
+                expert._move_control("unassisted_lift", lift_control, 24)
+                expert._hold("unsupported_lift_hold", 12)
+                lower_control = pregrasp_solution["qpos"][: expert.model.nu].copy()
+                lower_control[gripper_address] = effective_request["close_target_rad"]
+                expert._move_control("lower", lower_control, 24)
+                expert._move_gripper("release", 1.6, 12)
+                expert._hold("release_settle", 8)
+                retreat_control = approach_solution["qpos"][: expert.model.nu].copy()
+                retreat_control[gripper_address] = 1.6
+                expert._move_control("retreat", retreat_control, 24)
         finally:
             expert.close()
     close = [row for row in raw_frames if row["phase"] == "close"]
@@ -365,6 +408,10 @@ def _run_candidate(
                 "passive_settle_yaw_drift_rad": passive_settle_yaw_drift,
             }
         )
+    if close_target_override_rad is not None:
+        result["effective_close_target_rad"] = close_target_override_rad
+    if vertical_target_override_m is not None:
+        result["effective_vertical_target_offset_m"] = vertical_target_override_m
     if explicit_pad_proxy_only:
         result["observed_robot_object_contact_geoms"] = sorted(
             {
@@ -402,6 +449,21 @@ def _run_candidate(
             )
             if row["pad_contact_aggregate"] is not None
         ]
+    if execute_full_lift_cycle:
+        phase_names = ("grasp_hold", "unassisted_lift", "unsupported_lift_hold", "lower", "release_settle", "retreat")
+        phase_rows = {phase: [row for row in raw_frames if row["phase"] == phase] for phase in phase_names}
+        result["full_lift_cycle"] = {
+            "phase_frame_counts": {phase: len(rows) for phase, rows in phase_rows.items()},
+            "strict_v2_valid_frame_counts": {phase: sum(_valid_contact(row, spec) for row in rows) for phase, rows in phase_rows.items()},
+            "unsupported_lift_hold_frame_count": sum(not row["anchor_support_contacts"] for row in phase_rows["unsupported_lift_hold"]),
+            "active_assist_frame_count": sum(bool(row["grasp_assists_active"]) for row in raw_frames),
+            "object_z_m": {phase: [row["cube_positions_m"][OBJECT_ID][2] for row in rows] for phase, rows in phase_rows.items()},
+            "robot_object_contact_geoms": {phase: [row.get("all_robot_object_contact_geoms", []) for row in rows] for phase, rows in phase_rows.items()},
+            "release_settle_contact_clear": all(not row.get("all_robot_object_contact_geoms", []) for row in phase_rows["release_settle"]),
+            "retreat_contact_clear": all(not row.get("all_robot_object_contact_geoms", []) for row in phase_rows["retreat"]),
+            "release_settle_final_contact_clear": bool(phase_rows["release_settle"]) and not phase_rows["release_settle"][-1].get("all_robot_object_contact_geoms", []),
+            "retreat_final_contact_clear": bool(phase_rows["retreat"]) and not phase_rows["retreat"][-1].get("all_robot_object_contact_geoms", []),
+        }
     if (
         principal_axis_alignment
         or joint_wrist_axis_alignment

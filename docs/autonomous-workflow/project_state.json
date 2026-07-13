@@ -2594,13 +2594,36 @@
       ]
     },
     "T19.0l": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0k"],
-      "result": "mechanically derive a unilateral-jaw grasp from selected object width, compiled aperture curve, object-center pad height, and bounded fixed-jaw clearance, then run deterministic close/hold/lift/unsupported-hold/lower/release/retreat",
-      "authority_granted": [],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "106",
+      "review_decision_id": "132",
+      "result": "geometry-derived unilateral-jaw controls produce an exact two-pass deterministic unassisted MuJoCo close/hold/40 mm lift/unsupported-hold/lower/release/retreat cycle under the unchanged strict-v2 evaluator",
+      "artifact": {
+        "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
+        "identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+        "file_sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7",
+        "size_bytes": 16262,
+        "derived_close_target_rad": 0.2492469645219354,
+        "preclose_object_displacement_m": 5.985417583858897e-09,
+        "strict_grasp_hold_frame_count": 8,
+        "strict_lift_frame_count": 24,
+        "strict_unsupported_hold_frame_count": 12,
+        "strict_lower_frame_count": 24,
+        "lift_height_m": 0.036271,
+        "nonpad_robot_object_contact_frame_count": 0,
+        "active_assist_frame_count": 0,
+        "final_retreat_contact_clear": true,
+        "broad_test_count": 198
+      },
+      "authority_granted": [
+        "geometry_derived_unilateral_jaw_grasp_cycle_valid",
+        "unassisted_mujoco_grasp_success"
+      ],
       "authority_not_granted": [
-        "unassisted_mujoco_grasp_success",
         "simulation_training_ready",
+        "physical_twin_qualified",
         "physical_actuation"
       ]
     }
