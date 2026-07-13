@@ -245,8 +245,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M17/M19 grasp execution track",
-  "current_task": "T19.0c",
-  "next_eligible_task": "T19.0c",
+  "current_task": "T19.0d",
+  "next_eligible_task": "T19.0d",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2330,9 +2330,40 @@
       ]
     },
     "T19.0c": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0", "T19.0b"],
-      "result": "run deterministic bounded geometry-first grasp search with pad-qualified contact aggregation, untouched geometry holdout, and no friction/compliance tuning",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "097",
+      "review_decision_id": "123",
+      "result": "bounded geometry-first search completed with zero explicit-pad contacts; preserved composite jaw collision geometry occludes the fingertip pad proxies and is the isolated next correction",
+      "artifact": {
+        "path": "configurations/robot_lab/geometry_first_grasp_search.json",
+        "schema_version": "scenesmith.geometry_first_grasp_search.v1",
+        "identity_sha256": "bbba9eac27c335b4ea292f698f18277d9fbc17a1ce75c4678e85a8eeb33900ce",
+        "file_sha256": "143a3f83e7baa35e92f50f46cece3ada3c072023b521755408b68b62fcf62b05",
+        "size_bytes": 15096,
+        "training_candidate_count": 12,
+        "setup_valid_count": 10,
+        "geometry_eligible_count": 0,
+        "explicit_pad_contact_frame_count": 0,
+        "holdout_excluded_from_selection": true,
+        "broad_test_count": 178
+      },
+      "authority_granted": [
+        "bounded_geometry_first_search_observed",
+        "explicit_pad_collision_occlusion_diagnosed"
+      ],
+      "authority_not_granted": [
+        "geometry_eligible_grasp_candidate",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_actuation"
+      ]
+    },
+    "T19.0d": {
+      "state": "pending",
+      "depends_on": ["T19.0c"],
+      "result": "version the fingertip collision proxy so preserved composite jaw meshes remain auditable but cannot occlude pad-qualified contact, then rerun the identical search",
       "authority_granted": [],
       "authority_not_granted": [
         "geometry_eligible_grasp_candidate",
