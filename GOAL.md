@@ -33,8 +33,9 @@ proof states must remain distinct.
   `08:55` through `09:30` CDT only after remote confirmation and fresh preflight.
   That session was consumed and closed at `08:56` after the frame adapter passed
   and the next strict camera-audit boundary rejected. Brief 079 verifies the one
-  permitted narrow offline correction; the live gate remains closed and any
-  future attempt requires a separately reviewed transition.
+  permitted narrow offline correction. Reviewer 106 opens one fresh finite
+  session from `09:10` through `09:45` CDT only after remote confirmation and
+  complete fresh preflight.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 

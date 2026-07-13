@@ -69,7 +69,7 @@
     "trigger": "owner_present_full_access_no_prompt_t16_5c_physical_evidence_mission",
     "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
     "starting_head": "738d0006601335bc68bcf4ffda005a19d34933cc",
-    "live_gate": "closed",
+    "live_gate": "open_after_remote_confirmation",
     "training_lock": "closed",
     "deadline": null
   },
@@ -488,7 +488,7 @@
         "01802a0"
       ],
       "review_decision_id": "053",
-      "live_gate_review_decision_id": "103",
+      "live_gate_review_decision_id": "106",
       "result": "Live attempt 006 is accepted for live_read_only_census_observed and physical_observation_capture: both exact signed 640x480 modes match four decoded PNGs, all six Torque_Enable values are zero, every operation/holder/hash/cleanup check passes, and the live gate is closed",
       "execution_note": "The accepted evidence is finite sequential physical observation only; it is not synchronized, policy-shadow-input-valid, physical qualification, transfer readiness, autonomous policy success, or motion authority",
       "test_commands": [
@@ -1011,14 +1011,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "closed",
-      "live_gate_opened_at": "2026-07-13T08:55:00-05:00",
-      "live_gate_valid_until": "2026-07-13T09:30:00-05:00",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-13T09:10:00-05:00",
+      "live_gate_valid_until": "2026-07-13T09:45:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 1,
-      "live_gate_closed_at": "2026-07-13T08:56:01-05:00",
-      "live_gate_close_reason": "candidate_rejected_static_pose_camera_audit_drifted",
-      "live_gate_reconsideration_state": "t16_5c_gate_consumed_waiting_one_narrow_offline_camera_audit_adapter_correction",
+      "live_gate_sessions_started": 0,
+      "live_gate_closed_at": null,
+      "live_gate_close_reason": null,
+      "live_gate_reconsideration_state": "one_post_brief_079_t16_5c_candidate_session_open_only_after_remote_confirmation",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1148,6 +1148,12 @@
           "at": "2026-07-13T08:56:01-05:00",
           "review_decision_id": "104",
           "reason": "candidate_rejected_static_pose_camera_audit_drifted"
+        },
+        {
+          "state": "open",
+          "at": "2026-07-13T09:10:00-05:00",
+          "review_decision_id": "106",
+          "result": "one_post_brief_079_static_pose_bracket_candidate_session_authorized_only_after_remote_confirmation"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1333,7 +1339,7 @@
       "active_brief_id": null,
       "latest_verified_brief_id": "079",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079"],
-      "result": "Brief 079 corrects the exact rejected-session audit boundary offline: the pinned live camera adapter validates the full successful finite FFmpeg backend audit and projects only the exact static-pose lifecycle fields. The consumed gate remains closed; no accepted static-pose, reviewed-input, shadow, or replay label is granted",
+      "result": "Brief 079 corrects the exact rejected-session audit boundary offline. Reviewer 106 opens one fresh finite post-correction candidate gate only after remote confirmation. No accepted static-pose, reviewed-input, shadow, or replay label is granted by the transition",
       "latest_rejected_live_candidate": {
         "session_id": "t16-5c-20260713-0855-cdt",
         "discovery_identity_sha256": "0cebaa894b26540811ef7292c3c3068686b4b946684856e5da610fd9c0c7d6ac",
@@ -1760,9 +1766,9 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "remotely preserve Brief 079 and Reviewer 105, then separately review at most one fresh finite gate before repeating complete fresh preflight",
+      "next_action": "remotely confirm Reviewer 106, then repeat fresh profile, lease, discovery, Studio status, and holder preflight before at most one post-Brief-079 candidate session",
       "live_execution_prerequisites_missing": [
-        "new_separately_reviewed_remote_live_gate_transition",
+        "remote_confirmation_of_reviewer_106_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
       ],
