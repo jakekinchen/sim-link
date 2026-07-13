@@ -1,0 +1,711 @@
+{
+  "actual_mujoco_grasp_success": false,
+  "approach_motion_limit_m": 0.0001,
+  "authority_not_granted": [
+    "unassisted_mujoco_grasp_success",
+    "simulation_training_ready",
+    "physical_actuation"
+  ],
+  "bilateral_contact_candidate_count": 2,
+  "candidates": [
+    {
+      "candidate_index": 1,
+      "geometry_eligible": false,
+      "holdout": false,
+      "rejection_reason": "No horizontal anchor principal axis found: {'x': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': -0.08125, 'selected_wrist_roll_rad': 1.6, 'object_x_axis_world': [0.9382704901946277, -0.3459024244347813, 2.705926594465799e-07], 'predicted_closing_axis_world': [-0.10400527323993233, 0.9805993859380284, 0.16615579266534317], 'predicted_principal_axis_alignment': 0.4367767387403415, 'predicted_closing_axis_vertical_abs': 0.16615579266534317, 'orientation_error': 0.34482818946021404}\", 'y': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': -0.08125, 'selected_wrist_roll_rad': -1.6, 'object_x_axis_world': [0.34590242443467684, 0.9382704901946328, 3.6910894403719945e-07], 'predicted_closing_axis_world': [-0.27276694099978455, -0.9554096312588498, 0.11309567805821927], 'predicted_principal_axis_alignment': 0.990783367510744, 'predicted_closing_axis_vertical_abs': 0.11309567805821927, 'orientation_error': 0.012875578709890388}\"}",
+      "request": {
+        "close_target_rad": -0.15294117647058825,
+        "lateral_x_m": -0.008571428571428572,
+        "lateral_y_m": -0.009818181818181818,
+        "object_yaw_rad": -0.42,
+        "vertical_m": 0.01553846153846154,
+        "wrist_flex_rad": 0.0,
+        "wrist_roll_rad": -0.5333333333333334
+      },
+      "setup_valid": false
+    },
+    {
+      "achieved_object_yaw_rad": -0.14,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.00036975449572049723,
+      "approach_predicted_pad_midpoint_residual_m": 3.5601552275446146e-05,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": 0.04370682,
+      "candidate_index": 2,
+      "close_pad_contact_frame_count": 7,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 8,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 3.779703707,
+      "maximum_representative_span_m": 0.01991529,
+      "minimum_representative_span_m": 0.006526637,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "object_x_axis_world": [
+        0.10858422751237937,
+        0.9940872524761295,
+        0.0
+      ],
+      "observed_robot_object_contact_geoms": [
+        "fixed_fingertip_pad_collision",
+        "moving_fingertip_pad_collision"
+      ],
+      "orientation_error": 0.0018106252337570694,
+      "original_horizontal_target_offset_world_m": [
+        -0.0051428571428571435,
+        -0.0076363636363636364,
+        0.0
+      ],
+      "passive_settle_displacement_m": 0.0019900359305491983,
+      "passive_settle_yaw_drift_rad": 0.031201254671791398,
+      "post_yaw_settle_seconds": 0.25,
+      "post_yaw_settle_step_count": 125,
+      "preclose_object_displacement_m": 0.0005907097326937466,
+      "predicted_closing_axis_vertical_abs": 0.04247203037618863,
+      "predicted_closing_axis_world": [
+        -0.16614947279715,
+        -0.9851855050318965,
+        0.04247203037618863
+      ],
+      "predicted_principal_axis_alignment": 0.9974015640317337,
+      "pregrasp_position_residual_m": 8.77596195573329e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 3.3855306766939007e-05,
+      "raw_pad_contact_count": 135,
+      "raw_pad_normal_force_range_n": [
+        0.0,
+        3.773789095
+      ],
+      "removed_selected_axis_offset_m": -0.008149644916245018,
+      "request": {
+        "close_target_rad": -0.13588235294117648,
+        "lateral_x_m": -0.0051428571428571435,
+        "lateral_y_m": -0.0076363636363636364,
+        "object_yaw_rad": -0.14,
+        "vertical_m": 0.01707692307692308,
+        "wrist_flex_rad": -0.325,
+        "wrist_roll_rad": 0.5333333333333332
+      },
+      "retained_horizontal_target_offset_world_m": [
+        -0.004257934245126488,
+        0.00046509448708243004,
+        0.0
+      ],
+      "sampled_wrist_flex_rad": -0.325,
+      "sampled_wrist_roll_rad": 0.5333333333333332,
+      "selected_object_principal_axis": "y",
+      "selected_wrist_flex_rad": -0.203125,
+      "selected_wrist_roll_rad": -1.6,
+      "settled_object_yaw_rad": -0.10879874532820862,
+      "setup_valid": true,
+      "wrist_orientation_evaluation_count": 33
+    },
+    {
+      "achieved_object_yaw_rad": 0.14000000000000012,
+      "approach_object_motion_valid": false,
+      "approach_position_residual_m": 0.0003694011062240026,
+      "approach_predicted_pad_midpoint_residual_m": 5.068959639462826e-05,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": 0.051848674,
+      "candidate_index": 3,
+      "close_pad_contact_frame_count": 7,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 8,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 2.514786754,
+      "maximum_representative_span_m": 0.020965076,
+      "minimum_representative_span_m": 0.007849114,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "object_x_axis_world": [
+        -0.10858422751237942,
+        0.9940872524761294,
+        0.0
+      ],
+      "observed_robot_object_contact_geoms": [
+        "fixed_fingertip_pad_collision",
+        "moving_fingertip_pad_collision"
+      ],
+      "orientation_error": 0.000686043293026139,
+      "original_horizontal_target_offset_world_m": [
+        -0.001714285714285715,
+        -0.005454545454545455,
+        0.0
+      ],
+      "passive_settle_displacement_m": 0.0019900359305491983,
+      "passive_settle_yaw_drift_rad": -0.03120125467179144,
+      "post_yaw_settle_seconds": 0.25,
+      "post_yaw_settle_step_count": 125,
+      "preclose_object_displacement_m": 0.00032478912409524284,
+      "predicted_closing_axis_vertical_abs": 0.0003077408064940782,
+      "predicted_closing_axis_world": [
+        -0.12028108271585673,
+        -0.9927398281706528,
+        0.0003077408064940782
+      ],
+      "predicted_principal_axis_alignment": 0.973809379758735,
+      "pregrasp_position_residual_m": 8.734915349684525e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 4.931117146235188e-05,
+      "raw_pad_contact_count": 136,
+      "raw_pad_normal_force_range_n": [
+        0.011399423,
+        2.421381339
+      ],
+      "removed_selected_axis_offset_m": -0.00523614971439403,
+      "request": {
+        "close_target_rad": -0.11882352941176472,
+        "lateral_x_m": -0.001714285714285715,
+        "lateral_y_m": -0.005454545454545455,
+        "object_yaw_rad": 0.14000000000000012,
+        "vertical_m": 0.018615384615384617,
+        "wrist_flex_rad": 0.32500000000000007,
+        "wrist_roll_rad": -1.2444444444444445
+      },
+      "retained_horizontal_target_offset_world_m": [
+        -0.002282848986162357,
+        -0.0002493557714098246,
+        0.0
+      ],
+      "sampled_wrist_flex_rad": 0.32500000000000007,
+      "sampled_wrist_roll_rad": -1.2444444444444445,
+      "selected_object_principal_axis": "y",
+      "selected_wrist_flex_rad": -0.20312500000000003,
+      "selected_wrist_roll_rad": -1.6,
+      "settled_object_yaw_rad": 0.10879874532820868,
+      "setup_valid": true,
+      "wrist_orientation_evaluation_count": 33
+    },
+    {
+      "candidate_index": 4,
+      "geometry_eligible": false,
+      "holdout": false,
+      "rejection_reason": "No horizontal anchor principal axis found: {'x': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': 1.0000000000000002, 'object_x_axis_world': [0.9382704901946277, 0.3459024244347814, 2.7059265944930524e-07], 'predicted_closing_axis_world': [0.4803257651770794, 0.8229220751900463, 0.3034574393089758], 'predicted_principal_axis_alignment': 0.735326314188302, 'predicted_closing_axis_vertical_abs': 0.3034574393089758, 'orientation_error': 0.16213857743311016}\", 'y': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': -0.203125, 'selected_wrist_roll_rad': 1.6, 'object_x_axis_world': [-0.3459024244346769, 0.9382704901946328, -3.6910894403798936e-07], 'predicted_closing_axis_world': [-0.030482043722860813, 0.9989738130319039, 0.03349874455821436], 'predicted_principal_axis_alignment': 0.9478514497058211, 'predicted_closing_axis_vertical_abs': 0.03349874455821436, 'orientation_error': 0.0038416371847609988}\"}",
+      "request": {
+        "close_target_rad": -0.10176470588235295,
+        "lateral_x_m": 0.0017142857142857133,
+        "lateral_y_m": -0.0032727272727272726,
+        "object_yaw_rad": 0.41999999999999993,
+        "vertical_m": 0.020153846153846154,
+        "wrist_flex_rad": -0.48750000000000004,
+        "wrist_roll_rad": -0.1777777777777778
+      },
+      "setup_valid": false
+    },
+    {
+      "candidate_index": 5,
+      "geometry_eligible": false,
+      "holdout": false,
+      "rejection_reason": "No horizontal anchor principal axis found: {'x': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': -1.1500000000000001, 'object_x_axis_world': [0.7899131964620039, -0.6132186739289033, 2.392290965897429e-07], 'predicted_closing_axis_world': [0.30825527886073456, -0.9343706543437947, 0.17869013222794303], 'predicted_principal_axis_alignment': 0.8164684890138315, 'predicted_closing_axis_vertical_abs': 0.17869013222794303, 'orientation_error': 0.06561397888050585}\", 'y': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.48750000000000004, 'selected_wrist_roll_rad': -1.6, 'object_x_axis_world': [0.613218673928949, 0.7899131964619639, -2.5373169824933326e-07], 'predicted_closing_axis_world': [-0.08144115319526403, -0.9961855943443962, -0.03133049930862046], 'predicted_principal_axis_alignment': 0.8368413751140467, 'predicted_closing_axis_vertical_abs': 0.03133049930862046, 'orientation_error': 0.0276023370616027}\"}",
+      "request": {
+        "close_target_rad": -0.08470588235294117,
+        "lateral_x_m": 0.00514285714285714,
+        "lateral_y_m": -0.0010909090909090903,
+        "object_yaw_rad": -0.6439999999999999,
+        "vertical_m": 0.021692307692307695,
+        "wrist_flex_rad": 0.16249999999999998,
+        "wrist_roll_rad": 0.8888888888888888
+      },
+      "setup_valid": false
+    },
+    {
+      "achieved_object_yaw_rad": -0.36399999999999993,
+      "approach_object_motion_valid": true,
+      "approach_position_residual_m": 0.00040323311647131205,
+      "approach_predicted_pad_midpoint_residual_m": 0.00011560041119035153,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 6,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "object_x_axis_world": [
+        0.2959837876806234,
+        0.9551929634530563,
+        0.0
+      ],
+      "observed_robot_object_contact_geoms": [],
+      "orientation_error": 0.001230051464247745,
+      "original_horizontal_target_offset_world_m": [
+        0.00857142857142857,
+        0.0010909090909090903,
+        0.0
+      ],
+      "passive_settle_displacement_m": 0.007202871962878997,
+      "passive_settle_yaw_drift_rad": 0.06351470938097631,
+      "post_yaw_settle_seconds": 0.25,
+      "post_yaw_settle_step_count": 125,
+      "preclose_object_displacement_m": 1.5932293128561884e-08,
+      "predicted_closing_axis_vertical_abs": 0.0010939178382619202,
+      "predicted_closing_axis_world": [
+        0.0349176808610093,
+        0.9993895931552679,
+        -0.0010939178382619202
+      ],
+      "predicted_principal_axis_alignment": 0.9649449745683892,
+      "pregrasp_position_residual_m": 8.622872591985293e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.00011640459982890999,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "removed_selected_axis_offset_m": 0.0035790325818086765,
+      "request": {
+        "close_target_rad": -0.06764705882352942,
+        "lateral_x_m": 0.00857142857142857,
+        "lateral_y_m": 0.0010909090909090903,
+        "object_yaw_rad": -0.36399999999999993,
+        "vertical_m": 0.023230769230769235,
+        "wrist_flex_rad": -0.16249999999999998,
+        "wrist_roll_rad": -0.888888888888889
+      },
+      "retained_horizontal_target_offset_world_m": [
+        0.007512092951632477,
+        -0.0023277576472037825,
+        0.0
+      ],
+      "sampled_wrist_flex_rad": -0.16249999999999998,
+      "sampled_wrist_roll_rad": -0.888888888888889,
+      "selected_object_principal_axis": "y",
+      "selected_wrist_flex_rad": -0.325,
+      "selected_wrist_roll_rad": 1.6,
+      "settled_object_yaw_rad": -0.3004852906190236,
+      "setup_valid": true,
+      "wrist_orientation_evaluation_count": 47
+    },
+    {
+      "achieved_object_yaw_rad": -0.08399999999999995,
+      "approach_object_motion_valid": true,
+      "approach_position_residual_m": 0.00032121494768714594,
+      "approach_predicted_pad_midpoint_residual_m": 0.00015349104600276376,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 7,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "object_x_axis_world": [
+        0.06163461672135615,
+        0.9980987796914751,
+        0.0
+      ],
+      "observed_robot_object_contact_geoms": [],
+      "orientation_error": 0.00020070797997010618,
+      "original_horizontal_target_offset_world_m": [
+        -0.011510204081632653,
+        0.0032727272727272726,
+        0.0
+      ],
+      "passive_settle_displacement_m": 0.0011032373472687313,
+      "passive_settle_yaw_drift_rad": 0.022326293215693405,
+      "post_yaw_settle_seconds": 0.25,
+      "post_yaw_settle_step_count": 125,
+      "preclose_object_displacement_m": 4.3075587937666524e-08,
+      "predicted_closing_axis_vertical_abs": 0.014150715496472038,
+      "predicted_closing_axis_world": [
+        0.027548061690793855,
+        0.9995203157255074,
+        -0.014150715496472038
+      ],
+      "predicted_principal_axis_alignment": 0.9993179216261951,
+      "pregrasp_position_residual_m": 8.802758509879635e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.00015505299186748453,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "removed_selected_axis_offset_m": 0.002557078080216082,
+      "request": {
+        "close_target_rad": -0.050588235294117656,
+        "lateral_x_m": -0.011510204081632653,
+        "lateral_y_m": 0.0032727272727272726,
+        "object_yaw_rad": -0.08399999999999996,
+        "vertical_m": 0.024769230769230773,
+        "wrist_flex_rad": 0.48749999999999993,
+        "wrist_roll_rad": 0.1777777777777778
+      },
+      "retained_horizontal_target_offset_world_m": [
+        -0.011667808609033353,
+        0.0007205107612877817,
+        0.0
+      ],
+      "sampled_wrist_flex_rad": 0.48749999999999993,
+      "sampled_wrist_roll_rad": 0.1777777777777778,
+      "selected_object_principal_axis": "y",
+      "selected_wrist_flex_rad": -0.1625,
+      "selected_wrist_roll_rad": 1.6,
+      "settled_object_yaw_rad": -0.061673706784306545,
+      "setup_valid": true,
+      "wrist_orientation_evaluation_count": 31
+    },
+    {
+      "achieved_object_yaw_rad": 0.19600000000000017,
+      "approach_object_motion_valid": true,
+      "approach_position_residual_m": 0.0003347008365175383,
+      "approach_predicted_pad_midpoint_residual_m": 0.00018659672125369352,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 8,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "object_x_axis_world": [
+        -0.153067454971998,
+        0.9882157427547871,
+        0.0
+      ],
+      "observed_robot_object_contact_geoms": [],
+      "orientation_error": 0.0008375394471810316,
+      "original_horizontal_target_offset_world_m": [
+        -0.008081632653061225,
+        0.005454545454545455,
+        0.0
+      ],
+      "passive_settle_displacement_m": 0.002902772816480283,
+      "passive_settle_yaw_drift_rad": -0.04232843437967537,
+      "post_yaw_settle_seconds": 0.25,
+      "post_yaw_settle_step_count": 125,
+      "preclose_object_displacement_m": 2.637875429167685e-09,
+      "predicted_closing_axis_vertical_abs": 0.021551203155845636,
+      "predicted_closing_axis_world": [
+        0.04200313104873585,
+        0.9988850197218088,
+        -0.021551203155845636
+      ],
+      "predicted_principal_axis_alignment": 0.9806845893205322,
+      "pregrasp_position_residual_m": 8.733674634342649e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.00018823284230177256,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "removed_selected_axis_offset_m": 0.0066273026299760625,
+      "request": {
+        "close_target_rad": -0.03352941176470589,
+        "lateral_x_m": -0.008081632653061225,
+        "lateral_y_m": 0.005454545454545455,
+        "object_yaw_rad": 0.19600000000000017,
+        "vertical_m": 0.02630769230769231,
+        "wrist_flex_rad": -0.56875,
+        "wrist_roll_rad": 1.2444444444444445
+      },
+      "retained_horizontal_target_offset_world_m": [
+        -0.00706720830616156,
+        -0.0010946593363970938,
+        0.0
+      ],
+      "sampled_wrist_flex_rad": -0.56875,
+      "sampled_wrist_roll_rad": 1.2444444444444445,
+      "selected_object_principal_axis": "y",
+      "selected_wrist_flex_rad": -0.203125,
+      "selected_wrist_roll_rad": 1.6,
+      "settled_object_yaw_rad": 0.1536715656203248,
+      "setup_valid": true,
+      "wrist_orientation_evaluation_count": 33
+    },
+    {
+      "achieved_object_yaw_rad": 0.476,
+      "approach_object_motion_valid": true,
+      "approach_position_residual_m": 0.00030551741443739277,
+      "approach_predicted_pad_midpoint_residual_m": 0.00023005650307449783,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 9,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "object_x_axis_world": [
+        -0.39583092167945233,
+        0.9183234078702315,
+        0.0
+      ],
+      "observed_robot_object_contact_geoms": [],
+      "orientation_error": 0.002477151329225031,
+      "original_horizontal_target_offset_world_m": [
+        -0.004653061224489796,
+        0.007636363636363639,
+        0.0
+      ],
+      "passive_settle_displacement_m": 0.009445986241575185,
+      "passive_settle_yaw_drift_rad": -0.06902750052146794,
+      "post_yaw_settle_seconds": 0.25,
+      "post_yaw_settle_step_count": 125,
+      "preclose_object_displacement_m": 1.1798068906572118e-08,
+      "predicted_closing_axis_vertical_abs": 0.026917661082181257,
+      "predicted_closing_axis_world": [
+        0.11749620089342577,
+        -0.9927084578553145,
+        0.026917661082181257
+      ],
+      "predicted_principal_axis_alignment": 0.9581360435327733,
+      "pregrasp_position_residual_m": 8.707706439997074e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.00022653617789518564,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "removed_selected_axis_offset_m": 0.008854476991402486,
+      "request": {
+        "close_target_rad": -0.016470588235294098,
+        "lateral_x_m": -0.004653061224489796,
+        "lateral_y_m": 0.007636363636363639,
+        "object_yaw_rad": 0.476,
+        "vertical_m": 0.027846153846153847,
+        "wrist_flex_rad": 0.08125000000000004,
+        "wrist_roll_rad": -1.4814814814814816
+      },
+      "retained_horizontal_target_offset_world_m": [
+        -0.0011481854359934457,
+        -0.0004949098492896455,
+        0.0
+      ],
+      "sampled_wrist_flex_rad": 0.08125000000000004,
+      "sampled_wrist_roll_rad": -1.4814814814814816,
+      "selected_object_principal_axis": "y",
+      "selected_wrist_flex_rad": -0.12187500000000001,
+      "selected_wrist_roll_rad": -1.4314814814814816,
+      "settled_object_yaw_rad": 0.40697249947853203,
+      "setup_valid": true,
+      "wrist_orientation_evaluation_count": 45
+    },
+    {
+      "candidate_index": 10,
+      "geometry_eligible": false,
+      "holdout": false,
+      "rejection_reason": "No horizontal anchor principal axis found: {'x': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': -1.1, 'object_x_axis_world': [0.8401520710796373, -0.5423508988289617, 1.1617691484070204e-07], 'predicted_closing_axis_world': [0.42443631792278486, -0.8926414453785666, 0.1518060012667881], 'predicted_principal_axis_alignment': 0.8407159594136451, 'predicted_closing_axis_vertical_abs': 0.1518060012667881, 'orientation_error': 0.048416467606127625}\", 'y': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.28437500000000004, 'selected_wrist_roll_rad': 1.4500000000000002, 'object_x_axis_world': [0.5423508988287679, 0.8401520710794852, 6.923334513482914e-07], 'predicted_closing_axis_world': [0.13384952150635857, 0.990080661268629, 0.042715217129182345], 'predicted_principal_axis_alignment': 0.9044117559705327, 'predicted_closing_axis_vertical_abs': 0.042715217129182345, 'orientation_error': 0.010961702171030185}\"}",
+      "request": {
+        "close_target_rad": 0.0005882352941176672,
+        "lateral_x_m": -0.0012244897959183682,
+        "lateral_y_m": 0.00981818181818182,
+        "object_yaw_rad": -0.588,
+        "vertical_m": 0.02938461538461539,
+        "wrist_flex_rad": -0.24375000000000002,
+        "wrist_roll_rad": -0.41481481481481497
+      },
+      "setup_valid": false
+    },
+    {
+      "achieved_object_yaw_rad": -0.30799999999999994,
+      "approach_object_motion_valid": true,
+      "approach_position_residual_m": 0.0003652215153904074,
+      "approach_predicted_pad_midpoint_residual_m": 0.0003035387641350862,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 11,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "object_x_axis_world": [
+        0.23923277499916887,
+        0.9709622440477267,
+        0.0
+      ],
+      "observed_robot_object_contact_geoms": [],
+      "orientation_error": 0.00012372350014460534,
+      "original_horizontal_target_offset_world_m": [
+        0.0022040816326530602,
+        -0.011801652892561984,
+        0.0
+      ],
+      "passive_settle_displacement_m": 0.00586666892999512,
+      "passive_settle_yaw_drift_rad": 0.0664243957338857,
+      "post_yaw_settle_seconds": 0.25,
+      "post_yaw_settle_step_count": 125,
+      "preclose_object_displacement_m": 2.4372489688137057e-09,
+      "predicted_closing_axis_vertical_abs": 0.007450456715405621,
+      "predicted_closing_axis_world": [
+        0.11293333882879843,
+        0.9935746331683954,
+        0.007450456715405621
+      ],
+      "predicted_principal_axis_alignment": 0.991740811488017,
+      "pregrasp_position_residual_m": 8.556582241409314e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.0003039732177544403,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "removed_selected_axis_offset_m": -0.010931670810730038,
+      "request": {
+        "close_target_rad": 0.017647058823529432,
+        "lateral_x_m": 0.0022040816326530602,
+        "lateral_y_m": -0.011801652892561984,
+        "object_yaw_rad": -0.30799999999999994,
+        "vertical_m": 0.030923076923076928,
+        "wrist_flex_rad": 0.4062500000000001,
+        "wrist_roll_rad": 0.6518518518518519
+      },
+      "retained_horizontal_target_offset_world_m": [
+        0.004819295576081422,
+        -0.0011874132709845144,
+        0.0
+      ],
+      "sampled_wrist_flex_rad": 0.4062500000000001,
+      "sampled_wrist_roll_rad": 0.6518518518518519,
+      "selected_object_principal_axis": "y",
+      "selected_wrist_flex_rad": -0.284375,
+      "selected_wrist_roll_rad": 1.55,
+      "settled_object_yaw_rad": -0.24157560426611424,
+      "setup_valid": true,
+      "wrist_orientation_evaluation_count": 40
+    },
+    {
+      "achieved_object_yaw_rad": -0.027999999999999914,
+      "approach_object_motion_valid": true,
+      "approach_position_residual_m": 0.00040092745942319163,
+      "approach_predicted_pad_midpoint_residual_m": 0.0003426746106875554,
+      "base_contact_geometry_eligible": false,
+      "best_normal_alignment": null,
+      "candidate_index": 12,
+      "close_pad_contact_frame_count": 0,
+      "geometry_eligible": false,
+      "hold_pad_contact_frame_count": 0,
+      "hold_strict_v2_valid_frame_count": 0,
+      "holdout": false,
+      "maximum_contact_force_n": 0.0,
+      "maximum_representative_span_m": null,
+      "minimum_representative_span_m": null,
+      "nonpad_contact_valid": true,
+      "nonpad_robot_object_contact_frame_count": 0,
+      "object_x_axis_world": [
+        0.022028947197996574,
+        0.9997573332991101,
+        0.0
+      ],
+      "observed_robot_object_contact_geoms": [],
+      "orientation_error": 0.00010565245553298405,
+      "original_horizontal_target_offset_world_m": [
+        0.005632653061224489,
+        -0.009619834710743801,
+        0.0
+      ],
+      "passive_settle_displacement_m": 0.00039053810382328656,
+      "passive_settle_yaw_drift_rad": 0.005969270686130925,
+      "post_yaw_settle_seconds": 0.25,
+      "post_yaw_settle_step_count": 125,
+      "preclose_object_displacement_m": 1.2397186186625993e-07,
+      "predicted_closing_axis_vertical_abs": 0.009651699320384515,
+      "predicted_closing_axis_world": [
+        0.1053850643851324,
+        0.9943846503766892,
+        0.009651699320384515
+      ],
+      "predicted_principal_axis_alignment": 0.9964648683529643,
+      "pregrasp_position_residual_m": 8.480040303699465e-05,
+      "pregrasp_predicted_pad_midpoint_residual_m": 0.0003433605572280858,
+      "raw_pad_contact_count": 0,
+      "raw_pad_normal_force_range_n": null,
+      "removed_selected_axis_offset_m": -0.00949341888032109,
+      "request": {
+        "close_target_rad": 0.03470588235294117,
+        "lateral_x_m": 0.005632653061224489,
+        "lateral_y_m": -0.009619834710743801,
+        "object_yaw_rad": -0.027999999999999914,
+        "vertical_m": 0.032461538461538465,
+        "wrist_flex_rad": -0.40625,
+        "wrist_roll_rad": -1.125925925925926
+      },
+      "retained_horizontal_target_offset_world_m": [
+        0.0058417830844675455,
+        -0.00012871956706256467,
+        0.0
+      ],
+      "sampled_wrist_flex_rad": -0.40625,
+      "sampled_wrist_roll_rad": -1.125925925925926,
+      "selected_object_principal_axis": "y",
+      "selected_wrist_flex_rad": -0.365625,
+      "selected_wrist_roll_rad": 1.55,
+      "settled_object_yaw_rad": -0.02203072931386899,
+      "setup_valid": true,
+      "wrist_orientation_evaluation_count": 39
+    }
+  ],
+  "centered_candidate_count": 8,
+  "contact_physics_unchanged": true,
+  "evidence_mode": "deterministic_selected_axis_centered_target_search",
+  "geometry_eligible_count": 0,
+  "hardware_accessed": false,
+  "holdout": {
+    "candidate": {
+      "candidate_index": 13,
+      "geometry_eligible": false,
+      "holdout": true,
+      "rejection_reason": "No horizontal anchor principal axis found: {'x': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': 0.8000000000000003, 'object_x_axis_world': [0.9801423297771369, 0.1982952681710246, 1.6674227870027454e-07], 'predicted_closing_axis_world': [0.7020771151766277, 0.6618787269097225, 0.2626866483276779], 'predicted_principal_axis_alignment': 0.8193829628026613, 'predicted_closing_axis_vertical_abs': 0.2626866483276779, 'orientation_error': 0.10162678933557395}\", 'y': \"No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': -0.325, 'selected_wrist_roll_rad': 1.55, 'object_x_axis_world': [-0.19829526817097443, 0.980142329777122, -2.7737278160890793e-07], 'predicted_closing_axis_world': [0.1328666673572023, 0.9911333576048893, -0.0010564791759518507], 'predicted_principal_axis_alignment': 0.9451049271011361, 'predicted_closing_axis_vertical_abs': 0.0010564791759518507, 'orientation_error': 0.0030145851768207978}\"}",
+      "request": {
+        "close_target_rad": 0.051764705882352935,
+        "lateral_x_m": 0.009061224489795919,
+        "lateral_y_m": -0.00743801652892562,
+        "object_yaw_rad": 0.252,
+        "vertical_m": 0.014118343195266272,
+        "wrist_flex_rad": 0.24375000000000002,
+        "wrist_roll_rad": -0.059259259259259345
+      },
+      "setup_valid": false
+    },
+    "excluded_from_selection": true
+  },
+  "identity_sha256": "7deb28268e07e7e268c8e35005d5104e8a7a1c68faf60da8c2add77d97688ae6",
+  "only_selected_axis_offset_removed": true,
+  "physical_follower_commanded": false,
+  "post_yaw_settle_seconds": 0.25,
+  "ranges": {
+    "close_target_rad": [
+      -0.17,
+      0.12
+    ],
+    "lateral_x_m": [
+      -0.012,
+      0.012
+    ],
+    "lateral_y_m": [
+      -0.012,
+      0.012
+    ],
+    "object_yaw_rad": [
+      -0.7,
+      0.7
+    ],
+    "vertical_m": [
+      0.014,
+      0.034
+    ],
+    "wrist_flex_rad": [
+      -0.65,
+      0.65
+    ],
+    "wrist_roll_rad": [
+      -1.6,
+      1.6
+    ]
+  },
+  "schema_version": "scenesmith.centered_axis_grasp_search.v1",
+  "selected_candidate": null,
+  "simulation_training_ready": false,
+  "source_best_axis_search_identity_sha256": "06bc0f4abcc4d7eb151ea4148364032ac8e33d2168fc53fb0b22847c61e18402",
+  "training_candidate_count": 12
+}

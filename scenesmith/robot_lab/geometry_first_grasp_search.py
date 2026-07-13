@@ -107,6 +107,7 @@ def _candidate(
     principal_axis_alignment: bool = False,
     joint_wrist_axis_alignment: bool = False,
     best_principal_axis_alignment: bool = False,
+    center_selected_axis_offset: bool = False,
 ) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
@@ -119,6 +120,7 @@ def _candidate(
             principal_axis_alignment=principal_axis_alignment,
             joint_wrist_axis_alignment=joint_wrist_axis_alignment,
             best_principal_axis_alignment=best_principal_axis_alignment,
+            center_selected_axis_offset=center_selected_axis_offset,
         )
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
@@ -134,6 +136,7 @@ def _run_candidate(
     principal_axis_alignment: bool = False,
     joint_wrist_axis_alignment: bool = False,
     best_principal_axis_alignment: bool = False,
+    center_selected_axis_offset: bool = False,
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
@@ -214,7 +217,7 @@ def _run_candidate(
             approach = target + np.asarray([0.0, 0.0, 0.04])
             effective_request = request
             axis_alignment: dict[str, Any] | None = None
-            if best_principal_axis_alignment:
+            if best_principal_axis_alignment or center_selected_axis_offset:
                 object_rotation = np.asarray(expert.data.xmat[object_body]).reshape(3, 3)
                 axis_alignment = _select_best_horizontal_principal_axis_wrist_pose(
                     expert,
@@ -224,6 +227,47 @@ def _run_candidate(
                     moving_site=moving_site,
                     object_rotation_world=object_rotation,
                 )
+                if center_selected_axis_offset:
+                    selected_axis = np.asarray(
+                        axis_alignment["object_x_axis_world"], dtype=np.float64
+                    )
+                    selected_axis[2] = 0.0
+                    selected_axis /= np.linalg.norm(selected_axis)
+                    original_lateral = np.asarray(
+                        [request["lateral_x_m"], request["lateral_y_m"], 0.0]
+                    )
+                    removed_projection = float(
+                        np.dot(original_lateral, selected_axis)
+                    )
+                    retained_lateral = (
+                        original_lateral - removed_projection * selected_axis
+                    )
+                    target = (
+                        anchor_start
+                        + retained_lateral
+                        + np.asarray([0.0, 0.0, request["vertical_m"]])
+                    )
+                    approach = target + np.asarray([0.0, 0.0, 0.04])
+                    selected_label = axis_alignment[
+                        "selected_object_principal_axis"
+                    ]
+                    final_alignment = _select_horizontal_principal_axis_wrist_pose(
+                        expert,
+                        desired_midpoint=target,
+                        request=request,
+                        fixed_site=fixed_site,
+                        moving_site=moving_site,
+                        object_axis_world=selected_axis,
+                    )
+                    final_alignment.update(
+                        {
+                            "selected_object_principal_axis": selected_label,
+                            "original_horizontal_target_offset_world_m": original_lateral.tolist(),
+                            "removed_selected_axis_offset_m": removed_projection,
+                            "retained_horizontal_target_offset_world_m": retained_lateral.tolist(),
+                        }
+                    )
+                    axis_alignment = final_alignment
                 effective_request = {
                     **request,
                     "wrist_flex_rad": axis_alignment["selected_wrist_flex_rad"],
@@ -346,6 +390,7 @@ def _run_candidate(
         principal_axis_alignment
         or joint_wrist_axis_alignment
         or best_principal_axis_alignment
+        or center_selected_axis_offset
     ):
         assert axis_alignment is not None
         result.update(axis_alignment)

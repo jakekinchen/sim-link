@@ -2533,9 +2533,41 @@
       ]
     },
     "T19.0j": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0i"],
-      "result": "remove only the object-relative target offset projected along the selected closing axis, then rerun the otherwise identical best-axis search",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "104",
+      "review_decision_id": "130",
+      "result": "selected-axis centering raised one bilateral candidate above the strict span threshold, but actual contact-normal alignment and preclose motion remain failing",
+      "artifact": {
+        "path": "configurations/robot_lab/centered_axis_grasp_search.json",
+        "identity_sha256": "7deb28268e07e7e268c8e35005d5104e8a7a1c68faf60da8c2add77d97688ae6",
+        "file_sha256": "3cf4aaaa8301b7a439ae1c0d25c09daacc74a75e096e9fa0afe12087267da36c",
+        "size_bytes": 31360,
+        "centered_candidate_count": 8,
+        "approach_motion_valid_candidate_count": 6,
+        "bilateral_contact_candidate_count": 2,
+        "maximum_representative_span_m": 0.020965076,
+        "best_normal_alignment": 0.051848674,
+        "geometry_eligible_count": 0,
+        "strict_v2_valid_hold_frame_count": 0,
+        "broad_test_count": 192
+      },
+      "authority_granted": [
+        "selected_axis_centering_span_correction_observed",
+        "bilateral_explicit_pad_contact_observed"
+      ],
+      "authority_not_granted": [
+        "geometry_eligible_grasp_candidate",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_actuation"
+      ]
+    },
+    "T19.0k": {
+      "state": "pending",
+      "depends_on": ["T19.0j"],
+      "result": "audit actual per-pad contact points and inward normals in object frame for centered bilateral candidates before changing pose or contact geometry again",
       "authority_granted": [],
       "authority_not_granted": [
         "geometry_eligible_grasp_candidate",

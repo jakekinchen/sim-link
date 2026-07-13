@@ -71,9 +71,11 @@ T19.0h is `verified` through Brief 102 as a bounded negative result: no wrist
 pose inside the existing ranges satisfies both the 0.95 anchor-x alignment and
 0.1 vertical-component gates. T19.0i is `verified` through Brief 103:
 eight horizontal y-axis poses are valid and two retain bilateral contact, but
-both fail motion and strict contact geometry. T19.0j is the next eligible
-offline slice: remove only the target offset projected along the selected
-closing axis while preserving the transverse and vertical offsets.
+both fail motion and strict contact geometry. T19.0j is
+`verified` through Brief 104: selected-axis centering raises one bilateral
+candidate above the strict span threshold, but normal alignment and preclose
+motion still fail. T19.0k is the next eligible offline slice: audit actual
+contact faces and inward normals before another pose or geometry correction.
 The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
