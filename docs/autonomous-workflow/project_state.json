@@ -1343,9 +1343,9 @@
       "state": "in_progress",
       "depends_on": ["T16.5b"],
       "active_brief_id": null,
-      "latest_verified_brief_id": "082",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082"],
-      "result": "Reviewer 108 accepts session t16-5c-20260713-0912-cdt as a static_pose_bracketed_observation after Brief 082 aligns the real hardware-profile review classification. The privacy-safe review manifest 75d8aae3... verifies zero drift, four finite frames, exact no-write/no-motion counts, clean close, and stable zero holders. Current frame bytes were not retained, so policy_shadow_input_valid, preprocessing, shadow, and replay remain withheld",
+      "latest_verified_brief_id": "083",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082", "083"],
+      "result": "Reviewer 109 issues a production-valid reviewed-input semantic bundle d48165d1... for the accepted static bracket, exact stable-camera roles, and sorting prompt. The gate has no missing reviewed inputs and production_input_issuance_allowed=true, while accepted_live_policy_input remains false because current pixel bytes were not retained. No preprocessing, model load, inference, shadow, or replay has run",
       "latest_observed_live_candidate": {
         "session_id": "t16-5c-20260713-0912-cdt",
         "discovery_identity_sha256": "fac2fb49e2bdad35b6f8dda4056b3a17c2603d1b40f444ff2fef9a6937ddbf1c",
@@ -1813,12 +1813,43 @@
         "current_session_stable_identity_match": true,
         "current_session_frame_content_directly_reviewable": false,
         "current_session_semantics_basis": "Reviewer 089 physical content review carried by exact stable camera identity; current session retained hashes and dimensions but not pixel bytes",
-        "production_reviewed_input_issued": false,
-        "production_linkage_missing": "tracked production acceptance, camera-role, and prompt artifacts"
+        "production_reviewed_input_issued": true,
+        "production_linkage_missing": "retained current physical frame bytes"
       },
-      "next_action": "issue the tracked PI0.5 acceptance, stable-camera role, and task-prompt artifacts for Reviewer 108's accepted bracket, then resolve current-frame byte retention before real preprocessing",
+      "production_reviewed_input_bundle": {
+        "review_decision_id": "109",
+        "session_id": "t16-5c-20260713-0912-cdt",
+        "accepted_session": {
+          "path": "configurations/robot_lab/pi05_static_pose_live_session_t16-5c-20260713-0912-cdt.acceptance.json",
+          "identity_sha256": "3a7436b86ff3023c411caab8b8e9939cde58e3281366ba922b71699627ec1b36",
+          "file_sha256": "b05aa585fa80d53d28dce05e3ebbfedbfc67f107fc91c9034afe9b4a486a08c8"
+        },
+        "camera_role_binding": {
+          "path": "configurations/robot_lab/pi05_camera_role_binding_t16-5c-20260713-0912-cdt.json",
+          "identity_sha256": "01b8fa2fdd7bda7e125289be9ea6f17dd451e8499d3383903f454960a8206bb1",
+          "file_sha256": "5e4f3aceba0b734d040047de813b080d1079e78954d56b86c1463d9913bce14f"
+        },
+        "task_prompt": {
+          "path": "configurations/robot_lab/pi05_task_prompt_t16-5c-20260713-0912-cdt.json",
+          "identity_sha256": "6aff5fdade12e469f7a8e67c526ffdd7ae79a036ea3d70b10d20a22a7b66e13a",
+          "file_sha256": "ed0af3f5a10a90447e69af72df02925f17e56ab74e0769ce22a90a9f9fd14a36"
+        },
+        "gate": {
+          "path": "configurations/robot_lab/pi05_reviewed_inputs_t16-5c-20260713-0912-cdt.json",
+          "identity_sha256": "d48165d18fc724f1a1fe40df6b79c0b73f803e28cad269690aac76e7590f9bb3",
+          "file_sha256": "9b47954edf52808ca21b3918503b24e505c04b742c7e83b084e6a7641e71fbfd",
+          "status": "reviewed_input_bundle_valid",
+          "missing_inputs": [],
+          "production_input_issuance_allowed": true,
+          "accepted_live_policy_input": false,
+          "policy_input_built": false,
+          "preprocessing_run": false
+        },
+        "issued_at_unix_ns": 1783952714633307000,
+        "valid_until_unix_ns": 1783995914633307000
+      },
+      "next_action": "implement the smallest source-bound private current-frame retention contract required for real PI0.5 preprocessing, then collect a fresh bracket under a separately reviewed finite gate",
       "live_execution_prerequisites_missing": [
-        "tracked_production_reviewed_input_bundle",
         "retained_current_physical_frame_bytes_for_model_input"
       ],
       "conditional_authority": [
@@ -1849,7 +1880,11 @@
         "redacted_static_pose_live_session_review_real_profile_compatible",
         "actual_live_review_manifest",
         "live_candidate_session_accepted",
-        "static_pose_bracketed_observation"
+        "static_pose_bracketed_observation",
+        "pi05_live_session_acceptance_valid",
+        "pi05_stable_camera_role_binding_valid",
+        "pi05_task_prompt_review_valid",
+        "pi05_reviewed_input_bundle_valid"
       ],
       "authority_not_granted": [
         "accepted_live_policy_input",

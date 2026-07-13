@@ -1,0 +1,74 @@
+{
+  "accepted_live_policy_input": false,
+  "assignments": [
+    {
+      "model_key": "observation.images.base_0_rgb",
+      "source_key": "observation.images.top",
+      "stable_camera_identity_sha256": "9931d03025b4d9830ffda038ff0fd3a10d7badd2a3120e692fd13ce63325e180"
+    },
+    {
+      "model_key": "observation.images.left_wrist_0_rgb",
+      "source_key": "observation.images.wrist",
+      "stable_camera_identity_sha256": "69d55167e318a97b7f38c2562366ba7c8798ded18397f466b083494cf4198cd9"
+    }
+  ],
+  "authority_not_granted": [
+    "accepted_live_policy_input",
+    "policy_shadow_input_valid",
+    "policy_shadow",
+    "model_weight_load",
+    "policy_inference",
+    "physical_follower_command",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "simulation_training_ready",
+    "supervised_micro_motion"
+  ],
+  "binding_reviewed": true,
+  "evidence_class": "tracked_production_review",
+  "hardware_accessed": false,
+  "identity_sha256": "01b8fa2fdd7bda7e125289be9ea6f17dd451e8499d3383903f454960a8206bb1",
+  "input_kind": "reviewed_stable_camera_role_binding",
+  "issued_at_unix_ns": 1783952714633307000,
+  "issuer_id": "scenesmith_same_agent_reviewer_v1",
+  "local_capabilities": [
+    "pi05_stable_camera_role_binding_valid"
+  ],
+  "model_instantiated": false,
+  "model_weights_read": false,
+  "motion_authority_granted": false,
+  "mujoco_replay_run": false,
+  "numeric_camera_index_used": false,
+  "physical_follower_commanded": false,
+  "policy_inference_run": false,
+  "policy_input_built": false,
+  "policy_shadow_run": false,
+  "preprocessing_run": false,
+  "private_review_evidence_sha256": "2a5eac37a1f826b2f736e91d98f3603b77590f0ef40608b2f2c6a928f4029de5",
+  "production_eligible": true,
+  "proof_labels": [],
+  "qualification_scope": "local_pi05_stable_camera_role_binding",
+  "raw_camera_identity_included": false,
+  "review_decision_id": "109",
+  "review_manifest": {
+    "identity_sha256": "75d8aae327a986dba6d3c9c2cfe744408e8b8e7a0b14bf3d8d14e555f41bf704",
+    "path": "configurations/robot_lab/pi05_static_pose_live_session_t16-5c-20260713-0912-cdt.redacted.json",
+    "schema_version": "scenesmith.static_pose_live_session_review_manifest.v1",
+    "sha256": "2180d0a4840f90a35cbe7d125d072bfc7347bbe3926e830781b19fe4f3cf4ff3",
+    "size_bytes": 9185
+  },
+  "review_record": {
+    "path": "docs/reviewer-messages/109-issue-reviewed-pi05-inputs.md",
+    "sha256": "58049b131c6b69fd60448acdfbdaa111d50f5e54c04e4d55673cc78198a310ea",
+    "size_bytes": 1944
+  },
+  "review_subject_sha256": "8622979a29ae28611fc994767d9583fd0c825ced2377a444cb330d9db3121d32",
+  "schema_version": "scenesmith.pi05_camera_role_binding.v1",
+  "session_id": "t16-5c-20260713-0912-cdt",
+  "source_contract_identity_sha256": "f6b216684f6bb3f895b3d1761d72e80b5e93a5ec7be8f44b04cc277e7a871afa",
+  "status": "reviewed",
+  "training_authority_granted": false,
+  "valid_from_unix_ns": 1783952714633307000,
+  "valid_until_unix_ns": 1783995914633307000
+}

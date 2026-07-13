@@ -1,0 +1,142 @@
+{
+  "accepted_live_policy_input": false,
+  "authority_not_granted": [
+    "accepted_live_policy_input",
+    "policy_shadow_input_valid",
+    "policy_shadow",
+    "model_weight_load",
+    "policy_inference",
+    "physical_follower_command",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "simulation_training_ready",
+    "supervised_micro_motion"
+  ],
+  "evaluation_time_unix_ns": 1783952801088999000,
+  "evidence_mode": "tracked_production_reviewed_inputs",
+  "gate_name": "pi05_reviewed_input_issuance_gate",
+  "hardware_accessed": false,
+  "identity_sha256": "d48165d18fc724f1a1fe40df6b79c0b73f803e28cad269690aac76e7590f9bb3",
+  "local_capabilities": [
+    "pi05_reviewed_input_issuance_gate_conformant",
+    "pi05_reviewed_input_bundle_valid"
+  ],
+  "missing_inputs": [],
+  "model_instantiated": false,
+  "model_weights_read": false,
+  "motion_authority_granted": false,
+  "mujoco_replay_run": false,
+  "physical_follower_commanded": false,
+  "policy_inference_run": false,
+  "policy_input_built": false,
+  "policy_shadow_run": false,
+  "preprocessing_run": false,
+  "production_input_issuance_allowed": true,
+  "proof_labels": [],
+  "qualification_scope": "local_pi05_reviewed_input_bundle",
+  "requirements": {
+    "allowed_issuer_ids": [
+      "scenesmith_same_agent_reviewer_v1"
+    ],
+    "fixture_evidence_class": "deterministic_fixture",
+    "input_artifacts_created_by_gate": false,
+    "maximum_validity_interval_ns": 86400000000000,
+    "production_evidence_class": "tracked_production_review",
+    "prompt_template_sha256": "6aa8b31bd76f47e39b893c8eb8eb8040e9d6843fce7e130b4d75dae647a0ff0b",
+    "required_camera_roles": [
+      {
+        "model_key": "observation.images.base_0_rgb",
+        "source_key": "observation.images.top"
+      },
+      {
+        "model_key": "observation.images.left_wrist_0_rgb",
+        "source_key": "observation.images.wrist"
+      }
+    ],
+    "required_input_order": [
+      "accepted_live_session_review_decision",
+      "reviewed_stable_camera_role_binding",
+      "reviewed_task_prompt"
+    ],
+    "source_contract_identity_sha256": "f6b216684f6bb3f895b3d1761d72e80b5e93a5ec7be8f44b04cc277e7a871afa",
+    "stable_camera_identity_sha256": [
+      "69d55167e318a97b7f38c2562366ba7c8798ded18397f466b083494cf4198cd9",
+      "9931d03025b4d9830ffda038ff0fd3a10d7badd2a3120e692fd13ce63325e180"
+    ],
+    "task_key": "task"
+  },
+  "reviewed_inputs": {
+    "accepted_live_session_review_decision": {
+      "evidence_class": "tracked_production_review",
+      "identity_sha256": "3a7436b86ff3023c411caab8b8e9939cde58e3281366ba922b71699627ec1b36",
+      "issued_at_unix_ns": 1783952714633307000,
+      "issuer_id": "scenesmith_same_agent_reviewer_v1",
+      "path": "configurations/robot_lab/pi05_static_pose_live_session_t16-5c-20260713-0912-cdt.acceptance.json",
+      "present": true,
+      "review_decision_id": "109",
+      "review_manifest_identity_sha256": "75d8aae327a986dba6d3c9c2cfe744408e8b8e7a0b14bf3d8d14e555f41bf704",
+      "review_manifest_sha256": "2180d0a4840f90a35cbe7d125d072bfc7347bbe3926e830781b19fe4f3cf4ff3",
+      "review_record_sha256": "58049b131c6b69fd60448acdfbdaa111d50f5e54c04e4d55673cc78198a310ea",
+      "review_subject_sha256": "a7e4a35bea99ece26b77978a1d8de0a3e6d7b750bdc9b6dc842c6465f7bf3472",
+      "schema_version": "scenesmith.pi05_live_session_acceptance.v1",
+      "session_id": "t16-5c-20260713-0912-cdt",
+      "sha256": "b05aa585fa80d53d28dce05e3ebbfedbfc67f107fc91c9034afe9b4a486a08c8",
+      "size_bytes": 2470,
+      "valid_from_unix_ns": 1783952714633307000,
+      "valid_until_unix_ns": 1783995914633307000
+    },
+    "reviewed_stable_camera_role_binding": {
+      "camera_assignment_sha256": "efa49a9e4e483b73d8aacb32be914cc06821aadbf0d7261e504bb8115de7f412",
+      "evidence_class": "tracked_production_review",
+      "identity_sha256": "01b8fa2fdd7bda7e125289be9ea6f17dd451e8499d3383903f454960a8206bb1",
+      "issued_at_unix_ns": 1783952714633307000,
+      "issuer_id": "scenesmith_same_agent_reviewer_v1",
+      "path": "configurations/robot_lab/pi05_camera_role_binding_t16-5c-20260713-0912-cdt.json",
+      "present": true,
+      "private_review_evidence_sha256": "2a5eac37a1f826b2f736e91d98f3603b77590f0ef40608b2f2c6a928f4029de5",
+      "review_decision_id": "109",
+      "review_manifest_identity_sha256": "75d8aae327a986dba6d3c9c2cfe744408e8b8e7a0b14bf3d8d14e555f41bf704",
+      "review_manifest_sha256": "2180d0a4840f90a35cbe7d125d072bfc7347bbe3926e830781b19fe4f3cf4ff3",
+      "review_record_sha256": "58049b131c6b69fd60448acdfbdaa111d50f5e54c04e4d55673cc78198a310ea",
+      "review_subject_sha256": "8622979a29ae28611fc994767d9583fd0c825ced2377a444cb330d9db3121d32",
+      "schema_version": "scenesmith.pi05_camera_role_binding.v1",
+      "session_id": "t16-5c-20260713-0912-cdt",
+      "sha256": "5e4f3aceba0b734d040047de813b080d1079e78954d56b86c1463d9913bce14f",
+      "size_bytes": 2986,
+      "valid_from_unix_ns": 1783952714633307000,
+      "valid_until_unix_ns": 1783995914633307000
+    },
+    "reviewed_task_prompt": {
+      "evidence_class": "tracked_production_review",
+      "identity_sha256": "6aff5fdade12e469f7a8e67c526ffdd7ae79a036ea3d70b10d20a22a7b66e13a",
+      "issued_at_unix_ns": 1783952714633307000,
+      "issuer_id": "scenesmith_same_agent_reviewer_v1",
+      "path": "configurations/robot_lab/pi05_task_prompt_t16-5c-20260713-0912-cdt.json",
+      "present": true,
+      "prompt_prefix_sha256": "234b7e3aee65d3b5f5dfaca8968c24a79902c2b7adec0e70b3b01a5b84108473",
+      "prompt_template_sha256": "6aa8b31bd76f47e39b893c8eb8eb8040e9d6843fce7e130b4d75dae647a0ff0b",
+      "review_decision_id": "109",
+      "review_record_sha256": "58049b131c6b69fd60448acdfbdaa111d50f5e54c04e4d55673cc78198a310ea",
+      "review_subject_sha256": "c53087de7f75fdccca81eee6098196a1bf6fec59a63fa0235ace06033f002a13",
+      "schema_version": "scenesmith.pi05_reviewed_task_prompt.v1",
+      "session_id": "t16-5c-20260713-0912-cdt",
+      "sha256": "ed0af3f5a10a90447e69af72df02925f17e56ab74e0769ce22a90a9f9fd14a36",
+      "size_bytes": 2325,
+      "task_text_included": false,
+      "task_text_sha256": "6bf96b1858409892cd1596cc36a4ddf2a93a6656c60e77f16700bbd0c8e120a5",
+      "valid_from_unix_ns": 1783952714633307000,
+      "valid_until_unix_ns": 1783995914633307000
+    }
+  },
+  "schema_version": "scenesmith.pi05_reviewed_input_gate.v1",
+  "source_contract": {
+    "identity_sha256": "f6b216684f6bb3f895b3d1761d72e80b5e93a5ec7be8f44b04cc277e7a871afa",
+    "path": "configurations/robot_lab/pi05_policy_input_preprocessing.blocked_missing_inputs.json",
+    "schema_version": "scenesmith.pi05_preprocessing_source_contract.v1",
+    "sha256": "07ee37e81a9b1699c7c6d380a12a8df539962512813b53b1fb85f4e4cc966e58",
+    "size_bytes": 12621
+  },
+  "status": "reviewed_input_bundle_valid",
+  "training_authority_granted": false
+}

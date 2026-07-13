@@ -377,6 +377,10 @@ offline and reviewed. That review now passes with manifest `75d8aae3...` and
 accepts the bracket only. The current frames' hashes and dimensions were
 retained, but their pixel bytes were not, so no model input, preprocessing,
 shadow, or replay label follows from this acceptance.
+Reviewer 109 now issues the production-valid acceptance, exact stable-camera
+role, and exact task-prompt artifacts. Gate `d48165d1...` has no missing
+reviewed inputs and permits production issuance, while explicitly keeping
+`accepted_live_policy_input=false` until current pixel bytes exist.
 
 ## Durable State
 

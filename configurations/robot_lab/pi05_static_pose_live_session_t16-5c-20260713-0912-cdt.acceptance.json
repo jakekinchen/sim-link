@@ -1,0 +1,61 @@
+{
+  "accepted_as_static_pose_bracketed_observation": true,
+  "accepted_live_policy_input": false,
+  "accepted_live_session_review": true,
+  "authority_not_granted": [
+    "accepted_live_policy_input",
+    "policy_shadow_input_valid",
+    "policy_shadow",
+    "model_weight_load",
+    "policy_inference",
+    "physical_follower_command",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "simulation_training_ready",
+    "supervised_micro_motion"
+  ],
+  "evidence_class": "tracked_production_review",
+  "hardware_accessed": false,
+  "identity_sha256": "3a7436b86ff3023c411caab8b8e9939cde58e3281366ba922b71699627ec1b36",
+  "input_kind": "accepted_live_session_review_decision",
+  "issued_at_unix_ns": 1783952714633307000,
+  "issuer_id": "scenesmith_same_agent_reviewer_v1",
+  "local_capabilities": [
+    "pi05_live_session_acceptance_valid"
+  ],
+  "model_instantiated": false,
+  "model_weights_read": false,
+  "motion_authority_granted": false,
+  "mujoco_replay_run": false,
+  "physical_follower_commanded": false,
+  "policy_inference_run": false,
+  "policy_input_built": false,
+  "policy_shadow_run": false,
+  "preprocessing_run": false,
+  "production_eligible": true,
+  "proof_labels": [],
+  "qualification_scope": "local_pi05_live_session_acceptance",
+  "review_decision_id": "109",
+  "review_manifest": {
+    "identity_sha256": "75d8aae327a986dba6d3c9c2cfe744408e8b8e7a0b14bf3d8d14e555f41bf704",
+    "path": "configurations/robot_lab/pi05_static_pose_live_session_t16-5c-20260713-0912-cdt.redacted.json",
+    "schema_version": "scenesmith.static_pose_live_session_review_manifest.v1",
+    "sha256": "2180d0a4840f90a35cbe7d125d072bfc7347bbe3926e830781b19fe4f3cf4ff3",
+    "size_bytes": 9185
+  },
+  "review_outcome": "accepted_for_pi05_reviewed_input_bundle",
+  "review_record": {
+    "path": "docs/reviewer-messages/109-issue-reviewed-pi05-inputs.md",
+    "sha256": "58049b131c6b69fd60448acdfbdaa111d50f5e54c04e4d55673cc78198a310ea",
+    "size_bytes": 1944
+  },
+  "review_subject_sha256": "a7e4a35bea99ece26b77978a1d8de0a3e6d7b750bdc9b6dc842c6465f7bf3472",
+  "schema_version": "scenesmith.pi05_live_session_acceptance.v1",
+  "session_id": "t16-5c-20260713-0912-cdt",
+  "source_contract_identity_sha256": "f6b216684f6bb3f895b3d1761d72e80b5e93a5ec7be8f44b04cc277e7a871afa",
+  "status": "reviewed",
+  "training_authority_granted": false,
+  "valid_from_unix_ns": 1783952714633307000,
+  "valid_until_unix_ns": 1783995914633307000
+}
