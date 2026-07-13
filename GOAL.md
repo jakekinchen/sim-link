@@ -412,6 +412,16 @@ physical transform. Scene mismatch, missing metric camera/workcell calibration,
 checkpoint-support mismatch, the 54.4099-degree first wrist-roll change, and
 5.43238 rad/s maximum replay velocity keep `DO_NOT_ACTUATE`, T16.5c in progress,
 T16.6 pending, and the training lock closed.
+Brief 089 and Reviewer 115 now accept the first grasp-specific executable
+semantic boundary: one analytic-expert positive satisfies the ordered strict
+grasp phases while remaining explicitly non-policy, and all twelve adversarial
+negative traces fail through the same evaluator for their expected reasons.
+The accepted external frame is bound only to a visible turquoise anchor
+candidate; physical dimensions, mass, COM, material, friction, and pose remain
+unknown. The nominal analytic cousin is not physical evidence. The next offline
+experiment is a deterministic anchor-cousin MuJoCo grasp evaluated through the
+unchanged semantic gate; no policy, twin, training, or motion authority follows
+from the analytic fixture.
 
 ## Durable State
 

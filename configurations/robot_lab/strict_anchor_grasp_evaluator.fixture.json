@@ -1,0 +1,4398 @@
+{
+  "adversarial_negatives": [
+    {
+      "case_id": "wrong_object",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "wrong_object"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "wrong_object",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "grasped_transport",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "wrong",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "missing_pregrasp",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "phase_order_invalid"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "phase_order_invalid",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "reordered_close",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "phase_order_invalid"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "phase_order_invalid",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "planar_slide",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "pushing_or_sliding_without_grasp"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "pushing_or_sliding_without_grasp",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "slide",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "hook",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "hooking_or_table_pinning"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "hooking_or_table_pinning",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "hook",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "throw",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "throwing_or_ballistic_motion"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "throwing_or_ballistic_motion",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "throw",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "teleport",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "teleport_detected"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "teleport_detected",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": true,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "scripted_motion",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "scripted_object_motion"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "scripted_object_motion",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": true,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "momentary_contact",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "stable_hold_too_short"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "stable_hold_too_short",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "assistance_relabel",
+      "claimed_proof_mode": "strict_policy",
+      "evaluation": {
+        "failure_reasons": [
+          "controller_assistance_relabelled_as_policy"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "controller_assistance_relabelled_as_policy",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "evaluator_leakage",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "evaluator_state_leaked_to_actor"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "evaluator_state_leaked_to_actor",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state",
+            "privileged.object_pose"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    },
+    {
+      "case_id": "invalid_release",
+      "claimed_proof_mode": "analytic_expert",
+      "evaluation": {
+        "failure_reasons": [
+          "release_invalid"
+        ],
+        "observed_phase_order": [
+          "approach",
+          "pregrasp",
+          "close",
+          "grasp_confirmed",
+          "lift",
+          "stable_hold",
+          "lower",
+          "release",
+          "retreat"
+        ],
+        "proof_mode": "invalid",
+        "pure_policy_success": false,
+        "strict_grasp_success": false
+      },
+      "expected_failure_reason": "release_invalid",
+      "trajectory": [
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 40.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.42
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "approach",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 100000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 55.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.37
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "pregrasp",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 200000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 350.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 1.2,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "close",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 300000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 330.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasp_contact",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "grasp_confirmed",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 400000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 360.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.2,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.12,
+          "object_table_contact": false,
+          "phase": "lift",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 500000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 325.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.006,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 600000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 320.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.385
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.365
+          ],
+          "object_speed_m_s": 0.004,
+          "object_table_contact": false,
+          "phase": "stable_hold",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 700000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 340.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.012,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.4,
+          "mechanism": "grasped_transport",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.1,
+          "object_table_contact": true,
+          "phase": "lower",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 800000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 80.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 2,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.345
+          ],
+          "impact_force_n": 0.1,
+          "mechanism": "release",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "release",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 900000000
+        },
+        {
+          "actor_observation_fields": [
+            "observation.images.base_0_rgb",
+            "observation.state"
+          ],
+          "actuator_current_ma_max": 45.0,
+          "control_mode": "analytic_expert",
+          "controller_owner": "analytic_grasp_expert",
+          "fingertip_contacts": 0,
+          "forbidden_collision": false,
+          "gripper_aperture_m": 0.03,
+          "gripper_position_m": [
+            0.22,
+            0.0,
+            0.43
+          ],
+          "impact_force_n": 0.0,
+          "mechanism": "free_motion",
+          "object_id": "analytic_turquoise_anchor_cousin_v1",
+          "object_position_m": [
+            0.22,
+            0.0,
+            0.325
+          ],
+          "object_speed_m_s": 0.0,
+          "object_table_contact": true,
+          "phase": "retreat",
+          "scripted_object_motion": false,
+          "teleport_detected": false,
+          "timestamp_ns": 1000000000
+        }
+      ]
+    }
+  ],
+  "all_negatives_rejected_for_expected_reason": true,
+  "authority_not_granted": [
+    "mujoco_grasp_trajectory_valid",
+    "physical_anchor_profile_complete",
+    "strict_policy_grasp_success",
+    "physical_twin_qualified",
+    "simulation_training_ready",
+    "physical_actuation"
+  ],
+  "evaluator_spec": {
+    "identity_sha256": "b4a8f0e4df2b316777733ee35046ca5ec2c0c233998ef6442055a0ff8984556a",
+    "maximum_actuator_current_ma": 600.0,
+    "maximum_hold_object_speed_m_s": 0.02,
+    "maximum_impact_force_n": 5.0,
+    "maximum_object_gripper_relative_drift_m": 0.01,
+    "maximum_object_speed_m_s": 0.25,
+    "minimum_fingertip_contacts": 2,
+    "minimum_release_aperture_m": 0.025,
+    "minimum_retreat_distance_m": 0.08,
+    "minimum_stable_hold_frames": 2,
+    "object_half_height_m": 0.015,
+    "object_id": "analytic_turquoise_anchor_cousin_v1",
+    "ordered_phases": [
+      "approach",
+      "pregrasp",
+      "close",
+      "grasp_confirmed",
+      "lift",
+      "stable_hold",
+      "lower",
+      "release",
+      "retreat"
+    ],
+    "physical_measurement_claimed": false,
+    "prohibited_actor_observation_fields": [
+      "contact_force_exact",
+      "evaluator.grasp_confirmed",
+      "privileged.object_pose",
+      "strict_grasp_success"
+    ],
+    "required_lift_clearance_m": 0.025,
+    "schema_version": "scenesmith.strict_grasp_spec.v1",
+    "source_mode": "analytic_simulation_fixture",
+    "table_top_z_m": 0.31
+  },
+  "evidence_mode": "analytic_simulation_strict_grasp_fixture",
+  "hardware_accessed": false,
+  "identity_sha256": "4f0bad3c9f12fc648a7eed25a9f9fcaf7b8a1c63ca312e3a13f2c20d0f3120d8",
+  "local_capabilities": [
+    "strict_grasp_evaluator_fixture_conformant"
+  ],
+  "physical_anchor_observation": {
+    "candidate_object_id": "visible_turquoise_rectangular_anchor_candidate_01",
+    "com_assumption": null,
+    "dimensions_m": null,
+    "external_frame_sha256": "165815e34f85d74b216080ddb17eb84feb9b0e8690db6c4f73e9cb240e6803f6",
+    "friction": null,
+    "mass_kg": null,
+    "material": null,
+    "measurements_complete": false,
+    "pose_transform": null,
+    "session_id": "t16-5c-20260713-0958-cdt",
+    "visible_description": "small_lightweight_turquoise_rectangular_object"
+  },
+  "physical_follower_commanded": false,
+  "physical_twin_qualified": false,
+  "positive": {
+    "evaluation": {
+      "failure_reasons": [],
+      "observed_phase_order": [
+        "approach",
+        "pregrasp",
+        "close",
+        "grasp_confirmed",
+        "lift",
+        "stable_hold",
+        "lower",
+        "release",
+        "retreat"
+      ],
+      "proof_mode": "analytic_expert",
+      "pure_policy_success": false,
+      "strict_grasp_success": true
+    },
+    "trajectory": [
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 40.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 0,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.03,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.42
+        ],
+        "impact_force_n": 0.0,
+        "mechanism": "free_motion",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.325
+        ],
+        "object_speed_m_s": 0.0,
+        "object_table_contact": true,
+        "phase": "approach",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 100000000
+      },
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 55.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 0,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.03,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.37
+        ],
+        "impact_force_n": 0.0,
+        "mechanism": "free_motion",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.325
+        ],
+        "object_speed_m_s": 0.0,
+        "object_table_contact": true,
+        "phase": "pregrasp",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 200000000
+      },
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 350.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 2,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.012,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.345
+        ],
+        "impact_force_n": 1.2,
+        "mechanism": "grasp_contact",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.325
+        ],
+        "object_speed_m_s": 0.0,
+        "object_table_contact": true,
+        "phase": "close",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 300000000
+      },
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 330.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 2,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.012,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.345
+        ],
+        "impact_force_n": 0.4,
+        "mechanism": "grasp_contact",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.325
+        ],
+        "object_speed_m_s": 0.0,
+        "object_table_contact": true,
+        "phase": "grasp_confirmed",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 400000000
+      },
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 360.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 2,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.012,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.385
+        ],
+        "impact_force_n": 0.2,
+        "mechanism": "grasped_transport",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.365
+        ],
+        "object_speed_m_s": 0.12,
+        "object_table_contact": false,
+        "phase": "lift",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 500000000
+      },
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 325.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 2,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.012,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.385
+        ],
+        "impact_force_n": 0.1,
+        "mechanism": "grasped_transport",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.365
+        ],
+        "object_speed_m_s": 0.006,
+        "object_table_contact": false,
+        "phase": "stable_hold",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 600000000
+      },
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 320.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 2,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.012,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.385
+        ],
+        "impact_force_n": 0.1,
+        "mechanism": "grasped_transport",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.365
+        ],
+        "object_speed_m_s": 0.004,
+        "object_table_contact": false,
+        "phase": "stable_hold",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 700000000
+      },
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 340.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 2,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.012,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.345
+        ],
+        "impact_force_n": 0.4,
+        "mechanism": "grasped_transport",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.325
+        ],
+        "object_speed_m_s": 0.1,
+        "object_table_contact": true,
+        "phase": "lower",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 800000000
+      },
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 80.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 0,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.03,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.345
+        ],
+        "impact_force_n": 0.1,
+        "mechanism": "release",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.325
+        ],
+        "object_speed_m_s": 0.0,
+        "object_table_contact": true,
+        "phase": "release",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 900000000
+      },
+      {
+        "actor_observation_fields": [
+          "observation.images.base_0_rgb",
+          "observation.state"
+        ],
+        "actuator_current_ma_max": 45.0,
+        "control_mode": "analytic_expert",
+        "controller_owner": "analytic_grasp_expert",
+        "fingertip_contacts": 0,
+        "forbidden_collision": false,
+        "gripper_aperture_m": 0.03,
+        "gripper_position_m": [
+          0.22,
+          0.0,
+          0.43
+        ],
+        "impact_force_n": 0.0,
+        "mechanism": "free_motion",
+        "object_id": "analytic_turquoise_anchor_cousin_v1",
+        "object_position_m": [
+          0.22,
+          0.0,
+          0.325
+        ],
+        "object_speed_m_s": 0.0,
+        "object_table_contact": true,
+        "phase": "retreat",
+        "scripted_object_motion": false,
+        "teleport_detected": false,
+        "timestamp_ns": 1000000000
+      }
+    ]
+  },
+  "proof_labels": [],
+  "qualification_scope": "evaluator_semantics_not_mujoco_or_physical_success",
+  "schema_version": "scenesmith.strict_grasp_fixture.v1",
+  "simulation_anchor_cousin": {
+    "dimensions_m": [
+      0.05,
+      0.035,
+      0.03
+    ],
+    "mass_kg": 0.025,
+    "object_id": "analytic_turquoise_anchor_cousin_v1",
+    "physical_measurement_claimed": false,
+    "source_mode": "declared_nominal_analytic_simulation_fixture"
+  },
+  "simulation_training_ready": false,
+  "task_spec": {
+    "ordered_phases": [
+      "approach",
+      "pregrasp",
+      "close",
+      "grasp_confirmed",
+      "lift",
+      "stable_hold",
+      "lower",
+      "release",
+      "retreat"
+    ]
+  }
+}
