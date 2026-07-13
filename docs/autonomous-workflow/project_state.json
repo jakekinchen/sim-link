@@ -29,22 +29,22 @@
   ],
   "branch": "codex/pi05-autolearn-loop",
   "verified_implementation_boundary": {
-    "brief_id": "062",
-    "commit": "d404778509115290bf3a4918f52d6697b4b7faec",
-    "summary": "identity_stable_codex_desktop_resume_profile_correction"
+    "brief_id": "071",
+    "commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
+    "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "review_boundary": {
-    "reviewer_decision_id": "088",
-    "path": "docs/reviewer-messages/088-accept-brief-062-desktop-resume-profile-correction.md",
-    "review_commit": "a514402f2dc0d4ba98fc1df9fc1a07db6ced72c3",
-    "decision": "ACCEPT_BRIEF_062_CURRENT_THREAD_PROFILE_ELIGIBLE_LIVE_GATE_REMAINS_CLOSED"
+    "reviewer_decision_id": "097",
+    "path": "docs/reviewer-messages/097-accept-brief-071-full-access-no-prompt-profile.md",
+    "review_commit": "06ef9497f5630d9dc8d293c402008c8f464337a2",
+    "decision": "ACCEPT_BRIEF_071_FULL_ACCESS_NO_PROMPT_RUNTIME_POLICY_LIVE_GATE_REMAINS_CLOSED"
   },
-  "last_reviewed_implementation_commit": "d404778509115290bf3a4918f52d6697b4b7faec",
+  "last_reviewed_implementation_commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
   "source_review": {
-    "implementation_commit": "d404778509115290bf3a4918f52d6697b4b7faec",
-    "decision": "ACCEPT_BRIEF_062_CURRENT_THREAD_PROFILE_ELIGIBLE_LIVE_GATE_REMAINS_CLOSED",
-    "reviewer_decision": "docs/reviewer-messages/088-accept-brief-062-desktop-resume-profile-correction.md",
-    "review_commit": "a514402f2dc0d4ba98fc1df9fc1a07db6ced72c3"
+    "implementation_commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
+    "decision": "ACCEPT_BRIEF_071_FULL_ACCESS_NO_PROMPT_RUNTIME_POLICY_LIVE_GATE_REMAINS_CLOSED",
+    "reviewer_decision": "docs/reviewer-messages/097-accept-brief-071-full-access-no-prompt-profile.md",
+    "review_commit": "06ef9497f5630d9dc8d293c402008c8f464337a2"
   },
   "closeout_review": {
     "decision": "STOP_OVERNIGHT_RUN_AT_SCHEDULED_CLOSEOUT_T16_5C_REMAINS_IN_PROGRESS",
@@ -1307,6 +1307,7 @@
         "implementation_commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
         "review_decision_id": "097",
         "review_decision_path": "docs/reviewer-messages/097-accept-brief-071-full-access-no-prompt-profile.md",
+        "review_commit": "06ef9497f5630d9dc8d293c402008c8f464337a2",
         "execution_profile": "hardware_supervised_no_prompt",
         "sandbox_mode": "danger-full-access",
         "approval_policy": "never",
