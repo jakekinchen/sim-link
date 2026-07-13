@@ -105,6 +105,7 @@ def _candidate(
     pad_midpoint_targeting: bool = False,
     post_yaw_settle_seconds: float = 0.0,
     principal_axis_alignment: bool = False,
+    joint_wrist_axis_alignment: bool = False,
 ) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
@@ -115,6 +116,7 @@ def _candidate(
             pad_midpoint_targeting=pad_midpoint_targeting,
             post_yaw_settle_seconds=post_yaw_settle_seconds,
             principal_axis_alignment=principal_axis_alignment,
+            joint_wrist_axis_alignment=joint_wrist_axis_alignment,
         )
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
@@ -128,6 +130,7 @@ def _run_candidate(
     pad_midpoint_targeting: bool = False,
     post_yaw_settle_seconds: float = 0.0,
     principal_axis_alignment: bool = False,
+    joint_wrist_axis_alignment: bool = False,
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
@@ -208,7 +211,22 @@ def _run_candidate(
             approach = target + np.asarray([0.0, 0.0, 0.04])
             effective_request = request
             axis_alignment: dict[str, Any] | None = None
-            if principal_axis_alignment:
+            if joint_wrist_axis_alignment:
+                object_rotation = np.asarray(expert.data.xmat[object_body]).reshape(3, 3)
+                axis_alignment = _select_horizontal_principal_axis_wrist_pose(
+                    expert,
+                    desired_midpoint=target,
+                    request=request,
+                    fixed_site=fixed_site,
+                    moving_site=moving_site,
+                    object_axis_world=object_rotation[:, 0],
+                )
+                effective_request = {
+                    **request,
+                    "wrist_flex_rad": axis_alignment["selected_wrist_flex_rad"],
+                    "wrist_roll_rad": axis_alignment["selected_wrist_roll_rad"],
+                }
+            elif principal_axis_alignment:
                 object_rotation = np.asarray(expert.data.xmat[object_body]).reshape(3, 3)
                 axis_alignment = _select_principal_axis_wrist_roll(
                     expert,
@@ -306,7 +324,7 @@ def _run_candidate(
         result["pregrasp_predicted_pad_midpoint_residual_m"] = pregrasp_solution[
             "predicted_pad_midpoint_residual_m"
         ]
-    if principal_axis_alignment:
+    if principal_axis_alignment or joint_wrist_axis_alignment:
         assert axis_alignment is not None
         result.update(axis_alignment)
     return result
@@ -431,6 +449,120 @@ def _select_principal_axis_wrist_roll(
     ):
         raise ValueError(f"No principal-axis-aligned wrist roll found: {best}")
     return best[1]
+
+
+def _select_horizontal_principal_axis_wrist_pose(
+    expert: CausalSortExpert,
+    *,
+    desired_midpoint: np.ndarray,
+    request: dict[str, float],
+    fixed_site: int,
+    moving_site: int,
+    object_axis_world: np.ndarray,
+) -> dict[str, Any]:
+    flex_min, flex_max = RANGES["wrist_flex_rad"]
+    roll_min, roll_max = RANGES["wrist_roll_rad"]
+    flex_values = sorted(
+        {
+            request["wrist_flex_rad"],
+            *(float(value) for value in np.linspace(flex_min, flex_max, 5)),
+        }
+    )
+    roll_values = sorted(
+        {
+            request["wrist_roll_rad"],
+            *(float(value) for value in np.linspace(roll_min, roll_max, 9)),
+        }
+    )
+    object_axis = np.asarray(object_axis_world, dtype=np.float64)
+    object_axis /= np.linalg.norm(object_axis)
+    evaluated: dict[tuple[float, float], dict[str, Any]] = {}
+
+    def evaluate(flex: float, roll: float) -> dict[str, Any] | None:
+        key = (flex, roll)
+        if key in evaluated:
+            return evaluated[key]
+        trial_request = {
+            **request,
+            "wrist_flex_rad": flex,
+            "wrist_roll_rad": roll,
+        }
+        try:
+            solved = _solve_pad_midpoint_target(
+                expert,
+                desired_midpoint=desired_midpoint,
+                request=trial_request,
+                fixed_site=fixed_site,
+                moving_site=moving_site,
+            )
+        except (RuntimeError, ValueError, np.linalg.LinAlgError):
+            return None
+        predicted = expert.mujoco.MjData(expert.model)
+        predicted.qpos[:] = solved["qpos"]
+        predicted.qpos[
+            int(
+                expert.model.jnt_qposadr[
+                    expert._id(expert.mujoco.mjtObj.mjOBJ_JOINT, "gripper")
+                ]
+            )
+        ] = request["close_target_rad"]
+        expert.mujoco.mj_forward(expert.model, predicted)
+        closing_axis = (
+            predicted.site_xpos[moving_site] - predicted.site_xpos[fixed_site]
+        )
+        closing_axis /= np.linalg.norm(closing_axis)
+        alignment = abs(float(np.dot(closing_axis, object_axis)))
+        vertical = abs(float(closing_axis[2]))
+        evidence = {
+            "selected_wrist_flex_rad": flex,
+            "selected_wrist_roll_rad": roll,
+            "object_x_axis_world": object_axis.tolist(),
+            "predicted_closing_axis_world": closing_axis.tolist(),
+            "predicted_principal_axis_alignment": alignment,
+            "predicted_closing_axis_vertical_abs": vertical,
+            "orientation_error": (1.0 - alignment) ** 2 + vertical**2,
+        }
+        evaluated[key] = evidence
+        return evidence
+
+    best: dict[str, Any] | None = None
+    for flex in flex_values:
+        for roll in roll_values:
+            candidate = evaluate(flex, roll)
+            if candidate is not None and (
+                best is None or candidate["orientation_error"] < best["orientation_error"]
+            ):
+                best = candidate
+    flex_step = (flex_max - flex_min) / 4.0
+    roll_step = (roll_max - roll_min) / 8.0
+    for _ in range(3):
+        if best is None:
+            break
+        flex_step /= 2.0
+        roll_step /= 2.0
+        center_flex = best["selected_wrist_flex_rad"]
+        center_roll = best["selected_wrist_roll_rad"]
+        for flex in (center_flex - flex_step, center_flex, center_flex + flex_step):
+            for roll in (center_roll - roll_step, center_roll, center_roll + roll_step):
+                if not (flex_min <= flex <= flex_max and roll_min <= roll <= roll_max):
+                    continue
+                candidate = evaluate(flex, roll)
+                if candidate is not None and candidate["orientation_error"] < best["orientation_error"]:
+                    best = candidate
+    if (
+        best is None
+        or best["predicted_principal_axis_alignment"] < 0.95
+        or best["predicted_closing_axis_vertical_abs"] > 0.1
+    ):
+        raise ValueError(f"No horizontal principal-axis wrist pose found: {best}")
+    best.update(
+        {
+            "sampled_wrist_flex_rad": request["wrist_flex_rad"],
+            "sampled_wrist_roll_rad": request["wrist_roll_rad"],
+            "wrist_orientation_evaluation_count": len(evaluated),
+        }
+    )
+    return best
 
 
 def _valid_contact(frame: dict[str, Any], requirement: dict[str, Any]) -> bool:

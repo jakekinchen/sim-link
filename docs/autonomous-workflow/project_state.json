@@ -2475,9 +2475,37 @@
       ]
     },
     "T19.0h": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0g"],
-      "result": "jointly solve wrist flex and roll within existing ranges so the compiled pad closing axis is horizontal and aligned to an anchor principal axis",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "102",
+      "review_decision_id": "128",
+      "result": "bounded joint wrist-flex/wrist-roll solve found no pose satisfying both 0.95 anchor-x alignment and 0.1 maximum closing-axis vertical component",
+      "artifact": {
+        "path": "configurations/robot_lab/horizontal_axis_grasp_search.json",
+        "identity_sha256": "fd04d757192aecdbfb55fbfb38404607942e0dabcdf2f9234e370fdcc55a92e9",
+        "file_sha256": "cfc8234a97396b11e3c893b4c80094f70d7a9a77762d775af423f0eab7e133ba",
+        "size_bytes": 14305,
+        "aligned_candidate_count": 0,
+        "bilateral_contact_candidate_count": 0,
+        "geometry_eligible_count": 0,
+        "broad_test_count": 188
+      },
+      "authority_granted": [
+        "bounded_anchor_x_wrist_orientation_infeasible_observed"
+      ],
+      "authority_not_granted": [
+        "horizontal_principal_axis_pose_valid",
+        "geometry_eligible_grasp_candidate",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_actuation"
+      ]
+    },
+    "T19.0i": {
+      "state": "pending",
+      "depends_on": ["T19.0h"],
+      "result": "evaluate both rectangular-anchor x and y principal axes under the unchanged horizontal alignment gate before changing any search or contact-physics bounds",
       "authority_granted": [],
       "authority_not_granted": [
         "geometry_eligible_grasp_candidate",

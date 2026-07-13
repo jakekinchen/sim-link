@@ -67,8 +67,11 @@ approach motion, six candidates pass the motion gate, but both bilateral
 candidates still fail strict contact geometry. T19.0g is `verified` through
 Brief 101: four wrist-roll-aligned candidates were reachable, two passed the
 motion gate, but preserved wrist-flex tilt prevented all moving-pad contact.
-T19.0h is the next eligible offline slice: jointly solve wrist flex and roll
-for a horizontal principal-axis closing vector without tuning contact physics.
+T19.0h is `verified` through Brief 102 as a bounded negative result: no wrist
+pose inside the existing ranges satisfies both the 0.95 anchor-x alignment and
+0.1 vertical-component gates. T19.0i is the next eligible offline slice:
+evaluate the equally valid anchor y principal axis under the same gates before
+changing any bounds or contact physics.
 The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
