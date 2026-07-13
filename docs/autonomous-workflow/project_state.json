@@ -69,7 +69,7 @@
     "trigger": "owner_present_full_access_no_prompt_t16_5c_physical_evidence_mission",
     "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
     "starting_head": "738d0006601335bc68bcf4ffda005a19d34933cc",
-    "live_gate": "open_after_remote_confirmation",
+    "live_gate": "closed",
     "training_lock": "closed",
     "deadline": null
   },
@@ -1011,14 +1011,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "open",
+      "live_gate": "closed",
       "live_gate_opened_at": "2026-07-13T09:58:00-05:00",
       "live_gate_valid_until": "2026-07-13T10:38:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 0,
-      "live_gate_closed_at": null,
-      "live_gate_close_reason": null,
-      "live_gate_reconsideration_state": "one_post_brief_084_current_frame_candidate_open_only_after_remote_confirmation",
+      "live_gate_sessions_started": 1,
+      "live_gate_closed_at": "2026-07-13T09:59:31-05:00",
+      "live_gate_close_reason": "candidate_observed_with_private_v2_and_accepted_as_static_pose_bracket_only",
+      "live_gate_reconsideration_state": "t16_5c_current_frame_candidate_accepted_gate_consumed_and_closed",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1166,6 +1166,12 @@
           "at": "2026-07-13T09:58:00-05:00",
           "review_decision_id": "111",
           "result": "one_post_brief_084_current_frame_static_pose_candidate_session_authorized_only_after_remote_confirmation"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-13T09:59:31-05:00",
+          "review_decision_id": "112",
+          "reason": "candidate_observed_with_private_v2_and_accepted_as_static_pose_bracket_only"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1351,7 +1357,7 @@
       "active_brief_id": null,
       "latest_verified_brief_id": "084",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082", "083", "084"],
-      "result": "Reviewer 110 verifies backward-compatible private source-bound current-frame retention for future successful sessions. The accepted 09:12 session remains v1 without pixel bytes, so accepted_live_policy_input, preprocessing, model load, inference, shadow, and replay remain unavailable pending a fresh separately reviewed finite bracket",
+      "result": "Reviewer 112 accepts session t16-5c-20260713-0958-cdt as a zero-drift static_pose_bracketed_observation with four exact current PNGs retained in private-success v2 and clean no-torque shutdown. Current pixels confirm camera roles but reject sorting-scene match because the required cubes and red/blue trays are not visible. accepted_live_policy_input, inference, replay, motion, and training remain withheld",
       "private_current_frame_retention": {
         "brief_id": "084",
         "review_decision_id": "110",
@@ -1362,7 +1368,7 @@
         "frame_count": 4,
         "candidate_result_contains_frame_bytes": false,
         "tracked_review_contains_frame_bytes": false,
-        "existing_accepted_session_contains_frame_bytes": false,
+        "existing_accepted_session_contains_frame_bytes": true,
         "future_successful_session_retains_source_bound_frame_bytes": true,
         "local_capability": "private_source_bound_current_frame_retention_conformant",
         "hardware_accessed": false,
@@ -1372,20 +1378,23 @@
         "training_authority_granted": false
       },
       "latest_observed_live_candidate": {
-        "session_id": "t16-5c-20260713-0912-cdt",
-        "discovery_identity_sha256": "fac2fb49e2bdad35b6f8dda4056b3a17c2603d1b40f444ff2fef9a6937ddbf1c",
-        "hardware_profile_identity_sha256": "6714ebf80457d75c5c373da44585dd5dadc1c7b7cd7a82adfd07db55a86919e1",
-        "presence_lease_identity_sha256": "24e882d0cf042d258b6c284dfbd248dd6db11c9ff9735fe798577a24b4c6d064",
-        "candidate_contract_identity_sha256": "130b4fe191012d794dca5739d3ca93fd85e8e9f2446c0dda8db3450e6b73f651",
-        "candidate_result_identity_sha256": "4a50b4c4bff2b1fc178478c99a13e86abd2c7eac016c01ee80a9049b1f57a3fd",
-        "session_receipt_identity_sha256": "20969971733337ba36537a163c37c2ca1daf8651680fed75865991f7dd18486a",
-        "private_success_identity_sha256": "97eb44b3ed7512fe35558d480540d1dc442727a79b79f7967617cfa0f0226cfd",
+        "session_id": "t16-5c-20260713-0958-cdt",
+        "discovery_identity_sha256": "27f72f5a6d44be098fa0440a382293425b6039f8b75c84922c3eab0557e5aeb7",
+        "hardware_profile_identity_sha256": "2abf38c7eb9f9f71753e448e9cd7658651c1722e1c980149e0cee4ca200fa464",
+        "presence_lease_identity_sha256": "5bf8e189f1cc0acc2c7840a4730911d7915cb3e5e9a95ba461881dbc58c20050",
+        "candidate_contract_identity_sha256": "b6fe7c7c1034a387a612af6aa22e5a870845af5ab7901bddc0b85323f90de610",
+        "candidate_result_identity_sha256": "040305a76c7246282386bd3aebf98627387142cc29f1b143dbb2a0a775333fc7",
+        "session_receipt_identity_sha256": "e61dc15f7b6ff6a2c1ab94607965261f887029d8a3ca2ff18bb7fdee808e9c08",
+        "private_success_identity_sha256": "d985577e15112a78ba62a13df8280130f41cccc9f3d2b94af2b9df77dd1e70e3",
+        "private_success_schema_version": "scenesmith.static_pose_live_candidate_private_success.v2",
+        "private_frame_bundle_schema_version": "scenesmith.static_pose_live_candidate_private_frame_bundle.v1",
+        "private_total_png_bytes": 1750412,
         "status": "accepted_static_pose_bracketed_observation",
         "maximum_body_drift_degrees": 0.0,
         "gripper_drift_percent": 0.0,
         "static_pose_within_tolerance": true,
-        "bracket_duration_ns": 2305608750,
-        "camera_receive_duration_ns": 2289907250,
+        "bracket_duration_ns": 2254243417,
+        "camera_receive_duration_ns": 2239282417,
         "frame_counts": [2, 2],
         "position_read_successes": 12,
         "motor_register_writes": 0,
@@ -1402,14 +1411,16 @@
         "review_manifest_written": true,
         "review_failure_class": null,
         "review_manifest": {
-          "path": "configurations/robot_lab/pi05_static_pose_live_session_t16-5c-20260713-0912-cdt.redacted.json",
+          "path": "configurations/robot_lab/pi05_static_pose_live_session_t16-5c-20260713-0958-cdt.redacted.json",
           "schema_version": "scenesmith.static_pose_live_session_review_manifest.v1",
-          "identity_sha256": "75d8aae327a986dba6d3c9c2cfe744408e8b8e7a0b14bf3d8d14e555f41bf704",
-          "file_sha256": "2180d0a4840f90a35cbe7d125d072bfc7347bbe3926e830781b19fe4f3cf4ff3",
-          "size_bytes": 9185,
-          "review_decision_id": "108"
+          "identity_sha256": "0930c3c96e397c996604ea95be234dbc2e15bfb797e96836a504aa8163d2c584",
+          "file_sha256": "c765200dd4b44d568cb00593d63a41b48cd59be9026ea8be74c53b0122808b81",
+          "size_bytes": 9186,
+          "review_decision_id": "112"
         },
-        "current_frame_bytes_retained": false,
+        "current_frame_bytes_retained": true,
+        "current_frame_content_reviewed": true,
+        "sorting_scene_semantics_accepted": false,
         "proof_labels": ["static_pose_bracketed_observation"]
       },
       "latest_rejected_live_candidate": {
@@ -1813,9 +1824,9 @@
         "git diff --check"
       ],
       "physical_camera_and_task_review": {
-        "review_decision_id": "089",
-        "evidence_class": "accepted_t16_5b_physical_frame_content_review",
-        "review_evidence_sha256": "2a5eac37a1f826b2f736e91d98f3603b77590f0ef40608b2f2c6a928f4029de5",
+        "review_decision_id": "112",
+        "evidence_class": "accepted_current_private_v2_physical_frame_content_review",
+        "review_evidence_sha256": "0930c3c96e397c996604ea95be234dbc2e15bfb797e96836a504aa8163d2c584",
         "fixture_hypothesis_rejected": true,
         "assignments": [
           {
@@ -1823,27 +1834,34 @@
             "physical_role": "rigid_wrist_mounted",
             "source_key": "observation.images.wrist",
             "model_key": "observation.images.left_wrist_0_rgb",
-            "review_frame_sha256": "c77e4c7e54a40a9efdd3ccc3c3ecfc73f8b993e2fbe5adc64e6264bfa72bbbdc"
+            "review_frame_sha256": "983137ea76f758cf4abd974397ae59a8caad0ed13c3463f319dc79161e28b5c6"
           },
           {
             "stable_camera_identity_sha256": "9931d03025b4d9830ffda038ff0fd3a10d7badd2a3120e692fd13ce63325e180",
             "physical_role": "external_workcell_overview",
             "source_key": "observation.images.top",
             "model_key": "observation.images.base_0_rgb",
-            "review_frame_sha256": "caab2f5d943fce53ccaaf05cf2b5c7e5ecf737f8088fabf2cc80f207dff0f544"
+            "review_frame_sha256": "165815e34f85d74b216080ddb17eb84feb9b0e8690db6c4f73e9cb240e6803f6"
           }
         ],
         "checkpoint_task_prompt": "Sort each cube into the same-colored tray: red cubes into the red tray and blue cubes into the blue tray.",
         "checkpoint_task_prompt_sha256": "6bf96b1858409892cd1596cc36a4ddf2a93a6656c60e77f16700bbd0c8e120a5",
         "current_session_stable_identity_match": true,
-        "current_session_frame_content_directly_reviewable": false,
-        "current_session_semantics_basis": "Reviewer 089 physical content review carried by exact stable camera identity; current session retained hashes and dimensions but not pixel bytes",
-        "production_reviewed_input_issued": true,
-        "production_linkage_missing": "retained current physical frame bytes"
+        "current_session_frame_content_directly_reviewable": true,
+        "current_session_semantics_basis": "Reviewer 112 direct review of exact private-v2 current pixels by stable camera identity",
+        "selected_frame_rule": "highest_complete_frame_index",
+        "wrist_exposure_stability_established": false,
+        "observed_scene": ["open gripper", "bare work surface", "robot arm", "AprilTag sheet", "small turquoise rectangular object", "keyboard edge"],
+        "sorting_scene_semantics_accepted": false,
+        "sorting_scene_rejection_reasons": ["red and blue sorting trays not visible", "sorting cube set not clearly visible"],
+        "production_reviewed_input_issued": false,
+        "production_linkage_missing": "new-session acceptance/camera/prompt artifacts and explicit prompt-scene mismatch disposition"
       },
       "production_reviewed_input_bundle": {
         "review_decision_id": "109",
         "session_id": "t16-5c-20260713-0912-cdt",
+        "superseded_for_current_candidate": true,
+        "current_candidate_session_id": "t16-5c-20260713-0958-cdt",
         "accepted_session": {
           "path": "configurations/robot_lab/pi05_static_pose_live_session_t16-5c-20260713-0912-cdt.acceptance.json",
           "identity_sha256": "3a7436b86ff3023c411caab8b8e9939cde58e3281366ba922b71699627ec1b36",
@@ -1873,12 +1891,10 @@
         "issued_at_unix_ns": 1783952714633307000,
         "valid_until_unix_ns": 1783995914633307000
       },
-      "next_action": "remotely confirm Reviewer 111, then repeat fresh full-access profile, presence lease, discovery, Studio status, and holder preflight before at most one current-frame candidate session",
+      "next_action": "remotely preserve Reviewer 112, then run exact PI0.5 preprocessing on the selected current private-v2 frames and q_after as a no-actuation diagnostic while keeping sorting-scene mismatch explicit",
       "live_execution_prerequisites_missing": [
-        "remote_confirmation_of_reviewer_111_gate_transition",
-        "fresh_operator_presence_lease",
-        "fresh_discovery_and_zero_holder_snapshots",
-        "retained_current_physical_frame_bytes_for_model_input"
+        "current_session_production_reviewed_input_bundle",
+        "sorting_scene_semantics_accepted_for_policy_input"
       ],
       "conditional_authority": [
         "physical_observation_preprocessing",

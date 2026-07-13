@@ -43,7 +43,10 @@ proof states must remain distinct.
   retention for a future session; the accepted 09:12 session remains v1 and
   still has no current pixel bytes. Reviewer 111 opens one distinct fresh
   current-frame session from 09:58 through 10:38 CDT only after its transition
-  is confirmed on origin.
+  is confirmed on origin. That session is consumed and closed: Reviewer 112
+  accepts the zero-drift private-v2 bracket and current camera roles, while
+  rejecting sorting-scene match because the required cubes and trays are not
+  visible.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -392,7 +395,11 @@ source-bound PNGs in private-success v2 while candidate and tracked review
 artifacts stay hash-only. The accepted session remains v1; a fresh separately
 reviewed bracket is the next experiment. Reviewer 111 opens exactly one such
 session after remote confirmation, with complete fresh preflight and mandatory
-private-success v2 on success.
+private-success v2 on success. Session `t16-5c-20260713-0958-cdt` satisfies that
+physical bracket and shutdown boundary. Current pixel review confirms the wrist
+and external roles but finds the exact sorting prompt does not match the visible
+workcell; tensor preprocessing may continue diagnostically, but policy-input
+and actuation authority remain withheld.
 
 ## Durable State
 
