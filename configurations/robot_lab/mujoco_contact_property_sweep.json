@@ -1,0 +1,346 @@
+{
+  "anchor_dimensions_m": [
+    0.05,
+    0.035,
+    0.03
+  ],
+  "anchor_mass_kg": 0.025,
+  "authority_not_granted": [
+    "unassisted_mujoco_grasp_success",
+    "strict_policy_grasp_success",
+    "physical_gripper_aperture_calibrated",
+    "physical_twin_qualified",
+    "simulation_training_ready",
+    "physical_actuation"
+  ],
+  "baseline_summary": {
+    "contact_gated_assist_ever_active": false,
+    "contact_timeconst_s": null,
+    "final_object_z_m": 0.324974,
+    "friction": null,
+    "lift_hold_two_jaw_frames": 0,
+    "maximum_contact_force_n": 4.1971684,
+    "maximum_object_z_m": 0.325019,
+    "unassisted_lift_clearance_maintained": false
+  },
+  "baseline_two_pass_exact_determinism": true,
+  "contact_span_profile": [
+    {
+      "contact_force_n_max": 3.263178913,
+      "frame_index": 77,
+      "gripper_percent": 16.724525,
+      "jaw_contact_point_span_m": 0.03286691,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 3.6552605,
+      "frame_index": 78,
+      "gripper_percent": 14.157221,
+      "jaw_contact_point_span_m": 0.03197264,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 3.207878521,
+      "frame_index": 79,
+      "gripper_percent": 11.60162,
+      "jaw_contact_point_span_m": 0.028436016,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 3.356506376,
+      "frame_index": 80,
+      "gripper_percent": 9.358311,
+      "jaw_contact_point_span_m": 0.025083641,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 3.100797574,
+      "frame_index": 81,
+      "gripper_percent": 7.315344,
+      "jaw_contact_point_span_m": 0.01602415,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 3.493950291,
+      "frame_index": 82,
+      "gripper_percent": 5.516742,
+      "jaw_contact_point_span_m": 0.013143596,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 4.1971684,
+      "frame_index": 83,
+      "gripper_percent": 3.931484,
+      "jaw_contact_point_span_m": 0.010947536,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 3.675967386,
+      "frame_index": 84,
+      "gripper_percent": 2.649206,
+      "jaw_contact_point_span_m": 0.008865713,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 3.909353687,
+      "frame_index": 85,
+      "gripper_percent": 1.550074,
+      "jaw_contact_point_span_m": 0.007286136,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 4.158202587,
+      "frame_index": 86,
+      "gripper_percent": 0.893756,
+      "jaw_contact_point_span_m": 0.006358961,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 3.855262708,
+      "frame_index": 87,
+      "gripper_percent": 0.410856,
+      "jaw_contact_point_span_m": 0.005520578,
+      "phase": "close"
+    },
+    {
+      "contact_force_n_max": 3.589428146,
+      "frame_index": 88,
+      "gripper_percent": 0.262535,
+      "jaw_contact_point_span_m": 0.005207029,
+      "phase": "grasp_hold"
+    },
+    {
+      "contact_force_n_max": 3.287606719,
+      "frame_index": 89,
+      "gripper_percent": 0.24308,
+      "jaw_contact_point_span_m": 0.005096355,
+      "phase": "grasp_hold"
+    },
+    {
+      "contact_force_n_max": 3.178069537,
+      "frame_index": 90,
+      "gripper_percent": 0.245637,
+      "jaw_contact_point_span_m": 0.004981427,
+      "phase": "grasp_hold"
+    },
+    {
+      "contact_force_n_max": 3.097999878,
+      "frame_index": 91,
+      "gripper_percent": 0.244317,
+      "jaw_contact_point_span_m": 0.005110858,
+      "phase": "grasp_hold"
+    },
+    {
+      "contact_force_n_max": 3.034991662,
+      "frame_index": 92,
+      "gripper_percent": 0.242901,
+      "jaw_contact_point_span_m": 0.005037922,
+      "phase": "grasp_hold"
+    },
+    {
+      "contact_force_n_max": 2.975447836,
+      "frame_index": 93,
+      "gripper_percent": 0.241632,
+      "jaw_contact_point_span_m": 0.004981464,
+      "phase": "grasp_hold"
+    },
+    {
+      "contact_force_n_max": 2.926442603,
+      "frame_index": 94,
+      "gripper_percent": 0.240459,
+      "jaw_contact_point_span_m": 0.004939948,
+      "phase": "grasp_hold"
+    },
+    {
+      "contact_force_n_max": 2.8893103,
+      "frame_index": 95,
+      "gripper_percent": 0.2395,
+      "jaw_contact_point_span_m": 0.004907838,
+      "phase": "grasp_hold"
+    }
+  ],
+  "contact_span_range_m": [
+    0.004907838,
+    0.03286691
+  ],
+  "evidence_mode": "simulation_only_contact_span_and_property_sweep",
+  "fixed_pose": {
+    "close_target_rad": -0.17,
+    "pregrasp_height_m": 0.018,
+    "wrist_roll_rad": -1.5
+  },
+  "hardware_accessed": false,
+  "holdout": {
+    "contact_timeconst_s": 0.01,
+    "excluded_from_selection": true,
+    "friction": 4.0,
+    "result": {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.01,
+      "final_object_z_m": 0.322867,
+      "friction": 4.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.281370801,
+      "maximum_object_z_m": 0.323761,
+      "unassisted_lift_clearance_maintained": false
+    }
+  },
+  "identity_sha256": "89c0406265f406002c1e0e2c61297f89a1e1db5962fa0b3c7ee1fed15f32a3ba",
+  "local_capabilities": [
+    "mujoco_contact_span_profile_observed",
+    "bounded_contact_property_sweep_observed"
+  ],
+  "metric_physical_gripper_aperture_profile_complete": false,
+  "metric_profile_scope": "mujoco_contact_point_span_not_physical_aperture",
+  "object_id": "analytic_turquoise_anchor_cousin_v1",
+  "physical_follower_commanded": false,
+  "physical_measurement_claimed": false,
+  "physical_twin_qualified": false,
+  "pinned_mjcf": {
+    "path": "external/SO-ARM100/Simulation/SO101/so101_new_calib.xml",
+    "sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+    "size_bytes": 13921
+  },
+  "schema_version": "scenesmith.mujoco_contact_property_sweep.v1",
+  "selected_training_candidate": null,
+  "simulation_training_ready": false,
+  "source_contact_search_identity_sha256": "5a5de249f7374cde37b6e201a4ae4097ee74e0f39bf7884c205947e8cf7446e2",
+  "training_candidates": [
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.004,
+      "final_object_z_m": 0.324982,
+      "friction": 1.1,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 19.332965681,
+      "maximum_object_z_m": 0.324982,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.008,
+      "final_object_z_m": 0.324964,
+      "friction": 1.1,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 7.859577391,
+      "maximum_object_z_m": 0.324965,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.012,
+      "final_object_z_m": 0.324941,
+      "friction": 1.1,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 4.361094858,
+      "maximum_object_z_m": 0.324942,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.004,
+      "final_object_z_m": 0.324864,
+      "friction": 2.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 7.753135392,
+      "maximum_object_z_m": 0.324869,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.008,
+      "final_object_z_m": 0.324738,
+      "friction": 2.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 3.13219112,
+      "maximum_object_z_m": 0.325,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.012,
+      "final_object_z_m": 0.324581,
+      "friction": 2.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 1.755339208,
+      "maximum_object_z_m": 0.325241,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.004,
+      "final_object_z_m": 0.324443,
+      "friction": 3.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 2.984182794,
+      "maximum_object_z_m": 0.324552,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.008,
+      "final_object_z_m": 0.324088,
+      "friction": 3.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 1.077572238,
+      "maximum_object_z_m": 0.325028,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.012,
+      "final_object_z_m": 0.323789,
+      "friction": 3.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.491539257,
+      "maximum_object_z_m": 0.324925,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.004,
+      "final_object_z_m": 0.323009,
+      "friction": 5.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.707163799,
+      "maximum_object_z_m": 0.323832,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.008,
+      "final_object_z_m": 0.321095,
+      "friction": 5.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.218565371,
+      "maximum_object_z_m": 0.322169,
+      "unassisted_lift_clearance_maintained": false
+    },
+    {
+      "contact_gated_assist_ever_active": false,
+      "contact_timeconst_s": 0.012,
+      "final_object_z_m": 0.318536,
+      "friction": 5.0,
+      "lift_hold_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.127525548,
+      "maximum_object_z_m": 0.319822,
+      "unassisted_lift_clearance_maintained": false
+    }
+  ],
+  "training_grid": {
+    "candidate_count": 12,
+    "contact_timeconst_s": [
+      0.004,
+      0.008,
+      0.012
+    ],
+    "friction": [
+      1.1,
+      2.0,
+      3.0,
+      5.0
+    ]
+  },
+  "training_success_count": 0,
+  "unassisted_mujoco_grasp_success": false
+}

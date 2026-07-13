@@ -440,6 +440,15 @@ and the object returns to 0.324974 m. This is a low-impact contact candidate,
 not a grasp. The next experiment must derive metric aperture from pinned jaw
 geometry and sweep contact friction/compliance and close-hold parameters with a
 held-out setting; normalized gripper percent is not relabeled as aperture.
+Brief 092 and Reviewer 118 show why that contact still cannot grasp. The nominal
+MuJoCo contact-point span collapses from 32.86691 mm during closure to 4.907838
+mm during hold, so the fixed and moving jaw bodies converge on one local object
+region rather than opposing faces. None of 12 friction/contact-time training
+settings or the untouched holdout retains lift. Friction-only tuning is
+rejected. Future MuJoCo strict evaluation must require opposing contact normals,
+span, and wrench closure rather than a two-contact count alone; the next
+experiment searches wrist pitch, object yaw, and lateral pregrasp offset under
+those stricter geometry criteria.
 
 ## Durable State
 
