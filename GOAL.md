@@ -35,7 +35,10 @@ proof states must remain distinct.
   and the next strict camera-audit boundary rejected. Brief 079 verifies the one
   permitted narrow offline correction. Reviewer 106 opens one fresh finite
   session from `09:10` through `09:45` CDT only after remote confirmation and
-  complete fresh preflight.
+  complete fresh preflight. That session produced a verified candidate at
+  `09:12` and closed cleanly; acceptance remains withheld because the redacted
+  review's hardware-profile classification is inconsistent with the formal
+  profile schema.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -366,6 +369,11 @@ advanced to camera-audit validation and failed there; immutable failure
 Brief 079 validates the complete successful finite FFmpeg backend audit before
 projecting the exact static-pose lifecycle view; it grants adapter conformance
 only and does not reopen the consumed gate.
+Session `t16-5c-20260713-0912-cdt` then observed zero q drift, two 640x480 frames
+per camera, 12 successful position reads, zero writes/torque changes/motion,
+and clean zero-holder shutdown. The receipt and private success verify, but the
+candidate is not accepted until the redacted review schema mismatch is fixed
+offline and reviewed.
 
 ## Durable State
 

@@ -69,7 +69,7 @@
     "trigger": "owner_present_full_access_no_prompt_t16_5c_physical_evidence_mission",
     "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
     "starting_head": "738d0006601335bc68bcf4ffda005a19d34933cc",
-    "live_gate": "open_after_remote_confirmation",
+    "live_gate": "closed",
     "training_lock": "closed",
     "deadline": null
   },
@@ -1011,14 +1011,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "open",
+      "live_gate": "closed",
       "live_gate_opened_at": "2026-07-13T09:10:00-05:00",
       "live_gate_valid_until": "2026-07-13T09:45:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 0,
-      "live_gate_closed_at": null,
-      "live_gate_close_reason": null,
-      "live_gate_reconsideration_state": "one_post_brief_079_t16_5c_candidate_session_open_only_after_remote_confirmation",
+      "live_gate_sessions_started": 1,
+      "live_gate_closed_at": "2026-07-13T09:12:43-05:00",
+      "live_gate_close_reason": "candidate_observed_pending_redacted_review_schema_correction",
+      "live_gate_reconsideration_state": "t16_5c_candidate_observed_gate_consumed_review_fails_closed",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1154,6 +1154,12 @@
           "at": "2026-07-13T09:10:00-05:00",
           "review_decision_id": "106",
           "result": "one_post_brief_079_static_pose_bracket_candidate_session_authorized_only_after_remote_confirmation"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-13T09:12:43-05:00",
+          "review_decision_id": "107",
+          "reason": "candidate_observed_pending_redacted_review_schema_correction"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1339,7 +1345,39 @@
       "active_brief_id": null,
       "latest_verified_brief_id": "079",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079"],
-      "result": "Brief 079 corrects the exact rejected-session audit boundary offline. Reviewer 106 opens one fresh finite post-correction candidate gate only after remote confirmation. No accepted static-pose, reviewed-input, shadow, or replay label is granted by the transition",
+      "result": "Session t16-5c-20260713-0912-cdt produced a mechanically verified candidate observation with zero pose drift, four finite frames, exact no-write/no-motion counts, clean close, and zero holders. The gate is consumed and closed. Acceptance fails closed because the redacted-review validator requires a proof_labels field that the formal hardware-profile schema forbids; no accepted static-pose, reviewed-input, shadow, or replay label is granted yet",
+      "latest_observed_live_candidate": {
+        "session_id": "t16-5c-20260713-0912-cdt",
+        "discovery_identity_sha256": "fac2fb49e2bdad35b6f8dda4056b3a17c2603d1b40f444ff2fef9a6937ddbf1c",
+        "hardware_profile_identity_sha256": "6714ebf80457d75c5c373da44585dd5dadc1c7b7cd7a82adfd07db55a86919e1",
+        "presence_lease_identity_sha256": "24e882d0cf042d258b6c284dfbd248dd6db11c9ff9735fe798577a24b4c6d064",
+        "candidate_contract_identity_sha256": "130b4fe191012d794dca5739d3ca93fd85e8e9f2446c0dda8db3450e6b73f651",
+        "candidate_result_identity_sha256": "4a50b4c4bff2b1fc178478c99a13e86abd2c7eac016c01ee80a9049b1f57a3fd",
+        "session_receipt_identity_sha256": "20969971733337ba36537a163c37c2ca1daf8651680fed75865991f7dd18486a",
+        "private_success_identity_sha256": "97eb44b3ed7512fe35558d480540d1dc442727a79b79f7967617cfa0f0226cfd",
+        "status": "candidate_observed_pending_review",
+        "maximum_body_drift_degrees": 0.0,
+        "gripper_drift_percent": 0.0,
+        "static_pose_within_tolerance": true,
+        "bracket_duration_ns": 2305608750,
+        "camera_receive_duration_ns": 2289907250,
+        "frame_counts": [2, 2],
+        "position_read_successes": 12,
+        "motor_register_writes": 0,
+        "configuration_writes": 0,
+        "torque_changes": 0,
+        "motion_commands": 0,
+        "unexpected_operations": 0,
+        "post_holder_counts": [0, 0],
+        "post_deduplicated_holder_count": 0,
+        "post_status_follower_connected": false,
+        "post_status_follower_torque": false,
+        "physical_follower_commanded": false,
+        "policy_inference_run": false,
+        "review_manifest_written": false,
+        "review_failure_class": "hardware_profile_schema_forbids_proof_labels_but_review_requires_empty_list",
+        "proof_labels": []
+      },
       "latest_rejected_live_candidate": {
         "session_id": "t16-5c-20260713-0855-cdt",
         "discovery_identity_sha256": "0cebaa894b26540811ef7292c3c3068686b4b946684856e5da610fd9c0c7d6ac",
@@ -1766,11 +1804,10 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "remotely confirm Reviewer 106, then repeat fresh profile, lease, discovery, Studio status, and holder preflight before at most one post-Brief-079 candidate session",
+      "next_action": "remotely preserve Reviewer 107 gate close, then perform one narrow offline correction to align the redacted-review hardware-profile classification with the formal profile schema and review the existing candidate without retry",
       "live_execution_prerequisites_missing": [
-        "remote_confirmation_of_reviewer_106_gate_transition",
-        "fresh_operator_presence_lease",
-        "fresh_discovery_and_zero_holder_snapshots"
+        "redacted_session_review_hardware_profile_schema_correction",
+        "accepted_live_session_review_decision"
       ],
       "conditional_authority": [
         "physical_observation_preprocessing",
