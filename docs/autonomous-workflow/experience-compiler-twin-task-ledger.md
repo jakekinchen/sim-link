@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-13T12:30:11-05:00; no new major slice after 19:45:11; hard closeout 20:30:11 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M17/M19 grasp execution track
-current_task: T17.2 pending after verified T17.1; implement the named canonical SO-101 processor without conflating transformation, validation, or safety limiting
+current_task: T17.3 pending after verified T17.2; generate an immutable normalization and preprocessing bundle bound to the canonical processor
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: geometry-derived grasp 30c5873a...; immutable experience contract f2b8b462... binds grasp/twin/coordinates and quarantines two source-projection frames for five explicit missing-data reasons; no compiled frames, hardware, or motion
-remaining: canonical SO-101 processor; normalization, segments/windows, real generated grasp episodes, compiler audit; T19.2 physical calibration under fresh permits; central simulation-training authority
+evidence: experience contract f2b8b462...; canonical processor 9800c873... proves 128 round trips at max error 4.441e-16, golden legacy parity, monotonic gripper mapping, pure unclamped transform, and explicit requested/executed limiting; no compiled frames, hardware, or motion
+remaining: normalization bundle, segments/windows, real generated grasp episodes, compiler audit; T19.2 physical calibration under fresh permits; central simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; simulation training remains centrally withheld
-next_step: implement and parity-test the named canonical SO-101 processor as pure coordinate transformation, separate contract validation, and separate safety limiting with requested-versus-executed logging
+next_step: generate an immutable normalization/preprocessing bundle that pins feature order, algorithms, coordinates, cameras, tokenizer/processors, dependency identities, and real-processor parity without claiming compiled training frames
 ```
 
 ## Rules
@@ -236,7 +236,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
 | T17.1 | verified | T16.2,T19.0l | Define immutable raw rollout/frame records and provenance dictionaries | Brief 107/Reviewer 133; contract f2b8b462...; grasp/twin/coordinate bound; stable rollout/frame identities; canonical/source phases; recovery only a control mode; five action variants remain distinct; two-frame fixture quarantined for five missing-data reasons; 210-test broad gate |
-| T17.2 | pending | T16.2-T16.3, T17.1 | Implement a named canonical SO-101 processor shared by collection, training, evaluation, and adapters | Permutation, randomized round-trip, bounds, action-mode, gripper-monotonicity, golden-pose tests |
+| T17.2 | verified | T16.2-T16.3,T17.1 | Implement a named canonical SO-101 processor shared by collection, training, evaluation, and adapters | Brief 108/Reviewer 134; processor 9800c873...; pure unclamped transform, fail-closed bounds, explicit requested/executed limiter; 128 round trips max 4.441e-16; golden parity and monotonic gripper; 221-test broad gate |
 | T17.3 | pending | T17.2 | Generate immutable `normalization_bundle.json` | Feature order, algorithm, coordinates, cameras, tokenizer, processors, dependency SHAs pinned |
 | T17.4 | pending | T17.1-T17.3 | Compile `frames.parquet` and hard-boundary `segments.parquet` | Raw hashes retained; owner/reset/prompt/contract/gap changes split or fail |
 | T17.5 | pending | T17.2-T17.4 | Compile unpadded `window_index.parquet` for horizons 5/10/15/50 | No gaps, missing actions, padding, reset, teleport, drift, or forbidden transition |

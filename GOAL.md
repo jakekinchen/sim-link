@@ -83,9 +83,11 @@ grasp with strict-v2 contact through hold, 40 mm lift, unsupported hold, and
 lower, followed by a contact-clear final retreat. T17.1 is `verified` through
 Brief 107: a signed immutable rollout/frame contract binds the grasp, twin, and
 coordinate identities while quarantining the aggregate source projection
-rather than calling it training data. The next eligible offline slice is
-T17.2: a named canonical SO-101 processor with pure transform, validation, and
-safety limiting kept mechanically separate.
+rather than calling it training data. T17.2 is `verified` through Brief 108: a
+named canonical SO-101 processor keeps pure unclamped transform, fail-closed
+validation, and requested-versus-executed safety limiting mechanically
+separate. The next eligible offline slice is T17.3: an immutable normalization
+and preprocessing bundle bound to the processor and runtime identities.
 The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance

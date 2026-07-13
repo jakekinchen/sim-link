@@ -1,0 +1,162 @@
+{
+  "action_mode": "absolute",
+  "authority_not_granted": [
+    "normalization_bundle_valid",
+    "compiled_training_frames",
+    "simulation_training_ready",
+    "optimizer_training",
+    "physical_actuation"
+  ],
+  "compiled_training_frames": false,
+  "coordinate_contract_ref": {
+    "identity_sha256": "45c3f7e201dcf6bba9295b9bacb3dee72159c78d53be8a8e8e248fb990b99ba7",
+    "schema_version": "scenesmith.so101_coordinates.v1"
+  },
+  "hardware_accessed": false,
+  "identity_sha256": "9800c873896eee63c10da7a4c02c964ff1faf28711d438c89731f3266d77a6f2",
+  "limits": {
+    "absolute_joint_degrees_plus_gripper_percent": [
+      [
+        -109.99987525598623,
+        109.99987525598623
+      ],
+      [
+        5.849957142432018,
+        205.85004285756798
+      ],
+      [
+        -186.40986737710912,
+        7.249867377109126
+      ],
+      [
+        -94.99984017946129,
+        94.99984017946129
+      ],
+      [
+        -157.21102461697095,
+        162.78934171036462
+      ],
+      [
+        0.0,
+        100.0
+      ]
+    ],
+    "absolute_joint_radians_plus_gripper_radians": [
+      [
+        -1.91986,
+        1.91986
+      ],
+      [
+        -1.74533,
+        1.74533
+      ],
+      [
+        -1.69,
+        1.69
+      ],
+      [
+        -1.65806,
+        1.65806
+      ],
+      [
+        -2.74385,
+        2.84121
+      ],
+      [
+        -0.17453,
+        1.74533
+      ]
+    ]
+  },
+  "normalization_bundle_valid": false,
+  "operations": {
+    "limit": "explicit_safety_limit_with_requested_and_executed_values",
+    "transform": "pure_unclamped_coordinate_conversion",
+    "validate": "fail_closed_representation_range_validation"
+  },
+  "ordered_joint_names": [
+    "shoulder_pan",
+    "shoulder_lift",
+    "elbow_flex",
+    "wrist_flex",
+    "wrist_roll",
+    "gripper"
+  ],
+  "physical_follower_commanded": false,
+  "processor_name": "scenesmith_so101_canonical_processor_v1",
+  "representations": {
+    "canonical": "absolute_joint_degrees_plus_gripper_percent",
+    "mujoco": "absolute_joint_radians_plus_gripper_radians"
+  },
+  "schema_version": "scenesmith.so101_canonical_processor_contract.v1",
+  "simulation_training_ready": false,
+  "source_experience_record_contract_ref": {
+    "file_sha256": "4214679b11c22ba147d7e874d149043e26b8bdad188e0348b6d2d5bb53a11dad",
+    "identity_sha256": "f2b8b462ec5b153c6e5366a10f85a1e6ebf99c580b2eaf3b94e33f7d88226ab6",
+    "path": "configurations/robot_lab/experience_record_contract.json",
+    "schema_version": "scenesmith.experience_record_contract.v1"
+  },
+  "verification": {
+    "golden_canonical_values": [
+      0.0,
+      74.33732126780471,
+      -29.419431511263554,
+      -27.501974166279513,
+      0.0,
+      27.32126300876105
+    ],
+    "golden_mujoco_values": [
+      0.0,
+      -0.55,
+      1.05,
+      -0.48,
+      0.0,
+      0.35
+    ],
+    "gripper_monotonic_canonical_percent": [
+      0.0,
+      100.0
+    ],
+    "limited_out_of_range_example": {
+      "action_mode": "absolute",
+      "clipped_indices": [
+        5
+      ],
+      "clipped_joint_names": [
+        "gripper"
+      ],
+      "executed_values": [
+        0.0,
+        74.33732126780471,
+        -29.419431511263554,
+        -27.501974166279513,
+        0.0,
+        100.0
+      ],
+      "operation": "safety_limit",
+      "ordered_joint_names": [
+        "shoulder_pan",
+        "shoulder_lift",
+        "elbow_flex",
+        "wrist_flex",
+        "wrist_roll",
+        "gripper"
+      ],
+      "processor_name": "scenesmith_so101_canonical_processor_v1",
+      "representation": "absolute_joint_degrees_plus_gripper_percent",
+      "requested_values": [
+        0.0,
+        74.33732126780471,
+        -29.419431511263554,
+        -27.501974166279513,
+        0.0,
+        120.0
+      ],
+      "safety_limited": true
+    },
+    "maximum_round_trip_error": 4.440892098500626e-16,
+    "pure_transform_out_of_range_gripper_rad": 2.129302,
+    "random_round_trip_count": 128,
+    "random_seed": 1702
+  }
+}

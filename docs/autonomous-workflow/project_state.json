@@ -2295,6 +2295,37 @@
         "physical_actuation"
       ]
     },
+    "T17.2": {
+      "state": "verified",
+      "depends_on": ["T16.2", "T16.3", "T17.1"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "108",
+      "review_decision_id": "134",
+      "result": "named canonical SO-101 processor verifies pure unclamped bidirectional transformation, separate fail-closed validation, and separate safety limiting with requested-versus-executed evidence",
+      "artifact": {
+        "path": "configurations/robot_lab/so101_canonical_processor_contract.json",
+        "identity_sha256": "9800c873896eee63c10da7a4c02c964ff1faf28711d438c89731f3266d77a6f2",
+        "file_sha256": "cd60dce9f791f4c8becf7d33baa2382d96b843fe0af5b975a0ea0f796505d902",
+        "size_bytes": 3945,
+        "processor_name": "scenesmith_so101_canonical_processor_v1",
+        "random_round_trip_count": 128,
+        "maximum_round_trip_error": 4.440892098500626e-16,
+        "broad_test_count": 221
+      },
+      "authority_granted": [
+        "canonical_so101_processor_valid",
+        "pure_coordinate_transform_valid",
+        "separate_action_validation_valid",
+        "separate_safety_limiting_evidence_valid"
+      ],
+      "authority_not_granted": [
+        "normalization_bundle_valid",
+        "compiled_training_frames",
+        "simulation_training_ready",
+        "optimizer_training",
+        "physical_actuation"
+      ]
+    },
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],
