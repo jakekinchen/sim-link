@@ -98,10 +98,14 @@ class CausalSortExpert:
         self.noise_std = noise_std
         self.model = mujoco.MjModel.from_xml_path(str(xml_path))
         self.data = mujoco.MjData(self.model)
-        self.renderer = mujoco.Renderer(
-            self.model,
-            height=config.image_size,
-            width=config.image_size,
+        self.renderer = (
+            mujoco.Renderer(
+                self.model,
+                height=config.image_size,
+                width=config.image_size,
+            )
+            if config.capture_images
+            else None
         )
         self.gripper_site_id = self._id(mujoco.mjtObj.mjOBJ_SITE, "gripperframe")
         self.gripper_body_id = self._id(mujoco.mjtObj.mjOBJ_BODY, "gripper")
@@ -122,7 +126,9 @@ class CausalSortExpert:
         self.last_images: dict[str, np.ndarray] = {}
 
     def close(self) -> None:
-        self.renderer.close()
+        if self.renderer is not None:
+            self.renderer.close()
+        self.frame_sink = lambda _frame, _images: None
 
     def run(self) -> dict[str, Any]:
         mujoco = self.mujoco
@@ -162,6 +168,8 @@ class CausalSortExpert:
         }
 
     def render(self, camera: str) -> np.ndarray:
+        if self.renderer is None:
+            raise RuntimeError("Image capture is disabled for this expert")
         self.renderer.update_scene(self.data, camera=camera)
         return self.renderer.render().copy()
 
@@ -314,6 +322,8 @@ class CausalSortExpert:
         self.frame_index += 1
 
     def _capture(self, camera: str, camera_index: int) -> np.ndarray:
+        if self.renderer is None:
+            raise RuntimeError("Image capture is disabled for this expert")
         self.renderer.update_scene(self.data, camera=camera)
         pixels = self.renderer.render().copy()
         if self.brightness == 1.0 and self.noise_std <= 0:

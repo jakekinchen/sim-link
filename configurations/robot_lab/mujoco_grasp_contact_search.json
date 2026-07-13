@@ -1,0 +1,7460 @@
+{
+  "anchor_dimensions_m": [
+    0.05,
+    0.035,
+    0.03
+  ],
+  "anchor_mass_kg": 0.025,
+  "authority_not_granted": [
+    "unassisted_mujoco_grasp_success",
+    "strict_policy_grasp_success",
+    "metric_gripper_aperture_profile_complete",
+    "physical_twin_qualified",
+    "simulation_training_ready",
+    "physical_actuation"
+  ],
+  "candidate_count": 20,
+  "candidates": [
+    {
+      "close_two_jaw_frames": 11,
+      "final_object_z_m": 0.324674,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 4.1971684,
+      "maximum_object_z_m": 0.325019,
+      "pregrasp_height_m": 0.018,
+      "two_jaw_contact_gripper_percent_range": [
+        0.2395,
+        16.724525
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": -1.5
+    },
+    {
+      "close_two_jaw_frames": 7,
+      "final_object_z_m": 0.324888,
+      "hold_two_jaw_frames": 5,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 2.31735768,
+      "maximum_object_z_m": 0.327009,
+      "pregrasp_height_m": 0.022,
+      "two_jaw_contact_gripper_percent_range": [
+        0.237264,
+        7.244748
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": -1.5
+    },
+    {
+      "close_two_jaw_frames": 5,
+      "final_object_z_m": 0.328481,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 1.814686161,
+      "maximum_object_z_m": 0.329111,
+      "pregrasp_height_m": 0.026,
+      "two_jaw_contact_gripper_percent_range": [
+        0.237192,
+        3.852752
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": -1.5
+    },
+    {
+      "close_two_jaw_frames": 0,
+      "final_object_z_m": 0.324974,
+      "hold_two_jaw_frames": 0,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 1.073731829,
+      "maximum_object_z_m": 0.325649,
+      "pregrasp_height_m": 0.03,
+      "two_jaw_contact_gripper_percent_range": null,
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": -1.5
+    },
+    {
+      "close_two_jaw_frames": 8,
+      "final_object_z_m": 0.324551,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 4.371728866,
+      "maximum_object_z_m": 0.325072,
+      "pregrasp_height_m": 0.018,
+      "two_jaw_contact_gripper_percent_range": [
+        0.232507,
+        9.31389
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": -1.0
+    },
+    {
+      "close_two_jaw_frames": 0,
+      "final_object_z_m": 0.324974,
+      "hold_two_jaw_frames": 0,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.33554487,
+      "maximum_object_z_m": 0.324974,
+      "pregrasp_height_m": 0.022,
+      "two_jaw_contact_gripper_percent_range": null,
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": -1.0
+    },
+    {
+      "close_two_jaw_frames": 0,
+      "final_object_z_m": 0.324974,
+      "hold_two_jaw_frames": 0,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.0,
+      "maximum_object_z_m": 0.324974,
+      "pregrasp_height_m": 0.026,
+      "two_jaw_contact_gripper_percent_range": null,
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": -1.0
+    },
+    {
+      "close_two_jaw_frames": 0,
+      "final_object_z_m": 0.324974,
+      "hold_two_jaw_frames": 0,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.0,
+      "maximum_object_z_m": 0.324974,
+      "pregrasp_height_m": 0.03,
+      "two_jaw_contact_gripper_percent_range": null,
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": -1.0
+    },
+    {
+      "close_two_jaw_frames": 8,
+      "final_object_z_m": 0.324547,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 4.640721512,
+      "maximum_object_z_m": 0.325022,
+      "pregrasp_height_m": 0.018,
+      "two_jaw_contact_gripper_percent_range": [
+        0.232872,
+        9.285314
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 1.0
+    },
+    {
+      "close_two_jaw_frames": 0,
+      "final_object_z_m": 0.324974,
+      "hold_two_jaw_frames": 0,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.0,
+      "maximum_object_z_m": 0.324974,
+      "pregrasp_height_m": 0.022,
+      "two_jaw_contact_gripper_percent_range": null,
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 1.0
+    },
+    {
+      "close_two_jaw_frames": 0,
+      "final_object_z_m": 0.324974,
+      "hold_two_jaw_frames": 0,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.0,
+      "maximum_object_z_m": 0.324974,
+      "pregrasp_height_m": 0.026,
+      "two_jaw_contact_gripper_percent_range": null,
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 1.0
+    },
+    {
+      "close_two_jaw_frames": 0,
+      "final_object_z_m": 0.324974,
+      "hold_two_jaw_frames": 0,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.0,
+      "maximum_object_z_m": 0.324974,
+      "pregrasp_height_m": 0.03,
+      "two_jaw_contact_gripper_percent_range": null,
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 1.0
+    },
+    {
+      "close_two_jaw_frames": 11,
+      "final_object_z_m": 0.324662,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 4.243401828,
+      "maximum_object_z_m": 0.325027,
+      "pregrasp_height_m": 0.018,
+      "two_jaw_contact_gripper_percent_range": [
+        0.2395,
+        16.681336
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 1.5
+    },
+    {
+      "close_two_jaw_frames": 7,
+      "final_object_z_m": 0.324945,
+      "hold_two_jaw_frames": 4,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 2.462921885,
+      "maximum_object_z_m": 0.327046,
+      "pregrasp_height_m": 0.022,
+      "two_jaw_contact_gripper_percent_range": [
+        0.238923,
+        7.25295
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 1.5
+    },
+    {
+      "close_two_jaw_frames": 5,
+      "final_object_z_m": 0.32845,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 2.130360437,
+      "maximum_object_z_m": 0.329212,
+      "pregrasp_height_m": 0.026,
+      "two_jaw_contact_gripper_percent_range": [
+        0.237878,
+        3.858506
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 1.5
+    },
+    {
+      "close_two_jaw_frames": 0,
+      "final_object_z_m": 0.324974,
+      "hold_two_jaw_frames": 0,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 0.0,
+      "maximum_object_z_m": 0.324974,
+      "pregrasp_height_m": 0.03,
+      "two_jaw_contact_gripper_percent_range": null,
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 1.5
+    },
+    {
+      "close_two_jaw_frames": 9,
+      "final_object_z_m": 0.324713,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 14.180275328,
+      "maximum_object_z_m": 0.325374,
+      "pregrasp_height_m": 0.018,
+      "two_jaw_contact_gripper_percent_range": [
+        0.239594,
+        20.853793
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 2.0
+    },
+    {
+      "close_two_jaw_frames": 8,
+      "final_object_z_m": 0.326151,
+      "hold_two_jaw_frames": 7,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 3.685876167,
+      "maximum_object_z_m": 0.327068,
+      "pregrasp_height_m": 0.022,
+      "two_jaw_contact_gripper_percent_range": [
+        0.236341,
+        14.03907
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 2.0
+    },
+    {
+      "close_two_jaw_frames": 6,
+      "final_object_z_m": 0.328366,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 3.472521763,
+      "maximum_object_z_m": 0.329457,
+      "pregrasp_height_m": 0.026,
+      "two_jaw_contact_gripper_percent_range": [
+        0.234298,
+        5.431073
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 2.0
+    },
+    {
+      "close_two_jaw_frames": 2,
+      "final_object_z_m": 0.330436,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 0,
+      "maximum_contact_force_n": 3.136294395,
+      "maximum_object_z_m": 0.330797,
+      "pregrasp_height_m": 0.03,
+      "two_jaw_contact_gripper_percent_range": [
+        0.233699,
+        0.857533
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": 2.0
+    }
+  ],
+  "close_target_rad": -0.17,
+  "evidence_mode": "finite_mujoco_two_jaw_contact_search",
+  "hardware_accessed": false,
+  "identity_sha256": "5a5de249f7374cde37b6e201a4ae4097ee74e0f39bf7884c205947e8cf7446e2",
+  "impact_limit_n": 5.0,
+  "local_capabilities": [
+    "low_impact_two_jaw_mujoco_contact_candidate_observed"
+  ],
+  "metric_gripper_aperture_profile_complete": false,
+  "object_id": "analytic_turquoise_anchor_cousin_v1",
+  "physical_follower_commanded": false,
+  "physical_measurement_claimed": false,
+  "physical_twin_qualified": false,
+  "pinned_mjcf": {
+    "path": "external/SO-ARM100/Simulation/SO101/so101_new_calib.xml",
+    "sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+    "size_bytes": 13921
+  },
+  "pregrasp_height_grid_m": [
+    0.018,
+    0.022,
+    0.026,
+    0.03
+  ],
+  "schema_version": "scenesmith.mujoco_grasp_contact_search.v1",
+  "selected_candidate": {
+    "close_two_jaw_frames": 11,
+    "final_object_z_m": 0.324674,
+    "hold_two_jaw_frames": 8,
+    "lift_hold_two_jaw_frames": 0,
+    "lift_two_jaw_frames": 0,
+    "maximum_contact_force_n": 4.1971684,
+    "maximum_object_z_m": 0.325019,
+    "pregrasp_height_m": 0.018,
+    "two_jaw_contact_gripper_percent_range": [
+      0.2395,
+      16.724525
+    ],
+    "unassisted_lift_clearance_maintained": false,
+    "wrist_roll_rad": -1.5
+  },
+  "selected_unassisted_validation": {
+    "contact_gated_assist_ever_active": false,
+    "raw_frame_count": 148,
+    "raw_frames": [
+      {
+        "action": [
+          2.889885,
+          8.577867,
+          -0.819842,
+          60.714905,
+          -85.943669,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.440969938,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 0,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.1240943,
+          0.00039247,
+          0.359065625
+        ],
+        "phase": "settle",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.889885,
+          8.578126,
+          -0.794531,
+          60.71951,
+          -85.94413,
+          92.430031
+        ],
+        "time_s": 0.35
+      },
+      {
+        "action": [
+          2.889885,
+          8.577867,
+          -0.819842,
+          60.714905,
+          -85.943669,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.440970015,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 1,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.1240943,
+          0.00039247,
+          0.359065625
+        ],
+        "phase": "settle",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.889885,
+          8.578126,
+          -0.794531,
+          60.71951,
+          -85.94413,
+          92.430031
+        ],
+        "time_s": 0.384
+      },
+      {
+        "action": [
+          2.889885,
+          8.577867,
+          -0.819842,
+          60.714905,
+          -85.943669,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.44097003,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 2,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.1240943,
+          0.00039247,
+          0.359065625
+        ],
+        "phase": "settle",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.889885,
+          8.578126,
+          -0.794531,
+          60.71951,
+          -85.94413,
+          92.430031
+        ],
+        "time_s": 0.418
+      },
+      {
+        "action": [
+          2.889885,
+          8.577867,
+          -0.819842,
+          60.714905,
+          -85.943669,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.440970033,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 3,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.1240943,
+          0.00039247,
+          0.359065625
+        ],
+        "phase": "settle",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.889885,
+          8.578126,
+          -0.794531,
+          60.71951,
+          -85.94413,
+          92.430031
+        ],
+        "time_s": 0.452
+      },
+      {
+        "action": [
+          2.87467,
+          9.360656,
+          -1.05649,
+          59.993337,
+          -86.348729,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.440970033,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 4,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.1240943,
+          0.00039247,
+          0.359065625
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.889885,
+          8.578126,
+          -0.794531,
+          60.71951,
+          -85.94413,
+          92.430031
+        ],
+        "time_s": 0.486
+      },
+      {
+        "action": [
+          2.831672,
+          11.572888,
+          -1.725277,
+          57.954122,
+          -87.493464,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 1.113946762,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 5,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.124909207,
+          0.000401534,
+          0.3595644
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.871604,
+          9.384511,
+          -1.00266,
+          59.997716,
+          -86.309787,
+          92.430035
+        ],
+        "time_s": 0.52
+      },
+      {
+        "action": [
+          2.76486,
+          15.010357,
+          -2.764468,
+          54.785495,
+          -89.272206,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 6,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.12788927,
+          0.000360985,
+          0.362256886
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.833078,
+          11.756065,
+          -1.802446,
+          57.712857,
+          -87.812218,
+          92.430062
+        ],
+        "time_s": 0.554
+      },
+      {
+        "action": [
+          2.678203,
+          19.468855,
+          -4.112331,
+          50.675693,
+          -91.579287,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 7,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.132295367,
+          0.000313438,
+          0.364639496
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.770458,
+          16.07631,
+          -2.998699,
+          53.867488,
+          -89.724337,
+          92.430024
+        ],
+        "time_s": 0.588
+      },
+      {
+        "action": [
+          2.575669,
+          24.744178,
+          -5.70713,
+          45.812949,
+          -94.309039,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 8,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.137491653,
+          0.000281529,
+          0.368464636
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.687288,
+          20.118222,
+          -4.35313,
+          50.133723,
+          -92.176882,
+          92.430059
+        ],
+        "time_s": 0.622
+      },
+      {
+        "action": [
+          2.461229,
+          30.632119,
+          -7.487132,
+          40.3855,
+          -97.355795,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 9,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.144282678,
+          0.000221521,
+          0.37237829
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.587648,
+          25.196925,
+          -5.953077,
+          45.233496,
+          -94.906638,
+          92.430036
+        ],
+        "time_s": 0.656
+      },
+      {
+        "action": [
+          2.33885,
+          36.928471,
+          -9.390602,
+          34.581581,
+          -100.613887,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 10,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.152714014,
+          0.000128269,
+          0.377148375
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.474367,
+          31.381641,
+          -7.955129,
+          39.636183,
+          -98.077924,
+          92.430074
+        ],
+        "time_s": 0.69
+      },
+      {
+        "action": [
+          2.212502,
+          43.42903,
+          -11.355807,
+          28.589426,
+          -103.977646,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 11,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.160687043,
+          8.3766e-05,
+          0.379348513
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.35332,
+          37.762254,
+          -9.680202,
+          33.839437,
+          -101.36766,
+          92.430051
+        ],
+        "time_s": 0.724
+      },
+      {
+        "action": [
+          2.086155,
+          49.929589,
+          -13.321011,
+          22.597271,
+          -107.341405,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 12,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.170455151,
+          -7.019e-06,
+          0.383401612
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.22711,
+          44.239849,
+          -11.849639,
+          27.883361,
+          -104.730954,
+          92.430066
+        ],
+        "time_s": 0.758
+      },
+      {
+        "action": [
+          1.963776,
+          56.225942,
+          -15.224481,
+          16.793352,
+          -110.599497,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 13,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.17979328,
+          -6.5917e-05,
+          0.385321357
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          2.10059,
+          50.78114,
+          -13.708797,
+          21.76976,
+          -108.120749,
+          92.430063
+        ],
+        "time_s": 0.792
+      },
+      {
+        "action": [
+          1.849335,
+          62.113883,
+          -17.004483,
+          11.365902,
+          -113.646252,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 14,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.189070423,
+          -0.00011062,
+          0.386535594
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.977144,
+          57.261546,
+          -15.644154,
+          15.900887,
+          -111.335102,
+          92.430062
+        ],
+        "time_s": 0.826
+      },
+      {
+        "action": [
+          1.746802,
+          67.389205,
+          -18.599283,
+          6.503159,
+          -116.376005,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 15,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.197497239,
+          -0.000126007,
+          0.386563968
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.860982,
+          63.29598,
+          -17.371936,
+          10.422705,
+          -114.335492,
+          92.430056
+        ],
+        "time_s": 0.86
+      },
+      {
+        "action": [
+          1.660145,
+          71.847704,
+          -19.947145,
+          2.393356,
+          -118.683086,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 16,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.205072594,
+          -0.000128214,
+          0.386339661
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.755902,
+          68.589066,
+          -18.91871,
+          5.520706,
+          -117.049125,
+          92.43005
+        ],
+        "time_s": 0.894
+      },
+      {
+        "action": [
+          1.593332,
+          75.285172,
+          -20.986337,
+          -0.77527,
+          -120.461828,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 17,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.211170895,
+          -9.9265e-05,
+          0.385556739
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.665986,
+          72.998491,
+          -20.178118,
+          1.47137,
+          -119.191137,
+          92.430043
+        ],
+        "time_s": 0.928
+      },
+      {
+        "action": [
+          1.550335,
+          77.497404,
+          -21.655124,
+          -2.814485,
+          -121.606562,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 18,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.215574873,
+          -5.8778e-05,
+          0.384621425
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.595584,
+          76.270942,
+          -21.13429,
+          -1.493291,
+          -120.829895,
+          92.430038
+        ],
+        "time_s": 0.962
+      },
+      {
+        "action": [
+          1.53512,
+          78.280194,
+          -21.891771,
+          -3.536053,
+          -122.011622,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 19,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218200483,
+          -4.138e-06,
+          0.384452975
+        ],
+        "phase": "approach",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.548645,
+          77.969863,
+          -21.691939,
+          -3.144726,
+          -121.663159,
+          92.430032
+        ],
+        "time_s": 0.996
+      },
+      {
+        "action": [
+          1.53511,
+          78.382281,
+          -21.930571,
+          -3.543089,
+          -122.012145,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.567623371,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 20,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218965696,
+          1.8557e-05,
+          0.38493947
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.530903,
+          78.265255,
+          -21.868948,
+          -3.519195,
+          -121.99739,
+          92.430046
+        ],
+        "time_s": 1.03
+      },
+      {
+        "action": [
+          1.535083,
+          78.676873,
+          -22.042534,
+          -3.563392,
+          -122.013653,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.359429545,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 21,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218944206,
+          4.145e-06,
+          0.384674617
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.53438,
+          78.383829,
+          -21.910469,
+          -3.540956,
+          -122.015612,
+          92.430063
+        ],
+        "time_s": 1.064
+      },
+      {
+        "action": [
+          1.535038,
+          79.146471,
+          -22.22101,
+          -3.595756,
+          -122.016056,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.810954316,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 22,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218928921,
+          2.625e-06,
+          0.384035039
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534885,
+          78.662481,
+          -21.999936,
+          -3.556231,
+          -122.01294,
+          92.430064
+        ],
+        "time_s": 1.098
+      },
+      {
+        "action": [
+          1.534979,
+          79.773573,
+          -22.459347,
+          -3.638976,
+          -122.019266,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 1.350488042,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 23,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218910224,
+          2.408e-06,
+          0.382935717
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534993,
+          79.141808,
+          -22.153449,
+          -3.580569,
+          -122.01583,
+          92.430061
+        ],
+        "time_s": 1.132
+      },
+      {
+        "action": [
+          1.534907,
+          80.54068,
+          -22.750894,
+          -3.691844,
+          -122.023192,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 1.761314706,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 24,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218908709,
+          2.205e-06,
+          0.381402932
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534992,
+          79.828992,
+          -22.375422,
+          -3.619514,
+          -122.01898,
+          92.430057
+        ],
+        "time_s": 1.166
+      },
+      {
+        "action": [
+          1.534824,
+          81.430291,
+          -23.089001,
+          -3.753155,
+          -122.027746,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 2.397924995,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 25,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219017906,
+          -8.56e-07,
+          0.379702697
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534945,
+          80.679647,
+          -22.680188,
+          -3.674836,
+          -122.023271,
+          92.430056
+        ],
+        "time_s": 1.2
+      },
+      {
+        "action": [
+          1.53473,
+          82.424905,
+          -23.467015,
+          -3.821703,
+          -122.032837,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.26340551,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 26,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219207886,
+          -6.036e-06,
+          0.377947702
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534879,
+          81.60982,
+          -23.04478,
+          -3.740557,
+          -122.027992,
+          92.430054
+        ],
+        "time_s": 1.234
+      },
+      {
+        "action": [
+          1.534628,
+          83.507022,
+          -23.878285,
+          -3.896282,
+          -122.038375,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 27,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219335361,
+          -9.51e-06,
+          0.375880045
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534796,
+          82.659179,
+          -23.438941,
+          -3.810936,
+          -122.033291,
+          92.430053
+        ],
+        "time_s": 1.268
+      },
+      {
+        "action": [
+          1.53452,
+          84.659141,
+          -24.31616,
+          -3.975685,
+          -122.044272,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 28,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219459993,
+          -1.2902e-05,
+          0.373688855
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534705,
+          83.757384,
+          -23.861095,
+          -3.886355,
+          -122.038979,
+          92.430051
+        ],
+        "time_s": 1.302
+      },
+      {
+        "action": [
+          1.534406,
+          85.863761,
+          -24.77399,
+          -4.058706,
+          -122.050438,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 29,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219548446,
+          -1.5291e-05,
+          0.371300457
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534601,
+          84.943531,
+          -24.304943,
+          -3.966124,
+          -122.044967,
+          92.43005
+        ],
+        "time_s": 1.336
+      },
+      {
+        "action": [
+          1.53429,
+          87.103383,
+          -25.245122,
+          -4.14414,
+          -122.056783,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 30,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219618393,
+          -1.7199e-05,
+          0.368798008
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534496,
+          86.164658,
+          -24.770978,
+          -4.049818,
+          -122.051252,
+          92.430048
+        ],
+        "time_s": 1.37
+      },
+      {
+        "action": [
+          1.534171,
+          88.360505,
+          -25.722905,
+          -4.23078,
+          -122.063217,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 31,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.21966841,
+          -1.854e-05,
+          0.366251791
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534381,
+          87.410133,
+          -25.243533,
+          -4.135244,
+          -122.057604,
+          92.430046
+        ],
+        "time_s": 1.404
+      },
+      {
+        "action": [
+          1.534053,
+          89.617627,
+          -26.200688,
+          -4.317419,
+          -122.069651,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 32,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219672226,
+          -1.8651e-05,
+          0.363601497
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534266,
+          88.679503,
+          -25.724899,
+          -4.222194,
+          -122.064092,
+          92.430044
+        ],
+        "time_s": 1.438
+      },
+      {
+        "action": [
+          1.533936,
+          90.857248,
+          -26.67182,
+          -4.402853,
+          -122.075996,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 33,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219649744,
+          -1.8039e-05,
+          0.360971533
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534149,
+          89.932671,
+          -26.200941,
+          -4.308612,
+          -122.070482,
+          92.430042
+        ],
+        "time_s": 1.472
+      },
+      {
+        "action": [
+          1.533823,
+          92.061869,
+          -27.129649,
+          -4.485875,
+          -122.082162,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 34,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219591114,
+          -1.6455e-05,
+          0.358349602
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534032,
+          91.168497,
+          -26.669902,
+          -4.393853,
+          -122.076794,
+          92.43004
+        ],
+        "time_s": 1.506
+      },
+      {
+        "action": [
+          1.533715,
+          93.213988,
+          -27.567524,
+          -4.565278,
+          -122.088059,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 35,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219516177,
+          -1.4426e-05,
+          0.355827819
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.533917,
+          92.351065,
+          -27.123045,
+          -4.476492,
+          -122.08287,
+          92.430038
+        ],
+        "time_s": 1.54
+      },
+      {
+        "action": [
+          1.533613,
+          94.296104,
+          -27.978795,
+          -4.639856,
+          -122.093598,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 36,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219403206,
+          -1.1366e-05,
+          0.353381438
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.533805,
+          93.486042,
+          -27.553739,
+          -4.555293,
+          -122.088652,
+          92.430036
+        ],
+        "time_s": 1.574
+      },
+      {
+        "action": [
+          1.533519,
+          95.290718,
+          -28.356809,
+          -4.708404,
+          -122.098688,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 37,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219300043,
+          -8.569e-06,
+          0.35114365
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.5337,
+          94.5229,
+          -27.956883,
+          -4.629298,
+          -122.094053,
+          92.430034
+        ],
+        "time_s": 1.608
+      },
+      {
+        "action": [
+          1.533436,
+          96.180329,
+          -28.694915,
+          -4.769715,
+          -122.103242,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 38,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219140447,
+          -4.239e-06,
+          0.348997673
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.533599,
+          95.500002,
+          -28.323189,
+          -4.696995,
+          -122.098944,
+          92.430034
+        ],
+        "time_s": 1.642
+      },
+      {
+        "action": [
+          1.533363,
+          96.947436,
+          -28.986463,
+          -4.822584,
+          -122.107168,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 2.391202322,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 39,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219053989,
+          -1.887e-06,
+          0.347230794
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.533512,
+          96.320829,
+          -28.653597,
+          -4.75808,
+          -122.103321,
+          92.430032
+        ],
+        "time_s": 1.676
+      },
+      {
+        "action": [
+          1.533304,
+          97.574539,
+          -29.2248,
+          -4.865803,
+          -122.110378,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 2.043018389,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.219,
+            0.0,
+            0.324974
+          ]
+        },
+        "frame_index": 40,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218875552,
+          2.966e-06,
+          0.345551775
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.533429,
+          97.070026,
+          -28.929787,
+          -4.808945,
+          -122.106976,
+          92.430032
+        ],
+        "time_s": 1.71
+      },
+      {
+        "action": [
+          1.53326,
+          98.044136,
+          -29.403276,
+          -4.898167,
+          -122.112781,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 1.16039445,
+        "anchor_speed_m_s": 0.000902706,
+        "anchor_step_displacement_m": 3.0692e-05,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218971,
+            1e-06,
+            0.324964
+          ]
+        },
+        "frame_index": 41,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218922112,
+          1.72e-06,
+          0.344522707
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.000327
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533373,
+          97.609996,
+          -29.173316,
+          -4.85704,
+          -122.110057,
+          92.430031
+        ],
+        "time_s": 1.744
+      },
+      {
+        "action": [
+          1.533232,
+          98.338729,
+          -29.515239,
+          -4.91847,
+          -122.114289,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.64807684,
+        "anchor_speed_m_s": 0.004116597,
+        "anchor_step_displacement_m": 0.000139964,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218901,
+            8e-06,
+            0.324843
+          ]
+        },
+        "frame_index": 42,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219039254,
+          -1.063e-06,
+          0.343795692
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 1.438720472,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.000941
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533247,
+          98.036047,
+          -29.378075,
+          -4.903029,
+          -122.112711,
+          92.430033
+        ],
+        "time_s": 1.778
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.651566229,
+        "anchor_speed_m_s": 0.003996647,
+        "anchor_step_displacement_m": 0.000135886,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218923,
+            1.3e-05,
+            0.324709
+          ]
+        },
+        "frame_index": 43,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219079015,
+          -1.823e-06,
+          0.34329597
+        ],
+        "phase": "pregrasp",
+        "robot_anchor_contact_force_n_max": 2.580541619,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001308
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533135,
+          98.310193,
+          -29.507434,
+          -4.930098,
+          -122.114879,
+          92.430036
+        ],
+        "time_s": 1.812
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.453921478,
+        "anchor_speed_m_s": 0.001398219,
+        "anchor_step_displacement_m": 4.7539e-05,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218941,
+            1.3e-05,
+            0.324665
+          ]
+        },
+        "frame_index": 44,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.21911385,
+          -2.803e-06,
+          0.343122728
+        ],
+        "phase": "pregrasp_hold",
+        "robot_anchor_contact_force_n_max": 2.986101811,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001436
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533125,
+          98.417815,
+          -29.563596,
+          -4.942917,
+          -122.115888,
+          92.43004
+        ],
+        "time_s": 1.846
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.335969956,
+        "anchor_speed_m_s": 0.000229713,
+        "anchor_step_displacement_m": 7.81e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218947,
+            1.3e-05,
+            0.32466
+          ]
+        },
+        "frame_index": 45,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219125113,
+          -3.22e-06,
+          0.343123991
+        ],
+        "phase": "pregrasp_hold",
+        "robot_anchor_contact_force_n_max": 3.054988243,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001429
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533146,
+          98.426321,
+          -29.573195,
+          -4.940198,
+          -122.116094,
+          92.430042
+        ],
+        "time_s": 1.88
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.314083191,
+        "anchor_speed_m_s": 5.0943e-05,
+        "anchor_step_displacement_m": 1.732e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218946,
+            1.2e-05,
+            0.324659
+          ]
+        },
+        "frame_index": 46,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219123328,
+          -3.232e-06,
+          0.343123645
+        ],
+        "phase": "pregrasp_hold",
+        "robot_anchor_contact_force_n_max": 3.052804414,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001429
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.53316,
+          98.42547,
+          -29.572103,
+          -4.940466,
+          -122.116116,
+          92.430042
+        ],
+        "time_s": 1.914
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          92.430177
+        ],
+        "actuator_effort_nm_max": 0.298064241,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218945,
+            1.1e-05,
+            0.324659
+          ]
+        },
+        "frame_index": 47,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219121687,
+          -3.218e-06,
+          0.343124386
+        ],
+        "phase": "pregrasp_hold",
+        "robot_anchor_contact_force_n_max": 3.051717851,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533166,
+          98.42444,
+          -29.571161,
+          -4.940566,
+          -122.116116,
+          92.430042
+        ],
+        "time_s": 1.948
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          92.260194
+        ],
+        "actuator_effort_nm_max": 0.293343397,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218944,
+            1e-05,
+            0.324659
+          ]
+        },
+        "frame_index": 48,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219121284,
+          -3.22e-06,
+          0.343124863
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.051234666,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533169,
+          98.424054,
+          -29.570879,
+          -4.940572,
+          -122.116115,
+          92.430042
+        ],
+        "time_s": 1.982
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          91.761769
+        ],
+        "actuator_effort_nm_max": 0.455833889,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218943,
+            9e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 49,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219121232,
+          -3.22e-06,
+          0.343125096
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.05107412,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.53317,
+          98.423925,
+          -29.570808,
+          -4.940569,
+          -122.116115,
+          92.279336
+        ],
+        "time_s": 2.016
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          90.952189
+        ],
+        "actuator_effort_nm_max": 1.049409857,
+        "anchor_speed_m_s": 2.9412e-05,
+        "anchor_step_displacement_m": 1e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218942,
+            9e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 50,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219121245,
+          -3.216e-06,
+          0.343125196
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.051035157,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533168,
+          98.423885,
+          -29.570793,
+          -4.94057,
+          -122.116114,
+          91.797521
+        ],
+        "time_s": 2.05
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          89.848739
+        ],
+        "actuator_effort_nm_max": 3.155014299,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218941,
+            8e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 51,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219121224,
+          -3.228e-06,
+          0.343125209
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050675393,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.53317,
+          98.423871,
+          -29.570786,
+          -4.940567,
+          -122.116114,
+          90.795671
+        ],
+        "time_s": 2.084
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          88.468707
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 2.9412e-05,
+        "anchor_step_displacement_m": 1e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218941,
+            7e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 52,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219121186,
+          -3.243e-06,
+          0.343125185
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050649988,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533173,
+          98.423866,
+          -29.570777,
+          -4.940559,
+          -122.116114,
+          89.553855
+        ],
+        "time_s": 2.118
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          86.829378
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.21894,
+            6e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 53,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.2191212,
+          -3.228e-06,
+          0.343125188
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050627004,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533169,
+          98.423871,
+          -29.570781,
+          -4.940563,
+          -122.116114,
+          88.183491
+        ],
+        "time_s": 2.152
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          84.94804
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218939,
+            5e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 54,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219121123,
+          -3.253e-06,
+          0.34312512
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050639847,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533176,
+          98.42387,
+          -29.570768,
+          -4.94055,
+          -122.116114,
+          86.435521
+        ],
+        "time_s": 2.186
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          82.841978
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218938,
+            4e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 55,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.21912114,
+          -3.232e-06,
+          0.343125119
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050596968,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.53317,
+          98.423878,
+          -29.570774,
+          -4.940556,
+          -122.116113,
+          84.460681
+        ],
+        "time_s": 2.22
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          80.528479
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218937,
+            3e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 56,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219121058,
+          -3.253e-06,
+          0.343125039
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050624711,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533176,
+          98.42388,
+          -29.57076,
+          -4.940542,
+          -122.116113,
+          82.386007
+        ],
+        "time_s": 2.254
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          78.02483
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218937,
+            3e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 57,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219121038,
+          -3.245e-06,
+          0.343125006
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.05058448,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533174,
+          98.423887,
+          -29.57076,
+          -4.940541,
+          -122.116112,
+          79.937173
+        ],
+        "time_s": 2.288
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          75.348316
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218936,
+            2e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 58,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.21912098,
+          -3.25e-06,
+          0.343124941
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050597408,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001427
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533175,
+          98.423892,
+          -29.570752,
+          -4.940533,
+          -122.116111,
+          77.450325
+        ],
+        "time_s": 2.322
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          72.516225
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218935,
+            1e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 59,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120926,
+          -3.253e-06,
+          0.343124878
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050585316,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533176,
+          98.423899,
+          -29.570745,
+          -4.940526,
+          -122.116109,
+          74.720925
+        ],
+        "time_s": 2.356
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          69.545843
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218934,
+            0.0,
+            0.324659
+          ]
+        },
+        "frame_index": 60,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120871,
+          -3.253e-06,
+          0.343124812
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050582086,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533176,
+          98.423906,
+          -29.570739,
+          -4.940519,
+          -122.116107,
+          71.857986
+        ],
+        "time_s": 2.39
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          66.454455
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218933,
+            -1e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 61,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120812,
+          -3.254e-06,
+          0.343124742
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050582922,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533176,
+          98.423914,
+          -29.570731,
+          -4.940511,
+          -122.116105,
+          68.877291
+        ],
+        "time_s": 2.424
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          63.259349
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 2.9412e-05,
+        "anchor_step_displacement_m": 1e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218933,
+            -2e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 62,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120748,
+          -3.254e-06,
+          0.343124667
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050582773,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533176,
+          98.423922,
+          -29.570724,
+          -4.940503,
+          -122.116102,
+          65.778986
+        ],
+        "time_s": 2.458
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          59.977811
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218932,
+            -3e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 63,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120683,
+          -3.254e-06,
+          0.34312459
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050586864,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533176,
+          98.42393,
+          -29.570716,
+          -4.940494,
+          -122.116099,
+          62.573423
+        ],
+        "time_s": 2.492
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          56.627127
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 2.9412e-05,
+        "anchor_step_displacement_m": 1e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218931,
+            -3e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 64,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120618,
+          -3.252e-06,
+          0.343124512
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050593326,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533176,
+          98.423939,
+          -29.570708,
+          -4.940485,
+          -122.116095,
+          59.279789
+        ],
+        "time_s": 2.526
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          53.224584
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.21893,
+            -4e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 65,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120553,
+          -3.249e-06,
+          0.343124434
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050604126,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533175,
+          98.423947,
+          -29.5707,
+          -4.940476,
+          -122.116091,
+          55.920895
+        ],
+        "time_s": 2.56
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          49.787468
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218929,
+            -5e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 66,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120486,
+          -3.245e-06,
+          0.343124355
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.05061893,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533175,
+          98.423956,
+          -29.570692,
+          -4.940467,
+          -122.116086,
+          52.511956
+        ],
+        "time_s": 2.594
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          46.333066
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 2.9412e-05,
+        "anchor_step_displacement_m": 1e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218929,
+            -6e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 67,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120421,
+          -3.24e-06,
+          0.343124277
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050637355,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533174,
+          98.423964,
+          -29.570685,
+          -4.940458,
+          -122.116081,
+          49.068702
+        ],
+        "time_s": 2.628
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          42.878664
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218928,
+            -7e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 68,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120357,
+          -3.234e-06,
+          0.343124201
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050660169,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533173,
+          98.423973,
+          -29.570677,
+          -4.94045,
+          -122.116076,
+          45.609704
+        ],
+        "time_s": 2.662
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          39.441548
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218927,
+            -8e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 69,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120295,
+          -3.227e-06,
+          0.343124127
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.05068767,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533171,
+          98.423981,
+          -29.57067,
+          -4.940441,
+          -122.11607,
+          42.152475
+        ],
+        "time_s": 2.696
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          36.039005
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218926,
+            -9e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 70,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120236,
+          -3.219e-06,
+          0.343124056
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050719676,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.53317,
+          98.423989,
+          -29.570663,
+          -4.940433,
+          -122.116064,
+          38.713723
+        ],
+        "time_s": 2.73
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          32.688321
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 2.9412e-05,
+        "anchor_step_displacement_m": 1e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218925,
+            -9e-06,
+            0.324659
+          ]
+        },
+        "frame_index": 71,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.21912018,
+          -3.211e-06,
+          0.343123989
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050756222,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533168,
+          98.423996,
+          -29.570656,
+          -4.940425,
+          -122.116058,
+          35.310819
+        ],
+        "time_s": 2.764
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          29.406783
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 2.9412e-05,
+        "anchor_step_displacement_m": 1e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218925,
+            -1e-05,
+            0.324659
+          ]
+        },
+        "frame_index": 72,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120127,
+          -3.203e-06,
+          0.343123926
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050797311,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533166,
+          98.424003,
+          -29.57065,
+          -4.940417,
+          -122.116051,
+          31.961249
+        ],
+        "time_s": 2.798
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          26.211677
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218924,
+            -1.1e-05,
+            0.324659
+          ]
+        },
+        "frame_index": 73,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120078,
+          -3.194e-06,
+          0.343123867
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050842697,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533165,
+          98.424009,
+          -29.570644,
+          -4.94041,
+          -122.116044,
+          28.682206
+        ],
+        "time_s": 2.832
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          23.120289
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218923,
+            -1.2e-05,
+            0.324659
+          ]
+        },
+        "frame_index": 74,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219120032,
+          -3.185e-06,
+          0.343123813
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.050894886,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533163,
+          98.424015,
+          -29.570639,
+          -4.940403,
+          -122.116038,
+          25.490302
+        ],
+        "time_s": 2.866
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          20.149907
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218922,
+            -1.3e-05,
+            0.324659
+          ]
+        },
+        "frame_index": 75,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219119996,
+          -3.174e-06,
+          0.343123769
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.05095165,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.53316,
+          98.424019,
+          -29.570635,
+          -4.940398,
+          -122.116031,
+          22.416496
+        ],
+        "time_s": 2.9
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          17.317815
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 4.1595e-05,
+        "anchor_step_displacement_m": 1.414e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218921,
+            -1.4e-05,
+            0.324659
+          ]
+        },
+        "frame_index": 76,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219119957,
+          -3.166e-06,
+          0.343123724
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.051013638,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001428
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.533159,
+          98.424024,
+          -29.57063,
+          -4.940392,
+          -122.116025,
+          19.477332
+        ],
+        "time_s": 2.934
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          14.641302
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.011950699,
+        "anchor_step_displacement_m": 0.000406324,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218964,
+            0.000381,
+            0.324744
+          ]
+        },
+        "frame_index": 77,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.21902228,
+          -0.000114769,
+          0.343026982
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.263178913,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001592
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.001285
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.561247,
+          98.428799,
+          -29.550031,
+          -4.931504,
+          -122.115293,
+          16.724525
+        ],
+        "time_s": 2.968
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          12.137653
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.036929068,
+        "anchor_step_displacement_m": 0.001255588,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218729,
+            0.001592,
+            0.324978
+          ]
+        },
+        "frame_index": 78,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218933706,
+          -0.000132524,
+          0.342934144
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.6552605,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001912
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.001977
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.564234,
+          98.434131,
+          -29.535573,
+          -4.923622,
+          -122.113973,
+          14.157221
+        ],
+        "time_s": 3.002
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          9.824154
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.048177279,
+        "anchor_step_displacement_m": 0.001638027,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.218043,
+            0.003079,
+            0.324941
+          ]
+        },
+        "frame_index": 79,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218946063,
+          -0.000113969,
+          0.342941837
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.207878521,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001883
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.001634
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.560548,
+          98.435634,
+          -29.540874,
+          -4.924089,
+          -122.11334,
+          11.60162
+        ],
+        "time_s": 3.036
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          7.718092
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.046076531,
+        "anchor_step_displacement_m": 0.001566602,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.21741,
+            0.004512,
+            0.324933
+          ]
+        },
+        "frame_index": 80,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218925844,
+          -9.576e-05,
+          0.342916011
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.356506376,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001917
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.001622
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.556177,
+          98.439293,
+          -29.538816,
+          -4.923235,
+          -122.113549,
+          9.358311
+        ],
+        "time_s": 3.07
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          5.836754
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.04571859,
+        "anchor_step_displacement_m": 0.001554432,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.216863,
+            0.005967,
+            0.324938
+          ]
+        },
+        "frame_index": 81,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218873959,
+          -0.000147325,
+          0.342855934
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.100797574,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.002
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.002044
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.570538,
+          98.445848,
+          -29.530531,
+          -4.919084,
+          -122.113953,
+          7.315344
+        ],
+        "time_s": 3.104
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          4.197425
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.049081151,
+        "anchor_step_displacement_m": 0.001668759,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.216464,
+            0.007587,
+            0.324972
+          ]
+        },
+        "frame_index": 82,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218878763,
+          -0.000225988,
+          0.342861909
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.493950291,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.002042
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.002634
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.584939,
+          98.445135,
+          -29.530906,
+          -4.918626,
+          -122.114223,
+          5.516742
+        ],
+        "time_s": 3.138
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          2.817393
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.050386336,
+        "anchor_step_displacement_m": 0.001713135,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.216132,
+            0.009267,
+            0.325019
+          ]
+        },
+        "frame_index": 83,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218907545,
+          -0.000273357,
+          0.342903305
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 4.1971684,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.002071
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.002999
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.595701,
+          98.437573,
+          -29.532385,
+          -4.921672,
+          -122.114446,
+          3.931484
+        ],
+        "time_s": 3.172
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          1.713943
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.051584529,
+        "anchor_step_displacement_m": 0.001753874,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.21584,
+            0.010996,
+            0.324982
+          ]
+        },
+        "frame_index": 84,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218923364,
+          -0.000261856,
+          0.34291691
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.675967386,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.00204
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.003122
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.592174,
+          98.437838,
+          -29.536744,
+          -4.921885,
+          -122.114744,
+          2.649206
+        ],
+        "time_s": 3.206
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.904363
+        ],
+        "actuator_effort_nm_max": 3.35,
+        "anchor_speed_m_s": 0.046224376,
+        "anchor_step_displacement_m": 0.001571629,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215637,
+            0.012554,
+            0.324944
+          ]
+        },
+        "frame_index": 85,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218940957,
+          -0.000269654,
+          0.342938454
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.909353687,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.002015
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.003071
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.594518,
+          98.435415,
+          -29.537719,
+          -4.92498,
+          -122.115065,
+          1.550074
+        ],
+        "time_s": 3.24
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.405938
+        ],
+        "actuator_effort_nm_max": 0.850093196,
+        "anchor_speed_m_s": 0.040405193,
+        "anchor_step_displacement_m": 0.001373777,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.21549,
+            0.013916,
+            0.324841
+          ]
+        },
+        "frame_index": 86,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218981996,
+          -0.000220082,
+          0.342978596
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 4.158202587,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001872
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.002782
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.583117,
+          98.433022,
+          -29.547938,
+          -4.927758,
+          -122.115364,
+          0.893756
+        ],
+        "time_s": 3.274
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.786283863,
+        "anchor_speed_m_s": 0.031747844,
+        "anchor_step_displacement_m": 0.001079427,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215397,
+            0.014989,
+            0.324769
+          ]
+        },
+        "frame_index": 87,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219007927,
+          -0.000204451,
+          0.343003943
+        ],
+        "phase": "close",
+        "robot_anchor_contact_force_n_max": 3.855262708,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001788
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.002452
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.57948,
+          98.432298,
+          -29.552182,
+          -4.929752,
+          -122.115587,
+          0.410856
+        ],
+        "time_s": 3.308
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.717041563,
+        "anchor_speed_m_s": 0.022264181,
+        "anchor_step_displacement_m": 0.000756982,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215346,
+            0.015739,
+            0.32468
+          ]
+        },
+        "frame_index": 88,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219033209,
+          -0.000176765,
+          0.343032035
+        ],
+        "phase": "grasp_hold",
+        "robot_anchor_contact_force_n_max": 3.589428146,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001652
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.002013
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.574677,
+          98.430032,
+          -29.556032,
+          -4.931492,
+          -122.115757,
+          0.262535
+        ],
+        "time_s": 3.342
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.645401715,
+        "anchor_speed_m_s": 0.013859684,
+        "anchor_step_displacement_m": 0.000471229,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215315,
+            0.016209,
+            0.324666
+          ]
+        },
+        "frame_index": 89,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219060289,
+          -0.000159283,
+          0.343060873
+        ],
+        "phase": "grasp_hold",
+        "robot_anchor_contact_force_n_max": 3.287606719,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001579
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.001639
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.570393,
+          98.42814,
+          -29.56017,
+          -4.934646,
+          -122.115877,
+          0.24308
+        ],
+        "time_s": 3.376
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.550314356,
+        "anchor_speed_m_s": 0.010699335,
+        "anchor_step_displacement_m": 0.000363777,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215293,
+            0.016572,
+            0.324657
+          ]
+        },
+        "frame_index": 90,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219069715,
+          -0.000136196,
+          0.343070787
+        ],
+        "phase": "grasp_hold",
+        "robot_anchor_contact_force_n_max": 3.178069537,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001519
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.00135
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.564918,
+          98.42755,
+          -29.561675,
+          -4.935735,
+          -122.115917,
+          0.245637
+        ],
+        "time_s": 3.41
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.46886434,
+        "anchor_speed_m_s": 0.008626927,
+        "anchor_step_displacement_m": 0.000293316,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.21528,
+            0.016865,
+            0.324653
+          ]
+        },
+        "frame_index": 91,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219075133,
+          -0.000116467,
+          0.343075963
+        ],
+        "phase": "grasp_hold",
+        "robot_anchor_contact_force_n_max": 3.097999878,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001474
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.001122
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.560227,
+          98.427443,
+          -29.562725,
+          -4.936283,
+          -122.115907,
+          0.244317
+        ],
+        "time_s": 3.444
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.398795778,
+        "anchor_speed_m_s": 0.007180869,
+        "anchor_step_displacement_m": 0.00024415,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215272,
+            0.017109,
+            0.324656
+          ]
+        },
+        "frame_index": 92,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219079302,
+          -9.9588e-05,
+          0.343079763
+        ],
+        "phase": "grasp_hold",
+        "robot_anchor_contact_force_n_max": 3.034991662,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.00144
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.000932
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.556195,
+          98.427443,
+          -29.563584,
+          -4.936698,
+          -122.115896,
+          0.242901
+        ],
+        "time_s": 3.478
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.327994819,
+        "anchor_speed_m_s": 0.005857447,
+        "anchor_step_displacement_m": 0.000199153,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215267,
+            0.017308,
+            0.324662
+          ]
+        },
+        "frame_index": 93,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.21908272,
+          -8.2666e-05,
+          0.34308281
+        ],
+        "phase": "grasp_hold",
+        "robot_anchor_contact_force_n_max": 2.975447836,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001411
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.000784
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.552137,
+          98.427476,
+          -29.564303,
+          -4.937045,
+          -122.115895,
+          0.241632
+        ],
+        "time_s": 3.512
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.268894405,
+        "anchor_speed_m_s": 0.004564607,
+        "anchor_step_displacement_m": 0.000155197,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215262,
+            0.017463,
+            0.324668
+          ]
+        },
+        "frame_index": 94,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219085691,
+          -6.8223e-05,
+          0.34308543
+        ],
+        "phase": "grasp_hold",
+        "robot_anchor_contact_force_n_max": 2.926442603,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001386
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.000675
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.548726,
+          98.427517,
+          -29.564933,
+          -4.93735,
+          -122.115896,
+          0.240459
+        ],
+        "time_s": 3.546
+      },
+      {
+        "action": [
+          1.533223,
+          98.440815,
+          -29.554038,
+          -4.925506,
+          -122.114812,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.231159115,
+        "anchor_speed_m_s": 0.003622426,
+        "anchor_step_displacement_m": 0.000123162,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.21526,
+            0.017586,
+            0.324674
+          ]
+        },
+        "frame_index": 95,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219088149,
+          -5.7188e-05,
+          0.343087608
+        ],
+        "phase": "grasp_hold",
+        "robot_anchor_contact_force_n_max": 2.8893103,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001365
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.00059
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.546115,
+          98.427547,
+          -29.565451,
+          -4.9376,
+          -122.115895,
+          0.2395
+        ],
+        "time_s": 3.58
+      },
+      {
+        "action": [
+          1.533256,
+          98.396954,
+          -29.542465,
+          -4.914085,
+          -122.114093,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.231273857,
+        "anchor_speed_m_s": 0.003036969,
+        "anchor_step_displacement_m": 0.000103257,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215262,
+            0.017689,
+            0.324681
+          ]
+        },
+        "frame_index": 96,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219090386,
+          -4.7228e-05,
+          0.343089653
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 2.859737433,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001348
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.000516
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.543733,
+          98.427541,
+          -29.565913,
+          -4.937829,
+          -122.115896,
+          0.238755
+        ],
+        "time_s": 3.614
+      },
+      {
+        "action": [
+          1.533352,
+          98.268345,
+          -29.508531,
+          -4.880595,
+          -122.111985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.208345724,
+        "anchor_speed_m_s": 0.002702043,
+        "anchor_step_displacement_m": 9.1869e-05,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215266,
+            0.017779,
+            0.324699
+          ]
+        },
+        "frame_index": 97,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219089634,
+          -3.487e-05,
+          0.343178117
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 2.713330567,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.00127
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.000447
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.540854,
+          98.384141,
+          -29.552783,
+          -4.923921,
+          -122.115365,
+          0.238204
+        ],
+        "time_s": 3.648
+      },
+      {
+        "action": [
+          1.533509,
+          98.059448,
+          -29.453412,
+          -4.826198,
+          -122.108562,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.257062925,
+        "anchor_speed_m_s": 0.002598076,
+        "anchor_step_displacement_m": 8.8335e-05,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215271,
+            0.017856,
+            0.324742
+          ]
+        },
+        "frame_index": 98,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219114044,
+          -2.46e-05,
+          0.343435185
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 2.295698754,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.001065
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.000376
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.538338,
+          98.268989,
+          -29.521557,
+          -4.893501,
+          -122.1136,
+          0.237804
+        ],
+        "time_s": 3.682
+      },
+      {
+        "action": [
+          1.533722,
+          97.774723,
+          -29.378285,
+          -4.752055,
+          -122.103896,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.41161893,
+        "anchor_speed_m_s": 0.002962861,
+        "anchor_step_displacement_m": 0.000100737,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215279,
+            0.017928,
+            0.324812
+          ]
+        },
+        "frame_index": 99,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219136166,
+          -1.7769e-05,
+          0.343843208
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 1.504149433,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.000757
+          },
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "moving_jaw_so101_v1",
+            "body2_id": 8,
+            "distance_m": -0.000243
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.536647,
+          98.077289,
+          -29.465161,
+          -4.840012,
+          -122.109497,
+          0.23724
+        ],
+        "time_s": 3.716
+      },
+      {
+        "action": [
+          1.533989,
+          97.418631,
+          -29.284329,
+          -4.659329,
+          -122.098061,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.792423948,
+        "anchor_speed_m_s": 0.003549575,
+        "anchor_step_displacement_m": 0.000120686,
+        "anchor_support_contacts": [
+          "desk_top",
+          "green_tray_left_rim"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215271,
+            0.018002,
+            0.324907
+          ]
+        },
+        "frame_index": 100,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219167291,
+          -1.4367e-05,
+          0.344414026
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.607401571,
+        "robot_cube_contacts": [
+          {
+            "body1": "analytic_turquoise_anchor_cousin_v1",
+            "body1_id": 10,
+            "body2": "gripper",
+            "body2_id": 6,
+            "distance_m": -0.000337
+          }
+        ],
+        "robot_self_contacts": [],
+        "state": [
+          1.535667,
+          97.810768,
+          -29.386397,
+          -4.764312,
+          -122.104308,
+          0.236507
+        ],
+        "time_s": 3.75
+      },
+      {
+        "action": [
+          1.534306,
+          96.995633,
+          -29.172718,
+          -4.54918,
+          -122.09113,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.892136662,
+        "anchor_speed_m_s": 0.001790498,
+        "anchor_step_displacement_m": 6.0877e-05,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.21524,
+            0.018023,
+            0.324955
+          ]
+        },
+        "frame_index": 101,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219281204,
+          -1.2741e-05,
+          0.345244922
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534701,
+          97.457133,
+          -29.294584,
+          -4.671869,
+          -122.098107,
+          0.236121
+        ],
+        "time_s": 3.784
+      },
+      {
+        "action": [
+          1.53467,
+          96.510189,
+          -29.04463,
+          -4.42277,
+          -122.083175,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.588683155,
+        "anchor_speed_m_s": 0.000490392,
+        "anchor_step_displacement_m": 1.6673e-05,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018032,
+            0.324969
+          ]
+        },
+        "frame_index": 102,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219489979,
+          -1.6396e-05,
+          0.346345793
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534407,
+          97.013105,
+          -29.197254,
+          -4.568048,
+          -122.09067,
+          0.236056
+        ],
+        "time_s": 3.818
+      },
+      {
+        "action": [
+          1.535078,
+          95.966758,
+          -28.901243,
+          -4.281261,
+          -122.07427,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.767340339,
+        "anchor_speed_m_s": 0.000147059,
+        "anchor_step_displacement_m": 5e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324973
+          ]
+        },
+        "frame_index": 103,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219655206,
+          -2.0572e-05,
+          0.347516058
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534512,
+          96.513568,
+          -29.076906,
+          -4.445357,
+          -122.082396,
+          0.236053
+        ],
+        "time_s": 3.852
+      },
+      {
+        "action": [
+          1.535525,
+          95.369803,
+          -28.743733,
+          -4.125814,
+          -122.064487,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.899374447,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324973
+          ]
+        },
+        "frame_index": 104,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219814224,
+          -2.5307e-05,
+          0.348800888
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.534799,
+          95.955557,
+          -28.938982,
+          -4.30651,
+          -122.073101,
+          0.236055
+        ],
+        "time_s": 3.886
+      },
+      {
+        "action": [
+          1.536009,
+          94.723783,
+          -28.573276,
+          -3.95759,
+          -122.053901,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.984367077,
+        "anchor_speed_m_s": 2.9412e-05,
+        "anchor_step_displacement_m": 1e-06,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 105,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219962352,
+          -3.0101e-05,
+          0.350182156
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.535181,
+          95.347251,
+          -28.784697,
+          -4.153112,
+          -122.063005,
+          0.236057
+        ],
+        "time_s": 3.92
+      },
+      {
+        "action": [
+          1.536527,
+          94.033158,
+          -28.391051,
+          -3.777751,
+          -122.042584,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.016541415,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 106,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220100908,
+          -3.4833e-05,
+          0.351660079
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.535621,
+          94.688143,
+          -28.615056,
+          -3.986492,
+          -122.052106,
+          0.236059
+        ],
+        "time_s": 3.954
+      },
+      {
+        "action": [
+          1.537075,
+          93.30239,
+          -28.198233,
+          -3.587459,
+          -122.030609,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.032556372,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 107,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220225436,
+          -3.9323e-05,
+          0.3532128
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.536105,
+          93.988764,
+          -28.432745,
+          -3.807848,
+          -122.040519,
+          0.23606
+        ],
+        "time_s": 3.988
+      },
+      {
+        "action": [
+          1.537649,
+          92.535937,
+          -27.996,
+          -3.387875,
+          -122.018049,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.045492301,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 108,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.22034471,
+          -4.3777e-05,
+          0.354850488
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.536624,
+          93.248637,
+          -28.239742,
+          -3.618618,
+          -122.028295,
+          0.236062
+        ],
+        "time_s": 4.022
+      },
+      {
+        "action": [
+          1.538247,
+          91.738262,
+          -27.785529,
+          -3.18016,
+          -122.004978,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.052017982,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 109,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220452733,
+          -4.802e-05,
+          0.356554279
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.537173,
+          92.474189,
+          -28.037082,
+          -3.419896,
+          -122.015519,
+          0.236063
+        ],
+        "time_s": 4.056
+      },
+      {
+        "action": [
+          1.538865,
+          90.913824,
+          -27.567996,
+          -2.965476,
+          -121.991468,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.148833433,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 110,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220542603,
+          -5.1856e-05,
+          0.358308854
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.537749,
+          91.668839,
+          -27.824789,
+          -3.212432,
+          -122.00226,
+          0.236064
+        ],
+        "time_s": 4.09
+      },
+      {
+        "action": [
+          1.5395,
+          90.067084,
+          -27.344578,
+          -2.744985,
+          -121.977593,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.242349089,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 111,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220616793,
+          -5.5338e-05,
+          0.360105124
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.538349,
+          90.839802,
+          -27.605057,
+          -2.997832,
+          -121.988594,
+          0.236065
+        ],
+        "time_s": 4.124
+      },
+      {
+        "action": [
+          1.540148,
+          89.202503,
+          -27.116453,
+          -2.519847,
+          -121.963425,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.345997487,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 112,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220678789,
+          -5.8554e-05,
+          0.361942595
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.538968,
+          89.988158,
+          -27.37974,
+          -2.777366,
+          -121.974592,
+          0.236066
+        ],
+        "time_s": 4.158
+      },
+      {
+        "action": [
+          1.540807,
+          88.32454,
+          -26.884797,
+          -2.291226,
+          -121.949038,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.416054085,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 113,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220726536,
+          -6.1437e-05,
+          0.363809133
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.539603,
+          89.120059,
+          -27.150147,
+          -2.552176,
+          -121.960324,
+          0.236066
+        ],
+        "time_s": 4.192
+      },
+      {
+        "action": [
+          1.541471,
+          87.437656,
+          -26.650788,
+          -2.060281,
+          -121.934505,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.503562935,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 114,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220759395,
+          -6.3963e-05,
+          0.365697682
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.540251,
+          88.237861,
+          -26.917453,
+          -2.323446,
+          -121.945866,
+          0.236067
+        ],
+        "time_s": 4.226
+      },
+      {
+        "action": [
+          1.54214,
+          86.546311,
+          -26.415601,
+          -1.828175,
+          -121.919898,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.531278163,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 115,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.22077202,
+          -6.5976e-05,
+          0.367586022
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.540908,
+          87.349572,
+          -26.682325,
+          -2.092301,
+          -121.931286,
+          0.236067
+        ],
+        "time_s": 4.26
+      },
+      {
+        "action": [
+          1.542808,
+          85.654967,
+          -26.180414,
+          -1.596068,
+          -121.905292,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.559546564,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 116,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220769499,
+          -6.7607e-05,
+          0.369475718
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.541572,
+          86.456823,
+          -26.446415,
+          -1.860034,
+          -121.916664,
+          0.236068
+        ],
+        "time_s": 4.294
+      },
+      {
+        "action": [
+          1.543473,
+          84.768083,
+          -25.946405,
+          -1.365124,
+          -121.890759,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.545693403,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 117,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220749173,
+          -6.8773e-05,
+          0.371349855
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.542238,
+          85.56608,
+          -26.21072,
+          -1.627775,
+          -121.902067,
+          0.236068
+        ],
+        "time_s": 4.328
+      },
+      {
+        "action": [
+          1.544131,
+          83.89012,
+          -25.714749,
+          -1.136502,
+          -121.876372,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.517612495,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 118,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.22071361,
+          -6.9535e-05,
+          0.373204051
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.542904,
+          84.680491,
+          -25.976592,
+          -1.396724,
+          -121.887572,
+          0.236068
+        ],
+        "time_s": 4.362
+      },
+      {
+        "action": [
+          1.544779,
+          83.025538,
+          -25.486624,
+          -0.911365,
+          -121.862204,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.45671365,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 119,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220662302,
+          -6.9869e-05,
+          0.375025717
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.543566,
+          83.805392,
+          -25.745092,
+          -1.168018,
+          -121.87325,
+          0.236068
+        ],
+        "time_s": 4.396
+      },
+      {
+        "action": [
+          1.545414,
+          82.178798,
+          -25.263206,
+          -0.690873,
+          -121.848329,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.387416813,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 120,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220598249,
+          -6.9848e-05,
+          0.376811049
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.544221,
+          82.944026,
+          -25.517556,
+          -0.942837,
+          -121.859177,
+          0.236068
+        ],
+        "time_s": 4.43
+      },
+      {
+        "action": [
+          1.546032,
+          81.35436,
+          -25.045673,
+          -0.476189,
+          -121.834819,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.295480575,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 121,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220520661,
+          -6.9442e-05,
+          0.378546815
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.544865,
+          82.10161,
+          -25.295108,
+          -0.722252,
+          -121.845422,
+          0.236067
+        ],
+        "time_s": 4.464
+      },
+      {
+        "action": [
+          1.54663,
+          80.556685,
+          -24.835202,
+          -0.268475,
+          -121.821747,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.172901231,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 122,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220429168,
+          -6.863e-05,
+          0.380220105
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.545495,
+          81.283069,
+          -25.078366,
+          -0.507277,
+          -121.832059,
+          0.236067
+        ],
+        "time_s": 4.498
+      },
+      {
+        "action": [
+          1.547204,
+          79.790233,
+          -24.632969,
+          -0.06889,
+          -121.809188,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 1.031417924,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 123,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220328673,
+          -6.7536e-05,
+          0.381828414
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.546108,
+          80.492133,
+          -24.868589,
+          -0.299133,
+          -121.819163,
+          0.236066
+        ],
+        "time_s": 4.532
+      },
+      {
+        "action": [
+          1.547752,
+          79.059464,
+          -24.440151,
+          0.121402,
+          -121.797213,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.914274136,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 124,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220217835,
+          -6.6117e-05,
+          0.383357518
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.546701,
+          79.733282,
+          -24.666758,
+          -0.098845,
+          -121.806812,
+          0.236066
+        ],
+        "time_s": 4.566
+      },
+      {
+        "action": [
+          1.54827,
+          78.36884,
+          -24.257926,
+          0.301241,
+          -121.785896,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.886836252,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 125,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.220097628,
+          -6.4389e-05,
+          0.384797628
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.54727,
+          79.011279,
+          -24.473172,
+          0.092608,
+          -121.795072,
+          0.236065
+        ],
+        "time_s": 4.6
+      },
+      {
+        "action": [
+          1.548754,
+          77.72282,
+          -24.087469,
+          0.469465,
+          -121.775309,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.858638722,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 126,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219975139,
+          -6.2534e-05,
+          0.386147525
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.547811,
+          78.33055,
+          -24.290302,
+          0.273715,
+          -121.784023,
+          0.236064
+        ],
+        "time_s": 4.634
+      },
+      {
+        "action": [
+          1.549202,
+          77.125864,
+          -23.929959,
+          0.624912,
+          -121.765527,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.834658043,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 127,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219853796,
+          -6.0637e-05,
+          0.387402762
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.548322,
+          77.695017,
+          -24.119492,
+          0.44323,
+          -121.773732,
+          0.236063
+        ],
+        "time_s": 4.668
+      },
+      {
+        "action": [
+          1.549609,
+          76.582434,
+          -23.786572,
+          0.766421,
+          -121.756622,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.786505223,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 128,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219727682,
+          -5.8531e-05,
+          0.388543219
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.548799,
+          77.108176,
+          -23.960269,
+          0.600591,
+          -121.764274,
+          0.236062
+        ],
+        "time_s": 4.702
+      },
+      {
+        "action": [
+          1.549973,
+          76.09699,
+          -23.658484,
+          0.892831,
+          -121.748667,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.699312504,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 129,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219598469,
+          -5.6249e-05,
+          0.389554531
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.549238,
+          76.577009,
+          -23.81337,
+          0.744382,
+          -121.755714,
+          0.23606
+        ],
+        "time_s": 4.736
+      },
+      {
+        "action": [
+          1.55029,
+          75.673991,
+          -23.546873,
+          1.00298,
+          -121.741736,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.579671315,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 130,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219469876,
+          -5.3886e-05,
+          0.390434913
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.549638,
+          76.104803,
+          -23.68012,
+          0.873691,
+          -121.74813,
+          0.236059
+        ],
+        "time_s": 4.77
+      },
+      {
+        "action": [
+          1.550557,
+          75.3179,
+          -23.452917,
+          1.095706,
+          -121.7359,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.554397314,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 131,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219347606,
+          -5.1589e-05,
+          0.391187763
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.549993,
+          75.692138,
+          -23.561677,
+          0.987136,
+          -121.741598,
+          0.236058
+        ],
+        "time_s": 4.804
+      },
+      {
+        "action": [
+          1.55077,
+          75.033175,
+          -23.37779,
+          1.169849,
+          -121.731235,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.716270204,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 132,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219234126,
+          -4.9415e-05,
+          0.391801099
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.550301,
+          75.346266,
+          -23.460104,
+          1.083621,
+          -121.736189,
+          0.236057
+        ],
+        "time_s": 4.838
+      },
+      {
+        "action": [
+          1.550927,
+          74.824278,
+          -23.322671,
+          1.224246,
+          -121.727811,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.790082639,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 133,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219134498,
+          -4.749e-05,
+          0.392279757
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.550558,
+          75.06796,
+          -23.376934,
+          1.162113,
+          -121.731937,
+          0.236057
+        ],
+        "time_s": 4.872
+      },
+      {
+        "action": [
+          1.551023,
+          74.695668,
+          -23.288737,
+          1.257735,
+          -121.725704,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.784193179,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 134,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.219051047,
+          -4.5869e-05,
+          0.392619756
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.550762,
+          74.860992,
+          -23.313195,
+          1.221443,
+          -121.7289,
+          0.236057
+        ],
+        "time_s": 4.906
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.6262228,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 135,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218995105,
+          -4.4817e-05,
+          0.392837387
+        ],
+        "phase": "unassisted_lift",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.550909,
+          74.726473,
+          -23.271994,
+          1.26028,
+          -121.726725,
+          0.236058
+        ],
+        "time_s": 4.94
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.414730421,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 136,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218965528,
+          -4.4298e-05,
+          0.392916856
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.550995,
+          74.670172,
+          -23.253002,
+          1.277852,
+          -121.725551,
+          0.23606
+        ],
+        "time_s": 4.974
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.398541008,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 137,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218975481,
+          -4.4711e-05,
+          0.392932113
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551033,
+          74.667177,
+          -23.254301,
+          1.275443,
+          -121.725252,
+          0.236061
+        ],
+        "time_s": 5.008
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.409510211,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 138,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218974448,
+          -4.4743e-05,
+          0.39293176
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551048,
+          74.666854,
+          -23.25367,
+          1.27527,
+          -121.725215,
+          0.236061
+        ],
+        "time_s": 5.042
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.41348125,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 139,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218973356,
+          -4.4738e-05,
+          0.39292933
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551053,
+          74.6672,
+          -23.253434,
+          1.275289,
+          -121.725214,
+          0.236061
+        ],
+        "time_s": 5.076
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.414462669,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 140,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218973014,
+          -4.4737e-05,
+          0.392928472
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551055,
+          74.667346,
+          -23.253375,
+          1.275297,
+          -121.725215,
+          0.236061
+        ],
+        "time_s": 5.11
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.414670715,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 141,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218972922,
+          -4.4738e-05,
+          0.392928212
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551056,
+          74.667397,
+          -23.253363,
+          1.275298,
+          -121.725215,
+          0.236061
+        ],
+        "time_s": 5.144
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.41471072,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 142,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218972897,
+          -4.4739e-05,
+          0.392928133
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551056,
+          74.667414,
+          -23.253361,
+          1.275297,
+          -121.725215,
+          0.236061
+        ],
+        "time_s": 5.178
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.414717689,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 143,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218972889,
+          -4.4739e-05,
+          0.392928108
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551056,
+          74.66742,
+          -23.25336,
+          1.275297,
+          -121.725215,
+          0.236061
+        ],
+        "time_s": 5.212
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.414718713,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 144,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218972887,
+          -4.4739e-05,
+          0.3929281
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551056,
+          74.667422,
+          -23.25336,
+          1.275297,
+          -121.725215,
+          0.236061
+        ],
+        "time_s": 5.246
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.414718796,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 145,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218972887,
+          -4.4739e-05,
+          0.392928098
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551056,
+          74.667423,
+          -23.25336,
+          1.275297,
+          -121.725215,
+          0.236061
+        ],
+        "time_s": 5.28
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.414718774,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 146,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218972886,
+          -4.4739e-05,
+          0.392928097
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551056,
+          74.667423,
+          -23.25336,
+          1.275297,
+          -121.725215,
+          0.236061
+        ],
+        "time_s": 5.314
+      },
+      {
+        "action": [
+          1.551056,
+          74.651807,
+          -23.277164,
+          1.269157,
+          -121.724985,
+          0.235955
+        ],
+        "actuator_effort_nm_max": 0.414718757,
+        "anchor_speed_m_s": 0.0,
+        "anchor_step_displacement_m": 0.0,
+        "anchor_support_contacts": [
+          "desk_top"
+        ],
+        "cube_positions_m": {
+          "analytic_turquoise_anchor_cousin_v1": [
+            0.215239,
+            0.018035,
+            0.324974
+          ]
+        },
+        "frame_index": 147,
+        "grasp_assists_active": [],
+        "gripper_position_m": [
+          0.218972886,
+          -4.4739e-05,
+          0.392928096
+        ],
+        "phase": "unassisted_lift_hold",
+        "robot_anchor_contact_force_n_max": 0.0,
+        "robot_cube_contacts": [],
+        "robot_self_contacts": [],
+        "state": [
+          1.551056,
+          74.667423,
+          -23.25336,
+          1.275297,
+          -121.725215,
+          0.236061
+        ],
+        "time_s": 5.348
+      }
+    ],
+    "summary": {
+      "close_two_jaw_frames": 11,
+      "final_object_z_m": 0.324974,
+      "hold_two_jaw_frames": 8,
+      "lift_hold_two_jaw_frames": 0,
+      "lift_two_jaw_frames": 4,
+      "maximum_contact_force_n": 4.1971684,
+      "maximum_object_z_m": 0.325019,
+      "pregrasp_height_m": 0.018,
+      "two_jaw_contact_gripper_percent_range": [
+        0.2395,
+        16.724525
+      ],
+      "unassisted_lift_clearance_maintained": false,
+      "wrist_roll_rad": -1.5
+    }
+  },
+  "selected_validation_two_pass_exact_determinism": true,
+  "simulation_training_ready": false,
+  "source_anchor_attempt_identity_sha256": "32f14feba6c10e501082c0438ee4b0cd80ee530d4c143468b5af20f5ad29626e",
+  "strict_grasp_success": false,
+  "unassisted_mujoco_grasp_success": false,
+  "wrist_roll_grid_rad": [
+    -1.5,
+    -1.0,
+    1.0,
+    1.5,
+    2.0
+  ]
+}

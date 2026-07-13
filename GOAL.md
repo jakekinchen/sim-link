@@ -431,6 +431,15 @@ current and metric aperture. The next offline correction is a lower-force
 object-relative close that establishes simultaneous fixed- and moving-jaw
 contact, stable hold, and clean release, with a nominal simulation-only aperture
 profile. No threshold was relaxed and no physical value was inferred.
+Brief 091 and Reviewer 117 isolate wrist roll as the missing contact variable.
+A fixed 20-candidate search selects -1.5 rad wrist roll and 0.018 m pregrasp
+height: 11 close frames and all 8 pre-lift hold frames have simultaneous fixed-
+and moving-jaw contact at a 4.1971684 N peak. With no weld assistance, contact
+survives only 4 lift frames, disappears for the complete 12-frame lift hold,
+and the object returns to 0.324974 m. This is a low-impact contact candidate,
+not a grasp. The next experiment must derive metric aperture from pinned jaw
+geometry and sweep contact friction/compliance and close-hold parameters with a
+held-out setting; normalized gripper percent is not relabeled as aperture.
 
 ## Durable State
 
