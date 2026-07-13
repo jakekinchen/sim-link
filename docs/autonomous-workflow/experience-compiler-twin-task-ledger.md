@@ -7,9 +7,9 @@ training_lock: closed
 run_window: start 2026-07-13T12:30:11-05:00; no new major slice after 19:45:11; hard closeout 20:30:11 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M17/M19 grasp execution track
-current_task: T19.0k pending; audit actual contact faces and normals for centered bilateral candidates
+current_task: T19.0l pending; construct a geometry-derived unilateral-jaw grasp and full unassisted lift trajectory
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: bracket 040305a7...; antipodal v2 strict 950e7568...; centered-axis search 7deb2826... with 20.965 mm max span but <=0.052 normal alignment and zero strict-v2 frames; no new hardware or motion
+evidence: bracket 040305a7...; antipodal v2 strict 950e7568...; contact-face audit 23572851... proves fixed pad on +z in 30/30 bilateral aggregates and moving pad on -y in 27/30; no new hardware or motion
 remaining: T19.0 truthful gripper/contact semantics; strict unassisted MuJoCo grasp; T19.2 bounded physical calibration under fresh permits; M17 Experience Compiler grasp episodes; simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; large policy proposal; two jaw bodies contact one local object region without force closure; no physical aperture/current mapping
@@ -267,7 +267,8 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T19.0h | verified | T19.0g | Jointly solve wrist flex and roll for a horizontal principal-axis closing vector | Brief 102/Reviewer 128; zero solutions at >=0.95 x-axis alignment and <=0.1 vertical; zero contact/eligible; 188-test broad gate |
 | T19.0i | verified | T19.0h | Evaluate both anchor x and y principal axes under the same horizontal gate | Brief 103/Reviewer 129; 8 y-axis aligned, 6 motion-valid, 2 bilateral through 8/8 hold, zero strict-v2/eligible; 190-test broad gate |
 | T19.0j | verified | T19.0i | Center the target along the selected closing axis while retaining transverse offset | Brief 104/Reviewer 130; 8 centered, 6 motion-valid, 2 bilateral through 8/8 hold; max span 20.965 mm; alignment <=0.052; zero strict-v2/eligible; 192-test broad gate |
-| T19.0k | pending | T19.0j | Audit actual contact faces and normals for centered bilateral candidates | Preserve simulation and evaluator; emit per-pad contact point/normal in object frame, face classification, phase counts, and order-reversal checks before another correction |
+| T19.0k | verified | T19.0j | Audit actual contact faces and normals for centered bilateral candidates | Brief 105/Reviewer 131; candidates 2/3 source-identical; fixed pad +z 30/30; moving pad -y 27/30; convention proof valid/order-independent; 194-test broad gate |
+| T19.0l | pending | T19.0k | Build geometry-derived unilateral-jaw close/hold/lift/lower/release proof | Derive close q from 35 mm selected width and aperture curve; pad midpoint at object-center height; bounded fixed-jaw clearance; two-pass deterministic unchanged-evaluator trajectory |
 | T19.1 | pending | M16, read authority | Run read-only servo/firmware/register census | Immutable hardware snapshot; no writes or motion |
 | T19.2 | pending | T19.1, motion authority | Calibrate cameras, joint offsets, kinematics, timing, and gripper aperture | Held-out reprojection, pose, and timing tolerances |
 | T19.3 | pending | T19.1-T19.2, motion authority | Identify delay, saturation, settling, directionality, backlash, friction, compliance | Per-joint fitted distributions and held-out trajectory evidence |

@@ -1,0 +1,2880 @@
+{
+  "actual_mujoco_grasp_success": false,
+  "anchor_half_extents_m": [
+    0.025,
+    0.0175,
+    0.015
+  ],
+  "authority_not_granted": [
+    "geometry_eligible_grasp_candidate",
+    "unassisted_mujoco_grasp_success",
+    "simulation_training_ready",
+    "physical_actuation"
+  ],
+  "candidates": [
+    {
+      "candidate_index": 2,
+      "contact_phase_diagnostics": [
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.019842079,
+            "euclidean_span_m": 0.01991529,
+            "fixed_normal_span_alignment": 0.04370682,
+            "force_balance_min_over_max": 0.270154945,
+            "maximum_pairwise_span_m_diagnostic_only": 0.022033942,
+            "minimum_pairwise_span_m_diagnostic_only": 0.019223916,
+            "moving_normal_span_alignment": 0.995718466,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.003439227,
+                  0.003077686,
+                  0.013646887
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 6.004328183
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001817084,
+                  -0.016752336,
+                  0.012776453
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 1.622098952
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": -0.005090665,
+              "moving": 0.014751414
+            },
+            "span_vector_object_m": [
+              0.001622143,
+              -0.019830022,
+              -0.000870434
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.003439227,
+                  0.003077686,
+                  0.013646887
+                ],
+                [
+                  -0.001817084,
+                  -0.016752336,
+                  0.012776453
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 29,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001353113,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000747664,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.017178228,
+            "euclidean_span_m": 0.017293388,
+            "fixed_normal_span_alignment": 0.036911448,
+            "force_balance_min_over_max": 0.706514288,
+            "maximum_pairwise_span_m_diagnostic_only": 0.019398989,
+            "minimum_pairwise_span_m_diagnostic_only": 0.016524655,
+            "moving_normal_span_alignment": 0.994187701,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.003214996,
+                  0.000797943,
+                  0.013580454
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 7.122510647
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001466023,
+                  -0.016394931,
+                  0.01294213
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 5.032155538
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": -0.003043076,
+              "moving": 0.014135152
+            },
+            "span_vector_object_m": [
+              0.001748973,
+              -0.017192874,
+              -0.000638324
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.003214996,
+                  0.000797943,
+                  0.013580454
+                ],
+                [
+                  -0.001466023,
+                  -0.016394931,
+                  0.01294213
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 30,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001419546,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.001105069,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.014609743,
+            "euclidean_span_m": 0.01472056,
+            "fixed_normal_span_alignment": 0.032444282,
+            "force_balance_min_over_max": 0.615229303,
+            "maximum_pairwise_span_m_diagnostic_only": 0.016830344,
+            "minimum_pairwise_span_m_diagnostic_only": 0.013899547,
+            "moving_normal_span_alignment": 0.993341624,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002937981,
+                  -0.00142054,
+                  0.013371021
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 7.058179976
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001310724,
+                  -0.016043085,
+                  0.012893423
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 4.342399148
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": -0.000754178,
+              "moving": 0.013855565
+            },
+            "span_vector_object_m": [
+              0.001627257,
+              -0.014622545,
+              -0.000477598
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.002937981,
+                  -0.00142054,
+                  0.013371021
+                ],
+                [
+                  -0.001310724,
+                  -0.016043085,
+                  0.012893423
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 31,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001628979,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.001456915,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.012503141,
+            "euclidean_span_m": 0.012604506,
+            "fixed_normal_span_alignment": 0.018767891,
+            "force_balance_min_over_max": 0.763914179,
+            "maximum_pairwise_span_m_diagnostic_only": 0.014853603,
+            "minimum_pairwise_span_m_diagnostic_only": 0.011742145,
+            "moving_normal_span_alignment": 0.993310013,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.00260294,
+                  -0.003329634,
+                  0.013207097
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 7.363964288
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001166746,
+                  -0.015849816,
+                  0.012970537
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 5.625436736
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.001419201,
+              "moving": 0.013922343
+            },
+            "span_vector_object_m": [
+              0.001436194,
+              -0.012520182,
+              -0.00023656
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.00260294,
+                  -0.003329634,
+                  0.013207097
+                ],
+                [
+                  -0.001166746,
+                  -0.015849816,
+                  0.012970537
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 32,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001792903,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.001650184,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.01072717,
+            "euclidean_span_m": 0.010828025,
+            "fixed_normal_span_alignment": 0.000675746,
+            "force_balance_min_over_max": 0.615220477,
+            "maximum_pairwise_span_m_diagnostic_only": 0.013268803,
+            "minimum_pairwise_span_m_diagnostic_only": 0.009916361,
+            "moving_normal_span_alignment": 0.991195873,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002229576,
+                  -0.004997753,
+                  0.013088656
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 7.007204988
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000795924,
+                  -0.015730447,
+                  0.013081339
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 4.310975996
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.003557458,
+              "moving": 0.014284627
+            },
+            "span_vector_object_m": [
+              0.001433652,
+              -0.010732694,
+              -7.317e-06
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.002229576,
+                  -0.004997753,
+                  0.013088656
+                ],
+                [
+                  -0.000795924,
+                  -0.015730447,
+                  0.013081339
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 33,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001911344,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.001769553,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.009272538,
+            "euclidean_span_m": 0.009349967,
+            "fixed_normal_span_alignment": -0.027311861,
+            "force_balance_min_over_max": 0.691120098,
+            "maximum_pairwise_span_m_diagnostic_only": 0.01185642,
+            "minimum_pairwise_span_m_diagnostic_only": 0.008415273,
+            "moving_normal_span_alignment": 0.992817067,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001869749,
+                  -0.006470867,
+                  0.013061816
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 6.835395418
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000780635,
+                  -0.015753674,
+                  0.013317181
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 4.724079148
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.005667206,
+              "moving": 0.014939744
+            },
+            "span_vector_object_m": [
+              0.001089114,
+              -0.009282807,
+              0.000255365
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.001869749,
+                  -0.006470867,
+                  0.013061816
+                ],
+                [
+                  -0.000780635,
+                  -0.015753674,
+                  0.013317181
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 34,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001938184,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.001682819,
+              "nearest_face": "+z"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.008393471,
+            "euclidean_span_m": 0.008435878,
+            "fixed_normal_span_alignment": -0.051245168,
+            "force_balance_min_over_max": 0.848323196,
+            "maximum_pairwise_span_m_diagnostic_only": 0.010806711,
+            "minimum_pairwise_span_m_diagnostic_only": 0.007482513,
+            "moving_normal_span_alignment": 0.994959705,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001583275,
+                  -0.007526785,
+                  0.013138326
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 6.576412977
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000856167,
+                  -0.015920144,
+                  0.013570624
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 5.578923673
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.007297677,
+              "moving": 0.015691148
+            },
+            "span_vector_object_m": [
+              0.000727108,
+              -0.008393359,
+              0.000432298
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.001583275,
+                  -0.007526785,
+                  0.013138326
+                ],
+                [
+                  -0.000856167,
+                  -0.015920144,
+                  0.013570624
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 35,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001861674,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.001429376,
+              "nearest_face": "+z"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.007597764,
+            "euclidean_span_m": 0.007632401,
+            "fixed_normal_span_alignment": -0.049206663,
+            "force_balance_min_over_max": 0.795050962,
+            "maximum_pairwise_span_m_diagnostic_only": 0.009807376,
+            "minimum_pairwise_span_m_diagnostic_only": 0.006699554,
+            "moving_normal_span_alignment": 0.994393596,
+            "normal_dot": 0.017744111,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001299407,
+                  -0.008750957,
+                  0.013288338
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 6.430830047
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000529143,
+                  -0.016335098,
+                  0.013663903
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  0.999842561,
+                  -0.017744111
+                ],
+                "total_normal_force_n": 8.088575895
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.008926302,
+              "moving": 0.016524066
+            },
+            "span_vector_object_m": [
+              0.000770264,
+              -0.007584141,
+              0.000375565
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.999842561,
+                  -0.017744111
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.001299407,
+                  -0.008750957,
+                  0.013288338
+                ],
+                [
+                  -0.000529143,
+                  -0.016335098,
+                  0.013663903
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 0,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001711662,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.001164902,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.007122024,
+            "euclidean_span_m": 0.007185495,
+            "fixed_normal_span_alignment": -0.042117626,
+            "force_balance_min_over_max": 0.89662671,
+            "maximum_pairwise_span_m_diagnostic_only": 0.009245593,
+            "minimum_pairwise_span_m_diagnostic_only": 0.006239683,
+            "moving_normal_span_alignment": 0.989494272,
+            "normal_dot": 0.02321119,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001012814,
+                  -0.009589861,
+                  0.013398634
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 6.330540002
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  1.6849e-05,
+                  -0.016694757,
+                  0.01370127
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  0.999730584,
+                  -0.02321119
+                ],
+                "total_normal_force_n": 5.676131253
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.009837631,
+              "moving": 0.016959655
+            },
+            "span_vector_object_m": [
+              0.001029663,
+              -0.007104896,
+              0.000302636
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.999730584,
+                  -0.02321119
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.001012814,
+                  -0.009589861,
+                  0.013398634
+                ],
+                [
+                  1.6849e-05,
+                  -0.016694757,
+                  0.01370127
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 1,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001601366,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000805243,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.006885331,
+            "euclidean_span_m": 0.006958448,
+            "fixed_normal_span_alignment": -0.042800779,
+            "force_balance_min_over_max": 0.708727112,
+            "maximum_pairwise_span_m_diagnostic_only": 0.008920796,
+            "minimum_pairwise_span_m_diagnostic_only": 0.006003568,
+            "moving_normal_span_alignment": 0.987665358,
+            "normal_dot": 0.03072905,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000860364,
+                  -0.010021719,
+                  0.013475537
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 6.06785288
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  0.000225733,
+                  -0.016888428,
+                  0.013773364
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  0.999527751,
+                  -0.03072905
+                ],
+                "total_normal_force_n": 4.300451848
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.010375791,
+              "moving": 0.017261123
+            },
+            "span_vector_object_m": [
+              0.001086097,
+              -0.006866709,
+              0.000297827
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.999527751,
+                  -0.03072905
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000860364,
+                  -0.010021719,
+                  0.013475537
+                ],
+                [
+                  0.000225733,
+                  -0.016888428,
+                  0.013773364
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 2,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001524463,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000611572,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.006728209,
+            "euclidean_span_m": 0.006803158,
+            "fixed_normal_span_alignment": -0.048287132,
+            "force_balance_min_over_max": 0.55815476,
+            "maximum_pairwise_span_m_diagnostic_only": 0.008154529,
+            "minimum_pairwise_span_m_diagnostic_only": 0.005839792,
+            "moving_normal_span_alignment": 0.987187498,
+            "normal_dot": 0.037466102,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000752976,
+                  -0.010309045,
+                  0.013536544
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 5.945523966
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  0.000329837,
+                  -0.01701744,
+                  0.013865049
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.999297899,
+                  -0.037466102
+                ],
+                "total_normal_force_n": 3.318522501
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.010762845,
+              "moving": 0.017491055
+            },
+            "span_vector_object_m": [
+              0.001082813,
+              -0.006708395,
+              0.000328505
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.999297899,
+                  -0.037466102
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000752976,
+                  -0.010309045,
+                  0.013536544
+                ],
+                [
+                  0.000329837,
+                  -0.01701744,
+                  0.013865049
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 3,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001463456,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.00048256,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.006624181,
+            "euclidean_span_m": 0.00670073,
+            "fixed_normal_span_alignment": -0.060005107,
+            "force_balance_min_over_max": 0.427396877,
+            "maximum_pairwise_span_m_diagnostic_only": 0.008013016,
+            "minimum_pairwise_span_m_diagnostic_only": 0.005725232,
+            "moving_normal_span_alignment": 0.986908497,
+            "normal_dot": 0.042366198,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000645889,
+                  -0.010509093,
+                  0.013577957
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 5.874268564
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  0.000427902,
+                  -0.017110993,
+                  0.013980035
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.99910215,
+                  -0.042366198
+                ],
+                "total_normal_force_n": 2.510644037
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.011043186,
+              "moving": 0.017667366
+            },
+            "span_vector_object_m": [
+              0.001073791,
+              -0.0066019,
+              0.000402078
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.99910215,
+                  -0.042366198
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000645889,
+                  -0.010509093,
+                  0.013577957
+                ],
+                [
+                  0.000427902,
+                  -0.017110993,
+                  0.013980035
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 4,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001422043,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000389007,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.006550519,
+            "euclidean_span_m": 0.006628148,
+            "fixed_normal_span_alignment": -0.068565305,
+            "force_balance_min_over_max": 0.313211678,
+            "maximum_pairwise_span_m_diagnostic_only": 0.007913216,
+            "minimum_pairwise_span_m_diagnostic_only": 0.005644119,
+            "moving_normal_span_alignment": 0.986701376,
+            "normal_dot": 0.046194433,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000566503,
+                  -0.010650096,
+                  0.013606312
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 5.807637645
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  0.00050001,
+                  -0.017176072,
+                  0.014060773
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.998932467,
+                  -0.046194433
+                ],
+                "total_normal_force_n": 1.819019934
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.011245133,
+              "moving": 0.017795652
+            },
+            "span_vector_object_m": [
+              0.001066513,
+              -0.006525976,
+              0.000454461
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.998932467,
+                  -0.046194433
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000566503,
+                  -0.010650096,
+                  0.013606312
+                ],
+                [
+                  0.00050001,
+                  -0.017176072,
+                  0.014060773
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 5,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001393688,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000323928,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.00649348,
+            "euclidean_span_m": 0.00657232,
+            "fixed_normal_span_alignment": -0.075267184,
+            "force_balance_min_over_max": 0.232141791,
+            "maximum_pairwise_span_m_diagnostic_only": 0.007837656,
+            "minimum_pairwise_span_m_diagnostic_only": 0.005581603,
+            "moving_normal_span_alignment": 0.986461437,
+            "normal_dot": 0.049191073,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000513352,
+                  -0.01075963,
+                  0.013626611
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 5.767645662
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  0.000550003,
+                  -0.017226465,
+                  0.014121291
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.998789386,
+                  -0.049191073
+                ],
+                "total_normal_force_n": 1.338911595
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.011400712,
+              "moving": 0.017894193
+            },
+            "span_vector_object_m": [
+              0.001063355,
+              -0.006466835,
+              0.00049468
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.998789386,
+                  -0.049191073
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000513352,
+                  -0.01075963,
+                  0.013626611
+                ],
+                [
+                  0.000550003,
+                  -0.017226465,
+                  0.014121291
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 6,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001373389,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000273535,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.006447832,
+            "euclidean_span_m": 0.006526637,
+            "fixed_normal_span_alignment": -0.0792477,
+            "force_balance_min_over_max": 0.176181775,
+            "maximum_pairwise_span_m_diagnostic_only": 0.007779936,
+            "minimum_pairwise_span_m_diagnostic_only": 0.005532351,
+            "moving_normal_span_alignment": 0.986415726,
+            "normal_dot": 0.051467985,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000475431,
+                  -0.010847349,
+                  0.013640268
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 5.74522337
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  0.000580409,
+                  -0.017267215,
+                  0.014157489
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.998674645,
+                  -0.051467985
+                ],
+                "total_normal_force_n": 1.012203652
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.011522695,
+              "moving": 0.017970527
+            },
+            "span_vector_object_m": [
+              0.00105584,
+              -0.006419866,
+              0.000517221
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.998674645,
+                  -0.051467985
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000475431,
+                  -0.010847349,
+                  0.013640268
+                ],
+                [
+                  0.000580409,
+                  -0.017267215,
+                  0.014157489
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 7,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001359732,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000232785,
+              "nearest_face": "-y"
+            }
+          }
+        }
+      ],
+      "preclose_object_displacement_m": 0.0005907097326937466,
+      "request": {
+        "close_target_rad": -0.13588235294117648,
+        "lateral_x_m": -0.0051428571428571435,
+        "lateral_y_m": -0.0076363636363636364,
+        "object_yaw_rad": -0.14,
+        "vertical_m": 0.01707692307692308,
+        "wrist_flex_rad": -0.325,
+        "wrist_roll_rad": 0.5333333333333332
+      },
+      "selected_object_principal_axis": "y"
+    },
+    {
+      "candidate_index": 3,
+      "contact_phase_diagnostics": [
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.020479039,
+            "euclidean_span_m": 0.020965076,
+            "fixed_normal_span_alignment": -0.011345058,
+            "force_balance_min_over_max": 0.643615598,
+            "maximum_pairwise_span_m_diagnostic_only": 0.022111771,
+            "minimum_pairwise_span_m_diagnostic_only": 0.019892308,
+            "moving_normal_span_alignment": 0.949158573,
+            "normal_dot": 0.162021947,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000939831,
+                  0.003328728,
+                  0.01426428
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 2.929622845
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.006804885,
+                  -0.016797846,
+                  0.01450213
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.986787155,
+                  -0.162021947
+                ],
+                "total_normal_force_n": 1.88555096
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": -0.004981722,
+              "moving": 0.015497317
+            },
+            "span_vector_object_m": [
+              -0.005865054,
+              -0.020126574,
+              0.00023785
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.986787155,
+                  -0.162021947
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000939831,
+                  0.003328728,
+                  0.01426428
+                ],
+                [
+                  -0.006804885,
+                  -0.016797846,
+                  0.01450213
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 29,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.00073572,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.00049787,
+              "nearest_face": "+z"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.017723123,
+            "euclidean_span_m": 0.017934557,
+            "fixed_normal_span_alignment": 0.051848674,
+            "force_balance_min_over_max": 0.976141012,
+            "maximum_pairwise_span_m_diagnostic_only": 0.019407001,
+            "minimum_pairwise_span_m_diagnostic_only": 0.016985562,
+            "moving_normal_span_alignment": 0.965742478,
+            "normal_dot": 0.071195447,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001055265,
+                  0.000699413,
+                  0.014226822
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 4.015444803
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.005173258,
+                  -0.016731186,
+                  0.013296939
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  0.997462384,
+                  -0.071195447
+                ],
+                "total_normal_force_n": 3.919640353
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": -0.00262074,
+              "moving": 0.015102384
+            },
+            "span_vector_object_m": [
+              -0.004117993,
+              -0.017430599,
+              -0.000929883
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  0.997462384,
+                  -0.071195447
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.001055265,
+                  0.000699413,
+                  0.014226822
+                ],
+                [
+                  -0.005173258,
+                  -0.016731186,
+                  0.013296939
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 30,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.000773178,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000768814,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.015076147,
+            "euclidean_span_m": 0.015324202,
+            "fixed_normal_span_alignment": 0.049404335,
+            "force_balance_min_over_max": 0.337715613,
+            "maximum_pairwise_span_m_diagnostic_only": 0.016922717,
+            "minimum_pairwise_span_m_diagnostic_only": 0.014231005,
+            "moving_normal_span_alignment": 0.966380777,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.001077695,
+                  -0.001800151,
+                  0.014047653
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 4.62574445
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.004944359,
+                  -0.016609165,
+                  0.013290571
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 1.562186124
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": -0.000237581,
+              "moving": 0.014838566
+            },
+            "span_vector_object_m": [
+              -0.003866664,
+              -0.014809014,
+              -0.000757082
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.001077695,
+                  -0.001800151,
+                  0.014047653
+                ],
+                [
+                  -0.004944359,
+                  -0.016609165,
+                  0.013290571
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 31,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.000952347,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000890835,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.013052201,
+            "euclidean_span_m": 0.013190647,
+            "fixed_normal_span_alignment": 0.048582303,
+            "force_balance_min_over_max": 0.418560612,
+            "maximum_pairwise_span_m_diagnostic_only": 0.015003732,
+            "minimum_pairwise_span_m_diagnostic_only": 0.012132722,
+            "moving_normal_span_alignment": 0.973767029,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.00106173,
+                  -0.003578017,
+                  0.013894119
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 4.706938044
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.003994018,
+                  -0.016422634,
+                  0.013253287
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 1.970138869
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.001686435,
+              "moving": 0.014738636
+            },
+            "span_vector_object_m": [
+              -0.002932288,
+              -0.012844617,
+              -0.000640832
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.00106173,
+                  -0.003578017,
+                  0.013894119
+                ],
+                [
+                  -0.003994018,
+                  -0.016422634,
+                  0.013253287
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 32,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001105881,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.001077366,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.011347096,
+            "euclidean_span_m": 0.011468386,
+            "fixed_normal_span_alignment": 0.029013586,
+            "force_balance_min_over_max": 0.241768139,
+            "maximum_pairwise_span_m_diagnostic_only": 0.013331314,
+            "minimum_pairwise_span_m_diagnostic_only": 0.010338834,
+            "moving_normal_span_alignment": 0.971393361,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.00101253,
+                  -0.005233266,
+                  0.013785663
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 4.401881789
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.003715596,
+                  -0.01637358,
+                  0.013452924
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 1.064234768
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.003641917,
+              "moving": 0.014989013
+            },
+            "span_vector_object_m": [
+              -0.002703066,
+              -0.011140314,
+              -0.000332739
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.00101253,
+                  -0.005233266,
+                  0.013785663
+                ],
+                [
+                  -0.003715596,
+                  -0.01637358,
+                  0.013452924
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 33,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001214337,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.00112642,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.009908573,
+            "euclidean_span_m": 0.009953675,
+            "fixed_normal_span_alignment": 0.012423552,
+            "force_balance_min_over_max": 0.352470123,
+            "maximum_pairwise_span_m_diagnostic_only": 0.011918153,
+            "minimum_pairwise_span_m_diagnostic_only": 0.008900694,
+            "moving_normal_span_alignment": 0.98105804,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000962341,
+                  -0.006659582,
+                  0.013747757
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 4.2857553
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002886538,
+                  -0.016424715,
+                  0.013624097
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 1.510600699
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.005497288,
+              "moving": 0.015405861
+            },
+            "span_vector_object_m": [
+              -0.001924197,
+              -0.009765133,
+              -0.00012366
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000962341,
+                  -0.006659582,
+                  0.013747757
+                ],
+                [
+                  -0.002886538,
+                  -0.016424715,
+                  0.013624097
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 34,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001252243,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.001075285,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.00898662,
+            "euclidean_span_m": 0.009003764,
+            "fixed_normal_span_alignment": -0.005402518,
+            "force_balance_min_over_max": 0.611718329,
+            "maximum_pairwise_span_m_diagnostic_only": 0.010918245,
+            "minimum_pairwise_span_m_diagnostic_only": 0.008001903,
+            "moving_normal_span_alignment": 0.987376352,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000934341,
+                  -0.007667721,
+                  0.013790343
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 4.078460556
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002359633,
+                  -0.016557825,
+                  0.013838986
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 2.494869078
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.006967911,
+              "moving": 0.015954531
+            },
+            "span_vector_object_m": [
+              -0.001425292,
+              -0.008890104,
+              4.8643e-05
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000934341,
+                  -0.007667721,
+                  0.013790343
+                ],
+                [
+                  -0.002359633,
+                  -0.016557825,
+                  0.013838986
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "close",
+          "phase_frame_index": 35,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001209657,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000942175,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.008509271,
+            "euclidean_span_m": 0.008517367,
+            "fixed_normal_span_alignment": -0.014439909,
+            "force_balance_min_over_max": 0.719113743,
+            "maximum_pairwise_span_m_diagnostic_only": 0.010247387,
+            "minimum_pairwise_span_m_diagnostic_only": 0.007516278,
+            "moving_normal_span_alignment": 0.988020249,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000920123,
+                  -0.008314552,
+                  0.013919021
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 3.493100206
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002228793,
+                  -0.016729883,
+                  0.014042011
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 2.511936365
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.007981475,
+              "moving": 0.016490746
+            },
+            "span_vector_object_m": [
+              -0.00130867,
+              -0.008415331,
+              0.00012299
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000920123,
+                  -0.008314552,
+                  0.013919021
+                ],
+                [
+                  -0.002228793,
+                  -0.016729883,
+                  0.014042011
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 0,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.001080979,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000770117,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.008262523,
+            "euclidean_span_m": 0.008266827,
+            "fixed_normal_span_alignment": -0.018199728,
+            "force_balance_min_over_max": 0.585042776,
+            "maximum_pairwise_span_m_diagnostic_only": 0.009828166,
+            "minimum_pairwise_span_m_diagnostic_only": 0.007283823,
+            "moving_normal_span_alignment": 0.988049734,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000899421,
+                  -0.008710869,
+                  0.014079174
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 3.248477784
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002164718,
+                  -0.016878905,
+                  0.014229628
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 1.90049846
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.008612783,
+              "moving": 0.016875306
+            },
+            "span_vector_object_m": [
+              -0.001265297,
+              -0.008168036,
+              0.000150454
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000899421,
+                  -0.008710869,
+                  0.014079174
+                ],
+                [
+                  -0.002164718,
+                  -0.016878905,
+                  0.014229628
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 1,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.000920826,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000621095,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.008142915,
+            "euclidean_span_m": 0.008146981,
+            "fixed_normal_span_alignment": -0.020200365,
+            "force_balance_min_over_max": 0.488945545,
+            "maximum_pairwise_span_m_diagnostic_only": 0.009646469,
+            "minimum_pairwise_span_m_diagnostic_only": 0.007168164,
+            "moving_normal_span_alignment": 0.987936576,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000861426,
+                  -0.008933722,
+                  0.014152816
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 3.177244889
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.00211228,
+                  -0.016982423,
+                  0.014317388
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 1.553499735
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.008877423,
+              "moving": 0.017020339
+            },
+            "span_vector_object_m": [
+              -0.001250854,
+              -0.008048701,
+              0.000164572
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000861426,
+                  -0.008933722,
+                  0.014152816
+                ],
+                [
+                  -0.00211228,
+                  -0.016982423,
+                  0.014317388
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 2,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.000847184,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000517577,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.008059453,
+            "euclidean_span_m": 0.008063292,
+            "fixed_normal_span_alignment": -0.021983702,
+            "force_balance_min_over_max": 0.401156812,
+            "maximum_pairwise_span_m_diagnostic_only": 0.009531054,
+            "minimum_pairwise_span_m_diagnostic_only": 0.007085846,
+            "moving_normal_span_alignment": 0.987817922,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000845794,
+                  -0.009088966,
+                  0.01418538
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 3.099864069
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002087972,
+                  -0.01705403,
+                  0.014362641
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 1.243531587
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.009077078,
+              "moving": 0.017136532
+            },
+            "span_vector_object_m": [
+              -0.001242178,
+              -0.007965064,
+              0.000177261
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000845794,
+                  -0.009088966,
+                  0.01418538
+                ],
+                [
+                  -0.002087972,
+                  -0.01705403,
+                  0.014362641
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 3,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.00081462,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.00044597,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.007992686,
+            "euclidean_span_m": 0.007996349,
+            "fixed_normal_span_alignment": -0.023137436,
+            "force_balance_min_over_max": 0.330482682,
+            "maximum_pairwise_span_m_diagnostic_only": 0.009445836,
+            "minimum_pairwise_span_m_diagnostic_only": 0.007019251,
+            "moving_normal_span_alignment": 0.987714821,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000838563,
+                  -0.00921505,
+                  0.014202184
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 3.04721464
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002074357,
+                  -0.017113162,
+                  0.014387199
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 1.007051667
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.009238198,
+              "moving": 0.017230884
+            },
+            "span_vector_object_m": [
+              -0.001235794,
+              -0.007898112,
+              0.000185015
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000838563,
+                  -0.00921505,
+                  0.014202184
+                ],
+                [
+                  -0.002074357,
+                  -0.017113162,
+                  0.014387199
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 4,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.000797816,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000386838,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.007936432,
+            "euclidean_span_m": 0.007939875,
+            "fixed_normal_span_alignment": -0.023298225,
+            "force_balance_min_over_max": 0.275191658,
+            "maximum_pairwise_span_m_diagnostic_only": 0.009378625,
+            "minimum_pairwise_span_m_diagnostic_only": 0.006963331,
+            "moving_normal_span_alignment": 0.987645492,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000835218,
+                  -0.009321988,
+                  0.014211765
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 3.012176425
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002065606,
+                  -0.01716377,
+                  0.01439675
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 0.828925824
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.009371212,
+              "moving": 0.017307644
+            },
+            "span_vector_object_m": [
+              -0.001230388,
+              -0.007841782,
+              0.000184985
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000835218,
+                  -0.009321988,
+                  0.014211765
+                ],
+                [
+                  -0.002065606,
+                  -0.01716377,
+                  0.01439675
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 5,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.000788235,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.00033623,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.007888133,
+            "euclidean_span_m": 0.007891331,
+            "fixed_normal_span_alignment": -0.02271936,
+            "force_balance_min_over_max": 0.23097573,
+            "maximum_pairwise_span_m_diagnostic_only": 0.009323612,
+            "minimum_pairwise_span_m_diagnostic_only": 0.006915652,
+            "moving_normal_span_alignment": 0.987605224,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000833649,
+                  -0.009413905,
+                  0.014217739
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 2.987407287
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.002059215,
+                  -0.017207425,
+                  0.014397025
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 0.690018579
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.009482646,
+              "moving": 0.017370779
+            },
+            "span_vector_object_m": [
+              -0.001225566,
+              -0.00779352,
+              0.000179286
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000833649,
+                  -0.009413905,
+                  0.014217739
+                ],
+                [
+                  -0.002059215,
+                  -0.017207425,
+                  0.014397025
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 6,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.000782261,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.000292575,
+              "nearest_face": "-y"
+            }
+          }
+        },
+        {
+          "aggregate": {
+            "closing_axis_projected_span_m": 0.007846182,
+            "euclidean_span_m": 0.007849114,
+            "fixed_normal_span_alignment": -0.021513383,
+            "force_balance_min_over_max": 0.195018534,
+            "maximum_pairwise_span_m_diagnostic_only": 0.009277518,
+            "minimum_pairwise_span_m_diagnostic_only": 0.006874654,
+            "moving_normal_span_alignment": 0.987590812,
+            "normal_dot": 0.0,
+            "representative_contacts": {
+              "fixed_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.000832885,
+                  -0.009493387,
+                  0.014221795
+                ],
+                "contact_count": 2,
+                "normal_object_inward": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "total_normal_force_n": 2.968892146
+              },
+              "moving_fingertip_pad": {
+                "centroid_object_m": [
+                  -0.00205396,
+                  -0.0172451,
+                  0.014390656
+                ],
+                "contact_count": 3,
+                "normal_object_inward": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "total_normal_force_n": 0.578988993
+              }
+            },
+            "signed_contact_locations_on_closing_axis_m": {
+              "fixed": 0.00957712,
+              "moving": 0.017423302
+            },
+            "span_vector_object_m": [
+              -0.001221075,
+              -0.007751713,
+              0.000168861
+            ],
+            "strict_v2_witness": {
+              "contact_normals": [
+                [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                [
+                  0.0,
+                  1.0,
+                  0.0
+                ]
+              ],
+              "contact_points_m": [
+                [
+                  -0.000832885,
+                  -0.009493387,
+                  0.014221795
+                ],
+                [
+                  -0.00205396,
+                  -0.0172451,
+                  0.014390656
+                ]
+              ],
+              "jaw_ids": [
+                "fixed_fingertip_pad",
+                "moving_fingertip_pad"
+              ],
+              "source_mode": "mujoco_pad_qualified_force_weighted_representatives"
+            }
+          },
+          "phase": "grasp_hold",
+          "phase_frame_index": 7,
+          "representative_face_classification": {
+            "fixed_fingertip_pad": {
+              "face_residual_m": 0.000778205,
+              "nearest_face": "+z"
+            },
+            "moving_fingertip_pad": {
+              "face_residual_m": 0.0002549,
+              "nearest_face": "-y"
+            }
+          }
+        }
+      ],
+      "preclose_object_displacement_m": 0.00032478912409524284,
+      "request": {
+        "close_target_rad": -0.11882352941176472,
+        "lateral_x_m": -0.001714285714285715,
+        "lateral_y_m": -0.005454545454545455,
+        "object_yaw_rad": 0.14000000000000012,
+        "vertical_m": 0.018615384615384617,
+        "wrist_flex_rad": 0.32500000000000007,
+        "wrist_roll_rad": -1.2444444444444445
+      },
+      "selected_object_principal_axis": "y"
+    }
+  ],
+  "contact_normal_convention": "object_coordinates_inward_toward_object",
+  "evidence_mode": "diagnostic_replay_of_centered_bilateral_contacts",
+  "geom_order_independent": true,
+  "hardware_accessed": false,
+  "identity_sha256": "235728518c5bdb32a7ee0522cc780c8c3dbae21f36240a702df164463488e639",
+  "physical_follower_commanded": false,
+  "schema_version": "scenesmith.centered_contact_face_audit.v1",
+  "simulation_training_ready": false,
+  "source_candidate_metrics_identical": true,
+  "source_centered_axis_search_identity_sha256": "7deb28268e07e7e268c8e35005d5104e8a7a1c68faf60da8c2add77d97688ae6",
+  "source_gripper_geometry_audit_identity_sha256": "9bfce4c6fab67cc9259414a2c3d1615b810e2ffb00e7c00070700a64992f6c88",
+  "synthetic_convention_aggregate_valid": true
+}

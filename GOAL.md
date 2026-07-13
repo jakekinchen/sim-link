@@ -74,8 +74,13 @@ eight horizontal y-axis poses are valid and two retain bilateral contact, but
 both fail motion and strict contact geometry. T19.0j is
 `verified` through Brief 104: selected-axis centering raises one bilateral
 candidate above the strict span threshold, but normal alignment and preclose
-motion still fail. T19.0k is the next eligible offline slice: audit actual
-contact faces and inward normals before another pose or geometry correction.
+motion still fail. T19.0k is `verified` through Brief 105: source-identical
+diagnostics prove the fixed pad contacts the anchor top while the moving pad
+contacts the side; normal convention and geom ordering are valid. T19.0l is the
+next eligible offline slice: build a geometry-derived unilateral-jaw grasp from
+the 35 mm anchor width, compiled aperture curve, object-center pad height, and
+bounded fixed-jaw clearance, then verify a full unassisted lift/lower/release
+trajectory under the unchanged strict evaluator.
 The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance

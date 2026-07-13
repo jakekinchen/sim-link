@@ -2565,12 +2565,40 @@
       ]
     },
     "T19.0k": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0j"],
-      "result": "audit actual per-pad contact points and inward normals in object frame for centered bilateral candidates before changing pose or contact geometry again",
-      "authority_granted": [],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "105",
+      "review_decision_id": "131",
+      "result": "source-identical contact audit proves the fixed pad rides the anchor +z top face while the moving pad predominantly contacts the -y side; normal convention and geom-order handling remain valid",
+      "artifact": {
+        "path": "configurations/robot_lab/centered_contact_face_audit.json",
+        "identity_sha256": "235728518c5bdb32a7ee0522cc780c8c3dbae21f36240a702df164463488e639",
+        "file_sha256": "0792a2329d9380bb28c6126130a6a256bc17ef800f3074dc59d7d56cfd4317ba",
+        "size_bytes": 89736,
+        "audited_candidate_count": 2,
+        "bilateral_diagnostic_frame_count": 30,
+        "fixed_pad_top_face_frame_count": 30,
+        "moving_pad_negative_y_face_frame_count": 27,
+        "geom_order_independent": true,
+        "broad_test_count": 194
+      },
+      "authority_granted": [
+        "centered_contact_face_failure_diagnosed"
+      ],
       "authority_not_granted": [
         "geometry_eligible_grasp_candidate",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_actuation"
+      ]
+    },
+    "T19.0l": {
+      "state": "pending",
+      "depends_on": ["T19.0k"],
+      "result": "mechanically derive a unilateral-jaw grasp from selected object width, compiled aperture curve, object-center pad height, and bounded fixed-jaw clearance, then run deterministic close/hold/lift/unsupported-hold/lower/release/retreat",
+      "authority_granted": [],
+      "authority_not_granted": [
         "unassisted_mujoco_grasp_success",
         "simulation_training_ready",
         "physical_actuation"

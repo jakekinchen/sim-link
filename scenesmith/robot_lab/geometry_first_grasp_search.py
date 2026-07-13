@@ -108,6 +108,7 @@ def _candidate(
     joint_wrist_axis_alignment: bool = False,
     best_principal_axis_alignment: bool = False,
     center_selected_axis_offset: bool = False,
+    retain_contact_diagnostics: bool = False,
 ) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
@@ -121,6 +122,7 @@ def _candidate(
             joint_wrist_axis_alignment=joint_wrist_axis_alignment,
             best_principal_axis_alignment=best_principal_axis_alignment,
             center_selected_axis_offset=center_selected_axis_offset,
+            retain_contact_diagnostics=retain_contact_diagnostics,
         )
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
@@ -137,6 +139,7 @@ def _run_candidate(
     joint_wrist_axis_alignment: bool = False,
     best_principal_axis_alignment: bool = False,
     center_selected_axis_offset: bool = False,
+    retain_contact_diagnostics: bool = False,
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
@@ -385,6 +388,19 @@ def _run_candidate(
         ]
         result["pregrasp_predicted_pad_midpoint_residual_m"] = pregrasp_solution[
             "predicted_pad_midpoint_residual_m"
+        ]
+    if retain_contact_diagnostics:
+        result["pad_contact_phase_diagnostics"] = [
+            {
+                "phase": row["phase"],
+                "phase_frame_index": index,
+                "aggregate": row["pad_contact_aggregate"],
+            }
+            for phase in ("close", "grasp_hold")
+            for index, row in enumerate(
+                frame for frame in raw_frames if frame["phase"] == phase
+            )
+            if row["pad_contact_aggregate"] is not None
         ]
     if (
         principal_axis_alignment
