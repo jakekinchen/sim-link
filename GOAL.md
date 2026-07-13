@@ -26,9 +26,9 @@ proof states must remain distinct.
 - The owner is physically present for the initial bounded session. The exact
   current task passed the formal same-thread `danger-full-access`/`never`
   verifier with profile identity `77f39177...` and no hardware access.
-- Reviewer 098 opens at most one read-only static-pose candidate session from
-  `08:30` through `09:15` CDT, effective only after remote confirmation and a
-  fresh short operator-presence lease.
+- Reviewer 098's one-session gate was consumed and closed at `08:42` CDT after
+  the candidate rejected live camera-frame fields. Reviewer 101 preserves the
+  rejected boundary; no second session is allowed under that gate.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -347,7 +347,9 @@ Fresh discovery later added an AVFoundation-only screen-capture source. Brief
 074 corrects only unselected-source handling: the exact signed RealSense and
 C922 still require unique system identities and modes, and selecting the screen
 source rejects. Actual candidate construction now passes without hardware open;
-the live session remains unconsumed pending remote preservation.
+the subsequent one-shot live session is rejected by a separate frame-field
+contract mismatch. Failure `b117e797...` grants no observation or policy label;
+shutdown leaves the follower disconnected, torque false, and both aliases free.
 
 ## Durable State
 

@@ -69,7 +69,7 @@
     "trigger": "owner_present_full_access_no_prompt_t16_5c_physical_evidence_mission",
     "scope": "T16.5c accepted static-pose observation, reviewed real input, no-actuation PI0.5 shadow, and matched MuJoCo replay; T16.6 only if every gate passes",
     "starting_head": "738d0006601335bc68bcf4ffda005a19d34933cc",
-    "live_gate": "open",
+    "live_gate": "closed",
     "training_lock": "closed",
     "deadline": null
   },
@@ -1011,14 +1011,14 @@
       "hardware_opened": true,
       "hardware_cleanup_completed_before_rejection": true,
       "physical_follower_commanded": false,
-      "live_gate": "open",
+      "live_gate": "closed",
       "live_gate_opened_at": "2026-07-13T08:30:00-05:00",
       "live_gate_valid_until": "2026-07-13T09:15:00-05:00",
       "live_gate_session_limit": 1,
-      "live_gate_sessions_started": 0,
-      "live_gate_closed_at": null,
-      "live_gate_close_reason": null,
-      "live_gate_reconsideration_state": "one_t16_5c_candidate_session_open_only_after_remote_confirmation",
+      "live_gate_sessions_started": 1,
+      "live_gate_closed_at": "2026-07-13T08:42:00-05:00",
+      "live_gate_close_reason": "candidate_rejected_static_pose_camera_frame_fields_invalid",
+      "live_gate_reconsideration_state": "t16_5c_gate_consumed_waiting_one_narrow_offline_frame_contract_correction",
       "live_gate_transitions": [
         {
           "state": "open",
@@ -1130,6 +1130,12 @@
           "at": "2026-07-13T08:30:00-05:00",
           "review_decision_id": "098",
           "result": "one_full_access_no_prompt_static_pose_bracket_candidate_session_authorized_only_after_remote_confirmation"
+        },
+        {
+          "state": "closed",
+          "at": "2026-07-13T08:42:00-05:00",
+          "review_decision_id": "101",
+          "reason": "candidate_rejected_static_pose_camera_frame_fields_invalid"
         }
       ],
       "live_gate_scope": "one_static_pose_bracket_candidate_session",
@@ -1315,7 +1321,26 @@
       "active_brief_id": null,
       "latest_verified_brief_id": "074",
       "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074"],
-      "result": "Briefs 048-059, 062, 071, and 074 are verified. Reviewer 097 accepts danger-full-access plus never runtime policy, Reviewer 098 opens one finite gate, and Reviewer 099 corrects its machine review linkage. Brief 074 permits unselected AVFoundation-only sources while preserving exact system identity for selected cameras; the actual fresh discovery now builds a candidate contract without hardware access. Production reviewed-input issuance remains blocked pending an accepted session",
+      "result": "Briefs 048-059, 062, 071, and 074 are verified. Attempt t16-5c-20260713-0845-cdt consumed the one-session gate and is rejected: camera-frame normalization reported invalid fields after the session started. Immutable failure b117e797... verifies no physical command, policy inference, motion authority, or training; Studio remains follower-disconnected/torque-false and both aliases holder-free. No static-pose, reviewed-input, shadow, or replay label is granted",
+      "latest_rejected_live_candidate": {
+        "session_id": "t16-5c-20260713-0845-cdt",
+        "discovery_identity_sha256": "673ff2d201f48ffaa9ece6646901d9aa5137260015ebe187b6424cb788d59033",
+        "hardware_profile_identity_sha256": "69e86eda62ccb813e70f7d02a4088ff39fa16a56dd29d5e6f69952447aa1dddf",
+        "presence_lease_identity_sha256": "43fc0c7228b28dde1ca119bcd2120d116df22ba2cd75e3d1bd08e4652e9f0402",
+        "candidate_contract_identity_sha256": "e6bf4f623ef31f894c95d9d6b8b2a0f7b0a918faa308d25463d471956787cb7e",
+        "private_failure_identity_sha256": "b117e797e8da345e55b9bde8e366699b4d7ece0492f0c0b253f740e8e2b757db",
+        "failure_class": "camera_frame_fields_invalid",
+        "hardware_opened_may_have_occurred": true,
+        "physical_follower_commanded": false,
+        "policy_inference_run": false,
+        "motion_authority_granted": false,
+        "training_authority_granted": false,
+        "post_status_follower_connected": false,
+        "post_status_follower_torque": false,
+        "post_holder_counts": [0, 0],
+        "post_deduplicated_holder_count": 0,
+        "proof_labels": []
+      },
       "runtime_policy_transition": {
         "brief_id": "071",
         "implementation_commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
@@ -1708,8 +1733,10 @@
         "production_reviewed_input_issued": false,
         "production_linkage_missing": "accepted_live_session_review_decision"
       },
-      "next_action": "remotely preserve Brief 074 and Reviewer 100, then recapture the exact profile, issue a fresh short lease, bind the corrected candidate, and execute no more than one session",
+      "next_action": "remotely preserve Reviewer 101 gate close, then perform one narrow offline correction for live FFmpeg frame metadata versus the static-pose normalization contract before any separately reviewed future gate",
       "live_execution_prerequisites_missing": [
+        "one_narrow_offline_frame_contract_correction",
+        "new_separately_reviewed_remote_live_gate_transition",
         "fresh_operator_presence_lease",
         "fresh_discovery_and_zero_holder_snapshots"
       ],
