@@ -117,6 +117,23 @@ class StrictGraspTests(unittest.TestCase):
                 claimed_proof_mode="analytic_expert",
             )
 
+    def test_missing_physical_metrics_reject_without_inventing_values(self) -> None:
+        spec = strict_grasp_spec()
+        trajectory = analytic_grasp_trajectory(spec)
+        for frame in trajectory:
+            frame["actuator_current_ma_max"] = None
+            frame["gripper_aperture_m"] = None
+
+        result = evaluate_strict_grasp(
+            spec,
+            trajectory,
+            claimed_proof_mode="analytic_expert",
+        )
+
+        self.assertFalse(result["strict_grasp_success"])
+        self.assertIn("actuator_current_measurement_missing", result["failure_reasons"])
+        self.assertIn("gripper_aperture_measurement_missing", result["failure_reasons"])
+
     def test_checked_fixture_is_deterministic_and_withholds_authority(self) -> None:
         payload = load_strict_json(FIXTURE)
 

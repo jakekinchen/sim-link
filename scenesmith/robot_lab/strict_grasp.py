@@ -208,11 +208,14 @@ def evaluate_strict_grasp(
         reasons.append("object_speed_limit_exceeded")
     if any(frame["impact_force_n"] > spec["maximum_impact_force_n"] for frame in trajectory):
         reasons.append("impact_limit_exceeded")
-    if any(
-        frame["actuator_current_ma_max"] > spec["maximum_actuator_current_ma"]
-        for frame in trajectory
-    ):
+    currents = [frame["actuator_current_ma_max"] for frame in trajectory]
+    if any(value is None for value in currents):
+        reasons.append("actuator_current_measurement_missing")
+    elif any(value > spec["maximum_actuator_current_ma"] for value in currents):
         reasons.append("current_limit_exceeded")
+    apertures = [frame["gripper_aperture_m"] for frame in trajectory]
+    if any(value is None for value in apertures):
+        reasons.append("gripper_aperture_measurement_missing")
 
     confirmed = _phase_rows(trajectory, "grasp_confirmed")
     if not confirmed or confirmed[0]["fingertip_contacts"] < spec["minimum_fingertip_contacts"]:
@@ -253,6 +256,7 @@ def evaluate_strict_grasp(
     if (
         not release
         or release[0]["fingertip_contacts"] != 0
+        or release[0]["gripper_aperture_m"] is None
         or release[0]["gripper_aperture_m"] < spec["minimum_release_aperture_m"]
     ):
         reasons.append("release_invalid")
@@ -494,6 +498,8 @@ def _validate_frames(trajectory: list[dict[str, Any]]) -> None:
     numeric_fields = (
         "object_speed_m_s",
         "impact_force_n",
+    )
+    optional_numeric_fields = (
         "actuator_current_ma_max",
         "gripper_aperture_m",
     )
@@ -521,6 +527,13 @@ def _validate_frames(trajectory: list[dict[str, Any]]) -> None:
         previous_timestamp = timestamp
         for name in numeric_fields:
             value = _finite(frame.get(name), label=name)
+            if value < 0.0:
+                raise ValueError(f"{name} must be non-negative")
+        for name in optional_numeric_fields:
+            raw_value = frame.get(name)
+            if raw_value is None:
+                continue
+            value = _finite(raw_value, label=name)
             if value < 0.0:
                 raise ValueError(f"{name} must be non-negative")
         contacts = frame.get("fingertip_contacts")

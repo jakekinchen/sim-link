@@ -1355,9 +1355,9 @@
       "state": "in_progress",
       "depends_on": ["T16.5b"],
       "active_brief_id": null,
-      "latest_verified_brief_id": "089",
-      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082", "083", "084", "087", "088", "089"],
-      "result": "Reviewer 115 accepts a deterministic strict-grasp evaluator over one analytic-expert positive and twelve adversarial negatives only. The positive is semantic analytic-expert success, not policy or MuJoCo success. Physical anchor dimensions, mass, COM, material, friction, and pose remain unknown. Reviewer 114's corrected midpoint replay remains diagnostic and DO_NOT_ACTUATE. Accepted policy input, accepted shadow, matched replay, T16.6 preparation, motion, twin qualification, and training remain withheld",
+      "latest_verified_brief_id": "090",
+      "completed_brief_ids": ["048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "062", "071", "074", "076", "079", "082", "083", "084", "087", "088", "089", "090"],
+      "result": "Reviewer 116 accepts deterministic evidence from the first 371-frame nominal anchor-cousin MuJoCo attempt but rejects strict grasp success. The legacy placement score passes only after contact-gated weld assistance. Strict evaluation rejects 17.081659463 N peak impact, missing calibrated current and metric aperture, one-sided contact, invalid stable hold, and contact-retaining release. Physical anchor measurements remain unknown. Accepted policy input, accepted shadow, matched physical replay, T16.6 preparation, motion, twin qualification, and training remain withheld",
       "private_current_frame_retention": {
         "brief_id": "084",
         "review_decision_id": "110",
@@ -2017,7 +2017,40 @@
         "motion_authority_granted": false,
         "training_authority_granted": false
       },
-      "next_action": "execute one deterministic nominal anchor-cousin grasp in the pinned MuJoCo model, capture measured contact and object-motion trace, and evaluate it through the unchanged strict evaluator",
+      "mujoco_anchor_grasp_attempt": {
+        "brief_id": "090",
+        "review_decision_id": "116",
+        "artifact_path": "configurations/robot_lab/mujoco_anchor_grasp_attempt.json",
+        "schema_version": "scenesmith.mujoco_anchor_grasp_attempt.v1",
+        "identity_sha256": "32f14feba6c10e501082c0438ee4b0cd80ee530d4c143468b5af20f5ad29626e",
+        "file_sha256": "831fdf2aaf787575ae1c83bcbeb987a5399ab0d8f58c915a4e582379bce1e76b",
+        "size_bytes": 439297,
+        "raw_frame_count": 371,
+        "two_pass_exact_determinism": true,
+        "legacy_placement_score_success": true,
+        "controller_assistance_present": true,
+        "maximum_anchor_step_displacement_m": 0.004194223,
+        "maximum_selected_contact_force_n": 17.081659463,
+        "grasp_confirmed_contact_count": 1,
+        "release_contact_count": 1,
+        "strict_grasp_success": false,
+        "strict_failure_reasons": [
+          "impact_limit_exceeded",
+          "actuator_current_measurement_missing",
+          "gripper_aperture_measurement_missing",
+          "valid_grasp_contact_missing",
+          "stable_hold_invalid",
+          "release_invalid"
+        ],
+        "unassisted_mujoco_grasp_success": false,
+        "physical_twin_qualified": false,
+        "simulation_training_ready": false,
+        "hardware_accessed": false,
+        "physical_follower_commanded": false,
+        "motion_authority_granted": false,
+        "training_authority_granted": false
+      },
+      "next_action": "run a lower-force object-relative MuJoCo pregrasp and close that requires simultaneous fixed- and moving-jaw contact, then stable hold and clean release, while deriving a nominal simulation-only aperture profile from pinned gripper kinematics",
       "live_execution_prerequisites_missing": [
         "current_session_production_reviewed_input_bundle",
         "sorting_scene_semantics_accepted_for_policy_input",
@@ -2060,7 +2093,8 @@
         "pi05_reviewed_input_bundle_valid",
         "midpoint_direct_physical_pose_candidate_selected_for_offline_replay",
         "midpoint_coordinate_corrected_proposal_prefix_replay_diagnostic_observed",
-        "strict_grasp_evaluator_fixture_conformant"
+        "strict_grasp_evaluator_fixture_conformant",
+        "deterministic_mujoco_anchor_grasp_attempt_observed"
       ],
       "authority_not_granted": [
         "accepted_live_policy_input",
@@ -2075,7 +2109,7 @@
     "T16.6": {
       "state": "pending",
       "depends_on": ["T16.5a", "T16.5b", "T16.5c"],
-      "result": "standing Stage A authority is recorded, but T16.5c is not verified. Brief 088 corrected the legacy-offset projection and false start collision in offline MuJoCo, but the transform is not metric-calibrated, policy-input and shadow validity remain rejected, the physical scene does not match the sorting checkpoint, and the proposal is unsuitable. Permit-specific current-pose, limit, telemetry, watchdog, stop, and shutdown prerequisites also remain pending",
+      "result": "standing Stage A authority is recorded, but T16.5c is not verified. Brief 088 corrected the legacy-offset projection and false start collision, while Brief 090's nominal anchor attempt remains contact-gated assisted and fails strict impact, two-sided contact, hold, release, current, and aperture requirements. The physical transform is not metric-calibrated, policy-input and shadow validity remain rejected, and the proposal is unsuitable. Permit-specific current-pose, limit, telemetry, watchdog, stop, and shutdown prerequisites also remain pending",
       "no_second_prompt_required": true,
       "pre_execution_requirements": [
         "T16.5a_T16.5b_T16.5c_verified",

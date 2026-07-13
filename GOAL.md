@@ -422,6 +422,15 @@ unknown. The nominal analytic cousin is not physical evidence. The next offline
 experiment is a deterministic anchor-cousin MuJoCo grasp evaluated through the
 unchanged semantic gate; no policy, twin, training, or motion authority follows
 from the analytic fixture.
+Brief 090 and Reviewer 116 preserve that first physics experiment. Two exact
+371-frame replays lift and place the nominal anchor cousin only after a
+contact-gated weld, so the legacy placement score passes while strict grasp
+fails. The measured selected trace reaches 17.081659463 N contact force, has
+only one gripper-side contact at confirmation and release, and lacks calibrated
+current and metric aperture. The next offline correction is a lower-force
+object-relative close that establishes simultaneous fixed- and moving-jaw
+contact, stable hold, and clean release, with a nominal simulation-only aperture
+profile. No threshold was relaxed and no physical value was inferred.
 
 ## Durable State
 

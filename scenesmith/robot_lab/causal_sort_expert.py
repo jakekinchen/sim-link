@@ -55,6 +55,7 @@ class CausalSortExpertConfig:
     # envelope. Keep the accepted miss tightly bounded while allowing the
     # physics-scored episode to decide whether the resulting placement is valid.
     ik_max_residual_m: float = 0.020
+    capture_images: bool = True
 
 
 FrameSink = Callable[[dict[str, Any], dict[str, np.ndarray]], None]
@@ -272,10 +273,14 @@ class CausalSortExpert:
             self._record_and_step(phase, action)
 
     def _record_and_step(self, phase: str, action: np.ndarray) -> None:
-        images = {
-            "top": self._capture("cam1_overhead", 0),
-            "wrist": self._capture("cam2_wrist", 1),
-        }
+        images = (
+            {
+                "top": self._capture("cam1_overhead", 0),
+                "wrist": self._capture("cam2_wrist", 1),
+            }
+            if self.config.capture_images
+            else {}
+        )
         state = self._mujoco_to_lerobot(self.data.qpos[: self.model.nu])
         policy_action = self._mujoco_to_lerobot(action)
         contacts = self._all_robot_cube_contacts()
