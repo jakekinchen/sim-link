@@ -286,9 +286,17 @@ class StaticPoseLiveSessionTests(unittest.TestCase):
         )
         make_transport.assert_called_once()
         make_camera.assert_called_once()
+        private_frame_batches = make_camera.call_args.kwargs[
+            "private_frame_batches"
+        ]
+        self.assertEqual(private_frame_batches, [])
         self.assertIs(runner.call_args.kwargs["transport_factory"], transport)
         self.assertIs(runner.call_args.kwargs["camera_factory"], camera)
         build_success.assert_called_once()
+        self.assertIs(
+            build_success.call_args.kwargs["private_frame_batches"],
+            private_frame_batches,
+        )
         verify_success.assert_called_once()
         writer.assert_called_once()
         verify_reference.assert_called_once()

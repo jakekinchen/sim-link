@@ -43,9 +43,10 @@ _LIVE_RESULT_SCHEMA_VERSION = "scenesmith.static_pose_live_candidate_result.v2"
 _HARDWARE_PROFILE_SCHEMA_VERSION = (
     "scenesmith.hardware_execution_profile_evidence.v1"
 )
-_PRIVATE_SUCCESS_SCHEMA_VERSION = (
-    "scenesmith.static_pose_live_candidate_private_success.v1"
-)
+_PRIVATE_SUCCESS_SCHEMA_VERSIONS = {
+    "scenesmith.static_pose_live_candidate_private_success.v1",
+    "scenesmith.static_pose_live_candidate_private_success.v2",
+}
 _SESSION_ID_PATTERN = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}")
 _SOURCE_ARTIFACT_KEYS = {
     "accepted_manifest",
@@ -370,7 +371,7 @@ def _verify_review_sources(
         raise ValueError("Redacted review candidate result classification drifted")
     if (
         private_evidence.get("schema_version")
-        != _PRIVATE_SUCCESS_SCHEMA_VERSION
+        not in _PRIVATE_SUCCESS_SCHEMA_VERSIONS
         or private_evidence.get("status") != "candidate_observed"
         or private_evidence.get("evidence_name")
         != "pi05_static_pose_live_candidate_private_success"

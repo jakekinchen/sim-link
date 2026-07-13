@@ -516,6 +516,44 @@ class StaticPoseSessionReviewTests(unittest.TestCase):
             self.assertNotIn("numeric_index", camera)
             self.assertNotIn("resolved_camera", camera)
 
+    def test_v2_private_frame_bytes_are_never_copied_into_redacted_manifest(self):
+        private_evidence = copy.deepcopy(self.private_evidence)
+        private_evidence.pop("identity_sha256")
+        private_evidence["schema_version"] = (
+            "scenesmith.static_pose_live_candidate_private_success.v2"
+        )
+        private_evidence["private_frame_bundle"] = {
+            "png_base64": "SENSITIVE_PRIVATE_FRAME_BYTES_NEVER_TRACK",
+        }
+        private_evidence = sign_payload(private_evidence)
+        reference = _reference(private_evidence)
+        receipt = _receipt(
+            self.contract,
+            self.profile,
+            self.result,
+            private_evidence,
+            reference,
+        )
+        arguments = self._arguments()
+        arguments.update(
+            {
+                "session_receipt": receipt,
+                "private_evidence": private_evidence,
+                "private_reference": reference,
+            }
+        )
+        with self._patched_receipt_verifier():
+            manifest = build_redacted_static_pose_live_session_review_manifest(
+                **arguments
+            )
+        encoded = json.dumps(manifest, sort_keys=True)
+        self.assertEqual(
+            manifest["private_artifact"]["schema_version"],
+            "scenesmith.static_pose_live_candidate_private_success.v2",
+        )
+        self.assertNotIn("private_frame_bundle", encoded)
+        self.assertNotIn("SENSITIVE_PRIVATE_FRAME_BYTES_NEVER_TRACK", encoded)
+
     def test_builder_rejects_failure_fixture_or_source_substitution(self):
         cases = []
 

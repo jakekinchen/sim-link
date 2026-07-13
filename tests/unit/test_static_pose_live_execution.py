@@ -1,12 +1,15 @@
 from __future__ import annotations
 
+import base64
 import copy
 import hashlib
 import json
 import os
+import struct
 import subprocess
 import tempfile
 import unittest
+import zlib
 
 from pathlib import Path
 from unittest.mock import patch
@@ -92,6 +95,9 @@ class _FakePinnedCamera:
 
     def __init__(self, spec: dict) -> None:
         self.spec = copy.deepcopy(spec)
+
+    def bind_private_frame_sink(self, sink: list[dict]) -> None:
+        self.private_frame_sink = sink
 
 
 def _doctor_report(
@@ -324,6 +330,90 @@ def _candidate_result(contract: dict, profile: dict) -> dict:
             "tracked_redacted_manifest_written": False,
         }
     )
+
+
+def _png_frame(red: int) -> bytes:
+    width = 640
+    height = 480
+    rows = b"".join(
+        b"\x00" + bytes((red, 0, 0)) * width for _ in range(height)
+    )
+
+    def chunk(kind: bytes, data: bytes) -> bytes:
+        return (
+            struct.pack(">I", len(data))
+            + kind
+            + data
+            + struct.pack(">I", zlib.crc32(kind + data) & 0xFFFFFFFF)
+        )
+
+    return (
+        b"\x89PNG\r\n\x1a\n"
+        + chunk(
+            b"IHDR",
+            struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0),
+        )
+        + chunk(b"IDAT", zlib.compress(rows))
+        + chunk(b"IEND", b"")
+    )
+
+
+def _private_frame_batches(contract: dict) -> list[dict]:
+    batches = []
+    for camera_index, camera in enumerate(contract["cameras"]):
+        frames = []
+        for frame_index in range(2):
+            frames.append(
+                {
+                    "frame_bytes": _png_frame(camera_index * 2 + frame_index + 1),
+                    "encoding": "png",
+                    "width": 640,
+                    "height": 480,
+                    "channels": 3,
+                }
+            )
+        batches.append(
+            {
+                "stable_camera_identity_sha256": camera[
+                    "stable_camera_identity_sha256"
+                ],
+                "frames": frames,
+            }
+        )
+    return batches
+
+
+def _candidate_result_with_frames(
+    contract: dict,
+    profile: dict,
+    batches: list[dict],
+) -> dict:
+    result = copy.deepcopy(_candidate_result(contract, profile))
+    result.pop("identity_sha256")
+    result["capture"] = {
+        "cameras": [
+            {
+                "stable_camera_identity_sha256": batch[
+                    "stable_camera_identity_sha256"
+                ],
+                "frames": [
+                    {
+                        "frame_index": frame_index,
+                        "frame_sha256": hashlib.sha256(
+                            frame["frame_bytes"]
+                        ).hexdigest(),
+                        "width": frame["width"],
+                        "height": frame["height"],
+                        "channels": frame["channels"],
+                        "encoding": frame["encoding"],
+                    }
+                    for frame_index, frame in enumerate(batch["frames"])
+                ],
+            }
+            for batch in batches
+        ]
+    }
+    return sign_payload(result)
 
 
 class HardwareExecutionProfileTests(unittest.TestCase):
@@ -767,11 +857,15 @@ class PinnedLiveFactoryTests(unittest.TestCase):
         self.assertEqual(executable["path"], "/opt/homebrew/bin/ffmpeg")
         self.assertEqual(executable["version"], "8.0.1")
         created: list[dict] = []
+        instances: list[_FakePinnedCamera] = []
+        private_frame_batches: list[dict] = []
         profile = _profile_evidence()
 
         def construct(spec: dict, *, monotonic_ns):
             created.append(copy.deepcopy(spec))
-            return _FakePinnedCamera(spec)
+            instance = _FakePinnedCamera(spec)
+            instances.append(instance)
+            return instance
 
         with patch.object(
             execution_module,
@@ -794,6 +888,7 @@ class PinnedLiveFactoryTests(unittest.TestCase):
                 manifest_path=Path("fixture-manifest.json"),
                 now=VERIFIED_AT,
                 monotonic_ns=_Clock(),
+                private_frame_batches=private_frame_batches,
             )
             for camera in contract["cameras"]:
                 instance = factory(
@@ -813,6 +908,26 @@ class PinnedLiveFactoryTests(unittest.TestCase):
         self.assertTrue(all(spec["expected_frame_count"] == 2 for spec in created))
         self.assertTrue(all(spec["framerate_fps"] == 30 for spec in created))
         self.assertTrue(all(spec["ffmpeg"] == executable for spec in created))
+        self.assertEqual(
+            [
+                batch["stable_camera_identity_sha256"]
+                for batch in private_frame_batches
+            ],
+            [
+                camera["stable_camera_identity_sha256"]
+                for camera in contract["cameras"]
+            ],
+        )
+        self.assertTrue(
+            all(
+                instance.private_frame_sink is batch["frames"]
+                for instance, batch in zip(
+                    instances,
+                    private_frame_batches,
+                    strict=True,
+                )
+            )
+        )
 
     def test_pinned_camera_adapts_only_validated_receive_timestamps(self):
         frame = {
@@ -825,6 +940,8 @@ class PinnedLiveFactoryTests(unittest.TestCase):
             "receive_finished_monotonic_ns": 200,
         }
         instance = object.__new__(execution_module.PinnedFFmpegStaticPoseCamera)
+        private_sink = []
+        instance.bind_private_frame_sink(private_sink)
         with patch.object(
             execution_module.FFmpegNamedFiniteCamera,
             "read",
@@ -841,6 +958,7 @@ class PinnedLiveFactoryTests(unittest.TestCase):
                 "channels": 3,
             },
         )
+        self.assertEqual(private_sink, [adapted])
 
         for label, mutate in (
             ("unknown", lambda value: value.__setitem__("unexpected", 1)),
@@ -879,6 +997,7 @@ class PinnedLiveFactoryTests(unittest.TestCase):
                     return_value=changed,
                 ), self.assertRaises(ValueError):
                     instance.read()
+        self.assertEqual(private_sink, [adapted])
 
     def test_pinned_camera_adapts_only_exact_successful_backend_audit(self):
         camera = _candidate_contract()["cameras"][0]["resolved_camera"]
@@ -1107,6 +1226,91 @@ class PrivateCandidateEvidenceTests(unittest.TestCase):
             now="2026-07-12T14:31:00-05:00",
             expected_thread_id=THREAD_ID,
         )
+
+    def test_v2_success_retains_and_verifies_exact_source_bound_png_bytes(self):
+        batches = _private_frame_batches(self.contract)
+        result = _candidate_result_with_frames(
+            self.contract,
+            self.profile,
+            batches,
+        )
+        success = build_private_static_pose_candidate_success_evidence(
+            candidate_contract=self.contract,
+            hardware_execution_profile=self.profile,
+            candidate_result=result,
+            private_frame_batches=batches,
+            completed_at=VERIFIED_AT,
+        )
+        self.assertEqual(
+            success["schema_version"],
+            "scenesmith.static_pose_live_candidate_private_success.v2",
+        )
+        bundle = success["private_frame_bundle"]
+        self.assertEqual(bundle["camera_count"], 2)
+        self.assertEqual(bundle["frame_count"], 4)
+        self.assertEqual(
+            base64.b64decode(
+                bundle["cameras"][0]["frames"][0]["png_base64"],
+                validate=True,
+            ),
+            batches[0]["frames"][0]["frame_bytes"],
+        )
+        verify_private_static_pose_candidate_success_evidence(
+            success,
+            repo_root=REPO_ROOT,
+            now=VERIFIED_AT,
+            expected_thread_id=THREAD_ID,
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            private_root = Path(directory).resolve() / "private"
+            private_root.mkdir()
+            reference = write_private_static_pose_candidate_evidence(
+                private_root=private_root,
+                evidence=success,
+            )
+            verify_private_static_pose_candidate_evidence_reference(
+                reference,
+                private_root=private_root,
+                evidence=success,
+            )
+            self.assertEqual(
+                reference["schema_version"],
+                "scenesmith.static_pose_live_candidate_private_success.v2",
+            )
+
+        for label, mutate in (
+            (
+                "bytes",
+                lambda value: value["private_frame_bundle"]["cameras"][0][
+                    "frames"
+                ][0].__setitem__(
+                    "png_base64",
+                    base64.b64encode(b"not-png").decode(),
+                ),
+            ),
+            (
+                "source",
+                lambda value: value["private_frame_bundle"]["cameras"][
+                    0
+                ].__setitem__("stable_camera_identity_sha256", "0" * 64),
+            ),
+            (
+                "metadata",
+                lambda value: value["private_frame_bundle"]["cameras"][0][
+                    "frames"
+                ][0].__setitem__("width", 641),
+            ),
+        ):
+            with self.subTest(label=label):
+                changed = copy.deepcopy(success)
+                mutate(changed)
+                with self.assertRaises(ValueError):
+                    verify_private_static_pose_candidate_success_evidence(
+                        sign_payload(changed),
+                        repo_root=REPO_ROOT,
+                        now=VERIFIED_AT,
+                        expected_thread_id=THREAD_ID,
+                    )
 
     def test_re_signed_success_failure_class_contract_profile_and_proof_drift_reject(self):
         success = build_private_static_pose_candidate_success_evidence(

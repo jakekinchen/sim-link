@@ -124,6 +124,7 @@ def run_pinned_static_pose_live_session(
         repo_root=REPO_ROOT,
         monotonic_ns=monotonic_ns,
     )
+    private_frame_batches: list[dict[str, Any]] = []
     camera_factory = make_pinned_static_pose_camera_factory(
         candidate_contract,
         hardware_execution_profile=hardware_execution_profile,
@@ -134,6 +135,7 @@ def run_pinned_static_pose_live_session(
         manifest_path=manifest_path,
         now=preflight_at,
         monotonic_ns=monotonic_ns,
+        private_frame_batches=private_frame_batches,
     )
 
     started_at = _normalized_time(wall_time(), label="live session started_at")
@@ -244,6 +246,7 @@ def run_pinned_static_pose_live_session(
             candidate_contract=candidate_contract,
             hardware_execution_profile=hardware_execution_profile,
             candidate_result=candidate_result,
+            private_frame_batches=private_frame_batches,
             completed_at=completed_at,
         )
         verify_private_static_pose_candidate_success_evidence(

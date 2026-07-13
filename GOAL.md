@@ -38,7 +38,10 @@ proof states must remain distinct.
   complete fresh preflight. That session produced a verified candidate at
   `09:12` and closed cleanly. Brief 082 corrects the exact redacted-review
   hardware-profile contradiction, and Reviewer 108 accepts the session as a
-  static-pose bracketed observation.
+  static-pose bracketed observation. Reviewer 109 issues its reviewed semantic
+  input bundle. Brief 084 and Reviewer 110 verify private source-bound frame
+  retention for a future session; the accepted 09:12 session remains v1 and
+  still has no current pixel bytes.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -381,6 +384,11 @@ Reviewer 109 now issues the production-valid acceptance, exact stable-camera
 role, and exact task-prompt artifacts. Gate `d48165d1...` has no missing
 reviewed inputs and permits production issuance, while explicitly keeping
 `accepted_live_policy_input=false` until current pixel bytes exist.
+Brief 084 and Reviewer 110 now verify the smallest backward-compatible private
+retention correction. Future successful sessions can retain four exact
+source-bound PNGs in private-success v2 while candidate and tracked review
+artifacts stay hash-only. The accepted session remains v1; a fresh separately
+reviewed bracket is the next experiment.
 
 ## Durable State
 

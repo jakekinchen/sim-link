@@ -5,15 +5,15 @@ Updated: 2026-07-13
 ```text
 training_lock: closed
 run_window: start 2026-07-13T08:21:09-05:00; no new major slice after 11:51:09; hard closeout 12:21:09 CDT
-run_state: Reviewer 109 production reviewed-input bundle d48165d1... valid; accepted_live_policy_input false; current frame bytes absent; training lock closed
+run_state: Reviewer 110 private current-frame retention conformant; accepted session remains v1 without pixels; training lock closed
 current_milestone: M16 Twin and dependency foundation
-current_task: T16.5c in progress; implement minimal private current-frame retention for real preprocessing
+current_task: T16.5c in progress; open a fresh finite bracket under a separate reviewed gate
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: result 4a50b4c4..., manifest 75d8aae3..., reviewed-input gate d48165d1... valid; zero drift; frames [2,2]; 12 reads; zero writes/motion; holders [0,0]
 remaining: T16.5c static-pose-bracket/coordinate validation/preprocessing/shadow/replay with no actuation; T16.6 exact initial supervised micro-motion permit only after T16.5c and permit gates
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: current physical frame bytes remain absent; accepted_live_policy_input, preprocessing, shadow, and replay unavailable
-next_step: add the smallest source-bound private frame retention needed by real preprocessing, then collect a fresh finite bracket
+blockers: current physical frame bytes remain absent until a fresh bracket emits verified private-success v2; accepted_live_policy_input, preprocessing, shadow, and replay unavailable
+next_step: commit and confirm Brief 084, then open and execute one separately reviewed finite static-pose gate
 ```
 
 ## Rules
@@ -52,6 +52,19 @@ next_step: add the smallest source-bound private frame retention needed by real 
 | T16.5b | verified | T16.5a | Live read-only census and finite physical camera capture while owner-present lease is active | Attempt 006; private `125de28f...`; original manifest v4 `eff3c824...`, mechanically migrated manifest v5 `5218c3bd...`; exact two-camera 640x480 capture; 54 no-write reads; six torque-off values; sequential evidence only |
 | T16.5c | in_progress | T16.5b | Real-observation preprocessing, PI0.5 shadow, and matched MuJoCo replay with no actuation | Reviewed-input gate d48165d1... production-valid; current pixel bytes/preprocessing/shadow/replay pending |
 | T16.6 | pending | T16.5a-T16.5c | Exact initial supervised physical POC under final owner confirmation | Signed/content-addressed session permit; no-op-equivalent then at most one small one-joint delta and exact return; no second prompt; active lease; requested/projected/sent/measured separate; `supervised_micro_motion` only |
+
+### 2026-07-13 - Brief 084 private current-frame retention
+
+```text
+Current task: T16.5c
+State: in_progress; accepted session remains v1; live gate closed; training lock closed
+Experiment-derived gap: accepted bracket retained four frame hashes and semantics but not current pixel bytes, blocking real preprocessing
+Correction: future successful sessions emit private-success v2 with four exact source-bound PNGs; result/receipt/tracked review remain hash-only; v1 remains verifiable
+Verification: targeted red then green; 183 focused tests per pinned runtime; 382 broad tests in 121.863 seconds; source verifiers in both runtimes; actual accepted v1 verifies in both; compile/workflow/JSON/privacy/diff checks
+Authority gained: private_source_bound_current_frame_retention_conformant only
+Authority withheld: accepted live policy input, preprocessing, model, inference, shadow, replay, motion, qualification, training, and paid compute
+Next step: remote confirmation, then a separately reviewed finite bracket with fresh profile, discovery, lease, holder preflight, and no-torque cleanup
+```
 
 ### 2026-07-13 - Brief 074 unselected AVFoundation source correction
 

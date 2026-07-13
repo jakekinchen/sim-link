@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import copy
 import hashlib
 import inspect
@@ -33,10 +34,12 @@ from scenesmith.robot_lab.live_readonly_observation import (
     AuditedReadOnlyBusBackend,
     FFMPEG_EXECUTABLE,
     FFmpegNamedFiniteCamera,
+    _parse_exact_png_stream,
     stable_camera_identity_sha256,
 )
 from scenesmith.robot_lab.static_pose_bracket_runtime import (
     InjectedStaticPoseBusAdapter,
+    MAX_FIXTURE_FRAME_BYTES,
 )
 from scenesmith.robot_lab.static_pose_live_candidate import (
     STATIC_POSE_LIVE_CANDIDATE_CONTRACT_SCHEMA_VERSION,
@@ -48,6 +51,16 @@ from scenesmith.robot_lab.static_pose_live_candidate import (
 PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION = (
     "scenesmith.static_pose_live_candidate_private_success.v1"
 )
+PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION_V2 = (
+    "scenesmith.static_pose_live_candidate_private_success.v2"
+)
+PRIVATE_STATIC_POSE_FRAME_BUNDLE_SCHEMA_VERSION = (
+    "scenesmith.static_pose_live_candidate_private_frame_bundle.v1"
+)
+_PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSIONS = {
+    PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION,
+    PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION_V2,
+}
 PRIVATE_STATIC_POSE_FAILURE_SCHEMA_VERSION = (
     "scenesmith.static_pose_live_candidate_private_failure.v1"
 )
@@ -93,6 +106,15 @@ class PinnedFFmpegStaticPoseCamera(FFmpegNamedFiniteCamera):
     def evidence_mode(self) -> str:
         return "live_injected_camera"
 
+    def bind_private_frame_sink(self, sink: list[dict[str, Any]]) -> None:
+        """Bind one empty session-private sink before the first frame read."""
+
+        if hasattr(self, "_private_frame_sink"):
+            raise RuntimeError("Pinned static-pose camera frame sink already bound")
+        if not isinstance(sink, list) or sink:
+            raise ValueError("Pinned static-pose camera frame sink must be empty")
+        self._private_frame_sink = sink
+
     def read(self) -> dict[str, Any]:
         """Validate pinned receive metadata and return the strict frame view."""
 
@@ -111,7 +133,13 @@ class PinnedFFmpegStaticPoseCamera(FFmpegNamedFiniteCamera):
             or finished <= started
         ):
             raise ValueError("Pinned static-pose camera receive interval is invalid")
-        return {field: frame[field] for field in self._SEMANTIC_FRAME_FIELDS}
+        semantic = {
+            field: frame[field] for field in self._SEMANTIC_FRAME_FIELDS
+        }
+        sink = getattr(self, "_private_frame_sink", None)
+        if sink is not None:
+            sink.append(copy.deepcopy(semantic))
+        return semantic
 
     def audit(self) -> dict[str, Any]:
         """Validate the finite FFmpeg lifecycle and return its strict audit view."""
@@ -341,9 +369,14 @@ def make_pinned_static_pose_camera_factory(
     manifest_path: Path,
     now: str,
     monotonic_ns: Callable[[], int],
+    private_frame_batches: list[dict[str, Any]] | None = None,
 ) -> Callable[[dict[str, Any], dict[str, Any]], PinnedFFmpegStaticPoseCamera]:
     """Return a factory that consumes each of the two exact cameras once."""
 
+    if private_frame_batches is not None and (
+        not isinstance(private_frame_batches, list) or private_frame_batches
+    ):
+        raise ValueError("Pinned static-pose private frame batches must start empty")
     verify_static_pose_live_candidate_contract(
         candidate_contract,
         project_state=project_state,
@@ -394,6 +427,15 @@ def make_pinned_static_pose_camera_factory(
         )
         if instance.evidence_mode != "live_injected_camera":
             raise ValueError("Pinned static-pose camera evidence class drifted")
+        if private_frame_batches is not None:
+            frames: list[dict[str, Any]] = []
+            instance.bind_private_frame_sink(frames)
+            private_frame_batches.append(
+                {
+                    "stable_camera_identity_sha256": stable,
+                    "frames": frames,
+                }
+            )
         return instance
 
     return factory
@@ -474,6 +516,7 @@ def build_private_static_pose_candidate_success_evidence(
     candidate_contract: dict[str, Any],
     hardware_execution_profile: dict[str, Any],
     candidate_result: dict[str, Any],
+    private_frame_batches: list[dict[str, Any]] | None = None,
     completed_at: str,
 ) -> dict[str, Any]:
     """Build a label-free private success record for later acceptance review."""
@@ -492,8 +535,17 @@ def build_private_static_pose_candidate_success_evidence(
         "hardware_execution_profile_identity_sha256"
     ) != hardware_execution_profile.get("identity_sha256"):
         raise ValueError("Candidate result hardware profile linkage drifted")
+    schema_version = PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION
+    private_frame_bundle = None
+    if private_frame_batches is not None:
+        schema_version = PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION_V2
+        private_frame_bundle = _build_private_static_pose_frame_bundle(
+            private_frame_batches,
+            candidate_contract=candidate_contract,
+            candidate_result=candidate_result,
+        )
     payload = {
-        "schema_version": PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION,
+        "schema_version": schema_version,
         "evidence_name": "pi05_static_pose_live_candidate_private_success",
         "qualification_scope": "local_static_pose_live_candidate_runtime",
         "evidence_mode": "local_private_live_candidate_success",
@@ -518,6 +570,8 @@ def build_private_static_pose_candidate_success_evidence(
         "training_authority_granted": False,
         "tracked_redacted_manifest_written": False,
     }
+    if private_frame_bundle is not None:
+        payload["private_frame_bundle"] = private_frame_bundle
     signed = sign_payload(payload)
     verify_private_static_pose_candidate_success_evidence(
         signed,
@@ -526,6 +580,274 @@ def build_private_static_pose_candidate_success_evidence(
         expected_thread_id=hardware_execution_profile["thread_id"],
     )
     return signed
+
+
+def _build_private_static_pose_frame_bundle(
+    private_frame_batches: list[dict[str, Any]],
+    *,
+    candidate_contract: dict[str, Any],
+    candidate_result: dict[str, Any],
+) -> dict[str, Any]:
+    expected_cameras = _candidate_camera_frame_records(
+        candidate_contract,
+        candidate_result=candidate_result,
+    )
+    if (
+        not isinstance(private_frame_batches, list)
+        or len(private_frame_batches) != len(expected_cameras)
+    ):
+        raise ValueError("Private static-pose frame batch count drifted")
+    cameras = []
+    total_png_bytes = 0
+    for batch, expected_camera in zip(
+        private_frame_batches,
+        expected_cameras,
+        strict=True,
+    ):
+        if not isinstance(batch, dict) or set(batch) != {
+            "stable_camera_identity_sha256",
+            "frames",
+        }:
+            raise ValueError("Private static-pose frame batch fields drifted")
+        stable = batch.get("stable_camera_identity_sha256")
+        if stable != expected_camera["stable_camera_identity_sha256"]:
+            raise ValueError("Private static-pose frame source identity drifted")
+        raw_frames = batch.get("frames")
+        expected_frames = expected_camera["frames"]
+        if not isinstance(raw_frames, list) or len(raw_frames) != len(
+            expected_frames
+        ):
+            raise ValueError("Private static-pose frame count drifted")
+        frames = []
+        for frame_index, (frame, expected_frame) in enumerate(
+            zip(raw_frames, expected_frames, strict=True)
+        ):
+            if not isinstance(frame, dict) or set(frame) != {
+                "frame_bytes",
+                "encoding",
+                "width",
+                "height",
+                "channels",
+            }:
+                raise ValueError("Private static-pose raw frame fields drifted")
+            frame_bytes = _validated_private_png_bytes(
+                frame.get("frame_bytes"),
+                expected_frame=expected_frame,
+                observed_semantics=frame,
+            )
+            total_png_bytes += len(frame_bytes)
+            frames.append(
+                {
+                    "frame_index": frame_index,
+                    "frame_sha256": expected_frame["frame_sha256"],
+                    "encoding": expected_frame["encoding"],
+                    "width": expected_frame["width"],
+                    "height": expected_frame["height"],
+                    "channels": expected_frame["channels"],
+                    "png_base64": base64.b64encode(frame_bytes).decode("ascii"),
+                }
+            )
+        cameras.append(
+            {
+                "stable_camera_identity_sha256": stable,
+                "frames": frames,
+            }
+        )
+    bundle = {
+        "schema_version": PRIVATE_STATIC_POSE_FRAME_BUNDLE_SCHEMA_VERSION,
+        "camera_count": len(cameras),
+        "frame_count": sum(len(camera["frames"]) for camera in cameras),
+        "total_png_bytes": total_png_bytes,
+        "cameras": cameras,
+    }
+    _verify_private_static_pose_frame_bundle(
+        bundle,
+        candidate_contract=candidate_contract,
+        candidate_result=candidate_result,
+    )
+    return bundle
+
+
+def _verify_private_static_pose_frame_bundle(
+    bundle: Any,
+    *,
+    candidate_contract: dict[str, Any],
+    candidate_result: dict[str, Any],
+) -> None:
+    if not isinstance(bundle, dict) or set(bundle) != {
+        "schema_version",
+        "camera_count",
+        "frame_count",
+        "total_png_bytes",
+        "cameras",
+    }:
+        raise ValueError("Private static-pose frame bundle fields drifted")
+    expected_cameras = _candidate_camera_frame_records(
+        candidate_contract,
+        candidate_result=candidate_result,
+    )
+    cameras = bundle.get("cameras")
+    if (
+        bundle.get("schema_version")
+        != PRIVATE_STATIC_POSE_FRAME_BUNDLE_SCHEMA_VERSION
+        or bundle.get("camera_count") != 2
+        or bundle.get("frame_count") != 4
+        or not isinstance(cameras, list)
+        or len(cameras) != 2
+    ):
+        raise ValueError("Private static-pose frame bundle classification drifted")
+    total_png_bytes = 0
+    for camera, expected_camera in zip(cameras, expected_cameras, strict=True):
+        if not isinstance(camera, dict) or set(camera) != {
+            "stable_camera_identity_sha256",
+            "frames",
+        }:
+            raise ValueError("Private static-pose frame camera fields drifted")
+        if (
+            camera.get("stable_camera_identity_sha256")
+            != expected_camera["stable_camera_identity_sha256"]
+        ):
+            raise ValueError("Private static-pose frame source identity drifted")
+        frames = camera.get("frames")
+        expected_frames = expected_camera["frames"]
+        if not isinstance(frames, list) or len(frames) != 2:
+            raise ValueError("Private static-pose retained frame count drifted")
+        for frame_index, (frame, expected_frame) in enumerate(
+            zip(frames, expected_frames, strict=True)
+        ):
+            if not isinstance(frame, dict) or set(frame) != {
+                "frame_index",
+                "frame_sha256",
+                "encoding",
+                "width",
+                "height",
+                "channels",
+                "png_base64",
+            }:
+                raise ValueError("Private static-pose retained frame fields drifted")
+            if frame.get("frame_index") != frame_index:
+                raise ValueError("Private static-pose retained frame order drifted")
+            encoded = frame.get("png_base64")
+            if not isinstance(encoded, str) or not encoded:
+                raise ValueError("Private static-pose retained frame bytes are missing")
+            try:
+                frame_bytes = base64.b64decode(encoded, validate=True)
+            except (ValueError, TypeError) as exc:
+                raise ValueError(
+                    "Private static-pose retained frame base64 is invalid"
+                ) from exc
+            if base64.b64encode(frame_bytes).decode("ascii") != encoded:
+                raise ValueError(
+                    "Private static-pose retained frame base64 is noncanonical"
+                )
+            _validated_private_png_bytes(
+                frame_bytes,
+                expected_frame=expected_frame,
+                observed_semantics=frame,
+            )
+            total_png_bytes += len(frame_bytes)
+    if (
+        type(bundle.get("total_png_bytes")) is not int
+        or bundle.get("total_png_bytes") != total_png_bytes
+    ):
+        raise ValueError("Private static-pose retained byte total drifted")
+
+
+def _candidate_camera_frame_records(
+    candidate_contract: dict[str, Any],
+    *,
+    candidate_result: dict[str, Any],
+) -> list[dict[str, Any]]:
+    contract_cameras = candidate_contract.get("cameras")
+    capture = candidate_result.get("capture")
+    result_cameras = capture.get("cameras") if isinstance(capture, dict) else None
+    if (
+        not isinstance(contract_cameras, list)
+        or len(contract_cameras) != 2
+        or not isinstance(result_cameras, list)
+        or len(result_cameras) != 2
+    ):
+        raise ValueError("Private static-pose source camera evidence is missing")
+    expected = []
+    for contract_camera, result_camera in zip(
+        contract_cameras,
+        result_cameras,
+        strict=True,
+    ):
+        stable = contract_camera.get("stable_camera_identity_sha256")
+        _require_sha256(stable, label="private frame stable camera identity")
+        if (
+            not isinstance(result_camera, dict)
+            or result_camera.get("stable_camera_identity_sha256") != stable
+        ):
+            raise ValueError("Private static-pose result camera identity drifted")
+        frames = result_camera.get("frames")
+        if not isinstance(frames, list) or len(frames) != 2:
+            raise ValueError("Private static-pose result frame evidence drifted")
+        validated_frames = []
+        for frame_index, frame in enumerate(frames):
+            if not isinstance(frame, dict) or set(frame) != {
+                "frame_index",
+                "frame_sha256",
+                "width",
+                "height",
+                "channels",
+                "encoding",
+            }:
+                raise ValueError("Private static-pose result frame fields drifted")
+            _require_sha256(
+                frame.get("frame_sha256"),
+                label="private frame result digest",
+            )
+            static_camera = contract_camera.get("static_camera_contract")
+            input_mode = (
+                static_camera.get("input_mode")
+                if isinstance(static_camera, dict)
+                else None
+            )
+            if (
+                frame.get("frame_index") != frame_index
+                or frame.get("encoding") != "png"
+                or not isinstance(input_mode, dict)
+                or frame.get("width") != input_mode.get("width")
+                or frame.get("height") != input_mode.get("height")
+                or frame.get("channels") != 3
+            ):
+                raise ValueError("Private static-pose result frame semantics drifted")
+            validated_frames.append(copy.deepcopy(frame))
+        expected.append(
+            {
+                "stable_camera_identity_sha256": stable,
+                "frames": validated_frames,
+            }
+        )
+    return expected
+
+
+def _validated_private_png_bytes(
+    value: Any,
+    *,
+    expected_frame: dict[str, Any],
+    observed_semantics: dict[str, Any],
+) -> bytes:
+    if (
+        not isinstance(value, bytes)
+        or not value
+        or len(value) > MAX_FIXTURE_FRAME_BYTES
+    ):
+        raise ValueError("Private static-pose PNG bytes exceed their finite bound")
+    if hashlib.sha256(value).hexdigest() != expected_frame["frame_sha256"]:
+        raise ValueError("Private static-pose PNG digest drifted")
+    parsed = _parse_exact_png_stream(value, expected_frame_count=1)[0]
+    for field in ("encoding", "width", "height", "channels"):
+        if (
+            observed_semantics.get(field) != expected_frame[field]
+            or parsed[field] != expected_frame[field]
+        ):
+            raise ValueError("Private static-pose PNG semantics drifted")
+    if parsed["frame_bytes"] != value:
+        raise ValueError("Private static-pose PNG parser did not consume exact bytes")
+    return value
 
 
 def build_private_static_pose_candidate_failure_evidence(
@@ -596,18 +918,24 @@ def verify_private_static_pose_candidate_success_evidence(
     verified = _parse_time(now, label="candidate success verification time")
     if verified < completed:
         raise ValueError("Private static-pose success is future-dated")
+    schema_version = payload.get("schema_version")
+    if schema_version not in _PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSIONS:
+        raise ValueError("Private static-pose success schema is unsupported")
+    expected_fields = {
+        "candidate_result",
+        "candidate_result_identity_sha256",
+        "completed_at",
+        "hardware_opened",
+    }
+    if schema_version == PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION_V2:
+        expected_fields.add("private_frame_bundle")
     _verify_private_candidate_common(
         payload,
         repo_root=repo_root,
         profile_time=completed.isoformat(),
         expected_thread_id=expected_thread_id,
-        expected_schema=PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION,
-        expected_fields={
-            "candidate_result",
-            "candidate_result_identity_sha256",
-            "completed_at",
-            "hardware_opened",
-        },
+        expected_schema=schema_version,
+        expected_fields=expected_fields,
     )
     if (
         payload.get("evidence_name")
@@ -625,6 +953,12 @@ def verify_private_static_pose_candidate_success_evidence(
         != payload["hardware_execution_profile_identity_sha256"]
     ):
         raise ValueError("Private static-pose success result identity drifted")
+    if schema_version == PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION_V2:
+        _verify_private_static_pose_frame_bundle(
+            payload.get("private_frame_bundle"),
+            candidate_contract=payload["candidate_contract"],
+            candidate_result=result,
+        )
 
 
 def verify_private_static_pose_candidate_failure_evidence(
@@ -761,7 +1095,7 @@ def write_private_static_pose_candidate_evidence(
 ) -> dict[str, Any]:
     """Write one content-addressed artifact with no replacement path."""
 
-    if evidence.get("schema_version") == PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION:
+    if evidence.get("schema_version") in _PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSIONS:
         verify_private_static_pose_candidate_success_evidence(
             evidence,
             repo_root=REPO_ROOT,
@@ -863,7 +1197,8 @@ def verify_private_static_pose_candidate_evidence_reference(
         raise ValueError("Private static-pose evidence reference path is unsafe")
     filename = (
         "private_success.json"
-        if evidence.get("schema_version") == PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSION
+        if evidence.get("schema_version")
+        in _PRIVATE_STATIC_POSE_SUCCESS_SCHEMA_VERSIONS
         else "private_failure.json"
     )
     expected_relative = Path(
