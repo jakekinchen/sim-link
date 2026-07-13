@@ -23,6 +23,10 @@ from scenesmith.robot_lab.live_readonly_observation import (
     require_no_serial_identity_holders,
     verify_serial_identity_holder_stability,
 )
+from scenesmith.robot_lab.hardware_execution_profile import (
+    HARDWARE_APPROVAL_POLICY,
+    HARDWARE_SANDBOX_MODE,
+)
 from scenesmith.robot_lab.static_pose_bracket import EXPECTED_OPERATION_COUNTS
 from scenesmith.robot_lab.static_pose_live_session import (
     STATIC_POSE_LIVE_SESSION_RECEIPT_SCHEMA_VERSION,
@@ -327,8 +331,9 @@ def _verify_review_sources(
     if (
         hardware_execution_profile.get("schema_version")
         != _HARDWARE_PROFILE_SCHEMA_VERSION
-        or hardware_execution_profile.get("approval_policy") != "on-request"
-        or hardware_execution_profile.get("sandbox_mode") != "danger-full-access"
+        or hardware_execution_profile.get("approval_policy")
+        != HARDWARE_APPROVAL_POLICY
+        or hardware_execution_profile.get("sandbox_mode") != HARDWARE_SANDBOX_MODE
         or hardware_execution_profile.get("local_capabilities")
         != ["hardware_supervised_runtime_profile_observed"]
         or hardware_execution_profile.get("proof_labels") != []

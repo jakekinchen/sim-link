@@ -27,6 +27,8 @@ from scenesmith.robot_lab.live_readonly_observation import (
     verify_operator_presence_lease,
 )
 from scenesmith.robot_lab.hardware_execution_profile import (
+    HARDWARE_APPROVAL_POLICY,
+    HARDWARE_EXECUTION_PROFILE_NAME,
     verify_hardware_execution_profile_evidence,
 )
 from scenesmith.robot_lab.static_pose_bracket import (
@@ -54,8 +56,7 @@ EXPECTED_ACCEPTED_MANIFEST_IDENTITY = (
     "5218c3bd0ee0b34aca9aa32e5e1912c284a2dfffcdbc86ba7fa34f08f4433ed4"
 )
 LIVE_GATE_SCOPE = "one_static_pose_bracket_candidate_session"
-HARDWARE_EXECUTION_PROFILE = "hardware_supervised_on_request"
-HARDWARE_APPROVAL_POLICY = "on-request"
+HARDWARE_EXECUTION_PROFILE = HARDWARE_EXECUTION_PROFILE_NAME
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 _ALLOWED_OPERATIONS = [

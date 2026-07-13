@@ -18,16 +18,15 @@ delta-and-return permit under an active owner-presence lease. Neural-policy,
 contact-stabilized, controller-assisted, supervised-motion, and physical-robot
 proof states must remain distinct.
 
-## Active Run Window
+## Run Window
 
-- Actual start: `2026-07-12T15:30:07-05:00`.
-- No new major slice after: `2026-07-12T21:00:07-05:00`.
-- Hard closeout: `2026-07-12T21:30:07-05:00`.
-- Owner-triggered continuation: the owner is physically present and resumed
-  the existing goal from remotely preserved HEAD `a514402`.
+- No live hardware run window or owner-presence lease is active.
+- The previous window closed at `2026-07-12T21:30:07-05:00`.
+- Brief 071 is an offline runtime-policy slice only. A future physical session
+  requires a fresh finite window and fresh owner-presence lease after the new
+  no-prompt runtime passes its formal same-thread verifier.
 - Prior windows are retained in
-  `docs/autonomous-workflow/project_state.json`; the immediately preceding
-  window expired at `2026-07-12T13:55:00-05:00`.
+  `docs/autonomous-workflow/project_state.json`.
 
 ## Current Milestone
 
@@ -297,7 +296,7 @@ MEAN_STD checkpoint and gripper remains inside observed training support.
 Only `fixture_pi05_model_ready_tensor_parity_conformant` is newly granted. The
 real Brief 057 gate, live gate, model/weight/inference/replay, hardware,
 policy-shadow, motion, and training authorities remain closed; the decisive
-live experiment requires a fresh hardware-supervised on-request parent.
+live experiment requires a fresh hardware-supervised no-prompt parent.
 
 Brief 059 is verified and remotely preserved at implementation `f6b6c08`. The
 v2 artifact binds all training-support statistics and preserves serialized
@@ -306,7 +305,7 @@ byte. Only fixture wrist-flex is outside observed training min-max; gripper is
 inside q01-q99 and min-max support. The new local capability is only
 `fixture_pi05_training_support_audit_conformant`; it grants no real input,
 shadow, model, replay, hardware, motion, or training authority. The next live
-experiment still requires a fresh hardware-supervised on-request parent.
+experiment still requires a fresh hardware-supervised no-prompt parent.
 
 Brief 062 is the latest reviewed implementation boundary at `d4047785`.
 Reviewer 088 is remotely preserved in review commit `a514402f` and grants
@@ -328,6 +327,15 @@ checkpoint prompt is pinned exactly as: `Sort each cube into the same-colored
 tray: red cubes into the red tray and blue cubes into the blue tray.` These
 review decisions cannot become production inputs until bound to a newly
 accepted static-pose session.
+
+Brief 071 is active offline under the owner's explicit 2026-07-13 direction to
+use Full Access without approval prompts. It changes the future Codex runtime
+contract to `danger-full-access`/`never` across the project default, explicit
+hardware profile, formal doctor/active-turn verifier, candidate gate snapshot,
+and redacted review. Historical on-request evidence above remains historical.
+The current task is still restricted and cannot inherit the new settings; a
+fresh same-thread runtime must mechanically prove the no-prompt profile before
+any device access. The live gate and training lock remain closed.
 
 ## Durable State
 

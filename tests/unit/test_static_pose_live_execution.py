@@ -96,7 +96,7 @@ class _FakePinnedCamera:
 
 def _doctor_report(
     *,
-    approval_policy: str = "OnRequest",
+    approval_policy: str = "Never",
     cwd: Path = REPO_ROOT,
 ) -> dict:
     return {
@@ -148,7 +148,7 @@ def _doctor_report(
 
 def _runtime_capture(
     *,
-    approval_policy: str = "on-request",
+    approval_policy: str = "never",
     sandbox_mode: str = "danger-full-access",
     repo_root: Path = REPO_ROOT,
 ) -> dict:
@@ -327,17 +327,20 @@ def _candidate_result(contract: dict, profile: dict) -> dict:
 
 
 class HardwareExecutionProfileTests(unittest.TestCase):
-    def test_profile_files_keep_default_safe_and_separate_offline_authority(self):
+    def test_profile_files_use_full_access_without_approval_prompts(self):
         profiles = verify_codex_execution_profile_files(repo_root=REPO_ROOT)
-        self.assertEqual(profiles["project_default"]["sandbox_mode"], "workspace-write")
-        self.assertEqual(profiles["project_default"]["approval_policy"], "on-request")
+        self.assertEqual(
+            profiles["project_default"]["sandbox_mode"],
+            "danger-full-access",
+        )
+        self.assertEqual(profiles["project_default"]["approval_policy"], "never")
         self.assertEqual(
             profiles["hardware_supervised"]["sandbox_mode"],
             "danger-full-access",
         )
         self.assertEqual(
             profiles["hardware_supervised"]["approval_policy"],
-            "on-request",
+            "never",
         )
         self.assertEqual(
             profiles["offline_autonomous"]["approval_policy"],
@@ -345,6 +348,38 @@ class HardwareExecutionProfileTests(unittest.TestCase):
         )
         self.assertFalse(profiles["hardware_supervised"]["features"]["multi_agent"])
         self.assertFalse(profiles["offline_autonomous"]["features"]["multi_agent"])
+        self.assertNotEqual(
+            profiles["hardware_supervised"],
+            profiles["offline_autonomous"],
+        )
+
+    def test_profile_files_reject_restricted_or_interactive_project_default(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            _copy_profile_tree(root)
+            project_default = root / ".codex/config.toml"
+            source = project_default.read_text(encoding="utf-8")
+            project_default.write_text(
+                source.replace(
+                    'sandbox_mode = "danger-full-access"',
+                    'sandbox_mode = "workspace-write"',
+                    1,
+                ),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "full-access no-prompt"):
+                verify_codex_execution_profile_files(repo_root=root)
+
+            project_default.write_text(
+                source.replace(
+                    'approval_policy = "never"',
+                    'approval_policy = "on-request"',
+                    1,
+                ),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "full-access no-prompt"):
+                verify_codex_execution_profile_files(repo_root=root)
 
     def test_capture_uses_exact_doctor_command_and_binds_actual_runtime(self):
         observed: dict = {}
@@ -370,7 +405,7 @@ class HardwareExecutionProfileTests(unittest.TestCase):
             [
                 "/opt/homebrew/bin/codex",
                 "--ask-for-approval",
-                "on-request",
+                "never",
                 "--sandbox",
                 "danger-full-access",
                 "doctor",
@@ -381,7 +416,7 @@ class HardwareExecutionProfileTests(unittest.TestCase):
         )
         self.assertFalse(observed["kwargs"]["shell"])
         self.assertEqual(evidence["thread_id"], THREAD_ID)
-        self.assertEqual(evidence["approval_policy"], "on-request")
+        self.assertEqual(evidence["approval_policy"], "never")
         self.assertEqual(evidence["sandbox_mode"], "danger-full-access")
         self.assertEqual(
             evidence["source_mode"],
@@ -567,7 +602,7 @@ class HardwareExecutionProfileTests(unittest.TestCase):
                     ),
                 )
 
-    def test_never_stale_cross_thread_synthetic_and_profile_drift_reject(self):
+    def test_stale_cross_thread_synthetic_and_profile_drift_reject(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             _copy_profile_tree(root)
@@ -598,10 +633,13 @@ class HardwareExecutionProfileTests(unittest.TestCase):
                     expected_thread_id=THREAD_ID,
                     runtime_context_loader=_runtime_loader,
                 )
-            (root / ".codex/profiles/hardware-supervised.toml").write_text(
-                "sandbox_mode = \"danger-full-access\"\n"
-                "approval_policy = \"never\"\n"
-                "[features]\nmulti_agent = false\n",
+            hardware_profile = root / ".codex/profiles/hardware-supervised.toml"
+            hardware_profile.write_text(
+                hardware_profile.read_text(encoding="utf-8").replace(
+                    'approval_policy = "never"',
+                    'approval_policy = "on-request"',
+                    1,
+                ),
                 encoding="utf-8",
             )
             with self.assertRaisesRegex(ValueError, "profile|approval"):
@@ -624,12 +662,12 @@ class HardwareExecutionProfileTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "aliased"):
                 verify_codex_execution_profile_files(repo_root=root)
 
-        report = _doctor_report(approval_policy="Never")
+        report = _doctor_report(approval_policy="OnRequest")
 
         def runner(command: list[str], **kwargs) -> subprocess.CompletedProcess:
             return subprocess.CompletedProcess(command, 0, json.dumps(report), "")
 
-        with self.assertRaisesRegex(ValueError, "on-request"):
+        with self.assertRaisesRegex(ValueError, "never|approval"):
             capture_hardware_execution_profile_evidence(
                 repo_root=REPO_ROOT,
                 captured_at=CAPTURED_AT,
@@ -638,7 +676,7 @@ class HardwareExecutionProfileTests(unittest.TestCase):
                 runtime_context_loader=_runtime_loader,
             )
 
-        with self.assertRaisesRegex(ValueError, "[Aa]ctive.*on-request"):
+        with self.assertRaisesRegex(ValueError, "[Aa]ctive.*no-prompt"):
             capture_hardware_execution_profile_evidence(
                 repo_root=REPO_ROOT,
                 captured_at=CAPTURED_AT,
@@ -647,7 +685,7 @@ class HardwareExecutionProfileTests(unittest.TestCase):
                     "doctor must not run for an ineligible active thread"
                 ),
                 runtime_context_loader=lambda **kwargs: _runtime_capture(
-                    approval_policy="never",
+                    approval_policy="on-request",
                     repo_root=kwargs["repo_root"],
                 ),
             )

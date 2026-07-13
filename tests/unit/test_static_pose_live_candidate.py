@@ -609,8 +609,8 @@ class StaticPoseLiveCandidateTests(unittest.TestCase):
         with self._accepted_identity_patches(), patch.object(
             candidate_module,
             "verify_hardware_execution_profile_evidence",
-            side_effect=ValueError("hardware profile is not on-request"),
-        ), self.assertRaisesRegex(ValueError, "profile.*on-request"):
+            side_effect=ValueError("hardware profile is not no-prompt"),
+        ), self.assertRaisesRegex(ValueError, "profile.*no-prompt"):
             run_static_pose_live_candidate(
                 contract,
                 hardware_execution_profile=self._hardware_profile(),

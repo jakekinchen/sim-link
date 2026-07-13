@@ -11,6 +11,10 @@
 - At the start of every session and commit boundary, verify the branch, HEAD,
   upstream, and dirty paths. Preserve all unrelated dirty files and saved
   dirty-worktree evidence. Stage explicit paths; never use broad staging.
+- For any physical-hardware session, require the formal same-thread runtime
+  verifier to prove `danger-full-access` with approval policy `never`. This is
+  the owner's no-prompt execution preference; it does not grant a live gate,
+  hardware lease, proof label, training authority, or motion permit.
 
 ## Authority and proof boundaries
 

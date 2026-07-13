@@ -67,7 +67,7 @@ def _profile() -> dict:
         {
             "schema_version": "scenesmith.hardware_execution_profile_evidence.v1",
             "thread_id": THREAD_ID,
-            "approval_policy": "on-request",
+            "approval_policy": "never",
             "sandbox_mode": "danger-full-access",
             "proof_labels": [],
             "authority_not_granted": copy.deepcopy(AUTHORITY_NOT_GRANTED),

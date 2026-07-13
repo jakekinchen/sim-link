@@ -142,7 +142,7 @@ def _profile() -> dict:
             "thread_id": "brief-055-fixture-thread",
             "doctor_report": {"secret": SENSITIVE_DOCTOR_REPORT},
             "rollout_reference": {"path": SENSITIVE_ROLLOUT_PATH},
-            "approval_policy": "on-request",
+            "approval_policy": "never",
             "sandbox_mode": "danger-full-access",
             "local_capabilities": [
                 "hardware_supervised_runtime_profile_observed"
@@ -580,7 +580,7 @@ class StaticPoseSessionReviewTests(unittest.TestCase):
         )
 
         profile_authority = copy.deepcopy(self.profile)
-        profile_authority["approval_policy"] = "never"
+        profile_authority["approval_policy"] = "on-request"
         cases.append(
             (
                 "profile authority",

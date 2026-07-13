@@ -1,7 +1,9 @@
-# Apply these exact semantics only to an owner-present, separately reviewed
-# hardware session. The live verifier checks the effective runtime independently.
+# Apply these exact no-prompt semantics only to an owner-present, separately
+# reviewed hardware session. The live verifier checks the effective runtime,
+# live gate, lease, and session permit independently.
 sandbox_mode = "danger-full-access"
-approval_policy = "on-request"
+approval_policy = "never"
+developer_instructions = "Hardware-supervised permissions do not grant robot authority. Require the repository live gate, owner-presence lease, and exact session permit before physical hardware access."
 
 [features]
 multi_agent = false

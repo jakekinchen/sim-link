@@ -24,13 +24,16 @@ from scenesmith.robot_lab.artifact_contract import (
 HARDWARE_EXECUTION_PROFILE_SCHEMA_VERSION = (
     "scenesmith.hardware_execution_profile_evidence.v1"
 )
+HARDWARE_APPROVAL_POLICY = "never"
+HARDWARE_SANDBOX_MODE = "danger-full-access"
+HARDWARE_EXECUTION_PROFILE_NAME = "hardware_supervised_no_prompt"
 CODEX_EXECUTABLE = Path("/opt/homebrew/bin/codex")
 DOCTOR_COMMAND = [
     str(CODEX_EXECUTABLE),
     "--ask-for-approval",
-    "on-request",
+    HARDWARE_APPROVAL_POLICY,
     "--sandbox",
-    "danger-full-access",
+    HARDWARE_SANDBOX_MODE,
     "doctor",
     "--json",
     "--summary",
@@ -52,6 +55,15 @@ _AUTHORITY_NOT_GRANTED = [
     "supervised_micro_motion",
 ]
 _SESSION_META_RESUME_ADDITIVE_FIELDS = {"memory_mode"}
+_HARDWARE_PROFILE_INSTRUCTIONS = (
+    "Hardware-supervised permissions do not grant robot authority. Require the "
+    "repository live gate, owner-presence lease, and exact session permit before "
+    "physical hardware access."
+)
+_OFFLINE_PROFILE_INSTRUCTIONS = (
+    "Offline-autonomous permissions do not grant robot authority. Keep every "
+    "physical-hardware gate closed."
+)
 
 
 def verify_codex_execution_profile_files(*, repo_root: Path) -> dict[str, Any]:
@@ -85,21 +97,23 @@ def verify_codex_execution_profile_files(*, repo_root: Path) -> dict[str, Any]:
 
     default = profiles["project_default"]
     if (
-        default.get("sandbox_mode") != "workspace-write"
-        or default.get("approval_policy") != "on-request"
+        default.get("sandbox_mode") != HARDWARE_SANDBOX_MODE
+        or default.get("approval_policy") != HARDWARE_APPROVAL_POLICY
         or default.get("features", {}).get("multi_agent") is not False
     ):
-        raise ValueError("Committed Codex project default is not owner-interactive")
+        raise ValueError("Committed Codex project default is not full-access no-prompt")
     _verify_profile_fragment(
         profiles["hardware_supervised"],
-        expected_sandbox="danger-full-access",
-        expected_approval="on-request",
+        expected_sandbox=HARDWARE_SANDBOX_MODE,
+        expected_approval=HARDWARE_APPROVAL_POLICY,
+        expected_instructions=_HARDWARE_PROFILE_INSTRUCTIONS,
         label="hardware-supervised",
     )
     _verify_profile_fragment(
         profiles["offline_autonomous"],
         expected_sandbox="danger-full-access",
         expected_approval="never",
+        expected_instructions=_OFFLINE_PROFILE_INSTRUCTIONS,
         label="offline-autonomous",
     )
     if profiles["hardware_supervised"] == profiles["offline_autonomous"]:
@@ -133,9 +147,9 @@ def capture_hardware_execution_profile_evidence(
     )
     _validate_active_runtime_capture(active_before, thread_id=thread_id, repo_root=root)
     active_context = active_before["active_runtime_context"]
-    if active_context["approval_policy"] != "on-request":
-        raise ValueError("Active Codex thread is not using on-request approval")
-    if active_context["sandbox_policy"] != {"type": "danger-full-access"}:
+    if active_context["approval_policy"] != HARDWARE_APPROVAL_POLICY:
+        raise ValueError("Active Codex thread is not using no-prompt approval")
+    if active_context["sandbox_policy"] != {"type": HARDWARE_SANDBOX_MODE}:
         raise ValueError("Active Codex thread is not using the hardware sandbox")
     completed = run_command(
         list(DOCTOR_COMMAND),
@@ -163,9 +177,9 @@ def capture_hardware_execution_profile_evidence(
     _validate_active_runtime_capture(active_after, thread_id=thread_id, repo_root=root)
     if active_after != active_before:
         raise ValueError("Active Codex runtime context changed during profile capture")
-    if runtime["approval_policy"] != "on-request":
-        raise ValueError("Hardware execution requires active on-request approval")
-    if runtime["sandbox_mode"] != "danger-full-access":
+    if runtime["approval_policy"] != HARDWARE_APPROVAL_POLICY:
+        raise ValueError("Hardware execution requires active no-prompt approval")
+    if runtime["sandbox_mode"] != HARDWARE_SANDBOX_MODE:
         raise ValueError("Hardware execution requires the supervised device-access sandbox")
     payload = {
         "schema_version": HARDWARE_EXECUTION_PROFILE_SCHEMA_VERSION,
@@ -290,8 +304,8 @@ def verify_hardware_execution_profile_evidence(
     )
     active_context = embedded_runtime["active_runtime_context"]
     if (
-        active_context["approval_policy"] != "on-request"
-        or active_context["sandbox_policy"] != {"type": "danger-full-access"}
+        active_context["approval_policy"] != HARDWARE_APPROVAL_POLICY
+        or active_context["sandbox_policy"] != {"type": HARDWARE_SANDBOX_MODE}
     ):
         raise ValueError("Hardware execution profile active runtime is not supervised")
     if require_active_runtime:
@@ -328,9 +342,9 @@ def verify_hardware_execution_profile_evidence(
     if (
         payload.get("codex_version") != runtime["codex_version"]
         or payload.get("codex_executable") != runtime["codex_executable"]
-        or payload.get("approval_policy") != "on-request"
+        or payload.get("approval_policy") != HARDWARE_APPROVAL_POLICY
         or payload.get("approval_policy") != runtime["approval_policy"]
-        or payload.get("sandbox_mode") != "danger-full-access"
+        or payload.get("sandbox_mode") != HARDWARE_SANDBOX_MODE
         or payload.get("sandbox_mode") != runtime["sandbox_mode"]
         or payload.get("approval_policy") != active_context["approval_policy"]
         or payload.get("sandbox_mode")
@@ -592,13 +606,20 @@ def _verify_profile_fragment(
     *,
     expected_sandbox: str,
     expected_approval: str,
+    expected_instructions: str,
     label: str,
 ) -> None:
-    if set(payload) != {"sandbox_mode", "approval_policy", "features"}:
+    if set(payload) != {
+        "sandbox_mode",
+        "approval_policy",
+        "developer_instructions",
+        "features",
+    }:
         raise ValueError(f"Codex {label} profile fields drifted")
     if (
         payload.get("sandbox_mode") != expected_sandbox
         or payload.get("approval_policy") != expected_approval
+        or payload.get("developer_instructions") != expected_instructions
         or payload.get("features") != {"multi_agent": False}
     ):
         raise ValueError(f"Codex {label} profile semantics drifted")
