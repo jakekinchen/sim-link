@@ -61,10 +61,13 @@ negative sorting-checkpoint transfer result. T19.0 is `verified` through Brief
 095, T19.0b is `verified` through Brief 096, T19.0c is a verified negative
 geometry search, and T19.0d verifies unilateral fixed-pad proxy contact. T19.0e
 is `verified` through Brief 099 with bilateral explicit-pad contact in two
-candidates but zero strict-v2 frames or geometry-eligible grasps. T19.0f is the
-next eligible offline slice: settle the yawed object on the table before
-anchoring the preclose-motion baseline, then rerun the otherwise identical
-search. The live gate and training lock remain closed. The
+candidates but zero strict-v2 frames or geometry-eligible grasps. T19.0f is
+`verified` through Brief 100: passive yaw/table settling is separated from
+approach motion, six candidates pass the motion gate, but both bilateral
+candidates still fail strict contact geometry. T19.0g is the next eligible
+offline slice: align the compiled gripper closing axis with an anchor principal
+axis without tuning contact physics. The live gate and training lock remain
+closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
 history that constrains later hardware work. Brief 043 implementation

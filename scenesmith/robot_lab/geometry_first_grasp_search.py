@@ -102,6 +102,7 @@ def _candidate(
     holdout: bool,
     explicit_pad_proxy_only: bool = False,
     pad_midpoint_targeting: bool = False,
+    post_yaw_settle_seconds: float = 0.0,
 ) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
@@ -110,6 +111,7 @@ def _candidate(
             request,
             explicit_pad_proxy_only=explicit_pad_proxy_only,
             pad_midpoint_targeting=pad_midpoint_targeting,
+            post_yaw_settle_seconds=post_yaw_settle_seconds,
         )
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
@@ -121,6 +123,7 @@ def _run_candidate(
     *,
     explicit_pad_proxy_only: bool = False,
     pad_midpoint_targeting: bool = False,
+    post_yaw_settle_seconds: float = 0.0,
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
@@ -173,6 +176,29 @@ def _run_candidate(
             for _ in range(round(0.25 / expert.model.opt.timestep)):
                 expert.mujoco.mj_step(expert.model, expert.data)
             achieved_yaw = apply_and_read_object_yaw(expert.mujoco, expert.model, expert.data, object_joint_name=f"{OBJECT_ID}_free", object_body_name=OBJECT_ID, yaw_rad=request["object_yaw_rad"])
+            if post_yaw_settle_seconds < 0.0 or not math.isfinite(post_yaw_settle_seconds):
+                raise ValueError("Post-yaw settle duration must be finite and nonnegative")
+            pre_settle_position = expert.data.xpos[object_body].copy()
+            if post_yaw_settle_seconds:
+                settle_steps = max(
+                    1,
+                    round(post_yaw_settle_seconds / expert.model.opt.timestep),
+                )
+                for _ in range(settle_steps):
+                    expert.mujoco.mj_step(expert.model, expert.data)
+            else:
+                settle_steps = 0
+            settled_yaw = math.atan2(
+                float(expert.data.xmat[object_body][3]),
+                float(expert.data.xmat[object_body][0]),
+            )
+            passive_settle_displacement = float(
+                np.linalg.norm(expert.data.xpos[object_body] - pre_settle_position)
+            )
+            passive_settle_yaw_drift = math.atan2(
+                math.sin(settled_yaw - achieved_yaw),
+                math.cos(settled_yaw - achieved_yaw),
+            )
             anchor_start = expert.data.xpos[object_body].copy()
             target = anchor_start + np.asarray([request["lateral_x_m"], request["lateral_y_m"], request["vertical_m"]])
             approach = target + np.asarray([0.0, 0.0, 0.04])
@@ -226,6 +252,16 @@ def _run_candidate(
         "best_normal_alignment": max((min(row["fixed_normal_span_alignment"], row["moving_normal_span_alignment"]) for row in aggregates), default=None),
         "geometry_eligible": geometry_eligible,
     }
+    if post_yaw_settle_seconds:
+        result.update(
+            {
+                "settled_object_yaw_rad": settled_yaw,
+                "post_yaw_settle_seconds": post_yaw_settle_seconds,
+                "post_yaw_settle_step_count": settle_steps,
+                "passive_settle_displacement_m": passive_settle_displacement,
+                "passive_settle_yaw_drift_rad": passive_settle_yaw_drift,
+            }
+        )
     if explicit_pad_proxy_only:
         result["observed_robot_object_contact_geoms"] = sorted(
             {

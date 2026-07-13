@@ -2417,9 +2417,38 @@
       ]
     },
     "T19.0f": {
-      "state": "pending",
+      "state": "verified",
       "depends_on": ["T19.0e"],
-      "result": "settle the yawed object deterministically on the table before defining the preclose motion baseline, then rerun the otherwise identical bounded search",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "100",
+      "review_decision_id": "126",
+      "result": "post-yaw passive settling separated table relaxation from gripper-induced motion; six candidates pass the approach-motion gate, while both bilateral candidates still fail motion and strict contact geometry",
+      "artifact": {
+        "path": "configurations/robot_lab/post_yaw_settle_search.json",
+        "identity_sha256": "75e1ff2b6c4e51aa8922d227082abceafac494629db17a9e16a315fc01eefb3b",
+        "file_sha256": "47d6993217dbf9bff020c6d0f5c79a4ebf02b4d6eff8344b30c27ee3b5925167",
+        "size_bytes": 21700,
+        "approach_motion_valid_candidate_count": 6,
+        "bilateral_contact_candidate_count": 2,
+        "geometry_eligible_count": 0,
+        "strict_v2_valid_hold_frame_count": 0,
+        "broad_test_count": 184
+      },
+      "authority_granted": [
+        "passive_yaw_settle_motion_separated",
+        "approach_motion_gate_valid_candidates_observed"
+      ],
+      "authority_not_granted": [
+        "geometry_eligible_grasp_candidate",
+        "unassisted_mujoco_grasp_success",
+        "simulation_training_ready",
+        "physical_actuation"
+      ]
+    },
+    "T19.0g": {
+      "state": "pending",
+      "depends_on": ["T19.0f"],
+      "result": "derive gripper closing-axis orientation from compiled pad references and anchor principal axes, then rerun the bounded search without contact-physics tuning",
       "authority_granted": [],
       "authority_not_granted": [
         "geometry_eligible_grasp_candidate",
