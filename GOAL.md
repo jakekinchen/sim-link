@@ -31,6 +31,8 @@ proof states must remain distinct.
   rejected boundary; no second session is allowed under that gate. After the
   verified Brief 076 correction, Reviewer 103 opens one new finite session from
   `08:55` through `09:30` CDT only after remote confirmation and fresh preflight.
+  That session was consumed and closed at `08:56` after the frame adapter passed
+  and the next strict camera-audit boundary rejected.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -355,7 +357,9 @@ shutdown leaves the follower disconnected, torque false, and both aliases free.
 Brief 076 corrects that exact mismatch offline by validating and removing only
 the pinned reader's two lower-level receive timestamps at the live adapter
 boundary. The strict semantic frame contract is unchanged, and any new live
-attempt requires a separately reviewed remote gate.
+attempt requires a separately reviewed remote gate. The post-correction attempt
+advanced to camera-audit validation and failed there; immutable failure
+`33c8e4b1...` grants no observation or policy label and shutdown remains clean.
 
 ## Durable State
 
