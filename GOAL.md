@@ -52,7 +52,7 @@ proof states must remain distinct.
 
 ## Current Milestone
 
-M17/M19 - Grasp Experience And Hardware Twin Execution Track
+M18/M19 - Dataset Mechanics And Hardware Twin Execution Track
 
 ## Current Slice
 
@@ -101,8 +101,11 @@ deterministic unassisted episodes compile to 1,952 eligible frames, 88
 hard-boundary segments, and 3,744 unpadded windows (including 120 at horizon
 50), with zero quarantines. T17.6 is `verified` through Brief 114: all three
 bounded legacy canary descriptors are reasoned quarantines (zero accepted
-records), and its source-bound compiler view is explicitly empty. T17.7 is the
-next pending compiler-audit task. The
+records), and its source-bound compiler view is explicitly empty. T17.7 is
+`verified` through Brief 115: it traces 100 deterministic windows (25 at each
+of horizons 5/10/15/50) across all eight scripted grasp rollouts from raw-frame
+identity through compiler and window rows, with canonical actor-input/action
+descriptor parity but no model call. M17 is closed; T18.1 is next. The
 live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
