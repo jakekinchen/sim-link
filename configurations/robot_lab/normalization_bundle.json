@@ -19,7 +19,7 @@
   ],
   "fixture_normalization_bundle_valid": true,
   "hardware_accessed": false,
-  "identity_sha256": "c829e2ba79b3d6bca2b17a4e5dc45d665be020ef7f70b5bf91b53b5b6f30bfb6",
+  "identity_sha256": "dea3ff8cb85640499416fc6fd6bf0cf43dce3479766fb1ff277e8d224e097ebe",
   "model_call_executed": false,
   "normalization": {
     "mode": "MEAN_STD",
@@ -271,8 +271,8 @@
   "simulation_training_ready": false,
   "source_refs": {
     "canonical_processor": {
-      "file_sha256": "cd60dce9f791f4c8becf7d33baa2382d96b843fe0af5b975a0ea0f796505d902",
-      "identity_sha256": "9800c873896eee63c10da7a4c02c964ff1faf28711d438c89731f3266d77a6f2",
+      "file_sha256": "3145f4ae1efb86463df2398775315cd0b764a74bca954448c6a1d0f57eb8f503",
+      "identity_sha256": "59827b3dfe8adce0903495edd9f68af2db5f40abf93aa0fb51b9acfcef4118c7",
       "path": "configurations/robot_lab/so101_canonical_processor_contract.json",
       "schema_version": "scenesmith.so101_canonical_processor_contract.v1"
     },
