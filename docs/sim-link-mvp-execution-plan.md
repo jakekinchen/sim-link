@@ -137,6 +137,10 @@ completed 500 finite local-MPS updates, but the frozen adapter made zero strict
 contact on both held-out seeds and lifted only 0.000144 mm / 0.000143 mm. The
 0/2 candidate is rejected; no accepted-policy pointer changed. The next policy
 step is offline failure localization, not another unexamined optimizer rung.
+Brief 156 opens that T20.25 diagnostic: compare both frozen adapters' complete
+requested-action and visited-state traces with exact held-out source seeds 6-7,
+separating frame-zero prediction error from later closed-loop drift. It runs no
+optimizer and predeclares no next training hypothesis.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,

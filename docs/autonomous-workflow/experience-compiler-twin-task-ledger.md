@@ -5,15 +5,15 @@ Updated: 2026-07-14
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: start 2026-07-14T12:20:57-05:00; no new major slice after 2026-07-14T19:35:57-05:00; hard closeout 2026-07-14T20:20:57 CDT
-run_state: T20.24 is verified negative through Brief 155 and Reviewer Decision 185: 500 finite local-MPS updates produced a frozen adapter that made zero strict contact on both held-out seeds, for 0/2 strict successes.
+run_state: T20.24 is verified negative through Brief 155 and Reviewer Decision 185: 500 finite local-MPS updates produced a frozen adapter that made zero strict contact on both held-out seeds, for 0/2 strict successes. Brief 156 opens T20.25 as a frozen-candidate action/state diagnostic with no optimizer.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.24 verified negative; accepted-policy pointer unchanged; next safe task is offline output/failure localization before more optimizer work
+current_task: T20.25 in progress under Brief 156; compare T20.17/T20.24 requested actions and visited states against held-out source seeds 6-7
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: compare T20.17 and T20.24 frozen action/state trajectories against held-out source actions and recovery-state supervision to localize the persistent no-contact failure before allocating another training rung
+next_step: tests-first frozen reruns and signed action/state localization; allocate no optimizer rung in this slice
 ```
 
 ## Rules
@@ -38,6 +38,15 @@ next_step: compare T20.17 and T20.24 frozen action/state trajectories against he
 - Any additional joint, gripper, reach, contact, task, policy actuation, or
   material permit expansion is unauthorized.
 - States are `pending`, `in_progress`, `verified`, `blocked`, `deferred`, and `superseded`.
+
+## 2026-07-14 - Brief 156 frozen-candidate localization opened
+
+T20.25 will rerun the immutable T20.17 and T20.24 adapters on held-out seeds 6
+and 7, capturing every requested action and pre-action simulator state for
+source-relative and candidate-relative comparison. Frame zero is isolated as
+prediction error; later differences include closed-loop state drift. The slice
+runs no optimizer and creates no policy-acceptance, transfer, promotion,
+hardware, external-compute, or Brev authority.
 
 ## 2026-07-14 - Brief 155 recovery-augmented campaign opened
 
