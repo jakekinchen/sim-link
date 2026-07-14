@@ -60,10 +60,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "118",
-    "commit": "b55186d160f6570d3855018c679e7bfb282f1b28",
-    "reviewer_decision_id": "146",
-    "summary": "immutable_logical_cycle_0001_resolves_to_exact_source"
+    "brief_id": "119",
+    "commit": "c588a92b1504520072649e6dd951c4bcdef1d60f",
+    "reviewer_decision_id": "147",
+    "summary": "immutable_source_snapshots_preserve_exact_restoration_sequences_for"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -254,8 +254,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M18/M19 dataset mechanics and grasp execution track",
-  "current_task": "T18.4",
-  "next_eligible_task": "T18.4",
+  "current_task": "T18.5",
+  "next_eligible_task": "T18.5",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2632,6 +2632,38 @@
       },
       "authority_granted": ["exact_state_component_projection_valid", "actor_input_privilege_boundary_valid"],
       "authority_not_granted": ["materialized_dataset_buffer", "dataset_mixture_frozen", "simulation_training_ready", "optimizer_training", "physical_actuation", "external_compute"]
+    },
+    "T18.4": {
+      "state": "verified",
+      "depends_on": ["T16.3", "T17.1", "T17.2", "T17.3", "T17.4", "T17.5", "T18.3"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "119",
+      "review_decision_id": "147",
+      "result": "immutable source snapshots preserve exact restoration sequences for every T18.2 window, while the branch-and-correct mechanism remains fixture-only until source-bound correction evidence exists",
+      "artifact": {
+        "implementation_commit": "c588a92b1504520072649e6dd951c4bcdef1d60f",
+        "path": "configurations/robot_lab/t18_4_snapshot_branch_corrections.json",
+        "schema_version": "scenesmith.snapshot_branch_corrections.v1",
+        "manifest_identity_sha256": "7b0d00e9e1f2223f98426a2a6b2de2865ac03fa176a68cc72ae956aeffbd09d6",
+        "manifest_file_sha256": "25f9326b8920c69ddfbfed6d9083afc411467abd0e9e6639ee0f24e4c574f757",
+        "logical_cycle_id": "0001",
+        "snapshot_count": 192,
+        "base_branch_count": 192,
+        "correction_event_count": 0,
+        "source_correction_evidence_present": false,
+        "fixture_events_included": false,
+        "buffer_materialized": false,
+        "buffer_mutated": false,
+        "training_eligible": false,
+        "simulation_training_ready": false,
+        "optimizer_training": false,
+        "physical_actuation": false,
+        "raw_bytes_rewritten": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["immutable_snapshot_restore_valid", "fixture_only_branch_contract_valid"],
+      "authority_not_granted": ["source_bound_correction_evidence", "materialized_dataset_buffer", "dataset_mixture_frozen", "simulation_training_ready", "optimizer_training", "physical_actuation", "external_compute"]
     },
     "T19.0": {
       "state": "verified",
