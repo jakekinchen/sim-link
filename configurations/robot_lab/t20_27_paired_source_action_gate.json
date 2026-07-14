@@ -1,0 +1,174 @@
+{
+  "action_applied": false,
+  "aggregate": {
+    "clean_source_mae_rad": 0.5083251577277254,
+    "paired_seed_count": 5,
+    "per_joint_recovery_minus_clean_mae_rad": {
+      "elbow_flex": 0.07576171987492047,
+      "gripper": -0.0011984038209533754,
+      "shoulder_lift": 0.18748725979507275,
+      "shoulder_pan": 0.0019494813554949198,
+      "wrist_flex": 0.1785058622031268,
+      "wrist_roll": 0.22311092759007412
+    },
+    "recovery_improved_seed_count": 0,
+    "recovery_minus_clean_mae_rad": 0.11093614116628922,
+    "recovery_regressed_seed_count": 5,
+    "recovery_source_mae_rad": 0.6192612988940146,
+    "recovery_tied_seed_count": 0
+  },
+  "brev_compute_started": false,
+  "closed_loop_capability_claimed": false,
+  "closed_loop_rollout_executed": false,
+  "distribution_result": "recovery_did_not_improve_frame_zero_source_mae",
+  "external_compute_started": false,
+  "identity_sha256": "37c7fb8fb2899e3c368cc5c25a2e3f0a0b8526a43477b979632edc850fd9eabe",
+  "model_inference_executed": false,
+  "optimizer_training": false,
+  "paired_samples": [
+    {
+      "candidate_action_mae_rad": 0.11976957444279834,
+      "clean_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.06881728568900569,
+        "gripper": 0.6081957887092589,
+        "shoulder_lift": 0.8536929502363066,
+        "shoulder_pan": 0.002244228072723016,
+        "wrist_flex": 0.4986394036901912,
+        "wrist_roll": 0.773346669220975
+      },
+      "clean_source_mae_rad": 0.4674893876030768,
+      "inference_seed": 20260714,
+      "mode": "same_seed_repeat",
+      "recovery_minus_clean_mae_rad": 0.11904247902653842,
+      "recovery_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.15788434479123836,
+        "gripper": 0.6060145024604794,
+        "shoulder_lift": 1.0436725426533355,
+        "shoulder_pan": 0.004311361227274914,
+        "wrist_flex": 0.6961478190879014,
+        "wrist_roll": 1.011160629557462
+      },
+      "recovery_source_mae_rad": 0.5865318666296152,
+      "sample_id": "same_01"
+    },
+    {
+      "candidate_action_mae_rad": 0.10350346137548701,
+      "clean_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.19733315080733682,
+        "gripper": 0.6810932560844417,
+        "shoulder_lift": 0.8792723461904087,
+        "shoulder_pan": 0.0031486667072383526,
+        "wrist_flex": 0.6016621925632526,
+        "wrist_roll": 0.8967562225547018
+      },
+      "clean_source_mae_rad": 0.5432109724845634,
+      "inference_seed": 20260720,
+      "mode": "distinct_seed_sample",
+      "recovery_minus_clean_mae_rad": 0.10340529958832678,
+      "recovery_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.2622366169699808,
+        "gripper": 0.6807987707229611,
+        "shoulder_lift": 1.0631142844011863,
+        "shoulder_pan": 0.005022125632703434,
+        "wrist_flex": 0.7688064436343697,
+        "wrist_roll": 1.0997193910761394
+      },
+      "recovery_source_mae_rad": 0.6466162720728902,
+      "sample_id": "distinct_01"
+    },
+    {
+      "candidate_action_mae_rad": 0.1116549404603958,
+      "clean_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.20240387610187494,
+        "gripper": 0.6037991610778807,
+        "shoulder_lift": 0.8606469964747215,
+        "shoulder_pan": 0.0030346917349613617,
+        "wrist_flex": 0.5454496530124595,
+        "wrist_roll": 0.8097622679135277
+      },
+      "clean_source_mae_rad": 0.5041827743859043,
+      "inference_seed": 20260721,
+      "mode": "distinct_seed_sample",
+      "recovery_minus_clean_mae_rad": 0.11062317976093294,
+      "recovery_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.2672659966885955,
+        "gripper": 0.600703878979492,
+        "shoulder_lift": 1.0486830139282106,
+        "shoulder_pan": 0.004923934051074372,
+        "wrist_flex": 0.7291813030645943,
+        "wrist_roll": 1.0380775981690564
+      },
+      "recovery_source_mae_rad": 0.6148059541468373,
+      "sample_id": "distinct_02"
+    },
+    {
+      "candidate_action_mae_rad": 0.113480640516105,
+      "clean_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.11385406946236287,
+        "gripper": 0.6744295818565368,
+        "shoulder_lift": 0.7774346640024328,
+        "shoulder_pan": 0.002829744844322954,
+        "wrist_flex": 0.5766646973073328,
+        "wrist_roll": 0.8514974643044865
+      },
+      "clean_source_mae_rad": 0.49945170362957914,
+      "inference_seed": 20260722,
+      "mode": "distinct_seed_sample",
+      "recovery_minus_clean_mae_rad": 0.11330562886423934,
+      "recovery_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.19381514829685575,
+        "gripper": 0.6739045469009398,
+        "shoulder_lift": 0.9836274479778094,
+        "shoulder_pan": 0.004762679647070077,
+        "wrist_flex": 0.752253399431414,
+        "wrist_roll": 1.0681807727088215
+      },
+      "recovery_source_mae_rad": 0.6127573324938185,
+      "sample_id": "distinct_03"
+    },
+    {
+      "candidate_action_mae_rad": 0.10830411859140869,
+      "clean_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.117361219591402,
+        "gripper": 0.6769054267036437,
+        "shoulder_lift": 0.9622133691266458,
+        "shoulder_pan": 0.002675231566827918,
+        "wrist_flex": 0.6020730517404245,
+        "wrist_roll": 0.802517404484076
+      },
+      "clean_source_mae_rad": 0.5272909505355033,
+      "inference_seed": 20260723,
+      "mode": "distinct_seed_sample",
+      "recovery_minus_clean_mae_rad": 0.10830411859140865,
+      "recovery_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.19737609427991432,
+        "gripper": 0.6770094962631222,
+        "shoulder_lift": 1.1315993360453371,
+        "shoulder_pan": 0.004659869145425405,
+        "wrist_flex": 0.7706293441110152,
+        "wrist_roll": 1.0322962749166578
+      },
+      "recovery_source_mae_rad": 0.635595069126912,
+      "sample_id": "distinct_04"
+    }
+  ],
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_27_paired_source_action_gate.v1",
+  "simulation_policy_accepted": false,
+  "source_action_rad": [
+    0.05030802315890238,
+    -1.6782525911998447,
+    1.5437626844684913,
+    1.0424512390670553,
+    -0.029811999999999998,
+    1.5999999999999999
+  ],
+  "source_episode_file_sha256": "1361a4a25cad3a3567203061e2463fd05f3d72500d813cebcfea8f48285b430a",
+  "source_episode_identity_sha256": "2c431b85e83f929da3157ce9c260fe014dde82b77766ef5c6c2c8b66396c79b0",
+  "source_inference_evidence_reused": true,
+  "statistical_significance_claimed": false,
+  "t20_26_gate_identity_sha256": "b1bbe7b27855ac738cf740ec04e03339b1f7897b03576b3b2757001c63163c0b",
+  "task_id": "T20.27"
+}
