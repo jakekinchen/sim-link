@@ -89,6 +89,9 @@ frame-zero actions against the exact source action over five paired inference
 seeds. T20.27 is now `verified` through Reviewer Decision 188: recovery is
 worse on all 5/5 seeds, raising source-action MAE by 0.11094 rad. Only gripper
 improves marginally; arm joints regress. No new training is justified yet.
+Brief 159 now opens T20.28 to reconstruct the exact clean and recovery-campaign
+sampler orders and quantify early-phase exposure. It runs no model or optimizer
+and predeclares no exposure conclusion.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
