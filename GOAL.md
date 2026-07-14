@@ -67,7 +67,10 @@ failures, and seeds 6-7 remain outside training and statistics. Central
 composition grants only `simulation_training_ready`; no optimizer ran, and a
 separate brief must activate the frozen 500-update local-MPS campaign. Brief
 155 now opens T20.24 for that exact campaign and one frozen unassisted strict-v2
-evaluation each on seeds 6 and 7; no result or acceptance is predeclared.
+evaluation each on seeds 6 and 7. T20.24 is now `verified` negative through
+Reviewer Decision 185: 500 finite updates yielded zero strict contact on both
+seeds and 0/2 strict successes. No result was promoted; the next safe slice is
+offline output/failure localization before any additional optimizer budget.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
@@ -137,7 +140,7 @@ calibration or twin mutation. This is not paired real/sim evidence. Brief 153 is
 verified through `98a79a2` by Reviewer Decision 183: one synthetic timing
 certificate passes and eleven one-factor timing failures each block dynamics
 attribution. Brief 154 verifies T20.23's narrow policy-data preflight and Brief
-155 opens its exact bounded training/evaluation successor,
+155 verifies its exact bounded training/evaluation successor as negative,
 but the broader MVP exit remains unmet by the failed learned policy, absent real Robo Scan/I5
 bundle, and absent newly authorized physical canary. No hardware, live-probe,
 clock-sync, calibration/twin, optimizer, posterior, policy-acceptance, or

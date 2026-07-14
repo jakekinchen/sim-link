@@ -132,6 +132,11 @@ separate brief must activate the frozen 500-update local-MPS campaign.
 Brief 155 now activates exactly that bounded T20.24 campaign and its two frozen
 held-out evaluations; it does not predeclare a passing result or policy
 acceptance.
+T20.24 is verified negative through `3abee49` by Reviewer Decision 185. Run 002
+completed 500 finite local-MPS updates, but the frozen adapter made zero strict
+contact on both held-out seeds and lifted only 0.000144 mm / 0.000143 mm. The
+0/2 candidate is rejected; no accepted-policy pointer changed. The next policy
+step is offline failure localization, not another unexamined optimizer rung.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
