@@ -1,0 +1,186 @@
+{
+  "authority_granted": [
+    "t20_19_discrete_recovery_ensemble_verified"
+  ],
+  "authority_not_granted": [
+    "posterior_calibrated",
+    "optimizer_training",
+    "dataset_mixture_frozen",
+    "simulation_training_ready",
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "brev_compute_started": false,
+  "cell_manifest_ref": {
+    "file_sha256": "99332c9c8b1615316f06682073d27a4c38e77c460ab42a3aa9a460954a1a8c36",
+    "identity_sha256": "2842bb35296e1a5b1504ba07932ddb425cff4f1a68115249a26d259ebf708688",
+    "path": "configurations/robot_lab/t20_19_discrete_recovery_cells.json"
+  },
+  "dataset_mixture_frozen": false,
+  "evidence_ref": {
+    "file_sha256": "46a597e8f961ca641dcbac6a9582bca3134d2303137d125a25309724f89e8c9b",
+    "identity_sha256": "67c0003ef46961a5cb932a3a7ab0b78b117ed75b3a1e26e580a9d1b10175a12b",
+    "path": "outputs/robot_lab/t20_19_discrete_recovery_ensemble.json"
+  },
+  "external_compute_started": false,
+  "identity_sha256": "1205e336a81b68b650013572bd96ac8f6d452a5262ab924966aa14b7fa5e10c6",
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "posterior_calibrated": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_19_discrete_recovery_scorecard_gate.v1",
+  "scorecard": {
+    "brev_compute_started": false,
+    "cell_count": 12,
+    "cell_manifest_identity_sha256": "2842bb35296e1a5b1504ba07932ddb425cff4f1a68115249a26d259ebf708688",
+    "dataset_mixture_frozen": false,
+    "ensemble_scope": "fixed_discrete_uncalibrated_one_factor_recovery_falsification",
+    "external_compute_started": false,
+    "identity_sha256": "19834ecd0198764a1243b3be6d34d37ab19b14b94e095f843aa8f7fdc81cac0f",
+    "nominal_strict_success": true,
+    "nominal_terminal_outcome": "strict_success",
+    "optimizer_training": false,
+    "physical_actuation": false,
+    "physical_transfer_ready": false,
+    "posterior_calibrated": false,
+    "promotion_eligible": false,
+    "results": [
+      {
+        "cell_id": "nominal",
+        "cell_index": 0,
+        "first_trace_sha256": "c3e7eb5bec12c1b04d30cedb4c331f65a5df66bed416b43fe7983b5616e9fa42",
+        "maximum_anchor_lift_m": 0.03632799999999997,
+        "second_trace_sha256": "c3e7eb5bec12c1b04d30cedb4c331f65a5df66bed416b43fe7983b5616e9fa42",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "cube_x_low",
+        "cell_index": 1,
+        "first_trace_sha256": "3d99d3520024793145e7b288823d56e71f8b5fe95dbd1a8d51de2a198d2b7517",
+        "maximum_anchor_lift_m": 0.03797699999999998,
+        "second_trace_sha256": "3d99d3520024793145e7b288823d56e71f8b5fe95dbd1a8d51de2a198d2b7517",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "cube_x_high",
+        "cell_index": 2,
+        "first_trace_sha256": "192317717da620f34716386c1d5d4cf1072a60c625550fa7b0c120e9b9e805af",
+        "maximum_anchor_lift_m": 0.036609999999999976,
+        "second_trace_sha256": "192317717da620f34716386c1d5d4cf1072a60c625550fa7b0c120e9b9e805af",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 135,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "cube_y_low",
+        "cell_index": 3,
+        "first_trace_sha256": "dcb8d41b5e6ad55732374eee8a412d7a4bf912e72a2aee8c15780fdf370dbe02",
+        "maximum_anchor_lift_m": 0.037985999999999964,
+        "second_trace_sha256": "dcb8d41b5e6ad55732374eee8a412d7a4bf912e72a2aee8c15780fdf370dbe02",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "cube_y_high",
+        "cell_index": 4,
+        "first_trace_sha256": "e62b816565dff1a55d0cf4f8f9278fd4c81c4195932482407304e0c3643bcf19",
+        "maximum_anchor_lift_m": 0.03630099999999997,
+        "second_trace_sha256": "e62b816565dff1a55d0cf4f8f9278fd4c81c4195932482407304e0c3643bcf19",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "friction_low",
+        "cell_index": 5,
+        "first_trace_sha256": "d84b930c2aad042546dd2895c45529ea8fc723582b4cfbb29ad7b417502ca0a3",
+        "maximum_anchor_lift_m": 0.03695799999999999,
+        "second_trace_sha256": "d84b930c2aad042546dd2895c45529ea8fc723582b4cfbb29ad7b417502ca0a3",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "friction_high",
+        "cell_index": 6,
+        "first_trace_sha256": "b27ffdd3dba23edd2211421d8eed9ca690e7fdd0456c4ed47ba0f8812383f768",
+        "maximum_anchor_lift_m": 0.03525299999999998,
+        "second_trace_sha256": "b27ffdd3dba23edd2211421d8eed9ca690e7fdd0456c4ed47ba0f8812383f768",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "command_delay_1",
+        "cell_index": 7,
+        "first_trace_sha256": "cae2eac5388728ddc6f46c1c271903e32f529f5cb699d5c98f5b6cdc80ddca57",
+        "maximum_anchor_lift_m": 0.03632799999999997,
+        "second_trace_sha256": "cae2eac5388728ddc6f46c1c271903e32f529f5cb699d5c98f5b6cdc80ddca57",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "command_delay_2",
+        "cell_index": 8,
+        "first_trace_sha256": "84329b11ac92f35fa097d3f6894dbe0c116fcab8b49cab704cde561fc3454c00",
+        "maximum_anchor_lift_m": 0.03632799999999997,
+        "second_trace_sha256": "84329b11ac92f35fa097d3f6894dbe0c116fcab8b49cab704cde561fc3454c00",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "action_hold_2",
+        "cell_index": 9,
+        "first_trace_sha256": "08d630f0f0d7bf58a45caf43a0fad762710afaedacae0d26f7ea71428de763e1",
+        "maximum_anchor_lift_m": 0.03692400000000001,
+        "second_trace_sha256": "08d630f0f0d7bf58a45caf43a0fad762710afaedacae0d26f7ea71428de763e1",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "gripper_scale_low",
+        "cell_index": 10,
+        "first_trace_sha256": "6f76a2e60f1570ca9f813f1c38e837586e7c0dd383a1402711738d96ab56e74a",
+        "maximum_anchor_lift_m": 0.038266999999999995,
+        "second_trace_sha256": "6f76a2e60f1570ca9f813f1c38e837586e7c0dd383a1402711738d96ab56e74a",
+        "simulation_semantic_strict_success": true,
+        "strict_contact_frame_count": 136,
+        "terminal_outcome": "strict_success"
+      },
+      {
+        "cell_id": "gripper_scale_high",
+        "cell_index": 11,
+        "first_trace_sha256": "0d7a2e82bc13d1bdd48b870ca6f660328ff885396db5c9061fbc9d62eec4ed4a",
+        "maximum_anchor_lift_m": 0.031849000000000016,
+        "second_trace_sha256": "0d7a2e82bc13d1bdd48b870ca6f660328ff885396db5c9061fbc9d62eec4ed4a",
+        "simulation_semantic_strict_success": false,
+        "strict_contact_frame_count": 77,
+        "terminal_outcome": "lifted_without_strict_cycle"
+      }
+    ],
+    "schema_version": "scenesmith.t20_19_discrete_recovery_scorecard.v1",
+    "simulation_policy_accepted": false,
+    "simulation_training_ready": false,
+    "success_count": 11,
+    "success_rate": 0.9166666666666666,
+    "task_id": "T20.19",
+    "worst_cell_id": "gripper_scale_high",
+    "worst_cell_terminal_outcome": "lifted_without_strict_cycle"
+  },
+  "simulation_policy_accepted": false,
+  "simulation_training_ready": false,
+  "task_id": "T20.19"
+}

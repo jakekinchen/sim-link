@@ -1,0 +1,108 @@
+{
+  "brev_compute_started": false,
+  "cell_count": 12,
+  "cell_ids_sha256": "004e7a14baa2dffb488ed1a0d8d7835090f18ee5173f557710920f16f6f592a4",
+  "cells": [
+    {
+      "cell_id": "nominal",
+      "cell_index": 0,
+      "factor": "nominal",
+      "one_factor_only": true,
+      "value": 0.0
+    },
+    {
+      "cell_id": "cube_x_low",
+      "cell_index": 1,
+      "factor": "cube_x_offset_m",
+      "one_factor_only": true,
+      "value": -0.004
+    },
+    {
+      "cell_id": "cube_x_high",
+      "cell_index": 2,
+      "factor": "cube_x_offset_m",
+      "one_factor_only": true,
+      "value": 0.004
+    },
+    {
+      "cell_id": "cube_y_low",
+      "cell_index": 3,
+      "factor": "cube_y_offset_m",
+      "one_factor_only": true,
+      "value": -0.004
+    },
+    {
+      "cell_id": "cube_y_high",
+      "cell_index": 4,
+      "factor": "cube_y_offset_m",
+      "one_factor_only": true,
+      "value": 0.004
+    },
+    {
+      "cell_id": "friction_low",
+      "cell_index": 5,
+      "factor": "object_friction_multiplier",
+      "one_factor_only": true,
+      "value": 0.8
+    },
+    {
+      "cell_id": "friction_high",
+      "cell_index": 6,
+      "factor": "object_friction_multiplier",
+      "one_factor_only": true,
+      "value": 1.2
+    },
+    {
+      "cell_id": "command_delay_1",
+      "cell_index": 7,
+      "factor": "command_delay_frames",
+      "one_factor_only": true,
+      "value": 1
+    },
+    {
+      "cell_id": "command_delay_2",
+      "cell_index": 8,
+      "factor": "command_delay_frames",
+      "one_factor_only": true,
+      "value": 2
+    },
+    {
+      "cell_id": "action_hold_2",
+      "cell_index": 9,
+      "factor": "action_hold_frames",
+      "one_factor_only": true,
+      "value": 2
+    },
+    {
+      "cell_id": "gripper_scale_low",
+      "cell_index": 10,
+      "factor": "gripper_command_scale",
+      "one_factor_only": true,
+      "value": 0.95
+    },
+    {
+      "cell_id": "gripper_scale_high",
+      "cell_index": 11,
+      "factor": "gripper_command_scale",
+      "one_factor_only": true,
+      "value": 1.05
+    }
+  ],
+  "dataset_mixture_frozen": false,
+  "ensemble_scope": "fixed_discrete_uncalibrated_one_factor_recovery_falsification",
+  "external_compute_started": false,
+  "identity_sha256": "2842bb35296e1a5b1504ba07932ddb425cff4f1a68115249a26d259ebf708688",
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "posterior_calibrated": false,
+  "promotion_eligible": false,
+  "recovery_manifest_identity_sha256": "f97c784f2f68ce3028a221acb715576c8c3fcaf0e66917e77ad28ecef11dd0b3",
+  "recovery_package_identity_sha256": "4123e8d40e5e1fd80702c4dc40ceb7a31922c2da2f36c797c91a20677f208e7c",
+  "schema_version": "scenesmith.t20_19_discrete_recovery_ensemble.v1",
+  "seed": 6,
+  "simulation_policy_accepted": false,
+  "simulation_training_ready": false,
+  "source_branch_id": "35790636312237b8b067a56ba5979e571b970845c309bedf2ab559106bc276d0",
+  "task_id": "T20.19"
+}
