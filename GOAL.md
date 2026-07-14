@@ -78,11 +78,12 @@ requirements/contracts, decision index, and current-versus-historical guides
 now route readers to canonical sources. Its seventh boundary is verified at
 `890058b`: the separate Robo Scan repository is documented as a fail-closed
 scene-scan/calibration artifact handoff, with no package import, artifact
-ingestion, or physical claim. Its active eighth slice defines the exact
-cross-repository integration, compatibility, and deduplication roadmap while
-the separate Robo Scan thread owns its dirty Brief 054 export-receipt work.
-It does not change system authority or the broader T20.17 training task. Only
-repeatable strict semantic success can promote a policy.
+ingestion, or physical claim. Its eighth boundary is verified at `d695ed4`:
+the exact cross-repository integration, compatibility, and deduplication
+roadmap preserves the separate Robo Scan thread's ownership of dirty Brief 054
+and gates sim-link consumption on its committed receipt. It does not change
+system authority or the broader T20.17 training task. Only repeatable strict
+semantic success can promote a policy.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
