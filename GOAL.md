@@ -56,19 +56,16 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.7 is `verified` through Brief 127/Reviewer 157 as a negative equal-sample
-four-model bake-off. PI0.5, SmolVLA, ACT, and Diffusion Policy each consumed the
-same ordered 20 source starts and then ran the same seed-2 policy-owned loop
-with five 256 px keyframes and measured gate margins. Every model had zero
-strict contacts and zero strict success, so no winner exists. ACT moved the
-anchor 2.4213 mm versus the 25 mm gate while remaining visually below and
-offset from the object; the other three moved it 0.0003007 mm. Diffusion also
-requested out-of-range actions on 52 frames and fails the no-projection
-contract. T20.8 is `in_progress` under Brief 128 to issue the fail-closed
-policy-acceptance decision through a backwards-compatible path in the central
-composer. It requires one selected checkpoint with at least three independent
-strict-v2 successes; current measured success is zero. Hardware, physical
-transfer, promotion, external compute, and Brev remain closed.
+T20.8 is `verified` through Brief 128/Reviewer 158 as a central, fail-closed
+policy rejection. The source-bound decision has no selected model, zero strict
+successes versus three required, and zero T20.7 strict successes versus one
+required for selection. It therefore keeps `simulation_policy_accepted`,
+`physical_transfer_ready`, and `promotion_eligible` false while preserving the
+existing local simulation-training grant. T20.9 is the next eligible recovery
+slice: feed the recorded held-out expert actions through the exact policy
+closed-loop adapter and identify the first source-versus-execution divergence
+before another optimizer hypothesis. Hardware, physical transfer, promotion,
+external compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
