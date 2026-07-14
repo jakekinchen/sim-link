@@ -66,11 +66,12 @@ replace shadow-preprocessing derivation by invoking the pinned PI0.5 processor
 on a source-bound actual `LeRobotDataset` sample and hashing its finite output
 descriptors. This creates no model, training, or policy evidence. Historical
 artifacts remain immutable, no clean-base training starts until a source
-dataset—not a fixture—satisfies the new LeRobot-native boundary. The active
-fourth slice extracts only the live constructive geometry/contact primitive
-before retiring the eight dead T19 wrapper modules; it preserves historical
-signed diagnostics and creates no policy or training authority. Only
-repeatable strict semantic success can promote a policy.
+dataset—not a fixture—satisfies the new LeRobot-native boundary. Its fourth
+boundary is verified at `1aceebe`: the live constructive geometry/contact
+primitive is named and the eight dead T19 wrapper modules are retired, while
+historical signed diagnostics remain immutable. This creates no policy or
+training authority. Only repeatable strict semantic success can promote a
+policy.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
