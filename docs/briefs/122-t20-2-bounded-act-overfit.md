@@ -38,3 +38,17 @@ behavior.
 
 PI0.5, model bake-offs, MPS ladders beyond this overfit, physical hardware,
 external compute, Brev, checkpoint promotion, or destructive cleanup.
+
+## Verification Result
+
+The bounded 100-update run reduced train L1 from 1.0217032432556152 to
+0.16815676142772037 and produced held-out L1 0.22133693750947714. This is a
+real finite optimizer change, but not near-zero overfit.
+
+The saved model then owned all 244 controls in a fresh held-out-seed MuJoCo
+rollout. It used no assist and required no action projection, but formed zero
+strict-v2 grasp contacts and lifted the object only 0.0002023007066939697 m
+against the 0.025 m gate. The terminal outcome is
+`no_strict_grasp_contact`; semantic strict success, policy acceptance,
+physical transfer, and promotion all remain false. Five 256 px rendered
+keyframes and measured-versus-threshold margins preserve the negative proof.
