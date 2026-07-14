@@ -85,6 +85,25 @@ def parse_finite_loss_trace(path: Path, *, expected_updates: int = EXPECTED_UPDA
     return [{"step": step, "loss": by_step[step]} for step in expected]
 
 
+def verify_run_summary(summary: dict[str, Any]) -> None:
+    expected = {
+        "schema_version": "scenesmith.t20_17_clean_base_run.v1",
+        "optimizer_update_count": EXPECTED_UPDATES,
+        "all_losses_finite": True,
+        "held_out_evaluation_executed": False,
+        "simulation_policy_accepted": False,
+        "physical_actuation": False,
+        "external_compute_started": False,
+        "brev_compute_started": False,
+    }
+    if any(summary.get(key) != value for key, value in expected.items()):
+        raise ValueError("T20.17 clean-base run summary contract drifted")
+    paths = {row.get("path") for row in summary.get("checkpoint_tree", []) if isinstance(row, dict)}
+    required = {"adapter_model.safetensors", "adapter_config.json", "policy_preprocessor.json"}
+    if not required.issubset(paths):
+        raise ValueError("T20.17 clean-base run summary lacks required checkpoint evidence")
+
+
 def run_campaign(*, repo_root: Path = REPO_ROOT, python: Path | None = None) -> dict[str, Any]:
     root = Path(repo_root)
     spec = verify_training_spec_file(repo_root=root)

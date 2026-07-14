@@ -2,12 +2,14 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+import copy
 from pathlib import Path
 
 from scenesmith.robot_lab.t20_17_clean_base_campaign import (
     EXPECTED_UPDATES,
     build_training_argv,
     parse_finite_loss_trace,
+    verify_run_summary,
 )
 
 
@@ -53,6 +55,29 @@ class T2017CleanBaseCampaignTests(unittest.TestCase):
             path.write_text("step:1 loss:nan\n", encoding="utf-8")
             with self.assertRaises(ValueError):
                 parse_finite_loss_trace(path, expected_updates=1)
+
+    def test_run_summary_rejects_execution_or_authority_drift(self) -> None:
+        summary = {
+            "schema_version": "scenesmith.t20_17_clean_base_run.v1",
+            "optimizer_update_count": 250,
+            "all_losses_finite": True,
+            "held_out_evaluation_executed": False,
+            "simulation_policy_accepted": False,
+            "physical_actuation": False,
+            "external_compute_started": False,
+            "brev_compute_started": False,
+            "checkpoint_tree": [
+                {"path": "adapter_model.safetensors", "size_bytes": 10, "sha256": "a" * 64},
+                {"path": "adapter_config.json", "size_bytes": 10, "sha256": "b" * 64},
+                {"path": "policy_preprocessor.json", "size_bytes": 10, "sha256": "c" * 64},
+            ],
+        }
+        verify_run_summary(summary)
+        for key in ("optimizer_update_count", "physical_actuation"):
+            drift = copy.deepcopy(summary)
+            drift[key] = 251 if key == "optimizer_update_count" else True
+            with self.assertRaises(ValueError):
+                verify_run_summary(drift)
 
 
 if __name__ == "__main__":
