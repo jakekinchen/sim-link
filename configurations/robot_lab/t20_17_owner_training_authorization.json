@@ -1,0 +1,26 @@
+{
+  "authorization_id": "t20_17_simulation_training_owner_grant",
+  "authorization_scope": "t20_17_clean_base_simulation_only_training",
+  "authorization_source": "owner_goal_enact_sim_link_mvp_execution_plan",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training",
+    "simulation_policy_evaluation"
+  ],
+  "identity_sha256": "2f5fea2eb9740df5c94e2408bb82a2daf4329c45f9ea935edaa6dfa7945053f1",
+  "issued_at": "2026-07-14T03:05:00-05:00",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "source_training_spec_ref": {
+    "file_sha256": "b377784deef2de01703ef6c2b212c4ae5b74539ee25665b2d7ba61cd6ec2b6e0",
+    "identity_sha256": "8898aeede6723c76f7bc2c38c8e922587a95fb14288cb672a855402b187d7df9",
+    "path": "configurations/robot_lab/t20_17_clean_base_training_spec.json",
+    "schema_version": "scenesmith.t20_17_clean_base_training_spec.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-21T03:05:00-05:00"
+}

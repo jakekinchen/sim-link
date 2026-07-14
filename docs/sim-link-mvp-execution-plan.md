@@ -95,6 +95,13 @@ start broad calibration, Robo Scan consumption beyond the verified
 reference-only I2/I3 boundary, or canary planning while the learned policy has
 not achieved repeatable strict-v2 success in simulation.
 
+**Current progress:** Brief 147 is implementing the missing persistent native
+training boundary. The reviewed split is six strict-v2 source episodes
+(seeds 0-5, 1,464 frames) for one actual LeRobot training dataset, with seeds
+6-7 frozen outside it for evaluation. The same boundary must bind the complete
+local `lerobot/pi05_base` snapshot and mechanically grant T20.17-specific
+simulation-only authority before optimizer execution begins.
+
 ## Paused Integration Queue
 
 Robo Scan producer Brief 054 is committed and accepted at

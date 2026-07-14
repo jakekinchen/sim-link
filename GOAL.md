@@ -96,8 +96,12 @@ initialization, a realistic bounded local update budget, and frozen unassisted
 strict-v2 evaluation. Later planned tasks are state-fork recovery data, a small
 discrete ensemble, an observer-role evaluator, a thin paired trace runner, and
 timing evidence. No queued task inherits hardware, physical-transfer,
-promotion, external-compute, or Brev authority from the plan. The next slice
-requires a new brief for the clean-base dataset-native T20.17 campaign.
+promotion, external-compute, or Brev authority from the plan. Brief 147 is now
+active for the source-native clean-base preflight. It must persistently
+materialize and verify the six-episode LeRobot training dataset, keep seeds
+6-7 held out, bind the complete local `lerobot/pi05_base` snapshot, and compose
+T20.17-specific simulation-only authority before any optimizer or model
+execution.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:

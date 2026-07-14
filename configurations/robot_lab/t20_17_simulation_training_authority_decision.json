@@ -1,0 +1,189 @@
+{
+  "authority_granted": [
+    "simulation_training_ready"
+  ],
+  "authority_withheld": [
+    "physical_transfer_ready",
+    "promotion_eligible"
+  ],
+  "composition_identity_sha256": "4c46cc933c1d70d8c9139ceaf191389e959177b1cfbf571bb52859e94577e189",
+  "composition_mode": "production",
+  "contract_ref": {
+    "identity_sha256": "bbc353920e704b38b623038bfb26b6ead9a6a5a3ab7eea7afaedc2f6fc872bf0",
+    "schema_version": "scenesmith.authority_composition_contract.v1"
+  },
+  "evaluation_time": "2026-07-14T12:00:00-05:00",
+  "global_decisions": [
+    {
+      "consumed_evidence_identities": [
+        "2f5fea2eb9740df5c94e2408bb82a2daf4329c45f9ea935edaa6dfa7945053f1",
+        "34200be34fe6c0dbe7a6a1b608a49af74d08e111dd52b43ee1d181df71e767cf",
+        "3860158e201e457146a167cfa778da14f210d88fa223cb075a1ec6d422ecfd1a",
+        "59827b3dfe8adce0903495edd9f68af2db5f40abf93aa0fb51b9acfcef4118c7",
+        "689516af0ee418b600d51a5ae7cda8a5c49709a6f4e1c3356e18c9d5c708ab29",
+        "8898aeede6723c76f7bc2c38c8e922587a95fb14288cb672a855402b187d7df9",
+        "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
+        "e0fca4fe23b184e61f90711818192df6a66fdf4e8219ea1feb9be73f12ba1caf"
+      ],
+      "decision_id": "simulation_training_ready",
+      "denial_reason_codes": [],
+      "evaluated_expression": {
+        "operator": "all",
+        "terms": [
+          {
+            "id": "required_training_authority_present",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "structural_contract_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "executable_stack_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "coordinate_contract_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "normalization_contract_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "experience_compiler_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "required_simulation_properties_available",
+            "kind": "prerequisite"
+          }
+        ]
+      },
+      "granted": true,
+      "missing_prerequisite_ids": [],
+      "satisfied_prerequisite_ids": [
+        "coordinate_contract_valid",
+        "executable_stack_valid",
+        "experience_compiler_valid",
+        "normalization_contract_valid",
+        "required_simulation_properties_available",
+        "required_training_authority_present",
+        "structural_contract_valid"
+      ]
+    },
+    {
+      "consumed_evidence_identities": [
+        "2f5fea2eb9740df5c94e2408bb82a2daf4329c45f9ea935edaa6dfa7945053f1",
+        "34200be34fe6c0dbe7a6a1b608a49af74d08e111dd52b43ee1d181df71e767cf",
+        "3860158e201e457146a167cfa778da14f210d88fa223cb075a1ec6d422ecfd1a",
+        "59827b3dfe8adce0903495edd9f68af2db5f40abf93aa0fb51b9acfcef4118c7",
+        "689516af0ee418b600d51a5ae7cda8a5c49709a6f4e1c3356e18c9d5c708ab29",
+        "8898aeede6723c76f7bc2c38c8e922587a95fb14288cb672a855402b187d7df9",
+        "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
+        "e0fca4fe23b184e61f90711818192df6a66fdf4e8219ea1feb9be73f12ba1caf"
+      ],
+      "decision_id": "physical_transfer_ready",
+      "denial_reason_codes": [
+        "MISSING_PREREQUISITE"
+      ],
+      "evaluated_expression": {
+        "operator": "all",
+        "terms": [
+          {
+            "id": "simulation_training_ready",
+            "kind": "decision"
+          },
+          {
+            "id": "physical_hardware_identity_verified",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "actuator_and_timing_qualification_passed",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "camera_qualification_passed",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "contact_qualification_passed",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "held_out_twin_metrics_passed",
+            "kind": "prerequisite"
+          }
+        ]
+      },
+      "granted": false,
+      "missing_prerequisite_ids": [
+        "actuator_and_timing_qualification_passed",
+        "camera_qualification_passed",
+        "contact_qualification_passed",
+        "held_out_twin_metrics_passed",
+        "physical_hardware_identity_verified"
+      ],
+      "satisfied_prerequisite_ids": [
+        "coordinate_contract_valid",
+        "executable_stack_valid",
+        "experience_compiler_valid",
+        "normalization_contract_valid",
+        "required_simulation_properties_available",
+        "required_training_authority_present",
+        "structural_contract_valid"
+      ]
+    },
+    {
+      "consumed_evidence_identities": [],
+      "decision_id": "promotion_eligible",
+      "denial_reason_codes": [
+        "MISSING_PREREQUISITE"
+      ],
+      "evaluated_expression": {
+        "operator": "all",
+        "terms": [
+          {
+            "id": "policy_artifact_and_training_provenance_valid",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "appropriate_evaluation_tier_passed",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "required_deployment_authority_present",
+            "kind": "prerequisite"
+          },
+          {
+            "id": "no_safety_or_proof_state_violation",
+            "kind": "prerequisite"
+          }
+        ]
+      },
+      "granted": false,
+      "missing_prerequisite_ids": [
+        "appropriate_evaluation_tier_passed",
+        "no_safety_or_proof_state_violation",
+        "policy_artifact_and_training_provenance_valid",
+        "required_deployment_authority_present"
+      ],
+      "satisfied_prerequisite_ids": []
+    }
+  ],
+  "identity_sha256": "2c077bbcaa141cc25127d441ddcb43b2de9bd31e460a077c14294f22880bdfc1",
+  "input_claim_identity_sha256s": [
+    "150e44eaafb1f49ba9996f5b4a0e9fda6ef255fd9f2f221e7db7055edbc2845c",
+    "31382522b1b66e5084477b00df3fb15c338f155919fa0e4d39500715c5a8767b",
+    "51cd942ddcebde917988bacc44dd57c1227bc3f38e9063ac82f9c66c4213e7f9",
+    "6167ec6bc83c236bdbe4659b6e73768a0697b3511e849221b68d4415b6f30f91",
+    "7c2ba18ffa43728a72ae404832af0b3a411d686071d91b95577e703f1cd35516",
+    "a53dd7a44a34a68c5f30a0500abdb1d563fd78b0c88457b8842372c6a5164ff2",
+    "f511987d7a11094cee9c24bc00f4cd8cdb23e4fd71b32b60c3b0df3f8c94ed94"
+  ],
+  "rejected_component_fields": [],
+  "request_identity_sha256": "ad27efbea1f25e3babd9f37f6ae601fc0e0c9fdcee695836ee1d4450faa28dda",
+  "schema_version": "scenesmith.authority_composition_decision.v1",
+  "scope_id": "pi05_so101_authority",
+  "subject_id": "pi05_so101_sorting_system"
+}
