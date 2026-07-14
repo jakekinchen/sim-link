@@ -56,11 +56,12 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.4 is `in_progress` under Brief 124. It starts the explicit PI0.5
-optimizer-update ladder with a bounded 250-update local-MPS rung, exact
-microbatch and accumulation accounting, immutable checkpoint evidence, and a
-fresh strict held-out rollout. The 500- and 1,000-update rungs are contingent
-on reviewed evidence from the smaller rung. No checkpoint may be promoted from
+T20.4 is `in_progress` under Brief 124 and interim Reviewer 152. The exact
+250-update/500-microbatch local-MPS rung reduced train loss from 100.8441 to
+32.2517 and held-out loss from 130.0066 to 31.4226, but its changed action
+sequence still made zero strict contacts and lifted only 0.0003007 mm. The
+clean monotonic loss signal justifies one 500-total-update rung; 1,000 updates
+remain unauthorized pending that result. No checkpoint may be promoted from
 loss alone. Hardware, physical transfer, promotion, external compute, and Brev
 remain closed.
 

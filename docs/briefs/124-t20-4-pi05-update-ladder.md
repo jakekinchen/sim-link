@@ -47,3 +47,19 @@ evidence justifies the added compute.
 
 Unreviewed 500/1,000-update execution, model bake-offs, physical hardware,
 external compute, Brev, checkpoint promotion, and destructive cleanup.
+
+## Interim Reviewed 250-Update Rung
+
+The exact 250-update/500-microbatch run completed with all losses and gradients
+finite and 390 unique valid train starts. Train loss changed from
+100.84408569335938 to 32.25172805786133; held-out loss changed from
+130.006591796875 to 31.422643661499023. The saved adapter changed the policy
+action sequence, but the 244-frame strict held-out rollout still made zero
+strict-v2 contacts and lifted only 0.00000030070669393422733 m against the
+0.025 m threshold. It used zero assist and zero action projections and retained
+five 256 px keyframes with measured gate margins.
+
+Reviewer 152 authorizes one independent 500-total-update rung because the loss
+signal is large, finite, and directionally consistent. This is a bounded
+falsification test, not a promotion. The 1,000-update rung remains outside
+authority until the 500-update behavior is reviewed.
