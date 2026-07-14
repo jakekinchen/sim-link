@@ -72,11 +72,12 @@ primitive is named and the eight dead T19 wrapper modules are retired, while
 historical signed diagnostics remain immutable. Its fifth boundary is verified
 at `61f2d8c`: the few-page owner-present/read-only/content-addressed contract
 for a future LeRobot camera/robot adapter preserves historical physical
-evidence and creates neither hardware objects nor motion authority. The active
-sixth slice makes the documentation navigable: one front door, architecture,
-tech-stack, requirements/contracts, and current-versus-historical explainers.
-It does not change system authority or the broader T20.17 training task. Only
-repeatable strict semantic success can promote a policy.
+evidence and creates neither hardware objects nor motion authority. Its sixth
+boundary is verified at `69416bc`: a front door, architecture/tech-stack,
+requirements/contracts, decision index, and current-versus-historical guides
+now route readers to canonical sources. It does not change system authority or
+the broader T20.17 training task. Only repeatable strict semantic success can
+promote a policy.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
