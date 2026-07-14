@@ -7,6 +7,7 @@ import hashlib
 import os
 import sys
 from pathlib import Path
+from typing import Any, Callable
 
 import numpy as np
 
@@ -39,7 +40,11 @@ SCHEMA_VERSION = "scenesmith.t20_17_clean_base_closed_loop.v1"
 OUTPUT_PATH = Path("held_out_seed_6_closed_loop.json")
 
 
-def main() -> int:
+def run_frozen_candidate(
+    *, simulator_state_observer: Callable[[Any, dict[str, Any], np.ndarray], None] | None = None
+) -> dict[str, Any]:
+    """Reproduce the frozen candidate without writing or replacing evidence."""
+
     stack = activate_lerobot_stack(repo_root=REPO_ROOT, stage="inference")
     require_active_t20_17_authority(repo_root=REPO_ROOT)
     run_root = REPO_ROOT / RUN_ROOT
@@ -49,9 +54,6 @@ def main() -> int:
     verify_run_summary(summary)
     checkpoint = run_root / "training/checkpoints/last/pretrained_model"
     _verify_checkpoint(checkpoint, summary)
-    output = run_root / OUTPUT_PATH
-    if output.exists():
-        raise FileExistsError("T20.17 held-out evaluation output already exists")
     manifest = load_strict_json(REPO_ROOT / SOURCE_MANIFEST_PATH)
     verify_episode_store(manifest, default_store_root())
     source_entry = next(row for row in manifest["episodes"] if row["seed"] == SEED)
@@ -127,6 +129,7 @@ def main() -> int:
         evidence_mode="clean_base_dataset_native_pi05_held_out_seed_6_unassisted",
         policy_label="pi05_clean_base_lora_rank4",
         release_clearance_basis=FORCE_BEARING_RELEASE_CLEARANCE_BASIS,
+        simulator_state_observer=simulator_state_observer,
     )
     validate_rendered_keyframes(rollout["rendered_keyframes"])
     payload = sign_payload({
@@ -155,7 +158,16 @@ def main() -> int:
         "physical_transfer_ready": False,
         "promotion_eligible": False,
     })
+    return payload
+
+
+def main() -> int:
+    output = REPO_ROOT / RUN_ROOT / OUTPUT_PATH
+    if output.exists():
+        raise FileExistsError("T20.17 held-out evaluation output already exists")
+    payload = run_frozen_candidate()
     dump_canonical_json(output, payload)
+    rollout = payload["closed_loop"]
     print(payload["identity_sha256"], rollout["simulation_semantic_strict_success"], rollout["maximum_anchor_lift_m"], rollout["terminal_outcome"])
     return 0
 

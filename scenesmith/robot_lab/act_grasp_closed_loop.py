@@ -54,6 +54,7 @@ PHASE_PLAN = (
 ROLLOUT_FRAMES = sum(count for _, count in PHASE_PLAN)
 Policy = Callable[[dict[str, np.ndarray], np.ndarray], np.ndarray]
 FrameObserver = Callable[[dict[str, Any]], None]
+SimulatorStateObserver = Callable[[Any, dict[str, Any], np.ndarray], None]
 LEGACY_RELEASE_CLEARANCE_BASIS = "geometry_contact_pair"
 FORCE_BEARING_RELEASE_CLEARANCE_BASIS = "force_bearing_pad_or_nonpad_contact"
 RELEASE_CLEARANCE_BASES = {
@@ -105,6 +106,7 @@ def run_policy_grasp_closed_loop(
     evidence_mode: str,
     policy_label: str,
     frame_observer: FrameObserver | None = None,
+    simulator_state_observer: SimulatorStateObserver | None = None,
     release_clearance_basis: str = LEGACY_RELEASE_CLEARANCE_BASIS,
 ) -> dict[str, Any]:
     """Run one bounded held-out rollout for a named policy evidence contract."""
@@ -169,6 +171,8 @@ def run_policy_grasp_closed_loop(
             row["nonpad_robot_object_contacts"] = nonpad_robot_object_contacts(expert, object_body, set(pad_roles))
             row["all_robot_object_contact_geoms"] = all_robot_object_contact_geoms(expert, object_body)
             row["policy_requested_action"] = pending_requested.astype(float).tolist()
+            if simulator_state_observer is not None:
+                simulator_state_observer(expert, json.loads(json.dumps(row)), pending_requested.copy())
             frames.append(row)
             if frame_observer is not None:
                 frame_observer(json.loads(json.dumps(row)))
