@@ -56,13 +56,12 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.5 is `verified` through Brief 125 and Reviewer 154 as a negative execution-
-horizon result. Fixed-weight horizons 5/10/15 used 49/25/17 queue refills and
-produced distinct action sequences, but every rollout made zero strict contacts
-and lifted only 0.0003007 mm. Queue duration does not explain the failure.
-T20.6 is next for fixed phase-level and adversarial outcome-versus-strict
-evaluation. Hardware, physical transfer, promotion, external compute, and Brev
-remain closed.
+T20.6 is `in_progress` under Brief 126. It binds the existing strict-v2 grasp
+semantics to an explicit eight-stage capability witness and records terminal
+target occupancy independently from strict success. The fixed adversarial set
+must include putt, slide, throw, terminal-occupancy-only, scripted-motion,
+assistance-relabel, stage-drift, and actor-privilege cases. Hardware, physical
+transfer, promotion, external compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
