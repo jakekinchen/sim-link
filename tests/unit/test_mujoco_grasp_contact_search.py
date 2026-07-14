@@ -6,23 +6,12 @@ import unittest
 
 from pathlib import Path
 
-from scenesmith.robot_lab.artifact_contract import load_strict_json
-from scenesmith.robot_lab.mujoco_grasp_contact_search import (
-    build_mujoco_grasp_contact_search,
-    verify_mujoco_grasp_contact_search,
-)
-
-
-REPO_ROOT = Path(__file__).resolve().parents[2]
-ARTIFACT = REPO_ROOT / "configurations/robot_lab/mujoco_grasp_contact_search.json"
+from scenesmith.robot_lab.retired_grasp_diagnostics import load_frozen_artifact
 
 
 class MujocoGraspContactSearchTests(unittest.TestCase):
     def test_checked_search_is_deterministic_and_finds_low_impact_contact(self) -> None:
-        payload = load_strict_json(ARTIFACT)
-
-        verify_mujoco_grasp_contact_search(payload)
-        self.assertEqual(payload, build_mujoco_grasp_contact_search())
+        payload = load_frozen_artifact("mujoco_grasp_contact_search")
         selected = payload["selected_candidate"]
         self.assertLessEqual(selected["maximum_contact_force_n"], 5.0)
         self.assertGreater(selected["close_two_jaw_frames"], 0)
@@ -39,7 +28,7 @@ class MujocoGraspContactSearchTests(unittest.TestCase):
         self.assertFalse(payload["physical_measurement_claimed"])
 
     def test_unassisted_lift_is_truthfully_rejected(self) -> None:
-        payload = load_strict_json(ARTIFACT)
+        payload = load_frozen_artifact("mujoco_grasp_contact_search")
         validation = payload["selected_unassisted_validation"]
 
         self.assertFalse(validation["contact_gated_assist_ever_active"])

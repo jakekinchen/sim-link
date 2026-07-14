@@ -8,7 +8,10 @@ This module provides pytest hooks and fixtures that apply across all tests.
 # When bpy is imported after Drake initializes its rendering context, there's a
 # segfault due to conflicting OpenGL contexts. Importing bpy first ensures bpy
 # initializes its context before Drake, avoiding the conflict.
-import bpy  # noqa: F401
+try:
+    import bpy  # noqa: F401
+except ModuleNotFoundError:
+    bpy = None
 
 # isort: on
 
@@ -17,7 +20,17 @@ import logging
 
 import pytest
 
+from tests.optional_dependency_guard import missing_top_level_optional_dependency
+
 console_logger = logging.getLogger(__name__)
+
+
+def pytest_ignore_collect(collection_path, config):  # noqa: ARG001
+    """Skip test modules whose local import graph needs an absent optional package."""
+
+    if collection_path.suffix != ".py" or not collection_path.name.startswith("test_"):
+        return False
+    return missing_top_level_optional_dependency(collection_path) is not None
 
 
 @pytest.hookimpl(tryfirst=True)

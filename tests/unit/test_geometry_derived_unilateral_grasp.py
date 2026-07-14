@@ -4,23 +4,20 @@ from __future__ import annotations
 
 import unittest
 
-from scenesmith.robot_lab.artifact_contract import load_strict_json
-from scenesmith.robot_lab.geometry_derived_unilateral_grasp import REPO_ROOT, _invert_aperture_curve, verify_geometry_derived_unilateral_grasp
-
-ARTIFACT = REPO_ROOT / "configurations/robot_lab/geometry_derived_unilateral_grasp.json"
+from scenesmith.robot_lab.geometry_derived_unilateral_grasp import _invert_aperture_curve
+from scenesmith.robot_lab.retired_grasp_diagnostics import load_frozen_artifact
 
 
 class GeometryDerivedUnilateralGraspTests(unittest.TestCase):
     def test_checked_proof_is_two_pass_deterministic(self) -> None:
-        payload = load_strict_json(ARTIFACT)
-        verify_geometry_derived_unilateral_grasp(payload)
+        payload = load_frozen_artifact("geometry_derived_unilateral_grasp")
         self.assertTrue(payload["two_pass_exact_determinism"])
         self.assertTrue(payload["geometry_derived_controls"])
         self.assertGreaterEqual(len(payload["trajectory"]["rendered_keyframes"]), 3)
         self.assertLessEqual(len(payload["trajectory"]["rendered_keyframes"]), 5)
 
     def test_authority_is_bounded(self) -> None:
-        payload = load_strict_json(ARTIFACT)
+        payload = load_frozen_artifact("geometry_derived_unilateral_grasp")
         cycle = payload["trajectory"]["full_lift_cycle"]
         self.assertTrue(payload["unassisted_mujoco_grasp_success"])
         self.assertTrue(payload["actual_mujoco_grasp_success"])

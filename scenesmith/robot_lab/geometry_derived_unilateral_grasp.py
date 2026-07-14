@@ -8,11 +8,14 @@ from typing import Any
 from scenesmith.robot_lab.artifact_contract import load_strict_json, sign_payload, verify_signed_payload
 from scenesmith.robot_lab.geometry_first_grasp_search import REPO_ROOT, _candidate
 from scenesmith.robot_lab.grasp_evidence import validate_rendered_keyframes
+from scenesmith.robot_lab.grasp_artifact_schema import (
+    GEOMETRY_DERIVED_UNILATERAL_GRASP_SCHEMA_VERSION,
+)
 from scenesmith.robot_lab.gripper_contact_semantics import PAD_HALF_SIZE_M
 from scenesmith.robot_lab.mujoco_anchor_grasp import ANCHOR_DIMENSIONS_M
 from scenesmith.robot_lab.post_yaw_settle_search import APPROACH_MOTION_LIMIT_M, POST_YAW_SETTLE_SECONDS
 
-SCHEMA_VERSION = "scenesmith.geometry_derived_unilateral_grasp.v1"
+SCHEMA_VERSION = GEOMETRY_DERIVED_UNILATERAL_GRASP_SCHEMA_VERSION
 GEOMETRY_AUDIT = REPO_ROOT / "configurations/robot_lab/gripper_geometry_audit.json"
 CONTACT_AUDIT = REPO_ROOT / "configurations/robot_lab/centered_contact_face_audit.json"
 SOURCE_CANDIDATE_INDEX = 3
