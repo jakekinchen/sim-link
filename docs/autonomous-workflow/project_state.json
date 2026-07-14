@@ -60,10 +60,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "109",
-    "commit": "f6626faeaadd6cbfb86e000cbf15e750772c20e1",
-    "reviewer_decision_id": "135",
-    "summary": "immutable_fixture_scoped_normalization_preprocessing_bundle_binds_canonical"
+    "brief_id": "110",
+    "commit": "1a3746613d5856db05c901ba51e92dbdb7756c8d",
+    "reviewer_decision_id": "138",
+    "summary": "deterministic_source_bound_frame_and_hard_boundary_segment"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -254,8 +254,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M17/M19 grasp execution track",
-  "current_task": "T17.4",
-  "next_eligible_task": "T17.4",
+  "current_task": "T17.5",
+  "next_eligible_task": "T17.5",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2365,22 +2365,53 @@
       "authority_not_granted": ["production_normalization_valid", "compiled_training_frames", "simulation_training_ready", "optimizer_training", "physical_actuation"]
     },
     "T17.4": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T17.1", "T17.2", "T17.3"],
-      "active_brief_id": "110",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
-      "result": "compiling deterministic source-bound frames and hard-boundary segments with explicit quarantine for incomplete action evidence",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "110",
+      "review_decision_id": "138",
+      "result": "deterministic source-bound frame and hard-boundary segment compiler preserves raw provenance and quarantines incomplete evidence without training escalation",
       "artifact": {
+        "path": "configurations/robot_lab/t17_4_compile/compiler_manifest.json",
+        "schema_version": "scenesmith.experience_compiler.v1",
         "frames_path": "configurations/robot_lab/t17_4_compile/frames.parquet",
         "segments_path": "configurations/robot_lab/t17_4_compile/segments.parquet",
         "quarantine_manifest_path": "configurations/robot_lab/t17_4_compile/quarantine_manifest.json",
         "compiler_manifest_path": "configurations/robot_lab/t17_4_compile/compiler_manifest.json",
         "source_experience_record_identity_sha256": "8682cea5d45ed5cf115f3f68eadc5f81376e26b9d6981969876f05c3c7665737",
-        "source_normalization_bundle_identity_sha256": "dea3ff8cb85640499416fc6fd6bf0cf43dce3479766fb1ff277e8d224e097ebe"
+        "source_normalization_bundle_identity_sha256": "dea3ff8cb85640499416fc6fd6bf0cf43dce3479766fb1ff277e8d224e097ebe",
+        "frames_file_sha256": "ba9c4523a80588eceded8e93cb39ea1dd8aebe62bcca06a6741ce732ec52926b",
+        "segments_file_sha256": "44230e200794b46d70f02654be0e470341eefa6f479fa113649f0de8d62d5446",
+        "quarantine_manifest_file_sha256": "0bc52a76729919603cdb894071fe47250d3eddaaa996df33ab76dcb291581748",
+        "compiler_manifest_file_sha256": "48974083098f3bf3295839303810ebf5c8ed3e672985c0807253e288d5eef1e6",
+        "frame_count": 2,
+        "eligible_frame_count": 0,
+        "segment_count": 0,
+        "quarantine_count": 2,
+        "training_eligible": false,
+        "simulation_training_ready": false,
+        "optimizer_training": false,
+        "physical_actuation": false,
+        "raw_bytes_rewritten": false
       },
-      "authority_granted": [],
+      "authority_granted": [
+        "source_bound_frame_table_valid",
+        "hard_boundary_segment_compiler_valid",
+        "quarantine_manifest_valid",
+        "deterministic_compiler_outputs_valid"
+      ],
       "authority_not_granted": ["compiled_training_frames", "valid_action_windows", "simulation_training_ready", "optimizer_training", "physical_actuation"]
+    },
+    "T17.5": {
+      "state": "pending",
+      "depends_on": ["T17.2", "T17.4"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "result": "compile unpadded action windows only from eligible T17.4 segments",
+      "artifact": null,
+      "authority_granted": [],
+      "authority_not_granted": ["valid_action_windows", "simulation_training_ready", "optimizer_training", "physical_actuation"]
     },
     "T19.0": {
       "state": "verified",

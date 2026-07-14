@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-13T20:30:52-05:00; no new major slice after 2026-07-14T03:45:52-05:00; hard closeout 2026-07-14T04:30:52 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M17/M19 grasp execution track
-current_task: T17.4 in_progress after verified T17.3; compile source-bound frames and hard-boundary segments while quarantining incomplete rollout projections
+current_task: T17.5 pending after verified T17.4; compile unpadded action windows only from eligible source-bound segments
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; no compiled frames, hardware, or motion
-remaining: source-bound frames/segments, valid windows, real generated grasp episodes, compiler audit; T19.2 physical calibration under fresh permits; central simulation-training authority
+remaining: valid windows, real generated grasp episodes, compiler audit; T19.2 physical calibration under fresh permits; central simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; simulation training remains centrally withheld
-next_step: compile deterministic frame/segment tables from immutable records, emit quarantine for missing per-frame action evidence, and prove hard boundaries without laundering the T17.1 source projection into training data
+next_step: compile unpadded action windows only from eligible T17.4 segments; the current fixture has none and must remain empty without padding or inferred actions
 ```
 
 ## Rules
@@ -76,6 +76,22 @@ their canonical builders. Commit `f6626fa` records the processor identity
 closed authority flags are unchanged. The T17.4 compiler was then rebound to
 the new normalization identity. No raw bytes, hardware, Brev, training, or
 optimizer work occurred.
+
+## 2026-07-13 - Brief 110 T17.4 verification
+
+T17.4 is verified by Reviewer Decision 138. Commit `1a37466` is pushed to the
+allowed remote branch and contains the deterministic source-bound compiler,
+writer, tests, brief, and tracked outputs. The current fixture yields 2 frame
+rows, 0 eligible frames, 0 segments, and 2 frame quarantines. The compiler
+preserves raw identities and unavailable action/gripper/effort reasons,
+splits on declared hard boundaries, prevents quarantined frames from bridging
+segments, and keeps training, optimizer, and physical authority closed.
+
+The repository-wide unit invocation was environment-limited at 616 tests with
+69 dependency-import errors from the incomplete local runtime; the relevant
+compiler, contract, normalization, processor, and pointer gates passed. T17.5
+is now the next pending task and must not infer or pad windows from this empty
+fixture.
 
 ## M16 - Twin And Dependency Foundation
 
@@ -281,7 +297,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T17.1 | verified | T16.2,T19.0l | Define immutable raw rollout/frame records and provenance dictionaries | Brief 107/Reviewer 133; maintenance reconciliation 2f880d0 / Session 140 / Reviewer 136 updates the current content-addressed projection identity without rewriting Brief 107; grasp/twin/coordinate bound; stable rollout/frame identities; canonical/source phases; recovery only a control mode; five action variants remain distinct; two-frame fixture quarantined for five missing-data reasons; 210-test broad gate |
 | T17.2 | verified | T16.2-T16.3,T17.1 | Implement a named canonical SO-101 processor shared by collection, training, evaluation, and adapters | Brief 108/Reviewer 134; maintenance f6626fa / Session 141 / Reviewer 137 rebinds the source reference; processor 59827b3d...; pure unclamped transform, fail-closed bounds, explicit requested/executed limiter; 128 round trips max 4.441e-16; golden parity and monotonic gripper; 221-test broad gate |
 | T17.3 | verified | T17.2 | Generate immutable `normalization_bundle.json` | Brief 109/Reviewer 135; maintenance f6626fa / Session 141 / Reviewer 137 rebinds the processor reference; bundle dea3ff8c...; 94,568-sample MEAN_STD statistics; actual cached processor/tokenizer fixture parity; camera/order/runtime/tensor hashes pinned; production/training false; 227-test broad gate |
-| T17.4 | pending | T17.1-T17.3 | Compile `frames.parquet` and hard-boundary `segments.parquet` | Raw hashes retained; owner/reset/prompt/contract/gap changes split or fail |
+| T17.4 | verified | T17.1-T17.3 | Compile `frames.parquet` and hard-boundary `segments.parquet` | Brief 110/Reviewer 138; commit 1a37466; 2 frame rows, 0 eligible frames, 0 segments, 2 quarantines; deterministic Parquet/JSON outputs; quarantined rows cannot bridge segments; training/optimizer/physical authority closed |
 | T17.5 | pending | T17.2-T17.4 | Compile unpadded `window_index.parquet` for horizons 5/10/15/50 | No gaps, missing actions, padding, reset, teleport, drift, or forbidden transition |
 | T17.6 | pending | T17.1-T17.5 | Recompile qualifying legacy raw rollouts and quarantine ambiguous legacy data | No guessed migration; reasoned quarantine manifest |
 | T17.7 | pending | T17.1-T17.6 | Add full compiler manifest and deterministic 100-window replay/annotation audit | Zero invalid accepted windows; collection/training/inference tensor parity |
