@@ -62,8 +62,8 @@ zero action/state/object/contact divergence, no projection or assistance,
 36.3853 mm lift, and all grasp/hold/lower counts pass. T20.7 still rejects the
 oracle only because its release-clear gate treats a zero-force fixed-pad
 collision pair as active contact, while the T17.5b source contract omits that
-gate and T20.6 defines release by fingertip contact. T20.10 is next to reconcile
-release semantics without weakening final retreat clearance, then rerun the
+gate and T20.6 defines release by fingertip contact. T20.10 is `in_progress`
+under Brief 130 to reconcile release semantics without weakening final retreat clearance, then rerun the
 oracle before training. No learned policy is accepted. Hardware, physical
 transfer, promotion, external compute, and Brev remain closed.
 
