@@ -147,6 +147,10 @@ sampled pre-contact action MAE by 0.04735 rad but regresses frame-zero MAE by
 reproducible despite an equal stack identity, training-effect attribution is
 blocked. Repeated frozen-inference variability is the next causal proof; no
 optimizer rung is justified yet.
+Brief 157 opens T20.26 for two independent frame-zero inference batches per
+adapter on one identical held-out observation. It separates same-process seeded
+sampling from cross-process drift without applying an action or running an
+optimizer.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
