@@ -72,8 +72,11 @@ error. T20.12 is `verified` through Brief 132/Reviewer 162. All 732 actions
 round-trip within 3.606e-9 rad versus 1e-8, and all six action dimensions have
 equal loss weight. The supported fault is instead a broad checkpoint-normalizer
 domain mismatch: shoulder lift, wrist flex, wrist roll, and gripper exceed its
-observed min/max. T20.13 is `in_progress` under Brief 133 to derive a train-only
-dataset-bound PI0.5 state/action normalizer before any optimizer run. No
+observed min/max. T20.13 is `verified` through Brief 133/Reviewer 163. Its
+train-only population statistics balance average target mean-square near 1.0
+per joint and inverse-transform within 1.23e-9 rad, while held-out values remain
+evaluation-only and unclipped. T20.14 is next for one bounded local-MPS PI0.5
+retrain with equal loss weights and a fixed seed-2 closed loop. No
 learned policy is accepted. Hardware, physical transfer, promotion, external
 compute, and Brev remain closed.
 
