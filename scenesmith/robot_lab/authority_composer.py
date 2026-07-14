@@ -29,6 +29,9 @@ CAPABILITY_CLAIM_SCHEMA_VERSION = "scenesmith.component_capability_claim.v1"
 EVIDENCE_REF_SCHEMA_VERSION = "scenesmith.capability_evidence_ref.v1"
 COMPOSITION_REQUEST_SCHEMA_VERSION = "scenesmith.authority_composition_request.v1"
 AUTHORITY_DECISION_SCHEMA_VERSION = "scenesmith.authority_composition_decision.v1"
+SIMULATION_POLICY_ACCEPTANCE_SCHEMA_VERSION = (
+    "scenesmith.simulation_policy_acceptance_decision.v1"
+)
 
 DEFAULT_AUTHORITY_CONTRACT_PATH = Path(
     "configurations/robot_lab/pi05_authority_composition_contract.json"
@@ -39,6 +42,11 @@ DEFAULT_AUTHORITY_DECISION_PATH = Path(
 DEFAULT_AUTHORITY_SUBJECT_ID = "pi05_so101_sorting_system"
 DEFAULT_AUTHORITY_SCOPE_ID = "pi05_so101_authority"
 DEFAULT_EVALUATION_TIME = "2026-07-11T02:14:07-05:00"
+DEFAULT_T20_8_EVALUATION_TIME = "2026-07-14T09:30:00-05:00"
+DEFAULT_T20_8_RUN_ROOT = Path(
+    "outputs/robot_lab/t20_7_four_model_training_run_001"
+)
+REQUIRED_POLICY_ACCEPTANCE_REPEAT_COUNT = 3
 
 GLOBAL_DECISION_IDS = (
     "simulation_training_ready",
@@ -612,6 +620,233 @@ def verify_authority_artifacts(
     return {"contract": contract, "decision": decision}
 
 
+def build_simulation_policy_acceptance_decision(
+    *,
+    repo_root: Path,
+    run_root: Path = DEFAULT_T20_8_RUN_ROOT,
+    evaluation_time: str = DEFAULT_T20_8_EVALUATION_TIME,
+) -> dict[str, Any]:
+    """Compose T20.8 only after independently verifying every T20.6/T20.7 source."""
+
+    from scenesmith.robot_lab.model_bakeoff import (
+        MODEL_ORDER,
+        verify_model_training_gate,
+    )
+    from scenesmith.robot_lab.model_bakeoff_evaluation import (
+        verify_model_evaluation_gate,
+    )
+    from scenesmith.robot_lab.phase_outcome_evaluation import (
+        verify_phase_outcome_fixture,
+    )
+    from scenesmith.robot_lab.strict_grasp import verify_strict_grasp_v2_fixture
+
+    root = Path(repo_root).resolve()
+    runs = _resolve(root, run_root).resolve()
+    if not runs.is_relative_to(root):
+        raise ValueError("T20.8 run root escapes the repository")
+    semantic_path = root / "configurations/robot_lab/t20_6_phase_outcome_evaluation.json"
+    strict_path = root / "configurations/robot_lab/strict_anchor_grasp_evaluator_v2.fixture.json"
+    plan_path = root / "configurations/robot_lab/t20_7_model_bakeoff_plan.json"
+    semantic = load_strict_json(semantic_path)
+    strict = load_strict_json(strict_path)
+    plan = load_strict_json(plan_path)
+    verify_strict_grasp_v2_fixture(strict)
+    verify_phase_outcome_fixture(semantic, strict)
+
+    training_gate_path = runs / "run_summary.json"
+    evaluation_gate_path = runs / "evaluation_summary.json"
+    training_gate = load_strict_json(training_gate_path)
+    evaluation_gate = load_strict_json(evaluation_gate_path)
+    training_results = []
+    evaluation_results = []
+    for model_id in MODEL_ORDER:
+        model_root = runs / model_id
+        training_path = model_root / "run_summary.json"
+        evaluation_path = runs / "closed_loop" / f"{model_id}.json"
+        training = load_strict_json(training_path)
+        evaluation = load_strict_json(evaluation_path)
+        _verify_checkpoint_manifest(model_root, training["checkpoint_files"])
+        training_file_sha256 = _file_sha256(training_path)
+        training_results.append(
+            (str(training_path.relative_to(root)), training, training_file_sha256)
+        )
+        evaluation_results.append(
+            (
+                str(evaluation_path.relative_to(root)),
+                evaluation,
+                _file_sha256(evaluation_path),
+                training,
+                training_file_sha256,
+            )
+        )
+    verify_model_training_gate(training_gate, plan, training_results)
+    verify_model_evaluation_gate(
+        evaluation_gate,
+        plan,
+        training_gate,
+        evaluation_results,
+    )
+    sources = {
+        "strict_v2": _source_ref(root, strict_path, strict),
+        "semantic_fixture": _source_ref(root, semantic_path, semantic),
+        "model_bakeoff_plan": _source_ref(root, plan_path, plan),
+        "training_gate": _source_ref(root, training_gate_path, training_gate),
+        "evaluation_gate": _source_ref(root, evaluation_gate_path, evaluation_gate),
+    }
+    return _compose_simulation_policy_acceptance_core(
+        semantic_fixture=semantic,
+        evaluation_gate=evaluation_gate,
+        source_evidence=sources,
+        evaluation_time=evaluation_time,
+    )
+
+
+def verify_simulation_policy_acceptance_decision(
+    payload: dict[str, Any],
+    *,
+    repo_root: Path,
+    run_root: Path = DEFAULT_T20_8_RUN_ROOT,
+    evaluation_time: str = DEFAULT_T20_8_EVALUATION_TIME,
+) -> None:
+    """Recompute the central T20.8 decision from source bytes."""
+
+    if payload.get("schema_version") != SIMULATION_POLICY_ACCEPTANCE_SCHEMA_VERSION:
+        raise ValueError("Unsupported simulation policy acceptance decision schema")
+    verify_signed_payload(payload, label="Simulation policy acceptance decision")
+    expected = build_simulation_policy_acceptance_decision(
+        repo_root=repo_root,
+        run_root=run_root,
+        evaluation_time=evaluation_time,
+    )
+    if payload != expected:
+        raise ValueError("Simulation policy acceptance decision drifted from sources")
+
+
+def verify_simulation_policy_acceptance_core(
+    payload: dict[str, Any],
+    *,
+    semantic_fixture: dict[str, Any],
+    evaluation_gate: dict[str, Any],
+    source_evidence: dict[str, Any],
+    evaluation_time: str,
+) -> None:
+    """Reject re-signed policy decisions that differ from mechanical recomposition."""
+
+    verify_signed_payload(payload, label="Simulation policy acceptance decision")
+    expected = _compose_simulation_policy_acceptance_core(
+        semantic_fixture=semantic_fixture,
+        evaluation_gate=evaluation_gate,
+        source_evidence=source_evidence,
+        evaluation_time=evaluation_time,
+    )
+    if payload != expected:
+        raise ValueError("Simulation policy acceptance core drifted from evidence")
+
+
+def _compose_simulation_policy_acceptance_core(
+    *,
+    semantic_fixture: dict[str, Any],
+    evaluation_gate: dict[str, Any],
+    source_evidence: dict[str, Any],
+    evaluation_time: str,
+) -> dict[str, Any]:
+    """Mechanically derive acceptance after callers verify the supplied evidence."""
+
+    selected_model_id = evaluation_gate.get("winner_model_id")
+    model_results = evaluation_gate.get("model_results", [])
+    selected = next(
+        (item for item in model_results if item.get("model_id") == selected_model_id),
+        None,
+    )
+    measured_repeat_count = (
+        1
+        if selected is not None
+        and selected.get("simulation_semantic_strict_success") is True
+        else 0
+    )
+    criteria = {
+        "semantic_contract_conformant": _acceptance_margin(
+            int(
+                semantic_fixture.get("all_required_adversarial_cases_rejected") is True
+                and semantic_fixture.get("positive", {})
+                .get("strict_evaluation", {})
+                .get("strict_grasp_success")
+                is True
+            ),
+            1,
+            "==",
+        ),
+        "selected_checkpoint_count": _acceptance_margin(
+            int(selected is not None), 1, "=="
+        ),
+        "strict_success_repeat_count": _acceptance_margin(
+            measured_repeat_count,
+            REQUIRED_POLICY_ACCEPTANCE_REPEAT_COUNT,
+            ">=",
+        ),
+        "selected_projected_action_frames": _acceptance_margin(
+            None if selected is None else selected.get("projected_action_frame_count"),
+            0,
+            "==",
+        ),
+        "selected_active_assist_frames": _acceptance_margin(
+            None if selected is None else selected.get("active_assist_frame_count"),
+            0,
+            "==",
+        ),
+        "selected_rendered_keyframe_count": _acceptance_margin(
+            None if selected is None else selected.get("rendered_keyframe_count"),
+            5,
+            "==",
+        ),
+        "t20_7_strict_success_count": _acceptance_margin(
+            evaluation_gate.get("strict_success_count"), 1, ">="
+        ),
+    }
+    accepted = all(value["passed"] for value in criteria.values())
+    denial_reasons = [
+        name for name, value in criteria.items() if not value["passed"]
+    ]
+    return sign_payload(
+        {
+            "schema_version": SIMULATION_POLICY_ACCEPTANCE_SCHEMA_VERSION,
+            "task_id": "T20.8",
+            "decision_id": "simulation_policy_accepted",
+            "composer": "scenesmith.robot_lab.authority_composer",
+            "subject_id": DEFAULT_AUTHORITY_SUBJECT_ID,
+            "scope_id": DEFAULT_AUTHORITY_SCOPE_ID,
+            "evaluation_time": _canonical_timestamp(
+                evaluation_time, label="T20.8 evaluation_time"
+            ),
+            "source_evidence": json.loads(json.dumps(source_evidence)),
+            "selected_model_id": selected_model_id,
+            "measured_strict_success_rollout_count": measured_repeat_count,
+            "required_strict_success_rollout_count": REQUIRED_POLICY_ACCEPTANCE_REPEAT_COUNT,
+            "criteria": criteria,
+            "denial_reasons": denial_reasons,
+            "all_source_evidence_verified": True,
+            "terminal_occupancy_sufficient_for_acceptance": False,
+            "simulation_policy_accepted": accepted,
+            "physical_transfer_eligible": False,
+            "physical_transfer_ready": False,
+            "promotion_eligible": False,
+            "physical_actuation": False,
+            "external_compute_started": False,
+            "brev_compute_started": False,
+            "authority_granted": ["simulation_policy_accepted"] if accepted else [],
+            "authority_withheld": [
+                decision_id
+                for decision_id, granted in (
+                    ("simulation_policy_accepted", accepted),
+                    ("physical_transfer_ready", False),
+                    ("promotion_eligible", False),
+                )
+                if not granted
+            ],
+        }
+    )
+
+
 def _compose_validated(
     request: dict[str, Any],
     *,
@@ -1042,6 +1277,64 @@ def _all_expression(kind: str, identifiers: tuple[str, ...]) -> dict[str, Any]:
 
 def _known_capability_ids() -> set[str]:
     return {item["capability_id"] for item in build_authority_contract()["capabilities"]}
+
+
+def _acceptance_margin(
+    measured: int | float | None,
+    threshold: int | float,
+    comparison: str,
+) -> dict[str, Any]:
+    if measured is None:
+        return {
+            "measured": None,
+            "threshold": threshold,
+            "comparison": comparison,
+            "margin": None,
+            "passed": False,
+        }
+    if comparison == ">=":
+        margin = float(measured) - float(threshold)
+        passed = margin >= 0
+    elif comparison == "==":
+        margin = -abs(float(measured) - float(threshold))
+        passed = measured == threshold
+    else:
+        raise ValueError("Unsupported T20.8 acceptance comparison")
+    return {
+        "measured": measured,
+        "threshold": threshold,
+        "comparison": comparison,
+        "margin": margin,
+        "passed": passed,
+    }
+
+
+def _source_ref(repo_root: Path, path: Path, payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "path": str(path.relative_to(repo_root)),
+        "schema_version": payload["schema_version"],
+        "identity_sha256": payload["identity_sha256"],
+        "file_sha256": _file_sha256(path),
+    }
+
+
+def _verify_checkpoint_manifest(model_root: Path, files: dict[str, Any]) -> None:
+    root = model_root.resolve()
+    if not isinstance(files, dict) or not files:
+        raise ValueError("T20.8 checkpoint manifest is empty")
+    for relative_path, expected in files.items():
+        path = (model_root / relative_path).resolve()
+        if not path.is_relative_to(root) or not path.is_file():
+            raise ValueError("T20.8 checkpoint path is unavailable or escapes its run")
+        if (
+            _file_sha256(path) != expected.get("sha256")
+            or path.stat().st_size != expected.get("size_bytes")
+        ):
+            raise ValueError("T20.8 checkpoint bytes drifted")
+
+
+def _file_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def _find_forbidden_fields(payload: Any, *, forbidden: set[str]) -> set[str]:
