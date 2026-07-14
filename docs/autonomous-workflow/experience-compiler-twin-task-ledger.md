@@ -5,9 +5,9 @@ Updated: 2026-07-14
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: start 2026-07-14T12:20:57-05:00; no new major slice after 2026-07-14T19:35:57-05:00; hard closeout 2026-07-14T20:20:57 CDT
-run_state: T20.17 remains in progress; Brief 145 is verified at `67daad9` and reviewed by Decision 175. The first eight boundaries remain as recorded; the ninth independently validates one copied Robo Scan receipt against its lock and emits only a non-authorizing relative visual-context descriptor. It rejects any live checkout, does not compile simulation assets, and leaves all global authority denied.
+run_state: T20.17 remains in progress; Brief 146 is verified at `81c9a25` and reviewed by Decision 176. The accepted MVP cut restores clean pi05_base dataset-native training as the immediate target, records T20.18-T20.22 as pending only, and leaves Robo Scan I4 as a separate external dependency.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.17 in progress under documentation-only Brief 146: the accepted MVP cut restores the immediate target to clean pi05_base dataset-native training and strict-v2 evaluation; T20.18-T20.22 are dependency-ordered pending sim-link tasks; Robo Scan I4 remains a separate external dependency
+current_task: T20.17 in progress with no active implementation brief: open one precise clean pi05_base dataset-native training and strict-v2 evaluation brief next; T20.18-T20.22 remain dependency-ordered pending sim-link tasks; Robo Scan I4 remains a separate external dependency
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: T20.17 clean-base dataset-native training campaign specification and bounded execution in a fresh run window; T19.2 physical calibration remains under fresh permits
@@ -38,6 +38,19 @@ next_step: open a fresh run window, bind pi05_base rather than the foreign sort-
 - Any additional joint, gripper, reach, contact, task, policy actuation, or
   material permit expansion is unauthorized.
 - States are `pending`, `in_progress`, `verified`, `blocked`, `deferred`, and `superseded`.
+
+## 2026-07-14 - Brief 146 MVP cut and local queue verified
+
+Implementation `81c9a25` and Reviewer Decision 176 make the accepted triage a
+durable living plan. T20.17 remains the immediate clean-base dataset-native
+PI0.5 campaign. T20.18-T20.22 are pending in dependency order: state-fork
+recovery data, a 10-20-cell discrete ensemble, observer-role evaluation, a thin
+paired trace runner, and timing/latency evidence. The reference-only Robo Scan
+I2/I3 boundary is complete; I4 waits on real producer M1-M4 evidence.
+
+No model, optimizer, simulator rollout, hardware, external compute, or Brev was
+used. No physical, transfer, promotion, or policy-acceptance authority changed.
+The next action is a new narrow T20.17 implementation brief.
 
 ## 2026-07-13 - Post-109 maintenance reconciliation
 

@@ -88,7 +88,7 @@ candidate descriptor at `67daad9`/`cb4e5a0`/`d01416b`. It does not change system
 broader T20.17 training task. Only repeatable strict semantic success can
 promote a policy.
 
-Brief 146 is the active documentation-only reconciliation. It records the
+Brief 146 is verified at `81c9a25` and reviewed by Decision 176. It records the
 owner-approved MVP cut and a sim-link-only dependency queue while Robo Scan
 waits for its real metric-capture path. The immediate implementation target
 remains T20.17: clean `pi05_base`, exact source-dataset statistics from
@@ -96,7 +96,8 @@ initialization, a realistic bounded local update budget, and frozen unassisted
 strict-v2 evaluation. Later planned tasks are state-fork recovery data, a small
 discrete ensemble, an observer-role evaluator, a thin paired trace runner, and
 timing evidence. No queued task inherits hardware, physical-transfer,
-promotion, external-compute, or Brev authority from the plan.
+promotion, external-compute, or Brev authority from the plan. The next slice
+requires a new brief for the clean-base dataset-native T20.17 campaign.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
