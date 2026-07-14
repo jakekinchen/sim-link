@@ -64,9 +64,11 @@ strict contacts and zero strict success, so no winner exists. ACT moved the
 anchor 2.4213 mm versus the 25 mm gate while remaining visually below and
 offset from the object; the other three moved it 0.0003007 mm. Diffusion also
 requested out-of-range actions on 52 frames and fails the no-projection
-contract. T20.8 is pending to issue the fail-closed policy-acceptance decision;
-hardware, physical transfer, promotion, external compute, and Brev remain
-closed.
+contract. T20.8 is `in_progress` under Brief 128 to issue the fail-closed
+policy-acceptance decision through a backwards-compatible path in the central
+composer. It requires one selected checkpoint with at least three independent
+strict-v2 successes; current measured success is zero. Hardware, physical
+transfer, promotion, external compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
