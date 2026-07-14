@@ -57,6 +57,12 @@ from scenesmith.robot_lab.t20_25_frozen_candidate_localization import (  # noqa:
     build_comparison_rows,
     build_trace_payload,
 )
+from scenesmith.robot_lab.t20_26_frame_zero_variability import (  # noqa: E402
+    BATCH_IDS,
+    SAMPLE_SCHEDULE,
+    build_batch,
+    verify_batch,
+)
 
 
 OUTPUT_ROOT = REPO_ROOT / "outputs/robot_lab/t20_25_frozen_candidate_localization"
@@ -88,25 +94,41 @@ CANDIDATE_CONFIG = {
 }
 
 
+class _FrameZeroCaptured(RuntimeError):
+    pass
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--candidate", required=True, choices=CANDIDATE_IDS)
+    parser.add_argument("--frame-zero-batch", type=int, choices=BATCH_IDS)
     parser.add_argument("--verify", action="store_true")
     args = parser.parse_args()
     config = CANDIDATE_CONFIG[args.candidate]
     outputs = {
         seed: OUTPUT_ROOT / f"{args.candidate}_seed_{seed}.json" for seed in HELD_OUT_SEEDS
     }
+    batch_output = (
+        OUTPUT_ROOT / f"{args.candidate}_frame_zero_batch_{args.frame_zero_batch}.json"
+        if args.frame_zero_batch is not None
+        else None
+    )
+    if args.verify and batch_output is not None:
+        verify_batch(load_strict_json(batch_output))
+        print(args.candidate, "frame-zero batch", args.frame_zero_batch, "verified")
+        return 0
     if args.verify:
         from scenesmith.robot_lab.t20_25_frozen_candidate_localization import verify_trace_payload
         for path in outputs.values():
             verify_trace_payload(load_strict_json(path))
         print(args.candidate, "verified", flush=True)
         return 0
-    if any(path.exists() for path in outputs.values()):
+    if batch_output is not None and batch_output.exists():
+        raise FileExistsError("T20.26 frame-zero batch output already exists")
+    if batch_output is None and any(path.exists() for path in outputs.values()):
         raise FileExistsError("T20.25 candidate trace output already exists")
 
-    activate_lerobot_stack(repo_root=REPO_ROOT, stage="inference")
+    stack = activate_lerobot_stack(repo_root=REPO_ROOT, stage="inference")
     config["authority"](repo_root=REPO_ROOT)
     run_root: Path = config["run_root"]
     summary_path = run_root / "run_summary.json"
@@ -172,6 +194,118 @@ def main() -> int:
         if row["path"] == "adapter_model.safetensors"
     )
 
+    def select_action(images: dict[str, np.ndarray], state: np.ndarray) -> np.ndarray:
+        raw = {
+            "observation.images.base_0_rgb": images["top"].copy(),
+            "observation.images.left_wrist_0_rgb": images["wrist"].copy(),
+            "observation.state": np.asarray(
+                mujoco_to_lerobot(state[:6]), dtype=np.float32
+            ),
+        }
+        prepared = prepare_observation_for_inference(
+            raw, torch.device("mps"), task=TASK, robot_type="so101_follower"
+        )
+        with torch.inference_mode():
+            canonical = postprocessor(policy.select_action(preprocessor(prepared)))
+        values = canonical.detach().cpu().float().numpy().reshape(-1)
+        if values.shape != (6,) or not np.isfinite(values).all():
+            raise ValueError("Frozen candidate emitted an invalid action")
+        return np.asarray(lerobot_to_mujoco(values.tolist()), dtype=np.float64)
+
+    if batch_output is not None:
+        source_entry = sources[6]
+        source_episode = load_strict_json(
+            default_store_root() / source_entry["relative_path"]
+        )
+        source_frame = source_episode["frames"][0]
+        captured: dict[str, Any] = {}
+
+        def capture_frame_zero(
+            images: dict[str, np.ndarray], state: np.ndarray
+        ) -> np.ndarray:
+            source_qpos = np.asarray(
+                source_frame["observations"]["joint_position_mujoco_rad"],
+                dtype=np.float64,
+            )
+            source_qvel = np.asarray(
+                source_frame["observations"]["joint_velocity_mujoco_rad_s"],
+                dtype=np.float64,
+            )
+            samples = []
+            for sample_id, mode, inference_seed in SAMPLE_SCHEDULE:
+                torch.manual_seed(inference_seed)
+                policy.reset()
+                action = select_action(images, state)
+                samples.append(
+                    {
+                        "sample_id": sample_id,
+                        "mode": mode,
+                        "inference_seed": inference_seed,
+                        "requested_action_rad": action.astype(float).tolist(),
+                    }
+                )
+            captured["observation"] = {
+                "seed": 6,
+                "frame_index": 0,
+                "phase": "approach",
+                "top_raw_sha256": hashlib.sha256(
+                    np.ascontiguousarray(images["top"]).tobytes()
+                ).hexdigest(),
+                "wrist_raw_sha256": hashlib.sha256(
+                    np.ascontiguousarray(images["wrist"]).tobytes()
+                ).hexdigest(),
+                "qpos_rad": np.asarray(state[:6], dtype=float).tolist(),
+                "qvel_rad_s": np.asarray(state[6:], dtype=float).tolist(),
+                "source_state_max_abs_error": float(
+                    max(
+                        np.max(np.abs(np.asarray(state[:6]) - source_qpos)),
+                        np.max(np.abs(np.asarray(state[6:]) - source_qvel)),
+                    )
+                ),
+            }
+            captured["samples"] = samples
+            raise _FrameZeroCaptured
+
+        try:
+            run_policy_grasp_closed_loop(
+                capture_frame_zero,
+                checkpoint_sha256=adapter_sha,
+                training_run_summary_sha256=_sha(summary_path),
+                seed=6,
+                schema_version="scenesmith.t20_26_frame_zero_capture.v1",
+                task_id="T20.26",
+                evidence_mode=f"{args.candidate}_frame_zero_variability_capture",
+                policy_label=config["policy_label"],
+                release_clearance_basis=FORCE_BEARING_RELEASE_CLEARANCE_BASIS,
+            )
+        except _FrameZeroCaptured:
+            pass
+        if set(captured) != {"observation", "samples"}:
+            raise RuntimeError("T20.26 frame-zero observation was not captured")
+        batch = build_batch(
+            candidate_id=args.candidate,
+            batch_id=args.frame_zero_batch,
+            source_episode_file_sha256=source_entry["episode_file_sha256"],
+            source_episode_identity_sha256=source_entry[
+                "raw_rollout_record_identity_sha256"
+            ],
+            training_identity_sha256=summary["identity_sha256"],
+            checkpoint_sha256=adapter_sha,
+            lerobot_stack_identity_sha256=stack["identity_sha256"],
+            observation=captured["observation"],
+            samples=captured["samples"],
+        )
+        dump_canonical_json(batch_output, batch)
+        print(
+            args.candidate,
+            "batch",
+            args.frame_zero_batch,
+            batch["identity_sha256"],
+            batch["diagnostics"],
+            flush=True,
+        )
+        return 0
+
     for seed in HELD_OUT_SEEDS:
         source_entry = sources[seed]
         source_path = default_store_root() / source_entry["relative_path"]
@@ -181,20 +315,7 @@ def main() -> int:
         observed: list[dict[str, Any]] = []
 
         def policy_action(images: dict[str, np.ndarray], state: np.ndarray) -> np.ndarray:
-            raw = {
-                "observation.images.base_0_rgb": images["top"].copy(),
-                "observation.images.left_wrist_0_rgb": images["wrist"].copy(),
-                "observation.state": np.asarray(mujoco_to_lerobot(state[:6]), dtype=np.float32),
-            }
-            prepared = prepare_observation_for_inference(
-                raw, torch.device("mps"), task=TASK, robot_type="so101_follower"
-            )
-            with torch.inference_mode():
-                canonical = postprocessor(policy.select_action(preprocessor(prepared)))
-            values = canonical.detach().cpu().float().numpy().reshape(-1)
-            if values.shape != (6,) or not np.isfinite(values).all():
-                raise ValueError("T20.25 candidate emitted an invalid action")
-            return np.asarray(lerobot_to_mujoco(values.tolist()), dtype=np.float64)
+            return select_action(images, state)
 
         rollout = run_policy_grasp_closed_loop(
             policy_action,
