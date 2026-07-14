@@ -61,7 +61,7 @@
   },
   "latest_verified_task_implementation_boundary": {
     "brief_id": "116",
-    "commit": "ce3a12c5af5b51ccd6ad0cd0960a9424d674a672",
+    "commit": "e7d43af2f5c85a5fa30c86212881c1ceed50d5cc",
     "reviewer_decision_id": "144",
     "summary": "deterministic_episode_first_source_task_phase_control_mode"
   },
