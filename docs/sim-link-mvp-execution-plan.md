@@ -141,6 +141,12 @@ Brief 156 opens that T20.25 diagnostic: compare both frozen adapters' complete
 requested-action and visited-state traces with exact held-out source seeds 6-7,
 separating frame-zero prediction error from later closed-loop drift. It runs no
 optimizer and predeclares no next training hypothesis.
+T20.25 is verified through `c234936` by Reviewer Decision 186. Recovery improves
+sampled pre-contact action MAE by 0.04735 rad but regresses frame-zero MAE by
+0.11137 rad. Because the clean prior action hash is not cross-process
+reproducible despite an equal stack identity, training-effect attribution is
+blocked. Repeated frozen-inference variability is the next causal proof; no
+optimizer rung is justified yet.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,

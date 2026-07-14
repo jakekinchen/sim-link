@@ -73,7 +73,11 @@ seeds and 0/2 strict successes. No result was promoted; the next safe slice is
 offline output/failure localization before any additional optimizer budget.
 Brief 156 now opens T20.25 to compare the frozen T20.17 and T20.24 requested
 actions and visited states against exact held-out source trajectories on seeds
-6 and 7. It runs no optimizer and predeclares no causal conclusion.
+6 and 7. T20.25 is now `verified` through Reviewer Decision 186: recovery
+training regresses sampled frame-zero MAE but improves sampled pre-contact MAE,
+while the clean adapter's prior action hash is not cross-process reproducible.
+Training attribution is therefore blocked pending repeated frozen-inference
+variability measurement; no optimizer or policy acceptance follows.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
