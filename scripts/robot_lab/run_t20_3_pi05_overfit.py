@@ -41,11 +41,18 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--updates", type=int, default=5)
+    parser.add_argument("--gradient-accumulation-steps", type=int, default=1)
+    parser.add_argument("--task-id", choices=("T20.3", "T20.4"), default="T20.3")
     parser.add_argument("--seed", type=int, default=203)
     parser.add_argument("--learning-rate", type=float, default=5e-5)
     args = parser.parse_args()
-    if args.updates <= 0 or not np.isfinite(args.learning_rate) or args.learning_rate <= 0:
-        parser.error("updates and learning rate must be finite and positive")
+    if (
+        args.updates <= 0
+        or args.gradient_accumulation_steps <= 0
+        or not np.isfinite(args.learning_rate)
+        or args.learning_rate <= 0
+    ):
+        parser.error("updates, accumulation steps, and learning rate must be finite and positive")
     require_active_simulation_training_authority(repo_root=REPO_ROOT)
     output = _resolve(args.output)
     if output.exists():
@@ -128,27 +135,35 @@ def main() -> int:
     baseline_train = _mean_loss(policy, preprocessor, arrays, "train", (0, 244), torch, args.seed + 1000)
     baseline_evaluation = _mean_loss(policy, preprocessor, arrays, "evaluation", (0, 96), torch, args.seed + 2000)
     losses: list[float] = []
+    microbatch_losses: list[float] = []
     gradient_norms: list[float] = []
     realized_starts: list[int] = []
     policy.train()
-    for update in range(args.updates):
-        start = VALID_TRAIN_STARTS[(update * 73) % len(VALID_TRAIN_STARTS)]
-        realized_starts.append(start)
-        batch = _batch(preprocessor, arrays, split="train", start=start, torch=torch, device="mps")
+    training_plan = _training_plan(args.updates, args.gradient_accumulation_steps)
+    microbatch_index = 0
+    for starts in training_plan:
         optimizer.zero_grad(set_to_none=True)
-        torch.manual_seed(args.seed + update)
-        loss, _metrics = policy(batch)
-        if not torch.isfinite(loss):
-            raise ValueError("T20.3 observed a non-finite training loss")
-        loss.backward()
-        if not all(torch.isfinite(value.grad).all().item() for _, value in trainable if value.grad is not None):
-            raise ValueError("T20.3 observed a non-finite gradient")
+        update_losses: list[float] = []
+        for start in starts:
+            realized_starts.append(start)
+            batch = _batch(preprocessor, arrays, split="train", start=start, torch=torch, device="mps")
+            torch.manual_seed(args.seed + microbatch_index)
+            loss, _metrics = policy(batch)
+            if not torch.isfinite(loss):
+                raise ValueError(f"{args.task_id} observed a non-finite training loss")
+            (loss / args.gradient_accumulation_steps).backward()
+            if not all(torch.isfinite(value.grad).all().item() for _, value in trainable if value.grad is not None):
+                raise ValueError(f"{args.task_id} observed a non-finite gradient")
+            observed_loss = float(loss.detach().cpu())
+            microbatch_losses.append(observed_loss)
+            update_losses.append(observed_loss)
+            microbatch_index += 1
         norm = torch.nn.utils.clip_grad_norm_([value for _, value in trainable], max_norm=1.0)
         if not torch.isfinite(norm):
-            raise ValueError("T20.3 observed a non-finite gradient norm")
+            raise ValueError(f"{args.task_id} observed a non-finite gradient norm")
         optimizer.step()
         torch.mps.synchronize()
-        losses.append(float(loss.detach().cpu()))
+        losses.append(float(sum(update_losses) / len(update_losses)))
         gradient_norms.append(float(norm.detach().cpu()))
 
     final_train = _mean_loss(policy, preprocessor, arrays, "train", (0, 244), torch, args.seed + 1000)
@@ -162,8 +177,12 @@ def main() -> int:
         if path.is_file()
     }
     summary = {
-        "schema_version": "scenesmith.t20_3_pi05_overfit.v1",
-        "task_id": "T20.3",
+        "schema_version": (
+            "scenesmith.t20_3_pi05_overfit.v1"
+            if args.task_id == "T20.3"
+            else "scenesmith.t20_4_pi05_update_ladder.v1"
+        ),
+        "task_id": args.task_id,
         "source_training_spec_identity_sha256": spec["identity_sha256"],
         "source_tensor_view_sha256": _sha(tensor_path),
         "checkpoint_repository_id": CHECKPOINT_REPOSITORY_ID,
@@ -181,6 +200,9 @@ def main() -> int:
             "checkpoint_files": checkpoint_files,
         },
         "updates": args.updates,
+        "optimizer_update_count": args.updates,
+        "gradient_accumulation_steps": args.gradient_accumulation_steps,
+        "microbatch_count": len(realized_starts),
         "seed": args.seed,
         "learning_rate": args.learning_rate,
         "chunk_size": CHUNK_SIZE,
@@ -190,6 +212,7 @@ def main() -> int:
             "baseline_train": baseline_train,
             "baseline_held_out": baseline_evaluation,
             "per_update": losses,
+            "per_microbatch": microbatch_losses,
             "gradient_norms_before_clip": gradient_norms,
             "final_train": final_train,
             "final_held_out": final_evaluation,
@@ -201,7 +224,7 @@ def main() -> int:
         "brev_compute_started": False,
         "simulation_semantic_strict_success": False,
         "simulation_policy_accepted": False,
-        "disposition": "supervised_pi05_lora_overfit_only; closed-loop semantic evaluation pending",
+        "disposition": "supervised_pi05_lora_training_only; closed-loop semantic evaluation pending",
     }
     (output / "run_summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2, sort_keys=True))
@@ -218,6 +241,18 @@ def _validate_arrays(arrays) -> None:
     for name, shape in expected.items():
         if arrays[name].shape != shape or not np.isfinite(arrays[name]).all():
             raise ValueError(f"T20.3 tensor {name} is invalid")
+
+
+def _training_plan(updates: int, accumulation_steps: int) -> list[list[int]]:
+    if updates <= 0 or accumulation_steps <= 0:
+        raise ValueError("Training plan dimensions must be positive")
+    return [
+        [
+            VALID_TRAIN_STARTS[((update * accumulation_steps + microbatch) * 73) % len(VALID_TRAIN_STARTS)]
+            for microbatch in range(accumulation_steps)
+        ]
+        for update in range(updates)
+    ]
 
 
 def _batch(preprocessor, arrays, *, split: str, start: int, torch, device: str):

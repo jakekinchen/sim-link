@@ -34,6 +34,22 @@ class T20_3PI05ClosedLoopTest(unittest.TestCase):
                 },
             }
             MODULE._verify_training_run(summary, adapter)
+            t20_4 = {
+                **summary,
+                "task_id": "T20.4",
+                "optimizer_update_count": 250,
+                "gradient_accumulation_steps": 2,
+                "microbatch_count": 500,
+                "realized_train_starts": [0] * 500,
+                "loss": {"per_update": [1.0] * 250, "per_microbatch": [1.0] * 500},
+            }
+            MODULE._verify_training_run(t20_4, adapter, expected_task_id="T20.4")
+            with self.assertRaisesRegex(ValueError, "optimizer-update accounting"):
+                MODULE._verify_training_run(
+                    {**t20_4, "microbatch_count": 499},
+                    adapter,
+                    expected_task_id="T20.4",
+                )
             model.write_bytes(b"drift")
             with self.assertRaisesRegex(ValueError, "adapter_model.safetensors hash drifted"):
                 MODULE._verify_training_run(summary, adapter)

@@ -40,6 +40,7 @@ def main() -> int:
     parser.add_argument("--training-run", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--seed", type=int, default=2)
+    parser.add_argument("--task-id", choices=("T20.3", "T20.4"), default="T20.3")
     args = parser.parse_args()
     require_active_simulation_training_authority(repo_root=REPO_ROOT)
     training_run = _resolve(args.training_run)
@@ -49,7 +50,7 @@ def main() -> int:
     summary_path = training_run / "run_summary.json"
     adapter_path = training_run / "adapter"
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
-    _verify_training_run(summary, adapter_path)
+    _verify_training_run(summary, adapter_path, expected_task_id=args.task_id)
     spec = load_strict_json(REPO_ROOT / SPEC_PATH)
     if summary["source_training_spec_identity_sha256"] != spec["identity_sha256"]:
         raise ValueError("T20.3 adapter training-spec binding drifted")
@@ -125,9 +126,17 @@ def main() -> int:
         checkpoint_sha256=summary["adapter"]["checkpoint_files"]["adapter/adapter_model.safetensors"]["sha256"],
         training_run_summary_sha256=_sha(summary_path),
         seed=args.seed,
-        schema_version=SCHEMA_VERSION,
-        task_id="T20.3",
-        evidence_mode="held_out_seed_closed_loop_pi05_lora_mujoco",
+        schema_version=(
+            SCHEMA_VERSION
+            if args.task_id == "T20.3"
+            else "scenesmith.t20_4_pi05_closed_loop.v1"
+        ),
+        task_id=args.task_id,
+        evidence_mode=(
+            "held_out_seed_closed_loop_pi05_lora_mujoco"
+            if args.task_id == "T20.3"
+            else "held_out_seed_closed_loop_pi05_update_ladder_mujoco"
+        ),
         policy_label="PI0.5-LoRA",
     )
     payload["policy_runtime"] = {
@@ -151,9 +160,26 @@ def main() -> int:
     return 0
 
 
-def _verify_training_run(summary: dict, adapter_path: Path) -> None:
-    if summary.get("task_id") != "T20.3" or summary.get("simulation_policy_accepted") is not False:
-        raise ValueError("T20.3 training summary contract drifted")
+def _verify_training_run(summary: dict, adapter_path: Path, *, expected_task_id: str = "T20.3") -> None:
+    if expected_task_id not in {"T20.3", "T20.4"}:
+        raise ValueError("Unsupported PI0.5 evaluation task")
+    if summary.get("task_id") != expected_task_id or summary.get("simulation_policy_accepted") is not False:
+        raise ValueError(f"{expected_task_id} training summary contract drifted")
+    if expected_task_id == "T20.4":
+        expected_counts = {
+            "optimizer_update_count": 250,
+            "gradient_accumulation_steps": 2,
+            "microbatch_count": 500,
+        }
+        if any(summary.get(name) != value for name, value in expected_counts.items()):
+            raise ValueError("T20.4 optimizer-update accounting drifted")
+        loss = summary.get("loss", {})
+        if (
+            len(summary.get("realized_train_starts", [])) != 500
+            or len(loss.get("per_update", [])) != 250
+            or len(loss.get("per_microbatch", [])) != 500
+        ):
+            raise ValueError("T20.4 sample or loss accounting drifted")
     files = summary.get("adapter", {}).get("checkpoint_files", {})
     required = {
         "adapter/adapter_config.json": adapter_path / "adapter_config.json",
@@ -162,7 +188,7 @@ def _verify_training_run(summary: dict, adapter_path: Path) -> None:
     for logical_path, path in required.items():
         expected = files.get(logical_path, {}).get("sha256")
         if not isinstance(expected, str) or not path.is_file() or _sha(path) != expected:
-            raise ValueError(f"T20.3 {logical_path} hash drifted from its run summary")
+            raise ValueError(f"{expected_task_id} {logical_path} hash drifted from its run summary")
 
 
 def _snapshot_root(repository_id: str, revision: str) -> Path:

@@ -38,6 +38,19 @@ class T20_3PI05OverfitTest(unittest.TestCase):
         path = MODULE._snapshot_root("org/model", "abc123")
         self.assertTrue(str(path).endswith("models--org--model/snapshots/abc123"))
 
+    def test_t20_4_training_plan_distinguishes_updates_and_microbatches(self) -> None:
+        plan = MODULE._training_plan(250, 2)
+        self.assertEqual(len(plan), 250)
+        self.assertTrue(all(len(update) == 2 for update in plan))
+        starts = [start for update in plan for start in update]
+        self.assertEqual(len(starts), 500)
+        self.assertTrue(all(start in MODULE.VALID_TRAIN_STARTS for start in starts))
+
+    def test_training_plan_rejects_nonpositive_dimensions(self) -> None:
+        for updates, accumulation in ((0, 1), (1, 0), (-1, 2)):
+            with self.assertRaises(ValueError):
+                MODULE._training_plan(updates, accumulation)
+
 
 if __name__ == "__main__":
     unittest.main()
