@@ -55,6 +55,12 @@ ARTIFACT_WRITERS: dict[str, ArtifactWriterSpec] = {
         "configurations/robot_lab/normalization_bundle.json",
         True,
     ),
+    "observer_role_evaluator_fixture": ArtifactWriterSpec(
+        "scenesmith.robot_lab.observer_role_evaluator",
+        "build_observer_role_evaluator_fixture",
+        "verify_observer_role_evaluator_fixture",
+        "configurations/robot_lab/t20_20_observer_role_evaluator.json",
+    ),
     "robotics_dependency_lock": ArtifactWriterSpec(
         "scenesmith.robot_lab.robotics_dependency_lock",
         "build_robotics_dependency_lock",
