@@ -1,0 +1,41 @@
+{
+  "horizons": [
+    5,
+    10,
+    15,
+    50
+  ],
+  "inferred_actions": false,
+  "optimizer_training": false,
+  "output_sha256": {
+    "window_index.parquet": "992ce03d60c24f2fcaec148952815b9a56af752dbabc4da1e36673fafa958b50"
+  },
+  "padding_applied": false,
+  "physical_actuation": false,
+  "raw_bytes_rewritten": false,
+  "schema_version": "scenesmith.experience_window_index.v1",
+  "segments_shorter_than_horizon_count_by_horizon": {
+    "10": 16,
+    "15": 40,
+    "5": 0,
+    "50": 80
+  },
+  "simulation_training_ready": false,
+  "source_compiler_manifest_sha256": "289e6ae5a37dc9f358ef38e8970ddf6226e355b1741f0bcff5dc34a28cdc06a1",
+  "source_compiler_schema_version": "scenesmith.experience_compiler.v1",
+  "source_eligible_frame_count": 1952,
+  "source_experience_identity_sha256": "8682cea5d45ed5cf115f3f68eadc5f81376e26b9d6981969876f05c3c7665737",
+  "source_frame_count": 1952,
+  "source_frames_sha256": "5e21b75b47b19837e37fdb1f5092a8197a688c253bebf12befd9741610ea962f",
+  "source_normalization_identity_sha256": "dea3ff8cb85640499416fc6fd6bf0cf43dce3479766fb1ff277e8d224e097ebe",
+  "source_segment_count": 88,
+  "source_segments_sha256": "861c30da926e968e8fa9aaf90999f52bdd4a7e6d249296c77c974db11e6cb372",
+  "training_eligible": false,
+  "window_count": 3744,
+  "window_count_by_horizon": {
+    "10": 1176,
+    "15": 848,
+    "5": 1600,
+    "50": 120
+  }
+}

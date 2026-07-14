@@ -1,0 +1,37 @@
+{
+  "eligible_frame_count": 1952,
+  "frame_count": 1952,
+  "hard_boundary_events": [
+    "rollout_start",
+    "rollout_end",
+    "phase_change",
+    "reset",
+    "teleport",
+    "scene_change",
+    "prompt_change",
+    "controller_owner_change",
+    "control_mode_change",
+    "coordinate_contract_change",
+    "dropped_observation",
+    "timestamp_gap"
+  ],
+  "max_timestamp_gap_ns": 1000000000,
+  "optimizer_training": false,
+  "output_sha256": {
+    "frames.parquet": "5e21b75b47b19837e37fdb1f5092a8197a688c253bebf12befd9741610ea962f",
+    "quarantine_manifest.json": "e489620fe2de84109ad65cac16368c210930f814d6f324c2d0268a9c780f00ce",
+    "segments.parquet": "861c30da926e968e8fa9aaf90999f52bdd4a7e6d249296c77c974db11e6cb372"
+  },
+  "physical_actuation": false,
+  "quarantine_count": 0,
+  "raw_bytes_rewritten": false,
+  "raw_rollout_id": "multiple_append_only_rollouts",
+  "schema_version": "scenesmith.experience_compiler.v1",
+  "segment_count": 88,
+  "simulation_training_ready": false,
+  "source_episode_store_manifest_sha256": "72f49c6664a9e2663548ebf8064cbf29de19ea18170fea30bf862de082485084",
+  "source_experience_identity_sha256": "8682cea5d45ed5cf115f3f68eadc5f81376e26b9d6981969876f05c3c7665737",
+  "source_normalization_identity_sha256": "dea3ff8cb85640499416fc6fd6bf0cf43dce3479766fb1ff277e8d224e097ebe",
+  "source_rollout_count": 8,
+  "training_eligible": false
+}
