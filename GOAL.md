@@ -56,13 +56,17 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.7 is `in_progress` under Brief 127. It runs a fresh equal-sample local-MPS
-bake-off across PI0.5, SmolVLA, ACT, and Diffusion Policy, because the existing
-ACT and PI0.5 runs are not sample-comparable. Reviewer 156 accepts the hardened
-four-model finite forward/backward canary and authorizes only the exact common
-20-sample rung. No loss ranking or policy result exists yet; only fixed-seed
-policy-owned closed-loop strict behavior may rank models. Hardware, physical
-transfer, promotion, external compute, and Brev remain closed.
+T20.7 is `verified` through Brief 127/Reviewer 157 as a negative equal-sample
+four-model bake-off. PI0.5, SmolVLA, ACT, and Diffusion Policy each consumed the
+same ordered 20 source starts and then ran the same seed-2 policy-owned loop
+with five 256 px keyframes and measured gate margins. Every model had zero
+strict contacts and zero strict success, so no winner exists. ACT moved the
+anchor 2.4213 mm versus the 25 mm gate while remaining visually below and
+offset from the object; the other three moved it 0.0003007 mm. Diffusion also
+requested out-of-range actions on 52 frames and fails the no-projection
+contract. T20.8 is pending to issue the fail-closed policy-acceptance decision;
+hardware, physical transfer, promotion, external compute, and Brev remain
+closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
