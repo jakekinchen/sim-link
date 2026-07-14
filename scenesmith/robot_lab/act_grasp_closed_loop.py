@@ -53,6 +53,7 @@ PHASE_PLAN = (
 )
 ROLLOUT_FRAMES = sum(count for _, count in PHASE_PLAN)
 Policy = Callable[[dict[str, np.ndarray], np.ndarray], np.ndarray]
+FrameObserver = Callable[[dict[str, Any]], None]
 
 
 def phase_for_frame(frame_index: int) -> str:
@@ -97,6 +98,7 @@ def run_policy_grasp_closed_loop(
     task_id: str,
     evidence_mode: str,
     policy_label: str,
+    frame_observer: FrameObserver | None = None,
 ) -> dict[str, Any]:
     """Run one bounded held-out rollout for a named policy evidence contract."""
 
@@ -159,6 +161,8 @@ def run_policy_grasp_closed_loop(
             row["all_robot_object_contact_geoms"] = _all_robot_object_contact_geoms(expert, object_body)
             row["policy_requested_action"] = pending_requested.astype(float).tolist()
             frames.append(row)
+            if frame_observer is not None:
+                frame_observer(json.loads(json.dumps(row)))
             retain_rendered_keyframe(rendered, frame, images)
 
         expert = CausalSortExpert(
@@ -332,4 +336,6 @@ def _margin(measured: Any, threshold: float | int, comparison: str) -> dict[str,
         passed = measured == threshold
     else:
         raise ValueError("Unsupported gate comparison")
+    if margin == 0:
+        margin = 0.0
     return {"measured": measured, "threshold": threshold, "comparison": comparison, "margin": margin, "passed": passed}

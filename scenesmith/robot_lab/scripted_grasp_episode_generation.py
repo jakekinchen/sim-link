@@ -7,7 +7,7 @@ import json
 import os
 
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import numpy as np
 
@@ -91,7 +91,11 @@ def default_store_root(*, repo_root: Path = REPO_ROOT) -> Path:
     return repo_root / STORE_RELATIVE_ROOT
 
 
-def generate_episode_payload(spec: dict[str, Any]) -> dict[str, Any]:
+def generate_episode_payload(
+    spec: dict[str, Any],
+    *,
+    raw_trace_sink: Callable[[dict[str, Any]], None] | None = None,
+) -> dict[str, Any]:
     """Run one bounded unassisted episode and convert it into raw records."""
 
     _validate_episode_spec(spec)
@@ -108,6 +112,8 @@ def generate_episode_payload(spec: dict[str, Any]) -> dict[str, Any]:
 
     def retain(frame: dict[str, Any], images: dict[str, np.ndarray]) -> None:
         captured.append((frame, images))
+        if raw_trace_sink is not None:
+            raw_trace_sink(json.loads(json.dumps(frame)))
 
     request = dict(grasp["trajectory"]["request"])
     request["object_yaw_rad"] += spec["yaw_offset_rad"]
