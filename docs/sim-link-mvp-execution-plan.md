@@ -93,7 +93,7 @@ not inherit authority from this document.
 
 T20.17 is verified negative, T20.18 is verified recovery evidence, T20.19 is
 verified as an uncalibrated grid, T20.20 and T20.21 are verified, and T20.22 is
-verified. Brief 154 opens T20.23 as the next narrow policy-data preflight; the
+verified. Brief 154 and Reviewer Decision 184 verify T20.23's narrow policy-data preflight; the
 MVP exit condition below is not met. Do not
 start broad calibration, Robo Scan consumption beyond the verified
 reference-only I2/I3 boundary, or canary planning while the learned policy has
@@ -122,10 +122,12 @@ synthetic pair has zero joint/action/event-time error and nine fixed diagnostics
 route all declared mismatch categories without calibration or twin mutation.
 Brief 153 is verified through `98a79a2` by Reviewer Decision 183: one synthetic
 certificate passes, eleven one-factor timing failures route exactly, and every
-failure blocks dynamics attribution. Brief 154 opens T20.23 without an optimizer:
-freeze the six nominal successes plus four strict-success recovery branches as
-one 10-episode, 2,330-frame package dataset while retaining all negative and
-held-out evidence outside training statistics.
+failure blocks dynamics attribution. Brief 154 is verified through `fc54988`
+by Reviewer Decision 184 without an optimizer: the six nominal successes plus
+four strict-success recovery branches form one 10-episode, 2,330-frame package
+dataset while all negative and held-out evidence remains outside training
+statistics. Central composition grants only `simulation_training_ready`; a
+separate brief must activate the frozen 500-update local-MPS campaign.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
