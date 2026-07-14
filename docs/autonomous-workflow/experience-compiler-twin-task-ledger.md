@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-13T20:30:52-05:00; no new major slice after 2026-07-14T03:45:52-05:00; hard closeout 2026-07-14T04:30:52 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M18/M19 dataset mechanics and grasp execution track
-current_task: T18.5 pending after verified T18.4; freeze deterministic dataset-mixture and training-input manifests without training
+current_task: T20.2 pending after verified M18; central training authority and training_lock remain closed
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze those exact 192 IDs as immutable logical cycle 0001 with no buffer materialization; T18.3 compiled 1,345 exact source-bound frame records across all 192 logical-cycle windows while excluding privileged fields from the four-field actor schema; T18.4 froze 192 exact restoration snapshots/base branches and truthfully emitted zero correction events; no hardware or motion
-remaining: T18.5 dataset mechanics; T19.2 physical calibration under fresh permits; central simulation-training authority
+remaining: central simulation-training authority for T20.2; T19.2 physical calibration under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; simulation training remains centrally withheld
-next_step: generate T18.5 deterministic dataset-mixture and training-input manifests with training authority closed
+next_step: await explicit central simulation-training authority before T20.2; do not load a model or optimizer
 ```
 
 ## Rules
@@ -286,6 +286,23 @@ and cannot construct a source-bound correction event. No buffer, mixture,
 model, optimizer, training, raw rewrite, hardware, physical actuation, external
 compute, or Brev activity occurred.
 
+## 2026-07-13 - Brief 120 T18.5 start
+
+T18.5 is now `in_progress` under Brief 120. It may freeze only a deterministic,
+reference-only source composition from the verified T18.1-T18.4 artifacts. It
+must preserve the zero correction-event count, actor privilege boundary, and
+all separated action variants; it may not materialize records, open a model,
+run inference or an optimizer, or grant simulation-training authority.
+
+## 2026-07-13 - Brief 120 T18.5 verification
+
+T18.5 is `verified`: the frozen reference-only mixture and training-input
+manifests bind exactly 192 ordered source windows, zero correction windows, the
+four-field actor schema, and all five separated action variants. They are not a
+materialized buffer and both declare training ineligible. M18 is complete; T20.2
+remains pending because the central training authority and training lock are
+closed.
+
 ## M16 - Twin And Dependency Foundation
 
 | ID | State | Depends on | Task | Verification / artifacts |
@@ -504,7 +521,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T18.2 | verified | T17.1,T17.7,T18.1 | Preserve append-only logical source/cycle buffers | Brief 117/Reviewer 145; implementation `4a034f4`; signed registry `b1b08441...`; immutable cycle 0001 binds exact 192 selection IDs; prior-cycle mutation and duplicate reuse reject; no materialized buffer |
 | T18.3 | verified | T17.1,T17.4,T18.2 | Compile exact-state phase, progress, reward components, and provenance | Brief 118/Reviewer 146; implementation `b55186d`; signed manifest `40f522d1...`; all 192 cycle windows map to 1,345 unique source-bound frames; exact phase/progress/reward predicates; four-field actor schema excludes privileged outcomes; no buffer/training mutation |
 | T18.4 | verified | T16.3,T17.1-T17.5,T18.3 | Implement snapshot branch-and-correct linked by `correction_event_id` | Brief 119/Reviewer 147; implementation `c588a92`; signed manifest `7b0d00e9...`; 192 exact source snapshots/base branches; zero source correction events; fixture-only event mechanism rejects reuse, mutation, and source-evidence spoofing |
-| T18.5 | pending | T18.1-T18.4 | Generate `dataset_mixture_manifest.json` and training-input manifest | Re-run produces identical selected window IDs and composition |
+| T18.5 | verified | T18.1-T18.4 | Generate `dataset_mixture_manifest.json` and training-input manifest | Brief 120/Reviewer 148; implementation `4a5afd5`; frozen reference-only 192-window/zero-correction composition; actor schema and five action variants preserved; training remains ineligible |
 
 ## M19 - Physical Hardware Twin Qualification
 
