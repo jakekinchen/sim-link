@@ -1,0 +1,97 @@
+{
+  "all_available_prior_action_sequences_reproduced_exactly": false,
+  "brev_compute_started": false,
+  "candidate_summaries": {
+    "clean_base": {
+      "frame_zero_action_mean_absolute_error_rad": 0.5073549720015492,
+      "frame_zero_gripper_absolute_error_rad": 0.640207834210205,
+      "frame_zero_non_gripper_mean_absolute_error_rad": 0.480784399559818,
+      "precontact_action_mean_absolute_error_rad": 0.40136918272833655,
+      "prior_action_sequence_reproduced_exactly_by_seed": {
+        "6": false,
+        "7": null
+      },
+      "trace_identity_sha256_by_seed": {
+        "6": "388dd09a7b429e2e96f3935b8c37d3867b7ec76c82c0a1ecd6d9f966761f3e48",
+        "7": "1b7cbe4deed6f9d254fdac97900adcb4ad229cc878526912891a1afa9a33d4c4"
+      },
+      "trajectory_action_mean_absolute_error_rad": 0.4300513185273639,
+      "trajectory_qpos_mean_absolute_error_rad": 0.42331893378833885
+    },
+    "recovery_augmented": {
+      "frame_zero_action_mean_absolute_error_rad": 0.6187202607512582,
+      "frame_zero_gripper_absolute_error_rad": 0.6388966749397276,
+      "frame_zero_non_gripper_mean_absolute_error_rad": 0.6146849779135644,
+      "precontact_action_mean_absolute_error_rad": 0.35402332049758073,
+      "prior_action_sequence_reproduced_exactly_by_seed": {
+        "6": true,
+        "7": true
+      },
+      "trace_identity_sha256_by_seed": {
+        "6": "6236d940e7a69e37922a83a824534875c187b23e9b1f59f9081f3d88f035039d",
+        "7": "37f9406547ab545e36a2fc4a65db60680b189f192ec5024a54c5c15ac189844b"
+      },
+      "trajectory_action_mean_absolute_error_rad": 0.3372847721893885,
+      "trajectory_qpos_mean_absolute_error_rad": 0.32843645161901447
+    }
+  },
+  "candidate_to_candidate_by_seed": {
+    "6": {
+      "first_action_divergence": {
+        "absolute_error": 0.23781396033648705,
+        "frame_index": 0,
+        "joint_name": "wrist_roll",
+        "phase": "approach",
+        "threshold": 1e-06
+      },
+      "first_qpos_divergence": {
+        "absolute_error": 0.0018267552499945591,
+        "frame_index": 1,
+        "joint_name": "shoulder_pan",
+        "phase": "approach",
+        "threshold": 1e-06
+      },
+      "frame_zero_action_mean_absolute_difference_rad": 0.11976957444279834,
+      "precontact_action_mean_absolute_difference_rad": 0.10337438246176463,
+      "trajectory_action_mean_absolute_difference_rad": 0.10152271525936764,
+      "trajectory_qpos_mean_absolute_difference_rad": 0.09894200099059268
+    },
+    "7": {
+      "first_action_divergence": {
+        "absolute_error": 0.21627664370587985,
+        "frame_index": 0,
+        "joint_name": "wrist_roll",
+        "phase": "approach",
+        "threshold": 1e-06
+      },
+      "first_qpos_divergence": {
+        "absolute_error": 0.0017041552297022283,
+        "frame_index": 1,
+        "joint_name": "shoulder_pan",
+        "phase": "approach",
+        "threshold": 1e-06
+      },
+      "frame_zero_action_mean_absolute_difference_rad": 0.1038351092369381,
+      "precontact_action_mean_absolute_difference_rad": 0.10214063054473306,
+      "trajectory_action_mean_absolute_difference_rad": 0.10081561201824338,
+      "trajectory_qpos_mean_absolute_difference_rad": 0.09827523890218694
+    }
+  },
+  "earliest_shared_failure_surface": "identical_reset_prediction_error",
+  "external_compute_started": false,
+  "identity_sha256": "fdaa6fa9afa6ad45ab66e91f1c8c965556caff278587d6953e92b5d50d7db522",
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "recovery_relative_effect": {
+    "frame_zero": "regressed",
+    "frame_zero_delta_rad": 0.11136528874970897,
+    "precontact": "improved",
+    "precontact_delta_rad": -0.04734586223075582
+  },
+  "schema_version": "scenesmith.t20_25_frozen_candidate_localization_gate.v1",
+  "selected_next_hypothesis": "characterize_frozen_inference_variability_before_training_attribution",
+  "simulation_policy_accepted": false,
+  "task_id": "T20.25"
+}
