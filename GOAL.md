@@ -96,8 +96,11 @@ at horizons 5, 10, 15, and 50 without padding or inferred actions. The next
 eligible offline slice is T17.5b, which must record the already-verified
 geometry-derived scripted grasp as complete raw experience; it must first make
 explicitly derived action variants fail-closed and verifiable rather than
-mislabeling them as observed.
-The live gate and training lock remain closed. The
+mislabeling them as observed. T17.5b is `verified` through Brief 112: eight
+deterministic unassisted episodes compile to 1,952 eligible frames, 88
+hard-boundary segments, and 3,744 unpadded windows (including 120 at horizon
+50), with zero quarantines. T17.6 is now the next pending offline task. The
+live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
 history that constrains later hardware work. Brief 043 implementation
