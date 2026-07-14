@@ -36,3 +36,13 @@ and semantic-proof input fixed.
 
 Further training, altered inference seeds, changed denoising steps, hardware,
 external compute, Brev, promotion, and physical transfer.
+
+## Verified Outcome
+
+Fresh horizon-5, horizon-10, and horizon-15 artifacts record one initial policy
+reset and 49, 25, and 17 queue refills respectively. The fixed adapter and seed
+produced three distinct action-sequence hashes. Nevertheless, all three
+rollouts made zero strict-v2 contacts, used zero assist and zero projections,
+and lifted exactly 0.00000030070669393422733 m against the 0.025 m gate. Each
+retains five 256 px keyframes and all measured gate margins. Reviewer 154 closes
+the execution-horizon hypothesis as verified negative evidence.

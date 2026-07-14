@@ -56,12 +56,13 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.5 is `in_progress` under Brief 125. It fixes the verified T20.4 500-update
-adapter, held-out seed, inference seed, model steps, prompt, and strict gates
-while comparing execution horizons 5/10/15. Horizon 5 is already bound by the
-final T20.4 artifact; fresh horizons 10 and 15 must record queue refills, initial
-reset, open-loop duration, keyframes, and measured gate margins. Hardware,
-physical transfer, promotion, external compute, and Brev remain closed.
+T20.5 is `verified` through Brief 125 and Reviewer 154 as a negative execution-
+horizon result. Fixed-weight horizons 5/10/15 used 49/25/17 queue refills and
+produced distinct action sequences, but every rollout made zero strict contacts
+and lifted only 0.0003007 mm. Queue duration does not explain the failure.
+T20.6 is next for fixed phase-level and adversarial outcome-versus-strict
+evaluation. Hardware, physical transfer, promotion, external compute, and Brev
+remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
