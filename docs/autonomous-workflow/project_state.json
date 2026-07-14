@@ -61,7 +61,7 @@
   },
   "latest_verified_task_implementation_boundary": {
     "brief_id": "117",
-    "commit": "4a034f48821f1a50c6e913c0ef94de3e24b7ab4e",
+    "commit": "9e40aa341a5237da1c6366419886837b1255558f",
     "reviewer_decision_id": "145",
     "summary": "immutable_logical_cycle_registry_preserves_the_exact_t18"
   },
