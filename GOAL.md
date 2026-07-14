@@ -61,8 +61,8 @@ policy rejection. The source-bound decision has no selected model, zero strict
 successes versus three required, and zero T20.7 strict successes versus one
 required for selection. It therefore keeps `simulation_policy_accepted`,
 `physical_transfer_ready`, and `promotion_eligible` false while preserving the
-existing local simulation-training grant. T20.9 is the next eligible recovery
-slice: feed the recorded held-out expert actions through the exact policy
+existing local simulation-training grant. T20.9 is `in_progress` under Brief
+129: feed the recorded held-out expert actions through the exact policy
 closed-loop adapter and identify the first source-versus-execution divergence
 before another optimizer hypothesis. Hardware, physical transfer, promotion,
 external compute, and Brev remain closed.
