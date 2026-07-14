@@ -24,7 +24,7 @@ historical artifacts.
 
 | Current seam | Replacement | Required proof |
 | --- | --- | --- |
-| Compiler-owned frames, segments, and windows used as a second training store | A signed eligibility/provenance manifest over a single `LeRobotDataset`. | Episode bytes, eligibility/quarantine, split, metadata, and dataset statistics hash; no Parquet translation before training. |
+| Compiler-owned frames, segments, and windows used as a second training store | A signed eligibility/provenance manifest over a single `LeRobotDataset` (`lerobot_native_episode_manifest.py`). | Episode bytes, eligibility/quarantine, split, metadata, and dataset statistics hash; no Parquet translation before training. |
 | `pi05_fixture_preprocessing.py` plus `pi05_preprocessing_contract.py` mirroring | Run the pinned LeRobot processor pipeline and hash its actual input/output tensors and serialized pipeline identity. | Same dataset metadata/stat hash, finite tensor hashes, and deterministic repeated output; no hand-derived normalization substitute. |
 | Live physical-twin observation stack | A smaller future adapter over LeRobot camera/robot APIs with owner permit, read-only session, and content-addressed frame invariants. | Do not change the present historical live evidence in T20.17. |
 
