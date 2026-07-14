@@ -57,7 +57,8 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.17 remains `in_progress`; Brief 145 is verified. Its first boundary is verified at
+T20.17 is `verified` as a bounded negative clean-base result; T20.18 is the
+current dependency-ready slice. Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
 geometry-derived episode generation, the SO-101 processor, and thin
@@ -90,8 +91,8 @@ promote a policy.
 
 Brief 146 is verified at `81c9a25` and reviewed by Decision 176. It records the
 owner-approved MVP cut and a sim-link-only dependency queue while Robo Scan
-waits for its real metric-capture path. The immediate implementation target
-remains T20.17: clean `pi05_base`, exact source-dataset statistics from
+waits for its real metric-capture path. The completed T20.17 campaign used
+clean `pi05_base`, exact source-dataset statistics from
 initialization, a realistic bounded local update budget, and frozen unassisted
 strict-v2 evaluation. Later planned tasks are state-fork recovery data, a small
 discrete ensemble, an observer-role evaluator, a thin paired trace runner, and
@@ -101,12 +102,14 @@ verified at `b826e3f` and reviewed by Decision 177: the six-episode LeRobot
 training dataset is persistent, seeds 6-7 are frozen outside its statistics,
 the complete local `lerobot/pi05_base` snapshot is byte-bound, and central
 composition grants only `simulation_training_ready`. No model load, optimizer,
-rollout, or policy result occurred. The next T20.17 boundary requires a new
-precise brief for the fixed local-MPS campaign and strict seed-6 evaluation.
-Brief 148 is now active for exactly that bounded execution: official pinned
-LeRobot training, rank-4 LoRA, local MPS, batch size 1, 250 updates, seed
-20260714, no Hub/external logger, followed by unassisted frozen seed-6
-evaluation. Any non-passing policy remains a signed negative result.
+rollout, or policy result occurred at that boundary.
+Brief 148 is verified through `dce1995` and reviewed by Decision 178. Official
+LeRobot completed 250 finite rank-4 local-MPS updates from the clean base; the
+frozen seed-6 candidate then ran 244 unassisted frames with zero projected or
+assisted actions, no strict grasp contact, and 0.000307 mm lift. This is a
+verified negative result, not policy acceptance. T20.18 is next: state-forked
+recovery, near-failure, and failure episodes from policy-visited states before
+another optimizer campaign.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:

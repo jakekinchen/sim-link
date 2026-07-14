@@ -100,10 +100,12 @@ not achieved repeatable strict-v2 success in simulation.
 0-5, 1,464 frames); seeds 6-7 remain frozen outside it and its statistics. The
 complete local `lerobot/pi05_base` snapshot and fixed local-MPS campaign are
 byte-bound, and central composition grants only `simulation_training_ready`.
-No model, optimizer, inference, or rollout has run. The next boundary is the
-precisely briefed 250-update campaign and unassisted strict seed-6 evaluation.
-Brief 148 is active for that exact official-LeRobot local execution; it may
-record a positive or negative policy result but cannot promote either one.
+Brief 148 is verified through `dce1995` by Reviewer Decision 178. Official
+LeRobot completed the exact 250-update clean-base campaign with finite losses,
+but the unassisted frozen seed-6 rollout made no strict contact and lifted only
+0.000307 mm. The result is signed negative evidence and is not promoted.
+Per the dependency queue, T20.18 state-fork recovery data is now the next task;
+another optimizer rung waits on that reviewed dataset expansion.
 
 ## Paused Integration Queue
 
