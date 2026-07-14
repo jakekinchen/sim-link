@@ -57,7 +57,7 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.17 is `in_progress` under Brief 140. Its first boundary is verified at
+T20.17 is `in_progress` under Brief 141. Its first boundary is verified at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
 geometry-derived episode generation, the SO-101 processor, and thin
@@ -69,9 +69,11 @@ artifacts remain immutable, no clean-base training starts until a source
 dataset—not a fixture—satisfies the new LeRobot-native boundary. Its fourth
 boundary is verified at `1aceebe`: the live constructive geometry/contact
 primitive is named and the eight dead T19 wrapper modules are retired, while
-historical signed diagnostics remain immutable. This creates no policy or
-training authority. Only repeatable strict semantic success can promote a
-policy.
+historical signed diagnostics remain immutable. The active fifth slice records
+the few-page owner-present/read-only/content-addressed contract for a future
+LeRobot camera/robot adapter; it does not alter historical physical evidence,
+create hardware objects, or grant motion authority. Only repeatable strict
+semantic success can promote a policy.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
