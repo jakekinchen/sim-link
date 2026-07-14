@@ -1,0 +1,36 @@
+{
+  "action_applied": false,
+  "brev_compute_started": false,
+  "candidate_summaries": {
+    "clean_base": {
+      "batch_identity_sha256": {
+        "1": "8e0085fd6f753f6708dc789ac458a54a35458ba97821d69313059b235e777dd8",
+        "2": "adbb5c42ef8e9bf0c8f873bcd84654aab86081b349f31c5b0ad45892a3bf54f5"
+      },
+      "cross_process_same_seed_max_abs_difference_rad": 0.0,
+      "maximum_distinct_seed_pairwise_difference_rad": 0.18477870512421302,
+      "within_process_same_seed_max_abs_difference_rad": 0.0
+    },
+    "recovery_augmented": {
+      "batch_identity_sha256": {
+        "1": "887c7ccdea02d3c5d3ea6c5d0f1b8cdbb6f53eee47475a69204b3a3df81e142a",
+        "2": "cfa7304c51c95add36e65f37a9cacabfd2a4f3cfd50e2cd3e84f73456865f8ac"
+      },
+      "cross_process_same_seed_max_abs_difference_rad": 0.0,
+      "maximum_distinct_seed_pairwise_difference_rad": 0.1479718880675277,
+      "within_process_same_seed_max_abs_difference_rad": 0.0
+    }
+  },
+  "closed_loop_rollout_executed": false,
+  "cross_process_same_seed_gap_reproduced": false,
+  "external_compute_started": false,
+  "identity_sha256": "b1bbe7b27855ac738cf740ec04e03339b1f7897b03576b3b2757001c63163c0b",
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_26_frame_zero_variability_gate.v1",
+  "selected_next_hypothesis": "treat_prior_clean_hash_as_historical_runtime_specific_and_repeat_training_comparison_with_multi_seed_inference",
+  "simulation_policy_accepted": false,
+  "task_id": "T20.26"
+}
