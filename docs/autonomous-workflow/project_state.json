@@ -60,10 +60,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "117",
-    "commit": "9e40aa341a5237da1c6366419886837b1255558f",
-    "reviewer_decision_id": "145",
-    "summary": "immutable_logical_cycle_registry_preserves_the_exact_t18"
+    "brief_id": "118",
+    "commit": "b55186d160f6570d3855018c679e7bfb282f1b28",
+    "reviewer_decision_id": "146",
+    "summary": "immutable_logical_cycle_0001_resolves_to_exact_source"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -254,8 +254,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M18/M19 dataset mechanics and grasp execution track",
-  "current_task": "T18.3",
-  "next_eligible_task": "T18.3",
+  "current_task": "T18.4",
+  "next_eligible_task": "T18.4",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2603,15 +2603,35 @@
       "authority_not_granted": ["materialized_dataset_buffer", "dataset_mixture_frozen", "simulation_training_ready", "optimizer_training", "physical_actuation"]
     },
     "T18.3": {
-      "state": "pending",
-      "depends_on": ["T17.1", "T17.4"],
+      "state": "verified",
+      "depends_on": ["T17.1", "T17.4", "T18.2"],
       "active_brief_id": null,
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
-      "result": "compile exact-state task phase, progress, reward components, and provenance while excluding privileged fields from actor inputs",
-      "artifact": null,
-      "authority_granted": [],
-      "authority_not_granted": ["simulation_training_ready", "optimizer_training", "physical_actuation"]
+      "latest_verified_brief_id": "118",
+      "review_decision_id": "146",
+      "result": "immutable logical cycle 0001 resolves to exact source-bound task-phase, source-phase, progress, and reward component records while the four-field actor input schema excludes all privileged outcome fields",
+      "artifact": {
+        "implementation_commit": "b55186d160f6570d3855018c679e7bfb282f1b28",
+        "path": "configurations/robot_lab/t18_3_exact_state_components.json",
+        "schema_version": "scenesmith.exact_state_components.v1",
+        "manifest_identity_sha256": "40f522d16b34bc4a854cb47d657d21ac71fc00fad562557c43016c15195d752a",
+        "manifest_file_sha256": "f907b2f6cac9c49dfe7e7f1bb5a72cf8819cc8220376e217ea5324ff5f3031a0",
+        "logical_cycle_id": "0001",
+        "logical_cycle_window_count": 192,
+        "unique_frame_count": 1345,
+        "component_record_ids_sha256": "5cdf3bd4ae145a5b939ceb72e6f571fb0d783ff3e45147c1f75e023cb46b547b",
+        "privileged_fields_available_to_actor": false,
+        "buffer_materialized": false,
+        "buffer_mutated": false,
+        "training_eligible": false,
+        "simulation_training_ready": false,
+        "optimizer_training": false,
+        "physical_actuation": false,
+        "raw_bytes_rewritten": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["exact_state_component_projection_valid", "actor_input_privilege_boundary_valid"],
+      "authority_not_granted": ["materialized_dataset_buffer", "dataset_mixture_frozen", "simulation_training_ready", "optimizer_training", "physical_actuation", "external_compute"]
     },
     "T19.0": {
       "state": "verified",
