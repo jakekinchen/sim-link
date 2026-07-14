@@ -2,11 +2,11 @@
   "schema_version": "scenesmith.project_state.v1",
   "updated": "2026-07-14",
   "run_window": {
-    "actual_start": "2026-07-13T20:30:52-05:00",
+    "actual_start": "2026-07-14T04:09:58-05:00",
     "total_duration_hours": 8,
-    "no_new_major_slice_after": "2026-07-14T03:45:52-05:00",
-    "hard_closeout": "2026-07-14T04:30:52-05:00",
-    "owner_extension_recorded_at": "2026-07-13T20:30:52-05:00",
+    "no_new_major_slice_after": "2026-07-14T11:24:58-05:00",
+    "hard_closeout": "2026-07-14T12:09:58-05:00",
+    "owner_extension_recorded_at": "2026-07-14T04:09:58-05:00",
     "closeout_recorded_at": null
   },
   "run_window_history": [
@@ -51,6 +51,15 @@
       "owner_extension_recorded_at": "2026-07-13T12:30:11-05:00",
       "closeout_recorded_at": "2026-07-13T20:30:14-05:00",
       "closeout_reason": "window_expired_before_current_owner_continuation"
+    },
+    {
+      "actual_start": "2026-07-13T20:30:52-05:00",
+      "total_duration_hours": 8,
+      "no_new_major_slice_after": "2026-07-14T03:45:52-05:00",
+      "hard_closeout": "2026-07-14T04:30:52-05:00",
+      "owner_extension_recorded_at": "2026-07-13T20:30:52-05:00",
+      "closeout_recorded_at": "2026-07-14T04:09:58-05:00",
+      "closeout_reason": "owner_continuation_opened_fresh_simulation_goal_window_after_cutoff"
     }
   ],
   "branch": "codex/pi05-autolearn-loop",
@@ -2679,6 +2688,7 @@
     },
     "T20.1": {"state":"verified","depends_on":["T18.5"],"active_brief_id":null,"latest_verified_brief_id":"121","review_decision_id":"149","source_commit":"8c57c8ac8d53076b043848af885613eba1ae4261","implementation_commits":["603e087857d4a552fed346e0a5835d2da8cd7b21","8c57c8ac8d53076b043848af885613eba1ae4261"],"result":"source-bound simulation-only ACT input specification and owner-gated central authority verified; training lock opened only for bounded local simulation work while a live verifier enforces the grant expiry","artifact":{"path":"configurations/robot_lab/t20_1_simulation_training_authority_decision.json","decision_identity_sha256":"6c3a6250c5c96a654b416cfc7ee57139a587187303f26b03e1416da46b5fbc0c","request_path":"configurations/robot_lab/t20_1_simulation_training_authority_request.json","request_identity_sha256":"c040cdeda92c85e4d95710f5ebfe487269981cfe959374bd76102fc74abd96b7","training_spec_path":"configurations/robot_lab/t20_1_simulation_training_spec.json","training_spec_identity_sha256":"099ed4250a7e47e8afd7bf956446cdabb656400eaf7adebe5c1d7bbc18384d94","tensor_view_sha256":"eca512ab510fb317bf87868b2391bec98c38bc2e59449975e85773a9c6d46004","train_frame_count":488,"evaluation_frame_count":244,"simulation_only":true,"authority_valid_until":"2026-07-21T03:05:00-05:00","physical_transfer_ready":false,"promotion_eligible":false},"authority_granted":["simulation_training_ready","simulation_model_load","simulation_model_inference","simulation_optimizer_training"],"authority_not_granted":["physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T20.2": {"state":"verified","depends_on":["T20.1"],"active_brief_id":null,"latest_verified_brief_id":"122","review_decision_id":"150","source_commit":"41d90bc59180cd2522fc062b94da6484dba85ee9","implementation_commits":["42ccbb60649eec173b4241c7db9b8761416ae1b4","41d90bc59180cd2522fc062b94da6484dba85ee9"],"result":"verified negative ACT falsification: 100 local MPS updates changed the model but did not reach near-zero error; the policy-owned held-out rollout made no strict grasp contact and lifted only 0.2023 mm versus the 25 mm gate","artifact":{"path":"outputs/robot_lab/t20_2_act_closed_loop_run_002.json","run_summary_path":"outputs/robot_lab/t20_2_act_overfit_run_003/run_summary.json","run_summary_sha256":"0bde6870afda7adc62c44c2bf8b67e3b97b51c677af659b00bd4795c00ee8ca6","checkpoint_sha256":"dfb4e81f916c0239074a4fb89645b1fc2f5820b4c3389543c769ad2e9c147447","closed_loop_path":"outputs/robot_lab/t20_2_act_closed_loop_run_002.json","closed_loop_file_sha256":"f58fe5adc50823fd861bd494e8f5104740ec6577047a2d2946a7ec4919360d1d","closed_loop_identity_sha256":"11cfa0d22259597e5ef0321e6d8a9253b46c72a8b215d73ca6845114f6e41948","runner_sha256":"637d7572a828025e7c74ef4d6d705c21f77470d5289597aaabd8fb8168f5afaf","evaluator_sha256":"1ac5b9abcab26fc0f43f11d0568556d4b2e79b27848e98d5fc331c5ca0cb31bd","updates":100,"baseline_train_l1":1.0217032432556152,"final_train_l1":0.16815676142772037,"held_out_l1":0.22133693750947714,"all_finite":true,"closed_loop_frame_count":244,"rendered_keyframe_count":5,"projected_action_frame_count":0,"active_assist_frame_count":0,"maximum_anchor_lift_m":0.0002023007066939697,"required_lift_m":0.025,"terminal_outcome":"no_strict_grasp_contact","simulation_semantic_strict_success":false,"simulation_policy_accepted":false,"physical_actuation":false,"external_compute_started":false,"brev_compute_started":false},"authority_granted":["simulation_training_ready","simulation_model_load","simulation_model_inference","simulation_optimizer_training"],"authority_not_granted":["physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
+    "T20.3": {"state":"in_progress","depends_on":["T20.1"],"active_brief_id":"123","latest_verified_brief_id":null,"review_decision_id":null,"result":"owner continuation opened a fresh simulation-only window for bounded PI0.5 tiny-overfit falsification","authority_granted":["simulation_training_ready","simulation_model_load","simulation_model_inference","simulation_optimizer_training"],"authority_not_granted":["physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],

@@ -20,12 +20,12 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Actual start: `2026-07-13T12:30:11-05:00`.
-- No new major slice after: `2026-07-13T19:45:11-05:00`.
-- Hard closeout: `2026-07-13T20:30:11-05:00`.
-- The owner is physically present for the initial bounded session. The exact
-  current task passed the formal same-thread `danger-full-access`/`never`
-  verifier with profile identity `77f39177...` and no hardware access.
+- Actual start: `2026-07-14T04:09:58-05:00`.
+- No new major slice after: `2026-07-14T11:24:58-05:00`.
+- Hard closeout: `2026-07-14T12:09:58-05:00`.
+- This owner-requested continuation is simulation-only. It grants no hardware,
+  physical-transfer, promotion, external-compute, or Brev authority. Historical
+  physical-session notes below are retained only as consumed-gate history.
 - Reviewer 098's one-session gate was consumed and closed at `08:42` CDT after
   the candidate rejected live camera-frame fields. Reviewer 101 preserves the
   rejected boundary; no second session is allowed under that gate. After the
@@ -52,9 +52,19 @@ proof states must remain distinct.
 
 ## Current Milestone
 
-M18/M19 - Dataset Mechanics And Hardware Twin Execution Track
+M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
+
+T20.3 is `in_progress` under Brief 123. It repeats the T20.2 tiny-overfit
+falsification with the pinned local PI0.5 checkpoint, the exact T20.1
+simulation-only train/held-out split, canonical MuJoCo-to-LeRobot coordinates,
+and strict held-out closed-loop grasp evaluation. The finite central training
+authority must pass immediately before model load and optimization. Hardware,
+physical transfer, promotion, external compute, and Brev remain closed.
+
+The paragraphs below retain earlier verified history and do not supersede the
+canonical current task in `docs/autonomous-workflow/project_state.json`.
 
 T16.5c is `verified` as a successful no-actuation diagnostic experiment with a
 negative sorting-checkpoint transfer result. T19.0 is `verified` through Brief
