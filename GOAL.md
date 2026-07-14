@@ -56,12 +56,13 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.3 is `in_progress` under Brief 123. It repeats the T20.2 tiny-overfit
-falsification with the pinned local PI0.5 checkpoint, the exact T20.1
-simulation-only train/held-out split, canonical MuJoCo-to-LeRobot coordinates,
-and strict held-out closed-loop grasp evaluation. The finite central training
-authority must pass immediately before model load and optimization. Hardware,
-physical transfer, promotion, external compute, and Brev remain closed.
+T20.3 is `verified` through Brief 123 and Reviewer 151 as a negative PI0.5
+falsification. Twenty local MPS LoRA updates changed finite train and held-out
+loss, but the policy-owned held-out rollout made zero strict contacts and
+lifted only 0.0003007 mm against the 25 mm gate. T20.4 is the next eligible
+simulation-only slice: an explicit 250/500/1,000 optimizer-update ladder with
+exact sample accounting and no promotion from loss alone. Hardware, physical
+transfer, promotion, external compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.

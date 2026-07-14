@@ -40,3 +40,18 @@ episodes changes loss and held-out closed-loop grasp behavior.
 
 T20.4 update ladders, model bake-offs, physical hardware, external compute,
 Brev, checkpoint promotion, and destructive cleanup.
+
+## Verified Outcome
+
+Implementation boundaries `657258e46a39e8a7cabe1068db5ac7b64e07cb02`
+and `7ffd48e721c5ba28bc1283481df86f542076a897` completed the bounded
+source-bound run and strict held-out evaluator. Twenty local MPS LoRA updates
+used 321,792 trainable parameters and changed train loss from
+100.84408569335938 to 100.08732986450195 and held-out loss from
+130.006591796875 to 128.40567779541016. All losses and gradients were finite.
+
+The deterministic 244-frame seed-2 rollout used 49 policy replans, zero action
+projections, and zero assist frames. It made zero strict-v2 contacts and lifted
+the anchor 0.00000030070669393422733 m against the 0.025 m threshold. Five
+256 px top/wrist keyframes and measured-versus-threshold gate margins are bound
+in the signed artifact. The result is a verified negative and is not promoted.
