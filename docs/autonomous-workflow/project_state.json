@@ -60,10 +60,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "110",
-    "commit": "1a3746613d5856db05c901ba51e92dbdb7756c8d",
-    "reviewer_decision_id": "138",
-    "summary": "deterministic_source_bound_frame_and_hard_boundary_segment"
+    "brief_id": "111",
+    "commit": "cc507f3e8403198e18d81859dd32974c97f76293",
+    "reviewer_decision_id": "139",
+    "summary": "deterministic_source_bound_unpadded_action_window_compiler_yields"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -254,8 +254,8 @@
   },
   "training_lock": "closed",
   "current_milestone": "M17/M19 grasp execution track",
-  "current_task": "T17.5",
-  "next_eligible_task": "T17.5",
+  "current_task": "T17.5b",
+  "next_eligible_task": "T17.5b",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2403,12 +2403,39 @@
       "authority_not_granted": ["compiled_training_frames", "valid_action_windows", "simulation_training_ready", "optimizer_training", "physical_actuation"]
     },
     "T17.5": {
+      "state": "verified",
+      "depends_on": ["T17.2", "T17.3", "T17.4"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "111",
+      "review_decision_id": "139",
+      "result": "deterministic source-bound unpadded action-window compiler yields an explicit empty index for the empty T17.4 source without padding, inferred actions, or authority escalation",
+      "artifact": {
+        "path": "configurations/robot_lab/t17_5_window_index/window_manifest.json",
+        "schema_version": "scenesmith.experience_window_index.v1",
+        "manifest_file_sha256": "72be8a73257a7956491170f243befe7558095f76eecf1541f6941839fefb015b",
+        "window_index_file_sha256": "d03744b08fa52bc741ed52a57e0a09684aef604f4d945f0dc3a184b10560b091",
+        "source_compiler_manifest_file_sha256": "4e4df563c4a82a2b195e12704a9a9c1760b76f511477891d79c879028a4ebf4c",
+        "source_segment_count": 0,
+        "window_count": 0,
+        "window_count_by_horizon": {"5": 0, "10": 0, "15": 0, "50": 0},
+        "padding_applied": false,
+        "inferred_actions": false,
+        "raw_bytes_rewritten": false,
+        "training_eligible": false,
+        "simulation_training_ready": false,
+        "optimizer_training": false,
+        "physical_actuation": false
+      },
+      "authority_granted": ["source_bound_unpadded_window_index_compiler_valid", "empty_source_window_index_valid"],
+      "authority_not_granted": ["valid_action_windows", "simulation_training_ready", "optimizer_training", "physical_actuation"]
+    },
+    "T17.5b": {
       "state": "pending",
-      "depends_on": ["T17.2", "T17.4"],
+      "depends_on": ["T17.1", "T17.2", "T17.3", "T17.4", "T17.5", "T19.0l"],
       "active_brief_id": null,
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "compile unpadded action windows only from eligible T17.4 segments",
+      "result": "record deterministic scripted single-cube grasp episodes with complete sourced evidence and a fail-closed named-derivation path for by-construction action variants",
       "artifact": null,
       "authority_granted": [],
       "authority_not_granted": ["valid_action_windows", "simulation_training_ready", "optimizer_training", "physical_actuation"]

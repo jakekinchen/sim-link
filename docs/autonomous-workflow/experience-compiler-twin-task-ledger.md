@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-13T20:30:52-05:00; no new major slice after 2026-07-14T03:45:52-05:00; hard closeout 2026-07-14T04:30:52 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M17/M19 grasp execution track
-current_task: T17.5 pending after verified T17.4; compile unpadded action windows only from eligible source-bound segments
+current_task: T17.5b pending after verified T17.5; record deterministic scripted grasp episodes with complete, sourced per-frame evidence
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; no compiled frames, hardware, or motion
-remaining: valid windows, real generated grasp episodes, compiler audit; T19.2 physical calibration under fresh permits; central simulation-training authority
+evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; no hardware or motion
+remaining: real generated grasp episodes, non-empty valid windows, compiler audit; T19.2 physical calibration under fresh permits; central simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; simulation training remains centrally withheld
-next_step: compile unpadded action windows only from eligible T17.4 segments; the current fixture has none and must remain empty without padding or inferred actions
+next_step: implement T17.5b recorded scripted-expert generation; do not label by-construction derived action variants as observed, and do not accept them until T17.4/T17.5 validate the explicit derivation fail-closed
 ```
 
 ## Rules
@@ -92,6 +92,36 @@ The repository-wide unit invocation was environment-limited at 616 tests with
 compiler, contract, normalization, processor, and pointer gates passed. T17.5
 is now the next pending task and must not infer or pad windows from this empty
 fixture.
+
+## 2026-07-13 - Brief 111 T17.5 start
+
+T17.5 is now `in_progress` under Brief 111. It may read only the verified T17.4
+frame/segment outputs and compile deterministic unpadded windows at horizons
+5, 10, 15, and 50. The present source has zero eligible segments, so its only
+valid result is a signed empty `window_index.parquet` and explicit counts. No
+padding, inferred actions, normalization rewrite, training, optimizer, Brev,
+hardware, or physical authority is permitted.
+
+## 2026-07-13 - Brief 111 T17.5 verification and T17.5b adoption
+
+T17.5 is verified by Reviewer Decision 139. Its source-bound window compiler
+and writer bind the T17.4 compiler manifest, frame/segment hashes, raw rollout
+identities, and every window's exact frame/action IDs. The current verified
+source remains correctly empty: `window_index.parquet` contains zero rows and
+the manifest reports zero windows at horizons 5, 10, 15, and 50. Empty short
+segments are reported rather than padded; all training, optimizer, physical,
+and raw-rewrite authority flags remain false. Six focused adversarial tests
+and the 74-test compiler/contract/processor/normalization/pointer/authority
+gate passed, as did both deterministic writers and the pointer check.
+
+The reviewer adopts T17.5b as the next pending task because no existing ledger
+row owns recording the verified scripted grasp into complete raw experience.
+The adoption includes one mandatory compatibility condition: current T17.4 and
+T17.5 code accepts only `observed` action variants, while a truthful scripted
+expert must retain by-construction identical variants as `derived` with an
+explicit derivation. T17.5b must make that representation verifiable and
+fail-closed before it emits or compiles a non-empty source. It may not relabel
+derived values as observed.
 
 ## M16 - Twin And Dependency Foundation
 
@@ -298,9 +328,10 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T17.2 | verified | T16.2-T16.3,T17.1 | Implement a named canonical SO-101 processor shared by collection, training, evaluation, and adapters | Brief 108/Reviewer 134; maintenance f6626fa / Session 141 / Reviewer 137 rebinds the source reference; processor 59827b3d...; pure unclamped transform, fail-closed bounds, explicit requested/executed limiter; 128 round trips max 4.441e-16; golden parity and monotonic gripper; 221-test broad gate |
 | T17.3 | verified | T17.2 | Generate immutable `normalization_bundle.json` | Brief 109/Reviewer 135; maintenance f6626fa / Session 141 / Reviewer 137 rebinds the processor reference; bundle dea3ff8c...; 94,568-sample MEAN_STD statistics; actual cached processor/tokenizer fixture parity; camera/order/runtime/tensor hashes pinned; production/training false; 227-test broad gate |
 | T17.4 | verified | T17.1-T17.3 | Compile `frames.parquet` and hard-boundary `segments.parquet` | Brief 110/Reviewer 138; commit 1a37466; 2 frame rows, 0 eligible frames, 0 segments, 2 quarantines; deterministic Parquet/JSON outputs; quarantined rows cannot bridge segments; training/optimizer/physical authority closed |
-| T17.5 | pending | T17.2-T17.4 | Compile unpadded `window_index.parquet` for horizons 5/10/15/50 | No gaps, missing actions, padding, reset, teleport, drift, or forbidden transition |
+| T17.5 | verified | T17.2-T17.4 | Compile unpadded `window_index.parquet` for horizons 5/10/15/50 | Brief 111/Reviewer 139; commit pending; 0 rows at all horizons from the verified empty source; source manifest/hash and exact frame/action identities bound; no gaps, missing actions, padding, reset, teleport, drift, or forbidden transition |
+| T17.5b | pending | T17.1-T17.5,T19.0l | Record deterministic scripted single-cube grasp episodes into an append-only raw store with complete per-frame evidence | Explicitly derived action variants require named, fail-closed derivation; fresh T17.4 view must yield >0 eligible frames and >0 hard-boundary segments; no padding, inferred actions, optimizer, Brev, or physical authority |
 | T17.6 | pending | T17.1-T17.5 | Recompile qualifying legacy raw rollouts and quarantine ambiguous legacy data | No guessed migration; reasoned quarantine manifest |
-| T17.7 | pending | T17.1-T17.6 | Add full compiler manifest and deterministic 100-window replay/annotation audit | Zero invalid accepted windows; collection/training/inference tensor parity |
+| T17.7 | pending | T17.1-T17.6,T17.5b | Add full compiler manifest and deterministic 100-window replay/annotation audit | Zero invalid accepted windows; collection/training/inference tensor parity |
 
 ## M18 / Gate B - Intentional Mixture And Corrections
 

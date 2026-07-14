@@ -88,9 +88,15 @@ named canonical SO-101 processor keeps pure unclamped transform, fail-closed
 validation, and requested-versus-executed safety limiting mechanically
 separate. T17.3 is `verified` through Brief 109 as an immutable fixture-scoped
 normalization/preprocessing bundle bound to actual cached processor parity; it
-remains production-ineligible. The next eligible offline slice is T17.4:
-source-bound frames and hard-boundary segments with incomplete projections
-quarantined from training.
+remains production-ineligible. T17.4 is `verified` through Brief 110: its
+source-bound frame and hard-boundary segment compiler retains the incomplete
+two-frame projection in quarantine, yielding zero eligible segments. T17.5 is
+`verified` through Brief 111: its source-bound unpadded index yields zero rows
+at horizons 5, 10, 15, and 50 without padding or inferred actions. The next
+eligible offline slice is T17.5b, which must record the already-verified
+geometry-derived scripted grasp as complete raw experience; it must first make
+explicitly derived action variants fail-closed and verifiable rather than
+mislabeling them as observed.
 The live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
