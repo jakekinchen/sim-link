@@ -126,8 +126,15 @@ def build_trace_payload(
     checkpoint_sha256: str,
     rows: list[dict[str, Any]],
     closed_loop: dict[str, Any],
+    prior_action_sequence_sha256: str | None = None,
 ) -> dict[str, Any]:
     diagnostics = summarize_rows(rows)
+    current_action_sequence_sha256 = closed_loop.get("policy_action_sequence_sha256")
+    prior_reproduced = (
+        None
+        if prior_action_sequence_sha256 is None
+        else prior_action_sequence_sha256 == current_action_sequence_sha256
+    )
     payload = sign_payload(
         {
             "schema_version": TRACE_SCHEMA_VERSION,
@@ -141,6 +148,8 @@ def build_trace_payload(
             "comparisons": rows,
             "diagnostics": diagnostics,
             "closed_loop": closed_loop,
+            "prior_evaluation_action_sequence_sha256": prior_action_sequence_sha256,
+            "prior_action_sequence_reproduced_exactly": prior_reproduced,
             "model_inference_executed": True,
             "optimizer_training": False,
             "simulation_policy_accepted": False,
@@ -189,6 +198,17 @@ def verify_trace_payload(payload: dict[str, Any]) -> None:
         or rollout.get("active_assist_frame_count") != 0
     ):
         raise ValueError("T20.25 trace rollout linkage, projection, or assistance drifted")
+    prior_sha = payload.get("prior_evaluation_action_sequence_sha256")
+    prior_reproduced = payload.get("prior_action_sequence_reproduced_exactly")
+    if prior_sha is None:
+        if prior_reproduced is not None:
+            raise ValueError("T20.25 absent prior action hash has a reproduction claim")
+    else:
+        _sha(prior_sha, "prior evaluation action sequence")
+        if prior_reproduced is not (
+            prior_sha == rollout["policy_action_sequence_sha256"]
+        ):
+            raise ValueError("T20.25 prior action-sequence reproduction claim drifted")
     required_false = (
         "optimizer_training",
         "simulation_policy_accepted",
@@ -286,6 +306,12 @@ def _recompose_gate_without_verify(traces: list[dict[str, Any]]) -> dict[str, An
             "trajectory_qpos_mean_absolute_error_rad": _mean(
                 diagnostics, "trajectory_qpos_mean_absolute_error_rad"
             ),
+            "prior_action_sequence_reproduced_exactly_by_seed": {
+                str(seed): keyed[(candidate, seed)][
+                    "prior_action_sequence_reproduced_exactly"
+                ]
+                for seed in HELD_OUT_SEEDS
+            },
         }
     clean = candidate_summaries["clean_base"]
     recovery = candidate_summaries["recovery_augmented"]
@@ -312,6 +338,23 @@ def _recompose_gate_without_verify(traces: list[dict[str, Any]]) -> dict[str, An
         for candidate in CANDIDATE_IDS
         for seed in HELD_OUT_SEEDS
     )
+    prior_reproduction_claims = [
+        trace["prior_action_sequence_reproduced_exactly"]
+        for trace in traces
+        if trace["prior_action_sequence_reproduced_exactly"] is not None
+    ]
+    all_available_prior_sequences_reproduced = bool(prior_reproduction_claims) and all(
+        prior_reproduction_claims
+    )
+    selected_next_hypothesis = (
+        "characterize_frozen_inference_variability_before_training_attribution"
+        if not all_available_prior_sequences_reproduced
+        else (
+            "localize_post_precontact_closed_loop_state_drift_before_more_optimizer"
+            if pre < -DIVERGENCE_THRESHOLD
+            else "audit_recovery_sample_exposure_and_phase_weighting_before_more_optimizer"
+        )
+    )
     return sign_payload({
         "schema_version": GATE_SCHEMA_VERSION,
         "task_id": "T20.25",
@@ -323,16 +366,15 @@ def _recompose_gate_without_verify(traces: list[dict[str, Any]]) -> dict[str, An
             "precontact_delta_rad": pre,
         },
         "candidate_to_candidate_by_seed": direct,
+        "all_available_prior_action_sequences_reproduced_exactly": (
+            all_available_prior_sequences_reproduced
+        ),
         "earliest_shared_failure_surface": (
             "identical_reset_prediction_error"
             if shared_frame_zero
             else "later_closed_loop_prediction_and_state_drift"
         ),
-        "selected_next_hypothesis": (
-            "localize_post_precontact_closed_loop_state_drift_before_more_optimizer"
-            if pre < -DIVERGENCE_THRESHOLD
-            else "audit_recovery_sample_exposure_and_phase_weighting_before_more_optimizer"
-        ),
+        "selected_next_hypothesis": selected_next_hypothesis,
         "optimizer_training": False,
         "simulation_policy_accepted": False,
         "physical_actuation": False,

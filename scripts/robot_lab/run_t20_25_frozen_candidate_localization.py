@@ -214,14 +214,13 @@ def main() -> int:
         ):
             raise ValueError("T20.25 candidate used projection or assistance")
         prior_path = config["prior_evaluations"].get(seed)
+        prior_action_sequence_sha256 = None
         if prior_path is not None:
             prior = load_strict_json(prior_path)
             verify_signed_payload(prior, label="T20.25 prior frozen evaluation")
-            if (
-                prior["closed_loop"]["policy_action_sequence_sha256"]
-                != rollout["policy_action_sequence_sha256"]
-            ):
-                raise ValueError("T20.25 frozen candidate did not reproduce prior action sequence")
+            prior_action_sequence_sha256 = prior["closed_loop"][
+                "policy_action_sequence_sha256"
+            ]
         rows = build_comparison_rows(source_episode["frames"], observed)
         trace = build_trace_payload(
             candidate_id=args.candidate,
@@ -232,6 +231,7 @@ def main() -> int:
             checkpoint_sha256=adapter_sha,
             rows=rows,
             closed_loop=rollout,
+            prior_action_sequence_sha256=prior_action_sequence_sha256,
         )
         dump_canonical_json(outputs[seed], trace)
         d = trace["diagnostics"]
