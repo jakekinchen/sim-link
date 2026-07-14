@@ -42,6 +42,12 @@ _GLOBAL_FIELDS = {
     "simulation_training_ready",
     "training_or_promotion_authority",
 }
+_LAYER_ROOTS = {
+    "measured": "/World/Measured",
+    "appearance": "/World/Appearance",
+    "inferred": "/World/Inferred",
+    "reference_only": "/World/ReferenceOnly",
+}
 
 
 class RoboScanExportError(ValueError):
@@ -252,11 +258,12 @@ def _validate_manifest(payload: Mapping[str, Any]) -> tuple[dict[str, Any], list
     if provenance.get("privacyReview") != {"rawObservationPublished": False, "sourcePathsPublished": False}:
         raise RoboScanExportError("manifest privacy review is invalid")
     nodes = payload.get("nodes")
-    if not isinstance(nodes, list) or not nodes:
-        raise RoboScanExportError("manifest nodes are required")
+    if not isinstance(nodes, list) or len(nodes) < 2:
+        raise RoboScanExportError("manifest requires /World and at least one layer node")
     assets: dict[str, dict[str, Any]] = {}
     bindings: list[dict[str, Any]] = []
     paths: set[str] = set()
+    ordered_paths: list[str] = []
     ids: set[str] = set()
     for index, node in enumerate(nodes):
         if not isinstance(node, Mapping):
@@ -273,6 +280,7 @@ def _validate_manifest(payload: Mapping[str, Any]) -> tuple[dict[str, Any], list
         if path in paths or node.get("parentPath") != _parent_path(path):
             raise RoboScanExportError("manifest node hierarchy is invalid")
         paths.add(path)
+        ordered_paths.append(path)
         if node.get("authority") not in {"measured", "appearance", "inferred", "reference_only"} or node.get("layer") != node.get("authority"):
             raise RoboScanExportError("manifest node authority/layer is invalid")
         if not isinstance(node.get("kind"), str) or not node["kind"]:
@@ -301,8 +309,35 @@ def _validate_manifest(payload: Mapping[str, Any]) -> tuple[dict[str, Any], list
             "uncertainty": uncertainty,
             "provenanceObservationIds": observation_ids,
         })
+    if ordered_paths != sorted(ordered_paths):
+        raise RoboScanExportError("manifest nodes must use canonical path ordering")
     if any(path != "/World" and _parent_path(path) not in paths for path in paths):
         raise RoboScanExportError("manifest node parent is missing")
+    root = nodes[0]
+    if (
+        root.get("id") != "world"
+        or root.get("path") != "/World"
+        or root.get("parentPath") is not None
+        or root.get("kind") != "group"
+        or root.get("authority") != "reference_only"
+        or root.get("layer") != "reference_only"
+        or root.get("visible") is not False
+        or root.get("viewerDefaultVisible") is not False
+        or "asset" in root
+    ):
+        raise RoboScanExportError("/World must be the non-visible reference-only root")
+    for node, path in zip(nodes[1:], ordered_paths[1:], strict=True):
+        authority = node["authority"]
+        layer_root = _LAYER_ROOTS[authority]
+        if path != layer_root and not path.startswith(f"{layer_root}/"):
+            raise RoboScanExportError("manifest node lies outside its authority layer")
+        if authority == "inferred" and node["viewerDefaultVisible"] is not False:
+            raise RoboScanExportError("inferred manifest nodes must default hidden")
+    if not metric:
+        if any(node["authority"] != "reference_only" for node in nodes[1:]) or any(
+            node["viewerDefaultVisible"] is True for node in nodes
+        ):
+            raise RoboScanExportError("reference-only manifest content contradicts its authority")
     return deepcopy(dict(payload)), [assets[key] for key in sorted(assets)], bindings
 
 
