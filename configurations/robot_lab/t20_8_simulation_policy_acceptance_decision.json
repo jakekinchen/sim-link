@@ -1,0 +1,119 @@
+{
+  "all_source_evidence_verified": true,
+  "authority_granted": [],
+  "authority_withheld": [
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible"
+  ],
+  "brev_compute_started": false,
+  "composer": "scenesmith.robot_lab.authority_composer",
+  "criteria": {
+    "selected_active_assist_frames": {
+      "comparison": "==",
+      "margin": null,
+      "measured": null,
+      "passed": false,
+      "threshold": 0
+    },
+    "selected_checkpoint_count": {
+      "comparison": "==",
+      "margin": -1.0,
+      "measured": 0,
+      "passed": false,
+      "threshold": 1
+    },
+    "selected_projected_action_frames": {
+      "comparison": "==",
+      "margin": null,
+      "measured": null,
+      "passed": false,
+      "threshold": 0
+    },
+    "selected_rendered_keyframe_count": {
+      "comparison": "==",
+      "margin": null,
+      "measured": null,
+      "passed": false,
+      "threshold": 5
+    },
+    "semantic_contract_conformant": {
+      "comparison": "==",
+      "margin": 0.0,
+      "measured": 1,
+      "passed": true,
+      "threshold": 1
+    },
+    "strict_success_repeat_count": {
+      "comparison": ">=",
+      "margin": -3.0,
+      "measured": 0,
+      "passed": false,
+      "threshold": 3
+    },
+    "t20_7_strict_success_count": {
+      "comparison": ">=",
+      "margin": -1.0,
+      "measured": 0,
+      "passed": false,
+      "threshold": 1
+    }
+  },
+  "decision_id": "simulation_policy_accepted",
+  "denial_reasons": [
+    "selected_checkpoint_count",
+    "strict_success_repeat_count",
+    "selected_projected_action_frames",
+    "selected_active_assist_frames",
+    "selected_rendered_keyframe_count",
+    "t20_7_strict_success_count"
+  ],
+  "evaluation_time": "2026-07-14T09:30:00-05:00",
+  "external_compute_started": false,
+  "identity_sha256": "0587820043c6f2f21a05e22b95062dc4f4187a72513ceb56ca3ce21d65b59ace",
+  "measured_strict_success_rollout_count": 0,
+  "physical_actuation": false,
+  "physical_transfer_eligible": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "required_strict_success_rollout_count": 3,
+  "schema_version": "scenesmith.simulation_policy_acceptance_decision.v1",
+  "scope_id": "pi05_so101_authority",
+  "selected_model_id": null,
+  "simulation_policy_accepted": false,
+  "source_evidence": {
+    "evaluation_gate": {
+      "file_sha256": "4b393aa1ec93e2d41c4ee718913cd4059adfca7b542663bf2e5dcfa5771ceae2",
+      "identity_sha256": "9dd450c9f6149b80cbfa8fe010c9f7811d71855e55043feb3febbac1aaff8151",
+      "path": "outputs/robot_lab/t20_7_four_model_training_run_001/evaluation_summary.json",
+      "schema_version": "scenesmith.t20_7_model_evaluation_gate.v1"
+    },
+    "model_bakeoff_plan": {
+      "file_sha256": "19070c3703ac3f6ee5f1aa1132faa259a6ec1933f7373b4e2ab827edaa6eaead",
+      "identity_sha256": "cfbd4b9b3dbea7311e911a0ef9f57ed4e2c0f6eaebc569bf179534b90b1832a4",
+      "path": "configurations/robot_lab/t20_7_model_bakeoff_plan.json",
+      "schema_version": "scenesmith.t20_7_model_bakeoff_plan.v1"
+    },
+    "semantic_fixture": {
+      "file_sha256": "d6944009acf08592b5aea3dd1bcf7b70e67f64def71841f04ff8fde821142092",
+      "identity_sha256": "8126d054e217ec1ac11037187543f203168d86d49fdc9c91ea9478c287b993af",
+      "path": "configurations/robot_lab/t20_6_phase_outcome_evaluation.json",
+      "schema_version": "scenesmith.phase_outcome_evaluation.v1"
+    },
+    "strict_v2": {
+      "file_sha256": "5ac9c96e7efb1b9980cbc2159d58dda28b033e47e5d063e944367d5a42472e45",
+      "identity_sha256": "950e7568025f4fe09b9e51633da71b3ee90212ee5ea9c86be8194863cea2e640",
+      "path": "configurations/robot_lab/strict_anchor_grasp_evaluator_v2.fixture.json",
+      "schema_version": "scenesmith.strict_grasp_fixture.v2"
+    },
+    "training_gate": {
+      "file_sha256": "c3e53683247f6b4384732f2d3876d550b85a7ddb4a0865ec2b82de2b87858ff9",
+      "identity_sha256": "08d02eb04e645ef57b2231b84c304e131923e983a345931619c4070a532cb2d6",
+      "path": "outputs/robot_lab/t20_7_four_model_training_run_001/run_summary.json",
+      "schema_version": "scenesmith.t20_7_model_training_gate.v1"
+    }
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "task_id": "T20.8",
+  "terminal_occupancy_sufficient_for_acceptance": false
+}
