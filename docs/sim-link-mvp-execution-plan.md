@@ -90,7 +90,8 @@ not inherit authority from this document.
 | 5 | **T20.21 — thin paired trace runner** | Extend the Brief-088 replay idea: bind common `q0`, proposed/issued/measured actions, timestamps, joint traces, and grasp/contact event times; compare traces without a pixel-matching requirement; route mismatch categories without changing the twin. | T20.20 observable contract; separately supplied immutable traces | Live robot execution, calibration optimizer, full shadow-sim service |
 | 6 | **T20.22 — timing/latency certificate v0** | Deterministic schema and verifier for clock sources, frame age/skew, observation assembly, action transport/hold, control period/jitter, inference latency where present, drops, and deadline misses; prove timing mismatch cannot be silently relabelled as dynamics error. | T20.21 trace schema | Contact/dynamics calibration, live probe execution, task-family fidelity certificate |
 
-T20.17 is verified negative and T20.18 is now active under Brief 149. Do not
+T20.17 is verified negative, T20.18 is verified recovery evidence, and T20.19
+is next. Do not
 start broad calibration, Robo Scan consumption beyond the verified
 reference-only I2/I3 boundary, or canary planning while the learned policy has
 not achieved repeatable strict-v2 success in simulation.
@@ -104,9 +105,11 @@ Brief 148 is verified through `dce1995` by Reviewer Decision 178. Official
 LeRobot completed the exact 250-update clean-base campaign with finite losses,
 but the unassisted frozen seed-6 rollout made no strict contact and lifted only
 0.000307 mm. The result is signed negative evidence and is not promoted.
-Brief 149 activates exact failed-candidate replay with pre-action MuJoCo state
-capture and bounded state-fork recovery evidence. Another optimizer rung waits
-on that reviewed dataset expansion.
+Brief 149 is verified through `9b359a5` by Reviewer Decision 179. Exact replay
+captured 244 policy-visited states; eight deterministic branches yielded four
+recoveries, two near-failures, and two failures. The durable supplement retains
+1,290 child frames and 2,580 fresh top/wrist observations with measured,
+unpadded actions. T20.19 is next; no training-ready or optimizer grant exists.
 
 ## Paused Integration Queue
 
