@@ -151,6 +151,11 @@ Brief 157 opens T20.26 for two independent frame-zero inference batches per
 adapter on one identical held-out observation. It separates same-process seeded
 sampling from cross-process drift without applying an action or running an
 optimizer.
+T20.26 is verified through `437215b` by Reviewer Decision 187. Fixed-seed output
+is bit-exact within and across processes for both adapters, so the older clean
+hash gap is not reproduced in the current runtime. Distinct seeds span 0.18478
+rad clean and 0.14797 rad recovery; the next comparison must pair candidates
+over the same seed distribution before any optimizer decision.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
