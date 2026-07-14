@@ -61,7 +61,7 @@
   },
   "latest_verified_task_implementation_boundary": {
     "brief_id": "115",
-    "commit": "c1f0a40fc36ad0a266f631887a914f0a452f2fc4",
+    "commit": "a671b41eafdebc7c288ffa62bf88d22c9abfb557",
     "reviewer_decision_id": "143",
     "summary": "deterministic_source_bound_replay_audit_verifies_100_horizon"
   },
