@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-13T20:30:52-05:00; no new major slice after 2026-07-14T03:45:52-05:00; hard closeout 2026-07-14T04:30:52 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M18/M19 dataset mechanics and grasp execution track
-current_task: T18.1 pending after verified M17; sample valid windows episode-first over source, task phase, and control mode without training
+current_task: T18.2 pending after verified T18.1; preserve append-only logical source/cycle buffers without training
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; no hardware or motion
-remaining: M18 dataset mechanics; T19.2 physical calibration under fresh permits; central simulation-training authority
+evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; no hardware or motion
+remaining: T18.2-T18.5 dataset mechanics; T19.2 physical calibration under fresh permits; central simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; simulation training remains centrally withheld
-next_step: implement T18.1 episode-first valid-window sampling over the verified M17 source, with deterministic source/task-phase/control-mode composition and training authority closed
+next_step: implement T18.2 append-only logical source/cycle buffer preservation over the verified T18.1 selection; keep training authority closed
 ```
 
 ## Rules
@@ -200,6 +200,27 @@ boundary, while requested action descriptors remain separate training targets.
 This is not model loading, inference, or trained-policy proof. M17 is complete;
 training, optimizer, raw rewrite, hardware, physical actuation, external
 compute, and Brev remain false or closed.
+
+## 2026-07-13 - Brief 116 T18.1 start
+
+T18.1 is now `in_progress` under Brief 116. It may inspect only the verified
+T17.5b compiler/window source and T17.7 audit. The sampler must select valid
+windows episode-first across source class, task phase, control mode, and horizon
+with a fixed seed and explicit configured-versus-realized accounting. It must
+not mutate buffers, mixture state, normalization, raw evidence, or training
+authority; model calls, optimizer work, hardware, external compute, and Brev
+remain prohibited.
+
+## 2026-07-13 - Brief 116 T18.1 verification
+
+T18.1 is `verified`: the signed initial selection contains 192 unique valid
+windows—one deterministic hash-ranked window for each of eight realized
+episodes in each of 24 complete source-class/task-phase/control-mode/horizon
+buckets. The source binds the T17.5b index and the signed T17.7 audit; no
+bucket is allowed to replace a missing episode with extra windows from another
+episode. This selection is not a mutable buffer or mixture freeze. Model,
+optimizer, training, raw rewrite, hardware, physical actuation, external
+compute, and Brev authority remain false or closed.
 
 ## M16 - Twin And Dependency Foundation
 
@@ -415,7 +436,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
-| T18.1 | pending | M17 | Sample valid windows episode-first over source x task-phase x control-mode | Deterministic configured/realized counts, unique ratio, episodes/cycles, seed, index hash |
+| T18.1 | verified | T17.7 | Sample valid windows episode-first over source x task-phase x control-mode x horizon | Brief 116/Reviewer 144; implementation `ce3a12c`; signed selection `17f804dd...`; 24 complete buckets × 8 episodes = 192 unique windows; fixed seed 181001, immutable logical sampling cycle, no buffer/training mutation |
 | T18.2 | pending | T17.1, T17.7 | Preserve append-only cycle/source logical buffers | Earlier cycles immutable; mutation and duplicate rejection retained |
 | T18.3 | pending | T17.1, T17.4 | Compile exact-state phase, progress, reward components, and provenance | Deterministic predicates; privileged fields excluded from actor inputs |
 | T18.4 | pending | T16.3, T17.1-T17.5, T18.3 | Implement snapshot branch-and-correct linked by `correction_event_id` | Restored snapshots match; failure and correction remain immutable branches |

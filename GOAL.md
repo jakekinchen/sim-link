@@ -105,7 +105,10 @@ records), and its source-bound compiler view is explicitly empty. T17.7 is
 `verified` through Brief 115: it traces 100 deterministic windows (25 at each
 of horizons 5/10/15/50) across all eight scripted grasp rollouts from raw-frame
 identity through compiler and window rows, with canonical actor-input/action
-descriptor parity but no model call. M17 is closed; T18.1 is next. The
+descriptor parity but no model call. M17 is closed. T18.1 is `verified` through
+Brief 116: one unique valid window per realized episode in each of 24
+source/phase/control/horizon buckets produces a 192-window signed selection;
+T18.2 is next. The
 live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance
