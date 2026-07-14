@@ -10,6 +10,7 @@
 | `docs/requirements-and-contracts.md` | Requirement families, claim vocabulary, and canonical contract routing. |
 | `docs/current-and-historical.md` | Current truth surface versus append-only/historical evidence guidance. |
 | `docs/decisions-and-adjuncts.md` | Package, external-pattern, and design decision index. |
+| `docs/robo-scan-integration.md` | Separate Robo Scan scan/scene/calibration handoff boundary and authority limits. |
 | `executor-reviewer-pair-programming.md` | Root quickstart and role overview for the pair. |
 | `docs/autonomous-workflow/` | Autonomous workflow strategy and protocols. |
 | `docs/autonomous-workflow/09-autonomous-milestones.md` | Invariant milestone gates. |
@@ -31,6 +32,7 @@
 | Product intent | `docs/README.md` plus `GOAL.md` and the active milestone/task sources it routes to |
 | Architecture | `docs/architecture.md` |
 | Tech stack / package ownership | `docs/architecture.md` plus `docs/autonomous-workflow/bespoke-package-recreation-map.md` |
+| Robo Scan handoff | `docs/robo-scan-integration.md` plus the upstream repository's current state |
 | Requirements and contracts | `docs/requirements-and-contracts.md` plus referenced implementation/configuration |
 | Current versus historical interpretation | `docs/current-and-historical.md` |
 | External ideas and adjunct decisions | `docs/decisions-and-adjuncts.md` |

@@ -20,6 +20,7 @@ flowchart LR
     U[MuJoCo\ndeterministic simulation]
     L[LeRobot\npolicy, training, processors, datasets, motors, teleop]
     E[leLab\npinned UI, URDF, runtime]
+    C[Robo Scan\nseparate scan, scene, calibration source]
     G[SceneSmith governance shell\ncontracts, strict grasp, SO-101 bridge, authority]
     R[Signed evidence\nartifacts, manifests, reviews]
 
@@ -27,6 +28,7 @@ flowchart LR
     M --> U
     U --> L
     E --> L
+    C -. explicit sealed export only .-> G
     L --> G
     U --> G
     G --> R
@@ -40,6 +42,7 @@ flowchart LR
 | MuJoCo | simulated state transitions and rendering | policy acceptance or physical proof |
 | Pinned LeRobot | dataset API, processor pipeline, policy/training, motors, teleop | whole-system authority |
 | leLab | UI shell, URDF source, pinned runtime | a second ML stack |
+| Robo Scan | separate scan, scene-creation, reconstruction, and calibration artifacts | a direct runtime dependency, current sim-link authority, or automatic physical-twin qualification |
 | Governance shell | content identity, truth gates, coordinates, stack identity, authority composition | model/pipeline behavior |
 
 ## Technology Stack
@@ -51,6 +54,7 @@ flowchart LR
 | Simulation | MuJoCo | deterministic physics, contacts, state, and rendering | simulation evidence only until separately composed |
 | Robot/ML package | Pinned LeRobot checkout | policies, training, `LeRobotDataset`, processors, motors, teleop | execute package behavior directly |
 | UI/runtime shell | Pinned leLab environment | robotics UI/runtime and URDF-facing integration | pinned adjunct, not an ML replacement |
+| Upstream scan/calibration | Separate Robo Scan repository (`environment-scanner` / `so101_scan`) | produces bounded scan/reconstruction/calibration artifacts | explicit immutable export only; no import, vendoring, or automatic authority |
 | Evidence layer | Python canonical JSON + SHA-256 | identities, signatures, append-only references | SceneSmith-owned, dependency-light |
 | Contracts | JSON configurations plus Python validators | stack, source, authority, and capability rules | versioned, signed, fail-closed |
 | Documentation | Markdown briefs, logs, reviews, guides, and state JSON | human navigation plus auditable execution history | state routes live facts; guides route readers |
@@ -82,6 +86,19 @@ evidence. A clean recreation creates one native `LeRobotDataset`, binds it with
 and observes the actual package pipeline with
 [`lerobot_actual_processor_observation.py`](../scenesmith/robot_lab/lerobot_actual_processor_observation.py).
 It does not translate that dataset into another training format.
+
+## Robo Scan Boundary
+
+Robo Scan modularizes the adjacent scene-scanning, scene-creation, and basic
+calibration work. It is an upstream source of potential artifacts, not part of
+the pinned LeRobot/MuJoCo runtime. A reference-only upstream scene can at most
+be a labelled visual/fixture context; a measured metric export remains a twin
+candidate until sim-link validates the immutable receipt and the central
+authority composer accepts independent evidence. There is no current code
+import or qualified artifact handoff.
+
+The full ownership, artifact classes, receipt fields, and rejection rules are
+in the [Robo Scan integration boundary](./robo-scan-integration.md).
 
 ## Bespoke Boundaries
 

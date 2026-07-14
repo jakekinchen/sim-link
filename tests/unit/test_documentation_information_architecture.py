@@ -20,6 +20,11 @@ REQUIRED_GUIDES = {
     "requirements-and-contracts.md": ("# Requirements And Contract Index", "## Requirement Families"),
     "current-and-historical.md": ("# Current Versus Historical Documentation", "## The Current Truth Surface"),
     "decisions-and-adjuncts.md": ("# Decisions And Adjuncts", "## Evaluation Rule"),
+    "robo-scan-integration.md": (
+        "# Robo Scan Integration Boundary",
+        "## Authority-Preserving Handoff",
+        "## Required Future Export Receipt",
+    ),
 }
 
 
@@ -48,6 +53,7 @@ class DocumentationInformationArchitectureTests(unittest.TestCase):
             "requirements-and-contracts.md",
             "current-and-historical.md",
             "decisions-and-adjuncts.md",
+            "robo-scan-integration.md",
         ):
             with self.subTest(target=target):
                 self.assertIn(target, content)
@@ -61,6 +67,7 @@ class DocumentationInformationArchitectureTests(unittest.TestCase):
             "docs/architecture.md",
             "docs/requirements-and-contracts.md",
             "docs/current-and-historical.md",
+            "docs/robo-scan-integration.md",
         ):
             with self.subTest(target=target):
                 self.assertIn(target, content)
@@ -73,6 +80,7 @@ class DocumentationInformationArchitectureTests(unittest.TestCase):
             DOCS / "requirements-and-contracts.md",
             DOCS / "current-and-historical.md",
             DOCS / "decisions-and-adjuncts.md",
+            DOCS / "robo-scan-integration.md",
             DOCS / "autonomous-workflow" / "README.md",
         )
         for document in documents:
@@ -86,6 +94,33 @@ class DocumentationInformationArchitectureTests(unittest.TestCase):
                         (document.parent / target).resolve().exists(),
                         f"broken local documentation link: {target}",
                     )
+
+    def test_robo_scan_is_an_explicit_handoff_not_a_runtime_dependency(self) -> None:
+        handoff = (DOCS / "robo-scan-integration.md").read_text(encoding="utf-8")
+        architecture = (DOCS / "architecture.md").read_text(encoding="utf-8")
+        requirements = (DOCS / "requirements-and-contracts.md").read_text(encoding="utf-8")
+
+        for content, expected in (
+            (handoff, "explicit artifact handoff"),
+            (handoff, "automatic filesystem, package, Git, or runtime import"),
+            (handoff, "reference-only"),
+            (architecture, "Robo Scan Boundary"),
+            (requirements, "R11: Scan/calibration handoff"),
+        ):
+            with self.subTest(expected=expected):
+                self.assertIn(expected, content)
+
+        forbidden_import = re.compile(
+            r"^\\s*(?:from\\s+(?:environment_scanner|so101_scan)\\b|"
+            r"import\\s+(?:environment_scanner|so101_scan)\\b)",
+            re.MULTILINE,
+        )
+        for source in (REPO_ROOT / "scenesmith" / "robot_lab").rglob("*.py"):
+            with self.subTest(source=source):
+                self.assertIsNone(
+                    forbidden_import.search(source.read_text(encoding="utf-8")),
+                    f"Robo Scan runtime dependency requires a reviewed handoff implementation: {source}",
+                )
 
 
 if __name__ == "__main__":

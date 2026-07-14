@@ -57,7 +57,7 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.17 is `in_progress` under Brief 142. Its first boundary is verified at
+T20.17 is `in_progress` under Brief 143. Its first boundary is verified at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
 geometry-derived episode generation, the SO-101 processor, and thin
@@ -75,9 +75,11 @@ for a future LeRobot camera/robot adapter preserves historical physical
 evidence and creates neither hardware objects nor motion authority. Its sixth
 boundary is verified at `69416bc`: a front door, architecture/tech-stack,
 requirements/contracts, decision index, and current-versus-historical guides
-now route readers to canonical sources. It does not change system authority or
-the broader T20.17 training task. Only repeatable strict semantic success can
-promote a policy.
+now route readers to canonical sources. Its seventh boundary is now in
+progress: document the separate Robo Scan repository as a fail-closed
+scene-scan/calibration artifact handoff, with no package import or physical
+claim. It does not change system authority or the broader T20.17 training
+task. Only repeatable strict semantic success can promote a policy.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:

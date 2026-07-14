@@ -31,6 +31,7 @@ These are maintained explainers, not time-capsule evidence:
 - [Requirements and contracts](./requirements-and-contracts.md)
 - [Bespoke-versus-package recreation map](./autonomous-workflow/bespoke-package-recreation-map.md)
 - [Minimal live-adapter recreation](./autonomous-workflow/minimal-live-adapter-recreation.md)
+- [Robo Scan integration boundary](./robo-scan-integration.md)
 - [Autonomous workflow](./autonomous-workflow/README.md)
 
 Update these when a durable boundary, ownership rule, or reader route changes.
@@ -60,6 +61,7 @@ entry point for the current M20 clean-supervision work:
 | [`pi05-autonomous-sorting-goal-loop.md`](./autonomous-workflow/pi05-autonomous-sorting-goal-loop.md) and its task ledger | Earlier sorting-transfer program; later work records its negative-transfer disposition. | Investigating why the current program does not reuse its checkpoint/path. |
 | T19 search briefs and frozen diagnostic JSON | Retired search wrappers produced durable diagnostic evidence; the live primitive is now constructive geometry. | Auditing the grasp design decision. |
 | Historical live-observation modules and briefs | Evidence is retained; the future minimal adapter is only a design contract. | Reviewing actual past live proof, never as an automatic runtime dependency. |
+| A Robo Scan checkout, export, or earlier scan result | It is governed by the separate Robo Scan state and has no automatic sim-link authority. | Evaluating one future immutable handoff under a new reviewed sim-link brief. |
 | Original SceneSmith paper README | Describes the broader research repository. | Installing or studying the paper’s scene-generation pipeline. |
 
 ## Status-Reading Checklist

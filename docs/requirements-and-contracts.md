@@ -18,6 +18,7 @@ authority decisions from `project_state.json`.
 | R8: Training authority | Training stays closed unless the central composer mechanically grants `simulation_training_ready`. | [`authority_composer.py`](../scenesmith/robot_lab/authority_composer.py), [`pi05_authority_composition_contract.json`](../configurations/robot_lab/pi05_authority_composition_contract.json), [state](./autonomous-workflow/project_state.json) |
 | R9: Physical boundaries | A read-only observation, a policy result, and physical proof are distinct; no hardware is accessed without separate live authority. | [`hardware_execution_profile.py`](../scenesmith/robot_lab/hardware_execution_profile.py), [live-adapter contract](./autonomous-workflow/minimal-live-adapter-recreation.md) |
 | R10: Cost control | External or Brev compute must be explicitly bounded and cleaned up; it is not inferred from a training request. | [`autolearn_cycle.py`](../scenesmith/robot_lab/autolearn_cycle.py), [milestone M8](./autonomous-workflow/09-autonomous-milestones.md) |
+| R11: Scan/calibration handoff | A Robo Scan export is explicit, immutable, checksum-bound, coordinate-complete, provenance-labelled, and locally scoped; no source checkout or artifact can grant whole-system authority. | [Robo Scan integration boundary](./robo-scan-integration.md), [`artifact_contract.py`](../scenesmith/robot_lab/artifact_contract.py), [`authority_composer.py`](../scenesmith/robot_lab/authority_composer.py) |
 
 ## Claim Vocabulary
 
@@ -32,6 +33,8 @@ Use these labels precisely.
 | Policy evaluation | A bounded policy-owned simulation evaluation ran | strict task success unless the evaluator says so |
 | Physical read-only | Owner-permitted live observation evidence | hardware motion, calibration, or qualification |
 | Physical proof | Separately authorized physical task evidence | automatic promotion |
+| Robo Scan reference-only export | Upstream visual or synthetic context admitted as a labelled simulation adjunct | measured geometry, metric calibration, or physical-twin qualification |
+| Robo Scan metric candidate | Upstream measured artifact whose receipt and local facts can be validated | a system-level grant before central authority composition |
 
 ## Authority Rules
 
