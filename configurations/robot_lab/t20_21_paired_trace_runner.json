@@ -1,0 +1,868 @@
+{
+  "all_mismatch_categories_routed": true,
+  "authority_granted": [
+    "offline_paired_trace_runner_fixture_conformant"
+  ],
+  "authority_not_granted": [
+    "hardware_observation",
+    "live_robot_execution",
+    "camera_access",
+    "clock_synchronization",
+    "calibration_update",
+    "twin_update",
+    "physical_qualification",
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "brev_compute_started": false,
+  "calibration_updated": false,
+  "camera_accessed": false,
+  "clock_synchronization_proven": false,
+  "contract": {
+    "action_variant_policy": "proposed_issued_measured_remain_distinct",
+    "allowed_evidence_sources": {
+      "hardware_observable": [
+        "synthetic_observable_fixture",
+        "physical_instrumentation"
+      ],
+      "simulator_privileged": [
+        "synthetic_simulator_fixture",
+        "simulator_trace"
+      ]
+    },
+    "calibration_or_twin_update_supported": false,
+    "clock_policy": "identity_preserved_synchronization_not_inferred",
+    "common_q0_policy": "exact_before_diagnostic_comparison",
+    "event_types": [
+      "grasp_contact",
+      "object_lift_clear",
+      "stable_hold",
+      "release_complete",
+      "retreat_complete"
+    ],
+    "frame_fields": [
+      "events",
+      "frame_index",
+      "issued_action_rad",
+      "joint_position_rad",
+      "measured_action_rad",
+      "proposed_action_rad",
+      "timestamp_ns"
+    ],
+    "identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+    "joint_count": 6,
+    "mismatch_categories": [
+      "common_q0_mismatch",
+      "trace_length_mismatch",
+      "proposed_command_mismatch",
+      "clock_source_mismatch",
+      "issued_action_mismatch",
+      "measured_action_mismatch",
+      "joint_tracking_mismatch",
+      "event_presence_mismatch",
+      "event_time_mismatch"
+    ],
+    "physical_qualification_supported": false,
+    "pixel_comparison_supported": false,
+    "proposed_command_policy": "exact_sequence_before_causal_interpretation",
+    "result_schema_version": "scenesmith.paired_trace_comparison.v1",
+    "roles": [
+      "simulator_privileged",
+      "hardware_observable"
+    ],
+    "schema_version": "scenesmith.paired_trace_runner_contract.v1",
+    "source_observer_fixture_identity_sha256": "560480c705a3b3ec9e98fc1a74bb0d1112b7f973fc8877b272b08597d2abb4e1",
+    "thresholds": {
+      "event_elapsed_time_abs_error_ns": 20000000,
+      "issued_action_max_abs_error_rad": 0.01,
+      "joint_max_abs_error_rad": 0.01,
+      "measured_action_max_abs_error_rad": 0.01
+    },
+    "timestamp_policy": "integer_nanoseconds_strictly_increasing_per_trace",
+    "trace_fields": [
+      "clock_source",
+      "evidence_source",
+      "frames",
+      "identity_sha256",
+      "observer_role",
+      "q0_rad",
+      "schema_version",
+      "trace_id"
+    ],
+    "trace_schema_version": "scenesmith.paired_joint_action_event_trace.v1"
+  },
+  "diagnostic_cases": {
+    "clock_source_mismatch": {
+      "expected_mismatch_category": "clock_source_mismatch",
+      "observable_trace_identity_sha256": "65d1a6995fe10c3b2ef3767bd2c52f404661dddeaf3a4b25be306f62eda8f2a1",
+      "result": {
+        "authority_granted": [],
+        "calibration_update_selected": false,
+        "clock_synchronization_inferred": false,
+        "common_q0_identical": true,
+        "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+        "downstream_comparison_eligible": true,
+        "event_elapsed_time_delta_ns": {},
+        "event_presence_identical": true,
+        "event_time_comparison_eligible": false,
+        "identity_sha256": "ce1e2ae168c027d61e82f532965fc4d40e546f51dfd8bb0911b8ba6857ce6c1c",
+        "issued_action_max_abs_error_rad": 0.0,
+        "joint_max_abs_error_rad": 0.0,
+        "joint_rmse_rad": 0.0,
+        "matched": false,
+        "maximum_event_elapsed_time_abs_error_ns": 0,
+        "measured_action_max_abs_error_rad": 0.0,
+        "mismatch_categories": [
+          "clock_source_mismatch"
+        ],
+        "observable_clock_source": "synthetic_monotonic_ns_alt",
+        "observable_evidence_source": "synthetic_observable_fixture",
+        "observable_frame_count": 4,
+        "observable_trace_identity_sha256": "65d1a6995fe10c3b2ef3767bd2c52f404661dddeaf3a4b25be306f62eda8f2a1",
+        "paired_frame_count": 4,
+        "physical_qualification": false,
+        "pixel_comparison_performed": false,
+        "proposed_command_sequence_identical": true,
+        "schema_version": "scenesmith.paired_trace_comparison.v1",
+        "simulator_clock_source": "synthetic_monotonic_ns",
+        "simulator_evidence_source": "synthetic_simulator_fixture",
+        "simulator_frame_count": 4,
+        "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+        "twin_update_selected": false
+      }
+    },
+    "common_q0_mismatch": {
+      "expected_mismatch_category": "common_q0_mismatch",
+      "observable_trace_identity_sha256": "a3b9e23d1d2108defaabb60f7e9585e3d7378c4541a68a7f4d9a6a8da324dd0b",
+      "result": {
+        "authority_granted": [],
+        "calibration_update_selected": false,
+        "clock_synchronization_inferred": false,
+        "common_q0_identical": false,
+        "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+        "downstream_comparison_eligible": false,
+        "event_elapsed_time_delta_ns": {},
+        "event_presence_identical": true,
+        "event_time_comparison_eligible": false,
+        "identity_sha256": "affb53b1d7909205007864261d0c09737fb540ab65f6aea0f352bdc95b25569f",
+        "issued_action_max_abs_error_rad": 0.0,
+        "joint_max_abs_error_rad": 0.0,
+        "joint_rmse_rad": 0.0,
+        "matched": false,
+        "maximum_event_elapsed_time_abs_error_ns": 0,
+        "measured_action_max_abs_error_rad": 0.0,
+        "mismatch_categories": [
+          "common_q0_mismatch"
+        ],
+        "observable_clock_source": "synthetic_monotonic_ns",
+        "observable_evidence_source": "synthetic_observable_fixture",
+        "observable_frame_count": 4,
+        "observable_trace_identity_sha256": "a3b9e23d1d2108defaabb60f7e9585e3d7378c4541a68a7f4d9a6a8da324dd0b",
+        "paired_frame_count": 4,
+        "physical_qualification": false,
+        "pixel_comparison_performed": false,
+        "proposed_command_sequence_identical": true,
+        "schema_version": "scenesmith.paired_trace_comparison.v1",
+        "simulator_clock_source": "synthetic_monotonic_ns",
+        "simulator_evidence_source": "synthetic_simulator_fixture",
+        "simulator_frame_count": 4,
+        "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+        "twin_update_selected": false
+      }
+    },
+    "event_presence_mismatch": {
+      "expected_mismatch_category": "event_presence_mismatch",
+      "observable_trace_identity_sha256": "cb5ba0c33dc965026b2d24fb4f84f283d5a2f5363c4ac198aff4d199bb1095ea",
+      "result": {
+        "authority_granted": [],
+        "calibration_update_selected": false,
+        "clock_synchronization_inferred": false,
+        "common_q0_identical": true,
+        "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+        "downstream_comparison_eligible": true,
+        "event_elapsed_time_delta_ns": {
+          "grasp_contact": 0,
+          "stable_hold": 0
+        },
+        "event_presence_identical": false,
+        "event_time_comparison_eligible": true,
+        "identity_sha256": "155513a86d22fe0d0b1c0c9768fee1b206e0ded214acb0615524b1e0e4ce97f2",
+        "issued_action_max_abs_error_rad": 0.0,
+        "joint_max_abs_error_rad": 0.0,
+        "joint_rmse_rad": 0.0,
+        "matched": false,
+        "maximum_event_elapsed_time_abs_error_ns": 0,
+        "measured_action_max_abs_error_rad": 0.0,
+        "mismatch_categories": [
+          "event_presence_mismatch"
+        ],
+        "observable_clock_source": "synthetic_monotonic_ns",
+        "observable_evidence_source": "synthetic_observable_fixture",
+        "observable_frame_count": 4,
+        "observable_trace_identity_sha256": "cb5ba0c33dc965026b2d24fb4f84f283d5a2f5363c4ac198aff4d199bb1095ea",
+        "paired_frame_count": 4,
+        "physical_qualification": false,
+        "pixel_comparison_performed": false,
+        "proposed_command_sequence_identical": true,
+        "schema_version": "scenesmith.paired_trace_comparison.v1",
+        "simulator_clock_source": "synthetic_monotonic_ns",
+        "simulator_evidence_source": "synthetic_simulator_fixture",
+        "simulator_frame_count": 4,
+        "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+        "twin_update_selected": false
+      }
+    },
+    "event_time_mismatch": {
+      "expected_mismatch_category": "event_time_mismatch",
+      "observable_trace_identity_sha256": "1c921e66fa8d5e1b2d08350b378487c4fa2d16ddda85a4ed342547dc26e11904",
+      "result": {
+        "authority_granted": [],
+        "calibration_update_selected": false,
+        "clock_synchronization_inferred": false,
+        "common_q0_identical": true,
+        "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+        "downstream_comparison_eligible": true,
+        "event_elapsed_time_delta_ns": {
+          "grasp_contact": 100000000,
+          "release_complete": 0,
+          "stable_hold": 0
+        },
+        "event_presence_identical": true,
+        "event_time_comparison_eligible": true,
+        "identity_sha256": "676de630ba4f97c3eaf2b36ad5912c3d99f81b53340fd6ae5f754ad8b3875351",
+        "issued_action_max_abs_error_rad": 0.0,
+        "joint_max_abs_error_rad": 0.0,
+        "joint_rmse_rad": 0.0,
+        "matched": false,
+        "maximum_event_elapsed_time_abs_error_ns": 100000000,
+        "measured_action_max_abs_error_rad": 0.0,
+        "mismatch_categories": [
+          "event_time_mismatch"
+        ],
+        "observable_clock_source": "synthetic_monotonic_ns",
+        "observable_evidence_source": "synthetic_observable_fixture",
+        "observable_frame_count": 4,
+        "observable_trace_identity_sha256": "1c921e66fa8d5e1b2d08350b378487c4fa2d16ddda85a4ed342547dc26e11904",
+        "paired_frame_count": 4,
+        "physical_qualification": false,
+        "pixel_comparison_performed": false,
+        "proposed_command_sequence_identical": true,
+        "schema_version": "scenesmith.paired_trace_comparison.v1",
+        "simulator_clock_source": "synthetic_monotonic_ns",
+        "simulator_evidence_source": "synthetic_simulator_fixture",
+        "simulator_frame_count": 4,
+        "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+        "twin_update_selected": false
+      }
+    },
+    "issued_action_mismatch": {
+      "expected_mismatch_category": "issued_action_mismatch",
+      "observable_trace_identity_sha256": "013e390ea9b59177e4974d0248a88832fbe4dcd4d77079093f527d616e3c01e1",
+      "result": {
+        "authority_granted": [],
+        "calibration_update_selected": false,
+        "clock_synchronization_inferred": false,
+        "common_q0_identical": true,
+        "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+        "downstream_comparison_eligible": true,
+        "event_elapsed_time_delta_ns": {
+          "grasp_contact": 0,
+          "release_complete": 0,
+          "stable_hold": 0
+        },
+        "event_presence_identical": true,
+        "event_time_comparison_eligible": true,
+        "identity_sha256": "e22f79004494c1c1c9f756fe07332d30013a1f1490351300f051032759b2260f",
+        "issued_action_max_abs_error_rad": 0.12,
+        "joint_max_abs_error_rad": 0.0,
+        "joint_rmse_rad": 0.0,
+        "matched": false,
+        "maximum_event_elapsed_time_abs_error_ns": 0,
+        "measured_action_max_abs_error_rad": 0.0,
+        "mismatch_categories": [
+          "issued_action_mismatch"
+        ],
+        "observable_clock_source": "synthetic_monotonic_ns",
+        "observable_evidence_source": "synthetic_observable_fixture",
+        "observable_frame_count": 4,
+        "observable_trace_identity_sha256": "013e390ea9b59177e4974d0248a88832fbe4dcd4d77079093f527d616e3c01e1",
+        "paired_frame_count": 4,
+        "physical_qualification": false,
+        "pixel_comparison_performed": false,
+        "proposed_command_sequence_identical": true,
+        "schema_version": "scenesmith.paired_trace_comparison.v1",
+        "simulator_clock_source": "synthetic_monotonic_ns",
+        "simulator_evidence_source": "synthetic_simulator_fixture",
+        "simulator_frame_count": 4,
+        "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+        "twin_update_selected": false
+      }
+    },
+    "joint_tracking_mismatch": {
+      "expected_mismatch_category": "joint_tracking_mismatch",
+      "observable_trace_identity_sha256": "240c1ed6302c76ae2610b96886e626814156711295725135decd61ca52915e9e",
+      "result": {
+        "authority_granted": [],
+        "calibration_update_selected": false,
+        "clock_synchronization_inferred": false,
+        "common_q0_identical": true,
+        "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+        "downstream_comparison_eligible": true,
+        "event_elapsed_time_delta_ns": {
+          "grasp_contact": 0,
+          "release_complete": 0,
+          "stable_hold": 0
+        },
+        "event_presence_identical": true,
+        "event_time_comparison_eligible": true,
+        "identity_sha256": "bf584ad325eb21e1fd51b70916299ff7e2708aaec3ab005bd19385df8f038b20",
+        "issued_action_max_abs_error_rad": 0.0,
+        "joint_max_abs_error_rad": 0.01999999999999999,
+        "joint_rmse_rad": 0.004082482904638628,
+        "matched": false,
+        "maximum_event_elapsed_time_abs_error_ns": 0,
+        "measured_action_max_abs_error_rad": 0.0,
+        "mismatch_categories": [
+          "joint_tracking_mismatch"
+        ],
+        "observable_clock_source": "synthetic_monotonic_ns",
+        "observable_evidence_source": "synthetic_observable_fixture",
+        "observable_frame_count": 4,
+        "observable_trace_identity_sha256": "240c1ed6302c76ae2610b96886e626814156711295725135decd61ca52915e9e",
+        "paired_frame_count": 4,
+        "physical_qualification": false,
+        "pixel_comparison_performed": false,
+        "proposed_command_sequence_identical": true,
+        "schema_version": "scenesmith.paired_trace_comparison.v1",
+        "simulator_clock_source": "synthetic_monotonic_ns",
+        "simulator_evidence_source": "synthetic_simulator_fixture",
+        "simulator_frame_count": 4,
+        "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+        "twin_update_selected": false
+      }
+    },
+    "measured_action_mismatch": {
+      "expected_mismatch_category": "measured_action_mismatch",
+      "observable_trace_identity_sha256": "469256ac6a3b0dd1fbc885367ad9db11007c9d55e45ca1b882776ac32d8988c6",
+      "result": {
+        "authority_granted": [],
+        "calibration_update_selected": false,
+        "clock_synchronization_inferred": false,
+        "common_q0_identical": true,
+        "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+        "downstream_comparison_eligible": true,
+        "event_elapsed_time_delta_ns": {
+          "grasp_contact": 0,
+          "release_complete": 0,
+          "stable_hold": 0
+        },
+        "event_presence_identical": true,
+        "event_time_comparison_eligible": true,
+        "identity_sha256": "2484cf89e130d2acac85c06e8e605e30f940e04c48a8b46e0ba2f245e904b3f9",
+        "issued_action_max_abs_error_rad": 0.0,
+        "joint_max_abs_error_rad": 0.0,
+        "joint_rmse_rad": 0.0,
+        "matched": false,
+        "maximum_event_elapsed_time_abs_error_ns": 0,
+        "measured_action_max_abs_error_rad": 0.12,
+        "mismatch_categories": [
+          "measured_action_mismatch"
+        ],
+        "observable_clock_source": "synthetic_monotonic_ns",
+        "observable_evidence_source": "synthetic_observable_fixture",
+        "observable_frame_count": 4,
+        "observable_trace_identity_sha256": "469256ac6a3b0dd1fbc885367ad9db11007c9d55e45ca1b882776ac32d8988c6",
+        "paired_frame_count": 4,
+        "physical_qualification": false,
+        "pixel_comparison_performed": false,
+        "proposed_command_sequence_identical": true,
+        "schema_version": "scenesmith.paired_trace_comparison.v1",
+        "simulator_clock_source": "synthetic_monotonic_ns",
+        "simulator_evidence_source": "synthetic_simulator_fixture",
+        "simulator_frame_count": 4,
+        "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+        "twin_update_selected": false
+      }
+    },
+    "proposed_command_mismatch": {
+      "expected_mismatch_category": "proposed_command_mismatch",
+      "observable_trace_identity_sha256": "54114d3cb6d72c4b70b5d7646500052d28fe6adaa77908c836622e5a5abe1f71",
+      "result": {
+        "authority_granted": [],
+        "calibration_update_selected": false,
+        "clock_synchronization_inferred": false,
+        "common_q0_identical": true,
+        "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+        "downstream_comparison_eligible": false,
+        "event_elapsed_time_delta_ns": {},
+        "event_presence_identical": true,
+        "event_time_comparison_eligible": false,
+        "identity_sha256": "999e2d114694e8c27bbf7f39bd384e2529fce35bcbdd5a05be1d3869f64df60e",
+        "issued_action_max_abs_error_rad": 0.0,
+        "joint_max_abs_error_rad": 0.0,
+        "joint_rmse_rad": 0.0,
+        "matched": false,
+        "maximum_event_elapsed_time_abs_error_ns": 0,
+        "measured_action_max_abs_error_rad": 0.0,
+        "mismatch_categories": [
+          "proposed_command_mismatch"
+        ],
+        "observable_clock_source": "synthetic_monotonic_ns",
+        "observable_evidence_source": "synthetic_observable_fixture",
+        "observable_frame_count": 4,
+        "observable_trace_identity_sha256": "54114d3cb6d72c4b70b5d7646500052d28fe6adaa77908c836622e5a5abe1f71",
+        "paired_frame_count": 4,
+        "physical_qualification": false,
+        "pixel_comparison_performed": false,
+        "proposed_command_sequence_identical": false,
+        "schema_version": "scenesmith.paired_trace_comparison.v1",
+        "simulator_clock_source": "synthetic_monotonic_ns",
+        "simulator_evidence_source": "synthetic_simulator_fixture",
+        "simulator_frame_count": 4,
+        "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+        "twin_update_selected": false
+      }
+    },
+    "trace_length_mismatch": {
+      "expected_mismatch_category": "trace_length_mismatch",
+      "observable_trace_identity_sha256": "72b2ea87469295bc44d8d1c2071f66fccb571b024a7b4d4387fcb7a708a0e72d",
+      "result": {
+        "authority_granted": [],
+        "calibration_update_selected": false,
+        "clock_synchronization_inferred": false,
+        "common_q0_identical": true,
+        "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+        "downstream_comparison_eligible": false,
+        "event_elapsed_time_delta_ns": {},
+        "event_presence_identical": true,
+        "event_time_comparison_eligible": false,
+        "identity_sha256": "53692fa8d1bcbe8c992325140d6e94e71d59ea9a12e601c1378ef91943fa0c91",
+        "issued_action_max_abs_error_rad": 0.0,
+        "joint_max_abs_error_rad": 0.0,
+        "joint_rmse_rad": 0.0,
+        "matched": false,
+        "maximum_event_elapsed_time_abs_error_ns": 0,
+        "measured_action_max_abs_error_rad": 0.0,
+        "mismatch_categories": [
+          "trace_length_mismatch",
+          "proposed_command_mismatch"
+        ],
+        "observable_clock_source": "synthetic_monotonic_ns",
+        "observable_evidence_source": "synthetic_observable_fixture",
+        "observable_frame_count": 3,
+        "observable_trace_identity_sha256": "72b2ea87469295bc44d8d1c2071f66fccb571b024a7b4d4387fcb7a708a0e72d",
+        "paired_frame_count": 3,
+        "physical_qualification": false,
+        "pixel_comparison_performed": false,
+        "proposed_command_sequence_identical": false,
+        "schema_version": "scenesmith.paired_trace_comparison.v1",
+        "simulator_clock_source": "synthetic_monotonic_ns",
+        "simulator_evidence_source": "synthetic_simulator_fixture",
+        "simulator_frame_count": 4,
+        "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+        "twin_update_selected": false
+      }
+    }
+  },
+  "evidence_scope": "synthetic_offline_trace_fixture_only",
+  "external_compute_started": false,
+  "hardware_observation_performed": false,
+  "identity_sha256": "483fbe671f1ec9d75477c0109af9e23981b371b4987e9ec7e40ced5b78c687af",
+  "live_robot_executed": false,
+  "matched_result": {
+    "authority_granted": [],
+    "calibration_update_selected": false,
+    "clock_synchronization_inferred": false,
+    "common_q0_identical": true,
+    "contract_identity_sha256": "aaa53d2d555c2eaf6190276415812a2400bd9154199874e67a14b11d44c81644",
+    "downstream_comparison_eligible": true,
+    "event_elapsed_time_delta_ns": {
+      "grasp_contact": 0,
+      "release_complete": 0,
+      "stable_hold": 0
+    },
+    "event_presence_identical": true,
+    "event_time_comparison_eligible": true,
+    "identity_sha256": "13e04a15b0b929a115ab2dc8d1596effa2fe781bb980a1fcbe416b47a2844108",
+    "issued_action_max_abs_error_rad": 0.0,
+    "joint_max_abs_error_rad": 0.0,
+    "joint_rmse_rad": 0.0,
+    "matched": true,
+    "maximum_event_elapsed_time_abs_error_ns": 0,
+    "measured_action_max_abs_error_rad": 0.0,
+    "mismatch_categories": [],
+    "observable_clock_source": "synthetic_monotonic_ns",
+    "observable_evidence_source": "synthetic_observable_fixture",
+    "observable_frame_count": 4,
+    "observable_trace_identity_sha256": "b5aa3c0ce0a0b1c35d7c1cfcd26c2daec9b816d47c5f662573ce870d81a14884",
+    "paired_frame_count": 4,
+    "physical_qualification": false,
+    "pixel_comparison_performed": false,
+    "proposed_command_sequence_identical": true,
+    "schema_version": "scenesmith.paired_trace_comparison.v1",
+    "simulator_clock_source": "synthetic_monotonic_ns",
+    "simulator_evidence_source": "synthetic_simulator_fixture",
+    "simulator_frame_count": 4,
+    "simulator_trace_identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+    "twin_update_selected": false
+  },
+  "optimizer_training": false,
+  "physical_qualification_granted": false,
+  "physical_transfer_ready": false,
+  "pixel_comparison_performed": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.paired_trace_runner_fixture.v1",
+  "simulation_policy_accepted": false,
+  "source_observer_fixture_identity_sha256": "560480c705a3b3ec9e98fc1a74bb0d1112b7f973fc8877b272b08597d2abb4e1",
+  "traces": {
+    "observable": {
+      "clock_source": "synthetic_monotonic_ns",
+      "evidence_source": "synthetic_observable_fixture",
+      "frames": [
+        {
+          "events": [],
+          "frame_index": 0,
+          "issued_action_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "joint_position_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "measured_action_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "proposed_action_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timestamp_ns": 0
+        },
+        {
+          "events": [
+            "grasp_contact"
+          ],
+          "frame_index": 1,
+          "issued_action_rad": [
+            0.1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "joint_position_rad": [
+            0.1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "measured_action_rad": [
+            0.1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "proposed_action_rad": [
+            0.1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timestamp_ns": 100000000
+        },
+        {
+          "events": [
+            "stable_hold"
+          ],
+          "frame_index": 2,
+          "issued_action_rad": [
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "joint_position_rad": [
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "measured_action_rad": [
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "proposed_action_rad": [
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timestamp_ns": 200000000
+        },
+        {
+          "events": [
+            "release_complete"
+          ],
+          "frame_index": 3,
+          "issued_action_rad": [
+            0.3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "joint_position_rad": [
+            0.3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "measured_action_rad": [
+            0.3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "proposed_action_rad": [
+            0.3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timestamp_ns": 300000000
+        }
+      ],
+      "identity_sha256": "b5aa3c0ce0a0b1c35d7c1cfcd26c2daec9b816d47c5f662573ce870d81a14884",
+      "observer_role": "hardware_observable",
+      "q0_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "schema_version": "scenesmith.paired_joint_action_event_trace.v1",
+      "trace_id": "t20_21_hardware_observable_matched_fixture"
+    },
+    "simulator": {
+      "clock_source": "synthetic_monotonic_ns",
+      "evidence_source": "synthetic_simulator_fixture",
+      "frames": [
+        {
+          "events": [],
+          "frame_index": 0,
+          "issued_action_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "joint_position_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "measured_action_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "proposed_action_rad": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timestamp_ns": 0
+        },
+        {
+          "events": [
+            "grasp_contact"
+          ],
+          "frame_index": 1,
+          "issued_action_rad": [
+            0.1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "joint_position_rad": [
+            0.1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "measured_action_rad": [
+            0.1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "proposed_action_rad": [
+            0.1,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timestamp_ns": 100000000
+        },
+        {
+          "events": [
+            "stable_hold"
+          ],
+          "frame_index": 2,
+          "issued_action_rad": [
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "joint_position_rad": [
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "measured_action_rad": [
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "proposed_action_rad": [
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timestamp_ns": 200000000
+        },
+        {
+          "events": [
+            "release_complete"
+          ],
+          "frame_index": 3,
+          "issued_action_rad": [
+            0.3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "joint_position_rad": [
+            0.3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "measured_action_rad": [
+            0.3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "proposed_action_rad": [
+            0.3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "timestamp_ns": 300000000
+        }
+      ],
+      "identity_sha256": "ad3cd4c8622a4d9e2b9d2dabd042596b3ca3cd3dcf16410bee44db1ede637721",
+      "observer_role": "simulator_privileged",
+      "q0_rad": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "schema_version": "scenesmith.paired_joint_action_event_trace.v1",
+      "trace_id": "t20_21_simulator_privileged_matched_fixture"
+    }
+  },
+  "twin_updated": false
+}

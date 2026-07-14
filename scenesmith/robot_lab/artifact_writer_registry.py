@@ -61,6 +61,12 @@ ARTIFACT_WRITERS: dict[str, ArtifactWriterSpec] = {
         "verify_observer_role_evaluator_fixture",
         "configurations/robot_lab/t20_20_observer_role_evaluator.json",
     ),
+    "paired_trace_runner_fixture": ArtifactWriterSpec(
+        "scenesmith.robot_lab.paired_trace_runner",
+        "build_paired_trace_runner_fixture",
+        "verify_paired_trace_runner_fixture",
+        "configurations/robot_lab/t20_21_paired_trace_runner.json",
+    ),
     "robotics_dependency_lock": ArtifactWriterSpec(
         "scenesmith.robot_lab.robotics_dependency_lock",
         "build_robotics_dependency_lock",
