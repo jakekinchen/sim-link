@@ -44,6 +44,19 @@ class T20_3PI05ClosedLoopTest(unittest.TestCase):
                 "loss": {"per_update": [1.0] * 250, "per_microbatch": [1.0] * 500},
             }
             MODULE._verify_training_run(t20_4, adapter, expected_task_id="T20.4")
+            t20_4_500 = {
+                **t20_4,
+                "optimizer_update_count": 500,
+                "microbatch_count": 1000,
+                "realized_train_starts": [0] * 1000,
+                "loss": {"per_update": [1.0] * 500, "per_microbatch": [1.0] * 1000},
+            }
+            MODULE._verify_training_run(
+                t20_4_500,
+                adapter,
+                expected_task_id="T20.4",
+                expected_updates=500,
+            )
             with self.assertRaisesRegex(ValueError, "optimizer-update accounting"):
                 MODULE._verify_training_run(
                     {**t20_4, "microbatch_count": 499},

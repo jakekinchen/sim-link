@@ -41,6 +41,7 @@ def main() -> int:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--seed", type=int, default=2)
     parser.add_argument("--task-id", choices=("T20.3", "T20.4"), default="T20.3")
+    parser.add_argument("--expected-updates", type=int, choices=(250, 500, 1000), default=250)
     args = parser.parse_args()
     require_active_simulation_training_authority(repo_root=REPO_ROOT)
     training_run = _resolve(args.training_run)
@@ -50,7 +51,12 @@ def main() -> int:
     summary_path = training_run / "run_summary.json"
     adapter_path = training_run / "adapter"
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
-    _verify_training_run(summary, adapter_path, expected_task_id=args.task_id)
+    _verify_training_run(
+        summary,
+        adapter_path,
+        expected_task_id=args.task_id,
+        expected_updates=args.expected_updates,
+    )
     spec = load_strict_json(REPO_ROOT / SPEC_PATH)
     if summary["source_training_spec_identity_sha256"] != spec["identity_sha256"]:
         raise ValueError("T20.3 adapter training-spec binding drifted")
@@ -146,6 +152,7 @@ def main() -> int:
         "action_horizon": ACTION_HORIZON,
         "inference_replan_count": (payload["frame_count"] + ACTION_HORIZON - 1) // ACTION_HORIZON,
         "num_inference_steps": config.num_inference_steps,
+        "source_optimizer_update_count": summary.get("optimizer_update_count"),
         "coordinate_conversion": "mujoco_radians_to_lerobot_degrees_and_gripper_percent_then_inverse",
         "checkpoint_revision": CHECKPOINT_REVISION,
         "tokenizer_revision": TOKENIZER_REVISION,
@@ -160,24 +167,33 @@ def main() -> int:
     return 0
 
 
-def _verify_training_run(summary: dict, adapter_path: Path, *, expected_task_id: str = "T20.3") -> None:
+def _verify_training_run(
+    summary: dict,
+    adapter_path: Path,
+    *,
+    expected_task_id: str = "T20.3",
+    expected_updates: int = 250,
+) -> None:
     if expected_task_id not in {"T20.3", "T20.4"}:
         raise ValueError("Unsupported PI0.5 evaluation task")
     if summary.get("task_id") != expected_task_id or summary.get("simulation_policy_accepted") is not False:
         raise ValueError(f"{expected_task_id} training summary contract drifted")
     if expected_task_id == "T20.4":
+        if expected_updates not in {250, 500, 1000}:
+            raise ValueError("Unsupported T20.4 optimizer-update rung")
+        expected_microbatches = expected_updates * 2
         expected_counts = {
-            "optimizer_update_count": 250,
+            "optimizer_update_count": expected_updates,
             "gradient_accumulation_steps": 2,
-            "microbatch_count": 500,
+            "microbatch_count": expected_microbatches,
         }
         if any(summary.get(name) != value for name, value in expected_counts.items()):
             raise ValueError("T20.4 optimizer-update accounting drifted")
         loss = summary.get("loss", {})
         if (
-            len(summary.get("realized_train_starts", [])) != 500
-            or len(loss.get("per_update", [])) != 250
-            or len(loss.get("per_microbatch", [])) != 500
+            len(summary.get("realized_train_starts", [])) != expected_microbatches
+            or len(loss.get("per_update", [])) != expected_updates
+            or len(loss.get("per_microbatch", [])) != expected_microbatches
         ):
             raise ValueError("T20.4 sample or loss accounting drifted")
     files = summary.get("adapter", {}).get("checkpoint_files", {})
