@@ -31,7 +31,7 @@ from scenesmith.robot_lab.t20_23_simulation_training_authority import (
 
 EXPECTED_UPDATES = 500
 HELD_OUT_SEEDS = (6, 7)
-RUN_ROOT = Path("outputs/robot_lab/t20_24_recovery_augmented_run_001")
+RUN_ROOT = Path("outputs/robot_lab/t20_24_recovery_augmented_run_002")
 TRAINING_OUTPUT_DIR = Path("training")
 INVOCATION_PATH = Path("invocation.json")
 TRAIN_LOG_PATH = Path("train.log")
@@ -71,7 +71,7 @@ def build_training_argv(
         "--save_checkpoint=true",
         f"--save_freq={EXPECTED_UPDATES}",
         f"--output_dir={output_root}",
-        "--job_name=t20_24_recovery_augmented_run_001",
+        "--job_name=t20_24_recovery_augmented_run_002",
         "--wandb.enable=false",
         "--job.target=local",
     ]

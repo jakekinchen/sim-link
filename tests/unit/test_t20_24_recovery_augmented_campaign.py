@@ -38,6 +38,7 @@ class T2024RecoveryAugmentedCampaignTests(unittest.TestCase):
             "--policy.push_to_hub=false",
             "--wandb.enable=false",
             "--job.target=local",
+            "--job_name=t20_24_recovery_augmented_run_002",
         ):
             self.assertIn(required, joined)
         for forbidden in ("cuda", "--resume=true", "push_to_hub=true"):
