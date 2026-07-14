@@ -91,7 +91,8 @@ not inherit authority from this document.
 | 6 | **T20.22 — timing/latency certificate v0** | Deterministic schema and verifier for clock sources, frame age/skew, observation assembly, action transport/hold, control period/jitter, inference latency where present, drops, and deadline misses; prove timing mismatch cannot be silently relabelled as dynamics error. | T20.21 trace schema | Contact/dynamics calibration, live probe execution, task-family fidelity certificate |
 
 T20.17 is verified negative, T20.18 is verified recovery evidence, T20.19 is
-verified as an uncalibrated grid, and T20.20 is verified; T20.21 is next. Do not
+verified as an uncalibrated grid, and T20.20 is verified; T20.21 is active under
+Brief 152. Do not
 start broad calibration, Robo Scan consumption beyond the verified
 reference-only I2/I3 boundary, or canary planning while the learned policy has
 not achieved repeatable strict-v2 success in simulation.
@@ -114,8 +115,10 @@ unpadded actions. Brief 150 is verified through `2436a14` by Reviewer Decision
 151 is verified through `50abb80` by Reviewer Decision 181: both roles share
 eight strict-v2 predicates, two complete simulator cases agree, and missing,
 leaked, spoofed, camera/VLM, malformed, or undeclared evidence fails closed.
-T20.21 is next; no hardware-observation, physical-qualification,
-training-ready, posterior-calibration, or optimizer grant exists.
+Brief 152 activates only the offline signed paired-trace diagnostic; no
+hardware-observation, live-execution, calibration/twin update,
+physical-qualification, training-ready, posterior-calibration, or optimizer
+grant exists.
 
 ## Paused Integration Queue
 
