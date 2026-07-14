@@ -278,6 +278,8 @@ def _run_branch(
     *,
     capture_dir: Path | None = None,
     include_frames: bool = False,
+    object_position_delta_m: list[float] | None = None,
+    object_friction_multiplier: float = 1.0,
 ) -> dict[str, Any]:
     spec = next(row for row in EPISODE_SPECS if row["seed"] == SEED)
     offset_x, offset_y = spec["planar_offset_m"]
@@ -358,6 +360,18 @@ def _run_branch(
             moving_site = expert._id(expert.mujoco.mjtObj.mjOBJ_SITE, MOVING_PAD_SITE)
             object_body = expert.cube_body_ids[OBJECT_ID]
             restore_integration_state(expert.mujoco, expert.model, expert.data, parent)
+            if not np.isfinite(object_friction_multiplier) or not 0.5 <= object_friction_multiplier <= 1.5:
+                raise ValueError("T20.19 object-friction multiplier exits its physical bound")
+            object_geoms = np.flatnonzero(expert.model.geom_bodyid == object_body)
+            if object_geoms.size == 0:
+                raise ValueError("T20.19 object friction has no bound geometry")
+            expert.model.geom_friction[object_geoms] *= object_friction_multiplier
+            object_delta = np.asarray(object_position_delta_m or [0.0, 0.0, 0.0], dtype=np.float64)
+            if object_delta.shape != (3,) or not np.isfinite(object_delta).all() or np.max(np.abs(object_delta)) > 0.004:
+                raise ValueError("T20.19 object-position delta exits its bound")
+            object_joint = expert._id(expert.mujoco.mjtObj.mjOBJ_JOINT, f"{OBJECT_ID}_free")
+            object_qpos = int(expert.model.jnt_qposadr[object_joint])
+            expert.data.qpos[object_qpos : object_qpos + 3] += object_delta
             joint_delta = np.asarray(perturbation.get("joint_delta_rad", [0.0] * 6))
             expert.data.qpos[: expert.model.nu] += joint_delta
             lower = expert.model.jnt_range[: expert.model.nu, 0]
@@ -368,9 +382,16 @@ def _run_branch(
                 raise ValueError("T20.18 branch perturbation exits robot joint bounds")
             expert.mujoco.mj_forward(expert.model, expert.data)
             expert.frame_index = parent["frame_index"]
+            ctrl_min = expert.model.actuator_ctrlrange[: expert.model.nu, 0]
+            ctrl_max = expert.model.actuator_ctrlrange[: expert.model.nu, 1]
             for offset, action in enumerate(actions):
                 frame_index = parent["frame_index"] + offset
-                expert._record_and_step(phase_for_frame(frame_index), np.asarray(action))
+                applied = np.asarray(action, dtype=np.float64)
+                if applied.shape != (expert.model.nu,) or not np.isfinite(applied).all():
+                    raise ValueError("T20.19 ensemble action is non-finite or wrong-shaped")
+                if np.any(applied < ctrl_min) or np.any(applied > ctrl_max):
+                    raise ValueError("T20.19 ensemble action would require projection")
+                expert._record_and_step(phase_for_frame(frame_index), applied)
             anchor_final = expert.data.xpos[object_body].copy()
             final_state = np.empty(
                 expert.mujoco.mj_stateSize(
@@ -403,6 +424,9 @@ def _run_branch(
         "final_integration_state_sha256": _sha_value(final_state.astype(float).tolist()),
         "terminal_outcome": evidence["terminal_outcome"],
         "observed_result": observed,
+        "strict_v2_gate_margins": evidence["gate_margins"],
+        "failed_gate_margins": evidence["failed_gate_margins"],
+        "strict_v2_valid_frame_counts": evidence["strict_v2_valid_frame_counts"],
     }
     if include_frames:
         result["episode_frame_records_sha256"] = _sha_value(frames)
