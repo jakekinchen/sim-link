@@ -58,7 +58,8 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 ## Current Slice
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
-`verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20 is next. Brief 145 established T20.17's first boundary at
+`verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
+is `in_progress` under Brief 151. Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
 geometry-derived episode generation, the SO-101 processor, and thin
@@ -116,7 +117,9 @@ activates T20.19's fixed 12-cell, same-seed discrete ensemble around the strict
 approach recovery. Brief 150 is verified through `2436a14` by Reviewer Decision
 180: 11/12 cells passed, while gripper scale 1.05 lifted 31.849 mm but failed the
 full stable-hold and lower counts. This is an uncalibrated grid result. T20.20 is
-next; no optimizer, posterior, or training-readiness grant was created.
+active under Brief 151 to separate privileged and observable evaluator roles
+under one strict-v2 predicate vocabulary. No hardware-observation, physical
+qualification, optimizer, posterior, or training-readiness grant was created.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
