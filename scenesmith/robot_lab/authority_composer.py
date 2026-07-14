@@ -1300,6 +1300,8 @@ def _acceptance_margin(
         passed = measured == threshold
     else:
         raise ValueError("Unsupported T20.8 acceptance comparison")
+    if margin == 0:
+        margin = 0.0
     return {
         "measured": measured,
         "threshold": threshold,
