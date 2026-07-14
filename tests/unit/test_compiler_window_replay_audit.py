@@ -125,6 +125,17 @@ class CompilerWindowReplayAuditTests(unittest.TestCase):
                 segments=segments,
                 compiler_manifest=load_strict_json(COMPILER_DIR / "compiler_manifest.json"),
             )
+        identity_drift = dict(window_row)
+        identity_drift["raw_rollout_record_identity_sha256"] = "0" * 64
+        with self.assertRaisesRegex(ValueError, "raw rollout identity"):
+            _audit_window(
+                identity_drift,
+                selection_rank=1,
+                raw_frames=raw_frames,
+                compiler_frames=compiler_frames,
+                segments=segments,
+                compiler_manifest=load_strict_json(COMPILER_DIR / "compiler_manifest.json"),
+            )
 
     def test_manifest_drift_and_raw_rewrite_are_rejected(self) -> None:
         changed = dict(self.audit)

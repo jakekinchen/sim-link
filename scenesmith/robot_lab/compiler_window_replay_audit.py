@@ -243,6 +243,11 @@ def _audit_window(
     segment = segments.get(segment_id)
     if segment is None:
         raise ValueError("Window references an absent source segment")
+    raw_rollout_identity = _require_sha256(
+        window.get("raw_rollout_record_identity_sha256"), label="window raw rollout identity"
+    )
+    if segment.get("raw_rollout_record_identity_sha256") != raw_rollout_identity:
+        raise ValueError("Window raw rollout identity drifted from source segment")
     if window.get("source_compiler_manifest_sha256") != _sha256_file(
         COMPILER_DIR / "compiler_manifest.json"
     ):
@@ -264,6 +269,8 @@ def _audit_window(
         if raw is None or compiler is None:
             raise ValueError("Window frame cannot be traced to raw and compiler sources")
         _validate_raw_compiler_frame(raw, compiler)
+        if compiler.get("raw_rollout_record_identity_sha256") != raw_rollout_identity:
+            raise ValueError("Window raw rollout identity drifted from compiler frame")
         frame_index = _require_int(compiler.get("frame_index"), label="compiler frame index")
         timestamp = _require_int(compiler.get("timestamp_ns"), label="compiler timestamp")
         if prior_index is not None and frame_index != prior_index + 1:
@@ -327,7 +334,7 @@ def _audit_window(
         "selection_rank": selection_rank,
         "segment_id": segment_id,
         "rollout_id": window["rollout_id"],
-        "raw_rollout_record_identity_sha256": window["raw_rollout_record_identity_sha256"],
+        "raw_rollout_record_identity_sha256": raw_rollout_identity,
         "frame_ids_sha256": _sha256(frame_ids),
         "frame_count": len(audited_frames),
         "frames": audited_frames,
