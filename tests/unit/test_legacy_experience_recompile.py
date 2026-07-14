@@ -39,6 +39,22 @@ class LegacyExperienceRecompileTests(unittest.TestCase):
             "missing_current_action_variant_lineage",
             by_id["m10_observation_frames"]["quarantine_reason_codes"],
         )
+        self.assertIn(
+            "missing_current_frame_provenance",
+            by_id["m10_observation_frames"]["quarantine_reason_codes"],
+        )
+        self.assertIn(
+            "timestamp_not_integer_nanoseconds",
+            by_id["m10_observation_frames"]["quarantine_reason_codes"],
+        )
+        self.assertIn(
+            "missing_current_hard_boundary_contract",
+            by_id["m10_observation_frames"]["quarantine_reason_codes"],
+        )
+        self.assertIn(
+            "unconfined_legacy_observation_paths",
+            by_id["m10_dagger_intervention_sidecar"]["quarantine_reason_codes"],
+        )
         self.assertEqual(by_id["m10_training_dataset_metadata"]["source_facts"]["declared_episode_count"], 12)
 
     def test_empty_compiler_view_is_source_bound_and_byte_deterministic(self) -> None:
@@ -78,6 +94,15 @@ class LegacyExperienceRecompileTests(unittest.TestCase):
             )
             with self.assertRaisesRegex(ValueError, "escapes"):
                 build_legacy_inventory_manifest(root, specs=escaped)
+            linked_source = root / "linked-observation.jsonl"
+            linked_source.symlink_to(root / CANDIDATE_SPECS[0].relative_path)
+            linked = (
+                LegacyCandidateSpec(
+                    "linked", Path("linked-observation.jsonl"), "legacy_jsonl_frame_stream"
+                ),
+            )
+            with self.assertRaisesRegex(ValueError, "symlink"):
+                build_legacy_inventory_manifest(root, specs=linked)
 
     def test_source_hash_drift_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory(

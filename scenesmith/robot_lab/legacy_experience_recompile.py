@@ -288,8 +288,10 @@ def _quarantined_candidate(
 
 
 def _require_legacy_root(legacy_root: Path) -> Path:
+    if legacy_root.is_symlink():
+        raise ValueError("Configured legacy inventory root may not be a symlink")
     root = legacy_root.resolve()
-    if not root.is_dir() or root.is_symlink():
+    if not root.is_dir():
         raise ValueError("Configured legacy inventory root is absent or unsafe")
     return root
 
@@ -297,7 +299,10 @@ def _require_legacy_root(legacy_root: Path) -> Path:
 def _bound_candidate_path(root: Path, relative_path: Path) -> Path:
     if relative_path.is_absolute() or ".." in relative_path.parts:
         raise ValueError("Legacy candidate path escapes its configured root")
-    path = (root / relative_path).resolve()
+    configured_path = root / relative_path
+    if configured_path.is_symlink():
+        raise ValueError("Legacy candidate path may not be a symlink")
+    path = configured_path.resolve()
     try:
         path.relative_to(root)
     except ValueError as error:
