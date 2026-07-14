@@ -68,8 +68,9 @@ explicit force-bearing release basis while final retreat remains geometrically
 clear; legacy T20.9 still verifies unchanged. T20.11 is `verified` through
 Brief 131/Reviewer 161. All four models diverge at frame 0. PI0.5 isolates the
 narrowest issue: 0.03097 rad initial non-gripper MAE but 0.75432 rad gripper
-error. T20.12 is next to audit the PI0.5 gripper source, coordinate conversion,
-normalization, postprocessing, and loss weighting before any optimizer run. No
+error. T20.12 is `in_progress` under Brief 132 to audit the PI0.5 gripper
+source, coordinate conversion, normalization, postprocessing, and loss
+weighting before any optimizer run. No
 learned policy is accepted. Hardware, physical transfer, promotion, external
 compute, and Brev remain closed.
 
