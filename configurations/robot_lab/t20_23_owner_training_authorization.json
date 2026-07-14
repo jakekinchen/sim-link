@@ -1,0 +1,26 @@
+{
+  "authorization_id": "t20_23_recovery_augmented_simulation_training_owner_grant",
+  "authorization_scope": "t20_23_recovery_augmented_simulation_only_training",
+  "authorization_source": "owner_goal_enact_sim_link_mvp_execution_plan",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training",
+    "simulation_policy_evaluation"
+  ],
+  "identity_sha256": "efbf820ae0b1c2fe5771a030cd29e3089c3048ed4e77991c3008b703e0c9ddbb",
+  "issued_at": "2026-07-14T12:20:57-05:00",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "source_training_spec_ref": {
+    "file_sha256": "3118cb4a3d8c21d9136a8b6c5b80d868bc1847837a0908f5ab585f000bcaa563",
+    "identity_sha256": "5ad2f407d5df49752c65180addbda033888fdcc5869fc5c9a546669bb94a58aa",
+    "path": "configurations/robot_lab/t20_23_recovery_augmented_training_spec.json",
+    "schema_version": "scenesmith.t20_23_recovery_augmented_training_spec.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-21T03:05:00-05:00"
+}

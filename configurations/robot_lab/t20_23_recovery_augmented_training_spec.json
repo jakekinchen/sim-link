@@ -1,0 +1,326 @@
+{
+  "authority_not_granted": [
+    "simulation_training_ready",
+    "simulation_optimizer_training",
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "brev_compute_started": false,
+  "campaign": {
+    "adapter": "lora",
+    "batch_size": 1,
+    "device": "mps",
+    "lora_rank": 4,
+    "network_mode": "offline_local_cache_only",
+    "normalization": "QUANTILES",
+    "official_training_entrypoint": "lerobot.scripts.lerobot_train",
+    "optimizer_update_count": 500,
+    "policy_type": "pi05",
+    "processor_statistics_source": "lerobot_dataset_meta_stats",
+    "strict_closed_loop_evaluation_seeds": [
+      6,
+      7
+    ],
+    "training_seed": 20260714
+  },
+  "coordinate_contract": {
+    "body_joint_offsets_deg": [
+      0.0,
+      -105.85,
+      89.58,
+      0.0,
+      0.0
+    ],
+    "body_joint_signs": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "gripper_range_rad": [
+      -0.17453,
+      1.74533
+    ],
+    "lerobot_to_mujoco_formula": "mujoco_deg=lerobot_deg*sign+offset_deg",
+    "mujoco_to_lerobot_formula": "lerobot_deg=(mujoco_deg-offset_deg)/sign",
+    "schema_version": "scenesmith.so101_coordinates.v1"
+  },
+  "dataset_contract": {
+    "action_dimension": 6,
+    "action_variant": "measured",
+    "camera_source_roles": [
+      "top",
+      "wrist"
+    ],
+    "dataset_repo_id": "scenesmith/t20-23-anchor-grasp-recovery-train",
+    "diagnostic_episode_count": 4,
+    "diagnostic_frame_count": 424,
+    "diagnostics_in_training": false,
+    "diagnostics_or_held_out_in_statistics": false,
+    "episode_count": 10,
+    "frame_count": 2330,
+    "held_out_in_training": false,
+    "held_out_seeds": [
+      6,
+      7
+    ],
+    "image_feature_keys": [
+      "observation.images.base_0_rgb",
+      "observation.images.left_wrist_0_rgb"
+    ],
+    "implicit_resampling_or_duplication": false,
+    "joint_names": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "padding_or_inferred_actions": false,
+    "source_episode_counts": {
+      "nominal_strict_success": 6,
+      "policy_visited_recovery": 4
+    },
+    "source_frame_counts": {
+      "nominal_strict_success": 1464,
+      "policy_visited_recovery": 866
+    },
+    "state_dimension": 6,
+    "training_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "dataset_manifest_ref": {
+    "file_sha256": "df6e63d86cd053937c9e4d4c267f057b76aaf418761e7dc3356a9ae08c06fea5",
+    "identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+    "path": "configurations/robot_lab/t20_23_recovery_augmented_dataset_manifest.json",
+    "schema_version": "scenesmith.lerobot_native_episode_manifest.v1"
+  },
+  "dataset_mixture_frozen": true,
+  "dataset_statistics": {
+    "feature_keys": [
+      "action",
+      "episode_index",
+      "frame_index",
+      "index",
+      "observation.images.base_0_rgb",
+      "observation.images.left_wrist_0_rgb",
+      "observation.state",
+      "task_index",
+      "timestamp"
+    ],
+    "identity_sha256": "d815dda101681ff394e2e211ca7936c90b08a259875ac49ff14319049f0e2669",
+    "normalization": "QUANTILES",
+    "source": "lerobot_dataset_meta_stats",
+    "statistics_sha256": "85e6df3e91725cff6e6ec7c22bf7a3c512738179f5769c4aed567a492d90642d"
+  },
+  "diagnostic_episodes": [
+    {
+      "branch_id": "78ceccb46b3f63b14dcac2c9815e27d9c3a624d09120a445ad883358c1b94643",
+      "file_sha256": "33674c05752f7bd2ae8a903bac8eaa7d13eff8d18f6e58a62246c919504ee478",
+      "frame_count": 173,
+      "identity_sha256": "c9b6347a55dfb90a9e523982ed63717c71d9a5a8afc9e277076880d4982fb785",
+      "image_count": 346,
+      "included_in_dataset_statistics": false,
+      "included_in_training_dataset": false,
+      "outcome_class": "near_failure",
+      "path": "outputs/robot_lab/t20_18_recovery_episode_package/episodes/78ceccb46b3f63b14dcac2c9815e27d9c3a624d09120a445ad883358c1b94643.json"
+    },
+    {
+      "branch_id": "ef8a9f0d651239e964172a4bf1f8ed6d8f14a40409c648cca2fcf8039af7ac9b",
+      "file_sha256": "06fd925f5b736ea07bffd8e055106d42ae27bd6c6fa2fa4339c6b3708fecf47c",
+      "frame_count": 173,
+      "identity_sha256": "8a9410086f54d2d850ba9888494c83ea08384d2a95527b4185ac9baf617e1e8b",
+      "image_count": 346,
+      "included_in_dataset_statistics": false,
+      "included_in_training_dataset": false,
+      "outcome_class": "near_failure",
+      "path": "outputs/robot_lab/t20_18_recovery_episode_package/episodes/ef8a9f0d651239e964172a4bf1f8ed6d8f14a40409c648cca2fcf8039af7ac9b.json"
+    },
+    {
+      "branch_id": "eb1f693357ab58560bee9100d2065936f171cf3fdf4df51d00def3347ce4a7e0",
+      "file_sha256": "e5e2118e0e6a76f8fef38c9eee6d2aa56b15c36a7cffc00dae5f698ff99292e6",
+      "frame_count": 39,
+      "identity_sha256": "50e58cfb7d60f543deed16f7e1276944ae1c12fd4ba2156e14cb433362dfd9cc",
+      "image_count": 78,
+      "included_in_dataset_statistics": false,
+      "included_in_training_dataset": false,
+      "outcome_class": "failure",
+      "path": "outputs/robot_lab/t20_18_recovery_episode_package/episodes/eb1f693357ab58560bee9100d2065936f171cf3fdf4df51d00def3347ce4a7e0.json"
+    },
+    {
+      "branch_id": "0900444b80deaf92f2793f340a28ab01f54398805e296d641b6722cb5e7408aa",
+      "file_sha256": "bf942e8453d876c38a7a26fcbe972a2d776a2a00cb980fc7d8cd4e3a11eec790",
+      "frame_count": 39,
+      "identity_sha256": "051ad13c6b9e7656ac6bdf5dd0369bb6c91a742fa292b42496f3a86fdad9fe3c",
+      "image_count": 78,
+      "included_in_dataset_statistics": false,
+      "included_in_training_dataset": false,
+      "outcome_class": "failure",
+      "path": "outputs/robot_lab/t20_18_recovery_episode_package/episodes/0900444b80deaf92f2793f340a28ab01f54398805e296d641b6722cb5e7408aa.json"
+    }
+  ],
+  "external_compute_started": false,
+  "held_out_episodes": [
+    {
+      "episode_file_sha256": "1361a4a25cad3a3567203061e2463fd05f3d72500d813cebcfea8f48285b430a",
+      "frame_count": 244,
+      "included_in_dataset_statistics": false,
+      "included_in_training_dataset": false,
+      "raw_rollout_record_identity_sha256": "2c431b85e83f929da3157ce9c260fe014dde82b77766ef5c6c2c8b66396c79b0",
+      "relative_path": "1361a4a25cad3a3567203061e2463fd05f3d72500d813cebcfea8f48285b430a.json",
+      "seed": 6
+    },
+    {
+      "episode_file_sha256": "98a97772cca207be5c956122decca6c55040eb964eab5182fe9a7f7220f8ed79",
+      "frame_count": 244,
+      "included_in_dataset_statistics": false,
+      "included_in_training_dataset": false,
+      "raw_rollout_record_identity_sha256": "3c006f739dc54439903bf1e47a20d392a65214838b2ebdd799f5a1e476862007",
+      "relative_path": "98a97772cca207be5c956122decca6c55040eb964eab5182fe9a7f7220f8ed79.json",
+      "seed": 7
+    }
+  ],
+  "identity_sha256": "5ad2f407d5df49752c65180addbda033888fdcc5869fc5c9a546669bb94a58aa",
+  "model_inference": false,
+  "model_loaded": false,
+  "model_snapshot": {
+    "files": [
+      {
+        "path": "config.json",
+        "sha256": "367869712a2847c27e95c431ecb03f17bec4eee01a63995e2fb2d91940752b53",
+        "size_bytes": 1896
+      },
+      {
+        "path": "model.safetensors",
+        "sha256": "0eb11ca9587678c1d2ef8cf32807c29f8ce53a2bfdfc1aa4a4c96f16fca59b0f",
+        "size_bytes": 14467165872
+      },
+      {
+        "path": "policy_postprocessor.json",
+        "sha256": "142c8b622aeac5c14631e057279df058d3005f616d909cfe30a04524de0b0891",
+        "size_bytes": 567
+      },
+      {
+        "path": "policy_preprocessor.json",
+        "sha256": "be2cd1acc33229d42be0640cb55b5d5a4bb3e8d8e27ddfcdcf3f99f1fe3beaef",
+        "size_bytes": 1241
+      }
+    ],
+    "repo_id": "lerobot/pi05_base",
+    "revision": "7de663972b7817d2c4cf2d84c821153dfea772e9",
+    "snapshot_mode": "complete_local_content_addressed_cache"
+  },
+  "nominal_source_manifest_ref": {
+    "file_sha256": "72f49c6664a9e2663548ebf8064cbf29de19ea18170fea30bf862de082485084",
+    "identity_sha256": "3860158e201e457146a167cfa778da14f210d88fa223cb075a1ec6d422ecfd1a",
+    "path": "configurations/robot_lab/t17_5b_episode_generation_manifest.json",
+    "schema_version": "scenesmith.scripted_grasp_episode_store.v1"
+  },
+  "nominal_training_episodes": [
+    {
+      "frame_count": 244,
+      "raw_rollout_record_identity_sha256": "9e186088c9ca82fa9c58cb6e3870f322a9c2a84405d5ea23152b822fb9d4abdb",
+      "seed": 0
+    },
+    {
+      "frame_count": 244,
+      "raw_rollout_record_identity_sha256": "e13a347254692408c4767962a5fc5604d2bf44d096e35f1be0517b0d32e3ce71",
+      "seed": 1
+    },
+    {
+      "frame_count": 244,
+      "raw_rollout_record_identity_sha256": "3999fe109e6e34495617160a2d8abaa6bdc8419342a3fc152f8e8ee395f3f960",
+      "seed": 2
+    },
+    {
+      "frame_count": 244,
+      "raw_rollout_record_identity_sha256": "b51fbe83dfcaeef34686e0b94c86c24a2f9cfd65d9d772b71ccecec043fe04b7",
+      "seed": 3
+    },
+    {
+      "frame_count": 244,
+      "raw_rollout_record_identity_sha256": "776ea11e529596d6cac9b1534544265de74880c53aca3af600db17ed65abb0d7",
+      "seed": 4
+    },
+    {
+      "frame_count": 244,
+      "raw_rollout_record_identity_sha256": "115143953f456bc47433bebc5253c1feb9cf9ca6f2bb8187c994e04ab1c22654",
+      "seed": 5
+    }
+  ],
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "recovery_package_manifest_ref": {
+    "file_sha256": "b54af13a8158935144ab72c0c20b8bd43a42c9ae34d1e5444b42863725e79b3d",
+    "identity_sha256": "4123e8d40e5e1fd80702c4dc40ceb7a31922c2da2f36c797c91a20677f208e7c",
+    "path": "outputs/robot_lab/t20_18_recovery_episode_package/manifest.json",
+    "schema_version": "scenesmith.t20_18_recovery_episode_package.v1"
+  },
+  "recovery_training_episodes": [
+    {
+      "branch_id": "35790636312237b8b067a56ba5979e571b970845c309bedf2ab559106bc276d0",
+      "file_sha256": "2538d95f4dca270b4452de11c56f7cb4d02d8e38266ed88227ceb1d9ca76bff9",
+      "frame_count": 238,
+      "identity_sha256": "e29c1b3320b50621164b02a4b98d884cbd79ff0d30c4da8d1f1aa6b45db8e078",
+      "image_count": 476,
+      "included_in_dataset_statistics": true,
+      "included_in_training_dataset": true,
+      "outcome_class": "recovery",
+      "path": "outputs/robot_lab/t20_18_recovery_episode_package/episodes/35790636312237b8b067a56ba5979e571b970845c309bedf2ab559106bc276d0.json"
+    },
+    {
+      "branch_id": "4dbb42161ef8ecd7cb3ea865dd304bc67a467eeeba5e1fadd7c218e7fc947ca1",
+      "file_sha256": "a8445bdfab8709ba9b8c1f487fab089b990bf8788275903828a1ecbcc94b7986",
+      "frame_count": 238,
+      "identity_sha256": "22c96545c759b9573a299690408e10967389df0cbd35f9efaa110f2200e5ed8b",
+      "image_count": 476,
+      "included_in_dataset_statistics": true,
+      "included_in_training_dataset": true,
+      "outcome_class": "recovery",
+      "path": "outputs/robot_lab/t20_18_recovery_episode_package/episodes/4dbb42161ef8ecd7cb3ea865dd304bc67a467eeeba5e1fadd7c218e7fc947ca1.json"
+    },
+    {
+      "branch_id": "7b3b6707fae79d355162a6c588c5770998b7850bcb3e30b3aba825c2e048c2c2",
+      "file_sha256": "6c9447cbe90a9648d4d8657eff4a952c4bf4ce3ac85f2c27d65a4165aec27d8e",
+      "frame_count": 195,
+      "identity_sha256": "e74d7178f813fbecc0a8578c9e2fd08324102c3e3e7f8af6585bf5209bb62faa",
+      "image_count": 390,
+      "included_in_dataset_statistics": true,
+      "included_in_training_dataset": true,
+      "outcome_class": "recovery",
+      "path": "outputs/robot_lab/t20_18_recovery_episode_package/episodes/7b3b6707fae79d355162a6c588c5770998b7850bcb3e30b3aba825c2e048c2c2.json"
+    },
+    {
+      "branch_id": "f74ebf7a47d419f0dd1a3887e010b032e99b4302d8e19e9f4611c096d2c079ff",
+      "file_sha256": "0f81b0b6282f161034a83f20a67086fabe359323e12c814a5864b1955af15072",
+      "frame_count": 195,
+      "identity_sha256": "548d08056ad16acfbd94b88b143e9acc54864f960383c08fabfb2ceb2623d54f",
+      "image_count": 390,
+      "included_in_dataset_statistics": true,
+      "included_in_training_dataset": true,
+      "outcome_class": "recovery",
+      "path": "outputs/robot_lab/t20_18_recovery_episode_package/episodes/f74ebf7a47d419f0dd1a3887e010b032e99b4302d8e19e9f4611c096d2c079ff.json"
+    }
+  ],
+  "schema_version": "scenesmith.t20_23_recovery_augmented_training_spec.v1",
+  "scope": "t20_23_source_bound_nominal_plus_successful_recovery_simulation_training_preflight",
+  "simulation_only": true,
+  "simulation_policy_accepted": false,
+  "simulation_rollout_executed": false,
+  "simulation_training_ready": false,
+  "task": "Grasp the lightweight anchor, lift 40 mm, hold, lower, release, and retreat."
+}

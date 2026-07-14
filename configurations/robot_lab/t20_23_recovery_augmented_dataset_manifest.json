@@ -1,0 +1,156 @@
+{
+  "authority_not_granted": [
+    "simulation_training_ready",
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training",
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "brev_compute_started": false,
+  "dataset": {
+    "dataset_class": "lerobot.datasets.lerobot_dataset.LeRobotDataset",
+    "label": "t20_23/nominal_plus_policy_visited_recovery_train",
+    "metadata_tree": {
+      "file_count": 4,
+      "files": [
+        {
+          "path": "meta/episodes/chunk-000/file-000.parquet",
+          "sha256": "01974d0f5e66b2fa96fcfe8a263e2765e755f65847eaa22ef3fa6173a40e50bd",
+          "size_bytes": 59881
+        },
+        {
+          "path": "meta/info.json",
+          "sha256": "789ab860cae39d100f1d28e0e547e2229b860cdcacc2916c230074ff5e7ed9fc",
+          "size_bytes": 2445
+        },
+        {
+          "path": "meta/stats.json",
+          "sha256": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1",
+          "size_bytes": 13075
+        },
+        {
+          "path": "meta/tasks.parquet",
+          "sha256": "75d507d99b8f12e63006844a0034e3ce8570ca47b22d7417f2096c29dbfa3f4f",
+          "size_bytes": 2372
+        }
+      ],
+      "identity_sha256": "ea34560f53fc2992b25d432ecfc478a770b5e6f91d29ac3de770b84d511955c0"
+    },
+    "repo_id": "scenesmith/t20-23-anchor-grasp-recovery-train",
+    "revision": "v3.0",
+    "total_episodes": 10,
+    "total_frames": 2330
+  },
+  "eligible_episode_count": 10,
+  "episode_count": 10,
+  "episodes": [
+    {
+      "eligible": true,
+      "episode_content_sha256": "35f6cd650928761604cfbc384d1f291ac5a3801535a2da5d8776be74538f79c4",
+      "episode_index": 0,
+      "frame_count": 244,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "9e186088c9ca82fa9c58cb6e3870f322a9c2a84405d5ea23152b822fb9d4abdb"
+    },
+    {
+      "eligible": true,
+      "episode_content_sha256": "b952703694de92136358f32ca9c738c22444342344b1b89bb7321db38e476771",
+      "episode_index": 1,
+      "frame_count": 244,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "e13a347254692408c4767962a5fc5604d2bf44d096e35f1be0517b0d32e3ce71"
+    },
+    {
+      "eligible": true,
+      "episode_content_sha256": "bef540b8f3c4efe3f0623019838d53956403b0191ce508d7dd394a445e3dbac6",
+      "episode_index": 2,
+      "frame_count": 244,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "3999fe109e6e34495617160a2d8abaa6bdc8419342a3fc152f8e8ee395f3f960"
+    },
+    {
+      "eligible": true,
+      "episode_content_sha256": "05cac99f1acd801999353ffdf20228f28c954dfa5b337d0cab6a645f73f0ce65",
+      "episode_index": 3,
+      "frame_count": 244,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "b51fbe83dfcaeef34686e0b94c86c24a2f9cfd65d9d772b71ccecec043fe04b7"
+    },
+    {
+      "eligible": true,
+      "episode_content_sha256": "0e65547b9b416a41bf3016599f30e0c3332be5ce8dd57d04d22582fc1734ff7a",
+      "episode_index": 4,
+      "frame_count": 244,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "776ea11e529596d6cac9b1534544265de74880c53aca3af600db17ed65abb0d7"
+    },
+    {
+      "eligible": true,
+      "episode_content_sha256": "63b8d433e8f34feae37f426193da4f92f51e38615477a093204ccd4fcc358058",
+      "episode_index": 5,
+      "frame_count": 244,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "115143953f456bc47433bebc5253c1feb9cf9ca6f2bb8187c994e04ab1c22654"
+    },
+    {
+      "eligible": true,
+      "episode_content_sha256": "d2faac95b6b5658b21e1e296d79030f705c3d36071d0d14976730861471a5da2",
+      "episode_index": 6,
+      "frame_count": 238,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "e29c1b3320b50621164b02a4b98d884cbd79ff0d30c4da8d1f1aa6b45db8e078"
+    },
+    {
+      "eligible": true,
+      "episode_content_sha256": "71e463a27294105b69c1a7d3abe1f2954f44c8972f46368b5902c197cb473ef2",
+      "episode_index": 7,
+      "frame_count": 238,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "22c96545c759b9573a299690408e10967389df0cbd35f9efaa110f2200e5ed8b"
+    },
+    {
+      "eligible": true,
+      "episode_content_sha256": "c8c615092ccd199b657ddf957923a98f59cf1d2f707cabe17d27ee599a150d1b",
+      "episode_index": 8,
+      "frame_count": 195,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "e74d7178f813fbecc0a8578c9e2fd08324102c3e3e7f8af6585bf5209bb62faa"
+    },
+    {
+      "eligible": true,
+      "episode_content_sha256": "cc776acca2f1b5166eaa835af8525b53d31ced461194f615811d257bb293c988",
+      "episode_index": 9,
+      "frame_count": 195,
+      "quarantine_reason": null,
+      "raw_rollout_identity_sha256": "548d08056ad16acfbd94b88b143e9acc54864f960383c08fabfb2ceb2623d54f"
+    }
+  ],
+  "evidence_mode": "signed_lerobot_dataset_provenance_view",
+  "external_compute_started": false,
+  "frames_materialized": false,
+  "identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+  "local_capabilities": [
+    "lerobot_dataset_episode_provenance_bound",
+    "lerobot_dataset_episode_eligibility_bound",
+    "lerobot_dataset_quarantine_bound"
+  ],
+  "new_storage_rows_created": 0,
+  "normalization_reimplemented": false,
+  "parallel_parquet_written": false,
+  "physical_actuation": false,
+  "processor_executed": false,
+  "proof_labels": [],
+  "qualification_scope": "simulation_dataset_provenance_and_eligibility_only",
+  "quarantined_episode_count": 0,
+  "raw_bytes_rewritten": false,
+  "schema_version": "scenesmith.lerobot_native_episode_manifest.v1",
+  "segments_materialized": false,
+  "simulation_training_ready": false,
+  "storage_owner": "lerobot_dataset",
+  "windows_materialized": false
+}
