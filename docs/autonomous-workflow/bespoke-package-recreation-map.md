@@ -1,6 +1,6 @@
 # Bespoke-versus-Package Recreation Map
 
-**Status:** T20.17 first-slice contract (2026-07-14)
+**Status:** T20.17 requested recreation map verified through Brief 141 (2026-07-14)
 
 SceneSmith should own its evidence, grasp truthfulness, SO-101 bridge, and
 authority rules. It should not duplicate a package's dataset storage,

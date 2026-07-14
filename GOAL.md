@@ -69,11 +69,12 @@ artifacts remain immutable, no clean-base training starts until a source
 dataset—not a fixture—satisfies the new LeRobot-native boundary. Its fourth
 boundary is verified at `1aceebe`: the live constructive geometry/contact
 primitive is named and the eight dead T19 wrapper modules are retired, while
-historical signed diagnostics remain immutable. The active fifth slice records
-the few-page owner-present/read-only/content-addressed contract for a future
-LeRobot camera/robot adapter; it does not alter historical physical evidence,
-create hardware objects, or grant motion authority. Only repeatable strict
-semantic success can promote a policy.
+historical signed diagnostics remain immutable. Its fifth boundary is verified
+at `61f2d8c`: the few-page owner-present/read-only/content-addressed contract
+for a future LeRobot camera/robot adapter preserves historical physical
+evidence and creates neither hardware objects nor motion authority. The
+requested recreation map is complete; the broader T20.17 training task remains
+separate. Only repeatable strict semantic success can promote a policy.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
