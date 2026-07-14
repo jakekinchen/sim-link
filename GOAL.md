@@ -20,10 +20,11 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Actual start: `2026-07-14T04:09:58-05:00`.
-- No new major slice after: `2026-07-14T11:24:58-05:00`.
-- Hard closeout: `2026-07-14T12:09:58-05:00`.
-- This owner-requested continuation is simulation-only. It grants no hardware,
+- Actual start: `2026-07-14T12:20:57-05:00`.
+- No new major slice after: `2026-07-14T19:35:57-05:00`.
+- Hard closeout: `2026-07-14T20:20:57-05:00`.
+- This owner-requested bespoke-versus-package recreation continuation is
+  simulation-only. It grants no hardware,
   physical-transfer, promotion, external-compute, or Brev authority. Historical
   physical-session notes below are retained only as consumed-gate history.
 - Reviewer 098's one-session gate was consumed and closed at `08:42` CDT after
@@ -55,6 +56,16 @@ proof states must remain distinct.
 M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
+
+T20.17 is `in_progress` under Brief 137. Preserve the compact bespoke IP
+(content-addressed contracts, strict grasp semantics, geometry-derived episode
+generation, the SO-101 processor, and thin authority/stack locks); delete only
+unreferenced test-only modules; and replace duplicate dataset and
+shadow-preprocessing derivations with a signed manifest around one
+`LeRobotDataset` plus hashes of its actual pipeline outputs. Historical
+artifacts remain immutable, no clean-base training starts until the new
+LeRobot-native boundary is verified, and only repeatable strict semantic
+success can promote a policy.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
