@@ -60,7 +60,12 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
 is `verified` through Brief 151; T20.21 is `verified` through Brief 152, and
-T20.22 is `verified` through Brief 153. Brief 145 established T20.17's first boundary at
+T20.22 is `verified` through Brief 153. T20.23 is `in_progress` through Brief
+154: materialize and freeze only the six nominal successes plus four
+strict-success recovery branches as a source-bound LeRobotDataset; keep
+near-failures, failures, and seeds 6-7 outside training and statistics, and do
+not run an optimizer until a separate central authority decision and brief.
+Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
 geometry-derived episode generation, the SO-101 processor, and thin
@@ -128,8 +133,8 @@ diagnostics route `q0`, action, joint, clock, and event mismatches without
 calibration or twin mutation. This is not paired real/sim evidence. Brief 153 is
 verified through `98a79a2` by Reviewer Decision 183: one synthetic timing
 certificate passes and eleven one-factor timing failures each block dynamics
-attribution. The bounded T20.17-T20.22 local queue is complete, but the broader
-MVP exit remains unmet by the failed learned policy, absent real Robo Scan/I5
+attribution. Brief 154 opens T20.23 as the next narrow policy-data preflight,
+but the broader MVP exit remains unmet by the failed learned policy, absent real Robo Scan/I5
 bundle, and absent newly authorized physical canary. No hardware, live-probe,
 clock-sync, calibration/twin, optimizer, posterior, policy-acceptance, or
 physical-qualification grant was created.

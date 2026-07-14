@@ -89,11 +89,12 @@ not inherit authority from this document.
 | 4 | **T20.20 — observer-role evaluator contract** | Versioned privileged and observable evaluator roles; identical task predicate vocabulary; positive, negative, anti-false-positive, missing-observation, and role-leakage tests; simulator consistency report. | Strict-v2 semantics and declared observable inputs | Camera access, VLM-only success, physical qualification |
 | 5 | **T20.21 — thin paired trace runner** | Extend the Brief-088 replay idea: bind common `q0`, proposed/issued/measured actions, timestamps, joint traces, and grasp/contact event times; compare traces without a pixel-matching requirement; route mismatch categories without changing the twin. | T20.20 observable contract; separately supplied immutable traces | Live robot execution, calibration optimizer, full shadow-sim service |
 | 6 | **T20.22 — timing/latency certificate v0** | Deterministic schema and verifier for clock sources, frame age/skew, observation assembly, action transport/hold, control period/jitter, inference latency where present, drops, and deadline misses; prove timing mismatch cannot be silently relabelled as dynamics error. | T20.21 trace schema | Contact/dynamics calibration, live probe execution, task-family fidelity certificate |
+| 7 | **T20.23 — recovery-augmented dataset preflight** | One actual LeRobotDataset containing the six nominal strict-success episodes and four strict-success policy-visited recovery episodes; near-failures/failures and seeds 6-7 remain outside training/statistics; exact mixture, dataset, statistics, clean model snapshot, and central simulation-only authority identities signed before any optimizer. | Verified T20.17 dataset/result and T20.18 recovery package | Optimizer execution, failure imitation, implicit oversampling, hardware, Robo Scan, external compute, Brev |
 
 T20.17 is verified negative, T20.18 is verified recovery evidence, T20.19 is
 verified as an uncalibrated grid, T20.20 and T20.21 are verified, and T20.22 is
-verified. The bounded local queue is complete, but the MVP exit condition below
-is not. Do not
+verified. Brief 154 opens T20.23 as the next narrow policy-data preflight; the
+MVP exit condition below is not met. Do not
 start broad calibration, Robo Scan consumption beyond the verified
 reference-only I2/I3 boundary, or canary planning while the learned policy has
 not achieved repeatable strict-v2 success in simulation.
@@ -121,7 +122,10 @@ synthetic pair has zero joint/action/event-time error and nine fixed diagnostics
 route all declared mismatch categories without calibration or twin mutation.
 Brief 153 is verified through `98a79a2` by Reviewer Decision 183: one synthetic
 certificate passes, eleven one-factor timing failures route exactly, and every
-failure blocks dynamics attribution. The local T20.17-T20.22 queue is complete.
+failure blocks dynamics attribution. Brief 154 opens T20.23 without an optimizer:
+freeze the six nominal successes plus four strict-success recovery branches as
+one 10-episode, 2,330-frame package dataset while retaining all negative and
+held-out evidence outside training statistics.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
