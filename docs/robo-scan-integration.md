@@ -113,9 +113,14 @@ artifact as a system-level grant.
 No step above opens a camera, robot, serial port, capture session, motion API,
 training run, external compute, or Brev instance.
 
+The exact cross-repository phase gates, file-level consumer plan, contract
+stack, compatibility protocol, deduplication matrix, and rollback rules are in
+the [Robo Scan and sim-link integration roadmap](./robo-scan-sim-link-integration-roadmap.md).
+
 ## Read Next
 
 - [Program architecture](./architecture.md)
 - [Requirements and contracts](./requirements-and-contracts.md)
 - [Current versus historical guide](./current-and-historical.md)
+- [Integration and deduplication roadmap](./robo-scan-sim-link-integration-roadmap.md)
 - [Robo Scan handoff brief](./briefs/143-robo-scan-handoff-boundary.md)

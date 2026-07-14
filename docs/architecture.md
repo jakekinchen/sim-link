@@ -98,7 +98,10 @@ authority composer accepts independent evidence. There is no current code
 import or qualified artifact handoff.
 
 The full ownership, artifact classes, receipt fields, and rejection rules are
-in the [Robo Scan integration boundary](./robo-scan-integration.md).
+in the [Robo Scan integration boundary](./robo-scan-integration.md). The
+[integration roadmap](./robo-scan-sim-link-integration-roadmap.md) defines the
+producer/consumer phases, contract stack, compatibility locks, and retirement
+conditions for overlapping code.
 
 ## Bespoke Boundaries
 

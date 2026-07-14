@@ -10,7 +10,7 @@ work without replacing the canonical state, signed evidence, or slice history.
 | --- | --- | --- |
 | Understand what is happening now | [Current state](#current-state) | [roadmap](#roadmap-and-next-work) and the active brief |
 | Learn how the pieces fit together | [Architecture](./architecture.md) | [requirements and contracts](./requirements-and-contracts.md) |
-| Connect scan or calibration work from Robo Scan | [Robo Scan integration boundary](./robo-scan-integration.md) | the upstream Robo Scan state and a future explicit export receipt |
+| Connect scan or calibration work from Robo Scan | [Robo Scan integration boundary](./robo-scan-integration.md) | [integration and deduplication roadmap](./robo-scan-sim-link-integration-roadmap.md) |
 | Run or change a safe implementation slice | [Autonomous workflow](./autonomous-workflow/README.md) | `GOAL.md`, current brief, and review decision |
 | Find the authoritative rule for a capability claim | [Requirements and contracts](./requirements-and-contracts.md) | the referenced code, configuration, and test |
 | Investigate an older result or rejected approach | [Current versus historical guide](./current-and-historical.md) | frozen artifact, session log, and reviewer decision |
@@ -48,6 +48,10 @@ Read [Architecture](./architecture.md) for the component, data, and authority
 flows. Read [Requirements and contracts](./requirements-and-contracts.md) for
 the rules those flows must satisfy, and [Robo Scan integration](./robo-scan-integration.md)
 for the cross-repository boundary.
+
+For the exact producer/consumer sequence, compatibility locks, ownership split,
+deduplication gates, and definition of integrated, read the
+[Robo Scan and sim-link integration roadmap](./robo-scan-sim-link-integration-roadmap.md).
 
 ## Roadmap And Next Work
 

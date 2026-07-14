@@ -57,7 +57,7 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.17 is `in_progress` under Brief 143. Its first boundary is verified at
+T20.17 is `in_progress` under Brief 144. Its first boundary is verified at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
 geometry-derived episode generation, the SO-101 processor, and thin
@@ -78,9 +78,11 @@ requirements/contracts, decision index, and current-versus-historical guides
 now route readers to canonical sources. Its seventh boundary is verified at
 `890058b`: the separate Robo Scan repository is documented as a fail-closed
 scene-scan/calibration artifact handoff, with no package import, artifact
-ingestion, or physical claim. It does not change system authority or the
-broader T20.17 training task. Only repeatable strict semantic success can
-promote a policy.
+ingestion, or physical claim. Its active eighth slice defines the exact
+cross-repository integration, compatibility, and deduplication roadmap while
+the separate Robo Scan thread owns its dirty Brief 054 export-receipt work.
+It does not change system authority or the broader T20.17 training task. Only
+repeatable strict semantic success can promote a policy.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:

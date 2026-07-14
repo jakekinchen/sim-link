@@ -11,6 +11,7 @@
 | `docs/current-and-historical.md` | Current truth surface versus append-only/historical evidence guidance. |
 | `docs/decisions-and-adjuncts.md` | Package, external-pattern, and design decision index. |
 | `docs/robo-scan-integration.md` | Separate Robo Scan scan/scene/calibration handoff boundary and authority limits. |
+| `docs/robo-scan-sim-link-integration-roadmap.md` | Cross-repository ownership, phase gates, compatibility protocol, deduplication, and rollback plan. |
 | `executor-reviewer-pair-programming.md` | Root quickstart and role overview for the pair. |
 | `docs/autonomous-workflow/` | Autonomous workflow strategy and protocols. |
 | `docs/autonomous-workflow/09-autonomous-milestones.md` | Invariant milestone gates. |
@@ -33,6 +34,7 @@
 | Architecture | `docs/architecture.md` |
 | Tech stack / package ownership | `docs/architecture.md` plus `docs/autonomous-workflow/bespoke-package-recreation-map.md` |
 | Robo Scan handoff | `docs/robo-scan-integration.md` plus the upstream repository's current state |
+| Robo Scan/sim-link integration sequence | `docs/robo-scan-sim-link-integration-roadmap.md` |
 | Requirements and contracts | `docs/requirements-and-contracts.md` plus referenced implementation/configuration |
 | Current versus historical interpretation | `docs/current-and-historical.md` |
 | External ideas and adjunct decisions | `docs/decisions-and-adjuncts.md` |

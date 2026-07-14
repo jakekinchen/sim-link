@@ -25,6 +25,12 @@ REQUIRED_GUIDES = {
         "## Authority-Preserving Handoff",
         "## Required Future Export Receipt",
     ),
+    "robo-scan-sim-link-integration-roadmap.md": (
+        "# Robo Scan And Sim-Link Integration Roadmap",
+        "## Final Repository Ownership",
+        "## Integration Phases",
+        "## Definition Of Integrated",
+    ),
 }
 
 
@@ -54,6 +60,7 @@ class DocumentationInformationArchitectureTests(unittest.TestCase):
             "current-and-historical.md",
             "decisions-and-adjuncts.md",
             "robo-scan-integration.md",
+            "robo-scan-sim-link-integration-roadmap.md",
         ):
             with self.subTest(target=target):
                 self.assertIn(target, content)
@@ -68,6 +75,7 @@ class DocumentationInformationArchitectureTests(unittest.TestCase):
             "docs/requirements-and-contracts.md",
             "docs/current-and-historical.md",
             "docs/robo-scan-integration.md",
+            "docs/robo-scan-sim-link-integration-roadmap.md",
         ):
             with self.subTest(target=target):
                 self.assertIn(target, content)
@@ -81,6 +89,7 @@ class DocumentationInformationArchitectureTests(unittest.TestCase):
             DOCS / "current-and-historical.md",
             DOCS / "decisions-and-adjuncts.md",
             DOCS / "robo-scan-integration.md",
+            DOCS / "robo-scan-sim-link-integration-roadmap.md",
             DOCS / "autonomous-workflow" / "README.md",
         )
         for document in documents:
@@ -99,6 +108,7 @@ class DocumentationInformationArchitectureTests(unittest.TestCase):
         handoff = (DOCS / "robo-scan-integration.md").read_text(encoding="utf-8")
         architecture = (DOCS / "architecture.md").read_text(encoding="utf-8")
         requirements = (DOCS / "requirements-and-contracts.md").read_text(encoding="utf-8")
+        roadmap = (DOCS / "robo-scan-sim-link-integration-roadmap.md").read_text(encoding="utf-8")
 
         for content, expected in (
             (handoff, "explicit artifact handoff"),
@@ -106,6 +116,9 @@ class DocumentationInformationArchitectureTests(unittest.TestCase):
             (handoff, "reference-only"),
             (architecture, "Robo Scan Boundary"),
             (requirements, "R11: Scan/calibration handoff"),
+            (roadmap, "Do not merge the Git repositories"),
+            (roadmap, "### I2 - Independent Sim-Link Receipt Conformance"),
+            (roadmap, "### I7 - Deduplicate Active Paths"),
         ):
             with self.subTest(expected=expected):
                 self.assertIn(expected, content)

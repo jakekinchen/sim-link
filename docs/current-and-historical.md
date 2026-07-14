@@ -32,6 +32,7 @@ These are maintained explainers, not time-capsule evidence:
 - [Bespoke-versus-package recreation map](./autonomous-workflow/bespoke-package-recreation-map.md)
 - [Minimal live-adapter recreation](./autonomous-workflow/minimal-live-adapter-recreation.md)
 - [Robo Scan integration boundary](./robo-scan-integration.md)
+- [Robo Scan and sim-link integration roadmap](./robo-scan-sim-link-integration-roadmap.md)
 - [Autonomous workflow](./autonomous-workflow/README.md)
 
 Update these when a durable boundary, ownership rule, or reader route changes.
