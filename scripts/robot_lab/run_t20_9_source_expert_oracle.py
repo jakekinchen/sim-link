@@ -17,6 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
 from scenesmith.robot_lab.act_grasp_closed_loop import (  # noqa: E402
+    LEGACY_RELEASE_CLEARANCE_BASIS,
     run_policy_grasp_closed_loop,
 )
 from scenesmith.robot_lab.artifact_contract import (  # noqa: E402
@@ -48,6 +49,19 @@ SEED = 2
 
 
 def build() -> dict:
+    evidence = build_oracle_evidence(
+        release_clearance_basis=LEGACY_RELEASE_CLEARANCE_BASIS
+    )
+    return build_source_oracle_artifact(**evidence)
+
+
+def build_oracle_evidence(
+    *,
+    release_clearance_basis: str,
+    schema_version: str = SCHEMA_VERSION,
+    task_id: str = "T20.9",
+    evidence_mode: str = "source_expert_action_oracle_through_policy_closed_loop_adapter",
+) -> dict:
     manifest = load_strict_json(MANIFEST_PATH)
     verify_episode_store(manifest, default_store_root())
     entry = next((item for item in manifest["episodes"] if item["seed"] == SEED), None)
@@ -86,11 +100,12 @@ def build() -> dict:
         checkpoint_sha256=entry["episode_file_sha256"],
         training_run_summary_sha256=_sha(MANIFEST_PATH),
         seed=SEED,
-        schema_version=SCHEMA_VERSION,
-        task_id="T20.9",
-        evidence_mode="source_expert_action_oracle_through_policy_closed_loop_adapter",
+        schema_version=schema_version,
+        task_id=task_id,
+        evidence_mode=evidence_mode,
         policy_label="source_expert_oracle",
         frame_observer=oracle_trace.append,
+        release_clearance_basis=release_clearance_basis,
     )
     if cursor != len(source_actions) or rollout["policy_action_sequence_sha256"] != source_action_sha256:
         raise ValueError("T20.9 oracle did not consume the exact source action sequence")
@@ -100,13 +115,14 @@ def build() -> dict:
         oracle_trace,
         source_outcome=stored_episode["outcome"],
         oracle_rollout=rollout,
+        release_clearance_basis=release_clearance_basis,
     )
     evaluation = load_strict_json(T20_7_EVALUATION_PATH)
     verify_signed_payload(evaluation, label="T20.7 evaluation gate")
     if evaluation.get("strict_success_count") != 0 or evaluation.get("winner_model_id") is not None:
         raise ValueError("T20.9 source T20.7 negative gate drifted")
-    return build_source_oracle_artifact(
-        source_refs={
+    return {
+        "source_refs": {
             "episode_store_manifest": {
                 "path": str(MANIFEST_PATH.relative_to(REPO_ROOT)),
                 "identity_sha256": manifest["identity_sha256"],
@@ -127,16 +143,16 @@ def build() -> dict:
             ],
             "source_episode_regenerated_byte_identically": True,
         },
-        t20_7_evaluation_ref={
+        "t20_7_evaluation_ref": {
             "path": str(T20_7_EVALUATION_PATH.relative_to(REPO_ROOT)),
             "identity_sha256": evaluation["identity_sha256"],
             "file_sha256": _sha(T20_7_EVALUATION_PATH),
             "strict_success_count": evaluation["strict_success_count"],
             "winner_model_id": evaluation["winner_model_id"],
         },
-        oracle_rollout=rollout,
-        diagnostics=diagnostics,
-    )
+        "oracle_rollout": rollout,
+        "diagnostics": diagnostics,
+    }
 
 
 def main() -> int:

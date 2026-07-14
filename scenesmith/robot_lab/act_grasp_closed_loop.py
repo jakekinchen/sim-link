@@ -54,6 +54,12 @@ PHASE_PLAN = (
 ROLLOUT_FRAMES = sum(count for _, count in PHASE_PLAN)
 Policy = Callable[[dict[str, np.ndarray], np.ndarray], np.ndarray]
 FrameObserver = Callable[[dict[str, Any]], None]
+LEGACY_RELEASE_CLEARANCE_BASIS = "geometry_contact_pair"
+FORCE_BEARING_RELEASE_CLEARANCE_BASIS = "force_bearing_pad_or_nonpad_contact"
+RELEASE_CLEARANCE_BASES = {
+    LEGACY_RELEASE_CLEARANCE_BASIS,
+    FORCE_BEARING_RELEASE_CLEARANCE_BASIS,
+}
 
 
 def phase_for_frame(frame_index: int) -> str:
@@ -99,6 +105,7 @@ def run_policy_grasp_closed_loop(
     evidence_mode: str,
     policy_label: str,
     frame_observer: FrameObserver | None = None,
+    release_clearance_basis: str = LEGACY_RELEASE_CLEARANCE_BASIS,
 ) -> dict[str, Any]:
     """Run one bounded held-out rollout for a named policy evidence contract."""
 
@@ -110,6 +117,8 @@ def run_policy_grasp_closed_loop(
     }.items():
         if not isinstance(value, str) or not value.strip():
             raise ValueError(f"Closed-loop {name} must be a non-empty string")
+    if release_clearance_basis not in RELEASE_CLEARANCE_BASES:
+        raise ValueError("Closed-loop release-clearance basis is unsupported")
 
     spec = next((dict(item) for item in EPISODE_SPECS if item["seed"] == seed), None)
     if spec is None:
@@ -220,40 +229,47 @@ def run_policy_grasp_closed_loop(
         finally:
             expert.close()
 
-    evidence = _evaluate(frames, anchor_start=anchor_start, anchor_final=anchor_final, projected_frames=projected_frames)
-    action_bytes = json.dumps(requested_actions, separators=(",", ":"), allow_nan=False).encode()
-    return sign_payload(
-        {
-            "schema_version": schema_version,
-            "task_id": task_id,
-            "evidence_mode": evidence_mode,
-            "policy_label": policy_label,
-            "seed": seed,
-            "source_episode_spec": spec,
-            "source_grasp_identity_sha256": grasp["identity_sha256"],
-            "checkpoint_sha256": checkpoint_sha256,
-            "training_run_summary_sha256": training_run_summary_sha256,
-            "frame_count": len(frames),
-            "phase_frame_counts": {phase: count for phase, count in PHASE_PLAN},
-            "phase_schedule_source": "held_out_scripted_episode_horizon_only_not_semantic_success",
-            "policy_action_sequence_sha256": hashlib.sha256(action_bytes).hexdigest(),
-            "policy_requested_action_first": requested_actions[0],
-            "policy_requested_action_last": requested_actions[-1],
-            "applied_action_first": applied_actions[0],
-            "applied_action_last": applied_actions[-1],
-            "projected_action_frame_count": len(projected_frames),
-            "projected_action_frame_indices": projected_frames,
-            "rendered_keyframes": finalize_rendered_keyframes(rendered),
-            **evidence,
-            "policy_controls_owned_all_frames": True,
-            "physical_actuation": False,
-            "external_compute_started": False,
-            "brev_compute_started": False,
-            "physical_transfer_ready": False,
-            "promotion_eligible": False,
-            "simulation_policy_accepted": False,
-        }
+    evidence = _evaluate(
+        frames,
+        anchor_start=anchor_start,
+        anchor_final=anchor_final,
+        projected_frames=projected_frames,
+        release_clearance_basis=release_clearance_basis,
     )
+    action_bytes = json.dumps(requested_actions, separators=(",", ":"), allow_nan=False).encode()
+    payload = {
+        "schema_version": schema_version,
+        "task_id": task_id,
+        "evidence_mode": evidence_mode,
+        "policy_label": policy_label,
+        "seed": seed,
+        "source_episode_spec": spec,
+        "source_grasp_identity_sha256": grasp["identity_sha256"],
+        "checkpoint_sha256": checkpoint_sha256,
+        "training_run_summary_sha256": training_run_summary_sha256,
+        "frame_count": len(frames),
+        "phase_frame_counts": {phase: count for phase, count in PHASE_PLAN},
+        "phase_schedule_source": "held_out_scripted_episode_horizon_only_not_semantic_success",
+        "policy_action_sequence_sha256": hashlib.sha256(action_bytes).hexdigest(),
+        "policy_requested_action_first": requested_actions[0],
+        "policy_requested_action_last": requested_actions[-1],
+        "applied_action_first": applied_actions[0],
+        "applied_action_last": applied_actions[-1],
+        "projected_action_frame_count": len(projected_frames),
+        "projected_action_frame_indices": projected_frames,
+        "rendered_keyframes": finalize_rendered_keyframes(rendered),
+        **evidence,
+        "policy_controls_owned_all_frames": True,
+        "physical_actuation": False,
+        "external_compute_started": False,
+        "brev_compute_started": False,
+        "physical_transfer_ready": False,
+        "promotion_eligible": False,
+        "simulation_policy_accepted": False,
+    }
+    if release_clearance_basis != LEGACY_RELEASE_CLEARANCE_BASIS:
+        payload["release_clearance_basis"] = release_clearance_basis
+    return sign_payload(payload)
 
 
 def _evaluate(
@@ -262,6 +278,7 @@ def _evaluate(
     anchor_start: np.ndarray,
     anchor_final: np.ndarray,
     projected_frames: list[int],
+    release_clearance_basis: str = LEGACY_RELEASE_CLEARANCE_BASIS,
 ) -> dict[str, Any]:
     requirement = strict_grasp_spec_v2()["antipodal_contact_requirement"]
     by_phase = {phase: [row for row in frames if row["phase"] == phase] for phase, _ in PHASE_PLAN}
@@ -282,7 +299,9 @@ def _evaluate(
     support_free_hold = sum(not row["anchor_support_contacts"] for row in by_phase["unsupported_lift_hold"])
     nonpad_count = sum(bool(row["nonpad_robot_object_contacts"]) for row in frames)
     active_assist_count = sum(bool(row["grasp_assists_active"]) for row in frames)
-    release_clear = bool(by_phase["release_settle"]) and not by_phase["release_settle"][-1]["all_robot_object_contact_geoms"]
+    release_clear = bool(by_phase["release_settle"]) and _release_final_clear(
+        by_phase["release_settle"][-1], release_clearance_basis
+    )
     retreat_clear = bool(by_phase["retreat"]) and not by_phase["retreat"][-1]["all_robot_object_contact_geoms"]
     measurements = {
         "grasp_hold_strict_v2": (valid_counts["grasp_hold"], 8, ">="),
@@ -323,6 +342,16 @@ def _evaluate(
         "maximum_anchor_lift_m": maximum_z - float(anchor_start[2]),
         "active_assist_frame_count": active_assist_count,
     }
+
+
+def _release_final_clear(frame: dict[str, Any], basis: str) -> bool:
+    if basis == LEGACY_RELEASE_CLEARANCE_BASIS:
+        return not frame.get("all_robot_object_contact_geoms", [])
+    if basis == FORCE_BEARING_RELEASE_CLEARANCE_BASIS:
+        return not frame.get("pad_contact_aggregate") and not frame.get(
+            "nonpad_robot_object_contacts", []
+        )
+    raise ValueError("Closed-loop release-clearance basis is unsupported")
 
 
 def _margin(measured: Any, threshold: float | int, comparison: str) -> dict[str, Any]:

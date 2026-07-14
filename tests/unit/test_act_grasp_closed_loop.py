@@ -1,9 +1,12 @@
 import unittest
 
 from scenesmith.robot_lab.act_grasp_closed_loop import (
+    FORCE_BEARING_RELEASE_CLEARANCE_BASIS,
+    LEGACY_RELEASE_CLEARANCE_BASIS,
     PHASE_PLAN,
     ROLLOUT_FRAMES,
     _margin,
+    _release_final_clear,
     phase_for_frame,
     run_policy_grasp_closed_loop,
 )
@@ -40,6 +43,33 @@ class ActGraspClosedLoopTest(unittest.TestCase):
                 evidence_mode="test",
                 policy_label="test",
             )
+
+    def test_release_clearance_distinguishes_force_from_geometry(self) -> None:
+        zero_force_overlap = {
+            "all_robot_object_contact_geoms": ["fixed_fingertip_pad_collision"],
+            "pad_contact_aggregate": None,
+            "nonpad_robot_object_contacts": [],
+        }
+        self.assertFalse(
+            _release_final_clear(zero_force_overlap, LEGACY_RELEASE_CLEARANCE_BASIS)
+        )
+        self.assertTrue(
+            _release_final_clear(
+                zero_force_overlap, FORCE_BEARING_RELEASE_CLEARANCE_BASIS
+            )
+        )
+        for mutation in (
+            {"pad_contact_aggregate": {"normal_force_n": 0.1}},
+            {"nonpad_robot_object_contacts": ["wrist_collision"]},
+        ):
+            frame = {**zero_force_overlap, **mutation}
+            self.assertFalse(
+                _release_final_clear(
+                    frame, FORCE_BEARING_RELEASE_CLEARANCE_BASIS
+                )
+            )
+        with self.assertRaisesRegex(ValueError, "unsupported"):
+            _release_final_clear(zero_force_overlap, "unknown")
 
 
 if __name__ == "__main__":

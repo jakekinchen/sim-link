@@ -9,6 +9,10 @@ from typing import Any
 import numpy as np
 
 from scenesmith.robot_lab.artifact_contract import sign_payload, verify_signed_payload
+from scenesmith.robot_lab.act_grasp_closed_loop import (
+    FORCE_BEARING_RELEASE_CLEARANCE_BASIS,
+    LEGACY_RELEASE_CLEARANCE_BASIS,
+)
 from scenesmith.robot_lab.grasp_evidence import validate_rendered_keyframes
 
 
@@ -28,6 +32,7 @@ def analyze_source_oracle(
     *,
     source_outcome: dict[str, Any],
     oracle_rollout: dict[str, Any],
+    release_clearance_basis: str = LEGACY_RELEASE_CLEARANCE_BASIS,
 ) -> dict[str, Any]:
     """Measure the first execution divergence and semantic gate mismatch."""
 
@@ -149,6 +154,9 @@ def analyze_source_oracle(
     release_final_clear = bool(release_rows) and not release_rows[-1].get(
         "all_robot_object_contact_geoms", []
     )
+    release_force_bearing_clear = bool(release_rows) and not release_rows[-1].get(
+        "pad_contact_aggregate"
+    ) and not release_rows[-1].get("nonpad_robot_object_contacts", [])
     retreat_final_clear = bool(retreat_rows) and not retreat_rows[-1].get(
         "all_robot_object_contact_geoms", []
     )
@@ -170,7 +178,7 @@ def analyze_source_oracle(
         and not release_final_clear
         and retreat_final_clear
     )
-    return {
+    result = {
         "frame_count": frame_count,
         "object_names": sorted(object_names),
         "divergence_thresholds": dict(DIVERGENCE_THRESHOLDS),
@@ -194,6 +202,17 @@ def analyze_source_oracle(
             else None
         ),
     }
+    if release_clearance_basis == FORCE_BEARING_RELEASE_CLEARANCE_BASIS:
+        result.update(
+            {
+                "release_clearance_basis": release_clearance_basis,
+                "release_settle_final_geometry_clear": release_final_clear,
+                "release_settle_final_force_bearing_contact_clear": release_force_bearing_clear,
+            }
+        )
+    elif release_clearance_basis != LEGACY_RELEASE_CLEARANCE_BASIS:
+        raise ValueError("T20.9 release-clearance basis is unsupported")
+    return result
 
 
 def build_source_oracle_artifact(
