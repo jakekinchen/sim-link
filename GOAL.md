@@ -56,16 +56,16 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.8 is `verified` through Brief 128/Reviewer 158 as a central, fail-closed
-policy rejection. The source-bound decision has no selected model, zero strict
-successes versus three required, and zero T20.7 strict successes versus one
-required for selection. It therefore keeps `simulation_policy_accepted`,
-`physical_transfer_ready`, and `promotion_eligible` false while preserving the
-existing local simulation-training grant. T20.9 is `in_progress` under Brief
-129: feed the recorded held-out expert actions through the exact policy
-closed-loop adapter and identify the first source-versus-execution divergence
-before another optimizer hypothesis. Hardware, physical transfer, promotion,
-external compute, and Brev remain closed.
+T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
+actions reproduce the source trajectory exactly through the policy adapter:
+zero action/state/object/contact divergence, no projection or assistance,
+36.3853 mm lift, and all grasp/hold/lower counts pass. T20.7 still rejects the
+oracle only because its release-clear gate treats a zero-force fixed-pad
+collision pair as active contact, while the T17.5b source contract omits that
+gate and T20.6 defines release by fingertip contact. T20.10 is next to reconcile
+release semantics without weakening final retreat clearance, then rerun the
+oracle before training. No learned policy is accepted. Hardware, physical
+transfer, promotion, external compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
