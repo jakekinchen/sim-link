@@ -334,6 +334,105 @@ def verify_recovery_gate(gate: dict[str, Any], *, repo_root: Path) -> dict[str, 
     return manifest
 
 
+def verify_recovery_episode_package_gate(
+    gate: dict[str, Any], *, repo_root: Path
+) -> dict[str, Any]:
+    """Verify the durable branch episode package, observations, and source actions."""
+
+    verify_signed_payload(gate, label="T20.18 recovery episode package gate")
+    if gate.get("schema_version") != "scenesmith.t20_18_recovery_episode_package_gate.v1" or gate.get("task_id") != TASK_ID:
+        raise ValueError("T20.18 episode package gate schema or task drifted")
+    for field in _FALSE_AUTHORITY_FIELDS:
+        if gate.get(field) is not False:
+            raise ValueError(f"T20.18 episode package authority flag drifted: {field}")
+    root = Path(repo_root).resolve()
+    manifest_path = _inside(root, gate.get("package_manifest_path"), "package manifest")
+    if _sha_file(manifest_path) != gate.get("package_manifest_file_sha256"):
+        raise ValueError("T20.18 package manifest bytes drifted")
+    package = load_strict_json(manifest_path)
+    verify_signed_payload(package, label="T20.18 recovery episode package")
+    if package.get("schema_version") != "scenesmith.t20_18_recovery_episode_package.v1" or package.get("task_id") != TASK_ID:
+        raise ValueError("T20.18 episode package schema or task drifted")
+    if package.get("identity_sha256") != gate.get("package_manifest_identity_sha256"):
+        raise ValueError("T20.18 package identity drifted")
+    for field in _FALSE_AUTHORITY_FIELDS:
+        if package.get(field) is not False:
+            raise ValueError(f"T20.18 episode package authority flag drifted: {field}")
+    source = package.get("source_recovery_artifact")
+    if not isinstance(source, dict):
+        raise ValueError("T20.18 episode package source is invalid")
+    source_path = _inside(root, source.get("path"), "source recovery artifact")
+    if _sha_file(source_path) != source.get("file_sha256"):
+        raise ValueError("T20.18 episode package source bytes drifted")
+    recovery = load_strict_json(source_path)
+    verify_recovery_manifest(recovery)
+    if recovery["identity_sha256"] != source.get("identity_sha256"):
+        raise ValueError("T20.18 episode package source identity drifted")
+    branches = {row["branch_id"]: row for row in recovery["branches"]}
+    entries = package.get("episodes")
+    if not isinstance(entries, list) or len(entries) != len(branches):
+        raise ValueError("T20.18 episode package branch coverage is incomplete")
+    seen: set[str] = set()
+    image_count = frame_count = 0
+    outcomes: Counter[str] = Counter()
+    for entry in entries:
+        if not isinstance(entry, dict):
+            raise ValueError("T20.18 episode package entry is invalid")
+        branch_id = _sha_value(entry.get("branch_id"), "episode branch ID")
+        if branch_id in seen or branch_id not in branches:
+            raise ValueError("T20.18 episode package contains a duplicate or absent branch")
+        seen.add(branch_id)
+        episode_path = _inside(root, entry.get("path"), "branch episode")
+        if _sha_file(episode_path) != entry.get("file_sha256"):
+            raise ValueError("T20.18 branch episode bytes drifted")
+        episode = load_strict_json(episode_path)
+        verify_signed_payload(episode, label="T20.18 branch episode")
+        branch = branches[branch_id]
+        if episode.get("branch_id") != branch_id or episode.get("identity_sha256") != entry.get("identity_sha256"):
+            raise ValueError("T20.18 branch episode identity drifted")
+        if episode.get("schema_version") != "scenesmith.t20_18_recovery_episode.v1":
+            raise ValueError("T20.18 branch episode schema drifted")
+        for field in _FALSE_AUTHORITY_FIELDS:
+            if episode.get(field) is not False:
+                raise ValueError(f"T20.18 branch episode authority flag drifted: {field}")
+        if episode.get("actions_padded") is not False or episode.get("actions_inferred") is not False:
+            raise ValueError("T20.18 branch episode admits padded or inferred actions")
+        for key in ("parent_snapshot_id", "generation_reason", "outcome_class", "observed_result", "measured_actions", "action_source_record_ids"):
+            if episode.get(key) != branch.get(key):
+                raise ValueError(f"T20.18 branch episode source binding drifted: {key}")
+        frames = episode.get("frames")
+        actions = episode.get("measured_actions")
+        if not isinstance(frames, list) or len(frames) != len(actions) or episode.get("frame_count") != len(frames):
+            raise ValueError("T20.18 branch episode frame/action count drifted")
+        core_frames = []
+        for frame, action in zip(frames, actions, strict=True):
+            if not isinstance(frame, dict) or frame.get("mujoco_requested_action") != action:
+                raise ValueError("T20.18 branch episode measured action drifted")
+            images = frame.get("actor_observation_images")
+            if not isinstance(images, dict) or set(images) != {"top", "wrist"}:
+                raise ValueError("T20.18 branch episode actor observations are incomplete")
+            for image_ref in images.values():
+                image_path = _inside(root, image_ref.get("path"), "branch observation image")
+                if _sha_file(image_path) != image_ref.get("file_sha256"):
+                    raise ValueError("T20.18 branch observation image drifted")
+                image_count += 1
+            core_frames.append({key: value for key, value in frame.items() if key != "actor_observation_images"})
+        if _sha(core_frames) != branch["trace_summary"]["frame_records_sha256"]:
+            raise ValueError("T20.18 branch episode core trace drifted")
+        frame_count += len(frames)
+        outcomes[episode["outcome_class"]] += 1
+    if package.get("episode_count") != len(entries) or gate.get("episode_count") != len(entries):
+        raise ValueError("T20.18 episode package count drifted")
+    if package.get("frame_count") != frame_count or gate.get("frame_count") != frame_count:
+        raise ValueError("T20.18 episode package frame count drifted")
+    if package.get("image_count") != image_count or gate.get("image_count") != image_count:
+        raise ValueError("T20.18 episode package image count drifted")
+    expected_outcomes = dict(sorted(outcomes.items()))
+    if package.get("outcome_class_counts") != expected_outcomes or gate.get("outcome_class_counts") != expected_outcomes:
+        raise ValueError("T20.18 episode package outcomes drifted")
+    return package
+
+
 def _validate_parent(parent: Any) -> None:
     if not isinstance(parent, dict):
         raise ValueError("Parent snapshot is invalid")
@@ -566,3 +665,15 @@ def _sha_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _inside(root: Path, value: Any, label: str) -> Path:
+    relative = _text(value, label)
+    path = (root / relative).resolve()
+    try:
+        path.relative_to(root)
+    except ValueError as error:
+        raise ValueError(f"T20.18 {label} path escapes checkout") from error
+    if not path.is_file():
+        raise ValueError(f"T20.18 {label} is absent")
+    return path

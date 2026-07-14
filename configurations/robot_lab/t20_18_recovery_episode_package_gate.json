@@ -1,0 +1,42 @@
+{
+  "actions_inferred": false,
+  "actions_padded": false,
+  "authority_granted": [
+    "t20_18_recovery_episode_package_generated"
+  ],
+  "authority_not_granted": [
+    "optimizer_training",
+    "dataset_mixture_frozen",
+    "simulation_training_ready",
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "brev_compute_started": false,
+  "dataset_mixture_frozen": false,
+  "episode_count": 8,
+  "external_compute_started": false,
+  "frame_count": 1290,
+  "identity_sha256": "c6f365151550e58f5edf7d52e51d7f1b3742995331c038fc571e66e3bc9e7b73",
+  "image_count": 2580,
+  "optimizer_training": false,
+  "outcome_class_counts": {
+    "failure": 2,
+    "near_failure": 2,
+    "recovery": 4
+  },
+  "package_manifest_file_sha256": "b54af13a8158935144ab72c0c20b8bd43a42c9ae34d1e5444b42863725e79b3d",
+  "package_manifest_identity_sha256": "4123e8d40e5e1fd80702c4dc40ceb7a31922c2da2f36c797c91a20677f208e7c",
+  "package_manifest_path": "outputs/robot_lab/t20_18_recovery_episode_package/manifest.json",
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "recovery_training_candidate": true,
+  "schema_version": "scenesmith.t20_18_recovery_episode_package_gate.v1",
+  "simulation_policy_accepted": false,
+  "simulation_training_ready": false,
+  "task_id": "T20.18"
+}

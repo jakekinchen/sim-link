@@ -272,7 +272,12 @@ def _verify_exact_candidate_reproduction(
 
 
 def _run_branch(
-    parent: dict[str, Any], perturbation: dict[str, Any], actions: list[list[float]]
+    parent: dict[str, Any],
+    perturbation: dict[str, Any],
+    actions: list[list[float]],
+    *,
+    capture_dir: Path | None = None,
+    include_frames: bool = False,
 ) -> dict[str, Any]:
     spec = next(row for row in EPISODE_SPECS if row["seed"] == SEED)
     offset_x, offset_y = spec["planar_offset_m"]
@@ -286,6 +291,7 @@ def _run_branch(
     )
     scene = _scene(initial_position_m=initial_position.tolist())
     frames: list[dict[str, Any]] = []
+    core_frames: list[dict[str, Any]] = []
     with tempfile.TemporaryDirectory(prefix="scenesmith-t20-18-branch-") as directory:
         root = Path(directory)
         robot_xml = prepare_mujoco_so101_assets(root, scene.robot.base_position_m)
@@ -298,7 +304,6 @@ def _run_branch(
         object_body = fixed_site = moving_site = -1
 
         def retain(frame: dict[str, Any], images: dict[str, np.ndarray]) -> None:
-            del images
             assert expert is not None
             row = _raw_frame(expert, frame)
             contacts = extract_pad_contacts(
@@ -321,6 +326,23 @@ def _run_branch(
             row["all_robot_object_contact_geoms"] = all_robot_object_contact_geoms(
                 expert, object_body
             )
+            core_frames.append(row)
+            if capture_dir is not None:
+                from PIL import Image
+
+                image_refs: dict[str, Any] = {}
+                for role, pixels in sorted(images.items()):
+                    path = capture_dir / f"frame-{row['frame_index']:06d}-{role}.png"
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    Image.fromarray(pixels).save(path, format="PNG", compress_level=9)
+                    image_refs[role] = {
+                        "path": path.relative_to(REPO_ROOT).as_posix(),
+                        "file_sha256": _sha_file(path),
+                        "height": int(pixels.shape[0]),
+                        "width": int(pixels.shape[1]),
+                        "channels": int(pixels.shape[2]),
+                    }
+                row = {**row, "actor_observation_images": image_refs}
             frames.append(row)
 
         expert = CausalSortExpert(
@@ -328,7 +350,7 @@ def _run_branch(
             scene_xml,
             seed=1701 + SEED,
             frame_sink=retain,
-            config=CausalSortExpertConfig(image_size=256, capture_images=False),
+            config=CausalSortExpertConfig(image_size=256, capture_images=capture_dir is not None),
         )
         try:
             pad_roles = compiled_pad_geom_roles(expert.mujoco, expert.model)
@@ -375,13 +397,17 @@ def _run_branch(
         "strict_contact_frame_count": sum(evidence["strict_v2_valid_frame_counts"].values()),
         "maximum_anchor_lift_m": evidence["maximum_anchor_lift_m"],
     }
-    return {
+    result = {
         "frame_count": len(frames),
-        "frame_records_sha256": _sha_value(frames),
+        "frame_records_sha256": _sha_value(core_frames),
         "final_integration_state_sha256": _sha_value(final_state.astype(float).tolist()),
         "terminal_outcome": evidence["terminal_outcome"],
         "observed_result": observed,
     }
+    if include_frames:
+        result["episode_frame_records_sha256"] = _sha_value(frames)
+        result["frames"] = frames
+    return result
 
 
 def _sha_file(path: Path) -> str:
