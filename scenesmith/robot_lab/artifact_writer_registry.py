@@ -87,6 +87,12 @@ ARTIFACT_WRITERS: dict[str, ArtifactWriterSpec] = {
         "verify_strict_grasp_fixture",
         "configurations/robot_lab/strict_anchor_grasp_evaluator.fixture.json",
     ),
+    "timing_latency_fixture": ArtifactWriterSpec(
+        "scenesmith.robot_lab.timing_latency_certificate",
+        "build_timing_latency_fixture",
+        "verify_timing_latency_fixture",
+        "configurations/robot_lab/t20_22_timing_latency_certificate.json",
+    ),
     "strict_grasp_v2_fixture": ArtifactWriterSpec(
         "scenesmith.robot_lab.strict_grasp",
         "build_strict_grasp_v2_fixture",
