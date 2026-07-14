@@ -45,6 +45,11 @@ ORDERED_TRAIN_STARTS = (
 ACTION_CHUNK_SIZE = 50
 CANARY_SCHEMA_VERSION = "scenesmith.t20_7_model_canary.v1"
 CANARY_GATE_SCHEMA_VERSION = "scenesmith.t20_7_model_canary_gate.v1"
+TRAINING_SCHEMA_VERSION = "scenesmith.t20_7_model_training_result.v1"
+TRAINING_GATE_SCHEMA_VERSION = "scenesmith.t20_7_model_training_gate.v1"
+TRAINING_SEED = 207
+TRAIN_DIAGNOSTIC_STARTS = (0, 244)
+HELD_OUT_DIAGNOSTIC_STARTS = (0, 96)
 
 
 def build_model_bakeoff_plan(
@@ -313,6 +318,304 @@ def verify_model_canary_gate(
     verify_signed_payload(payload, label="T20.7 model canary gate")
     if payload != build_model_canary_gate(plan, results):
         raise ValueError("T20.7 model canary gate drifted from observed results")
+
+
+def build_model_training_result(
+    plan: dict[str, Any], model_id: str, observation: dict[str, Any]
+) -> dict[str, Any]:
+    """Sign one exact-common-sample optimizer result without claiming behavior."""
+
+    verify_signed_payload(plan, label="T20.7 model bake-off plan")
+    model = next((item for item in plan["models"] if item["model_id"] == model_id), None)
+    if model is None:
+        raise ValueError(f"T20.7 model is absent from the plan: {model_id}")
+    _validate_training_observation(observation, plan)
+    if observation["optimizer"] != _expected_optimizer(model_id):
+        raise ValueError("T20.7 model training optimizer drifted")
+    loss = observation["loss"]
+    return sign_payload(
+        {
+            "schema_version": TRAINING_SCHEMA_VERSION,
+            "task_id": "T20.7",
+            "model_id": model_id,
+            "source_plan_identity_sha256": plan["identity_sha256"],
+            "source_tensor_view_sha256": plan["source_tensor_view"]["file_sha256"],
+            "source_semantic_fixture_identity_sha256": plan[
+                "source_semantic_fixture_identity_sha256"
+            ],
+            "sample_plan_sha256": model["sample_plan_sha256"],
+            "realized_train_starts": list(observation["realized_train_starts"]),
+            "action_chunk_size": model["action_chunk_size"],
+            "optimizer_update_count": len(observation["realized_train_starts"]),
+            "microbatch_count": len(observation["realized_train_starts"]),
+            "seed": TRAINING_SEED,
+            "train_diagnostic_starts": list(TRAIN_DIAGNOSTIC_STARTS),
+            "held_out_diagnostic_starts": list(HELD_OUT_DIAGNOSTIC_STARTS),
+            "initialization": model["initialization"],
+            "input_adapter": model["input_adapter"],
+            "optimizer": observation["optimizer"],
+            "loss": {
+                "baseline_train": float(loss["baseline_train"]),
+                "baseline_held_out": float(loss["baseline_held_out"]),
+                "per_update": [float(value) for value in loss["per_update"]],
+                "gradient_norms_before_clip": [
+                    float(value) for value in loss["gradient_norms_before_clip"]
+                ],
+                "final_train": float(loss["final_train"]),
+                "final_held_out": float(loss["final_held_out"]),
+                "all_finite": True,
+            },
+            "trainable_parameter_count": observation["trainable_parameter_count"],
+            "total_parameter_count": observation["total_parameter_count"],
+            "runtime": observation["runtime"],
+            "source_weight_check": observation["source_weight_check"],
+            "checkpoint_files": observation["checkpoint_files"],
+            "same_samples_verified": True,
+            "optimizer_training": True,
+            "model_inference_executed": False,
+            "closed_loop_evaluation_executed": False,
+            "simulation_policy_accepted": False,
+            "physical_actuation": False,
+            "external_compute_started": False,
+            "brev_compute_started": False,
+            "disposition": "equal_sample_supervised_training_only; closed_loop_comparison_pending",
+        }
+    )
+
+
+def verify_model_training_result(
+    payload: dict[str, Any], plan: dict[str, Any]
+) -> None:
+    """Verify an observed optimizer result and its exact paired-sample linkage."""
+
+    verify_signed_payload(payload, label="T20.7 model training result")
+    model = next(
+        (item for item in plan["models"] if item["model_id"] == payload.get("model_id")),
+        None,
+    )
+    common = plan["common_sample_plan"]
+    expected = {
+        "schema_version": TRAINING_SCHEMA_VERSION,
+        "task_id": "T20.7",
+        "source_plan_identity_sha256": plan["identity_sha256"],
+        "source_tensor_view_sha256": plan["source_tensor_view"]["file_sha256"],
+        "source_semantic_fixture_identity_sha256": plan[
+            "source_semantic_fixture_identity_sha256"
+        ],
+        "sample_plan_sha256": common["ordered_train_starts_sha256"],
+        "realized_train_starts": common["ordered_train_starts"],
+        "action_chunk_size": ACTION_CHUNK_SIZE,
+        "optimizer_update_count": common["optimizer_update_count"],
+        "microbatch_count": common["microbatch_count"],
+        "seed": TRAINING_SEED,
+        "train_diagnostic_starts": list(TRAIN_DIAGNOSTIC_STARTS),
+        "held_out_diagnostic_starts": list(HELD_OUT_DIAGNOSTIC_STARTS),
+    }
+    if model is None or any(payload.get(key) != value for key, value in expected.items()):
+        raise ValueError("T20.7 model training linkage or sample schedule drifted")
+    if payload.get("initialization") != model["initialization"]:
+        raise ValueError("T20.7 model training initialization drifted")
+    if payload.get("input_adapter") != model["input_adapter"]:
+        raise ValueError("T20.7 model training input adapter drifted")
+    _validate_training_observation(payload, plan)
+    if payload.get("optimizer") != _expected_optimizer(payload["model_id"]):
+        raise ValueError("T20.7 model training optimizer drifted")
+    expected_source = (
+        {
+            "kind": "sha256",
+            "value": model["initialization"]["model_sha256"],
+        }
+        if model["initialization"]["kind"] == "pinned_pretrained_plus_rank4_lora"
+        else {"kind": "deterministic_random_init", "seed": TRAINING_SEED}
+    )
+    if payload.get("source_weight_check") != expected_source:
+        raise ValueError("T20.7 model training source-weight evidence drifted")
+    runtime = payload.get("runtime")
+    if (
+        not isinstance(runtime, dict)
+        or runtime.get("device") != "mps"
+        or runtime.get("dtype") != "float32"
+        or runtime.get("offline") is not True
+        or not _is_sha256(runtime.get("lerobot_stack_identity_sha256"))
+    ):
+        raise ValueError("T20.7 model training runtime evidence drifted")
+    required_true = ("same_samples_verified", "optimizer_training")
+    required_false = (
+        "model_inference_executed",
+        "closed_loop_evaluation_executed",
+        "simulation_policy_accepted",
+        "physical_actuation",
+        "external_compute_started",
+        "brev_compute_started",
+    )
+    if any(payload.get(key) is not True for key in required_true) or any(
+        payload.get(key) is not False for key in required_false
+    ):
+        raise ValueError("T20.7 model training authority or completion fields drifted")
+
+
+def build_model_training_gate(
+    plan: dict[str, Any], results: list[tuple[str, dict[str, Any], str]]
+) -> dict[str, Any]:
+    """Compose four exact-sample optimizer results into an evaluation gate."""
+
+    if [payload.get("model_id") for _, payload, _ in results] != list(MODEL_ORDER):
+        raise ValueError("T20.7 model training results are incomplete or out of order")
+    entries = []
+    for path, payload, file_sha256 in results:
+        verify_model_training_result(payload, plan)
+        if not _is_sha256(file_sha256):
+            raise ValueError("T20.7 model training result file hash is invalid")
+        entries.append(
+            {
+                "model_id": payload["model_id"],
+                "path": path,
+                "identity_sha256": payload["identity_sha256"],
+                "file_sha256": file_sha256,
+                "trainable_parameter_count": payload["trainable_parameter_count"],
+                "total_parameter_count": payload["total_parameter_count"],
+                "baseline_train_loss": payload["loss"]["baseline_train"],
+                "final_train_loss": payload["loss"]["final_train"],
+                "baseline_held_out_loss": payload["loss"]["baseline_held_out"],
+                "final_held_out_loss": payload["loss"]["final_held_out"],
+                "checkpoint_files": payload["checkpoint_files"],
+            }
+        )
+    return sign_payload(
+        {
+            "schema_version": TRAINING_GATE_SCHEMA_VERSION,
+            "task_id": "T20.7",
+            "source_plan_identity_sha256": plan["identity_sha256"],
+            "sample_plan_sha256": plan["common_sample_plan"][
+                "ordered_train_starts_sha256"
+            ],
+            "realized_train_starts": plan["common_sample_plan"][
+                "ordered_train_starts"
+            ],
+            "optimizer_update_count_each": plan["common_sample_plan"][
+                "optimizer_update_count"
+            ],
+            "model_results": entries,
+            "all_four_models_present": True,
+            "all_losses_finite": True,
+            "all_gradients_finite": True,
+            "same_samples_verified": True,
+            "initialization_asymmetry_recorded": True,
+            "losses_cross_model_comparable": False,
+            "closed_loop_comparison_authorized": True,
+            "optimizer_training": True,
+            "simulation_policy_accepted": False,
+            "physical_actuation": False,
+            "external_compute_started": False,
+            "brev_compute_started": False,
+        }
+    )
+
+
+def verify_model_training_gate(
+    payload: dict[str, Any],
+    plan: dict[str, Any],
+    results: list[tuple[str, dict[str, Any], str]],
+) -> None:
+    verify_signed_payload(payload, label="T20.7 model training gate")
+    if payload != build_model_training_gate(plan, results):
+        raise ValueError("T20.7 model training gate drifted from observed results")
+
+
+def _validate_training_observation(
+    observation: dict[str, Any], plan: dict[str, Any]
+) -> None:
+    required = (
+        "realized_train_starts",
+        "optimizer",
+        "loss",
+        "trainable_parameter_count",
+        "total_parameter_count",
+        "runtime",
+        "source_weight_check",
+        "checkpoint_files",
+    )
+    if any(key not in observation for key in required):
+        raise ValueError("T20.7 model training observation is incomplete")
+    if observation["realized_train_starts"] != plan["common_sample_plan"][
+        "ordered_train_starts"
+    ]:
+        raise ValueError("T20.7 model training realized samples drifted")
+    loss = observation["loss"]
+    scalar_loss_keys = (
+        "baseline_train",
+        "baseline_held_out",
+        "final_train",
+        "final_held_out",
+    )
+    series_keys = ("per_update", "gradient_norms_before_clip")
+    if any(key not in loss for key in (*scalar_loss_keys, *series_keys)):
+        raise ValueError("T20.7 model training loss observation is incomplete")
+    if "all_finite" in loss and loss["all_finite"] is not True:
+        raise ValueError("T20.7 model training all-finite marker drifted")
+    expected_count = plan["common_sample_plan"]["optimizer_update_count"]
+    for key in scalar_loss_keys:
+        if not _is_finite_number(loss[key]):
+            raise ValueError(f"T20.7 model training {key} must be finite")
+    for key in series_keys:
+        values = loss[key]
+        if not isinstance(values, list) or len(values) != expected_count or not all(
+            _is_finite_number(value) for value in values
+        ):
+            raise ValueError(f"T20.7 model training {key} must contain exact finite updates")
+    for key in ("trainable_parameter_count", "total_parameter_count"):
+        value = observation[key]
+        if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+            raise ValueError(f"T20.7 model training {key} must be positive")
+    if observation["trainable_parameter_count"] > observation["total_parameter_count"]:
+        raise ValueError("T20.7 model training parameter counts are inconsistent")
+    optimizer = observation["optimizer"]
+    if not isinstance(optimizer, dict) or not isinstance(optimizer.get("name"), str):
+        raise ValueError("T20.7 model training optimizer is incomplete")
+    for key in ("learning_rate", "weight_decay", "gradient_clip_norm"):
+        if not _is_finite_number(optimizer.get(key)) or optimizer[key] < 0:
+            raise ValueError(f"T20.7 model training optimizer {key} is invalid")
+    files = observation["checkpoint_files"]
+    if not isinstance(files, dict) or not files:
+        raise ValueError("T20.7 model training checkpoint manifest is empty")
+    for relative_path, metadata in files.items():
+        if (
+            not isinstance(relative_path, str)
+            or not relative_path
+            or relative_path.startswith("/")
+            or ".." in Path(relative_path).parts
+            or not isinstance(metadata, dict)
+            or not _is_sha256(metadata.get("sha256"))
+            or isinstance(metadata.get("size_bytes"), bool)
+            or not isinstance(metadata.get("size_bytes"), int)
+            or metadata["size_bytes"] <= 0
+        ):
+            raise ValueError("T20.7 model training checkpoint manifest is invalid")
+
+
+def _is_finite_number(value: Any) -> bool:
+    return (
+        not isinstance(value, bool)
+        and isinstance(value, (int, float))
+        and math.isfinite(value)
+    )
+
+
+def _is_sha256(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
+
+
+def _expected_optimizer(model_id: str) -> dict[str, Any]:
+    return {
+        "name": "AdamW",
+        "learning_rate": 5e-5 if model_id in ("pi05", "smolvla") else 1e-4,
+        "weight_decay": 0.0,
+        "gradient_clip_norm": 1.0,
+    }
 
 
 def _validate_starts(training_spec: dict[str, Any]) -> None:
