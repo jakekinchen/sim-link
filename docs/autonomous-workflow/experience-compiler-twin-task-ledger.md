@@ -4,12 +4,12 @@ Updated: 2026-07-13
 
 ```text
 training_lock: closed
-run_window: start 2026-07-13T12:30:11-05:00; no new major slice after 19:45:11; hard closeout 20:30:11 CDT
+run_window: start 2026-07-13T20:30:52-05:00; no new major slice after 2026-07-14T03:45:52-05:00; hard closeout 2026-07-14T04:30:52 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M17/M19 grasp execution track
-current_task: T17.4 pending after verified T17.3; compile source-bound frames and hard-boundary segments while quarantining incomplete rollout projections
+current_task: T17.4 in_progress after verified T17.3; compile source-bound frames and hard-boundary segments while quarantining incomplete rollout projections
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: processor 9800c873...; fixture normalization bundle c829e2ba... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; no compiled frames, hardware, or motion
+evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; no compiled frames, hardware, or motion
 remaining: source-bound frames/segments, valid windows, real generated grasp episodes, compiler audit; T19.2 physical calibration under fresh permits; central simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; simulation training remains centrally withheld
@@ -53,6 +53,29 @@ The regenerated T17.1 content-addressed projection is recorded in
 `project_state.json` with its maintenance linkage to Session 140 and Reviewer
 Decision 136. Its original Brief 107 verification is not rewritten. No
 hardware, Brev, paid compute, optimizer, training, or physical motion occurred.
+
+## 2026-07-13 - Brief 110 T17.4 start
+
+The prior eight-hour window expired at `2026-07-13T20:30:11-05:00` and was
+recorded in `run_window_history`. Owner continuation opened a fresh eight-hour
+window at `2026-07-13T20:30:52-05:00`; no-new-major-slice cutoff is
+`2026-07-14T03:45:52-05:00` and hard closeout is `2026-07-14T04:30:52-05:00`.
+
+T17.4 is now `in_progress` under Brief 110. The first implementation slice is
+the source-bound compiler only: deterministic frame rows, hard-boundary
+segments, and explicit quarantine/compiler manifests. The current fixture's
+missing per-frame action evidence must remain quarantined; no normalization,
+training, optimizer, hardware, or Brev authority is opened.
+
+## 2026-07-13 - Signed dependency reconciliation
+
+The T17.1 maintenance refresh changed the source experience-record identity, so
+the signed T17.2 processor and T17.3 normalization bundle were regenerated from
+their canonical builders. Commit `f6626fa` records the processor identity
+`59827b3d...` and normalization identity `dea3ff8c...`; their capabilities and
+closed authority flags are unchanged. The T17.4 compiler was then rebound to
+the new normalization identity. No raw bytes, hardware, Brev, training, or
+optimizer work occurred.
 
 ## M16 - Twin And Dependency Foundation
 
@@ -256,8 +279,8 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
 | T17.1 | verified | T16.2,T19.0l | Define immutable raw rollout/frame records and provenance dictionaries | Brief 107/Reviewer 133; maintenance reconciliation 2f880d0 / Session 140 / Reviewer 136 updates the current content-addressed projection identity without rewriting Brief 107; grasp/twin/coordinate bound; stable rollout/frame identities; canonical/source phases; recovery only a control mode; five action variants remain distinct; two-frame fixture quarantined for five missing-data reasons; 210-test broad gate |
-| T17.2 | verified | T16.2-T16.3,T17.1 | Implement a named canonical SO-101 processor shared by collection, training, evaluation, and adapters | Brief 108/Reviewer 134; processor 9800c873...; pure unclamped transform, fail-closed bounds, explicit requested/executed limiter; 128 round trips max 4.441e-16; golden parity and monotonic gripper; 221-test broad gate |
-| T17.3 | verified | T17.2 | Generate immutable `normalization_bundle.json` | Brief 109/Reviewer 135; bundle c829e2ba...; 94,568-sample MEAN_STD statistics; actual cached processor/tokenizer fixture parity; camera/order/runtime/tensor hashes pinned; production/training false; 227-test broad gate |
+| T17.2 | verified | T16.2-T16.3,T17.1 | Implement a named canonical SO-101 processor shared by collection, training, evaluation, and adapters | Brief 108/Reviewer 134; maintenance f6626fa / Session 141 / Reviewer 137 rebinds the source reference; processor 59827b3d...; pure unclamped transform, fail-closed bounds, explicit requested/executed limiter; 128 round trips max 4.441e-16; golden parity and monotonic gripper; 221-test broad gate |
+| T17.3 | verified | T17.2 | Generate immutable `normalization_bundle.json` | Brief 109/Reviewer 135; maintenance f6626fa / Session 141 / Reviewer 137 rebinds the processor reference; bundle dea3ff8c...; 94,568-sample MEAN_STD statistics; actual cached processor/tokenizer fixture parity; camera/order/runtime/tensor hashes pinned; production/training false; 227-test broad gate |
 | T17.4 | pending | T17.1-T17.3 | Compile `frames.parquet` and hard-boundary `segments.parquet` | Raw hashes retained; owner/reset/prompt/contract/gap changes split or fail |
 | T17.5 | pending | T17.2-T17.4 | Compile unpadded `window_index.parquet` for horizons 5/10/15/50 | No gaps, missing actions, padding, reset, teleport, drift, or forbidden transition |
 | T17.6 | pending | T17.1-T17.5 | Recompile qualifying legacy raw rollouts and quarantine ambiguous legacy data | No guessed migration; reasoned quarantine manifest |

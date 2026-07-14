@@ -2,11 +2,11 @@
   "schema_version": "scenesmith.project_state.v1",
   "updated": "2026-07-13",
   "run_window": {
-    "actual_start": "2026-07-13T12:30:11-05:00",
+    "actual_start": "2026-07-13T20:30:52-05:00",
     "total_duration_hours": 8,
-    "no_new_major_slice_after": "2026-07-13T19:45:11-05:00",
-    "hard_closeout": "2026-07-13T20:30:11-05:00",
-    "owner_extension_recorded_at": "2026-07-13T12:30:11-05:00",
+    "no_new_major_slice_after": "2026-07-14T03:45:52-05:00",
+    "hard_closeout": "2026-07-14T04:30:52-05:00",
+    "owner_extension_recorded_at": "2026-07-13T20:30:52-05:00",
     "closeout_recorded_at": null
   },
   "run_window_history": [
@@ -42,6 +42,15 @@
       "owner_extension_recorded_at": "2026-07-13T08:21:09-05:00",
       "closeout_recorded_at": "2026-07-13T12:21:09-05:00",
       "closeout_reason": "window_expired_before_current_owner_continuation"
+    },
+    {
+      "actual_start": "2026-07-13T12:30:11-05:00",
+      "total_duration_hours": 8,
+      "no_new_major_slice_after": "2026-07-13T19:45:11-05:00",
+      "hard_closeout": "2026-07-13T20:30:11-05:00",
+      "owner_extension_recorded_at": "2026-07-13T12:30:11-05:00",
+      "closeout_recorded_at": "2026-07-13T20:30:14-05:00",
+      "closeout_reason": "window_expired_before_current_owner_continuation"
     }
   ],
   "branch": "codex/pi05-autolearn-loop",
@@ -52,7 +61,7 @@
   },
   "latest_verified_task_implementation_boundary": {
     "brief_id": "109",
-    "commit": "76cb16ddbc46967a1c558216dad9780c701d42e6",
+    "commit": "f6626faeaadd6cbfb86e000cbf15e750772c20e1",
     "reviewer_decision_id": "135",
     "summary": "immutable_fixture_scoped_normalization_preprocessing_bundle_binds_canonical"
   },
@@ -2310,13 +2319,19 @@
       "result": "named canonical SO-101 processor verifies pure unclamped bidirectional transformation, separate fail-closed validation, and separate safety limiting with requested-versus-executed evidence",
       "artifact": {
         "path": "configurations/robot_lab/so101_canonical_processor_contract.json",
-        "identity_sha256": "9800c873896eee63c10da7a4c02c964ff1faf28711d438c89731f3266d77a6f2",
-        "file_sha256": "cd60dce9f791f4c8becf7d33baa2382d96b843fe0af5b975a0ea0f796505d902",
+        "identity_sha256": "59827b3dfe8adce0903495edd9f68af2db5f40abf93aa0fb51b9acfcef4118c7",
+        "file_sha256": "3145f4ae1efb86463df2398775315cd0b764a74bca954448c6a1d0f57eb8f503",
         "size_bytes": 3945,
         "processor_name": "scenesmith_so101_canonical_processor_v1",
         "random_round_trip_count": 128,
         "maximum_round_trip_error": 4.440892098500626e-16,
         "broad_test_count": 221
+      },
+      "artifact_maintenance": {
+        "commit": "f6626faeaadd6cbfb86e000cbf15e750772c20e1",
+        "reason": "rebound signed downstream contract to the reconciled T17.1 source identity",
+        "review_decision_id": "137",
+        "session_log": "docs/session-logs/141-signed-contract-dependency-reconciliation.md"
       },
       "authority_granted": [
         "canonical_so101_processor_valid",
@@ -2339,9 +2354,33 @@
       "latest_verified_brief_id": "109",
       "review_decision_id": "135",
       "result": "immutable fixture-scoped normalization/preprocessing bundle binds canonical processor, dependencies, actual cached checkpoint processor/tokenizer parity, statistics, cameras, runtime revisions, and tensor hashes without production or training escalation",
-      "artifact": {"path": "configurations/robot_lab/normalization_bundle.json", "identity_sha256": "c829e2ba79b3d6bca2b17a4e5dc45d665be020ef7f70b5bf91b53b5b6f30bfb6", "file_sha256": "7500b2cc7dc0d25653a3d3b7a03f5961c5af622d3cc66e1b3d3aacf546ae599c", "size_bytes": 8835, "sample_count": 94568, "normalization_mode": "MEAN_STD", "actual_cached_processor_executed": true, "production_eligible": false, "broad_test_count": 227},
+      "artifact": {"path": "configurations/robot_lab/normalization_bundle.json", "identity_sha256": "dea3ff8cb85640499416fc6fd6bf0cf43dce3479766fb1ff277e8d224e097ebe", "file_sha256": "0d20428fbe20a27d0c60ad9f8b75ce3613a01f244aa6771e21fa474913ea3bda", "size_bytes": 8835, "sample_count": 94568, "normalization_mode": "MEAN_STD", "actual_cached_processor_executed": true, "production_eligible": false, "broad_test_count": 227},
+      "artifact_maintenance": {
+        "commit": "f6626faeaadd6cbfb86e000cbf15e750772c20e1",
+        "reason": "rebound normalization source reference to the reconciled T17.2 processor contract",
+        "review_decision_id": "137",
+        "session_log": "docs/session-logs/141-signed-contract-dependency-reconciliation.md"
+      },
       "authority_granted": ["fixture_normalization_bundle_valid", "actual_cached_processor_fixture_parity_bound"],
       "authority_not_granted": ["production_normalization_valid", "compiled_training_frames", "simulation_training_ready", "optimizer_training", "physical_actuation"]
+    },
+    "T17.4": {
+      "state": "in_progress",
+      "depends_on": ["T17.1", "T17.2", "T17.3"],
+      "active_brief_id": "110",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "result": "compiling deterministic source-bound frames and hard-boundary segments with explicit quarantine for incomplete action evidence",
+      "artifact": {
+        "frames_path": "configurations/robot_lab/t17_4_compile/frames.parquet",
+        "segments_path": "configurations/robot_lab/t17_4_compile/segments.parquet",
+        "quarantine_manifest_path": "configurations/robot_lab/t17_4_compile/quarantine_manifest.json",
+        "compiler_manifest_path": "configurations/robot_lab/t17_4_compile/compiler_manifest.json",
+        "source_experience_record_identity_sha256": "8682cea5d45ed5cf115f3f68eadc5f81376e26b9d6981969876f05c3c7665737",
+        "source_normalization_bundle_identity_sha256": "dea3ff8cb85640499416fc6fd6bf0cf43dce3479766fb1ff277e8d224e097ebe"
+      },
+      "authority_granted": [],
+      "authority_not_granted": ["compiled_training_frames", "valid_action_windows", "simulation_training_ready", "optimizer_training", "physical_actuation"]
     },
     "T19.0": {
       "state": "verified",

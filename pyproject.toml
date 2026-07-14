@@ -29,6 +29,7 @@ dependencies = [
     "openai-agents>=0.6.5,<0.7",
     "opencv-python>=4.10.0.84,<4.12",
     "pybind11>=3.0.1",
+    "pyarrow==22.0.0",
     "pygltflib>=1.16.5",
     "pymeshlab==2023.12.post3",
     "python-fcl>=0.7.0.10",
