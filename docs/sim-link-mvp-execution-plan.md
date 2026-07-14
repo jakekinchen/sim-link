@@ -92,7 +92,7 @@ not inherit authority from this document.
 
 T20.17 is verified negative, T20.18 is verified recovery evidence, T20.19 is
 verified as an uncalibrated grid, T20.20 and T20.21 are verified, and T20.22 is
-next. Do not
+active under Brief 153. Do not
 start broad calibration, Robo Scan consumption beyond the verified
 reference-only I2/I3 boundary, or canary planning while the learned policy has
 not achieved repeatable strict-v2 success in simulation.
@@ -118,9 +118,10 @@ leaked, spoofed, camera/VLM, malformed, or undeclared evidence fails closed.
 Brief 152 is verified through `7f264ab` by Reviewer Decision 182: the matched
 synthetic pair has zero joint/action/event-time error and nine fixed diagnostics
 route all declared mismatch categories without calibration or twin mutation.
-T20.22 is next; no paired-real/sim, hardware-observation, live-execution,
-physical-qualification, training-ready, posterior-calibration, or optimizer
-grant exists.
+Brief 153 activates only the offline timing/latency certificate; no
+paired-real/sim, hardware-observation, live-probe, clock-synchronization,
+calibration/twin update, physical-qualification, training-ready,
+posterior-calibration, or optimizer grant exists.
 
 ## Paused Integration Queue
 

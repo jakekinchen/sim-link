@@ -60,7 +60,7 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
 is `verified` through Brief 151; T20.21 is `verified` through Brief 152, and
-T20.22 is next. Brief 145 established T20.17's first boundary at
+T20.22 is `in_progress` under Brief 153. Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
 geometry-derived episode generation, the SO-101 processor, and thin
@@ -125,9 +125,10 @@ evidence fails closed. This is not hardware observation or physical
 qualification. Brief 152 is verified through `7f264ab` by Reviewer Decision
 182. Its two separately signed synthetic traces match exactly, and nine fixed
 diagnostics route `q0`, action, joint, clock, and event mismatches without
-calibration or twin mutation. This is not paired real/sim evidence. T20.22 is
-next; no hardware, optimizer, posterior, policy-acceptance, or training-readiness
-grant was created.
+calibration or twin mutation. This is not paired real/sim evidence. Brief 153
+activates only an offline timing-certificate fixture; no hardware, live probe,
+clock synchronization, calibration/twin update, optimizer, posterior,
+policy-acceptance, or training-readiness grant was created.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
