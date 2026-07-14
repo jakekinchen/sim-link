@@ -40,3 +40,14 @@ retreat witness passes.
 
 Model training or inference, policy comparison, MuJoCo capability claims,
 hardware, physical transfer, promotion, external compute, and Brev.
+
+## Verified Outcome
+
+The source-bound deterministic fixture projects the checked-in strict-v2 trace
+onto all eight capability stages. Its analytic positive reaches the declared
+target and passes strict semantics while remaining explicitly non-policy and
+non-MuJoCo evidence. Eight required adversarial traces also reach and stably
+occupy the target, yet putt, slide, throw, invalid release, scripted motion,
+assistance relabeling, stage drift, and actor privilege each fail strict success
+for the expected reason. Fifty-six focused semantic, artifact, authority, and
+pointer tests pass. Reviewer 155 accepts implementation boundary `fd4b2a4`.

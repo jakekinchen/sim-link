@@ -56,12 +56,13 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.6 is `in_progress` under Brief 126. It binds the existing strict-v2 grasp
-semantics to an explicit eight-stage capability witness and records terminal
-target occupancy independently from strict success. The fixed adversarial set
-must include putt, slide, throw, terminal-occupancy-only, scripted-motion,
-assistance-relabel, stage-drift, and actor-privilege cases. Hardware, physical
-transfer, promotion, external compute, and Brev remain closed.
+T20.6 is `verified` through Brief 126 and Reviewer 155. Its source-bound
+analytic positive passes the existing strict-v2 evaluator with all eight
+capability stages, while eight target-reaching adversarial traces preserve
+truthful stable target occupancy but fail strict success for the expected
+semantic reason. T20.7 is next for a separately briefed fixed-semantics model
+bake-off. Hardware, physical transfer, promotion, external compute, and Brev
+remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
