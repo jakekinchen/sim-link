@@ -84,6 +84,9 @@ optimizer, and T20.26 is now `verified` through Reviewer Decision 187. Both
 adapters are bit-exact for fixed-seed repeats within and across processes;
 distinct inference seeds span 0.18478 / 0.14797 rad. Future training comparison
 must therefore pair multiple inference seeds. No policy is accepted.
+Brief 158 now opens T20.27 to compare the already captured clean/recovery
+frame-zero actions against the exact source action over five paired inference
+seeds. It runs no model or optimizer and predeclares no training-effect result.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

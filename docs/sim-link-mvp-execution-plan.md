@@ -156,6 +156,9 @@ is bit-exact within and across processes for both adapters, so the older clean
 hash gap is not reproduced in the current runtime. Distinct seeds span 0.18478
 rad clean and 0.14797 rad recovery; the next comparison must pair candidates
 over the same seed distribution before any optimizer decision.
+Brief 158 opens T20.27 to compute that paired five-seed source-action comparison
+offline from the verified T20.26 batches. No additional inference, rollout, or
+optimizer is authorized.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
