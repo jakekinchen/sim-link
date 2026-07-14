@@ -65,7 +65,8 @@ collision pair as active contact, while the T17.5b source contract omits that
 gate and T20.6 defines release by fingertip contact. T20.10 is `verified`
 through Brief 130/Reviewer 160: the exact oracle now passes all gates under an
 explicit force-bearing release basis while final retreat remains geometrically
-clear; legacy T20.9 still verifies unchanged. T20.11 is next to localize each
+clear; legacy T20.9 still verifies unchanged. T20.11 is `in_progress` under
+Brief 131 to localize each
 learned model's per-phase action error against this oracle before any optimizer
 hypothesis. No learned policy is accepted. Hardware, physical transfer,
 promotion, external compute, and Brev remain closed.
