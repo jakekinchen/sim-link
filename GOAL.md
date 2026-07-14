@@ -80,9 +80,14 @@ evaluation-only and unclipped. T20.14 is `verified` through Brief 134/Reviewer
 0.75432 to 0.23898 rad, but initial non-gripper MAE regressed from 0.03097 to
 0.74683 rad. The fixed seed-2 rollout retained zero strict-v2 frames and only
 0.0003007 mm lift; five reviewed keyframes visibly show the gripper displaced
-from the cube. T20.15 is `in_progress` under Brief 135 for a no-optimizer 2x2
-state-versus-action normalizer ablation. No learned policy is accepted. Hardware, physical
-transfer, promotion, external compute, and Brev remain closed.
+from the cube. T20.15 is `verified` through Brief 135/Reviewer 165. Its exact
+2x2 frame-zero ablation isolates action postprocessing as the dominant arm
+regression: 0.95872 rad non-gripper displacement versus 0.23586 from state
+preprocessing and 0.26037 interaction. T20.16 is next for a no-training hybrid
+that retains checkpoint arm/state scaling and substitutes only the
+dataset-derived gripper postprocessor before one strict rendered rollout. No
+learned policy is accepted. Hardware, physical transfer, promotion, external
+compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
