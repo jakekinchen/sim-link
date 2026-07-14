@@ -57,11 +57,14 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.17 is `in_progress` under Brief 137. Its first boundary is verified at
+T20.17 is `in_progress` under Brief 138. Its first boundary is verified at
 `af317bc`: preserve the compact bespoke IP
 (content-addressed contracts, strict grasp semantics, geometry-derived episode
 generation, the SO-101 processor, and thin authority/stack locks); delete only
-unreferenced test-only modules; and replace duplicate dataset and
+unreferenced test-only modules. The active second slice builds the thin signed
+manifest over a single actual `LeRobotDataset` (episode hashes, eligibility,
+provenance, quarantine) without creating a duplicate training store; it then
+replaces duplicate dataset and
 shadow-preprocessing derivations with a signed manifest around one
 `LeRobotDataset` plus hashes of its actual pipeline outputs. Historical
 artifacts remain immutable, no clean-base training starts until the new
