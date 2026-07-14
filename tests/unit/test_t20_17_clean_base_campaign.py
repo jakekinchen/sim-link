@@ -17,7 +17,7 @@ class T2017CleanBaseCampaignTests(unittest.TestCase):
             python=Path("/runtime/python"),
             dataset_root=Path("/repo/dataset"),
             model_snapshot_root=Path("/cache/pi05"),
-            output_root=Path("/repo/run"),
+            output_root=Path("/repo/run/training"),
         )
         joined = " ".join(str(item) for item in argv)
         for required in (
@@ -33,6 +33,7 @@ class T2017CleanBaseCampaignTests(unittest.TestCase):
             "--policy.push_to_hub=false",
             "--wandb.enable=false",
             "--job.target=local",
+            "--output_dir=/repo/run/training",
         ):
             self.assertIn(required, joined)
         for forbidden in ("cuda", "hf jobs", "--resume=true"):

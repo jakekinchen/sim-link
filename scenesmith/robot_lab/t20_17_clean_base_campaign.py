@@ -24,7 +24,8 @@ from scenesmith.robot_lab.t20_17_simulation_training_authority import require_ac
 
 
 EXPECTED_UPDATES = 250
-RUN_ROOT = Path("outputs/robot_lab/t20_17_clean_base_run_001")
+RUN_ROOT = Path("outputs/robot_lab/t20_17_clean_base_run_002")
+TRAINING_OUTPUT_DIR = Path("training")
 INVOCATION_PATH = Path("invocation.json")
 TRAIN_LOG_PATH = Path("train.log")
 RUN_SUMMARY_PATH = Path("run_summary.json")
@@ -60,7 +61,7 @@ def build_training_argv(
         "--save_checkpoint=true",
         f"--save_freq={EXPECTED_UPDATES}",
         f"--output_dir={output_root}",
-        "--job_name=t20_17_clean_base_run_001",
+        "--job_name=t20_17_clean_base_run_002",
         "--wandb.enable=false",
         "--job.target=local",
     ]
@@ -101,7 +102,7 @@ def run_campaign(*, repo_root: Path = REPO_ROOT, python: Path | None = None) -> 
         python=python or Path(sys.executable),
         dataset_root=dataset_root,
         model_snapshot_root=model_root,
-        output_root=run_root,
+            output_root=run_root / TRAINING_OUTPUT_DIR,
     )
     invocation = sign_payload({
         "schema_version": "scenesmith.t20_17_clean_base_invocation.v1",
@@ -139,7 +140,7 @@ def run_campaign(*, repo_root: Path = REPO_ROOT, python: Path | None = None) -> 
     if return_code != 0:
         raise RuntimeError(f"Official LeRobot training exited with status {return_code}")
     trace = parse_finite_loss_trace(run_root / TRAIN_LOG_PATH)
-    checkpoint_root = run_root / "checkpoints" / "last" / "pretrained_model"
+    checkpoint_root = run_root / TRAINING_OUTPUT_DIR / "checkpoints" / "last" / "pretrained_model"
     if not checkpoint_root.is_dir():
         raise ValueError("T20.17 final LeRobot checkpoint is missing")
     files = _file_tree(checkpoint_root)
