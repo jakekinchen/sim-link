@@ -7,6 +7,7 @@ from typing import Any
 
 from scenesmith.robot_lab.artifact_contract import load_strict_json, sign_payload, verify_signed_payload
 from scenesmith.robot_lab.geometry_first_grasp_search import REPO_ROOT, _candidate
+from scenesmith.robot_lab.grasp_evidence import validate_rendered_keyframes
 from scenesmith.robot_lab.gripper_contact_semantics import PAD_HALF_SIZE_M
 from scenesmith.robot_lab.mujoco_anchor_grasp import ANCHOR_DIMENSIONS_M
 from scenesmith.robot_lab.post_yaw_settle_search import APPROACH_MOTION_LIMIT_M, POST_YAW_SETTLE_SECONDS
@@ -135,5 +136,6 @@ def verify_geometry_derived_unilateral_grasp(payload: dict[str, Any]) -> None:
     verify_signed_payload(payload, label="geometry-derived unilateral grasp")
     if not payload.get("two_pass_exact_determinism") or not payload.get("geometry_derived_controls"):
         raise ValueError("Geometry-derived grasp proof is incomplete")
+    validate_rendered_keyframes(payload.get("trajectory", {}).get("rendered_keyframes"))
     if payload != build_geometry_derived_unilateral_grasp():
         raise ValueError("Geometry-derived grasp proof drifted")

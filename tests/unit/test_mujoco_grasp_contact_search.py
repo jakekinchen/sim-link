@@ -29,8 +29,12 @@ class MujocoGraspContactSearchTests(unittest.TestCase):
         self.assertEqual(selected["hold_two_jaw_frames"], 8)
         self.assertTrue(payload["selected_validation_two_pass_exact_determinism"])
         self.assertEqual(
+            len(payload["selected_unassisted_validation"]["summary"]["rendered_keyframes"]),
+            4,
+        )
+        self.assertEqual(
             payload["source_anchor_attempt_identity_sha256"],
-            "32f14feba6c10e501082c0438ee4b0cd80ee530d4c143468b5af20f5ad29626e",
+            "f880cc5318d87a1da9bc6dfc65ce8afb1f4a9152414b2ef9e099726d9fb795cf",
         )
         self.assertFalse(payload["physical_measurement_claimed"])
 

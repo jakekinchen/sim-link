@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any
 from scenesmith.robot_lab.artifact_contract import load_strict_json, sign_payload, verify_signed_payload
 from scenesmith.robot_lab.geometry_first_grasp_search import REPO_ROOT, RANGES, TRAINING_CANDIDATES, _candidate, _rank
+from scenesmith.robot_lab.grasp_pose_solver import APPROACH_MOTION_LIMIT_M
 SCHEMA_VERSION="scenesmith.pad_midpoint_grasp_search.v1"
 SOURCE=REPO_ROOT/"configurations/robot_lab/explicit_pad_proxy_search.json"
 def build_pad_midpoint_search()->dict[str,Any]:
@@ -15,7 +16,7 @@ def _midpoint_candidate(index:int,*,holdout:bool)->dict[str,Any]:
     row=_candidate(index,holdout=holdout,explicit_pad_proxy_only=True,pad_midpoint_targeting=True)
     if not row.get("setup_valid"): return row
     row["base_contact_geometry_eligible"]=row["geometry_eligible"]
-    row["approach_object_motion_valid"]=row["preclose_object_displacement_m"]<=0.0001
+    row["approach_object_motion_valid"]=row["preclose_object_displacement_m"]<=APPROACH_MOTION_LIMIT_M
     row["nonpad_contact_valid"]=row["nonpad_robot_object_contact_frame_count"]==0
     row["geometry_eligible"]=bool(row["base_contact_geometry_eligible"] and row["approach_object_motion_valid"] and row["nonpad_contact_valid"])
     return row

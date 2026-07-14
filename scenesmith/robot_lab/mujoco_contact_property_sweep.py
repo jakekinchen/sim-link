@@ -20,6 +20,12 @@ from scenesmith.robot_lab.causal_sort_expert import (
     CausalSortExpert,
     CausalSortExpertConfig,
 )
+from scenesmith.robot_lab.grasp_evidence import (
+    KEYFRAME_IMAGE_SIZE,
+    finalize_rendered_keyframes,
+    retain_rendered_keyframe,
+    validate_rendered_keyframes,
+)
 from scenesmith.robot_lab.mujoco_anchor_grasp import (
     OBJECT_ID,
     _add_anchor_speeds,
@@ -143,6 +149,24 @@ def verify_mujoco_contact_property_sweep(payload: dict[str, Any]) -> None:
         raise ValueError("MuJoCo contact property baseline is not deterministic")
     if not payload.get("holdout", {}).get("excluded_from_selection"):
         raise ValueError("MuJoCo contact property holdout leaked into selection")
+    keyframe_phases = (
+        "pregrasp",
+        "close",
+        "grasp_hold",
+        "unassisted_lift_hold",
+    )
+    validate_rendered_keyframes(
+        payload.get("baseline_summary", {}).get("rendered_keyframes"),
+        phases=keyframe_phases,
+    )
+    for candidate in payload.get("training_candidates", []):
+        validate_rendered_keyframes(
+            candidate.get("rendered_keyframes"), phases=keyframe_phases
+        )
+    validate_rendered_keyframes(
+        payload.get("holdout", {}).get("result", {}).get("rendered_keyframes"),
+        phases=keyframe_phases,
+    )
 
 
 def _run_variant(
@@ -151,6 +175,7 @@ def _run_variant(
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
+    rendered_keyframes: dict[str, dict[str, Any]] = {}
     with tempfile.TemporaryDirectory(prefix="scenesmith-contact-property-") as directory:
         root = Path(directory)
         prepare_mujoco_so101_assets(root, scene.robot.base_position_m)
@@ -165,13 +190,28 @@ def _run_variant(
             retained = _raw_frame(expert, frame)
             retained["jaw_contact_geometry"] = _jaw_contact_geometry(expert)
             raw_frames.append(retained)
+            retain_rendered_keyframe(
+                rendered_keyframes,
+                frame,
+                _images,
+                phases=(
+                    "pregrasp",
+                    "close",
+                    "grasp_hold",
+                    "unassisted_lift_hold",
+                ),
+                image_size=KEYFRAME_IMAGE_SIZE,
+            )
 
         expert = CausalSortExpert(
             scene,
             xml_path,
             seed=901,
             frame_sink=retain,
-            config=CausalSortExpertConfig(image_size=16, capture_images=False),
+            config=CausalSortExpertConfig(
+                image_size=KEYFRAME_IMAGE_SIZE,
+                capture_images=True,
+            ),
         )
         if friction is not None and contact_timeconst_s is not None:
             _apply_contact_properties(expert, friction, contact_timeconst_s)
@@ -211,8 +251,13 @@ def _run_variant(
         finally:
             expert.close()
     _add_anchor_speeds(raw_frames)
+    summary = _summary(raw_frames, friction, contact_timeconst_s)
+    summary["rendered_keyframes"] = finalize_rendered_keyframes(
+        rendered_keyframes,
+        phases=("pregrasp", "close", "grasp_hold", "unassisted_lift_hold"),
+    )
     return {
-        "summary": _summary(raw_frames, friction, contact_timeconst_s),
+        "summary": summary,
         "contact_span_profile": _contact_span_profile(raw_frames),
     }
 

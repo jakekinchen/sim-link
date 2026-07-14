@@ -18,6 +18,12 @@ from scenesmith.robot_lab.causal_sort_expert import (
     CausalSortExpert,
     CausalSortExpertConfig,
 )
+from scenesmith.robot_lab.grasp_evidence import (
+    KEYFRAME_IMAGE_SIZE,
+    finalize_rendered_keyframes,
+    retain_rendered_keyframe,
+    validate_rendered_keyframes,
+)
 from scenesmith.robot_lab.mujoco_export import (
     prepare_mujoco_so101_assets,
     render_mujoco_xml,
@@ -78,6 +84,7 @@ def build_mujoco_anchor_grasp_attempt() -> dict[str, Any]:
             "mujoco_report": first["report"],
             "raw_frame_count": len(first["raw_frames"]),
             "raw_frames": first["raw_frames"],
+            "rendered_keyframes": first["rendered_keyframes"],
             "maximum_anchor_step_displacement_m": first[
                 "maximum_anchor_step_displacement_m"
             ],
@@ -103,6 +110,7 @@ def build_mujoco_anchor_grasp_attempt() -> dict[str, Any]:
 
 def verify_mujoco_anchor_grasp_attempt(payload: dict[str, Any]) -> None:
     verify_signed_payload(payload, label="MuJoCo anchor grasp attempt")
+    validate_rendered_keyframes(payload.get("rendered_keyframes"))
     if payload != build_mujoco_anchor_grasp_attempt():
         raise ValueError("MuJoCo anchor grasp attempt drifted")
 
@@ -110,6 +118,14 @@ def verify_mujoco_anchor_grasp_attempt(payload: dict[str, Any]) -> None:
 def _run_once() -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
+    rendered_keyframes: dict[str, dict[str, Any]] = {}
+    phase_aliases = (
+        ("descend", "pregrasp"),
+        ("close", "close"),
+        ("grasp_settle", "grasp_hold"),
+        ("lift", "unsupported_lift_hold"),
+        ("return_home", "retreat"),
+    )
     with tempfile.TemporaryDirectory(prefix="scenesmith-anchor-grasp-") as directory:
         root = Path(directory)
         prepare_mujoco_so101_assets(root, scene.robot.base_position_m)
@@ -122,13 +138,33 @@ def _run_once() -> dict[str, Any]:
             if expert is None:
                 raise RuntimeError("MuJoCo expert was not initialized")
             raw_frames.append(_raw_frame(expert, frame))
+            phase = next(
+                (
+                    target
+                    for suffix, target in phase_aliases
+                    if str(frame.get("phase", "")).endswith(suffix)
+                ),
+                None,
+            )
+            if phase is not None:
+                aliased_frame = dict(frame)
+                aliased_frame["phase"] = phase
+                retain_rendered_keyframe(
+                    rendered_keyframes,
+                    aliased_frame,
+                    _images,
+                    image_size=KEYFRAME_IMAGE_SIZE,
+                )
 
         expert = CausalSortExpert(
             scene,
             xml_path,
             seed=SEED,
             frame_sink=retain,
-            config=CausalSortExpertConfig(image_size=32, capture_images=False),
+            config=CausalSortExpertConfig(
+                image_size=KEYFRAME_IMAGE_SIZE,
+                capture_images=True,
+            ),
         )
         try:
             report = expert.run()
@@ -139,6 +175,7 @@ def _run_once() -> dict[str, Any]:
     return {
         "report": report,
         "raw_frames": raw_frames,
+        "rendered_keyframes": finalize_rendered_keyframes(rendered_keyframes),
         "maximum_anchor_step_displacement_m": maximum_step,
     }
 

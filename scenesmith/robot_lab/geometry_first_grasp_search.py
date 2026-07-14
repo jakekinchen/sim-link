@@ -13,6 +13,16 @@ import numpy as np
 from scenesmith.robot_lab.artifact_contract import load_strict_json, sign_payload, verify_signed_payload
 from scenesmith.robot_lab.causal_sort_expert import CausalSortExpert, CausalSortExpertConfig, SIMULATION_HOME
 from scenesmith.robot_lab.grasp_pose_solver import apply_and_read_object_yaw, solve_grasp_pose
+from scenesmith.robot_lab.grasp_pose_solver import (
+    APPROACH_MOTION_LIMIT_M,
+    POSITION_TOLERANCE_M,
+)
+from scenesmith.robot_lab.grasp_evidence import (
+    KEYFRAME_IMAGE_SIZE,
+    finalize_rendered_keyframes,
+    retain_rendered_keyframe,
+    validate_rendered_keyframes,
+)
 from scenesmith.robot_lab.gripper_contact_semantics import (
     FIXED_PAD_SITE,
     MOVING_PAD_SITE,
@@ -31,7 +41,15 @@ SCHEMA_VERSION = "scenesmith.geometry_first_grasp_search.v1"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 GEOMETRY_AUDIT = REPO_ROOT / "configurations/robot_lab/gripper_geometry_audit.json"
 POSE_FIXTURE = REPO_ROOT / "configurations/robot_lab/grasp_pose_solver.fixture.json"
+# Retired design: 12 Halton samples under-sample the largest base (17), and
+# vertical_m=(0.014, 0.034) was proven to search dead space above the object.
+HALTON_BASES = (2, 3, 5, 7, 11, 13, 17)
 TRAINING_CANDIDATES = 12
+MINIMUM_REUSE_CANDIDATE_COUNT = 5 * max(HALTON_BASES)
+DEGENERATE_SEARCH_NOTICE = (
+    "retired: 12-sample Halton design under-samples base 17 and its vertical "
+    "band searches dead space above the object"
+)
 RANGES = {
     "wrist_flex_rad": (-0.65, 0.65),
     "wrist_roll_rad": (-1.6, 1.6),
@@ -42,6 +60,14 @@ RANGES = {
     "close_target_rad": (-0.17, 0.12),
 }
 PRINCIPAL_AXIS_ALIGNMENT_MINIMUM = 0.8
+
+
+class GraspGateFailure(ValueError):
+    """A rejected candidate with structured measured-vs-threshold evidence."""
+
+    def __init__(self, message: str, *, gate_margins: dict[str, dict[str, Any]]) -> None:
+        super().__init__(message)
+        self.gate_margins = gate_margins
 
 
 def build_geometry_first_grasp_search() -> dict[str, Any]:
@@ -68,6 +94,13 @@ def build_geometry_first_grasp_search() -> dict[str, Any]:
             },
             "ranges": {name: list(bounds) for name, bounds in RANGES.items()},
             "design": "seven_dimensional_halton_bases_2_3_5_7_11_13_17",
+            "search_status": "retired_degenerate_design",
+            "retirement_notice": DEGENERATE_SEARCH_NOTICE,
+            "reuse_requirements": {
+                "minimum_candidate_count": MINIMUM_REUSE_CANDIDATE_COUNT,
+                "largest_halton_base": max(HALTON_BASES),
+                "vertical_band_must_be_rederived": True,
+            },
             "friction_or_compliance_tuned": False,
             "training_candidate_count": len(candidates),
             "geometry_eligible_count": len(eligible),
@@ -95,6 +128,33 @@ def verify_geometry_first_grasp_search(payload: dict[str, Any]) -> None:
         raise ValueError("Geometry search changed contact properties")
     if payload.get("geometry_eligible_count") != sum(row["geometry_eligible"] for row in candidates):
         raise ValueError("Geometry eligibility count drifted")
+    if payload.get("search_status") != "retired_degenerate_design":
+        raise ValueError("Degenerate geometry search was not retired")
+    if payload.get("retirement_notice") != DEGENERATE_SEARCH_NOTICE:
+        raise ValueError("Degenerate geometry search notice drifted")
+    reuse = payload.get("reuse_requirements")
+    if not isinstance(reuse, dict) or reuse.get("minimum_candidate_count") < MINIMUM_REUSE_CANDIDATE_COUNT:
+        raise ValueError("Geometry search reuse candidate floor is missing")
+    if reuse.get("largest_halton_base") != max(HALTON_BASES) or reuse.get("vertical_band_must_be_rederived") is not True:
+        raise ValueError("Geometry search reuse warning is incomplete")
+    for row in candidates:
+        if "gate_margins" in row:
+            if not isinstance(row.get("failed_gate_margins"), list):
+                raise ValueError("Geometry search rejection lacks failed gate margins")
+            expected_failed = {
+                name
+                for name, margin in row["gate_margins"].items()
+                if not margin.get("passed")
+            }
+            observed_failed = {
+                margin.get("gate") for margin in row["failed_gate_margins"]
+            }
+            if observed_failed != expected_failed:
+                raise ValueError("Geometry search failed gate margins drifted")
+        if row.get("setup_valid"):
+            if "gate_margins" not in row:
+                raise ValueError("Geometry search candidate lacks gate margins")
+            validate_rendered_keyframes(row.get("rendered_keyframes"))
 
 
 def _candidate(
@@ -113,6 +173,7 @@ def _candidate(
     vertical_target_override_m: float | None = None,
     selected_axis_clearance_m: float = 0.0,
     execute_full_lift_cycle: bool = False,
+    capture_keyframes: bool = True,
 ) -> dict[str, Any]:
     values = _halton(index)
     request = {name: _scale(value, RANGES[name]) for name, value in zip(RANGES, values, strict=True)}
@@ -131,7 +192,24 @@ def _candidate(
             vertical_target_override_m=vertical_target_override_m,
             selected_axis_clearance_m=selected_axis_clearance_m,
             execute_full_lift_cycle=execute_full_lift_cycle,
+            capture_keyframes=capture_keyframes,
         )
+    except GraspGateFailure as exc:
+        failed_gate_margins = [
+            {"gate": name, **margin}
+            for name, margin in exc.gate_margins.items()
+            if not margin["passed"]
+        ]
+        return {
+            "candidate_index": index,
+            "holdout": holdout,
+            "request": request,
+            "setup_valid": False,
+            "rejection_reason": str(exc),
+            "geometry_eligible": False,
+            "gate_margins": exc.gate_margins,
+            "failed_gate_margins": failed_gate_margins,
+        }
     except (RuntimeError, ValueError, np.linalg.LinAlgError) as exc:
         return {"candidate_index": index, "holdout": holdout, "request": request, "setup_valid": False, "rejection_reason": str(exc), "geometry_eligible": False}
     return {"candidate_index": index, "holdout": holdout, "request": request, **result}
@@ -152,9 +230,11 @@ def _run_candidate(
     vertical_target_override_m: float | None = None,
     selected_axis_clearance_m: float = 0.0,
     execute_full_lift_cycle: bool = False,
+    capture_keyframes: bool = False,
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
+    rendered_keyframes: dict[str, dict[str, Any]] = {}
     with tempfile.TemporaryDirectory(prefix="scenesmith-geometry-search-") as directory:
         root = Path(directory)
         robot_xml = prepare_mujoco_so101_assets(root, scene.robot.base_position_m)
@@ -191,8 +271,24 @@ def _run_candidate(
                     set(pad_roles),
                 )
             raw_frames.append(retained)
+            if capture_keyframes:
+                retain_rendered_keyframe(
+                    rendered_keyframes,
+                    frame,
+                    _images,
+                    image_size=KEYFRAME_IMAGE_SIZE,
+                )
 
-        expert = CausalSortExpert(scene, scene_xml, seed=1701 + index_hash(request), frame_sink=retain, config=CausalSortExpertConfig(image_size=16, capture_images=False))
+        expert = CausalSortExpert(
+            scene,
+            scene_xml,
+            seed=1701 + index_hash(request),
+            frame_sink=retain,
+            config=CausalSortExpertConfig(
+                image_size=KEYFRAME_IMAGE_SIZE if capture_keyframes else 16,
+                capture_images=capture_keyframes,
+            ),
+        )
         try:
             pad_roles = compiled_pad_geom_roles(expert.mujoco, expert.model)
             fixed_site = expert._id(expert.mujoco.mjtObj.mjOBJ_SITE, FIXED_PAD_SITE)
@@ -398,6 +494,21 @@ def _run_candidate(
         "best_normal_alignment": max((min(row["fixed_normal_span_alignment"], row["moving_normal_span_alignment"]) for row in aggregates), default=None),
         "geometry_eligible": geometry_eligible,
     }
+    result["gate_margins"] = _gate_margins(
+        result,
+        minimum_hold_frames=8,
+        minimum_span_m=spec["minimum_contact_span_m"],
+        minimum_normal_alignment=0.8,
+        approach_motion_limit_m=APPROACH_MOTION_LIMIT_M,
+        position_tolerance_m=POSITION_TOLERANCE_M,
+    )
+    result["failed_gate_margins"] = [
+        {"gate": name, **margin}
+        for name, margin in result["gate_margins"].items()
+        if not margin["passed"]
+    ]
+    if capture_keyframes:
+        result["rendered_keyframes"] = finalize_rendered_keyframes(rendered_keyframes)
     if post_yaw_settle_seconds:
         result.update(
             {
@@ -587,12 +698,18 @@ def _select_principal_axis_wrist_roll(
         }
         if best is None or score > best[0]:
             best = (score, evidence)
-    if (
-        best is None
-        or best[1]["predicted_principal_axis_alignment"]
-        < PRINCIPAL_AXIS_ALIGNMENT_MINIMUM
-    ):
-        raise ValueError(f"No principal-axis-aligned wrist roll found: {best}")
+    measured = (
+        None if best is None else best[1]["predicted_principal_axis_alignment"]
+    )
+    if measured is None or measured < PRINCIPAL_AXIS_ALIGNMENT_MINIMUM:
+        raise GraspGateFailure(
+            f"No principal-axis-aligned wrist roll found: {best}",
+            gate_margins={
+                "principal_axis_alignment": _margin(
+                    measured, PRINCIPAL_AXIS_ALIGNMENT_MINIMUM, ">="
+                )
+            },
+        )
     return best[1]
 
 
@@ -694,12 +811,20 @@ def _select_horizontal_principal_axis_wrist_pose(
                 candidate = evaluate(flex, roll)
                 if candidate is not None and candidate["orientation_error"] < best["orientation_error"]:
                     best = candidate
-    if (
-        best is None
-        or best["predicted_principal_axis_alignment"] < 0.95
-        or best["predicted_closing_axis_vertical_abs"] > 0.1
-    ):
-        raise ValueError(f"No horizontal principal-axis wrist pose found: {best}")
+    alignment = (
+        None if best is None else best["predicted_principal_axis_alignment"]
+    )
+    vertical = (
+        None if best is None else best["predicted_closing_axis_vertical_abs"]
+    )
+    if alignment is None or alignment < 0.95 or vertical is None or vertical > 0.1:
+        raise GraspGateFailure(
+            f"No horizontal principal-axis wrist pose found: {best}",
+            gate_margins={
+                "principal_axis_alignment": _margin(alignment, 0.95, ">="),
+                "closing_axis_vertical_abs": _margin(vertical, 0.1, "<="),
+            },
+        )
     best.update(
         {
             "sampled_wrist_flex_rad": request["wrist_flex_rad"],
@@ -752,6 +877,66 @@ def _select_best_horizontal_principal_axis_wrist_pose(
 def _valid_contact(frame: dict[str, Any], requirement: dict[str, Any]) -> bool:
     aggregate = frame["pad_contact_aggregate"]
     return bool(aggregate) and evaluate_antipodal_contact_witness(aggregate["strict_v2_witness"], requirement)["valid"]
+
+
+def _gate_margins(
+    result: dict[str, Any],
+    *,
+    minimum_hold_frames: int,
+    minimum_span_m: float,
+    minimum_normal_alignment: float,
+    approach_motion_limit_m: float,
+    position_tolerance_m: float,
+) -> dict[str, dict[str, Any]]:
+    """Report measured value, threshold, and signed margin for each gate."""
+
+    return {
+        "strict_hold_frame_count": _margin(
+            result["hold_strict_v2_valid_frame_count"], minimum_hold_frames, ">="
+        ),
+        "representative_span_m": _margin(
+            result["minimum_representative_span_m"], minimum_span_m, ">="
+        ),
+        "normal_alignment": _margin(
+            result["best_normal_alignment"], minimum_normal_alignment, ">="
+        ),
+        "preclose_object_displacement_m": _margin(
+            result["preclose_object_displacement_m"], approach_motion_limit_m, "<="
+        ),
+        "approach_position_residual_m": _margin(
+            result["approach_position_residual_m"], position_tolerance_m, "<="
+        ),
+        "pregrasp_position_residual_m": _margin(
+            result["pregrasp_position_residual_m"], position_tolerance_m, "<="
+        ),
+        "nonpad_contact_frame_count": _margin(
+            result["nonpad_robot_object_contact_frame_count"], 0, "<="
+        ),
+    }
+
+
+def _margin(measured: Any, threshold: float | int, comparison: str) -> dict[str, Any]:
+    if measured is None:
+        return {
+            "measured": None,
+            "threshold": threshold,
+            "comparison": comparison,
+            "margin": None,
+            "passed": False,
+        }
+    if comparison == ">=":
+        margin = float(measured) - float(threshold)
+        passed = measured >= threshold
+    else:
+        margin = float(threshold) - float(measured)
+        passed = measured <= threshold
+    return {
+        "measured": measured,
+        "threshold": threshold,
+        "comparison": comparison,
+        "margin": margin,
+        "passed": bool(passed),
+    }
 
 
 def _nonpad_contacts(expert: CausalSortExpert, object_body: int, pad_geoms: set[int]) -> list[str]:
@@ -818,7 +1003,7 @@ def _rank(row: dict[str, Any]) -> tuple[Any, ...]:
 
 
 def _halton(index: int) -> list[float]:
-    return [_radical_inverse(index, base) for base in (2, 3, 5, 7, 11, 13, 17)]
+    return [_radical_inverse(index, base) for base in HALTON_BASES]
 
 
 def _radical_inverse(index: int, base: int) -> float:

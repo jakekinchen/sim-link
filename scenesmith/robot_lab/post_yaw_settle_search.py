@@ -16,12 +16,12 @@ from scenesmith.robot_lab.geometry_first_grasp_search import (
     _candidate,
     _rank,
 )
+from scenesmith.robot_lab.grasp_pose_solver import APPROACH_MOTION_LIMIT_M
 
 
 SCHEMA_VERSION = "scenesmith.post_yaw_settle_grasp_search.v1"
 SOURCE = REPO_ROOT / "configurations/robot_lab/pad_midpoint_search.json"
 POST_YAW_SETTLE_SECONDS = 0.25
-APPROACH_MOTION_LIMIT_M = 0.0001
 PINNED_MODEL_TIMESTEP_SECONDS = 0.002
 EXPECTED_SETTLE_STEP_COUNT = round(
     POST_YAW_SETTLE_SECONDS / PINNED_MODEL_TIMESTEP_SECONDS

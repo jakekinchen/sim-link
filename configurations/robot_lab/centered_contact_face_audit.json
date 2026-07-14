@@ -2869,12 +2869,12 @@
   "evidence_mode": "diagnostic_replay_of_centered_bilateral_contacts",
   "geom_order_independent": true,
   "hardware_accessed": false,
-  "identity_sha256": "235728518c5bdb32a7ee0522cc780c8c3dbae21f36240a702df164463488e639",
+  "identity_sha256": "0a0c48a149214ba40153b57db7cc616a0e48d9ccb3a1b65add7ec0c6ecd25d47",
   "physical_follower_commanded": false,
   "schema_version": "scenesmith.centered_contact_face_audit.v1",
   "simulation_training_ready": false,
   "source_candidate_metrics_identical": true,
-  "source_centered_axis_search_identity_sha256": "7deb28268e07e7e268c8e35005d5104e8a7a1c68faf60da8c2add77d97688ae6",
+  "source_centered_axis_search_identity_sha256": "6e95d8a64dd57a69cfd21d521e5c3151609c377e5d9ecab8fb5a91b57ba0c94c",
   "source_gripper_geometry_audit_identity_sha256": "9bfce4c6fab67cc9259414a2c3d1615b810e2ffb00e7c00070700a64992f6c88",
   "synthetic_convention_aggregate_valid": true
 }

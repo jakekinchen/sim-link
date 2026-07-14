@@ -19,6 +19,12 @@ from scenesmith.robot_lab.causal_sort_expert import (
     CausalSortExpert,
     CausalSortExpertConfig,
 )
+from scenesmith.robot_lab.grasp_evidence import (
+    KEYFRAME_IMAGE_SIZE,
+    finalize_rendered_keyframes,
+    retain_rendered_keyframe,
+    validate_rendered_keyframes,
+)
 from scenesmith.robot_lab.mujoco_anchor_grasp import (
     OBJECT_ID,
     _add_anchor_speeds,
@@ -96,6 +102,22 @@ def verify_mujoco_grasp_contact_search(payload: dict[str, Any]) -> None:
         raise ValueError("MuJoCo grasp contact search candidate count drifted")
     if not payload.get("selected_validation_two_pass_exact_determinism"):
         raise ValueError("Selected MuJoCo grasp validation is not deterministic")
+    validate_rendered_keyframes(
+        payload.get("selected_unassisted_validation", {})
+        .get("summary", {})
+        .get("rendered_keyframes"),
+        phases=(
+            "pregrasp",
+            "close",
+            "grasp_hold",
+            "unassisted_lift_hold",
+        ),
+    )
+    for candidate in payload.get("candidates", []):
+        validate_rendered_keyframes(
+            candidate.get("rendered_keyframes")
+            or candidate.get("summary", {}).get("rendered_keyframes")
+        )
 
 
 def _run_search() -> dict[str, Any]:
@@ -150,6 +172,12 @@ def _run_probe(
 ) -> dict[str, Any]:
     scene = _scene()
     raw_frames: list[dict[str, Any]] = []
+    rendered_keyframes: dict[str, dict[str, Any]] = {}
+    keyframe_phases = (
+        ("pregrasp", "close", "grasp_hold", "unassisted_lift_hold")
+        if include_lift
+        else ("pregrasp", "close", "grasp_hold")
+    )
     with tempfile.TemporaryDirectory(prefix="scenesmith-contact-search-") as directory:
         root = Path(directory)
         prepare_mujoco_so101_assets(root, scene.robot.base_position_m)
@@ -162,13 +190,23 @@ def _run_probe(
             if expert is None:
                 raise RuntimeError("MuJoCo contact probe was not initialized")
             raw_frames.append(_raw_frame(expert, frame))
+            retain_rendered_keyframe(
+                rendered_keyframes,
+                frame,
+                _images,
+                phases=keyframe_phases,
+                image_size=KEYFRAME_IMAGE_SIZE,
+            )
 
         expert = CausalSortExpert(
             scene,
             xml_path,
             seed=901,
             frame_sink=retain,
-            config=CausalSortExpertConfig(image_size=16, capture_images=False),
+            config=CausalSortExpertConfig(
+                image_size=KEYFRAME_IMAGE_SIZE,
+                capture_images=True,
+            ),
         )
         try:
             home = np.asarray(SIMULATION_HOME, dtype=np.float64).copy()
@@ -211,6 +249,10 @@ def _run_probe(
         raw_frames,
         wrist_roll_rad=wrist_roll_rad,
         pregrasp_height_m=pregrasp_height_m,
+    )
+    summary["rendered_keyframes"] = finalize_rendered_keyframes(
+        rendered_keyframes,
+        phases=keyframe_phases,
     )
     return {
         "summary": summary,

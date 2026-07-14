@@ -75,8 +75,8 @@
             "derivation": "selected object width plus two pad normal half-thicknesses",
             "source_pointer": "/derivation/target_aperture_m",
             "source_ref": {
-              "file_sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7",
-              "identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+              "file_sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
+              "identity_sha256": "bec0a3d689b9deaea6b851f32eb3cd7353bc98c5dd514307ea96f4f2ca19739b",
               "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
               "schema_version": "scenesmith.geometry_derived_unilateral_grasp.v1"
             },
@@ -96,8 +96,8 @@
             "derivation": "phase strict-v2 valid count equals the complete phase frame count",
             "source_pointer": "/trajectory/full_lift_cycle/strict_v2_valid_frame_counts/grasp_hold",
             "source_ref": {
-              "file_sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7",
-              "identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+              "file_sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
+              "identity_sha256": "bec0a3d689b9deaea6b851f32eb3cd7353bc98c5dd514307ea96f4f2ca19739b",
               "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
               "schema_version": "scenesmith.geometry_derived_unilateral_grasp.v1"
             },
@@ -119,7 +119,7 @@
           "units": null,
           "value": null
         },
-        "frame_id": "rollout-af554fa23d42d986ea3a4e06-frame-000000",
+        "frame_id": "rollout-d63c731365703b8aadd38c0f-frame-000000",
         "frame_index": 0,
         "progress": {
           "components": [],
@@ -129,7 +129,7 @@
           "value": null
         },
         "proof_mode": "simulation_unassisted",
-        "record_identity_sha256": "07e0d3dae261397647308332abdb719aace922c09fffddd9f420acf5bda20d42",
+        "record_identity_sha256": "1960193e50dbacdc82840467d7f89f83ee0aec8abe694f317450faf72ae78a63",
         "requested_gripper_pose": {
           "provenance": null,
           "reason": "source artifact does not retain per-frame requested gripper pose",
@@ -144,7 +144,7 @@
           "state": "not_observed",
           "value": null
         },
-        "rollout_id": "rollout-af554fa23d42d986ea3a4e06",
+        "rollout_id": "rollout-d63c731365703b8aadd38c0f",
         "schema_version": "scenesmith.frame_record.v1",
         "source_class": "mujoco_expert",
         "source_phase": "grasp_hold",
@@ -154,8 +154,8 @@
             "derivation": "phase strict-v2 valid count equals the complete phase frame count",
             "source_pointer": "/trajectory/full_lift_cycle/strict_v2_valid_frame_counts/grasp_hold",
             "source_ref": {
-              "file_sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7",
-              "identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+              "file_sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
+              "identity_sha256": "bec0a3d689b9deaea6b851f32eb3cd7353bc98c5dd514307ea96f4f2ca19739b",
               "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
               "schema_version": "scenesmith.geometry_derived_unilateral_grasp.v1"
             },
@@ -227,8 +227,8 @@
             "derivation": "selected object width plus two pad normal half-thicknesses",
             "source_pointer": "/derivation/target_aperture_m",
             "source_ref": {
-              "file_sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7",
-              "identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+              "file_sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
+              "identity_sha256": "bec0a3d689b9deaea6b851f32eb3cd7353bc98c5dd514307ea96f4f2ca19739b",
               "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
               "schema_version": "scenesmith.geometry_derived_unilateral_grasp.v1"
             },
@@ -248,8 +248,8 @@
             "derivation": "phase strict-v2 valid count equals the complete phase frame count",
             "source_pointer": "/trajectory/full_lift_cycle/strict_v2_valid_frame_counts/unsupported_lift_hold",
             "source_ref": {
-              "file_sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7",
-              "identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+              "file_sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
+              "identity_sha256": "bec0a3d689b9deaea6b851f32eb3cd7353bc98c5dd514307ea96f4f2ca19739b",
               "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
               "schema_version": "scenesmith.geometry_derived_unilateral_grasp.v1"
             },
@@ -271,7 +271,7 @@
           "units": null,
           "value": null
         },
-        "frame_id": "rollout-af554fa23d42d986ea3a4e06-frame-000001",
+        "frame_id": "rollout-d63c731365703b8aadd38c0f-frame-000001",
         "frame_index": 1,
         "progress": {
           "components": [],
@@ -281,7 +281,7 @@
           "value": null
         },
         "proof_mode": "simulation_unassisted",
-        "record_identity_sha256": "3824ee3b433ba326bcb3e8943e5463aab276523b86a60d407fd3fcc3f6e5d83a",
+        "record_identity_sha256": "b9980376d5cfeb723a56d7115a4435ce5700eecadeb07849df6c5f4074184c1b",
         "requested_gripper_pose": {
           "provenance": null,
           "reason": "source artifact does not retain per-frame requested gripper pose",
@@ -296,7 +296,7 @@
           "state": "not_observed",
           "value": null
         },
-        "rollout_id": "rollout-af554fa23d42d986ea3a4e06",
+        "rollout_id": "rollout-d63c731365703b8aadd38c0f",
         "schema_version": "scenesmith.frame_record.v1",
         "source_class": "mujoco_expert",
         "source_phase": "unsupported_lift_hold",
@@ -306,8 +306,8 @@
             "derivation": "phase strict-v2 valid count equals the complete phase frame count",
             "source_pointer": "/trajectory/full_lift_cycle/strict_v2_valid_frame_counts/unsupported_lift_hold",
             "source_ref": {
-              "file_sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7",
-              "identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+              "file_sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
+              "identity_sha256": "bec0a3d689b9deaea6b851f32eb3cd7353bc98c5dd514307ea96f4f2ca19739b",
               "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
               "schema_version": "scenesmith.geometry_derived_unilateral_grasp.v1"
             },
@@ -339,7 +339,7 @@
         {
           "kind": "signed_simulation_artifact",
           "ref": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
-          "sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7"
+          "sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006"
         }
       ],
       "frame_count": 2,
@@ -360,7 +360,7 @@
           "unsupported_lift_hold": 12
         },
         "proof_mode": "simulation_unassisted",
-        "source_artifact_identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+        "source_artifact_identity_sha256": "bec0a3d689b9deaea6b851f32eb3cd7353bc98c5dd514307ea96f4f2ca19739b",
         "source_candidate_index": 3,
         "strict_v2_valid_frame_counts": {
           "grasp_hold": 8,
@@ -373,13 +373,13 @@
         "unassisted_mujoco_grasp_success": true
       },
       "raw_payload_append_only": true,
-      "raw_payload_sha256": "af554fa23d42d986ea3a4e0621f5215c44d37ac8afbf1cf4feb24e8b348b0a68",
-      "record_identity_sha256": "f6ddbbe85c4b868c937af89c09f772640d8540f549484815958c96389e2b65cb",
-      "rollout_id": "rollout-af554fa23d42d986ea3a4e06",
+      "raw_payload_sha256": "d63c731365703b8aadd38c0f2a1e09864b5e501429d5137b3cd09975d8365e87",
+      "record_identity_sha256": "d7bf705c38295a10b6df06bd44e017cb6e3662f80157439990dca15edc95a14b",
+      "rollout_id": "rollout-d63c731365703b8aadd38c0f",
       "schema_version": "scenesmith.raw_rollout_record.v1",
       "source_artifact_ref": {
-        "file_sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7",
-        "identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+        "file_sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
+        "identity_sha256": "bec0a3d689b9deaea6b851f32eb3cd7353bc98c5dd514307ea96f4f2ca19739b",
         "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
         "schema_version": "scenesmith.geometry_derived_unilateral_grasp.v1"
       },
@@ -396,7 +396,7 @@
     "training_eligible": false
   },
   "hardware_accessed": false,
-  "identity_sha256": "f2b8b462ec5b153c6e5366a10f85a1e6ebf99c580b2eaf3b94e33f7d88226ab6",
+  "identity_sha256": "8682cea5d45ed5cf115f3f68eadc5f81376e26b9d6981969876f05c3c7665737",
   "invariants": {
     "actions_remain_variant_separated": true,
     "frame_record_identity_is_canonical_sha256": true,
@@ -533,8 +533,8 @@
   "schema_version": "scenesmith.experience_record_contract.v1",
   "simulation_training_ready": false,
   "source_grasp_artifact_ref": {
-    "file_sha256": "d0b847e68e708e8de2ded6620b8a9c6e96c88264ec256989b83eb7b829db46b7",
-    "identity_sha256": "30c5873ae8922ce5238c6bc1aea38bb4e6b6fafd937f25932e93f1128d39e51d",
+    "file_sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
+    "identity_sha256": "bec0a3d689b9deaea6b851f32eb3cd7353bc98c5dd514307ea96f4f2ca19739b",
     "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
     "schema_version": "scenesmith.geometry_derived_unilateral_grasp.v1"
   },

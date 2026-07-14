@@ -25,7 +25,7 @@ class MujocoContactPropertySweepTests(unittest.TestCase):
         self.assertEqual(payload, build_mujoco_contact_property_sweep())
         self.assertEqual(
             payload["source_contact_search_identity_sha256"],
-            "5a5de249f7374cde37b6e201a4ae4097ee74e0f39bf7884c205947e8cf7446e2",
+            "abf05433677d9ac367a44622dd1544c99a766c47e27d2288acfcf4c949ad74cd",
         )
         self.assertTrue(payload["baseline_two_pass_exact_determinism"])
         self.assertFalse(payload["physical_measurement_claimed"])

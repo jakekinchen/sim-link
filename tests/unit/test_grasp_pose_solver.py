@@ -6,7 +6,9 @@ import unittest
 
 from scenesmith.robot_lab.artifact_contract import load_strict_json
 from scenesmith.robot_lab.grasp_pose_solver import (
+    APPROACH_MOTION_LIMIT_M,
     REPO_ROOT,
+    POSITION_TOLERANCE_M,
     build_grasp_pose_solver_fixture,
     verify_grasp_pose_solver_fixture,
 )
@@ -16,6 +18,10 @@ ARTIFACT = REPO_ROOT / "configurations/robot_lab/grasp_pose_solver.fixture.json"
 
 
 class GraspPoseSolverTests(unittest.TestCase):
+    def test_approach_motion_uses_pad_midpoint_ik_tolerance(self) -> None:
+        self.assertEqual(APPROACH_MOTION_LIMIT_M, POSITION_TOLERANCE_M)
+        self.assertEqual(APPROACH_MOTION_LIMIT_M, 0.001)
+
     def test_checked_fixture_is_deterministic_and_achieves_every_request(self) -> None:
         stored = load_strict_json(ARTIFACT)
         verify_grasp_pose_solver_fixture(stored)

@@ -16,6 +16,8 @@ class GeometryDerivedUnilateralGraspTests(unittest.TestCase):
         verify_geometry_derived_unilateral_grasp(payload)
         self.assertTrue(payload["two_pass_exact_determinism"])
         self.assertTrue(payload["geometry_derived_controls"])
+        self.assertGreaterEqual(len(payload["trajectory"]["rendered_keyframes"]), 3)
+        self.assertLessEqual(len(payload["trajectory"]["rendered_keyframes"]), 5)
 
     def test_authority_is_bounded(self) -> None:
         payload = load_strict_json(ARTIFACT)

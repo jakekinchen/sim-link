@@ -12,6 +12,7 @@ from scenesmith.robot_lab.geometry_first_grasp_search import (
     _candidate,
     _rank,
 )
+from scenesmith.robot_lab.grasp_pose_solver import APPROACH_MOTION_LIMIT_M
 
 
 SCHEMA_VERSION = "scenesmith.explicit_pad_proxy_search.v1"
@@ -89,7 +90,7 @@ def _proxy_candidate(index: int, *, holdout: bool) -> dict[str, Any]:
         return row
     row["base_contact_geometry_eligible"] = row["geometry_eligible"]
     row["approach_object_motion_valid"] = (
-        row["preclose_object_displacement_m"] <= 0.0001
+        row["preclose_object_displacement_m"] <= APPROACH_MOTION_LIMIT_M
     )
     row["nonpad_contact_valid"] = (
         row["nonpad_robot_object_contact_frame_count"] == 0

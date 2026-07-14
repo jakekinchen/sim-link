@@ -1,7 +1,7 @@
 {
   "actual_mujoco_grasp_success": false,
   "aligned_candidate_count": 0,
-  "approach_motion_limit_m": 0.0001,
+  "approach_motion_limit_m": 0.001,
   "authority_not_granted": [
     "unassisted_mujoco_grasp_success",
     "simulation_training_ready",
@@ -12,6 +12,40 @@
   "candidates": [
     {
       "candidate_index": 1,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.5132232612596584,
+          "measured": 0.4367767387403415,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.06615579266534316,
+          "measured": 0.16615579266534317,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.06615579266534316,
+          "measured": 0.16615579266534317,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.5132232612596584,
+          "measured": 0.4367767387403415,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': -0.08125, 'selected_wrist_roll_rad': 1.6, 'object_x_axis_world': [0.9382704901946277, -0.3459024244347813, 2.705926594465799e-07], 'predicted_closing_axis_world': [-0.10400527323993233, 0.9805993859380284, 0.16615579266534317], 'predicted_principal_axis_alignment': 0.4367767387403415, 'predicted_closing_axis_vertical_abs': 0.16615579266534317, 'orientation_error': 0.34482818946021404}",
@@ -28,6 +62,40 @@
     },
     {
       "candidate_index": 2,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.2635105209704628,
+          "measured": 0.6864894790295372,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.4161191554165905,
+          "measured": 0.5161191554165905,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.4161191554165905,
+          "measured": 0.5161191554165905,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.2635105209704628,
+          "measured": 0.6864894790295372,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.40625000000000006, 'selected_wrist_roll_rad': -0.5499999999999998, 'object_x_axis_world': [0.99408725247613, -0.10858422751237055, 2.998184790486637e-08], 'predicted_closing_axis_world': [0.6268131176119688, -0.5837176826186007, 0.5161191554165905], 'predicted_principal_axis_alignment': 0.6864894790295372, 'predicted_closing_axis_vertical_abs': 0.5161191554165905, 'orientation_error': 0.36466782934710573}",
@@ -44,6 +112,40 @@
     },
     {
       "candidate_index": 3,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.24722967645772798,
+          "measured": 0.702770323542272,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.32539622497529475,
+          "measured": 0.4253962249752947,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.32539622497529475,
+          "measured": 0.4253962249752947,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.24722967645772798,
+          "measured": 0.702770323542272,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': 0.7500000000000003, 'object_x_axis_world': [0.99408725247613, 0.10858422751237062, 2.998184790446173e-08], 'predicted_closing_axis_world': [0.6366980050317501, 0.6431591577248652, 0.4253962249752947], 'predicted_principal_axis_alignment': 0.702770323542272, 'predicted_closing_axis_vertical_abs': 0.4253962249752947, 'orientation_error': 0.26930742879039726}",
@@ -60,6 +162,40 @@
     },
     {
       "candidate_index": 4,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.214673685811698,
+          "measured": 0.735326314188302,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.20345743930897578,
+          "measured": 0.3034574393089758,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.20345743930897578,
+          "measured": 0.3034574393089758,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.214673685811698,
+          "measured": 0.735326314188302,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': 1.0000000000000002, 'object_x_axis_world': [0.9382704901946277, 0.3459024244347814, 2.7059265944930524e-07], 'predicted_closing_axis_world': [0.4803257651770794, 0.8229220751900463, 0.3034574393089758], 'predicted_principal_axis_alignment': 0.735326314188302, 'predicted_closing_axis_vertical_abs': 0.3034574393089758, 'orientation_error': 0.16213857743311016}",
@@ -76,6 +212,40 @@
     },
     {
       "candidate_index": 5,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.13353151098616844,
+          "measured": 0.8164684890138315,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.07869013222794302,
+          "measured": 0.17869013222794303,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.07869013222794302,
+          "measured": 0.17869013222794303,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.13353151098616844,
+          "measured": 0.8164684890138315,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': -1.1500000000000001, 'object_x_axis_world': [0.7899131964620039, -0.6132186739289033, 2.392290965897429e-07], 'predicted_closing_axis_world': [0.30825527886073456, -0.9343706543437947, 0.17869013222794303], 'predicted_principal_axis_alignment': 0.8164684890138315, 'predicted_closing_axis_vertical_abs': 0.17869013222794303, 'orientation_error': 0.06561397888050585}",
@@ -92,6 +262,40 @@
     },
     {
       "candidate_index": 6,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.19241833954358234,
+          "measured": 0.7575816604564176,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.19434939939477017,
+          "measured": 0.2943493993947702,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.19434939939477017,
+          "measured": 0.2943493993947702,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.19241833954358234,
+          "measured": 0.7575816604564176,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': -0.8388888888888889, 'object_x_axis_world': [0.955192963452877, -0.29598378768075045, 5.172503068705077e-07], 'predicted_closing_axis_world': [0.5511948649717794, -0.7807321255748864, 0.2943493993947702], 'predicted_principal_axis_alignment': 0.7575816604564176, 'predicted_closing_axis_vertical_abs': 0.2943493993947702, 'orientation_error': 0.14540822027112954}",
@@ -108,6 +312,40 @@
     },
     {
       "candidate_index": 7,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.20443070344346848,
+          "measured": 0.7455692965565315,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.2763023973274724,
+          "measured": 0.3763023973274724,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.2763023973274724,
+          "measured": 0.3763023973274724,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.20443070344346848,
+          "measured": 0.7455692965565315,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.40625000000000006, 'selected_wrist_roll_rad': -0.6000000000000001, 'object_x_axis_world': [0.998098779687473, -0.06163461672659014, 2.7099286167506805e-06], 'predicted_closing_axis_world': [0.7102503780940411, -0.5949293287297818, 0.3763023973274724], 'predicted_principal_axis_alignment': 0.7455692965565315, 'predicted_closing_axis_vertical_abs': 0.3763023973274724, 'orientation_error': 0.20633847708914113}",
@@ -124,6 +362,40 @@
     },
     {
       "candidate_index": 8,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.1997732128050821,
+          "measured": 0.7502267871949179,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.2508139772275614,
+          "measured": 0.35081397722756136,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.2508139772275614,
+          "measured": 0.35081397722756136,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.1997732128050821,
+          "measured": 0.7502267871949179,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.40625000000000006, 'selected_wrist_roll_rad': 0.7500000000000002, 'object_x_axis_world': [0.9882157427547866, 0.1530674549720001, -1.3342202660391075e-08], 'predicted_closing_axis_world': [0.6556013043729605, 0.6686676925695252, 0.35081397722756136], 'predicted_principal_axis_alignment': 0.7502267871949179, 'predicted_closing_axis_vertical_abs': 0.35081397722756136, 'orientation_error': 0.18545710445319277}",
@@ -140,6 +412,40 @@
     },
     {
       "candidate_index": 9,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.19406270080346377,
+          "measured": 0.7559372991965362,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.11753064617171721,
+          "measured": 0.21753064617171722,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.11753064617171721,
+          "measured": 0.21753064617171722,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.19406270080346377,
+          "measured": 0.7559372991965362,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': 1.0500000000000003, 'object_x_axis_world': [0.9183234078701806, 0.3958309216794562, 3.0050325627844226e-07], 'predicted_closing_axis_world': [0.44979071642706114, 0.8662382636389058, 0.21753064617171722], 'predicted_principal_axis_alignment': 0.7559372991965362, 'predicted_closing_axis_vertical_abs': 0.21753064617171722, 'orientation_error': 0.10688618394736593}",
@@ -156,6 +462,40 @@
     },
     {
       "candidate_index": 10,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.10928404058635488,
+          "measured": 0.8407159594136451,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.05180600126678808,
+          "measured": 0.1518060012667881,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.05180600126678808,
+          "measured": 0.1518060012667881,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.10928404058635488,
+          "measured": 0.8407159594136451,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': -1.1, 'object_x_axis_world': [0.8401520710796373, -0.5423508988289617, 1.1617691484070204e-07], 'predicted_closing_axis_world': [0.42443631792278486, -0.8926414453785666, 0.1518060012667881], 'predicted_principal_axis_alignment': 0.8407159594136451, 'predicted_closing_axis_vertical_abs': 0.1518060012667881, 'orientation_error': 0.048416467606127625}",
@@ -172,6 +512,40 @@
     },
     {
       "candidate_index": 11,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.19429627552238038,
+          "measured": 0.7557037244776196,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.198750342863058,
+          "measured": 0.298750342863058,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.198750342863058,
+          "measured": 0.298750342863058,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.19429627552238038,
+          "measured": 0.7557037244776196,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.44687500000000013, 'selected_wrist_roll_rad': -0.75, 'object_x_axis_world': [0.970962244047724, -0.239232774999174, -5.2841144527851844e-08], 'predicted_closing_axis_world': [0.5943340660108771, -0.7466694386528644, 0.298750342863058], 'predicted_principal_axis_alignment': 0.7557037244776196, 'predicted_closing_axis_vertical_abs': 0.298750342863058, 'orientation_error': 0.14893243759490155}",
@@ -188,6 +562,40 @@
     },
     {
       "candidate_index": 12,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.17796547727367795,
+          "measured": 0.772034522726322,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.28068401628476636,
+          "measured": 0.3806840162847664,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.28068401628476636,
+          "measured": 0.3806840162847664,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.17796547727367795,
+          "measured": 0.772034522726322,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": false,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': 0.6000000000000003, 'object_x_axis_world': [0.9997573332749755, -0.022028947243053876, 6.802373390992045e-06], 'predicted_closing_axis_world': [0.7830565715785844, 0.49183542517075063, 0.3806840162847664], 'predicted_principal_axis_alignment': 0.772034522726322, 'predicted_closing_axis_vertical_abs': 0.3806840162847664, 'orientation_error': 0.19688857908331608}",
@@ -211,6 +619,40 @@
   "holdout": {
     "candidate": {
       "candidate_index": 13,
+      "failed_gate_margins": [
+        {
+          "comparison": ">=",
+          "gate": "principal_axis_alignment",
+          "margin": -0.13061703719733864,
+          "measured": 0.8193829628026613,
+          "passed": false,
+          "threshold": 0.95
+        },
+        {
+          "comparison": "<=",
+          "gate": "closing_axis_vertical_abs",
+          "margin": -0.1626866483276779,
+          "measured": 0.2626866483276779,
+          "passed": false,
+          "threshold": 0.1
+        }
+      ],
+      "gate_margins": {
+        "closing_axis_vertical_abs": {
+          "comparison": "<=",
+          "margin": -0.1626866483276779,
+          "measured": 0.2626866483276779,
+          "passed": false,
+          "threshold": 0.1
+        },
+        "principal_axis_alignment": {
+          "comparison": ">=",
+          "margin": -0.13061703719733864,
+          "measured": 0.8193829628026613,
+          "passed": false,
+          "threshold": 0.95
+        }
+      },
       "geometry_eligible": false,
       "holdout": true,
       "rejection_reason": "No horizontal principal-axis wrist pose found: {'selected_wrist_flex_rad': 0.4468750000000001, 'selected_wrist_roll_rad': 0.8000000000000003, 'object_x_axis_world': [0.9801423297771369, 0.1982952681710246, 1.6674227870027454e-07], 'predicted_closing_axis_world': [0.7020771151766277, 0.6618787269097225, 0.2626866483276779], 'predicted_principal_axis_alignment': 0.8193829628026613, 'predicted_closing_axis_vertical_abs': 0.2626866483276779, 'orientation_error': 0.10162678933557395}",
@@ -227,7 +669,7 @@
     },
     "excluded_from_selection": true
   },
-  "identity_sha256": "fd04d757192aecdbfb55fbfb38404607942e0dabcdf2f9234e370fdcc55a92e9",
+  "identity_sha256": "4b98dca2f0e85232780af98c19a74d37f0c85259e5909834be96458f121f557a",
   "physical_follower_commanded": false,
   "post_yaw_settle_seconds": 0.25,
   "principal_axis_alignment_minimum": 0.95,
@@ -264,6 +706,6 @@
   "schema_version": "scenesmith.horizontal_axis_grasp_search.v1",
   "selected_candidate": null,
   "simulation_training_ready": false,
-  "source_principal_axis_search_identity_sha256": "34b2a47ce6391fffce5b8c30302fd985871b76a954af6620193e97c8db773ff3",
+  "source_principal_axis_search_identity_sha256": "ba930e4de811f77031786ca9c19c62de67c252ba58e46092e090099208229306",
   "training_candidate_count": 12
 }

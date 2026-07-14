@@ -11,6 +11,16 @@ class GeometryFirstGraspSearchTests(unittest.TestCase):
         self.assertEqual(stored["training_candidate_count"], 12)
         self.assertTrue(stored["holdout"]["excluded_from_selection"])
         self.assertFalse(stored["friction_or_compliance_tuned"])
+        self.assertEqual(stored["search_status"], "retired_degenerate_design")
+        self.assertGreaterEqual(
+            stored["reuse_requirements"]["minimum_candidate_count"],
+            5 * stored["reuse_requirements"]["largest_halton_base"],
+        )
+        self.assertTrue(stored["reuse_requirements"]["vertical_band_must_be_rederived"])
+        for candidate in stored["candidates"]:
+            if candidate.get("setup_valid"):
+                self.assertIn("normal_alignment", candidate["gate_margins"])
+                self.assertIn("failed_gate_margins", candidate)
     def test_search_withholds_dynamic_grasp_and_training(self) -> None:
         stored = load_strict_json(ARTIFACT)
         self.assertFalse(stored["actual_mujoco_grasp_success"])

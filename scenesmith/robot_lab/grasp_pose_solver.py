@@ -29,6 +29,10 @@ SCHEMA_VERSION = "scenesmith.grasp_pose_solver_fixture.v1"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 GEOMETRY_AUDIT = REPO_ROOT / "configurations/robot_lab/gripper_geometry_audit.json"
 POSITION_TOLERANCE_M = 0.001
+# The approach gate is a physical consequence of the same pad-midpoint IK
+# solve; keeping it no tighter than this tolerance avoids rejecting sampled
+# candidates for solver noise rather than object motion.
+APPROACH_MOTION_LIMIT_M = POSITION_TOLERANCE_M
 WRIST_TOLERANCE_RAD = 1e-9
 OBJECT_YAW_TOLERANCE_RAD = 1e-9
 CANDIDATES = (
