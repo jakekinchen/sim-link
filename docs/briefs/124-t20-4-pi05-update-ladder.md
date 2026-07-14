@@ -63,3 +63,14 @@ Reviewer 152 authorizes one independent 500-total-update rung because the loss
 signal is large, finite, and directionally consistent. This is a bounded
 falsification test, not a promotion. The 1,000-update rung remains outside
 authority until the 500-update behavior is reviewed.
+
+## Verified 500-Update Outcome
+
+The exact 500-update/1,000-microbatch run remained finite and reduced train
+loss to 6.476014852523804 and held-out loss to 1.8620187640190125. Its strict
+held-out action sequence changed again but still produced zero strict-v2
+contacts, zero assist or projection frames, and only
+0.00000030070669393422733 m lift. The initial action retained 0.1507563 rad
+mean absolute error against the held-out expert command, including 0.6551162
+rad on the gripper coordinate. Reviewer 153 retires the 1,000-update rung for
+this hypothesis and closes T20.4 as verified negative evidence.
