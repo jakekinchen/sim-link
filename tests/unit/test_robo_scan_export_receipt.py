@@ -38,6 +38,11 @@ def _seal_receipt(payload: dict) -> None:
     payload["receiptSha256"] = hashlib.sha256(_canonical(payload)).hexdigest()
 
 
+def _seal_manifest(payload: dict) -> None:
+    payload.pop("manifestSha256", None)
+    payload["manifestSha256"] = hashlib.sha256(_canonical(payload)).hexdigest()
+
+
 class RoboScanExportReceiptTests(unittest.TestCase):
     def _copied_fixture(self, parent: Path) -> Path:
         target = parent / "copied-export"
@@ -135,6 +140,23 @@ class RoboScanExportReceiptTests(unittest.TestCase):
             manifest["manifestSha256"] = "0" * 64
             (root / "layered-scene-manifest.json").write_bytes(_canonical(manifest))
             with self.assertRaisesRegex(RoboScanExportError, "manifest bytes"):
+                validate_robo_scan_export(export_root=root, lock_path=LOCK_PATH)
+
+    def test_manifest_authority_layer_alias_fails_after_rebinding_all_hashes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = self._copied_fixture(Path(temporary))
+            manifest = json.loads((root / "layered-scene-manifest.json").read_text(encoding="utf-8"))
+            manifest["nodes"][2]["authority"] = "measured"
+            manifest["nodes"][2]["layer"] = "measured"
+            _seal_manifest(manifest)
+            manifest_bytes = _canonical(manifest)
+            (root / "layered-scene-manifest.json").write_bytes(manifest_bytes)
+            receipt = json.loads((root / "export-receipt.json").read_text(encoding="utf-8"))
+            receipt["scene"]["manifest"]["sha256"] = hashlib.sha256(manifest_bytes).hexdigest()
+            receipt["scene"]["manifest"]["bytes"] = len(manifest_bytes)
+            receipt["scene"]["manifestSha256"] = manifest["manifestSha256"]
+            self._write_receipt(root, receipt)
+            with self.assertRaisesRegex(RoboScanExportError, "authority layer"):
                 validate_robo_scan_export(export_root=root, lock_path=LOCK_PATH)
 
     def test_candidate_has_no_global_authority_surface_and_composer_still_denies(self) -> None:
