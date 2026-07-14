@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import copy
+import hashlib
+import tempfile
 import unittest
 
 from pathlib import Path
@@ -20,6 +22,9 @@ from scenesmith.robot_lab.model_bakeoff import (
     verify_model_bakeoff_plan,
     verify_model_training_gate,
     verify_model_training_result,
+)
+from scripts.robot_lab.compose_t20_7_model_training_gate import (
+    _verify_checkpoint_files,
 )
 
 
@@ -174,6 +179,33 @@ class ModelBakeoffPlanTests(unittest.TestCase):
         self.assertFalse(gate["simulation_policy_accepted"])
         with self.assertRaisesRegex(ValueError, "incomplete or out of order"):
             build_model_training_gate(self.plan, list(reversed(results)))
+
+    def test_training_gate_rehashes_checkpoint_bytes_and_rejects_escape(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            checkpoint = root / "checkpoint" / "model.pt"
+            checkpoint.parent.mkdir()
+            checkpoint.write_bytes(b"bound-checkpoint")
+            files = {
+                "checkpoint/model.pt": {
+                    "sha256": hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
+                    "size_bytes": checkpoint.stat().st_size,
+                }
+            }
+            _verify_checkpoint_files(root, files)
+            checkpoint.write_bytes(b"drifted-checkpoint")
+            with self.assertRaisesRegex(ValueError, "bytes drifted"):
+                _verify_checkpoint_files(root, files)
+            with self.assertRaisesRegex(ValueError, "escapes"):
+                _verify_checkpoint_files(
+                    root,
+                    {
+                        "../outside.pt": {
+                            "sha256": "0" * 64,
+                            "size_bytes": 1,
+                        }
+                    },
+                )
 
     def _training_observation(self, model_id: str = "act") -> dict:
         starts = self.plan["common_sample_plan"]["ordered_train_starts"]
