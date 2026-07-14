@@ -57,7 +57,8 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.17 is `in_progress` under Brief 137. Preserve the compact bespoke IP
+T20.17 is `in_progress` under Brief 137. Its first boundary is verified at
+`af317bc`: preserve the compact bespoke IP
 (content-addressed contracts, strict grasp semantics, geometry-derived episode
 generation, the SO-101 processor, and thin authority/stack locks); delete only
 unreferenced test-only modules; and replace duplicate dataset and
