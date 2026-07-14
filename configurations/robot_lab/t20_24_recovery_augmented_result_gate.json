@@ -1,0 +1,67 @@
+{
+  "authority_granted": [
+    "t20_24_two_seed_candidate_result_verified"
+  ],
+  "authority_not_granted": [
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "baseline_loss": 1.483,
+  "brev_compute_started": false,
+  "candidate_two_seed_strict_success": false,
+  "decision": "candidate_failed_two_seed_strict_v2",
+  "external_compute_started": false,
+  "final_loss": 0.603,
+  "held_out_results": [
+    {
+      "active_assist_frame_count": 0,
+      "evaluation_ref": {
+        "file_sha256": "4d3128a1b224fabbec666e736ecadbd0a8973ef40197417ab61c314e14b42c74",
+        "identity_sha256": "21f8fd46ee2b174dfed1503326f82f5c2162665241683ccc54458f7fc7ae30a5",
+        "path": "outputs/robot_lab/t20_24_recovery_augmented_run_002/held_out_seed_6_closed_loop.json",
+        "schema_version": "scenesmith.t20_24_recovery_augmented_closed_loop.v1"
+      },
+      "frame_count": 244,
+      "maximum_anchor_lift_m": 1.4435518985722595e-07,
+      "projected_action_frame_count": 0,
+      "seed": 6,
+      "simulation_semantic_strict_success": false,
+      "terminal_outcome": "no_strict_grasp_contact"
+    },
+    {
+      "active_assist_frame_count": 0,
+      "evaluation_ref": {
+        "file_sha256": "0c21b6c40ec3c33628ad9c065b699ecf218dc4eb8c88ed305d6da8b6e274f425",
+        "identity_sha256": "7a8a5b14dd16356d1dc2949fc74dce21bb55aa89654f0c3a9f589884fa4f9b3b",
+        "path": "outputs/robot_lab/t20_24_recovery_augmented_run_002/held_out_seed_7_closed_loop.json",
+        "schema_version": "scenesmith.t20_24_recovery_augmented_closed_loop.v1"
+      },
+      "frame_count": 244,
+      "maximum_anchor_lift_m": 1.4322435304414682e-07,
+      "projected_action_frame_count": 0,
+      "seed": 7,
+      "simulation_semantic_strict_success": false,
+      "terminal_outcome": "no_strict_grasp_contact"
+    }
+  ],
+  "held_out_seed_count": 2,
+  "identity_sha256": "480f812ce360e16784a9c087cf6500c94c9cc0363ca591e9e648c0b74097411b",
+  "minimum_loss": 0.018,
+  "optimizer_update_count": 500,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_24_recovery_augmented_result_gate.v1",
+  "simulation_policy_accepted": false,
+  "strict_success_count": 0,
+  "training_ref": {
+    "file_sha256": "9f3ea0b4e699f2804a381575b0f8b9e0ad72146e3471f8ca86c7a6903d589168",
+    "identity_sha256": "8b54bba54305f635a911494f4f68695974d0958ff613ea6f46243c0f66f2f47c",
+    "path": "outputs/robot_lab/t20_24_recovery_augmented_run_002/run_summary.json",
+    "schema_version": "scenesmith.t20_24_recovery_augmented_run.v1"
+  }
+}

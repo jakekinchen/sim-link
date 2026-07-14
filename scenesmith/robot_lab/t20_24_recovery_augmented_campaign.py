@@ -137,6 +137,13 @@ def build_result_gate(
         raise ValueError("T20.24 held-out seed coverage drifted")
     if not isinstance(evaluation_refs, list) or [row.get("seed") for row in evaluation_refs] != list(HELD_OUT_SEEDS):
         raise ValueError("T20.24 evaluation reference seed coverage drifted")
+    losses = [
+        training_summary.get("baseline_loss"),
+        training_summary.get("final_loss"),
+        training_summary.get("minimum_loss"),
+    ]
+    if any(isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) for value in losses):
+        raise ValueError("T20.24 result contains a non-finite training loss")
     rows = []
     strict_count = 0
     for seed, rollout, ref in zip(HELD_OUT_SEEDS, evaluations, evaluation_refs, strict=True):
@@ -150,15 +157,21 @@ def build_result_gate(
         success = rollout.get("simulation_semantic_strict_success")
         if not isinstance(success, bool):
             raise ValueError("T20.24 strict-success result is invalid")
+        terminal = rollout.get("terminal_outcome")
+        lift = rollout.get("maximum_anchor_lift_m")
+        if not isinstance(terminal, str) or not terminal.strip():
+            raise ValueError("T20.24 terminal outcome is invalid")
+        if isinstance(lift, bool) or not isinstance(lift, (int, float)) or not math.isfinite(lift):
+            raise ValueError("T20.24 maximum anchor lift is non-finite")
         strict_count += int(success)
         rows.append(
             {
                 "seed": seed,
                 "evaluation_ref": {key: value for key, value in ref.items() if key != "seed"},
                 "frame_count": 244,
-                "terminal_outcome": rollout.get("terminal_outcome"),
+                "terminal_outcome": terminal,
                 "simulation_semantic_strict_success": success,
-                "maximum_anchor_lift_m": rollout.get("maximum_anchor_lift_m"),
+                "maximum_anchor_lift_m": float(lift),
                 "projected_action_frame_count": 0,
                 "active_assist_frame_count": 0,
             }

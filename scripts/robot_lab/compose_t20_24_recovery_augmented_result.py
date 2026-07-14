@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import sys
 
 from pathlib import Path
@@ -27,6 +28,26 @@ from scenesmith.robot_lab.t20_24_recovery_augmented_campaign import (
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--verify", action="store_true")
+    args = parser.parse_args()
+    gate = build_gate()
+    if args.verify:
+        archived = load_strict_json(REPO_ROOT / RESULT_GATE_PATH)
+        verify_signed_payload(archived, label="T20.24 result gate")
+        if archived != gate:
+            raise ValueError("T20.24 result gate drifted from live run evidence")
+    else:
+        dump_canonical_json(REPO_ROOT / RESULT_GATE_PATH, gate)
+    print(
+        gate["identity_sha256"],
+        gate["decision"],
+        gate["strict_success_count"],
+    )
+    return 0
+
+
+def build_gate() -> dict:
     summary_path = RUN_ROOT / RUN_SUMMARY_PATH
     summary = load_strict_json(REPO_ROOT / summary_path)
     verify_signed_payload(summary, label="T20.24 training summary")
@@ -49,7 +70,7 @@ def main() -> int:
             }
         )
         rollouts.append(rollout)
-    gate = build_result_gate(
+    return build_result_gate(
         training_ref=artifact_ref(
             path=summary_path, payload=summary, repo_root=REPO_ROOT
         ),
@@ -57,13 +78,6 @@ def main() -> int:
         training_summary=summary,
         evaluations=rollouts,
     )
-    dump_canonical_json(REPO_ROOT / RESULT_GATE_PATH, gate)
-    print(
-        gate["identity_sha256"],
-        gate["decision"],
-        gate["strict_success_count"],
-    )
-    return 0
 
 
 if __name__ == "__main__":

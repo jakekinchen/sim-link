@@ -136,6 +136,15 @@ class T2024RecoveryAugmentedCampaignTests(unittest.TestCase):
                 training_summary=summary,
                 evaluations=[self._rollout(6, True), assisted],
             )
+        nonfinite = self._rollout(7, False)
+        nonfinite["maximum_anchor_lift_m"] = float("nan")
+        with self.assertRaisesRegex(ValueError, "non-finite"):
+            build_result_gate(
+                training_ref={"identity_sha256": "a" * 64},
+                evaluation_refs=refs,
+                training_summary=summary,
+                evaluations=[self._rollout(6, True), nonfinite],
+            )
 
     @staticmethod
     def _rollout(seed: int, success: bool) -> dict:
