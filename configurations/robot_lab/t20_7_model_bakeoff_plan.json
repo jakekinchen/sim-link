@@ -1,0 +1,229 @@
+{
+  "authority_not_granted": [
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "brev_compute_started": false,
+  "canary_executed": false,
+  "common_sample_plan": {
+    "action_chunk_size": 50,
+    "batch_size": 1,
+    "canary_start": 0,
+    "microbatch_count": 20,
+    "optimizer_update_count": 20,
+    "ordered_train_starts": [
+      0,
+      73,
+      146,
+      268,
+      341,
+      414,
+      48,
+      121,
+      194,
+      316,
+      389,
+      23,
+      96,
+      169,
+      291,
+      364,
+      437,
+      71,
+      144,
+      266
+    ],
+    "ordered_train_starts_sha256": "918a7913893555ede71079eb0831b8a431a0e4cb07cf51bde78c4377e2b8fbfa",
+    "same_samples_required_for_every_model": true,
+    "train_episode_frame_ranges": [
+      [
+        0,
+        244
+      ],
+      [
+        244,
+        488
+      ]
+    ]
+  },
+  "evaluation_contract": {
+    "action_projection_allowed": false,
+    "controller_assistance_allowed": false,
+    "denoising_steps_where_applicable": 10,
+    "executed_action_horizon": 5,
+    "frame_count": 244,
+    "held_out_episode_seed": 2,
+    "inference_seed": 1703,
+    "policy_owned_actions_only": true,
+    "rendered_keyframe_count": 5,
+    "rendered_keyframe_size_px": 256,
+    "terminal_outcome_separate_from_strict_success": true
+  },
+  "external_compute_started": false,
+  "hardware_accessed": false,
+  "identity_sha256": "7857e14b7d7145841d52617c18c15bed1627d40e8383b6761136200c2b437aae",
+  "losses_cross_model_comparable": false,
+  "model_inference_executed": false,
+  "models": [
+    {
+      "action_chunk_size": 50,
+      "device": "mps",
+      "dtype": "float32",
+      "family": "PI0.5",
+      "initialization": {
+        "kind": "pinned_pretrained_plus_rank4_lora",
+        "model_sha256": "471adf9abf281d7e3b5750b126cdd9a6efbdc7a230a9dd6fa8570e6b86cc62cf",
+        "repository_id": "Cache-SCA/pi05_teleop_sort_block",
+        "revision": "84b551af1303e92d97d6752d43cc3c9f1a090778"
+      },
+      "model_id": "pi05",
+      "sample_plan_sha256": "918a7913893555ede71079eb0831b8a431a0e4cb07cf51bde78c4377e2b8fbfa"
+    },
+    {
+      "action_chunk_size": 50,
+      "device": "mps",
+      "dtype": "float32",
+      "family": "SmolVLA",
+      "initialization": {
+        "kind": "pinned_pretrained_plus_rank4_lora",
+        "model_sha256": "7cd549ac2351fb069c0ddb3c34ad2d09cfc92b56a15dccdfc2e41467aaca01eb",
+        "repository_id": "lerobot/smolvla_base",
+        "revision": "c83c3163b8ca9b7e67c509fffd9121e66cb96205"
+      },
+      "model_id": "smolvla",
+      "sample_plan_sha256": "918a7913893555ede71079eb0831b8a431a0e4cb07cf51bde78c4377e2b8fbfa"
+    },
+    {
+      "action_chunk_size": 50,
+      "device": "mps",
+      "dtype": "float32",
+      "family": "ACT",
+      "initialization": {
+        "architecture_source": "T20.2 reviewed compact ACT with chunk enlarged to 50",
+        "kind": "deterministic_compact_random_init",
+        "pretrained_backbone_weights": null,
+        "seed": 207
+      },
+      "model_id": "act",
+      "sample_plan_sha256": "918a7913893555ede71079eb0831b8a431a0e4cb07cf51bde78c4377e2b8fbfa"
+    },
+    {
+      "action_chunk_size": 50,
+      "device": "mps",
+      "dtype": "float32",
+      "family": "Diffusion Policy",
+      "initialization": {
+        "architecture": "resnet18 plus one-stage temporal unet",
+        "diffusion_train_steps": 100,
+        "kind": "deterministic_compact_random_init",
+        "pretrained_backbone_weights": null,
+        "seed": 207
+      },
+      "model_id": "diffusion_policy",
+      "sample_plan_sha256": "918a7913893555ede71079eb0831b8a431a0e4cb07cf51bde78c4377e2b8fbfa"
+    }
+  ],
+  "optimizer_training": false,
+  "physical_transfer_eligible": false,
+  "ranking_surface": "fixed_seed_policy_owned_closed_loop_strict_behavior",
+  "schema_version": "scenesmith.t20_7_model_bakeoff_plan.v1",
+  "scope": "local_mps_equal_sample_four_model_bakeoff",
+  "simulation_policy_accepted": false,
+  "source_semantic_fixture_identity_sha256": "8126d054e217ec1ac11037187543f203168d86d49fdc9c91ea9478c287b993af",
+  "source_strict_v2_identity_sha256": "950e7568025f4fe09b9e51633da71b3ee90212ee5ea9c86be8194863cea2e640",
+  "source_tensor_view": {
+    "file_sha256": "eca512ab510fb317bf87868b2391bec98c38bc2e59449975e85773a9c6d46004",
+    "member_order": [
+      "evaluation_action",
+      "evaluation_state",
+      "evaluation_top_rgb",
+      "evaluation_wrist_rgb",
+      "train_action",
+      "train_state",
+      "train_top_rgb",
+      "train_wrist_rgb"
+    ],
+    "members": {
+      "evaluation_action": {
+        "dtype": "float32",
+        "npy_sha256": "2769b34238218c729fe93f27c3f2e9db436ae4b05046ae035d1c5ab3863ae6dc",
+        "shape": [
+          244,
+          6
+        ]
+      },
+      "evaluation_state": {
+        "dtype": "float32",
+        "npy_sha256": "804dcef5c85997e58a9ada6ea987b2acc5b850c38d9ba73ae3af58ef5b24d273",
+        "shape": [
+          244,
+          12
+        ]
+      },
+      "evaluation_top_rgb": {
+        "dtype": "uint8",
+        "npy_sha256": "8b51611908d463c5dce6ea863184ea4f7f8a5cec37760553363ef681a7952d93",
+        "shape": [
+          244,
+          64,
+          64,
+          3
+        ]
+      },
+      "evaluation_wrist_rgb": {
+        "dtype": "uint8",
+        "npy_sha256": "791b380095e13bceb43e400864831cb69906898c419fb343006af92774ddfce7",
+        "shape": [
+          244,
+          64,
+          64,
+          3
+        ]
+      },
+      "train_action": {
+        "dtype": "float32",
+        "npy_sha256": "09574fd33515642a6434bb5dd953ed616327a606b27f6eb494056df63dbfb706",
+        "shape": [
+          488,
+          6
+        ]
+      },
+      "train_state": {
+        "dtype": "float32",
+        "npy_sha256": "e18b12e95f33b1ae40ba1866b2f347a2d13b6bd5d200e5e31730701e4c54daf8",
+        "shape": [
+          488,
+          12
+        ]
+      },
+      "train_top_rgb": {
+        "dtype": "uint8",
+        "npy_sha256": "7a3bd904b7db985ce46decedf8fa4cc14cf39b36b8788d1a55a2cdd9fb41c801",
+        "shape": [
+          488,
+          64,
+          64,
+          3
+        ]
+      },
+      "train_wrist_rgb": {
+        "dtype": "uint8",
+        "npy_sha256": "dd28842b9387f81aca3ef68d4bffe3719d4c9e008d192d7594d442c557220e2a",
+        "shape": [
+          488,
+          64,
+          64,
+          3
+        ]
+      }
+    },
+    "path": "outputs/robot_lab/t20_1_act_tensor_view.npz",
+    "schema_version": "numpy.npz.v1"
+  },
+  "source_training_spec_identity_sha256": "099ed4250a7e47e8afd7bf956446cdabb656400eaf7adebe5c1d7bbc18384d94",
+  "task_id": "T20.7"
+}
