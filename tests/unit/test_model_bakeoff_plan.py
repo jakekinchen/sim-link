@@ -10,7 +10,11 @@ from pathlib import Path
 from scenesmith.robot_lab.artifact_contract import load_strict_json, sign_payload
 from scenesmith.robot_lab.model_bakeoff import (
     MODEL_ORDER,
+    build_model_canary_gate,
+    build_model_canary_result,
     build_model_bakeoff_plan,
+    verify_model_canary_gate,
+    verify_model_canary_result,
     verify_model_bakeoff_plan,
 )
 
@@ -61,6 +65,9 @@ class ModelBakeoffPlanTests(unittest.TestCase):
         self.assertEqual(self.plan["common_sample_plan"]["action_chunk_size"], 50)
         self.assertEqual(self.plan["evaluation_contract"]["held_out_episode_seed"], 2)
         self.assertEqual(self.plan["evaluation_contract"]["inference_seed"], 1703)
+        smolvla = next(model for model in self.plan["models"] if model["model_id"] == "smolvla")
+        self.assertEqual(smolvla["input_adapter"]["empty_camera_count"], 1)
+        self.assertEqual(smolvla["input_adapter"]["empty_camera_value"], 0.0)
 
     def test_plan_records_initialization_asymmetry_and_denies_results(self) -> None:
         initializations = {model["model_id"]: model["initialization"] for model in self.plan["models"]}
@@ -88,6 +95,45 @@ class ModelBakeoffPlanTests(unittest.TestCase):
                         self.strict_v2,
                         repo_root=REPO_ROOT,
                     )
+
+    def test_observed_canary_requires_finite_same_sample_and_denies_authority(self) -> None:
+        observed = {
+            "loss": 1.25,
+            "gradient_norm": 0.75,
+            "trainable_parameter_count": 10,
+            "total_parameter_count": 20,
+            "runtime": {"device": "mps", "torch": "test"},
+            "source_weight_check": {"kind": "fixture"},
+        }
+        result = build_model_canary_result(self.plan, "act", observed)
+        verify_model_canary_result(result, self.plan)
+        self.assertFalse(result["optimizer_step_completed"])
+        self.assertFalse(result["simulation_policy_accepted"])
+
+        changed = copy.deepcopy(result)
+        changed["sample_start"] = 1
+        with self.assertRaisesRegex(ValueError, "linkage drifted"):
+            verify_model_canary_result(sign_payload(changed), self.plan)
+
+    def test_four_model_gate_requires_exact_model_order(self) -> None:
+        observed = {
+            "loss": 1.25,
+            "gradient_norm": 0.75,
+            "trainable_parameter_count": 10,
+            "total_parameter_count": 20,
+            "runtime": {"device": "mps", "torch": "test"},
+            "source_weight_check": {"kind": "fixture"},
+        }
+        results = [
+            (f"outputs/{model_id}.json", build_model_canary_result(self.plan, model_id, observed), "0" * 64)
+            for model_id in MODEL_ORDER
+        ]
+        gate = build_model_canary_gate(self.plan, results)
+        verify_model_canary_gate(gate, self.plan, results)
+        self.assertTrue(gate["continuation_rung_authorized"])
+        self.assertFalse(gate["optimizer_training"])
+        with self.assertRaisesRegex(ValueError, "incomplete or out of order"):
+            build_model_canary_gate(self.plan, list(reversed(results)))
 
 
 if __name__ == "__main__":
