@@ -4,12 +4,15 @@ from __future__ import annotations
 
 import hashlib
 import math
+from collections import Counter
+from pathlib import Path
 from typing import Any
 
 import numpy as np
 
 from scenesmith.robot_lab.artifact_contract import (
     canonical_json_bytes,
+    load_strict_json,
     sign_payload,
     verify_signed_payload,
 )
@@ -166,6 +169,7 @@ def build_branch_record(
     action_source_record_ids: list[str],
     observed_result: dict[str, Any],
     replay_evidence: dict[str, Any],
+    trace_summary: dict[str, Any],
 ) -> dict[str, Any]:
     _validate_parent(parent)
     reason = _text(generation_reason, "generation reason")
@@ -192,6 +196,7 @@ def build_branch_record(
         "actions_inferred": False,
         "observed_result": result,
         "replay_evidence": replay,
+        "trace_summary": trace_summary,
         "outcome_class": _outcome_class(result),
     }
     payload["branch_id"] = _sha(payload)
@@ -278,6 +283,57 @@ def verify_recovery_manifest(manifest: dict[str, Any]) -> None:
         raise ValueError("T20.18 branch digest drifted")
 
 
+def verify_source_files(manifest: dict[str, Any], *, repo_root: Path) -> None:
+    """Reverify every source-reference byte hash inside the named checkout."""
+
+    verify_recovery_manifest(manifest)
+    root = Path(repo_root).resolve()
+    for label, row in manifest["source_refs"].items():
+        path = (root / row["path"]).resolve()
+        try:
+            path.relative_to(root)
+        except ValueError as error:
+            raise ValueError(f"T20.18 source path escapes checkout: {label}") from error
+        if not path.is_file() or _sha_file(path) != row["file_sha256"]:
+            raise ValueError(f"T20.18 source file drifted: {label}")
+
+
+def verify_recovery_gate(gate: dict[str, Any], *, repo_root: Path) -> dict[str, Any]:
+    """Verify the tracked gate and its complete immutable recovery artifact."""
+
+    verify_signed_payload(gate, label="T20.18 recovery gate")
+    if gate.get("schema_version") != "scenesmith.t20_18_state_fork_recovery_gate.v1" or gate.get("task_id") != TASK_ID:
+        raise ValueError("T20.18 recovery gate schema or task drifted")
+    for field in _FALSE_AUTHORITY_FIELDS:
+        if gate.get(field) is not False:
+            raise ValueError(f"T20.18 gate authority flag drifted: {field}")
+    for field in ("exact_candidate_reproduced", "deterministic_replay_verified"):
+        if gate.get(field) is not True:
+            raise ValueError(f"T20.18 gate verification flag drifted: {field}")
+    if gate.get("actions_padded") is not False or gate.get("actions_inferred") is not False:
+        raise ValueError("T20.18 gate admits padded or inferred actions")
+    root = Path(repo_root).resolve()
+    relative = _text(gate.get("artifact_path"), "T20.18 artifact path")
+    artifact = (root / relative).resolve()
+    try:
+        artifact.relative_to(root)
+    except ValueError as error:
+        raise ValueError("T20.18 artifact path escapes checkout") from error
+    if not artifact.is_file() or _sha_file(artifact) != gate.get("artifact_file_sha256"):
+        raise ValueError("T20.18 recovery artifact bytes drifted")
+    manifest = load_strict_json(artifact)
+    verify_recovery_manifest(manifest)
+    verify_source_files(manifest, repo_root=root)
+    if gate.get("artifact_identity_sha256") != manifest["identity_sha256"]:
+        raise ValueError("T20.18 gate artifact identity drifted")
+    if gate.get("parent_count") != manifest["parent_count"] or gate.get("branch_count") != manifest["branch_count"]:
+        raise ValueError("T20.18 gate artifact counts drifted")
+    expected_counts = dict(sorted(Counter(row["outcome_class"] for row in manifest["branches"]).items()))
+    if gate.get("outcome_class_counts") != expected_counts:
+        raise ValueError("T20.18 gate outcome counts drifted")
+    return manifest
+
+
 def _validate_parent(parent: Any) -> None:
     if not isinstance(parent, dict):
         raise ValueError("Parent snapshot is invalid")
@@ -348,7 +404,16 @@ def _validate_branch(branch: Any, *, parents: dict[str, dict[str, Any]]) -> None
     if branch.get("measured_action_sequence_sha256") != _sha(clean):
         raise ValueError("T20.18 branch measured-action digest drifted")
     result = _validate_observed_result(branch.get("observed_result"))
-    _validate_replay_evidence(branch.get("replay_evidence"))
+    replay = _validate_replay_evidence(branch.get("replay_evidence"))
+    trace = branch.get("trace_summary")
+    if not isinstance(trace, dict):
+        raise ValueError("T20.18 branch trace summary is invalid")
+    if _sha(trace) != replay["first_trace_sha256"]:
+        raise ValueError("T20.18 branch trace summary is not bound to deterministic replay")
+    if trace.get("frame_count") != replay["frame_count"]:
+        raise ValueError("T20.18 branch trace frame count drifted")
+    if trace.get("observed_result") != result:
+        raise ValueError("T20.18 branch trace observed result drifted")
     if branch.get("outcome_class") != _outcome_class(result):
         raise ValueError("T20.18 branch outcome label is not observed-result derived")
     branch_id = _sha_value(branch.get("branch_id"), "branch ID")
@@ -493,3 +558,11 @@ def _sha_value(value: Any, label: str) -> str:
 
 def _sha(value: Any) -> str:
     return hashlib.sha256(canonical_json_bytes(value)).hexdigest()
+
+
+def _sha_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()

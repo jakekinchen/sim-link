@@ -1,0 +1,42 @@
+{
+  "actions_inferred": false,
+  "actions_padded": false,
+  "artifact_file_sha256": "2fdc81d0701fdbef0a53b07993b2aae9b849aa9e7a5f41fdf02393d125dfd5f7",
+  "artifact_identity_sha256": "f97c784f2f68ce3028a221acb715576c8c3fcaf0e66917e77ad28ecef11dd0b3",
+  "artifact_path": "outputs/robot_lab/t20_18_state_fork_recovery.json",
+  "authority_granted": [
+    "t20_18_state_fork_recovery_evidence_generated"
+  ],
+  "authority_not_granted": [
+    "optimizer_training",
+    "dataset_mixture_frozen",
+    "simulation_training_ready",
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "branch_count": 8,
+  "brev_compute_started": false,
+  "dataset_mixture_frozen": false,
+  "deterministic_replay_verified": true,
+  "exact_candidate_reproduced": true,
+  "external_compute_started": false,
+  "identity_sha256": "299b24ae36579dced8552b6c34bf8fef41011d93c03f28026fa962d2ad739427",
+  "optimizer_training": false,
+  "outcome_class_counts": {
+    "failure": 2,
+    "near_failure": 2,
+    "recovery": 4
+  },
+  "parent_count": 4,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_18_state_fork_recovery_gate.v1",
+  "simulation_policy_accepted": false,
+  "simulation_training_ready": false,
+  "task_id": "T20.18"
+}

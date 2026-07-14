@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import copy
 import math
+import json
+import tempfile
 import unittest
 
 from scenesmith.robot_lab.artifact_contract import sign_payload
@@ -15,6 +17,7 @@ from scenesmith.robot_lab.t20_18_state_fork_recovery import (
     restore_integration_state,
     select_parent_snapshots,
     verify_recovery_manifest,
+    verify_recovery_gate,
 )
 
 
@@ -88,6 +91,13 @@ class T2018StateForkRecoveryTests(unittest.TestCase):
     def test_branch_provenance_bounds_and_observed_labels_fail_closed(self) -> None:
         parent = self._snapshot(49, "close")
         parent["phase_role"] = "grasp"
+        trace = self._trace(
+            {
+                "simulation_semantic_strict_success": False,
+                "strict_contact_frame_count": 3,
+                "maximum_anchor_lift_m": 0.001,
+            }
+        )
         branch = build_branch_record(
             parent,
             generation_reason="recover_from_policy_close_miss",
@@ -99,7 +109,8 @@ class T2018StateForkRecoveryTests(unittest.TestCase):
                 "strict_contact_frame_count": 3,
                 "maximum_anchor_lift_m": 0.001,
             },
-            replay_evidence=self._replay(),
+            replay_evidence=self._replay(trace),
+            trace_summary=trace,
         )
         self.assertEqual(branch["outcome_class"], "near_failure")
         self.assertFalse(branch["actions_padded"])
@@ -117,7 +128,22 @@ class T2018StateForkRecoveryTests(unittest.TestCase):
                     "strict_contact_frame_count": 0,
                     "maximum_anchor_lift_m": 0.0,
                 },
-                replay_evidence=self._replay(),
+                replay_evidence=self._replay(
+                    self._trace(
+                        {
+                            "simulation_semantic_strict_success": False,
+                            "strict_contact_frame_count": 0,
+                            "maximum_anchor_lift_m": 0.0,
+                        }
+                    )
+                ),
+                trace_summary=self._trace(
+                    {
+                        "simulation_semantic_strict_success": False,
+                        "strict_contact_frame_count": 0,
+                        "maximum_anchor_lift_m": 0.0,
+                    }
+                ),
             )
         nonfinite = copy.deepcopy(parent)
         nonfinite["integration_state"][0] = math.nan
@@ -137,19 +163,7 @@ class T2018StateForkRecoveryTests(unittest.TestCase):
             )
         ]
         branches = [
-            build_branch_record(
-                parent,
-                generation_reason=f"bounded_{parent['phase_role']}_correction",
-                perturbation={"joint_delta_rad": [0.0] * 6},
-                measured_actions=[[0.1] * 6],
-                action_source_record_ids=[f"{index + 1:064x}"],
-                observed_result={
-                    "simulation_semantic_strict_success": index == 0,
-                    "strict_contact_frame_count": 1 if index == 1 else 0,
-                    "maximum_anchor_lift_m": 0.026 if index == 0 else 0.0,
-                },
-                replay_evidence=self._replay(),
-            )
+            self._branch(parent, index)
             for index, parent in enumerate(parents)
         ]
         manifest = build_recovery_manifest(
@@ -177,6 +191,67 @@ class T2018StateForkRecoveryTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "reproduce"):
             verify_recovery_manifest(sign_payload(mismatch))
 
+    def test_tracked_gate_binds_artifact_sources_counts_and_false_authority(self) -> None:
+        parents = [
+            dict(self._snapshot(index, phase), phase_role=role)
+            for role, index, phase in (
+                ("approach", 6, "approach"),
+                ("grasp", 49, "close"),
+                ("hold", 71, "grasp_hold"),
+                ("release", 205, "release"),
+            )
+        ]
+        branches = [self._branch(parent, index) for index, parent in enumerate(parents)]
+        with tempfile.TemporaryDirectory() as directory:
+            from pathlib import Path
+            import hashlib
+
+            root = Path(directory)
+            refs = self._source_refs()
+            for row in refs.values():
+                path = root / row["path"]
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(row["path"].encode())
+                row["file_sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+            manifest = build_recovery_manifest(
+                source_refs=refs,
+                t18_4_identity_sha256="d" * 64,
+                t20_17_evaluation_identity_sha256="a" * 64,
+                t20_17_action_sequence_sha256="e" * 64,
+                reproduced_action_sequence_sha256="e" * 64,
+                reproduced_terminal_outcome="no_strict_grasp_contact",
+                parents=parents,
+                branches=branches,
+            )
+            artifact = root / "artifact.json"
+            artifact.write_text(json.dumps(manifest, sort_keys=True, separators=(",", ":")) + "\n")
+            gate = sign_payload(
+                {
+                    "schema_version": "scenesmith.t20_18_state_fork_recovery_gate.v1",
+                    "task_id": "T20.18",
+                    "artifact_path": "artifact.json",
+                    "artifact_file_sha256": hashlib.sha256(artifact.read_bytes()).hexdigest(),
+                    "artifact_identity_sha256": manifest["identity_sha256"],
+                    "parent_count": 4,
+                    "branch_count": 4,
+                    "outcome_class_counts": {"failure": 2, "near_failure": 1, "recovery": 1},
+                    "exact_candidate_reproduced": True,
+                    "deterministic_replay_verified": True,
+                    "actions_padded": False,
+                    "actions_inferred": False,
+                    **{field: False for field in (
+                        "optimizer_training", "dataset_mixture_frozen", "simulation_training_ready",
+                        "simulation_policy_accepted", "physical_transfer_ready", "promotion_eligible",
+                        "physical_actuation", "external_compute_started", "brev_compute_started",
+                    )},
+                }
+            )
+            verify_recovery_gate(gate, repo_root=root)
+            drift = copy.deepcopy(gate)
+            drift["outcome_class_counts"] = {"recovery": 4}
+            with self.assertRaisesRegex(ValueError, "outcome counts"):
+                verify_recovery_gate(sign_payload(drift), repo_root=root)
+
     @staticmethod
     def _snapshot(index: int, phase: str) -> dict:
         from scenesmith.robot_lab.t20_18_state_fork_recovery import build_parent_snapshot
@@ -194,13 +269,45 @@ class T2018StateForkRecoveryTests(unittest.TestCase):
         )
 
     @staticmethod
-    def _replay() -> dict:
+    def _replay(trace: dict) -> dict:
+        from scenesmith.robot_lab.artifact_contract import canonical_json_bytes
+        import hashlib
+
+        digest = hashlib.sha256(canonical_json_bytes(trace)).hexdigest()
         return {
-            "first_trace_sha256": "9" * 64,
-            "second_trace_sha256": "9" * 64,
+            "first_trace_sha256": digest,
+            "second_trace_sha256": digest,
             "frame_count": 1,
             "absolute_tolerance": 0.0,
         }
+
+    @staticmethod
+    def _trace(observed: dict) -> dict:
+        return {
+            "frame_count": 1,
+            "frame_records_sha256": "7" * 64,
+            "final_integration_state_sha256": "8" * 64,
+            "terminal_outcome": "test",
+            "observed_result": observed,
+        }
+
+    def _branch(self, parent: dict, index: int) -> dict:
+        observed = {
+            "simulation_semantic_strict_success": index == 0,
+            "strict_contact_frame_count": 1 if index == 1 else 0,
+            "maximum_anchor_lift_m": 0.026 if index == 0 else 0.0,
+        }
+        trace = self._trace(observed)
+        return build_branch_record(
+            parent,
+            generation_reason=f"bounded_{parent['phase_role']}_correction",
+            perturbation={"joint_delta_rad": [0.0] * 6},
+            measured_actions=[[0.1] * 6],
+            action_source_record_ids=[f"{index + 1:064x}"],
+            observed_result=observed,
+            replay_evidence=self._replay(trace),
+            trace_summary=trace,
+        )
 
     @staticmethod
     def _source_refs() -> dict:

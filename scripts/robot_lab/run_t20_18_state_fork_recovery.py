@@ -58,6 +58,7 @@ from scenesmith.robot_lab.t20_18_state_fork_recovery import (
     capture_integration_state,
     restore_integration_state,
     select_parent_snapshots,
+    verify_recovery_gate,
 )
 
 
@@ -137,10 +138,8 @@ def main() -> int:
                     "frame_count": first["frame_count"],
                     "absolute_tolerance": 0.0,
                 },
+                trace_summary=first,
             )
-            branch["trace_summary"] = first
-            unsigned = {key: value for key, value in branch.items() if key != "branch_id"}
-            branch["branch_id"] = _sha_value(unsigned)
             branches.append(branch)
 
     manifest = build_recovery_manifest(
@@ -197,6 +196,7 @@ def main() -> int:
         }
     )
     dump_canonical_json(gate_path, gate)
+    verify_recovery_gate(gate, repo_root=REPO_ROOT)
     print(manifest["identity_sha256"], gate["identity_sha256"], dict(counts))
     return 0
 
