@@ -17,6 +17,7 @@ from scenesmith.robot_lab.simulation_training_authority import (
     DECISION_PATH,
     OWNER_GRANT_PATH,
     REQUEST_PATH,
+    require_active_simulation_training_authority,
     verify_production_authority,
     write_owner_training_grant,
     write_production_authority,
@@ -28,6 +29,7 @@ def main() -> int:
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--write", action="store_true")
     action.add_argument("--verify", action="store_true")
+    action.add_argument("--verify-live", action="store_true")
     parser.add_argument("--owner-grant", type=Path, default=OWNER_GRANT_PATH)
     parser.add_argument("--request", type=Path, default=REQUEST_PATH)
     parser.add_argument("--decision", type=Path, default=DECISION_PATH)
@@ -40,13 +42,15 @@ def main() -> int:
             request_path=args.request,
             decision_path=args.decision,
         )
-    else:
+    elif args.verify:
         payload = verify_production_authority(
             repo_root=REPO_ROOT,
             owner_grant_path=args.owner_grant,
             request_path=args.request,
             decision_path=args.decision,
         )
+    else:
+        payload = require_active_simulation_training_authority(repo_root=REPO_ROOT)
     print(json.dumps(payload, indent=2, sort_keys=True))
     return 0
 

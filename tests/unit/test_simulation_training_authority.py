@@ -4,6 +4,7 @@ import json
 import tempfile
 import unittest
 
+from datetime import datetime
 from pathlib import Path
 
 from scenesmith.robot_lab.artifact_contract import dump_canonical_json, sign_payload
@@ -11,6 +12,7 @@ from scenesmith.robot_lab.authority_composer import build_authority_contract, co
 from scenesmith.robot_lab.simulation_training_authority import (
     OWNER_GRANT_PATH,
     build_production_authority,
+    require_active_simulation_training_authority,
     verify_production_authority,
 )
 
@@ -60,3 +62,10 @@ class SimulationTrainingAuthorityTests(unittest.TestCase):
             dump_canonical_json(target, sign_payload(owner))
             with self.assertRaisesRegex(ValueError, "Owner simulation-training grant drifted"):
                 build_production_authority(repo_root=REPO_ROOT, owner_grant_path=target)
+
+    def test_live_authority_rejects_expired_owner_grant(self):
+        with self.assertRaisesRegex(ValueError, "has expired"):
+            require_active_simulation_training_authority(
+                repo_root=REPO_ROOT,
+                now=datetime.fromisoformat("2026-07-21T03:05:01-05:00"),
+            )

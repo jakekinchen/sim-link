@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -198,6 +199,28 @@ def verify_production_authority(
     return {"request": request, "decision": decision}
 
 
+def require_active_simulation_training_authority(
+    *,
+    repo_root: Path = REPO_ROOT,
+    now: datetime | None = None,
+) -> dict[str, Any]:
+    """Require both the archived decision and an unexpired owner grant now."""
+
+    verified = verify_production_authority(repo_root=repo_root)
+    owner = load_strict_json(_resolve(Path(repo_root), OWNER_GRANT_PATH))
+    verify_owner_training_grant(owner, repo_root=repo_root)
+    current = now or datetime.now().astimezone()
+    if current.tzinfo is None or current.utcoffset() is None:
+        raise ValueError("Current training-authority time must include a UTC offset")
+    valid_from = datetime.fromisoformat(owner["issued_at"])
+    valid_until = datetime.fromisoformat(owner["valid_until"])
+    if current < valid_from:
+        raise ValueError("Simulation training authority is not yet active")
+    if current > valid_until:
+        raise ValueError("Simulation training authority has expired")
+    return verified
+
+
 def _verify_spec_sources(root: Path, spec: dict[str, Any]) -> dict[str, dict[str, Any]]:
     sources = spec.get("source_artifacts")
     if not isinstance(sources, dict):
@@ -249,6 +272,7 @@ __all__ = [
     "REQUEST_PATH",
     "build_owner_training_grant",
     "build_production_authority",
+    "require_active_simulation_training_authority",
     "verify_production_authority",
     "write_owner_training_grant",
     "write_production_authority",
