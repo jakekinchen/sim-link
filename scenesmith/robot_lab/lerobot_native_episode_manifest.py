@@ -226,11 +226,13 @@ def _actual_episode_rows(dataset: Any) -> list[dict[str, Any]]:
 
 
 def _frame_hash(frame: dict[str, Any]) -> str:
-    normalized = {key: _value_descriptor(value) for key, value in sorted(frame.items())}
+    normalized = {key: describe_lerobot_value(value) for key, value in sorted(frame.items())}
     return hashlib.sha256(canonical_json_bytes(normalized)).hexdigest()
 
 
-def _value_descriptor(value: Any) -> dict[str, Any]:
+def describe_lerobot_value(value: Any) -> dict[str, Any]:
+    """Return a finite, deterministic descriptor for a package-returned value."""
+
     if value is None:
         return {"kind": "none"}
     if isinstance(value, bool):
@@ -247,10 +249,10 @@ def _value_descriptor(value: Any) -> dict[str, Any]:
     if isinstance(value, dict):
         return {
             "kind": "mapping",
-            "entries": {key: _value_descriptor(item) for key, item in sorted(value.items())},
+            "entries": {key: describe_lerobot_value(item) for key, item in sorted(value.items())},
         }
     if isinstance(value, (list, tuple)):
-        return {"kind": "sequence", "entries": [_value_descriptor(item) for item in value]}
+        return {"kind": "sequence", "entries": [describe_lerobot_value(item) for item in value]}
     return _tensor_or_array_descriptor(value)
 
 

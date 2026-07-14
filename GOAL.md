@@ -57,19 +57,17 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.17 is `in_progress` under Brief 138. Its first boundary is verified at
-`af317bc`; its second boundary is verified at `1f5154a`: preserve the compact bespoke IP
-(content-addressed contracts, strict grasp semantics, geometry-derived episode
-generation, the SO-101 processor, and thin authority/stack locks); delete only
-unreferenced test-only modules. The active second slice builds the thin signed
-manifest over a single actual `LeRobotDataset` (episode hashes, eligibility,
-provenance, quarantine) without creating a duplicate training store; it then
-replaces duplicate dataset and
-shadow-preprocessing derivations with a signed manifest around one
-`LeRobotDataset` plus hashes of its actual pipeline outputs. Historical
-artifacts remain immutable, no clean-base training starts until the new
-LeRobot-native boundary is verified, and only repeatable strict semantic
-success can promote a policy.
+T20.17 is `in_progress` under Brief 139. Its first boundary is verified at
+`af317bc`; its second boundary is verified at `1f5154a`: preserve the compact
+bespoke IP (content-addressed contracts, strict grasp semantics,
+geometry-derived episode generation, the SO-101 processor, and thin
+authority/stack locks); delete only unreferenced test-only modules. The active
+third slice replaces the remaining shadow-preprocessing derivation by invoking
+the pinned PI0.5 processor on a source-bound actual `LeRobotDataset` sample
+and hashing its finite outputs. It creates no model, training, or policy
+evidence. Historical artifacts remain immutable, no clean-base training starts
+until the new LeRobot-native boundary is verified, and only repeatable strict
+semantic success can promote a policy.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
