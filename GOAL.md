@@ -83,7 +83,8 @@ evaluation-only and unclipped. T20.14 is `verified` through Brief 134/Reviewer
 from the cube. T20.15 is `verified` through Brief 135/Reviewer 165. Its exact
 2x2 frame-zero ablation isolates action postprocessing as the dominant arm
 regression: 0.95872 rad non-gripper displacement versus 0.23586 from state
-preprocessing and 0.26037 interaction. T20.16 is next for a no-training hybrid
+preprocessing and 0.26037 interaction. T20.16 is `in_progress` under Brief 136
+for a no-training hybrid
 that retains checkpoint arm/state scaling and substitutes only the
 dataset-derived gripper postprocessor before one strict rendered rollout. No
 learned policy is accepted. Hardware, physical transfer, promotion, external
