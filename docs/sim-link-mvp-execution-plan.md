@@ -159,6 +159,10 @@ over the same seed distribution before any optimizer decision.
 Brief 158 opens T20.27 to compute that paired five-seed source-action comparison
 offline from the verified T20.26 batches. No additional inference, rollout, or
 optimizer is authorized.
+T20.27 is verified through `e1fc104` by Reviewer Decision 188. Across five
+paired seeds, recovery raises frame-zero source-action MAE from 0.50833 to
+0.61926 rad and regresses every seed. Only gripper improves marginally. The
+next causal proof is exact phase/sample exposure, not another optimizer rung.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
