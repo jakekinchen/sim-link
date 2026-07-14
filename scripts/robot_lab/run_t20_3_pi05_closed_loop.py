@@ -32,7 +32,6 @@ from scenesmith.robot_lab.so101_coordinates import lerobot_to_mujoco, mujoco_to_
 
 TASK = "Grasp the lightweight anchor, lift 40 mm, hold, lower, release, and retreat."
 SCHEMA_VERSION = "scenesmith.t20_3_pi05_closed_loop.v1"
-ACTION_HORIZON = 5
 
 
 def main() -> int:
@@ -40,8 +39,9 @@ def main() -> int:
     parser.add_argument("--training-run", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--seed", type=int, default=2)
-    parser.add_argument("--task-id", choices=("T20.3", "T20.4"), default="T20.3")
+    parser.add_argument("--task-id", choices=("T20.3", "T20.4", "T20.5"), default="T20.3")
     parser.add_argument("--expected-updates", type=int, choices=(250, 500, 1000), default=250)
+    parser.add_argument("--action-horizon", type=int, choices=(5, 10, 15), default=5)
     args = parser.parse_args()
     require_active_simulation_training_authority(repo_root=REPO_ROOT)
     training_run = _resolve(args.training_run)
@@ -54,7 +54,7 @@ def main() -> int:
     _verify_training_run(
         summary,
         adapter_path,
-        expected_task_id=args.task_id,
+        expected_task_id="T20.4" if args.task_id == "T20.5" else args.task_id,
         expected_updates=args.expected_updates,
     )
     spec = load_strict_json(REPO_ROOT / SPEC_PATH)
@@ -84,7 +84,7 @@ def main() -> int:
     config.dtype = "float32"
     config.use_amp = False
     config.compile_model = False
-    config.n_action_steps = ACTION_HORIZON
+    config.n_action_steps = args.action_horizon
     config.pretrained_path = str(snapshot)
     policy_class = get_policy_class(config.type)
     base_policy = policy_class.from_pretrained(snapshot, config=config, local_files_only=True, strict=True)
@@ -132,25 +132,28 @@ def main() -> int:
         checkpoint_sha256=summary["adapter"]["checkpoint_files"]["adapter/adapter_model.safetensors"]["sha256"],
         training_run_summary_sha256=_sha(summary_path),
         seed=args.seed,
-        schema_version=(
-            SCHEMA_VERSION
-            if args.task_id == "T20.3"
-            else "scenesmith.t20_4_pi05_closed_loop.v1"
-        ),
+        schema_version={
+            "T20.3": SCHEMA_VERSION,
+            "T20.4": "scenesmith.t20_4_pi05_closed_loop.v1",
+            "T20.5": "scenesmith.t20_5_pi05_horizon_sweep.v1",
+        }[args.task_id],
         task_id=args.task_id,
-        evidence_mode=(
-            "held_out_seed_closed_loop_pi05_lora_mujoco"
-            if args.task_id == "T20.3"
-            else "held_out_seed_closed_loop_pi05_update_ladder_mujoco"
-        ),
+        evidence_mode={
+            "T20.3": "held_out_seed_closed_loop_pi05_lora_mujoco",
+            "T20.4": "held_out_seed_closed_loop_pi05_update_ladder_mujoco",
+            "T20.5": "held_out_seed_closed_loop_pi05_execution_horizon_mujoco",
+        }[args.task_id],
         policy_label="PI0.5-LoRA",
     )
     payload["policy_runtime"] = {
         "device": "mps",
         "dtype": "float32",
         "offline": True,
-        "action_horizon": ACTION_HORIZON,
-        "inference_replan_count": (payload["frame_count"] + ACTION_HORIZON - 1) // ACTION_HORIZON,
+        "action_horizon": args.action_horizon,
+        "maximum_open_loop_duration_frames": args.action_horizon,
+        "initial_policy_reset_count": 1,
+        "inference_replan_count": _replan_count(payload["frame_count"], args.action_horizon),
+        "queue_refill_count": _replan_count(payload["frame_count"], args.action_horizon),
         "num_inference_steps": config.num_inference_steps,
         "source_optimizer_update_count": summary.get("optimizer_update_count"),
         "coordinate_conversion": "mujoco_radians_to_lerobot_degrees_and_gripper_percent_then_inverse",
@@ -210,6 +213,12 @@ def _verify_training_run(
 def _snapshot_root(repository_id: str, revision: str) -> Path:
     directory = "models--" + repository_id.replace("/", "--")
     return Path.home() / ".cache/huggingface/hub" / directory / "snapshots" / revision
+
+
+def _replan_count(frame_count: int, action_horizon: int) -> int:
+    if frame_count <= 0 or action_horizon not in {5, 10, 15}:
+        raise ValueError("Invalid T20.5 frame count or action horizon")
+    return (frame_count + action_horizon - 1) // action_horizon
 
 
 def _resolve(path: Path) -> Path:

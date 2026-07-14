@@ -71,6 +71,13 @@ class T20_3PI05ClosedLoopTest(unittest.TestCase):
         path = MODULE._snapshot_root("org/model", "abc")
         self.assertTrue(str(path).endswith("models--org--model/snapshots/abc"))
 
+    def test_horizon_replan_count_covers_all_244_frames(self) -> None:
+        self.assertEqual(MODULE._replan_count(244, 5), 49)
+        self.assertEqual(MODULE._replan_count(244, 10), 25)
+        self.assertEqual(MODULE._replan_count(244, 15), 17)
+        with self.assertRaises(ValueError):
+            MODULE._replan_count(244, 7)
+
 
 if __name__ == "__main__":
     unittest.main()
