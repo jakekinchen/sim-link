@@ -61,7 +61,7 @@
   },
   "latest_verified_task_implementation_boundary": {
     "brief_id": "114",
-    "commit": "68b20ede071e4b27f856ff005eb88aeb08f7923d",
+    "commit": "235dcd08038ddb23938f861e105baa15d9a51d91",
     "reviewer_decision_id": "142",
     "summary": "bounded_legacy_canary_audit_preserves_source_bytes_emits"
   },
