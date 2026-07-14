@@ -72,6 +72,9 @@ class FiducialFace:
     recess_depth_mm: float = 1.2
     quiet_zone_mm: float = 3.0
     family: str = "tag36h11"
+    # In-face (u, v) offset of the tag center from the face center (mm). Used
+    # e.g. to place grasp-face tags above a tag-free contact band.
+    offset_mm: tuple[float, float] = (0.0, 0.0)
 
 
 @dataclass(frozen=True)
@@ -208,6 +211,14 @@ class CalibrationTargetSpec:
     def with_measured_slug_mass(self, grams: float) -> "CalibrationTargetSpec":
         """Return a copy that uses a weighed per-slug mass for ground truth."""
         return replace(self, slug_measured_mass_g=grams)
+
+    def cartridge_line(self) -> str:
+        """One-line cartridge description for the acceptance sheet."""
+        return (
+            f"- **Cartridge slug:** {self.cartridge_material}, "
+            f"d{self.slug_diameter_mm} x {self.slug_length_mm} mm, "
+            f"{self.slug_mass_kg() * 1e3:.3f} g each (model)"
+        )
 
     def validate(self) -> list[str]:
         """Return a list of geometry warnings; empty means the spec is sound.

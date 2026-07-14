@@ -32,7 +32,7 @@ _MATERIAL_RGBA = {
 def _geom_for(primitive: Primitive) -> dict | None:
     """Map a positive primitive to MJCF geom attributes, or None to skip."""
     label = primitive.label
-    if label.startswith(("shell_cavity", "recess_", "guide_")):
+    if label.startswith(("shell_cavity", "recess_", "guide_", "void_")):
         return None  # captured by the explicit inertial, not a solid geom
     p = primitive.params
     if primitive.kind == "box":
@@ -47,13 +47,20 @@ def _geom_for(primitive: Primitive) -> dict | None:
             "size": fmt([p["radius"], p["length"] / 2.0]),
             "pos": fmt(primitive.center),
         }
+    elif primitive.kind == "sphere":
+        attrs = {
+            "type": "sphere",
+            "size": fmt([p["radius"]]),
+            "pos": fmt(primitive.center),
+        }
     else:
         return None
-    if label.startswith("slug_"):
+    if label.startswith(("slug_", "ball_")):
+        # Internal metal inserts: visual only, collisions handled by the shell.
         attrs.update(material="steel", group="2", contype="0", conaffinity="0")
-    elif label.startswith("shell_outer"):
-        attrs.update(material="plastic", group="0")
-    elif label.startswith("grasp_rib"):
+    elif label.startswith("carrier"):
+        attrs.update(material="plastic", group="2", contype="0", conaffinity="0")
+    elif label.startswith(("shell_outer", "grasp_rib")):
         attrs.update(material="plastic", group="0")
     elif label.startswith("coupon_"):
         mat = (

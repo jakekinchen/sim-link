@@ -177,7 +177,9 @@ def primitive_to_trimesh(primitive: Primitive, segments: int = 48):
         )
         mesh.apply_transform(_axis_transform(p["axis"]))
     elif primitive.kind == "sphere":
-        mesh = trimesh.creation.icosphere(radius=p["radius"])
+        # subdivisions=4 keeps the icosphere volume within ~0.03% of the true
+        # sphere so ball-heavy targets stay inside the 1e-3 cross-check tol.
+        mesh = trimesh.creation.icosphere(radius=p["radius"], subdivisions=4)
     else:  # pragma: no cover
         raise ValueError(primitive.kind)
     mesh.apply_translation(primitive.center)

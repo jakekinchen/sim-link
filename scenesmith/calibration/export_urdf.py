@@ -39,6 +39,8 @@ def _geometry(parent: ET.Element, primitive: Primitive) -> bool:
         ET.SubElement(
             geom, "cylinder", radius=f"{p['radius']:.8g}", length=f"{p['length']:.8g}"
         )
+    elif primitive.kind == "sphere":
+        ET.SubElement(geom, "sphere", radius=f"{p['radius']:.8g}")
     else:
         parent.remove(geom)
         return False
@@ -71,11 +73,11 @@ def build_urdf_tree(target: ResolvedTarget) -> ET.Element:
 
     for primitive in target.all_primitives:
         label = primitive.label
-        if label.startswith(("shell_cavity", "recess_", "guide_")):
+        if label.startswith(("shell_cavity", "recess_", "guide_", "void_")):
             continue
         color = (
             "steel"
-            if label.startswith("slug_")
+            if label.startswith(("slug_", "ball_"))
             else ("coupon" if label.startswith("coupon_") else "plastic")
         )
         visual = ET.SubElement(base, "visual", name=f"vis_{label}")
@@ -85,8 +87,8 @@ def build_urdf_tree(target: ResolvedTarget) -> ET.Element:
             continue
         mat = ET.SubElement(visual, "material", name=f"{label}_mat")
         ET.SubElement(mat, "color", rgba=_RGBA[color])
-        # Collision: external solids only (skip internal slugs).
-        if not label.startswith("slug_"):
+        # Collision: external solids only (skip internal slugs/balls/carriers).
+        if not label.startswith(("slug_", "ball_", "carrier")):
             collision = ET.SubElement(base, "collision", name=f"col_{label}")
             _origin(collision, primitive.center)
             _geometry(collision, primitive)

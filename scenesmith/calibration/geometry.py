@@ -63,10 +63,14 @@ class TargetGeometry:
         return sum(p.volume for p in self.shell_primitives)
 
 
-def _face_mount_offset(spec: CalibrationTargetSpec, face: str) -> float:
-    """Outward height (m) of the mounting surface, accounting for a grasp rib."""
-    if spec.grasp.face == face:
-        return spec.grasp.height_mm * MM
+def _face_mount_offset(spec, face: str) -> float:
+    """Outward height (m) of the mounting surface, accounting for a grasp rib.
+
+    Specs without a rib (e.g. the flat-faced WCW-1) set ``grasp = None``.
+    """
+    grasp = getattr(spec, "grasp", None)
+    if grasp is not None and grasp.face == face:
+        return grasp.height_mm * MM
     return 0.0
 
 
@@ -169,6 +173,8 @@ def _fiducial(spec, fid, outer, rho) -> tuple[dict, Primitive]:
     surface = sign * half[axis] + sign * _face_mount_offset(spec, fid.face)
     center_on_face = np.zeros(3)
     center_on_face[axis] = surface
+    ou, ov = fid.offset_mm
+    center_on_face = center_on_face + u * ou * MM + v * ov * MM
 
     # Tag frame: origin on the surface, z along outward normal.
     frame = np.eye(4)

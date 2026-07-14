@@ -1,12 +1,16 @@
 """Command-line generator for the calibration target kit.
 
 Emits a self-contained, versioned artifact directory from a single spec:
-the ground-truth bundle, the acceptance sheet, MJCF + URDF sim assets, BOMs,
-fiducial tables, and preview/printable geometry -- with the three-way mass
-verification run by default.
+the ground-truth bundle, acceptance sheet, receipt template, MJCF + URDF sim
+assets, BOMs, fiducial tables, and preview/printable geometry -- with the
+three-way mass verification run by default.
+
+Two designs are available via ``--design``:
+  * ``wcw1`` (default): the ball-cartridge Workcell Calibration Witness.
+  * ``calbrick``: the earlier slug-socket brick.
 
 Example:
-    python -m scenesmith.calibration --out dist/calbrick --verify
+    python -m scenesmith.calibration --out dist/wcw1 --metrology
 """
 
 from __future__ import annotations
@@ -15,28 +19,47 @@ import argparse
 import json
 import logging
 
-from dataclasses import replace
+from dataclasses import fields, replace
 from pathlib import Path
 
-from scenesmith.calibration import export_stl
+from scenesmith.calibration import export_stl, wcw1
 from scenesmith.calibration.configurations import resolve_target, standard_kit
 from scenesmith.calibration.export_bom import write_bom_csv, write_fiducial_csv
 from scenesmith.calibration.export_mjcf import to_mjcf_string
 from scenesmith.calibration.export_urdf import to_urdf_string
 from scenesmith.calibration.geometry import build_geometry
+from scenesmith.calibration.receipt import blank_receipt
 from scenesmith.calibration.report import (
     acceptance_markdown,
     build_bundle,
     write_bundle,
 )
-from scenesmith.calibration.spec import CalibrationTargetSpec, default_so101_target
+from scenesmith.calibration.spec import default_so101_target
 
 console_logger = logging.getLogger(__name__)
 
+# Design registry: spec factory, geometry builder, kit factory, resolver.
+DESIGNS = {
+    "wcw1": {
+        "factory": wcw1.default_wcw1_target,
+        "build_geometry": wcw1.build_wcw1_geometry,
+        "kit": wcw1.wcw1_kit,
+        "resolve": wcw1.resolve_wcw1,
+    },
+    "calbrick": {
+        "factory": default_so101_target,
+        "build_geometry": build_geometry,
+        "kit": standard_kit,
+        "resolve": resolve_target,
+    },
+}
 
-def build_spec_from_args(args: argparse.Namespace) -> CalibrationTargetSpec:
-    """Apply CLI overrides on top of the default SO-101 target."""
-    spec = default_so101_target()
+
+def build_spec_from_args(args: argparse.Namespace):
+    """Apply CLI overrides on top of the chosen design's default spec."""
+    design = DESIGNS[args.design]
+    spec = design["factory"]()
+    valid_fields = {f.name for f in fields(spec)}
     overrides = {}
     for field_name in (
         "length_mm",
@@ -48,12 +71,19 @@ def build_spec_from_args(args: argparse.Namespace) -> CalibrationTargetSpec:
     ):
         value = getattr(args, field_name, None)
         if value is not None:
+            if field_name not in valid_fields:
+                console_logger.warning(
+                    "--%s ignored: design %s has no such parameter",
+                    field_name.replace("_", "-"),
+                    args.design,
+                )
+                continue
             overrides[field_name] = value
     if overrides:
         spec = replace(spec, **overrides)
 
     if args.measured_shell_g is not None:
-        geom = build_geometry(spec)
+        geom = design["build_geometry"](spec)
         spec = spec.with_measured_shell_mass(
             args.measured_shell_g, geom.shell_solid_volume()
         )
@@ -63,15 +93,18 @@ def build_spec_from_args(args: argparse.Namespace) -> CalibrationTargetSpec:
 
 
 def generate(
-    spec: CalibrationTargetSpec,
+    spec,
     out_dir: Path,
+    design: str = "wcw1",
     slugs: int = 4,
     verify: bool = True,
     mc_samples: int = 500_000,
     watertight: bool = False,
     step: bool = False,
+    metrology: bool = False,
 ) -> dict:
     """Generate the full artifact directory for a spec. Returns a summary dict."""
+    handlers = DESIGNS[design]
     warnings = spec.validate()
     for w in warnings:
         console_logger.warning("spec warning: %s", w)
@@ -80,17 +113,17 @@ def generate(
     for sub in ("mjcf", "urdf", "bom", "stl"):
         (root / sub).mkdir(parents=True, exist_ok=True)
 
-    geom = build_geometry(spec)
-    configs = standard_kit(spec, slugs=slugs)
-    targets = [resolve_target(spec, cfg, geometry=geom) for cfg in configs]
+    geom = handlers["build_geometry"](spec)
+    configs = handlers["kit"](spec, slugs=slugs)
+    targets = [handlers["resolve"](spec, cfg, geometry=geom) for cfg in configs]
 
     verify_map: dict[str, list] = {}
     if verify:
         from scenesmith.calibration.verify import verify_all
 
         for t in targets:
-            if t.config.name == "bare":
-                continue
+            if t.config.name in ("bare", "C0"):
+                continue  # baseline shells: nothing beyond the shell to check
             verify_map[t.config.name] = verify_all(t, mc_samples=mc_samples)
 
     # Per-configuration assets.
@@ -114,6 +147,7 @@ def generate(
     bundle = build_bundle(spec, targets, verify_map)
     write_bundle(root / "calibration_target.json", bundle)
     (root / "acceptance.md").write_text(acceptance_markdown(spec, targets, verify_map))
+    blank_receipt(spec, design).to_json(root / "receipt_template.json")
 
     # Optional printable geometry.
     if watertight:
@@ -123,12 +157,20 @@ def generate(
     if step:
         from scenesmith.calibration import build123d_cad
 
-        if build123d_cad.available():
+        if build123d_cad.available() and design == "calbrick":
             build123d_cad.export_cad(
                 spec, root / "shell.step", root / "stl" / "shell_cad.stl"
             )
+        elif design != "calbrick":
+            console_logger.warning("STEP export currently supports calbrick only")
         else:
             console_logger.warning("STEP export skipped (build123d absent)")
+    if metrology:
+        from scenesmith.calibration import metrology as metrology_mod
+
+        written = metrology_mod.export_metrology(root / "metrology")
+        if not written:
+            console_logger.warning("metrology extras skipped (trimesh absent)")
 
     return {
         "root": root,
@@ -148,7 +190,7 @@ def _print_summary(summary: dict) -> None:
             print(f"  - {w}")
     print(f"\n{'config':13s}{'mass(g)':>10s}{'CoM (mm)':>26s}   checks")
     for t in summary["targets"]:
-        if t.config.name == "bare":
+        if t.config.name in ("bare", "C0"):
             continue
         com = t.com_mm
         checks = summary["verify_map"].get(t.config.name, [])
@@ -169,7 +211,13 @@ def _print_summary(summary: dict) -> None:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out", type=Path, default=Path("dist/calbrick"))
+    parser.add_argument(
+        "--design",
+        choices=sorted(DESIGNS),
+        default="wcw1",
+        help="Target design: wcw1 (ball cartridges, recommended) or calbrick.",
+    )
+    parser.add_argument("--out", type=Path, default=Path("dist/caltarget"))
     parser.add_argument("--slugs", type=int, default=4)
     parser.add_argument("--length-mm", dest="length_mm", type=float)
     parser.add_argument("--width-mm", dest="width_mm", type=float)
@@ -202,6 +250,11 @@ def main(argv=None) -> int:
         action="store_true",
         help="Also write parametric STEP (needs build123d).",
     )
+    parser.add_argument(
+        "--metrology",
+        action="store_true",
+        help="Also write the D405 depth plate + grip gauge (needs trimesh).",
+    )
     args = parser.parse_args(argv)
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -209,11 +262,13 @@ def main(argv=None) -> int:
     summary = generate(
         spec,
         args.out,
+        design=args.design,
         slugs=args.slugs,
         verify=args.verify,
         mc_samples=args.mc_samples,
         watertight=args.watertight,
         step=args.step,
+        metrology=args.metrology,
     )
     _print_summary(summary)
     return 0

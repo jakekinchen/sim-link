@@ -47,6 +47,11 @@ MATERIALS: dict[str, Material] = {
         Material("pa12", 1010.0, "SLS Nylon PA12.", is_printed=True),
         Material("resin", 1180.0, "Standard SLA resin.", is_printed=True),
         Material("steel", 7850.0, "AISI low-carbon steel dowel/slug."),
+        Material(
+            "chrome_steel_52100",
+            7810.0,
+            "AISI 52100 chrome bearing steel (ISO 3290-1 precision balls).",
+        ),
         Material("stainless", 7900.0, "304/316 stainless slug or ball."),
         Material("brass", 8500.0, "Brass slug."),
         Material("tungsten", 19250.0, "Tungsten slug (high density, small size)."),

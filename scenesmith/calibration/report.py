@@ -184,9 +184,7 @@ def acceptance_markdown(
         f"- **Shell:** {spec.shell_material}, effective density "
         f"{spec.shell_density():.1f} kg/m^3 "
         f"(nominal infill {spec.nominal_infill:.0%})",
-        f"- **Cartridge slug:** {spec.cartridge_material}, "
-        f"d{spec.slug_diameter_mm} x {spec.slug_length_mm} mm, "
-        f"{spec.slug_mass_kg()*1e3:.3f} g each (model)",
+        spec.cartridge_line(),
         "",
         "## 0. Print-density calibration (do this first)",
         "",
@@ -196,8 +194,8 @@ def acceptance_markdown(
         "3. Feed the reading back: "
         "`spec.with_measured_shell_mass(grams, shell.solid_volume_m3)` and "
         "regenerate. This replaces nominal infill density with the real value.",
-        "4. Weigh each steel slug; if it differs from the model, use "
-        "`spec.with_measured_slug_mass(grams)`.",
+        "4. Weigh each cartridge insert (slug or ball); if it differs from the "
+        "model, feed it back via `spec.with_measured_slug_mass(grams)`.",
         "",
         "## 1. Configurations",
         "",
