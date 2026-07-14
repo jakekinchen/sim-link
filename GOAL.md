@@ -103,6 +103,10 @@ the complete local `lerobot/pi05_base` snapshot is byte-bound, and central
 composition grants only `simulation_training_ready`. No model load, optimizer,
 rollout, or policy result occurred. The next T20.17 boundary requires a new
 precise brief for the fixed local-MPS campaign and strict seed-6 evaluation.
+Brief 148 is now active for exactly that bounded execution: official pinned
+LeRobot training, rank-4 LoRA, local MPS, batch size 1, 250 updates, seed
+20260714, no Hub/external logger, followed by unassisted frozen seed-6
+evaluation. Any non-passing policy remains a signed negative result.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:

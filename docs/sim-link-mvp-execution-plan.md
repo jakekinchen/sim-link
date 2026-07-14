@@ -102,6 +102,8 @@ complete local `lerobot/pi05_base` snapshot and fixed local-MPS campaign are
 byte-bound, and central composition grants only `simulation_training_ready`.
 No model, optimizer, inference, or rollout has run. The next boundary is the
 precisely briefed 250-update campaign and unassisted strict seed-6 evaluation.
+Brief 148 is active for that exact official-LeRobot local execution; it may
+record a positive or negative policy result but cannot promote either one.
 
 ## Paused Integration Queue
 
