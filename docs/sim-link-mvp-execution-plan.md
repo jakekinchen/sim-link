@@ -169,6 +169,9 @@ running an optimizer.
 T20.28 is verified through `72a6360` by Reviewer Decision 189. Recovery saw 26
 approach and 3 frame-zero samples versus clean's 14 and 0, so low early-phase
 exposure does not explain the regression. Quantile/postprocessor shift is next.
+Brief 160 opens T20.29 to cross-decode the same normalized five-seed candidate
+outputs under clean and recovery action quantiles without model execution or
+optimizer authority.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,

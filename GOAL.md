@@ -94,6 +94,9 @@ sampler orders and quantify early-phase exposure. It runs no model or optimizer
 and T20.28 is now `verified` through Reviewer Decision 189. Recovery saw 26
 approach and 3 frame-zero samples versus clean's 14 and 0, so low early-phase
 exposure is rejected. Dataset quantile/postprocessor shift is next.
+Brief 160 now opens T20.29 for a five-seed postprocessor-only quantile
+counterfactual holding normalized candidate outputs fixed. It runs no model or
+optimizer and predeclares no statistics-freezing conclusion.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
