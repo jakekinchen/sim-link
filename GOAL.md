@@ -57,8 +57,8 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.17 is `verified` as a bounded negative clean-base result; T20.18 is the
-current dependency-ready slice. Brief 145 established T20.17's first boundary at
+T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
+`in_progress` under Brief 149. Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
 geometry-derived episode generation, the SO-101 processor, and thin
@@ -107,9 +107,10 @@ Brief 148 is verified through `dce1995` and reviewed by Decision 178. Official
 LeRobot completed 250 finite rank-4 local-MPS updates from the clean base; the
 frozen seed-6 candidate then ran 244 unassisted frames with zero projected or
 assisted actions, no strict grasp contact, and 0.000307 mm lift. This is a
-verified negative result, not policy acceptance. T20.18 is next: state-forked
-recovery, near-failure, and failure episodes from policy-visited states before
-another optimizer campaign.
+verified negative result, not policy acceptance. Brief 149 activates T20.18:
+reproduce the exact failed candidate while capturing its pre-action MuJoCo
+states, then generate state-forked recovery, near-failure, and failure evidence
+before another optimizer campaign.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:
