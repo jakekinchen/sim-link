@@ -9,7 +9,9 @@ from scenesmith.robot_lab.t20_26_frame_zero_variability import (
     SAMPLE_SCHEDULE,
     build_batch,
     build_gate,
+    build_paired_source_gate,
     verify_batch,
+    verify_paired_source_gate,
 )
 
 
@@ -60,6 +62,32 @@ class T2026FrameZeroVariabilityTests(unittest.TestCase):
         substituted[-1] = sign_payload(substituted[-1])
         with self.assertRaisesRegex(ValueError, "identical observation"):
             build_gate(substituted)
+
+    def test_paired_source_gate_reports_distribution_without_capability_claim(self) -> None:
+        batches = [
+            self._batch(candidate, batch_id, offset=0.2 if candidate == "clean_base" else 0.1)
+            for candidate in ("clean_base", "recovery_augmented")
+            for batch_id in BATCH_IDS
+        ]
+        gate = build_paired_source_gate(
+            batches=batches,
+            source_action_rad=[0.0] * 6,
+            source_episode_file_sha256="a" * 64,
+            source_episode_identity_sha256="b" * 64,
+            t20_26_gate_identity_sha256="9" * 64,
+        )
+        self.assertEqual(gate["aggregate"]["paired_seed_count"], 5)
+        self.assertEqual(gate["aggregate"]["recovery_improved_seed_count"], 5)
+        self.assertEqual(
+            gate["distribution_result"], "recovery_improved_frame_zero_source_mae"
+        )
+        self.assertFalse(gate["model_inference_executed"])
+        self.assertFalse(gate["closed_loop_capability_claimed"])
+        mutation = copy.deepcopy(gate)
+        mutation["aggregate"]["recovery_improved_seed_count"] = 4
+        mutation = sign_payload(mutation)
+        with self.assertRaisesRegex(ValueError, "drifted"):
+            verify_paired_source_gate(mutation, batches)
 
     @staticmethod
     def _batch(candidate: str, batch_id: int, *, offset: float) -> dict:

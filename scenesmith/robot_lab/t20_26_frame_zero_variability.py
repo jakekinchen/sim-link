@@ -13,6 +13,7 @@ from scenesmith.robot_lab.t20_25_frozen_candidate_localization import CANDIDATE_
 
 BATCH_SCHEMA_VERSION = "scenesmith.t20_26_frame_zero_inference_batch.v1"
 GATE_SCHEMA_VERSION = "scenesmith.t20_26_frame_zero_variability_gate.v1"
+PAIRED_GATE_SCHEMA_VERSION = "scenesmith.t20_27_paired_source_action_gate.v1"
 BATCH_IDS = (1, 2)
 SAMPLE_SCHEDULE = (
     ("same_01", "same_seed_repeat", 20260714),
@@ -148,6 +149,172 @@ def verify_gate(gate: dict[str, Any], batches: list[dict[str, Any]]) -> None:
     _validate_batch_set(batches)
     if gate != _compose_gate(batches):
         raise ValueError("T20.26 variability gate drifted from batch evidence")
+
+
+def build_paired_source_gate(
+    *,
+    batches: list[dict[str, Any]],
+    source_action_rad: list[float],
+    source_episode_file_sha256: str,
+    source_episode_identity_sha256: str,
+    t20_26_gate_identity_sha256: str,
+    _skip_verify: bool = False,
+) -> dict[str, Any]:
+    _validate_batch_set(batches)
+    source_action = np.asarray(_vector(source_action_rad, "source action"))
+    _sha(source_episode_file_sha256, "source episode file")
+    _sha(source_episode_identity_sha256, "source episode identity")
+    _sha(t20_26_gate_identity_sha256, "T20.26 gate identity")
+    if any(
+        batch["source_episode_file_sha256"] != source_episode_file_sha256
+        or batch["source_episode_identity_sha256"] != source_episode_identity_sha256
+        for batch in batches
+    ):
+        raise ValueError("T20.27 source episode substitution detected")
+    keyed = {(batch["candidate_id"], batch["batch_id"]): batch for batch in batches}
+    unique_schedule = (SAMPLE_SCHEDULE[0], *SAMPLE_SCHEDULE[3:])
+    rows = []
+    for sample_id, mode, seed in unique_schedule:
+        actions = {}
+        for candidate in CANDIDATE_IDS:
+            first_samples = {
+                sample["sample_id"]: sample for sample in keyed[(candidate, 1)]["samples"]
+            }
+            second_samples = {
+                sample["sample_id"]: sample for sample in keyed[(candidate, 2)]["samples"]
+            }
+            if first_samples[sample_id] != second_samples[sample_id]:
+                raise ValueError("T20.27 duplicate process actions disagree")
+            actions[candidate] = np.asarray(
+                first_samples[sample_id]["requested_action_rad"], dtype=np.float64
+            )
+        clean_error = np.abs(actions["clean_base"] - source_action)
+        recovery_error = np.abs(actions["recovery_augmented"] - source_action)
+        rows.append(
+            {
+                "sample_id": sample_id,
+                "mode": mode,
+                "inference_seed": seed,
+                "clean_source_mae_rad": float(np.mean(clean_error)),
+                "recovery_source_mae_rad": float(np.mean(recovery_error)),
+                "recovery_minus_clean_mae_rad": float(
+                    np.mean(recovery_error) - np.mean(clean_error)
+                ),
+                "candidate_action_mae_rad": float(
+                    np.mean(np.abs(actions["recovery_augmented"] - actions["clean_base"]))
+                ),
+                "clean_per_joint_absolute_error_rad": {
+                    name: float(value)
+                    for name, value in zip(JOINT_NAMES, clean_error, strict=True)
+                },
+                "recovery_per_joint_absolute_error_rad": {
+                    name: float(value)
+                    for name, value in zip(JOINT_NAMES, recovery_error, strict=True)
+                },
+            }
+        )
+    deltas = np.asarray([row["recovery_minus_clean_mae_rad"] for row in rows])
+    clean_matrix = np.asarray(
+        [list(row["clean_per_joint_absolute_error_rad"].values()) for row in rows]
+    )
+    recovery_matrix = np.asarray(
+        [list(row["recovery_per_joint_absolute_error_rad"].values()) for row in rows]
+    )
+    tolerance = 1e-6
+    improved = int(np.sum(deltas < -tolerance))
+    regressed = int(np.sum(deltas > tolerance))
+    tied = len(rows) - improved - regressed
+    aggregate_delta = float(np.mean(deltas))
+    gate = sign_payload(
+        {
+            "schema_version": PAIRED_GATE_SCHEMA_VERSION,
+            "task_id": "T20.27",
+            "source_episode_file_sha256": source_episode_file_sha256,
+            "source_episode_identity_sha256": source_episode_identity_sha256,
+            "t20_26_gate_identity_sha256": t20_26_gate_identity_sha256,
+            "source_action_rad": source_action.astype(float).tolist(),
+            "paired_samples": rows,
+            "aggregate": {
+                "paired_seed_count": len(rows),
+                "clean_source_mae_rad": float(np.mean(clean_matrix)),
+                "recovery_source_mae_rad": float(np.mean(recovery_matrix)),
+                "recovery_minus_clean_mae_rad": aggregate_delta,
+                "recovery_improved_seed_count": improved,
+                "recovery_regressed_seed_count": regressed,
+                "recovery_tied_seed_count": tied,
+                "per_joint_recovery_minus_clean_mae_rad": {
+                    name: float(value)
+                    for name, value in zip(
+                        JOINT_NAMES,
+                        np.mean(recovery_matrix, axis=0) - np.mean(clean_matrix, axis=0),
+                        strict=True,
+                    )
+                },
+            },
+            "distribution_result": (
+                "recovery_improved_frame_zero_source_mae"
+                if aggregate_delta < -tolerance and improved > regressed
+                else "recovery_did_not_improve_frame_zero_source_mae"
+            ),
+            "statistical_significance_claimed": False,
+            "closed_loop_capability_claimed": False,
+            "source_inference_evidence_reused": True,
+            "model_inference_executed": False,
+            "action_applied": False,
+            "closed_loop_rollout_executed": False,
+            "optimizer_training": False,
+            "simulation_policy_accepted": False,
+            "physical_actuation": False,
+            "external_compute_started": False,
+            "brev_compute_started": False,
+            "physical_transfer_ready": False,
+            "promotion_eligible": False,
+        }
+    )
+    if not _skip_verify:
+        verify_paired_source_gate(gate, batches)
+    return gate
+
+
+def verify_paired_source_gate(
+    gate: dict[str, Any], batches: list[dict[str, Any]]
+) -> None:
+    verify_signed_payload(gate, label="T20.27 paired source-action gate")
+    expected = build_paired_source_gate(
+        batches=batches,
+        source_action_rad=gate["source_action_rad"],
+        source_episode_file_sha256=gate["source_episode_file_sha256"],
+        source_episode_identity_sha256=gate["source_episode_identity_sha256"],
+        t20_26_gate_identity_sha256=gate["t20_26_gate_identity_sha256"],
+        _skip_verify=True,
+    )
+    if gate != expected:
+        raise ValueError("T20.27 gate drifted from paired batch/source evidence")
+    if (
+        gate.get("schema_version") != PAIRED_GATE_SCHEMA_VERSION
+        or gate.get("task_id") != "T20.27"
+        or gate.get("aggregate", {}).get("paired_seed_count") != 5
+        or len(gate.get("paired_samples", [])) != 5
+        or gate.get("statistical_significance_claimed") is not False
+        or gate.get("closed_loop_capability_claimed") is not False
+        or gate.get("source_inference_evidence_reused") is not True
+        or gate.get("model_inference_executed") is not False
+        or any(
+            gate.get(field) is not False
+            for field in (
+                "action_applied",
+                "closed_loop_rollout_executed",
+                "optimizer_training",
+                "simulation_policy_accepted",
+                "physical_actuation",
+                "external_compute_started",
+                "brev_compute_started",
+                "physical_transfer_ready",
+                "promotion_eligible",
+            )
+        )
+    ):
+        raise ValueError("T20.27 result shape or authority drifted")
 
 
 def _validate_batch_set(batches: list[dict[str, Any]]) -> None:
