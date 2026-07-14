@@ -56,14 +56,12 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.4 is `verified` through Brief 124 and Reviewer 153 as a negative update-
-ladder result. The 500-update/1,000-microbatch rung reduced train loss from
-100.8441 to 6.4760 and held-out loss from 130.0066 to 1.8620, but its changed
-action sequence still made zero strict contacts and lifted only 0.0003007 mm.
-The initial held-out command retains a 0.655 rad gripper error, so the 1,000-
-update rung is retired for this hypothesis. T20.5 is next: sweep execution
-horizons 5/10/15 using the same 500-update weights and seed. Hardware, physical
-transfer, promotion, external compute, and Brev remain closed.
+T20.5 is `in_progress` under Brief 125. It fixes the verified T20.4 500-update
+adapter, held-out seed, inference seed, model steps, prompt, and strict gates
+while comparing execution horizons 5/10/15. Horizon 5 is already bound by the
+final T20.4 artifact; fresh horizons 10 and 15 must record queue refills, initial
+reset, open-loop duration, keyframes, and measured gate margins. Hardware,
+physical transfer, promotion, external compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
