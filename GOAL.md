@@ -56,13 +56,12 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.6 is `verified` through Brief 126 and Reviewer 155. Its source-bound
-analytic positive passes the existing strict-v2 evaluator with all eight
-capability stages, while eight target-reaching adversarial traces preserve
-truthful stable target occupancy but fail strict success for the expected
-semantic reason. T20.7 is next for a separately briefed fixed-semantics model
-bake-off. Hardware, physical transfer, promotion, external compute, and Brev
-remain closed.
+T20.7 is `in_progress` under Brief 127. It runs a fresh equal-sample local-MPS
+bake-off across PI0.5, SmolVLA, ACT, and Diffusion Policy, because the existing
+ACT and PI0.5 runs are not sample-comparable. A four-model finite canary gates
+any continued rung, and only fixed-seed policy-owned closed-loop strict behavior
+may rank models. Hardware, physical transfer, promotion, external compute, and
+Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
