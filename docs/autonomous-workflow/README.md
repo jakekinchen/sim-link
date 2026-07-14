@@ -2,6 +2,17 @@
 
 This directory defines the autonomous Codex workflow for this repo. It is a repo-local operating system: file-backed plans, reviewable execution slices, explicit audit trails, and a thin Manager/Guardian role that gives the user one clean line of communication.
 
+## Project Explainers
+
+The workflow is one part of the project, not the project’s only documentation.
+For the current program’s system/data/authority boundaries, begin at the
+[SO-101 documentation hub](../README.md), then use:
+
+- [Architecture](../architecture.md)
+- [Requirements and contracts](../requirements-and-contracts.md)
+- [Current versus historical guide](../current-and-historical.md)
+- [Decisions and adjuncts](../decisions-and-adjuncts.md)
+
 ## Documents
 
 1. [Operating Model](./01-operating-model.md) - workflow thesis, role topology, and source-of-truth rules.
