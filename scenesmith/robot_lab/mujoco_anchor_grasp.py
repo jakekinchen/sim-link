@@ -180,7 +180,14 @@ def _run_once() -> dict[str, Any]:
     }
 
 
-def _scene() -> RobotLabScene:
+def _scene(
+    *, initial_position_m: tuple[float, float, float] | None = None
+) -> RobotLabScene:
+    anchor_position = initial_position_m or (0.22, 0.0, 0.325)
+    if len(anchor_position) != 3:
+        raise ValueError("Anchor initial position must have three coordinates")
+    if any(not math.isfinite(value) for value in anchor_position):
+        raise ValueError("Anchor initial position must be finite")
     return RobotLabScene(
         schema_version="scenesmith.robot_lab.v1",
         scene_id="scenesmith_nominal_anchor_grasp_probe",
@@ -199,7 +206,7 @@ def _scene() -> RobotLabScene:
             RobotLabCube(
                 name=OBJECT_ID,
                 color="green",
-                initial_position_m=(0.22, 0.0, 0.325),
+                initial_position_m=anchor_position,
                 side_length_m=ANCHOR_DIMENSIONS_M[2],
                 mass_kg=ANCHOR_MASS_KG,
             ),

@@ -18,7 +18,7 @@ from scenesmith.robot_lab.experience_compiler import (
     compile_projection,
     write_compilation,
 )
-from scenesmith.robot_lab.experience_records import REPO_ROOT
+from scenesmith.robot_lab.experience_records import JOINT_NAMES, REPO_ROOT
 from scenesmith.robot_lab.experience_window_index import (
     HORIZONS,
     OUTPUT_NAMES,
@@ -74,6 +74,13 @@ class ExperienceWindowIndexTests(unittest.TestCase):
         )
         self.assertEqual(first["action_frame_ids_json"], first["frame_ids_json"])
         self.assertEqual(first["action_variants_json"], '["requested","proposed","projected","sent","measured"]')
+
+    def test_named_derived_actions_compile_into_windows(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="scenesmith-window-source-") as source_dir:
+            self._write_source(Path(source_dir), frame_count=6, derived_action_at=2)
+            result = compile_window_index(Path(source_dir))
+
+        self.assertEqual(result["manifest"]["window_count_by_horizon"]["5"], 2)
 
     def test_hard_boundaries_do_not_allow_cross_segment_windows(self) -> None:
         with tempfile.TemporaryDirectory(prefix="scenesmith-window-source-") as source_dir:
@@ -145,12 +152,14 @@ class ExperienceWindowIndexTests(unittest.TestCase):
         boundary_at: int | None = None,
         noncontiguous_at: int | None = None,
         empty_action_at: int | None = None,
+        derived_action_at: int | None = None,
     ) -> None:
         projection = _complete_projection(
             frame_count,
             boundary_at=boundary_at,
             noncontiguous_at=noncontiguous_at,
             empty_action_at=empty_action_at,
+            derived_action_at=derived_action_at,
         )
         result = compile_projection(
             projection,
@@ -166,6 +175,7 @@ def _complete_projection(
     boundary_at: int | None,
     noncontiguous_at: int | None,
     empty_action_at: int | None,
+    derived_action_at: int | None,
 ) -> dict:
     import json
 
@@ -204,6 +214,16 @@ def _complete_projection(
         }
         if index == empty_action_at:
             frame["actions"]["requested"]["values"] = []
+        if index == derived_action_at:
+            for action in frame["actions"].values():
+                action["state"] = "derived"
+                action["ordered_joint_names"] = list(JOINT_NAMES)
+                action["values"] = [float(index)] * len(JOINT_NAMES)
+                action["provenance"] = {
+                    "state": "derived",
+                    "source": "test",
+                    "derivation": "scripted action equals requested action",
+                }
         for field in ("requested_gripper_pose", "achieved_gripper_pose", "effort"):
             frame[field] = {
                 "state": "observed",

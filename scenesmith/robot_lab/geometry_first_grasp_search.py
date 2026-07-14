@@ -6,7 +6,7 @@ import math
 import tempfile
 
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import numpy as np
 
@@ -231,8 +231,13 @@ def _run_candidate(
     selected_axis_clearance_m: float = 0.0,
     execute_full_lift_cycle: bool = False,
     capture_keyframes: bool = False,
+    recording_stable_hold_frames: int = 0,
+    scene_initial_position_m: tuple[float, float, float] | None = None,
+    recording_sink: Callable[[dict[str, Any], dict[str, np.ndarray]], None] | None = None,
 ) -> dict[str, Any]:
-    scene = _scene()
+    if isinstance(recording_stable_hold_frames, bool) or recording_stable_hold_frames < 0:
+        raise ValueError("Recording stable-hold frame count must be nonnegative")
+    scene = _scene(initial_position_m=scene_initial_position_m)
     raw_frames: list[dict[str, Any]] = []
     rendered_keyframes: dict[str, dict[str, Any]] = {}
     with tempfile.TemporaryDirectory(prefix="scenesmith-geometry-search-") as directory:
@@ -271,6 +276,8 @@ def _run_candidate(
                     set(pad_roles),
                 )
             raw_frames.append(retained)
+            if recording_sink is not None:
+                recording_sink(retained, _images)
             if capture_keyframes:
                 retain_rendered_keyframe(
                     rendered_keyframes,
@@ -461,6 +468,8 @@ def _run_candidate(
                 lift_control[gripper_address] = effective_request["close_target_rad"]
                 expert._move_control("unassisted_lift", lift_control, 24)
                 expert._hold("unsupported_lift_hold", 12)
+                if recording_stable_hold_frames:
+                    expert._hold("recording_stable_hold", recording_stable_hold_frames)
                 lower_control = pregrasp_solution["qpos"][: expert.model.nu].copy()
                 lower_control[gripper_address] = effective_request["close_target_rad"]
                 expert._move_control("lower", lower_control, 24)
@@ -575,6 +584,19 @@ def _run_candidate(
             "release_settle_final_contact_clear": bool(phase_rows["release_settle"]) and not phase_rows["release_settle"][-1].get("all_robot_object_contact_geoms", []),
             "retreat_final_contact_clear": bool(phase_rows["retreat"]) and not phase_rows["retreat"][-1].get("all_robot_object_contact_geoms", []),
         }
+        if recording_stable_hold_frames:
+            recording_hold_rows = [
+                row for row in raw_frames if row["phase"] == "recording_stable_hold"
+            ]
+            result["recording_stable_hold"] = {
+                "frame_count": len(recording_hold_rows),
+                "strict_v2_valid_frame_count": sum(
+                    _valid_contact(row, spec) for row in recording_hold_rows
+                ),
+                "anchor_support_free_frame_count": sum(
+                    not row["anchor_support_contacts"] for row in recording_hold_rows
+                ),
+            }
     if (
         principal_axis_alignment
         or joint_wrist_axis_alignment

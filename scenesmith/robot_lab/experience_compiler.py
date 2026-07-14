@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -18,6 +19,7 @@ from scenesmith.robot_lab.artifact_contract import (
 from scenesmith.robot_lab.experience_records import (
     ACTION_VARIANTS,
     HARD_BOUNDARY_EVENTS,
+    JOINT_NAMES,
     REPO_ROOT,
     verify_experience_record_contract,
 )
@@ -190,6 +192,75 @@ def compile_projection(
     return {"manifest": manifest, "frame_rows": frame_rows, "segment_rows": segment_rows, "quarantine": quarantine}
 
 
+def compile_projections(
+    projections: list[dict[str, Any]],
+    *,
+    source_experience_identity: str,
+    source_normalization_identity: str,
+    source_episode_store_manifest_sha256: str | None = None,
+    max_timestamp_gap_ns: int = DEFAULT_MAX_TIMESTAMP_GAP_NS,
+) -> dict[str, Any]:
+    """Compile multiple append-only rollouts into one source-bound view."""
+
+    if not isinstance(projections, list) or not projections:
+        raise ValueError("At least one source projection is required")
+    compiled = [
+        compile_projection(
+            projection,
+            source_experience_identity=source_experience_identity,
+            source_normalization_identity=source_normalization_identity,
+            max_timestamp_gap_ns=max_timestamp_gap_ns,
+        )
+        for projection in projections
+    ]
+    frame_rows = [row for result in compiled for row in result["frame_rows"]]
+    segment_rows = [row for result in compiled for row in result["segment_rows"]]
+    quarantine = [row for result in compiled for row in result["quarantine"]]
+    frame_ids = [row["frame_id"] for row in frame_rows]
+    segment_ids = [row["segment_id"] for row in segment_rows]
+    if len(frame_ids) != len(set(frame_ids)):
+        raise ValueError("Source projections contain duplicate frame IDs")
+    if len(segment_ids) != len(set(segment_ids)):
+        raise ValueError("Source projections contain duplicate segment IDs")
+    manifest = {
+        "schema_version": SCHEMA_VERSION,
+        "source_experience_identity_sha256": source_experience_identity,
+        "source_normalization_identity_sha256": source_normalization_identity,
+        "raw_rollout_id": "multiple_append_only_rollouts",
+        "source_rollout_count": len(projections),
+        "frame_count": len(frame_rows),
+        "eligible_frame_count": sum(row["frame_eligible"] for row in frame_rows),
+        "segment_count": len(segment_rows),
+        "quarantine_count": len(quarantine),
+        "max_timestamp_gap_ns": max_timestamp_gap_ns,
+        "training_eligible": False,
+        "simulation_training_ready": False,
+        "optimizer_training": False,
+        "physical_actuation": False,
+        "raw_bytes_rewritten": False,
+        "hard_boundary_events": list(HARD_BOUNDARY_EVENTS),
+        "frame_rows": frame_rows,
+        "segment_rows": segment_rows,
+        "quarantine": quarantine,
+    }
+    if source_episode_store_manifest_sha256 is not None:
+        if (
+            not isinstance(source_episode_store_manifest_sha256, str)
+            or len(source_episode_store_manifest_sha256) != 64
+            or any(character not in "0123456789abcdef" for character in source_episode_store_manifest_sha256)
+        ):
+            raise ValueError("Source episode-store manifest hash is invalid")
+        manifest["source_episode_store_manifest_sha256"] = (
+            source_episode_store_manifest_sha256
+        )
+    return {
+        "manifest": manifest,
+        "frame_rows": frame_rows,
+        "segment_rows": segment_rows,
+        "quarantine": quarantine,
+    }
+
+
 def write_compilation(result: dict[str, Any], output_dir: Path) -> dict[str, Any]:
     """Write parquet and JSON outputs, then bind their hashes into the manifest."""
 
@@ -286,7 +357,7 @@ def _frame_quarantine_reasons(frame: dict[str, Any]) -> list[str]:
     else:
         for variant in ACTION_VARIANTS:
             action = actions.get(variant)
-            if not isinstance(action, dict) or action.get("state") != "observed" or action.get("values") is None:
+            if not _action_variant_complete(action):
                 reasons.append(f"missing_action_{variant}")
     for field in ("requested_gripper_pose", "achieved_gripper_pose", "effort"):
         value = frame.get(field)
@@ -457,12 +528,35 @@ def _quarantine_row(
 def _actions_complete(actions: Any) -> bool:
     if not isinstance(actions, dict):
         return False
-    return all(
-        isinstance(action, dict)
-        and action.get("state") == "observed"
-        and action.get("values") is not None
-        for variant in ACTION_VARIANTS
-        for action in [actions.get(variant)]
+    return all(_action_variant_complete(actions.get(variant)) for variant in ACTION_VARIANTS)
+
+
+def _action_variant_complete(action: Any) -> bool:
+    """Accept observed values or explicitly sourced scripted derivations only."""
+
+    if not isinstance(action, dict) or action.get("values") is None:
+        return False
+    state = action.get("state")
+    if state == "observed":
+        return True
+    if state != "derived":
+        return False
+    provenance = action.get("provenance")
+    values = action.get("values")
+    return (
+        isinstance(provenance, dict)
+        and provenance.get("state") == "derived"
+        and isinstance(provenance.get("derivation"), str)
+        and bool(provenance["derivation"].strip())
+        and action.get("ordered_joint_names") == list(JOINT_NAMES)
+        and isinstance(values, list)
+        and len(values) == len(JOINT_NAMES)
+        and all(
+            not isinstance(value, bool)
+            and isinstance(value, (int, float))
+            and math.isfinite(value)
+            for value in values
+        )
     )
 
 

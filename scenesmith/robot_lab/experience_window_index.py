@@ -22,7 +22,7 @@ from scenesmith.robot_lab.experience_compiler import (
     SEGMENT_SCHEMA,
     verify_compilation,
 )
-from scenesmith.robot_lab.experience_records import ACTION_VARIANTS
+from scenesmith.robot_lab.experience_records import ACTION_VARIANTS, JOINT_NAMES
 
 
 SCHEMA_VERSION = "scenesmith.experience_window_index.v1"
@@ -370,8 +370,30 @@ def _validate_actions(value: Any) -> None:
         raise ValueError("Source frame actions are invalid")
     for variant in ACTION_VARIANTS:
         action = actions.get(variant)
-        if not isinstance(action, dict) or action.get("state") != "observed":
+        if not isinstance(action, dict) or action.get("state") not in {"observed", "derived"}:
             raise ValueError(f"Source frame action variant is unavailable: {variant}")
+        if action["state"] == "derived":
+            provenance = action.get("provenance")
+            derived_values = action.get("values")
+            if (
+                not isinstance(provenance, dict)
+                or provenance.get("state") != "derived"
+                or not isinstance(provenance.get("derivation"), str)
+                or not provenance["derivation"].strip()
+                or action.get("ordered_joint_names") != list(JOINT_NAMES)
+                or not isinstance(derived_values, list)
+                or len(derived_values) != len(JOINT_NAMES)
+                or any(
+                    isinstance(item, bool)
+                    or not isinstance(item, (int, float))
+                    or not math.isfinite(item)
+                    for item in derived_values
+                )
+            ):
+                raise ValueError(
+                    "Source frame derived action is incomplete or lacks a named "
+                    f"derivation: {variant}"
+                )
         values = action.get("values")
         if not isinstance(values, list) or not values:
             raise ValueError(f"Source frame action values are invalid: {variant}")

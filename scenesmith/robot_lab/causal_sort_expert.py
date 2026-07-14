@@ -307,6 +307,12 @@ class CausalSortExpert:
             "phase": phase,
             "state": state,
             "action": policy_action,
+            "mujoco_qpos": self.data.qpos[: self.model.nu].astype(float).tolist(),
+            "mujoco_qvel": self.data.qvel[: self.model.nu].astype(float).tolist(),
+            "mujoco_requested_action": np.asarray(action, dtype=np.float64).tolist(),
+            "mujoco_actuator_effort": self.data.qfrc_actuator[: self.model.nu]
+            .astype(float)
+            .tolist(),
             "robot_cube_contacts": contacts,
             "grasp_assists_active": active_assists,
             "cube_positions_m": {

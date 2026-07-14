@@ -13,7 +13,7 @@ from scenesmith.robot_lab.experience_compiler import (
     compile_projection,
     verify_compilation,
 )
-from scenesmith.robot_lab.experience_records import REPO_ROOT
+from scenesmith.robot_lab.experience_records import JOINT_NAMES, REPO_ROOT
 
 
 CONTRACT_PATH = REPO_ROOT / "configurations/robot_lab/experience_record_contract.json"
@@ -140,6 +140,72 @@ class ExperienceCompilerTests(unittest.TestCase):
             any(
                 "segment_too_short_after_hard_boundary" in item["reason_codes"]
                 for item in split["quarantine"]
+            )
+        )
+
+    def test_named_derived_actions_are_complete_but_unnamed_are_quarantined(self) -> None:
+        contract = load_strict_json(CONTRACT_PATH)
+        projection = copy.deepcopy(contract["fixture_projection"])
+        for index, frame in enumerate(projection["frames"]):
+            frame["boundary_events"] = []
+            frame["actions"] = {
+                variant: {
+                    "state": "derived",
+                    "representation": "mujoco_radians",
+                    "units": "radian",
+                    "ordered_joint_names": list(JOINT_NAMES),
+                    "values": [float(index)] * len(JOINT_NAMES),
+                    "provenance": {
+                        "state": "derived",
+                        "source": "test",
+                        "derivation": "scripted action equals requested action",
+                    },
+                    "reason": None,
+                }
+                for variant in ("requested", "proposed", "projected", "sent", "measured")
+            }
+            for field in ("requested_gripper_pose", "achieved_gripper_pose", "effort"):
+                frame[field] = {
+                    "state": "observed",
+                    "value": float(index),
+                    "units": "unit",
+                    "provenance": {"state": "observed", "source": "test"},
+                    "reason": None,
+                }
+        complete = compile_projection(
+            projection,
+            source_experience_identity="a" * 64,
+            source_normalization_identity="b" * 64,
+        )
+        self.assertEqual(complete["manifest"]["eligible_frame_count"], 2)
+        self.assertEqual(complete["manifest"]["segment_count"], 1)
+
+        projection["frames"][0]["actions"]["requested"]["provenance"].pop(
+            "derivation"
+        )
+        unnamed = compile_projection(
+            projection,
+            source_experience_identity="a" * 64,
+            source_normalization_identity="b" * 64,
+        )
+        self.assertEqual(unnamed["manifest"]["eligible_frame_count"], 1)
+        self.assertTrue(
+            any(
+                "missing_action_requested" in item["reason_codes"]
+                for item in unnamed["quarantine"]
+            )
+        )
+
+        projection["frames"][1]["actions"]["requested"]["values"] = [0.0]
+        malformed = compile_projection(
+            projection,
+            source_experience_identity="a" * 64,
+            source_normalization_identity="b" * 64,
+        )
+        self.assertTrue(
+            any(
+                "missing_action_requested" in item["reason_codes"]
+                for item in malformed["quarantine"]
             )
         )
 
