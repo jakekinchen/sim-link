@@ -29,6 +29,7 @@ TRAINING_OUTPUT_DIR = Path("training")
 INVOCATION_PATH = Path("invocation.json")
 TRAIN_LOG_PATH = Path("train.log")
 RUN_SUMMARY_PATH = Path("run_summary.json")
+RESULT_GATE_PATH = Path("configurations/robot_lab/t20_17_clean_base_result_gate.json")
 _STEP = re.compile(r"(?:^|\s)step:(\d+)(?:\s|$)")
 _LOSS = re.compile(r"(?:^|\s)loss:([^\s]+)(?:\s|$)")
 
@@ -102,6 +103,51 @@ def verify_run_summary(summary: dict[str, Any]) -> None:
     required = {"adapter_model.safetensors", "adapter_config.json", "policy_preprocessor.json"}
     if not required.issubset(paths):
         raise ValueError("T20.17 clean-base run summary lacks required checkpoint evidence")
+
+
+def build_result_gate(
+    *,
+    training_ref: dict[str, Any],
+    evaluation_ref: dict[str, Any],
+    training_summary: dict[str, Any],
+    rollout: dict[str, Any],
+) -> dict[str, Any]:
+    success = rollout.get("simulation_semantic_strict_success") is True
+    terminal = rollout.get("terminal_outcome")
+    if success or terminal != "no_strict_grasp_contact":
+        raise ValueError("T20.17 result composer only accepts the observed negative boundary")
+    if training_summary.get("optimizer_update_count") != EXPECTED_UPDATES:
+        raise ValueError("T20.17 result optimizer accounting drifted")
+    if any(rollout.get(key) != 0 for key in ("projected_action_frame_count", "active_assist_frame_count")):
+        raise ValueError("T20.17 negative result contains projected or assisted actions")
+    return sign_payload({
+        "schema_version": "scenesmith.t20_17_clean_base_result_gate.v1",
+        "training_ref": dict(training_ref),
+        "evaluation_ref": dict(evaluation_ref),
+        "optimizer_update_count": EXPECTED_UPDATES,
+        "baseline_loss": training_summary["baseline_loss"],
+        "final_loss": training_summary["final_loss"],
+        "minimum_loss": training_summary["minimum_loss"],
+        "held_out_seed": 6,
+        "held_out_frame_count": rollout["frame_count"],
+        "terminal_outcome": terminal,
+        "maximum_anchor_lift_m": rollout["maximum_anchor_lift_m"],
+        "required_anchor_lift_m": 0.025,
+        "projected_action_frame_count": 0,
+        "active_assist_frame_count": 0,
+        "decision": "verified_negative_no_strict_contact",
+        "simulation_policy_accepted": False,
+        "physical_transfer_ready": False,
+        "promotion_eligible": False,
+        "physical_actuation": False,
+        "external_compute_started": False,
+        "brev_compute_started": False,
+        "authority_granted": ["t20_17_clean_base_negative_result_verified"],
+        "authority_not_granted": [
+            "simulation_policy_accepted", "physical_transfer_ready", "promotion_eligible",
+            "physical_actuation", "external_compute", "brev_compute",
+        ],
+    })
 
 
 def run_campaign(*, repo_root: Path = REPO_ROOT, python: Path | None = None) -> dict[str, Any]:

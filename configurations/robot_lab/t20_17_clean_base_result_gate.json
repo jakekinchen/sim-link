@@ -1,0 +1,45 @@
+{
+  "active_assist_frame_count": 0,
+  "authority_granted": [
+    "t20_17_clean_base_negative_result_verified"
+  ],
+  "authority_not_granted": [
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "baseline_loss": 0.829,
+  "brev_compute_started": false,
+  "decision": "verified_negative_no_strict_contact",
+  "evaluation_ref": {
+    "file_sha256": "19b2dd6b60192d821ecca7f45377583a4bc61a8525dcdbd9e325f55135958974",
+    "identity_sha256": "0c21769d4b131e90ef2eb1c02d1007da8091d47d1d4d03a8ebe58314a7bbf9f9",
+    "path": "outputs/robot_lab/t20_17_clean_base_run_002/held_out_seed_6_closed_loop.json",
+    "schema_version": "scenesmith.t20_17_clean_base_closed_loop.v1"
+  },
+  "external_compute_started": false,
+  "final_loss": 0.135,
+  "held_out_frame_count": 244,
+  "held_out_seed": 6,
+  "identity_sha256": "a0a884150c659910f2e641ceaa2ac0014ca6a82430b404b1e1dfa554d099dbac",
+  "maximum_anchor_lift_m": 3.0724689892291934e-07,
+  "minimum_loss": 0.017,
+  "optimizer_update_count": 250,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "projected_action_frame_count": 0,
+  "promotion_eligible": false,
+  "required_anchor_lift_m": 0.025,
+  "schema_version": "scenesmith.t20_17_clean_base_result_gate.v1",
+  "simulation_policy_accepted": false,
+  "terminal_outcome": "no_strict_grasp_contact",
+  "training_ref": {
+    "file_sha256": "c3815212cf013e33bf06fa9f3f2da170499448943191c13f253962dcdc3f4f58",
+    "identity_sha256": "0c06ca5042368feca537afbb2141348fa55d181080b0184050932233adc59e84",
+    "path": "outputs/robot_lab/t20_17_clean_base_run_002/run_summary.json",
+    "schema_version": "scenesmith.t20_17_clean_base_run.v1"
+  }
+}

@@ -8,6 +8,7 @@ from pathlib import Path
 from scenesmith.robot_lab.t20_17_clean_base_campaign import (
     EXPECTED_UPDATES,
     build_training_argv,
+    build_result_gate,
     parse_finite_loss_trace,
     verify_run_summary,
 )
@@ -78,6 +79,24 @@ class T2017CleanBaseCampaignTests(unittest.TestCase):
             drift[key] = 251 if key == "optimizer_update_count" else True
             with self.assertRaises(ValueError):
                 verify_run_summary(drift)
+
+    def test_result_gate_records_failure_without_promotion(self) -> None:
+        gate = build_result_gate(
+            training_ref={"identity_sha256": "a" * 64},
+            evaluation_ref={"identity_sha256": "b" * 64},
+            training_summary={"optimizer_update_count": 250, "baseline_loss": 0.829, "final_loss": 0.135, "minimum_loss": 0.017},
+            rollout={
+                "frame_count": 244,
+                "terminal_outcome": "no_strict_grasp_contact",
+                "simulation_semantic_strict_success": False,
+                "maximum_anchor_lift_m": 3.0e-7,
+                "projected_action_frame_count": 0,
+                "active_assist_frame_count": 0,
+            },
+        )
+        self.assertEqual(gate["decision"], "verified_negative_no_strict_contact")
+        self.assertFalse(gate["simulation_policy_accepted"])
+        self.assertFalse(gate["promotion_eligible"])
 
 
 if __name__ == "__main__":
