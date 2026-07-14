@@ -80,12 +80,23 @@ now route readers to canonical sources. Its seventh boundary is verified at
 scene-scan/calibration artifact handoff, with no package import, artifact
 ingestion, or physical claim. Its eighth boundary is verified at `d695ed4`:
 the exact cross-repository integration, compatibility, and deduplication
-roadmap preserves the separate Robo Scan thread's ownership of dirty Brief 054
-and gates sim-link consumption on its committed receipt. Its ninth boundary
+roadmap preserved the separate Robo Scan thread's ownership until Brief 054 was
+committed and accepted at `72eb02e`, then gated sim-link consumption on that
+immutable receipt. Its ninth boundary
 now independently validates only a copied receipt and emits a non-authorizing
 candidate descriptor at `67daad9`/`cb4e5a0`/`d01416b`. It does not change system authority or the
 broader T20.17 training task. Only repeatable strict semantic success can
 promote a policy.
+
+Brief 146 is the active documentation-only reconciliation. It records the
+owner-approved MVP cut and a sim-link-only dependency queue while Robo Scan
+waits for its real metric-capture path. The immediate implementation target
+remains T20.17: clean `pi05_base`, exact source-dataset statistics from
+initialization, a realistic bounded local update budget, and frozen unassisted
+strict-v2 evaluation. Later planned tasks are state-fork recovery data, a small
+discrete ensemble, an observer-role evaluator, a thin paired trace runner, and
+timing evidence. No queued task inherits hardware, physical-transfer,
+promotion, external-compute, or Brev authority from the plan.
 
 T20.9 is `verified` through Brief 129/Reviewer 159. The immutable seed-2 expert
 actions reproduce the source trajectory exactly through the policy adapter:

@@ -7,6 +7,7 @@
 | `GOAL.md` | Active mission, current slice, stop sentinel, human constraints. |
 | `docs/README.md` | Documentation front door and reader routing. |
 | `docs/architecture.md` | Component, data-flow, tech-stack, and authority overview. |
+| `docs/sim-link-mvp-execution-plan.md` | Approved product cut, sim-link-only dependency queue, deferrals, and MVP exit condition. |
 | `docs/requirements-and-contracts.md` | Requirement families, claim vocabulary, and canonical contract routing. |
 | `docs/current-and-historical.md` | Current truth surface versus append-only/historical evidence guidance. |
 | `docs/decisions-and-adjuncts.md` | Package, external-pattern, and design decision index. |
@@ -32,13 +33,14 @@
 |---|---|
 | Product intent | `docs/README.md` plus `GOAL.md` and the active milestone/task sources it routes to |
 | Architecture | `docs/architecture.md` |
+| Current MVP cut and build order | `docs/sim-link-mvp-execution-plan.md` plus `GOAL.md`, authoritative state, and latest brief |
 | Tech stack / package ownership | `docs/architecture.md` plus `docs/autonomous-workflow/bespoke-package-recreation-map.md` |
 | Robo Scan handoff | `docs/robo-scan-integration.md` plus the upstream repository's current state |
 | Robo Scan/sim-link integration sequence | `docs/robo-scan-sim-link-integration-roadmap.md` |
 | Requirements and contracts | `docs/requirements-and-contracts.md` plus referenced implementation/configuration |
 | Current versus historical interpretation | `docs/current-and-historical.md` |
 | External ideas and adjunct decisions | `docs/decisions-and-adjuncts.md` |
-| Build order | `docs/autonomous-workflow/09-autonomous-milestones.md` plus latest brief |
+| Invariant milestone order | `docs/autonomous-workflow/09-autonomous-milestones.md` |
 | Active work | `GOAL.md` plus latest brief |
 | Completed evidence | `docs/session-logs/` plus commits |
 | Review decisions | `docs/reviewer-messages/` |

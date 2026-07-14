@@ -11,6 +11,21 @@ SceneSmith governance shell**. That boundary is the key architectural choice:
 packages execute ML, robot, dataset, teleoperation, and processor behavior;
 SceneSmith proves what inputs, outputs, and claims are trustworthy.
 
+The MVP is organized into five planes:
+
+| Plane | Owns now | Important separation |
+| --- | --- | --- |
+| Representation | workcell/twin revisions, coordinates, geometry, explicit uncertainty | a twin candidate is not a qualified physical twin |
+| Experimentation | tasks, state forks, episodes, perturbations, declared cousins | an episode is evidence for a named hypothesis, not merely a trajectory |
+| Learning | pinned LeRobot policy adaptation and checkpoint evaluation | policy updates are distinct from twin calibration and optional dynamics learning |
+| Runtime | MuJoCo execution now; separately permitted hardware execution later | the LLM/goal loop never becomes the real-time safety controller |
+| Governance | content identity, observer roles, gates, certificates, lineage, rollback | component evidence cannot self-promote to a system-level state |
+
+The current implementation keeps three mutable learning surfaces conceptually
+separate: the workcell twin, the robot policy, and an optional learned dynamics
+model. The MVP updates the policy and may compare a small explicit twin
+ensemble. Learned world models and residual dynamics are intentionally cut.
+
 ## Component Map
 
 ```mermaid
@@ -94,8 +109,11 @@ calibration work. It is an upstream source of potential artifacts, not part of
 the pinned LeRobot/MuJoCo runtime. A reference-only upstream scene can at most
 be a labelled visual/fixture context; a measured metric export remains a twin
 candidate until sim-link validates the immutable receipt and the central
-authority composer accepts independent evidence. There is no current code
-import or qualified artifact handoff.
+authority composer accepts independent evidence. The first source-free
+reference-only handoff is now independently validated and can produce only a
+non-authorizing visual-context descriptor. There is still no metric workcell
+handoff, simulator compilation from Robo Scan geometry, or physical-twin
+qualification.
 
 The full ownership, artifact classes, receipt fields, and rejection rules are
 in the [Robo Scan integration boundary](./robo-scan-integration.md). The
@@ -117,6 +135,18 @@ These are intentionally retained because they define trust, not commodity ML:
 
 The detailed keep/collapse/delete decision is in the
 [bespoke-versus-package recreation map](./autonomous-workflow/bespoke-package-recreation-map.md).
+
+## MVP Construction Rule
+
+Prefer constructive, testable solutions over open-ended search everywhere but
+the learned policy. The verified geometry-derived grasp, direct execution of
+the pinned LeRobot processor, strict evaluator predicates, and deterministic
+MuJoCo state branching are the model. Do not add a reward compiler, scientist
+service, skill graph, posterior engine, or alternate simulator until a current
+failure demonstrates that the smaller mechanism is insufficient.
+
+The dependency-ordered cut and remaining sim-link tasks are in the
+[MVP execution plan](./sim-link-mvp-execution-plan.md).
 
 ## Authority Flow
 
@@ -151,5 +181,6 @@ not grant a hardware session, motion permit, or proof label.
 ## Read Next
 
 - [Requirements and contracts](./requirements-and-contracts.md)
+- [MVP execution plan](./sim-link-mvp-execution-plan.md)
 - [Current versus historical guide](./current-and-historical.md)
 - [Autonomous workflow](./autonomous-workflow/README.md)

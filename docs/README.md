@@ -11,6 +11,7 @@ work without replacing the canonical state, signed evidence, or slice history.
 | Understand what is happening now | [Current state](#current-state) | [roadmap](#roadmap-and-next-work) and the active brief |
 | Learn how the pieces fit together | [Architecture](./architecture.md) | [requirements and contracts](./requirements-and-contracts.md) |
 | Connect scan or calibration work from Robo Scan | [Robo Scan integration boundary](./robo-scan-integration.md) | [integration and deduplication roadmap](./robo-scan-sim-link-integration-roadmap.md) |
+| See the approved MVP cut and sim-link-only queue | [MVP execution plan](./sim-link-mvp-execution-plan.md) | `GOAL.md`, current brief, and task state |
 | Run or change a safe implementation slice | [Autonomous workflow](./autonomous-workflow/README.md) | `GOAL.md`, current brief, and review decision |
 | Find the authoritative rule for a capability claim | [Requirements and contracts](./requirements-and-contracts.md) | the referenced code, configuration, and test |
 | Investigate an older result or rejected approach | [Current versus historical guide](./current-and-historical.md) | frozen artifact, session log, and reviewer decision |
@@ -54,6 +55,10 @@ deduplication gates, and definition of integrated, read the
 [Robo Scan and sim-link integration roadmap](./robo-scan-sim-link-integration-roadmap.md).
 
 ## Roadmap And Next Work
+
+- [Sim-link MVP execution plan](./sim-link-mvp-execution-plan.md) records the
+  current product cut, dependency-ordered local queue, deferrals, and exit
+  condition.
 
 - [Autonomous milestones](./autonomous-workflow/09-autonomous-milestones.md)
   defines M0–M22 as outcome gates.

@@ -36,11 +36,13 @@ does not own either repository's live status.
 - The [Robo Scan integration boundary](./robo-scan-integration.md) owns the
   permanent handoff safety rules.
 
-At the time this roadmap was written, the separate Robo Scan thread had an
-uncommitted active Brief 054 for an immutable, source-free scene-export
-receipt. That is the correct producer-side starting slice. Its worktree must
-remain owned by that thread; sim-link must wait for a committed producer
-boundary before implementing a consumer.
+The producer handshake is no longer pending. Robo Scan Brief 054 is committed,
+reviewer-accepted, and pinned at
+`72eb02efe7e69981a5afab41a2733cd31ec03d4e`. Sim-link independently completed
+I2 and the reference-only I3 descriptor at `67daad9`, `cb4e5a0`, and `d01416b`.
+Those boundaries admit only labelled visual context. The next cross-repository
+dependency is a real metric I4 bundle after Robo Scan M1-M4; until then each
+repository continues its own local queue.
 
 ## Final Repository Ownership
 
@@ -94,8 +96,8 @@ implementations.
 1. Keep the repositories and Git histories separate.
 2. Ban sibling-checkout reads, path dependencies, submodules, and automatic
    discovery from production paths.
-3. Preserve Robo Scan's active dirty Brief 054 worktree; do not steer it into
-   sim-link code.
+3. Preserve the accepted producer receipt identity and the independent sim-link
+   compatibility lock; schema changes require a new producer-first boundary.
 4. Keep sim-link's import guard against `environment_scanner` and `so101_scan`.
 
 **Exit gate:** this roadmap and the permanent handoff contract are reviewed and
@@ -103,7 +105,8 @@ committed. No runtime capability is created.
 
 ### I1 - Producer Receipt Handshake
 
-**Owner:** Robo Scan; its active Brief 054 already defines this slice.
+**Owner:** Robo Scan. **Status:** verified and remotely preserved by Brief 054
+at `72eb02efe7e69981a5afab41a2733cd31ec03d4e`.
 
 **Required output:** one checked-in, source-free reference-only export fixture
 containing a canonical receipt, one sealed layered-scene manifest, and exactly
@@ -131,7 +134,8 @@ schema identity, and fixture bytes—not a working-tree path.
 
 ### I2 - Independent Sim-Link Receipt Conformance
 
-**Owner:** sim-link; start only after I1 is remotely preserved.
+**Owner:** sim-link. **Status:** verified by Brief 145 at `67daad9`, hardened at
+`cb4e5a0`, and adversarially covered at `d01416b`.
 
 **Planned slice:**
 
@@ -158,7 +162,8 @@ scene.
 
 ### I3 - Reference-Only End-To-End Plumbing
 
-**Owner:** sim-link.
+**Owner:** sim-link. **Status:** reference-only descriptor boundary verified by
+Brief 145; no metric geometry or simulator asset was created.
 
 Add a narrow `robo_scan_workcell_adapter.py` that converts an accepted receipt
 into an inspectable, non-metric `TwinCandidate` shell. The first adapter must:
@@ -265,16 +270,14 @@ or authority interpretation changes.
 
 ### I8 - Whole Foundry Expansion
 
-Only after I6 is credible, add the larger report's ideas incrementally:
-
-1. Probabilistic `TwinRevision` and calibrated uncertainty cousins.
-2. Task/evaluator contracts with hardware-observable parity.
-3. Paired shadow runner and event-triggered flight recorder.
-4. Task-conditioned fidelity and drift certificates.
-5. Skill graphs, counterfactual checkpoints, recovery data, and broader cousins.
-6. Multimodal scientist tools that propose bounded experiments but never enter
-   the real-time safety loop.
-7. Final `WorkcellDeploymentBundle` with complete lineage and rollback.
+Only after the MVP exit gate, add the larger report's ideas incrementally. The
+approved near-term sim-link cut is narrower and lives in the
+[MVP execution plan](./sim-link-mvp-execution-plan.md). It pulls forward only
+state-fork recovery data, a discrete uncertainty ensemble, observer roles, a
+thin paired trace runner, and timing evidence. Posterior calibration, a broad
+cousin algebra, fidelity/drift certificates, flight recording, skill graphs,
+scientist tooling, alternate renderers/backends, world models, and residual
+dynamics remain deferred or cut until evidence creates a need.
 
 These remain sim-link/integration or hardware-runtime responsibilities. Robo
 Scan should not absorb task, reward, episode, policy, or promotion systems.
@@ -319,17 +322,18 @@ release and keep it dependency-light.
 
 ## Immediate Queue
 
-1. **Robo Scan thread:** finish Brief 054 exactly as scoped, commit/review/push
-   the immutable reference-only export receipt, then return to the first open
-   M1 gate. Do not add sim-link code or expand into policy/twin qualification.
-2. **Sim-link:** wait for the verified Brief 054 commit. Then open I2 as one
-   offline receipt-validator slice with no simulator or hardware behavior.
-3. **Sim-link follow-up:** run I3 reference-only structural plumbing and prove
-   that all global authority remains denied.
-4. **Robo Scan:** finish M1–M4 before producing a real metric
-   `WorkcellBundle`.
-5. **Sim-link:** execute I5–I6 only from that verified metric export.
-6. **Both:** perform I7 deduplication after two real handoffs, never before.
+1. **Sim-link now:** execute T20.17 clean `pi05_base` dataset-native training
+   and strict-v2 evaluation under the current mechanical simulation authority.
+2. **Sim-link next:** follow the local T20.18-T20.22 queue for state-fork
+   recovery data, a discrete ensemble, observer-role evaluation, paired traces,
+   and timing. Each task requires its own brief and dependency gate.
+3. **Robo Scan separately:** use the expected USB fix to pursue its first real
+   M1 capture, then complete M2-M4 before producing a metric I4
+   `WorkcellBundle`. This roadmap grants none of those actions.
+4. **Cross-repository wait:** sim-link opens I5 only after the exact verified I4
+   bytes and an updated compatibility lock exist.
+5. **Both later:** perform I7 deduplication only after two real metric handoffs
+   and one end-to-end compile.
 
 ## Definition Of Integrated
 

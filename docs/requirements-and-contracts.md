@@ -19,6 +19,7 @@ authority decisions from `project_state.json`.
 | R9: Physical boundaries | A read-only observation, a policy result, and physical proof are distinct; no hardware is accessed without separate live authority. | [`hardware_execution_profile.py`](../scenesmith/robot_lab/hardware_execution_profile.py), [live-adapter contract](./autonomous-workflow/minimal-live-adapter-recreation.md) |
 | R10: Cost control | External or Brev compute must be explicitly bounded and cleaned up; it is not inferred from a training request. | [`autolearn_cycle.py`](../scenesmith/robot_lab/autolearn_cycle.py), [milestone M8](./autonomous-workflow/09-autonomous-milestones.md) |
 | R11: Scan/calibration handoff | A Robo Scan export is explicit, immutable, checksum-bound, coordinate-complete, provenance-labelled, and locally scoped; no source checkout or artifact can grant whole-system authority. | [Robo Scan integration boundary](./robo-scan-integration.md), [`artifact_contract.py`](../scenesmith/robot_lab/artifact_contract.py), [`authority_composer.py`](../scenesmith/robot_lab/authority_composer.py) |
+| R12: Observer and timing truth | Privileged simulator facts and hardware-observable facts use explicit roles; every timed stream names its clock; proposed, issued, and measured/applied actions remain separate. | [MVP execution plan](./sim-link-mvp-execution-plan.md), future T20.20-T20.22 contracts |
 
 ## Claim Vocabulary
 
