@@ -1,6 +1,12 @@
 import unittest
 
-from scenesmith.robot_lab.act_grasp_closed_loop import PHASE_PLAN, ROLLOUT_FRAMES, _margin, phase_for_frame
+from scenesmith.robot_lab.act_grasp_closed_loop import (
+    PHASE_PLAN,
+    ROLLOUT_FRAMES,
+    _margin,
+    phase_for_frame,
+    run_policy_grasp_closed_loop,
+)
 
 
 class ActGraspClosedLoopTest(unittest.TestCase):
@@ -21,6 +27,19 @@ class ActGraspClosedLoopTest(unittest.TestCase):
         self.assertFalse(failed["passed"])
         self.assertAlmostEqual(failed["margin"], -0.01)
         self.assertFalse(_margin(1, 0, "==")["passed"])
+
+    def test_generic_policy_contract_rejects_empty_labels_before_simulation(self) -> None:
+        with self.assertRaisesRegex(ValueError, "task_id"):
+            run_policy_grasp_closed_loop(
+                lambda images, state: state[:6],
+                checkpoint_sha256="a" * 64,
+                training_run_summary_sha256="b" * 64,
+                seed=2,
+                schema_version="schema.v1",
+                task_id="",
+                evidence_mode="test",
+                policy_label="test",
+            )
 
 
 if __name__ == "__main__":

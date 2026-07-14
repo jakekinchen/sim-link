@@ -73,7 +73,41 @@ def run_act_grasp_closed_loop(
     training_run_summary_sha256: str,
     seed: int = 2,
 ) -> dict[str, Any]:
-    """Run exactly one held-out simulation rollout with policy-owned controls."""
+    """Run exactly one held-out ACT rollout with policy-owned controls."""
+
+    return run_policy_grasp_closed_loop(
+        policy,
+        checkpoint_sha256=checkpoint_sha256,
+        training_run_summary_sha256=training_run_summary_sha256,
+        seed=seed,
+        schema_version=SCHEMA_VERSION,
+        task_id="T20.2",
+        evidence_mode="held_out_seed_closed_loop_act_mujoco",
+        policy_label="ACT",
+    )
+
+
+def run_policy_grasp_closed_loop(
+    policy: Policy,
+    *,
+    checkpoint_sha256: str,
+    training_run_summary_sha256: str,
+    seed: int,
+    schema_version: str,
+    task_id: str,
+    evidence_mode: str,
+    policy_label: str,
+) -> dict[str, Any]:
+    """Run one bounded held-out rollout for a named policy evidence contract."""
+
+    for name, value in {
+        "schema_version": schema_version,
+        "task_id": task_id,
+        "evidence_mode": evidence_mode,
+        "policy_label": policy_label,
+    }.items():
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"Closed-loop {name} must be a non-empty string")
 
     spec = next((dict(item) for item in EPISODE_SPECS if item["seed"] == seed), None)
     if spec is None:
@@ -95,7 +129,7 @@ def run_act_grasp_closed_loop(
     projected_frames: list[int] = []
     pending_requested: np.ndarray | None = None
 
-    with tempfile.TemporaryDirectory(prefix="scenesmith-t20-2-act-") as directory:
+    with tempfile.TemporaryDirectory(prefix="scenesmith-policy-grasp-") as directory:
         root = Path(directory)
         robot_xml = prepare_mujoco_so101_assets(root, scene.robot.base_position_m)
         apply_explicit_pad_proxy_contact_model(robot_xml)
@@ -171,7 +205,7 @@ def run_act_grasp_closed_loop(
                 ).astype(np.float32)
                 pending_requested = np.asarray(policy(images, state), dtype=np.float64)
                 if pending_requested.shape != (expert.model.nu,) or not np.isfinite(pending_requested).all():
-                    raise ValueError("ACT policy emitted a non-finite or wrong-shaped action")
+                    raise ValueError(f"{policy_label} policy emitted a non-finite or wrong-shaped action")
                 applied = np.clip(pending_requested, ctrl_min, ctrl_max)
                 if not np.array_equal(applied, pending_requested):
                     projected_frames.append(frame_index)
@@ -186,9 +220,10 @@ def run_act_grasp_closed_loop(
     action_bytes = json.dumps(requested_actions, separators=(",", ":"), allow_nan=False).encode()
     return sign_payload(
         {
-            "schema_version": SCHEMA_VERSION,
-            "task_id": "T20.2",
-            "evidence_mode": "held_out_seed_closed_loop_act_mujoco",
+            "schema_version": schema_version,
+            "task_id": task_id,
+            "evidence_mode": evidence_mode,
+            "policy_label": policy_label,
             "seed": seed,
             "source_episode_spec": spec,
             "source_grasp_identity_sha256": grasp["identity_sha256"],
