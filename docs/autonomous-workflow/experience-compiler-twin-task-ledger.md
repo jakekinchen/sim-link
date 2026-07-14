@@ -39,6 +39,21 @@ next_step: compile deterministic frame/segment tables from immutable records, em
   material permit expansion is unauthorized.
 - States are `pending`, `in_progress`, `verified`, `blocked`, `deferred`, and `superseded`.
 
+## 2026-07-13 - Post-109 maintenance reconciliation
+
+Commit `2f880d0` added grasp-evidence observability hardening after Brief 109:
+3-5 rendered keyframes, measured-vs-threshold gate margins, explicit retirement
+of the degenerate 12-sample Halton design, and approach/IK tolerance
+consistency. The fourteen signed evidence artifacts were regenerated and
+verified. This is maintenance reconciliation, not a new major slice: T17.4
+remains pending, the latest verified implementation boundary remains Brief 109
+at `76cb16d`, and no pointer advance is implied.
+
+The regenerated T17.1 content-addressed projection is recorded in
+`project_state.json` with its maintenance linkage to Session 140 and Reviewer
+Decision 136. Its original Brief 107 verification is not rewritten. No
+hardware, Brev, paid compute, optimizer, training, or physical motion occurred.
+
 ## M16 - Twin And Dependency Foundation
 
 | ID | State | Depends on | Task | Verification / artifacts |
@@ -240,7 +255,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 
 | ID | State | Depends on | Task | Verification / artifacts |
 |---|---|---|---|---|
-| T17.1 | verified | T16.2,T19.0l | Define immutable raw rollout/frame records and provenance dictionaries | Brief 107/Reviewer 133; contract f2b8b462...; grasp/twin/coordinate bound; stable rollout/frame identities; canonical/source phases; recovery only a control mode; five action variants remain distinct; two-frame fixture quarantined for five missing-data reasons; 210-test broad gate |
+| T17.1 | verified | T16.2,T19.0l | Define immutable raw rollout/frame records and provenance dictionaries | Brief 107/Reviewer 133; maintenance reconciliation 2f880d0 / Session 140 / Reviewer 136 updates the current content-addressed projection identity without rewriting Brief 107; grasp/twin/coordinate bound; stable rollout/frame identities; canonical/source phases; recovery only a control mode; five action variants remain distinct; two-frame fixture quarantined for five missing-data reasons; 210-test broad gate |
 | T17.2 | verified | T16.2-T16.3,T17.1 | Implement a named canonical SO-101 processor shared by collection, training, evaluation, and adapters | Brief 108/Reviewer 134; processor 9800c873...; pure unclamped transform, fail-closed bounds, explicit requested/executed limiter; 128 round trips max 4.441e-16; golden parity and monotonic gripper; 221-test broad gate |
 | T17.3 | verified | T17.2 | Generate immutable `normalization_bundle.json` | Brief 109/Reviewer 135; bundle c829e2ba...; 94,568-sample MEAN_STD statistics; actual cached processor/tokenizer fixture parity; camera/order/runtime/tensor hashes pinned; production/training false; 227-test broad gate |
 | T17.4 | pending | T17.1-T17.3 | Compile `frames.parquet` and hard-boundary `segments.parquet` | Raw hashes retained; owner/reset/prompt/contract/gap changes split or fail |

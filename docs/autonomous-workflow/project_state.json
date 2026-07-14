@@ -2275,14 +2275,20 @@
       "result": "signed immutable raw-rollout/frame contract and source-bound grasp projection fixture verify with canonical/source phase separation, orthogonal provenance dictionaries, variant-separated actions, stable identities, and truthful quarantine",
       "artifact": {
         "path": "configurations/robot_lab/experience_record_contract.json",
-        "identity_sha256": "f2b8b462ec5b153c6e5366a10f85a1e6ebf99c580b2eaf3b94e33f7d88226ab6",
-        "file_sha256": "4214679b11c22ba147d7e874d149043e26b8bdad188e0348b6d2d5bb53a11dad",
+        "identity_sha256": "8682cea5d45ed5cf115f3f68eadc5f81376e26b9d6981969876f05c3c7665737",
+        "file_sha256": "e0ad93a0e4ee97180049fa7d5ae8d91af9723eafc7fd339d1c12ad484cc52c86",
         "size_bytes": 20469,
         "fixture_rollout_id": "rollout-af554fa23d42d986ea3a4e06",
         "fixture_frame_count": 2,
         "quarantine_reason_count": 5,
         "training_eligible": false,
         "broad_test_count": 210
+      },
+      "artifact_maintenance": {
+        "commit": "2f880d0a7d41ccc7c294e8a9e3f0008d95e5a960",
+        "session_log": "docs/session-logs/140-grasp-evidence-observability-hardening.md",
+        "review_decision_id": "136",
+        "reason": "downstream grasp projection changed under observability hardening; current content-addressed artifact reconciled without rewriting Brief 107"
       },
       "authority_granted": [
         "immutable_experience_record_contract_valid",
