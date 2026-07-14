@@ -47,3 +47,12 @@ batch, chunk, and sample schedules differ.
 
 External downloads, external compute, Brev, hardware, physical transfer,
 promotion, T20.8 acceptance, and changes to the T20.6 evaluator.
+
+## Canary Boundary
+
+Run 003 binds the full local model, processor, normalizer, tokenizer/VLM,
+input-adapter, tensor-view, semantic-fixture, sample-plan, and LeRobot runtime
+identities. PI0.5, SmolVLA, ACT, and compact Diffusion Policy all completed one
+finite local-MPS forward/backward pass on source start 0 with no optimizer step.
+Their model-specific losses are not cross-model scores. Reviewer 156 authorizes
+only the exact 20-sample continuation rung; T20.7 remains `in_progress`.

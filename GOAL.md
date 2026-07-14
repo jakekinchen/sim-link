@@ -58,10 +58,11 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 T20.7 is `in_progress` under Brief 127. It runs a fresh equal-sample local-MPS
 bake-off across PI0.5, SmolVLA, ACT, and Diffusion Policy, because the existing
-ACT and PI0.5 runs are not sample-comparable. A four-model finite canary gates
-any continued rung, and only fixed-seed policy-owned closed-loop strict behavior
-may rank models. Hardware, physical transfer, promotion, external compute, and
-Brev remain closed.
+ACT and PI0.5 runs are not sample-comparable. Reviewer 156 accepts the hardened
+four-model finite forward/backward canary and authorizes only the exact common
+20-sample rung. No loss ranking or policy result exists yet; only fixed-seed
+policy-owned closed-loop strict behavior may rank models. Hardware, physical
+transfer, promotion, external compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
