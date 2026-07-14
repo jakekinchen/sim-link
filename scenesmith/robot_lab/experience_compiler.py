@@ -198,11 +198,14 @@ def compile_projections(
     source_experience_identity: str,
     source_normalization_identity: str,
     source_episode_store_manifest_sha256: str | None = None,
+    source_legacy_inventory_manifest_sha256: str | None = None,
     max_timestamp_gap_ns: int = DEFAULT_MAX_TIMESTAMP_GAP_NS,
 ) -> dict[str, Any]:
     """Compile multiple append-only rollouts into one source-bound view."""
 
-    if not isinstance(projections, list) or not projections:
+    if not isinstance(projections, list):
+        raise ValueError("Source projections must be a list")
+    if not projections and source_legacy_inventory_manifest_sha256 is None:
         raise ValueError("At least one source projection is required")
     compiled = [
         compile_projection(
@@ -252,6 +255,19 @@ def compile_projections(
             raise ValueError("Source episode-store manifest hash is invalid")
         manifest["source_episode_store_manifest_sha256"] = (
             source_episode_store_manifest_sha256
+        )
+    if source_legacy_inventory_manifest_sha256 is not None:
+        if (
+            not isinstance(source_legacy_inventory_manifest_sha256, str)
+            or len(source_legacy_inventory_manifest_sha256) != 64
+            or any(
+                character not in "0123456789abcdef"
+                for character in source_legacy_inventory_manifest_sha256
+            )
+        ):
+            raise ValueError("Source legacy-inventory manifest hash is invalid")
+        manifest["source_legacy_inventory_manifest_sha256"] = (
+            source_legacy_inventory_manifest_sha256
         )
     return {
         "manifest": manifest,
