@@ -7,13 +7,13 @@ training_lock: closed
 run_window: start 2026-07-13T20:30:52-05:00; no new major slice after 2026-07-14T03:45:52-05:00; hard closeout 2026-07-14T04:30:52 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
 current_milestone: M17/M19 grasp execution track
-current_task: T17.6 pending after verified T17.5b; recompile qualifying legacy raw rollouts and quarantine ambiguous legacy data without guessing
+current_task: T17.7 pending after verified T17.6; audit the non-empty compiled grasp source with a deterministic 100-window replay without training
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
-evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; no hardware or motion
-remaining: T17.6 legacy recompile, T17.7 compiler audit, M18 dataset mechanics; T19.2 physical calibration under fresh permits; central simulation-training authority
+evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; no hardware or motion
+remaining: T17.7 compiler audit, M18 dataset mechanics; T19.2 physical calibration under fresh permits; central simulation-training authority
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; simulation training remains centrally withheld
-next_step: implement T17.6 legacy raw-rollout recompile; quarantine any ambiguous legacy record rather than guessing, and keep training authority closed
+next_step: write the T17.7 compiler-manifest and deterministic 100-window replay audit over the verified non-empty T17.5b compiled source; keep training authority closed
 ```
 
 ## Rules
@@ -153,6 +153,30 @@ index contains 1,600/1,176/848/120 windows at horizons 5/10/15/50. A fresh
 eight-seed temporary replay reproduced the manifest, compiler, and index
 byte-for-byte. Training, optimizer, physical, and raw-rewrite flags remain
 false. T17.6 is now the pending next task.
+
+## 2026-07-13 - Brief 114 T17.6 start
+
+T17.6 is now `in_progress` under Brief 114. It may inventory only the bounded
+local legacy canary roots and must preserve their bytes. A candidate is
+recompiled only if it already satisfies the current raw rollout/frame contract,
+including action semantics, source identities, timestamps, hard boundaries,
+and provenance. Every other candidate receives an explicit deterministic
+quarantine reason; no normalized/action/coordinate reconstruction or inferred
+migration is permitted. Training, optimizer, Brev, hardware, and physical
+authority remain closed.
+
+## 2026-07-13 - Brief 114 T17.6 verification
+
+T17.6 is `verified`: the fixed inventory bound the legacy observation stream
+(3,219 rows), DAgger intervention sidecar (660 rows), and 12-episode training
+metadata. None exposes the current signed raw-rollout/frame envelope, complete
+five-variant action lineage, integer nanosecond timing, source-bound frame
+provenance, or the current hard-boundary contract; the sidecar also retains
+unconfined legacy image paths. The signed inventory accepts zero candidates and
+the new compiler view has zero frames, segments, and quarantines. This is a
+truthful compatibility outcome, not a migration failure: the verified T17.5b
+source remains the non-empty source for T17.7. Training, optimizer, raw
+rewrites, hardware, physical actuation, and Brev remain closed or false.
 
 ## M16 - Twin And Dependency Foundation
 
@@ -361,7 +385,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T17.4 | verified | T17.1-T17.3 | Compile `frames.parquet` and hard-boundary `segments.parquet` | Brief 110/Reviewer 138; commit 1a37466; 2 frame rows, 0 eligible frames, 0 segments, 2 quarantines; deterministic Parquet/JSON outputs; quarantined rows cannot bridge segments; training/optimizer/physical authority closed |
 | T17.5 | verified | T17.2-T17.4 | Compile unpadded `window_index.parquet` for horizons 5/10/15/50 | Brief 111/Reviewer 139; commit cc507f3; 0 rows at all horizons from the verified empty source; source manifest/hash and exact frame/action identities bound; no gaps, missing actions, padding, reset, teleport, drift, or forbidden transition |
 | T17.5b | verified | T17.1-T17.5,T19.0l | Record deterministic scripted single-cube grasp episodes into an append-only raw store with complete per-frame evidence | Brief 112/Reviewer 141; commits 5c3c34b + 8ccee81; 8/8 strict successes, five seed-0 256px proof keyframes, 1,952 eligible frames, 88 segments, zero quarantines, and 1,600/1,176/848/120 unpadded 5/10/15/50 windows; derived variants require named provenance plus six finite named joints; training/optimizer/physical/raw-rewrite false |
-| T17.6 | pending | T17.1-T17.5 | Recompile qualifying legacy raw rollouts and quarantine ambiguous legacy data | No guessed migration; reasoned quarantine manifest |
+| T17.6 | verified | T17.1,T17.4,T17.5b | Audit bounded legacy canary descriptors and recompile only exact current raw-record evidence | Brief 114/Reviewer 142; implementations `520ca0c` + `68b20ed`; signed inventory `5ba35300...`; 3 descriptors/0 accepted/3 quarantined; explicit source-bound zero-row compiler view; no guessed migration or authority escalation |
 | T17.7 | pending | T17.1-T17.6,T17.5b | Add full compiler manifest and deterministic 100-window replay/annotation audit | Zero invalid accepted windows; collection/training/inference tensor parity |
 
 ## M18 / Gate B - Intentional Mixture And Corrections

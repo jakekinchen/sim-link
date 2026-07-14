@@ -99,7 +99,10 @@ explicitly derived action variants fail-closed and verifiable rather than
 mislabeling them as observed. T17.5b is `verified` through Brief 112: eight
 deterministic unassisted episodes compile to 1,952 eligible frames, 88
 hard-boundary segments, and 3,744 unpadded windows (including 120 at horizon
-50), with zero quarantines. T17.6 is now the next pending offline task. The
+50), with zero quarantines. T17.6 is `verified` through Brief 114: all three
+bounded legacy canary descriptors are reasoned quarantines (zero accepted
+records), and its source-bound compiler view is explicitly empty. T17.7 is the
+next pending compiler-audit task. The
 live gate and training lock remain closed. The
 following paragraphs
 retain the T16.5b disconnect, rejected-attempt, correction, and acceptance

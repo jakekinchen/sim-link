@@ -1,0 +1,232 @@
+{
+  "accepted_candidate_count": 0,
+  "accepted_frame_count": 0,
+  "accepted_rollout_count": 0,
+  "candidates": [
+    {
+      "byte_count": 6407059,
+      "candidate_id": "m10_observation_frames",
+      "decision": "quarantined",
+      "file_sha256": "c5fed3a06419a2895dd9b1905152cd36cfc458f8ee4e29184fd6db1a81aad825",
+      "observed_top_level_keys": [
+        "action_source",
+        "cube",
+        "cube_position_m",
+        "deadman_age_s",
+        "deadman_armed",
+        "deadman_fresh",
+        "deadman_sequence",
+        "deadman_takeover",
+        "executed_action",
+        "failure_reason",
+        "frame_index",
+        "human_action",
+        "intervention_event",
+        "is_intervention",
+        "object_motion_mode",
+        "observation",
+        "phase",
+        "policy_action",
+        "policy_task",
+        "robot_control",
+        "robot_cube_contacts",
+        "seed",
+        "target_tray",
+        "time_s",
+        "transition"
+      ],
+      "path": "outputs/robot_lab/autolearn/m10-contract-canary/collection/randomized-episode-6204/observation_frames.jsonl",
+      "quarantine_reason_codes": [
+        "missing_current_action_variant_lineage",
+        "missing_current_frame_provenance",
+        "missing_current_hard_boundary_contract",
+        "not_current_signed_raw_rollout_envelope",
+        "timestamp_not_integer_nanoseconds"
+      ],
+      "record_count": 3219,
+      "source_kind": "legacy_jsonl_frame_stream"
+    },
+    {
+      "byte_count": 1339398,
+      "candidate_id": "m10_dagger_intervention_sidecar",
+      "decision": "quarantined",
+      "file_sha256": "28dc93169057c59c9f75a7eebee24f58748192e5f529e1ce576e47bec7574911",
+      "observed_top_level_keys": [
+        "action_source",
+        "deadman",
+        "episode_index",
+        "executed_action",
+        "failure_reason",
+        "frame_index",
+        "human_action",
+        "intervention_event",
+        "is_expert_correction",
+        "is_intervention",
+        "object_motion_mode",
+        "observation_images",
+        "phase",
+        "policy_action",
+        "policy_task",
+        "scene_id",
+        "seed",
+        "segment_index",
+        "source_episode_index",
+        "time_s",
+        "transition"
+      ],
+      "path": "outputs/robot_lab/autolearn/m10-contract-canary/dagger-dataset/scenesmith_intervention_sidecar.jsonl",
+      "quarantine_reason_codes": [
+        "missing_current_action_variant_lineage",
+        "missing_current_frame_provenance",
+        "missing_current_hard_boundary_contract",
+        "not_current_signed_raw_rollout_envelope",
+        "timestamp_not_integer_nanoseconds",
+        "unconfined_legacy_observation_paths"
+      ],
+      "record_count": 660,
+      "source_kind": "legacy_jsonl_intervention_sidecar"
+    },
+    {
+      "byte_count": 2476,
+      "candidate_id": "m10_training_dataset_metadata",
+      "decision": "quarantined",
+      "file_sha256": "1fbeafe88b4ee293bf9173dcae0917145230641264396089ea523d3d5e490c05",
+      "observed_top_level_keys": [
+        "chunks_size",
+        "codebase_version",
+        "data_files_size_in_mb",
+        "data_path",
+        "features",
+        "fps",
+        "robot_type",
+        "splits",
+        "total_episodes",
+        "total_frames",
+        "total_tasks",
+        "video_files_size_in_mb",
+        "video_path"
+      ],
+      "path": "outputs/robot_lab/autolearn/m10-contract-canary/training-dataset/meta/info.json",
+      "quarantine_reason_codes": [
+        "legacy_coordinate_contract_not_current_source_bound_frame_contract",
+        "legacy_timestamp_not_integer_nanoseconds",
+        "legacy_training_dataset_not_current_raw_rollout",
+        "missing_current_signed_raw_rollout_envelope",
+        "single_legacy_action_field_lacks_variant_lineage"
+      ],
+      "record_count": null,
+      "source_facts": {
+        "declared_episode_count": 12,
+        "declared_frame_count": 11316,
+        "feature_summary": {
+          "action": {
+            "dtype": "float32",
+            "names": [
+              "shoulder_pan.pos",
+              "shoulder_lift.pos",
+              "elbow_flex.pos",
+              "wrist_flex.pos",
+              "wrist_roll.pos",
+              "gripper.pos"
+            ],
+            "shape": [
+              6
+            ]
+          },
+          "episode_index": {
+            "dtype": "int64",
+            "names": null,
+            "shape": [
+              1
+            ]
+          },
+          "frame_index": {
+            "dtype": "int64",
+            "names": null,
+            "shape": [
+              1
+            ]
+          },
+          "index": {
+            "dtype": "int64",
+            "names": null,
+            "shape": [
+              1
+            ]
+          },
+          "observation.images.top": {
+            "dtype": "image",
+            "names": [
+              "channel",
+              "height",
+              "width"
+            ],
+            "shape": [
+              3,
+              224,
+              224
+            ]
+          },
+          "observation.images.wrist": {
+            "dtype": "image",
+            "names": [
+              "channel",
+              "height",
+              "width"
+            ],
+            "shape": [
+              3,
+              224,
+              224
+            ]
+          },
+          "observation.state": {
+            "dtype": "float32",
+            "names": [
+              "shoulder_pan.pos",
+              "shoulder_lift.pos",
+              "elbow_flex.pos",
+              "wrist_flex.pos",
+              "wrist_roll.pos",
+              "gripper.pos"
+            ],
+            "shape": [
+              6
+            ]
+          },
+          "task_index": {
+            "dtype": "int64",
+            "names": null,
+            "shape": [
+              1
+            ]
+          },
+          "timestamp": {
+            "dtype": "float32",
+            "names": null,
+            "shape": [
+              1
+            ]
+          }
+        }
+      },
+      "source_kind": "legacy_training_dataset_metadata"
+    }
+  ],
+  "configured_candidate_count": 3,
+  "decision": "no_legacy_candidate_qualifies_for_current_raw_record_contract",
+  "discovered_candidate_count": 3,
+  "identity_sha256": "5ba3530040a1004fa18d641ef145fafa9e04696b6e2904ec78968439c2922826",
+  "inventory_root": "outputs/robot_lab/autolearn/m10-contract-canary",
+  "inventory_scope": "fixed_named_files_only",
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "quarantined_candidate_count": 3,
+  "raw_bytes_rewritten": false,
+  "schema_version": "scenesmith.legacy_experience_recompile.v1",
+  "simulation_training_ready": false,
+  "source_experience_identity_sha256": "8682cea5d45ed5cf115f3f68eadc5f81376e26b9d6981969876f05c3c7665737",
+  "source_normalization_identity_sha256": "dea3ff8cb85640499416fc6fd6bf0cf43dce3479766fb1ff277e8d224e097ebe",
+  "task_id": "T17.6",
+  "training_eligible": false
+}

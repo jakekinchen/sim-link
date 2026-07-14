@@ -1,0 +1,11 @@
+{
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "quarantine": [],
+  "raw_bytes_rewritten": false,
+  "schema_version": "scenesmith.experience_compiler.v1",
+  "simulation_training_ready": false,
+  "source_experience_identity_sha256": "8682cea5d45ed5cf115f3f68eadc5f81376e26b9d6981969876f05c3c7665737",
+  "source_normalization_identity_sha256": "dea3ff8cb85640499416fc6fd6bf0cf43dce3479766fb1ff277e8d224e097ebe",
+  "training_eligible": false
+}
