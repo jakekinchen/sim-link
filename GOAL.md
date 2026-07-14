@@ -62,10 +62,13 @@ zero action/state/object/contact divergence, no projection or assistance,
 36.3853 mm lift, and all grasp/hold/lower counts pass. T20.7 still rejects the
 oracle only because its release-clear gate treats a zero-force fixed-pad
 collision pair as active contact, while the T17.5b source contract omits that
-gate and T20.6 defines release by fingertip contact. T20.10 is `in_progress`
-under Brief 130 to reconcile release semantics without weakening final retreat clearance, then rerun the
-oracle before training. No learned policy is accepted. Hardware, physical
-transfer, promotion, external compute, and Brev remain closed.
+gate and T20.6 defines release by fingertip contact. T20.10 is `verified`
+through Brief 130/Reviewer 160: the exact oracle now passes all gates under an
+explicit force-bearing release basis while final retreat remains geometrically
+clear; legacy T20.9 still verifies unchanged. T20.11 is next to localize each
+learned model's per-phase action error against this oracle before any optimizer
+hypothesis. No learned policy is accepted. Hardware, physical transfer,
+promotion, external compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
