@@ -83,12 +83,19 @@ evaluation-only and unclipped. T20.14 is `verified` through Brief 134/Reviewer
 from the cube. T20.15 is `verified` through Brief 135/Reviewer 165. Its exact
 2x2 frame-zero ablation isolates action postprocessing as the dominant arm
 regression: 0.95872 rad non-gripper displacement versus 0.23586 from state
-preprocessing and 0.26037 interaction. T20.16 is `in_progress` under Brief 136
-for a no-training hybrid
-that retains checkpoint arm/state scaling and substitutes only the
-dataset-derived gripper postprocessor before one strict rendered rollout. No
-learned policy is accepted. Hardware, physical transfer, promotion, external
-compute, and Brev remain closed.
+preprocessing and 0.26037 interaction. T20.16 is `verified` through Brief
+136/Reviewer 166. Its no-training hybrid retained checkpoint state and arm
+scaling while substituting dataset-derived gripper mean/std. The frame-zero
+prediction passed at 0.03088 rad arm MAE and 0.12015 rad gripper error, but the
+244-frame policy-owned rollout diverged to 0.90603 rad trajectory MAE, made
+zero strict contacts, and lifted only 0.0003007 mm. Coordinate conversion and
+simulator projection counts were both zero; five reviewed keyframes visibly
+show the gripper below-left of the cube. The hybrid is retired. T20.17 is
+pending for the next run window: bind a clean `pi05_base` source to dataset
+statistics from initialization, scale source supervision and optimizer budget,
+and grade progress on the T20.6 ladder while retaining strict success as the
+only promotion gate. No learned policy is accepted. Hardware, physical
+transfer, promotion, external compute, and Brev remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
