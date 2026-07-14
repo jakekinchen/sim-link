@@ -73,6 +73,10 @@
       "kind": "global_prerequisite_fact"
     },
     {
+      "capability_id": "required_training_authority_present",
+      "kind": "global_prerequisite_fact"
+    },
+    {
       "capability_id": "structural_contract_valid",
       "kind": "global_prerequisite_fact"
     }
@@ -108,6 +112,10 @@
       "expression": {
         "operator": "all",
         "terms": [
+          {
+            "id": "required_training_authority_present",
+            "kind": "prerequisite"
+          },
           {
             "id": "structural_contract_valid",
             "kind": "prerequisite"
@@ -192,7 +200,7 @@
       }
     }
   ],
-  "identity_sha256": "6d04b20547a9391c4e695b5a337ee292410a2a13a8a3efdf34cb7033feda6ba1",
+  "identity_sha256": "bbc353920e704b38b623038bfb26b6ead9a6a5a3ab7eea7afaedc2f6fc872bf0",
   "issuer_registry": [
     {
       "authority_id": "scenesmith.deployment_authority.v1",
@@ -224,6 +232,19 @@
     }
   ],
   "prerequisites": [
+    {
+      "allowed_provenance_classes": [
+        "deployment_authority"
+      ],
+      "authorized_issuers": [
+        {
+          "authority_id": "scenesmith.deployment_authority.v1",
+          "authority_identity_sha256": "5df225ad4cce10f60884923a2f8acbc23f5f6469c2329418e1ebb813c4929214"
+        }
+      ],
+      "capability_id": "required_training_authority_present",
+      "prerequisite_id": "required_training_authority_present"
+    },
     {
       "allowed_provenance_classes": [
         "repository",

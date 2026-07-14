@@ -253,9 +253,9 @@
     ]
   },
   "training_lock": "closed",
-  "current_milestone": "M18/M19 dataset mechanics and grasp execution track",
-  "current_task": "T20.2",
-  "next_eligible_task": "T20.2",
+  "current_milestone": "M20 simulation-only clean supervision",
+  "current_task": "T20.1",
+  "next_eligible_task": "T20.1",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2676,7 +2676,8 @@
       "authority_granted": ["deterministic_reference_only_mixture_frozen"],
       "authority_not_granted": ["materialized_dataset_buffer", "simulation_training_ready", "optimizer_training", "physical_actuation", "external_compute"]
     },
-    "T20.2": {"state":"pending","depends_on":["T18.5","central_simulation_training_authority"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"requires owner-granted central simulation training authority before any model or optimizer action","artifact":null,"authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training","model_loaded","model_inference_executed"]},
+    "T20.1": {"state":"in_progress","depends_on":["T18.5"],"active_brief_id":"121","latest_verified_brief_id":null,"review_decision_id":null,"result":"build source-bound simulation-only ACT input specification and compose central training authority from an explicit owner grant","artifact":null,"authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training","model_loaded","model_inference_executed","physical_transfer_ready","promotion_eligible"]},
+    "T20.2": {"state":"pending","depends_on":["T20.1"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"requires verified T20.1 simulation-training authority before any model or optimizer action","artifact":null,"authority_granted":[],"authority_not_granted":["optimizer_training","model_loaded","model_inference_executed"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],

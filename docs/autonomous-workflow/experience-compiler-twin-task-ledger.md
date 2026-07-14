@@ -6,14 +6,14 @@ Updated: 2026-07-13
 training_lock: closed
 run_window: start 2026-07-13T20:30:52-05:00; no new major slice after 2026-07-14T03:45:52-05:00; hard closeout 2026-07-14T04:30:52 CDT
 run_state: T16.5c verified as a negative sorting-checkpoint transfer diagnosis; live gate closed; training lock closed
-current_milestone: M18/M19 dataset mechanics and grasp execution track
-current_task: T20.2 pending after verified M18; central training authority and training_lock remain closed
+current_milestone: M20 simulation-only clean supervision
+current_task: T20.1 in progress: source-bound simulation dataset/split and central training-authority composition; training_lock remains closed until the reviewed authority boundary is committed and pushed
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze those exact 192 IDs as immutable logical cycle 0001 with no buffer materialization; T18.3 compiled 1,345 exact source-bound frame records across all 192 logical-cycle windows while excluding privileged fields from the four-field actor schema; T18.4 froze 192 exact restoration snapshots/base branches and truthfully emitted zero correction events; no hardware or motion
-remaining: central simulation-training authority for T20.2; T19.2 physical calibration under fresh permits
+remaining: T20.1 authority closeout, then T20.2 ACT overfit; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; simulation training remains centrally withheld
-next_step: await explicit central simulation-training authority before T20.2; do not load a model or optimizer
+blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no model or optimizer before T20.1's authority boundary is committed and pushed
+next_step: verify and close T20.1's simulation-only owner grant and central authority; do not load a model or optimizer
 ```
 
 ## Rules

@@ -1,0 +1,249 @@
+{
+  "action_variant": "measured",
+  "actor_input_schema": [
+    "observation.top_rgb",
+    "observation.wrist_rgb",
+    "observation.joint_position",
+    "observation.joint_velocity"
+  ],
+  "actor_input_schema_sha256": "ea574bd4d0b21c47d01a3a76df39ffdadab8dfc2a2aea7d41e371e47a5cedec1",
+  "actor_privileged_fields_available": false,
+  "available_action_variants": [
+    "requested",
+    "proposed",
+    "projected",
+    "sent",
+    "measured"
+  ],
+  "brev_compute_started": false,
+  "evaluation_seeds": [
+    2
+  ],
+  "external_compute_started": false,
+  "identity_sha256": "099ed4250a7e47e8afd7bf956446cdabb656400eaf7adebe5c1d7bbc18384d94",
+  "materialized_tensor_view": {
+    "file_sha256": "eca512ab510fb317bf87868b2391bec98c38bc2e59449975e85773a9c6d46004",
+    "member_order": [
+      "evaluation_action",
+      "evaluation_state",
+      "evaluation_top_rgb",
+      "evaluation_wrist_rgb",
+      "train_action",
+      "train_state",
+      "train_top_rgb",
+      "train_wrist_rgb"
+    ],
+    "members": {
+      "evaluation_action": {
+        "dtype": "float32",
+        "npy_sha256": "2769b34238218c729fe93f27c3f2e9db436ae4b05046ae035d1c5ab3863ae6dc",
+        "shape": [
+          244,
+          6
+        ]
+      },
+      "evaluation_state": {
+        "dtype": "float32",
+        "npy_sha256": "804dcef5c85997e58a9ada6ea987b2acc5b850c38d9ba73ae3af58ef5b24d273",
+        "shape": [
+          244,
+          12
+        ]
+      },
+      "evaluation_top_rgb": {
+        "dtype": "uint8",
+        "npy_sha256": "8b51611908d463c5dce6ea863184ea4f7f8a5cec37760553363ef681a7952d93",
+        "shape": [
+          244,
+          64,
+          64,
+          3
+        ]
+      },
+      "evaluation_wrist_rgb": {
+        "dtype": "uint8",
+        "npy_sha256": "791b380095e13bceb43e400864831cb69906898c419fb343006af92774ddfce7",
+        "shape": [
+          244,
+          64,
+          64,
+          3
+        ]
+      },
+      "train_action": {
+        "dtype": "float32",
+        "npy_sha256": "09574fd33515642a6434bb5dd953ed616327a606b27f6eb494056df63dbfb706",
+        "shape": [
+          488,
+          6
+        ]
+      },
+      "train_state": {
+        "dtype": "float32",
+        "npy_sha256": "e18b12e95f33b1ae40ba1866b2f347a2d13b6bd5d200e5e31730701e4c54daf8",
+        "shape": [
+          488,
+          12
+        ]
+      },
+      "train_top_rgb": {
+        "dtype": "uint8",
+        "npy_sha256": "7a3bd904b7db985ce46decedf8fa4cc14cf39b36b8788d1a55a2cdd9fb41c801",
+        "shape": [
+          488,
+          64,
+          64,
+          3
+        ]
+      },
+      "train_wrist_rgb": {
+        "dtype": "uint8",
+        "npy_sha256": "dd28842b9387f81aca3ef68d4bffe3719d4c9e008d192d7594d442c557220e2a",
+        "shape": [
+          488,
+          64,
+          64,
+          3
+        ]
+      }
+    },
+    "path": "outputs/robot_lab/t20_1_act_tensor_view.npz",
+    "schema_version": "numpy.npz.v1"
+  },
+  "model_inference_executed": false,
+  "model_loaded": false,
+  "normalization": {
+    "action_mean": [
+      0.0456547811627388,
+      -0.2336101084947586,
+      1.1525682210922241,
+      -0.16948483884334564,
+      1.555955171585083,
+      0.7364017963409424
+    ],
+    "action_std": [
+      0.0007454275037162006,
+      0.2638011872768402,
+      0.09372086077928543,
+      0.1720041036605835,
+      0.22517667710781097,
+      0.612013041973114
+    ],
+    "mode": "per_dimension_mean_std_from_train_split",
+    "state_mean": [
+      0.04567313194274902,
+      -0.23793773353099823,
+      1.1539998054504395,
+      -0.16472701728343964,
+      1.549437403678894,
+      0.7355091571807861,
+      0.0004474550951272249,
+      0.13407865166664124,
+      -0.017316969111561775,
+      -0.12258994579315186,
+      0.1761062741279602,
+      0.10499680042266846
+    ],
+    "state_std": [
+      0.0008024449925869703,
+      0.278638631105423,
+      0.09643005579710007,
+      0.18792273104190826,
+      0.24759621918201447,
+      0.6119851469993591,
+      0.0025227193254977465,
+      0.6333549618721008,
+      0.21951302886009216,
+      0.594174325466156,
+      0.8438227772712708,
+      0.7678187489509583
+    ],
+    "std_floor": 1e-06
+  },
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "schema_version": "scenesmith.simulation_training_spec.v1",
+  "selected_episodes": [
+    {
+      "episode_file_sha256": "586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54",
+      "frame_count": 244,
+      "raw_rollout_record_identity_sha256": "9e186088c9ca82fa9c58cb6e3870f322a9c2a84405d5ea23152b822fb9d4abdb",
+      "relative_path": "586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54.json",
+      "seed": 0,
+      "split": "train"
+    },
+    {
+      "episode_file_sha256": "a384c9b2e4606036b1b39407332b4d2525e61fde6d83915a1469b5a9e42d4a30",
+      "frame_count": 244,
+      "raw_rollout_record_identity_sha256": "e13a347254692408c4767962a5fc5604d2bf44d096e35f1be0517b0d32e3ce71",
+      "relative_path": "a384c9b2e4606036b1b39407332b4d2525e61fde6d83915a1469b5a9e42d4a30.json",
+      "seed": 1,
+      "split": "train"
+    },
+    {
+      "episode_file_sha256": "0d4ac194dad55bb208398afa17f8e3c3731a5a560af3908915735f1bcf0827ea",
+      "frame_count": 244,
+      "raw_rollout_record_identity_sha256": "3999fe109e6e34495617160a2d8abaa6bdc8419342a3fc152f8e8ee395f3f960",
+      "relative_path": "0d4ac194dad55bb208398afa17f8e3c3731a5a560af3908915735f1bcf0827ea.json",
+      "seed": 2,
+      "split": "evaluation"
+    }
+  ],
+  "simulation_only": true,
+  "simulation_training_ready": false,
+  "source_artifacts": {
+    "compiler_replay_audit": {
+      "file_sha256": "8a7463c8e1fdb018e22be4682db871b5a24d818ddb7e9398fab6ffc9eb866d9c",
+      "identity_sha256": "e0fca4fe23b184e61f90711818192df6a66fdf4e8219ea1feb9be73f12ba1caf",
+      "path": "configurations/robot_lab/t17_7_compiler_window_replay_audit.json",
+      "schema_version": "scenesmith.compiler_window_replay_audit.v1"
+    },
+    "coordinate_contract": {
+      "file_sha256": "3145f4ae1efb86463df2398775315cd0b764a74bca954448c6a1d0f57eb8f503",
+      "identity_sha256": "59827b3dfe8adce0903495edd9f68af2db5f40abf93aa0fb51b9acfcef4118c7",
+      "path": "configurations/robot_lab/so101_canonical_processor_contract.json",
+      "schema_version": "scenesmith.so101_canonical_processor_contract.v1"
+    },
+    "episode_store": {
+      "file_sha256": "72f49c6664a9e2663548ebf8064cbf29de19ea18170fea30bf862de082485084",
+      "identity_sha256": "3860158e201e457146a167cfa778da14f210d88fa223cb075a1ec6d422ecfd1a",
+      "path": "configurations/robot_lab/t17_5b_episode_generation_manifest.json",
+      "schema_version": "scenesmith.scripted_grasp_episode_store.v1"
+    },
+    "executable_stack": {
+      "file_sha256": "169f04ee953604193f1f0dc9a3821acbb2de7dc49fcce1aba066c338c1eb7f12",
+      "identity_sha256": "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
+      "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+      "schema_version": "scenesmith.robotics_dependency_lock.v2"
+    },
+    "reference_input": {
+      "file_sha256": "f16963708cd82fa29a0fefa333ad0653655e63b6d09afe59327e2b4ef29f1d44",
+      "identity_sha256": "7f1702319d4e04965e604bbd2bf5f50bef24b99fb5076ffe7126a95d5ad28545",
+      "path": "configurations/robot_lab/training_input_manifest.json",
+      "schema_version": "scenesmith.training_input_manifest.v1"
+    },
+    "reference_mixture": {
+      "file_sha256": "3b9f6092de878e87e06e34b9ff1f29e821434b1a5140a1cd23328fec9c802629",
+      "identity_sha256": "c197762034546a974f6820bca927a496fd68d5a2d1d412193161602098b96a3e",
+      "path": "configurations/robot_lab/dataset_mixture_manifest.json",
+      "schema_version": "scenesmith.dataset_mixture_manifest.v1"
+    },
+    "structural_twin": {
+      "file_sha256": "d8dd9670be2125be171b8b2dce91b271920d45865dc19cb424b851e9c91a1be1",
+      "identity_sha256": "34200be34fe6c0dbe7a6a1b608a49af74d08e111dd52b43ee1d181df71e767cf",
+      "path": "configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json",
+      "schema_version": "scenesmith.structural_twin_diff.v1"
+    }
+  },
+  "source_bytes_rewritten": false,
+  "split_frame_counts": {
+    "evaluation": 244,
+    "train": 488
+  },
+  "task_id": "T20.1",
+  "train_seeds": [
+    0,
+    1
+  ],
+  "training_input_scope": "simulation_only_source_bound_act_overfit"
+}

@@ -47,6 +47,7 @@ GLOBAL_DECISION_IDS = (
 )
 
 SIMULATION_PREREQUISITES = (
+    "required_training_authority_present",
     "structural_contract_valid",
     "executable_stack_valid",
     "coordinate_contract_valid",
@@ -119,6 +120,12 @@ _SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 def build_authority_contract() -> dict[str, Any]:
     authorities = _authority_registry()
     prerequisites = [
+        _prerequisite(
+            prerequisite_id="required_training_authority_present",
+            provenance=("deployment_authority",),
+            issuers=("scenesmith.deployment_authority.v1",),
+            authorities=authorities,
+        ),
         _prerequisite(
             prerequisite_id="structural_contract_valid",
             provenance=("repository", "simulation"),

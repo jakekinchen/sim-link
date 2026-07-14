@@ -1,25 +1,31 @@
 {
-  "authority_granted": [],
+  "authority_granted": [
+    "simulation_training_ready"
+  ],
   "authority_withheld": [
-    "simulation_training_ready",
     "physical_transfer_ready",
     "promotion_eligible"
   ],
-  "composition_identity_sha256": "b9ebbc0114ec079c13726f9bca78c6b1f24a5402e6bbd76465e0f23862c55ab8",
-  "composition_mode": "fixture",
+  "composition_identity_sha256": "ff71c7212ab4fc93be441371966f37262aaf61dbb7455d03af75fe75d0d459e9",
+  "composition_mode": "production",
   "contract_ref": {
     "identity_sha256": "bbc353920e704b38b623038bfb26b6ead9a6a5a3ab7eea7afaedc2f6fc872bf0",
     "schema_version": "scenesmith.authority_composition_contract.v1"
   },
-  "evaluation_time": "2026-07-11T02:14:07-05:00",
+  "evaluation_time": "2026-07-14T03:06:00-05:00",
   "global_decisions": [
     {
-      "consumed_evidence_identities": [],
-      "decision_id": "simulation_training_ready",
-      "denial_reason_codes": [
-        "MISSING_PREREQUISITE",
-        "NON_AUTHORIZING_COMPOSITION_MODE"
+      "consumed_evidence_identities": [
+        "099ed4250a7e47e8afd7bf956446cdabb656400eaf7adebe5c1d7bbc18384d94",
+        "34200be34fe6c0dbe7a6a1b608a49af74d08e111dd52b43ee1d181df71e767cf",
+        "3860158e201e457146a167cfa778da14f210d88fa223cb075a1ec6d422ecfd1a",
+        "59827b3dfe8adce0903495edd9f68af2db5f40abf93aa0fb51b9acfcef4118c7",
+        "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
+        "d2e650a5034f6119cdca90fe289decaa15ad3c211b3dd8988d31045de8bc2388",
+        "e0fca4fe23b184e61f90711818192df6a66fdf4e8219ea1feb9be73f12ba1caf"
       ],
+      "decision_id": "simulation_training_ready",
+      "denial_reason_codes": [],
       "evaluated_expression": {
         "operator": "all",
         "terms": [
@@ -53,8 +59,9 @@
           }
         ]
       },
-      "granted": false,
-      "missing_prerequisite_ids": [
+      "granted": true,
+      "missing_prerequisite_ids": [],
+      "satisfied_prerequisite_ids": [
         "coordinate_contract_valid",
         "executable_stack_valid",
         "experience_compiler_valid",
@@ -62,16 +69,21 @@
         "required_simulation_properties_available",
         "required_training_authority_present",
         "structural_contract_valid"
-      ],
-      "satisfied_prerequisite_ids": []
+      ]
     },
     {
-      "consumed_evidence_identities": [],
+      "consumed_evidence_identities": [
+        "099ed4250a7e47e8afd7bf956446cdabb656400eaf7adebe5c1d7bbc18384d94",
+        "34200be34fe6c0dbe7a6a1b608a49af74d08e111dd52b43ee1d181df71e767cf",
+        "3860158e201e457146a167cfa778da14f210d88fa223cb075a1ec6d422ecfd1a",
+        "59827b3dfe8adce0903495edd9f68af2db5f40abf93aa0fb51b9acfcef4118c7",
+        "adf09cc324a6f1fbe7d086d16c454dcf6785bd9fd136c1e3442cb319598c8262",
+        "d2e650a5034f6119cdca90fe289decaa15ad3c211b3dd8988d31045de8bc2388",
+        "e0fca4fe23b184e61f90711818192df6a66fdf4e8219ea1feb9be73f12ba1caf"
+      ],
       "decision_id": "physical_transfer_ready",
       "denial_reason_codes": [
-        "MISSING_PREREQUISITE",
-        "NON_AUTHORIZING_COMPOSITION_MODE",
-        "UPSTREAM_DECISION_DENIED"
+        "MISSING_PREREQUISITE"
       ],
       "evaluated_expression": {
         "operator": "all",
@@ -107,24 +119,24 @@
         "actuator_and_timing_qualification_passed",
         "camera_qualification_passed",
         "contact_qualification_passed",
+        "held_out_twin_metrics_passed",
+        "physical_hardware_identity_verified"
+      ],
+      "satisfied_prerequisite_ids": [
         "coordinate_contract_valid",
         "executable_stack_valid",
         "experience_compiler_valid",
-        "held_out_twin_metrics_passed",
         "normalization_contract_valid",
-        "physical_hardware_identity_verified",
         "required_simulation_properties_available",
         "required_training_authority_present",
         "structural_contract_valid"
-      ],
-      "satisfied_prerequisite_ids": []
+      ]
     },
     {
       "consumed_evidence_identities": [],
       "decision_id": "promotion_eligible",
       "denial_reason_codes": [
-        "MISSING_PREREQUISITE",
-        "NON_AUTHORIZING_COMPOSITION_MODE"
+        "MISSING_PREREQUISITE"
       ],
       "evaluated_expression": {
         "operator": "all",
@@ -157,15 +169,18 @@
       "satisfied_prerequisite_ids": []
     }
   ],
-  "identity_sha256": "d39a924d0ea2de52fbc590358a35ecc605034cafb823d451ba2b8c68d20465d6",
+  "identity_sha256": "6c3a6250c5c96a654b416cfc7ee57139a587187303f26b03e1416da46b5fbc0c",
   "input_claim_identity_sha256s": [
-    "4f5ecbcc88fc1728a800a58e5e1bdd192bf3a4a06f1d89a93164a065e16560a8",
-    "a0a8ea7cba4b69333580d628ec5706553ea93ec702b86cc1af75e6f69ca65dc1",
-    "adbfe955dd0fb97c196a1a79821ba27a02cd195af0f10b892c1b9e5e4f13f90e",
-    "e4aa4a9e79d198301f5e3cc1550a3dfc1f25e918d666d7fd7f53b794d193b20b"
+    "0c409d407e67812678bd388ace23e1fd88f2fb4212146c6c465748e55220e9a7",
+    "303290f39dfb3b4f585bc3b2db5381acc8367b9b7362c9ad2f5979cac1fcd7f6",
+    "53f010ba64215e378cb6badb0eee19c98b69bb6c6cec458d2cf6b33a2bafafa6",
+    "6214e1568beb387fdf06df186177516c734cd9b7311a1c1584b8a1d56a8be2f3",
+    "8cb7a1e8e856e18b4d7d733179f432a17f1d7e576f4d8db189680af20f0ae778",
+    "eb838a90b407be39981f166737c9c3cc0c1ba6b22442990569ebf3e83985b5ad",
+    "fdf75362ecc06662f0835d5d93873c79279136279628bf975fe7306aa8f5be03"
   ],
   "rejected_component_fields": [],
-  "request_identity_sha256": "d23148d8a71f99d8233651a29c1a30b2a1c37e8512c341823a2dac1d848ec5a3",
+  "request_identity_sha256": "c040cdeda92c85e4d95710f5ebfe487269981cfe959374bd76102fc74abd96b7",
   "schema_version": "scenesmith.authority_composition_decision.v1",
   "scope_id": "pi05_so101_authority",
   "subject_id": "pi05_so101_sorting_system"
