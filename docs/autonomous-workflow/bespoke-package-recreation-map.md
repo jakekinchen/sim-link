@@ -37,10 +37,10 @@ consumer and are deleted with their dedicated tests:
 - `evidence_image_store.py`
 - `so101_physical_coordinates.py`
 
-The retired T19.0 wrappers and the large search body are not deleted by this
-slice because current geometry episode code still imports their primitive
-helpers. A later isolated migration must first move the retained primitive to a
-named geometry module, preserve the existing T19 evidence as immutable, and
-then delete the dead wrappers. The enduring lesson is: a 12-sample Halton
-scheme with bases above its sample count is not meaningful search; place the
-grasp at mid-height and derive aperture from geometry.
+The eight T19.0 wrappers and their Halton candidate body are retired after
+their live MuJoCo runner/contact helpers moved to
+`geometry_derived_grasp_primitives.py`. Historical signed JSON remains in the
+frozen-diagnostic registry; no active source can regenerate it. The enduring
+lesson is: a 12-sample Halton scheme with bases above its sample count is not
+meaningful search; place the grasp at mid-height and derive aperture from
+geometry.

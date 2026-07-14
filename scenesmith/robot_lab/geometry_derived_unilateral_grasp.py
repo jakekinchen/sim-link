@@ -4,21 +4,37 @@ from __future__ import annotations
 
 import math
 from typing import Any
+from pathlib import Path
 
 from scenesmith.robot_lab.artifact_contract import load_strict_json, sign_payload, verify_signed_payload
-from scenesmith.robot_lab.geometry_first_grasp_search import REPO_ROOT, _candidate
+from scenesmith.robot_lab.geometry_derived_grasp_primitives import (
+    APPROACH_MOTION_LIMIT_M,
+    POST_YAW_SETTLE_SECONDS,
+    run_constructive_grasp,
+)
 from scenesmith.robot_lab.grasp_evidence import validate_rendered_keyframes
 from scenesmith.robot_lab.grasp_artifact_schema import (
     GEOMETRY_DERIVED_UNILATERAL_GRASP_SCHEMA_VERSION,
 )
 from scenesmith.robot_lab.gripper_contact_semantics import PAD_HALF_SIZE_M
 from scenesmith.robot_lab.mujoco_anchor_grasp import ANCHOR_DIMENSIONS_M
-from scenesmith.robot_lab.post_yaw_settle_search import APPROACH_MOTION_LIMIT_M, POST_YAW_SETTLE_SECONDS
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 SCHEMA_VERSION = GEOMETRY_DERIVED_UNILATERAL_GRASP_SCHEMA_VERSION
 GEOMETRY_AUDIT = REPO_ROOT / "configurations/robot_lab/gripper_geometry_audit.json"
 CONTACT_AUDIT = REPO_ROOT / "configurations/robot_lab/centered_contact_face_audit.json"
 SOURCE_CANDIDATE_INDEX = 3
+CONSTRUCTIVE_SOURCE_REQUEST = {
+    "wrist_flex_rad": 0.32500000000000007,
+    "wrist_roll_rad": -1.2444444444444445,
+    "object_yaw_rad": 0.14000000000000012,
+    "lateral_x_m": -0.001714285714285715,
+    "lateral_y_m": -0.005454545454545455,
+    "vertical_m": 0.018615384615384617,
+    "close_target_rad": -0.11882352941176472,
+}
 SELECTED_OBJECT_WIDTH_M = ANCHOR_DIMENSIONS_M[1]
 PAD_NORMAL_HALF_THICKNESS_M = PAD_HALF_SIZE_M[0]
 TARGET_APERTURE_M = SELECTED_OBJECT_WIDTH_M + 2.0 * PAD_NORMAL_HALF_THICKNESS_M
@@ -94,9 +110,8 @@ def build_geometry_derived_unilateral_grasp() -> dict[str, Any]:
 
 
 def _run(close_target: float) -> dict[str, Any]:
-    row = _candidate(
-        SOURCE_CANDIDATE_INDEX,
-        holdout=False,
+    row = run_constructive_grasp(
+        CONSTRUCTIVE_SOURCE_REQUEST,
         explicit_pad_proxy_only=True,
         pad_midpoint_targeting=True,
         post_yaw_settle_seconds=POST_YAW_SETTLE_SECONDS,
@@ -105,6 +120,8 @@ def _run(close_target: float) -> dict[str, Any]:
         vertical_target_override_m=0.0,
         selected_axis_clearance_m=FIXED_JAW_CLEARANCE_M,
         execute_full_lift_cycle=True,
+        source_candidate_index=SOURCE_CANDIDATE_INDEX,
+        source_holdout=False,
     )
     if not row.get("setup_valid"):
         raise ValueError(f"Geometry-derived grasp setup failed: {row}")

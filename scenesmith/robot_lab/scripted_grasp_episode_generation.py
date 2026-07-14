@@ -38,7 +38,7 @@ from scenesmith.robot_lab.experience_records import (
 from scenesmith.robot_lab.geometry_derived_unilateral_grasp import (
     SCHEMA_VERSION as GRASP_SCHEMA_VERSION,
 )
-from scenesmith.robot_lab.geometry_first_grasp_search import _run_candidate
+from scenesmith.robot_lab.geometry_derived_grasp_primitives import run_constructive_grasp
 from scenesmith.robot_lab.grasp_evidence import (
     KEYFRAME_IMAGE_SIZE,
     encode_png_image,
@@ -118,7 +118,7 @@ def generate_episode_payload(
     request = dict(grasp["trajectory"]["request"])
     request["object_yaw_rad"] += spec["yaw_offset_rad"]
     offset_x, offset_y = spec["planar_offset_m"]
-    result = _run_candidate(
+    result = run_constructive_grasp(
         request,
         explicit_pad_proxy_only=True,
         pad_midpoint_targeting=True,

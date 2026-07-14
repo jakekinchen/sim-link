@@ -14,10 +14,10 @@ import numpy as np
 
 from scenesmith.robot_lab.artifact_contract import load_strict_json, sign_payload
 from scenesmith.robot_lab.causal_sort_expert import CausalSortExpert, CausalSortExpertConfig, SIMULATION_HOME
-from scenesmith.robot_lab.geometry_first_grasp_search import (
-    _all_robot_object_contact_geoms,
-    _nonpad_contacts,
-    _valid_contact,
+from scenesmith.robot_lab.geometry_derived_grasp_primitives import (
+    all_robot_object_contact_geoms,
+    has_valid_antipodal_contact,
+    nonpad_robot_object_contacts,
 )
 from scenesmith.robot_lab.grasp_evidence import finalize_rendered_keyframes, retain_rendered_keyframe
 from scenesmith.robot_lab.grasp_pose_solver import apply_and_read_object_yaw
@@ -166,8 +166,8 @@ def run_policy_grasp_closed_loop(
             closing_object = rotation.T @ closing_world
             row["pad_contacts"] = contacts
             row["pad_contact_aggregate"] = aggregate_pad_contacts(contacts, closing_object.tolist()) if contacts else None
-            row["nonpad_robot_object_contacts"] = _nonpad_contacts(expert, object_body, set(pad_roles))
-            row["all_robot_object_contact_geoms"] = _all_robot_object_contact_geoms(expert, object_body)
+            row["nonpad_robot_object_contacts"] = nonpad_robot_object_contacts(expert, object_body, set(pad_roles))
+            row["all_robot_object_contact_geoms"] = all_robot_object_contact_geoms(expert, object_body)
             row["policy_requested_action"] = pending_requested.astype(float).tolist()
             frames.append(row)
             if frame_observer is not None:
@@ -283,7 +283,7 @@ def _evaluate(
     requirement = strict_grasp_spec_v2()["antipodal_contact_requirement"]
     by_phase = {phase: [row for row in frames if row["phase"] == phase] for phase, _ in PHASE_PLAN}
     valid_counts = {
-        phase: sum(_valid_contact(row, requirement) for row in rows)
+        phase: sum(has_valid_antipodal_contact(row, requirement) for row in rows)
         for phase, rows in by_phase.items()
     }
     all_aggregates = [row["pad_contact_aggregate"] for row in frames if row["pad_contact_aggregate"]]
