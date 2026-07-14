@@ -166,6 +166,9 @@ next causal proof is exact phase/sample exposure, not another optimizer rung.
 Brief 159 opens T20.28 to replay the pinned official sampler and compare exact
 clean versus recovery-campaign phase exposure without loading a model or
 running an optimizer.
+T20.28 is verified through `72a6360` by Reviewer Decision 189. Recovery saw 26
+approach and 3 frame-zero samples versus clean's 14 and 0, so low early-phase
+exposure does not explain the regression. Quantile/postprocessor shift is next.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
