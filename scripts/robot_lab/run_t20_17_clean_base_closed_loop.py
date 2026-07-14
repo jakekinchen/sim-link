@@ -40,6 +40,7 @@ OUTPUT_PATH = Path("held_out_seed_6_closed_loop.json")
 
 
 def main() -> int:
+    stack = activate_lerobot_stack(repo_root=REPO_ROOT, stage="inference")
     require_active_t20_17_authority(repo_root=REPO_ROOT)
     run_root = REPO_ROOT / RUN_ROOT
     summary_path = run_root / RUN_SUMMARY_PATH
@@ -63,7 +64,6 @@ def main() -> int:
         "TOKENIZERS_PARALLELISM": "false",
         "PYTORCH_ENABLE_MPS_FALLBACK": "1",
     })
-    stack = activate_lerobot_stack(repo_root=REPO_ROOT, stage="inference")
     import torch
     import lerobot.policies.pi05.processor_pi05  # noqa: F401
     from lerobot.configs import PreTrainedConfig
