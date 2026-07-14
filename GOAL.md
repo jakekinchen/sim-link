@@ -56,13 +56,13 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.3 is `verified` through Brief 123 and Reviewer 151 as a negative PI0.5
-falsification. Twenty local MPS LoRA updates changed finite train and held-out
-loss, but the policy-owned held-out rollout made zero strict contacts and
-lifted only 0.0003007 mm against the 25 mm gate. T20.4 is the next eligible
-simulation-only slice: an explicit 250/500/1,000 optimizer-update ladder with
-exact sample accounting and no promotion from loss alone. Hardware, physical
-transfer, promotion, external compute, and Brev remain closed.
+T20.4 is `in_progress` under Brief 124. It starts the explicit PI0.5
+optimizer-update ladder with a bounded 250-update local-MPS rung, exact
+microbatch and accumulation accounting, immutable checkpoint evidence, and a
+fresh strict held-out rollout. The 500- and 1,000-update rungs are contingent
+on reviewed evidence from the smaller rung. No checkpoint may be promoted from
+loss alone. Hardware, physical transfer, promotion, external compute, and Brev
+remain closed.
 
 The paragraphs below retain earlier verified history and do not supersede the
 canonical current task in `docs/autonomous-workflow/project_state.json`.
