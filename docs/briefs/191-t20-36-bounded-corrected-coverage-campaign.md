@@ -70,3 +70,13 @@ bytes against a 6-GiB minimum. Permit `68d9042d...` authorizes one attempt.
 Thirty-two relevant tests and lint pass. Reviewer 239 authorizes that attempt;
 no T20.36 attempt, checkpoint tensor read, model load, optimizer, rollout,
 hardware, external compute, or Brev action has occurred.
+
+## Result Boundary
+
+The sole attempt completed 500 finite paired updates and emitted signed result
+`02b543be...`, preserved at `3e1f2bd`. Its standard-objective ratio passes at
+`0.0305642`, but all five decoded action chunks regress above the unchanged
+0.05-rad gate, with maxima from `0.150601` to `0.187035` rad. Gate B is not
+retained, so no closed-loop seed or mirror is reached. The one-use permit is
+consumed and no retry is authorized. Reviewer 240 verifies the negative result
+and routes only the optimizer-free Brief 192 evidence audit.

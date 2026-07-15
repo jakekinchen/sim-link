@@ -90,7 +90,7 @@ not spent on a higher gate while a lower one is unmet.
 | Gate | Proof | A failure localizes to | Status |
 | --- | --- | --- | --- |
 | A | Exact train/inference parity: dataset statistics, image/state/action normalization, chunk interpretation, joint order, gripper representation, postprocessing, cadence/hold, with round-trip tests on known values | Contract or preprocessing parity | Largely verified: T20.12 round-trip, T20.13 statistics, T20.26 determinism, T20.28-T20.31 sampler/quantile chain |
-| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | Still unmet; T20.34 proves rank-4 adapter is active and target-aligned, routing capacity/optimization |
+| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | T20.35x passed once; T20.36 then failed retention after full-coverage training, so Gate B is not held by the campaign candidate and T20.36a audits objective interference |
 | C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Blocked behind Gate B; T20.32 diverges at frame zero before execution feedback |
 | D | Full training-set success: strict-v2 across all eight constructive episodes | Dataset coverage or adaptation capacity | Open |
 | E | Held-out nominal starts: seeds 6-7 and small initial-state variation | Generalization | Open (0/2 at T20.24 and T20.31) |
@@ -124,7 +124,7 @@ not inherit authority from this document.
 | 11 | **T20.34 — Gate B plumbing localization (verified)** | Exact base/adapter replay proves active nonzero LoRA, exact checkpoint reload, lower mean error and positive target alignment on all five seeds; routes insufficient optimization/capacity. | Verified-negative T20.33; Brief 165; Reviewer Decision 196 | Optimizer continuation/retry, Gate C changes, second batch, promotion |
 | 12 | **T20.35 — Gate B rank-capacity discriminator (verified negative)** | The sole rank-16 attempt completed 500 finite updates and improved objective ratio from 0.528248 to 0.155307, but missed the 0.10 objective gate and all five 0.05 rad decoded-action gates. | Verified T20.34 capacity/optimization route; Brief 166; Reviewer Decision 199 | Multiple ranks, continuation, second batch, Gate C changes, promotion |
 | 12b | **T20.35.x — conditional Gate B discriminators** | T20.35c's expert-only ceiling passes the objective gate but misses action error; T20.35d-f localize systematic normalized bias without clipping. T20.35g rejects 20/50-step cadence. T20.35h's bias ceilings improve but fail. T20.35i localizes the remaining 96 failures as distributed across all five seeds and four channels; top-two seed/channel and boundary fractions are only 56.25%/67.71%/31.25%, with raw spread up to 0.183018 rad. Route T20.35j to one inference-only initial-noise-scale discriminator before any optimizer correction. | Verified-negative T20.35; T20.35c-i signed evidence; reviewer chain through Decision 212 | Combined-factor changes, unreviewed sweeps, second batch, Gate C changes, promotion |
-| 13 | **T20.36 — bounded campaign only after Gate B correction** | One reviewed bounded campaign only after one-batch memorization passes; training seed before held-out seeds 6-7. | Verified Gate B pass after T20.35 or later correction | Multiple concurrent rungs, promotion, hardware, external compute, Brev |
+| 13 | **T20.36 — bounded campaign after Gate B correction (verified negative)** | The sole 500-update campaign passed the standard-objective ratio but regressed all five decoded chunks to 0.1506-0.1870 rad; Gate B failed, so no closed-loop seed was reached. T20.36a is the optimizer-free interference audit. | Verified T20.35x Gate B pass | Retry, gate change, promotion, hardware, external compute, Brev |
 | 14 | **T20.37 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
 
 ### Support tooling
@@ -288,8 +288,9 @@ Gate B passes.
    scene semantics) is the first post-Gate-B tooling slice.
 3. **Watch:** builder previews plus `render_rollout_mirror.py` MP4s for every
    trace; fold auto-render into each evaluation slice as already queued.
-4. **Train (after Gate B):** one bounded corrected-coverage campaign on the
-   frozen dataset, training seed before held-out, per T20.36.
+4. **Train (after Gate B):** the sole bounded corrected-coverage T20.36
+   campaign completed but failed to retain Gate B, so training-seed and
+   held-out rollout remain blocked while T20.36a audits the signed evidence.
 5. **Before/after proof:** the frozen base-versus-adapter evaluation pair on
    identical seeds with strict-v2 outcomes, mirror videos, and one plain
    scorecard in the campaign brief.

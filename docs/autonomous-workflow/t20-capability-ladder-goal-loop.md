@@ -26,13 +26,14 @@ Narrative claims never override a closed or absent machine-readable grant.
 
 ## Active Boundary
 
-T20.35 is the current task under Brief 166. It permits exactly one rank-16
-LoRA discriminator using the frozen T20.33 batch, base, processors, learning
-rate, 500-update budget, training seed, five inference seeds, and unchanged
-Gate B thresholds. Only rank and alpha may change from 4 to 16. A fresh signed
-training specification, owner-scope grant, central-composer decision, tests,
-same-agent adversarial review, scoped commit, push, and remote confirmation
-must agree before model load or optimizer creation.
+T20.36 is verified negative through signed result `02b543be...` and remote
+result commit `3e1f2bd`. Its sole 500-update campaign passed the unchanged
+standard-objective ratio but regressed all five decoded chunks above the
+0.05-rad action gate, so the runner stopped before every closed-loop seed.
+T20.36a is current under Brief 192. It may read and classify only the existing
+signed T20.35x and T20.36 evidence. It may not read checkpoint tensors, load a
+model, run inference or an optimizer, execute a rollout, amend a gate, or
+authorize a second campaign.
 
 The run remains simulation-only. Hardware, cameras, serial devices, physical
 motion, external compute, Brev, promotion, and physical-transfer authority are
@@ -60,11 +61,11 @@ Repeat while the run window and authority permit:
 
 ## Evidence Routing
 
-- If T20.35 passes both unchanged Gate B thresholds, route to the separately
-  reviewed bounded campaign; do not infer closed-loop success.
-- If T20.35 fails, follow T20.35.x one reviewed discriminator at a time. Run
-  optimizer-free module-coverage and attainable-loss-floor audits where they
-  can eliminate hypotheses without spending another training rung.
+- T20.35x's correction-only Gate B pass is historical capability evidence; it
+  does not override T20.36's failure to retain Gate B under coverage.
+- T20.36a must distinguish a weighted-objective/physical-gate alias from broad
+  optimization regression using existing signed histories before any new
+  model or training proposal may be written.
 - Gate C opens only after Gate B is mechanically proven. A first learned
   closed-loop grasp must be labeled autonomous only when every action is policy
   owned and the strict-v2 evaluator passes.
