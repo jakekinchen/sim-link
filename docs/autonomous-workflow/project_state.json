@@ -2826,7 +2826,7 @@
       "authority_granted": ["t20_35a_peft_coverage_failure_verified"],
       "authority_not_granted": ["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
-    "T20.35b": {"state":"pending","depends_on":["T20.35a"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"pending no-LoRA expert-only unfreeze capacity-ceiling probe on the frozen T20.33 batch after verified PEFT target-coverage failure","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
+    "T20.35b": {"state":"in_progress","depends_on":["T20.35a"],"active_brief_id":"168","latest_verified_brief_id":null,"review_decision_id":null,"result":"in-progress optimizer-free correction of T20.35a generic pathway semantics against pinned PI0.5 source: state_proj is intentionally absent while time_mlp_in/out are real and missed by the stale action_time_mlp PEFT names","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],
