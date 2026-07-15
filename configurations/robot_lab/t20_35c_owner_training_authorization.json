@@ -1,0 +1,27 @@
+{
+  "authorization_id": "t20_35c_gate_b_expert_only_capacity_grant",
+  "authorization_scope": "t20_35c_simulation_only_expert_capacity_gate_b",
+  "authorization_source": "owner_resume_existing_sim_link_mvp_goal_loop_2026_07_15",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training"
+  ],
+  "brev_compute_authorized": false,
+  "external_compute_authorized": false,
+  "identity_sha256": "8a7d38f123910b39f35d9b9bf3c0e6ac8d3cbc11a4a3a17e8750b8ffda764184",
+  "issued_at": "2026-07-15T07:27:47-05:00",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "source_training_spec_ref": {
+    "file_sha256": "745213224ccd4b6069246c1f355f7cb0f50139024d47ab77d59a40b2f23a84a4",
+    "identity_sha256": "6c10a1c7ad1f901c8afd5452669a0f0ca845d9395fa75de8e84139b706e92309",
+    "path": "configurations/robot_lab/t20_35c_expert_only_training_spec.json",
+    "schema_version": "scenesmith.t20_35c_expert_only_training_spec.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-15T15:27:47-05:00"
+}
