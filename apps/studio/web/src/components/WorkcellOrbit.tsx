@@ -10,6 +10,8 @@ interface SceneSummary {
   trays: number
 }
 
+type CameraPreset = 'perspective' | 'overhead' | 'side'
+
 function numbers(value: string | null, fallback: number[]): number[] {
   if (!value) return fallback
   const parsed = value
@@ -180,12 +182,27 @@ function buildSceneGeometry(xmlText: string, root: THREE.Group): SceneSummary {
   return { boxes, cubes: cubes.size, trays: trays.size }
 }
 
-function OrbitCanvas({ sceneXml, sceneId }: { sceneXml: string; sceneId: string }) {
+function OrbitCanvas({
+  sceneXml,
+  sceneId,
+  immersive,
+}: {
+  sceneXml: string
+  sceneId: string
+  immersive: boolean
+}) {
   const mountRef = useRef<HTMLDivElement>(null)
-  const resetViewRef = useRef<() => void>(() => undefined)
+  const setViewRef = useRef<(preset: CameraPreset) => void>(() => undefined)
+  const autoOrbitRef = useRef(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [summary, setSummary] = useState<SceneSummary | null>(null)
+  const [cameraPreset, setCameraPreset] = useState<CameraPreset | null>('perspective')
+  const [autoOrbit, setAutoOrbit] = useState(false)
+
+  useEffect(() => {
+    autoOrbitRef.current = autoOrbit
+  }, [autoOrbit])
 
   useEffect(() => {
     const mount = mountRef.current
@@ -197,17 +214,23 @@ function OrbitCanvas({ sceneXml, sceneId }: { sceneXml: string; sceneId: string 
     let controls: OrbitControls | null = null
     let resizeObserver: ResizeObserver | null = null
     const scene = new THREE.Scene()
-    scene.background = new THREE.Color(0x0b0e13)
-    scene.fog = new THREE.Fog(0x0b0e13, 1.6, 3.2)
+    scene.background = new THREE.Color(immersive ? 0x080b10 : 0x0b0e13)
+    scene.fog = new THREE.Fog(immersive ? 0x080b10 : 0x0b0e13, 1.6, 3.2)
     const camera = new THREE.PerspectiveCamera(42, 1, 0.01, 10)
     camera.up.set(0, 0, 1)
 
-    const resetView = () => {
-      camera.position.set(0.82, -0.92, 0.72)
+    const setView = (preset: CameraPreset) => {
+      const positions: Record<CameraPreset, [number, number, number]> = {
+        perspective: [0.82, -0.92, 0.72],
+        overhead: [0.2, -0.001, 1.42],
+        side: [1.18, -0.001, 0.52],
+      }
+      const [x, y, z] = positions[preset]
+      camera.position.set(x, y, z)
       controls?.target.set(0.2, 0, 0.32)
       controls?.update()
     }
-    resetViewRef.current = resetView
+    setViewRef.current = setView
 
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' })
@@ -225,7 +248,8 @@ function OrbitCanvas({ sceneXml, sceneId }: { sceneXml: string; sceneId: string 
       controls.minDistance = 0.28
       controls.maxDistance = 2.8
       controls.maxPolarAngle = Math.PI * 0.49
-      resetView()
+      controls.autoRotateSpeed = 0.45
+      setView('perspective')
     } catch (renderError) {
       renderer?.dispose()
       renderer?.domElement.remove()
@@ -266,6 +290,7 @@ function OrbitCanvas({ sceneXml, sceneId }: { sceneXml: string; sceneId: string 
 
     const animate = () => {
       if (disposed || !renderer) return
+      if (controls) controls.autoRotate = autoOrbitRef.current
       controls?.update()
       renderer.render(scene, camera)
       animationFrame = requestAnimationFrame(animate)
@@ -306,36 +331,85 @@ function OrbitCanvas({ sceneXml, sceneId }: { sceneXml: string; sceneId: string 
       renderer?.dispose()
       renderer?.domElement.remove()
     }
-  }, [sceneId, sceneXml])
+  }, [immersive, sceneId, sceneXml])
+
+  const chooseView = (preset: CameraPreset) => {
+    setCameraPreset(preset)
+    setAutoOrbit(false)
+    setViewRef.current(preset)
+  }
+
+  const toggleAutoOrbit = () => {
+    const next = !autoOrbit
+    setAutoOrbit(next)
+    if (next) setCameraPreset(null)
+  }
 
   return (
-    <div className="border border-line-2 bg-bg">
-      <div className="flex flex-wrap items-center gap-2 border-b border-line px-2 py-1.5">
+    <div className={immersive ? 'foundry-orbit' : 'border border-line-2 bg-bg'}>
+      <div
+        className={
+          immersive
+            ? 'foundry-orbit-toolbar'
+            : 'flex flex-wrap items-center gap-2 border-b border-line px-2 py-1.5'
+        }
+      >
         <Led tone={error ? 'red' : loading ? 'amber' : 'green'} pulse={loading} />
-        <span className="cap text-ink">interactive scene · drag orbit · wheel zoom</span>
+        <span className="cap text-ink">scene inspection · drag orbit · wheel zoom</span>
         {summary && (
-          <span className="ml-auto flex items-center gap-1.5">
+          <span className={immersive ? 'hidden items-center gap-1.5 2xl:flex' : 'ml-auto flex items-center gap-1.5'}>
             <Tag tone="dim">{summary.boxes} scene boxes</Tag>
             <Tag tone="cyan">{summary.cubes} cubes</Tag>
             <Tag tone="violet">{summary.trays} trays</Tag>
-            <Tag tone="amber">SO-101 placeholder</Tag>
           </span>
         )}
-        <button className="btn btn-quiet" type="button" onClick={() => resetViewRef.current()}>
-          reset view
-        </button>
+        <span className={immersive ? 'ml-auto flex items-center gap-1' : 'flex items-center gap-1'}>
+          {(['perspective', 'overhead', 'side'] as const).map((preset) => (
+            <button
+              key={preset}
+              className={`btn ${cameraPreset === preset && !autoOrbit ? 'btn-primary' : 'btn-quiet'}`}
+              type="button"
+              onClick={() => chooseView(preset)}
+              aria-pressed={cameraPreset === preset && !autoOrbit}
+            >
+              {preset === 'perspective' ? 'orbit' : preset}
+            </button>
+          ))}
+          <button
+            className={`btn ${autoOrbit ? 'btn-primary' : 'btn-quiet'}`}
+            type="button"
+            onClick={toggleAutoOrbit}
+            aria-pressed={autoOrbit}
+          >
+            {autoOrbit ? 'stop sweep' : 'auto sweep'}
+          </button>
+        </span>
       </div>
       <div
         ref={mountRef}
-        className="h-[420px] w-full overflow-hidden"
+        className={immersive ? 'foundry-orbit-canvas' : 'h-[420px] w-full overflow-hidden'}
         role="img"
         aria-label={`Interactive 3D orbit view for ${sceneId}`}
       />
+      {immersive && loading && (
+        <div className="foundry-orbit-loading">
+          <Led tone="cyan" pulse />
+          <span className="cap text-cyan">compiling scene view</span>
+        </div>
+      )}
       {error && <p className="border-t border-red/40 p-2 font-mono text-2xs text-red">{error}</p>}
     </div>
   )
 }
 
-export default function WorkcellOrbit({ sceneXml, sceneId }: { sceneXml: string; sceneId: string }) {
-  return <OrbitCanvas sceneXml={sceneXml} sceneId={sceneId} />
+export default function WorkcellOrbit({
+  sceneXml,
+  sceneId,
+  immersive = false,
+}: {
+  sceneXml: string
+  sceneId: string
+  immersive?: boolean
+}) {
+  return <OrbitCanvas sceneXml={sceneXml} sceneId={sceneId} immersive={immersive} />
 }

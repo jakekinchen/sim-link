@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useStatus } from '../state/StatusContext'
 import { fmtClock } from '../lib/format'
 import { Led } from './ui'
 
 const NAV = [
-  { to: '/', label: 'Dashboard', code: '01' },
-  { to: '/events', label: 'Event Ledger', code: '02' },
-  { to: '/episodes', label: 'Episodes', code: '03' },
-  { to: '/tasks', label: 'Tasks', code: '04' },
-  { to: '/workcells', label: 'Workcells', code: '05' },
-  { to: '/feed', label: 'Agent Feed', code: '06' },
-  { to: '/robot', label: 'Robot', code: '07' },
+  { to: '/', label: 'Foundry', mark: '◆' },
+  { to: '/events', label: 'Event Ledger', mark: '╎' },
+  { to: '/episodes', label: 'Episodes', mark: '▶' },
+  { to: '/tasks', label: 'Tasks', mark: '⌁' },
+  { to: '/workcells', label: 'Workcells', mark: '▦' },
+  { to: '/feed', label: 'Agent Feed', mark: '✦' },
+  { to: '/robot', label: 'Robot', mark: '⌾' },
 ]
 
 function SessionClock() {
@@ -25,7 +25,9 @@ function SessionClock() {
 
 export default function Shell() {
   const { data: status, error, syncedAt } = useStatus()
+  const location = useLocation()
   const linkUp = !error && syncedAt !== null
+  const atFoundry = location.pathname === '/'
 
   return (
     <div className="flex min-h-screen">
@@ -62,7 +64,9 @@ export default function Shell() {
                 }`
               }
             >
-              <span className="text-3xs text-faint group-[.active]:text-amber/70">{item.code}</span>
+              <span className="w-4 text-center text-xs text-faint transition-colors group-hover:text-cyan">
+                {item.mark}
+              </span>
               <span className="tracking-wide2 uppercase">{item.label}</span>
             </NavLink>
           ))}
@@ -103,7 +107,10 @@ export default function Shell() {
           </span>
         </header>
 
-        <main className="min-w-0 flex-1 p-5" style={{ animation: 'rise-in 240ms ease-out' }}>
+        <main
+          className={`min-w-0 flex-1 ${atFoundry ? 'p-3 lg:p-4' : 'p-5'}`}
+          style={{ animation: 'rise-in 240ms ease-out' }}
+        >
           <Outlet />
         </main>
 

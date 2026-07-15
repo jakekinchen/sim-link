@@ -25,7 +25,7 @@ in the same commit as the work.
 | ST15D | Runtime REST/WebSocket transport and 5-10 Hz telemetry | pending | blocked by ST15C; cursor catch-up plus live push; no Kafka/Redpanda until the end-to-end local loop is proven |
 | ST15E | World-first Studio Operations canvas and runtime-event projection | pending | blocked by ST15D; interactive 3D actors, lifecycle motion, spatial HUD, replay timeline, and inspector drawer; operational stream stays separate from signed evidence |
 | ST15F | End-to-end replay/idempotency/staleness demo and proof package | pending | blocked by ST15E; browser demo, restart/replay equality, regression gate, documented limits, scoped commits, and remote preservation |
-| ST16 | Foundry Stage visual shell reframe over existing read-only artifacts | in_progress | world-first home, always-on 3D workcell, useful replay projection, spatial workflow ribbon, direct manipulation, responsive/reduced-motion proof; no new server mutation |
+| ST16 | Foundry Stage visual shell reframe over existing read-only artifacts | done | world-first home, always-on selectable 3D workcell, camera presets/sweep, real replay projection/transport, mission rail, spatial workflow ribbon, responsive proof; no new server mutation |
 
 Rules: never touch governed paths (see GOAL.md), never push to
 `codex/pi05-autolearn-loop`, commit small and often to `studio/app-shell`.
@@ -402,3 +402,27 @@ must not be the dominant first impression.
 6. Existing pages and routes remain reachable; `bun run build`, lint, server
    tests, live API checks, console inspection, and responsive screenshots are
    green before ST16 is marked done.
+
+### Delivered proof
+
+- `/` now opens on a large lazy-loaded Three.js workcell stage with orbit,
+  overhead, side, auto-sweep, drag, zoom, workcell selection, a signed preview,
+  and explicit compiled-simulation-fixture labelling.
+- The stage's primary plus control opens an existing mirror recording without
+  starting an execution. The projection exposes play/pause, duration, native
+  scrub, playback rate, replay selection, result, seed, frame count, and a link
+  back to episode evidence.
+- Current mission, run-window clocks, authority perimeter, next move, verified
+  boundary, and blockers are consolidated into a secondary mission rail. The
+  latest briefs, reviews, session logs, and manager interventions form a
+  channel-coded activity ribbon linked to the Event Ledger.
+- Browser proof used the live data root at desktop and 1024 x 768: scene
+  selection changed the rendered workcell, camera and sweep states responded,
+  a real 9.76-second mirror played, paused, and scrubbed to exactly 4.2 seconds,
+  replay selection changed the episode, the Event Ledger route remained
+  intact, and the browser console had no warnings or errors.
+- `bun run build` passes with the Three.js stage in its own lazy chunk;
+  `bun run lint` exits zero with only the existing `StatusContext.tsx`
+  fast-refresh advisory; all 6 server unit tests pass; live status, workcell,
+  and bounded event-registry API reads pass. No server route or write action
+  changed.

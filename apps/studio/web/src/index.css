@@ -345,6 +345,753 @@
   .event-row[data-selected='true'] .event-pip {
     box-shadow: 0 0 0 1px var(--color-cyan), 0 0 9px rgb(86 200 216 / 0.65);
   }
+
+  /* Foundry Stage: the robot world is primary; evidence and controls orbit it. */
+  .foundry-home {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .foundry-heading {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.25rem;
+    padding: 0.15rem 0.25rem 0.55rem;
+  }
+  .foundry-heading h1 {
+    margin-top: 0.05rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 3.15rem);
+    font-weight: 720;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    color: #e5edf7;
+  }
+  .foundry-heading p {
+    max-width: 72ch;
+    margin-top: 0.32rem;
+    overflow: hidden;
+    color: var(--color-dim);
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .foundry-heading-state {
+    display: flex;
+    margin-left: auto;
+    flex: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.45rem;
+  }
+  .foundry-layout {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr) 18rem;
+    gap: 0.75rem;
+  }
+  .foundry-stage-shell {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-line-2);
+    background: #080b10;
+    box-shadow: 0 24px 80px rgb(0 0 0 / 0.28);
+  }
+  .foundry-stage-shell::before,
+  .foundry-stage-shell::after {
+    position: absolute;
+    z-index: 15;
+    width: 1.25rem;
+    height: 1.25rem;
+    pointer-events: none;
+    content: '';
+  }
+  .foundry-stage-shell::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--color-amber);
+    border-left: 2px solid var(--color-amber);
+  }
+  .foundry-stage-shell::after {
+    right: -1px;
+    bottom: -1px;
+    border-right: 2px solid var(--color-cyan);
+    border-bottom: 2px solid var(--color-cyan);
+  }
+  .foundry-stage-topbar {
+    display: flex;
+    min-height: 2.55rem;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--color-line);
+    background: #0d1118;
+    padding: 0.38rem 0.55rem;
+  }
+  .foundry-mode-switch {
+    display: flex;
+    gap: 0.2rem;
+  }
+  .foundry-mode-switch button {
+    border: 1px solid transparent;
+    padding: 0.32rem 0.65rem;
+    color: var(--color-faint);
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+    font-weight: 600;
+    letter-spacing: var(--tracking-cap);
+    text-transform: uppercase;
+    transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+  }
+  .foundry-mode-switch button:hover:not(:disabled),
+  .foundry-mode-switch button:focus-visible {
+    color: var(--color-ink);
+  }
+  .foundry-mode-switch button:focus-visible {
+    outline: 1px solid var(--color-cyan);
+    outline-offset: 1px;
+  }
+  .foundry-mode-switch button.active {
+    border-color: rgb(86 200 216 / 0.42);
+    background: rgb(86 200 216 / 0.08);
+    color: var(--color-cyan);
+  }
+  .foundry-mode-switch button:disabled {
+    opacity: 0.35;
+  }
+  .foundry-stage-proof {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--color-dim);
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+    letter-spacing: var(--tracking-cap);
+    text-transform: uppercase;
+  }
+  .foundry-stage-viewport {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgb(86 200 216 / 0.018) 1px, transparent 1px),
+      linear-gradient(rgb(86 200 216 / 0.018) 1px, transparent 1px),
+      #080b10;
+    background-size: 28px 28px;
+  }
+  .foundry-stage-viewport::after {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(circle at 48% 42%, transparent 52%, rgb(2 4 8 / 0.58) 100%);
+    content: '';
+  }
+  .foundry-orbit {
+    position: relative;
+    min-width: 0;
+    background: #080b10;
+  }
+  .foundry-orbit-toolbar {
+    position: absolute;
+    z-index: 8;
+    top: 0.7rem;
+    right: 0.7rem;
+    left: 0.7rem;
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.42rem;
+    border: 1px solid rgb(42 51 66 / 0.78);
+    background: rgb(8 11 16 / 0.76);
+    padding: 0.35rem 0.42rem;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.22);
+    backdrop-filter: blur(12px);
+  }
+  .foundry-orbit-canvas {
+    width: 100%;
+    height: clamp(28rem, calc(100vh - 17rem), 46rem);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .foundry-orbit-canvas canvas {
+    display: block;
+  }
+  .foundry-orbit-loading {
+    position: absolute;
+    z-index: 9;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    border: 1px solid rgb(86 200 216 / 0.35);
+    background: rgb(8 11 16 / 0.84);
+    padding: 0.65rem 0.8rem;
+    transform: translate(-50%, -50%);
+  }
+  .foundry-scene-identity {
+    position: absolute;
+    z-index: 6;
+    bottom: 0.85rem;
+    left: 0.85rem;
+    display: flex;
+    max-width: min(32rem, calc(100% - 1.7rem));
+    flex-direction: column;
+    border-left: 2px solid var(--color-cyan);
+    background: rgb(8 11 16 / 0.78);
+    padding: 0.45rem 0.65rem;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.25);
+    backdrop-filter: blur(10px);
+  }
+  .foundry-scene-identity strong {
+    overflow: hidden;
+    color: #ecf4ff;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .foundry-scene-identity > span:last-child {
+    margin-top: 0.1rem;
+    color: var(--color-dim);
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+  }
+  .foundry-stage-dock {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    min-height: 4.35rem;
+    min-width: 0;
+    align-items: center;
+    gap: 0.65rem;
+    border-top: 1px solid var(--color-line-2);
+    background: #0d1118;
+    padding: 0.5rem 0.6rem;
+  }
+  .foundry-launch {
+    display: flex;
+    min-width: 15rem;
+    align-items: center;
+    gap: 0.72rem;
+    border: 1px solid rgb(255 180 84 / 0.55);
+    background: rgb(255 180 84 / 0.07);
+    padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+    color: var(--color-amber);
+    text-align: left;
+    transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+  .foundry-launch:hover:not(:disabled) {
+    border-color: var(--color-amber);
+    background: rgb(255 180 84 / 0.14);
+    transform: translateY(-1px);
+  }
+  .foundry-launch:focus-visible {
+    outline: 1px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+  .foundry-launch:disabled {
+    opacity: 0.36;
+  }
+  .foundry-launch-plus {
+    display: grid;
+    width: 2.45rem;
+    height: 2.45rem;
+    flex: none;
+    place-items: center;
+    border: 1px solid var(--color-amber);
+    background: var(--color-amber);
+    color: #151008;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 1;
+    box-shadow: 0 0 22px rgb(255 180 84 / 0.18);
+  }
+  .foundry-launch strong,
+  .foundry-launch small {
+    display: block;
+  }
+  .foundry-launch strong {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .foundry-launch small {
+    margin-top: 0.12rem;
+    color: var(--color-dim);
+    font-size: var(--text-3xs);
+  }
+  .foundry-scene-thumb {
+    width: 4.8rem;
+    height: 3.05rem;
+    flex: none;
+    border: 1px solid var(--color-line-2);
+    object-fit: cover;
+    filter: saturate(0.8) contrast(1.08);
+  }
+  .foundry-scene-select {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.16rem;
+  }
+  .foundry-scene-select select {
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--color-line-2);
+    background: transparent;
+    padding: 0.15rem 0;
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    outline: none;
+  }
+  .foundry-scene-select select:focus {
+    border-color: var(--color-cyan);
+  }
+  .foundry-mission-rail {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    border: 1px solid var(--color-line);
+    background: rgb(13 17 24 / 0.72);
+  }
+  .foundry-mission-block {
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.75rem 0.8rem;
+  }
+  .foundry-mission-primary {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(115deg, rgb(255 180 84 / 0.075), transparent 62%);
+  }
+  .foundry-mission-primary::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(transparent, var(--color-amber), transparent);
+    content: '';
+  }
+  .foundry-mission-primary h2 {
+    margin-top: 0.12rem;
+    color: var(--color-amber);
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 740;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .foundry-mission-primary p {
+    margin-top: 0.28rem;
+    color: var(--color-dim);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+  .foundry-sync {
+    display: flex;
+    margin-top: 0.72rem;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-faint);
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+    letter-spacing: var(--tracking-cap);
+    text-transform: uppercase;
+  }
+  .foundry-clock-pair {
+    display: grid;
+    margin-top: 0.48rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+  .foundry-clock-pair div {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+  .foundry-clock-pair span {
+    color: var(--color-faint);
+    font-size: var(--text-3xs);
+  }
+  .foundry-clock-pair strong {
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 0.93rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .foundry-authority-stack {
+    margin-top: 0.42rem;
+  }
+  .foundry-authority-row {
+    display: grid;
+    grid-template-columns: 0.55rem minmax(0, 1fr) minmax(0, 1.3fr);
+    align-items: center;
+    gap: 0.4rem;
+    border-top: 1px solid rgb(42 51 66 / 0.42);
+    padding: 0.28rem 0;
+    color: var(--color-dim);
+    font-size: var(--text-3xs);
+  }
+  .foundry-authority-row strong {
+    overflow: hidden;
+    color: var(--color-ink);
+    font-weight: 500;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .foundry-mission-copy {
+    margin-top: 0.42rem;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    line-height: 1.45;
+  }
+  .foundry-boundary {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--color-line);
+    background: rgb(86 200 216 / 0.035);
+    padding: 0.75rem 0.8rem;
+    transition: background 140ms ease;
+  }
+  .foundry-boundary:hover {
+    background: rgb(86 200 216 / 0.075);
+  }
+  .foundry-boundary strong {
+    display: -webkit-box;
+    margin-top: 0.28rem;
+    overflow: hidden;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 560;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .foundry-boundary > span:last-child {
+    margin-top: 0.38rem;
+    color: var(--color-faint);
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+  }
+  .foundry-mission-details {
+    margin-top: auto;
+  }
+  .foundry-mission-details summary {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.8rem;
+    color: var(--color-dim);
+    font-size: var(--text-3xs);
+    letter-spacing: var(--tracking-cap);
+    text-transform: uppercase;
+  }
+  .foundry-mission-details summary:focus-visible {
+    outline: 1px solid var(--color-cyan);
+    outline-offset: -2px;
+  }
+  .foundry-mission-details p {
+    border-top: 1px solid var(--color-line);
+    padding: 0.7rem 0.8rem;
+    color: var(--color-red);
+    font-size: var(--text-3xs);
+    line-height: 1.5;
+  }
+  .foundry-activity {
+    border: 1px solid var(--color-line);
+    background: #0d1118;
+  }
+  .foundry-activity-heading {
+    display: grid;
+    min-height: 2.25rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.3rem 0.5rem 0.3rem 0.7rem;
+  }
+  .foundry-activity-track {
+    position: relative;
+    display: flex;
+    min-height: 3.8rem;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 0.15rem;
+    overflow: hidden;
+    padding: 0.75rem 0.65rem 0.25rem;
+  }
+  .foundry-activity-track::before {
+    position: absolute;
+    top: 1.08rem;
+    right: 0.7rem;
+    left: 0.7rem;
+    height: 1px;
+    background: var(--color-line-2);
+    content: '';
+  }
+  .foundry-activity-event {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 1.4rem;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    animation: foundry-event-in 260ms ease-out both;
+    animation-delay: calc(var(--event-index) * 18ms);
+  }
+  .foundry-activity-pulse {
+    width: 0.62rem;
+    height: 0.62rem;
+    border: 2px solid #0d1118;
+    background: currentColor;
+    box-shadow: 0 0 0 1px currentColor;
+    transition: transform 140ms ease, box-shadow 140ms ease;
+  }
+  .foundry-activity-event:hover .foundry-activity-pulse,
+  .foundry-activity-event:focus-visible .foundry-activity-pulse {
+    box-shadow: 0 0 0 1px currentColor, 0 0 12px currentColor;
+    transform: scale(1.35);
+  }
+  .foundry-activity-event:focus-visible {
+    outline: none;
+  }
+  .foundry-activity-stem {
+    width: 1px;
+    height: 0.75rem;
+    background: currentColor;
+    opacity: 0.4;
+  }
+  .foundry-activity-sequence {
+    color: var(--color-faint);
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+  }
+  .foundry-activity-legend {
+    display: flex;
+    gap: 0.75rem;
+    border-top: 1px solid rgb(42 51 66 / 0.44);
+    padding: 0.26rem 0.7rem;
+    color: var(--color-faint);
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .foundry-event-brief {
+    color: var(--color-cyan);
+  }
+  .foundry-event-review {
+    color: var(--color-violet);
+  }
+  .foundry-event-session {
+    color: var(--color-green);
+  }
+  .foundry-event-manager {
+    color: var(--color-amber);
+  }
+
+  .foundry-replay {
+    position: relative;
+    z-index: 3;
+    background: #05070a;
+  }
+  .foundry-replay-hud {
+    display: flex;
+    min-height: 2.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--color-line);
+    background: #0d1118;
+    padding: 0.38rem 0.55rem;
+  }
+  .foundry-replay-screen {
+    position: relative;
+    height: clamp(23.2rem, calc(100vh - 23.8rem), 38rem);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at center, rgb(22 29 39 / 0.55), transparent 65%),
+      #030507;
+  }
+  .foundry-replay-screen::after {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgb(0 0 0 / 0.16), transparent 22%, transparent 72%, rgb(0 0 0 / 0.56));
+    content: '';
+  }
+  .foundry-replay-title {
+    position: absolute;
+    z-index: 2;
+    bottom: 0.75rem;
+    left: 0.85rem;
+    display: flex;
+    max-width: calc(100% - 1.7rem);
+    flex-direction: column;
+    border-left: 2px solid var(--color-violet);
+    background: rgb(5 7 10 / 0.76);
+    padding: 0.4rem 0.6rem;
+    backdrop-filter: blur(8px);
+  }
+  .foundry-replay-title strong {
+    overflow: hidden;
+    color: #f1f5ff;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 620;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .foundry-replay-transport {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.55rem;
+    border-top: 1px solid var(--color-line-2);
+    border-bottom: 1px solid var(--color-line);
+    background: #0d1118;
+    padding: 0.45rem 0.55rem;
+  }
+  .foundry-transport-play {
+    display: flex;
+    min-width: 7.3rem;
+    align-items: center;
+    gap: 0.48rem;
+    border: 1px solid rgb(143 138 242 / 0.48);
+    background: rgb(143 138 242 / 0.09);
+    padding: 0.38rem 0.55rem;
+    color: #bdb9ff;
+    font-family: var(--font-mono);
+    font-size: var(--text-3xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .foundry-transport-play:hover,
+  .foundry-transport-play:focus-visible {
+    background: rgb(143 138 242 / 0.17);
+  }
+  .foundry-transport-play:focus-visible {
+    outline: 1px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+  .foundry-phase-track {
+    position: relative;
+    display: flex;
+    height: 0.42rem;
+    overflow: visible;
+    border: 1px solid var(--color-line-2);
+    background: var(--color-inset);
+  }
+  .foundry-phase-playhead {
+    position: absolute;
+    top: -0.28rem;
+    bottom: -0.28rem;
+    width: 1px;
+    background: white;
+    box-shadow: 0 0 7px white;
+  }
+  .foundry-replay-range {
+    width: 100%;
+    height: 0.8rem;
+    margin-top: 0.25rem;
+    cursor: pointer;
+    accent-color: var(--color-violet);
+  }
+  .foundry-replay-dock {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.55rem;
+    background: #0d1118;
+    padding: 0.48rem 0.55rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .foundry-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .foundry-mission-rail {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .foundry-mission-block,
+  .foundry-boundary,
+  .foundry-mission-details {
+    border-right: 1px solid var(--color-line);
+  }
+  .foundry-mission-details {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .foundry-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .foundry-heading p {
+    white-space: normal;
+  }
+  .foundry-heading-state {
+    margin-left: 0;
+  }
+  .foundry-stage-topbar,
+  .foundry-stage-dock,
+  .foundry-replay-hud,
+  .foundry-replay-dock {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .foundry-stage-proof,
+  .foundry-replay-hud > span:last-child {
+    margin-left: 0;
+  }
+  .foundry-orbit-toolbar {
+    position: relative;
+    inset: auto;
+  }
+  .foundry-orbit-canvas {
+    height: 28rem;
+  }
+  .foundry-launch {
+    width: 100%;
+  }
+  .foundry-scene-thumb {
+    display: none;
+  }
+  .foundry-mission-rail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .foundry-activity-legend span:last-child {
+    display: none;
+  }
+  .foundry-replay-transport {
+    flex-wrap: wrap;
+  }
+  .foundry-replay-transport > div {
+    order: 3;
+    width: 100%;
+    flex-basis: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -382,6 +1129,17 @@
   from {
     opacity: 0;
     transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes foundry-event-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.45rem);
   }
   to {
     opacity: 1;

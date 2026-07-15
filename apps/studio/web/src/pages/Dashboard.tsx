@@ -1,251 +1,366 @@
+import { lazy, Suspense, useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { useStatus } from '../state/StatusContext'
+import { api, mediaUrl, usePoll } from '../api/client'
+import type { RunWindow, StudioEvent, WorkcellManifest } from '../api/types'
+import ReplayStage from '../components/ReplayStage'
+import { ErrorState, Led, Tag } from '../components/ui'
+import { countdownTo, fmtCountdown, fmtLocal, shortHash } from '../lib/format'
 import { useNow } from '../lib/useNow'
-import { countdownTo, fmtCountdown, fmtLocal, parseDocName, shortHash } from '../lib/format'
-import { EmptyState, ErrorState, KV, Led, Panel } from '../components/ui'
-import type { RunWindow } from '../api/types'
+import { useStatus } from '../state/StatusContext'
 
-function CountdownBlock({ label, iso, now }: { label: string; iso: string; now: number }) {
-  const parts = countdownTo(iso, now)
-  const tone = parts.negative
-    ? 'text-red'
-    : parts.totalMs < 60 * 60 * 1000
-      ? 'text-amber-hot'
-      : 'text-ink'
-  return (
-    <div className="flex min-w-0 flex-col gap-1">
-      <span className="cap">{label}</span>
-      <span className={`tabular font-mono text-[28px] leading-none font-semibold ${tone}`}>
-        {fmtCountdown(parts)}
-      </span>
-      <span className="text-3xs text-faint">
-        {parts.negative ? 'elapsed since' : 'until'} {fmtLocal(iso)}
-      </span>
-    </div>
-  )
+type StageMode = 'scene' | 'replay'
+
+const WorkcellOrbit = lazy(() => import('../components/WorkcellOrbit'))
+
+const EVENT_TONE: Record<StudioEvent['kind'], string> = {
+  briefs: 'foundry-event-brief',
+  'reviewer-messages': 'foundry-event-review',
+  'session-logs': 'foundry-event-session',
+  'manager-log': 'foundry-event-manager',
 }
 
-function WindowBar({ window, now }: { window: RunWindow; now: number }) {
-  const start = new Date(window.actual_start).getTime()
-  const cutoff = new Date(window.no_new_major_slice_after).getTime()
-  const end = new Date(window.hard_closeout).getTime()
-  const span = end - start
-  if (!(span > 0)) return null
-  const pct = Math.min(100, Math.max(0, ((now - start) / span) * 100))
-  const cutoffPct = ((cutoff - start) / span) * 100
-  return (
-    <div className="mt-3">
-      <div className="relative h-2 border border-line-2 bg-inset">
-        <div
-          className="absolute inset-y-0 left-0 bg-gradient-to-r from-amber/50 to-amber"
-          style={{ width: `${pct}%` }}
-        />
-        <div
-          className="absolute inset-y-[-3px] w-px bg-red"
-          style={{ left: `${cutoffPct}%` }}
-          title={`no new major slice after ${fmtLocal(window.no_new_major_slice_after)}`}
-        />
-      </div>
-      <div className="mt-1 flex justify-between text-3xs text-faint">
-        <span>start {fmtLocal(window.actual_start)}</span>
-        <span>
-          window {pct.toFixed(1)}% elapsed · {window.total_duration_hours ?? '—'}h total
-        </span>
-        <span>closeout {fmtLocal(window.hard_closeout)}</span>
-      </div>
-    </div>
-  )
+function ageLabel(iso: string, now: number): string {
+  const elapsed = Math.max(0, now - new Date(iso).getTime())
+  if (elapsed < 60_000) return `${Math.floor(elapsed / 1000)}s`
+  if (elapsed < 3_600_000) return `${Math.floor(elapsed / 60_000)}m`
+  return `${Math.floor(elapsed / 3_600_000)}h`
 }
 
-function AuthorityChips({ window }: { window: RunWindow }) {
-  const closed = (v: string | undefined) => (v ?? '').toLowerCase().includes('closed')
-  const items: Array<{ label: string; ok: boolean; text: string }> = [
-    {
-      label: 'simulation only',
-      ok: window.simulation_only === true,
-      text: window.simulation_only ? 'enforced' : 'unknown',
-    },
-    { label: 'hardware', ok: closed(window.hardware_authority), text: window.hardware_authority ?? '—' },
-    {
-      label: 'ext compute',
-      ok: closed(window.external_compute_authority),
-      text: window.external_compute_authority ?? '—',
-    },
-    { label: 'brev', ok: closed(window.brev_authority), text: window.brev_authority ?? '—' },
+function AuthorityStack({ window }: { window: RunWindow | null }) {
+  const closed = (value: string | undefined) => (value ?? '').toLowerCase().includes('closed')
+  const items = [
+    { label: 'simulation', value: window?.simulation_only ? 'enforced' : 'unknown', safe: window?.simulation_only === true },
+    { label: 'hardware', value: window?.hardware_authority ?? 'unknown', safe: closed(window?.hardware_authority) },
+    { label: 'external compute', value: window?.external_compute_authority ?? 'unknown', safe: closed(window?.external_compute_authority) },
+    { label: 'Brev', value: window?.brev_authority ?? 'unknown', safe: closed(window?.brev_authority) },
   ]
   return (
-    <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
+    <div className="foundry-authority-stack">
       {items.map((item) => (
-        <div key={item.label} className="flex items-center gap-2 border border-line bg-inset px-2 py-1.5">
-          <Led tone={item.ok ? 'green' : 'red'} />
-          <div className="min-w-0 leading-tight">
-            <div className="cap">{item.label}</div>
-            <div className="truncate font-mono text-3xs text-dim">{item.text}</div>
-          </div>
+        <div key={item.label} className="foundry-authority-row">
+          <Led tone={item.safe ? 'green' : 'red'} />
+          <span>{item.label}</span>
+          <strong>{item.value}</strong>
         </div>
       ))}
     </div>
   )
 }
 
-function DocList({
-  title,
-  tone,
-  names,
-}: {
-  title: string
-  tone: 'amber' | 'cyan'
-  names: string[]
-}) {
+function ActivityRibbon({ events, now }: { events: StudioEvent[]; now: number }) {
+  const ordered = events.slice(0, 28).reverse()
+  const latest = events[0]
   return (
-    <Panel
-      title={title}
-      right={
-        <Link to="/feed" className="cap text-faint hover:text-amber">
-          feed →
+    <section className="foundry-activity" aria-label="Observed workflow activity">
+      <div className="foundry-activity-heading">
+        <span className="flex items-center gap-2">
+          <Led tone="cyan" pulse />
+          <span className="cap text-ink">evidence activity</span>
+        </span>
+        <span className="hidden truncate text-2xs text-dim lg:block">
+          {latest ? `${latest.title} · observed ${ageLabel(latest.observed_at, now)} ago` : 'awaiting workflow documents'}
+        </span>
+        <Link to="/events" className="btn btn-quiet">
+          open ledger
         </Link>
-      }
-      pad={false}
-    >
-      {names.length === 0 ? (
-        <EmptyState>no documents indexed</EmptyState>
-      ) : (
-        <ul>
-          {names.map((name) => {
-            const doc = parseDocName(name)
-            return (
-              <li
-                key={name}
-                className="flex items-baseline gap-3 border-b border-line/60 px-3 py-2 last:border-b-0 hover:bg-panel-2"
-                title={name}
-              >
-                <span
-                  className={`tabular w-9 flex-none text-right font-mono text-xs font-semibold ${tone === 'amber' ? 'text-amber' : 'text-cyan'}`}
-                >
-                  #{doc.id}
-                </span>
-                <span className="min-w-0 truncate text-xs text-ink">{doc.title}</span>
-              </li>
-            )
-          })}
-        </ul>
-      )}
-    </Panel>
+      </div>
+      <div className="foundry-activity-track">
+        {ordered.map((event, index) => (
+          <Link
+            key={event.id}
+            to="/events"
+            className={`foundry-activity-event ${EVENT_TONE[event.kind]}`}
+            style={{ '--event-index': index } as CSSProperties}
+            title={`${event.title}\n${event.kind} #${event.sequence}\nObserved ${ageLabel(event.observed_at, now)} ago`}
+            aria-label={`${event.kind} ${event.sequence}: ${event.title}`}
+          >
+            <span className="foundry-activity-pulse" />
+            <span className="foundry-activity-stem" />
+            <span className="foundry-activity-sequence">{event.sequence}</span>
+          </Link>
+        ))}
+      </div>
+      <div className="foundry-activity-legend" aria-hidden>
+        <span className="foundry-event-brief">brief</span>
+        <span className="foundry-event-review">review</span>
+        <span className="foundry-event-session">session</span>
+        <span className="foundry-event-manager">manager</span>
+        <span className="ml-auto">filesystem observation order · never authority</span>
+      </div>
+    </section>
   )
 }
 
-export default function Dashboard() {
-  const { data: status, error, syncedAt } = useStatus()
-  const now = useNow(1000)
+function MissionRail({ now }: { now: number }) {
+  const { data: status, syncedAt } = useStatus()
+  if (!status) return null
+  const ledger = status.ledger ?? {}
+  const boundary = status.latest_verified_boundary
+  const blockersRaised =
+    !!ledger.blockers && !/^(none|no\b|—|n\/a)/i.test(ledger.blockers.trim())
+  const closeout = status.run_window
+    ? countdownTo(status.run_window.hard_closeout, now)
+    : null
+  const cutoff = status.run_window
+    ? countdownTo(status.run_window.no_new_major_slice_after, now)
+    : null
 
-  if (!status && error) return <ErrorState error={error} />
+  return (
+    <aside className="foundry-mission-rail">
+      <section className="foundry-mission-block foundry-mission-primary">
+        <span className="cap text-amber">active mission</span>
+        <h2>{status.current_task ?? '——'}</h2>
+        <p>{status.current_milestone ?? 'No milestone recorded'}</p>
+        <span className="foundry-sync">
+          <Led tone="green" pulse />
+          observed {syncedAt ? `${Math.max(0, Math.round((now - syncedAt) / 1000))}s ago` : 'now'}
+        </span>
+      </section>
+
+      <section className="foundry-mission-block">
+        <span className="cap">run window</span>
+        <div className="foundry-clock-pair">
+          <div>
+            <span>new work cutoff</span>
+            <strong>{cutoff ? fmtCountdown(cutoff) : '——:——:——'}</strong>
+          </div>
+          <div>
+            <span>hard closeout</span>
+            <strong>{closeout ? fmtCountdown(closeout) : '——:——:——'}</strong>
+          </div>
+        </div>
+        {status.run_window && (
+          <p className="font-mono text-3xs text-faint">
+            closeout {fmtLocal(status.run_window.hard_closeout)}
+          </p>
+        )}
+      </section>
+
+      <section className="foundry-mission-block">
+        <span className="cap">authority perimeter</span>
+        <AuthorityStack window={status.run_window} />
+      </section>
+
+      <section className="foundry-mission-block">
+        <span className="cap">next move</span>
+        <p className="foundry-mission-copy">{ledger.next_step ?? 'No next step recorded.'}</p>
+      </section>
+
+      {boundary && (
+        <Link to="/events" className="foundry-boundary">
+          <span className="cap text-cyan">verified boundary</span>
+          <strong>{boundary.summary ?? 'Recorded boundary'}</strong>
+          <span>
+            brief #{boundary.brief_id ?? '—'} · review #{boundary.reviewer_decision_id ?? '—'} ·{' '}
+            {shortHash(boundary.commit, 9)}
+          </span>
+        </Link>
+      )}
+
+      <details className="foundry-mission-details">
+        <summary>
+          <span>blockers</span>
+          <Led tone={blockersRaised ? 'red' : 'green'} pulse={blockersRaised} />
+        </summary>
+        <p>{ledger.blockers ?? 'None recorded.'}</p>
+      </details>
+    </aside>
+  )
+}
+
+function scenePreview(workcell: WorkcellManifest | null): string | null {
+  if (!workcell) return null
+  const values = Object.values(workcell.previews ?? {})
+  return values[1] ?? values[0] ?? null
+}
+
+export default function Dashboard() {
+  const { data: status, error: statusError } = useStatus()
+  const workcellPoll = usePoll((signal) => api.workcells(signal), 15_000)
+  const episodePoll = usePoll((signal) => api.episodes(signal), 15_000)
+  const eventPoll = usePoll((signal) => api.events(80, signal), 5_000)
+  const now = useNow(1000)
+  const [mode, setMode] = useState<StageMode>('scene')
+  const [selectedSceneId, setSelectedSceneId] = useState<string | null>(null)
+  const [selectedEpisodeId, setSelectedEpisodeId] = useState<string | null>(null)
+
+  const workcells = useMemo(
+    () => (workcellPoll.data?.workcells ?? []).filter((item) => typeof item.scene_xml === 'string'),
+    [workcellPoll.data],
+  )
+  const mirroredEpisodes = useMemo(
+    () => (episodePoll.data?.episodes ?? []).filter((episode) => Boolean(episode.mirror_video)),
+    [episodePoll.data],
+  )
+
+  useEffect(() => {
+    if (!selectedSceneId && workcells[0]) setSelectedSceneId(workcells[0].scene_id)
+  }, [selectedSceneId, workcells])
+
+  useEffect(() => {
+    if (!selectedEpisodeId && mirroredEpisodes[0]) setSelectedEpisodeId(mirroredEpisodes[0].id)
+  }, [mirroredEpisodes, selectedEpisodeId])
+
+  const selectedWorkcell =
+    workcells.find((workcell) => workcell.scene_id === selectedSceneId) ?? workcells[0] ?? null
+  const selectedEpisode =
+    mirroredEpisodes.find((episode) => episode.id === selectedEpisodeId) ?? mirroredEpisodes[0] ?? null
+  const preview = scenePreview(selectedWorkcell)
+  const combinedError = statusError ?? workcellPoll.error ?? episodePoll.error ?? eventPoll.error
+
+  if (!status && statusError) return <ErrorState error={statusError} />
   if (!status)
     return (
-      <div className="flex items-center gap-2 py-16 justify-center">
+      <div className="flex items-center justify-center gap-2 py-16">
         <Led tone="amber" pulse />
-        <span className="cap">acquiring loop telemetry…</span>
+        <span className="cap">lighting the foundry…</span>
       </div>
     )
 
-  const ledger = status.ledger ?? {}
-  const boundary = status.latest_verified_boundary
-  const blockersRaised = !!ledger.blockers && !/^(none|no\b|—|n\/a)/i.test(ledger.blockers.trim())
-
   return (
-    <div className="space-y-4">
-      {/* row 1: slice + window */}
-      <div className="grid grid-cols-12 gap-4">
-        <Panel title="Current slice" className="col-span-12 xl:col-span-5">
-          <div className="font-display text-[44px] leading-none font-bold tracking-tight text-amber">
-            {status.current_task ?? '——'}
+    <div className="foundry-home">
+      <header className="foundry-heading">
+        <div>
+          <span className="cap text-amber">robot-learning foundry</span>
+          <h1>Foundry stage</h1>
+          <p>
+            {selectedWorkcell?.task_prompt ??
+              'Inspect a compiled workcell, then project a recorded policy episode into the stage.'}
+          </p>
+        </div>
+        <div className="foundry-heading-state">
+          <Tag tone="cyan">live artifact view</Tag>
+          <Tag tone="amber">simulation only</Tag>
+          <span className="flex items-center gap-2">
+            <Led tone={combinedError ? 'red' : 'green'} pulse={!combinedError} />
+            <span className="cap">{combinedError ? 'partial link' : 'foundry linked'}</span>
+          </span>
+        </div>
+      </header>
+
+      <div className="foundry-layout">
+        <section className="foundry-stage-shell" aria-label="Interactive foundry stage">
+          <div className="foundry-stage-topbar">
+            <div className="foundry-mode-switch" aria-label="Stage projection mode">
+              <button
+                type="button"
+                className={mode === 'scene' ? 'active' : ''}
+                onClick={() => setMode('scene')}
+                aria-pressed={mode === 'scene'}
+              >
+                3D workcell
+              </button>
+              <button
+                type="button"
+                className={mode === 'replay' ? 'active' : ''}
+                onClick={() => selectedEpisode && setMode('replay')}
+                disabled={!selectedEpisode}
+                aria-pressed={mode === 'replay'}
+              >
+                recorded replay
+              </button>
+            </div>
+            <span className="foundry-stage-proof">
+              <Led tone={mode === 'scene' ? 'cyan' : 'amber'} pulse />
+              {mode === 'scene' ? 'compiled simulation fixture' : 'recorded mirror · read only'}
+            </span>
           </div>
-          <div className="mt-2 text-xs text-dim">{status.current_milestone ?? '—'}</div>
-          <div className="mt-4 border-t border-line pt-3">
-            <span className="cap">latest verified boundary</span>
-            {boundary ? (
-              <div className="mt-2 grid grid-cols-3 gap-3">
-                <KV label="brief">#{boundary.brief_id ?? '—'}</KV>
-                <KV label="decision">#{boundary.reviewer_decision_id ?? '—'}</KV>
-                <KV label="commit">{shortHash(boundary.commit, 10)}</KV>
-                <div className="col-span-3">
-                  <KV label="summary">{boundary.summary ?? '—'}</KV>
+
+          <div className="foundry-stage-viewport">
+            {mode === 'scene' ? (
+              selectedWorkcell?.scene_xml ? (
+                <>
+                  <Suspense
+                    fallback={
+                      <div className="flex h-[32rem] items-center justify-center gap-2">
+                        <Led tone="cyan" pulse />
+                        <span className="cap">lighting 3D scene…</span>
+                      </div>
+                    }
+                  >
+                    <WorkcellOrbit
+                      sceneXml={selectedWorkcell.scene_xml}
+                      sceneId={selectedWorkcell.scene_id}
+                      immersive
+                    />
+                  </Suspense>
+                  <div className="foundry-scene-identity">
+                    <span className="cap text-cyan">compiled workcell</span>
+                    <strong>{selectedWorkcell.scene_id}</strong>
+                    <span>
+                      {selectedWorkcell.cube_count ?? '—'} cubes · {selectedWorkcell.tray_count ?? '—'} trays ·{' '}
+                      {selectedWorkcell.all_cubes_stable ? 'settled' : 'stability unverified'}
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <div className="flex h-full items-center justify-center">
+                  <span className="cap">no compiled workcell available</span>
                 </div>
-              </div>
+              )
+            ) : selectedEpisode ? (
+              <ReplayStage
+                key={selectedEpisode.id}
+                episode={selectedEpisode}
+                episodes={mirroredEpisodes}
+                onSelect={setSelectedEpisodeId}
+                onReturnToScene={() => setMode('scene')}
+              />
             ) : (
-              <div className="mt-2 text-xs text-faint">none recorded</div>
+              <div className="flex h-full items-center justify-center">
+                <span className="cap">no recorded mirror available</span>
+              </div>
             )}
           </div>
-        </Panel>
 
-        <Panel
-          title="Run window"
-          className="col-span-12 xl:col-span-7"
-          right={
-            <span className="cap text-faint">
-              synced {syncedAt ? `${Math.max(0, Math.round((now - syncedAt) / 1000))}s ago` : '—'}
-            </span>
-          }
-        >
-          {status.run_window ? (
-            <>
-              <div className="grid grid-cols-2 gap-6">
-                <CountdownBlock
-                  label="No new major slice"
-                  iso={status.run_window.no_new_major_slice_after}
-                  now={now}
+          {mode === 'scene' && (
+            <div className="foundry-stage-dock">
+              <button
+                type="button"
+                className="foundry-launch"
+                onClick={() => selectedEpisode && setMode('replay')}
+                disabled={!selectedEpisode}
+              >
+                <span className="foundry-launch-plus" aria-hidden>+</span>
+                <span>
+                  <strong>Launch recorded replay</strong>
+                  <small>watch an existing episode · no new execution</small>
+                </span>
+              </button>
+
+              {preview && (
+                <img
+                  src={mediaUrl(preview)}
+                  alt={`${selectedWorkcell?.scene_id ?? 'workcell'} overhead preview`}
+                  className="foundry-scene-thumb"
                 />
-                <CountdownBlock label="Hard closeout" iso={status.run_window.hard_closeout} now={now} />
-              </div>
-              <WindowBar window={status.run_window} now={now} />
-              <AuthorityChips window={status.run_window} />
-            </>
-          ) : (
-            <EmptyState>no run window recorded</EmptyState>
+              )}
+              <label className="foundry-scene-select">
+                <span className="cap">scene</span>
+                <select
+                  value={selectedWorkcell?.scene_id ?? ''}
+                  onChange={(event) => setSelectedSceneId(event.target.value)}
+                  aria-label="Select compiled workcell"
+                >
+                  {workcells.map((workcell) => (
+                    <option key={workcell.scene_id} value={workcell.scene_id}>
+                      {workcell.scene_id}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <Link to="/workcells" className="btn btn-quiet">
+                open workbench
+              </Link>
+            </div>
           )}
-        </Panel>
+        </section>
+
+        <MissionRail now={now} />
       </div>
 
-      {/* row 2: ledger state */}
-      <div className="grid grid-cols-12 gap-4">
-        <Panel title="Run state" className="col-span-12 xl:col-span-7">
-          <p className="text-xs leading-relaxed text-ink">{ledger.run_state ?? '—'}</p>
-          {ledger.training_lock && (
-            <p className="mt-3 border-t border-line pt-2 text-2xs text-dim">
-              <span className="cap mr-2 text-faint">training lock</span>
-              {ledger.training_lock}
-            </p>
-          )}
-        </Panel>
-        <div className="col-span-12 flex flex-col gap-4 xl:col-span-5">
-          <Panel title="Next step">
-            <p className="text-xs leading-relaxed text-ink">{ledger.next_step ?? '—'}</p>
-          </Panel>
-          <Panel
-            title="Blockers"
-            right={<Led tone={blockersRaised ? 'red' : 'green'} pulse={blockersRaised} />}
-          >
-            <p className={`text-xs leading-relaxed ${blockersRaised ? 'text-red' : 'text-dim'}`}>
-              {ledger.blockers ?? 'none recorded'}
-            </p>
-          </Panel>
-        </div>
-      </div>
-
-      {/* row 3: recent documents */}
-      <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-12 xl:col-span-6">
-          <DocList title="Recent briefs" tone="amber" names={status.recent_briefs ?? []} />
-        </div>
-        <div className="col-span-12 xl:col-span-6">
-          <DocList
-            title="Reviewer decisions"
-            tone="cyan"
-            names={status.recent_reviewer_decisions ?? []}
-          />
-        </div>
-      </div>
-
-      {error && <ErrorState error={error} />}
+      <ActivityRibbon events={eventPoll.data?.events ?? []} now={now} />
+      {combinedError && <ErrorState error={combinedError} />}
     </div>
   )
 }
