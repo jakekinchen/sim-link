@@ -47,3 +47,12 @@ The decision must distinguish:
 No checkpoint read, model construction, inference, optimizer, training,
 campaign permit, rollout, dataset/statistics mutation, Gate B amendment,
 hardware, camera, serial, external compute, or Brev.
+
+## Result Boundary
+
+Spec `6e56f6ff...` and historical-fixture decision `e709c30c...`, preserved at
+`5fdc36c`, retain only `t20_35x_source` as rollback capability. T20.36 fails
+the action conjunct and no coverage checkpoint is selected. The fixture does
+not claim pre-registration; future schedules require remote preservation
+before optimizer creation. Reviewer 242 verifies the contract and routes only
+the read-only local ACT/SmolVLA preflight in Brief 194.

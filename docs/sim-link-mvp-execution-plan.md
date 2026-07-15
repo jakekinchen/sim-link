@@ -90,7 +90,7 @@ not spent on a higher gate while a lower one is unmet.
 | Gate | Proof | A failure localizes to | Status |
 | --- | --- | --- | --- |
 | A | Exact train/inference parity: dataset statistics, image/state/action normalization, chunk interpretation, joint order, gripper representation, postprocessing, cadence/hold, with round-trip tests on known values | Contract or preprocessing parity | Largely verified: T20.12 round-trip, T20.13 statistics, T20.26 determinism, T20.28-T20.31 sampler/quantile chain |
-| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | T20.35x passed once; T20.36 failed retention. T20.36a proves the weighted correction mean was not Gate-B-equivalent under coverage; T20.36b encodes a fail-closed retention contract before any new proposal |
+| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | T20.35x passed once; T20.36 failed retention. T20.36a proves weighted-loss non-equivalence; T20.36b retains only X and finds no coverage candidate. T20.36c inventories local ACT/SmolVLA viability before a policy-track decision |
 | C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Blocked behind Gate B; T20.32 diverges at frame zero before execution feedback |
 | D | Full training-set success: strict-v2 across all eight constructive episodes | Dataset coverage or adaptation capacity | Open |
 | E | Held-out nominal starts: seeds 6-7 and small initial-state variation | Generalization | Open (0/2 at T20.24 and T20.31) |
@@ -126,6 +126,13 @@ not inherit authority from this document.
 | 12b | **T20.35.x — conditional Gate B discriminators** | T20.35c's expert-only ceiling passes the objective gate but misses action error; T20.35d-f localize systematic normalized bias without clipping. T20.35g rejects 20/50-step cadence. T20.35h's bias ceilings improve but fail. T20.35i localizes the remaining 96 failures as distributed across all five seeds and four channels; top-two seed/channel and boundary fractions are only 56.25%/67.71%/31.25%, with raw spread up to 0.183018 rad. Route T20.35j to one inference-only initial-noise-scale discriminator before any optimizer correction. | Verified-negative T20.35; T20.35c-i signed evidence; reviewer chain through Decision 212 | Combined-factor changes, unreviewed sweeps, second batch, Gate C changes, promotion |
 | 13 | **T20.36 — bounded campaign after Gate B correction (verified negative)** | The sole 500-update campaign passed the standard-objective ratio but regressed all five decoded chunks to 0.1506-0.1870 rad; Gate B failed, so no closed-loop seed was reached. T20.36a verifies weighted-objective/physical-gate non-equivalence; T20.36b is a pure retention contract. | Verified T20.35x Gate B pass | Retry, gate change, promotion, hardware, external compute, Brev |
 | 14 | **T20.37 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
+
+The post-T20.36 policy-track discriminator starts with T20.36c's read-only
+local preflight. It inventories ACT and SmolVLA source/cache/dataset fit without
+downloading or loading a model. ACT remains the cheapest diagnostic control;
+SmolVLA may become the Mac-first VLA track only through a separate owner-signed
+Gate B entry brief. PI0.5 remains the compatibility/stress baseline. CUDA,
+A100, external compute, and Brev remain closed.
 
 ### Support tooling
 

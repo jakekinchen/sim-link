@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "192",
-    "commit": "3bbdc644a3eb71ea503e193910efbfd6a9f04ceb",
-    "reviewer_decision_id": "241",
-    "summary": "t20_36a_weighted_objective_not_gate_equivalent_under_coverage"
+    "brief_id": "193",
+    "commit": "5fdc36cf397ebd7a9b759546cc08300a723bcdbe",
+    "reviewer_decision_id": "242",
+    "summary": "t20_36b_only_source_retains_gate_b_no_coverage_candidate"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36b",
-  "next_eligible_task": "T20.36b",
+  "current_task": "T20.36c",
+  "next_eligible_task": "T20.36c",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4159,16 +4159,50 @@
       "authority_not_granted": ["checkpoint_tensor_read","model_load","model_inference","optimizer_creation","optimizer_training","t20_36_second_attempt","gate_b_threshold_change","gate_c_execution","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36b": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36a"],
-      "active_brief_id": "193",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "193",
+      "review_decision_id": "242",
+      "source_commit": "3bbdc644a3eb71ea503e193910efbfd6a9f04ceb",
+      "implementation_commits": ["5fdc36cf397ebd7a9b759546cc08300a723bcdbe"],
+      "result": "pure retention contract verifies only the T20.35x source retains unchanged Gate B; T20.36 is rejected, no post-source coverage candidate exists, and future schedules must be remotely preserved before optimizer creation",
+      "artifact": {
+        "path": "configurations/robot_lab/t20_36b_gate_b_retention_fixture_decision.json",
+        "spec_path": "configurations/robot_lab/t20_36b_gate_b_retention_spec.json",
+        "spec_identity_sha256": "6e56f6ff0c220f96f5ac30e049b756e2a331b33245dff4029862c006e60e8ea1",
+        "spec_file_sha256": "582696322dade4ab590eb374957238ed7f7d221c40b97865aa26b2bc7dc7234a",
+        "spec_size_bytes": 2273,
+        "decision_path": "configurations/robot_lab/t20_36b_gate_b_retention_fixture_decision.json",
+        "decision_identity_sha256": "e709c30cabeab069c4bd2fefa99e839ec68e6685fe61a7bf740ed97bb458ef2c",
+        "decision_file_sha256": "693acff087f7c06fe3929aa4dc1dea2a756e4c930cdcd2c09cd68ce97279466b",
+        "decision_size_bytes": 4011,
+        "decision": "only_source_checkpoint_retains_gate_b_no_coverage_candidate",
+        "retained_checkpoint_labels": ["t20_35x_source"],
+        "post_source_retained_checkpoint_labels": [],
+        "selected_coverage_checkpoint_label": null,
+        "historical_fixture_only": true,
+        "future_schedule_requires_pre_optimizer_remote_preservation": true,
+        "optimizer_training_authorized": false,
+        "gate_c_authorized": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["t20_36b_gate_b_retention_contract_valid","t20_36c_local_policy_track_preflight_routed"],
+      "authority_not_granted": ["checkpoint_tensor_read","model_load","model_inference","optimizer_creation","optimizer_training","t20_36_second_attempt","gate_b_threshold_change","gate_c_execution","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.36c": {
+      "state": "in_progress",
+      "depends_on": ["T20.36b"],
+      "active_brief_id": "194",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_commit": "3bbdc644a3eb71ea503e193910efbfd6a9f04ceb",
+      "source_commit": "5fdc36cf397ebd7a9b759546cc08300a723bcdbe",
       "implementation_commits": [],
-      "result": "pure Gate B retention decision contract is active; it may validate predeclared checkpoint evidence but cannot authorize a model, inference, optimizer, campaign, rollout, or gate change",
-      "authority_granted": ["design_and_test_gate_b_retention_decision_contract"],
-      "authority_not_granted": ["checkpoint_tensor_read","model_load","model_inference","optimizer_creation","optimizer_training","t20_36_second_attempt","gate_b_threshold_change","gate_c_execution","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "result": "read-only local ACT and SmolVLA source/cache/dataset compatibility preflight is active; it cannot download weights, load a model, run inference or an optimizer, or select a policy track",
+      "authority_granted": ["read_only_local_act_smolvla_capability_preflight"],
+      "authority_not_granted": ["network_download","checkpoint_tensor_read","model_load","model_inference","optimizer_creation","optimizer_training","policy_track_selected","gate_b_threshold_change","gate_c_execution","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

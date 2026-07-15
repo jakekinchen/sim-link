@@ -26,13 +26,13 @@ Narrative claims never override a closed or absent machine-readable grant.
 
 ## Active Boundary
 
-T20.36 is verified negative through signed result `02b543be...`. T20.36a audit
-`339a7229...`, remotely preserved at `3bbdc64`, proves the weighted correction
-mean improved while raw correction, standard objective, and every decoded seed
-regressed. T20.36b is current under Brief 193. It may encode and test only a
-pure fail-closed checkpoint-retention decision using the unchanged Gate B
-conjunction. It may not read checkpoint tensors, load a model, run inference
-or an optimizer, execute a rollout, amend a gate, or authorize a campaign.
+T20.36b spec `6e56f6ff...` and decision `e709c30c...`, remotely preserved at
+`5fdc36c`, retain only X as rollback capability and reject every post-source
+coverage candidate. T20.36c is current under Brief 194. It may inspect only
+local ACT/SmolVLA source, cache metadata, and canonical-dataset compatibility.
+It may not download weights, read checkpoint tensors, load a model, run
+inference or an optimizer, select a policy track, execute a rollout, amend a
+gate, or authorize a campaign.
 
 The run remains simulation-only. Hardware, cameras, serial devices, physical
 motion, external compute, Brev, promotion, and physical-transfer authority are
@@ -66,6 +66,9 @@ Repeat while the run window and authority permit:
   coverage. T20.36b must encode actual standard-ratio plus five-seed physical
   maxima as the retention decision; proxy losses may be reported but never
   substitute for either Gate B conjunct.
+- T20.36b finds no post-source candidate. T20.36c may route only a separately
+  reviewed ACT diagnostic or SmolVLA Gate B entry design from verified local
+  capability evidence; it cannot select or run either policy.
 - Gate C opens only after Gate B is mechanically proven. A first learned
   closed-loop grasp must be labeled autonomous only when every action is policy
   owned and the strict-v2 evaluator passes.
