@@ -20,13 +20,13 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Actual start: `2026-07-14T12:20:57-05:00`.
-- No new major slice after: `2026-07-14T19:35:57-05:00`.
-- Hard closeout: `2026-07-14T20:20:57-05:00`.
-- Closeout recorded: `2026-07-14T19:40:00-05:00`, after T20.31 verified
-  negative and the no-new-major-slice cutoff passed.
-- This owner-requested bespoke-versus-package recreation continuation is
-  simulation-only. It grants no hardware,
+- Actual start: `2026-07-14T20:10:00-05:00`.
+- No new major slice after: `2026-07-15T03:25:00-05:00`.
+- Hard closeout: `2026-07-15T04:10:00-05:00`.
+- This owner-requested continuation is simulation-only diagnostic and bounded
+  training work under M20: first T20.32 closed-loop divergence localization,
+  then the lowest unmet capability-ladder gate in
+  `docs/sim-link-mvp-execution-plan.md`. It grants no hardware,
   physical-transfer, promotion, external-compute, or Brev authority. Historical
   physical-session notes below are retained only as consumed-gate history.
 - Reviewer 098's one-session gate was consumed and closed at `08:42` CDT after
@@ -116,8 +116,16 @@ and one frozen unassisted strict-v2 evaluation each on held-out seeds 6 and 7.
 No policy is accepted or promoted by the brief.
 T20.31 is now `verified` negative through Reviewer Decision 192: 500 finite
 updates reduced loss from 1.544 to 0.413, but both frozen held-out policies made
-zero strict contact and achieved 0/2 strict successes. The no-new-major-slice
-cutoff has passed; no further optimizer or diagnostic slice is opened.
+zero strict contact and achieved 0/2 strict successes. The previous window's
+no-new-major-slice cutoff passed after that verification.
+Brief 163 now opens T20.32 in the fresh owner window recorded above: capture
+complete requested/applied action and state traces for the frozen T20.24 and
+T20.31 adapters, localize the earliest closed-loop divergence against the exact
+source trajectories on held-out seeds 6 and 7, and run one bounded
+training-seed closed-loop reproduction probe per adapter as capability-ladder
+Gate C evidence. No optimizer, dataset, statistics, twin, hardware, or
+authority change is permitted; the verified outcome routes the next gate in
+the MVP execution plan.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
@@ -706,6 +714,7 @@ complete unassisted lift, hold, lower, release, and retreat through v2.
 - Execution evidence: `docs/session-logs/`
 - Review decisions: `docs/reviewer-messages/`
 - Accepted checkpoint pointer: `experiments/pi05_autolearn/accepted.json`
+- MVP capability ladder and task queue: `docs/sim-link-mvp-execution-plan.md`
 
 ## Execution Mandate
 
