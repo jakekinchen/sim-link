@@ -49,3 +49,14 @@ math, residual hashes and summaries, decoded endpoint reproduction,
 classification thresholds, one-use semantics, non-finite values, and all
 forbidden truth flags. A fresh pre-run decision must authorize exactly one
 Python 3.12 local-MPS inference attempt.
+
+## Pre-Run Boundary
+
+Implementation `100a76e`, spec `c21c4d48...`, and one-use permit
+`65c516f3...` are remotely preserved. Reviewer 221 accepts the same-agent
+adversarial review and authorizes exactly one Python 3.12 local-MPS
+model-load/inference attempt. The reviewed boundary retains raw finite states
+and learned velocities so every reference residual, hash, summary, and route is
+recomputed by the verifier. Eleven relevant tests pass. No model, checkpoint
+tensor, inference, optimizer, mutation, rollout, Gate C, hardware, external
+compute, or Brev action occurred before authorization.
