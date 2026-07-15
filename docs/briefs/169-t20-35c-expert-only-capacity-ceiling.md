@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-15
 
-**State:** `in_progress`
+**State:** `verified_negative`
 
 ## Objective
 
@@ -74,3 +74,17 @@ and remotely confirmed. The runner writes an immutable attempt marker before
 model construction, rejects any PEFT/PaliGemma trainability or incomplete
 expert/time-MLP boundary, and binds every saved trainable tensor's name, shape,
 dtype, and element count. No model load or optimizer occurred at this boundary.
+
+## Result
+
+The sole counted attempt `43b2b721...` completed 500 finite updates and exposed
+693,422,112 trainable expert/projection parameters while keeping all
+3,449,982,704 PaliGemma parameters frozen. Run `9b1af8ee...`, checkpoint
+`439ae119...`, and result `f6f6b024...` are exact. The five-seed objective ratio
+fell from rank 16's `0.155307` to `0.004252`, passing the unchanged `0.10`
+gate. Mean decoded errors also improved on every seed, but maximum errors
+`0.091908` to `0.150321` still missed the `0.05` rad gate. Gate B therefore
+remains failed. The mixed result routes to an optimizer-free deterministic
+checkpoint replay and per-joint/per-timestep residual localization before any
+new training or Gate C work. No retry, policy acceptance, hardware, external
+compute, or Brev followed.

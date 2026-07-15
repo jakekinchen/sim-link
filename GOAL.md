@@ -177,6 +177,13 @@ batch, learning rate, 500 updates, seeds, processors, and gates while replacing
 PEFT with a PaliGemma-frozen, complete-expert-plus-real-projections trainable
 boundary. Central decision `75dc9c7d...` grants exactly one local-MPS attempt;
 no model load or optimizer occurred at the pre-run boundary.
+T20.35c is now `verified` mixed-negative through result `f6f6b024`, run
+`9b1af8ee`, and Reviewer Decision 203. The sole expert-only attempt completed
+500 finite updates, passed the objective gate at ratio `0.004252`, and improved
+all five decoded seeds over rank 16. Gate B still fails because maximum action
+errors remain `0.091908` to `0.150321` rad versus the `0.05` limit. T20.35d is
+next as an optimizer-free exact checkpoint replay and per-joint/per-timestep
+residual localization; no additional training or Gate C work is justified yet.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

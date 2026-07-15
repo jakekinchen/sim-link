@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "168",
-    "commit": "b6309307c7d1faac744469ad9775bb0f944c414a",
-    "reviewer_decision_id": "201",
-    "summary": "verified_pinned_source_correction_of_peft_coverage_semantics"
+    "brief_id": "169",
+    "commit": "011e42144171fef80bd8ecaa35b8a170e3eab0b3",
+    "reviewer_decision_id": "203",
+    "summary": "verified_mixed_gate_b_negative_expert_only_training"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35c",
-  "next_eligible_task": "T20.35c",
+  "current_task": "T20.35d",
+  "next_eligible_task": "T20.35d",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2862,30 +2862,52 @@
       "authority_not_granted": ["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35c": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.35b"],
-      "active_brief_id": "169",
-      "latest_verified_brief_id": null,
-      "review_decision_id": "202",
-      "result": "authorized pre-run no-LoRA expert-only Gate B capacity ceiling on the frozen T20.33 batch; no model or optimizer has run",
-      "pre_run_artifact": {
-        "implementation_commit": "82614ecb2c37587b2cff62abf43a2f0672e3c44a",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "169",
+      "review_decision_id": "203",
+      "source_commit": "011e42144171fef80bd8ecaa35b8a170e3eab0b3",
+      "implementation_commits": ["82614ecb2c37587b2cff62abf43a2f0672e3c44a","009085687f0236bb17335320c755c8f7640d0279","011e42144171fef80bd8ecaa35b8a170e3eab0b3"],
+      "result": "verified mixed Gate B negative: expert-only training passes the objective-ratio gate at 0.004252 and improves every decoded seed dramatically, but all five maximum action errors remain above 0.05 rad, routing deterministic residual localization rather than more training",
+      "artifact": {
+        "path": "configurations/robot_lab/t20_35c_expert_only_result.json",
+        "schema_version": "scenesmith.t20_35c_expert_only_result.v1",
+        "identity_sha256": "f6f6b024c169ffec9c59be9e8a111e756aae2b70729ae30ad016b29ee402df47",
         "training_spec_path": "configurations/robot_lab/t20_35c_expert_only_training_spec.json",
         "training_spec_identity_sha256": "6c10a1c7ad1f901c8afd5452669a0f0ca845d9395fa75de8e84139b706e92309",
         "coverage_correction_identity_sha256": "446a06860663be438b3dc1c87e4d2571a9cd4866b1d16feaa1e279e06cfe10f6",
         "authority_decision_path": "configurations/robot_lab/t20_35c_simulation_training_authority_decision.json",
         "authority_decision_identity_sha256": "75dc9c7d860e12e2a2114be709e24f7e544ff576696a3d223dd87dd0e2f06606",
-        "exactly_one_run_permitted": true,
-        "optimizer_training_executed": false,
-        "model_loaded": false,
+        "attempt_identity_sha256": "43b2b7211dd3700e5a8686a10d57f27fe74525b4d4614c8e74993142be57c939",
+        "run_identity_sha256": "9b1af8ee0020fef65b3990b587268642c4eb1e137f8b252729e79d0d5a5ad650",
+        "checkpoint_identity_sha256": "439ae119842fe5f9639b3e3e9b76f029678fd4b4257dfd6308253f6d2832c29f",
+        "optimizer_update_count": 500,
+        "trainable_parameter_count": 693422112,
+        "paligemma_trainable_parameter_count": 0,
+        "baseline_objective_mean": 0.9590791046619416,
+        "final_objective_mean": 0.004078254057094455,
+        "final_to_baseline_objective_ratio": 0.004252260358160933,
+        "objective_ratio_within_threshold": true,
+        "all_decoded_chunks_within_threshold": false,
+        "minimum_decoded_maximum_error_rad": 0.09190755343139756,
+        "maximum_decoded_maximum_error_rad": 0.15032132878119553,
+        "gate_b_one_batch_memorization_passed": false,
+        "decision": "gate_b_fail",
+        "selected_next_hypothesis": "gate_b_objective_pass_action_fail_route_decoded_action_residual_localization",
+        "optimizer_training": true,
         "closed_loop_rollout": false,
+        "simulation_policy_accepted": false,
         "physical_actuation": false,
         "external_compute_started": false,
-        "brev_compute_started": false
+        "brev_compute_started": false,
+        "physical_transfer_ready": false,
+        "promotion_eligible": false
       },
-      "authority_granted": ["simulation_training_ready"],
-      "authority_not_granted": ["optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "authority_granted": ["t20_35c_gate_b_mixed_negative_result_verified"],
+      "authority_not_granted": ["gate_b_passed","gate_c_execution_correction","additional_optimizer_training","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
+    "T20.35d": {"state":"pending","depends_on":["T20.35c"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"pending optimizer-free deterministic replay of the immutable expert-only checkpoint, exact reproduction of all five decoded hashes, and per-seed/per-timestep/per-joint residual localization before any new training or Gate C work","authority_granted":[],"authority_not_granted":["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],
