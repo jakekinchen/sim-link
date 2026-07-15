@@ -1,0 +1,70 @@
+{
+  "all_decoded_chunks_within_threshold": false,
+  "authority_decision_identity_sha256": "f4ef827b3ce79479c9d246560c5904b5d43fd97dc9a9dae8054927f0517fafe2",
+  "baseline_correction_objective_mean": 0.12080071842763573,
+  "baseline_standard_objective_mean": 0.04458113312721253,
+  "brev_compute_started": false,
+  "checkpoint_mutated": false,
+  "closed_loop_rollout": false,
+  "correction_example_count": 50,
+  "correction_objective_ratio_within_target": true,
+  "dataset_mutated": false,
+  "decoded_action_chunks": [
+    {
+      "decoded_action_chunk_sha256": "e16f247467456db6c5791f89ecae663e316d64636100afa20bf5fad9acaaa473",
+      "inference_seed": 20260721,
+      "maximum_absolute_error_rad": 0.19643273134391337,
+      "mean_absolute_error_rad": 0.04899418123062916
+    },
+    {
+      "decoded_action_chunk_sha256": "1a7758f628c28e9233e2fd0a8062681803a775e16db115f35461b0b116af780f",
+      "inference_seed": 20260722,
+      "maximum_absolute_error_rad": 0.115164539756896,
+      "mean_absolute_error_rad": 0.0255353765687284
+    },
+    {
+      "decoded_action_chunk_sha256": "c749b04528fc0f15d326f87bf199d66fbeee2ced3485ff51c7c8b5439e383a54",
+      "inference_seed": 20260723,
+      "maximum_absolute_error_rad": 0.11446985418654887,
+      "mean_absolute_error_rad": 0.03894075163459412
+    },
+    {
+      "decoded_action_chunk_sha256": "613b19a6f9c063a391484ed1795a873b0b38f4800d0a4506789232096d0a3b49",
+      "inference_seed": 20260724,
+      "maximum_absolute_error_rad": 0.19186903863141275,
+      "mean_absolute_error_rad": 0.05251805732434808
+    },
+    {
+      "decoded_action_chunk_sha256": "963c64a417005e70aadf7b835133f4e38543fbbb03181e1bb5c8e658ed723808",
+      "inference_seed": 20260725,
+      "maximum_absolute_error_rad": 0.1970053442677941,
+      "mean_absolute_error_rad": 0.04759518052107221
+    }
+  ],
+  "external_compute_started": false,
+  "final_correction_objective_mean": 0.01151430903468281,
+  "final_standard_objective_mean": 0.14431108087301253,
+  "final_to_baseline_correction_objective_ratio": 0.09531656089926588,
+  "final_to_source_gate_baseline_objective_ratio": 0.15046838177532773,
+  "gate_b_passed": false,
+  "identity_sha256": "52d4c9edcbafc5de24fea6f0f9718068665675ec9728b3511cbcc1d9d93cf363",
+  "maximum_allowed_action_error_rad": 0.05,
+  "maximum_allowed_objective_ratio": 0.1,
+  "objective_ratio_within_threshold": false,
+  "optimizer_training": true,
+  "optimizer_update_count": 500,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "run_identity_sha256": "85826156468f3f5285cbfce66974aeaab99bc23dc6a6f4987d45c84a5d94a9e2",
+  "sampler_mutated": false,
+  "schema_version": "scenesmith.t20_35r_full_path_flow_consistency_result.v1",
+  "selected_next_hypothesis": "full_path_correction_both_fail_route_capacity_or_interference_audit",
+  "simulation_policy_accepted": false,
+  "source_checkpoint_identity_sha256": "9358cee4ae5e86e814c6a376f27b8bef74bba62612869f49c39d6f5f78dcb68e",
+  "statistics_changed": false,
+  "t20_35o_result_identity_sha256": "5c5b41b99d83b1e5116195bab551277d3b65126066717823342030b23391a582",
+  "t20_35q_result_identity_sha256": "6ba4954cd850abe69cf0de838740dab3b976ca277cb08360ec2e29ec0011f40b",
+  "task_id": "T20.35r",
+  "training_spec_identity_sha256": "70be21a274c22d1fc9aaf0920a546b2ac3ab60efd5a3e51e143a485f7b0adfbe"
+}
