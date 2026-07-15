@@ -9,7 +9,7 @@ in the same commit as the work.
 | ST2 | Web scaffold: Vite + React + TS + Tailwind, layout shell, API client, dev proxy | done | design system in `web/src/components/ui.tsx` + `index.css` |
 | ST3 | Dashboard page: current slice, window countdown, ladder gates, reviewer ticker | done | polls /api/status every 5s |
 | ST4 | Episodes page: filter table + detail with mirror video, phase timeline, hash links | done | v0; expert frame scrubber included |
-| ST5 | Tasks page: campaign history + before/after trend from result gates | done | v0 table; trend chart still open |
+| ST5 | Tasks page: campaign history + before/after trend from result gates | done | live SVG trend: signed measured ratios only, task order, 0.10 Gate B objective threshold |
 | ST6 | Workcell Designer: spec form/editor, Build button (server action), preview images, stability report | done | live API + browser verified: synced form/JSON, inline 400/422 faults, stable previews, settle report, hashes |
 | ST7 | Agent Feed: briefs/session-logs/reviewer-decisions live tail | done | regex filename-only brief/reviewer reads; live full-text safe Markdown feed browser-verified |
 | ST8 | MCP server exposing status/episodes/tasks/workcells/build/render tools | done | official SDK stdio verified: 7 tools, 5 live reads, fail-closed guards, stable workcell build; REST parity exact |
