@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "176",
-    "commit": "06b3a0af419ecd802fc949cc344a453c3a925410",
-    "reviewer_decision_id": "214",
-    "summary": "verified_directionally_positive_gate_b_non_pass_lower"
+    "brief_id": "177",
+    "commit": "357cd6ea9d89fc52734fdf5bf269439d22dcda9f",
+    "reviewer_decision_id": "215",
+    "summary": "verified_matched_standard_normal_training_inference_sampler_with"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35k",
-  "next_eligible_task": "T20.35k",
+  "current_task": "T20.35l",
+  "next_eligible_task": "T20.35l",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -3319,16 +3319,62 @@
       "authority_not_granted": ["optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35k": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.35j"],
-      "active_brief_id": "177",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "177",
+      "review_decision_id": "215",
+      "source_commit": "06b3a0af419ecd802fc949cc344a453c3a925410",
+      "implementation_commits": ["357cd6ea9d89fc52734fdf5bf269439d22dcda9f"],
+      "result": "verified matched standard-normal training/inference sampler with 26 stochastic padded dimensions entering the shared action projection while direct loss and returned actions are truncated to six",
+      "artifact": {
+        "path": "configurations/robot_lab/t20_35k_sampler_noise_distribution_audit.json",
+        "schema_version": "scenesmith.t20_35k_sampler_noise_distribution_audit.v1",
+        "identity_sha256": "bc9f08458b2339757c1dc7a8266df34332df911209bab1154b5d1ce9a1a4ad60",
+        "file_sha256": "16f396183901f4da1b98b18c6ed1db2ce86c6750435f5665131b790a526809cc",
+        "size_bytes": 3561,
+        "model_source_sha256": "006fee5765b235dd66c55f16d78a1e296dc320667a02608c68a057d72d70bde0",
+        "config_source_sha256": "a8b80f54ffe98993529d8013b1f8ddde4289a71b5c6a5e41d7346ac7622da6a6",
+        "default_train_inference_noise_distribution_match": true,
+        "supervised_action_dimension_count": 6,
+        "maximum_action_dimension_count": 32,
+        "padded_action_dimension_count": 26,
+        "stochastic_padded_dimensions_enter_action_projection": true,
+        "padded_dimensions_receive_direct_loss": false,
+        "sampler_classification": "matched_standard_normal_sampler_with_unsupervised_padded_noise_exposure",
+        "selected_next_hypothesis": "run_separately_reviewed_active_vs_padded_noise_mask_discriminator",
+        "gate_b_passed": false,
+        "model_imported": false,
+        "model_loaded": false,
+        "model_inference": false,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "checkpoint_read": false,
+        "checkpoint_mutated": false,
+        "dataset_read": false,
+        "dataset_mutated": false,
+        "closed_loop_rollout": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false,
+        "simulation_policy_accepted": false,
+        "physical_transfer_ready": false,
+        "promotion_eligible": false
+      },
+      "authority_granted": ["t20_35k_sampler_noise_distribution_audit_verified","t20_35l_active_padded_noise_mask_discriminator_routed"],
+      "authority_not_granted": ["simulation_model_load","model_inference_executed","sampler_mutation","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.35l": {
+      "state": "in_progress",
+      "depends_on": ["T20.35k"],
+      "active_brief_id": "178",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_commit": "06b3a0af419ecd802fc949cc344a453c3a925410",
+      "source_commit": "357cd6ea9d89fc52734fdf5bf269439d22dcda9f",
       "implementation_commits": [],
-      "result": "Brief 177 opens a model-free exact-source audit of PI0.5 training/inference noise semantics and six active versus 26 padded action dimensions",
-      "authority_granted": ["static_sampler_source_audit_authorized"],
-      "authority_not_granted": ["simulation_model_load","model_inference_executed","sampler_mutation","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "result": "Brief 178 opens one separately reviewed inference-only active-six versus padded-26 initial-noise mask discriminator",
+      "authority_granted": ["t20_35l_preflight_implementation_authorized"],
+      "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

@@ -279,6 +279,15 @@ exact scale-1 baseline reproduced. Scale 0.5 reduced worst/mean/spread from
 gate. Brief 177 opens T20.35k as a model-free sampler/noise-distribution audit
 of the exact active PI0.5 source, including the six active versus 26 padded
 action dimensions. Gate B and Gate C remain closed.
+T20.35k is now `verified` through audit `bc9f0845...`, implementation
+`357cd6e`, and Reviewer Decision 215. The exact active runtime uses the same
+standard-normal sampler for training and inference, with the expected affine
+Beta training-time contract and 10-step Euler path. It also pads six supervised
+actions to 32, injects stochastic noise into all 32 through the shared action
+projection, and truncates direct loss and returned actions to six. This is an
+exposure mechanism, not causal proof. Brief 178 opens T20.35l to evaluate only
+the two mixed active-six/padded-26 noise masks while reusing T20.35j's signed
+all-normal and all-zero endpoints. No optimizer or Gate C authority exists.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

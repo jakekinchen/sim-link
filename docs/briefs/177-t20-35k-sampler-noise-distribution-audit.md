@@ -53,3 +53,11 @@ Deterministic tests cover exact source hashes, AST semantics, dimensional
 arithmetic, route selection, malformed/non-finite inputs, signed identity, and
 all forbidden truth flags. Writer verification must reproduce the checked-in
 report under both configured Python runtimes before same-agent review.
+
+## Result Boundary
+
+Audit `bc9f0845...`, preserved at `357cd6e`, verifies a matched standard-normal
+training/inference sampler plus 26 stochastic padded dimensions that enter the
+shared action projection without direct output loss. Reviewer 215 routes only
+the separately reviewed T20.35l active-versus-padded noise-mask discriminator.
+The audit itself does not claim causality, pass Gate B, or authorize Gate C.
