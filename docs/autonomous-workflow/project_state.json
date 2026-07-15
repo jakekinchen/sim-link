@@ -2861,7 +2861,31 @@
       "authority_granted": ["t20_35b_pi05_coverage_semantics_corrected"],
       "authority_not_granted": ["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
-    "T20.35c": {"state":"in_progress","depends_on":["T20.35b"],"active_brief_id":"169","latest_verified_brief_id":null,"review_decision_id":null,"result":"in-progress no-LoRA expert-only capacity-ceiling probe on the frozen T20.33 batch; exact PaliGemma-frozen and Gemma-expert-plus-real-projections trainable boundary must be implemented, tested, centrally authorized, reviewed, and remotely preserved before one counted attempt","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
+    "T20.35c": {
+      "state": "in_progress",
+      "depends_on": ["T20.35b"],
+      "active_brief_id": "169",
+      "latest_verified_brief_id": null,
+      "review_decision_id": "202",
+      "result": "authorized pre-run no-LoRA expert-only Gate B capacity ceiling on the frozen T20.33 batch; no model or optimizer has run",
+      "pre_run_artifact": {
+        "implementation_commit": "82614ecb2c37587b2cff62abf43a2f0672e3c44a",
+        "training_spec_path": "configurations/robot_lab/t20_35c_expert_only_training_spec.json",
+        "training_spec_identity_sha256": "6c10a1c7ad1f901c8afd5452669a0f0ca845d9395fa75de8e84139b706e92309",
+        "coverage_correction_identity_sha256": "446a06860663be438b3dc1c87e4d2571a9cd4866b1d16feaa1e279e06cfe10f6",
+        "authority_decision_path": "configurations/robot_lab/t20_35c_simulation_training_authority_decision.json",
+        "authority_decision_identity_sha256": "75dc9c7d860e12e2a2114be709e24f7e544ff576696a3d223dd87dd0e2f06606",
+        "exactly_one_run_permitted": true,
+        "optimizer_training_executed": false,
+        "model_loaded": false,
+        "closed_loop_rollout": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["simulation_training_ready"],
+      "authority_not_granted": ["optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],

@@ -171,6 +171,12 @@ intentionally has no `state_proj`; its real modules are action in/out plus
 so both real time-MLP layers are genuinely uncovered. The next safe
 discriminator remains a separately authorized no-LoRA expert-only unfreeze
 capacity ceiling, now grounded in the actual PI0.5 module tree.
+Brief 169's T20.35c pre-run implementation is remotely preserved at `82614ec`
+and accepted by Reviewer 202. Spec `6c10a1c7...` preserves the exact T20.33
+batch, learning rate, 500 updates, seeds, processors, and gates while replacing
+PEFT with a PaliGemma-frozen, complete-expert-plus-real-projections trainable
+boundary. Central decision `75dc9c7d...` grants exactly one local-MPS attempt;
+no model load or optimizer occurred at the pre-run boundary.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

@@ -61,3 +61,16 @@ Any PEFT or LoRA configuration; changing learning rate, update budget, batch,
 seed, processor, target, or gate; retry; continuation; Gate C work; campaign;
 closed-loop rollout; promotion; hardware; external compute; Brev; or global
 authority change.
+
+## Pre-Run Boundary
+
+Implementation `82614ecb2c37587b2cff62abf43a2f0672e3c44a` is preserved on
+origin. The mechanically derived expert-only specification is
+`6c10a1c7ad1f901c8afd5452669a0f0ca845d9395fa75de8e84139b706e92309`;
+the central training-only decision is
+`75dc9c7d860e12e2a2114be709e24f7e544ff576696a3d223dd87dd0e2f06606`.
+Reviewer 202 accepts exactly one local-MPS run after this review is preserved
+and remotely confirmed. The runner writes an immutable attempt marker before
+model construction, rejects any PEFT/PaliGemma trainability or incomplete
+expert/time-MLP boundary, and binds every saved trainable tensor's name, shape,
+dtype, and element count. No model load or optimizer occurred at this boundary.

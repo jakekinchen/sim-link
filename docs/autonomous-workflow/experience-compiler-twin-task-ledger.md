@@ -5,7 +5,7 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T15:27:47-05:00; no new major slice after 2026-07-15T14:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35
-run_state: T20.35c is in progress under Brief 169 for one no-LoRA expert-only capacity-ceiling probe; no model construction or optimizer is authorized before its tested central decision and pre-run review are preserved on origin.
+run_state: T20.35c pre-run implementation 82614ec, signed expert-only specification 6c10a1c7..., and central training-only decision 75dc9c7d... are remotely preserved and accepted by Reviewer 202; no model or optimizer has run.
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.35c in progress under Brief 169 for an exact PaliGemma-frozen, Gemma-expert-plus-real-projections trainable capacity ceiling on the frozen T20.33 batch
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
@@ -13,7 +13,7 @@ evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: implement tests and fail-closed expert-only spec, authority, runner, and result composition; preserve and review the complete pre-run boundary before any model or optimizer
+next_step: confirm Reviewer 202 on origin, consume the immutable one-run marker, execute exactly 500 local-MPS expert-only updates, compose the signed result, and adjudicate Gate B once
 ```
 
 ## Rules
@@ -125,6 +125,17 @@ projections must be the only trainable parameters. A new signed central
 training-only decision and same-agent pre-run review must be remotely preserved
 before a signed one-attempt marker permits model construction. Retry, Gate C,
 hardware, external compute, and Brev remain closed.
+
+## 2026-07-15 - T20.35c expert-only pre-run boundary accepted
+
+Implementation `82614ec` derives expert-only spec `6c10a1c7...` from the frozen
+T20.33 contract and binds corrected audit `446a0686...`. Central decision
+`75dc9c7d...` grants only `simulation_training_ready` through the current hard
+closeout. Sixty-nine relevant tests pass. Reviewer 202 confirms that the
+runner rejects PEFT, any trainable PaliGemma parameter, incomplete Gemma/action/
+time-MLP coverage, non-finite values, checkpoint drift, and forbidden
+authority. Its immutable attempt marker precedes model construction. Exactly
+one local-MPS run is next; no model or optimizer has run.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
