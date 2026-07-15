@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "182",
-    "commit": "7dba33e96123f5f5a600348b31b0b17d7b1e4ffa",
-    "reviewer_decision_id": "224",
-    "summary": "signed_result_cde1347f_passes_correction_and_original_objective"
+    "brief_id": "183",
+    "commit": "21ced86c8f3e45ed9754f5cddfe66b9960d6220a",
+    "reviewer_decision_id": "226",
+    "summary": "signed_result_6ba4954c_reproduces_all_five_t20_35p"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35q",
-  "next_eligible_task": "T20.35q",
+  "current_task": "T20.35r",
+  "next_eligible_task": "T20.35r",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -3632,15 +3632,15 @@
       "authority_not_granted": ["gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35q": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.35p"],
-      "active_brief_id": "183",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
+      "active_brief_id": null,
+      "latest_verified_brief_id": "183",
+      "review_decision_id": "226",
       "pre_run_review_decision_id": "225",
       "source_commit": "7dba33e",
       "implementation_commits": ["fbc1087"],
-      "result": "pre-run verified under Reviewer 225: five exact post-training paths will be compared against T20.35o and the target flow under one Python 3.12 local-MPS inference-only permit",
+      "result": "signed result 6ba4954c reproduces all five T20.35p endpoints, worsens active target residual at step 0, and materially leaves the source path by step 2; T20.35r is routed",
       "pre_run": {
         "spec_path": "configurations/robot_lab/t20_35q_post_training_trajectory_spec.json",
         "spec_identity_sha256": "fdb2fe3e4cbc70a87d09d297ded8fa64fc8d6caa4b94818af435d94b0945f05d",
@@ -3661,8 +3661,50 @@
         "external_compute_started": false,
         "brev_compute_started": false
       },
-      "authority_granted": ["t20_35q_one_python_3_12_local_mps_inference_path_audit_authorized"],
-      "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "artifact": {
+        "path": "configurations/robot_lab/t20_35q_post_training_trajectory_result.json",
+        "schema_version": "scenesmith.t20_35q_post_training_trajectory_result.v1",
+        "identity_sha256": "6ba4954cd850abe69cf0de838740dab3b976ca277cb08360ec2e29ec0011f40b",
+        "file_sha256": "a73fffb61c70e4812a8868b087c262be2625549251378966a69132c0f55e78ac",
+        "size_bytes": 5789898,
+        "attempt_identity_sha256": "57d0f2ece0b2c34034386b0afbfc10affd9ae007fb5433e61e2ceca1f8ac2d13",
+        "earliest_material_active_target_residual_worsening_step": 0,
+        "earliest_material_path_displacement_step": 2,
+        "maximum_active_state_displacement_mean_absolute": 0.07806055127324847,
+        "maximum_padded_state_displacement_mean_absolute": 0.06089450504165143,
+        "path_interference_classification": "early_mid_path_interference",
+        "gate_b_passed": false,
+        "selected_next_hypothesis": "design_full_path_self_consistency_correction",
+        "model_loaded": true,
+        "model_inference": true,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "checkpoint_read": true,
+        "checkpoint_mutated": false,
+        "dataset_mutated": false,
+        "closed_loop_rollout": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false,
+        "simulation_policy_accepted": false,
+        "physical_transfer_ready": false,
+        "promotion_eligible": false
+      },
+      "authority_granted": ["t20_35q_early_mid_path_interference_verified","t20_35r_full_path_self_consistency_correction_routed"],
+      "authority_not_granted": ["optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.35r": {
+      "state": "in_progress",
+      "depends_on": ["T20.35q"],
+      "active_brief_id": "184",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "pre_run_review_decision_id": null,
+      "source_commit": "21ced86c8f3e45ed9754f5cddfe66b9960d6220a",
+      "implementation_commits": [],
+      "result": "Brief 184 opened for one separately reviewed 50-state full-path self-consistency correction; no model load or optimizer creation is authorized yet",
+      "authority_granted": ["t20_35r_preflight_implementation_authorized"],
+      "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_creation","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

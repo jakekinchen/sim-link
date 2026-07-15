@@ -58,3 +58,15 @@ verifier, 0.01 material thresholds, classification precedence, and 40 passing
 relevant tests. No model, checkpoint tensor, inference, optimizer, training,
 rollout, Gate C, hardware, external compute, or Brev action occurred before
 authorization.
+
+## Result
+
+The sole consumed attempt `57d0f2ec...` reproduced all five T20.35p decoded
+endpoints and produced signed result `6ba4954c...`, remotely preserved at
+`21ced86`. The corrected field worsens mean active target residual by
+`0.067819` at step 0 and materially leaves the source path by step 2. Maximum
+active state displacement is `0.078061`, larger than the padded maximum
+`0.060895`, so padded-state coupling is not selected. Reviewer 226 verifies
+early/mid-path interference, keeps Gate B and Gate C closed, and opens
+T20.35r under Brief 184 for one separately reviewed full-path
+self-consistency correction.
