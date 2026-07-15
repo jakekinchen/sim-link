@@ -56,3 +56,15 @@ inference-only audit. Nineteen relevant tests, exact spec verification, and
 the Python 3.12 model-free preflight pass. No T20.35u checkpoint tensor access,
 model construction, inference, optimizer, rollout, hardware, external
 compute, or Brev action occurred before authorization.
+
+## Result
+
+Attempt `179092b9...` was consumed once and failed closed while importing
+LeRobot's dataset surface because the isolated Python 3.12 environment lacked
+the `datasets` package. The failure occurred before checkpoint tensor access,
+model construction, or inference; no result was emitted, the checkpoint tree
+remains `aeef380b...`, and the attempt marker is retained. Signed failure
+`0abd9650...` is preserved at `5700fb0`. Reviewer 233 closes T20.35u without a
+retry and routes distinct T20.35v only after a dependency-complete runtime
+preflight. Gate B and Gate C remain closed. No optimizer, rollout, hardware,
+external compute, or Brev action occurred.

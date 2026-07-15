@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "186",
-    "commit": "41238dec9bef2dffb76d2d1a1952a536b73d9488",
-    "reviewer_decision_id": "231",
-    "summary": "signed_result_f63ee934_passes_raw_correction_and_original"
+    "brief_id": "187",
+    "commit": "5700fb016e49e915f74fd8c3fa28cfbb7f756233",
+    "reviewer_decision_id": "233",
+    "summary": "attempt_179092b9_was_consumed_and_failed_before_checkpoint"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35u",
-  "next_eligible_task": "T20.35u",
+  "current_task": "T20.35v",
+  "next_eligible_task": "T20.35v",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -3854,15 +3854,15 @@
       "authority_not_granted": ["gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35u": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.35t"],
-      "active_brief_id": "187",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
+      "active_brief_id": null,
+      "latest_verified_brief_id": "187",
+      "review_decision_id": "233",
       "pre_run_review_decision_id": "232",
       "source_commit": "41238dec9bef2dffb76d2d1a1952a536b73d9488",
       "implementation_commits": ["5c99e79d8d59e77453e3986f9c3f5b52a5f44a41"],
-      "result": "pre-run verified under Reviewer 232: one Python 3.12 local-MPS inference-only balanced-checkpoint trajectory audit is authorized",
+      "result": "attempt 179092b9 was consumed and failed before checkpoint access because the exact Python 3.12 runtime lacked datasets; signed failure 0abd9650 routes distinct T20.35v without retry",
       "pre_run": {
         "spec_path": "configurations/robot_lab/t20_35u_post_training_trajectory_spec.json",
         "spec_identity_sha256": "2575861c116db18ba096b91398ac7acea5dbcc53ee7261fff24f3bf9473674df",
@@ -3884,8 +3884,40 @@
         "external_compute_started": false,
         "brev_compute_started": false
       },
-      "authority_granted": ["t20_35u_one_python_3_12_local_mps_inference_only_evaluation_attempt_authorized"],
-      "authority_not_granted": ["optimizer_creation","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "artifact": {
+        "path": "configurations/robot_lab/t20_35u_runtime_dependency_failure.json",
+        "schema_version": "scenesmith.t20_35u_runtime_dependency_failure.v1",
+        "identity_sha256": "0abd9650caa36206e6b2b8a1dc4c89d773107ada1c062677520089beadc0d208",
+        "file_sha256": "50c35635cc39cce6c0a8678917cb7097b9ebed0a0feba64543273656f3a2adc7",
+        "size_bytes": 1694,
+        "attempt_identity_sha256": "179092b97c91b37d69d4578f9f1c81a0a5f73c309c7e684df0454d6ce709ef81",
+        "failure_phase": "lerobot_dataset_dependency_import_before_checkpoint_access",
+        "missing_package": "datasets",
+        "model_loaded": false,
+        "model_inference": false,
+        "checkpoint_read": false,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "gate_b_passed": false,
+        "gate_c_opened": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["t20_35u_runtime_dependency_failure_verified","t20_35v_dependency_complete_runtime_preflight_routed"],
+      "authority_not_granted": ["t20_35u_retry","model_loaded","model_inference_executed","checkpoint_read","optimizer_creation","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.35v": {
+      "state": "in_progress",
+      "depends_on": ["T20.35u"],
+      "active_brief_id": "188",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "source_commit": "5700fb016e49e915f74fd8c3fa28cfbb7f756233",
+      "implementation_commits": [],
+      "result": "Brief 188 opens dependency-complete runtime-preflight design and tests; no inference permit is active",
+      "authority_granted": ["t20_35v_design_and_test_only"],
+      "authority_not_granted": ["model_loaded","model_inference_executed","checkpoint_read","optimizer_creation","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",
