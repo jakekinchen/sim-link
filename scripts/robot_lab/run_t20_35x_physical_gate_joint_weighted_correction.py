@@ -7,6 +7,7 @@ import argparse
 import copy
 import gc
 import hashlib
+import importlib.metadata
 import os
 import random
 import sys
@@ -139,6 +140,44 @@ def main() -> int:
         != spec["sampler_source_sha256"]
     ):
         raise ValueError("T20.35x sampler source drifted")
+
+    os.environ.update(
+        {
+            "HF_HUB_OFFLINE": "1",
+            "TRANSFORMERS_OFFLINE": "1",
+            "TOKENIZERS_PARALLELISM": "false",
+            "PYTORCH_ENABLE_MPS_FALLBACK": "1",
+        }
+    )
+    stack = activate_lerobot_stack(repo_root=REPO_ROOT, stage="training")
+    if stack["identity_sha256"] != spec["lerobot_stack_identity_sha256"]:
+        raise ValueError("T20.35x live LeRobot stack drifted")
+    import datasets  # noqa: F401
+    import lerobot.policies.pi05.processor_pi05  # noqa: F401
+    import pyarrow  # noqa: F401
+    import safetensors  # noqa: F401
+    import torch
+    import transformers  # noqa: F401
+    from lerobot.configs import PreTrainedConfig
+    from lerobot.datasets import LeRobotDataset
+    from lerobot.datasets.dataset_metadata import LeRobotDatasetMetadata
+    from lerobot.datasets.factory import resolve_delta_timestamps
+    from lerobot.policies import make_policy, make_pre_post_processors
+    from lerobot.utils.constants import (
+        OBS_LANGUAGE_ATTENTION_MASK,
+        OBS_LANGUAGE_TOKENS,
+    )
+    from safetensors.torch import load_file, save_file
+    from torch.utils.data import default_collate
+
+    dependency_versions = {
+        package: importlib.metadata.version(package)
+        for package in spec["required_dependency_versions"]
+    }
+    if dependency_versions != spec["required_dependency_versions"]:
+        raise RuntimeError("T20.35x live dependency versions drifted before attempt")
+    if not torch.backends.mps.is_available():
+        raise RuntimeError("T20.35x requires the authorized local MPS runtime")
     if args.preflight:
         if RUN_ROOT.exists():
             raise FileExistsError("T20.35x run root already exists")
@@ -207,33 +246,6 @@ def main() -> int:
     )
     dump_canonical_json(ATTEMPT_PATH, attempt)
 
-    os.environ.update(
-        {
-            "HF_HUB_OFFLINE": "1",
-            "TRANSFORMERS_OFFLINE": "1",
-            "TOKENIZERS_PARALLELISM": "false",
-            "PYTORCH_ENABLE_MPS_FALLBACK": "1",
-        }
-    )
-    stack = activate_lerobot_stack(repo_root=REPO_ROOT, stage="training")
-    if stack["identity_sha256"] != spec["lerobot_stack_identity_sha256"]:
-        raise ValueError("T20.35x live LeRobot stack drifted")
-    import torch
-    import lerobot.policies.pi05.processor_pi05  # noqa: F401
-    from lerobot.configs import PreTrainedConfig
-    from lerobot.utils.constants import (
-        OBS_LANGUAGE_ATTENTION_MASK,
-        OBS_LANGUAGE_TOKENS,
-    )
-    from lerobot.datasets import LeRobotDataset
-    from lerobot.datasets.dataset_metadata import LeRobotDatasetMetadata
-    from lerobot.datasets.factory import resolve_delta_timestamps
-    from lerobot.policies import make_policy, make_pre_post_processors
-    from safetensors.torch import load_file, save_file
-    from torch.utils.data import default_collate
-
-    if not torch.backends.mps.is_available():
-        raise RuntimeError("T20.35x requires the authorized local MPS runtime")
     source_checkpoint_config = _verify_source_checkpoint_config(
         load_strict_json(REPO_ROOT / SOURCE_CHECKPOINT_CONFIG_PATH),
         summary=sources["source_run"],
