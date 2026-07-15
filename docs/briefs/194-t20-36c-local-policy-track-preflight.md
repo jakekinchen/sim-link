@@ -45,3 +45,13 @@ Emit one deterministic signed report that records:
 No downloads, model/checkpoint load, inference, optimizer, training, policy
 selection, Gate B amendment, Gate C, hardware, camera, serial, external
 compute, A100, or Brev.
+
+## Result Boundary
+
+Signed report `61fcf124...`, preserved at implementation commit `139fe32`,
+verifies local metadata readiness only. ACT has prior MPS execution evidence
+and exact-control design prerequisites, but its cached candidate is not
+drop-in compatible. SmolVLA's base/VLM cache metadata is complete, but the
+cached processor expects three cameras and SmolVLA MPS runtime remains
+unverified. No checkpoint tensor was opened. Reviewer 243 verifies Brief 194
+and routes only the exact ACT Gate B control design in Brief 195.
