@@ -5,15 +5,15 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T23:27:47-05:00; no new major slice after 2026-07-15T22:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35, evening extension recorded 2026-07-15T10:20:00-05:00 for the MVP demo composition
-run_state: T20.35j pre-run implementation ed05689, spec a3dc0acb..., permit 545a71c6..., and Reviewer 213 authorize exactly one Python 3.12 local-MPS inference-only scale-1.0/0.5/0.0 evaluation after remote confirmation.
+run_state: T20.35j result e9bbff84... is remotely preserved at 06b3a0a and reviewed by Decision 214 as directionally positive but Gate-B-negative; T20.35k static sampler/noise-distribution audit is open under Brief 177.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.35j in progress under Brief 176 for a separately reviewed inference-only initial-noise-scale discriminator
+current_task: T20.35k in progress under Brief 177 for a model-free active-runtime sampler and padded-action noise audit
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: after remote confirmation, consume the sole T20.35j permit, require exact scale-1 baseline and identical base-noise hashes across scales, sign one result, and stop before Gate C or optimizer work
+next_step: bind the exact active PI0.5 model/config source, mechanically audit training and inference noise contracts plus active-versus-padded action dimensions, and route only the smallest separately reviewed discriminator justified by the signed report
 ```
 
 ## Rules
@@ -341,6 +341,32 @@ scale, records its hash, and fails unless hashes agree across scales. Reviewer
 remote preservation. Five focused and 86 relevant tests pass. No model,
 checkpoint tensor, inference, optimizer, mutation, rollout, Gate C, hardware,
 external compute, or Brev action occurred at this boundary.
+
+## 2026-07-15 - T20.35j initial-noise scale discriminator verified positive non-pass
+
+The one consumed attempt `61eca0ab...` produced signed result `e9bbff84...`,
+preserved at `06b3a0a`. Scale 1.0 exactly reproduced all five baseline action
+hashes and recorded identical per-seed base-noise hashes across scales. Scale
+0.5 improved worst maximum, aggregate mean, and raw cross-seed spread from
+`0.150321`/`0.030990`/`0.046392` rad to
+`0.084120`/`0.024630`/`0.018129`; scale 0.0 improved them to
+`0.073360`/`0.024130`/`0.0`. Both candidates remain above the 0.05-rad action
+gate, so Gate B and Gate C stay closed. Reviewer 214 routes T20.35k to a
+model-free sampler/noise-distribution audit. The signed verifier, 38 relevant
+tests, and 6 subtests pass under Python 3.12. No optimizer, training, mutation,
+rollout, hardware, external compute, or Brev action occurred.
+
+## 2026-07-15 - Brief 177 opens T20.35k sampler/noise-distribution audit
+
+T20.35k binds the exact active runtime model/config source and T20.35j result,
+then mechanically extracts the standard-normal sampler, training interpolation
+and velocity target, inference initial state and Euler time grid, action padding,
+and loss truncation semantics without importing or loading the model. The audit
+must distinguish the six supervised action dimensions from the 26 padded
+dimensions that enter the action projection. It may route a separately reviewed
+active-versus-padded noise-mask discriminator, but cannot call a model, change a
+sampler, pass Gate B, enter Gate C, create an optimizer, or grant broader
+authority.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 

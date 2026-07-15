@@ -270,6 +270,15 @@ configured Python runtimes. Exactly one Python 3.12 local-MPS model-load and
 inference attempt is authorized after remote confirmation. No model,
 checkpoint tensor, inference, optimizer, mutation, or rollout has occurred at
 this boundary.
+T20.35j is now `verified` directionally positive but Gate-B-negative through
+result `e9bbff84...`, result commit `06b3a0a`, and Reviewer Decision 214. The
+exact scale-1 baseline reproduced. Scale 0.5 reduced worst/mean/spread from
+`0.150321`/`0.030990`/`0.046392` rad to
+`0.084120`/`0.024630`/`0.018129`; scale 0.0 reduced them to
+`0.073360`/`0.024130`/`0.0`, but neither candidate met the 0.05-rad action
+gate. Brief 177 opens T20.35k as a model-free sampler/noise-distribution audit
+of the exact active PI0.5 source, including the six active versus 26 padded
+action dimensions. Gate B and Gate C remain closed.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

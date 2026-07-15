@@ -70,3 +70,13 @@ seed across all scales and requires exact scale-1 action hashes. Five focused
 and 86 relevant tests pass; spec/permit verification agrees under Python 3.11
 and 3.12. No model, checkpoint tensor, inference, optimizer, mutation, rollout,
 Gate C, hardware, external compute, or Brev action occurred at this boundary.
+
+## Result Boundary
+
+The one consumed attempt `61eca0ab...` produced result `e9bbff84...`, preserved
+at `06b3a0a`. Scale 1.0 reproduced all five baseline hashes. Scale 0.5 reduced
+worst/mean/spread to `0.084120`/`0.024630`/`0.018129` rad, and scale 0.0 reduced
+them to `0.073360`/`0.024130`/`0.0`; neither met the 0.05-rad action gate.
+Reviewer 214 accepts a directionally positive non-pass and routes only the
+model-free T20.35k sampler/noise-distribution audit. Gate B and Gate C remain
+closed.
