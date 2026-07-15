@@ -19,7 +19,8 @@ chunks, using only signed T20.35v trajectories and immutable target evidence.
 Without loading a model or checkpoint, recompute every seed/action-index/joint
 absolute error. Report per-seed and aggregate exceedance counts, maximum and
 mean errors by action index and joint, concentration of squared error mass,
-the exact worst cells, and corresponding final normalized-state residuals.
+the exact worst cells, and corresponding last-captured time-0.1 normalized-state
+residuals.
 Classify the failure as sparse time/coordinate outliers, joint-dominant,
 time-band-dominant, or distributed using explicit signed thresholds. Route at
 most one smallest simulation-only correction hypothesis.
