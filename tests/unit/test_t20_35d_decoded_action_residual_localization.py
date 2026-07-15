@@ -89,6 +89,20 @@ class T2035DDecodedActionResidualLocalizationTests(unittest.TestCase):
                     replay_chunks=drift,
                 )
 
+    def test_report_verification_tolerates_only_sub_femtoscale_derived_float_drift(self) -> None:
+        target = self._target()
+        chunks = self._chunks(target)
+        report, spec, permit = self._report(target, chunks)
+
+        tolerated = copy.deepcopy(report)
+        tolerated["per_joint_summary"][0]["mean_absolute_error_rad"] = 5e-16
+        verify_report(sign_payload(tolerated), spec=spec, permit=permit)
+
+        rejected = copy.deepcopy(report)
+        rejected["per_joint_summary"][0]["mean_absolute_error_rad"] = 2e-15
+        with self.assertRaisesRegex(ValueError, "drifted from replay evidence"):
+            verify_report(sign_payload(rejected), spec=spec, permit=permit)
+
     def test_permit_cannot_add_optimizer_or_external_authority(self) -> None:
         target = self._target()
         chunks = self._chunks(target)

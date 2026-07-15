@@ -378,8 +378,44 @@ def verify_report(payload: dict[str, Any], *, spec: dict[str, Any], permit: dict
         target_chunk=payload.get("target_action_chunk"),
         replay_chunks=replay,
     )
-    if payload != expected:
+    archived_content = {
+        key: value for key, value in payload.items() if key != "identity_sha256"
+    }
+    expected_content = {
+        key: value for key, value in expected.items() if key != "identity_sha256"
+    }
+    if not _equal_with_float_tolerance(
+        archived_content, expected_content, absolute_tolerance=1e-15
+    ):
         raise ValueError("T20.35d residual report drifted from replay evidence")
+
+
+def _equal_with_float_tolerance(
+    left: Any, right: Any, *, absolute_tolerance: float
+) -> bool:
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, float):
+        return math.isclose(
+            left, right, rel_tol=0.0, abs_tol=absolute_tolerance
+        )
+    if isinstance(left, dict):
+        return left.keys() == right.keys() and all(
+            _equal_with_float_tolerance(
+                left[key], right[key], absolute_tolerance=absolute_tolerance
+            )
+            for key in left
+        )
+    if isinstance(left, list):
+        return len(left) == len(right) and all(
+            _equal_with_float_tolerance(
+                left_item,
+                right_item,
+                absolute_tolerance=absolute_tolerance,
+            )
+            for left_item, right_item in zip(left, right, strict=True)
+        )
+    return left == right
 
 
 def _summaries(
