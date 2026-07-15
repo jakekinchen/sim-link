@@ -4,6 +4,8 @@ import type {
   EpisodesResponse,
   StatusResponse,
   TasksResponse,
+  WorkcellArrangementSpec,
+  WorkcellManifest,
   WorkcellsResponse,
 } from './types'
 
@@ -32,6 +34,25 @@ async function getJson<T>(url: string, signal?: AbortSignal): Promise<T> {
   return (await res.json()) as T
 }
 
+async function postJson<T>(url: string, body: unknown): Promise<T> {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) {
+    let detail = res.statusText
+    try {
+      const payload = await res.json()
+      if (payload && typeof payload.detail === 'string') detail = payload.detail
+    } catch {
+      /* non-JSON error body */
+    }
+    throw new ApiError(res.status, url, detail)
+  }
+  return (await res.json()) as T
+}
+
 export const api = {
   status: (signal?: AbortSignal) => getJson<StatusResponse>('/api/status', signal),
   episodes: (signal?: AbortSignal) => getJson<EpisodesResponse>('/api/episodes', signal),
@@ -39,6 +60,8 @@ export const api = {
     getJson<EpisodeDetail>(`/api/episodes/${id}`, signal),
   workcells: (signal?: AbortSignal) => getJson<WorkcellsResponse>('/api/workcells', signal),
   tasks: (signal?: AbortSignal) => getJson<TasksResponse>('/api/tasks', signal),
+  buildWorkcell: (spec: WorkcellArrangementSpec) =>
+    postJson<WorkcellManifest>('/api/actions/build-workcell', spec),
 }
 
 /** URL for a whitelisted media file (mirror mp4, workcell preview png). */

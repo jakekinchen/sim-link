@@ -131,6 +131,33 @@ export interface WorkcellsResponse {
   workcells: WorkcellManifest[]
 }
 
+export type WorkcellColor = 'red' | 'blue' | 'green' | 'yellow' | 'purple' | 'orange'
+
+export interface WorkcellCubeSpec {
+  name: string
+  color: WorkcellColor
+  position_m: [number, number, number]
+  side_length_m?: number
+  mass_kg?: number
+}
+
+export interface WorkcellTraySpec {
+  name: string
+  color: WorkcellColor
+  center_m: [number, number, number]
+  size_m?: [number, number, number]
+}
+
+export interface WorkcellArrangementSpec {
+  schema_version: 'scenesmith.workcell_arrangement_spec.v1'
+  scene_id: string
+  description?: string
+  task_prompt: string
+  success_metric?: string
+  trays: WorkcellTraySpec[]
+  cubes: WorkcellCubeSpec[]
+}
+
 export interface ResultGate {
   schema_version: string
   decision?: string
