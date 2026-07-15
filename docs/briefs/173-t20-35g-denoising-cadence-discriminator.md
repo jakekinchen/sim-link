@@ -47,3 +47,11 @@ initial-noise seeds.
 Optimizer; training; checkpoint or dataset mutation; normalization or output
 correction; additional cadence values; closed-loop execution; Gate C; rollout;
 hardware; external compute; Brev; transfer; promotion; or policy acceptance.
+
+## Pre-Run Boundary
+
+Implementation `88602b0` freezes signed spec `be1c50f3...` and one-use permit
+`ca3dbd3f...`. Four focused and 88 relevant tests pass. Reviewer 208 accepts
+one local-MPS model-load/inference attempt over cadences 10, 20, and 50 after
+remote preservation; no optimizer, training, mutation, rollout, Gate C,
+hardware, external-compute, or Brev authority exists.

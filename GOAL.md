@@ -208,6 +208,13 @@ clip and neither channel hits a physical bound. Systematic bias explains
 seed variance. T20.35g is therefore next as a separately reviewed,
 inference-only denoising-cadence discriminator against the pinned 10-step
 default; no new training or Gate C work is justified yet.
+Brief 173's T20.35g pre-run implementation is remotely preservation-ready at
+`88602b0` and accepted by Reviewer 208. Spec `be1c50f3...` and one-use permit
+`ca3dbd3f...` freeze the expert-only checkpoint, exact batch, five seeds, and
+10/20/50-step comparison. The 10-step row must reproduce all prior hashes
+before candidate interpretation. This boundary authorizes one local-MPS
+load/inference attempt only; no optimizer, mutation, rollout, or Gate C work
+has occurred.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
