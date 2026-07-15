@@ -170,6 +170,24 @@ def _resolve_episode(episode_id: str) -> tuple[str, Path]:
     return kind, path
 
 
+# NOTE: registered before episode_detail — the detail route's {episode_id:path}
+# converter is greedy and would otherwise swallow /frame/{index}/{view} URLs.
+@app.get("/api/episodes/{episode_id:path}/frame/{index}/{view}")
+def episode_frame(episode_id: str, index: int, view: str) -> Response:
+    kind, path = _resolve_episode(episode_id)
+    if kind != "expert" or view not in {"top", "wrist"}:
+        raise HTTPException(404, "Frame images exist only for expert episodes")
+    frames = _read_json(path).get("frames", [])
+    if not 0 <= index < len(frames):
+        raise HTTPException(404, "Frame index out of range")
+    record = frames[index].get("observations", {}).get(view)
+    if not record or record.get("encoding") != "png":
+        raise HTTPException(404, "No PNG observation for this view")
+    return Response(
+        content=base64.b64decode(record["png_base64"]), media_type="image/png"
+    )
+
+
 @app.get("/api/episodes/{episode_id:path}")
 def episode_detail(episode_id: str) -> dict[str, Any]:
     kind, path = _resolve_episode(episode_id)
@@ -213,22 +231,6 @@ def episode_detail(episode_id: str) -> dict[str, Any]:
         }
     )
     return detail
-
-
-@app.get("/api/episodes/{episode_id:path}/frame/{index}/{view}")
-def episode_frame(episode_id: str, index: int, view: str) -> Response:
-    kind, path = _resolve_episode(episode_id)
-    if kind != "expert" or view not in {"top", "wrist"}:
-        raise HTTPException(404, "Frame images exist only for expert episodes")
-    frames = _read_json(path).get("frames", [])
-    if not 0 <= index < len(frames):
-        raise HTTPException(404, "Frame index out of range")
-    record = frames[index].get("observations", {}).get(view)
-    if not record or record.get("encoding") != "png":
-        raise HTTPException(404, "No PNG observation for this view")
-    return Response(
-        content=base64.b64decode(record["png_base64"]), media_type="image/png"
-    )
 
 
 @app.get("/api/workcells")
