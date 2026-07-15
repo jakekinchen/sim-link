@@ -61,3 +61,13 @@ addition to the targeted correction diagnostic. Reviewer 223 authorizes one
 Python 3.12 local-MPS training/evaluation attempt. No model, checkpoint tensor,
 optimizer, training, rollout, Gate C, hardware, external compute, or Brev
 action occurred before authorization.
+
+## Result
+
+The sole attempt `31be48e4...` produced run `283c5745...`, checkpoint
+`9358cee4...`, and signed result `cde1347f...`, remotely preserved at
+`7dba33e`. Correction and original-objective ratios pass at `0.044154` and
+`0.046483`, but decoded maximum errors worsen to `0.127310–0.157144` rad.
+Reviewer 224 verifies objective-pass/action-fail, keeps Gate B and Gate C
+closed, rejects another training run, and opens T20.35q under Brief 183 for one
+post-training trajectory audit.
