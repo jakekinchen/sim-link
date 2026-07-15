@@ -112,6 +112,10 @@ within that file use clean nominal values. Central composition grants exactly
 Brief 162 opens T20.31 for the exact same-seed 500-update local-MPS campaign
 and one frozen unassisted strict-v2 evaluation each on held-out seeds 6 and 7.
 No policy is accepted or promoted by the brief.
+T20.31 is now `verified` negative through Reviewer Decision 192: 500 finite
+updates reduced loss from 1.544 to 0.413, but both frozen held-out policies made
+zero strict contact and achieved 0/2 strict successes. The no-new-major-slice
+cutoff has passed; no further optimizer or diagnostic slice is opened.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

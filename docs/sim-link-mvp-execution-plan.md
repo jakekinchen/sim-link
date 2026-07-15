@@ -191,6 +191,12 @@ Brief 162 now activates T20.31 for exactly 500 local-MPS updates with the
 T20.30 dataset/specification and frozen unassisted seed-6/7 evaluation. Its
 result must be recorded whether positive or negative; policy acceptance stays
 false pending a separate promotion decision.
+T20.31 is verified through `151c6ee` by Reviewer Decision 192. The checkpoint
+contains the intended clean action quantiles and 500 finite updates, but both
+244-frame held-out evaluations ended with no strict grasp contact and 0/2
+successes. The ablation changes action sequences without rescuing closed-loop
+behavior. Further training is not justified before offline trajectory
+localization, and the current run cutoff prevents opening that next slice now.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
