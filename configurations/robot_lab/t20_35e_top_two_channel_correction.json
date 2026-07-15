@@ -1,0 +1,113 @@
+{
+  "boundary_concentration_threshold": 0.6,
+  "boundary_exceedance_fraction": 0.09289617486338798,
+  "brev_compute_started": false,
+  "checkpoint_mutated": false,
+  "checkpoint_read": false,
+  "closed_loop_rollout": false,
+  "corrected_residual_classification": "multi_joint_output_channel_concentrated",
+  "external_compute_started": false,
+  "identity_sha256": "f2a8aa8089467b019310d24152f417d7987de0880d9664f3ef1184818a2ddea3",
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_training": false,
+  "original_residual_classification": "distributed_decoding_residual",
+  "original_selected_next_hypothesis": "inspect_decoder_sampling_or_action_gate_calibration",
+  "per_joint_exceedance_counts": [
+    {
+      "joint_index": 0,
+      "joint_name": "shoulder_pan",
+      "threshold_exceedance_count": 0
+    },
+    {
+      "joint_index": 1,
+      "joint_name": "shoulder_lift",
+      "threshold_exceedance_count": 29
+    },
+    {
+      "joint_index": 2,
+      "joint_name": "elbow_flex",
+      "threshold_exceedance_count": 0
+    },
+    {
+      "joint_index": 3,
+      "joint_name": "wrist_flex",
+      "threshold_exceedance_count": 52
+    },
+    {
+      "joint_index": 4,
+      "joint_name": "wrist_roll",
+      "threshold_exceedance_count": 164
+    },
+    {
+      "joint_index": 5,
+      "joint_name": "gripper",
+      "threshold_exceedance_count": 121
+    }
+  ],
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "ranked_joint_exceedance_counts": [
+    {
+      "joint_index": 4,
+      "joint_name": "wrist_roll",
+      "threshold_exceedance_count": 164
+    },
+    {
+      "joint_index": 5,
+      "joint_name": "gripper",
+      "threshold_exceedance_count": 121
+    },
+    {
+      "joint_index": 3,
+      "joint_name": "wrist_flex",
+      "threshold_exceedance_count": 52
+    },
+    {
+      "joint_index": 1,
+      "joint_name": "shoulder_lift",
+      "threshold_exceedance_count": 29
+    },
+    {
+      "joint_index": 0,
+      "joint_name": "shoulder_pan",
+      "threshold_exceedance_count": 0
+    },
+    {
+      "joint_index": 2,
+      "joint_name": "elbow_flex",
+      "threshold_exceedance_count": 0
+    }
+  ],
+  "schema_version": "scenesmith.t20_35e_top_two_channel_correction.v1",
+  "scope": "model_free_top_two_channel_residual_semantic_correction",
+  "selected_next_hypothesis": "audit_normalized_space_residual_and_target_saturation_for_top_channels",
+  "simulation_policy_accepted": false,
+  "single_joint_concentration_threshold": 0.5,
+  "source_report_mutated": false,
+  "source_t20_35d_report_identity_sha256": "13b08e70a805a8b176b9f9a7c0e37843f7267d7918f82aeb523551e2dadf1fbe",
+  "task_id": "T20.35e",
+  "threshold_exceedance_count": 366,
+  "top_one_channel": {
+    "joint_index": 4,
+    "joint_name": "wrist_roll",
+    "threshold_exceedance_count": 164
+  },
+  "top_one_channel_fraction": 0.44808743169398907,
+  "top_two_channel_concentration_threshold": 0.75,
+  "top_two_channel_exceedance_count": 285,
+  "top_two_channel_exceedance_fraction": 0.7786885245901639,
+  "top_two_channels": [
+    {
+      "joint_index": 4,
+      "joint_name": "wrist_roll",
+      "threshold_exceedance_count": 164
+    },
+    {
+      "joint_index": 5,
+      "joint_name": "gripper",
+      "threshold_exceedance_count": 121
+    }
+  ]
+}
