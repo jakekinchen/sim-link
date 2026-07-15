@@ -1,0 +1,57 @@
+{
+  "baseline_loss": 1.544,
+  "brev_compute_started": false,
+  "candidate_two_seed_strict_success": false,
+  "checkpoint_action_quantiles_match_t20_30": true,
+  "decision": "candidate_failed_two_seed_strict_v2",
+  "external_compute_started": false,
+  "final_loss": 0.413,
+  "held_out_results": [
+    {
+      "active_assist_frame_count": 0,
+      "evaluation_ref": {
+        "file_sha256": "b96af8bcdd0ae61e0be9463847c2a8ec790e84a56c40ea8f274cbc03fe13614b",
+        "identity_sha256": "168d911adc8cfcd144851040c302794063ae3264931e5a424062d7c06a3da314",
+        "path": "outputs/robot_lab/t20_31_nominal_action_quantile_run_001/held_out_seed_6_closed_loop.json",
+        "schema_version": "scenesmith.t20_31_nominal_action_quantile_closed_loop.v1"
+      },
+      "frame_count": 244,
+      "maximum_anchor_lift_m": 1.4435518985722595e-07,
+      "projected_action_frame_count": 0,
+      "seed": 6,
+      "simulation_semantic_strict_success": false,
+      "terminal_outcome": "no_strict_grasp_contact"
+    },
+    {
+      "active_assist_frame_count": 0,
+      "evaluation_ref": {
+        "file_sha256": "f06209a0b7639f8660e31d4f0bca19eb0d5c702370001996a97c211089848f66",
+        "identity_sha256": "384b9ea58b0166c052f56472c742cbec660249413318a9fda257d29371f14cca",
+        "path": "outputs/robot_lab/t20_31_nominal_action_quantile_run_001/held_out_seed_7_closed_loop.json",
+        "schema_version": "scenesmith.t20_31_nominal_action_quantile_closed_loop.v1"
+      },
+      "frame_count": 244,
+      "maximum_anchor_lift_m": 1.4322435304414682e-07,
+      "projected_action_frame_count": 0,
+      "seed": 7,
+      "simulation_semantic_strict_success": false,
+      "terminal_outcome": "no_strict_grasp_contact"
+    }
+  ],
+  "held_out_seed_count": 2,
+  "identity_sha256": "b43473aa0409b30b18b6b8a3d5a8ad4480604065a873f79680bf347a52074be4",
+  "minimum_loss": 0.02,
+  "optimizer_update_count": 500,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_31_nominal_action_quantile_result.v1",
+  "simulation_policy_accepted": false,
+  "strict_success_count": 0,
+  "training_ref": {
+    "file_sha256": "5c80bc5ee69029406a31d630398dd437b4eee89984a7f9a4cf5bb41a1b383c8f",
+    "identity_sha256": "d8fcc218c7ad96d9df69b8c847b72f9a4a37ae7f5377048184bf39455dbe98b2",
+    "path": "outputs/robot_lab/t20_31_nominal_action_quantile_run_001/run_summary.json",
+    "schema_version": "scenesmith.t20_31_nominal_action_quantile_run.v1"
+  }
+}
