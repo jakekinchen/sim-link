@@ -178,6 +178,11 @@ by 0.11301 rad versus the observed 0.11094 rad regression, leaving a -0.00208
 rad accounting residual. This is a postprocessor-only counterfactual, not full
 training causality. A separately reviewed nominal-quantile-freezing ablation is
 next; no optimizer is opened by this result.
+Brief 161 opens T20.30 for the tests-first preflight of that ablation. It must
+prove every dataset byte except `meta/stats.json` is unchanged, replace only
+action q01/q99 with clean nominal values, bind the same sampler seed and
+500-update budget, and obtain a fresh central simulation-only training decision
+before T20.31 may load a model or optimizer.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
