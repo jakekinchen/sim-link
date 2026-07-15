@@ -257,6 +257,12 @@ below their concentration gates. Seventy-six unique positions have failures
 and raw decoded spread reaches `0.183018` rad. The result is distributed and
 routes T20.35j to one separately reviewed inference-only initial-noise-scale
 discriminator; Gate B remains closed.
+Brief 176 opens T20.35j. It freezes initial-noise scales `1.0`, `0.5`, and
+`0.0`, the existing 10 denoising steps, exact expert-only checkpoint/batch,
+five seeds, source sampler hash, baseline hashes, and unchanged 0.05-rad Gate B
+threshold. Scale 1.0 must reproduce before candidates count. A separate
+pre-run review and remote-preserved one-use permit are required before one
+local-MPS inference-only attempt; no optimizer or Gate C authority exists.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

@@ -3264,6 +3264,37 @@
       "authority_granted": ["t20_35i_distributed_seed_channel_variance_verified","t20_35j_initial_noise_scale_discriminator_routed"],
       "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
+    "T20.35j": {
+      "state": "in_progress",
+      "depends_on": ["T20.35i"],
+      "active_brief_id": "176",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "pre_run_review_decision_id": null,
+      "source_commit": "aa15de85ed6c35b888f43db29cc665c17ed6ff0e",
+      "implementation_commits": [],
+      "result": "in progress before model access: freeze and review one inference-only initial-noise-scale discriminator at scales 1.0, 0.5, and 0.0 with exact baseline reproduction",
+      "pre_run": {
+        "initial_noise_scales": [1.0,0.5,0.0],
+        "num_inference_steps": 10,
+        "inference_seeds": [20260721,20260722,20260723,20260724,20260725],
+        "baseline_exact_hash_reproduction_required": true,
+        "one_evaluation_attempt_authorized": false,
+        "model_loaded": false,
+        "model_inference": false,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "checkpoint_read": false,
+        "checkpoint_mutated": false,
+        "dataset_mutated": false,
+        "closed_loop_rollout": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["t20_35j_pre_run_implementation_only"],
+      "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],
