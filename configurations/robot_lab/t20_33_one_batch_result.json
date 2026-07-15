@@ -1,0 +1,62 @@
+{
+  "all_decoded_chunks_within_threshold": false,
+  "authority_decision_identity_sha256": "ff3ac3c99eb71f4774976f02c8ae7d3d17827451f4c738c2ceaddf3545db5348",
+  "baseline_objective_mean": 0.9590791046619416,
+  "brev_compute_started": false,
+  "closed_loop_rollout": false,
+  "dataset_mutated": false,
+  "decision": "gate_b_fail",
+  "decoded_action_chunks": [
+    {
+      "decoded_action_chunk_sha256": "dfecc6d6531a20bacffa63d6ae3e16c0eafa81eaaf4a00fc4638415c79c6e14b",
+      "inference_seed": 20260721,
+      "maximum_absolute_error_rad": 0.8693916010174575,
+      "mean_absolute_error_rad": 0.3709931187132794
+    },
+    {
+      "decoded_action_chunk_sha256": "8f0974226d2d210718b614097d0f9362ed4460d2beaf133ed195602413575737",
+      "inference_seed": 20260722,
+      "maximum_absolute_error_rad": 0.8437073763849471,
+      "mean_absolute_error_rad": 0.43381314756495765
+    },
+    {
+      "decoded_action_chunk_sha256": "b94795f4fb549d660829c4f6f50323265e088a960b5417f4c9594977afcbd2d8",
+      "inference_seed": 20260723,
+      "maximum_absolute_error_rad": 1.2420954362252712,
+      "mean_absolute_error_rad": 0.393906905979269
+    },
+    {
+      "decoded_action_chunk_sha256": "eed32ba4e81fe4be6028d5664b7318709f4bb726bdddd8ce07c7f8e7a8dedf22",
+      "inference_seed": 20260724,
+      "maximum_absolute_error_rad": 1.2506473458282201,
+      "mean_absolute_error_rad": 0.4146863713196974
+    },
+    {
+      "decoded_action_chunk_sha256": "5071e261a3eeedbd0b685d1f8314360e831c00f5fbe93ac6b028946bbb9ee6e4",
+      "inference_seed": 20260725,
+      "maximum_absolute_error_rad": 0.8870086113654133,
+      "mean_absolute_error_rad": 0.4377853867236931
+    }
+  ],
+  "external_compute_started": false,
+  "final_objective_mean": 0.5066317349672318,
+  "final_to_baseline_objective_ratio": 0.5282481210408713,
+  "gate_b_one_batch_memorization_passed": false,
+  "identity_sha256": "27cd2be30916234e5eff18eb350449a47b648a9baf0a48e8fe50eb74dc2138ee",
+  "maximum_allowed_action_error_rad": 0.05,
+  "maximum_allowed_objective_ratio": 0.1,
+  "objective_ratio_within_threshold": false,
+  "optimizer_training": true,
+  "optimizer_update_count": 500,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "run_identity_sha256": "718a1c7cc272732012589159a1796fc76c1308d0ea521a3283682bb0f0fb5aa2",
+  "schema_version": "scenesmith.t20_33_one_batch_result.v1",
+  "selected_next_hypothesis": "gate_b_model_or_trainer_plumbing",
+  "simulation_policy_accepted": false,
+  "statistics_changed": false,
+  "task_id": "T20.33",
+  "training_spec_identity_sha256": "3fa3098c816b228a6687e952cb8444c77344e49877b17cfc5d1afdc32e6e685a",
+  "twin_updated": false
+}
