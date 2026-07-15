@@ -12,7 +12,7 @@
   "authorized_attempt_count": 1,
   "brev_compute_authorized": false,
   "external_compute_authorized": false,
-  "identity_sha256": "93bcddf437e6859fc935ef1603df9092dde506ddb47ba21e082ac8a8a2e5e281",
+  "identity_sha256": "f8f998d27fc23ed0d481549fbf6826cfbf72029cc811ff1fc809413b4b5ba6ae",
   "issued_at": "2026-07-15T07:27:47-05:00",
   "ordered_gate_enforcement_required": true,
   "physical_transfer_authorized": false,
@@ -21,8 +21,8 @@
   "scope_id": "pi05_so101_authority",
   "simulation_only": true,
   "source_training_spec_ref": {
-    "file_sha256": "44b39d6918a6bf12ac44acd8d58c1ab906a6f8b9790e0cbf844bc65a9685baf2",
-    "identity_sha256": "ed52299acd9b03314b55c0d19c5f707612a93e5ab11909317cc15175edb8061d",
+    "file_sha256": "8d0b826ab48b9528870747ec1297362f6bf319a53548ff04214a0df96eef211f",
+    "identity_sha256": "522a1e5a871613640eb24ba8334f24dad98c027f13a9e52b861ca56afdb19cfb",
     "path": "configurations/robot_lab/t20_36_bounded_corrected_coverage_training_spec.json",
     "schema_version": "scenesmith.t20_36_bounded_corrected_coverage_spec.v1"
   },

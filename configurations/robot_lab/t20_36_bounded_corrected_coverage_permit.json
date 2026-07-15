@@ -1,5 +1,5 @@
 {
-  "authority_decision_identity_sha256": "d46a79f5e9f295cc1788031dc4f480eaf2770a1a309c36c7bb268426889a5882",
+  "authority_decision_identity_sha256": "25e63103c523148be0b63f6bd495d4e8eb1a7d23db6770d5204b300513f4c3f5",
   "authorized_actions": [
     "simulation_model_load",
     "simulation_model_inference",
@@ -12,18 +12,18 @@
   "checkpoint_tensor_read": false,
   "closed_loop_rollout": false,
   "external_compute_started": false,
-  "identity_sha256": "d0231541f8a0dd05f2baf12462c6df1b9ea74f33d7add6e629f1632aa8291b4c",
+  "identity_sha256": "68d9042d6f95c3ce92abbcf860fd78a0980bdaf5d12f6a986c1dbfa38563a43e",
   "model_inference": false,
   "model_loaded": false,
   "optimizer_created": false,
   "optimizer_training": false,
   "ordered_gate_enforcement_required": true,
   "physical_actuation": false,
-  "runtime_preflight_identity_sha256": "7ad6098ab6c6f56313b612a76b1918de1f58626b0daf12f878fa70fb8beae627",
+  "runtime_preflight_identity_sha256": "04f2ce564965c094a1d3da1e77d99570f5b956fca84b5273687e948e416bb6a7",
   "schema_version": "scenesmith.t20_36_bounded_corrected_coverage_permit.v1",
   "simulation_only": true,
   "source_checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
   "task_id": "T20.36",
-  "training_spec_identity_sha256": "ed52299acd9b03314b55c0d19c5f707612a93e5ab11909317cc15175edb8061d",
+  "training_spec_identity_sha256": "522a1e5a871613640eb24ba8334f24dad98c027f13a9e52b861ca56afdb19cfb",
   "valid_until": "2026-07-15T23:27:47-05:00"
 }

@@ -10,6 +10,7 @@ import hashlib
 import importlib.metadata
 import os
 import random
+import shutil
 import subprocess
 import sys
 
@@ -190,6 +191,12 @@ def main() -> int:
         raise RuntimeError("T20.36 live dependency versions drifted before attempt")
     if not torch.backends.mps.is_available():
         raise RuntimeError("T20.36 requires the authorized local MPS runtime")
+    if (
+        not args.verify
+        and shutil.disk_usage(REPO_ROOT).free
+        < spec["minimum_free_disk_bytes_before_attempt"]
+    ):
+        raise RuntimeError("T20.36 free disk fell below the pre-attempt minimum")
     if args.preflight:
         if RUN_ROOT_ABS.exists() or (REPO_ROOT / RESULT_PATH).exists():
             raise FileExistsError("T20.36 run or result already exists")

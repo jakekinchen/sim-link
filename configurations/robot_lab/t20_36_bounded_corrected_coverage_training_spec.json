@@ -1591,7 +1591,8 @@
     "maximum_objective_ratio": 0.1,
     "source_gate_baseline_objective_mean": 0.9590791046619416
   },
-  "identity_sha256": "ed52299acd9b03314b55c0d19c5f707612a93e5ab11909317cc15175edb8061d",
+  "identity_sha256": "522a1e5a871613640eb24ba8334f24dad98c027f13a9e52b861ca56afdb19cfb",
+  "minimum_free_disk_bytes_before_attempt": 6442450944,
   "model_inference": false,
   "model_loaded": false,
   "one_run_permit_required": true,

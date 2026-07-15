@@ -8,6 +8,7 @@ import importlib.metadata
 import subprocess
 import sys
 import tempfile
+import shutil
 
 from pathlib import Path
 
@@ -126,6 +127,7 @@ def main() -> int:
         lerobot_stack_identity_sha256=stack["identity_sha256"],
         ffmpeg_version=ffmpeg,
         render_smoke_verified=render_smoke_verified,
+        free_disk_bytes=shutil.disk_usage(REPO_ROOT).free,
         source_checkpoint_tree_verified=(
             file_tree(REPO_ROOT / X_CHECKPOINT_ROOT)
             == spec["source_gate_b"]["checkpoint_tree"]

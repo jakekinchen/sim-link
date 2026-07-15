@@ -113,6 +113,7 @@ EXPECTED_DEPENDENCY_VERSIONS = {
     "Pillow": "12.3.0",
 }
 OPTIMIZER_UPDATES = 500
+MINIMUM_FREE_DISK_BYTES = 6 * 1024 * 1024 * 1024
 TRAINING_SEED = 20260719
 STANDARD_FLOW_SEED_BASE = 20264719
 EVALUATION_SEEDS = tuple(ALL_SEEDS)
@@ -301,6 +302,7 @@ def build_training_spec(
                 EXPECTED_DEPENDENCY_VERSIONS
             ),
             "runtime_dependency_preflight_required": True,
+            "minimum_free_disk_bytes_before_attempt": MINIMUM_FREE_DISK_BYTES,
             "one_run_permit_required": True,
             "authorized_actions": [
                 "simulation_model_load",
@@ -342,6 +344,7 @@ def build_runtime_preflight(
     lerobot_stack_identity_sha256: str,
     ffmpeg_version: str,
     render_smoke_verified: bool,
+    free_disk_bytes: int,
     source_checkpoint_tree_verified: bool,
     coverage_dataset_tree_verified: bool,
     attempt_exists: bool,
@@ -356,6 +359,9 @@ def build_runtime_preflight(
         or mps_available is not True
         or ffmpeg_version != spec["render_runtime"]["ffmpeg_version"]
         or render_smoke_verified is not True
+        or isinstance(free_disk_bytes, bool)
+        or not isinstance(free_disk_bytes, int)
+        or free_disk_bytes < spec["minimum_free_disk_bytes_before_attempt"]
         or source_checkpoint_tree_verified is not True
         or coverage_dataset_tree_verified is not True
         or attempt_exists is not False
@@ -377,6 +383,10 @@ def build_runtime_preflight(
             "lerobot_stack_identity_sha256": lerobot_stack_identity_sha256,
             "ffmpeg_version": ffmpeg_version,
             "render_smoke_verified": render_smoke_verified,
+            "free_disk_bytes": free_disk_bytes,
+            "minimum_free_disk_bytes": spec[
+                "minimum_free_disk_bytes_before_attempt"
+            ],
             "python_major_minor": python_major_minor,
             "dependency_versions": dependency_versions,
             "mps_available": mps_available,
@@ -412,6 +422,7 @@ def verify_runtime_preflight(
         ),
         ffmpeg_version=payload.get("ffmpeg_version"),
         render_smoke_verified=payload.get("render_smoke_verified"),
+        free_disk_bytes=payload.get("free_disk_bytes"),
         source_checkpoint_tree_verified=payload.get(
             "source_checkpoint_tree_verified"
         ),
