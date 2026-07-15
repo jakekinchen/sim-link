@@ -1,0 +1,36 @@
+{
+  "attempt_exists": false,
+  "authority_decision_identity_sha256": "a3a4eee706162dfa3df88ad3fc20a23e4487a432592c2e1d454ab3dd56340b1a",
+  "brev_compute_started": false,
+  "checkpoint_identity_sha256": "aeef380be01c5d63b7f87cb5e32a72ef6d34822ab9628e6ab447c716bc2e9191",
+  "checkpoint_mutated": false,
+  "checkpoint_tensor_read": false,
+  "checkpoint_tree_verified": true,
+  "closed_loop_rollout": false,
+  "dataset_mutated": false,
+  "dependency_versions": {
+    "datasets": "4.8.5",
+    "lerobot": "0.6.1",
+    "pyarrow": "25.0.0",
+    "safetensors": "0.8.0",
+    "torch": "2.11.0",
+    "transformers": "5.5.4"
+  },
+  "external_compute_started": false,
+  "identity_sha256": "292a5b10c66b208bf87947840639be5b4ea5e7cb575e91d5c3331df7e1c041b9",
+  "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "model_inference": false,
+  "model_loaded": false,
+  "mps_available": true,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "python_major_minor": [
+    3,
+    12
+  ],
+  "result_exists": false,
+  "schema_version": "scenesmith.t20_35x_runtime_dependency_preflight.v1",
+  "task_id": "T20.35x",
+  "training_spec_identity_sha256": "96efc6d35115126268684c91346b7388077342c573e458b7e708e98714113cfd"
+}

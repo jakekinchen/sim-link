@@ -1,0 +1,27 @@
+{
+  "authorization_id": "t20_35x_physical_gate_joint_weighted_consistency_grant",
+  "authorization_scope": "t20_35x_simulation_only_physical_gate_joint_weighted_correction",
+  "authorization_source": "owner_resume_existing_sim_link_mvp_goal_loop_2026_07_15",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training"
+  ],
+  "brev_compute_authorized": false,
+  "external_compute_authorized": false,
+  "identity_sha256": "810fe7e6f19d6185b86974c0fb2f28eccab83073ca82a1ab97ec8f0522f941b8",
+  "issued_at": "2026-07-15T07:27:47-05:00",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "source_training_spec_ref": {
+    "file_sha256": "a404128fedd56529b039ec98031aee09073ba156e8cc6f89d3d9b075d5d77e77",
+    "identity_sha256": "96efc6d35115126268684c91346b7388077342c573e458b7e708e98714113cfd",
+    "path": "configurations/robot_lab/t20_35x_physical_gate_joint_weighted_training_spec.json",
+    "schema_version": "scenesmith.t20_35x_physical_gate_joint_weighted_training_spec.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}
