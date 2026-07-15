@@ -51,3 +51,13 @@ No network, weight/checkpoint tensor read, pretrained checkpoint reuse, model
 construction, inference, optimizer creation, training, attempt marker, ACT
 run, SmolVLA entry, policy selection, Gate B amendment, Gate C, rollout,
 hardware, camera, serial, external compute, A100, or Brev.
+
+## Result Boundary
+
+Signed spec `45c90dc0...`, preserved at implementation commit `b8b19cd`,
+binds the exact canonical batch/statistics, fresh compact ACT, 2,000-update
+ceiling, pre-registered evaluation schedule, deterministic repeats, unchanged
+Gate B conjunction, one-use attempt contract, and diagnostic-only routes.
+Reviewer 244 verifies Brief 195 and routes only the pre-run implementation and
+task-specific central authority path in Brief 196. No attempt or execution
+authority follows from the design artifact.

@@ -26,13 +26,14 @@ Narrative claims never override a closed or absent machine-readable grant.
 
 ## Active Boundary
 
-T20.36c report `61fcf124...`, remotely preserved at `139fe32`, verifies local
-metadata readiness only. ACT has prior MPS evidence but its cached candidate is
-not drop-in compatible; SmolVLA needs a two-camera override and still lacks MPS
-runtime proof. T20.36d is current under Brief 195. It may design and test only
-the exact ACT one-batch Gate B control specification. It may not download
-weights, read checkpoint tensors, load a model, run inference or an optimizer,
-select a policy track, execute a rollout, amend a gate, or authorize a run.
+T20.36d spec `45c90dc0...`, remotely preserved at `b8b19cd`, fixes the exact
+ACT diagnostic design and pre-registered checkpoint schedule. T20.36e is
+current under Brief 196. It may implement and test only the runner, immutable
+attempt/result contracts, dependency preflight, and task-specific central
+authority path. It may not create an attempt marker, download or read weights,
+construct or load a model, run inference or an optimizer, select a policy
+track, execute a rollout, amend a gate, or start the control before the complete
+pre-run boundary is reviewed and remotely preserved.
 
 The run remains simulation-only. Hardware, cameras, serial devices, physical
 motion, external compute, Brev, promotion, and physical-transfer authority are
@@ -66,10 +67,10 @@ Repeat while the run window and authority permit:
   coverage. T20.36b must encode actual standard-ratio plus five-seed physical
   maxima as the retention decision; proxy losses may be reported but never
   substitute for either Gate B conjunct.
-- T20.36c verifies that the smallest next discriminator is an exact ACT Gate B
-  control design. T20.36d may bind that pre-run contract only; model load,
-  optimizer creation, execution, and any later SmolVLA entry require separate
-  remotely preserved review and authority.
+- T20.36d fixes the exact ACT Gate B control design. T20.36e must preserve its
+  runner, attempt/result contracts, dependency proof, and task-specific central
+  authority before the sole attempt. A control pass routes only a separately
+  reviewed SmolVLA entry design; a fail routes shared-path diagnosis first.
 - Gate C opens only after Gate B is mechanically proven. A first learned
   closed-loop grasp must be labeled autonomous only when every action is policy
   owned and the strict-v2 evaluator passes.
