@@ -14,12 +14,14 @@ import os
 import re
 import subprocess
 
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 
 DOCUMENT_FILENAME = re.compile(r"[0-9]{3}-[A-Za-z0-9][A-Za-z0-9_-]{0,180}\.md")
 SHA256_HEX = re.compile(r"[0-9a-f]{64}")
+MAX_DOCUMENT_BYTES = 2_000_000
 
 
 class StudioServiceError(Exception):
@@ -55,6 +57,14 @@ class StudioService:
         self.gate_store = self.data_root / "configurations/robot_lab"
         self.reviewer_store = self.data_root / "docs/reviewer-messages"
         self.brief_store = self.data_root / "docs/briefs"
+        self.session_log_store = self.data_root / "docs/session-logs"
+        self.manager_log_store = self.data_root / "docs/manager-log"
+        self.document_stores = {
+            "briefs": self.brief_store,
+            "reviewer-messages": self.reviewer_store,
+            "session-logs": self.session_log_store,
+            "manager-log": self.manager_log_store,
+        }
         self.robot_artifacts = {
             "live_observation": self.gate_store
             / "pi05_live_readonly_observation.redacted.json",
@@ -93,8 +103,6 @@ class StudioService:
 
     def status(self) -> dict[str, Any]:
         state = self._read_json(self.project_state_path)
-        reviewers = sorted(self.reviewer_store.glob("*.md"))[-5:]
-        briefs = sorted(self.brief_store.glob("*.md"))[-5:]
         return {
             "data_root": str(self.data_root),
             "run_window": state.get("run_window"),
@@ -104,10 +112,151 @@ class StudioService:
                 "latest_verified_task_implementation_boundary"
             ),
             "ledger": self._ledger_front_matter(),
-            "recent_reviewer_decisions": [
-                item.name for item in reversed(reviewers)
-            ],
-            "recent_briefs": [item.name for item in reversed(briefs)],
+            "recent_reviewer_decisions": self._recent_document_names(
+                "reviewer-messages"
+            ),
+            "recent_briefs": self._recent_document_names("briefs"),
+            "recent_session_logs": self._recent_document_names("session-logs"),
+            "recent_manager_interventions": self._recent_document_names(
+                "manager-log"
+            ),
+        }
+
+    def _document_path(self, kind: str, filename: str) -> Path:
+        store = self.document_stores.get(kind)
+        if store is None:
+            raise StudioServiceError(404, "Unknown document kind")
+        if not DOCUMENT_FILENAME.fullmatch(filename):
+            raise StudioServiceError(400, "Malformed document filename")
+        resolved_store = store.resolve()
+        resolved = (store / filename).resolve()
+        if not resolved.is_relative_to(resolved_store) or not resolved.is_file():
+            raise StudioServiceError(404, "Document not found")
+        if resolved.stat().st_size > MAX_DOCUMENT_BYTES:
+            raise StudioServiceError(413, "Document is too large to inspect")
+        return resolved
+
+    def _recent_document_names(self, kind: str, limit: int = 5) -> list[str]:
+        store = self.document_stores[kind]
+        names = []
+        for path in sorted(store.glob("*.md"), reverse=True):
+            if not DOCUMENT_FILENAME.fullmatch(path.name):
+                continue
+            try:
+                self._document_path(kind, path.name)
+            except (OSError, StudioServiceError):
+                continue
+            names.append(path.name)
+            if len(names) == limit:
+                break
+        return names
+
+    @staticmethod
+    def _document_heading(content: str, filename: str) -> str:
+        for line in content.splitlines():
+            match = re.fullmatch(r"#\s+(.+)", line.strip())
+            if match:
+                return match.group(1).strip()[:240]
+        return filename.removesuffix(".md").replace("-", " ")
+
+    @staticmethod
+    def _document_field(content: str, label: str) -> str | None:
+        inline = re.search(
+            rf"^\*\*{re.escape(label)}:\*\*\s*(.+)$", content, re.MULTILINE
+        )
+        if inline:
+            return inline.group(1).strip().strip("`")[:500]
+        section = re.search(
+            rf"^##\s+{re.escape(label)}\s*$\n+(?:\s*\n)*(.+)$",
+            content,
+            re.MULTILINE,
+        )
+        if section:
+            return section.group(1).strip().strip("`")[:500]
+        return None
+
+    @staticmethod
+    def _observed_at(timestamp: float) -> str:
+        observed = datetime.fromtimestamp(timestamp, timezone.utc)
+        return observed.isoformat(timespec="seconds").replace("+00:00", "Z")
+
+    def events(self, limit: int = 200) -> dict[str, Any]:
+        """Index canonical workflow documents without assigning new authority."""
+
+        if (
+            isinstance(limit, bool)
+            or not isinstance(limit, int)
+            or not 1 <= limit <= 500
+        ):
+            raise StudioServiceError(400, "limit must be an integer from 1 to 500")
+        candidates: list[tuple[int, int, int, str, str, Path, float]] = []
+        for kind_order, (kind, store) in enumerate(self.document_stores.items()):
+            for candidate in store.glob("*.md"):
+                if not DOCUMENT_FILENAME.fullmatch(candidate.name):
+                    continue
+                try:
+                    path = self._document_path(kind, candidate.name)
+                    stat = path.stat()
+                except (OSError, StudioServiceError):
+                    continue
+                sequence = int(candidate.name[:3])
+                candidates.append(
+                    (
+                        stat.st_mtime_ns,
+                        kind_order,
+                        sequence,
+                        candidate.name,
+                        kind,
+                        path,
+                        stat.st_mtime,
+                    )
+                )
+        candidates.sort(
+            key=lambda item: (
+                item[0],
+                item[1],
+                item[2],
+                item[3],
+            ),
+            reverse=True,
+        )
+        events = []
+        for (
+            _,
+            _,
+            sequence,
+            filename,
+            kind,
+            path,
+            observed_timestamp,
+        ) in candidates:
+            try:
+                raw = path.read_bytes()
+                content = raw.decode("utf-8")
+            except (OSError, UnicodeDecodeError):
+                continue
+            events.append(
+                {
+                    "id": f"{kind}/{filename}",
+                    "kind": kind,
+                    "sequence": sequence,
+                    "filename": filename,
+                    "title": self._document_heading(content, filename),
+                    "decision": self._document_field(content, "Decision"),
+                    "recorded_date": self._document_field(content, "Date"),
+                    "source": str(path.relative_to(self.data_root)),
+                    "sha256": hashlib.sha256(raw).hexdigest(),
+                    "bytes": len(raw),
+                    "observed_at": self._observed_at(observed_timestamp),
+                }
+            )
+            if len(events) == limit:
+                break
+        return {
+            "count": len(events),
+            "total": len(candidates),
+            "time_basis": "filesystem_mtime_observation_not_evidence_time",
+            "events": events,
         }
 
     def _mirror_for(self, stem: str) -> str | None:
@@ -502,22 +651,23 @@ class StudioService:
             },
         }
 
-    def document(self, kind: str, filename: str) -> dict[str, str]:
-        store = {
-            "briefs": self.brief_store,
-            "reviewer-messages": self.reviewer_store,
-        }.get(kind)
-        if store is None:
-            raise StudioServiceError(404, "Unknown document kind")
-        if not DOCUMENT_FILENAME.fullmatch(filename):
-            raise StudioServiceError(400, "Malformed document filename")
-        document_path = store / filename
-        if not document_path.is_file():
-            raise StudioServiceError(404, "Document not found")
+    def document(self, kind: str, filename: str) -> dict[str, Any]:
+        document_path = self._document_path(kind, filename)
+        try:
+            raw = document_path.read_bytes()
+            content = raw.decode("utf-8")
+        except (OSError, UnicodeDecodeError) as error:
+            raise StudioServiceError(
+                503, "Document is not readable UTF-8"
+            ) from error
         return {
             "kind": kind,
             "filename": filename,
-            "content": document_path.read_text(encoding="utf-8"),
+            "content": content,
+            "source": str(document_path.relative_to(self.data_root)),
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "bytes": len(raw),
+            "observed_at": self._observed_at(document_path.stat().st_mtime),
         }
 
     def media_path(self, path: str) -> Path:

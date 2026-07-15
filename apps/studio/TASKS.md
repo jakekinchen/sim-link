@@ -17,6 +17,8 @@ in the same commit as the work.
 | ST10 | Three.js orbit viewer for compiled workcells | done | live lazy Three.js viewer: whitelisted XML, 14 boxes/2 cubes/2 trays, orbit/reset, canvas cleanup |
 | ST11 | Tauri wrap (native Mac shell) | done | signed `.app` verified: fixed loopback Python sidecar, live API/AX render, shutdown cleanup; webview has no shell capability |
 | ST12 | Episode compare: two mirrors side-by-side, synced scrub | done | live browser verified: distinct pickers, side-by-side mirrors, shared play/end, exact 4.2s dual scrub |
+| ST13 | Event Ledger & Inspector: canonical workflow timeline, provenance, filters, full-text source inspection | in_progress | fail-closed metadata registry and all four canonical document whitelists under implementation |
+| ST14 | Native shell lifecycle diagnostics: visible sidecar startup, health, logs, and exit state | pending | read-only diagnostics only; no new server mutation or native capability |
 
 Rules: never touch governed paths (see GOAL.md), never push to
 `codex/pi05-autolearn-loop`, commit small and often to `studio/app-shell`.

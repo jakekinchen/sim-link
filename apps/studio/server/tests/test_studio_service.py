@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import json
+import os
 import tempfile
 import unittest
 
@@ -28,8 +29,28 @@ class StudioServiceTests(unittest.TestCase):
         ledger.parent.mkdir(parents=True, exist_ok=True)
         ledger.write_text("```text\ntraining_lock: closed\nrun_state: fixture\n```\n")
         self._text("docs/reviewer-messages/001-old.md", "old")
-        self._text("docs/reviewer-messages/002-new.md", "new")
-        self._text("docs/briefs/003-brief.md", "brief")
+        self._text(
+            "docs/reviewer-messages/002-new.md",
+            "# Reviewer Decision 002 - Verify Fixture\n\n**Decision:** `PASS`\n",
+        )
+        self._text("docs/briefs/003-brief.md", "# Brief 003 - Fixture Slice\n")
+        self._text("docs/session-logs/004-run.md", "# Session Log 004 - Fixture Run\n")
+        self._text(
+            "docs/manager-log/005-intervention.md",
+            "# Manager Intervention 005 - Hold Fixture\n\n"
+            "**Date:** 2026-07-15\n\n## Decision\n\n`HOLD`\n",
+        )
+        for observed, relative_path in enumerate(
+            (
+                "docs/reviewer-messages/001-old.md",
+                "docs/reviewer-messages/002-new.md",
+                "docs/briefs/003-brief.md",
+                "docs/session-logs/004-run.md",
+                "docs/manager-log/005-intervention.md",
+            ),
+            start=1,
+        ):
+            os.utime(self.root / relative_path, (observed, observed))
         self._write(
             "outputs/robot_lab/t17_5b_raw_store/expert_a.json",
             {
@@ -194,6 +215,10 @@ class StudioServiceTests(unittest.TestCase):
         self.assertEqual(status["current_task"], "T-test")
         self.assertEqual(status["ledger"]["training_lock"], "closed")
         self.assertEqual(status["recent_reviewer_decisions"][0], "002-new.md")
+        self.assertEqual(status["recent_session_logs"][0], "004-run.md")
+        self.assertEqual(
+            status["recent_manager_interventions"][0], "005-intervention.md"
+        )
 
         episode_registry = self.service.episodes()
         self.assertEqual(episode_registry["count"], 2)
@@ -261,11 +286,16 @@ class StudioServiceTests(unittest.TestCase):
 
     def test_document_lookup_is_filename_only_and_whitelisted(self) -> None:
         document = self.service.document("briefs", "003-brief.md")
-        self.assertEqual(document["content"], "brief")
+        self.assertEqual(document["content"], "# Brief 003 - Fixture Slice\n")
         self.assertEqual(document["filename"], "003-brief.md")
+        self.assertEqual(document["source"], "docs/briefs/003-brief.md")
+        self.assertEqual(len(document["sha256"]), 64)
+
+        session_log = self.service.document("session-logs", "004-run.md")
+        self.assertEqual(session_log["kind"], "session-logs")
 
         cases = (
-            ("session-logs", "003-brief.md", 404),
+            ("unknown", "003-brief.md", 404),
             ("briefs", "../003-brief.md", 400),
             ("briefs", "/tmp/003-brief.md", 400),
             ("briefs", "003-missing.md", 404),
@@ -275,6 +305,45 @@ class StudioServiceTests(unittest.TestCase):
                 with self.assertRaises(StudioServiceError) as caught:
                     self.service.document(kind, filename)
                 self.assertEqual(caught.exception.status_code, expected_status)
+
+    def test_event_registry_is_bounded_source_faithful_and_fail_closed(self) -> None:
+        registry = self.service.events(limit=2)
+        self.assertEqual(registry["total"], 5)
+        self.assertEqual(registry["count"], 2)
+        self.assertEqual(
+            registry["time_basis"],
+            "filesystem_mtime_observation_not_evidence_time",
+        )
+        self.assertEqual(
+            [event["kind"] for event in registry["events"]],
+            ["manager-log", "session-logs"],
+        )
+        manager = registry["events"][0]
+        self.assertEqual(
+            manager["title"], "Manager Intervention 005 - Hold Fixture"
+        )
+        self.assertEqual(manager["decision"], "HOLD")
+        self.assertEqual(manager["recorded_date"], "2026-07-15")
+        self.assertEqual(manager["source"], "docs/manager-log/005-intervention.md")
+        self.assertEqual(len(manager["sha256"]), 64)
+
+        secret = self.root / "secret.md"
+        secret.write_text("outside whitelist", encoding="utf-8")
+        leak = self.root / "docs/briefs/006-leak.md"
+        leak.symlink_to(secret)
+        with self.assertRaises(StudioServiceError) as caught:
+            self.service.document("briefs", "006-leak.md")
+        self.assertEqual(caught.exception.status_code, 404)
+        self.assertNotIn(
+            "briefs/006-leak.md",
+            {event["id"] for event in self.service.events()["events"]},
+        )
+
+        for invalid_limit in (0, 501, True):
+            with self.subTest(limit=invalid_limit):
+                with self.assertRaises(StudioServiceError) as caught:
+                    self.service.events(invalid_limit)
+                self.assertEqual(caught.exception.status_code, 400)
 
 
 if __name__ == "__main__":

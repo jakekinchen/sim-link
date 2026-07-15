@@ -79,8 +79,13 @@ def robot() -> dict[str, Any]:
     return _http_call(service.robot)
 
 
+@app.get("/api/events")
+def events(limit: int = 200) -> dict[str, Any]:
+    return _http_call(service.events, limit)
+
+
 @app.get("/api/documents/{kind}/{filename}")
-def document(kind: str, filename: str) -> dict[str, str]:
+def document(kind: str, filename: str) -> dict[str, Any]:
     return _http_call(service.document, kind, filename)
 
 
