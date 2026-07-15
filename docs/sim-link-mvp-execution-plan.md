@@ -270,6 +270,35 @@ remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
 training-ready, posterior-calibration, or optimizer grant exists.
 
+## Tonight's MVP Demo Composition (owner directive 2026-07-15)
+
+The owner's demo target composes verified pieces; it adds no new authority and
+changes no gate. Stages 1-3 are available now; stages 4-6 activate the moment
+Gate B passes.
+
+1. **Declare → build:** `scripts/robot_lab/build_workcell_from_spec.py` turns a
+   compact arrangement JSON (`configurations/robot_lab/workcell_spec_example.json`)
+   into a compiled MuJoCo workcell with settle-stability checks and rendered
+   previews. A built workcell is a labelled fixture with no metric, training,
+   or promotion authority.
+2. **Episodes:** the geometry-derived expert and state-fork recovery machinery
+   generate labelled experience on the anchor workcell; PI0.5 closed-loop
+   rollouts on the same workcell are the policy-driven episodes. A scene-generic
+   PI0.5 rollout runner for newly declared workcells (reusing `CausalSortExpert`
+   scene semantics) is the first post-Gate-B tooling slice.
+3. **Watch:** builder previews plus `render_rollout_mirror.py` MP4s for every
+   trace; fold auto-render into each evaluation slice as already queued.
+4. **Train (after Gate B):** one bounded corrected-coverage campaign on the
+   frozen dataset, training seed before held-out, per T20.36.
+5. **Before/after proof:** the frozen base-versus-adapter evaluation pair on
+   identical seeds with strict-v2 outcomes, mirror videos, and one plain
+   scorecard in the campaign brief.
+6. **Agent in the loop:** the executor/reviewer loop is the multimodal agent —
+   it authors task/success specifications, curricula, and single-factor
+   branches, and consumes rendered evidence. For the imitation MVP it designs
+   success evaluators, never dense rewards; a reward compiler enters only with
+   RL, per the governing rules.
+
 ## Paused Integration Queue
 
 Robo Scan producer Brief 054 is committed and accepted at
