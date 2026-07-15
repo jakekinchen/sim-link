@@ -1,0 +1,69 @@
+{
+  "all_decoded_chunks_within_threshold": false,
+  "authority_decision_identity_sha256": "c69090da6c813810aaee6efd7d80c20bb5ae17158947fc4543bfab291564e5d0",
+  "baseline_correction_objective_mean": 0.08980261099835236,
+  "baseline_standard_objective_mean": 0.004078254057094455,
+  "brev_compute_started": false,
+  "checkpoint_mutated": false,
+  "closed_loop_rollout": false,
+  "correction_example_count": 15,
+  "correction_objective_ratio_within_target": true,
+  "dataset_mutated": false,
+  "decoded_action_chunks": [
+    {
+      "decoded_action_chunk_sha256": "c3461d7f41e8341f332e3217fc365c57eed621614dab0891f50f0c63934cc48e",
+      "inference_seed": 20260721,
+      "maximum_absolute_error_rad": 0.15522072959385746,
+      "mean_absolute_error_rad": 0.05004610553027504
+    },
+    {
+      "decoded_action_chunk_sha256": "e4c4969b8e4ba67d50a633ea5bed93d32e5e0df10b8b1296d0b9fd24fa1227bf",
+      "inference_seed": 20260722,
+      "maximum_absolute_error_rad": 0.13903356256866473,
+      "mean_absolute_error_rad": 0.04998027070682909
+    },
+    {
+      "decoded_action_chunk_sha256": "50b8c1bce9050a419d8ba6d8cd13ed76061dee7d25b54b86afa4616754bdc1d0",
+      "inference_seed": 20260723,
+      "maximum_absolute_error_rad": 0.13867733854522712,
+      "mean_absolute_error_rad": 0.045475972494869656
+    },
+    {
+      "decoded_action_chunk_sha256": "94c1c342a7ea9b0265a639fdc21dd81bfaf2b2962d1aa43ff87ae932eba3426b",
+      "inference_seed": 20260724,
+      "maximum_absolute_error_rad": 0.1273098081130981,
+      "mean_absolute_error_rad": 0.04158066224865894
+    },
+    {
+      "decoded_action_chunk_sha256": "5741e77fa76d19795915e1dd7eb977a9d3f62e9a765e86e55a7ea6d346659b5e",
+      "inference_seed": 20260725,
+      "maximum_absolute_error_rad": 0.1571436817037061,
+      "mean_absolute_error_rad": 0.044380150279760826
+    }
+  ],
+  "external_compute_started": false,
+  "final_correction_objective_mean": 0.003965125031148394,
+  "final_standard_objective_mean": 0.04458113312721253,
+  "final_to_baseline_correction_objective_ratio": 0.04415378335960792,
+  "final_to_source_gate_baseline_objective_ratio": 0.04648327016041767,
+  "gate_b_passed": false,
+  "identity_sha256": "cde1347f4afcb878a5cc0ebada2a14a197ba82ba6b45e7f40a574d841c64166b",
+  "maximum_allowed_action_error_rad": 0.05,
+  "maximum_allowed_objective_ratio": 0.1,
+  "objective_ratio_within_threshold": true,
+  "optimizer_training": true,
+  "optimizer_update_count": 450,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "run_identity_sha256": "283c57453474863a7154c4a71adfac2d80c2196d4c47ad4bc04f900e81a4d7f6",
+  "sampler_mutated": false,
+  "schema_version": "scenesmith.t20_35p_terminal_time_flow_consistency_result.v1",
+  "selected_next_hypothesis": "terminal_objective_pass_action_fail_route_post_training_trajectory_audit",
+  "simulation_policy_accepted": false,
+  "source_checkpoint_identity_sha256": "439ae119842fe5f9639b3e3e9b76f029678fd4b4257dfd6308253f6d2832c29f",
+  "statistics_changed": false,
+  "t20_35o_result_identity_sha256": "5c5b41b99d83b1e5116195bab551277d3b65126066717823342030b23391a582",
+  "task_id": "T20.35p",
+  "training_spec_identity_sha256": "fd4f75f68b9031d0089b402d3fda6ec8b467c3e8ef177f8d02aec418045a6476"
+}
