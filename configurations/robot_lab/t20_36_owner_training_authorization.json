@@ -1,0 +1,31 @@
+{
+  "authorization_id": "t20_36_bounded_corrected_coverage_campaign_grant",
+  "authorization_scope": "one_t20_36_simulation_only_bounded_corrected_coverage_campaign_with_ordered_conditional_evaluation",
+  "authorization_source": "owner_resumed_sim_link_goal_loop_and_pre_registered_gate_b_pass_to_gate_c_2026_07_15",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training",
+    "simulation_closed_loop_rollout_if_prior_gates_pass",
+    "diagnostic_mirror_render"
+  ],
+  "authorized_attempt_count": 1,
+  "brev_compute_authorized": false,
+  "external_compute_authorized": false,
+  "identity_sha256": "93bcddf437e6859fc935ef1603df9092dde506ddb47ba21e082ac8a8a2e5e281",
+  "issued_at": "2026-07-15T07:27:47-05:00",
+  "ordered_gate_enforcement_required": true,
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "source_training_spec_ref": {
+    "file_sha256": "44b39d6918a6bf12ac44acd8d58c1ab906a6f8b9790e0cbf844bc65a9685baf2",
+    "identity_sha256": "ed52299acd9b03314b55c0d19c5f707612a93e5ab11909317cc15175edb8061d",
+    "path": "configurations/robot_lab/t20_36_bounded_corrected_coverage_training_spec.json",
+    "schema_version": "scenesmith.t20_36_bounded_corrected_coverage_spec.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}

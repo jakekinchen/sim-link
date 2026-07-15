@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Render a signed closed-loop trace as a side-by-side policy/expert MP4.
 
-Kinematic playback of `scenesmith.t20_32_closed_loop_trace.v1` artifacts:
+Kinematic playback of signed T20.32 or T20.36 complete-trace artifacts:
 each frame poses the deterministic anchor-grasp scene at the recorded
 candidate joint positions and anchor position, renders a diagnostic side view
 plus the scene's top camera, and tiles them beside the exact recorded expert
@@ -34,6 +34,12 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
 from scenesmith.robot_lab.experience_records import JOINT_NAMES  # noqa: E402
+from scenesmith.robot_lab.artifact_contract import (  # noqa: E402
+    dump_canonical_json,
+    load_strict_json,
+    sign_payload,
+    verify_signed_payload,
+)
 from scenesmith.robot_lab.geometry_derived_grasp_primitives import (  # noqa: E402
     apply_explicit_pad_proxy_contact_model,
 )
@@ -51,6 +57,15 @@ from scenesmith.robot_lab.scripted_grasp_episode_generation import (  # noqa: E4
     EPISODE_SPECS,
     default_store_root,
 )
+from scenesmith.robot_lab.t20_32_closed_loop_divergence import (  # noqa: E402
+    verify_trace_payload as verify_t20_32_trace,
+    verify_threshold_contract,
+)
+from scenesmith.robot_lab.t20_36_bounded_corrected_coverage import (  # noqa: E402
+    THRESHOLD_PATH,
+    TRACE_SCHEMA_VERSION as T20_36_TRACE_SCHEMA_VERSION,
+    verify_trace as verify_t20_36_trace,
+)
 
 PANEL_SIZE = 512
 TEXT_BAR_HEIGHT = 56
@@ -60,8 +75,16 @@ OVERHEAD_CAMERA = "cam1_overhead"
 
 
 def _load_trace(path: Path) -> dict:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if payload.get("schema_version") != "scenesmith.t20_32_closed_loop_trace.v1":
+    payload = load_strict_json(path)
+    verify_signed_payload(payload, label="rollout mirror source trace")
+    threshold = load_strict_json(REPO_ROOT / THRESHOLD_PATH)
+    verify_threshold_contract(threshold)
+    schema = payload.get("schema_version")
+    if schema == "scenesmith.t20_32_closed_loop_trace.v1":
+        verify_t20_32_trace(payload, threshold=threshold)
+    elif schema == T20_36_TRACE_SCHEMA_VERSION:
+        verify_t20_36_trace(payload, threshold=threshold)
+    else:
         raise SystemExit(f"Unsupported trace schema: {payload.get('schema_version')}")
     return payload
 
@@ -257,7 +280,7 @@ def main() -> int:
         if encoder.wait() != 0:
             raise SystemExit("ffmpeg failed while encoding the mirror video")
 
-    manifest = {
+    manifest = sign_payload({
         "schema_version": "scenesmith.rollout_mirror_render.v1",
         "purpose": "diagnostic visualization of signed trace evidence; no authority",
         "trace_path": str(args.trace),
@@ -271,12 +294,10 @@ def main() -> int:
         "output_mp4": str(output),
         "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
         "output_bytes": output.stat().st_size,
-    }
+    })
     manifest_path = output.with_suffix(".manifest.json")
-    manifest_path.write_text(
-        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
-    print(json.dumps({"output": str(output), "frames": len(rows)}, indent=2))
+    dump_canonical_json(manifest_path, manifest)
+    print(output, len(rows), manifest["identity_sha256"])
     return 0
 
 

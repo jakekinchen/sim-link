@@ -1,0 +1,29 @@
+{
+  "authority_decision_identity_sha256": "d46a79f5e9f295cc1788031dc4f480eaf2770a1a309c36c7bb268426889a5882",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training",
+    "simulation_closed_loop_rollout_if_prior_gates_pass",
+    "diagnostic_mirror_render"
+  ],
+  "authorized_attempt_count": 1,
+  "brev_compute_started": false,
+  "checkpoint_tensor_read": false,
+  "closed_loop_rollout": false,
+  "external_compute_started": false,
+  "identity_sha256": "d0231541f8a0dd05f2baf12462c6df1b9ea74f33d7add6e629f1632aa8291b4c",
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "ordered_gate_enforcement_required": true,
+  "physical_actuation": false,
+  "runtime_preflight_identity_sha256": "7ad6098ab6c6f56313b612a76b1918de1f58626b0daf12f878fa70fb8beae627",
+  "schema_version": "scenesmith.t20_36_bounded_corrected_coverage_permit.v1",
+  "simulation_only": true,
+  "source_checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
+  "task_id": "T20.36",
+  "training_spec_identity_sha256": "ed52299acd9b03314b55c0d19c5f707612a93e5ab11909317cc15175edb8061d",
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}
