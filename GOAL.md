@@ -233,6 +233,11 @@ five baseline hashes exactly. Neither candidate is directionally positive:
 `0.167722`/`0.035237`. Gate B remains closed. T20.35h is next as a model-free
 leave-one-seed-out output-bias correction ceiling; no additional model load,
 optimizer, training, or Gate C work is justified.
+Brief 174 opens T20.35h as that exact model-free ceiling. It binds the signed
+10-step chunks and target, fits each held-out seed only from the other four,
+and compares a six-channel global decoded-action offset with a
+time-and-channel-conditioned offset. A post-hoc ceiling can route a later
+model-internal correction but can never itself pass Gate B or become a policy.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
