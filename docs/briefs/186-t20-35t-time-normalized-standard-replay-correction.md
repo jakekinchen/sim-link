@@ -56,3 +56,15 @@ under the frozen schedule; objectives, gradients, and checkpoint tensors stay
 finite; and one signed result either passes Gate B or records the next
 smallest evidence-routed blocker. No result implies closed-loop or physical
 policy success.
+
+## Pre-Run Boundary
+
+Implementation `545a563`, signed spec `34881e21...`, and central authority
+decision `8387945b...` are remotely preserved. Ten exact time weights make
+each step's initial weighted correction mean equal to `0.120801`; all 50
+examples appear 10 times, and every update has one unique frozen standard
+replay seed. Reviewer 230 authorizes one Python 3.12 local-MPS
+training/evaluation attempt. Fifty-four relevant tests pass. No T20.35t model
+load, checkpoint tensor access, inference, optimizer creation, training,
+rollout, Gate C, hardware, external compute, or Brev action occurred before
+authorization.
