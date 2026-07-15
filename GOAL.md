@@ -317,6 +317,14 @@ Python 3.11 and 3.12. After remote confirmation, exactly one Python 3.12
 local-MPS attempt may evaluate active scales 0.25 and 0.5 with padded noise
 fixed normal. No model, checkpoint tensor, inference, optimizer, mutation, or
 rollout has occurred at this boundary.
+T20.35n is now `verified` endpoint-optimal but Gate-B-negative through result
+`d3e6e5d9...`, result commit `4e37e19`, and Reviewer Decision 220. With padded
+noise fixed normal, worst error rises monotonically from `0.066398` at active
+scale 0 to `0.082665`, `0.102040`, and `0.150321` at scales 0.25, 0.5, and 1.
+Further active-scale tuning is rejected. Brief 181 opens T20.35o to instrument
+the exact active-zero/padded-normal 10-step trajectory and compare each learned
+velocity with the deterministic single-target straight-flow velocity. Gate B
+and Gate C remain closed.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

@@ -63,3 +63,11 @@ base-noise hash is checked before inference. Fifty-seven relevant tests and 24
 subtests pass; exact verification agrees under Python 3.11 and 3.12. No model,
 checkpoint tensor, inference, optimizer, mutation, rollout, Gate C, hardware,
 external compute, or Brev action occurred at this boundary.
+
+## Result Boundary
+
+The consumed attempt `c8eecd80...` produced result `d3e6e5d9...`, preserved at
+`4e37e19`. Worst error increases monotonically across active scales
+0/0.25/0.5/1, so the active-zero endpoint remains best at `0.066398` rad but
+still fails Gate B. Reviewer 220 rejects further scale refinement and routes
+only the T20.35o flow-trajectory consistency audit. Gate C remains closed.
