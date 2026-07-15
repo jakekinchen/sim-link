@@ -60,3 +60,12 @@ and learned velocities so every reference residual, hash, summary, and route is
 recomputed by the verifier. Eleven relevant tests pass. No model, checkpoint
 tensor, inference, optimizer, mutation, rollout, Gate C, hardware, external
 compute, or Brev action occurred before authorization.
+
+## Result
+
+The sole attempt `5161631f...` produced signed result `5c5b41b9...`, remotely
+preserved at `30b5b0a`. All five decoded endpoints reproduce exactly. Active
+residual mean rises from `0.033131` at time 1.0 to `0.368387` at time 0.1;
+`62.8898%` of active residual mass lies in the final three steps, while no
+channel exceeds `24.7865%`. Reviewer 222 verifies a late-step distributed flow
+residual, keeps Gate B and Gate C closed, and routes T20.35p under Brief 182.
