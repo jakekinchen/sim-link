@@ -5,7 +5,7 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T23:27:47-05:00; no new major slice after 2026-07-15T22:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35, evening extension recorded 2026-07-15T10:20:00-05:00 for the MVP demo composition
-run_state: T20.35u attempt 179092b9... failed before checkpoint access because the exact Python 3.12 environment lacked datasets; Reviewer 233 forbids retry and routes distinct T20.35v behind a dependency-complete runtime preflight.
+run_state: T20.35v implementation d1861f3, spec a0b5c211..., permit 304b956b..., runtime preflight 59ecc86c..., and Reviewer 234 authorize exactly one distinct Python 3.12 local-MPS inference-only path audit after remote confirmation.
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.35v in progress under Brief 188 for a dependency-complete no-attempt runtime preflight and a separately reviewed distinct inference-only trajectory audit
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
@@ -13,7 +13,7 @@ evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: implement and pass T20.35v's exact dependency-complete no-attempt runtime preflight, then separately review and remotely preserve one distinct inference-only permit
+next_step: revalidate the exact T20.35v runtime before its marker, consume the sole distinct inference attempt, reproduce five endpoints/paths, sign one result, and route without optimizer or Gate C execution
 ```
 
 ## Rules
@@ -687,6 +687,18 @@ Python 3.12 command environment must import every dataset/model/checkpoint
 dependency and prove MPS plus the immutable checkpoint tree. Design and tests
 only are open; inference, optimizer, rollout, Gate C, hardware, external
 compute, and Brev remain closed pending a fresh remotely preserved review.
+
+## 2026-07-15 - T20.35v runtime-complete pre-run boundary accepted
+
+Implementation `d1861f3`, spec `a0b5c211...`, permit `304b956b...`, and signed
+runtime preflight `59ecc86c...` are remotely preserved. The exact Python 3.12
+environment imports LeRobot 0.6.1 `dataset,pi`, datasets 4.8.5, pyarrow 25.0.0,
+torch 2.11.0, safetensors 0.8.0, and transformers 5.5.4 with MPS available.
+Before creating a V marker, the normal path repeats all imports and requires
+exact version equality. Reviewer 234 authorizes one distinct inference-only
+attempt. Twenty-three relevant tests and all signed/model-free/runtime checks
+pass. No V attempt, checkpoint tensor load, model, inference, optimizer,
+rollout, Gate C, hardware, external compute, or Brev action occurred.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 

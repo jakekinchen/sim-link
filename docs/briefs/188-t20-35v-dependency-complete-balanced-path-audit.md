@@ -46,3 +46,17 @@ attempt then reproduces all five T20.35t endpoints and emits one signed finite
 trajectory result, or fails closed with a new non-reused failure artifact.
 Gate B remains false unless unchanged objective and action gates pass in a
 separately authorized evaluation.
+
+## Pre-Run Boundary
+
+Implementation `d1861f3`, signed spec `a0b5c211...`, distinct permit
+`304b956b...`, and runtime preflight `59ecc86c...` are remotely preserved. The
+exact offline Python 3.12 command imports LeRobot `0.6.1` with its `dataset,pi`
+extras, `datasets 4.8.5`, `pyarrow 25.0.0`, `torch 2.11.0`, `safetensors
+0.8.0`, and `transformers 5.5.4`; MPS is available. The normal path repeats
+the same imports and exact version comparison before creating an attempt.
+Reviewer 234 authorizes exactly one distinct inference-only attempt. Twenty-
+three relevant tests, signed spec/permit/runtime verification, model-free
+preflight, and the exact runtime preflight pass. No T20.35v attempt,
+checkpoint tensor load, model construction, inference, optimizer, rollout,
+hardware, external compute, or Brev action occurred before authorization.
