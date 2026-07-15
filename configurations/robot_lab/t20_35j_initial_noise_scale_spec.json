@@ -1,0 +1,91 @@
+{
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "brev_compute_started": false,
+  "checkpoint_identity_sha256": "439ae119842fe5f9639b3e3e9b76f029678fd4b4257dfd6308253f6d2832c29f",
+  "checkpoint_mutated": false,
+  "checkpoint_tree": [
+    {
+      "path": "expert_only_config.json",
+      "sha256": "a55d7ffeecc7e9403374e4631a2bde090bfe059af23588a228a8752329af4803",
+      "size_bytes": 64053
+    },
+    {
+      "path": "expert_only_model.safetensors",
+      "sha256": "72804966196f9b18a69bd0ca99461ebc166dd1327d0cd080985e1127e9e3434d",
+      "size_bytes": 2773721000
+    }
+  ],
+  "closed_loop_rollout": false,
+  "dataset_action_chunk_sha256": "5698babc07b2eebc8a3a96d33b28f03bbb33f1bec9b83a97d4e4f8a325c36b7e",
+  "dataset_mutated": false,
+  "directional_improvement_rule": "candidate_worst_seed_maximum_aggregate_mean_and_aggregate_raw_spread_all_strictly_below_scale_1",
+  "expected_baseline_decoded_action_chunks": [
+    {
+      "decoded_action_chunk_sha256": "12ae6ab9b119dbb4e2fa20cbaa43ef48e92d3158052cb285df4358d3c4e3d04f",
+      "inference_seed": 20260721
+    },
+    {
+      "decoded_action_chunk_sha256": "aa52d4289db0e7e59b902926293f9403ea7bd26bf6e1de7292fa3649b0b9520f",
+      "inference_seed": 20260722
+    },
+    {
+      "decoded_action_chunk_sha256": "32e2771b59f5cd8ab97d4c17952b342d3a7c6efbadb577eb094c5e5ed2048c95",
+      "inference_seed": 20260723
+    },
+    {
+      "decoded_action_chunk_sha256": "a0731007b9488c7ffb9289bc12f4e5030cc1629ab07efc9e22f4472ead4ecd78",
+      "inference_seed": 20260724
+    },
+    {
+      "decoded_action_chunk_sha256": "ba6c643d8d35545e79dc63033d871ed3b7ea613f4e4ece770c6d4f26f126feed",
+      "inference_seed": 20260725
+    }
+  ],
+  "external_compute_started": false,
+  "identity_sha256": "a3dc0acb66918f01920fae49188c9862d18609fa22a4c1d6cda2f819d7ac7116",
+  "inference_seeds": [
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725
+  ],
+  "initial_noise_scales": [
+    1.0,
+    0.5,
+    0.0
+  ],
+  "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "maximum_allowed_action_error_rad": 0.05,
+  "model_inference": false,
+  "model_loaded": false,
+  "num_inference_steps": 10,
+  "optimizer_training": false,
+  "paligemma_trainable_parameter_count": 0,
+  "passing_selection_rule": "largest_passing_candidate_scale",
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "required_python_major_minor": [
+    3,
+    12
+  ],
+  "same_base_noise_required_across_scales_per_seed": true,
+  "sampler_noise_distribution": "standard_normal_scaled_after_sampling",
+  "sampler_source_path": "external/leLab/.venv/lib/python3.12/site-packages/lerobot/policies/pi05/modeling_pi05.py",
+  "sampler_source_sha256": "006fee5765b235dd66c55f16d78a1e296dc320667a02608c68a057d72d70bde0",
+  "schema_version": "scenesmith.t20_35j_initial_noise_scale_spec.v1",
+  "scope": "one_inference_only_pi05_initial_noise_scale_discriminator",
+  "simulation_policy_accepted": false,
+  "source_final_to_baseline_objective_ratio": 0.004252260358160933,
+  "source_objective_ratio_within_threshold": true,
+  "t20_35g_result_identity_sha256": "57f1f0dd5190fa1e0dc2b84cf25546b8f4e520bb75d2a15616797c5f311b2ea2",
+  "t20_35g_spec_identity_sha256": "4407624835d014e906206a643997824f912834e8eca385654d9766d27f3d37e9",
+  "t20_35i_variance_identity_sha256": "ac87de7b21c7698fe5b02d1e57b06cab009bc6a92257bbcc52c27111cc04a6f0",
+  "task_id": "T20.35j",
+  "trainable_parameter_count": 693422112,
+  "trainable_parameter_names_sha256": "4e45aeebf8a2f98613b446d82a2bb789f89e9bc40e43885b6213271a2035723e"
+}
