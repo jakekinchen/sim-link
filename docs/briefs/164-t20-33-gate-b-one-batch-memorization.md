@@ -4,6 +4,16 @@
 
 **State:** `in_progress`
 
+**Pre-run implementation boundary:** `38fa450`
+
+**Pre-run reviewer decision:** `194`
+
+**Training-spec identity:**
+`3fa3098c816b228a6687e952cb8444c77344e49877b17cfc5d1afdc32e6e685a`
+
+**Central authority identity:**
+`ff3ac3c99eb71f4774976f02c8ae7d3d17827451f4c738c2ceaddf3545db5348`
+
 ## Objective
 
 Prove or falsify the lowest unmet policy-capability gate routed by T20.32:
