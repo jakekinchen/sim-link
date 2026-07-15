@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "172",
-    "commit": "dea54fb8d4f23234cf84b7fa6c9fada608877502",
-    "reviewer_decision_id": "207",
-    "summary": "verified_model_free_normalized_residual_audit_exact_physical"
+    "brief_id": "173",
+    "commit": "48e2b3f323b31155614a15ccb43d68089cce5c91",
+    "reviewer_decision_id": "210",
+    "summary": "verified_negative_cadence_discriminator_exact_10_step_hashes"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35g",
-  "next_eligible_task": "T20.35g",
+  "current_task": "T20.35h",
+  "next_eligible_task": "T20.35h",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -3034,15 +3034,15 @@
       "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35g": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.35f"],
-      "active_brief_id": "173",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
+      "active_brief_id": null,
+      "latest_verified_brief_id": "173",
+      "review_decision_id": "210",
       "pre_run_review_decision_id": "209",
       "source_commit": "88602b01adeb511a85119dd2117d05afde6a780c",
       "implementation_commits": ["88602b01adeb511a85119dd2117d05afde6a780c","5cb933f4be648da7ede182ba758e155f5d05d818","b077d1983ce096e1e851928a830448d8605ff2ea"],
-      "result": "attempt 001 consumed and failed at Python 3.14 config parsing after CPU checkpoint validation but before model/inference; Reviewer 209 authorizes one distinct Python 3.12 replacement attempt under a source-bound corrected spec and permit",
+      "result": "verified negative cadence discriminator: exact 10-step hashes reproduce, 20 and 50 inference steps worsen both worst-seed maximum and aggregate mean action error, Gate B remains closed, and a model-free output-bias correction ceiling is routed",
       "pre_run": {
         "spec_path": "configurations/robot_lab/t20_35g_denoising_cadence_spec.json",
         "spec_identity_sha256": "be1c50f3ecb01eadd59f62ae41fa2afc36149340bcc3287cd3cbe049ecc739e6",
@@ -3074,9 +3074,12 @@
         "permit_identity_sha256": "b3078ea007279c0377e9ff6082bf33f6a744cd0e2cf77392f7a91f9234b31fc4",
         "required_python_major_minor": [3,12],
         "replacement_attempt_number": 2,
-        "one_replacement_attempt_authorized": true,
-        "model_loaded": false,
-        "model_inference": false,
+        "one_replacement_attempt_authorized": false,
+        "permit_consumed": true,
+        "permit_reusable": false,
+        "attempt_identity_sha256": "83c215caa75bdbb11b667eaf2576fe1c4efbd48979c86292a3301e34155993f6",
+        "model_loaded": true,
+        "model_inference": true,
         "optimizer_training": false,
         "checkpoint_mutated": false,
         "closed_loop_rollout": false,
@@ -3084,8 +3087,42 @@
         "external_compute_started": false,
         "brev_compute_started": false
       },
-      "authority_granted": ["t20_35g_one_python_3_12_replacement_inference_evaluation_authorized"],
-      "authority_not_granted": ["additional_simulation_model_load_after_one_attempt","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "artifact": {
+        "path": "configurations/robot_lab/t20_35g_denoising_cadence_result.json",
+        "schema_version": "scenesmith.t20_35g_denoising_cadence_result.v1",
+        "identity_sha256": "57f1f0dd5190fa1e0dc2b84cf25546b8f4e520bb75d2a15616797c5f311b2ea2",
+        "file_sha256": "8ac42c3e63d436287cc482e57105e5195d9e4f220e4bb29fb254372fe5b2d4af",
+        "size_bytes": 184528,
+        "evaluation_attempt_identity_sha256": "83c215caa75bdbb11b667eaf2576fe1c4efbd48979c86292a3301e34155993f6",
+        "evaluation_spec_identity_sha256": "4407624835d014e906206a643997824f912834e8eca385654d9766d27f3d37e9",
+        "evaluation_permit_identity_sha256": "b3078ea007279c0377e9ff6082bf33f6a744cd0e2cf77392f7a91f9234b31fc4",
+        "baseline_reproduced_exactly": true,
+        "gate_b_passed": false,
+        "cadence_effect_positive": false,
+        "baseline_worst_seed_maximum_error_rad": 0.15032132878119553,
+        "baseline_aggregate_mean_absolute_error_rad": 0.030990397665380236,
+        "twenty_step_worst_seed_maximum_error_rad": 0.1592514405484493,
+        "twenty_step_aggregate_mean_absolute_error_rad": 0.033812868706277505,
+        "fifty_step_worst_seed_maximum_error_rad": 0.16772215702766435,
+        "fifty_step_aggregate_mean_absolute_error_rad": 0.03523742888229845,
+        "selected_num_inference_steps": null,
+        "selected_next_hypothesis": "denoising_cadence_rejected_route_output_bias_correction",
+        "model_loaded": true,
+        "model_inference": true,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "checkpoint_mutated": false,
+        "dataset_mutated": false,
+        "closed_loop_rollout": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false,
+        "simulation_policy_accepted": false,
+        "physical_transfer_ready": false,
+        "promotion_eligible": false
+      },
+      "authority_granted": ["t20_35g_denoising_cadence_rejected","t20_35h_model_free_output_bias_discriminator_routed"],
+      "authority_not_granted": ["additional_simulation_model_load_after_one_attempt","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

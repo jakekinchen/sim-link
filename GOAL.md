@@ -225,6 +225,14 @@ pinned PI0.5 config parses under Python 3.12 without checkpoint/model access.
 Correction `b077d19`, replacement spec `44076248...`, permit `b3078ea0...`, and
 Reviewer 209 authorize exactly one distinct Python 3.12 replacement attempt;
 the cadence, seeds, hashes, gates, and no-optimizer boundary are unchanged.
+T20.35g is now `verified` negative through signed result `57f1f0dd...`, result
+boundary `48e2b3f`, and Reviewer Decision 210. The 10-step row reproduced all
+five baseline hashes exactly. Neither candidate is directionally positive:
+20 steps worsened worst/mean error from `0.150321`/`0.030990` rad to
+`0.159251`/`0.033813`, and 50 steps worsened them to
+`0.167722`/`0.035237`. Gate B remains closed. T20.35h is next as a model-free
+leave-one-seed-out output-bias correction ceiling; no additional model load,
+optimizer, training, or Gate C work is justified.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

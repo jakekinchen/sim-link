@@ -5,15 +5,15 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T23:27:47-05:00; no new major slice after 2026-07-15T22:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35, evening extension recorded 2026-07-15T10:20:00-05:00 for the MVP demo composition
-run_state: T20.35g attempt 001 (788015fa...) consumed permit ca3dbd3f... and failed under Python 3.14 after CPU checkpoint validation but before model/inference; correction b077d19, preflight d476382b..., replacement spec 44076248..., permit b3078ea0..., and Reviewer 209 authorize exactly one Python 3.12 replacement attempt.
+run_state: T20.35g is verified negative through result 57f1f0dd..., result boundary 48e2b3f, and Reviewer 210; 10-step hashes reproduced exactly, while 20/50 steps worsened both worst-seed and aggregate error, routing a model-free output-bias correction ceiling.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.35g in progress under Brief 173 for a separately reviewed inference-only 10-versus-20-versus-50-step denoising-cadence discriminator
+current_task: T20.35h pending after verified-negative T20.35g; run one model-free leave-one-seed-out output-bias correction ceiling before any model or optimizer work
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: after remote confirmation, use Python 3.12 to consume replacement permit b3078ea0..., require exact 10-step hash reproduction, evaluate 20/50 steps, sign the result, and stop before Gate C
+next_step: freeze T20.35h's exact global-channel and time-conditioned leave-one-seed-out bias estimators and fail-closed routes, then review the model-free implementation before writing its signed result
 ```
 
 ## Rules
@@ -245,7 +245,7 @@ Implementation `88602b0`, spec `be1c50f3...`, and permit `ca3dbd3f...` freeze
 the exact expert-only checkpoint, batch, five seeds, 10-step baseline hashes,
 candidate cadences 20/50, metrics, gates, and fail-closed routes. Reviewer 208
 authorizes one local-MPS model-load/inference attempt after remote preservation.
-Four focused and 88 relevant tests pass. No model, checkpoint tensor, inference,
+Four focused and 89 relevant tests pass. No model, checkpoint tensor, inference,
 optimizer, training, mutation, Gate C, hardware, external compute, or Brev
 activity occurred at this boundary.
 
@@ -260,6 +260,17 @@ checkpoint/model access. Correction `b077d19` creates distinct spec
 any non-3.12 replacement runtime. Reviewer 209 authorizes one replacement
 attempt. Five focused and 90 relevant tests pass; all other authorities remain
 closed.
+
+## 2026-07-15 - T20.35g cadence discriminator verified negative
+
+Replacement attempt `83c215ca...` reproduced all five signed 10-step hashes.
+Result `57f1f0dd...` records no Gate B pass and no positive cadence effect. The
+baseline worst/aggregate errors are `0.150321`/`0.030990` rad; 20 steps worsen
+them to `0.159251`/`0.033813`, and 50 steps worsen them to
+`0.167722`/`0.035237`. Reviewer 210 rejects cadence expansion and routes
+T20.35h to a model-free leave-one-seed-out output-bias correction ceiling.
+The sole replacement permit is consumed. No optimizer, training, mutation,
+rollout, Gate C, hardware, external compute, or Brev action occurred.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 

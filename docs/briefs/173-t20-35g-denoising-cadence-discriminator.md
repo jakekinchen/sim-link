@@ -67,3 +67,14 @@ without checkpoint or model access. Correction `b077d19` creates distinct spec
 `44076248...` and permit `b3078ea0...`, binds the consumed attempt, and requires
 Python 3.12. Reviewer 209 authorizes replacement attempt 002 only; attempt 001
 and its permit are not reusable. Five focused and 90 relevant tests pass.
+
+## Verified Result
+
+Replacement attempt `83c215ca...` and result `57f1f0dd...` verify exactly. The
+10-step baseline reproduces all five T20.35d hashes. Gate B remains closed and
+cadence is rejected: baseline worst/aggregate action error is
+`0.150321`/`0.030990` rad, 20 steps worsen it to
+`0.159251`/`0.033813`, and 50 steps worsen it to
+`0.167722`/`0.035237`. Reviewer 210 routes a model-free leave-one-seed-out
+output-bias correction ceiling. No optimizer, training, checkpoint/data
+mutation, rollout, Gate C, hardware, external compute, or Brev action occurred.
