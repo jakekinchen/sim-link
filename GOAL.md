@@ -238,6 +238,12 @@ Brief 174 opens T20.35h as that exact model-free ceiling. It binds the signed
 and compares a six-channel global decoded-action offset with a
 time-and-channel-conditioned offset. A post-hoc ceiling can route a later
 model-internal correction but can never itself pass Gate B or become a policy.
+T20.35h is now `verified` mixed-negative through artifact `63e1181b...`,
+implementation `68b7115`, and Reviewer Decision 211. A global channel offset
+improves worst/mean error to `0.113302`/`0.019781` rad but leaves 159
+exceedances. The time-conditioned offset lowers mean error to `0.017710` and
+exceedances to 96, yet its worst fold is `0.136460` rad. Neither ceiling passes,
+so T20.35i is next as model-free seed/channel residual-variance localization.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

@@ -5,15 +5,15 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T23:27:47-05:00; no new major slice after 2026-07-15T22:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35, evening extension recorded 2026-07-15T10:20:00-05:00 for the MVP demo composition
-run_state: Brief 174 opens T20.35h as a model-free leave-one-seed-out decoded-action bias ceiling over the exact T20.35g 10-step chunks; global-channel and time-conditioned offsets are the only two correction classes.
+run_state: T20.35h is verified mixed-negative through artifact 63e1181b..., implementation 68b7115, and Reviewer 211; both bias classes improve error but fail the 0.05-rad ceiling, routing model-free seed/channel residual-variance localization.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.35h in progress under Brief 174 for a model-free leave-one-seed-out decoded-action bias correction ceiling
+current_task: T20.35i pending after verified T20.35h; localize the remaining time-conditioned residual variance by seed, channel, timestep, and pairwise spread without model access
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: add deterministic T20.35h contract tests first, implement the signed model-free ceiling, run focused and relevant gates, then review and route without model or optimizer access
+next_step: freeze T20.35i's variance-localization thresholds and routes in a precise brief, then add model-free tests and implementation before any model or optimizer correction
 ```
 
 ## Rules
@@ -281,6 +281,19 @@ time/seed positions with one 50-by-6 time-conditioned offset averaged across
 calibration seeds. The gate remains 0.05 rad on every held-out element. This is
 a post-hoc analytical ceiling only: it cannot pass Gate B, select a product
 correction, load a model, create an optimizer, mutate evidence, or enter Gate C.
+
+## 2026-07-15 - T20.35h decoded-action bias ceiling verified mixed-negative
+
+Artifact `63e1181b...` reproduces the exact T20.35g baseline. Global-channel
+bias reduces worst/aggregate error from `0.150321`/`0.030990` to
+`0.113302`/`0.019781` rad but leaves 159 exceedances. Time-conditioned bias
+reduces aggregate mean to `0.017710` and leaves 96 exceedances, but its worst
+fold remains `0.136460` rad. Neither analytical ceiling passes. A verifier-only
+`1e-15` tolerance preserves cross-runtime replay while identities, hashes,
+types, counts, routes, and non-float claims remain exact. Reviewer 211 routes
+T20.35i to model-free residual-variance localization. Six focused and 76
+relevant tests pass. No model, checkpoint, inference, optimizer, mutation,
+rollout, Gate C, hardware, external compute, or Brev action occurred.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 

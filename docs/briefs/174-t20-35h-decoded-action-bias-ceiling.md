@@ -72,3 +72,14 @@ A later model-internal correction must earn Gate B independently.
   workflow audit pass.
 - Same-agent adversarial review, scoped commit, push, and remote confirmation
   agree before the next task opens.
+
+## Verified Result
+
+Artifact `63e1181b...` and implementation `68b7115` verify in both configured
+Python runtimes. Global-channel correction improves worst/mean error to
+`0.113302`/`0.019781` rad but leaves 159 threshold exceedances. The
+time-conditioned class improves mean error to `0.017710` and leaves 96
+exceedances, but its worst held-out fold remains `0.136460` rad. Neither class
+passes and no correction is selected. Reviewer 211 routes T20.35i to model-free
+seed/channel residual-variance localization. Six focused and 76 relevant tests
+pass; all prohibited actions remain absent.
