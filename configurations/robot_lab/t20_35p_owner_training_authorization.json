@@ -1,0 +1,27 @@
+{
+  "authorization_id": "t20_35p_terminal_flow_consistency_grant",
+  "authorization_scope": "t20_35p_simulation_only_terminal_flow_correction",
+  "authorization_source": "owner_resume_existing_sim_link_mvp_goal_loop_2026_07_15",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training"
+  ],
+  "brev_compute_authorized": false,
+  "external_compute_authorized": false,
+  "identity_sha256": "c41333f8d8c59ec68925cd4ca36000a9fb4e3f516e8052880bddf2763f8874d6",
+  "issued_at": "2026-07-15T07:27:47-05:00",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "source_training_spec_ref": {
+    "file_sha256": "8efd01ee0e62b15d08ed89b979055b94bb2e261198265f93e16f0d3deb26b784",
+    "identity_sha256": "fd4f75f68b9031d0089b402d3fda6ec8b467c3e8ef177f8d02aec418045a6476",
+    "path": "configurations/robot_lab/t20_35p_terminal_time_flow_consistency_training_spec.json",
+    "schema_version": "scenesmith.t20_35p_terminal_time_flow_consistency_training_spec.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}
