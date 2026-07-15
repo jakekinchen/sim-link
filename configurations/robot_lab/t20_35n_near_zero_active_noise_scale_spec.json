@@ -1,0 +1,99 @@
+{
+  "active_action_dimension_count": 6,
+  "all_active_noise_scales": [
+    0.0,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "base_noise_sha256_by_seed": [
+    "7eb7dff02036ff9e333e87717b64532b08bdfb9a703ae0a3be907967c387812e",
+    "78f970b711b4bf49a38ad18fd442b9b3c0763555f849425a387c458464bad707",
+    "52128e7e1595282861bd968f7c35a69729be060468722a30a065726db59a11b6",
+    "406784a0ca3ed2513580aee22e11351d2945e7e6c15b4833ac3a08b8882dc89f",
+    "01597685ad0d3db1f3446b8393959a27ac63766a7e063566b2be67cdff10ab3f"
+  ],
+  "brev_compute_started": false,
+  "checkpoint_identity_sha256": "439ae119842fe5f9639b3e3e9b76f029678fd4b4257dfd6308253f6d2832c29f",
+  "checkpoint_mutated": false,
+  "checkpoint_tree": [
+    {
+      "path": "expert_only_config.json",
+      "sha256": "a55d7ffeecc7e9403374e4631a2bde090bfe059af23588a228a8752329af4803",
+      "size_bytes": 64053
+    },
+    {
+      "path": "expert_only_model.safetensors",
+      "sha256": "72804966196f9b18a69bd0ca99461ebc166dd1327d0cd080985e1127e9e3434d",
+      "size_bytes": 2773721000
+    }
+  ],
+  "closed_loop_rollout": false,
+  "dataset_action_chunk_sha256": "5698babc07b2eebc8a3a96d33b28f03bbb33f1bec9b83a97d4e4f8a325c36b7e",
+  "dataset_mutated": false,
+  "evaluated_active_noise_scales": [
+    0.25,
+    0.5
+  ],
+  "external_compute_started": false,
+  "identity_sha256": "155d93367f67f6bced4a04ea907bc2dddd57d583881bc5449b502ef7e5d4b3ae",
+  "inference_seeds": [
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725
+  ],
+  "inherited_active_noise_scales": [
+    0.0,
+    1.0
+  ],
+  "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "maximum_action_dimension_count": 32,
+  "maximum_allowed_action_error_rad": 0.05,
+  "model_inference": false,
+  "model_loaded": false,
+  "nonpassing_selection_rule": "lowest_worst_error_then_lowest_mean_then_largest_active_scale",
+  "num_inference_steps": 10,
+  "optimizer_training": false,
+  "padded_noise_scale": 1.0,
+  "paligemma_trainable_parameter_count": 0,
+  "passing_selection_rule": "largest_passing_active_noise_scale",
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "required_python_major_minor": [
+    3,
+    12
+  ],
+  "sampler_source_sha256": "006fee5765b235dd66c55f16d78a1e296dc320667a02608c68a057d72d70bde0",
+  "schema_version": "scenesmith.t20_35n_near_zero_active_noise_scale_spec.v1",
+  "scope": "one_inference_only_near_zero_active_noise_scale_discriminator_with_padded_normal",
+  "simulation_policy_accepted": false,
+  "source_active_one_decoded_action_sha256_by_seed": [
+    "12ae6ab9b119dbb4e2fa20cbaa43ef48e92d3158052cb285df4358d3c4e3d04f",
+    "aa52d4289db0e7e59b902926293f9403ea7bd26bf6e1de7292fa3649b0b9520f",
+    "32e2771b59f5cd8ab97d4c17952b342d3a7c6efbadb577eb094c5e5ed2048c95",
+    "a0731007b9488c7ffb9289bc12f4e5030cc1629ab07efc9e22f4472ead4ecd78",
+    "ba6c643d8d35545e79dc63033d871ed3b7ea613f4e4ece770c6d4f26f126feed"
+  ],
+  "source_active_zero_decoded_action_sha256_by_seed": [
+    "73b5babf647fc36e867d7c540ab6f87639a021527434d0486beeda4b9ee0bf6f",
+    "7e23aec65f21459f14026e7903cffe7dc0583689449cec45d2c74704c94cedb1",
+    "a779294cc0fea395faa8c4e863bea76824c04fe2b2ed105607be3722d2245c86",
+    "1a55f1c6953a82cce88aa9de13eb4884c4991b2b881c4e2cf41277d316fa6f7d",
+    "d0ea9f113da775660c3b5f709b420d3d1fb2a721d36a8a30befc33418ea04240"
+  ],
+  "source_final_to_baseline_objective_ratio": 0.004252260358160933,
+  "source_objective_ratio_within_threshold": true,
+  "t20_35l_result_identity_sha256": "b4fc6060c56431ab2bf52dd74d8efa58b1808a10a827521db076f9d10234dbea",
+  "t20_35l_spec_identity_sha256": "4c34668899f43631e0461e7f8175018b6c0576959c3881280714b85b952fa971",
+  "t20_35m_audit_identity_sha256": "83105424d6faf668d8a41a70999e25a82338bb2537c802f5a4a60803df3cedb0",
+  "task_id": "T20.35n",
+  "trainable_parameter_count": 693422112,
+  "trainable_parameter_names_sha256": "4e45aeebf8a2f98613b446d82a2bb789f89e9bc40e43885b6213271a2035723e"
+}
