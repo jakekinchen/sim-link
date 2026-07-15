@@ -1,0 +1,797 @@
+{
+  "authority_granted": [
+    "t20_32_offline_closed_loop_divergence_localization_verified"
+  ],
+  "authority_not_granted": [
+    "optimizer_training",
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "brev_compute_started": false,
+  "dataset_mutated": false,
+  "external_compute_started": false,
+  "frame_count_per_trace": 244,
+  "identity_sha256": "f9b091c61f6be77c66034a6062124418e84c21f01fb43b55f4c19f8ec42bd9a5",
+  "localizations": {
+    "t20_24_recovery_augmented": {
+      "0": {
+        "divergence_class": "frame_zero_prediction",
+        "earliest_divergence": {
+          "absolute_error": 1.0208659803858116,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_action_divergence": {
+          "absolute_error": 1.0208659803858116,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_state_divergence": {
+          "absolute_error": 0.056135517772328836,
+          "chunk_index": 0,
+          "chunk_offset": 1,
+          "frame_index": 1,
+          "joint_name": "gripper",
+          "phase": "approach",
+          "threshold": 0.01
+        },
+        "gripper_versus_arm_attribution": {
+          "arm_trajectory_mean_absolute_error_rad": 0.2895414555840164,
+          "dominant": "gripper",
+          "gripper_trajectory_mean_absolute_error_rad": 0.6204728464544172
+        },
+        "per_joint_action_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.2375672531776334,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "gripper": {
+            "absolute_error": 0.6294374037910461,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_lift": {
+            "absolute_error": 1.0208659803858116,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.7178705635823428,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "wrist_roll": {
+            "absolute_error": 0.9999036250043454,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          }
+        },
+        "per_joint_state_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.036025708949494195,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "gripper": {
+            "absolute_error": 0.056135517772328836,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_lift": {
+            "absolute_error": 0.032707984779032584,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.029244144787191617,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "wrist_roll": {
+            "absolute_error": 0.024372002145353944,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          }
+        },
+        "prior_action_sequence_reproduced_exactly": null,
+        "seed_role": "training",
+        "strict_success": false,
+        "terminal_outcome": "no_strict_grasp_contact",
+        "trace_identity_sha256": "f2166bec37345b92219abd88bb65b073031ec2bef98ba05c450cb58a9facebc7"
+      },
+      "6": {
+        "divergence_class": "frame_zero_prediction",
+        "earliest_divergence": {
+          "absolute_error": 1.0436725426533355,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_action_divergence": {
+          "absolute_error": 1.0436725426533355,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_state_divergence": {
+          "absolute_error": 0.056135584636896274,
+          "chunk_index": 0,
+          "chunk_offset": 1,
+          "frame_index": 1,
+          "joint_name": "gripper",
+          "phase": "approach",
+          "threshold": 0.01
+        },
+        "gripper_versus_arm_attribution": {
+          "arm_trajectory_mean_absolute_error_rad": 0.26882249608822384,
+          "dominant": "gripper",
+          "gripper_trajectory_mean_absolute_error_rad": 0.6171226091829771
+        },
+        "per_joint_action_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.15788434479123836,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "gripper": {
+            "absolute_error": 0.6060145024604794,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_lift": {
+            "absolute_error": 1.0436725426533355,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.6961478190879014,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "wrist_roll": {
+            "absolute_error": 1.011160629557462,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          }
+        },
+        "per_joint_state_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.03545692580644033,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "gripper": {
+            "absolute_error": 0.056135584636896274,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_lift": {
+            "absolute_error": 0.03299613602819562,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.03137019136668995,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "wrist_roll": {
+            "absolute_error": 0.025440139205371692,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          }
+        },
+        "prior_action_sequence_reproduced_exactly": true,
+        "seed_role": "held_out",
+        "strict_success": false,
+        "terminal_outcome": "no_strict_grasp_contact",
+        "trace_identity_sha256": "2c0269cd192fa64f1289d09d32826827e7251e9389c41ba0986b305fd32d60da"
+      },
+      "7": {
+        "divergence_class": "frame_zero_prediction",
+        "earliest_divergence": {
+          "absolute_error": 1.08008860098077,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_action_divergence": {
+          "absolute_error": 1.08008860098077,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_state_divergence": {
+          "absolute_error": 0.056135527245918304,
+          "chunk_index": 0,
+          "chunk_offset": 1,
+          "frame_index": 1,
+          "joint_name": "gripper",
+          "phase": "approach",
+          "threshold": 0.01
+        },
+        "gripper_versus_arm_attribution": {
+          "arm_trajectory_mean_absolute_error_rad": 0.29197979411718217,
+          "dominant": "gripper",
+          "gripper_trajectory_mean_absolute_error_rad": 0.6262832060626548
+        },
+        "per_joint_action_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.3083590960608502,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "gripper": {
+            "absolute_error": 0.6717788474189758,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_lift": {
+            "absolute_error": 1.08008860098077,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.7666589756728083,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "wrist_roll": {
+            "absolute_error": 1.0735208543851875,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          }
+        },
+        "per_joint_state_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.03602471007393948,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "gripper": {
+            "absolute_error": 0.056135527245918304,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_lift": {
+            "absolute_error": 0.032706411663665724,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.029244923973755776,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "wrist_roll": {
+            "absolute_error": 0.024366722162133946,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          }
+        },
+        "prior_action_sequence_reproduced_exactly": true,
+        "seed_role": "held_out",
+        "strict_success": false,
+        "terminal_outcome": "no_strict_grasp_contact",
+        "trace_identity_sha256": "2c51200e51b25688b0f52a8e0299b6c6bb9d6c9d5fb3505726fa7068de3d9550"
+      }
+    },
+    "t20_31_nominal_action_quantile": {
+      "0": {
+        "divergence_class": "frame_zero_prediction",
+        "earliest_divergence": {
+          "absolute_error": 0.8236385284831049,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_action_divergence": {
+          "absolute_error": 0.8236385284831049,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_state_divergence": {
+          "absolute_error": 0.056135520601502176,
+          "chunk_index": 0,
+          "chunk_offset": 1,
+          "frame_index": 1,
+          "joint_name": "gripper",
+          "phase": "approach",
+          "threshold": 0.01
+        },
+        "gripper_versus_arm_attribution": {
+          "arm_trajectory_mean_absolute_error_rad": 0.40928803406707615,
+          "dominant": "gripper",
+          "gripper_trajectory_mean_absolute_error_rad": 0.623741237047155
+        },
+        "per_joint_action_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.16289792536339842,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "gripper": {
+            "absolute_error": 0.6300472470153805,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_lift": {
+            "absolute_error": 0.8236385284831049,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.5258002232620336,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "wrist_roll": {
+            "absolute_error": 0.7495732070186494,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          }
+        },
+        "per_joint_state_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.036025641433072186,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "gripper": {
+            "absolute_error": 0.056135520601502176,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_lift": {
+            "absolute_error": 0.03270776009201515,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.029243233961657955,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "wrist_roll": {
+            "absolute_error": 0.024378574523530917,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          }
+        },
+        "prior_action_sequence_reproduced_exactly": null,
+        "seed_role": "training",
+        "strict_success": false,
+        "terminal_outcome": "no_strict_grasp_contact",
+        "trace_identity_sha256": "05c87aad2e212a8d9623a52df804de52ece40a8930fc9275d55ad8948246b28d"
+      },
+      "6": {
+        "divergence_class": "frame_zero_prediction",
+        "earliest_divergence": {
+          "absolute_error": 0.8529436698636129,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_action_divergence": {
+          "absolute_error": 0.8529436698636129,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_state_divergence": {
+          "absolute_error": 0.056135576386691755,
+          "chunk_index": 0,
+          "chunk_offset": 1,
+          "frame_index": 1,
+          "joint_name": "gripper",
+          "phase": "approach",
+          "threshold": 0.01
+        },
+        "gripper_versus_arm_attribution": {
+          "arm_trajectory_mean_absolute_error_rad": 0.38864793752561905,
+          "dominant": "gripper",
+          "gripper_trajectory_mean_absolute_error_rad": 0.6154900855921037
+        },
+        "per_joint_action_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.06412010202686491,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "gripper": {
+            "absolute_error": 0.6067017570320129,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_lift": {
+            "absolute_error": 0.8529436698636129,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.49386681927968745,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "wrist_roll": {
+            "absolute_error": 0.7653029906225541,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          }
+        },
+        "per_joint_state_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.035456765813765445,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "gripper": {
+            "absolute_error": 0.056135576386691755,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_lift": {
+            "absolute_error": 0.0329959541035203,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.03136907370153352,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "wrist_roll": {
+            "absolute_error": 0.025446391551666416,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          }
+        },
+        "prior_action_sequence_reproduced_exactly": true,
+        "seed_role": "held_out",
+        "strict_success": false,
+        "terminal_outcome": "no_strict_grasp_contact",
+        "trace_identity_sha256": "234561c1def1c3ba6817ca725c611d3d935b2c07c5fa98b0ee90fd69e8e98902"
+      },
+      "7": {
+        "divergence_class": "frame_zero_prediction",
+        "earliest_divergence": {
+          "absolute_error": 0.8999226240226288,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_action_divergence": {
+          "absolute_error": 0.8999226240226288,
+          "chunk_index": 0,
+          "chunk_offset": 0,
+          "frame_index": 0,
+          "joint_name": "shoulder_lift",
+          "phase": "approach",
+          "threshold": 0.05
+        },
+        "first_state_divergence": {
+          "absolute_error": 0.05613551623050084,
+          "chunk_index": 0,
+          "chunk_offset": 1,
+          "frame_index": 1,
+          "joint_name": "gripper",
+          "phase": "approach",
+          "threshold": 0.01
+        },
+        "gripper_versus_arm_attribution": {
+          "arm_trajectory_mean_absolute_error_rad": 0.4105846080471042,
+          "dominant": "gripper",
+          "gripper_trajectory_mean_absolute_error_rad": 0.6255126094600773
+        },
+        "per_joint_action_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.24982321477507208,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "gripper": {
+            "absolute_error": 0.6717214297309874,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_lift": {
+            "absolute_error": 0.8999226240226288,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.595587294363124,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          },
+          "wrist_roll": {
+            "absolute_error": 0.8542967571428626,
+            "chunk_index": 0,
+            "chunk_offset": 0,
+            "frame_index": 0,
+            "phase": "approach",
+            "threshold": 0.05
+          }
+        },
+        "per_joint_state_divergence_onset": {
+          "elbow_flex": {
+            "absolute_error": 0.03602454371446839,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "gripper": {
+            "absolute_error": 0.05613551623050084,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_lift": {
+            "absolute_error": 0.03270623236621395,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "shoulder_pan": null,
+          "wrist_flex": {
+            "absolute_error": 0.02924380525390191,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          },
+          "wrist_roll": {
+            "absolute_error": 0.024372880176998006,
+            "chunk_index": 0,
+            "chunk_offset": 1,
+            "frame_index": 1,
+            "phase": "approach",
+            "threshold": 0.01
+          }
+        },
+        "prior_action_sequence_reproduced_exactly": true,
+        "seed_role": "held_out",
+        "strict_success": false,
+        "terminal_outcome": "no_strict_grasp_contact",
+        "trace_identity_sha256": "80ee23189176dda6a5734c74855c3b18944149b48ff4f34a1edc717478d86df5"
+      }
+    }
+  },
+  "lowest_unmet_capability_gate": "B",
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "routing_basis": "training-seed reproduction precedes held-out generalization; frame-zero failure routes Gate B, aligned onset at or after execution routes Gate C, and training-seed success routes Gate D",
+  "schema_version": "scenesmith.t20_32_divergence_localization_report.v1",
+  "selected_next_gate_hypothesis": "gate_b_memorization_or_model_plumbing",
+  "simulation_policy_accepted": false,
+  "statistics_changed": false,
+  "task_id": "T20.32",
+  "threshold_contract_identity_sha256": "edbbf85e56a7020cec9b16cbab6263dc3e9dbe106ff8f55b53a85d3034d7f4cb",
+  "total_compared_frames": 1464,
+  "trace_count": 6,
+  "training_seed_strict_success_count": 0,
+  "twin_updated": false
+}

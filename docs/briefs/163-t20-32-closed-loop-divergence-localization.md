@@ -2,6 +2,8 @@
 
 **Date:** 2026-07-14
 
+**State:** `in_progress`
+
 ## Objective
 
 Localize where and how the frozen T20.24 and T20.31 adapters first diverge

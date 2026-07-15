@@ -1,0 +1,32 @@
+{
+  "action_divergence_threshold_rad": 0.05,
+  "action_horizon": 5,
+  "brev_compute_started": false,
+  "classification_order": [
+    "frame_zero_prediction",
+    "action_chunk_boundary",
+    "pre_contact_drift",
+    "observation_feedback_compounding"
+  ],
+  "external_compute_started": false,
+  "identity_sha256": "edbbf85e56a7020cec9b16cbab6263dc3e9dbe106ff8f55b53a85d3034d7f4cb",
+  "initial_reset_tolerance_rad": 1e-06,
+  "joint_names": [
+    "shoulder_pan",
+    "shoulder_lift",
+    "elbow_flex",
+    "wrist_flex",
+    "wrist_roll",
+    "gripper"
+  ],
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "schema_version": "scenesmith.t20_32_divergence_thresholds.v1",
+  "state_divergence_threshold_rad": 0.01,
+  "task_id": "T20.32",
+  "threshold_basis": {
+    "action": "absolute per-joint requested-action error",
+    "chunk_boundary": "frame_index modulo action_horizon equals zero",
+    "state": "absolute per-joint qpos error"
+  }
+}

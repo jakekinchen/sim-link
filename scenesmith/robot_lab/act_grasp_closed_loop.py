@@ -141,6 +141,7 @@ def run_policy_grasp_closed_loop(
     applied_actions: list[list[float]] = []
     projected_frames: list[int] = []
     pending_requested: np.ndarray | None = None
+    pending_applied: np.ndarray | None = None
 
     with tempfile.TemporaryDirectory(prefix="scenesmith-policy-grasp-") as directory:
         root = Path(directory)
@@ -154,7 +155,11 @@ def run_policy_grasp_closed_loop(
         fixed_site = moving_site = object_body = -1
 
         def retain(frame: dict[str, Any], images: dict[str, np.ndarray]) -> None:
-            assert expert is not None and pending_requested is not None
+            assert (
+                expert is not None
+                and pending_requested is not None
+                and pending_applied is not None
+            )
             row = _raw_frame(expert, frame)
             contacts = extract_pad_contacts(
                 expert.mujoco,
@@ -171,6 +176,7 @@ def run_policy_grasp_closed_loop(
             row["nonpad_robot_object_contacts"] = nonpad_robot_object_contacts(expert, object_body, set(pad_roles))
             row["all_robot_object_contact_geoms"] = all_robot_object_contact_geoms(expert, object_body)
             row["policy_requested_action"] = pending_requested.astype(float).tolist()
+            row["policy_applied_action"] = pending_applied.astype(float).tolist()
             if simulator_state_observer is not None:
                 simulator_state_observer(expert, json.loads(json.dumps(row)), pending_requested.copy())
             frames.append(row)
@@ -224,6 +230,7 @@ def run_policy_grasp_closed_loop(
                 if pending_requested.shape != (expert.model.nu,) or not np.isfinite(pending_requested).all():
                     raise ValueError(f"{policy_label} policy emitted a non-finite or wrong-shaped action")
                 applied = np.clip(pending_requested, ctrl_min, ctrl_max)
+                pending_applied = applied.copy()
                 if not np.array_equal(applied, pending_requested):
                     projected_frames.append(frame_index)
                 requested_actions.append(pending_requested.astype(float).tolist())
