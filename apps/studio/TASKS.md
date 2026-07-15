@@ -11,7 +11,7 @@ in the same commit as the work.
 | ST4 | Episodes page: filter table + detail with mirror video, phase timeline, hash links | done | v0; expert frame scrubber included |
 | ST5 | Tasks page: campaign history + before/after trend from result gates | done | v0 table; trend chart still open |
 | ST6 | Workcell Designer: spec form/editor, Build button (server action), preview images, stability report | done | live API + browser verified: synced form/JSON, inline 400/422 faults, stable previews, settle report, hashes |
-| ST7 | Agent Feed: briefs/session-logs/reviewer-decisions live tail | done | v0: names only; full-text rendering still open |
+| ST7 | Agent Feed: briefs/session-logs/reviewer-decisions live tail | done | regex filename-only brief/reviewer reads; live full-text safe Markdown feed browser-verified |
 | ST8 | MCP server exposing status/episodes/tasks/workcells/build/render tools | done | official SDK stdio verified: 7 tools, 5 live reads, fail-closed guards, stable workcell build; REST parity exact |
 | ST9 | Robot panel: render discovery/census/calibration evidence read-only with permit-gated registration stub | pending | |
 | ST10 | Three.js orbit viewer for compiled workcells | pending | reuse `threejs_export.py` |

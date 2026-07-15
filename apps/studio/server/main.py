@@ -69,6 +69,11 @@ def tasks() -> dict[str, Any]:
     return _http_call(service.tasks)
 
 
+@app.get("/api/documents/{kind}/{filename}")
+def document(kind: str, filename: str) -> dict[str, str]:
+    return _http_call(service.document, kind, filename)
+
+
 @app.get("/api/media")
 def media(path: str) -> FileResponse:
     return FileResponse(_http_call(service.media_path, path))

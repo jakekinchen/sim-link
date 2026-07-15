@@ -194,6 +194,97 @@
     border-color: var(--color-faint);
     color: var(--color-ink);
   }
+
+  .studio-markdown {
+    max-width: 76ch;
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--color-ink);
+  }
+  .studio-markdown h1,
+  .studio-markdown h2,
+  .studio-markdown h3 {
+    margin: 1.15rem 0 0.45rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide2);
+    text-transform: uppercase;
+  }
+  .studio-markdown h1:first-child,
+  .studio-markdown h2:first-child,
+  .studio-markdown h3:first-child {
+    margin-top: 0;
+  }
+  .studio-markdown h1 {
+    color: var(--color-amber);
+    font-size: 0.9rem;
+  }
+  .studio-markdown h2 {
+    color: var(--color-cyan);
+    font-size: 0.75rem;
+  }
+  .studio-markdown h3 {
+    color: var(--color-dim);
+    font-size: 0.7rem;
+  }
+  .studio-markdown p,
+  .studio-markdown ul,
+  .studio-markdown ol,
+  .studio-markdown blockquote,
+  .studio-markdown pre {
+    margin: 0.55rem 0;
+  }
+  .studio-markdown ul,
+  .studio-markdown ol {
+    padding-left: 1.25rem;
+  }
+  .studio-markdown ul {
+    list-style: square;
+  }
+  .studio-markdown ol {
+    list-style: decimal;
+  }
+  .studio-markdown li {
+    margin: 0.24rem 0;
+    padding-left: 0.18rem;
+  }
+  .studio-markdown li::marker {
+    color: var(--color-amber);
+  }
+  .studio-markdown code {
+    border: 1px solid var(--color-line-2);
+    background: var(--color-panel-2);
+    padding: 0.08rem 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-cyan);
+  }
+  .studio-markdown pre {
+    overflow-x: auto;
+    border: 1px solid var(--color-line-2);
+    background: var(--color-bg);
+    padding: 0.7rem;
+  }
+  .studio-markdown pre code {
+    border: 0;
+    background: transparent;
+    padding: 0;
+  }
+  .studio-markdown blockquote {
+    border-left: 2px solid var(--color-violet);
+    padding-left: 0.75rem;
+    color: var(--color-dim);
+  }
+  .studio-markdown a {
+    color: var(--color-cyan);
+    text-decoration: underline;
+    text-decoration-color: rgb(86 200 216 / 0.4);
+  }
+  .studio-markdown hr {
+    margin: 1rem 0;
+    border-color: var(--color-line-2);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

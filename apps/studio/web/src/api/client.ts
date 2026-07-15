@@ -3,6 +3,8 @@ import type {
   EpisodeDetail,
   EpisodesResponse,
   StatusResponse,
+  StudioDocument,
+  StudioDocumentKind,
   TasksResponse,
   WorkcellArrangementSpec,
   WorkcellManifest,
@@ -60,6 +62,11 @@ export const api = {
     getJson<EpisodeDetail>(`/api/episodes/${id}`, signal),
   workcells: (signal?: AbortSignal) => getJson<WorkcellsResponse>('/api/workcells', signal),
   tasks: (signal?: AbortSignal) => getJson<TasksResponse>('/api/tasks', signal),
+  document: (kind: StudioDocumentKind, filename: string, signal?: AbortSignal) =>
+    getJson<StudioDocument>(
+      `/api/documents/${encodeURIComponent(kind)}/${encodeURIComponent(filename)}`,
+      signal,
+    ),
   buildWorkcell: (spec: WorkcellArrangementSpec) =>
     postJson<WorkcellManifest>('/api/actions/build-workcell', spec),
 }

@@ -17,6 +17,9 @@ from pathlib import Path
 from typing import Any
 
 
+DOCUMENT_FILENAME = re.compile(r"[0-9]{3}-[A-Za-z0-9][A-Za-z0-9_-]{0,180}\.md")
+
+
 class StudioServiceError(Exception):
     """Expected request failure with an HTTP-compatible status and detail."""
 
@@ -275,6 +278,24 @@ class StudioService:
             summary["artifact"] = str(path.relative_to(self.data_root))
             gates.append(summary)
         return {"count": len(gates), "result_gates": gates}
+
+    def document(self, kind: str, filename: str) -> dict[str, str]:
+        store = {
+            "briefs": self.brief_store,
+            "reviewer-messages": self.reviewer_store,
+        }.get(kind)
+        if store is None:
+            raise StudioServiceError(404, "Unknown document kind")
+        if not DOCUMENT_FILENAME.fullmatch(filename):
+            raise StudioServiceError(400, "Malformed document filename")
+        document_path = store / filename
+        if not document_path.is_file():
+            raise StudioServiceError(404, "Document not found")
+        return {
+            "kind": kind,
+            "filename": filename,
+            "content": document_path.read_text(encoding="utf-8"),
+        }
 
     def media_path(self, path: str) -> Path:
         resolved = (self.data_root / path).resolve()

@@ -45,6 +45,14 @@ export interface StatusResponse {
   recent_briefs: string[]
 }
 
+export type StudioDocumentKind = 'briefs' | 'reviewer-messages'
+
+export interface StudioDocument {
+  kind: StudioDocumentKind
+  filename: string
+  content: string
+}
+
 export type EpisodeSource = 'expert' | 'policy_trace'
 
 export interface EpisodeSummary {

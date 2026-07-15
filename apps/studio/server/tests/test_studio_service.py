@@ -146,6 +146,23 @@ class StudioServiceTests(unittest.TestCase):
                     operation()
                 self.assertEqual(caught.exception.status_code, expected_status)
 
+    def test_document_lookup_is_filename_only_and_whitelisted(self) -> None:
+        document = self.service.document("briefs", "003-brief.md")
+        self.assertEqual(document["content"], "brief")
+        self.assertEqual(document["filename"], "003-brief.md")
+
+        cases = (
+            ("session-logs", "003-brief.md", 404),
+            ("briefs", "../003-brief.md", 400),
+            ("briefs", "/tmp/003-brief.md", 400),
+            ("briefs", "003-missing.md", 404),
+        )
+        for kind, filename, expected_status in cases:
+            with self.subTest(kind=kind, filename=filename):
+                with self.assertRaises(StudioServiceError) as caught:
+                    self.service.document(kind, filename)
+                self.assertEqual(caught.exception.status_code, expected_status)
+
 
 if __name__ == "__main__":
     unittest.main()
