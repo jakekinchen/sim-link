@@ -195,6 +195,43 @@ class T2035GDenoisingCadenceDiscriminatorTests(unittest.TestCase):
                 consumed_attempt=attempt,
             )
 
+    def test_result_verifier_tolerates_only_sub_femtoscale_derived_float_drift(self) -> None:
+        spec, permit, attempt, target, baseline = self._contract()
+        result = build_result(
+            spec=spec,
+            permit=permit,
+            attempt=attempt,
+            target_chunk=target,
+            cadence_evaluations=[
+                self._evaluation(10, baseline),
+                self._evaluation(20, self._chunks(0.08)),
+                self._evaluation(50, self._chunks(0.04)),
+            ],
+        )
+        tolerated = copy.deepcopy(result)
+        tolerated["cadence_evaluations"][0][
+            "aggregate_mean_absolute_error_rad"
+        ] += 5e-16
+        verify_result(
+            sign_payload(tolerated),
+            spec=spec,
+            permit=permit,
+            attempt=attempt,
+            target_chunk=target,
+        )
+        rejected = copy.deepcopy(result)
+        rejected["cadence_evaluations"][0][
+            "aggregate_mean_absolute_error_rad"
+        ] += 2e-15
+        with self.assertRaisesRegex(ValueError, "cadence result drifted"):
+            verify_result(
+                sign_payload(rejected),
+                spec=spec,
+                permit=permit,
+                attempt=attempt,
+                target_chunk=target,
+            )
+
     @classmethod
     def _contract(cls):
         target = [[0.0] * 6 for _ in range(50)]

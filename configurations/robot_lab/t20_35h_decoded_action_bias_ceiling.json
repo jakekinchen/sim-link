@@ -1,0 +1,714 @@
+{
+  "action_correction_selected": false,
+  "analytical_ceiling_passed": false,
+  "baseline_aggregate_mean_absolute_error_rad": 0.030990397665380236,
+  "baseline_decoded_action_chunks": [
+    {
+      "decoded_action_chunk_sha256": "12ae6ab9b119dbb4e2fa20cbaa43ef48e92d3158052cb285df4358d3c4e3d04f",
+      "inference_seed": 20260721,
+      "maximum_absolute_error_rad": 0.09190755343139756,
+      "mean_absolute_error_rad": 0.02727471744734213
+    },
+    {
+      "decoded_action_chunk_sha256": "aa52d4289db0e7e59b902926293f9403ea7bd26bf6e1de7292fa3649b0b9520f",
+      "inference_seed": 20260722,
+      "maximum_absolute_error_rad": 0.11935382530964533,
+      "mean_absolute_error_rad": 0.0328097259334106
+    },
+    {
+      "decoded_action_chunk_sha256": "32e2771b59f5cd8ab97d4c17952b342d3a7c6efbadb577eb094c5e5ed2048c95",
+      "inference_seed": 20260723,
+      "maximum_absolute_error_rad": 0.11080308083967316,
+      "mean_absolute_error_rad": 0.030037722305674332
+    },
+    {
+      "decoded_action_chunk_sha256": "a0731007b9488c7ffb9289bc12f4e5030cc1629ab07efc9e22f4472ead4ecd78",
+      "inference_seed": 20260724,
+      "maximum_absolute_error_rad": 0.15032132878119553,
+      "mean_absolute_error_rad": 0.03603424243438585
+    },
+    {
+      "decoded_action_chunk_sha256": "ba6c643d8d35545e79dc63033d871ed3b7ea613f4e4ece770c6d4f26f126feed",
+      "inference_seed": 20260725,
+      "maximum_absolute_error_rad": 0.11420685735626246,
+      "mean_absolute_error_rad": 0.028795580206088283
+    }
+  ],
+  "baseline_worst_fold_maximum_error_rad": 0.15032132878119553,
+  "brev_compute_started": false,
+  "calibration_seed_count_per_fold": 4,
+  "checkpoint_mutated": false,
+  "checkpoint_read": false,
+  "closed_loop_rollout": false,
+  "dataset_action_chunk_sha256": "5698babc07b2eebc8a3a96d33b28f03bbb33f1bec9b83a97d4e4f8a325c36b7e",
+  "dataset_mutated": false,
+  "external_compute_started": false,
+  "gate_b_passed": false,
+  "global_output_channel_bias": {
+    "aggregate_mean_absolute_error_rad": 0.01978096985985592,
+    "all_held_out_chunks_within_threshold": false,
+    "ceiling_passed": false,
+    "correction_class": "global_output_channel_bias",
+    "folds": [
+      {
+        "calibration_seeds": [
+          20260722,
+          20260723,
+          20260724,
+          20260725
+        ],
+        "corrected_action_chunk_sha256": "c3d7839803425f81d8478cdcf0f406e626a7cd130e2f7018b110cbfbf8c0afd8",
+        "correction_sha256": "80fcaf50b870664c2278c56c03424bfe0dcecbb96c19a93d517247b3c3a53173",
+        "correction_shape": [
+          6
+        ],
+        "held_out_inference_seed": 20260721,
+        "maximum_absolute_error_rad": 0.09969178996927985,
+        "mean_absolute_error_rad": 0.017204735009340864,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.00021743143612761723,
+            "mean_absolute_error_rad": 8.234258983334659e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.056169942733523714,
+            "mean_absolute_error_rad": 0.02263403585327534,
+            "threshold_exceedance_count": 2
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.026419465901846406,
+            "mean_absolute_error_rad": 0.010341168635888232,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.03377100645156217,
+            "mean_absolute_error_rad": 0.010097958505314164,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.04036469183244065,
+            "mean_absolute_error_rad": 0.016567112522854914,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.09969178996927985,
+            "mean_absolute_error_rad": 0.043505791948879186,
+            "threshold_exceedance_count": 20
+          }
+        ],
+        "threshold_exceedance_count": 22
+      },
+      {
+        "calibration_seeds": [
+          20260721,
+          20260723,
+          20260724,
+          20260725
+        ],
+        "corrected_action_chunk_sha256": "f0d6026ad3839c5762917bd616acb5d820c33e91365315218f56544c8d21b445",
+        "correction_sha256": "e66e3ed8dd98feaa79cad8d9988a6e518cf34ebf70dd699b04a51e15f63c1344",
+        "correction_shape": [
+          6
+        ],
+        "held_out_inference_seed": 20260722,
+        "maximum_absolute_error_rad": 0.10314452279872667,
+        "mean_absolute_error_rad": 0.02047820553401721,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.0003697957714883654,
+            "mean_absolute_error_rad": 8.969696494354029e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.050340481373122505,
+            "mean_absolute_error_rad": 0.022340265741008877,
+            "threshold_exceedance_count": 1
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.015053553015662136,
+            "mean_absolute_error_rad": 0.005452472142898621,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.09921930477317564,
+            "mean_absolute_error_rad": 0.030655132039494402,
+            "threshold_exceedance_count": 6
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.10314452279872667,
+            "mean_absolute_error_rad": 0.028142061437057556,
+            "threshold_exceedance_count": 8
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.06636116850236895,
+            "mean_absolute_error_rad": 0.03618960487870028,
+            "threshold_exceedance_count": 9
+          }
+        ],
+        "threshold_exceedance_count": 24
+      },
+      {
+        "calibration_seeds": [
+          20260721,
+          20260722,
+          20260724,
+          20260725
+        ],
+        "corrected_action_chunk_sha256": "4e761dbdd1c1b2971ce02e565c532ab7fccd5c5376963f721989c3da26648a56",
+        "correction_sha256": "f6a87bf01081e1c0efbdb9c71a6a13fed4a9fb2e0b0cb7b94168448d75e0b259",
+        "correction_shape": [
+          6
+        ],
+        "held_out_inference_seed": 20260723,
+        "maximum_absolute_error_rad": 0.11330226180861991,
+        "mean_absolute_error_rad": 0.024200360628617534,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.00030991655013686004,
+            "mean_absolute_error_rad": 6.774382400480228e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.11330226180861991,
+            "mean_absolute_error_rad": 0.054257861896916226,
+            "threshold_exceedance_count": 20
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.011162340353115585,
+            "mean_absolute_error_rad": 0.004196726371571638,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.08621039372603378,
+            "mean_absolute_error_rad": 0.02282119093906516,
+            "threshold_exceedance_count": 10
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.0859053821776703,
+            "mean_absolute_error_rad": 0.033109299678843226,
+            "threshold_exceedance_count": 11
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.08030267163569249,
+            "mean_absolute_error_rad": 0.030749341061304156,
+            "threshold_exceedance_count": 4
+          }
+        ],
+        "threshold_exceedance_count": 45
+      },
+      {
+        "calibration_seeds": [
+          20260721,
+          20260722,
+          20260723,
+          20260725
+        ],
+        "corrected_action_chunk_sha256": "c2f59d21927e6df9bc113cb942655f7205adb9335f216d64994f0640c58c7877",
+        "correction_sha256": "696914db8e6e7fb267adeda81b827b5539f30fa1dcd2ddf8cf4a8082e09fb8d0",
+        "correction_shape": [
+          6
+        ],
+        "held_out_inference_seed": 20260724,
+        "maximum_absolute_error_rad": 0.0989703990797941,
+        "mean_absolute_error_rad": 0.02006774222674773,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.000181651201092127,
+            "mean_absolute_error_rad": 7.781682219924632e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.04701217050076556,
+            "mean_absolute_error_rad": 0.023508486411258182,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.018849232597137666,
+            "mean_absolute_error_rad": 0.004377033855594244,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.038376644949916994,
+            "mean_absolute_error_rad": 0.014164142322875233,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.0989703990797941,
+            "mean_absolute_error_rad": 0.051386988246757755,
+            "threshold_exceedance_count": 33
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.06348617807913204,
+            "mean_absolute_error_rad": 0.026891985701801725,
+            "threshold_exceedance_count": 10
+          }
+        ],
+        "threshold_exceedance_count": 43
+      },
+      {
+        "calibration_seeds": [
+          20260721,
+          20260722,
+          20260723,
+          20260724
+        ],
+        "corrected_action_chunk_sha256": "819725c595a3810e522421d00ea37c6c5fc37a6f5882f5058e5a7892fa3e9529",
+        "correction_sha256": "4cf81ae618f21ea5a2aa0e40a868af33d41f07b5e8c19198dc1576d48c276901",
+        "correction_shape": [
+          6
+        ],
+        "held_out_inference_seed": 20260725,
+        "maximum_absolute_error_rad": 0.10770786954995715,
+        "mean_absolute_error_rad": 0.016953805900556264,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.00013098304251931564,
+            "mean_absolute_error_rad": 5.577431472894356e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.10770786954995715,
+            "mean_absolute_error_rad": 0.03016413654396526,
+            "threshold_exceedance_count": 7
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.01649984739373389,
+            "mean_absolute_error_rad": 0.008946417217370115,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.021176812295266856,
+            "mean_absolute_error_rad": 0.010618700894169488,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.06312196664735004,
+            "mean_absolute_error_rad": 0.020070100958354504,
+            "threshold_exceedance_count": 4
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.08965875279942703,
+            "mean_absolute_error_rad": 0.031867705474749285,
+            "threshold_exceedance_count": 14
+          }
+        ],
+        "threshold_exceedance_count": 25
+      }
+    ],
+    "improves_baseline_aggregate_mean": true,
+    "improves_baseline_worst_fold_maximum": true,
+    "total_threshold_exceedance_count": 159,
+    "worst_fold_maximum_error_rad": 0.11330226180861991
+  },
+  "identity_sha256": "63e1181b2f825de108a85525e38e0ae728cae2288a16b7d3763851e8109a6593",
+  "inference_seeds": [
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725
+  ],
+  "leave_one_seed_out": true,
+  "maximum_allowed_action_error_rad": 0.05,
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "post_hoc_ceiling_only": true,
+  "preferred_ceiling_class": null,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_35h_decoded_action_bias_ceiling.v1",
+  "scope": "model_free_leave_one_seed_out_decoded_action_bias_ceiling",
+  "selected_next_hypothesis": "bias_ceiling_improves_but_fails_route_residual_variance_localization",
+  "simulation_policy_accepted": false,
+  "source_num_inference_steps": 10,
+  "source_t20_35g_result_file_sha256": "8ac42c3e63d436287cc482e57105e5195d9e4f220e4bb29fb254372fe5b2d4af",
+  "source_t20_35g_result_identity_sha256": "57f1f0dd5190fa1e0dc2b84cf25546b8f4e520bb75d2a15616797c5f311b2ea2",
+  "statistics_changed": false,
+  "task_id": "T20.35h",
+  "time_conditioned_output_channel_bias": {
+    "aggregate_mean_absolute_error_rad": 0.01771016474386972,
+    "all_held_out_chunks_within_threshold": false,
+    "ceiling_passed": false,
+    "correction_class": "time_conditioned_output_channel_bias",
+    "folds": [
+      {
+        "calibration_seeds": [
+          20260722,
+          20260723,
+          20260724,
+          20260725
+        ],
+        "corrected_action_chunk_sha256": "10bfd03e6305b50d94cbb5ed1f6783eed8845c7a2872ad16a0dee618c435eb14",
+        "correction_sha256": "781e7e8de9b7ddedb2394aadc399945944d326ba59d4401ef76f2cb604a08952",
+        "correction_shape": [
+          50,
+          6
+        ],
+        "held_out_inference_seed": 20260721,
+        "maximum_absolute_error_rad": 0.08424134230575553,
+        "mean_absolute_error_rad": 0.01755114419987504,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.0001980642836962379,
+            "mean_absolute_error_rad": 9.768722469168212e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.04517733209988618,
+            "mean_absolute_error_rad": 0.01957834404690604,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.02310275600886924,
+            "mean_absolute_error_rad": 0.010196405251065186,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.0678975583076793,
+            "mean_absolute_error_rad": 0.017187768826195347,
+            "threshold_exceedance_count": 1
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.04292522992406067,
+            "mean_absolute_error_rad": 0.014740867901512742,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.08424134230575553,
+            "mean_absolute_error_rad": 0.04350579194887925,
+            "threshold_exceedance_count": 15
+          }
+        ],
+        "threshold_exceedance_count": 16
+      },
+      {
+        "calibration_seeds": [
+          20260721,
+          20260723,
+          20260724,
+          20260725
+        ],
+        "corrected_action_chunk_sha256": "b3e58064cb7b66801ba4d8618aa41fda382d7ec2c5c0953e59dd760d28e11133",
+        "correction_sha256": "f2aaf19bfd22c145c46bb4ea0f2578eb3795bcd2fd0027727d493c228663dc80",
+        "correction_shape": [
+          50,
+          6
+        ],
+        "held_out_inference_seed": 20260722,
+        "maximum_absolute_error_rad": 0.08719412448660713,
+        "mean_absolute_error_rad": 0.015643406894095914,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.00026015650868981693,
+            "mean_absolute_error_rad": 6.626098756117652e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.057115750634493395,
+            "mean_absolute_error_rad": 0.024576451180301495,
+            "threshold_exceedance_count": 5
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.014478350167621334,
+            "mean_absolute_error_rad": 0.006012053620354316,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.08719412448660713,
+            "mean_absolute_error_rad": 0.023816528662808492,
+            "threshold_exceedance_count": 5
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.08500277151195992,
+            "mean_absolute_error_rad": 0.019846343619982342,
+            "threshold_exceedance_count": 4
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.04237396078796407,
+            "mean_absolute_error_rad": 0.01954280329356767,
+            "threshold_exceedance_count": 0
+          }
+        ],
+        "threshold_exceedance_count": 14
+      },
+      {
+        "calibration_seeds": [
+          20260721,
+          20260722,
+          20260724,
+          20260725
+        ],
+        "corrected_action_chunk_sha256": "d051eb43652ced33e8239babffc973331e1672d6163e6dd77a76cbf5aea832d3",
+        "correction_sha256": "355ae3a17df036b34ed30bb1052ab9dafc25f6ccd1010389692d6ad485139087",
+        "correction_shape": [
+          50,
+          6
+        ],
+        "held_out_inference_seed": 20260723,
+        "maximum_absolute_error_rad": 0.13646004136052392,
+        "mean_absolute_error_rad": 0.022531890705416422,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.0002031929493892387,
+            "mean_absolute_error_rad": 5.3673265385671825e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.13646004136052392,
+            "mean_absolute_error_rad": 0.054257861896916226,
+            "threshold_exceedance_count": 16
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.01874058968948189,
+            "mean_absolute_error_rad": 0.005359001829894852,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.06070159717374418,
+            "mean_absolute_error_rad": 0.022404943055164498,
+            "threshold_exceedance_count": 5
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.0624504118378153,
+            "mean_absolute_error_rad": 0.03569099800012829,
+            "threshold_exceedance_count": 6
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.044004396092605536,
+            "mean_absolute_error_rad": 0.017424866185009005,
+            "threshold_exceedance_count": 0
+          }
+        ],
+        "threshold_exceedance_count": 27
+      },
+      {
+        "calibration_seeds": [
+          20260721,
+          20260722,
+          20260723,
+          20260725
+        ],
+        "corrected_action_chunk_sha256": "7891f771419302f901dc34dad7b7fe8a5af8faed16d9932e9c721094b352ff47",
+        "correction_sha256": "25803e19dc60843c7955e84df09cdd275c675949958c630a0213935a662e38cc",
+        "correction_shape": [
+          50,
+          6
+        ],
+        "held_out_inference_seed": 20260724,
+        "maximum_absolute_error_rad": 0.07723320292992475,
+        "mean_absolute_error_rad": 0.01853411889608828,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.0002078077082156432,
+            "mean_absolute_error_rad": 7.615548405460803e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.049161354511617475,
+            "mean_absolute_error_rad": 0.02210749706147949,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.018348722179833743,
+            "mean_absolute_error_rad": 0.005804579306617645,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.04896096828434582,
+            "mean_absolute_error_rad": 0.012982152436746695,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.07723320292992475,
+            "mean_absolute_error_rad": 0.04977861275123601,
+            "threshold_exceedance_count": 27
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.04628843363761881,
+            "mean_absolute_error_rad": 0.02045571633639523,
+            "threshold_exceedance_count": 0
+          }
+        ],
+        "threshold_exceedance_count": 27
+      },
+      {
+        "calibration_seeds": [
+          20260721,
+          20260722,
+          20260723,
+          20260724
+        ],
+        "corrected_action_chunk_sha256": "fa30c25dcd53bee181299dc881584ee72f9125d8c6f1ce14c5e6214ce24dc717",
+        "correction_sha256": "1bc3b8b96d82caa09f4bd4f23e657f080272ad65d13cf3a5ed714cf75c567ecb",
+        "correction_shape": [
+          50,
+          6
+        ],
+        "held_out_inference_seed": 20260725,
+        "maximum_absolute_error_rad": 0.11492207142321198,
+        "mean_absolute_error_rad": 0.014290263023872934,
+        "per_channel_summary": [
+          {
+            "joint_index": 0,
+            "joint_name": "shoulder_pan",
+            "maximum_absolute_error_rad": 0.00035246416878548237,
+            "mean_absolute_error_rad": 5.3598280756230605e-05,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 1,
+            "joint_name": "shoulder_lift",
+            "maximum_absolute_error_rad": 0.11492207142321198,
+            "mean_absolute_error_rad": 0.02766418123591583,
+            "threshold_exceedance_count": 7
+          },
+          {
+            "joint_index": 2,
+            "joint_name": "elbow_flex",
+            "maximum_absolute_error_rad": 0.018550831139435342,
+            "mean_absolute_error_rad": 0.007224833378774145,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 3,
+            "joint_name": "wrist_flex",
+            "maximum_absolute_error_rad": 0.0560236881399927,
+            "mean_absolute_error_rad": 0.008890297217673773,
+            "threshold_exceedance_count": 2
+          },
+          {
+            "joint_index": 4,
+            "joint_name": "wrist_roll",
+            "maximum_absolute_error_rad": 0.047692354854329766,
+            "mean_absolute_error_rad": 0.023664889393860467,
+            "threshold_exceedance_count": 0
+          },
+          {
+            "joint_index": 5,
+            "joint_name": "gripper",
+            "maximum_absolute_error_rad": 0.05425663920135504,
+            "mean_absolute_error_rad": 0.01824377863625715,
+            "threshold_exceedance_count": 3
+          }
+        ],
+        "threshold_exceedance_count": 12
+      }
+    ],
+    "improves_baseline_aggregate_mean": true,
+    "improves_baseline_worst_fold_maximum": true,
+    "total_threshold_exceedance_count": 96,
+    "worst_fold_maximum_error_rad": 0.13646004136052392
+  }
+}

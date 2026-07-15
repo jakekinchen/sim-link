@@ -21,6 +21,7 @@ from scenesmith.robot_lab.t20_33_one_batch_memorization import (
 )
 from scenesmith.robot_lab.t20_35d_decoded_action_residual_localization import (
     REPORT_PATH as T20_35D_REPORT_PATH,
+    _equal_with_float_tolerance,
     verify_evaluation_files as verify_t20_35d_evaluation_files,
     verify_report as verify_t20_35d_report,
 )
@@ -506,7 +507,15 @@ def verify_result(
         target_chunk=target_chunk,
         cadence_evaluations=payload.get("cadence_evaluations"),
     )
-    if payload != expected:
+    archived_content = {
+        key: value for key, value in payload.items() if key != "identity_sha256"
+    }
+    expected_content = {
+        key: value for key, value in expected.items() if key != "identity_sha256"
+    }
+    if not _equal_with_float_tolerance(
+        archived_content, expected_content, absolute_tolerance=1e-15
+    ):
         raise ValueError("T20.35g cadence result drifted")
 
 
