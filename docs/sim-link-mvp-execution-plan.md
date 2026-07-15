@@ -183,6 +183,10 @@ prove every dataset byte except `meta/stats.json` is unchanged, replace only
 action q01/q99 with clean nominal values, bind the same sampler seed and
 500-update budget, and obtain a fresh central simulation-only training decision
 before T20.31 may load a model or optimizer.
+T20.30 is verified through `2911e24` by Reviewer Decision 191. The distinct
+10-episode / 2,330-frame dataset view preserves all non-statistics bytes and
+changes only action q01/q99. Its fresh central decision grants only
+`simulation_training_ready`; T20.31 is the separately bounded execution slice.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,

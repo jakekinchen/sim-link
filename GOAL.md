@@ -105,6 +105,10 @@ Brief 161 opens T20.30 to materialize and centrally authorize the exact
 recovery dataset view whose only statistics change is replacing action q01/q99
 with the clean nominal values. It runs no model or optimizer; the actual
 same-seed 500-update ablation remains a separate T20.31 slice.
+T20.30 is now `verified` through Reviewer Decision 191: all five dataset files
+are separately copied, only `meta/stats.json` differs, and only action q01/q99
+within that file use clean nominal values. Central composition grants exactly
+`simulation_training_ready`; no model or optimizer ran.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
