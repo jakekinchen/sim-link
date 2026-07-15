@@ -1,0 +1,82 @@
+{
+  "brev_compute_started": false,
+  "campaign": {
+    "batch_size": 1,
+    "fixed_batch_repeated": true,
+    "gradient_clip_norm": 1.0,
+    "inference_seeds": [
+      20260721,
+      20260722,
+      20260723,
+      20260724,
+      20260725
+    ],
+    "learning_rate": 2.5e-05,
+    "network_mode": "offline_local_cache_only",
+    "optimizer": "AdamW",
+    "optimizer_update_count": 500,
+    "training_seed": 20260717,
+    "weight_decay": 0.0
+  },
+  "closed_loop_rollout": false,
+  "dataset_manifest_ref": {
+    "file_sha256": "ff0450569c5c8534b1b8636d5ab95f2f705d5dc534fe14e4f8a60e6864d82aa1",
+    "identity_sha256": "689516af0ee418b600d51a5ae7cda8a5c49709a6f4e1c3356e18c9d5c708ab29",
+    "path": "configurations/robot_lab/t20_17_lerobot_dataset_manifest.json",
+    "schema_version": "scenesmith.lerobot_native_episode_manifest.v1"
+  },
+  "dataset_mutated": false,
+  "external_compute_started": false,
+  "gate": {
+    "all_inference_seeds_must_pass": true,
+    "maximum_decoded_action_error_rad": 0.05,
+    "maximum_final_to_baseline_objective_ratio": 0.1
+  },
+  "identity_sha256": "3fa3098c816b228a6687e952cb8444c77344e49877b17cfc5d1afdc32e6e685a",
+  "model": {
+    "adapter": "lora",
+    "device": "mps",
+    "dtype": "float32",
+    "lora_alpha": 4,
+    "lora_rank": 4,
+    "repo_id": "lerobot/pi05_base",
+    "revision": "7de663972b7817d2c4cf2d84c821153dfea772e9"
+  },
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_33_one_batch_training_spec.v1",
+  "scope": "gate_b_one_fixed_source_batch_memorization",
+  "simulation_policy_accepted": false,
+  "source_batch": {
+    "action_horizon": 50,
+    "action_units": "mujoco_radian",
+    "action_variant": "measured",
+    "dataset_episode_index": 0,
+    "dataset_root": "outputs/robot_lab/t20_17_lerobot_training_dataset",
+    "frame_index": 0,
+    "initial_image_sha256": {
+      "top": "e25756a55d04ce77180780dd9e232b4f694bdf4fd40d9116645adbe736a1f4dc",
+      "wrist": "95e417324300382717637db8282e06eab0cf400612aa099c9ad3ea06bfd52adc"
+    },
+    "initial_observation_state_sha256": "130d1fd111b4a3990014e770c55121711c5cf5a8d7fd1f55e7d3e4d347559169",
+    "measured_action_chunk_sha256": "4a4e0e2c92a4ad500f6016346bae064a75a319ec901afd3862f676a65bd83b68",
+    "padding_or_inferred_actions": false,
+    "source_episode_file_sha256": "586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54",
+    "source_episode_identity_sha256": "9e186088c9ca82fa9c58cb6e3870f322a9c2a84405d5ea23152b822fb9d4abdb",
+    "source_seed": 0
+  },
+  "source_manifest_ref": {
+    "file_sha256": "72f49c6664a9e2663548ebf8064cbf29de19ea18170fea30bf862de082485084",
+    "identity_sha256": "3860158e201e457146a167cfa778da14f210d88fa223cb075a1ec6d422ecfd1a",
+    "path": "configurations/robot_lab/t17_5b_episode_generation_manifest.json",
+    "schema_version": "scenesmith.scripted_grasp_episode_store.v1"
+  },
+  "statistics_changed": false,
+  "task": "Grasp the lightweight anchor, lift 40 mm, hold, lower, release, and retreat.",
+  "task_id": "T20.33",
+  "twin_updated": false
+}

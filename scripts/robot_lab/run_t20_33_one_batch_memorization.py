@@ -1,0 +1,326 @@
+#!/usr/bin/env python3
+"""Run or verify the authorized T20.33 Gate B one-batch proof."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import os
+import random
+import sys
+
+from pathlib import Path
+
+import numpy as np
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scenesmith.robot_lab.artifact_contract import (  # noqa: E402
+    canonical_json_bytes,
+    dump_canonical_json,
+    load_strict_json,
+    sign_payload,
+)
+from scenesmith.robot_lab.lerobot_stack import activate_lerobot_stack  # noqa: E402
+from scenesmith.robot_lab.so101_coordinates import lerobot_to_mujoco  # noqa: E402
+from scenesmith.robot_lab.t20_17_clean_base_preflight import (  # noqa: E402
+    DATASET_REPO_ID,
+    DATASET_ROOT,
+    EXPECTED_MODEL_REVISION,
+)
+from scenesmith.robot_lab.t20_33_one_batch_memorization import (  # noqa: E402
+    ACTION_HORIZON,
+    FRAME_INDEX,
+    INFERENCE_SEEDS,
+    LEARNING_RATE,
+    LORA_ALPHA,
+    LORA_RANK,
+    OPTIMIZER_UPDATES,
+    RUN_SCHEMA_VERSION,
+    SOURCE_SEED,
+    SPEC_PATH,
+    TRAINING_SEED,
+    verify_run,
+    verify_preflight,
+    verify_training_spec_file,
+)
+from scenesmith.robot_lab.t20_33_simulation_training_authority import (  # noqa: E402
+    require_active_authority,
+)
+
+
+RUN_ROOT = REPO_ROOT / "outputs/robot_lab/t20_33_one_batch_run_001"
+SUMMARY_PATH = RUN_ROOT / "run_summary.json"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--verify", action="store_true")
+    args = parser.parse_args()
+    spec = verify_training_spec_file(repo_root=REPO_ROOT)
+    authority = require_active_authority(repo_root=REPO_ROOT)
+    authority_identity = authority["decision"]["identity_sha256"]
+    if args.verify:
+        summary = load_strict_json(SUMMARY_PATH)
+        verify_run(summary, spec=spec, authority_identity=authority_identity)
+        if _file_tree(RUN_ROOT / "adapter") != summary["checkpoint_tree"]:
+            raise ValueError("T20.33 checkpoint files drifted from run summary")
+        print(summary["identity_sha256"])
+        return 0
+    if RUN_ROOT.exists():
+        raise FileExistsError("T20.33 immutable run root already exists; use --verify")
+
+    os.environ.update(
+        {
+            "HF_HUB_OFFLINE": "1",
+            "TRANSFORMERS_OFFLINE": "1",
+            "TOKENIZERS_PARALLELISM": "false",
+            "PYTORCH_ENABLE_MPS_FALLBACK": "1",
+        }
+    )
+    stack = activate_lerobot_stack(repo_root=REPO_ROOT, stage="training")
+    import torch
+    import lerobot.policies.pi05.processor_pi05  # noqa: F401
+    from lerobot.configs import PreTrainedConfig
+    from lerobot.datasets import LeRobotDataset
+    from lerobot.datasets.dataset_metadata import LeRobotDatasetMetadata
+    from lerobot.datasets.factory import resolve_delta_timestamps
+    from lerobot.policies import make_policy, make_pre_post_processors
+    from torch.utils.data import default_collate
+
+    if not torch.backends.mps.is_available():
+        raise RuntimeError("T20.33 requires the authorized local MPS runtime")
+    snapshot = (
+        Path.home()
+        / ".cache/huggingface/hub/models--lerobot--pi05_base/snapshots"
+        / EXPECTED_MODEL_REVISION
+    ).resolve()
+    config = PreTrainedConfig.from_pretrained(snapshot, local_files_only=True)
+    config.pretrained_path = str(snapshot)
+    config.device = "mps"
+    config.dtype = "float32"
+    config.use_amp = False
+    config.gradient_checkpointing = True
+    config.compile_model = False
+    config.n_action_steps = ACTION_HORIZON
+    metadata = LeRobotDatasetMetadata(
+        DATASET_REPO_ID, root=REPO_ROOT / DATASET_ROOT
+    )
+    dataset = LeRobotDataset(
+        DATASET_REPO_ID,
+        root=REPO_ROOT / DATASET_ROOT,
+        episodes=[0],
+        delta_timestamps=resolve_delta_timestamps(config, metadata),
+        return_uint8=True,
+    )
+    item = dataset[FRAME_INDEX]
+    raw_batch = default_collate([item])
+    target_lerobot = raw_batch["action"].detach().cpu().numpy()[0]
+    if target_lerobot.shape != (ACTION_HORIZON, 6):
+        raise ValueError("T20.33 fixed dataset batch lacks the exact horizon-50 target")
+    target_mujoco = np.asarray(
+        [lerobot_to_mujoco(row.tolist()) for row in target_lerobot],
+        dtype=np.float64,
+    )
+    source_episode = verify_preflight(repo_root=REPO_ROOT)["source_episode"]
+    source_target = np.asarray(
+        [
+            row["actions"]["measured"]["values"]
+            for row in source_episode["frames"][FRAME_INDEX : FRAME_INDEX + ACTION_HORIZON]
+        ],
+        dtype=np.float64,
+    )
+    source_hash = hashlib.sha256(
+        canonical_json_bytes(source_target.astype(float).tolist())
+    ).hexdigest()
+    if (
+        source_hash != spec["source_batch"]["measured_action_chunk_sha256"]
+        or not np.allclose(target_mujoco, source_target, rtol=0.0, atol=1e-5)
+    ):
+        raise ValueError("T20.33 dataset batch substituted the source action target")
+
+    torch.manual_seed(TRAINING_SEED)
+    np.random.seed(TRAINING_SEED)
+    random.seed(TRAINING_SEED)
+    policy = make_policy(config, ds_meta=dataset.meta)
+    policy = policy.wrap_with_peft(
+        peft_cli_overrides={
+            "method_type": "LORA",
+            "r": LORA_RANK,
+            "lora_alpha": LORA_ALPHA,
+        }
+    ).to("mps")
+    trainable = [parameter for parameter in policy.parameters() if parameter.requires_grad]
+    if not trainable:
+        raise ValueError("T20.33 LoRA produced no trainable parameters")
+    preprocessor, postprocessor = make_pre_post_processors(
+        policy_cfg=config,
+        pretrained_path=snapshot,
+        dataset_stats=dataset.meta.stats,
+        preprocessor_overrides={
+            "device_processor": {"device": "mps"},
+            "normalizer_processor": {
+                "stats": dataset.meta.stats,
+                "features": {**policy.config.input_features, **policy.config.output_features},
+                "norm_map": policy.config.normalization_mapping,
+            },
+        },
+        postprocessor_overrides={
+            "unnormalizer_processor": {
+                "stats": dataset.meta.stats,
+                "features": policy.config.output_features,
+                "norm_map": policy.config.normalization_mapping,
+            }
+        },
+    )
+    for key in dataset.meta.camera_keys:
+        if raw_batch[key].dtype == torch.uint8:
+            raw_batch[key] = raw_batch[key].float().div(255.0)
+    batch = preprocessor(copy.deepcopy(raw_batch))
+    optimizer = torch.optim.AdamW(trainable, lr=LEARNING_RATE, weight_decay=0.0)
+
+    baseline = _objective_mean(policy, batch, torch, INFERENCE_SEEDS)
+    losses: list[float] = []
+    gradients: list[float] = []
+    policy.train()
+    for update in range(OPTIMIZER_UPDATES):
+        optimizer.zero_grad(set_to_none=True)
+        torch.manual_seed(TRAINING_SEED + update)
+        loss, _ = policy(batch)
+        if not torch.isfinite(loss):
+            raise ValueError(f"T20.33 non-finite objective at update {update + 1}")
+        loss.backward()
+        if not all(
+            torch.isfinite(parameter.grad).all().item()
+            for parameter in trainable
+            if parameter.grad is not None
+        ):
+            raise ValueError(f"T20.33 non-finite gradient at update {update + 1}")
+        norm = torch.nn.utils.clip_grad_norm_(trainable, 1.0)
+        if not torch.isfinite(norm):
+            raise ValueError(f"T20.33 non-finite gradient norm at update {update + 1}")
+        optimizer.step()
+        torch.mps.synchronize()
+        losses.append(float(loss.detach().cpu()))
+        gradients.append(float(norm.detach().cpu()))
+        if (update + 1) % 25 == 0:
+            print(update + 1, losses[-1], flush=True)
+    final = _objective_mean(policy, batch, torch, INFERENCE_SEEDS)
+    chunks = _decoded_chunks(
+        policy, preprocessor, postprocessor, raw_batch, target_mujoco, torch
+    )
+    RUN_ROOT.mkdir(parents=True, exist_ok=False)
+    adapter_root = RUN_ROOT / "adapter"
+    policy.save_pretrained(adapter_root, safe_serialization=True)
+    tree = _file_tree(adapter_root)
+    summary = sign_payload(
+        {
+            "schema_version": RUN_SCHEMA_VERSION,
+            "task_id": "T20.33",
+            "training_spec_identity_sha256": spec["identity_sha256"],
+            "authority_decision_identity_sha256": authority_identity,
+            "lerobot_stack_identity_sha256": stack["identity_sha256"],
+            "fixed_dataset_index": FRAME_INDEX,
+            "fixed_source_seed": SOURCE_SEED,
+            "action_horizon": ACTION_HORIZON,
+            "source_measured_action_chunk_sha256": source_hash,
+            "dataset_action_chunk_sha256": hashlib.sha256(
+                canonical_json_bytes(target_mujoco.astype(float).tolist())
+            ).hexdigest(),
+            "optimizer_update_count": OPTIMIZER_UPDATES,
+            "training_seed": TRAINING_SEED,
+            "learning_rate": LEARNING_RATE,
+            "baseline_objective_mean": baseline,
+            "final_objective_mean": final,
+            "per_update_objective": losses,
+            "gradient_norms_before_clip": gradients,
+            "decoded_action_chunks": chunks,
+            "checkpoint_tree": tree,
+            "checkpoint_identity_sha256": hashlib.sha256(
+                canonical_json_bytes(tree)
+            ).hexdigest(),
+            "optimizer_training": True,
+            "closed_loop_rollout": False,
+            "dataset_mutated": False,
+            "statistics_changed": False,
+            "twin_updated": False,
+            "simulation_policy_accepted": False,
+            "physical_actuation": False,
+            "external_compute_started": False,
+            "brev_compute_started": False,
+            "physical_transfer_ready": False,
+            "promotion_eligible": False,
+        }
+    )
+    dump_canonical_json(SUMMARY_PATH, summary)
+    verify_run(summary, spec=spec, authority_identity=authority_identity)
+    print(summary["identity_sha256"], flush=True)
+    return 0
+
+
+def _objective_mean(policy, batch, torch, seeds) -> float:
+    values = []
+    policy.eval()
+    with torch.no_grad():
+        for seed in seeds:
+            torch.manual_seed(seed)
+            loss, _ = policy(batch)
+            if not torch.isfinite(loss):
+                raise ValueError("T20.33 non-finite objective evaluation")
+            values.append(float(loss.detach().cpu()))
+    return float(sum(values) / len(values))
+
+
+def _decoded_chunks(policy, preprocessor, postprocessor, raw_batch, target, torch):
+    observation = {
+        key: copy.deepcopy(value)
+        for key, value in raw_batch.items()
+        if key != "action" and not key.startswith("action_")
+    }
+    processed = preprocessor(observation)
+    rows = []
+    policy.eval()
+    with torch.no_grad():
+        for seed in INFERENCE_SEEDS:
+            torch.manual_seed(seed)
+            policy.reset()
+            decoded = []
+            for _ in range(ACTION_HORIZON):
+                canonical = postprocessor(policy.select_action(processed))
+                values = canonical.detach().cpu().float().numpy().reshape(-1)
+                decoded.append(lerobot_to_mujoco(values.tolist()))
+            matrix = np.asarray(decoded, dtype=np.float64)
+            error = np.abs(matrix - target)
+            rows.append(
+                {
+                    "inference_seed": seed,
+                    "decoded_action_chunk_sha256": hashlib.sha256(
+                        canonical_json_bytes(matrix.astype(float).tolist())
+                    ).hexdigest(),
+                    "mean_absolute_error_rad": float(np.mean(error)),
+                    "maximum_absolute_error_rad": float(np.max(error)),
+                }
+            )
+    return rows
+
+
+def _file_tree(root: Path) -> list[dict[str, object]]:
+    rows = []
+    for path in sorted(root.rglob("*")):
+        if not path.is_file():
+            continue
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        rows.append(
+            {
+                "path": str(path.relative_to(root)),
+                "size_bytes": path.stat().st_size,
+                "sha256": digest,
+            }
+        )
+    return rows
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
