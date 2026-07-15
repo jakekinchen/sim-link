@@ -48,3 +48,13 @@ an optimizer coefficient, retry, threshold change, or policy replacement.
 No checkpoint tensor read, model construction, inference, optimizer, training,
 rollout, dataset/statistics mutation, Gate B amendment, second T20.36 attempt,
 policy acceptance, hardware, camera, serial, external compute, or Brev.
+
+## Result Boundary
+
+Signed audit `339a7229...`, preserved at `3bbdc64`, verifies the declared
+weighted-objective/physical-gate aliasing predicate. T20.36 improves the
+joint-weighted correction mean to `0.513119` of X while worsening raw
+correction to `1.545902`, standard objective to `12.118449`, and worst decoded
+error to `4.176295` times X; every decoded seed worsens. The result records
+that this is non-equivalence evidence, not gradient-level causality. Reviewer
+241 verifies T20.36a and routes Brief 193 to a pure Gate B retention contract.

@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "191",
-    "commit": "3e1f2bdb03ed0f95da002c36d29e132814372a06",
-    "reviewer_decision_id": "240",
-    "summary": "t20_36_verified_negative_gate_b_regressed_before_closed_loop"
+    "brief_id": "192",
+    "commit": "3bbdc644a3eb71ea503e193910efbfd6a9f04ceb",
+    "reviewer_decision_id": "241",
+    "summary": "t20_36a_weighted_objective_not_gate_equivalent_under_coverage"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36a",
-  "next_eligible_task": "T20.36a",
+  "current_task": "T20.36b",
+  "next_eligible_task": "T20.36b",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4123,15 +4123,51 @@
       "authority_not_granted": ["t20_36_second_attempt","additional_optimizer_training","gate_b_threshold_change","gate_c_execution","held_out_evaluation","gate_c_passed","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36a": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36"],
-      "active_brief_id": "192",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "192",
+      "review_decision_id": "241",
+      "source_commit": "3e1f2bdb03ed0f95da002c36d29e132814372a06",
+      "implementation_commits": ["3bbdc644a3eb71ea503e193910efbfd6a9f04ceb"],
+      "result": "signed audit proves the weighted correction mean is not Gate-B-equivalent under coverage: it improves to 0.513119 of X while raw correction worsens to 1.545902, standard objective worsens 12.118449-fold, and every decoded seed regresses",
+      "artifact": {
+        "path": "configurations/robot_lab/t20_36a_objective_interference_audit.json",
+        "schema_version": "scenesmith.t20_36a_objective_interference_audit.v1",
+        "identity_sha256": "339a72290b302a2751be02bbccc07ac9441e3b5db65f023741ce38ba190b73aa",
+        "file_sha256": "526f88fd114715bd210a2b1719db4d58ce9fd6e7afa79a7cddf1c7a2d856a707",
+        "size_bytes": 20116,
+        "campaign_to_source_standard_objective_ratio": 12.118449309582793,
+        "campaign_to_source_joint_weighted_correction_ratio": 0.5131189525382357,
+        "campaign_to_source_raw_correction_ratio": 1.5459016158478067,
+        "campaign_to_source_worst_action_error_ratio": 4.176295220662174,
+        "every_decoded_seed_maximum_worsened": true,
+        "gradient_norm_above_clip_count": 420,
+        "interference_classification": "weighted_objective_physical_gate_aliasing_under_coverage",
+        "selected_next_hypothesis": "design_gate_equivalent_retention_guard_before_any_training_proposal",
+        "checkpoint_read": false,
+        "model_loaded": false,
+        "model_inference": false,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "closed_loop_rollout": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["t20_36a_weighted_objective_gate_non_equivalence_verified","t20_36b_gate_equivalent_retention_guard_contract_routed"],
+      "authority_not_granted": ["checkpoint_tensor_read","model_load","model_inference","optimizer_creation","optimizer_training","t20_36_second_attempt","gate_b_threshold_change","gate_c_execution","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.36b": {
+      "state": "in_progress",
+      "depends_on": ["T20.36a"],
+      "active_brief_id": "193",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_commit": "3e1f2bdb03ed0f95da002c36d29e132814372a06",
+      "source_commit": "3bbdc644a3eb71ea503e193910efbfd6a9f04ceb",
       "implementation_commits": [],
-      "result": "optimizer-free audit of the signed T20.35x and T20.36 objective histories and Gate B outcomes is active; no model, checkpoint tensor, inference, optimizer, rollout, or gate change is permitted",
-      "authority_granted": ["read_and_classify_existing_signed_t20_35x_and_t20_36_evidence"],
+      "result": "pure Gate B retention decision contract is active; it may validate predeclared checkpoint evidence but cannot authorize a model, inference, optimizer, campaign, rollout, or gate change",
+      "authority_granted": ["design_and_test_gate_b_retention_decision_contract"],
       "authority_not_granted": ["checkpoint_tensor_read","model_load","model_inference","optimizer_creation","optimizer_training","t20_36_second_attempt","gate_b_threshold_change","gate_c_execution","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {

@@ -26,14 +26,13 @@ Narrative claims never override a closed or absent machine-readable grant.
 
 ## Active Boundary
 
-T20.36 is verified negative through signed result `02b543be...` and remote
-result commit `3e1f2bd`. Its sole 500-update campaign passed the unchanged
-standard-objective ratio but regressed all five decoded chunks above the
-0.05-rad action gate, so the runner stopped before every closed-loop seed.
-T20.36a is current under Brief 192. It may read and classify only the existing
-signed T20.35x and T20.36 evidence. It may not read checkpoint tensors, load a
-model, run inference or an optimizer, execute a rollout, amend a gate, or
-authorize a second campaign.
+T20.36 is verified negative through signed result `02b543be...`. T20.36a audit
+`339a7229...`, remotely preserved at `3bbdc64`, proves the weighted correction
+mean improved while raw correction, standard objective, and every decoded seed
+regressed. T20.36b is current under Brief 193. It may encode and test only a
+pure fail-closed checkpoint-retention decision using the unchanged Gate B
+conjunction. It may not read checkpoint tensors, load a model, run inference
+or an optimizer, execute a rollout, amend a gate, or authorize a campaign.
 
 The run remains simulation-only. Hardware, cameras, serial devices, physical
 motion, external compute, Brev, promotion, and physical-transfer authority are
@@ -63,9 +62,10 @@ Repeat while the run window and authority permit:
 
 - T20.35x's correction-only Gate B pass is historical capability evidence; it
   does not override T20.36's failure to retain Gate B under coverage.
-- T20.36a must distinguish a weighted-objective/physical-gate alias from broad
-  optimization regression using existing signed histories before any new
-  model or training proposal may be written.
+- T20.36a verifies weighted-objective/physical-gate non-equivalence under
+  coverage. T20.36b must encode actual standard-ratio plus five-seed physical
+  maxima as the retention decision; proxy losses may be reported but never
+  substitute for either Gate B conjunct.
 - Gate C opens only after Gate B is mechanically proven. A first learned
   closed-loop grasp must be labeled autonomous only when every action is policy
   owned and the strict-v2 evaluator passes.
