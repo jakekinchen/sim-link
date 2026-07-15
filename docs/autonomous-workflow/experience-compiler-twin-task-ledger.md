@@ -5,7 +5,7 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T23:27:47-05:00; no new major slice after 2026-07-15T22:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35, evening extension recorded 2026-07-15T10:20:00-05:00 for the MVP demo composition
-run_state: T20.35w audit e52d6d08... finds shoulder lift and wrist roll hold 80.0168 percent of physical squared error without normalized-state dominance; Reviewer 236 routes T20.35x correction design.
+run_state: T20.35x spec 96efc6d3..., authority a3a4eee7..., runtime 292a5b10..., and one-use permit c497dbed... are remotely preserved; Reviewer 237 authorizes exactly one local-MPS attempt.
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.35x in progress under Brief 190 for one separately reviewed current-path physical-gate-aligned joint-weighted correction with deterministic standard replay
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
@@ -13,7 +13,7 @@ evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: implement and test T20.35x joint/time weighting, signed spec, runtime preflight, and central authority; stop before model or optimizer until a fresh remotely preserved pre-run review
+next_step: consume exactly one T20.35x local-MPS training/evaluation attempt in the reviewed dependency surface, compose the signed Gate B result, and route only from that evidence
 ```
 
 ## Rules
@@ -738,6 +738,16 @@ deterministic standard replay. The original Gate B thresholds remain unchanged.
 Model/checkpoint access, optimizer, training, Gate C, hardware, external
 compute, and Brev stay closed pending implementation, authority composition,
 runtime preflight, and a fresh remotely preserved review.
+
+## 2026-07-15 - Reviewer 237 authorizes one T20.35x attempt
+
+Commits `1c0fc1a` and `ff36b1b` preserve the 50-state joint/time-weighted
+correction, exact spec `96efc6d3...`, training-only authority `a3a4eee7...`,
+runtime proof `292a5b10...`, and one-use permit `c497dbed...`. Twenty-two
+lineage tests pass. The normal runner rejects PyArrow 24 before attempt
+creation and passes on the reviewed PyArrow 25 surface. Exactly one local-MPS
+attempt is authorized. Gate C, hardware, physical transfer, promotion,
+external compute, and Brev remain closed.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 

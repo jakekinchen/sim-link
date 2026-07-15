@@ -55,3 +55,14 @@ objectives, gradients, checkpoint tensors, and five Gate B chunks verify
 exactly and remain finite. One signed result either passes Gate B or records
 the next smallest evidence-routed blocker. No result implies closed-loop or
 physical policy success.
+
+## Pre-run boundary
+
+Implementation commits `1c0fc1a` and `ff36b1b` are preserved on origin. The
+signed spec is `96efc6d3...`, central training-only authority is `a3a4eee7...`,
+dependency-complete runtime proof is `292a5b10...`, and the one-use permit is
+`c497dbed...`. Twenty-two lineage tests pass. The runner additionally proves
+that PyArrow 24 fails before any attempt directory, while the exact reviewed
+PyArrow 25 surface passes. Reviewer 237 authorizes exactly one local-MPS
+training/evaluation attempt. No checkpoint tensor, model, inference,
+optimizer, rollout, hardware, external compute, or Brev action has occurred.
