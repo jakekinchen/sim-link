@@ -21,8 +21,11 @@ proof states must remain distinct.
 ## Active Run Window
 
 - Actual start: `2026-07-15T07:27:47-05:00`.
-- No new major slice after: `2026-07-15T14:42:47-05:00`.
-- Hard closeout: `2026-07-15T15:27:47-05:00`.
+- No new major slice after: `2026-07-15T22:42:47-05:00`.
+- Hard closeout: `2026-07-15T23:27:47-05:00`.
+- Owner evening extension recorded at `2026-07-15T10:20:00-05:00` for the
+  tonight MVP demo composition in the MVP execution plan; scope, gates, and
+  all closed authorities are unchanged.
 - This owner-requested continuation is simulation-only diagnostic and bounded
   training work under M20. The active loop is
   `docs/autonomous-workflow/t20-capability-ladder-goal-loop.md`; it starts at

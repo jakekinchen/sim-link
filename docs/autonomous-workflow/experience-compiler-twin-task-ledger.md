@@ -4,7 +4,7 @@ Updated: 2026-07-15
 
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
-run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T15:27:47-05:00; no new major slice after 2026-07-15T14:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35
+run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T23:27:47-05:00; no new major slice after 2026-07-15T22:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35, evening extension recorded 2026-07-15T10:20:00-05:00 for the MVP demo composition
 run_state: T20.35g pre-run is verified through implementation 88602b0, spec be1c50f3..., permit ca3dbd3f..., and Reviewer 208; exactly one local-MPS inference-only 10/20/50-step evaluation is authorized after remote preservation.
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.35g in progress under Brief 173 for a separately reviewed inference-only 10-versus-20-versus-50-step denoising-cadence discriminator
