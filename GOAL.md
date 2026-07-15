@@ -200,6 +200,14 @@ threshold passes. The corrected class is multi-joint output-channel
 concentration. T20.35f is next as a model-free audit of normalized-space
 residuals and target saturation for those two channels before any decoder,
 normalization, projection, threshold, training, or Gate C correction.
+T20.35f is now `verified` through audit `85c24c5c`, implementation `dea54fb`,
+and Reviewer Decision 207. Exact PI0.5 quantile-space conversion preserves all
+164 wrist-roll and 121 gripper physical exceedances. The normalizer does not
+clip and neither channel hits a physical bound. Systematic bias explains
+84.81% and 82.33% of their normalized squared error, versus 15.19% and 17.67%
+seed variance. T20.35g is therefore next as a separately reviewed,
+inference-only denoising-cadence discriminator against the pinned 10-step
+default; no new training or Gate C work is justified yet.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

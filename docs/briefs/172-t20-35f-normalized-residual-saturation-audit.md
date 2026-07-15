@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-15
 
-**State:** `in_progress`
+**State:** `verified`
 
 ## Objective
 
@@ -56,3 +56,16 @@ Model construction; inference; optimizer; training; checkpoint or dataset
 mutation; denoising-cadence execution itself; normalization, coordinate,
 threshold, or action correction; Gate C; rollout; hardware; external compute;
 Brev; transfer; promotion; or policy acceptance.
+
+## Result
+
+Audit `85c24c5cd9a08c1a8153361bbdebaab0cedde28c5c1ec1a79bd1544924354432`
+reproduces the 164 wrist-roll and 121 gripper physical error exceedances in
+exact PI0.5 QUANTILES space. The source transform does not clip, and neither
+channel has a target or decoded physical-bound hit. Wrist roll has 39/50 target
+steps outside the q01-q99 reference range and 84.81% of normalized squared
+error in systematic bias; gripper has 32/50 and 82.33%. Seed variance accounts
+for only 15.19% and 17.67%. The predeclared route is therefore a separately
+reviewed, no-optimizer denoising-cadence discriminator against PI0.5's pinned
+10-step default. No model, inference, optimizer, checkpoint access, dataset
+write, action correction, or Gate C work occurred.
