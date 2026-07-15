@@ -52,3 +52,16 @@ joint before selecting any correction.
 Optimizer construction; training; checkpoint mutation; threshold relaxation;
 new batch or seed; action correction; Gate C; campaign; rollout; hardware;
 external compute; Brev; transfer; promotion; or global authority change.
+
+## Pre-Run Boundary
+
+Implementation `7162497b39d7e03a880b47f11ec60396928745e2` is preserved on
+origin. Evaluation spec
+`b083c59393a0eb9027bb07253357e8c7ec9fb1f240c58118ad8d49fa1067c033`
+and narrowed permit
+`bd3b093308048bafa02b26f81392a27b07ce617546706da94c9da65ed2f0e260`
+bind the immutable checkpoint tree and authorize exactly one model-load/
+inference replay. Reviewer 204 accepts the boundary after 76 relevant tests.
+The runner verifies the 2.77 GB checkpoint tree before writing its attempt
+marker, imports no optimizer, and blocks interpretation unless all five prior
+hashes reproduce. No T20.35d model construction or inference occurred here.

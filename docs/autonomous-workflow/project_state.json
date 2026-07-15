@@ -2907,7 +2907,31 @@
       "authority_granted": ["t20_35c_gate_b_mixed_negative_result_verified"],
       "authority_not_granted": ["gate_b_passed","gate_c_execution_correction","additional_optimizer_training","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
-    "T20.35d": {"state":"in_progress","depends_on":["T20.35c"],"active_brief_id":"170","latest_verified_brief_id":null,"review_decision_id":null,"result":"in-progress optimizer-free deterministic replay of the immutable expert-only checkpoint and per-seed/per-timestep/per-joint residual localization; model construction and inference remain closed until the tested evaluation boundary is reviewed and remotely preserved","authority_granted":[],"authority_not_granted":["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
+    "T20.35d": {
+      "state": "in_progress",
+      "depends_on": ["T20.35c"],
+      "active_brief_id": "170",
+      "latest_verified_brief_id": null,
+      "review_decision_id": "204",
+      "result": "authorized pre-run optimizer-free exact replay and decoded-action residual localization; no T20.35d model construction or inference has occurred",
+      "pre_run_artifact": {
+        "implementation_commit": "7162497b39d7e03a880b47f11ec60396928745e2",
+        "evaluation_spec_path": "configurations/robot_lab/t20_35d_residual_localization_spec.json",
+        "evaluation_spec_identity_sha256": "b083c59393a0eb9027bb07253357e8c7ec9fb1f240c58118ad8d49fa1067c033",
+        "evaluation_permit_path": "configurations/robot_lab/t20_35d_evaluation_permit.json",
+        "evaluation_permit_identity_sha256": "bd3b093308048bafa02b26f81392a27b07ce617546706da94c9da65ed2f0e260",
+        "checkpoint_identity_sha256": "439ae119842fe5f9639b3e3e9b76f029678fd4b4257dfd6308253f6d2832c29f",
+        "exactly_one_replay_permitted": true,
+        "model_loaded": false,
+        "model_inference": false,
+        "optimizer_training": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["simulation_model_load","simulation_model_inference"],
+      "authority_not_granted": ["optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],

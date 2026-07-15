@@ -5,7 +5,7 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T15:27:47-05:00; no new major slice after 2026-07-15T14:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35
-run_state: T20.35c is verified mixed-negative through result f6f6b024..., run 9b1af8ee..., checkpoint 439ae119..., and Reviewer 203; objective ratio 0.004252 passes but five maximum action errors 0.091908-0.150321 fail.
+run_state: T20.35d pre-run implementation 7162497, evaluation spec b083c593..., and optimizer-free permit bd3b0933... are remotely preserved and accepted by Reviewer 204; no T20.35d model or inference has run.
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.35d in progress under Brief 170 for optimizer-free exact checkpoint replay and per-seed/per-timestep/per-joint decoded-action residual localization
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
@@ -13,7 +13,7 @@ evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: implement and test the fail-closed T20.35d replay/localization report, then separately review and remotely preserve its evaluation-only boundary before model construction
+next_step: confirm Reviewer 204 on origin, consume the one replay marker, reproduce all five decoded hashes, and adjudicate the signed residual-localization report without an optimizer
 ```
 
 ## Rules
@@ -158,6 +158,15 @@ rad threshold exceedance by seed, timestep, and joint. A separately reviewed
 evaluation-only boundary must be remotely preserved before model construction
 or inference. Training, checkpoint mutation, Gate C work, policy acceptance,
 hardware, external compute, and Brev remain closed.
+
+## 2026-07-15 - T20.35d replay boundary accepted
+
+Implementation `7162497` and spec `b083c593...` bind the exact T20.35c result,
+run, 2.77 GB checkpoint tree, dataset target, seeds, hashes, and metrics.
+Permit `bd3b0933...` narrows the active authority to one model-load/inference
+replay with no optimizer or checkpoint mutation. Seventy-six relevant tests
+pass. Reviewer 204 requires exact reproduction before any residual
+interpretation. No T20.35d model construction or inference has occurred.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
