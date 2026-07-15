@@ -1,0 +1,117 @@
+{
+  "action_time_to_time_mlp_name_mismatch": {
+    "model.action_time_mlp_in": "model.time_mlp_in",
+    "model.action_time_mlp_out": "model.time_mlp_out"
+  },
+  "actual_pi05_action_time_modules": [
+    "model.action_in_proj",
+    "model.action_out_proj",
+    "model.time_mlp_in",
+    "model.time_mlp_out"
+  ],
+  "all_real_pi05_action_time_pathways_wrapped": false,
+  "brev_compute_started": false,
+  "checkpoint_mutated": false,
+  "closed_loop_rollout": false,
+  "corrected_real_module_coverage": [
+    {
+      "module_path": "model.action_in_proj",
+      "wrapped_as_lora_pair": true
+    },
+    {
+      "module_path": "model.action_out_proj",
+      "wrapped_as_lora_pair": true
+    },
+    {
+      "module_path": "model.time_mlp_in",
+      "wrapped_as_lora_pair": false
+    },
+    {
+      "module_path": "model.time_mlp_out",
+      "wrapped_as_lora_pair": false
+    }
+  ],
+  "decision": "pi05_peft_coverage_fail",
+  "declared_default_peft_modules": [
+    "model.state_proj",
+    "model.action_in_proj",
+    "model.action_out_proj",
+    "model.action_time_mlp_in",
+    "model.action_time_mlp_out"
+  ],
+  "external_compute_started": false,
+  "identity_sha256": "446a06860663be438b3dc1c87e4d2571a9cd4866b1d16feaa1e279e06cfe10f6",
+  "lerobot_revision": "e40b58a8dfa9e7b86918c374791599d070518d11",
+  "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "missing_real_pi05_action_time_modules": [
+    "model.time_mlp_in",
+    "model.time_mlp_out"
+  ],
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_training": false,
+  "patch_set_sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "pi05_model_source_path": "external/lerobot/src/lerobot/policies/pi05/modeling_pi05.py",
+  "pi05_model_source_sha256": "b05b6afe70a4a09f2eb610827b9ae09e8b08e43cd748d435e47879344e3fa619",
+  "promotion_eligible": false,
+  "real_modules_missing_from_default_peft_names": [
+    "model.time_mlp_in",
+    "model.time_mlp_out"
+  ],
+  "saved_lora_module_paths": [
+    "model.action_in_proj",
+    "model.action_out_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.v_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.q_proj",
+    "model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.v_proj"
+  ],
+  "schema_version": "scenesmith.t20_35b_pi05_coverage_correction.v1",
+  "scope": "optimizer_free_pi05_source_grounded_peft_coverage_correction",
+  "selected_next_hypothesis": "gate_b_expert_only_unfreeze_capacity_ceiling",
+  "simulation_policy_accepted": false,
+  "stale_or_nonexistent_declared_peft_modules": [
+    "model.action_time_mlp_in",
+    "model.action_time_mlp_out",
+    "model.state_proj"
+  ],
+  "state_proj_intentionally_absent": true,
+  "supersedes_t20_35a_audit_identity_sha256": "d1109ae8ea393b4577444d54f1675a78993e5c09de3c9ee87a0f78cf9b1b48a1",
+  "t20_35a_generic_five_pathway_semantics_superseded": true,
+  "task_id": "T20.35b",
+  "upstream_source_mutated": false
+}
