@@ -19,6 +19,316 @@ in the same commit as the work.
 | ST12 | Episode compare: two mirrors side-by-side, synced scrub | done | live browser verified: distinct pickers, side-by-side mirrors, shared play/end, exact 4.2s dual scrub |
 | ST13 | Event Ledger & Inspector: canonical workflow timeline, provenance, filters, full-text source inspection | done | 656 live docs across 4 channels; search/filter, rendered/raw source, SHA-256 consistency, and observation-time disclaimer browser-verified |
 | ST14 | Native shell lifecycle diagnostics: visible sidecar startup, health, logs, and exit state | done | signed app/AX verified: exact ready/fault/exit states, bounded lifecycle logs, named port conflict, and shutdown cleanup; no webview process capability |
+| ST15A | Event-sourced simulation spine: approve architecture and authority boundary | pending | planning only; requires an explicit owner-approved charter expansion before any command endpoint or runtime mutation is implemented |
+| ST15B | Event contracts, SQLite append-only store, and deterministic replay | pending | blocked by ST15A; schemas, idempotency, per-machine ordering, migrations, and replay tests first |
+| ST15C | Deterministic simulated machines, state machines, and command router | pending | blocked by ST15B; simulation-only actors and commands; no hardware, training, promotion, or goal-loop authority |
+| ST15D | Runtime REST/WebSocket transport and 5-10 Hz telemetry | pending | blocked by ST15C; cursor catch-up plus live push; no Kafka/Redpanda until the end-to-end local loop is proven |
+| ST15E | Studio Operations view and runtime-event inspector projection | pending | blocked by ST15D; operational stream remains visually and semantically separate from signed repository evidence |
+| ST15F | End-to-end replay/idempotency/staleness demo and proof package | pending | blocked by ST15E; browser demo, restart/replay equality, regression gate, documented limits, scoped commits, and remote preservation |
 
 Rules: never touch governed paths (see GOAL.md), never push to
 `codex/pi05-autolearn-loop`, commit small and often to `studio/app-shell`.
+
+## ST15 - Event-Sourced Command And Telemetry Spine
+
+### Why this is queued
+
+The proposed feature is the strongest next backend/system-design interview
+signal: a live operational runtime where commands, state transitions, and
+telemetry are represented as durable events and the current state can be
+rebuilt by replay. It is a genuinely new capability, not a rename or minor
+upgrade of ST13.
+
+The external feature proposal described a repository with a Hydra-style batch
+runner and no FastAPI or streaming dependency. That premise is not fully
+current for SceneSmith Studio: `apps/studio/server/main.py` is already a
+FastAPI transport and `apps/studio/server/pyproject.toml` already includes
+FastAPI and Uvicorn. The important capability gap is still real: Studio has no
+database event store, command router, simulated-machine state machines,
+durable command lifecycle, replay engine, or WebSocket telemetry stream.
+
+### What ST13 implemented - and what it did not
+
+ST13 is a repository-backed evidence projection and source inspector:
+
+- It indexes four canonical Markdown stores: briefs, reviewer decisions,
+  session logs, and manager interventions.
+- Its identifier is `kind/filename`; the three-digit filename number is local
+  to a document channel, not a global runtime sequence.
+- It computes exact source SHA-256, byte count, title, optional decision, and
+  optional recorded date.
+- It orders the combined rail by filesystem modification time and explicitly
+  labels that value `filesystem_mtime_observation_not_evidence_time`.
+- It serves a bounded, filename-only, path-whitelisted read API and verifies
+  that the indexed hash still matches the document opened in the inspector.
+- The web client refreshes `/api/events` every five seconds. This is 0.2 Hz
+  REST polling of workflow documents, not 5-10 Hz machine telemetry.
+- Its tests cover source fidelity, bounded limits, malformed paths, symlink
+  escape rejection, and whitelisted document access.
+
+ST13 does **not** append events, persist operational state, accept machine
+commands, assign command IDs, expose command lifecycle events, maintain a
+per-machine sequence, reject stale telemetry, publish over WebSocket, or
+rebuild state by replay. Its signed-artifact provenance and fail-closed access
+controls should be preserved as strengths, but they do not constitute event
+sourcing.
+
+### Authority decision required before implementation
+
+This queue entry is a design record, not implementation authority. The current
+Studio charter permits only two no-authority writes: workcell fixture builds
+and mirror renders. Adding `start`, `pause`, `resume`, `reset`, `estop`,
+`move_object`, or `run_task` as mutating Studio endpoints would violate that
+charter unless the owner explicitly approves a new slice and amends the
+boundary.
+
+If approved, the safe architecture is a separate **simulation-only runtime
+producer** with Studio as a read-only subscriber/projection:
+
+```text
+simulation runtime (new authority-owning service)
+  commands -> router -> machine state machines -> append-only SQLite events
+                               |                         |
+                               |                         +-> deterministic replay
+                               +-> 5-10 Hz telemetry -> WebSocket
+                                                            |
+                                                            v
+SceneSmith Studio (read-only consumer)
+  Operations view + runtime inspector     existing signed-evidence Event Ledger
+              operational data            repository evidence / authority records
+```
+
+Non-negotiable proof separation:
+
+- Every runtime event must say `source: simulation`.
+- Operational events must never be relabelled as signed repository evidence,
+  physical proof, policy success, promotion evidence, or authority.
+- Physical robot access, serial/camera access, optimizer training, checkpoint
+  promotion, calibration mutation, and the autonomous goal loop remain out of
+  scope and closed.
+- The existing `/api/events` evidence registry remains repository-backed and
+  read-only. Runtime events receive a separate route and UI lane.
+- The existing two Studio actions remain the only writes until ST15A records a
+  reviewed replacement boundary.
+
+### Proposed code footprint after ST15A approval
+
+Keep the capability isolated rather than folding command state into the
+artifact registry:
+
+```text
+apps/studio/runtime/
+  simulator/
+    machine_sim.py
+    scenarios.py
+  control/
+    command_models.py
+    state_machine.py
+    command_router.py
+  events/
+    event_store.py
+    schemas.py
+    replay.py
+  api/
+    server.py
+    websocket.py
+  tests/
+    test_command_idempotency.py
+    test_state_transitions.py
+    test_stale_telemetry.py
+    test_event_ordering.py
+    test_replay.py
+    test_websocket_catchup.py
+```
+
+The exact footprint is part of ST15A. No file in this proposed tree should be
+created before the authority decision is recorded.
+
+### Minimum worthwhile runtime
+
+1. Run three deterministic simulated workcell/robot actors concurrently.
+2. Emit telemetry at a configured 5-10 Hz per actor.
+3. Support exactly these commands for the first slice:
+   `start`, `pause`, `resume`, `reset`, `estop`, `move_object`, and
+   `run_task`.
+4. Give every submitted command a UUID `command_id`. A repeated ID with the
+   same payload returns the prior result without another state transition; a
+   repeated ID with a different payload is rejected as a conflict.
+5. Represent every command outcome with durable lifecycle events:
+   `command.accepted`, `command.rejected`, `command.executing`,
+   `command.succeeded`, or `command.failed`.
+6. Persist all command, transition, and telemetry events in SQLite. Use WAL
+   mode and transactions; keep Postgres as a later adapter, not an MVP
+   dependency.
+7. Stream new events and latest derived machine state over WebSocket, with a
+   durable cursor so reconnecting clients fetch the missed range before
+   resuming live delivery.
+8. Rebuild the same machine state deterministically from sequence zero after a
+   process restart.
+
+Do not add Kafka, Redpanda, RabbitMQ, a schema registry, distributed workers,
+or cloud infrastructure to the minimum slice. The interview story is the
+working operational loop, failure behavior, and replay proof; an installed
+broker without an end-to-end demo is weaker evidence.
+
+### Event and command contracts
+
+Every stored event should use one versioned envelope:
+
+```text
+schema_version
+event_id
+event_type
+machine_id
+sequence
+occurred_at
+ingested_at
+source                 # always simulation in this slice
+command_id             # nullable only for autonomous telemetry/ticks
+correlation_id
+causation_id
+payload
+```
+
+Required invariants:
+
+- `event_id` is globally unique.
+- `(machine_id, sequence)` is unique and strictly increasing without duplicate
+  application.
+- `command_id` is the idempotency boundary for command submission.
+- `occurred_at` records simulated/event time; `ingested_at` records store time.
+  Neither may be inferred from filesystem metadata.
+- All timestamps are timezone-aware UTC values and all schemas carry an
+  explicit version.
+- Non-finite pose, health, or numeric payload values fail validation.
+- Unknown event versions and unknown state transitions fail closed.
+
+Every telemetry payload must include:
+
+```text
+machine_id
+sequence
+timestamp
+mode
+pose
+health
+source                 # simulation
+```
+
+The initial machine modes are `idle`, `running`, `paused`, `estopped`, and
+`faulted`. Transition rules must be explicit and tested. At minimum, pause is
+valid only from running, resume only from paused, estop preempts any active
+mode, and an estopped actor cannot run or move until a successful reset.
+Rejected commands are terminal and must not mutate actor state.
+
+### Persistence and replay contract
+
+- SQLite is authoritative only for the new simulation runtime. It does not
+  supersede signed repository artifacts or `project_state.json`.
+- The `events` table is append-only. State is a projection, not a mutable
+  substitute for the log.
+- A transaction allocates the next per-machine sequence and appends the event
+  atomically.
+- Replay starts from sequence zero for the MVP. Snapshots may be added only
+  after plain replay is correct and measured to need optimization.
+- A process restart followed by replay must produce byte-equivalent normalized
+  machine state to the pre-restart projection.
+- Corrupt, duplicated, missing, out-of-order, or unknown-version events fail
+  replay closed with a named diagnostic; they are never silently skipped.
+
+### Proposed transport after approval
+
+The transport contract should remain small:
+
+- `POST /runtime/commands` - submit one versioned command with `command_id`.
+- `GET /runtime/machines` - current derived state for all simulated actors.
+- `GET /runtime/events?after=<cursor>&limit=<n>` - bounded ordered catch-up.
+- `GET /runtime/replay/{machine_id}` - read-only replay result and diagnostics.
+- `WS /runtime/stream?after=<cursor>` - missed-event catch-up followed by live
+  events and latest-state projections.
+
+These routes are proposals only. They must not be added to the current FastAPI
+app until ST15A approves the new mutation boundary. Validation errors,
+transition rejection, duplicate command IDs, and stale cursors must have
+stable typed responses rather than generic 500 errors.
+
+### Studio Operations view
+
+ST15E should reuse the visual idiom and inspector ergonomics of ST13 without
+merging the truth domains:
+
+- Three actor cards showing mode, last sequence, pose summary, health, and
+  telemetry freshness.
+- A simulation-only command composer with visible `command_id` and lifecycle.
+- A live event rail with machine, event type, sequence, and correlation
+  filters.
+- A raw/structured payload inspector plus replay position.
+- Reconnect state, cursor lag, stale telemetry, and server fault indicators.
+- Persistent `SIMULATION ONLY - OPERATIONAL DATA, NOT REPOSITORY EVIDENCE`
+  labelling.
+- No physical robot controls and no implication that `estop` affects real
+  hardware. The demo estop is a simulated state transition only.
+
+The existing Event Ledger continues to inspect briefs, reviews, session logs,
+and manager interventions. Cross-links may connect a runtime command to a
+later signed artifact by explicit identifier, but neither side may manufacture
+or infer the other's authority.
+
+### Required tests
+
+Tests are part of the feature, not follow-up polish:
+
+- **Command idempotency:** identical `command_id` and payload apply once and
+  return the original lifecycle; conflicting reuse is rejected.
+- **State transitions:** every valid and invalid mode/command pair, including
+  estop preemption and reset recovery.
+- **Stale telemetry:** duplicate or lower sequences do not regress current
+  state and produce a named rejection/diagnostic.
+- **Ordering:** concurrent commands preserve unique monotonic per-machine
+  sequence numbers.
+- **Replay:** full replay equals the live projection before and after restart.
+- **Failure replay:** rejected and failed commands remain visible but do not
+  apply successful state changes.
+- **WebSocket catch-up:** disconnect, produce events, reconnect from cursor,
+  receive each missing event exactly once in order, then continue live.
+- **Validation:** malformed IDs, timestamps, poses, non-finite values, unknown
+  actors, unknown schemas, and oversized payloads fail closed.
+- **Proof boundary:** every actor/event is simulation-labelled and no runtime
+  path invokes hardware, training, promotion, existing no-authority scripts,
+  or governed goal-loop writes.
+
+### ST15F acceptance and demo proof
+
+The umbrella feature is complete only when all of the following agree:
+
+1. Three actors run together for at least 60 seconds at the configured rate
+   without sequence collisions or unbounded memory growth.
+2. The UI visibly demonstrates start, pause, resume, move, task success, task
+   failure, estop rejection behavior, reset, and command-ID deduplication.
+3. The database contains every demonstrated command lifecycle and telemetry
+   event in ordered form.
+4. A WebSocket disconnect/reconnect visibly catches up from its cursor without
+   gaps or duplicates.
+5. The runtime is stopped and restarted; replay reconstructs the same
+   normalized state and the test asserts equality.
+6. The existing `/api/events` signed-artifact ledger and the two existing
+   no-authority actions remain behaviorally unchanged.
+7. Focused runtime tests, full Studio server tests, `bun run build`, browser
+   inspection with real runtime data, and an adversarial same-agent review are
+   green.
+8. `TASKS.md` states, schema documentation, demo commands, limits, and failure
+   semantics match the implementation.
+9. Each verified phase is committed in a small scoped commit, pushed only to
+   `studio/app-shell`, and confirmed present on the remote branch.
+
+### Explicit non-goals for the first slice
+
+- Kafka, Redpanda, RabbitMQ, or another external broker.
+- Physical robot, camera, serial, servo-bus, or leader/follower access.
+- Real emergency-stop or safety certification claims.
+- Optimizer training, dataset mutation, checkpoint promotion, or authority
+  composition.
+- Replacing the repository/signed-artifact source of truth.
+- Authentication, multi-tenant deployment, high availability, or cloud
+  infrastructure.
+- Native Mac packaging work; the target surface is the localhost web app.
