@@ -299,10 +299,9 @@ def build_result(
             "objective_ratio_within_threshold": objective_pass,
             "gate_b_one_batch_memorization_passed": passed,
             "decision": "gate_b_pass" if passed else "gate_b_fail",
-            "selected_next_hypothesis": (
-                "gate_b_expert_only_capacity_ceiling_pass_route_t20_36"
-                if passed
-                else "gate_b_expert_only_capacity_ceiling_fail_route_objective_floor_audit"
+            "selected_next_hypothesis": _next_hypothesis(
+                action_pass=action_pass,
+                objective_pass=objective_pass,
             ),
             "optimizer_training": True,
             "closed_loop_rollout": False,
@@ -461,6 +460,16 @@ def _finite(value: Any, label: str) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(float(value)):
         raise ValueError(f"T20.35c {label} must be finite")
     return float(value)
+
+
+def _next_hypothesis(*, action_pass: bool, objective_pass: bool) -> str:
+    if action_pass and objective_pass:
+        return "gate_b_expert_only_capacity_ceiling_pass_route_t20_36"
+    if objective_pass:
+        return "gate_b_objective_pass_action_fail_route_decoded_action_residual_localization"
+    if action_pass:
+        return "gate_b_action_pass_objective_fail_route_objective_floor_audit"
+    return "gate_b_expert_only_both_fail_route_loss_action_attainability_audit"
 
 
 def _sha(value: Any, label: str) -> str:

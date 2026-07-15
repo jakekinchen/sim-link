@@ -128,7 +128,7 @@ class T2035CExpertOnlyCapacityCeilingTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 self._verify_run(sign_payload(drift), spec)
 
-    def test_result_routes_gate_b_pass_or_objective_floor_audit(self) -> None:
+    def test_result_routes_each_gate_combination(self) -> None:
         spec = self._spec()
         passing_run = self._run(spec=spec, max_error=0.04, final=0.09)
         passing = self._result(spec, passing_run)
@@ -145,12 +145,27 @@ class T2035CExpertOnlyCapacityCeilingTests(unittest.TestCase):
             t20_33_spec=T20_33_SPEC,
             correction=CORRECTION,
         )
-        failing_run = self._run(spec=spec, max_error=0.051, final=0.11)
-        failing = self._result(spec, failing_run)
-        self.assertFalse(failing["gate_b_one_batch_memorization_passed"])
+        action_only_failure = self._result(
+            spec, self._run(spec=spec, max_error=0.051, final=0.09)
+        )
         self.assertEqual(
-            failing["selected_next_hypothesis"],
-            "gate_b_expert_only_capacity_ceiling_fail_route_objective_floor_audit",
+            action_only_failure["selected_next_hypothesis"],
+            "gate_b_objective_pass_action_fail_route_decoded_action_residual_localization",
+        )
+        objective_only_failure = self._result(
+            spec, self._run(spec=spec, max_error=0.04, final=0.11)
+        )
+        self.assertEqual(
+            objective_only_failure["selected_next_hypothesis"],
+            "gate_b_action_pass_objective_fail_route_objective_floor_audit",
+        )
+        both_fail = self._result(
+            spec, self._run(spec=spec, max_error=0.051, final=0.11)
+        )
+        self.assertFalse(both_fail["gate_b_one_batch_memorization_passed"])
+        self.assertEqual(
+            both_fail["selected_next_hypothesis"],
+            "gate_b_expert_only_both_fail_route_loss_action_attainability_audit",
         )
 
     def test_nonfinite_and_checkpoint_mutation_fail_closed(self) -> None:
