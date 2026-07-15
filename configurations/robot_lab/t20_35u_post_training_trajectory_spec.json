@@ -1,0 +1,85 @@
+{
+  "active_action_dimension_count": 6,
+  "active_noise_scale": 0.0,
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "base_noise_sha256_by_seed": [
+    "7eb7dff02036ff9e333e87717b64532b08bdfb9a703ae0a3be907967c387812e",
+    "78f970b711b4bf49a38ad18fd442b9b3c0763555f849425a387c458464bad707",
+    "52128e7e1595282861bd968f7c35a69729be060468722a30a065726db59a11b6",
+    "406784a0ca3ed2513580aee22e11351d2945e7e6c15b4833ac3a08b8882dc89f",
+    "01597685ad0d3db1f3446b8393959a27ac63766a7e063566b2be67cdff10ab3f"
+  ],
+  "brev_compute_started": false,
+  "checkpoint_identity_sha256": "aeef380be01c5d63b7f87cb5e32a72ef6d34822ab9628e6ab447c716bc2e9191",
+  "checkpoint_mutated": false,
+  "checkpoint_tree": [
+    {
+      "path": "time_normalized_standard_replay_config.json",
+      "sha256": "b1a2ad4ea0007fe17000e42df951eb2ba44988df5d0e759792be558678099be4",
+      "size_bytes": 64180
+    },
+    {
+      "path": "time_normalized_standard_replay_model.safetensors",
+      "sha256": "833bd04a9b0d2f587cdd57b08a0444e4517e02ec149e93a7ea342dff9477e905",
+      "size_bytes": 2773721000
+    }
+  ],
+  "closed_loop_rollout": false,
+  "dataset_action_chunk_sha256": "5698babc07b2eebc8a3a96d33b28f03bbb33f1bec9b83a97d4e4f8a325c36b7e",
+  "dataset_mutated": false,
+  "external_compute_started": false,
+  "identity_sha256": "2575861c116db18ba096b91398ac7acea5dbcc53ee7261fff24f3bf9473674df",
+  "inference_seeds": [
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725
+  ],
+  "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "material_active_target_residual_worsening_threshold": 0.01,
+  "material_state_displacement_threshold": 0.01,
+  "maximum_action_dimension_count": 32,
+  "model_inference": false,
+  "model_loaded": false,
+  "new_decoded_action_sha256_by_seed": [
+    "d07362043763c235ea3c2ad0162bf734972bd176862d98a5289dc3393d849769",
+    "04de6188df4bd6f2f54bd66cd5deec4ec5bf910371ce018574edba921f3c79c1",
+    "d78f6ca8d1a2a99aff4db0ebda2684be9849543b939767a95afdc683e91d7658",
+    "1a374078e46525a13bccb2069c49c7cc987fb60ced24fa7b7c2430a896be2219",
+    "68cb77952f3c8e1d4c5819d32a67cc441f6df390a2576ef31fb8c309728c5343"
+  ],
+  "normalized_padded_target_sha256": "b7c734917c478c2cff4662cfe6e7b150b140359fecb164b93dfeed98a4f45517",
+  "num_inference_steps": 10,
+  "optimizer_training": false,
+  "padded_noise_scale": 1.0,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "required_python_major_minor": [
+    3,
+    12
+  ],
+  "sampler_mutated": false,
+  "sampler_source_sha256": "006fee5765b235dd66c55f16d78a1e296dc320667a02608c68a057d72d70bde0",
+  "schema_version": "scenesmith.t20_35u_post_training_trajectory_spec.v1",
+  "scope": "one_inference_only_balanced_checkpoint_source_target_trajectory_comparison",
+  "simulation_policy_accepted": false,
+  "source_decoded_action_sha256_by_seed": [
+    "c3461d7f41e8341f332e3217fc365c57eed621614dab0891f50f0c63934cc48e",
+    "e4c4969b8e4ba67d50a633ea5bed93d32e5e0df10b8b1296d0b9fd24fa1227bf",
+    "50b8c1bce9050a419d8ba6d8cd13ed76061dee7d25b54b86afa4616754bdc1d0",
+    "94c1c342a7ea9b0265a639fdc21dd81bfaf2b2962d1aa43ff87ae932eba3426b",
+    "5741e77fa76d19795915e1dd7eb977a9d3f62e9a765e86e55a7ea6d346659b5e"
+  ],
+  "statistics_changed": false,
+  "t20_35o_result_identity_sha256": "5c5b41b99d83b1e5116195bab551277d3b65126066717823342030b23391a582",
+  "t20_35q_result_identity_sha256": "6ba4954cd850abe69cf0de838740dab3b976ca277cb08360ec2e29ec0011f40b",
+  "t20_35q_spec_identity_sha256": "fdb2fe3e4cbc70a87d09d297ded8fa64fc8d6caa4b94818af435d94b0945f05d",
+  "t20_35t_result_identity_sha256": "f63ee934d44ec6993f6e589d607fc8469f1aab4681c1b229e4d5c53e9264d38c",
+  "t20_35t_run_identity_sha256": "b5da8ab3f75d6232462ccdbe08179df718737883e92b8c89d14e26739b09b810",
+  "task_id": "T20.35u"
+}

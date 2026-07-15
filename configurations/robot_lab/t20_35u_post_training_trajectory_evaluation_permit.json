@@ -1,0 +1,34 @@
+{
+  "active_noise_scale": 0.0,
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "brev_compute_authorized": false,
+  "checkpoint_mutation_authorized": false,
+  "closed_loop_rollout_authorized": false,
+  "dataset_mutation_authorized": false,
+  "evaluation_spec_identity_sha256": "2575861c116db18ba096b91398ac7acea5dbcc53ee7261fff24f3bf9473674df",
+  "exactly_one_evaluation_attempt_authorized": true,
+  "external_compute_authorized": false,
+  "identity_sha256": "bda88c46369e5b8ecb06720dab3e77aa2628af65465e27918d6ce97f66717924",
+  "inference_seeds": [
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725
+  ],
+  "inherited_authority_decision_identity_sha256": "8387945b2c8232315668c9619096f07e086cee2368245a99c6e28ca392b084c8",
+  "num_inference_steps": 10,
+  "optimizer_training_authorized": false,
+  "padded_noise_scale": 1.0,
+  "physical_actuation_authorized": false,
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.t20_35u_post_training_trajectory_evaluation_permit.v1",
+  "scope": "one_local_mps_inference_only_post_training_trajectory_audit",
+  "task_id": "T20.35u",
+  "valid_from": "2026-07-15T07:27:47-05:00",
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}
