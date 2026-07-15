@@ -60,3 +60,13 @@ inference attempt. Existing attempt/result files fail closed.
 - Spec, permit, runner, focused/relevant tests, pointer check, workflow audit,
   and fresh same-agent adversarial review are remotely preserved before the
   sole runtime attempt.
+
+## Pre-Run Boundary
+
+Implementation `ed05689`, spec `a3dc0acb...`, permit `545a71c6...`, and
+Reviewer 213 authorize one Python 3.12 local-MPS model-load/inference attempt
+after remote preservation. The runner records the same base-noise hash for each
+seed across all scales and requires exact scale-1 action hashes. Five focused
+and 86 relevant tests pass; spec/permit verification agrees under Python 3.11
+and 3.12. No model, checkpoint tensor, inference, optimizer, mutation, rollout,
+Gate C, hardware, external compute, or Brev action occurred at this boundary.

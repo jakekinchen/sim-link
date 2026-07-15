@@ -263,6 +263,13 @@ five seeds, source sampler hash, baseline hashes, and unchanged 0.05-rad Gate B
 threshold. Scale 1.0 must reproduce before candidates count. A separate
 pre-run review and remote-preserved one-use permit are required before one
 local-MPS inference-only attempt; no optimizer or Gate C authority exists.
+T20.35j pre-run implementation `ed05689`, spec `a3dc0acb...`, permit
+`545a71c6...`, and Reviewer Decision 213 are remotely preservation-ready. Five
+focused and 86 relevant tests pass; spec/permit verification agrees under both
+configured Python runtimes. Exactly one Python 3.12 local-MPS model-load and
+inference attempt is authorized after remote confirmation. No model,
+checkpoint tensor, inference, optimizer, mutation, or rollout has occurred at
+this boundary.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
