@@ -16,7 +16,7 @@ in the same commit as the work.
 | ST9 | Robot panel: render discovery/census/calibration evidence read-only with permit-gated registration stub | pending | |
 | ST10 | Three.js orbit viewer for compiled workcells | pending | reuse `threejs_export.py` |
 | ST11 | Tauri wrap (native Mac shell) | pending | stretch |
-| ST12 | Episode compare: two mirrors side-by-side, synced scrub | pending | stretch |
+| ST12 | Episode compare: two mirrors side-by-side, synced scrub | done | live browser verified: distinct pickers, side-by-side mirrors, shared play/end, exact 4.2s dual scrub |
 
 Rules: never touch governed paths (see GOAL.md), never push to
 `codex/pi05-autolearn-loop`, commit small and often to `studio/app-shell`.

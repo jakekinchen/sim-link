@@ -25,15 +25,20 @@ export default function Episodes() {
     <Panel
       title={`episodes · ${episodes.length}`}
       right={
-        <select
-          value={source}
-          onChange={(e) => setSource(e.target.value as SourceFilter)}
-          className="border border-line-2 bg-panel-2 px-1.5 py-0.5 font-mono text-2xs text-ink"
-        >
-          <option value="all">all sources</option>
-          <option value="expert">expert</option>
-          <option value="policy_trace">policy trace</option>
-        </select>
+        <span className="flex items-center gap-2">
+          <Link to="/episodes/compare" className="btn btn-quiet">
+            compare mirrors
+          </Link>
+          <select
+            value={source}
+            onChange={(e) => setSource(e.target.value as SourceFilter)}
+            className="border border-line-2 bg-panel-2 px-1.5 py-0.5 font-mono text-2xs text-ink"
+          >
+            <option value="all">all sources</option>
+            <option value="expert">expert</option>
+            <option value="policy_trace">policy trace</option>
+          </select>
+        </span>
       }
       pad={false}
     >
