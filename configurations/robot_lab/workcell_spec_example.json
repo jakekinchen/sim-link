@@ -1,0 +1,14 @@
+{
+  "schema_version": "scenesmith.workcell_arrangement_spec.v1",
+  "scene_id": "sorting_demo_two_cube",
+  "description": "Owner-declared two-cube sorting workcell for the MVP demo pipeline.",
+  "task_prompt": "Sort each cube into the same-colored tray: red cubes into the red tray and blue cubes into the blue tray.",
+  "trays": [
+    {"name": "red_tray", "color": "red", "center_m": [0.32, -0.12, 0.316]},
+    {"name": "blue_tray", "color": "blue", "center_m": [0.32, 0.12, 0.316]}
+  ],
+  "cubes": [
+    {"name": "red_cube", "color": "red", "position_m": [0.2, -0.04, 0.325]},
+    {"name": "blue_cube", "color": "blue", "position_m": [0.2, 0.06, 0.325]}
+  ]
+}
