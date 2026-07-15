@@ -1,0 +1,34 @@
+{
+  "active_noise_scale": 0.0,
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "brev_compute_authorized": false,
+  "checkpoint_mutation_authorized": false,
+  "closed_loop_rollout_authorized": false,
+  "dataset_mutation_authorized": false,
+  "evaluation_spec_identity_sha256": "c21c4d4822d227bc765700f7c61eb68e0c68ca9e89a6774c9ea64e1e93e75825",
+  "exactly_one_evaluation_attempt_authorized": true,
+  "external_compute_authorized": false,
+  "identity_sha256": "65c516f3d26b8cfdd5eb053a0f493774ecbbe55338d7ebe9717be03d41e8fed8",
+  "inference_seeds": [
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725
+  ],
+  "inherited_authority_decision_identity_sha256": "75dc9c7d860e12e2a2114be709e24f7e544ff576696a3d223dd87dd0e2f06606",
+  "num_inference_steps": 10,
+  "optimizer_training_authorized": false,
+  "padded_noise_scale": 1.0,
+  "physical_actuation_authorized": false,
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.t20_35o_flow_trajectory_consistency_evaluation_permit.v1",
+  "scope": "one_local_mps_inference_only_flow_trajectory_consistency_audit",
+  "task_id": "T20.35o",
+  "valid_from": "2026-07-15T07:27:47-05:00",
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}
