@@ -68,3 +68,16 @@ training/evaluation attempt. Fifty-four relevant tests pass. No T20.35t model
 load, checkpoint tensor access, inference, optimizer creation, training,
 rollout, Gate C, hardware, external compute, or Brev action occurred before
 authorization.
+
+## Result
+
+The sole attempt `1a94b476...` completed all 500 paired updates with finite
+objectives and gradients. Run `b5da8ab3...`, checkpoint `aeef380b...`, and
+signed result `f63ee934...` are preserved at result commit `41238de`. The raw
+correction ratio passes at `0.051751`, and deterministic standard replay moves
+the unchanged original-baseline objective ratio to `0.006245`, also a pass.
+Every decoded action chunk still fails the 0.05-rad requirement, with maximum
+errors `0.084388-0.162008` rad. Gate B and Gate C therefore remain closed.
+Reviewer 231 routes one inference-only post-training trajectory audit before
+any further optimizer work. No retry, rollout, hardware, external compute, or
+Brev action occurred.
