@@ -66,3 +66,16 @@ that PyArrow 24 fails before any attempt directory, while the exact reviewed
 PyArrow 25 surface passes. Reviewer 237 authorizes exactly one local-MPS
 training/evaluation attempt. No checkpoint tensor, model, inference,
 optimizer, rollout, hardware, external compute, or Brev action has occurred.
+
+## Result
+
+One consumed attempt completed 500 finite local-MPS updates. Signed result
+`e79dacff...`, preserved at `afa421d`, passes unchanged Gate B: the standard
+objective is `0.00252212` of the original baseline and all five decoded chunks
+are below 0.05 rad, with worst-case error `0.04478485`. Joint-weighted and
+time-and-joint-weighted ratios are `0.0368839` and `0.0358318`. The raw
+correction ratio is `0.319203` and does not meet its auxiliary 0.10 target;
+that limitation is retained even though it is not part of the unchanged Gate
+B conjunction. Reviewer 238 routes separately reviewed T20.36. No rollout,
+policy acceptance, physical transfer, hardware, external compute, or Brev
+action occurred.
