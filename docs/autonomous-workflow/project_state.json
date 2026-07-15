@@ -1,13 +1,13 @@
 {
   "schema_version": "scenesmith.project_state.v1",
-  "updated": "2026-07-14",
+  "updated": "2026-07-15",
   "run_window": {
-    "actual_start": "2026-07-14T20:10:00-05:00",
+    "actual_start": "2026-07-15T07:27:47-05:00",
     "total_duration_hours": 8,
-    "no_new_major_slice_after": "2026-07-15T03:25:00-05:00",
-    "hard_closeout": "2026-07-15T04:10:00-05:00",
-    "owner_extension_recorded_at": "2026-07-14T20:10:00-05:00",
-    "scope": "owner_requested_t20_32_closed_loop_divergence_localization_then_capability_ladder",
+    "no_new_major_slice_after": "2026-07-15T14:42:47-05:00",
+    "hard_closeout": "2026-07-15T15:27:47-05:00",
+    "owner_extension_recorded_at": "2026-07-15T07:27:47-05:00",
+    "scope": "owner_requested_t20_35_rank_capacity_then_evidence_routed_capability_ladder",
     "simulation_only": true,
     "hardware_authority": "closed",
     "external_compute_authority": "closed",
@@ -82,6 +82,15 @@
       "owner_extension_recorded_at": "2026-07-14T12:20:57-05:00",
       "closeout_recorded_at": "2026-07-14T19:40:00-05:00",
       "closeout_reason": "no_new_major_slice_cutoff_reached_after_t20_31_negative_verification"
+    },
+    {
+      "actual_start": "2026-07-14T20:10:00-05:00",
+      "total_duration_hours": 8,
+      "no_new_major_slice_after": "2026-07-15T03:25:00-05:00",
+      "hard_closeout": "2026-07-15T04:10:00-05:00",
+      "owner_extension_recorded_at": "2026-07-14T20:10:00-05:00",
+      "closeout_recorded_at": "2026-07-15T07:27:47-05:00",
+      "closeout_reason": "window_expired_before_current_owner_continuation"
     }
   ],
   "branch": "codex/pi05-autolearn-loop",

@@ -20,13 +20,15 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Actual start: `2026-07-14T20:10:00-05:00`.
-- No new major slice after: `2026-07-15T03:25:00-05:00`.
-- Hard closeout: `2026-07-15T04:10:00-05:00`.
+- Actual start: `2026-07-15T07:27:47-05:00`.
+- No new major slice after: `2026-07-15T14:42:47-05:00`.
+- Hard closeout: `2026-07-15T15:27:47-05:00`.
 - This owner-requested continuation is simulation-only diagnostic and bounded
-  training work under M20: first T20.32 closed-loop divergence localization,
-  then the lowest unmet capability-ladder gate in
-  `docs/sim-link-mvp-execution-plan.md`. It grants no hardware,
+  training work under M20. The active loop is
+  `docs/autonomous-workflow/t20-capability-ladder-goal-loop.md`; it starts at
+  T20.35's single rank-16 Gate B discriminator and follows only the lowest
+  unmet evidence-routed gate in `docs/sim-link-mvp-execution-plan.md`. It
+  grants no hardware,
   physical-transfer, promotion, external-compute, or Brev authority. Historical
   physical-session notes below are retained only as consumed-gate history.
 - Reviewer 098's one-session gate was consumed and closed at `08:42` CDT after

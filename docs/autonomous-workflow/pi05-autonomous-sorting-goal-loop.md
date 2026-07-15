@@ -12,13 +12,15 @@ honest separation between neural, stabilized, assisted, and physical proof.
 Use these sources in descending order of authority:
 
 1. The latest explicit user instruction.
-2. This mandate and `GOAL.md`.
-3. `experience-compiler-twin-task-ledger.md` for the rebased M16-M22 program.
-4. `09-autonomous-milestones.md`, `experience-compiler-twin-goal-loop.md`, and
+2. `AGENTS.md`.
+3. `project_state.json` for dynamic task, authority, window, and proof state.
+4. This mandate and `GOAL.md`.
+5. `experience-compiler-twin-task-ledger.md` for the rebased M16-M22 program.
+6. `09-autonomous-milestones.md`, `experience-compiler-twin-goal-loop.md`, and
    the active numbered slice brief.
-5. Machine-readable cycle manifests and `experiments/pi05_autolearn/accepted.json`.
-6. Tests, source code, dataset/checkpoint manifests, and runtime artifacts.
-7. Executor logs, reviewer decisions, and research notes.
+7. Machine-readable cycle manifests and `experiments/pi05_autolearn/accepted.json`.
+8. Tests, source code, dataset/checkpoint manifests, and runtime artifacts.
+9. Executor logs, reviewer decisions, and research notes.
 
 Earlier completion claims never outrank current machine-readable evidence.
 

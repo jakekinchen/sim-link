@@ -1,10 +1,10 @@
 # Experience Compiler And Hardware Twin Task Ledger
 
-Updated: 2026-07-14
+Updated: 2026-07-15
 
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
-run_window: open 2026-07-14T20:10:00-05:00 through hard closeout 2026-07-15T04:10:00-05:00; no new major slice after 2026-07-15T03:25:00-05:00; owner-requested simulation-only continuation for T20.32 and the capability ladder
+run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T15:27:47-05:00; no new major slice after 2026-07-15T14:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35
 run_state: T20.34 is verified through Brief 165 and Reviewer 196; rank-4 adapter plumbing is active and target-aligned but insufficient, so Gate B routes to one rank-capacity discriminator.
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.35 in progress under Brief 166 for one same-batch rank-16 Gate B capacity discriminator
@@ -38,6 +38,18 @@ next_step: implement, test, centrally authorize, review, and remotely preserve t
 - Any additional joint, gripper, reach, contact, task, policy actuation, or
   material permit expansion is unauthorized.
 - States are `pending`, `in_progress`, `verified`, `blocked`, `deferred`, and `superseded`.
+
+## 2026-07-15 - Owner continuation resumes T20.35 capability ladder
+
+The owner resumed the existing durable MVP objective and opened a fresh
+simulation-only eight-hour window from 07:27 through hard closeout 15:27 CDT,
+with no new major slice after 14:42. The active prompt is
+`t20-capability-ladder-goal-loop.md`. T20.35 remains the sole current task under
+Brief 166: implement, test, centrally authorize, review, commit, push, and
+remotely confirm the exact rank-16 pre-run boundary before any model load or
+optimizer creation. Hardware, cameras, serial devices, external compute, Brev,
+promotion, and physical transfer remain closed. Session Log 200 records the
+resume, and Reviewer 197 permits only T20.35 preflight implementation.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
