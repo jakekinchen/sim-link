@@ -22,6 +22,7 @@ from scenesmith.robot_lab.t20_23_recovery_augmented_preflight import (
     DATASET_ROOT as SOURCE_DATASET_ROOT,
     REPO_ROOT,
     TRAINING_SPEC_PATH as SOURCE_SPEC_PATH,
+    verify_training_spec as verify_source_training_spec,
     verify_training_spec_file as verify_source_spec,
 )
 
@@ -269,6 +270,33 @@ def verify_preflight(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     verify_training_spec(spec)
     if manifest != expected_manifest or spec != expected_spec:
         raise ValueError("T20.30 preflight drifted from live verified sources")
+    return {"manifest": manifest, "training_spec": spec}
+
+
+def verify_preflight_lightweight(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
+    """Recompose archived T20.30 evidence without loading package tensors."""
+
+    root = Path(repo_root)
+    source_spec = load_strict_json(root / SOURCE_SPEC_PATH)
+    verify_source_training_spec(source_spec)
+    t20_29 = load_strict_json(root / T20_29_PATH)
+    verify_signed_payload(t20_29, label="T20.29 counterfactual")
+    clean_stats = load_strict_json(root / CLEAN_STATS_PATH)
+    recovery_stats = load_strict_json(root / RECOVERY_STATS_PATH)
+    recorded_manifest = load_strict_json(root / MANIFEST_PATH)
+    manifest = build_manifest(
+        source_root=root / SOURCE_DATASET_ROOT,
+        derived_root=root / DATASET_ROOT,
+        clean_stats=clean_stats,
+        recovery_stats=recovery_stats,
+        episode_count=recorded_manifest.get("episode_count"),
+        frame_count=recorded_manifest.get("frame_count"),
+    )
+    spec = _build_spec_live(root, manifest, source_spec, t20_29)
+    recorded_spec = load_strict_json(root / TRAINING_SPEC_PATH)
+    verify_training_spec(recorded_spec)
+    if recorded_manifest != manifest or recorded_spec != spec:
+        raise ValueError("T20.30 lightweight preflight recomposition drifted")
     return {"manifest": manifest, "training_spec": spec}
 
 

@@ -25,16 +25,17 @@ from scenesmith.robot_lab.authority_composer import (
     verify_authority_decision,
 )
 from scenesmith.robot_lab.t20_23_simulation_training_authority import (
+    DECISION_PATH as T20_23_DECISION_PATH,
+    REQUEST_PATH as T20_23_REQUEST_PATH,
     VALID_FROM,
     VALID_UNTIL,
-    verify_production_authority as verify_t20_23_authority,
 )
 from scenesmith.robot_lab.t20_30_nominal_action_quantile_preflight import (
     MANIFEST_PATH,
     REPO_ROOT,
     T20_29_PATH,
     TRAINING_SPEC_PATH,
-    verify_preflight,
+    verify_preflight_lightweight,
 )
 
 
@@ -99,12 +100,19 @@ def build_production_authority(
     *, repo_root: Path = REPO_ROOT
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     root = Path(repo_root)
-    preflight = verify_preflight(repo_root=root)
+    preflight = verify_preflight_lightweight(repo_root=root)
     spec = preflight["training_spec"]
     manifest = preflight["manifest"]
     owner = load_strict_json(root / OWNER_GRANT_PATH)
     verify_owner_grant(owner, training_spec=spec, repo_root=root)
-    t20_23 = verify_t20_23_authority(repo_root=root)["decision"]
+    t20_23_request = load_strict_json(root / T20_23_REQUEST_PATH)
+    t20_23 = load_strict_json(root / T20_23_DECISION_PATH)
+    verify_authority_decision(t20_23, request=t20_23_request)
+    require_global_decision(
+        t20_23,
+        request=t20_23_request,
+        decision_id="simulation_training_ready",
+    )
     t20_29 = load_strict_json(root / T20_29_PATH)
     verify_signed_payload(t20_29, label="T20.29 counterfactual")
     refs = {
@@ -118,10 +126,7 @@ def build_production_authority(
             path=TRAINING_SPEC_PATH, payload=spec, repo_root=root
         ),
         "t20_23": artifact_ref(
-            path=Path(
-                "configurations/robot_lab/"
-                "t20_23_simulation_training_authority_decision.json"
-            ),
+            path=T20_23_DECISION_PATH,
             payload=t20_23,
             repo_root=root,
         ),
@@ -197,7 +202,7 @@ def build_production_authority(
 
 def write_authority(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     root = Path(repo_root)
-    spec = verify_preflight(repo_root=root)["training_spec"]
+    spec = verify_preflight_lightweight(repo_root=root)["training_spec"]
     owner = build_owner_grant(training_spec=spec, repo_root=root)
     dump_canonical_json(root / OWNER_GRANT_PATH, owner)
     request, decision = build_production_authority(repo_root=root)
