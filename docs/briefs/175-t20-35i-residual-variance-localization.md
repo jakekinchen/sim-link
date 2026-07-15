@@ -64,3 +64,14 @@ This task always records `gate_b_passed=false` and
 - Focused and relevant T20.33-35 tests, pointer check, workflow audit,
   same-agent adversarial review, scoped commit, push, and remote confirmation
   agree before another task opens.
+
+## Verified Result
+
+Report `ac87de7b...` and implementation `aa15de8` verify in both configured
+Python runtimes. All five seeds retain exceedances. The top two seeds hold
+56.25%, top two channels 67.71%, and chunk boundaries 31.25%; none reaches its
+gate. Seventy-six unique positions fail and maximum raw decoded spread is
+`0.183018` rad. Reviewer 212 accepts `distributed_seed_channel_variance` and
+routes T20.35j to a separately reviewed inference-only initial-noise-scale
+discriminator. Five focused and 81 relevant tests pass; all prohibited actions
+remain absent.

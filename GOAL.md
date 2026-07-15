@@ -250,6 +250,13 @@ exceedances by seed, channel, timestep boundary, seed-channel pair, and decoded
 pairwise spread under frozen 50%/75%/60% concentration thresholds. Only a
 distributed classification may route a separately reviewed initial-noise-scale
 discriminator; this slice has no model or correction authority.
+T20.35i is now `verified` through report `ac87de7b...`, implementation
+`aa15de8`, and Reviewer Decision 212. All five seeds retain failures; the top
+two seeds hold 56.25%, the top two channels 67.71%, and boundaries 31.25%, all
+below their concentration gates. Seventy-six unique positions have failures
+and raw decoded spread reaches `0.183018` rad. The result is distributed and
+routes T20.35j to one separately reviewed inference-only initial-noise-scale
+discriminator; Gate B remains closed.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

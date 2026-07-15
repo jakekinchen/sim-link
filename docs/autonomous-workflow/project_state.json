@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "174",
-    "commit": "68b71153c769492e5eeedf2b7336cbba85f1a722",
-    "reviewer_decision_id": "211",
-    "summary": "verified_mixed_negative_model_free_bias_ceiling_global"
+    "brief_id": "175",
+    "commit": "aa15de85ed6c35b888f43db29cc665c17ed6ff0e",
+    "reviewer_decision_id": "212",
+    "summary": "verified_distributed_seed_channel_residual_variance_all_five"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35i",
-  "next_eligible_task": "T20.35i",
+  "current_task": "T20.35j",
+  "next_eligible_task": "T20.35j",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -3194,14 +3194,14 @@
       "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35i": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.35h"],
-      "active_brief_id": "175",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
+      "active_brief_id": null,
+      "latest_verified_brief_id": "175",
+      "review_decision_id": "212",
       "source_commit": "68b71153c769492e5eeedf2b7336cbba85f1a722",
-      "implementation_commits": [],
-      "result": "in progress: model-free localization of the 96 remaining time-conditioned held-out residual exceedances by seed, channel, boundary, seed-channel pair, and decoded pairwise spread",
+      "implementation_commits": ["aa15de85ed6c35b888f43db29cc665c17ed6ff0e"],
+      "result": "verified distributed seed/channel residual variance: all five seeds fail, no seed/channel/boundary concentration gate passes, and raw five-seed spread reaches 0.183018 rad, routing an inference-only initial-noise-scale discriminator",
       "scope": {
         "source_t20_35h_identity_sha256": "63e1181b2f825de108a85525e38e0ae728cae2288a16b7d3763851e8109a6593",
         "source_correction_class": "time_conditioned_output_channel_bias",
@@ -3224,7 +3224,44 @@
         "external_compute_started": false,
         "brev_compute_started": false
       },
-      "authority_granted": ["t20_35i_model_free_residual_variance_localization_implementation"],
+      "artifact": {
+        "path": "configurations/robot_lab/t20_35i_residual_variance_localization.json",
+        "schema_version": "scenesmith.t20_35i_residual_variance_localization.v1",
+        "identity_sha256": "ac87de7b21c7698fe5b02d1e57b06cab009bc6a92257bbcc52c27111cc04a6f0",
+        "file_sha256": "f65c5e97265ca5dd0f3ab9d7b48a391652c4eb7b06d188bd10fef8752f26a48e",
+        "size_bytes": 108538,
+        "source_t20_35h_identity_sha256": "63e1181b2f825de108a85525e38e0ae728cae2288a16b7d3763851e8109a6593",
+        "threshold_exceedance_count": 96,
+        "exceedance_seed_coverage_count": 5,
+        "boundary_exceedance_count": 30,
+        "boundary_exceedance_fraction": 0.3125,
+        "single_seed_concentration_fraction": 0.28125,
+        "top_two_seed_concentration_fraction": 0.5625,
+        "single_channel_concentration_fraction": 0.3854166666666667,
+        "top_two_channel_concentration_fraction": 0.6770833333333334,
+        "unique_failure_position_count": 76,
+        "maximum_raw_decoded_spread_rad": 0.1830175566953438,
+        "aggregate_mean_raw_decoded_spread_rad": 0.04639243967987639,
+        "variance_classification": "distributed_seed_channel_variance",
+        "selected_next_hypothesis": "run_separately_reviewed_inference_only_initial_noise_scale_discriminator",
+        "gate_b_passed": false,
+        "action_correction_selected": false,
+        "model_loaded": false,
+        "model_inference": false,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "checkpoint_read": false,
+        "checkpoint_mutated": false,
+        "dataset_mutated": false,
+        "closed_loop_rollout": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false,
+        "simulation_policy_accepted": false,
+        "physical_transfer_ready": false,
+        "promotion_eligible": false
+      },
+      "authority_granted": ["t20_35i_distributed_seed_channel_variance_verified","t20_35j_initial_noise_scale_discriminator_routed"],
       "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
