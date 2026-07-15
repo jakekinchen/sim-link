@@ -90,7 +90,7 @@ not spent on a higher gate while a lower one is unmet.
 | Gate | Proof | A failure localizes to | Status |
 | --- | --- | --- | --- |
 | A | Exact train/inference parity: dataset statistics, image/state/action normalization, chunk interpretation, joint order, gripper representation, postprocessing, cadence/hold, with round-trip tests on known values | Contract or preprocessing parity | Largely verified: T20.12 round-trip, T20.13 statistics, T20.26 determinism, T20.28-T20.31 sampler/quantile chain |
-| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | Lowest unmet gate: T20.32 routes T20.33 here |
+| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | Failed at T20.33; objective ratio 0.528 and decoded maximum error 0.844-1.251 rad |
 | C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Blocked behind Gate B; T20.32 diverges at frame zero before execution feedback |
 | D | Full training-set success: strict-v2 across all eight constructive episodes | Dataset coverage or adaptation capacity | Open |
 | E | Held-out nominal starts: seeds 6-7 and small initial-state variation | Generalization | Open (0/2 at T20.24 and T20.31) |
@@ -120,9 +120,10 @@ not inherit authority from this document.
 | 7 | **T20.23 — recovery-augmented dataset preflight** | One actual LeRobotDataset containing the six nominal strict-success episodes and four strict-success policy-visited recovery episodes; near-failures/failures and seeds 6-7 remain outside training/statistics; exact mixture, dataset, statistics, clean model snapshot, and central simulation-only authority identities signed before any optimizer. | Verified T20.17 dataset/result and T20.18 recovery package | Optimizer execution, failure imitation, implicit oversampling, hardware, Robo Scan, external compute, Brev |
 | 8 | **T20.24 — recovery-augmented local-MPS campaign** | Exact official-LeRobot 500-update rank-4 campaign from clean base; frozen adapter evaluated once each on held-out seeds 6-7 with no projection/assistance; signed per-seed and aggregate strict-v2 result without policy promotion. | Verified T20.23 dataset/spec and active central simulation-training authority | Additional rungs/sweeps, ensemble, promotion, hardware, Robo Scan, external compute, Brev |
 | 9 | **T20.32 — closed-loop divergence localization (verified)** | Six complete signed 244-frame traces; four held-out action hashes reproduce exactly; both seed-0 probes first diverge at frame zero and route Gate B. | Verified T20.31; Brief 163; Reviewer Decision 193 | Any optimizer, dataset/statistics change, promotion, hardware, Robo Scan, external compute, Brev |
-| 10 | **T20.33 — Gate B one-batch memorization proof** | Overfit one tiny fixed source batch to a declared near-zero action-error threshold; bind exact samples, normalization, model, optimizer, and inference path; deterministic pass/fail gate before any Gate C correction or campaign. | Verified T20.32 Gate B route | Gate C cadence/chunk changes, unreviewed sweeps, grid expansion, promotion |
-| 11 | **T20.34 — bounded campaign at the corrected gate** | One reviewed 500-update-class campaign only after the routed fault is corrected and its gate passes; frozen unassisted evaluation on a training seed first, then held-out seeds 6-7. | Verified T20.33 | Multiple concurrent rungs, promotion, hardware, external compute, Brev |
-| 12 | **T20.35 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
+| 10 | **T20.33 — Gate B one-batch memorization proof (verified negative)** | One exact batch, 500 finite updates, five fixed-seed decoded chunks; both objective-ratio and action-error gates fail. | Verified T20.32 Gate B route; Brief 164; Reviewer Decision 195 | Gate C cadence/chunk changes, unreviewed sweeps, grid expansion, promotion |
+| 11 | **T20.34 — Gate B plumbing localization** | Optimizer-free same-seed base-versus-T20.33 adapter comparison on the exact fixed batch; bind adapter parameter deltas, objective change, decoded-action direction and per-joint error; route adapter/update plumbing versus objective-to-inference alignment without another training rung. | Verified-negative T20.33 | Optimizer continuation/retry, Gate C changes, second batch, promotion |
+| 12 | **T20.35 — bounded campaign only after Gate B correction** | One reviewed bounded campaign only after the routed Gate B fault is corrected and one-batch memorization passes; training seed before held-out seeds 6-7. | Verified corrective proof after T20.34 | Multiple concurrent rungs, promotion, hardware, external compute, Brev |
+| 13 | **T20.36 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
 
 T20.17 is verified negative, T20.18 is verified recovery evidence, T20.19 is
 verified as an uncalibrated grid, T20.20 and T20.21 are verified, and T20.22 is
@@ -238,6 +239,12 @@ diverge from the source action at frame zero and produce no strict grasp. The
 first state error follows at frame one, so cadence, chunk boundaries, and
 observation feedback are not the initiating fault. T20.33 is routed narrowly
 to Gate B one-batch memorization/model-plumbing proof before further training.
+T20.33 is verified negative through `bb3435b` by Reviewer Decision 195. The
+one fixed batch received exactly 500 finite local-MPS updates, but the
+five-seed objective ratio is 0.528248 and decoded maximum errors remain
+0.843707-1.250647 rad against the 0.05 rad gate. No retry is authorized.
+T20.34 now localizes base-versus-adapter parameter and inference movement on
+that exact batch without an optimizer before any corrective campaign.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
