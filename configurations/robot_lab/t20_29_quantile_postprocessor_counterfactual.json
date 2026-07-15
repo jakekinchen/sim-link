@@ -1,0 +1,341 @@
+{
+  "accounting_residual_rad": -0.00207618165854187,
+  "accounting_tolerance_rad": 0.01,
+  "action_applied": false,
+  "aggregates": {
+    "clean_base": {
+      "actual_source_mae_rad": 0.5083251577277254,
+      "counterfactual_minus_actual_mae_rad": 0.11301232282483109,
+      "counterfactual_source_mae_rad": 0.6213374805525564,
+      "per_joint_counterfactual_minus_actual_mae_rad": {
+        "elbow_flex": 0.07994375512226387,
+        "gripper": 5.869150978554671e-07,
+        "shoulder_lift": 0.18754405785127592,
+        "shoulder_pan": 0.0019451373178650502,
+        "wrist_flex": 0.18078843460124516,
+        "wrist_roll": 0.2278519651412375
+      }
+    },
+    "recovery_augmented": {
+      "actual_source_mae_rad": 0.6192612988940146,
+      "counterfactual_minus_actual_mae_rad": -0.11369937589569212,
+      "counterfactual_source_mae_rad": 0.5055619229983225,
+      "per_joint_counterfactual_minus_actual_mae_rad": {
+        "elbow_flex": -0.08095475059127394,
+        "gripper": -5.879177166212557e-07,
+        "shoulder_lift": -0.18756142289817224,
+        "shoulder_pan": -0.001943588383311247,
+        "wrist_flex": -0.18179836270873406,
+        "wrist_roll": -0.2299375428749454
+      }
+    }
+  },
+  "brev_compute_started": false,
+  "clean_output_recovery_stats_delta_rad": 0.11301232282483109,
+  "clean_postprocessor_config_sha256": "8def456c1f5ae93ebf85655358fcfc58bee29c219e9d44644e61a11738aa14c9",
+  "clean_postprocessor_state_sha256": "f4b1e2b15bfc7a034f2b3e12712521d360ad1af4dcb64af56c1843aaab8c3d0a",
+  "clean_stats_sha256": "9c013fde21c80e2dd0d184ac3122f1ce4fd75e662dedef97fd5f6b651376cf4c",
+  "closed_loop_rollout_executed": false,
+  "external_compute_started": false,
+  "formula_source_sha256": "e9c4745d44f6f3808a84ed7ee9bc23b99ad930cc14222030e9167d4999da1012",
+  "full_training_effect_isolated": false,
+  "identity_sha256": "59474892f9d2da8605cff6429681b432cc8619be2e3a6c36fbe514b763ee0e9e",
+  "model_inference_executed": false,
+  "observed_recovery_minus_clean_mae_rad": 0.11093614116628922,
+  "optimizer_training": false,
+  "paired_sample_count": 5,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "postprocessor_only_counterfactual": true,
+  "promotion_eligible": false,
+  "quantile_formula": "normalized=2*(x-q01)/(q99-q01)-1; decoded=(normalized+1)*(q99-q01)/2+q01",
+  "recovery_postprocessor_config_sha256": "8def456c1f5ae93ebf85655358fcfc58bee29c219e9d44644e61a11738aa14c9",
+  "recovery_postprocessor_state_sha256": "0ff15456294199926f8542f1c91d3c0f3c277439bd4f91a77d7ade3eaf5517bd",
+  "recovery_stats_sha256": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1",
+  "result": "postprocessor_quantile_shift_accounts_for_observed_regression_within_tolerance",
+  "rows": [
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.06881728568900569,
+        "gripper": 0.6081957887092589,
+        "shoulder_lift": 0.8536929502363066,
+        "shoulder_pan": 0.002244228072723016,
+        "wrist_flex": 0.4986394036901912,
+        "wrist_roll": 0.773346669220975
+      },
+      "actual_source_mae_rad": 0.4674893876030768,
+      "candidate_id": "clean_base",
+      "counterfactual_minus_actual_mae_rad": 0.12195780021086633,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.16261014343194047,
+        "gripper": 0.6081964096491151,
+        "shoulder_lift": 1.0442713422750343,
+        "shoulder_pan": 0.004331901820968619,
+        "wrist_flex": 0.6997516670458548,
+        "wrist_roll": 1.0175216626607455
+      },
+      "counterfactual_source_mae_rad": 0.5894471878139431,
+      "counterfactual_stats": "recovery_augmented",
+      "cross_stat_coordinate_clipping_max_abs_error": 7.105427357601002e-15,
+      "inference_seed": 20260714,
+      "own_stat_round_trip_max_abs_error_rad": 0.0,
+      "sample_id": "same_01"
+    },
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.19733315080733682,
+        "gripper": 0.6810932560844417,
+        "shoulder_lift": 0.8792723461904087,
+        "shoulder_pan": 0.0031486667072383526,
+        "wrist_flex": 0.6016621925632526,
+        "wrist_roll": 0.8967562225547018
+      },
+      "actual_source_mae_rad": 0.5432109724845634,
+      "candidate_id": "clean_base",
+      "counterfactual_minus_actual_mae_rad": 0.10519942659890358,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.2661061377989995,
+        "gripper": 0.6810938160661125,
+        "shoulder_lift": 1.0638614067185515,
+        "shoulder_pan": 0.004998613853502032,
+        "wrist_flex": 0.7711736680017678,
+        "wrist_roll": 1.1032287520618689
+      },
+      "counterfactual_source_mae_rad": 0.648410399083467,
+      "counterfactual_stats": "recovery_augmented",
+      "cross_stat_coordinate_clipping_max_abs_error": 0.0,
+      "inference_seed": 20260720,
+      "own_stat_round_trip_max_abs_error_rad": 0.0,
+      "sample_id": "distinct_01"
+    },
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.20240387610187494,
+        "gripper": 0.6037991610778807,
+        "shoulder_lift": 0.8606469964747215,
+        "shoulder_pan": 0.0030346917349613617,
+        "wrist_flex": 0.5454496530124595,
+        "wrist_roll": 0.8097622679135277
+      },
+      "actual_source_mae_rad": 0.5041827743859043,
+      "candidate_id": "clean_base",
+      "counterfactual_minus_actual_mae_rad": 0.11307001911486225,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.2701896784267439,
+        "gripper": 0.6037997856942771,
+        "shoulder_lift": 1.0495971214372237,
+        "shoulder_pan": 0.004914596560868956,
+        "wrist_flex": 0.7322035323895602,
+        "wrist_roll": 1.0428120464959252
+      },
+      "counterfactual_source_mae_rad": 0.6172527935007666,
+      "counterfactual_stats": "recovery_augmented",
+      "cross_stat_coordinate_clipping_max_abs_error": 7.105427357601002e-15,
+      "inference_seed": 20260721,
+      "own_stat_round_trip_max_abs_error_rad": 2.220446049250313e-16,
+      "sample_id": "distinct_02"
+    },
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.11385406946236287,
+        "gripper": 0.6744295818565368,
+        "shoulder_lift": 0.7774346640024328,
+        "shoulder_pan": 0.002829744844322954,
+        "wrist_flex": 0.5766646973073328,
+        "wrist_roll": 0.8514974643044865
+      },
+      "actual_source_mae_rad": 0.49945170362957914,
+      "candidate_id": "clean_base",
+      "counterfactual_minus_actual_mae_rad": 0.1154786348828557,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.1988790252188395,
+        "gripper": 0.6744301474104927,
+        "shoulder_lift": 0.9858686831835406,
+        "shoulder_pan": 0.004763518806332127,
+        "wrist_flex": 0.753843801963453,
+        "wrist_roll": 1.071796854491951
+      },
+      "counterfactual_source_mae_rad": 0.6149303385124348,
+      "counterfactual_stats": "recovery_augmented",
+      "cross_stat_coordinate_clipping_max_abs_error": 1.4210854715202004e-14,
+      "inference_seed": 20260722,
+      "own_stat_round_trip_max_abs_error_rad": 1.1102230246251565e-16,
+      "sample_id": "distinct_03"
+    },
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.117361219591402,
+        "gripper": 0.6769054267036437,
+        "shoulder_lift": 0.9622133691266458,
+        "shoulder_pan": 0.002675231566827918,
+        "wrist_flex": 0.6020730517404245,
+        "wrist_roll": 0.802517404484076
+      },
+      "actual_source_mae_rad": 0.5272909505355033,
+      "candidate_id": "clean_base",
+      "counterfactual_minus_actual_mae_rad": 0.10935573331666659,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.20170339238677837,
+        "gripper": 0.6769059901872533,
+        "shoulder_lift": 1.1273820616725458,
+        "shoulder_pan": 0.004649618473727121,
+        "wrist_flex": 0.7714585019192506,
+        "wrist_roll": 1.0377805384734646
+      },
+      "counterfactual_source_mae_rad": 0.6366466838521699,
+      "counterfactual_stats": "recovery_augmented",
+      "cross_stat_coordinate_clipping_max_abs_error": 7.105427357601002e-15,
+      "inference_seed": 20260723,
+      "own_stat_round_trip_max_abs_error_rad": 0.0,
+      "sample_id": "distinct_04"
+    },
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.15788434479123836,
+        "gripper": 0.6060145024604794,
+        "shoulder_lift": 1.0436725426533355,
+        "shoulder_pan": 0.004311361227274914,
+        "wrist_flex": 0.6961478190879014,
+        "wrist_roll": 1.011160629557462
+      },
+      "actual_source_mae_rad": 0.5865318666296152,
+      "candidate_id": "recovery_augmented",
+      "counterfactual_minus_actual_mae_rad": -0.12291206495746498,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.06294903828098652,
+        "gripper": 0.6060138796960709,
+        "shoulder_lift": 0.8529110777384001,
+        "shoulder_pan": 0.00221636340911123,
+        "wrist_flex": 0.49344102696686154,
+        "wrist_roll": 0.7641874239414711
+      },
+      "counterfactual_source_mae_rad": 0.4636198016721502,
+      "counterfactual_stats": "clean_base",
+      "cross_stat_coordinate_clipping_max_abs_error": 7.105427357601002e-15,
+      "inference_seed": 20260714,
+      "own_stat_round_trip_max_abs_error_rad": 1.1102230246251565e-16,
+      "sample_id": "same_01"
+    },
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.2622366169699808,
+        "gripper": 0.6807987707229611,
+        "shoulder_lift": 1.0631142844011863,
+        "shoulder_pan": 0.005022125632703434,
+        "wrist_flex": 0.7688064436343697,
+        "wrist_roll": 1.0997193910761394
+      },
+      "actual_source_mae_rad": 0.6466162720728902,
+      "candidate_id": "recovery_augmented",
+      "counterfactual_minus_actual_mae_rad": -0.10582386488388662,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.19252818400667948,
+        "gripper": 0.6807982104945679,
+        "shoulder_lift": 0.8782968038364197,
+        "shoulder_pan": 0.0031805619790172893,
+        "wrist_flex": 0.5982475856780693,
+        "wrist_roll": 0.8917030971392678
+      },
+      "counterfactual_source_mae_rad": 0.5407924071890036,
+      "counterfactual_stats": "clean_base",
+      "cross_stat_coordinate_clipping_max_abs_error": 3.552713678800501e-15,
+      "inference_seed": 20260720,
+      "own_stat_round_trip_max_abs_error_rad": 2.220446049250313e-16,
+      "sample_id": "distinct_01"
+    },
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.2672659966885955,
+        "gripper": 0.600703878979492,
+        "shoulder_lift": 1.0486830139282106,
+        "shoulder_pan": 0.004923934051074372,
+        "wrist_flex": 0.7291813030645943,
+        "wrist_roll": 1.0380775981690564
+      },
+      "actual_source_mae_rad": 0.6148059541468373,
+      "candidate_id": "recovery_augmented",
+      "counterfactual_minus_actual_mae_rad": -0.11380382041821913,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.19877340237961483,
+        "gripper": 0.60070325177424,
+        "shoulder_lift": 0.8594534160255566,
+        "shoulder_pan": 0.0030473586533295363,
+        "wrist_flex": 0.5410902330927612,
+        "wrist_roll": 0.8029451404462071
+      },
+      "counterfactual_source_mae_rad": 0.5010021337286181,
+      "counterfactual_stats": "clean_base",
+      "cross_stat_coordinate_clipping_max_abs_error": 7.105427357601002e-15,
+      "inference_seed": 20260721,
+      "own_stat_round_trip_max_abs_error_rad": 5.551115123125783e-17,
+      "sample_id": "distinct_02"
+    },
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.19381514829685575,
+        "gripper": 0.6739045469009398,
+        "shoulder_lift": 0.9836274479778094,
+        "shoulder_pan": 0.004762679647070077,
+        "wrist_flex": 0.752253399431414,
+        "wrist_roll": 1.0681807727088215
+      },
+      "actual_source_mae_rad": 0.6127573324938185,
+      "candidate_id": "recovery_augmented",
+      "counterfactual_minus_actual_mae_rad": -0.11617931569934603,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.10756601428243573,
+        "gripper": 0.6739039809074666,
+        "shoulder_lift": 0.7745082089660564,
+        "shoulder_pan": 0.002828606469702316,
+        "wrist_flex": 0.5743706184228365,
+        "wrist_roll": 0.8462906717183369
+      },
+      "counterfactual_source_mae_rad": 0.49657801679447244,
+      "counterfactual_stats": "clean_base",
+      "cross_stat_coordinate_clipping_max_abs_error": 0.0,
+      "inference_seed": 20260722,
+      "own_stat_round_trip_max_abs_error_rad": 5.551115123125783e-17,
+      "sample_id": "distinct_03"
+    },
+    {
+      "actual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.19737609427991432,
+        "gripper": 0.6770094962631222,
+        "shoulder_lift": 1.1315993360453371,
+        "shoulder_pan": 0.004659869145425405,
+        "wrist_flex": 0.7706293441110152,
+        "wrist_roll": 1.0322962749166578
+      },
+      "actual_source_mae_rad": 0.635595069126912,
+      "candidate_id": "recovery_augmented",
+      "counterfactual_minus_actual_mae_rad": -0.10977781351954419,
+      "counterfactual_per_joint_absolute_error_rad": {
+        "elbow_flex": 0.11198780912049844,
+        "gripper": 0.6770089328660663,
+        "shoulder_lift": 0.9677200039485857,
+        "shoulder_pan": 0.002689137275831595,
+        "wrist_flex": 0.600877031625096,
+        "wrist_roll": 0.7946206188081284
+      },
+      "counterfactual_source_mae_rad": 0.5258172556073678,
+      "counterfactual_stats": "clean_base",
+      "cross_stat_coordinate_clipping_max_abs_error": 7.105427357601002e-15,
+      "inference_seed": 20260723,
+      "own_stat_round_trip_max_abs_error_rad": 2.220446049250313e-16,
+      "sample_id": "distinct_04"
+    }
+  ],
+  "schema_version": "scenesmith.t20_29_quantile_postprocessor_counterfactual.v1",
+  "selected_next_hypothesis": "freeze_nominal_action_quantiles_during_recovery_supervision_ablation",
+  "simulation_policy_accepted": false,
+  "source_action_rad": [
+    0.05030802315890238,
+    -1.6782525911998447,
+    1.5437626844684913,
+    1.0424512390670553,
+    -0.029811999999999998,
+    1.5999999999999999
+  ],
+  "t20_27_gate_identity_sha256": "37c7fb8fb2899e3c368cc5c25a2e3f0a0b8526a43477b979632edc850fd9eabe",
+  "task_id": "T20.29"
+}
