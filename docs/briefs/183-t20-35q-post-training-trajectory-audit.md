@@ -48,3 +48,13 @@ All endpoint hashes reproduce; every retained tensor is finite and signed;
 source/new/reference metrics recompute exactly; the earliest divergence and
 classification are deterministic; and one next hypothesis is routed without
 opening Gate B or Gate C.
+
+## Pre-Run Boundary
+
+Implementation `fbc1087`, spec `fdb2fe3e...`, and one-use permit
+`ab85aede...` are remotely preserved. Reviewer 225 authorizes exactly five
+Python 3.12 local-MPS inference calls after accepting the tensor-retaining
+verifier, 0.01 material thresholds, classification precedence, and 40 passing
+relevant tests. No model, checkpoint tensor, inference, optimizer, training,
+rollout, Gate C, hardware, external compute, or Brev action occurred before
+authorization.
