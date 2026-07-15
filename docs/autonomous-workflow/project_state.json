@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "169",
-    "commit": "011e42144171fef80bd8ecaa35b8a170e3eab0b3",
-    "reviewer_decision_id": "203",
-    "summary": "verified_mixed_gate_b_negative_expert_only_training"
+    "brief_id": "170",
+    "commit": "806ac7f3b38f53316dcea824e893a0a07978877d",
+    "reviewer_decision_id": "205",
+    "summary": "verified_exact_checkpoint_replay_and_residual_localization_all"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35d",
-  "next_eligible_task": "T20.35d",
+  "current_task": "T20.35e",
+  "next_eligible_task": "T20.35e",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2908,30 +2908,50 @@
       "authority_not_granted": ["gate_b_passed","gate_c_execution_correction","additional_optimizer_training","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35d": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.35c"],
-      "active_brief_id": "170",
-      "latest_verified_brief_id": null,
-      "review_decision_id": "204",
-      "result": "authorized pre-run optimizer-free exact replay and decoded-action residual localization; no T20.35d model construction or inference has occurred",
-      "pre_run_artifact": {
-        "implementation_commit": "7162497b39d7e03a880b47f11ec60396928745e2",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "170",
+      "review_decision_id": "205",
+      "source_commit": "806ac7f3b38f53316dcea824e893a0a07978877d",
+      "implementation_commits": ["7162497b39d7e03a880b47f11ec60396928745e2","806ac7f3b38f53316dcea824e893a0a07978877d"],
+      "result": "verified exact checkpoint replay and residual localization: all five decoded hashes reproduce; 366 threshold exceedances are 90.71% interior and dominated jointly by wrist roll plus gripper at 77.87%, exposing an under-specific single-joint distributed classifier before correction selection",
+      "artifact": {
+        "path": "configurations/robot_lab/t20_35d_residual_localization_report.json",
+        "schema_version": "scenesmith.t20_35d_residual_localization_report.v1",
+        "identity_sha256": "13b08e70a805a8b176b9f9a7c0e37843f7267d7918f82aeb523551e2dadf1fbe",
         "evaluation_spec_path": "configurations/robot_lab/t20_35d_residual_localization_spec.json",
         "evaluation_spec_identity_sha256": "b083c59393a0eb9027bb07253357e8c7ec9fb1f240c58118ad8d49fa1067c033",
-        "evaluation_permit_path": "configurations/robot_lab/t20_35d_evaluation_permit.json",
         "evaluation_permit_identity_sha256": "bd3b093308048bafa02b26f81392a27b07ce617546706da94c9da65ed2f0e260",
+        "replay_attempt_identity_sha256": "d3b3ff438bdfdb3d7dc1b01e7ac81024268e5479acfc953df647ba4535980306",
         "checkpoint_identity_sha256": "439ae119842fe5f9639b3e3e9b76f029678fd4b4257dfd6308253f6d2832c29f",
-        "exactly_one_replay_permitted": true,
-        "model_loaded": false,
-        "model_inference": false,
+        "all_five_decoded_hashes_reproduced": true,
+        "threshold_exceedance_count": 366,
+        "boundary_exceedance_count": 34,
+        "boundary_exceedance_fraction": 0.09289617486338798,
+        "largest_joint_exceedance_count": 164,
+        "largest_joint_exceedance_fraction": 0.44808743169398907,
+        "wrist_roll_plus_gripper_exceedance_count": 285,
+        "wrist_roll_plus_gripper_exceedance_fraction": 0.7786885245901639,
+        "residual_classification": "distributed_decoding_residual",
+        "selected_next_hypothesis": "inspect_decoder_sampling_or_action_gate_calibration",
+        "model_loaded": true,
+        "model_inference": true,
+        "optimizer_created": false,
         "optimizer_training": false,
+        "checkpoint_mutated": false,
+        "closed_loop_rollout": false,
+        "simulation_policy_accepted": false,
         "physical_actuation": false,
         "external_compute_started": false,
-        "brev_compute_started": false
+        "brev_compute_started": false,
+        "physical_transfer_ready": false,
+        "promotion_eligible": false
       },
-      "authority_granted": ["simulation_model_load","simulation_model_inference"],
-      "authority_not_granted": ["optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "authority_granted": ["t20_35d_exact_replay_and_residual_localization_verified"],
+      "authority_not_granted": ["optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
+    "T20.35e": {"state":"pending","depends_on":["T20.35d"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"pending optimizer-free and model-free correction of T20.35d residual semantics with an explicit top-two-channel concentration test before decoder, normalization, projection, or gate correction selection","authority_granted":[],"authority_not_granted":["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],

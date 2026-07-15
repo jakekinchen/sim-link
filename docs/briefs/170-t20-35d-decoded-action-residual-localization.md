@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-15
 
-**State:** `in_progress`
+**State:** `verified`
 
 ## Objective
 
@@ -65,3 +65,18 @@ inference replay. Reviewer 204 accepts the boundary after 76 relevant tests.
 The runner verifies the 2.77 GB checkpoint tree before writing its attempt
 marker, imports no optimizer, and blocks interpretation unless all five prior
 hashes reproduce. No T20.35d model construction or inference occurred here.
+
+## Result
+
+Attempt `d3b3ff43...` reproduced all five T20.35c decoded hashes exactly and
+emitted signed report `13b08e70...` with full target, decoded, and residual
+matrices. There are 366 errors above `0.05` rad; only 34 (9.29%) occur in the
+first/last five timesteps, rejecting chunk-boundary concentration. The
+predeclared single-joint classifier labels the residual distributed because
+wrist roll holds 164/366 (44.81%), just below its 50% cutoff. The exact counts
+also expose an under-specified semantic: wrist roll plus gripper account for
+285/366 (77.87%) while shoulder pan and elbow have zero exceedances. Reviewer
+205 therefore routes an optimizer/model-free T20.35e classification correction
+before choosing a decoder, normalization, projection, or gate correction. No
+optimizer, checkpoint mutation, rollout, Gate C work, hardware, external
+compute, or Brev occurred.

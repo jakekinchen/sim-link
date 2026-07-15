@@ -184,6 +184,13 @@ all five decoded seeds over rank 16. Gate B still fails because maximum action
 errors remain `0.091908` to `0.150321` rad versus the `0.05` limit. T20.35d is
 next as an optimizer-free exact checkpoint replay and per-joint/per-timestep
 residual localization; no additional training or Gate C work is justified yet.
+T20.35d is now `verified` through exact replay report `13b08e70` and Reviewer
+Decision 205. All five hashes reproduce. Of 366 errors above `0.05` rad, only
+9.29% are at chunk boundaries; wrist roll plus gripper account for 77.87%,
+while shoulder pan and elbow account for none. The signed single-joint
+classifier still says distributed because wrist roll alone is 44.81%, so
+T20.35e must correct that model-free classification before selecting a decoder,
+normalization, projection, or gate correction.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
