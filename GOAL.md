@@ -310,6 +310,13 @@ worst, mean, and spread, while padded noise changes sign for the two accuracy
 metrics. Brief 180 opens T20.35n to inherit active-scale 0 and 1 with padded
 noise normal and evaluate only active scales 0.25 and 0.5. No optimizer or Gate
 C authority exists.
+T20.35n pre-run implementation `04f7d3b`, spec `155d9336...`, permit
+`f821bd57...`, and Reviewer Decision 219 are preservation-ready. Fifty-seven
+relevant tests and 24 subtests pass; spec/permit verification agrees under
+Python 3.11 and 3.12. After remote confirmation, exactly one Python 3.12
+local-MPS attempt may evaluate active scales 0.25 and 0.5 with padded noise
+fixed normal. No model, checkpoint tensor, inference, optimizer, mutation, or
+rollout has occurred at this boundary.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
