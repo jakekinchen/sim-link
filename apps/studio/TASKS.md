@@ -14,7 +14,7 @@ in the same commit as the work.
 | ST7 | Agent Feed: briefs/session-logs/reviewer-decisions live tail | done | regex filename-only brief/reviewer reads; live full-text safe Markdown feed browser-verified |
 | ST8 | MCP server exposing status/episodes/tasks/workcells/build/render tools | done | official SDK stdio verified: 7 tools, 5 live reads, fail-closed guards, stable workcell build; REST parity exact |
 | ST9 | Robot panel: render discovery/census/calibration evidence read-only with permit-gated registration stub | pending | |
-| ST10 | Three.js orbit viewer for compiled workcells | pending | reuse `threejs_export.py` |
+| ST10 | Three.js orbit viewer for compiled workcells | done | live lazy Three.js viewer: whitelisted XML, 14 boxes/2 cubes/2 trays, orbit/reset, canvas cleanup |
 | ST11 | Tauri wrap (native Mac shell) | pending | stretch |
 | ST12 | Episode compare: two mirrors side-by-side, synced scrub | done | live browser verified: distinct pickers, side-by-side mirrors, shared play/end, exact 4.2s dual scrub |
 

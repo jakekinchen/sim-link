@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { api, ApiError, mediaUrl, usePoll } from '../api/client'
 import type {
   WorkcellArrangementSpec,
@@ -11,6 +11,7 @@ import { EmptyState, ErrorState, Hash, KV, Led, Panel, PassFail, Tag } from '../
 import { sci } from '../lib/format'
 
 const COLORS: WorkcellColor[] = ['red', 'blue', 'green', 'yellow', 'purple', 'orange']
+const WorkcellOrbit = lazy(() => import('../components/WorkcellOrbit'))
 
 const DEFAULT_SPEC: WorkcellArrangementSpec = {
   schema_version: 'scenesmith.workcell_arrangement_spec.v1',
@@ -223,6 +224,7 @@ function ManifestCard({ manifest, title }: { manifest: WorkcellManifest; title: 
           ))}
         </div>
       )}
+      {manifest.scene_xml && <OrbitGate sceneXml={manifest.scene_xml} sceneId={manifest.scene_id} />}
       <div className="grid grid-cols-2 gap-x-6 gap-y-2 md:grid-cols-4">
         <KV label="cubes">{String(manifest.cube_count ?? '—')}</KV>
         <KV label="trays">{String(manifest.tray_count ?? '—')}</KV>
@@ -240,6 +242,36 @@ function ManifestCard({ manifest, title }: { manifest: WorkcellManifest; title: 
       </div>
       <p className="cap mt-3 text-faint">{manifest.authority}</p>
     </Panel>
+  )
+}
+
+function OrbitGate({ sceneXml, sceneId }: { sceneXml: string; sceneId: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="mb-3">
+      <button
+        type="button"
+        className="flex w-full items-center gap-2 border border-line-2 bg-inset px-2 py-2 text-left hover:border-cyan/40"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+      >
+        <span className={`text-faint transition-transform ${open ? 'rotate-90' : ''}`}>▸</span>
+        <span className="cap text-cyan">3D orbit viewer</span>
+        <span className="cap ml-auto text-faint">compiled scene.xml · local render</span>
+      </button>
+      {open && (
+        <Suspense
+          fallback={
+            <div className="flex items-center gap-2 border border-line-2 border-t-0 p-3">
+              <Led tone="amber" pulse />
+              <span className="cap">loading Three.js viewport</span>
+            </div>
+          }
+        >
+          <WorkcellOrbit sceneXml={sceneXml} sceneId={sceneId} />
+        </Suspense>
+      )}
+    </div>
   )
 }
 
