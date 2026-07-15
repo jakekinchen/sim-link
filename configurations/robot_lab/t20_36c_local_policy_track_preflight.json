@@ -1,0 +1,303 @@
+{
+  "act": {
+    "cached_checkpoint_drop_in_compatible": false,
+    "cached_checkpoint_image_feature_keys": [
+      "observation.images.side",
+      "observation.images.wrist"
+    ],
+    "cached_checkpoint_integrity_verified": false,
+    "canonical_dataset_shape_compatible": true,
+    "diagnostic_control_design_ready": true,
+    "exact_gate_b_control_already_run": false,
+    "local_checkpoint_metadata_complete": true,
+    "mps_runtime_previously_observed": true,
+    "previous_closed_loop_evidence_file_sha256": "f58fe5adc50823fd861bd494e8f5104740ec6577047a2d2946a7ec4919360d1d",
+    "previous_closed_loop_strict_success": false,
+    "previous_mps_chunk_size": 8,
+    "previous_mps_evidence_file_sha256": "0bde6870afda7adc62c44c2bf8b67e3b97b51c677af659b00bd4795c00ee8ca6",
+    "previous_mps_updates": 100,
+    "source_entrypoints_complete": true
+  },
+  "brev_compute_started": false,
+  "cache_inventory": {
+    "act_candidate": {
+      "files": [
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "config.json",
+          "sha256": "7bfd75f3f29092b25a7687622695c806913f879371b3fa075df0a3867bb2a565",
+          "size_bytes": 1700
+        },
+        {
+          "content_read": false,
+          "is_weight_or_tensor_file": true,
+          "name": "model.safetensors",
+          "size_bytes": 62292104
+        }
+      ],
+      "model_cache": "models--binhpham--sim_so101_cubes_act_small",
+      "path": "~/.cache/huggingface/hub/models--binhpham--sim_so101_cubes_act_small/snapshots/9332873218eaba2c64ac1115c4b9742177f64c13",
+      "revision": "9332873218eaba2c64ac1115c4b9742177f64c13",
+      "tensor_content_read": false
+    },
+    "smolvla_base": {
+      "files": [
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "config.json",
+          "sha256": "650584b56c104720f7a3c91d1ec6bec9e8de8ac11e60c92ba2fa82d93eda147d",
+          "size_bytes": 2299
+        },
+        {
+          "content_read": false,
+          "is_weight_or_tensor_file": true,
+          "name": "model.safetensors",
+          "size_bytes": 906712520
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "policy_postprocessor.json",
+          "sha256": "2b78bb742065288df2ec63b0ee35f97a1f6950171cf2272f7e34b1fe3873b17b",
+          "size_bytes": 660
+        },
+        {
+          "content_read": false,
+          "is_weight_or_tensor_file": true,
+          "name": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+          "size_bytes": 640
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "policy_preprocessor.json",
+          "sha256": "7683d648280a72f0d51e869fb8dd1596beed90b7f84849330cf1bc26634a4bd6",
+          "size_bytes": 1872
+        },
+        {
+          "content_read": false,
+          "is_weight_or_tensor_file": true,
+          "name": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+          "size_bytes": 640
+        }
+      ],
+      "model_cache": "models--lerobot--smolvla_base",
+      "path": "~/.cache/huggingface/hub/models--lerobot--smolvla_base/snapshots/c83c3163b8ca9b7e67c509fffd9121e66cb96205",
+      "revision": "c83c3163b8ca9b7e67c509fffd9121e66cb96205",
+      "tensor_content_read": false
+    },
+    "smolvlm_base": {
+      "files": [
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "added_tokens.json",
+          "sha256": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a",
+          "size_bytes": 4739
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "chat_template.json",
+          "sha256": "b585e3598909a5687f9f9d738d35223724dedef256b9b274e1cbfb32b13c74bf",
+          "size_bytes": 430
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "config.json",
+          "sha256": "ea6bc1237e96247f6258de3e202e2e62b93d6f386dc47e7b36b5588bf3a15e17",
+          "size_bytes": 3767
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "generation_config.json",
+          "sha256": "34835060c9f0f74d1acb456cc72ca32746d3843d9eb5f578f9cbffac1d2eb840",
+          "size_bytes": 136
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "merges.txt",
+          "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "size_bytes": 466391
+        },
+        {
+          "content_read": false,
+          "is_weight_or_tensor_file": true,
+          "name": "model.safetensors",
+          "size_bytes": 2029990624
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "preprocessor_config.json",
+          "sha256": "149e315d9410368e5491455bb06e0f763426e9e56cca731c13b24404a29b6374",
+          "size_bytes": 599
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "processor_config.json",
+          "sha256": "f3ad45028447b3562b4752be0d5916d6806c1ef589091a469608dcf0faa1737c",
+          "size_bytes": 67
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "special_tokens_map.json",
+          "sha256": "2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60",
+          "size_bytes": 868
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "tokenizer.json",
+          "sha256": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+          "size_bytes": 3548256
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "tokenizer_config.json",
+          "sha256": "dd9ce2ab89a3dd881bd9378f1a79b943a064b9275a7e1706d5b7b47b68977913",
+          "size_bytes": 28626
+        },
+        {
+          "content_read": true,
+          "is_weight_or_tensor_file": false,
+          "name": "vocab.json",
+          "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+          "size_bytes": 800662
+        }
+      ],
+      "model_cache": "models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct",
+      "path": "~/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+      "revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+      "tensor_content_read": false
+    }
+  },
+  "checkpoint_tensor_read": false,
+  "classification": "local_metadata_supports_act_first_control_design_only",
+  "closed_loop_rollout": false,
+  "dataset": {
+    "action_dimension": 6,
+    "dataset_examples_read": false,
+    "episode_count": 10,
+    "fps": 30,
+    "image_feature_count": 2,
+    "image_feature_keys": [
+      "observation.images.base_0_rgb",
+      "observation.images.left_wrist_0_rgb"
+    ],
+    "image_shape": [
+      3,
+      256,
+      256
+    ],
+    "language_task_available": true,
+    "language_tasks": [
+      "Grasp the lightweight anchor, lift 40 mm, hold, lower, release, and retreat."
+    ],
+    "manifest_identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+    "metadata_file_sha256": {
+      "info": "789ab860cae39d100f1d28e0e547e2229b860cdcacc2916c230074ff5e7ed9fc",
+      "manifest": "df6e63d86cd053937c9e4d4c267f057b76aaf418761e7dc3356a9ae08c06fea5",
+      "stats": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1",
+      "tasks": "75d507d99b8f12e63006844a0034e3ce8570ca47b22d7417f2096c29dbfa3f4f"
+    },
+    "state_dimension": 6,
+    "total_frames": 2330
+  },
+  "exact_act_control_requires_separate_authority_and_spec": true,
+  "external_compute_started": false,
+  "gate_b_threshold_changed": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "61fcf124ab23d2e27672f8335ade0e74df10254ca58d4aec5a77b606ef328bcb",
+  "lerobot_source": {
+    "dirty_paths_preserved": [
+      " M src/lerobot/policies/pi05/modeling_pi05.py",
+      " M src/lerobot/scripts/lerobot_train.py"
+    ],
+    "head": "e40b58a8dfa9e7b86918c374791599d070518d11",
+    "source_bound": true,
+    "source_files": [
+      {
+        "path": "src/lerobot/configs/policies.py",
+        "sha256": "94bfe65715b2d35ac0ddfd79e52b8f9c1cf8a28fc1d62d56cd6fb2c3908a8876"
+      },
+      {
+        "path": "src/lerobot/policies/act/configuration_act.py",
+        "sha256": "35a60c0dd3c811b137b5eb035bdbd40d40e2c24ba0cda61756052e6e1c829282"
+      },
+      {
+        "path": "src/lerobot/policies/act/modeling_act.py",
+        "sha256": "a6c1a49c5daafa513b9abee9b986205d327e25c70ed13623ab2e6c0ab6b1f577"
+      },
+      {
+        "path": "src/lerobot/policies/act/processor_act.py",
+        "sha256": "2bff84913c264eba5c2e65239d685ca1b497c1d9d2259958da293ec604b5830a"
+      },
+      {
+        "path": "src/lerobot/policies/factory.py",
+        "sha256": "7d8a74352cb8691bd59de44a478b6f3a2bbe212583fdb04a5c19b669311b4ebe"
+      },
+      {
+        "path": "src/lerobot/policies/smolvla/configuration_smolvla.py",
+        "sha256": "2fb637cb428fa2fdf1d114646dcffaf4728216bfe5b7039d5d0cac4857ffc4e0"
+      },
+      {
+        "path": "src/lerobot/policies/smolvla/modeling_smolvla.py",
+        "sha256": "5daaa297954acf9ae89397b571322f07bf30798e72f566e61a09393342cb1f99"
+      },
+      {
+        "path": "src/lerobot/policies/smolvla/processor_smolvla.py",
+        "sha256": "d34594291b2ecf7801f8c27a940a998c52a7e308cbc89f2403c9cbecfb368f22"
+      },
+      {
+        "path": "src/lerobot/policies/smolvla/smolvlm_with_expert.py",
+        "sha256": "f7542fa2bf904f9ef64d26843809f913a5e93c4dfa538dda06db0b288391ab4d"
+      }
+    ]
+  },
+  "model_inference": false,
+  "model_loaded": false,
+  "network_accessed": false,
+  "next_hypothesis_is_design_only": true,
+  "no_checkpoint_integrity_inference_from_stat_only_inventory": true,
+  "no_policy_performance_inference_from_cache_presence": true,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "policy_track_selected": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_36c_local_policy_track_preflight.v1",
+  "scope": "read_only_local_act_and_smolvla_source_cache_dataset_preflight",
+  "selected_next_hypothesis": "design_exact_act_gate_b_control_before_smolvla_entry",
+  "simulation_policy_accepted": false,
+  "smolvla": {
+    "action_state_horizon_match": true,
+    "base_cache_metadata_complete": true,
+    "cached_checkpoint_integrity_verified": false,
+    "cached_image_feature_keys": [
+      "observation.images.camera1",
+      "observation.images.camera2",
+      "observation.images.camera3"
+    ],
+    "camera_feature_match": false,
+    "drop_in_ready": false,
+    "local_entry_design_ready": true,
+    "mps_runtime_verified": false,
+    "mps_source_not_explicitly_blocked": true,
+    "source_entrypoints_complete": true,
+    "two_camera_override_required": true,
+    "vlm_cache_metadata_complete": true
+  },
+  "smolvla_entry_requires_two_camera_override_test_and_mps_runtime_proof": true,
+  "task_id": "T20.36c",
+  "weights_downloaded": false
+}
