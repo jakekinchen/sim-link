@@ -60,3 +60,15 @@ three relevant tests, signed spec/permit/runtime verification, model-free
 preflight, and the exact runtime preflight pass. No T20.35v attempt,
 checkpoint tensor load, model construction, inference, optimizer, rollout,
 hardware, external compute, or Brev action occurred before authorization.
+
+## Result
+
+Distinct attempt `30df1e26...` reproduced all five T20.35t endpoint hashes and
+emitted signed result `aad8a148...`, preserved at `d464e26`. Active target
+residual improves over T20.35p for steps 0-2, then first worsens materially at
+step 3; source-path displacement becomes material at step 1. Maximum active
+state displacement is `0.070391`, versus padded `0.019197`, so the remaining
+error is active-dimension dominant rather than padded coupling. Reviewer 235
+routes one model-free step/coordinate outlier audit. Gate B and Gate C remain
+closed. No optimizer, rollout, hardware, external compute, or Brev action
+occurred.
