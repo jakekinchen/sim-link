@@ -22,6 +22,12 @@ export class ApiError extends Error {
   }
 }
 
+const API_BASE = (import.meta.env.VITE_API_BASE ?? '').replace(/\/$/, '')
+
+function apiUrl(path: string): string {
+  return `${API_BASE}${path}`
+}
+
 async function getJson<T>(url: string, signal?: AbortSignal): Promise<T> {
   const res = await fetch(url, { signal })
   if (!res.ok) {
@@ -57,30 +63,31 @@ async function postJson<T>(url: string, body: unknown): Promise<T> {
 }
 
 export const api = {
-  status: (signal?: AbortSignal) => getJson<StatusResponse>('/api/status', signal),
-  episodes: (signal?: AbortSignal) => getJson<EpisodesResponse>('/api/episodes', signal),
+  status: (signal?: AbortSignal) => getJson<StatusResponse>(apiUrl('/api/status'), signal),
+  episodes: (signal?: AbortSignal) => getJson<EpisodesResponse>(apiUrl('/api/episodes'), signal),
   episode: (id: string, signal?: AbortSignal) =>
-    getJson<EpisodeDetail>(`/api/episodes/${id}`, signal),
-  workcells: (signal?: AbortSignal) => getJson<WorkcellsResponse>('/api/workcells', signal),
-  tasks: (signal?: AbortSignal) => getJson<TasksResponse>('/api/tasks', signal),
-  robot: (signal?: AbortSignal) => getJson<RobotResponse>('/api/robot', signal),
+    getJson<EpisodeDetail>(apiUrl(`/api/episodes/${id}`), signal),
+  workcells: (signal?: AbortSignal) =>
+    getJson<WorkcellsResponse>(apiUrl('/api/workcells'), signal),
+  tasks: (signal?: AbortSignal) => getJson<TasksResponse>(apiUrl('/api/tasks'), signal),
+  robot: (signal?: AbortSignal) => getJson<RobotResponse>(apiUrl('/api/robot'), signal),
   document: (kind: StudioDocumentKind, filename: string, signal?: AbortSignal) =>
     getJson<StudioDocument>(
-      `/api/documents/${encodeURIComponent(kind)}/${encodeURIComponent(filename)}`,
+      apiUrl(`/api/documents/${encodeURIComponent(kind)}/${encodeURIComponent(filename)}`),
       signal,
     ),
   buildWorkcell: (spec: WorkcellArrangementSpec) =>
-    postJson<WorkcellManifest>('/api/actions/build-workcell', spec),
+    postJson<WorkcellManifest>(apiUrl('/api/actions/build-workcell'), spec),
 }
 
 /** URL for a whitelisted media file (mirror mp4, workcell preview png). */
 export function mediaUrl(relPath: string): string {
-  return `/api/media?path=${encodeURIComponent(relPath)}`
+  return apiUrl(`/api/media?path=${encodeURIComponent(relPath)}`)
 }
 
 /** URL for an expert episode camera frame PNG. */
 export function frameUrl(episodeId: string, index: number, view: string): string {
-  return `/api/episodes/${episodeId}/frame/${index}/${view}`
+  return apiUrl(`/api/episodes/${episodeId}/frame/${index}/${view}`)
 }
 
 export interface Polled<T> {

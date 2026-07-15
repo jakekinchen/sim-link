@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "SceneSmith Studio",
+  "version": "0.1.0",
+  "identifier": "com.scenesmith.studio",
+  "build": {
+    "beforeDevCommand": "bun run native:sidecar && bun run dev -- --host 127.0.0.1",
+    "devUrl": "http://127.0.0.1:5173",
+    "beforeBuildCommand": "bun run native:sidecar && bun run build:native",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "SceneSmith Studio",
+        "width": 1440,
+        "height": 900,
+        "minWidth": 1024,
+        "minHeight": 700,
+        "center": true,
+        "theme": "Dark"
+      }
+    ],
+    "security": {
+      "capabilities": ["default"],
+      "csp": "default-src 'self' customprotocol: asset:; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:8321; img-src 'self' data: blob: http://127.0.0.1:8321; media-src 'self' blob: http://127.0.0.1:8321; font-src 'self' data:; style-src 'self' 'unsafe-inline'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["app"],
+    "icon": ["icons/icon.png", "icons/icon.icns"],
+    "externalBin": ["binaries/studio-backend"],
+    "category": "DeveloperTool",
+    "shortDescription": "Local control room for the SceneSmith robot-learning foundry",
+    "macOS": {
+      "minimumSystemVersion": "12.0"
+    }
+  }
+}
