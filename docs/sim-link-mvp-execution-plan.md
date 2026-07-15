@@ -172,6 +172,12 @@ exposure does not explain the regression. Quantile/postprocessor shift is next.
 Brief 160 opens T20.29 to cross-decode the same normalized five-seed candidate
 outputs under clean and recovery action quantiles without model execution or
 optimizer authority.
+T20.29 is verified through `7473272` by Reviewer Decision 190. Applying the
+recovery action quantiles to clean normalized outputs raises source-action MAE
+by 0.11301 rad versus the observed 0.11094 rad regression, leaving a -0.00208
+rad accounting residual. This is a postprocessor-only counterfactual, not full
+training causality. A separately reviewed nominal-quantile-freezing ablation is
+next; no optimizer is opened by this result.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,

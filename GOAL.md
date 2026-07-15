@@ -96,7 +96,11 @@ approach and 3 frame-zero samples versus clean's 14 and 0, so low early-phase
 exposure is rejected. Dataset quantile/postprocessor shift is next.
 Brief 160 now opens T20.29 for a five-seed postprocessor-only quantile
 counterfactual holding normalized candidate outputs fixed. It runs no model or
-optimizer and predeclares no statistics-freezing conclusion.
+optimizer and predeclares no statistics-freezing conclusion. T20.29 is now
+`verified` through Reviewer Decision 190: recovery action quantiles reproduce
+the observed frame-zero regression within 0.00208 rad in the bounded
+postprocessor-only counterfactual. Full training causality remains unproven;
+freezing nominal action quantiles is the next separately reviewed ablation.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
