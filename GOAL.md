@@ -156,6 +156,13 @@ only in artifact identity metadata plus LoRA rank/alpha 4 to 16, and central
 composition grants only `simulation_training_ready` through the active window.
 Exactly one local-MPS run is next; no model load or optimizer occurred at the
 pre-run boundary.
+T20.35 is now `verified` negative through result boundary `fd9399d` and
+Reviewer Decision 199. The sole counted rank-16 attempt completed 500 finite
+updates and improved the objective ratio from `0.528248` to `0.155307`, but
+still missed the `0.10` gate; all five decoded chunks also missed the `0.05`
+rad maximum-error gate. Gate B remains closed. The next safe task is the
+optimizer-free T20.35a audit that enumerates the exact modules and tensors
+wrapped by PEFT before another learning-rate or update-budget rung.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

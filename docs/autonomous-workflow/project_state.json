@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "165",
-    "commit": "491eb6cf486740d65c1635ebad4ef4afac0a5d5f",
-    "reviewer_decision_id": "196",
-    "summary": "verified_optimizer_free_gate_b_plumbing_localization_saved"
+    "brief_id": "166",
+    "commit": "fd9399d959500f6cc439b6ad0fe7f29a7eea54ac",
+    "reviewer_decision_id": "199",
+    "summary": "verified_negative_gate_b_rank_capacity_discriminator_rank"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35",
-  "next_eligible_task": "T20.35",
+  "current_task": "T20.35a",
+  "next_eligible_task": "T20.35a",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2752,29 +2752,46 @@
     "T20.33": {"state":"verified","depends_on":["T20.32"],"active_brief_id":null,"latest_verified_brief_id":"164","review_decision_id":"195","source_commit":"bb3435ba0da3af707bc69f59f9e4ef60c6b0e64b","implementation_commits":["38fa45034ca66f2e0ebde01fc22a8490a464e9e9","bb3435ba0da3af707bc69f59f9e4ef60c6b0e64b"],"result":"verified negative Gate B one-batch proof: 500 finite fixed-batch updates reduce five-seed objective only to 0.528248 of baseline and all five decoded chunks miss the 0.05 rad maximum-error gate by large margins, keeping Gate C and broader campaigns closed","artifact":{"path":"configurations/robot_lab/t20_33_one_batch_result.json","schema_version":"scenesmith.t20_33_one_batch_result.v1","identity_sha256":"27cd2be30916234e5eff18eb350449a47b648a9baf0a48e8fe50eb74dc2138ee","training_spec_identity_sha256":"3fa3098c816b228a6687e952cb8444c77344e49877b17cfc5d1afdc32e6e685a","authority_decision_identity_sha256":"ff3ac3c99eb71f4774976f02c8ae7d3d17827451f4c738c2ceaddf3545db5348","run_identity_sha256":"718a1c7cc272732012589159a1796fc76c1308d0ea521a3283682bb0f0fb5aa2","optimizer_update_count":500,"baseline_objective_mean":0.9590791046619416,"final_objective_mean":0.5066317349672318,"final_to_baseline_objective_ratio":0.5282481210408713,"maximum_allowed_objective_ratio":0.1,"maximum_allowed_action_error_rad":0.05,"all_decoded_chunks_within_threshold":false,"objective_ratio_within_threshold":false,"gate_b_one_batch_memorization_passed":false,"decision":"gate_b_fail","selected_next_hypothesis":"gate_b_model_or_trainer_plumbing","optimizer_training":true,"closed_loop_rollout":false,"simulation_policy_accepted":false,"physical_actuation":false,"external_compute_started":false,"brev_compute_started":false},"authority_granted":["t20_33_gate_b_negative_result_verified"],"authority_not_granted":["gate_b_passed","gate_c_execution_correction","additional_optimizer_training","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T20.34": {"state":"verified","depends_on":["T20.33"],"active_brief_id":null,"latest_verified_brief_id":"165","review_decision_id":"196","source_commit":"491eb6cf486740d65c1635ebad4ef4afac0a5d5f","implementation_commits":["491eb6cf486740d65c1635ebad4ef4afac0a5d5f"],"result":"verified optimizer-free Gate B plumbing localization: saved rank-4 adapter is active and exactly replayable, lowers decoded mean error on all five seeds with positive target alignment, and reproduces objective improvement, routing insufficient optimization or capacity rather than dead plumbing or objective-inference opposition","artifact":{"path":"configurations/robot_lab/t20_34_gate_b_plumbing_localization.json","schema_version":"scenesmith.t20_34_gate_b_plumbing_localization.v1","identity_sha256":"8026980d2f3682dfff515f0e522393cf8c2d2ff090df480d55a203b85ee34c98","t20_33_run_identity_sha256":"718a1c7cc272732012589159a1796fc76c1308d0ea521a3283682bb0f0fb5aa2","adapter_tensor_value_count":321792,"adapter_tensor_nonzero_count":321688,"adapter_active":true,"base_objective_mean":0.9590791046619416,"adapter_objective_mean":0.5066317349672318,"every_seed_decoded_error_improved_and_aligned":true,"selected_next_hypothesis":"insufficient_gate_b_optimization_or_capacity","optimizer_training":false,"closed_loop_rollout":false,"simulation_policy_accepted":false,"physical_actuation":false,"external_compute_started":false,"brev_compute_started":false},"authority_granted":["t20_34_gate_b_plumbing_localization_verified"],"authority_not_granted":["gate_b_passed","optimizer_training_executed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T20.35": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.34"],
-      "active_brief_id": "166",
-      "latest_verified_brief_id": null,
-      "review_decision_id": "198",
-      "result": "authorized pre-run Gate B capacity discriminator: one remotely preserved same-batch same-seed rank-16 LoRA ablation with unchanged 500-update and decoded-action gates; no model or optimizer has run",
-      "pre_run_artifact": {
-        "implementation_commit": "579855fa893862d53f4748f7394dce8bee3698a7",
-        "training_spec_path": "configurations/robot_lab/t20_35_rank_capacity_training_spec.json",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "166",
+      "review_decision_id": "199",
+      "source_commit": "fd9399d959500f6cc439b6ad0fe7f29a7eea54ac",
+      "implementation_commits": ["579855fa893862d53f4748f7394dce8bee3698a7", "fd9399d959500f6cc439b6ad0fe7f29a7eea54ac"],
+      "result": "verified negative Gate B rank-capacity discriminator: rank 16 improves the five-seed objective ratio from 0.528248 to 0.155307 but misses the 0.10 objective gate and all five decoded chunks miss the 0.05 rad maximum-error gate, routing optimizer-free coverage and attainability audits before another training rung",
+      "artifact": {
+        "schema_version": "scenesmith.t20_35_rank_capacity_result.v1",
+        "path": "configurations/robot_lab/t20_35_rank_capacity_result.json",
+        "identity_sha256": "99538521686cf3e3ea16df352e12ddd7d02613bd2fdd2a9877ebe16e9b036ca8",
         "training_spec_identity_sha256": "ccd6ef2b742af2e0fd75599a05a3f5f6c29c27f39fbb514ab2fc823b19a7eac1",
-        "authority_decision_path": "configurations/robot_lab/t20_35_simulation_training_authority_decision.json",
         "authority_decision_identity_sha256": "0cd37ea2756799e033f431c7907b3322ddc986bf007195908ae59ee92a181f20",
-        "exactly_one_run_permitted": true,
-        "optimizer_training_executed": false,
-        "model_loaded": false,
+        "attempt_identity_sha256": "f58f435a5c4bc0a2d8a841eeb63d28c3dc9db5c186f07ff3135873d862a5f557",
+        "run_identity_sha256": "6e0dd4e2003fa78f5d82cf38414cf6763444c27a44e797f30ff99c3097cd5dbe",
+        "checkpoint_identity_sha256": "0dea38b3135a4f1957bcd1fd7f3e78ca77fc2096eff5e2c75f0a3d9365f22032",
+        "optimizer_training": true,
+        "optimizer_update_count": 500,
+        "lora_rank": 16,
+        "trainable_parameter_count": 1287168,
+        "baseline_objective_mean": 0.9590791046619416,
+        "final_objective_mean": 0.14895169734954833,
+        "final_to_baseline_objective_ratio": 0.1553069987924001,
+        "maximum_allowed_objective_ratio": 0.1,
+        "objective_ratio_within_threshold": false,
+        "maximum_allowed_action_error_rad": 0.05,
+        "observed_maximum_action_error_range_rad": [0.7085196269456949, 1.4679949964112322],
+        "all_decoded_chunks_within_threshold": false,
+        "gate_b_one_batch_memorization_passed": false,
+        "decision": "gate_b_fail",
         "closed_loop_rollout": false,
         "physical_actuation": false,
         "external_compute_started": false,
         "brev_compute_started": false
       },
-      "authority_granted": ["simulation_training_ready"],
-      "authority_not_granted": ["optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "authority_granted": ["t20_35_gate_b_negative_result_verified"],
+      "authority_not_granted": ["gate_b_passed","additional_optimizer_training","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
+    "T20.35a": {"state":"pending","depends_on":["T20.35"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"pending optimizer-free audit enumerating the exact PEFT-wrapped modules and saved adapter tensors to determine whether action-expert projections, action-time MLP, and state projection are trainable before another Gate B training rung","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],

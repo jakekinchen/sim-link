@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-14
 
-**State:** `in_progress`
+**State:** `verified_negative`
 
 ## Objective
 
@@ -57,3 +57,12 @@ Reviewer 198 accepts exactly one local-MPS run after remote confirmation. The
 runner creates an immutable attempt marker before model construction, so a
 failed attempt cannot silently retry. No model load or optimizer occurred at
 this boundary.
+
+## Result
+
+The sole counted attempt completed 500 finite updates. Rank 16 cut the
+five-seed objective ratio from T20.33's `0.528248` to `0.155307`, but missed
+the unchanged `0.10` gate. All five decoded chunks also missed the `0.05` rad
+maximum-error gate (`0.708520` to `1.467995` rad). Result `99538521...` and
+Reviewer 199 verify a Gate B failure. No retry, continuation, Gate C work,
+campaign, policy acceptance, hardware, external compute, or Brev follows.
