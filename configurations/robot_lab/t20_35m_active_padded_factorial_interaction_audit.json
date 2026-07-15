@@ -1,0 +1,88 @@
+{
+  "action_correction_selected": false,
+  "active_noise_harmful_at_both_padded_settings_all_metrics": true,
+  "best_noise_condition": "active_zero_padded_normal",
+  "brev_compute_started": false,
+  "checkpoint_mutated": false,
+  "checkpoint_read": false,
+  "closed_loop_rollout": false,
+  "condition_metrics": [
+    {
+      "aggregate_mean_absolute_error_rad": 0.030990397665380236,
+      "aggregate_mean_raw_decoded_spread_rad": 0.04639243967987639,
+      "all_decoded_chunks_within_threshold": false,
+      "noise_condition": "active_normal_padded_normal",
+      "worst_seed_maximum_error_rad": 0.15032132878119553
+    },
+    {
+      "aggregate_mean_absolute_error_rad": 0.02850444550507093,
+      "aggregate_mean_raw_decoded_spread_rad": 0.034543991306687,
+      "all_decoded_chunks_within_threshold": false,
+      "noise_condition": "active_normal_padded_zero",
+      "worst_seed_maximum_error_rad": 0.1141727289855956
+    },
+    {
+      "aggregate_mean_absolute_error_rad": 0.02090788045588213,
+      "aggregate_mean_raw_decoded_spread_rad": 0.009969666828294787,
+      "all_decoded_chunks_within_threshold": false,
+      "noise_condition": "active_zero_padded_normal",
+      "worst_seed_maximum_error_rad": 0.06639793229785562
+    },
+    {
+      "aggregate_mean_absolute_error_rad": 0.024130379933735208,
+      "aggregate_mean_raw_decoded_spread_rad": 0.0,
+      "all_decoded_chunks_within_threshold": false,
+      "noise_condition": "active_zero_padded_zero",
+      "worst_seed_maximum_error_rad": 0.07336017777404802
+    }
+  ],
+  "dataset_mutated": false,
+  "dataset_read": false,
+  "external_compute_started": false,
+  "gate_b_passed": false,
+  "identity_sha256": "83105424d6faf668d8a41a70999e25a82338bb2537c802f5a4a60803df3cedb0",
+  "interaction_classification": "active_noise_dominant_with_context_dependent_padded_interaction",
+  "metric_contrasts": [
+    {
+      "active_noise_effect_with_padded_normal": 0.08392339648333991,
+      "active_noise_effect_with_padded_zero": 0.04081255121154759,
+      "active_padded_interaction": 0.04311084527179232,
+      "metric": "worst_seed_maximum_error_rad",
+      "padded_noise_effect_with_active_normal": 0.03614859979559992,
+      "padded_noise_effect_with_active_zero": -0.006962245476192397
+    },
+    {
+      "active_noise_effect_with_padded_normal": 0.010082517209498106,
+      "active_noise_effect_with_padded_zero": 0.004374065571335722,
+      "active_padded_interaction": 0.005708451638162384,
+      "metric": "aggregate_mean_absolute_error_rad",
+      "padded_noise_effect_with_active_normal": 0.002485952160309307,
+      "padded_noise_effect_with_active_zero": -0.0032224994778530767
+    },
+    {
+      "active_noise_effect_with_padded_normal": 0.0364227728515816,
+      "active_noise_effect_with_padded_zero": 0.034543991306687,
+      "active_padded_interaction": 0.0018787815448946064,
+      "metric": "aggregate_mean_raw_decoded_spread_rad",
+      "padded_noise_effect_with_active_normal": 0.011848448373189394,
+      "padded_noise_effect_with_active_zero": 0.009969666828294787
+    }
+  ],
+  "model_imported": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "padded_noise_accuracy_effect_changes_sign_by_active_setting": true,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "sampler_mutated": false,
+  "schema_version": "scenesmith.t20_35m_active_padded_factorial_interaction_audit.v1",
+  "scope": "model_free_active_padded_noise_two_by_two_factorial_interaction_audit",
+  "selected_next_hypothesis": "run_separately_reviewed_near_zero_active_noise_scale_discriminator_with_padded_normal",
+  "simulation_policy_accepted": false,
+  "statistics_changed": false,
+  "t20_35l_result_identity_sha256": "b4fc6060c56431ab2bf52dd74d8efa58b1808a10a827521db076f9d10234dbea",
+  "task_id": "T20.35m"
+}
