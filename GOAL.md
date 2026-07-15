@@ -191,6 +191,15 @@ while shoulder pan and elbow account for none. The signed single-joint
 classifier still says distributed because wrist roll alone is 44.81%, so
 T20.35e must correct that model-free classification before selecting a decoder,
 normalization, projection, or gate correction.
+T20.35e is now `verified` through correction `f2a8aa80`, implementation
+`292a109`, verifier correction `3013ded`, and Reviewer Decision 206. The
+immutable T20.35d report remains unchanged. Wrist roll plus gripper hold
+285/366 exceedances (77.87%), passing the declared 75% top-two threshold while
+neither the single-joint nor boundary
+threshold passes. The corrected class is multi-joint output-channel
+concentration. T20.35f is next as a model-free audit of normalized-space
+residuals and target saturation for those two channels before any decoder,
+normalization, projection, threshold, training, or Gate C correction.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

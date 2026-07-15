@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-15
 
-**State:** `in_progress`
+**State:** `verified`
 
 ## Objective
 
@@ -43,3 +43,15 @@ decoded or residual evidence.
 Model construction; inference; optimizer; training; checkpoint or report
 mutation; normalized-space attribution itself; action or threshold correction;
 Gate C; rollout; hardware; external compute; Brev; transfer; or promotion.
+
+## Result
+
+Correction `f2a8aa8089467b019310d24152f417d7987de0880d9664f3ef1184818a2ddea3`
+preserves immutable report `13b08e70...` and deterministically ranks wrist
+roll (164 exceedances) then gripper (121). Their 285/366 combined exceedances
+are 77.87%, above the predeclared 75% top-two threshold, while neither the 50%
+single-joint threshold nor the 60% boundary threshold passes. The corrected
+classification is `multi_joint_output_channel_concentrated`, routing only to a
+model-free normalized-space residual and target-saturation audit. No model,
+inference, optimizer, checkpoint access, action correction, or Gate C work
+occurred.
