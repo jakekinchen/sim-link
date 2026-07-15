@@ -123,8 +123,22 @@ not inherit authority from this document.
 | 10 | **T20.33 — Gate B one-batch memorization proof (verified negative)** | One exact batch, 500 finite updates, five fixed-seed decoded chunks; both objective-ratio and action-error gates fail. | Verified T20.32 Gate B route; Brief 164; Reviewer Decision 195 | Gate C cadence/chunk changes, unreviewed sweeps, grid expansion, promotion |
 | 11 | **T20.34 — Gate B plumbing localization (verified)** | Exact base/adapter replay proves active nonzero LoRA, exact checkpoint reload, lower mean error and positive target alignment on all five seeds; routes insufficient optimization/capacity. | Verified-negative T20.33; Brief 165; Reviewer Decision 196 | Optimizer continuation/retry, Gate C changes, second batch, promotion |
 | 12 | **T20.35 — Gate B rank-capacity discriminator** | One separately authorized rank-16 LoRA ablation from the same base, exact batch, seeds, 500 updates, and unchanged objective/action gates; pass/fail isolates rank-4 capacity without a sweep. | Verified T20.34 capacity/optimization route | Multiple ranks, continuation, second batch, Gate C changes, promotion |
+| 12b | **T20.35.x — conditional Gate B discriminators** | Only if rank-16 fails its unchanged gates: at most one single-factor probe per reviewed slice, in order — (a) constant learning rate 2.5e-4 with the same batch and 500 updates; (b) a 5,000-update budget at the better rate. In parallel, two no-optimizer audits: enumerate exactly which modules `wrap_with_peft` wraps (action-expert in/out projections, action-time MLP, and state projection must be trainable), and calibrate the 0.10 objective-ratio gate by measuring the irreducible flow-matching objective under exact-target supervision so the memorization threshold is provably attainable. If target coverage is the fault, an expert-only unfreeze (no LoRA) is the capacity-ceiling probe. | Verified-negative T20.35 | Combined-factor changes, unreviewed sweeps, second batch, Gate C changes, promotion |
 | 13 | **T20.36 — bounded campaign only after Gate B correction** | One reviewed bounded campaign only after one-batch memorization passes; training seed before held-out seeds 6-7. | Verified Gate B pass after T20.35 or later correction | Multiple concurrent rungs, promotion, hardware, external compute, Brev |
 | 14 | **T20.37 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
+
+### Support tooling
+
+`scripts/robot_lab/render_rollout_mirror.py` renders any signed
+`t20_32_closed_loop_trace.v1` artifact as a side-by-side MP4: re-rendered
+policy side/overhead views beside the exact recorded expert top-camera frame
+for the same frame index, with phase, strict-contact, and anchor-lift
+overlays. Output stays under `outputs/robot_lab/rollout_mirror/` with a hash
+manifest. It is kinematic playback of signed evidence — diagnostic
+visualization only, never new evidence or authority. Every future closed-loop
+evaluation slice should retain its mirror MP4 the way rendered keyframes are
+retained today; a later small slice may fold the render into the evaluation
+runner and sign the output.
 
 T20.17 is verified negative, T20.18 is verified recovery evidence, T20.19 is
 verified as an uncalibrated grid, T20.20 and T20.21 are verified, and T20.22 is
