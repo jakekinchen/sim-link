@@ -156,6 +156,37 @@ class T2035FNormalizedResidualSaturationAuditTests(unittest.TestCase):
                 source_contract=sources,
             )
 
+    def test_archive_verification_tolerates_only_sub_femtoscale_derived_float_drift(self) -> None:
+        correction, report, stats, sources = self._sources(
+            wrist_errors=[0.08] * 5,
+            gripper_errors=[0.07] * 5,
+        )
+        audit = build_audit(
+            correction=correction,
+            report=report,
+            action_stats=stats,
+            source_contract=sources,
+        )
+        tolerated = copy.deepcopy(audit)
+        tolerated["channel_audits"][0]["normalized_residual_mean_absolute"] += 5e-16
+        verify_audit(
+            sign_payload(tolerated),
+            correction=correction,
+            report=report,
+            action_stats=stats,
+            source_contract=sources,
+        )
+        rejected = copy.deepcopy(audit)
+        rejected["channel_audits"][0]["normalized_residual_mean_absolute"] += 2e-15
+        with self.assertRaisesRegex(ValueError, "drifted from sources"):
+            verify_audit(
+                sign_payload(rejected),
+                correction=correction,
+                report=report,
+                action_stats=stats,
+                source_contract=sources,
+            )
+
     @staticmethod
     def _sources(*, wrist_errors: list[float], gripper_errors: list[float]):
         target_lerobot = [0.0, 0.0, 0.0, 0.0, 95.0, 95.0]

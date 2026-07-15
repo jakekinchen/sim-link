@@ -25,6 +25,7 @@ from scenesmith.robot_lab.t20_35d_decoded_action_residual_localization import (
     PERMIT_PATH,
     REPORT_PATH,
     SPEC_PATH,
+    _equal_with_float_tolerance,
     verify_evaluation_permit,
     verify_report,
 )
@@ -303,7 +304,15 @@ def verify_audit(
         action_stats=action_stats,
         source_contract=source_contract,
     )
-    if payload != expected:
+    archived_content = {
+        key: value for key, value in payload.items() if key != "identity_sha256"
+    }
+    expected_content = {
+        key: value for key, value in expected.items() if key != "identity_sha256"
+    }
+    if not _equal_with_float_tolerance(
+        archived_content, expected_content, absolute_tolerance=1e-15
+    ):
         raise ValueError("T20.35f normalized residual audit drifted from sources")
 
 
