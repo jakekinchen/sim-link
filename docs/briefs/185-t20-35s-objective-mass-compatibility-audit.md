@@ -40,3 +40,13 @@ One signed artifact reproduces all aggregate values from the immutable run,
 rejects non-finite, missing, reordered, or stale evidence, preserves every
 closed authority, and routes one smallest next correction hypothesis without
 claiming Gate B or policy success.
+
+## Result
+
+Signed audit `113f72a9...`, remotely preserved at `7242e98`, reproduces all 50
+objectives. Steps 8–9 contain `90.2746%` of baseline correction mass, step 9
+alone contains `77.5851%`, and the standard objective worsens `3.23704x` to an
+original-baseline ratio of `0.150468`. Reviewer 229 verifies terminal objective
+mass dominance with standard interference, keeps Gate B and Gate C closed,
+and opens T20.35t under Brief 186 for one separately reviewed time-normalized
+correction with standard replay.

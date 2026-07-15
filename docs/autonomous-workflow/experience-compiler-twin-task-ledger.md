@@ -5,15 +5,15 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T23:27:47-05:00; no new major slice after 2026-07-15T22:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35, evening extension recorded 2026-07-15T10:20:00-05:00 for the MVP demo composition
-run_state: T20.35r signed result 52d4c9ed... fails the standard-objective and action gates after its correction objective passes; Reviewer 228 opens model-free T20.35s objective-mass compatibility audit under Brief 185.
+run_state: T20.35s signed audit 113f72a9... verifies late objective-mass dominance with standard interference; Reviewer 229 opens T20.35t time-normalized standard-replay correction design under Brief 186.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.35s in progress under Brief 185 for one model-free time-step objective-mass and standard-compatibility audit
+current_task: T20.35t in progress under Brief 186 for one separately reviewed time-normalized full-path correction with deterministic standard replay
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: implement and verify one signed T20.35s model-free audit over the immutable T20.35r objective traces, then route a correction only if its imbalance classification is mechanically proven
+next_step: implement and test the exact T20.35t time-weight and paired standard-replay spec plus central authority boundary, then stop before model load until remotely reviewed
 ```
 
 ## Rules
@@ -605,6 +605,26 @@ and unchanged Gate B ratios without loading a model. It may route one
 time-normalized compatibility hypothesis but cannot select an action
 correction or grant optimizer, Gate C, hardware, external-compute, or Brev
 authority.
+
+## 2026-07-15 - T20.35s objective-mass interference verified
+
+Signed audit `113f72a9...`, preserved at `7242e98`, recomputes all 50 T20.35r
+baseline/final correction objectives. Steps 8–9 hold `90.2746%` of baseline
+mass and step 9 alone `77.5851%`, while the standard objective worsens
+`3.23704x` to original-baseline ratio `0.150468`. Reviewer 229 verifies
+terminal objective-mass dominance with standard interference and routes
+T20.35t. Thirty-three relevant tests pass. No model, checkpoint, optimizer,
+rollout, hardware, external compute, or Brev action occurred.
+
+## 2026-07-15 - Brief 186 opens T20.35t balanced correction
+
+T20.35t starts from the pre-regression T20.35p checkpoint, reuses all 50 exact
+T20.35q path examples, normalizes each step's correction loss to equal initial
+objective mass, and pairs every one of 500 correction updates with one
+deterministically seeded standard one-batch replay gradient before stepping.
+The original objective and 0.05-rad action gates remain unchanged. Model load,
+optimizer creation, training, Gate C, hardware, external compute, and Brev stay
+closed pending a fresh remotely preserved pre-run review.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
