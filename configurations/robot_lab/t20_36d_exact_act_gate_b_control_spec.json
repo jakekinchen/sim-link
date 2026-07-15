@@ -1,0 +1,349 @@
+{
+  "act_config": {
+    "chunk_size": 50,
+    "compile_model": false,
+    "device": "mps",
+    "dim_feedforward": 128,
+    "dim_model": 64,
+    "dropout": 0.0,
+    "dtype": "float32",
+    "feedforward_activation": "relu",
+    "input_features": {
+      "observation.images.base_0_rgb": {
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "type": "VISUAL"
+      },
+      "observation.images.left_wrist_0_rgb": {
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "type": "VISUAL"
+      },
+      "observation.state": {
+        "shape": [
+          6
+        ],
+        "type": "STATE"
+      }
+    },
+    "n_action_steps": 50,
+    "n_decoder_layers": 1,
+    "n_encoder_layers": 1,
+    "n_heads": 4,
+    "n_obs_steps": 1,
+    "normalization_mapping": {
+      "ACTION": "MEAN_STD",
+      "STATE": "MEAN_STD",
+      "VISUAL": "IDENTITY"
+    },
+    "output_features": {
+      "action": {
+        "shape": [
+          6
+        ],
+        "type": "ACTION"
+      }
+    },
+    "policy_type": "act",
+    "pre_norm": false,
+    "pretrained_backbone_weights": null,
+    "replace_final_stride_with_dilation": false,
+    "temporal_ensemble_coeff": null,
+    "use_amp": false,
+    "use_vae": false,
+    "vision_backbone": "resnet18"
+  },
+  "act_control_run_authorized": false,
+  "act_control_run_executed": false,
+  "attempt_contract": {
+    "central_authority_identity_bound_at_runtime": true,
+    "immutable_create_once": true,
+    "model_constructed_at_design_time": false,
+    "must_precede_model_construction": true,
+    "path": "outputs/robot_lab/t20_36e_exact_act_gate_b_control_run_001/attempt.json",
+    "required_fields": [
+      "schema_version",
+      "task_id",
+      "training_spec_identity_sha256",
+      "authority_decision_identity_sha256",
+      "source_commit",
+      "training_seed",
+      "created_before_model_construction"
+    ],
+    "schema_version": "scenesmith.t20_36e_exact_act_gate_b_control_attempt.v1",
+    "training_spec_identity_bound_at_runtime": true
+  },
+  "attempt_marker_created": false,
+  "brev_compute_started": false,
+  "campaign": {
+    "attempt_marker_must_precede_model_construction": true,
+    "attempt_marker_path": "outputs/robot_lab/t20_36e_exact_act_gate_b_control_run_001/attempt.json",
+    "batch_size": 1,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "device": "mps",
+    "epsilon": 1e-08,
+    "evaluation_update_schedule": [
+      0,
+      100,
+      250,
+      500,
+      1000,
+      2000
+    ],
+    "fixed_batch_repeated": true,
+    "gradient_clip_norm": 1.0,
+    "learning_rate": 0.0001,
+    "maximum_optimizer_updates": 2000,
+    "network_mode": "offline_no_download",
+    "one_attempt_only": true,
+    "optimizer": "AdamW",
+    "otherwise_stop_after_maximum_updates": true,
+    "per_update_seed_formula": "training_seed_plus_zero_based_update_index",
+    "retry_or_sweep_allowed": false,
+    "scheduler": null,
+    "stop_at_first_post_baseline_gate_b_pass": true,
+    "training_seed": 20260731,
+    "weight_decay": 0.0
+  },
+  "canonical_dataset": {
+    "action_dimension": 6,
+    "episode_zero_content_sha256": "35f6cd650928761604cfbc384d1f291ac5a3801535a2da5d8776be74538f79c4",
+    "episode_zero_frame_count": 244,
+    "episode_zero_raw_rollout_identity_sha256": "9e186088c9ca82fa9c58cb6e3870f322a9c2a84405d5ea23152b822fb9d4abdb",
+    "image_feature_keys": [
+      "observation.images.base_0_rgb",
+      "observation.images.left_wrist_0_rgb"
+    ],
+    "image_shape": [
+      3,
+      256,
+      256
+    ],
+    "joint_names": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "manifest_identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+    "metadata_file_sha256": {
+      "info": "789ab860cae39d100f1d28e0e547e2229b860cdcacc2916c230074ff5e7ed9fc",
+      "stats": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1"
+    },
+    "repo_id": "scenesmith/t20-23-anchor-grasp-recovery-train",
+    "revision": "v3.0",
+    "root": "outputs/robot_lab/t20_23_recovery_augmented_dataset",
+    "state_dimension": 6,
+    "total_episode_count": 10,
+    "total_frame_count": 2330
+  },
+  "checkpoint_tensor_read": false,
+  "closed_loop_rollout": false,
+  "coordinate_round_trip": {
+    "dataset_to_physical_function": "lerobot_to_mujoco",
+    "maximum_round_trip_error_rad": 1e-08,
+    "maximum_runtime_source_target_error_rad": 1e-05,
+    "must_pass_before_model_construction": true,
+    "physical_to_dataset_function": "mujoco_to_lerobot",
+    "source_path": "scenesmith/robot_lab/so101_coordinates.py",
+    "source_sha256": "9382e02106741906380eed572959f991382c285cedd08c8d652d0a3375cf843a"
+  },
+  "evaluation": {
+    "all_repetition_action_hashes_must_match": true,
+    "closed_loop": false,
+    "decode": "reset_once_then_select_action_50_times_from_one_processed_observation",
+    "dropout_disabled": true,
+    "expected_model_forward_count_per_repetition": 1,
+    "mode": "deterministic_open_loop_same_observation_action_chunk",
+    "model_eval_mode": true,
+    "physical_error_basis": "decoded_lerobot_action_converted_to_mujoco_radian_vs_exact_source_measured_chunk",
+    "repetition_count_per_checkpoint": 5,
+    "supervised_objective_basis": "mean_absolute_normalized_action_error_over_unpadded_horizon_50",
+    "vae_disabled": true
+  },
+  "execution_task_id": "T20.36e",
+  "external_compute_started": false,
+  "gate": {
+    "all_action_dimensions_and_timesteps_must_pass": true,
+    "all_deterministic_repetitions_must_pass": true,
+    "maximum_final_to_baseline_supervised_objective_ratio": 0.1,
+    "maximum_physical_action_error_rad": 0.05,
+    "proxy_metric_substitution_allowed": false,
+    "unchanged_t20_33_conjunction": true,
+    "uniform_physical_metric_reported_without_amendment": true
+  },
+  "gate_b_threshold_changed": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+  "lerobot_source": {
+    "act_source_files": [
+      {
+        "path": "src/lerobot/configs/policies.py",
+        "sha256": "94bfe65715b2d35ac0ddfd79e52b8f9c1cf8a28fc1d62d56cd6fb2c3908a8876"
+      },
+      {
+        "path": "src/lerobot/policies/act/configuration_act.py",
+        "sha256": "35a60c0dd3c811b137b5eb035bdbd40d40e2c24ba0cda61756052e6e1c829282"
+      },
+      {
+        "path": "src/lerobot/policies/act/modeling_act.py",
+        "sha256": "a6c1a49c5daafa513b9abee9b986205d327e25c70ed13623ab2e6c0ab6b1f577"
+      },
+      {
+        "path": "src/lerobot/policies/act/processor_act.py",
+        "sha256": "2bff84913c264eba5c2e65239d685ca1b497c1d9d2259958da293ec604b5830a"
+      },
+      {
+        "path": "src/lerobot/policies/factory.py",
+        "sha256": "7d8a74352cb8691bd59de44a478b6f3a2bbe212583fdb04a5c19b669311b4ebe"
+      }
+    ],
+    "head": "e40b58a8dfa9e7b86918c374791599d070518d11"
+  },
+  "model_constructed": false,
+  "model_inference": false,
+  "model_initialization": {
+    "cached_checkpoint_used": false,
+    "mode": "fresh_seeded_act_parameters",
+    "network_fallback_allowed": false,
+    "pretrained_backbone_used": false,
+    "training_seed": 20260731
+  },
+  "model_loaded": false,
+  "network_accessed": false,
+  "normalization": {
+    "action_normalization_matches_t20_35x_correction_mode": true,
+    "mapping": {
+      "ACTION": "MEAN_STD",
+      "STATE": "MEAN_STD",
+      "VISUAL": "IDENTITY"
+    },
+    "policy_specific_processor_implementation": "lerobot.policies.act.processor_act.make_act_pre_post_processors",
+    "shared_contract_claim_limited_to_dataset_statistics_and_physical_round_trip": true,
+    "statistics": {
+      "action": {
+        "count": [
+          2330
+        ],
+        "mean": [
+          2.5067803526129335,
+          92.83916232391488,
+          -25.055826046333806,
+          -7.419274741487953,
+          88.3151657235469,
+          45.51314309247062
+        ],
+        "std": [
+          0.17726604657538328,
+          13.36737165493642,
+          5.208101545420547,
+          7.927699989639833,
+          10.369881920994251,
+          31.2717095275406
+        ]
+      },
+      "observation.state": {
+        "count": [
+          2330
+        ],
+        "mean": [
+          2.5084697620039846,
+          92.56682140039273,
+          -24.96577545215132,
+          -7.131694166240774,
+          87.92887933428196,
+          45.32283301292059
+        ],
+        "std": [
+          0.1788259462958859,
+          14.03620694425021,
+          5.346221696566796,
+          8.802654238869128,
+          11.570796028283215,
+          31.125057154788802
+        ]
+      }
+    },
+    "statistics_frame_count": 2330,
+    "statistics_source_path": "outputs/robot_lab/t20_23_recovery_augmented_dataset/meta/stats.json",
+    "statistics_source_sha256": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1"
+  },
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "policy_track_selected": false,
+  "pre_run_remote_preservation_required": true,
+  "promotion_eligible": false,
+  "result_routing": {
+    "act_is_product_policy": false,
+    "fail": "shared_pipeline_not_exonerated_diagnose_before_smolvla_entry",
+    "fail_claim_limit": "does_not_prove_dataset_fault_without_separating_act_implementation_and_optimization",
+    "gate_c_unlocked_by_control": false,
+    "pass": "shared_batch_and_normalization_control_pass_then_design_smolvla_entry",
+    "pass_claim_limit": "one_batch_shared_dataset_statistics_and_physical_round_trip_exonerated_not_pi05_decode_or_product_policy",
+    "pi05_gate_b_changed": false
+  },
+  "schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1",
+  "scope": "design_only_exact_act_one_batch_gate_b_diagnostic_control",
+  "separate_central_training_authority_required": true,
+  "separate_execution_review_required": true,
+  "simulation_policy_accepted": false,
+  "smolvla_entry_authorized": false,
+  "source_batch": {
+    "action_horizon": 50,
+    "action_units": "mujoco_radian",
+    "action_variant": "measured",
+    "canonical_dataset_episode_index": 0,
+    "canonical_dataset_root": "outputs/robot_lab/t20_23_recovery_augmented_dataset",
+    "frame_index": 0,
+    "image_role_to_dataset_feature": {
+      "top": "observation.images.base_0_rgb",
+      "wrist": "observation.images.left_wrist_0_rgb"
+    },
+    "initial_image_sha256": {
+      "top": "e25756a55d04ce77180780dd9e232b4f694bdf4fd40d9116645adbe736a1f4dc",
+      "wrist": "95e417324300382717637db8282e06eab0cf400612aa099c9ad3ea06bfd52adc"
+    },
+    "initial_observation_state_sha256": "130d1fd111b4a3990014e770c55121711c5cf5a8d7fd1f55e7d3e4d347559169",
+    "measured_action_chunk_sha256": "4a4e0e2c92a4ad500f6016346bae064a75a319ec901afd3862f676a65bd83b68",
+    "padding_or_inferred_actions": false,
+    "source_episode_file_sha256": "586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54",
+    "source_episode_identity_sha256": "9e186088c9ca82fa9c58cb6e3870f322a9c2a84405d5ea23152b822fb9d4abdb",
+    "source_seed": 0,
+    "source_spec_dataset_root": "outputs/robot_lab/t20_17_lerobot_training_dataset"
+  },
+  "source_refs": {
+    "canonical_dataset_manifest": {
+      "file_sha256": "df6e63d86cd053937c9e4d4c267f057b76aaf418761e7dc3356a9ae08c06fea5",
+      "identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+      "path": "configurations/robot_lab/t20_23_recovery_augmented_dataset_manifest.json",
+      "schema_version": "scenesmith.lerobot_native_episode_manifest.v1"
+    },
+    "gate_b_source_spec": {
+      "file_sha256": "e084e17015bef33f15023bab868ef88f38601e99bd3b7f20163395476967a358",
+      "identity_sha256": "3fa3098c816b228a6687e952cb8444c77344e49877b17cfc5d1afdc32e6e685a",
+      "path": "configurations/robot_lab/t20_33_one_batch_training_spec.json",
+      "schema_version": "scenesmith.t20_33_one_batch_training_spec.v1"
+    },
+    "local_preflight": {
+      "file_sha256": "358abe964aba2613838ca2c6a159bcd630e88e139af720778e0093767b3c0626",
+      "identity_sha256": "61fcf124ab23d2e27672f8335ade0e74df10254ca58d4aec5a77b606ef328bcb",
+      "path": "configurations/robot_lab/t20_36c_local_policy_track_preflight.json",
+      "schema_version": "scenesmith.t20_36c_local_policy_track_preflight.v1"
+    }
+  },
+  "task_id": "T20.36d",
+  "weights_downloaded": false
+}
