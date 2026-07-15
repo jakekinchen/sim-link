@@ -1,0 +1,23 @@
+{
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "brev_compute_authorized": false,
+  "checkpoint_mutation_authorized": false,
+  "closed_loop_rollout_authorized": false,
+  "evaluation_spec_identity_sha256": "b083c59393a0eb9027bb07253357e8c7ec9fb1f240c58118ad8d49fa1067c033",
+  "exactly_one_replay_attempt_authorized": true,
+  "external_compute_authorized": false,
+  "identity_sha256": "bd3b093308048bafa02b26f81392a27b07ce617546706da94c9da65ed2f0e260",
+  "inherited_authority_decision_identity_sha256": "75dc9c7d860e12e2a2114be709e24f7e544ff576696a3d223dd87dd0e2f06606",
+  "optimizer_training_authorized": false,
+  "physical_actuation_authorized": false,
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.t20_35d_evaluation_permit.v1",
+  "scope": "one_optimizer_free_exact_t20_35c_checkpoint_replay",
+  "task_id": "T20.35d",
+  "valid_from": "2026-07-15T07:27:47-05:00",
+  "valid_until": "2026-07-15T15:27:47-05:00"
+}
