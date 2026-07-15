@@ -1,0 +1,1587 @@
+{
+  "adapter_config_sha256": "5ffa4d9e41472c0e08a15a97ae45704d32feac23a3e1038a4bc2dd57c50dc607",
+  "adapter_model_sha256": "0217f856ab1fbbfb4511f790096bd971f57b305503ab5d10de764c4ee3b2dafa",
+  "all_required_action_state_pathways_wrapped": false,
+  "brev_compute_started": false,
+  "checkpoint_identity_sha256": "0dea38b3135a4f1957bcd1fd7f3e78ca77fc2096eff5e2c75f0a3d9365f22032",
+  "checkpoint_mutated": false,
+  "closed_loop_rollout": false,
+  "decision": "peft_coverage_fail",
+  "declared_target_modules": "(.*\\.gemma_expert\\..*\\.self_attn\\.(q|v)_proj|model\\.(state_proj|action_in_proj|action_out_proj|action_time_mlp_in|action_time_mlp_out))",
+  "expected_trainable_parameter_count": 1287168,
+  "expert_attention_layer_count": 18,
+  "expert_attention_module_count": 36,
+  "expert_attention_module_coverage_complete": true,
+  "external_compute_started": false,
+  "identity_sha256": "d1109ae8ea393b4577444d54f1675a78993e5c09de3c9ee87a0f78cf9b1b48a1",
+  "lora_alpha": 16,
+  "lora_rank": 16,
+  "missing_required_action_state_modules": [
+    "model.action_time_mlp_in",
+    "model.action_time_mlp_out",
+    "model.state_proj"
+  ],
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "required_action_state_module_coverage": [
+    {
+      "module_path": "model.state_proj",
+      "wrapped_as_lora_pair": false
+    },
+    {
+      "module_path": "model.action_in_proj",
+      "wrapped_as_lora_pair": true
+    },
+    {
+      "module_path": "model.action_out_proj",
+      "wrapped_as_lora_pair": true
+    },
+    {
+      "module_path": "model.action_time_mlp_in",
+      "wrapped_as_lora_pair": false
+    },
+    {
+      "module_path": "model.action_time_mlp_out",
+      "wrapped_as_lora_pair": false
+    }
+  ],
+  "saved_tensor_count": 76,
+  "saved_tensor_element_count": 1287168,
+  "saved_tensor_nonzero_count": 1286752,
+  "schema_version": "scenesmith.t20_35a_peft_module_coverage.v1",
+  "scope": "optimizer_free_saved_peft_module_and_tensor_coverage",
+  "selected_next_hypothesis": "gate_b_expert_only_unfreeze_capacity_ceiling",
+  "simulation_policy_accepted": false,
+  "t20_35_result_identity_sha256": "99538521686cf3e3ea16df352e12ddd7d02613bd2fdd2a9877ebe16e9b036ca8",
+  "t20_35_run_identity_sha256": "6e0dd4e2003fa78f5d82cf38414cf6763444c27a44e797f30ff99c3097cd5dbe",
+  "task_id": "T20.35a",
+  "tensor_descriptors": [
+    {
+      "all_finite": true,
+      "content_sha256": "20ec4d30bf196721e194e6ac99d02a8f9f656b567fab904a55b151153006fc82",
+      "dtype": "float32",
+      "element_count": 512,
+      "key": "base_model.model.model.action_in_proj.lora_A.weight",
+      "nonzero_count": 512,
+      "shape": [
+        16,
+        32
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "8081115b5d56b02ec33867405665c22b99ded44a18fd6541d6e3ed1bc44eb7ff",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.action_in_proj.lora_B.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        1024,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "cec295c8aed44d2d204a48b77caf6b87a8c883547f11812f03b0eefc8052ab9a",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.action_out_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "f6cebe9d5de01a81d298527c560d1797739fa17e1f1c53a6f7bf94cff32506f0",
+      "dtype": "float32",
+      "element_count": 512,
+      "key": "base_model.model.model.action_out_proj.lora_B.weight",
+      "nonzero_count": 96,
+      "shape": [
+        32,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "ca2576a24cf345da87b8dc18ddcc1de67037daaaa5eca764618c7d3319504611",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "d09b93081f042fb19c39ad8572edfa5cd33eac6d103da35241d8462ac401f542",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "566fafaaaa8bb2b20be6a7e5a7377bebfe7479fe4cee7d485c4ef63867ea5b22",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "a710bc35ef992dc5da47ae38ccb91f78b8496ec73b30958b1ea288cd1305666f",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "667d162bb6d3fd3374615bb33ecec6f6bd77548cc87f02a66119c9d280e85e2b",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "589e90174f99829023b35eb2979409b6927d9acfa6bf865d7d6c1f3e9f8713c0",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "06f736a85ce1bd67d4bf7b8d2124aef7dd8781dd0604b4037607982b410b3347",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "3ccd70201547dc596f5872b123a5cdd96e35cb022b671f7b8e67d5e3fe5e3151",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "96a92e112a0633ed766264b4856abba0aa8b4bc1c498e2dfd4036528a98a90ec",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "1e392aa928fcf3e2f54303e23152989c0405f03e8672a621bea68d36669a2b7e",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "ccbdaa6e778e3590bce7d5bb3623faad544cec1394b82181e99d77e5d2ace309",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "efc67daf07366a5a1278ed61ba2eec647dcc0f2431c6f7453183d9ac58639980",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "b70346442622ce26bddbc7bf7b236f26cc9942d78ed697121f76117490e13e57",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "e54832f943660c6eb18e0c9cbfba36d36cf73105bf7a7577d0db6cf0a3c94f8c",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "c7d6826db6d565eb26a6af42f60a0b3dfb5c1c9003e4554e5aa6abf86de83d5c",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "09899c7f5c8783d8e01cf960603df521632b2bbbab751055f8f50eb5d200386f",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "2eb78616c456f2782e1a7fceed79b9db374c912f10c19250e5b5fae305c9be0c",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "e07b0af97b1a4e973c74e8ae409ee1d4b77e1d0790b762a5e3f8f1342922e016",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "ee446bedd553bc78226f6b9426835ae80a86e3a2aa24c3e9875f8a0de1d6044a",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "9bfabf637236f6e9340ca878a616230a3b6e6c38bfa635aac5122a6ac9df62a9",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "98fefea5c0dfb684dc5092c098d7e00e75eb8f4a2f8c60838dd049843a16fd45",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "bcddb513a72188d108814161b34ffdb20eb133f4831c83621e9173dea1b54e14",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "ebb0b57c278d256fe99d7d7ac9bb5b30aa4fcbbd20b3931a6f004cfb3d5284c4",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "b60eee84b2518047581a0aaa65312ad5b6f45e93dab6316362f49d44e4b576ab",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "c61cdcfb5ac22ceb7cccc7796efb88032e5c9b1f1a3eddbc33bfad935f280ab6",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "01f53630c9c20219973e3ae63cf17a7eafbae1f8fb0c35dfdde9bf331f89ab8b",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "684a7101d3810e13a7c11f87f69ee6b5856328318e4b796fd6f40b0c9c6955b0",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "8461e456065bb35f32e18f85f684b9e80ad261a3f95cda74fa2c413920b12bf0",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "cc9afa7d3d7e9bb339194d210d931e94dbb931fce33f5b39904d6c8d3106fd9d",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "cd2dd189fd32f79eba99ee9d8b37a83f65777c783e0b791244998d704f5227f0",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "7379521d0bb204bcf845b9034c087e65bfd4ef8d3aae00869b75b1c8caba8e98",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "bed179be397b82b2c4947e5ce8e852e945ecfae0359977436bebfe088a17a9c5",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "52a68b2f096a491a2002c8d6f3227dfdde5fc3bc1f7595b09046d1d5c53b060c",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "c450a9af72ddaaf5cb7bac4c1e583a3d05525aea5eb5218256b58d66fbf5460d",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "3677e794697aa3060b26e7110d68d408bd467d53af983d571da752881b2d43ff",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "1b9cea7e219c42d7c493e7bbe1ad85ae2a27110496661f26579e253d60d73915",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "7e9c645403e55435d26fa1f89c6b177356d9ac738c378f2d6d3b0a12238249ed",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "a17460c5475a1523bb5c448a02a6f38b8ba645d656a6ffd609af9bd6e2ed2657",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "673c687f3bd1de72be25f4f5904d7112d7cb28dc1ffe09a794c64aecdd5bfeba",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "0974aa2e3484eae06709b281cd61f9f0abafa5f9c7022334d89148a2ffc01bf6",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "8e3b326fc8fda8791f8fbfe3b3aa2d822c3d98529649fc3310fdb6d7140ecf0a",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "b150488fe52aff0c71f16ba9efe69bd70c207a1d25b3df930e4dc4e426e5ac5c",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "a3ec8f60e74f812afbfff54f7bb932d5c5a8a3f60c26ad2870dbcd4bfbd0b502",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "6ed0aff90b3bd32e4c2f5e5eb5a5b3acb36b129927c745d0a7b440e2ad988f11",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "55e1d239c6403ecf41fe4ae1e5935bd82af72076b0954e31ae1bc868c626f2be",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "4a766629bb18002e4d8bf0c461c8a1c403a62b3c292b9d6614b6be9cd19eebb8",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "254de9d34e89533490acc22820f47c190c879c67e5730d4e6f6d688bfe25540d",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "35c54acddb39bf30ce83e7200d8122a7b0bed6eca0e722a889b2a497c8339faf",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "2255697c8968e5a3fc50db9249dba98788b11621b120271d6c33cdcff281e5c3",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "3f9020f16585e27a29e3a64fe9321d8d8dd3ff341853325ec6f7e17ee98938d2",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "c1e56438ec371421973870b6e059cc7264a42604126f408f1068bcbc02dd80df",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "954c2cf86611d13dd13d79952c94860f75aac63d26346f7368dd5e443971d49f",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "3312cbf91babe99d91b3b6ba1422f6375ae1c746b19ff20a68f3c5b959e5dc1c",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "453bf1dc8c26cf19646e2f86cb1772a209f94a71acd3ea97ffb1c8754e2f95cf",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "d2b8662ffdce01f113d5aa80645531a27da1e6b78b9863069e7a2c8189a2e165",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "34d6c689286ad37bdb28d2c8812b4b755445ca232d6a54a26c55740e6ed125e0",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "e5b829f74bb25b22e25575a4812a7b23ac4cab646e91c362a0e7bfa675c4117f",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "cda23442dd48e1398cdec91ea875a8e5fa1481bcf01d6ac78d3f8f8a4b5ecf72",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "c55b8c0f5ce68924f40c58b9712b737f225caa0b907a1272074ace2051bb7cf3",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "f15dbf2c621b599c69d2d5852691ea0b27292e3939a5791713aabf3f3273344a",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "f6b0970292945c3dcf7ed09adcc4b79d65538ffd7af4fc02c64ea378a9b8cce5",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "38480325b2767c5bc40de1e97b32c9bddb4fd5a5f32ae518db3ed8288d5834ad",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "fdfc43be7cde8739e14edc39ce56bdc8f4cf343dfcb23aa8853f50820da5d24d",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "7e5ef7f53c8d27c0149420f9426981af66016f74402a0957e8219cfd938dd6cc",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "3d58527330708835970ce76cca1a7bb9a39f514921e3a6033b75d56930ecc4e6",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "c5e9ec4a778414df9d47573c7b2af76ec6768343bec5ec60c7213d528bb36a03",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "be3bfc2765a26cc357468275f19b619d1893ad0dac0f1c1fb8a12cf5603e3d65",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "3bc9a29e92c53ef911d65a0aecc305c07344175f6f30e3698c8b3886f26112b8",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "2df248707eae4c09822226e1a326239677eb62fc841f9b23ec2d94dcb1c2464f",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.q_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "28e4658e9381f72128a03ef3d5f02a73c045d2e7012bfd939d51663582e2a5f5",
+      "dtype": "float32",
+      "element_count": 32768,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.q_proj.lora_B.weight",
+      "nonzero_count": 32768,
+      "shape": [
+        2048,
+        16
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "a7a455da50d29ea6783c87ce07a1a3be4095471818323a3e02fd42fd560bec98",
+      "dtype": "float32",
+      "element_count": 16384,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.v_proj.lora_A.weight",
+      "nonzero_count": 16384,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    {
+      "all_finite": true,
+      "content_sha256": "60a777d990946f8cb941fe4d0d7b1353be895f76a74d8f1ac2f89d888ee52bec",
+      "dtype": "float32",
+      "element_count": 4096,
+      "key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.v_proj.lora_B.weight",
+      "nonzero_count": 4096,
+      "shape": [
+        256,
+        16
+      ]
+    }
+  ],
+  "wrapped_module_count": 38,
+  "wrapped_modules": [
+    {
+      "category": "action_state",
+      "element_count": 16896,
+      "lora_a_key": "base_model.model.model.action_in_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        32
+      ],
+      "lora_b_key": "base_model.model.model.action_in_proj.lora_B.weight",
+      "lora_b_shape": [
+        1024,
+        16
+      ],
+      "module_path": "model.action_in_proj",
+      "nonzero_count": 16896
+    },
+    {
+      "category": "action_state",
+      "element_count": 16896,
+      "lora_a_key": "base_model.model.model.action_out_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.action_out_proj.lora_B.weight",
+      "lora_b_shape": [
+        32,
+        16
+      ],
+      "module_path": "model.action_out_proj",
+      "nonzero_count": 16480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.0.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.1.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.10.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.11.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.12.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.13.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.14.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.15.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.16.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.17.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.2.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.3.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.4.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.5.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.6.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.7.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.8.self_attn.v_proj",
+      "nonzero_count": 20480
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 49152,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.q_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.q_proj.lora_B.weight",
+      "lora_b_shape": [
+        2048,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.q_proj",
+      "nonzero_count": 49152
+    },
+    {
+      "category": "expert_attention",
+      "element_count": 20480,
+      "lora_a_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.v_proj.lora_A.weight",
+      "lora_a_shape": [
+        16,
+        1024
+      ],
+      "lora_b_key": "base_model.model.model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.v_proj.lora_B.weight",
+      "lora_b_shape": [
+        256,
+        16
+      ],
+      "module_path": "model.paligemma_with_expert.gemma_expert.model.layers.9.self_attn.v_proj",
+      "nonzero_count": 20480
+    }
+  ]
+}
