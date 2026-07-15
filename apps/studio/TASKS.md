@@ -20,11 +20,12 @@ in the same commit as the work.
 | ST13 | Event Ledger & Inspector: canonical workflow timeline, provenance, filters, full-text source inspection | done | 656 live docs across 4 channels; search/filter, rendered/raw source, SHA-256 consistency, and observation-time disclaimer browser-verified |
 | ST14 | Native shell lifecycle diagnostics: visible sidecar startup, health, logs, and exit state | done | signed app/AX verified: exact ready/fault/exit states, bounded lifecycle logs, named port conflict, and shutdown cleanup; no webview process capability |
 | ST15A | Event-sourced simulation spine: approve architecture and authority boundary | pending | planning only; requires an explicit owner-approved charter expansion before any command endpoint or runtime mutation is implemented |
-| ST15B | Event contracts, SQLite append-only store, and deterministic replay | pending | blocked by ST15A; schemas, idempotency, per-machine ordering, migrations, and replay tests first |
+| ST15B | Event contracts, SQLite append-only store, and deterministic replay | pending | blocked by ST15A; programmatic writes only, agent-facing MCP/API tools, generated Markdown summaries, retention, migrations, ordering, and replay tests first |
 | ST15C | Deterministic simulated machines, state machines, and command router | pending | blocked by ST15B; simulation-only actors and commands; no hardware, training, promotion, or goal-loop authority |
 | ST15D | Runtime REST/WebSocket transport and 5-10 Hz telemetry | pending | blocked by ST15C; cursor catch-up plus live push; no Kafka/Redpanda until the end-to-end local loop is proven |
-| ST15E | Studio Operations view and runtime-event inspector projection | pending | blocked by ST15D; operational stream remains visually and semantically separate from signed repository evidence |
+| ST15E | World-first Studio Operations canvas and runtime-event projection | pending | blocked by ST15D; interactive 3D actors, lifecycle motion, spatial HUD, replay timeline, and inspector drawer; operational stream stays separate from signed evidence |
 | ST15F | End-to-end replay/idempotency/staleness demo and proof package | pending | blocked by ST15E; browser demo, restart/replay equality, regression gate, documented limits, scoped commits, and remote preservation |
+| ST16 | Foundry Stage visual shell reframe over existing read-only artifacts | in_progress | world-first home, always-on 3D workcell, useful replay projection, spatial workflow ribbon, direct manipulation, responsive/reduced-motion proof; no new server mutation |
 
 Rules: never touch governed paths (see GOAL.md), never push to
 `codex/pi05-autolearn-loop`, commit small and often to `studio/app-shell`.
@@ -223,6 +224,15 @@ Rejected commands are terminal and must not mutate actor state.
 
 ### Persistence and replay contract
 
+- SQLite tables and rows are created programmatically by migrations, the
+  command router, state machines, and simulator ticks. Agents never author SQL
+  or individual lifecycle/telemetry rows.
+- Agents operate through compact MCP/API tools such as `list_machines`,
+  `get_machine_state`, `run_task`, `tail_runtime_events`, `explain_command`,
+  and `replay_machine`. The adapter owns UUID generation and retry reuse.
+- Important runtime boundaries may produce generated Markdown summaries for
+  agent and reviewer consumption, but Markdown is a projection rather than the
+  5-10 Hz persistence mechanism.
 - SQLite is authoritative only for the new simulation runtime. It does not
   supersede signed repository artifacts or `project_state.json`.
 - The `events` table is append-only. State is a projection, not a mutable
@@ -233,6 +243,9 @@ Rejected commands are terminal and must not mutate actor state.
   after plain replay is correct and measured to need optimization.
 - A process restart followed by replay must produce byte-equivalent normalized
   machine state to the pre-restart projection.
+- Command and state-transition history is durable. High-rate telemetry is
+  session-scoped with an explicit rotation/retention policy so a continuously
+  running local demo does not grow without bound.
 - Corrupt, duplicated, missing, out-of-order, or unknown-version events fail
   replay closed with a named diagnostic; they are never silently skipped.
 
@@ -254,15 +267,21 @@ stable typed responses rather than generic 500 errors.
 
 ### Studio Operations view
 
-ST15E should reuse the visual idiom and inspector ergonomics of ST13 without
-merging the truth domains:
+ST15E should extend the world-first Foundry Stage rather than turn runtime
+events into another card-and-table dashboard:
 
-- Three actor cards showing mode, last sequence, pose summary, health, and
-  telemetry freshness.
-- A simulation-only command composer with visible `command_id` and lifecycle.
-- A live event rail with machine, event type, sequence, and correlation
-  filters.
-- A raw/structured payload inspector plus replay position.
+- A large interactive 3D stage is the primary surface, with three selectable
+  simulated actors visibly moving through their workcells.
+- One obvious plus/run control launches a simulation-only episode and keeps
+  its `command_id` and lifecycle visible without exposing SQL or raw transport.
+- Robot motion, objects, targets, contact, trajectory, success, failure,
+  pause, and simulated estop are expressed spatially and through purposeful
+  motion before they are expressed as text.
+- Camera, orbit, focus, and replay-scrub controls stay attached to the world.
+- Mode, health, sequence, freshness, and command lifecycle appear in a compact
+  spatial HUD; an event ribbon provides machine/type/correlation filters.
+- Raw/structured payloads and replay position live in a secondary inspector
+  drawer rather than occupying the main canvas.
 - Reconnect state, cursor lag, stale telemetry, and server fault indicators.
 - Persistent `SIMULATION ONLY - OPERATIONAL DATA, NOT REPOSITORY EVIDENCE`
   labelling.
@@ -332,3 +351,54 @@ The umbrella feature is complete only when all of the following agree:
 - Authentication, multi-tenant deployment, high availability, or cloud
   infrastructure.
 - Native Mac packaging work; the target surface is the localhost web app.
+
+## ST16 - Foundry Stage Visual Shell Reframe
+
+ST16 repairs the experiential gap without waiting for or implying authority to
+implement ST15. It consumes only existing read-only APIs and the two existing
+no-authority visualization surfaces.
+
+### Visual thesis
+
+The foundry is the interface. Opening Studio should first show the robot world,
+its current replay/evidence state, and an obvious way to explore an episode.
+Documents, hashes, forms, and tables remain available as workbenches, but they
+must not be the dominant first impression.
+
+### Required experience
+
+- Rename the home navigation concept from Dashboard to Foundry while keeping
+  the stable `/` route.
+- Make a compiled workcell the largest element above the fold with orbit,
+  zoom, focus/reset, scene selection, and clear simulation-fixture labelling.
+- Provide a prominent plus control that launches a **recorded replay** in the
+  stage. It must never imply that it starts training, hardware, or a new goal
+  loop episode.
+- Project available mirror video into the same stage with play/pause, replay
+  selection, native scrub, outcome, seed, frames, and provenance link.
+- Show current slice, simulation-only state, API freshness, workcell health,
+  and authority closure as a compact spatial HUD rather than a grid of cards.
+- Convert recent briefs, reviews, sessions, and manager interventions into a
+  compact activity ribbon/timeline with visual channel and recency cues.
+- Keep next step, blockers, run window, and verified boundary accessible in a
+  quiet mission drawer/rail.
+- Use purposeful scene and lifecycle motion, keyboard-visible focus, useful
+  hover states, and `prefers-reduced-motion` fallbacks.
+- Work at desktop and narrow laptop widths; no essential control may be hidden
+  behind hover alone.
+
+### Acceptance
+
+1. The first viewport communicates “robot-learning foundry” without requiring
+   the operator to read raw JSON, a document table, or a hash.
+2. From `/`, one obvious action shows a real recorded episode replay and its
+   outcome; returning to the 3D scene is equally obvious.
+3. The 3D scene is visible and interactive without expanding an accordion or
+   scrolling below an intake form.
+4. Scene selection, orbit/reset, replay selection, play/pause, scrub, camera or
+   mirror projection, and evidence ribbon navigation are browser-verified.
+5. The shell labels recorded replay, simulation fixture, and signed evidence
+   honestly and adds no new mutating endpoint.
+6. Existing pages and routes remain reachable; `bun run build`, lint, server
+   tests, live API checks, console inspection, and responsive screenshots are
+   green before ST16 is marked done.

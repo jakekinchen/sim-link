@@ -35,13 +35,16 @@ studio server (FastAPI, apps/studio/server)
         │  REST + polling (WS later)
         ▼
 studio web (Vite + React + TS + Tailwind, apps/studio/web)
-  Dashboard | Event Ledger | Episodes | Tasks | Workcell Designer | Robot | Agent Feed
+  Foundry Stage | Event Ledger | Episodes | Tasks | Workcell Designer | Robot | Agent Feed
 ```
 
 ## Sections
 
-1. **Dashboard** — current slice + brief objective, run-window countdown,
-   capability-ladder gate states, last N reviewer decisions, commit ticker.
+1. **Foundry Stage** — world-first home surface: an always-visible interactive
+   compiled workcell, direct episode-replay launch, camera/mirror projection,
+   spatial status overlays, and an evidence activity ribbon. Current slice,
+   run-window, authority, and provenance remain visible but support the scene
+   instead of dominating it as cards and rows.
 2. **Episodes** — filterable table (source: expert/recovery/policy; seed;
    task phase; outcome; strict-v2 gates) over the scripted store, recovery
    package, and closed-loop traces; detail view plays the mirror MP4, shows
@@ -96,3 +99,6 @@ etc.) drive the studio programmatically — the "agent workspace" contract.
 - **S5:** Robot panel rendering existing hardware evidence read-only.
 - **S6 (stretch):** Tauri wrap for the native Mac shell; episode compare view
   (two mirrors side by side); live WS push instead of polling.
+- **S7:** visual shell reframe — Foundry Stage as the primary experience using
+  live read-only workcells, mirrors, episode traces, and workflow evidence;
+  document tables and JSON remain secondary workbenches.
