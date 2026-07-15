@@ -1,0 +1,109 @@
+{
+  "brev_compute_started": false,
+  "campaign_authorized": false,
+  "checkpoint_decisions": [
+    {
+      "all_decoded_seeds_within_threshold": true,
+      "checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
+      "checkpoint_label": "t20_35x_source",
+      "decoded_action_maximum_by_seed": [
+        {
+          "inference_seed": 20260721,
+          "maximum_absolute_error_rad": 0.037518397055197744
+        },
+        {
+          "inference_seed": 20260722,
+          "maximum_absolute_error_rad": 0.03508661472957595
+        },
+        {
+          "inference_seed": 20260723,
+          "maximum_absolute_error_rad": 0.04478484873423583
+        },
+        {
+          "inference_seed": 20260724,
+          "maximum_absolute_error_rad": 0.043877110276682285
+        },
+        {
+          "inference_seed": 20260725,
+          "maximum_absolute_error_rad": 0.03866616955075145
+        }
+      ],
+      "evaluation_evidence_identity_sha256": "8be88656362e2989bbe66ed98d5e8ebbb000b689225f00d2b3a36418b584b4ea",
+      "gate_b_retained": true,
+      "objective_ratio_within_threshold": true,
+      "optimizer_update_count": 0,
+      "proxy_metrics_used_for_gate_b": false,
+      "standard_objective_ratio": 0.002522120613670501,
+      "tracked_proxy_metrics": {
+        "joint_weighted_correction_objective_mean": 0.0026003464788664134,
+        "raw_correction_objective_mean": 0.02521805474534631
+      }
+    },
+    {
+      "all_decoded_seeds_within_threshold": false,
+      "checkpoint_identity_sha256": "c5e36cca9b61379a24dd72bcb89aa582ab3b2de70a48bb64202a4484f0ac8488",
+      "checkpoint_label": "t20_36_post_coverage",
+      "decoded_action_maximum_by_seed": [
+        {
+          "inference_seed": 20260721,
+          "maximum_absolute_error_rad": 0.16600830450134296
+        },
+        {
+          "inference_seed": 20260722,
+          "maximum_absolute_error_rad": 0.15060095635604864
+        },
+        {
+          "inference_seed": 20260723,
+          "maximum_absolute_error_rad": 0.1870347497268675
+        },
+        {
+          "inference_seed": 20260724,
+          "maximum_absolute_error_rad": 0.16002053313369768
+        },
+        {
+          "inference_seed": 20260725,
+          "maximum_absolute_error_rad": 0.153112760494995
+        }
+      ],
+      "evaluation_evidence_identity_sha256": "1c1091c9782f8055116c91344981870880cebf9af979095b5fb911bb39df45e7",
+      "gate_b_retained": false,
+      "objective_ratio_within_threshold": true,
+      "optimizer_update_count": 500,
+      "proxy_metrics_used_for_gate_b": false,
+      "standard_objective_ratio": 0.03056419080941981,
+      "tracked_proxy_metrics": {
+        "joint_weighted_correction_objective_mean": 0.0013342870614724235,
+        "raw_correction_objective_mean": 0.03898463157936931
+      }
+    }
+  ],
+  "checkpoint_read": false,
+  "closed_loop_rollout": false,
+  "contract_valid": true,
+  "decision": "only_source_checkpoint_retains_gate_b_no_coverage_candidate",
+  "external_compute_started": false,
+  "gate_b_threshold_changed": false,
+  "gate_c_authorized": false,
+  "historical_fixture_only": true,
+  "identity_sha256": "e709c30cabeab069c4bd2fefa99e839ec68e6685fe61a7bf740ed97bb458ef2c",
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "optimizer_training_authorized": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "post_source_retained_checkpoint_labels": [],
+  "promotion_eligible": false,
+  "proxy_metrics_ignored_for_gate_b": true,
+  "retained_checkpoint_labels": [
+    "t20_35x_source"
+  ],
+  "retention_spec_identity_sha256": "6e56f6ff0c220f96f5ac30e049b756e2a331b33245dff4029862c006e60e8ea1",
+  "rollback_checkpoint_label": "t20_35x_source",
+  "schedule_registration_boundary_sha256": null,
+  "schema_version": "scenesmith.t20_36b_gate_b_retention_decision.v1",
+  "selected_coverage_checkpoint_label": null,
+  "simulation_policy_accepted": false,
+  "task_id": "T20.36b"
+}

@@ -1,0 +1,54 @@
+{
+  "all_inference_seeds_must_pass": true,
+  "brev_compute_started": false,
+  "campaign_authorized": false,
+  "checkpoint_read": false,
+  "closed_loop_rollout": false,
+  "external_compute_started": false,
+  "fixture_source_identities": {
+    "campaign_result": "02b543be829220f89e0bfe2d16b042507127f488f73a9de0149442e89bc3a638",
+    "campaign_run": "88daae0d8239239d064227b9e9561a01b7bf634d849dc4e61237b1713462410e",
+    "interference_audit": "339a72290b302a2751be02bbccc07ac9441e3b5db65f023741ce38ba190b73aa",
+    "source_result": "e79dacff684dac507295d839527fb15d4eced8fa9c83973f5534bdf7e99ec6cd",
+    "source_run": "b5cc16ef53a415a7e0a4b8519332a4197201544fc9ebe5186565562e048c054b"
+  },
+  "future_schedule_requires_pre_optimizer_remote_preservation": true,
+  "gate_b_threshold_changed": false,
+  "historical_fixture_only": true,
+  "identity_sha256": "6e56f6ff0c220f96f5ac30e049b756e2a331b33245dff4029862c006e60e8ea1",
+  "inference_seeds": [
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725
+  ],
+  "maximum_action_error_rad": 0.05,
+  "maximum_standard_objective_ratio": 0.1,
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "ordered_checkpoint_schedule": [
+    {
+      "checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
+      "checkpoint_label": "t20_35x_source",
+      "evaluation_evidence_identity_sha256": "8be88656362e2989bbe66ed98d5e8ebbb000b689225f00d2b3a36418b584b4ea",
+      "optimizer_update_count": 0
+    },
+    {
+      "checkpoint_identity_sha256": "c5e36cca9b61379a24dd72bcb89aa582ab3b2de70a48bb64202a4484f0ac8488",
+      "checkpoint_label": "t20_36_post_coverage",
+      "evaluation_evidence_identity_sha256": "1c1091c9782f8055116c91344981870880cebf9af979095b5fb911bb39df45e7",
+      "optimizer_update_count": 500
+    }
+  ],
+  "physical_actuation": false,
+  "proxy_metric_substitution_allowed": false,
+  "schedule_registration_boundary_sha256": null,
+  "schema_version": "scenesmith.t20_36b_gate_b_retention_spec.v1",
+  "scope": "pure_fail_closed_gate_b_checkpoint_retention_contract",
+  "selection_rule": "latest_predeclared_post_source_gate_b_pass",
+  "source_checkpoint_label": "t20_35x_source",
+  "task_id": "T20.36b"
+}
