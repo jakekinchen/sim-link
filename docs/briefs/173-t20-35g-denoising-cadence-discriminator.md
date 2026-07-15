@@ -57,3 +57,13 @@ relevant tests pass. Reviewer 208 accepts
 one local-MPS model-load/inference attempt over cadences 10, 20, and 50 after
 remote preservation; no optimizer, training, mutation, rollout, Gate C,
 hardware, external-compute, or Brev authority exists.
+
+Attempt 001 `788015fa...` consumed permit `ca3dbd3f...` but failed under Python
+3.14 at config parsing after checkpoint tensors were loaded on CPU and their
+manifest validated. No model was constructed and no inference, optimizer,
+mutation, rollout, hardware, external compute, or Brev occurred. Runtime
+preflight `d476382b...` proves the same pinned config parses under Python 3.12
+without checkpoint or model access. Correction `b077d19` creates distinct spec
+`44076248...` and permit `b3078ea0...`, binds the consumed attempt, and requires
+Python 3.12. Reviewer 209 authorizes replacement attempt 002 only; attempt 001
+and its permit are not reusable. Five focused and 90 relevant tests pass.

@@ -218,6 +218,13 @@ Brief 173's T20.35g pre-run implementation is remotely preservation-ready at
 before candidate interpretation. This boundary authorizes one local-MPS
 load/inference attempt only; no optimizer, mutation, rollout, or Gate C work
 has occurred.
+T20.35g attempt 001 `788015fa...` consumed its permit but failed under Python
+3.14 after CPU checkpoint validation and before model construction or inference.
+The old permit is not reusable. Runtime preflight `d476382b...` proves the same
+pinned PI0.5 config parses under Python 3.12 without checkpoint/model access.
+Correction `b077d19`, replacement spec `44076248...`, permit `b3078ea0...`, and
+Reviewer 209 authorize exactly one distinct Python 3.12 replacement attempt;
+the cadence, seeds, hashes, gates, and no-optimizer boundary are unchanged.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
