@@ -126,6 +126,14 @@ training-seed closed-loop reproduction probe per adapter as capability-ladder
 Gate C evidence. No optimizer, dataset, statistics, twin, hardware, or
 authority change is permitted; the verified outcome routes the next gate in
 the MVP execution plan.
+T20.32 is now `verified` through Reviewer Decision 193 and implementation
+boundary `7bbf7cf`. Six complete 244-frame traces reproduce all four frozen
+held-out action hashes exactly. Both adapters fail the seed-0 reproduction
+probe and already exceed the declared action threshold at frame zero; state
+divergence begins at frame one. The evidence therefore rejects a Gate C-first
+cadence/chunk/feedback correction and routes T20.33 to Gate B
+one-batch-memorization/model-plumbing proof before any additional optimizer
+campaign.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

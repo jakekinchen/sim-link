@@ -2,7 +2,12 @@
 
 **Date:** 2026-07-14
 
-**State:** `in_progress`
+**State:** `verified`
+
+**Verified implementation boundary:** `7bbf7cf`
+
+**Result identity:**
+`f9b091c61f6be77c66034a6062124418e84c21f01fb43b55f4c19f8ec42bd9a5`
 
 ## Objective
 
@@ -71,3 +76,14 @@ Any optimizer or training run; hyperparameter or dataset changes; new
 robustness-grid cells; policy promotion; hardware, camera, or physical
 calibration; Robo Scan consumption; external compute; Brev; or any global
 authority change.
+
+## Verified Result
+
+All six 244-frame traces are complete and signed. The four held-out traces
+reproduce their prior frozen action-sequence hashes exactly. Both adapters
+fail the bounded training-seed reproduction probe without strict contact, and
+both first exceed the 0.05 rad source-action threshold at frame zero. Their
+first state divergence follows at frame one. T20.32 therefore falsifies the
+leading Gate C-first hypothesis and routes exactly
+`gate_b_memorization_or_model_plumbing`; no optimizer or broader authority is
+granted.

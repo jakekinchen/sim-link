@@ -90,18 +90,19 @@ not spent on a higher gate while a lower one is unmet.
 | Gate | Proof | A failure localizes to | Status |
 | --- | --- | --- | --- |
 | A | Exact train/inference parity: dataset statistics, image/state/action normalization, chunk interpretation, joint order, gripper representation, postprocessing, cadence/hold, with round-trip tests on known values | Contract or preprocessing parity | Largely verified: T20.12 round-trip, T20.13 statistics, T20.26 determinism, T20.28-T20.31 sampler/quantile chain |
-| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | Open |
-| C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Open and decisive; T20.32 probes it |
+| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | Lowest unmet gate: T20.32 routes T20.33 here |
+| C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Blocked behind Gate B; T20.32 diverges at frame zero before execution feedback |
 | D | Full training-set success: strict-v2 across all eight constructive episodes | Dataset coverage or adaptation capacity | Open |
 | E | Held-out nominal starts: seeds 6-7 and small initial-state variation | Generalization | Open (0/2 at T20.24 and T20.31) |
 | F | Robustness grid and forked recovery starts | Robustness | Open |
 
-The T20.2 ACT control also failed closed loop with near-zero lift, so current
-Gate C evidence implicates execution semantics or compounding drift over any
-PI0.5-specific fault. If a memorized training seed cannot be reproduced closed
-loop, audit action-chunk boundary handling, cadence/hold behavior, and
-observation feedback before any new campaign. A small behavior-cloning control
-may serve as a Gate B/C diagnostic; it is never a product path.
+The T20.2 ACT control also failed closed loop with near-zero lift, but T20.32
+now localizes the frozen PI0.5 candidates' first training-seed error to frame
+zero, before action-chunk execution or observation feedback can initiate the
+failure. Gate B must therefore prove one-batch memorization and trainer/model
+plumbing before Gate C cadence, hold, chunk-boundary, or feedback work is
+reopened. A small behavior-cloning control may serve as a Gate B diagnostic;
+it is never a product path.
 
 ## Sim-Link Task Queue
 
@@ -118,8 +119,8 @@ not inherit authority from this document.
 | 6 | **T20.22 — timing/latency certificate v0** | Deterministic schema and verifier for clock sources, frame age/skew, observation assembly, action transport/hold, control period/jitter, inference latency where present, drops, and deadline misses; prove timing mismatch cannot be silently relabelled as dynamics error. | T20.21 trace schema | Contact/dynamics calibration, live probe execution, task-family fidelity certificate |
 | 7 | **T20.23 — recovery-augmented dataset preflight** | One actual LeRobotDataset containing the six nominal strict-success episodes and four strict-success policy-visited recovery episodes; near-failures/failures and seeds 6-7 remain outside training/statistics; exact mixture, dataset, statistics, clean model snapshot, and central simulation-only authority identities signed before any optimizer. | Verified T20.17 dataset/result and T20.18 recovery package | Optimizer execution, failure imitation, implicit oversampling, hardware, Robo Scan, external compute, Brev |
 | 8 | **T20.24 — recovery-augmented local-MPS campaign** | Exact official-LeRobot 500-update rank-4 campaign from clean base; frozen adapter evaluated once each on held-out seeds 6-7 with no projection/assistance; signed per-seed and aggregate strict-v2 result without policy promotion. | Verified T20.23 dataset/spec and active central simulation-training authority | Additional rungs/sweeps, ensemble, promotion, hardware, Robo Scan, external compute, Brev |
-| 9 | **T20.32 — closed-loop divergence localization** | Complete 244-frame requested/applied/state traces for frozen T20.24 and T20.31 on seeds 6-7; earliest-divergence frame, class, and per-joint onset per adapter/seed; one bounded training-seed (seed 0) closed-loop reproduction probe per adapter; one signed routed next-gate hypothesis. | Verified T20.31; fresh owner window; Brief 163 | Any optimizer, dataset/statistics change, promotion, hardware, Robo Scan, external compute, Brev |
-| 10 | **T20.33 — lowest-unmet-gate proof** | As routed by T20.32: Gate B one-batch memorization and/or the Gate C execution-semantics correction (chunk boundaries, cadence/hold, observation feedback), each with a deterministic pass/fail gate before further training. | Verified T20.32 routed hypothesis | Unreviewed hyperparameter sweeps, grid expansion, promotion |
+| 9 | **T20.32 — closed-loop divergence localization (verified)** | Six complete signed 244-frame traces; four held-out action hashes reproduce exactly; both seed-0 probes first diverge at frame zero and route Gate B. | Verified T20.31; Brief 163; Reviewer Decision 193 | Any optimizer, dataset/statistics change, promotion, hardware, Robo Scan, external compute, Brev |
+| 10 | **T20.33 — Gate B one-batch memorization proof** | Overfit one tiny fixed source batch to a declared near-zero action-error threshold; bind exact samples, normalization, model, optimizer, and inference path; deterministic pass/fail gate before any Gate C correction or campaign. | Verified T20.32 Gate B route | Gate C cadence/chunk changes, unreviewed sweeps, grid expansion, promotion |
 | 11 | **T20.34 — bounded campaign at the corrected gate** | One reviewed 500-update-class campaign only after the routed fault is corrected and its gate passes; frozen unassisted evaluation on a training seed first, then held-out seeds 6-7. | Verified T20.33 | Multiple concurrent rungs, promotion, hardware, external compute, Brev |
 | 12 | **T20.35 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
 
@@ -231,6 +232,12 @@ localization. Brief 163 now opens T20.32 in the fresh owner window:
 complete-trace earliest-divergence localization for T20.24 versus T20.31 plus
 one bounded training-seed closed-loop reproduction probe per adapter as
 capability-ladder Gate C evidence, with no optimizer.
+T20.32 is verified through `7bbf7cf` by Reviewer Decision 193. All four
+held-out action sequences replay exactly, but both adapters' seed-0 probes
+diverge from the source action at frame zero and produce no strict grasp. The
+first state error follows at frame one, so cadence, chunk boundaries, and
+observation feedback are not the initiating fault. T20.33 is routed narrowly
+to Gate B one-batch memorization/model-plumbing proof before further training.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
