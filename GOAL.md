@@ -302,6 +302,14 @@ active-six noise alone lowers it to `0.066398`, the best condition, while
 all-zero reaches `0.073360`. Both mixed masks improve worst/mean/spread, but no
 condition meets 0.05 rad. Brief 179 opens T20.35m as a model-free signed 2x2
 interaction audit before any new inference. Gate B and Gate C remain closed.
+T20.35m is now `verified` through audit `83105424...`, implementation
+`2ba6d8e`, and Reviewer Decision 218. Active noise increases worst error by
+`0.040813` with padded zero and `0.083923` with padded normal; the worst-error
+interaction is `0.043111`. Active noise is harmful at both padded settings for
+worst, mean, and spread, while padded noise changes sign for the two accuracy
+metrics. Brief 180 opens T20.35n to inherit active-scale 0 and 1 with padded
+noise normal and evaluate only active scales 0.25 and 0.5. No optimizer or Gate
+C authority exists.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

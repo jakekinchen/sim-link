@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "178",
-    "commit": "1040478f19deb134fee5c6e8a0c9d84aedddbe60",
-    "reviewer_decision_id": "217",
-    "summary": "verified_joint_positive_gate_b_non_pass_both"
+    "brief_id": "179",
+    "commit": "2ba6d8ece3daedbdc2cd371b981b249977af7b61",
+    "reviewer_decision_id": "218",
+    "summary": "verified_active_noise_dominant_factorial_interaction_active_noise"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35m",
-  "next_eligible_task": "T20.35m",
+  "current_task": "T20.35n",
+  "next_eligible_task": "T20.35n",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -3414,15 +3414,59 @@
       "authority_not_granted": ["optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35m": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.35l"],
-      "active_brief_id": "179",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "179",
+      "review_decision_id": "218",
+      "source_commit": "1040478f19deb134fee5c6e8a0c9d84aedddbe60",
+      "implementation_commits": ["2ba6d8ece3daedbdc2cd371b981b249977af7b61"],
+      "result": "verified active-noise-dominant factorial interaction: active noise is harmful at both padded settings across all metrics while padded-noise accuracy effects change sign by active context",
+      "artifact": {
+        "path": "configurations/robot_lab/t20_35m_active_padded_factorial_interaction_audit.json",
+        "schema_version": "scenesmith.t20_35m_active_padded_factorial_interaction_audit.v1",
+        "identity_sha256": "83105424d6faf668d8a41a70999e25a82338bb2537c802f5a4a60803df3cedb0",
+        "file_sha256": "5628cbf808484baf31943c5361d8de98b38981460b736a3b77764928ff754684",
+        "size_bytes": 3884,
+        "active_noise_harmful_at_both_padded_settings_all_metrics": true,
+        "padded_noise_accuracy_effect_changes_sign_by_active_setting": true,
+        "best_noise_condition": "active_zero_padded_normal",
+        "worst_error_active_effect_padded_zero_rad": 0.04081255121154759,
+        "worst_error_active_effect_padded_normal_rad": 0.08392339648333991,
+        "worst_error_interaction_rad": 0.04311084527179232,
+        "interaction_classification": "active_noise_dominant_with_context_dependent_padded_interaction",
+        "selected_next_hypothesis": "run_separately_reviewed_near_zero_active_noise_scale_discriminator_with_padded_normal",
+        "gate_b_passed": false,
+        "model_imported": false,
+        "model_loaded": false,
+        "model_inference": false,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "checkpoint_read": false,
+        "checkpoint_mutated": false,
+        "dataset_read": false,
+        "dataset_mutated": false,
+        "closed_loop_rollout": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false,
+        "simulation_policy_accepted": false,
+        "physical_transfer_ready": false,
+        "promotion_eligible": false
+      },
+      "authority_granted": ["t20_35m_factorial_interaction_audit_verified","t20_35n_near_zero_active_noise_scale_discriminator_routed"],
+      "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.35n": {
+      "state": "in_progress",
+      "depends_on": ["T20.35m"],
+      "active_brief_id": "180",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_commit": "1040478f19deb134fee5c6e8a0c9d84aedddbe60",
+      "source_commit": "2ba6d8ece3daedbdc2cd371b981b249977af7b61",
       "implementation_commits": [],
-      "result": "Brief 179 opens a model-free signed 2x2 active/padded noise interaction audit over all three T20.35l metrics",
-      "authority_granted": ["t20_35m_model_free_factorial_audit_authorized"],
+      "result": "Brief 180 opens one separately reviewed inference-only active-noise scale 0.25/0.5 discriminator with padded noise fixed normal and endpoints 0/1 inherited",
+      "authority_granted": ["t20_35n_preflight_implementation_authorized"],
       "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {

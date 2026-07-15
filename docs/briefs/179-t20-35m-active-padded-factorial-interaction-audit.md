@@ -45,3 +45,11 @@ compute, or Brev. This audit cannot pass Gate B or accept a policy.
 Tests cover exact lineage/order, metric recomputation, all contrast equations,
 sign-preserving classification, non-finite values, signed identity, and every
 forbidden truth flag. Writer verification must agree under Python 3.11 and 3.12.
+
+## Result Boundary
+
+Audit `83105424...`, preserved at `2ba6d8e`, verifies active noise is harmful at
+both padded settings for every metric and padded-noise accuracy effects change
+sign with active context. Reviewer 218 routes only the separately reviewed
+T20.35n near-zero active-scale discriminator with padded noise normal. The audit
+does not pass Gate B or authorize model access.
