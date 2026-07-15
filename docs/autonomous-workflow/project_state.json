@@ -3034,12 +3034,12 @@
       "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35g": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["T20.35f"],
-      "active_brief_id": null,
+      "active_brief_id": "173",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "pending separately reviewed inference-only denoising-cadence discriminator against PI0.5's pinned 10-step default using the immutable expert-only checkpoint, exact batch, and fixed five seeds",
+      "result": "in-progress inference-only 10-versus-20-versus-50-step denoising-cadence discriminator under Brief 173; pre-run spec, permit, tests, and review must be preserved before model load",
       "authority_granted": [],
       "authority_not_granted": ["simulation_model_load","model_inference_executed","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","action_correction_selected","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
