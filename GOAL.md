@@ -295,6 +295,13 @@ and 3.12. After this review is confirmed on origin, exactly one Python 3.12
 local-MPS model-load/inference attempt may evaluate the two mixed masks. No
 model, checkpoint tensor, inference, optimizer, mutation, or rollout has
 occurred at this boundary.
+T20.35l is now `verified` joint-positive but Gate-B-negative through result
+`b4fc6060...`, result commit `1040478`, and Reviewer Decision 217. Removing
+padded noise alone lowers worst error from `0.150321` to `0.114173`; removing
+active-six noise alone lowers it to `0.066398`, the best condition, while
+all-zero reaches `0.073360`. Both mixed masks improve worst/mean/spread, but no
+condition meets 0.05 rad. Brief 179 opens T20.35m as a model-free signed 2x2
+interaction audit before any new inference. Gate B and Gate C remain closed.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

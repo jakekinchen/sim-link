@@ -66,3 +66,12 @@ before inference. Sixty relevant tests and 17 subtests pass; exact spec/permit
 verification agrees under Python 3.11 and 3.12. No model, checkpoint tensor,
 inference, optimizer, mutation, rollout, Gate C, hardware, external compute, or
 Brev action occurred at this boundary.
+
+## Result Boundary
+
+The consumed attempt `adf33ca1...` produced result `b4fc6060...`, preserved at
+`1040478`. Both mixed masks strictly improve all three metrics over all-normal;
+active-zero/padded-normal is best at `0.066398` worst error, but remains above
+0.05 rad. Reviewer 217 accepts joint active/padded sensitivity and routes only
+the model-free T20.35m factorial interaction audit. Gate B and Gate C remain
+closed.
