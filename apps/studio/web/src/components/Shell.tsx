@@ -6,11 +6,12 @@ import { Led } from './ui'
 
 const NAV = [
   { to: '/', label: 'Dashboard', code: '01' },
-  { to: '/episodes', label: 'Episodes', code: '02' },
-  { to: '/tasks', label: 'Tasks', code: '03' },
-  { to: '/workcells', label: 'Workcells', code: '04' },
-  { to: '/feed', label: 'Agent Feed', code: '05' },
-  { to: '/robot', label: 'Robot', code: '06' },
+  { to: '/events', label: 'Event Ledger', code: '02' },
+  { to: '/episodes', label: 'Episodes', code: '03' },
+  { to: '/tasks', label: 'Tasks', code: '04' },
+  { to: '/workcells', label: 'Workcells', code: '05' },
+  { to: '/feed', label: 'Agent Feed', code: '06' },
+  { to: '/robot', label: 'Robot', code: '07' },
 ]
 
 function SessionClock() {

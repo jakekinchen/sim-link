@@ -186,9 +186,9 @@ class StudioService:
         if (
             isinstance(limit, bool)
             or not isinstance(limit, int)
-            or not 1 <= limit <= 500
+            or not 1 <= limit <= 1000
         ):
-            raise StudioServiceError(400, "limit must be an integer from 1 to 500")
+            raise StudioServiceError(400, "limit must be an integer from 1 to 1000")
         candidates: list[tuple[int, int, int, str, str, Path, float]] = []
         for kind_order, (kind, store) in enumerate(self.document_stores.items()):
             for candidate in store.glob("*.md"):

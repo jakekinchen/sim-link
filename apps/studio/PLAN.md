@@ -35,7 +35,7 @@ studio server (FastAPI, apps/studio/server)
         │  REST + polling (WS later)
         ▼
 studio web (Vite + React + TS + Tailwind, apps/studio/web)
-  Dashboard | Episodes | Tasks | Workcell Designer | Robot | Agent Feed
+  Dashboard | Event Ledger | Episodes | Tasks | Workcell Designer | Robot | Agent Feed
 ```
 
 ## Sections
@@ -61,6 +61,11 @@ studio web (Vite + React + TS + Tailwind, apps/studio/web)
    the panel must say exactly that.
 6. **Agent Feed** — live tail of briefs, session logs, and reviewer decisions
    rendered as a conversation; this is the multimodal-agent window.
+7. **Event Ledger & Inspector** — read-only observed chronology across briefs,
+   reviewer decisions, session logs, and manager interventions. The split-pane
+   inspector renders exact source text plus filename, byte count, and SHA-256;
+   filesystem time is labelled as observation order and never promoted into
+   evidence time or authority.
 
 ## MCP Surface (server milestone S4)
 

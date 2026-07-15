@@ -11,13 +11,13 @@ in the same commit as the work.
 | ST4 | Episodes page: filter table + detail with mirror video, phase timeline, hash links | done | v0; expert frame scrubber included |
 | ST5 | Tasks page: campaign history + before/after trend from result gates | done | live SVG trend: signed measured ratios only, task order, 0.10 Gate B objective threshold |
 | ST6 | Workcell Designer: spec form/editor, Build button (server action), preview images, stability report | done | live API + browser verified: synced form/JSON, inline 400/422 faults, stable previews, settle report, hashes |
-| ST7 | Agent Feed: briefs/session-logs/reviewer-decisions live tail | done | regex filename-only brief/reviewer reads; live full-text safe Markdown feed browser-verified |
+| ST7 | Agent Feed: briefs/session-logs/reviewer-decisions live tail | done | all promised channels plus manager interventions; filename-only full-text safe Markdown feed browser-verified |
 | ST8 | MCP server exposing status/episodes/tasks/workcells/build/render tools | done | official SDK stdio verified: 7 tools, 5 live reads, fail-closed guards, stable workcell build; REST parity exact |
 | ST9 | Robot panel: render discovery/census/calibration evidence read-only with permit-gated registration stub | done | fixed signed-artifact whitelist; 2 cameras/6 servos/6 calibration joints; disabled permit stub; no device access or registration endpoint |
 | ST10 | Three.js orbit viewer for compiled workcells | done | live lazy Three.js viewer: whitelisted XML, 14 boxes/2 cubes/2 trays, orbit/reset, canvas cleanup |
 | ST11 | Tauri wrap (native Mac shell) | done | signed `.app` verified: fixed loopback Python sidecar, live API/AX render, shutdown cleanup; webview has no shell capability |
 | ST12 | Episode compare: two mirrors side-by-side, synced scrub | done | live browser verified: distinct pickers, side-by-side mirrors, shared play/end, exact 4.2s dual scrub |
-| ST13 | Event Ledger & Inspector: canonical workflow timeline, provenance, filters, full-text source inspection | in_progress | fail-closed metadata registry and all four canonical document whitelists under implementation |
+| ST13 | Event Ledger & Inspector: canonical workflow timeline, provenance, filters, full-text source inspection | done | 656 live docs across 4 channels; search/filter, rendered/raw source, SHA-256 consistency, and observation-time disclaimer browser-verified |
 | ST14 | Native shell lifecycle diagnostics: visible sidecar startup, health, logs, and exit state | pending | read-only diagnostics only; no new server mutation or native capability |
 
 Rules: never touch governed paths (see GOAL.md), never push to

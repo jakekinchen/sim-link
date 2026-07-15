@@ -339,7 +339,7 @@ class StudioServiceTests(unittest.TestCase):
             {event["id"] for event in self.service.events()["events"]},
         )
 
-        for invalid_limit in (0, 501, True):
+        for invalid_limit in (0, 1001, True):
             with self.subTest(limit=invalid_limit):
                 with self.assertRaises(StudioServiceError) as caught:
                     self.service.events(invalid_limit)

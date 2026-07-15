@@ -43,14 +43,45 @@ export interface StatusResponse {
   ledger: LedgerFrontMatter
   recent_reviewer_decisions: string[]
   recent_briefs: string[]
+  recent_session_logs: string[]
+  recent_manager_interventions: string[]
 }
 
-export type StudioDocumentKind = 'briefs' | 'reviewer-messages'
+export type StudioDocumentKind =
+  | 'briefs'
+  | 'reviewer-messages'
+  | 'session-logs'
+  | 'manager-log'
 
 export interface StudioDocument {
   kind: StudioDocumentKind
   filename: string
   content: string
+  source: string
+  sha256: string
+  bytes: number
+  observed_at: string
+}
+
+export interface StudioEvent {
+  id: string
+  kind: StudioDocumentKind
+  sequence: number
+  filename: string
+  title: string
+  decision: string | null
+  recorded_date: string | null
+  source: string
+  sha256: string
+  bytes: number
+  observed_at: string
+}
+
+export interface EventsResponse {
+  count: number
+  total: number
+  time_basis: 'filesystem_mtime_observation_not_evidence_time'
+  events: StudioEvent[]
 }
 
 export type EpisodeSource = 'expert' | 'policy_trace'

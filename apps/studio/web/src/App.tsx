@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard'
 import Episodes from './pages/Episodes'
 import EpisodeCompare from './pages/EpisodeCompare'
 import EpisodeDetail from './pages/EpisodeDetail'
+import EventLedger from './pages/EventLedger'
 import Tasks from './pages/Tasks'
 import Workcells from './pages/Workcells'
 import AgentFeed from './pages/AgentFeed'
@@ -17,6 +18,7 @@ export default function App() {
         <Routes>
           <Route element={<Shell />}>
             <Route index element={<Dashboard />} />
+            <Route path="events" element={<EventLedger />} />
             <Route path="episodes" element={<Episodes />} />
             <Route path="episodes/compare" element={<EpisodeCompare />} />
             <Route path="episodes/:kind/:stem" element={<EpisodeDetail />} />
