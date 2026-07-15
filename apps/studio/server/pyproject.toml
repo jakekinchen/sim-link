@@ -1,0 +1,9 @@
+[project]
+name = "scenesmith-studio-server"
+version = "0.1.0"
+description = "Read-only artifact index and no-authority action surface for SceneSmith Studio"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+]
