@@ -56,3 +56,17 @@ One signed result records all 500 finite paired updates, Gate B retention, the
 ordered strict-v2 evaluation actually reached, complete traces, and content-
 addressed mirrors. It may route Gate C diagnosis or the next capability gate;
 it cannot itself grant physical readiness or promotion.
+
+## Pre-run boundary
+
+Implementation commits `8da3cae` and `18f81e7` are remotely preserved. Signed
+spec `522a1e5a...` binds the exact X checkpoint, all five recovery-dataset
+files, the official 500-unique-index coverage order, unchanged X processor and
+correction schedule, and ordered Gate B/Gate C/held-out stops. Central decision
+`25e63103...` grants simulation training only. Runtime proof `04f2ce56...`
+verifies the exact Python 3.12 stack, local MPS, both source trees, FFmpeg,
+MuJoCo, Pillow, a signed one-frame MP4 smoke render, and 23,132,839,936 free
+bytes against a 6-GiB minimum. Permit `68d9042d...` authorizes one attempt.
+Thirty-two relevant tests and lint pass. Reviewer 239 authorizes that attempt;
+no T20.36 attempt, checkpoint tensor read, model load, optimizer, rollout,
+hardware, external compute, or Brev action has occurred.
