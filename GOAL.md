@@ -141,6 +141,13 @@ decoded horizon-50 chunk exceeds the `0.05` rad maximum-error gate (observed
 range `0.843707` to `1.250647` rad). Gate B remains unmet. Gate C and broader
 campaigns stay closed; the next task is optimizer-free base-versus-adapter
 plumbing and objective-to-inference localization.
+T20.34 is now `verified` through Reviewer Decision 196. The saved adapter is
+not dead or misbound: 321,688 values are nonzero, all five prior decoded hashes
+replay exactly, mean action error improves on every seed by 0.0553-0.0826 rad,
+and movement-to-target cosine is positive on every seed. The remaining Gate B
+fault is insufficient rank-4 capacity or optimization budget. The next safe
+discriminator is one separately authorized same-batch/same-seed rank-16
+ablation, not Gate C work or a broad campaign.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

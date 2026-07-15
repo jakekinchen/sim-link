@@ -2,7 +2,12 @@
 
 **Date:** 2026-07-14
 
-**State:** `in_progress`
+**State:** `verified`
+
+**Implementation boundary:** `491eb6c`
+
+**Result identity:**
+`8026980d2f3682dfff515f0e522393cf8c2d2ff090df480d55a203b85ee34c98`
 
 ## Objective
 
@@ -49,3 +54,14 @@ consistently toward the exact fixed-batch action target.
 Any optimizer or retry; a second batch; Gate C cadence/chunk/feedback changes;
 full-dataset or held-out evaluation; closed-loop rollout; promotion; hardware;
 external compute; Brev; or global authority change.
+
+## Verified Result
+
+The T20.33 adapter is active and correctly reloaded: 321,688 of 321,792 saved
+values are nonzero, and all five decoded action hashes reproduce exactly.
+Compared with the pinned base under identical seeds, adapter mean action error
+improves by 0.0553-0.0826 rad on every seed and movement-to-target cosine is
+positive on every seed (0.456-0.856). The objective also reproduces exactly
+at 0.959079 base and 0.506632 adapter. Dead/misbound checkpoint plumbing and
+objective-to-inference opposition are rejected. The routed hypothesis is
+`insufficient_gate_b_optimization_or_capacity`; Gate B remains unmet.
