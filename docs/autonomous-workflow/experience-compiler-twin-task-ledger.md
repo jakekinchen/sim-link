@@ -4,7 +4,7 @@ Updated: 2026-07-14
 
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
-run_window: start 2026-07-14T12:20:57-05:00; no new major slice after 2026-07-14T19:35:57-05:00; hard closeout 2026-07-14T20:20:57 CDT
+run_window: closed 2026-07-14T19:40:00-05:00 after T20.31 verification; no-new-major-slice cutoff was 2026-07-14T19:35:57-05:00
 run_state: T20.31 is verified negative through Brief 162 and Reviewer Decision 192; the no-new-major-slice cutoff has passed and no further slice is open.
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.31 verified negative under Brief 162; 0/2 held-out strict successes

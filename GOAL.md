@@ -23,6 +23,8 @@ proof states must remain distinct.
 - Actual start: `2026-07-14T12:20:57-05:00`.
 - No new major slice after: `2026-07-14T19:35:57-05:00`.
 - Hard closeout: `2026-07-14T20:20:57-05:00`.
+- Closeout recorded: `2026-07-14T19:40:00-05:00`, after T20.31 verified
+  negative and the no-new-major-slice cutoff passed.
 - This owner-requested bespoke-versus-package recreation continuation is
   simulation-only. It grants no hardware,
   physical-transfer, promotion, external-compute, or Brev authority. Historical

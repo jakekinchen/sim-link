@@ -11,7 +11,9 @@
     "simulation_only": true,
     "hardware_authority": "closed",
     "external_compute_authority": "closed",
-    "brev_authority": "closed"
+    "brev_authority": "closed",
+    "closeout_recorded_at": "2026-07-14T19:40:00-05:00",
+    "closeout_reason": "no_new_major_slice_cutoff_reached_after_t20_31_negative_verification"
   },
   "run_window_history": [
     {
