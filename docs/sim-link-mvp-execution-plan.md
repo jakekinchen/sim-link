@@ -187,6 +187,10 @@ T20.30 is verified through `2911e24` by Reviewer Decision 191. The distinct
 10-episode / 2,330-frame dataset view preserves all non-statistics bytes and
 changes only action q01/q99. Its fresh central decision grants only
 `simulation_training_ready`; T20.31 is the separately bounded execution slice.
+Brief 162 now activates T20.31 for exactly 500 local-MPS updates with the
+T20.30 dataset/specification and frozen unassisted seed-6/7 evaluation. Its
+result must be recorded whether positive or negative; policy acceptance stays
+false pending a separate promotion decision.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
