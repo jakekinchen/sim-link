@@ -60,3 +60,14 @@ the original standard-objective baseline and 0.05-rad all-seed action gate.
 Reviewer 227 authorizes one Python 3.12 local-MPS training/evaluation attempt.
 No T20.35r model load, inference, optimizer creation, training, rollout, Gate
 C, hardware, external compute, or Brev action occurred before authorization.
+
+## Result
+
+The sole attempt `fbcc16a5...` produced run `85826156...`, checkpoint
+`b73123dc...`, and signed result `52d4c9ed...`, remotely preserved at
+`c8f75a0`. The correction objective improves to ratio `0.095317`, but the
+standard objective rises to original-baseline ratio `0.150468` and every
+decoded chunk fails 0.05 rad with maxima `0.114470–0.197005`. Reviewer 228
+verifies the negative result, keeps Gate B and Gate C closed, and opens
+T20.35s under Brief 185 for a model-free time-step objective-mass and
+standard-compatibility audit.
