@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "167",
-    "commit": "d0be1801e4d2988816719ba23c01177aaef21978",
-    "reviewer_decision_id": "200",
-    "summary": "verified_optimizer_free_peft_coverage_failure_the_rank"
+    "brief_id": "168",
+    "commit": "b6309307c7d1faac744469ad9775bb0f944c414a",
+    "reviewer_decision_id": "201",
+    "summary": "verified_pinned_source_correction_of_peft_coverage_semantics"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35b",
-  "next_eligible_task": "T20.35b",
+  "current_task": "T20.35c",
+  "next_eligible_task": "T20.35c",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2792,7 +2792,7 @@
       "authority_not_granted": ["gate_b_passed","additional_optimizer_training","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.35a": {
-      "state": "verified",
+      "state": "superseded",
       "depends_on": ["T20.35"],
       "active_brief_id": null,
       "latest_verified_brief_id": "167",
@@ -2824,9 +2824,44 @@
         "brev_compute_started": false
       },
       "authority_granted": ["t20_35a_peft_coverage_failure_verified"],
+      "authority_not_granted": ["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"],
+      "superseded_by": "T20.35b",
+      "superseded_scope": "generic five-pathway decision semantics only; exact tensor and module enumeration remains immutable"
+    },
+    "T20.35b": {
+      "state": "verified",
+      "depends_on": ["T20.35a"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "168",
+      "review_decision_id": "201",
+      "source_commit": "b6309307c7d1faac744469ad9775bb0f944c414a",
+      "implementation_commits": ["b6309307c7d1faac744469ad9775bb0f944c414a"],
+      "result": "verified pinned-source correction of PEFT coverage semantics: PI0.5 intentionally has no state_proj and uses time_mlp_in/out, while the default PEFT regex uses stale action_time_mlp names and the saved adapter genuinely misses both real time-MLP layers, preserving the expert-only capacity-ceiling route",
+      "artifact": {
+        "schema_version": "scenesmith.t20_35b_pi05_coverage_correction.v1",
+        "path": "configurations/robot_lab/t20_35b_pi05_coverage_correction.json",
+        "identity_sha256": "446a06860663be438b3dc1c87e4d2571a9cd4866b1d16feaa1e279e06cfe10f6",
+        "supersedes_t20_35a_audit_identity_sha256": "d1109ae8ea393b4577444d54f1675a78993e5c09de3c9ee87a0f78cf9b1b48a1",
+        "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+        "pi05_model_source_sha256": "b05b6afe70a4a09f2eb610827b9ae09e8b08e43cd748d435e47879344e3fa619",
+        "actual_pi05_action_time_modules": ["model.action_in_proj", "model.action_out_proj", "model.time_mlp_in", "model.time_mlp_out"],
+        "missing_real_pi05_action_time_modules": ["model.time_mlp_in", "model.time_mlp_out"],
+        "stale_or_nonexistent_declared_peft_modules": ["model.action_time_mlp_in", "model.action_time_mlp_out", "model.state_proj"],
+        "state_proj_intentionally_absent": true,
+        "all_real_pi05_action_time_pathways_wrapped": false,
+        "decision": "pi05_peft_coverage_fail",
+        "selected_next_hypothesis": "gate_b_expert_only_unfreeze_capacity_ceiling",
+        "model_loaded": false,
+        "model_inference": false,
+        "optimizer_training": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["t20_35b_pi05_coverage_semantics_corrected"],
       "authority_not_granted": ["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
-    "T20.35b": {"state":"in_progress","depends_on":["T20.35a"],"active_brief_id":"168","latest_verified_brief_id":null,"review_decision_id":null,"result":"in-progress optimizer-free correction of T20.35a generic pathway semantics against pinned PI0.5 source: state_proj is intentionally absent while time_mlp_in/out are real and missed by the stale action_time_mlp PEFT names","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
+    "T20.35c": {"state":"pending","depends_on":["T20.35b"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"pending no-LoRA expert-only unfreeze capacity-ceiling probe on the frozen T20.33 batch after source-grounded time-MLP PEFT coverage failure","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],

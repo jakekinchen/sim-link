@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-15
 
-**State:** `in_progress`
+**State:** `verified`
 
 ## Objective
 
@@ -40,3 +40,13 @@ Changing upstream LeRobot; changing the PEFT regex; model construction;
 inference; optimizer training; the expert-only capacity run; learning-rate or
 budget rungs; Gate C work; hardware; external compute; Brev; transfer; or
 promotion.
+
+## Result
+
+Correction `446a0686...` binds pinned source `b05b6afe...` and proves PI0.5's
+real modules are action in/out plus `time_mlp_in/out`; `state_proj` is
+intentionally absent. The default PEFT names include nonexistent `state_proj`
+and stale `action_time_mlp_in/out`, so the adapter genuinely misses both real
+time-MLP layers. T20.35a's generic five-pathway decision is superseded while
+its tensor enumeration remains immutable. The corrected evidence still routes
+to the separately authorized no-LoRA expert-only capacity ceiling.
