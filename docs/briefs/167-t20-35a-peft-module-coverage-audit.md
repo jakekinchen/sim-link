@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-15
 
-**State:** `in_progress`
+**State:** `verified`
 
 ## Objective
 
@@ -47,3 +47,13 @@ Model construction; inference; optimizer training; changing PEFT targets;
 learning-rate or update-budget probes; checkpoint mutation; Gate C work;
 closed-loop rollout; policy acceptance; hardware; cameras; serial devices;
 external compute; Brev; transfer; or promotion.
+
+## Result
+
+Audit `d1109ae8...` verifies 76 finite saved tensors, 1,287,168 elements,
+38 paired modules, and complete q/v coverage across all 18 expert-attention
+layers. Only `action_in_proj` and `action_out_proj` are wrapped among the five
+required action/state pathways. `state_proj`, `action_time_mlp_in`, and
+`action_time_mlp_out` are absent. Coverage fails and routes to a separately
+reviewed no-LoRA expert-only unfreeze capacity-ceiling probe. No model,
+inference, optimizer, or authority change occurred.

@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "166",
-    "commit": "fd9399d959500f6cc439b6ad0fe7f29a7eea54ac",
-    "reviewer_decision_id": "199",
-    "summary": "verified_negative_gate_b_rank_capacity_discriminator_rank"
+    "brief_id": "167",
+    "commit": "d0be1801e4d2988816719ba23c01177aaef21978",
+    "reviewer_decision_id": "200",
+    "summary": "verified_optimizer_free_peft_coverage_failure_the_rank"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.35a",
-  "next_eligible_task": "T20.35a",
+  "current_task": "T20.35b",
+  "next_eligible_task": "T20.35b",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -2791,7 +2791,42 @@
       "authority_granted": ["t20_35_gate_b_negative_result_verified"],
       "authority_not_granted": ["gate_b_passed","additional_optimizer_training","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
-    "T20.35a": {"state":"in_progress","depends_on":["T20.35"],"active_brief_id":"167","latest_verified_brief_id":null,"review_decision_id":null,"result":"in-progress optimizer-free audit enumerating the exact PEFT-wrapped modules and saved adapter tensors to determine whether action-expert projections, action-time MLP, and state projection are trainable before another Gate B training rung","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
+    "T20.35a": {
+      "state": "verified",
+      "depends_on": ["T20.35"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "167",
+      "review_decision_id": "200",
+      "source_commit": "d0be1801e4d2988816719ba23c01177aaef21978",
+      "implementation_commits": ["d0be1801e4d2988816719ba23c01177aaef21978"],
+      "result": "verified optimizer-free PEFT coverage failure: the rank-16 adapter contains all 36 expert-attention q/v module pairs plus action input/output pairs, but state projection and both action-time MLP projections are absent, routing a no-LoRA expert-only unfreeze capacity ceiling before another learning-rate rung",
+      "artifact": {
+        "schema_version": "scenesmith.t20_35a_peft_module_coverage.v1",
+        "path": "configurations/robot_lab/t20_35a_peft_module_coverage.json",
+        "identity_sha256": "d1109ae8ea393b4577444d54f1675a78993e5c09de3c9ee87a0f78cf9b1b48a1",
+        "t20_35_run_identity_sha256": "6e0dd4e2003fa78f5d82cf38414cf6763444c27a44e797f30ff99c3097cd5dbe",
+        "checkpoint_identity_sha256": "0dea38b3135a4f1957bcd1fd7f3e78ca77fc2096eff5e2c75f0a3d9365f22032",
+        "saved_tensor_count": 76,
+        "saved_tensor_element_count": 1287168,
+        "saved_tensor_nonzero_count": 1286752,
+        "wrapped_module_count": 38,
+        "expert_attention_module_count": 36,
+        "present_required_action_state_modules": ["model.action_in_proj", "model.action_out_proj"],
+        "missing_required_action_state_modules": ["model.action_time_mlp_in", "model.action_time_mlp_out", "model.state_proj"],
+        "all_required_action_state_pathways_wrapped": false,
+        "decision": "peft_coverage_fail",
+        "selected_next_hypothesis": "gate_b_expert_only_unfreeze_capacity_ceiling",
+        "model_loaded": false,
+        "model_inference": false,
+        "optimizer_training": false,
+        "physical_actuation": false,
+        "external_compute_started": false,
+        "brev_compute_started": false
+      },
+      "authority_granted": ["t20_35a_peft_coverage_failure_verified"],
+      "authority_not_granted": ["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.35b": {"state":"pending","depends_on":["T20.35a"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"pending no-LoRA expert-only unfreeze capacity-ceiling probe on the frozen T20.33 batch after verified PEFT target-coverage failure","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],

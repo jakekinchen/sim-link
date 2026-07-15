@@ -163,6 +163,13 @@ still missed the `0.10` gate; all five decoded chunks also missed the `0.05`
 rad maximum-error gate. Gate B remains closed. The next safe task is the
 optimizer-free T20.35a audit that enumerates the exact modules and tensors
 wrapped by PEFT before another learning-rate or update-budget rung.
+T20.35a is now `verified` through audit `d1109ae8`, implementation `d0be180`,
+and Reviewer Decision 200. The saved adapter has 38 paired modules: all 36
+expert-attention q/v projections plus only `action_in_proj` and
+`action_out_proj`. `state_proj` and both action-time MLP projections are absent
+despite being named by the target regex. This is a real target-coverage fault;
+the next safe discriminator is the separately authorized no-LoRA expert-only
+unfreeze capacity ceiling, not the queued learning-rate rung.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
