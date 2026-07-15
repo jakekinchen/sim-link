@@ -201,3 +201,80 @@ def run_campaign(*, repo_root: Path = REPO_ROOT, python: Path | None = None) -> 
     dump_canonical_json(run_root / RUN_SUMMARY_PATH, summary)
     verify_run_summary(summary)
     return summary
+
+
+def build_result_gate(
+    *,
+    training_ref: dict[str, Any],
+    evaluation_refs: list[dict[str, Any]],
+    training_summary: dict[str, Any],
+    evaluations: list[dict[str, Any]],
+    checkpoint_action_quantiles_match_t20_30: bool,
+) -> dict[str, Any]:
+    verify_run_summary(training_summary)
+    if checkpoint_action_quantiles_match_t20_30 is not True:
+        raise ValueError("T20.31 checkpoint action quantiles drifted")
+    if [row.get("seed") for row in evaluation_refs] != list(HELD_OUT_SEEDS):
+        raise ValueError("T20.31 evaluation reference seed coverage drifted")
+    if [row.get("seed") for row in evaluations] != list(HELD_OUT_SEEDS):
+        raise ValueError("T20.31 evaluation seed coverage drifted")
+    rows = []
+    strict_count = 0
+    for seed, rollout, ref in zip(
+        HELD_OUT_SEEDS, evaluations, evaluation_refs, strict=True
+    ):
+        if rollout.get("frame_count") != 244:
+            raise ValueError("T20.31 held-out rollout frame count drifted")
+        if any(
+            rollout.get(key) != 0
+            for key in ("projected_action_frame_count", "active_assist_frame_count")
+        ):
+            raise ValueError("T20.31 result contains projected or assisted actions")
+        success = rollout.get("simulation_semantic_strict_success")
+        if not isinstance(success, bool):
+            raise ValueError("T20.31 strict-success result is invalid")
+        lift = rollout.get("maximum_anchor_lift_m")
+        if isinstance(lift, bool) or not isinstance(lift, (int, float)):
+            raise ValueError("T20.31 lift result is invalid")
+        strict_count += int(success)
+        rows.append(
+            {
+                "seed": seed,
+                "evaluation_ref": {
+                    key: value for key, value in ref.items() if key != "seed"
+                },
+                "frame_count": 244,
+                "terminal_outcome": rollout["terminal_outcome"],
+                "simulation_semantic_strict_success": success,
+                "maximum_anchor_lift_m": float(lift),
+                "projected_action_frame_count": 0,
+                "active_assist_frame_count": 0,
+            }
+        )
+    passed = strict_count == len(HELD_OUT_SEEDS)
+    return sign_payload(
+        {
+            "schema_version": "scenesmith.t20_31_nominal_action_quantile_result.v1",
+            "training_ref": dict(training_ref),
+            "optimizer_update_count": EXPECTED_UPDATES,
+            "baseline_loss": training_summary["baseline_loss"],
+            "final_loss": training_summary["final_loss"],
+            "minimum_loss": training_summary["minimum_loss"],
+            "checkpoint_action_quantiles_match_t20_30": True,
+            "held_out_results": rows,
+            "held_out_seed_count": len(HELD_OUT_SEEDS),
+            "strict_success_count": strict_count,
+            "candidate_two_seed_strict_success": passed,
+            "decision": (
+                "candidate_passed_two_seed_strict_v2"
+                if passed
+                else "candidate_failed_two_seed_strict_v2"
+            ),
+            "simulation_policy_accepted": False,
+            "physical_transfer_ready": False,
+            "promotion_eligible": False,
+            "physical_actuation": False,
+            "external_compute_started": False,
+            "brev_compute_started": False,
+        }
+    )
