@@ -49,3 +49,14 @@ objectives, gradients, and checkpoint tensors remain finite; the source
 checkpoint stays unchanged; and one signed result either passes Gate B or
 records the next smallest evidence-routed blocker. No result implies
 closed-loop policy acceptance or physical transfer.
+
+## Pre-Run Boundary
+
+Implementation `bac3877` plus wrapper normalization `ef90668`, signed spec
+`70be21a2...`, and central authority decision `f4ef827b...` are remotely
+preserved. All 50 exact T20.35q states reconstruct below `1.2e-15`; each is
+scheduled exactly 10 times over 500 AdamW updates at `2.5e-5`. Gate B retains
+the original standard-objective baseline and 0.05-rad all-seed action gate.
+Reviewer 227 authorizes one Python 3.12 local-MPS training/evaluation attempt.
+No T20.35r model load, inference, optimizer creation, training, rollout, Gate
+C, hardware, external compute, or Brev action occurred before authorization.
