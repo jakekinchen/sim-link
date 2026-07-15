@@ -19,7 +19,7 @@ importable without consuming the attempt.
 
 ## Runtime Preflight
 
-A no-checkpoint, no-model, no-attempt mode must activate the exact LeRobot
+A no-checkpoint-tensor, no-model, no-attempt mode must activate the exact LeRobot
 stack and import every module used before and during dataset/model setup,
 including `datasets`, `pyarrow`, `torch`, `safetensors`, processor/config/
 dataset/factory/policy modules, and the local source package. It must also
