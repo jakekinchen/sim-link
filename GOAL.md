@@ -150,6 +150,12 @@ and movement-to-target cosine is positive on every seed. The remaining Gate B
 fault is insufficient rank-4 capacity or optimization budget. The next safe
 discriminator is one separately authorized same-batch/same-seed rank-16
 ablation, not Gate C work or a broad campaign.
+Brief 166's T20.35 pre-run implementation is remotely preserved at `579855f`
+and accepted by Reviewer 198. Its signed specification differs from T20.33
+only in artifact identity metadata plus LoRA rank/alpha 4 to 16, and central
+composition grants only `simulation_training_ready` through the active window.
+Exactly one local-MPS run is next; no model load or optimizer occurred at the
+pre-run boundary.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,

@@ -5,7 +5,7 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T15:27:47-05:00; no new major slice after 2026-07-15T14:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35
-run_state: T20.34 is verified through Brief 165 and Reviewer 196; rank-4 adapter plumbing is active and target-aligned but insufficient, so Gate B routes to one rank-capacity discriminator.
+run_state: T20.35 pre-run implementation 579855f, signed rank-16 specification ccd6ef2b..., and central training-only decision 0cd37ea2... are remotely preserved and accepted by Reviewer 198; no model or optimizer has run.
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.35 in progress under Brief 166 for one same-batch rank-16 Gate B capacity discriminator
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
@@ -13,7 +13,7 @@ evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: implement, test, centrally authorize, review, and remotely preserve the one Brief 166 rank-16 run before model load or optimizer creation
+next_step: confirm Reviewer 198 on origin, consume the immutable one-run marker, execute exactly 500 local-MPS rank-16 updates, compose the signed result, and adjudicate Gate B once
 ```
 
 ## Rules
@@ -50,6 +50,17 @@ remotely confirm the exact rank-16 pre-run boundary before any model load or
 optimizer creation. Hardware, cameras, serial devices, external compute, Brev,
 promotion, and physical transfer remain closed. Session Log 200 records the
 resume, and Reviewer 197 permits only T20.35 preflight implementation.
+
+## 2026-07-15 - T20.35 rank-capacity pre-run boundary accepted
+
+Implementation `579855f` mechanically derives the rank-16 spec from the
+archived T20.33 spec, rejecting any campaign, batch, seed, processor, gate, or
+authority drift. The signed spec is `ccd6ef2b...`; central composition
+`0cd37ea2...` grants only `simulation_training_ready` through the current hard
+closeout. Fifty-eight relevant tests pass. An adversarial review closed the
+inherited retry hole by requiring an immutable attempt marker before model
+construction. Session Log 201 and Reviewer 198 authorize exactly one local-MPS
+run after this review is confirmed on origin. No model or optimizer has run.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 

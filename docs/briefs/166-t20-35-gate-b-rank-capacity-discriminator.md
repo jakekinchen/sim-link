@@ -45,3 +45,15 @@ B proof under the unchanged update budget and pass thresholds.
 Any rank other than 16; rank sweep; extra updates; continuation; second batch;
 Gate C work; full campaign; closed-loop rollout; promotion; hardware; external
 compute; Brev; or global authority change.
+
+## Pre-Run Boundary
+
+Implementation `579855fa893862d53f4748f7394dce8bee3698a7` is preserved on
+origin. The mechanically derived rank-16 specification is
+`ccd6ef2b742af2e0fd75599a05a3f5f6c29c27f39fbb514ab2fc823b19a7eac1`;
+the central training-only decision is
+`0cd37ea2756799e033f431c7907b3322ddc986bf007195908ae59ee92a181f20`.
+Reviewer 198 accepts exactly one local-MPS run after remote confirmation. The
+runner creates an immutable attempt marker before model construction, so a
+failed attempt cannot silently retry. No model load or optimizer occurred at
+this boundary.
