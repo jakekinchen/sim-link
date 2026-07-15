@@ -37,3 +37,15 @@ Every decoded endpoint and target hash verifies; all 1,500 action errors and
 all derived summaries recompute exactly and remain finite; and one signed audit
 routes the next smallest discriminator without claiming Gate B, Gate C, policy
 acceptance, or physical readiness.
+
+## Result
+
+Signed audit `e52d6d08...`, preserved at `99cbbc4`, recomputes all 1,500
+seed/action/joint errors. Exactly 370 cells exceed 0.05 rad. Shoulder lift
+carries `50.6574%` of physical-radian squared error and wrist roll `29.3595%`,
+while no joint exceeds `20.7126%` of last-captured normalized-state error mass.
+The first ten actions carry `42.1972%`, below the 50% time-band threshold; the
+failure is neither sparse nor time-band dominant. Reviewer 236 routes one
+physical-gate-aligned joint-weighted correction design with standard replay.
+Gate B and Gate C remain closed. No model, checkpoint, inference, optimizer,
+rollout, hardware, external compute, or Brev action occurred.
