@@ -2861,7 +2861,7 @@
       "authority_granted": ["t20_35b_pi05_coverage_semantics_corrected"],
       "authority_not_granted": ["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
-    "T20.35c": {"state":"pending","depends_on":["T20.35b"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"pending no-LoRA expert-only unfreeze capacity-ceiling probe on the frozen T20.33 batch after source-grounded time-MLP PEFT coverage failure","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
+    "T20.35c": {"state":"in_progress","depends_on":["T20.35b"],"active_brief_id":"169","latest_verified_brief_id":null,"review_decision_id":null,"result":"in-progress no-LoRA expert-only capacity-ceiling probe on the frozen T20.33 batch; exact PaliGemma-frozen and Gemma-expert-plus-real-projections trainable boundary must be implemented, tested, centrally authorized, reviewed, and remotely preserved before one counted attempt","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],
