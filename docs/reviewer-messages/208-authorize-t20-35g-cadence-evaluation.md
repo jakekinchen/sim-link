@@ -4,9 +4,10 @@
 
 ## Reviewed Boundary
 
-Brief 173, implementation `88602b0`, spec `be1c50f3...`, permit `ca3dbd3f...`,
-T20.35f route, immutable checkpoint/batch/baseline sources, runner, tests,
-canonical state, and complete scoped diff were reviewed before model load.
+Brief 173, implementation `88602b0`, verifier correction `5cb933f`, spec
+`be1c50f3...`, permit `ca3dbd3f...`, T20.35f route, immutable
+checkpoint/batch/baseline sources, runner, tests, canonical state, and complete
+scoped diff were reviewed before model load.
 
 ## Adversarial Findings
 
@@ -25,7 +26,10 @@ canonical state, and complete scoped diff were reviewed before model load.
   model load. Existing attempt or result files fail closed; the permit is one-use.
 - The runner constructs no optimizer and exposes no training, checkpoint/data
   mutation, rollout, Gate C, hardware, external-compute, or Brev path.
-- Four focused and 88 relevant tests pass, including source/checkpoint, cadence,
+- The T20.35f archive verifier accepts only the already-declared `1e-15`
+  derived-float tolerance across Python 3.11/3.14; signed source identity,
+  types, keys, counts, hashes, routes, and non-float values remain exact.
+- Four focused and 89 relevant tests pass, including source/checkpoint, cadence,
   seed, baseline hash, metric, selection, route, permit, non-finite, and
   forbidden-action adversaries. Spec and permit reproduce exactly.
 

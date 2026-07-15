@@ -51,7 +51,9 @@ hardware; external compute; Brev; transfer; promotion; or policy acceptance.
 ## Pre-Run Boundary
 
 Implementation `88602b0` freezes signed spec `be1c50f3...` and one-use permit
-`ca3dbd3f...`. Four focused and 88 relevant tests pass. Reviewer 208 accepts
+`ca3dbd3f...`; verifier correction `5cb933f` preserves the already-declared
+`1e-15` derived-float tolerance across the pinned runtime. Four focused and 89
+relevant tests pass. Reviewer 208 accepts
 one local-MPS model-load/inference attempt over cadences 10, 20, and 50 after
 remote preservation; no optimizer, training, mutation, rollout, Gate C,
 hardware, external-compute, or Brev authority exists.
