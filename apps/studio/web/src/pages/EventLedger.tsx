@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { api, usePoll } from '../api/client'
 import type { StudioDocument, StudioDocumentKind, StudioEvent } from '../api/types'
 import MarkdownDocument from '../components/MarkdownDocument'
+import NativeDiagnostics from '../components/NativeDiagnostics'
 import { EmptyState, ErrorState, Hash, Led, Panel, PassFail, Tag } from '../components/ui'
 
 const KIND_META: Record<
@@ -195,6 +196,7 @@ export default function EventLedger() {
       </header>
 
       {error && <ErrorState error={error} />}
+      <NativeDiagnostics />
 
       <div className="grid gap-3 xl:grid-cols-[minmax(21rem,0.9fr)_minmax(0,1.5fr)]">
         <Panel

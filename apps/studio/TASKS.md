@@ -18,7 +18,7 @@ in the same commit as the work.
 | ST11 | Tauri wrap (native Mac shell) | done | signed `.app` verified: fixed loopback Python sidecar, live API/AX render, shutdown cleanup; webview has no shell capability |
 | ST12 | Episode compare: two mirrors side-by-side, synced scrub | done | live browser verified: distinct pickers, side-by-side mirrors, shared play/end, exact 4.2s dual scrub |
 | ST13 | Event Ledger & Inspector: canonical workflow timeline, provenance, filters, full-text source inspection | done | 656 live docs across 4 channels; search/filter, rendered/raw source, SHA-256 consistency, and observation-time disclaimer browser-verified |
-| ST14 | Native shell lifecycle diagnostics: visible sidecar startup, health, logs, and exit state | pending | read-only diagnostics only; no new server mutation or native capability |
+| ST14 | Native shell lifecycle diagnostics: visible sidecar startup, health, logs, and exit state | done | signed app/AX verified: exact ready/fault/exit states, bounded lifecycle logs, named port conflict, and shutdown cleanup; no webview process capability |
 
 Rules: never touch governed paths (see GOAL.md), never push to
 `codex/pi05-autolearn-loop`, commit small and often to `studio/app-shell`.

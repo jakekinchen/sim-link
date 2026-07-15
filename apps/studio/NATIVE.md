@@ -32,3 +32,16 @@ defaulting to `/Users/kelly/Developer/sim-link` exactly like the web stack.
 
 The sidecar build uses the server's locked `uv` environment and creates only
 ignored build output below `apps/studio/web/src-tauri/`.
+
+## Lifecycle diagnostics
+
+The Event Ledger includes a native-backend strip when it runs inside Tauri. It
+shows sidecar startup, ready, fault, and stopped states; the sidecar PID and
+exit code; and a bounded stdout/stderr buffer. Port conflicts and early
+backend exits are therefore visible in the app instead of appearing only as a
+generic API-link failure.
+
+The native command is read-only and returns at most 120 log entries with each
+entry capped at 2,000 characters. These messages are explicitly operational
+diagnostics, not repository evidence, and do not add shell, filesystem,
+hardware, or process-control capability to the webview.

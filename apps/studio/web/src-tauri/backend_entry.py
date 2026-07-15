@@ -29,7 +29,13 @@ def main() -> None:
 
     from main import app
 
-    uvicorn.run(app, host="127.0.0.1", port=8321, log_level="warning")
+    uvicorn.run(
+        app,
+        host="127.0.0.1",
+        port=8321,
+        log_level="info",
+        access_log=False,
+    )
 
 
 if __name__ == "__main__":
