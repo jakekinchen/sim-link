@@ -55,3 +55,14 @@ Tests cover exact lineage, dimension masks, base-noise equality, inherited
 endpoint replay, metrics, route precedence, one-use semantics, non-finite
 values, and every forbidden truth flag. A fresh pre-run reviewer decision must
 authorize exactly one Python 3.12 local-MPS inference attempt.
+
+## Pre-Run Boundary
+
+Implementation `2f04395`, spec `4c346688...`, permit `5b990e78...`, and
+Reviewer 216 authorize exactly one Python 3.12 local-MPS model-load/inference
+attempt after remote preservation. The runner inherits both endpoint chunks,
+evaluates only the two mixed masks, and validates every per-seed base-noise hash
+before inference. Sixty relevant tests and 17 subtests pass; exact spec/permit
+verification agrees under Python 3.11 and 3.12. No model, checkpoint tensor,
+inference, optimizer, mutation, rollout, Gate C, hardware, external compute, or
+Brev action occurred at this boundary.

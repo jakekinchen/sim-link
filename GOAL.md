@@ -288,6 +288,13 @@ projection, and truncates direct loss and returned actions to six. This is an
 exposure mechanism, not causal proof. Brief 178 opens T20.35l to evaluate only
 the two mixed active-six/padded-26 noise masks while reusing T20.35j's signed
 all-normal and all-zero endpoints. No optimizer or Gate C authority exists.
+T20.35l pre-run implementation `2f04395`, spec `4c346688...`, permit
+`5b990e78...`, and Reviewer Decision 216 are preservation-ready. Sixty relevant
+tests and 17 subtests pass; spec/permit verification agrees under Python 3.11
+and 3.12. After this review is confirmed on origin, exactly one Python 3.12
+local-MPS model-load/inference attempt may evaluate the two mixed masks. No
+model, checkpoint tensor, inference, optimizer, mutation, or rollout has
+occurred at this boundary.
 Brief 145 established T20.17's first boundary at
 `af317bc`; its second at `1f5154a`; and its third at `cf1d05d`: preserve the
 compact bespoke IP (content-addressed contracts, strict grasp semantics,
