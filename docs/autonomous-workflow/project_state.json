@@ -2791,7 +2791,7 @@
       "authority_granted": ["t20_35_gate_b_negative_result_verified"],
       "authority_not_granted": ["gate_b_passed","additional_optimizer_training","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
-    "T20.35a": {"state":"pending","depends_on":["T20.35"],"active_brief_id":null,"latest_verified_brief_id":null,"review_decision_id":null,"result":"pending optimizer-free audit enumerating the exact PEFT-wrapped modules and saved adapter tensors to determine whether action-expert projections, action-time MLP, and state projection are trainable before another Gate B training rung","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
+    "T20.35a": {"state":"in_progress","depends_on":["T20.35"],"active_brief_id":"167","latest_verified_brief_id":null,"review_decision_id":null,"result":"in-progress optimizer-free audit enumerating the exact PEFT-wrapped modules and saved adapter tensors to determine whether action-expert projections, action-time MLP, and state projection are trainable before another Gate B training rung","authority_granted":[],"authority_not_granted":["simulation_training_ready","optimizer_training_executed","gate_b_passed","gate_c_execution_correction","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]},
     "T19.0": {
       "state": "verified",
       "depends_on": ["T16.3", "T16.5c"],
