@@ -14,20 +14,28 @@ sys.path.insert(0, str(REPO_ROOT))
 from scenesmith.robot_lab.t20_35g_denoising_cadence_discriminator import (  # noqa: E402
     load_and_verify_evaluation_files,
     write_evaluation_files,
+    write_runtime_correction_files,
 )
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--verify", action="store_true")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("--verify", action="store_true")
+    group.add_argument("--runtime-correction", action="store_true")
     args = parser.parse_args()
-    result = (
-        load_and_verify_evaluation_files(repo_root=REPO_ROOT)
-        if args.verify
-        else write_evaluation_files(repo_root=REPO_ROOT)
-    )
-    spec = result["cadence_spec"] if args.verify else result["spec"]
-    permit = result["cadence_permit"] if args.verify else result["permit"]
+    if args.verify:
+        result = load_and_verify_evaluation_files(repo_root=REPO_ROOT)
+        spec = result["cadence_spec"]
+        permit = result["cadence_permit"]
+    elif args.runtime_correction:
+        result = write_runtime_correction_files(repo_root=REPO_ROOT)
+        spec = result["spec"]
+        permit = result["permit"]
+    else:
+        result = write_evaluation_files(repo_root=REPO_ROOT)
+        spec = result["spec"]
+        permit = result["permit"]
     print(spec["identity_sha256"], permit["identity_sha256"])
     return 0
 

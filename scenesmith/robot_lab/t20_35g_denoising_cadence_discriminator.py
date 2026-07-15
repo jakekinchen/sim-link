@@ -39,10 +39,26 @@ RESULT_PATH = Path(
     "configurations/robot_lab/t20_35g_denoising_cadence_result.json"
 )
 ATTEMPT_PATH = Path("outputs/robot_lab/t20_35g_denoising_cadence/attempt.json")
+RUNTIME_PREFLIGHT_PATH = Path(
+    "configurations/robot_lab/t20_35g_attempt_001_runtime_failure.json"
+)
+CORRECTED_SPEC_PATH = Path(
+    "configurations/robot_lab/t20_35g_denoising_cadence_spec_attempt_002.json"
+)
+CORRECTED_PERMIT_PATH = Path(
+    "configurations/robot_lab/t20_35g_denoising_cadence_evaluation_permit_attempt_002.json"
+)
+ATTEMPT_002_PATH = Path(
+    "outputs/robot_lab/t20_35g_denoising_cadence/attempt_002.json"
+)
 SCHEMA_VERSION = "scenesmith.t20_35g_denoising_cadence_spec.v1"
+CORRECTED_SCHEMA_VERSION = "scenesmith.t20_35g_denoising_cadence_spec.v2"
 PERMIT_SCHEMA_VERSION = "scenesmith.t20_35g_denoising_cadence_evaluation_permit.v1"
 RESULT_SCHEMA_VERSION = "scenesmith.t20_35g_denoising_cadence_result.v1"
 ATTEMPT_SCHEMA_VERSION = "scenesmith.t20_35g_evaluation_attempt.v1"
+RUNTIME_PREFLIGHT_SCHEMA_VERSION = (
+    "scenesmith.t20_35g_runtime_compatibility_preflight.v1"
+)
 EXPECTED_AUDIT_IDENTITY = (
     "85c24c5cd9a08c1a8153361bbdebaab0cedde28c5c1ec1a79bd1544924354432"
 )
@@ -205,6 +221,136 @@ def verify_evaluation_permit(
     verify_signed_payload(payload, label="T20.35g cadence permit")
     if payload != build_evaluation_permit(spec=spec):
         raise ValueError("T20.35g cadence permit drifted")
+
+
+def build_runtime_compatibility_preflight(
+    *,
+    original_spec: dict[str, Any],
+    original_permit: dict[str, Any],
+    consumed_attempt: dict[str, Any],
+) -> dict[str, Any]:
+    verify_signed_payload(original_spec, label="T20.35g original cadence spec")
+    verify_evaluation_permit(original_permit, spec=original_spec)
+    verify_attempt_marker(
+        consumed_attempt,
+        spec_identity=original_spec["identity_sha256"],
+        permit_identity=original_permit["identity_sha256"],
+    )
+    return sign_payload(
+        {
+            "schema_version": RUNTIME_PREFLIGHT_SCHEMA_VERSION,
+            "task_id": "T20.35g",
+            "scope": "model_free_runtime_compatibility_correction_after_consumed_attempt",
+            "original_evaluation_spec_identity_sha256": original_spec[
+                "identity_sha256"
+            ],
+            "consumed_evaluation_permit_identity_sha256": original_permit[
+                "identity_sha256"
+            ],
+            "consumed_attempt_identity_sha256": consumed_attempt[
+                "identity_sha256"
+            ],
+            "failure": {
+                "python_version": [3, 14, 2],
+                "runtime_path": "external/lerobot/.venv/bin/python",
+                "stage": "pretrained_config_parse_after_checkpoint_tensor_validation",
+                "exception_type": "TypeError",
+                "exception_signature": "typing_dict_union_not_callable",
+                "checkpoint_tree_verified": True,
+                "checkpoint_tensors_loaded_cpu_and_manifest_validated": True,
+                "model_constructed": False,
+                "model_inference": False,
+                "optimizer_created": False,
+                "optimizer_training": False,
+                "checkpoint_mutated": False,
+                "dataset_mutated": False,
+                "closed_loop_rollout": False,
+                "physical_actuation": False,
+                "external_compute_started": False,
+                "brev_compute_started": False,
+            },
+            "replacement_runtime_preflight": {
+                "python_version": [3, 12, 12],
+                "runtime_path": "external/leLab/.venv/bin/python",
+                "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+                "pi05_config_class": "lerobot.policies.pi05.configuration_pi05.PI05Config",
+                "pi05_default_num_inference_steps": 10,
+                "local_cached_config_parse_passed": True,
+                "checkpoint_tensor_read": False,
+                "model_constructed": False,
+                "model_inference": False,
+                "optimizer_created": False,
+                "optimizer_training": False,
+                "physical_actuation": False,
+                "external_compute_started": False,
+                "brev_compute_started": False,
+            },
+            "old_permit_reusable": False,
+            "replacement_attempt_executed": False,
+            "selected_next_hypothesis": (
+                "issue_distinct_python_3_12_runtime_pinned_replacement_permit"
+            ),
+        }
+    )
+
+
+def verify_runtime_compatibility_preflight(
+    payload: dict[str, Any],
+    *,
+    original_spec: dict[str, Any],
+    original_permit: dict[str, Any],
+    consumed_attempt: dict[str, Any],
+) -> None:
+    verify_signed_payload(payload, label="T20.35g runtime compatibility preflight")
+    expected = build_runtime_compatibility_preflight(
+        original_spec=original_spec,
+        original_permit=original_permit,
+        consumed_attempt=consumed_attempt,
+    )
+    if payload != expected:
+        raise ValueError("T20.35g runtime compatibility preflight drifted")
+
+
+def build_corrected_evaluation_spec(
+    *, original_spec: dict[str, Any], runtime_preflight: dict[str, Any]
+) -> dict[str, Any]:
+    verify_signed_payload(original_spec, label="T20.35g superseded cadence spec")
+    verify_signed_payload(runtime_preflight, label="T20.35g correction preflight")
+    if (
+        runtime_preflight.get("original_evaluation_spec_identity_sha256")
+        != original_spec.get("identity_sha256")
+        or runtime_preflight.get("old_permit_reusable") is not False
+        or runtime_preflight.get("replacement_runtime_preflight", {}).get(
+            "local_cached_config_parse_passed"
+        )
+        is not True
+    ):
+        raise ValueError("T20.35g runtime correction source drifted")
+    corrected = {
+        key: value for key, value in original_spec.items() if key != "identity_sha256"
+    }
+    corrected.update(
+        {
+            "schema_version": CORRECTED_SCHEMA_VERSION,
+            "scope": "one_runtime_pinned_replacement_inference_only_cadence_discriminator",
+            "supersedes_evaluation_spec_identity_sha256": original_spec[
+                "identity_sha256"
+            ],
+            "runtime_compatibility_preflight_identity_sha256": runtime_preflight[
+                "identity_sha256"
+            ],
+            "consumed_attempt_identity_sha256": runtime_preflight[
+                "consumed_attempt_identity_sha256"
+            ],
+            "consumed_permit_identity_sha256": runtime_preflight[
+                "consumed_evaluation_permit_identity_sha256"
+            ],
+            "required_python_major_minor": [3, 12],
+            "replacement_attempt_number": 2,
+            "prior_attempt_reused": False,
+        }
+    )
+    return sign_payload(corrected)
 
 
 def build_result(
@@ -413,12 +559,38 @@ def load_and_verify_evaluation_files(
     verify_evaluation_spec(spec, source_spec=expected)
     permit = load_strict_json(root / PERMIT_PATH)
     verify_evaluation_permit(permit, spec=spec)
+    active_spec = spec
+    active_permit = permit
+    runtime_preflight = None
+    corrected_exists = (root / CORRECTED_SPEC_PATH).exists()
+    corrected_permit_exists = (root / CORRECTED_PERMIT_PATH).exists()
+    if corrected_exists != corrected_permit_exists:
+        raise ValueError("T20.35g replacement spec/permit presence is contradictory")
+    if corrected_exists:
+        consumed_attempt = load_strict_json(root / ATTEMPT_PATH)
+        runtime_preflight = load_strict_json(root / RUNTIME_PREFLIGHT_PATH)
+        verify_runtime_compatibility_preflight(
+            runtime_preflight,
+            original_spec=spec,
+            original_permit=permit,
+            consumed_attempt=consumed_attempt,
+        )
+        corrected_expected = build_corrected_evaluation_spec(
+            original_spec=spec, runtime_preflight=runtime_preflight
+        )
+        active_spec = load_strict_json(root / CORRECTED_SPEC_PATH)
+        verify_evaluation_spec(active_spec, source_spec=corrected_expected)
+        active_permit = load_strict_json(root / CORRECTED_PERMIT_PATH)
+        verify_evaluation_permit(active_permit, spec=active_spec)
     return {
         **residual_sources,
         "residual_report": residual_report,
         "t20_35f_audit": audit,
-        "cadence_spec": spec,
-        "cadence_permit": permit,
+        "original_cadence_spec": spec,
+        "original_cadence_permit": permit,
+        "runtime_compatibility_preflight": runtime_preflight,
+        "cadence_spec": active_spec,
+        "cadence_permit": active_permit,
     }
 
 
@@ -443,6 +615,44 @@ def write_evaluation_files(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     dump_canonical_json(root / SPEC_PATH, spec)
     dump_canonical_json(root / PERMIT_PATH, permit)
     return {"spec": spec, "permit": permit}
+
+
+def write_runtime_correction_files(
+    *, repo_root: Path = REPO_ROOT
+) -> dict[str, Any]:
+    root = Path(repo_root)
+    if any(
+        (root / path).exists()
+        for path in (
+            RUNTIME_PREFLIGHT_PATH,
+            CORRECTED_SPEC_PATH,
+            CORRECTED_PERMIT_PATH,
+            ATTEMPT_002_PATH,
+            RESULT_PATH,
+        )
+    ):
+        raise FileExistsError("T20.35g runtime correction or replacement attempt already exists")
+    sources = load_and_verify_evaluation_files(repo_root=root)
+    original_spec = sources["original_cadence_spec"]
+    original_permit = sources["original_cadence_permit"]
+    consumed_attempt = load_strict_json(root / ATTEMPT_PATH)
+    runtime_preflight = build_runtime_compatibility_preflight(
+        original_spec=original_spec,
+        original_permit=original_permit,
+        consumed_attempt=consumed_attempt,
+    )
+    corrected_spec = build_corrected_evaluation_spec(
+        original_spec=original_spec, runtime_preflight=runtime_preflight
+    )
+    corrected_permit = build_evaluation_permit(spec=corrected_spec)
+    dump_canonical_json(root / RUNTIME_PREFLIGHT_PATH, runtime_preflight)
+    dump_canonical_json(root / CORRECTED_SPEC_PATH, corrected_spec)
+    dump_canonical_json(root / CORRECTED_PERMIT_PATH, corrected_permit)
+    return {
+        "runtime_preflight": runtime_preflight,
+        "spec": corrected_spec,
+        "permit": corrected_permit,
+    }
 
 
 def _source_baseline(report: dict[str, Any]) -> list[dict[str, Any]]:

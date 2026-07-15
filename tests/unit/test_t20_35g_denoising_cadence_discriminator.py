@@ -7,12 +7,15 @@ import unittest
 
 from scenesmith.robot_lab.artifact_contract import canonical_json_bytes, sign_payload
 from scenesmith.robot_lab.t20_35g_denoising_cadence_discriminator import (
+    build_corrected_evaluation_spec,
     build_evaluation_permit,
     build_evaluation_spec,
     build_result,
+    build_runtime_compatibility_preflight,
     verify_evaluation_permit,
     verify_evaluation_spec,
     verify_result,
+    verify_runtime_compatibility_preflight,
 )
 
 
@@ -155,6 +158,41 @@ class T2035GDenoisingCadenceDiscriminatorTests(unittest.TestCase):
                 attempt=attempt,
                 target_chunk=target,
                 cadence_evaluations=malformed,
+            )
+
+    def test_consumed_runtime_failure_requires_distinct_python_312_spec_and_permit(self) -> None:
+        spec, permit, attempt, _, _ = self._contract()
+        preflight = build_runtime_compatibility_preflight(
+            original_spec=spec,
+            original_permit=permit,
+            consumed_attempt=attempt,
+        )
+        verify_runtime_compatibility_preflight(
+            preflight,
+            original_spec=spec,
+            original_permit=permit,
+            consumed_attempt=attempt,
+        )
+        corrected = build_corrected_evaluation_spec(
+            original_spec=spec, runtime_preflight=preflight
+        )
+        replacement_permit = build_evaluation_permit(spec=corrected)
+        self.assertNotEqual(corrected["identity_sha256"], spec["identity_sha256"])
+        self.assertNotEqual(
+            replacement_permit["identity_sha256"], permit["identity_sha256"]
+        )
+        self.assertEqual(corrected["required_python_major_minor"], [3, 12])
+        self.assertEqual(corrected["consumed_attempt_identity_sha256"], attempt["identity_sha256"])
+        self.assertFalse(corrected["prior_attempt_reused"])
+
+        drift = copy.deepcopy(preflight)
+        drift["replacement_runtime_preflight"]["python_version"] = [3, 14, 2]
+        with self.assertRaisesRegex(ValueError, "preflight drifted"):
+            verify_runtime_compatibility_preflight(
+                sign_payload(drift),
+                original_spec=spec,
+                original_permit=permit,
+                consumed_attempt=attempt,
             )
 
     @classmethod

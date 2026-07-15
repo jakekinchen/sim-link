@@ -1,0 +1,29 @@
+{
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "brev_compute_authorized": false,
+  "cadence_num_inference_steps": [
+    10,
+    20,
+    50
+  ],
+  "checkpoint_mutation_authorized": false,
+  "closed_loop_rollout_authorized": false,
+  "dataset_mutation_authorized": false,
+  "evaluation_spec_identity_sha256": "4407624835d014e906206a643997824f912834e8eca385654d9766d27f3d37e9",
+  "exactly_one_evaluation_attempt_authorized": true,
+  "external_compute_authorized": false,
+  "identity_sha256": "b3078ea007279c0377e9ff6082bf33f6a744cd0e2cf77392f7a91f9234b31fc4",
+  "inherited_authority_decision_identity_sha256": "75dc9c7d860e12e2a2114be709e24f7e544ff576696a3d223dd87dd0e2f06606",
+  "optimizer_training_authorized": false,
+  "physical_actuation_authorized": false,
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.t20_35g_denoising_cadence_evaluation_permit.v1",
+  "scope": "one_local_mps_inference_only_denoising_cadence_evaluation",
+  "task_id": "T20.35g",
+  "valid_from": "2026-07-15T07:27:47-05:00",
+  "valid_until": "2026-07-15T15:27:47-05:00"
+}

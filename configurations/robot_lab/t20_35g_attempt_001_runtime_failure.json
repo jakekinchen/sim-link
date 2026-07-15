@@ -1,0 +1,55 @@
+{
+  "consumed_attempt_identity_sha256": "788015fa3e1593ec58449103d6a870dff1d8eb820e412b441f732f7858cc76a4",
+  "consumed_evaluation_permit_identity_sha256": "ca3dbd3fe0306636bbac062a0f60989681b8f656b8de1f713052dd791fdd8e9b",
+  "failure": {
+    "brev_compute_started": false,
+    "checkpoint_mutated": false,
+    "checkpoint_tensors_loaded_cpu_and_manifest_validated": true,
+    "checkpoint_tree_verified": true,
+    "closed_loop_rollout": false,
+    "dataset_mutated": false,
+    "exception_signature": "typing_dict_union_not_callable",
+    "exception_type": "TypeError",
+    "external_compute_started": false,
+    "model_constructed": false,
+    "model_inference": false,
+    "optimizer_created": false,
+    "optimizer_training": false,
+    "physical_actuation": false,
+    "python_version": [
+      3,
+      14,
+      2
+    ],
+    "runtime_path": "external/lerobot/.venv/bin/python",
+    "stage": "pretrained_config_parse_after_checkpoint_tensor_validation"
+  },
+  "identity_sha256": "d476382b54d41fe6f6612c72f9613f9aa61a2941acb13d2703efc13b6b7e66f6",
+  "old_permit_reusable": false,
+  "original_evaluation_spec_identity_sha256": "be1c50f3ecb01eadd59f62ae41fa2afc36149340bcc3287cd3cbe049ecc739e6",
+  "replacement_attempt_executed": false,
+  "replacement_runtime_preflight": {
+    "brev_compute_started": false,
+    "checkpoint_tensor_read": false,
+    "external_compute_started": false,
+    "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+    "local_cached_config_parse_passed": true,
+    "model_constructed": false,
+    "model_inference": false,
+    "optimizer_created": false,
+    "optimizer_training": false,
+    "physical_actuation": false,
+    "pi05_config_class": "lerobot.policies.pi05.configuration_pi05.PI05Config",
+    "pi05_default_num_inference_steps": 10,
+    "python_version": [
+      3,
+      12,
+      12
+    ],
+    "runtime_path": "external/leLab/.venv/bin/python"
+  },
+  "schema_version": "scenesmith.t20_35g_runtime_compatibility_preflight.v1",
+  "scope": "model_free_runtime_compatibility_correction_after_consumed_attempt",
+  "selected_next_hypothesis": "issue_distinct_python_3_12_runtime_pinned_replacement_permit",
+  "task_id": "T20.35g"
+}

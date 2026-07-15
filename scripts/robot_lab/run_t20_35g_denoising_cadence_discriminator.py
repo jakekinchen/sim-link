@@ -46,7 +46,7 @@ from scenesmith.robot_lab.t20_35d_decoded_action_residual_localization import ( 
     CHECKPOINT_ROOT,
 )
 from scenesmith.robot_lab.t20_35g_denoising_cadence_discriminator import (  # noqa: E402
-    ATTEMPT_PATH,
+    ATTEMPT_002_PATH,
     CADENCE_NUM_INFERENCE_STEPS,
     RESULT_PATH,
     build_result,
@@ -69,6 +69,9 @@ def main() -> int:
     sources = load_and_verify_evaluation_files(repo_root=REPO_ROOT)
     spec = sources["cadence_spec"]
     permit = sources["cadence_permit"]
+    required_python = spec.get("required_python_major_minor")
+    if required_python != [3, 12] or list(sys.version_info[:2]) != required_python:
+        raise RuntimeError("T20.35g replacement attempt requires the reviewed Python 3.12 runtime")
     authority = require_active_authority(repo_root=REPO_ROOT)
     if (
         authority["decision"]["identity_sha256"]
@@ -81,7 +84,7 @@ def main() -> int:
     target = sources["residual_report"]["target_action_chunk"]
 
     if args.verify:
-        attempt = load_strict_json(REPO_ROOT / ATTEMPT_PATH)
+        attempt = load_strict_json(REPO_ROOT / ATTEMPT_002_PATH)
         verify_attempt_marker(
             attempt,
             spec_identity=spec["identity_sha256"],
@@ -97,7 +100,7 @@ def main() -> int:
         )
         print(result["identity_sha256"], result["selected_next_hypothesis"])
         return 0
-    if (REPO_ROOT / ATTEMPT_PATH).exists() or (REPO_ROOT / RESULT_PATH).exists():
+    if (REPO_ROOT / ATTEMPT_002_PATH).exists() or (REPO_ROOT / RESULT_PATH).exists():
         raise FileExistsError("T20.35g cadence attempt already exists; use --verify")
 
     attempt = sign_payload(
@@ -120,8 +123,8 @@ def main() -> int:
             "brev_compute_started": False,
         }
     )
-    (REPO_ROOT / ATTEMPT_PATH).parent.mkdir(parents=True, exist_ok=False)
-    dump_canonical_json(REPO_ROOT / ATTEMPT_PATH, attempt)
+    (REPO_ROOT / ATTEMPT_002_PATH).parent.mkdir(parents=True, exist_ok=True)
+    dump_canonical_json(REPO_ROOT / ATTEMPT_002_PATH, attempt)
 
     os.environ.update(
         {
