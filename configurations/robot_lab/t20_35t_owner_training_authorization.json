@@ -1,0 +1,27 @@
+{
+  "authorization_id": "t20_35t_time_normalized_standard_replay_consistency_grant",
+  "authorization_scope": "t20_35t_simulation_only_time_normalized_standard_replay_correction",
+  "authorization_source": "owner_resume_existing_sim_link_mvp_goal_loop_2026_07_15",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training"
+  ],
+  "brev_compute_authorized": false,
+  "external_compute_authorized": false,
+  "identity_sha256": "6644b48019f5f44a40e353616b05e4e9a3f065f436ed544d4dc75df9dc1fa2f5",
+  "issued_at": "2026-07-15T07:27:47-05:00",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "source_training_spec_ref": {
+    "file_sha256": "ce68a06cdef665d1e7a7edfe6d626df5e9ec5666dd323dda20d21e88ad5ec626",
+    "identity_sha256": "34881e21e02b7567133a51a101fafc673ae52fe9bb7bf6e603384811e4747335",
+    "path": "configurations/robot_lab/t20_35t_time_normalized_standard_replay_training_spec.json",
+    "schema_version": "scenesmith.t20_35t_time_normalized_standard_replay_training_spec.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}
