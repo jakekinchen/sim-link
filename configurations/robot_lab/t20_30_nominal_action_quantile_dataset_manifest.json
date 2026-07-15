@@ -1,0 +1,70 @@
+{
+  "brev_compute_started": false,
+  "changed_files": [
+    "meta/stats.json"
+  ],
+  "changed_statistic_paths": [
+    "action.q01",
+    "action.q99"
+  ],
+  "clean_action_q01": [
+    2.5728027665615083,
+    17.636738535563147,
+    -30.18543879191081,
+    -9.698504447937012,
+    8.029720312754312,
+    22.073326110839844
+  ],
+  "clean_action_q99": [
+    2.852426586151123,
+    105.53366947906187,
+    -3.169457550048828,
+    52.39673530578614,
+    90.71812245774923,
+    92.42964738112228
+  ],
+  "dataset_repo_id": "scenesmith/t20-30-recovery-clean-action-quantiles",
+  "derived_dataset_root": "outputs/robot_lab/t20_30_nominal_action_quantile_dataset",
+  "derived_file_sha256": {
+    "data/chunk-000/file-000.parquet": "fc861cd7a7fb0dcced958fcd5f3bbebeab6172202e438da92cc387e1c02c4ecf",
+    "meta/episodes/chunk-000/file-000.parquet": "01974d0f5e66b2fa96fcfe8a263e2765e755f65847eaa22ef3fa6173a40e50bd",
+    "meta/info.json": "789ab860cae39d100f1d28e0e547e2229b860cdcacc2916c230074ff5e7ed9fc",
+    "meta/stats.json": "41126ffba555548b779b377c1faa49d917176c38ea73fc5e880a235ef99fb958",
+    "meta/tasks.parquet": "75d507d99b8f12e63006844a0034e3ce8570ca47b22d7417f2096c29dbfa3f4f"
+  },
+  "episode_count": 10,
+  "external_compute_started": false,
+  "file_count": 5,
+  "frame_count": 2330,
+  "identity_sha256": "a4db277031a8044086f716b2970ccd3a2c5700a91182b4c566566002dab2efaa",
+  "model_loaded": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "recovery_action_q01": [
+    2.500775802502816,
+    38.148943798932905,
+    -30.670182350060458,
+    -8.689193929827777,
+    32.58180140135932,
+    22.073326110839844
+  ],
+  "recovery_action_q99": [
+    2.706902075738866,
+    105.46509718504818,
+    -8.913756870187916,
+    34.3592065411842,
+    90.00833025291715,
+    92.42958854788905
+  ],
+  "schema_version": "scenesmith.t20_30_nominal_action_quantile_dataset.v1",
+  "source_dataset_mutated": false,
+  "source_dataset_root": "outputs/robot_lab/t20_23_recovery_augmented_dataset",
+  "source_file_sha256": {
+    "data/chunk-000/file-000.parquet": "fc861cd7a7fb0dcced958fcd5f3bbebeab6172202e438da92cc387e1c02c4ecf",
+    "meta/episodes/chunk-000/file-000.parquet": "01974d0f5e66b2fa96fcfe8a263e2765e755f65847eaa22ef3fa6173a40e50bd",
+    "meta/info.json": "789ab860cae39d100f1d28e0e547e2229b860cdcacc2916c230074ff5e7ed9fc",
+    "meta/stats.json": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1",
+    "meta/tasks.parquet": "75d507d99b8f12e63006844a0034e3ce8570ca47b22d7417f2096c29dbfa3f4f"
+  },
+  "source_inode_aliases": false
+}

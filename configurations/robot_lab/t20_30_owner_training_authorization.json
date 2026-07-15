@@ -1,0 +1,26 @@
+{
+  "authorization_id": "t20_30_nominal_action_quantile_ablation_grant",
+  "authorization_scope": "t20_30_simulation_only_quantile_ablation",
+  "authorization_source": "owner_goal_enact_sim_link_mvp_execution_plan",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference",
+    "simulation_optimizer_training",
+    "simulation_policy_evaluation"
+  ],
+  "identity_sha256": "9bb55d4607f68ee250d1f5d248d1dba60ce1e3d19cf9ac7a825e5596c313a30c",
+  "issued_at": "2026-07-14T12:20:57-05:00",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "source_training_spec_ref": {
+    "file_sha256": "661a06329f4b121f5a0db4eced182aea8f90114d7b3465baeb13a97b8e23036f",
+    "identity_sha256": "697c2fbefac560adab2436a2d8ed1bd060b959ab571da504117e72efc8ace548",
+    "path": "configurations/robot_lab/t20_30_nominal_action_quantile_training_spec.json",
+    "schema_version": "scenesmith.t20_30_nominal_action_quantile_training_spec.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-21T03:05:00-05:00"
+}

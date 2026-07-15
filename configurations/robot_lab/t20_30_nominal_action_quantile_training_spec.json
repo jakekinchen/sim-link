@@ -1,0 +1,69 @@
+{
+  "authority_not_granted": [
+    "optimizer_training_executed",
+    "simulation_policy_accepted",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "brev_compute_started": false,
+  "campaign": {
+    "adapter": "lora",
+    "batch_size": 1,
+    "device": "mps",
+    "lora_rank": 4,
+    "model_revision": "7de663972b7817d2c4cf2d84c821153dfea772e9",
+    "network_mode": "offline_local_cache_only",
+    "official_training_entrypoint": "lerobot.scripts.lerobot_train",
+    "optimizer_update_count": 500,
+    "strict_closed_loop_evaluation_seeds": [
+      6,
+      7
+    ],
+    "training_seed": 20260714
+  },
+  "dataset_contract": {
+    "action_quantile_source": "t20_17_clean_nominal_dataset",
+    "episode_count": 10,
+    "frame_count": 2330,
+    "membership_identical_to_t20_23": true,
+    "observation_statistics_source": "t20_23_recovery_dataset",
+    "only_statistics_changed": [
+      "action.q01",
+      "action.q99"
+    ],
+    "repo_id": "scenesmith/t20-30-recovery-clean-action-quantiles",
+    "root": "outputs/robot_lab/t20_30_nominal_action_quantile_dataset"
+  },
+  "dataset_manifest_ref": {
+    "file_sha256": "83fba232b6f7aed24e5001613e3b207733d78af69de2771723b60345044a616d",
+    "identity_sha256": "a4db277031a8044086f716b2970ccd3a2c5700a91182b4c566566002dab2efaa",
+    "path": "configurations/robot_lab/t20_30_nominal_action_quantile_dataset_manifest.json",
+    "schema_version": "scenesmith.t20_30_nominal_action_quantile_dataset.v1"
+  },
+  "external_compute_started": false,
+  "identity_sha256": "697c2fbefac560adab2436a2d8ed1bd060b959ab571da504117e72efc8ace548",
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "schema_version": "scenesmith.t20_30_nominal_action_quantile_training_spec.v1",
+  "scope": "recovery_supervision_with_clean_nominal_action_quantiles_only",
+  "simulation_policy_accepted": false,
+  "simulation_rollout_executed": false,
+  "simulation_training_ready": false,
+  "source_training_spec_ref": {
+    "file_sha256": "3118cb4a3d8c21d9136a8b6c5b80d868bc1847837a0908f5ab585f000bcaa563",
+    "identity_sha256": "5ad2f407d5df49752c65180addbda033888fdcc5869fc5c9a546669bb94a58aa",
+    "path": "configurations/robot_lab/t20_23_recovery_augmented_training_spec.json",
+    "schema_version": "scenesmith.t20_23_recovery_augmented_training_spec.v1"
+  },
+  "t20_29_counterfactual_ref": {
+    "file_sha256": "ea1feb1c0904b271c92ee31a2664bd37b9340afe009aeac12a4f48f56bbca342",
+    "identity_sha256": "59474892f9d2da8605cff6429681b432cc8619be2e3a6c36fbe514b763ee0e9e",
+    "path": "configurations/robot_lab/t20_29_quantile_postprocessor_counterfactual.json",
+    "schema_version": "scenesmith.t20_29_quantile_postprocessor_counterfactual.v1"
+  }
+}
