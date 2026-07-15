@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type {
   EpisodeDetail,
   EpisodesResponse,
+  RobotResponse,
   StatusResponse,
   StudioDocument,
   StudioDocumentKind,
@@ -62,6 +63,7 @@ export const api = {
     getJson<EpisodeDetail>(`/api/episodes/${id}`, signal),
   workcells: (signal?: AbortSignal) => getJson<WorkcellsResponse>('/api/workcells', signal),
   tasks: (signal?: AbortSignal) => getJson<TasksResponse>('/api/tasks', signal),
+  robot: (signal?: AbortSignal) => getJson<RobotResponse>('/api/robot', signal),
   document: (kind: StudioDocumentKind, filename: string, signal?: AbortSignal) =>
     getJson<StudioDocument>(
       `/api/documents/${encodeURIComponent(kind)}/${encodeURIComponent(filename)}`,

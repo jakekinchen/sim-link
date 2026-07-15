@@ -10,6 +10,7 @@ const NAV = [
   { to: '/tasks', label: 'Tasks', code: '03' },
   { to: '/workcells', label: 'Workcells', code: '04' },
   { to: '/feed', label: 'Agent Feed', code: '05' },
+  { to: '/robot', label: 'Robot', code: '06' },
 ]
 
 function SessionClock() {

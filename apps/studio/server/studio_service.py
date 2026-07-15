@@ -8,6 +8,7 @@ existing no-authority writes: workcell fixture builds and mirror renders.
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import os
 import re
@@ -18,6 +19,7 @@ from typing import Any
 
 
 DOCUMENT_FILENAME = re.compile(r"[0-9]{3}-[A-Za-z0-9][A-Za-z0-9_-]{0,180}\.md")
+SHA256_HEX = re.compile(r"[0-9a-f]{64}")
 
 
 class StudioServiceError(Exception):
@@ -53,6 +55,18 @@ class StudioService:
         self.gate_store = self.data_root / "configurations/robot_lab"
         self.reviewer_store = self.data_root / "docs/reviewer-messages"
         self.brief_store = self.data_root / "docs/briefs"
+        self.robot_artifacts = {
+            "live_observation": self.gate_store
+            / "pi05_live_readonly_observation.redacted.json",
+            "census_contract": self.gate_store
+            / "pi05_readonly_servo_census_contract.fixture.json",
+            "calibration_profile": self.gate_store / "pi05_calibration_profile.json",
+        }
+        self.robot_schemas = {
+            "live_observation": "scenesmith.live_readonly_observation_manifest.v5",
+            "census_contract": "scenesmith.readonly_servo_census_contract.v3",
+            "calibration_profile": "scenesmith.calibration_profile.v1",
+        }
         self.media_whitelist = (self.mirror_store, self.workcell_store)
         self.builder_cli = (
             self.data_root / "scripts/robot_lab/build_workcell_from_spec.py"
@@ -278,6 +292,215 @@ class StudioService:
             summary["artifact"] = str(path.relative_to(self.data_root))
             gates.append(summary)
         return {"count": len(gates), "result_gates": gates}
+
+    def _robot_artifact(self, name: str) -> tuple[dict[str, Any], dict[str, str]]:
+        path = self.robot_artifacts[name]
+        resolved = path.resolve()
+        if not resolved.is_relative_to(
+            self.gate_store.resolve()
+        ) or not resolved.is_file():
+            raise StudioServiceError(
+                503, f"Required robot artifact unavailable: {path.name}"
+            )
+        try:
+            raw = resolved.read_bytes()
+            payload = json.loads(raw)
+        except (json.JSONDecodeError, OSError) as error:
+            raise StudioServiceError(
+                503, f"Required robot artifact unreadable: {path.name}"
+            ) from error
+        if not isinstance(payload, dict):
+            raise StudioServiceError(
+                503, f"Required robot artifact malformed: {path.name}"
+            )
+        if payload.get("schema_version") != self.robot_schemas[name]:
+            raise StudioServiceError(
+                503, f"Required robot artifact schema mismatch: {path.name}"
+            )
+        identity_sha256 = payload.get("identity_sha256")
+        if not isinstance(identity_sha256, str) or not SHA256_HEX.fullmatch(
+            identity_sha256
+        ):
+            raise StudioServiceError(
+                503, f"Required robot artifact identity malformed: {path.name}"
+            )
+        source = {
+            "artifact": str(resolved.relative_to(self.data_root)),
+            "artifact_sha256": hashlib.sha256(raw).hexdigest(),
+            "identity_sha256": identity_sha256,
+            "schema_version": str(payload.get("schema_version", "")),
+        }
+        return payload, source
+
+    def robot(self) -> dict[str, Any]:
+        """Render a fixed, privacy-safe robot evidence projection without device access."""
+
+        observation, observation_source = self._robot_artifact("live_observation")
+        census_contract, census_source = self._robot_artifact("census_contract")
+        calibration, calibration_source = self._robot_artifact("calibration_profile")
+        expected_servos = census_contract.get("expected_servos", [])
+        forbidden_operations = census_contract.get("forbidden_operations", [])
+        accepted_live_manifest = calibration.get("accepted_live_manifest")
+        if not isinstance(accepted_live_manifest, dict) or (
+            accepted_live_manifest.get("file_sha256")
+            != observation_source["artifact_sha256"]
+            or accepted_live_manifest.get("identity_sha256")
+            != observation_source["identity_sha256"]
+        ):
+            raise StudioServiceError(
+                503, "Calibration profile does not bind the current live observation"
+            )
+
+        cameras = []
+        for camera in observation.get("cameras", []):
+            if not isinstance(camera, dict):
+                continue
+            mode = camera.get("input_mode")
+            cameras.append(
+                {
+                    "stable_identity_sha256": camera.get("stable_camera_identity_sha256"),
+                    "capture_identity_sha256": camera.get("capture_camera_identity_sha256"),
+                    "input_mode": mode if isinstance(mode, dict) else {},
+                    "frame_count": len(camera.get("frames", []))
+                    if isinstance(camera.get("frames"), list)
+                    else 0,
+                }
+            )
+
+        servos = []
+        for servo in observation.get("servo_identity", []):
+            if isinstance(servo, dict):
+                servos.append(
+                    {
+                        key: servo.get(key)
+                        for key in (
+                            "servo_id",
+                            "joint_name",
+                            "model",
+                            "model_number",
+                            "firmware_version",
+                        )
+                    }
+                )
+
+        joints = []
+        for joint in calibration.get("joints", []):
+            if not isinstance(joint, dict):
+                continue
+            normalization = joint.get("normalization")
+            joints.append(
+                {
+                    key: joint.get(key)
+                    for key in (
+                        "servo_id",
+                        "joint_name",
+                        "model",
+                        "firmware_version",
+                        "drive_mode",
+                        "homing_offset",
+                        "range_min",
+                        "range_max",
+                    )
+                }
+                | {
+                    "normalization_mode": normalization.get("mode")
+                    if isinstance(normalization, dict)
+                    else None
+                }
+            )
+
+        observed_servo_ids = {servo.get("servo_id") for servo in servos}
+        calibrated_servo_ids = {joint.get("servo_id") for joint in joints}
+        if (
+            calibration.get("joint_count") != len(joints)
+            or observed_servo_ids != calibrated_servo_ids
+        ):
+            raise StudioServiceError(
+                503, "Calibration profile and observed servo census disagree"
+            )
+
+        proof_labels = observation.get("proof_labels")
+        privacy = observation.get("privacy")
+        camera_operation_counts = observation.get("camera_operation_counts")
+        operation_counts = observation.get("operation_counts")
+        normalization_contract = calibration.get("normalization_contract")
+        authority_not_granted = calibration.get("authority_not_granted")
+
+        return {
+            "mode": "signed_artifacts_read_only",
+            "registration": {
+                "enabled": False,
+                "reason": "requires a separately reviewed owner-present permit slice.",
+            },
+            "discovery": observation_source
+            | {
+                "manifest_name": observation.get("manifest_name"),
+                "session_id": observation.get("session_id"),
+                "evidence_mode": observation.get("evidence_mode"),
+                "qualification_scope": observation.get("qualification_scope"),
+                "proof_labels": proof_labels if isinstance(proof_labels, list) else [],
+                "discovery_stability": observation.get("discovery_stability"),
+                "hardware_opened": observation.get("hardware_opened"),
+                "physical_follower_commanded": observation.get(
+                    "physical_follower_commanded"
+                ),
+                "pre_open_identity_sha256": observation.get(
+                    "pre_open_discovery_identity_sha256"
+                ),
+                "post_close_identity_sha256": observation.get(
+                    "post_close_discovery_identity_sha256"
+                ),
+                "privacy": privacy if isinstance(privacy, dict) else {},
+                "camera_operation_counts": camera_operation_counts
+                if isinstance(camera_operation_counts, dict)
+                else {},
+                "cameras": cameras,
+            },
+            "census": observation_source
+            | {
+                "session_id": observation.get("session_id"),
+                "proof_labels": proof_labels if isinstance(proof_labels, list) else [],
+                "servos": servos,
+                "operation_counts": operation_counts
+                if isinstance(operation_counts, dict)
+                else {},
+                "contract": census_source
+                | {
+                    "contract_name": census_contract.get("contract_name"),
+                    "proof_label": census_contract.get("proof_label"),
+                    "qualification_scope": census_contract.get("qualification_scope"),
+                    "expected_servo_count": len(expected_servos)
+                    if isinstance(expected_servos, list)
+                    else 0,
+                    "forbidden_operations": forbidden_operations
+                    if isinstance(forbidden_operations, list)
+                    else [],
+                },
+            },
+            "calibration": calibration_source
+            | {
+                "profile_name": calibration.get("profile_name"),
+                "evidence_mode": calibration.get("evidence_mode"),
+                "qualification_scope": calibration.get("qualification_scope"),
+                "joint_count": calibration.get("joint_count"),
+                "joints": joints,
+                "normalization_contract": normalization_contract
+                if isinstance(normalization_contract, dict)
+                else {},
+                "accepted_live_manifest": accepted_live_manifest,
+                "hardware_accessed": calibration.get("hardware_accessed"),
+                "physical_follower_commanded": calibration.get(
+                    "physical_follower_commanded"
+                ),
+                "motion_authority_granted": calibration.get("motion_authority_granted"),
+                "training_authority_granted": calibration.get(
+                    "training_authority_granted"
+                ),
+                "authority_not_granted": authority_not_granted
+                if isinstance(authority_not_granted, list)
+                else [],
+            },
+        }
 
     def document(self, kind: str, filename: str) -> dict[str, str]:
         store = {

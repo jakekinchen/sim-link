@@ -181,3 +181,97 @@ export interface TasksResponse {
   count: number
   result_gates: ResultGate[]
 }
+
+export interface RobotArtifactSource {
+  artifact: string
+  artifact_sha256: string
+  identity_sha256: string
+  schema_version: string
+}
+
+export interface RobotCameraEvidence {
+  stable_identity_sha256?: string | null
+  capture_identity_sha256?: string | null
+  input_mode: {
+    width?: number
+    height?: number
+    framerate_fps?: number
+    pixel_format?: string
+  }
+  frame_count: number
+}
+
+export interface RobotServoEvidence {
+  servo_id?: number | null
+  joint_name?: string | null
+  model?: string | null
+  model_number?: number | null
+  firmware_version?: string | null
+}
+
+export interface RobotDiscoveryEvidence extends RobotArtifactSource {
+  manifest_name?: string | null
+  session_id?: string | null
+  evidence_mode?: string | null
+  qualification_scope?: string | null
+  proof_labels: string[]
+  discovery_stability?: string | null
+  hardware_opened?: boolean | null
+  physical_follower_commanded?: boolean | null
+  pre_open_identity_sha256?: string | null
+  post_close_identity_sha256?: string | null
+  privacy: Record<string, boolean>
+  camera_operation_counts?: Record<string, number>
+  cameras: RobotCameraEvidence[]
+}
+
+export interface RobotCensusContract extends RobotArtifactSource {
+  contract_name?: string | null
+  proof_label?: string | null
+  qualification_scope?: string | null
+  expected_servo_count: number
+  forbidden_operations: string[]
+}
+
+export interface RobotCensusEvidence extends RobotArtifactSource {
+  session_id?: string | null
+  proof_labels: string[]
+  servos: RobotServoEvidence[]
+  operation_counts: Record<string, number>
+  contract: RobotCensusContract
+}
+
+export interface RobotCalibrationJoint {
+  servo_id?: number | null
+  joint_name?: string | null
+  model?: string | null
+  firmware_version?: string | null
+  drive_mode?: number | null
+  homing_offset?: number | null
+  range_min?: number | null
+  range_max?: number | null
+  normalization_mode?: string | null
+}
+
+export interface RobotCalibrationEvidence extends RobotArtifactSource {
+  profile_name?: string | null
+  evidence_mode?: string | null
+  qualification_scope?: string | null
+  joint_count?: number | null
+  joints: RobotCalibrationJoint[]
+  normalization_contract: Record<string, unknown>
+  accepted_live_manifest: Record<string, unknown>
+  hardware_accessed?: boolean | null
+  physical_follower_commanded?: boolean | null
+  motion_authority_granted?: boolean | null
+  training_authority_granted?: boolean | null
+  authority_not_granted: string[]
+}
+
+export interface RobotResponse {
+  mode: 'signed_artifacts_read_only'
+  registration: { enabled: false; reason: string }
+  discovery: RobotDiscoveryEvidence
+  census: RobotCensusEvidence
+  calibration: RobotCalibrationEvidence
+}

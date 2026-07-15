@@ -69,6 +69,11 @@ def tasks() -> dict[str, Any]:
     return _http_call(service.tasks)
 
 
+@app.get("/api/robot")
+def robot() -> dict[str, Any]:
+    return _http_call(service.robot)
+
+
 @app.get("/api/documents/{kind}/{filename}")
 def document(kind: str, filename: str) -> dict[str, str]:
     return _http_call(service.document, kind, filename)

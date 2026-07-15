@@ -8,6 +8,7 @@ import EpisodeDetail from './pages/EpisodeDetail'
 import Tasks from './pages/Tasks'
 import Workcells from './pages/Workcells'
 import AgentFeed from './pages/AgentFeed'
+import Robot from './pages/Robot'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="tasks" element={<Tasks />} />
             <Route path="workcells" element={<Workcells />} />
             <Route path="feed" element={<AgentFeed />} />
+            <Route path="robot" element={<Robot />} />
           </Route>
         </Routes>
       </StatusProvider>
