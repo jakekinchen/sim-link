@@ -1,0 +1,29 @@
+{
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "brev_compute_authorized": false,
+  "checkpoint_mutation_authorized": false,
+  "closed_loop_rollout_authorized": false,
+  "dataset_mutation_authorized": false,
+  "evaluated_noise_conditions": [
+    "active_normal_padded_zero",
+    "active_zero_padded_normal"
+  ],
+  "evaluation_spec_identity_sha256": "4c34668899f43631e0461e7f8175018b6c0576959c3881280714b85b952fa971",
+  "exactly_one_evaluation_attempt_authorized": true,
+  "external_compute_authorized": false,
+  "identity_sha256": "5b990e788d80c9082cd21545e78557e1b43b6555d5c7abd6a66389253ec572d1",
+  "inherited_authority_decision_identity_sha256": "75dc9c7d860e12e2a2114be709e24f7e544ff576696a3d223dd87dd0e2f06606",
+  "num_inference_steps": 10,
+  "optimizer_training_authorized": false,
+  "physical_actuation_authorized": false,
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.t20_35l_active_padded_noise_mask_evaluation_permit.v1",
+  "scope": "one_local_mps_inference_only_active_padded_noise_mask_evaluation",
+  "task_id": "T20.35l",
+  "valid_from": "2026-07-15T07:27:47-05:00",
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}

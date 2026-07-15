@@ -1,0 +1,98 @@
+{
+  "active_action_dimension_count": 6,
+  "all_noise_conditions": [
+    "active_normal_padded_normal",
+    "active_normal_padded_zero",
+    "active_zero_padded_normal",
+    "active_zero_padded_zero"
+  ],
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "base_noise_sha256_by_seed": [
+    "7eb7dff02036ff9e333e87717b64532b08bdfb9a703ae0a3be907967c387812e",
+    "78f970b711b4bf49a38ad18fd442b9b3c0763555f849425a387c458464bad707",
+    "52128e7e1595282861bd968f7c35a69729be060468722a30a065726db59a11b6",
+    "406784a0ca3ed2513580aee22e11351d2945e7e6c15b4833ac3a08b8882dc89f",
+    "01597685ad0d3db1f3446b8393959a27ac63766a7e063566b2be67cdff10ab3f"
+  ],
+  "brev_compute_started": false,
+  "checkpoint_identity_sha256": "439ae119842fe5f9639b3e3e9b76f029678fd4b4257dfd6308253f6d2832c29f",
+  "checkpoint_mutated": false,
+  "checkpoint_tree": [
+    {
+      "path": "expert_only_config.json",
+      "sha256": "a55d7ffeecc7e9403374e4631a2bde090bfe059af23588a228a8752329af4803",
+      "size_bytes": 64053
+    },
+    {
+      "path": "expert_only_model.safetensors",
+      "sha256": "72804966196f9b18a69bd0ca99461ebc166dd1327d0cd080985e1127e9e3434d",
+      "size_bytes": 2773721000
+    }
+  ],
+  "closed_loop_rollout": false,
+  "dataset_action_chunk_sha256": "5698babc07b2eebc8a3a96d33b28f03bbb33f1bec9b83a97d4e4f8a325c36b7e",
+  "dataset_mutated": false,
+  "directional_improvement_rule": "mixed_condition_worst_seed_maximum_aggregate_mean_and_aggregate_raw_spread_all_strictly_below_all_normal",
+  "evaluated_noise_conditions": [
+    "active_normal_padded_zero",
+    "active_zero_padded_normal"
+  ],
+  "external_compute_started": false,
+  "identity_sha256": "4c34668899f43631e0461e7f8175018b6c0576959c3881280714b85b952fa971",
+  "inference_seeds": [
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725
+  ],
+  "inherited_noise_conditions": [
+    "active_normal_padded_normal",
+    "active_zero_padded_zero"
+  ],
+  "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "maximum_action_dimension_count": 32,
+  "maximum_allowed_action_error_rad": 0.05,
+  "model_inference": false,
+  "model_loaded": false,
+  "num_inference_steps": 10,
+  "optimizer_training": false,
+  "padded_action_dimension_count": 26,
+  "paligemma_trainable_parameter_count": 0,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "required_python_major_minor": [
+    3,
+    12
+  ],
+  "sampler_source_sha256": "006fee5765b235dd66c55f16d78a1e296dc320667a02608c68a057d72d70bde0",
+  "schema_version": "scenesmith.t20_35l_active_padded_noise_mask_spec.v1",
+  "scope": "one_inference_only_active_six_vs_padded_twenty_six_noise_mask_discriminator",
+  "simulation_policy_accepted": false,
+  "source_all_normal_decoded_action_sha256_by_seed": [
+    "12ae6ab9b119dbb4e2fa20cbaa43ef48e92d3158052cb285df4358d3c4e3d04f",
+    "aa52d4289db0e7e59b902926293f9403ea7bd26bf6e1de7292fa3649b0b9520f",
+    "32e2771b59f5cd8ab97d4c17952b342d3a7c6efbadb577eb094c5e5ed2048c95",
+    "a0731007b9488c7ffb9289bc12f4e5030cc1629ab07efc9e22f4472ead4ecd78",
+    "ba6c643d8d35545e79dc63033d871ed3b7ea613f4e4ece770c6d4f26f126feed"
+  ],
+  "source_all_zero_decoded_action_sha256_by_seed": [
+    "1ab9619ba234deec5ac8bd1d0414fa0f494e3717272e0772f3e2a8df28e0136b",
+    "1ab9619ba234deec5ac8bd1d0414fa0f494e3717272e0772f3e2a8df28e0136b",
+    "1ab9619ba234deec5ac8bd1d0414fa0f494e3717272e0772f3e2a8df28e0136b",
+    "1ab9619ba234deec5ac8bd1d0414fa0f494e3717272e0772f3e2a8df28e0136b",
+    "1ab9619ba234deec5ac8bd1d0414fa0f494e3717272e0772f3e2a8df28e0136b"
+  ],
+  "source_final_to_baseline_objective_ratio": 0.004252260358160933,
+  "source_objective_ratio_within_threshold": true,
+  "t20_35j_result_identity_sha256": "e9bbff84864a838f64e67c72a4996fd4eefe13739294becc43a371268f3da75a",
+  "t20_35j_spec_identity_sha256": "a3dc0acb66918f01920fae49188c9862d18609fa22a4c1d6cda2f819d7ac7116",
+  "t20_35k_audit_identity_sha256": "bc9f08458b2339757c1dc7a8266df34332df911209bab1154b5d1ce9a1a4ad60",
+  "task_id": "T20.35l",
+  "trainable_parameter_count": 693422112,
+  "trainable_parameter_names_sha256": "4e45aeebf8a2f98613b446d82a2bb789f89e9bc40e43885b6213271a2035723e"
+}
