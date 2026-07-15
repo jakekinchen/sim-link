@@ -49,3 +49,15 @@ used under the frozen schedule, objectives/gradients/checkpoint tensors remain
 finite, and one signed result either passes Gate B or records the next smallest
 evidence-routed blocker. No result implies policy acceptance or physical
 transfer.
+
+## Pre-Run Boundary
+
+Implementation `7ee3803`, signed spec `fd4f75f6...`, and central authority
+decision `c69090da...` are remotely preserved. The 15 exact late-step examples
+reconstruct their source states and target velocities below `2e-12`; each is
+scheduled exactly 30 times over 450 AdamW updates at `2.5e-5`. Gate B retains
+the original standard-objective baseline and 0.05-rad all-seed action gate in
+addition to the targeted correction diagnostic. Reviewer 223 authorizes one
+Python 3.12 local-MPS training/evaluation attempt. No model, checkpoint tensor,
+optimizer, training, rollout, Gate C, hardware, external compute, or Brev
+action occurred before authorization.
