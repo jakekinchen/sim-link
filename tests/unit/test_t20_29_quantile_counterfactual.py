@@ -40,7 +40,36 @@ class T2029QuantileCounterfactualTests(unittest.TestCase):
                 source_action_rad=[0.0] * 6,
                 clean_stats=self._stats(0.0, 1.0),
                 recovery_stats=self._stats(0.2, 1.2),
+                **self._evidence(),
             )
+
+    def test_rejects_evidence_candidate_and_joint_substitution(self) -> None:
+        payload = self._payload()
+        mutation = copy.deepcopy(payload)
+        mutation["formula_source_sha256"] = "9" * 64
+        mutation = sign_payload(mutation)
+        with self.assertRaisesRegex(ValueError, "drifted"):
+            self._verify(mutation)
+
+        batches = self._batches()
+        batches["clean_base"]["samples"][0]["requested_action_rad"] = [0.0] * 5
+        with self.assertRaisesRegex(ValueError, "six-vector"):
+            self._payload(batches=batches)
+
+        batches = self._batches()
+        batches["substituted_candidate"] = batches.pop("clean_base")
+        with self.assertRaisesRegex(ValueError, "candidate coverage"):
+            self._payload(batches=batches)
+
+    def _verify(self, payload):
+        verify_counterfactual(
+            payload,
+            batches=self._batches(),
+            source_action_rad=[0.0] * 6,
+            clean_stats=self._stats(0.0, 1.0),
+            recovery_stats=self._stats(0.2, 1.2),
+            **self._evidence(),
+        )
 
     def _payload(self, *, batches=None, clean_stats=None):
         return build_counterfactual(
@@ -48,16 +77,22 @@ class T2029QuantileCounterfactualTests(unittest.TestCase):
             source_action_rad=[0.0] * 6,
             clean_stats=clean_stats or self._stats(0.0, 1.0),
             recovery_stats=self._stats(0.2, 1.2),
-            clean_stats_sha256="a" * 64,
-            recovery_stats_sha256="b" * 64,
-            clean_postprocessor_config_sha256="c" * 64,
-            recovery_postprocessor_config_sha256="d" * 64,
-            clean_postprocessor_state_sha256="e" * 64,
-            recovery_postprocessor_state_sha256="f" * 64,
-            formula_source_sha256="1" * 64,
-            t20_27_gate_identity_sha256="2" * 64,
-            observed_recovery_minus_clean_mae_rad=0.0035,
+            **self._evidence(),
         )
+
+    @staticmethod
+    def _evidence():
+        return {
+            "clean_stats_sha256": "a" * 64,
+            "recovery_stats_sha256": "b" * 64,
+            "clean_postprocessor_config_sha256": "c" * 64,
+            "recovery_postprocessor_config_sha256": "d" * 64,
+            "clean_postprocessor_state_sha256": "e" * 64,
+            "recovery_postprocessor_state_sha256": "f" * 64,
+            "formula_source_sha256": "1" * 64,
+            "t20_27_gate_identity_sha256": "2" * 64,
+            "observed_recovery_minus_clean_mae_rad": 0.0035,
+        }
 
     @staticmethod
     def _batches():

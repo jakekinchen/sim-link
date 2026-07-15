@@ -209,6 +209,17 @@ def build_counterfactual(
             source_action_rad=source_action_rad,
             clean_stats=clean_stats,
             recovery_stats=recovery_stats,
+            clean_stats_sha256=clean_stats_sha256,
+            recovery_stats_sha256=recovery_stats_sha256,
+            clean_postprocessor_config_sha256=clean_postprocessor_config_sha256,
+            recovery_postprocessor_config_sha256=(
+                recovery_postprocessor_config_sha256
+            ),
+            clean_postprocessor_state_sha256=clean_postprocessor_state_sha256,
+            recovery_postprocessor_state_sha256=recovery_postprocessor_state_sha256,
+            formula_source_sha256=formula_source_sha256,
+            t20_27_gate_identity_sha256=t20_27_gate_identity_sha256,
+            observed_recovery_minus_clean_mae_rad=observed_delta,
         )
     return payload
 
@@ -220,6 +231,15 @@ def verify_counterfactual(
     source_action_rad: list[float],
     clean_stats: dict[str, Any],
     recovery_stats: dict[str, Any],
+    clean_stats_sha256: str,
+    recovery_stats_sha256: str,
+    clean_postprocessor_config_sha256: str,
+    recovery_postprocessor_config_sha256: str,
+    clean_postprocessor_state_sha256: str,
+    recovery_postprocessor_state_sha256: str,
+    formula_source_sha256: str,
+    t20_27_gate_identity_sha256: str,
+    observed_recovery_minus_clean_mae_rad: float,
 ) -> None:
     verify_signed_payload(payload, label="T20.29 quantile counterfactual")
     expected = build_counterfactual(
@@ -227,23 +247,17 @@ def verify_counterfactual(
         source_action_rad=source_action_rad,
         clean_stats=clean_stats,
         recovery_stats=recovery_stats,
-        clean_stats_sha256=payload["clean_stats_sha256"],
-        recovery_stats_sha256=payload["recovery_stats_sha256"],
-        clean_postprocessor_config_sha256=payload[
-            "clean_postprocessor_config_sha256"
-        ],
-        recovery_postprocessor_config_sha256=payload[
-            "recovery_postprocessor_config_sha256"
-        ],
-        clean_postprocessor_state_sha256=payload["clean_postprocessor_state_sha256"],
-        recovery_postprocessor_state_sha256=payload[
-            "recovery_postprocessor_state_sha256"
-        ],
-        formula_source_sha256=payload["formula_source_sha256"],
-        t20_27_gate_identity_sha256=payload["t20_27_gate_identity_sha256"],
-        observed_recovery_minus_clean_mae_rad=payload[
-            "observed_recovery_minus_clean_mae_rad"
-        ],
+        clean_stats_sha256=clean_stats_sha256,
+        recovery_stats_sha256=recovery_stats_sha256,
+        clean_postprocessor_config_sha256=clean_postprocessor_config_sha256,
+        recovery_postprocessor_config_sha256=recovery_postprocessor_config_sha256,
+        clean_postprocessor_state_sha256=clean_postprocessor_state_sha256,
+        recovery_postprocessor_state_sha256=recovery_postprocessor_state_sha256,
+        formula_source_sha256=formula_source_sha256,
+        t20_27_gate_identity_sha256=t20_27_gate_identity_sha256,
+        observed_recovery_minus_clean_mae_rad=(
+            observed_recovery_minus_clean_mae_rad
+        ),
         _skip_verify=True,
     )
     if payload != expected:
@@ -266,6 +280,8 @@ def _validate_inputs(
         actual = [(row["sample_id"], row["inference_seed"]) for row in batch["samples"]]
         if actual != expected:
             raise ValueError(f"T20.29 {candidate} sample order drifted")
+        for row in batch["samples"]:
+            _vector(row.get("requested_action_rad"), f"{candidate} requested action")
     _quantiles(clean_stats)
     _quantiles(recovery_stats)
 
@@ -292,6 +308,13 @@ def _finite(value: Any, label: str) -> float:
     ):
         raise ValueError(f"T20.29 {label} must be finite")
     return float(value)
+
+
+def _vector(value: Any, label: str) -> np.ndarray:
+    vector = np.asarray(value, dtype=np.float64)
+    if vector.shape != (6,) or not np.isfinite(vector).all():
+        raise ValueError(f"T20.29 {label} must be a finite six-vector")
+    return vector
 
 
 def _sha(value: Any, label: str) -> str:

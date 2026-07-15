@@ -72,6 +72,27 @@ def main() -> int:
             source_action_rad=expected["source_action_rad"],
             clean_stats=stats["clean_base"],
             recovery_stats=stats["recovery_augmented"],
+            clean_stats_sha256=expected["clean_stats_sha256"],
+            recovery_stats_sha256=expected["recovery_stats_sha256"],
+            clean_postprocessor_config_sha256=expected[
+                "clean_postprocessor_config_sha256"
+            ],
+            recovery_postprocessor_config_sha256=expected[
+                "recovery_postprocessor_config_sha256"
+            ],
+            clean_postprocessor_state_sha256=expected[
+                "clean_postprocessor_state_sha256"
+            ],
+            recovery_postprocessor_state_sha256=expected[
+                "recovery_postprocessor_state_sha256"
+            ],
+            formula_source_sha256=expected["formula_source_sha256"],
+            t20_27_gate_identity_sha256=expected[
+                "t20_27_gate_identity_sha256"
+            ],
+            observed_recovery_minus_clean_mae_rad=expected[
+                "observed_recovery_minus_clean_mae_rad"
+            ],
         )
         if recorded != expected:
             raise ValueError("T20.29 recorded counterfactual drifted from evidence")
