@@ -21,8 +21,13 @@ authority composer.
   evaluation.
 - Recovery and perturbation episode expansion from the already verified MuJoCo
   state-branching primitive.
-- A small discrete uncertainty ensemble over cube pose, friction, command
-  latency, and gripper mapping using the existing randomization path.
+- A small discrete robustness grid using the existing randomization path.
+  Twin-uncertainty factors (friction, command latency/action hold, gripper
+  mapping) are declared separately from episode-variation factors (cube pose,
+  initialization deltas, fork perturbations); cube pose is start-state
+  variation, never a physics parameter. Roughly 10-20 hand-selected cells give
+  pairwise coverage, with declared training cells and held-out evaluation
+  cells; no full Cartesian product.
 - A hardware-observable evaluator with an explicit observer role; privileged
   MuJoCo state remains a separate oracle.
 - A thin paired trace runner that starts from the same measured/declared `q0`,
@@ -76,6 +81,28 @@ authority composer.
    artifacts, reviews, and quarantines already encode hypotheses and evidence.
    Add typed diagnostics to that loop only when a concrete task needs them.
 
+## Capability Ladder For Policy Adaptation
+
+Every training or diagnostic slice must name the lowest unmet gate it
+addresses. Failure at a gate localizes the fault class; optimizer budget is
+not spent on a higher gate while a lower one is unmet.
+
+| Gate | Proof | A failure localizes to | Status |
+| --- | --- | --- | --- |
+| A | Exact train/inference parity: dataset statistics, image/state/action normalization, chunk interpretation, joint order, gripper representation, postprocessing, cadence/hold, with round-trip tests on known values | Contract or preprocessing parity | Largely verified: T20.12 round-trip, T20.13 statistics, T20.26 determinism, T20.28-T20.31 sampler/quantile chain |
+| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | Open |
+| C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Open and decisive; T20.32 probes it |
+| D | Full training-set success: strict-v2 across all eight constructive episodes | Dataset coverage or adaptation capacity | Open |
+| E | Held-out nominal starts: seeds 6-7 and small initial-state variation | Generalization | Open (0/2 at T20.24 and T20.31) |
+| F | Robustness grid and forked recovery starts | Robustness | Open |
+
+The T20.2 ACT control also failed closed loop with near-zero lift, so current
+Gate C evidence implicates execution semantics or compounding drift over any
+PI0.5-specific fault. If a memorized training seed cannot be reproduced closed
+loop, audit action-chunk boundary handling, cadence/hold behavior, and
+observation feedback before any new campaign. A small behavior-cloning control
+may serve as a Gate B/C diagnostic; it is never a product path.
+
 ## Sim-Link Task Queue
 
 Only the first dependency-ready task is active. Later tasks are planned and do
@@ -91,6 +118,10 @@ not inherit authority from this document.
 | 6 | **T20.22 — timing/latency certificate v0** | Deterministic schema and verifier for clock sources, frame age/skew, observation assembly, action transport/hold, control period/jitter, inference latency where present, drops, and deadline misses; prove timing mismatch cannot be silently relabelled as dynamics error. | T20.21 trace schema | Contact/dynamics calibration, live probe execution, task-family fidelity certificate |
 | 7 | **T20.23 — recovery-augmented dataset preflight** | One actual LeRobotDataset containing the six nominal strict-success episodes and four strict-success policy-visited recovery episodes; near-failures/failures and seeds 6-7 remain outside training/statistics; exact mixture, dataset, statistics, clean model snapshot, and central simulation-only authority identities signed before any optimizer. | Verified T20.17 dataset/result and T20.18 recovery package | Optimizer execution, failure imitation, implicit oversampling, hardware, Robo Scan, external compute, Brev |
 | 8 | **T20.24 — recovery-augmented local-MPS campaign** | Exact official-LeRobot 500-update rank-4 campaign from clean base; frozen adapter evaluated once each on held-out seeds 6-7 with no projection/assistance; signed per-seed and aggregate strict-v2 result without policy promotion. | Verified T20.23 dataset/spec and active central simulation-training authority | Additional rungs/sweeps, ensemble, promotion, hardware, Robo Scan, external compute, Brev |
+| 9 | **T20.32 — closed-loop divergence localization** | Complete 244-frame requested/applied/state traces for frozen T20.24 and T20.31 on seeds 6-7; earliest-divergence frame, class, and per-joint onset per adapter/seed; one bounded training-seed (seed 0) closed-loop reproduction probe per adapter; one signed routed next-gate hypothesis. | Verified T20.31; fresh owner window; Brief 163 | Any optimizer, dataset/statistics change, promotion, hardware, Robo Scan, external compute, Brev |
+| 10 | **T20.33 — lowest-unmet-gate proof** | As routed by T20.32: Gate B one-batch memorization and/or the Gate C execution-semantics correction (chunk boundaries, cadence/hold, observation feedback), each with a deterministic pass/fail gate before further training. | Verified T20.32 routed hypothesis | Unreviewed hyperparameter sweeps, grid expansion, promotion |
+| 11 | **T20.34 — bounded campaign at the corrected gate** | One reviewed 500-update-class campaign only after the routed fault is corrected and its gate passes; frozen unassisted evaluation on a training seed first, then held-out seeds 6-7. | Verified T20.33 | Multiple concurrent rungs, promotion, hardware, external compute, Brev |
+| 12 | **T20.35 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
 
 T20.17 is verified negative, T20.18 is verified recovery evidence, T20.19 is
 verified as an uncalibrated grid, T20.20 and T20.21 are verified, and T20.22 is
@@ -196,7 +227,10 @@ contains the intended clean action quantiles and 500 finite updates, but both
 244-frame held-out evaluations ended with no strict grasp contact and 0/2
 successes. The ablation changes action sequences without rescuing closed-loop
 behavior. Further training is not justified before offline trajectory
-localization, and the current run cutoff prevents opening that next slice now.
+localization. Brief 163 now opens T20.32 in the fresh owner window:
+complete-trace earliest-divergence localization for T20.24 versus T20.31 plus
+one bounded training-seed closed-loop reproduction probe per adapter as
+capability-ladder Gate C evidence, with no optimizer.
 The learned policy, real Robo Scan/I5 bundle, and physical canary exit gates
 remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
@@ -215,6 +249,28 @@ When I4 eventually lands, sim-link may open I5 as a separate reviewed task. I7
 deduplication remains blocked until two real metric handoffs and one end-to-end
 compile prove that retirement is safe.
 
+Calibration splits into two stages with different prerequisites. **Instrument
+calibration** — camera intrinsics, hand-eye, robot/world frames, clock
+alignment, command cadence/latency, joint tracking, and gripper
+command-to-width mapping — is a property of the capture and execution stack
+and may proceed under fresh owner permits before a learned policy exists.
+**Transfer calibration** — the one friction parameter, contact discrepancy,
+and task-event alignment — waits for a strict-v2-passing policy and the
+compiled metric twin, and fits only what the single-anchor task exercises.
+
+The approved physical calibration intake is the WCW-1 witness: a printed,
+fiducialized, cartridge-loaded object with measured as-built dimensions and
+masses, an optional removable depth-metrology plate, and known
+center-of-mass/inertia configurations from selected precision bearing balls.
+Robo Scan owns its CAD/tag geometry, reference print profile, as-built
+measurement protocol, and `CalibrationArtifactReceipt`. Sim-link consumes only
+that receipt through the already verified
+`measured_inertial_intake`/`production_inertial_compiler` path, so MuJoCo
+inertials derive from measured masses, never slicer density. Grasp-face
+contact bands, gripper-width fit coupons, and push/lift probes later feed
+transfer calibration through the paired trace runner; none of this grants a
+hardware session by itself.
+
 ## MVP Exit Condition
 
 The program is in a good MVP state only when all of the following are true:
@@ -227,6 +283,13 @@ The program is in a good MVP state only when all of the following are true:
   deterministic MuJoCo twin candidate.
 - One separately authorized, owner-present, low-speed canary is scored by the
   hardware-observable evaluator and produces a paired trace.
+- Fork-generated recovery data has been evaluated against a success-only
+  baseline on the same gates, and grid training against nominal-only training.
+- The observable evaluator carries a signed confusion matrix against strict-v2
+  with ambiguous outcomes failing closed, and references no privileged state.
+- The canary brief contains one plain four-section scorecard — policy,
+  reconstruction, twin/runtime, canary — and the result is promoted or
+  quarantined only through the existing evidence process.
 - Every claim preserves exact source, task, evaluator, dataset, processor,
   normalizer, policy, twin, and evidence identities.
 

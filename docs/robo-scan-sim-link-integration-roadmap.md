@@ -71,6 +71,7 @@ content identity.
 | --- | --- | --- | --- |
 | `SceneExportReceipt` | Robo Scan | Self-contained manifest/assets, units, transforms, provenance, privacy, authority class, and candidate-only disposition | I1, reference-only fixture |
 | `WorkcellBundle` | Robo Scan | Simulator-independent frame/entity/relation graph, measured/appearance/inferred layers, collision candidates, sensor specs, uncertainty, and source lineage | I4, after real M4 reconstruction |
+| `CalibrationArtifactReceipt` (WCW-1 witness) | Robo Scan | As-built measured calibration witness: CAD/tag geometry identities, print/filament/slicer identities, measured dimensions and per-cartridge masses, fiducial acceptance results, and uncertainty; sim-link derives MuJoCo inertials from these measured values through its verified inertial intake | I4+, alongside the first metric capture |
 | `TwinCandidate` | Sim-link | Workcell bundle reference plus SO-ARM100 identity, MuJoCo compiler identity, actuator/contact priors, and deterministic compiled artifacts | I3 reference-only shell; I5 metric candidate |
 | `TwinRevision` | Sim-link | Candidate plus calibrated parameter posterior, supported action/observation interfaces, and validation results | I6 |
 | `Task/Evaluator/Episode/Policy` artifacts | Sim-link | Foundry inputs, experience, model adaptation, and truth evaluation | Existing and later sim-link work |
@@ -240,6 +241,23 @@ envelopes. Never overwrite the source scene with one fitted point estimate.
 Qualify geometry/sensor fidelity separately from task-conditioned dynamics and
 policy robustness.
 
+Calibration is two stages with different prerequisites. Instrument calibration
+(camera intrinsics, hand-eye, robot/world frames, clock alignment, command
+cadence/latency, joint tracking, gripper command-to-width mapping) is a
+property of the capture and execution stack and may proceed with static poses
+and scripted probes before any learned policy exists. Transfer calibration
+(friction, contact discrepancy, task-event alignment) waits for a policy worth
+transferring and a compiled metric twin, and fits only what the target task
+family exercises.
+
+The preferred first physical intake is the WCW-1 calibration witness. Robo
+Scan owns its CAD, fiducial geometry, reference print profile, as-built
+measurement protocol, and the `CalibrationArtifactReceipt`. Sim-link consumes
+only the receipt through its verified measured-inertial intake, keeping
+measured mass properties — never slicer density — as the source of compiled
+MuJoCo inertials. The witness's gripper contact bands and push/lift probes
+later provide transfer-calibration evidence through the paired trace runner.
+
 **Exit gate:** held-out paired evidence, uncertainty, task-family envelope,
 drift triggers, and central composition produce a scoped fidelity certificate.
 
@@ -327,9 +345,15 @@ release and keep it dependency-light.
 2. **Sim-link next:** follow the local T20.18-T20.22 queue for state-fork
    recovery data, a discrete ensemble, observer-role evaluation, paired traces,
    and timing. Each task requires its own brief and dependency gate.
-3. **Robo Scan separately:** use the expected USB fix to pursue its first real
-   M1 capture, then complete M2-M4 before producing a metric I4
-   `WorkcellBundle`. This roadmap grants none of those actions.
+3. **Robo Scan separately:** resolve the gate/CLI mismatch so M1 gates invoke
+   commands that exist, then pursue the first real M1 capture through an
+   explicit time-boxed fallback ladder: known-good USB3 cable/port, powered
+   hub, a Linux capture node emitting the same content-addressed bundles, and
+   only then a declared degraded-authority fiducial-scaled monocular path.
+   Complete M2-M4 before producing a metric I4 `WorkcellBundle`, and plan the
+   WCW-1 witness print/measurement so the first
+   `CalibrationArtifactReceipt` can accompany it. This roadmap grants none of
+   those actions.
 4. **Cross-repository wait:** sim-link opens I5 only after the exact verified I4
    bytes and an updated compatibility lock exist.
 5. **Both later:** perform I7 deduplication only after two real metric handoffs
