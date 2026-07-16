@@ -1,0 +1,118 @@
+{
+  "admission_fixture_ref": {
+    "file_sha256": "ee5ff97f85b2e117c34d2c8ec0e54b5081393cbb9a09321c30728488e5657e06",
+    "identity_sha256": "b7b1eb7746cf3736a12ae7f0fa3e7bffdf58a92cf702d8d7648366e7350553ba",
+    "path": "configurations/robot_lab/t20_42_r0_admission_fixture.json",
+    "schema_version": "scenesmith.t20_42_r0_dataset_admission_fixture.v1"
+  },
+  "all_output_paths_absent": true,
+  "all_output_paths_unaliased": true,
+  "attempt_marker_exists": false,
+  "authority_artifacts_materialized": false,
+  "branch": "codex/pi05-autolearn-loop",
+  "brev_compute_authorized": false,
+  "central_decision_ref": {
+    "file_sha256": "0a98a226175e7960c2728a6c259d171f077217fe14f198719f671d60786ae168",
+    "identity_sha256": "f612176216e9555070124d36a848e57e80631c66a68e481bd3ed525a9cf734ba",
+    "path": "configurations/robot_lab/t20_42a_r0_generation_authority_decision.json",
+    "schema_version": "scenesmith.authority_composition_decision.v1"
+  },
+  "central_request_ref": {
+    "file_sha256": "7568a3a9c2afd85a61fd780b763848e8c1f2c9cc7b14fe72630fad750d974fd2",
+    "identity_sha256": "5c5b99fccb0e8bf4422ec6396c6c106662ad23fec3c8cd94c1838611299eaf94",
+    "path": "configurations/robot_lab/t20_42a_r0_generation_authority_request.json",
+    "schema_version": "scenesmith.authority_composition_request.v1"
+  },
+  "construction_preflight_ref": {
+    "file_sha256": "e7558a46126e9e6ecd5018f5ba305af7961e1e73e0c23bcd07de57b85e39fff6",
+    "identity_sha256": "5ff8c5cca2abfe3ceb2b15296fb065c66ff416b98888eb3dba0a1a9074136250",
+    "path": "configurations/robot_lab/t20_42_r0_construction_preflight.json",
+    "schema_version": "scenesmith.t20_42_r0_construction_preflight.v1"
+  },
+  "construction_spec_ref": {
+    "file_sha256": "accb216dc17165c5cdc1ad01cd9173fa8838590325a16abd3020c4230a26d86a",
+    "identity_sha256": "b58a6b31d0a3d892cfce8e319c4736d2da9aab2864663a5b2fc89c752e221458",
+    "path": "configurations/robot_lab/t20_42_r0_construction_spec.json",
+    "schema_version": "scenesmith.t20_42_r0_construction_spec.v1"
+  },
+  "dependencies": {
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.5",
+    "numpy": "2.2.6",
+    "pillow": "12.3.0",
+    "pyarrow": "25.0.0",
+    "python": "3.12.12"
+  },
+  "dependency_fallback_enabled": false,
+  "external_compute_authorized": false,
+  "free_disk_bytes": 73371246592,
+  "hardware_authorized": false,
+  "identity_sha256": "ffa952189e862258a3097aa60194334be786155ea086073726e7fdbcf57cd828",
+  "minimum_free_disk_bytes": 10737418240,
+  "model_or_optimizer_authorized": false,
+  "network_access_authorized": false,
+  "network_enabled": false,
+  "origin_contains_source_commit": true,
+  "output_path_state": {
+    "configurations/robot_lab/t20_42_r0_dataset_mixture_manifest.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_42_r0_dataset_statistics.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_42_r0_generation_attempt.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_42_r0_generation_result.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_42_r0_retention_receipt.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_42_r0_generation_run_001": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_42_r0_generation_run_001/frame_segment_compiler": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_42_r0_generation_run_001/lerobot_dataset": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_42_r0_generation_run_001/raw_store": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_42_r0_generation_run_001/unpadded_window_index": {
+      "exists": false,
+      "is_symlink": false
+    }
+  },
+  "owner_grant_ref": {
+    "file_sha256": "d8af6cab80b40e06e8a6d3a1bc059c6da3800646a03fdd2af25761a66a94e3c8",
+    "identity_sha256": "b5d08b776739a0f9098b3c5f05c95b8e6a4e14a7ae5e71b9733fc8440d401cb2",
+    "path": "configurations/robot_lab/t20_42a_r0_owner_authorization.json",
+    "schema_version": "scenesmith.t20_42a_r0_owner_authorization.v1"
+  },
+  "physical_transfer_authorized": false,
+  "platform": {
+    "machine": "arm64",
+    "python_implementation": "CPython",
+    "system": "Darwin"
+  },
+  "promotion_authorized": false,
+  "r0_episode_generation_executed": false,
+  "r1_authorized": false,
+  "schema_version": "scenesmith.t20_42a_r0_generation_runtime_preflight.v1",
+  "scope": "prospective_one_use_r0_generation_runtime_preflight",
+  "scoped_dirty_paths": [],
+  "source_commit": "c435809896ae0155405682bff3ec655d8264db74",
+  "task_id": "T20.42a"
+}
