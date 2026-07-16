@@ -163,6 +163,12 @@ authority/runner/verifier implementation now pass Reviewer 291. Gate A probe
 Only compact Gate A/authority materialization opens after this implementation
 is exact on origin; backbone tensor read, model, optimizer, rollout, and Gate C
 remain closed until the separate Reviewer 292 boundary.
+Authority commit `2f2a2ca` now preserves Gate A/owner/request/decision/runtime/
+permit identities `90217d2b...`/`60b3b8cb...`/`79e190dd...`/`6da74892...`/
+`860fabd7...`/`7530e79d...`. Reviewer 292 accepts the active, clean, offline
+one-use boundary and signed acceptance `7d742980...`. After this acceptance is
+itself exact on origin, the runner may create the sole marker and execute the
+fixed full 10,000-update ACT attempt once. No retry or other authority opens.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

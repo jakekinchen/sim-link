@@ -126,3 +126,14 @@ compilation, spec reconstruction, strict JSON, and whitespace checks pass.
 Reviewer 291 accepts only origin-preserved compact Gate A/authority
 materialization followed by a separate pre-run review. No model or optimizer
 action has occurred.
+
+## Pre-run authority boundary
+
+Implementation `9a03a86` and compact-authority commit `2f2a2ca` are exact on
+origin. Gate A `90217d2b...`, owner `60b3b8cb...`, request `79e190dd...`,
+central decision `6da74892...`, runtime preflight `860fabd7...`, and permit
+`7530e79d...` reconstruct. Reviewer 292 accepts exactly one marker-bound full
+ACT attempt, and signed acceptance `7d742980...` binds the reviewer bytes and
+authority commit. No cached backbone tensor, model, optimizer, inference, or
+rollout action has occurred yet. The marker/run may begin only after this
+acceptance boundary is exact on origin and while the owner window is active.
