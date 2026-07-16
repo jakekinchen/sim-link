@@ -1,0 +1,69 @@
+{
+  "admission_fixture_ref": {
+    "file_sha256": "ee5ff97f85b2e117c34d2c8ec0e54b5081393cbb9a09321c30728488e5657e06",
+    "identity_sha256": "b7b1eb7746cf3736a12ae7f0fa3e7bffdf58a92cf702d8d7648366e7350553ba",
+    "path": "configurations/robot_lab/t20_42_r0_admission_fixture.json",
+    "schema_version": "scenesmith.t20_42_r0_dataset_admission_fixture.v1"
+  },
+  "admission_fixture_valid": true,
+  "archive_replay_activated": false,
+  "authority_not_granted": [
+    "r0_episode_generation_execution",
+    "dataset_materialization",
+    "model_construction",
+    "model_inference",
+    "optimizer_creation",
+    "optimizer_training",
+    "learned_policy_rollout",
+    "gate_c_execution",
+    "hardware",
+    "network_access",
+    "external_compute",
+    "brev_compute",
+    "physical_transfer",
+    "promotion",
+    "r1_activation"
+  ],
+  "brev_compute_started": false,
+  "camera_accessed": false,
+  "construction_contract_valid": true,
+  "construction_spec_ref": {
+    "file_sha256": "accb216dc17165c5cdc1ad01cd9173fa8838590325a16abd3020c4230a26d86a",
+    "identity_sha256": "b58a6b31d0a3d892cfce8e319c4736d2da9aab2864663a5b2fc89c752e221458",
+    "path": "configurations/robot_lab/t20_42_r0_construction_spec.json",
+    "schema_version": "scenesmith.t20_42_r0_construction_spec.v1"
+  },
+  "dataset_materialized": false,
+  "external_compute_started": false,
+  "gate_c_executed": false,
+  "generation_ready": false,
+  "hardware_accessed": false,
+  "identity_sha256": "5ff8c5cca2abfe3ceb2b15296fb065c66ff416b98888eb3dba0a1a9074136250",
+  "learned_policy_rollout": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "network_accessed": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "product_path": {
+    "current_mode": "write_or_verify_contract_artifacts_only",
+    "entrypoint": "scripts/robot_lab/write_t20_42_r0_dataset_construction.py",
+    "generation_runner_exposed": false
+  },
+  "promotion_eligible": false,
+  "r0_episode_generation_executed": false,
+  "r1_activated": false,
+  "required_before_generation": [
+    "implementation_committed_and_origin_confirmed",
+    "same_agent_adversarial_review_accepted",
+    "fresh_central_generation_decision_granted",
+    "fresh_runtime_preflight_valid",
+    "one_use_generation_permit_valid"
+  ],
+  "schema_version": "scenesmith.t20_42_r0_construction_preflight.v1",
+  "scope": "r0_contract_implementation_pre_generation_fail_closed",
+  "serial_accessed": false,
+  "task_id": "T20.42"
+}
