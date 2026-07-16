@@ -1,0 +1,102 @@
+{
+  "brev_compute_started": false,
+  "camera_accessed": false,
+  "dataset_manifest_ref": {
+    "file_sha256": "6b7abd88602a20a01dc446b04439200a7b38ae4d24da37675235baab8d5dc387",
+    "identity_sha256": "bd36b7c491ba3c3e08ae3efd87febdbbb1f52f917cb258399484ba4f5311a184",
+    "path": "outputs/robot_lab/t20_42_r0_generation_run_001/lerobot_dataset_manifest.json",
+    "schema_version": "scenesmith.lerobot_native_episode_manifest.v1"
+  },
+  "excluded_fresh_held_out_candidate_ids": [
+    "3936e87e9c69d30ba7f88baa918f9fd274c9c0e4c64c332236bec376c3204241",
+    "395e12bc486c0f8e805937f2a8c5b11f3da280ee3ef7e987f8884594a85b6919",
+    "49c9b25dd06c2f972a5d51657363529a15af69a058ad79e5c1e837973b8a7230",
+    "5e68f2b4038733662a7ad77114cb307d6d1cc90e855b89dce032daec9b24a6da",
+    "813752ef86f7f15da21c88ee1243ccc5ba4a96b5ff0ffde88fc9251cb80eb84d",
+    "824f5dd95de12928a727d85d5be97d46cb353ca0ea1b80ca60281e3a7d6d0dff",
+    "8e94f5d300a0e4a0f2ff4c5fd53777890ca4a9bf98abb37713289a6ee302a175",
+    "c91d999623267c52a5d4d8ac9232a840e9004c1d9274d9e92d31ee526a7482a9",
+    "f88865949cd9b3e88089d2c5b0512c16be6fcb297df3273d60acbfe3a0136d6d"
+  ],
+  "existing_held_out_seeds_excluded": [
+    6,
+    7
+  ],
+  "external_compute_started": false,
+  "features": {
+    "action": {
+      "count": [
+        31366.0
+      ],
+      "mean": [
+        2.6095025491510775,
+        92.26261373591771,
+        -24.800576567277382,
+        -7.0730842961452005,
+        87.82986620218483,
+        47.30410281220679
+      ],
+      "std": [
+        0.17685739363531575,
+        14.975893115165848,
+        5.558689790400484,
+        9.57219818572664,
+        12.626469272630263,
+        31.837386095890416
+      ]
+    },
+    "observation.state": {
+      "count": [
+        31366.0
+      ],
+      "mean": [
+        2.6107055153430494,
+        92.01450156618242,
+        -24.714058427020756,
+        -6.810901095077699,
+        87.46226065582839,
+        47.24687849644502
+      ],
+      "std": [
+        0.1774228180484075,
+        15.809062834482146,
+        5.721975582335295,
+        10.42523064667031,
+        13.871676800420603,
+        31.826133047160514
+      ]
+    }
+  },
+  "gate_c_executed": false,
+  "hardware_accessed": false,
+  "held_out_values_contributed_to_fit": false,
+  "identity_sha256": "02ba0e701da708680e162493aecececa5827914be2d07a0e1f9e20335d9388ae",
+  "joint_names": [
+    "shoulder_pan",
+    "shoulder_lift",
+    "elbow_flex",
+    "wrist_flex",
+    "wrist_roll",
+    "gripper"
+  ],
+  "learned_policy_rollout": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "network_accessed": false,
+  "normalization": "MEAN_STD",
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "r1_activated": false,
+  "schema_version": "scenesmith.t20_42_r0_mean_std_statistics.v1",
+  "serial_accessed": false,
+  "simulation_policy_accepted": false,
+  "simulation_training_ready": false,
+  "statistics_source": "package_lerobot_dataset_training_rows_only",
+  "task_id": "T20.42",
+  "training_episode_count": 129,
+  "training_frame_count": 31366
+}

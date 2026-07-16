@@ -141,6 +141,15 @@ identities `b5d08b77...`/`5c5b99fc...`/`f6121762...`/`ffa95218...`/
 `97694eb5...`. After this acceptance is itself exact on origin, the runner may
 create the sole marker and execute the fixed 119+9 manifest once; no retry or
 other authority opens.
+The sole marker-bound R0 attempt is now complete. All 119 training candidates
+and all nine fresh-held-out candidates pass strict-v2 with zero runtime or
+strict failures. The exact ten-episode T20.23 base appears once, yielding a
+129-episode/31,366-frame package with 59,904 unpadded windows and training-only
+MEAN_STD; held-out seeds 6-7 and the nine fresh-held-out successes contribute
+zero fitted rows. Producer and independent verification exit 0 with result
+`d238379b...`. Reviewer 290 verifies T20.42/R0 and routes to a fresh Brief 219
+for T20.43 ACT. This is scripted-expert dataset evidence, not learned-policy,
+Gate C, metric-twin, hardware, transfer, or promotion proof.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

@@ -114,3 +114,19 @@ inference, optimizer creation/training, learned-policy rollout, Gate C/D/E
 claim, threshold change, archive replay, hardware/camera/serial access,
 physical motion, network/download, external compute, Brev, physical transfer,
 promotion, destructive operation, or R1 activation.
+
+## Verified result
+
+The sole marker-bound attempt started at `2026-07-16T13:10:07-05:00` and
+completed all 128 fixed candidates exactly once. All 119 training candidates
+and all nine fresh-held-out candidates pass strict-v2, with zero runtime or
+strict failures. The exact ten-episode T20.23 base is included once, producing
+129 training episodes, 31,366 frames, and 59,904 unpadded windows. Fresh-held-
+out candidates and seeds 6-7 contribute zero training/statistics rows.
+
+Producer and independent full verification both exit 0 with result
+`d238379b...`; mixture `37b30d34...`, statistics `02ba0e70...`, and retention
+receipt `19d19fba...` reconstruct exactly. Reviewer 290 accepts T20.42/R0 and
+routes to a separately briefed T20.43 ACT rung. No model, optimizer, learned
+rollout, Gate C, hardware, network, external compute, Brev, transfer, or
+promotion action occurred.
