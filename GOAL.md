@@ -942,6 +942,11 @@ stopped before AutoProcessor on editable LeRobot's `PKG-INFO` metadata variant;
 correction `9e9272c` is remote and live recursive closure `ac8abed1...` passes
 across 57 active packages. Reviewer 256 permits one corrected preflight retry.
 No attempt marker exists.
+That retry constructed AutoProcessor offline but rejected empty opened-file
+evidence because Hugging Face resolved snapshot symlinks to blob paths.
+Correction `54339c2` is remote; real guarded smoke `3f9a4a0c...` now records six
+safe files, exact classes, no network, and no weights. Reviewer 257 authorizes
+the corrected preflight retry. No marker exists.
 
 ## Durable State
 

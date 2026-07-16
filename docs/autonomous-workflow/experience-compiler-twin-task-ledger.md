@@ -1045,6 +1045,20 @@ T20.36 tests and 12 pointer tests pass; the two excluded historical audit tests
 correctly assert the pre-install missing-package state. Reviewer 256 authorizes
 one corrected preflight retry, still before any marker.
 
+## 2026-07-16 - T20.36j processor symlink evidence guard corrected
+
+The second uncounted preflight constructed AutoProcessor offline, with no
+network or tensor guard firing, but rejected empty opened-file evidence because
+Hugging Face resolved snapshot symlinks into its blob store before opening.
+No preflight/permit/marker artifact was written. Correction `54339c2` maps every
+resolved blob target back to its snapshot-relative path before construction and
+applies the same weight/tensor denial to both spellings. A real guarded smoke
+now signs `3f9a4a0c...`, classes `SmolVLMProcessor`, `GPT2Tokenizer`, and
+`SmolVLMImageProcessorPil`, plus six safe config/tokenizer files; no weights or
+network are observed. Six focused tests, 71 applicable post-install T20.36
+tests, and 12 pointer tests pass. Reviewer 257 authorizes the corrected
+preflight retry; no attempt marker exists.
+
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
 The owner opened a fresh simulation-only window (20:10 CDT through hard
