@@ -926,9 +926,12 @@ offline: 24 existing distributions plus four cached additions bound by manifest
 read-only audit. Reviewer 254 now verifies corrected fail-closed preflight
 contract `cb018b69...`: recursive installed closure and offline AutoProcessor
 construction must pass before a marker, while full policy construction stays
-counted. The contract itself grants no permit or readiness. T20.36j remains
-blocked pending explicit owner authority for that exact offline installation,
-live preflight execution, and at most one unchanged-Gate-B replacement attempt.
+counted. The contract itself grants no permit or readiness. On 2026-07-16 the
+owner explicitly authorized the exact four-package offline installation, live
+corrected preflight, and at most one unchanged-Gate-B replacement attempt.
+Brief 203 opens the implementation and execution boundary; central authority,
+remote preservation, signed closure/processor evidence, and a fresh one-use
+permit remain mandatory before a marker.
 
 ## Durable State
 

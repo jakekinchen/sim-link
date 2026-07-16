@@ -1,13 +1,13 @@
 {
   "schema_version": "scenesmith.project_state.v1",
-  "updated": "2026-07-15",
+  "updated": "2026-07-16",
   "run_window": {
-    "actual_start": "2026-07-15T07:27:47-05:00",
-    "total_duration_hours": 16,
-    "no_new_major_slice_after": "2026-07-15T22:42:47-05:00",
-    "hard_closeout": "2026-07-15T23:27:47-05:00",
-    "owner_extension_recorded_at": "2026-07-15T10:20:00-05:00",
-    "scope": "owner_requested_t20_35_rank_capacity_then_evidence_routed_capability_ladder",
+    "actual_start": "2026-07-16T00:33:37-05:00",
+    "total_duration_hours": 8,
+    "no_new_major_slice_after": "2026-07-16T07:48:37-05:00",
+    "hard_closeout": "2026-07-16T08:33:37-05:00",
+    "owner_authorization_recorded_at": "2026-07-16T00:33:37-05:00",
+    "scope": "owner_authorized_exact_offline_smolvla_environment_correction_and_one_replacement_attempt",
     "simulation_only": true,
     "hardware_authority": "closed",
     "external_compute_authority": "closed",
@@ -91,6 +91,15 @@
       "owner_extension_recorded_at": "2026-07-14T20:10:00-05:00",
       "closeout_recorded_at": "2026-07-15T07:27:47-05:00",
       "closeout_reason": "window_expired_before_current_owner_continuation"
+    },
+    {
+      "actual_start": "2026-07-15T07:27:47-05:00",
+      "total_duration_hours": 16,
+      "no_new_major_slice_after": "2026-07-15T22:42:47-05:00",
+      "hard_closeout": "2026-07-15T23:27:47-05:00",
+      "owner_extension_recorded_at": "2026-07-15T10:20:00-05:00",
+      "closeout_recorded_at": "2026-07-15T23:27:47-05:00",
+      "closeout_reason": "window_expired_pending_exact_replacement_owner_authorization"
     }
   ],
   "branch": "codex/pi05-autolearn-loop",
@@ -4524,16 +4533,17 @@
       "authority_not_granted": ["dependency_install","environment_mutation","network_download","live_auto_processor_construction","attempt_marker_creation","replacement_attempt","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36j": {
-      "state": "blocked",
+      "state": "in_progress",
       "depends_on": ["T20.36j-B"],
-      "active_brief_id": null,
+      "active_brief_id": "203",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_commit": "79b567080b22e23f914c2e0199e55c49819f2f35",
+      "source_commit": "3f5d88119b6f5d25fda7b2c5934ba3678c04ce50",
       "implementation_commits": [],
-      "result": "blocked on new owner authority: install only the four distributions bound by offline cache manifest 6cc7235c... into the existing Python 3.12 venv with network disabled, execute contract cb018b69... to sign the recursive environment and offline AutoProcessor smoke before a marker, and authorize at most one replacement local-MPS attempt under unchanged Gate B",
-      "authority_granted": [],
-      "authority_not_granted": ["dependency_install","environment_mutation","replacement_attempt","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
+      "result": "owner authorization received for the exact four-package offline environment correction, live corrected preflight contract cb018b69..., and at most one unchanged-Gate-B local-MPS replacement attempt; implementation and central authority boundary in progress before any mutation",
+      "owner_authority_granted": ["install_exact_four_cached_distributions_offline","construct_auto_processor_offline_before_marker","execute_at_most_one_local_mps_replacement_attempt_after_verified_central_authority"],
+      "authority_granted": ["owner_authorized_exact_environment_correction_subject_to_reviewed_implementation","owner_authorized_one_replacement_attempt_subject_to_central_composer_and_fresh_permit"],
+      "authority_not_granted": ["unreviewed_dependency_install","network_download","attempt_before_remote_preflight_and_permit","second_attempt","retry","sweep","gate_b_threshold_change","gate_c_execution_before_gate_b_pass","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

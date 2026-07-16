@@ -1,0 +1,63 @@
+{
+  "authorization_id": "t20_36j_corrected_smolvla_replacement_grant",
+  "authorization_scope": "exact_offline_environment_correction_and_one_local_mps_smolvla_gate_b_replacement",
+  "authorization_source": "owner_proceed_and_authorize_exact_t20_36j_replacement_2026_07_16",
+  "authorized_actions": [
+    "offline_dependency_install",
+    "offline_auto_processor_construction",
+    "simulation_model_construction",
+    "simulation_model_inference",
+    "simulation_optimizer_training"
+  ],
+  "authorized_attempt_count": 1,
+  "brev_compute_authorized": false,
+  "corrected_preflight_contract_ref": {
+    "file_sha256": "850c505930812e77b936f3ac5bca613a8384e685df517d505f10d01bef27fb12",
+    "identity_sha256": "cb018b69c89e4410499e3d7d1f13a15d8cfd57774455c6055c78be25833e679c",
+    "path": "configurations/robot_lab/t20_36j_b_corrected_preflight_contract.json",
+    "schema_version": "scenesmith.t20_36j_b_corrected_preflight_contract.v1"
+  },
+  "exact_offline_install": [
+    {
+      "package": "accelerate",
+      "version": "1.14.0"
+    },
+    {
+      "package": "docopt",
+      "version": "0.6.2"
+    },
+    {
+      "package": "num2words",
+      "version": "0.5.14"
+    },
+    {
+      "package": "psutil",
+      "version": "7.2.2"
+    }
+  ],
+  "external_compute_authorized": false,
+  "gate_b_amendment_authorized": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "5764b7da444dff1731f4ffa8e49518a9dd23155c6f44811aebcb678f54c1d60b",
+  "issued_at": "2026-07-16T00:33:37-05:00",
+  "maximum_optimizer_updates": 2000,
+  "network_access_authorized": false,
+  "offline_cache_manifest_identity_sha256": "6cc7235cbc19c79fca9b180836a3996f5fc9afa7dd10e064d765394271790b7c",
+  "physical_transfer_authorized": false,
+  "policy_track_selection_authorized": false,
+  "promotion_authorized": false,
+  "retry_or_sweep_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "smolvla_entry_authorized": true,
+  "source_training_spec_ref": {
+    "file_sha256": "84fca847760568679175bb886d975198d17470535c1f12cbfb077b49e9b0a5d6",
+    "identity_sha256": "fb217f3e142bf082cc8628928bdb2b26c5abdaf8e3355ecd04c32ae17ff8f175",
+    "path": "configurations/robot_lab/t20_36g_exact_smolvla_gate_b_entry_spec.json",
+    "schema_version": "scenesmith.t20_36g_exact_smolvla_gate_b_entry_spec.v1"
+  },
+  "stop_at_first_gate_pass": true,
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-16T08:33:37-05:00"
+}
