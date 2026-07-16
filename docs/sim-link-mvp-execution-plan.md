@@ -2,23 +2,31 @@
 
 ## Decision
 
-The program will optimize for the next causal proof, not for architectural
-completeness. The immediate sim-link long pole is T20.17: initialize a clean
-`pi05_base` policy with source-dataset statistics, train with a realistic but
-bounded local update budget, and test unassisted strict-v2 grasp behavior in
-MuJoCo. Robo Scan proceeds independently toward its first real metric capture.
+The program will optimize for the first truthful, runnable learned-policy demo
+while preserving the complete physical-product exit condition. The immediate
+sim-link long pole is T20.42: generate and compile the fixed R0 dataset, then
+run T20.43 ACT with a standard recipe and immediate closed-loop strict-v2
+evaluation. SmolVLA follows after the ACT boundary; PI0.5 remains conditional.
+Robo Scan proceeds independently toward the real metric export required by I5.
 
 This plan is a task-ordering source, not an authority source. Live authority,
 training readiness, and proof labels remain mechanically owned by
 [`project_state.json`](./autonomous-workflow/project_state.json) and the central
 authority composer.
 
+The next-hours convergence order, demo checkpoint, proof bundle, and full-MVP
+proof stack are fixed by
+[`Manager Intervention 018`](./manager-log/018-mvp-demo-convergence-directive.md).
+
 ## Product Cut
 
 ### Build in the current sim-link lane
 
-- T20.17 clean-base, dataset-native PI0.5 fine-tuning and fixed strict-v2
-  evaluation.
+- T20.42 fixed R0 dataset construction, followed by standard-recipe ACT and
+  SmolVLA rungs with rollout-primary strict-v2 evaluation.
+- An explicit, reusable learning/plumbing evidence surface: exact R0 parity
+  checks plus the existing signed T20.35x one-batch proof, kept distinct from
+  any accepted product policy.
 - Recovery and perturbation episode expansion from the already verified MuJoCo
   state-branching primitive.
 - A small discrete robustness grid using the existing randomization path.
@@ -55,15 +63,12 @@ authority composer.
 
 ### Prepare now for the Gate F scene adversary
 
-- T20.36l is now verified fail-closed and T20.36m remains authority-pending.
-  After the T20.36m authority disposition is recorded, add one policy-
-  independent quantitative strict-v2 receipt with raw and normalized signed
-  predicate margins, hard actor/evidence guards, and bottleneck semantics. This
-  derives new receipts; it does not rewrite historical policy artifacts.
-- Add a content-addressed counterexample receipt/archive schema and bootstrap it
-  from T20.19's gripper-1.05 boundary negative. That seed is not yet a learned-
-  policy counterexample because T20.19 did not compare a policy with a freshly
-  re-derived expert on the same perturbed scene.
+- T20.38's quantitative strict-v2 receipt and T20.39's content-addressed
+  counterexample archive are verified. T20.40 replay remains inactive until a
+  learned policy mechanically passes Gate C.
+- T20.19's gripper-1.05 seed remains evidence-only rather than a learned-policy
+  counterexample because it did not compare a policy with a freshly re-derived
+  expert on the same perturbed scene.
 - After Gate C, every checkpoint eligible for selection must replay the fixed
   active archive. Scene mutation/search remains blocked until a policy passes
   Gate D; operationally, a Gate E nominal success should precede Gate F search.
@@ -120,13 +125,12 @@ not spent on a higher gate while a lower one is unmet.
 | E | Held-out nominal starts: seeds 6-7 and small initial-state variation | Generalization | Open (0/2 at T20.24 and T20.31) |
 | F | Robustness grid and forked recovery starts | Robustness | Open |
 
-The T20.2 ACT control also failed closed loop with near-zero lift, but T20.32
-now localizes the frozen PI0.5 candidates' first training-seed error to frame
-zero, before action-chunk execution or observation feedback can initiate the
-failure. Gate B must therefore prove one-batch memorization and trainer/model
-plumbing before Gate C cadence, hold, chunk-boundary, or feedback work is
-reopened. A small behavior-cloning control may serve as a Gate B diagnostic;
-it is never a product path.
+The historical T20.2 ACT control failed closed loop with near-zero lift, while
+T20.35x later proved that the shared training/checkpoint/decode stack can
+memorize one batch. That positive plumbing proof must appear in the MVP
+scorecard, but it is not an accepted policy. New R1-R3 candidates still require
+exact R0 Gate A parity and honest learning curves; a new one-batch or open-loop
+threshold may diagnose them but must not block safe closed-loop evaluation.
 
 ## Sim-Link Task Queue
 
@@ -141,6 +145,11 @@ evaluation doctrine, and stop rules are pre-registered in
 [`owner-route-decision-2026-07-16-t20-41.md`](./autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md).
 The consumed overnight direction is retained as history in
 [`owner-direction-2026-07-16-overnight.md`](./autonomous-workflow/owner-direction-2026-07-16-overnight.md).
+Manager Intervention 018 narrows the next-hours delivery order to T20.42 R0,
+then T20.43 ACT, immediate closed-loop evaluation and demo capture, then
+T20.44 SmolVLA. It also preserves the real Robo Scan/I5 metric twin and a
+separately authorized physical-policy canary as non-negotiable full-MVP exits:
+[`018-mvp-demo-convergence-directive.md`](./manager-log/018-mvp-demo-convergence-directive.md).
 
 | Order | Task | Required output and gate | Depends on | Explicitly excluded |
 | --- | --- | --- | --- | --- |
@@ -179,8 +188,8 @@ The consumed overnight direction is retained as history in
 | 17 | **T20.40 — fixed archive replay harness (deferred)** | Replay the complete active manifest on every checkpoint eligible for selection; report open challenges and block regressions of required cases. No scene mutation or training. | Mechanical Gate C pass absent; verified T20.39 | Active adversarial search, optimizer, automatic training ingestion, policy acceptance, hardware, external compute, Brev |
 | 18 | **T20.41 — owner capability-route decision (decided 2026-07-16)** | The owner selects dataset expansion plus standard-recipe rungs with rollout-primary evaluation, recorded in [`owner-route-decision-2026-07-16-t20-41.md`](./autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md). A fresh brief must open T20.42/R0; the optimizer alphabet stays closed. | T20.36o terminal negative; verified T20.39; recorded owner decision | Silent resumption of T20.35/T20.36, correction objectives, threshold changes to `463477dc...`, hardware, external compute, Brev |
 | 19 | **T20.42 — R0 dataset expansion by construction (active; Briefs 216-218)** | Order 64–128 new strict-v2-success scripted episodes over sanctioned cube-pose/init variation (plus cheap recovery branches), compiled through existing raw-store→compiler→window→LeRobotDataset contracts; MEAN_STD from the training split only; frozen held-out seeds 6–7 plus one fresh pose band; one signed dataset/statistics/mixture manifest. Reviewers 286/287 accept the 119+9 construction and authority contracts. The fresh 12:35:56-20:35:56 CDT owner window opens Brief 218 to implement/review the live collector, materializer, and fixed runner before authority materialization, followed by a separate pre-run review before the marker. | Recorded T20.41 route; verified scripted expert and randomization contracts; Briefs 216-218; Reviewers 286/287; fresh bounded owner window | Physics-parameter randomization, new subsystems, model/optimizer work, authority materialization before implementation review, marker/generation before pre-run review, retry, hardware, external compute, Brev |
-| 20 | **T20.43 — R1 ACT standard rung** | Official LeRobot ACT recipe from scratch on the R0 dataset, order 10k–20k updates, fixed-interval checkpoints and mid-run probes; rollout-primary evaluation per the route doctrine (both chunk semantics, mirror MP4, first-divergence trace, amended/uniform/T20.38 reporting). One bounded run; signed negative on failure. | Verified T20.42 | Correction objectives, retry without fresh brief, Gate B re-proof requirement, threshold changes, hardware, external compute, Brev |
-| 21 | **T20.44 — R2 SmolVLA standard rung** | Cached-base SmolVLA fine-tune with the validated trainable scope on the R0 dataset, order 5k–10k updates, same evaluation doctrine; runs after R1's boundary regardless of R1's outcome. One bounded run. | Verified T20.42; T20.43 boundary recorded | Correction objectives, retry without fresh brief, network/download, threshold changes, hardware, external compute, Brev |
+| 20 | **T20.43 — R1 ACT standard rung** | Official LeRobot ACT recipe from scratch on the R0 dataset, order 10k–20k updates, fixed-interval checkpoints and mid-run probes; at the pre-registered checkpoints run rollout-primary strict-v2 evaluation under both chunk semantics and retain the first mechanical Gate C pass immediately with trace, mirror MP4, manifest, and scorecard. One bounded run; signed negative on failure. | Verified T20.42 | Correction objectives, retry without fresh brief, Gate B re-proof requirement, open-loop entry barrier, threshold changes, hardware, external compute, Brev |
+| 21 | **T20.44 — R2 SmolVLA standard rung** | Cached-base SmolVLA fine-tune with the validated trainable scope on the R0 dataset, order 5k–10k updates, same evaluation doctrine; runs after R1's boundary regardless of R1's outcome, but cannot delay packaging an already valid ACT Gate C demo. One bounded run. | Verified T20.42; T20.43 boundary recorded | Correction objectives, retry without fresh brief, network/download, open-loop entry barrier, threshold changes, hardware, external compute, Brev |
 | 22 | **T20.45 — R3 conditional π0.5 standard rung** | Only after R1/R2 evidence: either one bounded local-MPS standard fine-tune from the cached base, or a costed external-compute proposal document (ABEJA-parity reference) for separate fresh owner authorization. No compute consumption beyond local MPS without that grant. | R1/R2 rollout evidence; fresh owner grant for any external compute | External compute or Brev consumption without fresh owner authorization, correction objectives, promotion |
 
 T20.36c's read-only preflight routes ACT as the cheapest diagnostic control,
@@ -334,35 +343,40 @@ remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
 training-ready, posterior-calibration, or optimizer grant exists.
 
-## Tonight's MVP Demo Composition (owner directive 2026-07-15)
+## Tonight's MVP Demo Composition (owner convergence directive 2026-07-16)
 
-The owner's demo target composes verified pieces; it adds no new authority and
-changes no gate. Stages 1-3 are available now; stages 4-6 activate the moment
-Gate B passes.
+The near-term presentation surface is a verified runbook and evidence bundle,
+not a new UI. It adds no authority and keeps scripted, learned-simulation,
+metric-twin, and physical proof distinct.
 
-1. **Declare → build:** `scripts/robot_lab/build_workcell_from_spec.py` turns a
-   compact arrangement JSON (`configurations/robot_lab/workcell_spec_example.json`)
-   into a compiled MuJoCo workcell with settle-stability checks and rendered
-   previews. A built workcell is a labelled fixture with no metric, training,
-   or promotion authority.
-2. **Episodes:** the geometry-derived expert and state-fork recovery machinery
-   generate labelled experience on the anchor workcell; PI0.5 closed-loop
-   rollouts on the same workcell are the policy-driven episodes. A scene-generic
-   PI0.5 rollout runner for newly declared workcells (reusing `CausalSortExpert`
-   scene semantics) is the first post-Gate-B tooling slice.
-3. **Watch:** builder previews plus `render_rollout_mirror.py` MP4s for every
-   trace; fold auto-render into each evaluation slice as already queued.
-4. **Train (after Gate B):** the sole bounded corrected-coverage T20.36
-   campaign completed but failed to retain Gate B, so training-seed and
-   held-out rollout remain blocked while T20.36a audits the signed evidence.
-5. **Before/after proof:** the frozen base-versus-adapter evaluation pair on
-   identical seeds with strict-v2 outcomes, mirror videos, and one plain
-   scorecard in the campaign brief.
-6. **Agent in the loop:** the executor/reviewer loop is the multimodal agent —
-   it authors task/success specifications, curricula, and single-factor
-   branches, and consumes rendered evidence. For the imitation MVP it designs
-   success evaluators, never dense rewards; a reward compiler enters only with
-   RL, per the governing rules.
+1. **Declare and build.** Use `build_workcell_from_spec.py` to show the compact
+   workcell declaration, deterministic MuJoCo compile, stability checks, and
+   rendered preview. Label it a simulation fixture, not a real metric twin.
+2. **Generate and compile R0.** Show the scripted expert completing unchanged
+   strict-v2 grasps, the fixed 119+9 manifest, admission/quarantine results,
+   the exact T20.23 base inclusion, training-only statistics, and held-out
+   exclusion. Scripted success demonstrates the data path, never policy skill.
+3. **Show learning plumbing.** Cite the signed one-batch T20.35x proof and the
+   active candidate's exact R0 Gate A round-trip/parity evidence. Keep this
+   separate from closed-loop policy behavior.
+4. **Train ACT first.** Run the bounded standard-recipe T20.43 rung. Evaluate
+   pre-registered checkpoints closed loop without an open-loop entry barrier.
+   At the first strict-v2 Gate C pass, preserve the checkpoint, full trace,
+   first divergence, margins, mirror MP4, and scorecard immediately.
+5. **Continue policy evidence.** If ACT is negative, proceed directly to
+   SmolVLA. If ACT is positive, publish the ACT demo before SmolVLA so a second
+   model cannot delay delivery. PI0.5 remains conditional and must not block a
+   valid ACT or SmolVLA demonstration.
+6. **Publish one proof index.** At the first Gate C result or by 18:30 CDT,
+   write `docs/autonomous-workflow/mvp-demo-status-2026-07-16.md` and a compact
+   tracked manifest binding every artifact that actually exists. Include exact
+   run/verification commands and one plain plumbing/policy/dataset/twin/canary
+   scorecard. A negative result is publishable evidence, not learned success.
+
+This composition is a **demo-ready simulation-learning MVP** only after a
+learned, unassisted nominal strict-v2 Gate C pass. The complete product MVP
+still requires the real Robo Scan/I5 metric twin and physical-policy canary
+defined below.
 
 ## Paused Integration Queue
 
@@ -376,6 +390,13 @@ hardware session.
 When I4 eventually lands, sim-link may open I5 as a separate reviewed task. I7
 deduplication remains blocked until two real metric handoffs and one end-to-end
 compile prove that retirement is safe.
+
+I4/I5 and the physical canary are full-MVP critical-path items, not optional
+polish. They proceed independently of R0/R1 until their inputs are ready; an
+active irreversible generation/training boundary is allowed to finish, then a
+real immutable I4 export makes I5 the next metric-twin compile boundary. No
+synthetic fixture, descriptor-only receipt, or scripted motion may fill these
+exit slots.
 
 Calibration splits into two stages with different prerequisites. **Instrument
 calibration** — camera intrinsics, hand-eye, robot/world frames, clock
@@ -401,10 +422,23 @@ hardware session by itself.
 
 ## MVP Exit Condition
 
-The program is in a good MVP state only when all of the following are true:
+The project may use two cumulative labels.
 
-- A PI0.5 adapter performs an unassisted strict-v2 grasp in nominal MuJoCo and
-  remains acceptable across the declared discrete ensemble.
+**Demo-ready simulation-learning MVP** requires all of:
+
+- One signed R0 dataset/statistics/mixture boundary with held-out evidence
+  excluded from training and statistics.
+- Explicit Gate A and one-batch learning/plumbing evidence, including the
+  existing T20.35x positive proof, without relabelling that checkpoint as the
+  product policy.
+- At least one approved learned policy (ACT, SmolVLA, or PI0.5) performing an
+  unassisted nominal strict-v2 MuJoCo grasp in closed loop.
+- A full trace, mirror MP4, compact evidence manifest, exact replay/verification
+  commands, and a plain proof-state scorecard.
+
+**Full SceneSmith MVP** additionally requires all of:
+
+- The learned policy remains acceptable across the declared discrete ensemble.
 - One real Robo Scan capture becomes a metric `WorkcellBundle` with fiducial
   scale, held-out evidence, uncertainty, and lineage.
 - Sim-link I5 compiles that exact bundle with pinned SO-ARM100 into a
@@ -423,4 +457,5 @@ The program is in a good MVP state only when all of the following are true:
 
 Until then, use narrower labels: simulator strict success, ensemble robustness,
 metric workcell candidate, paired replay, or constrained physical canary. None
-alone is full autonomous physical-robot proof.
+alone is full autonomous physical-robot proof, and a demo-ready simulation-
+learning MVP is not the full SceneSmith MVP.

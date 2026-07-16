@@ -20,9 +20,9 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Actual start: `2026-07-16T01:44:12-05:00`.
-- No new major slice after: `2026-07-16T08:59:12-05:00`.
-- Hard closeout: `2026-07-16T09:44:12-05:00`.
+- Actual start: `2026-07-16T12:35:56-05:00`.
+- No new major slice after: `2026-07-16T19:50:56-05:00`.
+- Hard closeout: `2026-07-16T20:35:56-05:00`.
 - Owner evening extension recorded at `2026-07-15T10:20:00-05:00` for the
   tonight MVP demo composition in the MVP execution plan; scope, gates, and
   all closed authorities are unchanged.
@@ -76,6 +76,15 @@ proof states must remain distinct.
   next session begins with a fresh brief for T20.42. Hardware, network,
   external compute, and Brev remain closed; T19.x stays a separate
   owner-present track.
+- Owner convergence direction recorded at approximately 12:50 CDT in
+  `docs/manager-log/018-mvp-demo-convergence-directive.md`: finish T20.42b/R0
+  unchanged, run T20.43 ACT first, evaluate pre-registered checkpoints closed
+  loop without a new Gate B entry barrier, and freeze the first truthful demo
+  bundle at the first Gate C result or by 18:30 CDT. The final proof stack must
+  separately expose one-batch/plumbing evidence, learned strict-v2 simulation,
+  the real Robo Scan/I5 metric twin, and a separately permitted physical-policy
+  canary. This is task ordering and proof definition only; it grants no
+  hardware, network, external-compute, Brev, promotion, or retry authority.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
