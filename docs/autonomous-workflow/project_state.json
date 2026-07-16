@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36j",
-  "next_eligible_task": "T20.36j",
+  "current_task": "T20.36j-A",
+  "next_eligible_task": "T20.36j-A",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4452,6 +4452,18 @@
       },
       "authority_granted": ["exact_smolvla_dependency_closure_verified","future_preflight_correction_design_valid"],
       "authority_not_granted": ["dependency_install","environment_mutation","attempt_marker_creation","replacement_attempt","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","policy_track_selected","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.36j-A": {
+      "state": "in_progress",
+      "depends_on": ["T20.36i"],
+      "active_brief_id": "201",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "source_commit": "b9ad9e74b87bbb48e338605070a9c679bc395f78",
+      "implementation_commits": [],
+      "result": "read-only offline cache resolution audit in progress; no installation, environment mutation, network access, model construction, or replacement attempt is authorized",
+      "authority_granted": ["read_only_offline_cache_resolution_audit"],
+      "authority_not_granted": ["dependency_install","environment_mutation","network_download","attempt_marker_creation","replacement_attempt","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36j": {
       "state": "blocked",
