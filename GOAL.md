@@ -129,6 +129,12 @@ fixed scripted generation/compiler/dataset runner first; then materialize and
 preserve the exact pre-run authority for a second review before the marker.
 Hardware, network, external compute, Brev, model/optimizer work, retries, and
 R1 remain closed.
+Implementation `d24ad0e` plus `c435809` are now exact on origin and Reviewer
+288 accepts the live collector, exclusive five-artifact materializer, fixed
+119+9 runner, signed pre-run gate, package dataset/MEAN_STD success route, and
+below-64 terminal-negative route. Only compact authority materialization is
+open. Reviewer 289 must reconstruct and accept that origin-preserved boundary
+before the permit-consuming marker or first R0 MuJoCo candidate.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

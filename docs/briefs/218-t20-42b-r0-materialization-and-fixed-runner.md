@@ -55,6 +55,15 @@ pre-run artifacts before creating the one-use marker or executing MuJoCo.
   re-check the active window and output absence, and explicitly accept the sole
   marker/run before execution.
 
+Implementation commits `d24ad0e78db59a4facb7de664a8e1a42dbcabc2e`
+and `c435809896ae0155405682bff3ec655d8264db74` are exact on origin. Reviewer
+288 accepts the collector/materializer/fixed-runner implementation and opens
+only the five-artifact compact materialization step. The live collector reports
+zero scoped dirt, all ten outputs absent/unaliased, exact offline dependencies,
+and more than 73 GB free. The pre-run acceptance, marker, and R0 execution
+remain closed until the materialized boundary is separately preserved and
+accepted by Reviewer 289.
+
 ## Sole attempt and result rules
 
 - After pre-run acceptance, create the immutable marker first. That consumes
