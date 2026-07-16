@@ -79,3 +79,14 @@ or Brev.
 
 Reviewer Decision 245 verifies the pre-run boundary and opens exactly the sole
 declared local-MPS attempt after its evidence commit is confirmed on origin.
+
+## Execution Result
+
+The sole attempt completed all 2,000 finite updates and signed negative result
+`2ea2c246...`. The final supervised-objective ratio is `0.054918`, which passes
+the unchanged 0.10 conjunct. All five deterministic decoded hashes match, and
+their mean physical error is `0.0145525` rad, but the maximum physical error is
+`0.442487` rad, so the unchanged 0.05-rad all-element conjunct fails. No retry
+or Gate C is allowed. Reviewer Decision 246 verifies the negative result and
+routes Brief 197 to an exact checkpoint-reload/per-joint localization boundary
+before SmolVLA or any gate amendment.

@@ -26,13 +26,14 @@ Narrative claims never override a closed or absent machine-readable grant.
 
 ## Active Boundary
 
-T20.36e implementation is remotely preserved at `0f0caa7`. Central decision
-`9c2a16d2...`, model-free preflight `d29b93e7...`, and one-use permit
-`75f5e163...` bind the exact source, batch, runtime, MPS device, schedule, and
-three authorized simulation actions. Reviewer 245 verifies the pre-run
-boundary. The sole attempt may create its marker and execute only after this
-complete evidence/review boundary is remotely preserved. No retry, sweep,
-policy selection, SmolVLA entry, gate amendment, Gate C, or rollout is opened.
+T20.36e completed negative with signed result `2ea2c246...`: the final objective
+ratio passes at `0.054918`, but the maximum physical error fails at `0.442487`
+rad despite matching five-repeat hashes and `0.0145525`-rad mean error. Reviewer
+246 closes the attempt and all retries. T20.36f is current under Brief 197 for
+an exact checkpoint-reload/per-joint localization pre-run boundary. It may
+implement and test only; no model load or inference occurs before separate
+authority, review, commit, and remote preservation. SmolVLA entry, Gate B
+amendment, Gate C, and rollout remain closed.
 
 The run remains simulation-only. Hardware, cameras, serial devices, physical
 motion, external compute, Brev, promotion, and physical-transfer authority are
@@ -66,11 +67,11 @@ Repeat while the run window and authority permit:
   coverage. T20.36b must encode actual standard-ratio plus five-seed physical
   maxima as the retention decision; proxy losses may be reported but never
   substitute for either Gate B conjunct.
-- T20.36d fixes the exact ACT Gate B control design. T20.36e has preserved its
-  runner and verified its attempt/result contracts, dependency proof, and
-  task-specific central authority; its evidence commit must reach origin before
-  the sole attempt. A control pass routes only a separately
-  reviewed SmolVLA entry design; a fail routes shared-path diagnosis first.
+- T20.36e fails the unchanged physical maximum after passing its objective
+  ratio. T20.36f must reproduce the final action hash from the exact checkpoint,
+  localize normalized and physical error by joint/time, and compare direct
+  chunk prediction with queued decoding. Only that evidence may route a shared-
+  path correction or a separately reviewed SmolVLA entry design.
 - Gate C opens only after Gate B is mechanically proven. A first learned
   closed-loop grasp must be labeled autonomous only when every action is policy
   owned and the strict-v2 evaluator passes.
