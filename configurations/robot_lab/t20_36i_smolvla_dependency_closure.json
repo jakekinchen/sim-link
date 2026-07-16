@@ -1,0 +1,133 @@
+{
+  "additional_missing_dependencies": [
+    {
+      "installed_version": null,
+      "package": "accelerate",
+      "requirement": "accelerate<2.0.0,>=1.14.0",
+      "source_extra": "accelerate-dep",
+      "status": "missing"
+    }
+  ],
+  "all_requirements_satisfied": false,
+  "brev_compute_started": false,
+  "checkpoint_tensor_read": false,
+  "correction_design": {
+    "auto_processor_smoke_must_precede_attempt_marker": true,
+    "full_policy_construction_remains_after_attempt_marker": true,
+    "future_preflight_requires_all_versions_within_bounds": true,
+    "future_preflight_requires_exact_environment_manifest": true,
+    "future_preflight_requires_offline_auto_processor_construction": true,
+    "future_preflight_requires_recursive_extra_closure": true,
+    "missing_or_mismatched_dependency_fails_before_attempt": true,
+    "post_install_exact_versions_must_be_newly_signed": true,
+    "replacement_attempt_requires_new_owner_authority": true,
+    "replacement_permit_must_bind_new_environment_manifest": true
+  },
+  "delegation_edges": [
+    {
+      "from_extra": "smolvla",
+      "to_extra": "accelerate-dep"
+    },
+    {
+      "from_extra": "smolvla",
+      "to_extra": "transformers-dep"
+    }
+  ],
+  "dependency_install_performed": false,
+  "environment_manifest": {
+    "python": {
+      "executable": "/Users/kelly/Developer/sim-link/external/lerobot/.venv/bin/python",
+      "implementation": "CPython",
+      "major_minor": [
+        3,
+        12
+      ],
+      "platform": "macOS-26.2-arm64-arm-64bit",
+      "version": "3.12.12"
+    },
+    "requirements": [
+      {
+        "installed_version": null,
+        "package": "accelerate",
+        "requirement": "accelerate<2.0.0,>=1.14.0",
+        "source_extra": "accelerate-dep",
+        "status": "missing"
+      },
+      {
+        "installed_version": "0.6.1",
+        "package": "lerobot",
+        "requirement": "lerobot==0.6.1",
+        "source_extra": "project",
+        "status": "present"
+      },
+      {
+        "installed_version": null,
+        "package": "num2words",
+        "requirement": "num2words<0.6.0,>=0.5.14",
+        "source_extra": "smolvla",
+        "status": "missing"
+      },
+      {
+        "installed_version": "5.5.4",
+        "package": "transformers",
+        "requirement": "transformers<5.6.0,>=5.4.0",
+        "source_extra": "transformers-dep",
+        "status": "present"
+      }
+    ]
+  },
+  "environment_manifest_identity_sha256": "8fbb324c8352afebf2d3c8b8b08452a535679276aa0fe50907bacd35d5eb8d08",
+  "environment_mutated": false,
+  "external_compute_started": false,
+  "gate_b_threshold_changed": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "0804fd4fda9b255509428f70c50f24672bf99ea91f9a2c6166410d5b6a45cee8",
+  "installed_metadata": {
+    "path": "external/lerobot/.venv/lib/python3.12/site-packages/lerobot-0.6.1.dist-info/METADATA",
+    "root_extra_matches_source": true,
+    "sha256": "ceb9917f6a38410b5dff2dd1020d7385a32468f286cbe32b1ca6719c5c40ea6c"
+  },
+  "lerobot_head": "e40b58a8dfa9e7b86918c374791599d070518d11",
+  "missing_requirements": [
+    {
+      "installed_version": null,
+      "package": "accelerate",
+      "requirement": "accelerate<2.0.0,>=1.14.0",
+      "source_extra": "accelerate-dep",
+      "status": "missing"
+    },
+    {
+      "installed_version": null,
+      "package": "num2words",
+      "requirement": "num2words<0.6.0,>=0.5.14",
+      "source_extra": "smolvla",
+      "status": "missing"
+    }
+  ],
+  "model_constructed": false,
+  "model_inference": false,
+  "network_accessed": false,
+  "observed_failure_dependency": "num2words",
+  "observed_failure_is_in_declared_closure": true,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "policy_track_selected": false,
+  "pyproject": {
+    "path": "external/lerobot/pyproject.toml",
+    "project_version": "0.6.1",
+    "root_extra": "smolvla",
+    "sha256": "d9e8960c33b69f963af3e7753ef05b902385c5f632444a73a10fd52fbc79851c"
+  },
+  "replacement_attempt_authorized": false,
+  "replacement_attempt_ready": false,
+  "requirement_count": 4,
+  "root_cause": "preflight_checked_selected_versions_but_not_recursive_lerobot_smolvla_extra_closure",
+  "schema_version": "scenesmith.t20_36i_smolvla_dependency_closure.v1",
+  "scope": "read_only_exact_pinned_smolvla_optional_dependency_closure",
+  "smolvla_gate_b_evaluated": false,
+  "source_failure_result_identity_sha256": "3804eff6962470e22166fd6bb7c4c22c0f97832b914aafb2ed40f4295be4ce33",
+  "task_id": "T20.36i",
+  "version_mismatched_requirements": [],
+  "weights_downloaded": false
+}
