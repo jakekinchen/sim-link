@@ -1,0 +1,31 @@
+{
+  "checkpoint_tensor_read": false,
+  "classes": {
+    "image_processor": "SmolVLMImageProcessorPil",
+    "processor": "SmolVLMProcessor",
+    "tokenizer": "GPT2Tokenizer"
+  },
+  "constructed": true,
+  "constructor": "transformers.AutoProcessor.from_pretrained",
+  "expected_vlm_snapshot": "/Users/kelly/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "identity_sha256": "5223d8f06f215e188e0b044ff2a078e0b1997da9120f93b9edd1be6cf14a75c3",
+  "local_files_only": true,
+  "model_constructed": false,
+  "network_attempted": false,
+  "observed_vlm_snapshot": "/Users/kelly/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "offline_environment": {
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1"
+  },
+  "opened_snapshot_files": [
+    "chat_template.json",
+    "config.json",
+    "preprocessor_config.json",
+    "processor_config.json",
+    "tokenizer.json",
+    "tokenizer_config.json"
+  ],
+  "schema_version": "scenesmith.t20_36j_offline_auto_processor_smoke.v1",
+  "task_id": "T20.36j",
+  "weight_or_tensor_file_opened": false
+}
