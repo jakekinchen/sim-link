@@ -229,13 +229,15 @@ gripper-mapping perturbation.
 
 ## Roadmap Integration
 
-### Phase 0 - Current boundary
+### Phase 0 - Current comparison boundary
 
-- Preserve T20.36l's verified fail-closed result and historical negative labels.
-- Record a separate authority disposition for proposed T20.36m; this plan does
-  not grant its tensor-reproduction inference attempt.
-- Do not change Gate B from this plan and do not load or run a model.
-- Preserve this document as planning only.
+- Preserve T20.36l and T20.36m's verified fail-closed results and historical
+  negative labels.
+- T20.36m reproduced all five retained SmolVLA hash pairs and failed the frozen
+  amended Gate B on every seed. T20.35x remains to be scored under that same
+  gate before the three-candidate comparison is complete.
+- Do not change Gate B from this plan or add another candidate architecture.
+- Preserve this document as a non-authorizing roadmap.
 
 ### Phase 1 - Short-term, policy-agnostic preparation
 
@@ -259,8 +261,8 @@ gripper-mapping perturbation.
 
 These tasks are useful before policies work because they improve every future
 evaluation receipt and prevent later evidence migration from becoming an ad hoc
-rewrite. They remain roadmap entries only; each enters `project_state.json`
-only with its own dependency-ready brief and authority boundary.
+rewrite. T20.38 and T20.39 remain filler roadmap entries until the active
+T20.35x comparison and any resulting Gate C priority work are dispositioned.
 
 ### Phase 2 - Gate C archive replay, no adversarial search
 

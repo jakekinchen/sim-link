@@ -20,9 +20,9 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Actual start: `2026-07-15T07:27:47-05:00`.
-- No new major slice after: `2026-07-15T22:42:47-05:00`.
-- Hard closeout: `2026-07-15T23:27:47-05:00`.
+- Actual start: `2026-07-16T01:44:12-05:00`.
+- No new major slice after: `2026-07-16T08:59:12-05:00`.
+- Hard closeout: `2026-07-16T09:44:12-05:00`.
 - Owner evening extension recorded at `2026-07-15T10:20:00-05:00` for the
   tonight MVP demo composition in the MVP execution plan; scope, gates, and
   all closed authorities are unchanged.
@@ -60,9 +60,13 @@ proof states must remain distinct.
   research→critique→iterate-or-maintain-course loop authorized by owner chat.
   Priority ordering, post-T20.36m branch routing, the one-episode Gate C
   bridge, and mandatory closeout are pre-registered in
-  `docs/autonomous-workflow/owner-direction-2026-07-16-overnight.md`. All
-  previously closed authorities (hardware, physical transfer, promotion,
-  network, external compute, Brev) remain closed.
+  `docs/autonomous-workflow/owner-direction-2026-07-16-overnight.md`.
+  At approximately `02:05` CDT the owner separately confirmed presence and
+  granted physical-hardware access through approximately `10:05` CDT. That
+  grant still requires the formal same-thread unrestricted/no-prompt runtime
+  verifier, central composition, and a finite per-session permit before any
+  camera, serial, or robot access. Physical transfer, promotion, network,
+  external compute, and Brev remain closed.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -993,6 +997,13 @@ reproduce only the five registered seeds with two repeats after a fresh central
 decision, verified preflight, committed one-use permit, and remote parity. No
 optimizer, threshold change, Gate C, hardware, network, external compute, or
 Brev authority follows from the window.
+That sole attempt is now verified negative through result `4f101f38...` and
+Reviewer 264. All five source hashes reproduced with bit-identical repeats, but
+all five SmolVLA seeds fail the frozen amended Gate B with 162 total
+violations. The mandated three-candidate comparison is not complete: retained
+T20.35x stores only hashes and aggregates, not its five 50x6 tensors. Brief 207
+therefore opens T20.36n for one hash-bound X reproduction and frozen amended-
+gate score. Gate C remains closed pending that result.
 
 ## Durable State
 

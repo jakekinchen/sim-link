@@ -53,3 +53,15 @@ The preflight byte-hashes the immutable checkpoint but does not deserialize a
 tensor or construct/load a model. Reviewer 263 authorizes exactly the five
 registered seeds with two repeats after the attempt marker; the permit is
 consumed by the first marker even on failure.
+
+## Verified Result
+
+The sole attempt reproduced all five signed T20.36j action hashes and both
+repeats were bit-identical for every seed. Tensor artifact `45a3369d...`, run
+`0b7c98b6...`, and result `4f101f38...` are exact. The retained objective ratio
+`0.022866` passes, but every seed fails the frozen amended Gate B with 162
+total joint/timestep violations; per-seed maximum threshold ratios range from
+`5.0790` to `10.6410`. Result boundary `a5e7c6a` is on origin. Reviewer 264
+verifies the SmolVLA negative and routes immediately to the required T20.35x
+comparison under the same frozen gate. Gate C remains closed pending that
+comparison.

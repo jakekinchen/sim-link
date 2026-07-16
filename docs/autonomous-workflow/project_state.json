@@ -2,12 +2,12 @@
   "schema_version": "scenesmith.project_state.v1",
   "updated": "2026-07-16",
   "run_window": {
-    "actual_start": "2026-07-16T00:33:37-05:00",
+    "actual_start": "2026-07-16T01:44:12-05:00",
     "total_duration_hours": 8,
-    "no_new_major_slice_after": "2026-07-16T07:48:37-05:00",
-    "hard_closeout": "2026-07-16T08:33:37-05:00",
-    "owner_authorization_recorded_at": "2026-07-16T00:33:37-05:00",
-    "scope": "owner_authorized_exact_offline_smolvla_environment_correction_and_one_replacement_attempt",
+    "no_new_major_slice_after": "2026-07-16T08:59:12-05:00",
+    "hard_closeout": "2026-07-16T09:44:12-05:00",
+    "owner_authorization_recorded_at": "2026-07-16T01:44:12-05:00",
+    "scope": "owner_authorized_autonomous_research_critique_iterate_or_maintain_course_loop",
     "simulation_only": true,
     "hardware_authority": "closed",
     "external_compute_authority": "closed",
@@ -100,6 +100,15 @@
       "owner_extension_recorded_at": "2026-07-15T10:20:00-05:00",
       "closeout_recorded_at": "2026-07-15T23:27:47-05:00",
       "closeout_reason": "window_expired_pending_exact_replacement_owner_authorization"
+    },
+    {
+      "actual_start": "2026-07-16T00:33:37-05:00",
+      "total_duration_hours": 8,
+      "no_new_major_slice_after": "2026-07-16T07:48:37-05:00",
+      "hard_closeout": "2026-07-16T08:33:37-05:00",
+      "owner_extension_recorded_at": "2026-07-16T00:33:37-05:00",
+      "closeout_recorded_at": "2026-07-16T01:44:12-05:00",
+      "closeout_reason": "owner_opened_fresh_eight_hour_research_critique_window"
     }
   ],
   "branch": "codex/pi05-autolearn-loop",
@@ -109,10 +118,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "205",
-    "commit": "e4c00bdbf0f0262b41d799f91b90cded94d7d8a2",
-    "reviewer_decision_id": "262",
-    "summary": "verified_frozen_consequence_gate_463477dc_and_retained_score"
+    "brief_id": "206",
+    "commit": "a5e7c6adf7f2c51b6708640a419a1c14989da6bf",
+    "reviewer_decision_id": "264",
+    "summary": "verified_t20_36m_exact_hash_reproduction_and_smolvla_amended_gate_failure"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -154,6 +163,16 @@
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
+    "current_hardware_access_window": {
+      "state": "owner_presence_and_access_granted_pending_central_and_session_permits",
+      "recorded_at_approximate": "2026-07-16T02:05:00-05:00",
+      "valid_through_approximate": "2026-07-16T10:05:00-05:00",
+      "owner_present": true,
+      "hardware_access_authorized": true,
+      "required_before_any_access": ["same_thread_danger_full_access_verified","same_thread_approval_policy_never_verified","fresh_central_authority_decision","finite_content_addressed_session_permit","remote_preservation_and_review"],
+      "not_authorized": ["brev_compute","paid_external_compute","destructive_operation","promotion","physical_transfer_claim","evidence_gate_weakening","unbounded_policy_actuation"],
+      "physical_access_performed_in_window": false
+    },
     "follower_release_correction_authority": {
       "authority_id": "owner_follower_release_correction_2026_07_12_1814",
       "state": "completed_verified",
@@ -304,8 +323,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36m",
-  "next_eligible_task": "T20.36m",
+  "current_task": "T20.36n",
+  "next_eligible_task": "T20.36n",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4652,21 +4671,36 @@
       "authority_not_granted": ["fit_thresholds_to_candidate_errors","act_retry","smolvla_retry","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","new_decode","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36m": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36l"],
-      "active_brief_id": "206",
+      "active_brief_id": null,
       "proposed_brief_id": null,
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
+      "latest_verified_brief_id": "206",
+      "review_decision_id": "264",
       "source_commit": "e4c00bdbf0f0262b41d799f91b90cded94d7d8a2",
-      "implementation_commits": ["52f15cc25b1122b8dadac1d336cb6fffeb527e65"],
-      "result": "owner-authorized one-use inference-only reproduction of the already-evaluated SmolVLA ten 50x6 tensors; all five signed hash pairs must match before frozen Gate B scoring and any pass still requires separate Gate C authority",
+      "implementation_commits": ["52f15cc25b1122b8dadac1d336cb6fffeb527e65","a5e7c6adf7f2c51b6708640a419a1c14989da6bf"],
+      "result": "verified negative exact SmolVLA tensor reproduction: all five signed T20.36j action hashes reproduced with bit-identical repeats, but every seed failed the frozen amended Gate B with 162 total violations; SmolVLA has no retry or Gate C route and the mandated T20.35x comparison remains",
       "run_window": {"start":"2026-07-16T01:44:12-05:00","hard_close":"2026-07-16T09:44:12-05:00","no_new_major_slice_after":"2026-07-16T08:59:12-05:00"},
       "missing": [],
-      "pre_run_authority": {"owner_grant_identity_sha256":"155a73382c7e8b64958774fc5980ef9fb98d43ff94342ec36764b78471690813","central_request_identity_sha256":"0e0aec0d3dc0e081d8190cb362b6bbc705ca51c98315fb2eda427fb52de73b07","central_decision_identity_sha256":"31eabbbdc2f5c39db97188490907884b8ceae78607f023b43f5e618f83c13cdd","runtime_preflight_identity_sha256":"970342fe4cf8ee9e4507097cbfb47da8ac593415ff2082c610fc2d4ff198b989","one_use_permit_identity_sha256":"374ad4f27ef976fae8ed9f59b7db274c4fe39edf124c119fd9cb7e852e2cb8a9","review_decision_id":"263","required_source_commit":"52f15cc25b1122b8dadac1d336cb6fffeb527e65","attempt_marker_exists":false},
+      "pre_run_authority": {"owner_grant_identity_sha256":"155a73382c7e8b64958774fc5980ef9fb98d43ff94342ec36764b78471690813","central_request_identity_sha256":"0e0aec0d3dc0e081d8190cb362b6bbc705ca51c98315fb2eda427fb52de73b07","central_decision_identity_sha256":"31eabbbdc2f5c39db97188490907884b8ceae78607f023b43f5e618f83c13cdd","runtime_preflight_identity_sha256":"970342fe4cf8ee9e4507097cbfb47da8ac593415ff2082c610fc2d4ff198b989","one_use_permit_identity_sha256":"374ad4f27ef976fae8ed9f59b7db274c4fe39edf124c119fd9cb7e852e2cb8a9","review_decision_id":"263","required_source_commit":"52f15cc25b1122b8dadac1d336cb6fffeb527e65","attempt_marker_exists":true},
+      "artifact": {"path":"configurations/robot_lab/t20_36m_tensor_reproduction_result.json","schema_version":"scenesmith.t20_36m_tensor_reproduction_result.v1","identity_sha256":"4f101f38c87c2a7d8d64aab8956a0da41d036019f8df697ed2d7c6863bbd9532","file_sha256":"49168612423d8b9c5a77440c08b39cb2e163bbec67274e3e488bdb41efd0532b","attempt_identity_sha256":"c69d3904fe59ccb04e5f3d077d3f8b145eacfa63a874237270336ae62f10cbf4","tensor_artifact_identity_sha256":"45a3369d3944b0c7090cc86e571006f0701a7a29d7db37b9e536a3034f62392c","run_identity_sha256":"0b7c98b67ee7bcc5bd1b742c7ed0d884c1c3959934bd136f3d9c0fb51fa8217a","all_expected_hashes_reproduced":true,"all_repeats_bit_identical":true,"amended_gate_b_passed":false,"total_violation_count":162},
       "owner_authority_granted": ["construct_exact_retained_smolvla_model_once","load_exact_retained_checkpoint_once","run_five_registered_inference_seeds_with_two_repeats","persist_ten_50x6_physical_action_tensors","score_frozen_t20_36l_gate_b"],
-      "authority_granted": ["read_t20_36l_result","activate_brief_206","implement_central_inference_authority","implement_runtime_preflight_and_one_use_permit","execute_one_hash_bound_local_mps_tensor_reproduction_after_remote_preservation"],
-      "authority_not_granted": ["optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
+      "authority_granted": ["read_t20_36l_result","activate_brief_206","implement_central_inference_authority","implement_runtime_preflight_and_one_use_permit","execute_one_hash_bound_local_mps_tensor_reproduction_after_remote_preservation","verify_all_five_source_hash_pairs","conclude_smolvla_amended_gate_failure","route_t20_35x_comparison"],
+      "authority_not_granted": ["retry","model_reconstruction","model_inference","optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
+    },
+    "T20.36n": {
+      "state": "in_progress",
+      "depends_on": ["T20.36m"],
+      "active_brief_id": "207",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "source_commit": "a5e7c6adf7f2c51b6708640a419a1c14989da6bf",
+      "implementation_commits": [],
+      "result": "active owner-directed hash-bound reproduction of the five retained T20.35x decoded tensors before frozen amended-gate scoring; retained artifacts contain hashes and aggregates only",
+      "source_evidence": {"t20_35x_spec_identity_sha256":"96efc6d35115126268684c91346b7388077342c573e458b7e708e98714113cfd","t20_35x_run_identity_sha256":"b5cc16ef53a415a7e0a4b8519332a4197201544fc9ebe5186565562e048c054b","t20_35x_result_identity_sha256":"e79dacff684dac507295d839527fb15d4eced8fa9c83973f5534bdf7e99ec6cd","t20_35x_checkpoint_identity_sha256":"40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50","frozen_gate_identity_sha256":"463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f","retained_tensor_available":false},
+      "owner_authority_granted": ["construct_exact_retained_t20_35x_model_once_after_pre_run_boundary","load_exact_retained_t20_35x_checkpoint_once_after_pre_run_boundary","run_five_registered_inference_seeds_with_two_repeats","persist_ten_50x6_physical_action_tensors","score_frozen_t20_36l_gate_b"],
+      "authority_granted": ["read_existing_signed_t20_35x_artifacts","activate_brief_207","implement_central_inference_authority","implement_runtime_preflight_and_one_use_permit"],
+      "authority_not_granted": ["checkpoint_tensor_read_before_attempt_marker","model_construction_before_attempt_marker","model_load_before_attempt_marker","model_inference_before_attempt_marker","optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",
