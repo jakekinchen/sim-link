@@ -16,6 +16,22 @@ blockers: T20.43b model action remains closed until Brief 222 implementation is 
 next_step: implement and fixture-test the unchanged-recipe T20.43b stable-runtime replacement contracts, perform fresh adversarial review, and preserve that implementation on origin before any live materialization
 ```
 
+## 2026-07-16 - T19.2d WCW-1A print package verified and delivered
+
+Brief 221/Reviewer 298 accepts the offline WCW-1A-R1 printer package preserved
+at `b24ac30`. The corrected parametric source separates nominal 20.0 mm ball
+diameter from 0.8 mm diametral FDM allowance, preserves C0-C4 at body-frame
+`y={empty,0,+15,+/-11,+/-15}` mm, and needs six of ten owned balls. All 13
+binary STLs open, are outward-wound/watertight/manifold, and have zero Blender
+BVH self-intersection pairs. Five tag36h11 labels decode as unique IDs 0-4 at
+Hamming 0; the two-page 1:1 PDF and five required renders pass visual review.
+ZIP `b650af2a...` is 5,455,354 bytes, has 42 CRC-valid entries, and matches its
+40-artifact manifest. Gmail sent the ZIP plus separate printing README from
+the authenticated owner account to the owner-named printer as message
+`19f6d356a4121193`. This is software/manufacturing-preflight proof only; coupon,
+printed-fit, retention shake, dimensions, label scale, and weigh-back remain
+physical QC and do not open T19.2c or any robot/camera authority.
+
 ## 2026-07-16 - Brief 222 opens one stable-runtime ACT replacement
 
 T20.44 result/review commit `9869cba` and synchronized state `b24ac30` are exact
@@ -2215,6 +2231,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T19.0l | verified | T19.0k | Build geometry-derived unilateral-jaw close/hold/lift/lower/release proof | Brief 106/Reviewer 132; q=0.249247 rad from 37 mm target aperture; 6 nm preclose motion; strict-v2 8/8 hold, 24/24 lift, 12/12 unsupported hold, 24/24 lower; 36.271 mm lift; zero assist/non-pad frames; final retreat clear; 198-test broad gate |
 | T19.1 | verified | M16, read authority | Run read-only servo/firmware/register census | Brief 212/Reviewer 282; centrally composed session `t19-1-20260716-0712-cdt`; six model-777 firmware-3.9 servos, torque off 6/6, 54/54 reads, zero retries/writes/torque changes/motion/unexpected operations, one no-torque close, no cameras; manifest `f423f5d3...` |
 | T19.2 | in_progress | T19.1, motion authority | Calibrate cameras, joint offsets, kinematics, timing, and gripper aperture | Brief 213/Reviewer 283 readiness; Brief 214/Reviewer 284 target; Brief 215/Reviewer 285 fixture-only +8-tick/0.7033-degree wrist-roll watchdog/deadman/exact-return harness `1282784f...`; T19.2c next binds printed-target evidence and central one-use live authority, with no gate yet |
+| T19.2d | verified | historical WCW-1, owner request | Produce and deliver a printer-ready weighted AprilTag cube without opening physical calibration authority | Brief 221/Reviewer 298; source commit `b24ac30`; 13 watertight/manifold/outward STLs with zero source self-intersections; six ordinary nominal 20 mm balls; tag36h11 IDs 0-4; ZIP `b650af2a...`; Gmail message `19f6d356a4121193`; physical print/QC remains unproven |
 | T19.3 | pending | T19.1-T19.2, motion authority | Identify delay, saturation, settling, directionality, backlash, friction, compliance | Per-joint fitted distributions and held-out trajectory evidence |
 | T19.4 | pending | T19.2-T19.3, contact authority | Identify fingertip/table friction, slip, force/current, and object profiles | Held-out grasp/lift/slip/release envelope |
 | T19.5 | pending | T16.4, T19.2-T19.4 | Fit posterior and run held-out qualification | Every TwinQualificationSpec metric passes or is explicitly failed |

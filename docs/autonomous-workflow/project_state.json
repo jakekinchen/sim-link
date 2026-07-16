@@ -5402,13 +5402,14 @@
       "authority_not_granted": ["camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     },
     "T19.2d": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["historical_wcw1_design_commit_aec1056", "owner_print_package_request"],
-      "active_brief_id": "221",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
-      "result": "Build and independently verify the complete offline WCW-1A printer package while leaving the active T20.44 training boundary unchanged",
-      "authority_granted": ["read_historical_wcw1_sources", "activate_brief_221", "generate_offline_parametric_cad_mesh_tag_and_document_artifacts", "send_verified_package_to_owner_named_printer"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "221",
+      "review_decision_id": "298",
+      "source_commit": "b24ac30dbc132199baec04b80091f23fb9309b3c",
+      "result": "Reviewer 298 accepts the 13-STL WCW-1A-R1 offline print package at b24ac30; ZIP b650af2a passed CRC and manifest verification and Gmail sent it with the separate README to the owner-named printer as message 19f6d356a4121193",
+      "authority_granted": ["read_historical_wcw1_sources", "activate_brief_221", "generate_offline_parametric_cad_mesh_tag_and_document_artifacts", "verify_offline_wcw1a_print_package", "send_verified_package_to_owner_named_printer"],
       "authority_not_granted": ["physical_print_proof","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","package_download","external_compute","brev_compute","promotion"]
     }
   }
