@@ -1,0 +1,167 @@
+{
+  "authority_granted": [
+    "bounded_micro_motion_harness_fixture_conformant"
+  ],
+  "authority_not_granted": [
+    "live_hardware_constructor",
+    "physical_motion",
+    "calibration_update",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "policy_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "close_count": 1,
+  "deadman_checked_before_every_non_cleanup_operation": true,
+  "evidence_mode": "deterministic_injected_fixture",
+  "final_torque_disabled": true,
+  "hardware_accessed": false,
+  "identity_sha256": "1282784f13aa9d28597598f67468e844d4a7641325bd7e9821bcda5fd9597c2f",
+  "motion_command_count": 2,
+  "physical_follower_commanded": false,
+  "plan_identity_sha256": "739002d9c4a5fa55a35710ed6b428e5eac00baad6eb09bb12217bbc479b4fb25",
+  "read_count": 12,
+  "result_name": "pi05_t19_2b_bounded_motion_harness_fixture",
+  "returned_to_baseline": true,
+  "schema_version": "scenesmith.bounded_micro_motion_fixture_result.v1",
+  "torque_change_count": 2,
+  "trace": [
+    {
+      "monotonic_ns": 1010000000,
+      "operation": "read",
+      "register": "Torque_Enable",
+      "sequence": 0,
+      "servo_id": 5,
+      "value": 0
+    },
+    {
+      "monotonic_ns": 1020000000,
+      "operation": "read",
+      "register": "Present_Position",
+      "sequence": 1,
+      "servo_id": 5,
+      "value": 1320
+    },
+    {
+      "monotonic_ns": 1030000000,
+      "operation": "read",
+      "register": "Present_Voltage",
+      "sequence": 2,
+      "servo_id": 5,
+      "value": 122
+    },
+    {
+      "monotonic_ns": 1040000000,
+      "operation": "read",
+      "register": "Present_Temperature",
+      "sequence": 3,
+      "servo_id": 5,
+      "value": 32
+    },
+    {
+      "monotonic_ns": 1050000000,
+      "operation": "write",
+      "register": "Torque_Enable",
+      "sequence": 4,
+      "servo_id": 5,
+      "value": 1
+    },
+    {
+      "monotonic_ns": 1060000000,
+      "operation": "write",
+      "register": "Goal_Position",
+      "sequence": 5,
+      "servo_id": 5,
+      "value": 1328
+    },
+    {
+      "monotonic_ns": 1070000000,
+      "operation": "read",
+      "register": "Present_Position",
+      "sequence": 6,
+      "servo_id": 5,
+      "value": 1323
+    },
+    {
+      "monotonic_ns": 1080000000,
+      "operation": "read",
+      "register": "Present_Position",
+      "sequence": 7,
+      "servo_id": 5,
+      "value": 1326
+    },
+    {
+      "monotonic_ns": 1090000000,
+      "operation": "read",
+      "register": "Present_Position",
+      "sequence": 8,
+      "servo_id": 5,
+      "value": 1328
+    },
+    {
+      "monotonic_ns": 1100000000,
+      "operation": "write",
+      "register": "Goal_Position",
+      "sequence": 9,
+      "servo_id": 5,
+      "value": 1320
+    },
+    {
+      "monotonic_ns": 1110000000,
+      "operation": "read",
+      "register": "Present_Position",
+      "sequence": 10,
+      "servo_id": 5,
+      "value": 1325
+    },
+    {
+      "monotonic_ns": 1120000000,
+      "operation": "read",
+      "register": "Present_Position",
+      "sequence": 11,
+      "servo_id": 5,
+      "value": 1322
+    },
+    {
+      "monotonic_ns": 1130000000,
+      "operation": "read",
+      "register": "Present_Position",
+      "sequence": 12,
+      "servo_id": 5,
+      "value": 1320
+    },
+    {
+      "monotonic_ns": 1140000000,
+      "operation": "write",
+      "register": "Torque_Enable",
+      "sequence": 13,
+      "servo_id": 5,
+      "value": 0
+    },
+    {
+      "monotonic_ns": 1150000000,
+      "operation": "read",
+      "register": "Torque_Enable",
+      "sequence": 14,
+      "servo_id": 5,
+      "value": 0
+    },
+    {
+      "monotonic_ns": 1160000000,
+      "operation": "read",
+      "register": "Present_Position",
+      "sequence": 15,
+      "servo_id": 5,
+      "value": 1320
+    },
+    {
+      "disable_torque": false,
+      "monotonic_ns": 1170000000,
+      "operation": "close",
+      "sequence": 16
+    }
+  ],
+  "watchdog_conformant": true,
+  "write_count": 4
+}

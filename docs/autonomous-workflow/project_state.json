@@ -5259,13 +5259,13 @@
       "authority_not_granted": ["camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     },
     "T19.2b": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["T19.2a", "owner_present_motion_authority"],
-      "active_brief_id": null,
+      "active_brief_id": "215",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "Build and fixture-test the bounded watchdog/deadman/stop/exact-return micro-motion harness before any new live motion gate",
-      "authority_granted": ["read_verified_metric_target_contract", "design_offline_bounded_motion_harness"],
+      "result": "Brief 215 is active to implement and fixture-test a sub-degree single-joint watchdog/deadman/stop/exact-return harness with no live constructor",
+      "authority_granted": ["read_verified_metric_target_contract", "activate_brief_215", "implement_offline_bounded_motion_harness"],
       "authority_not_granted": ["camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     }
   }

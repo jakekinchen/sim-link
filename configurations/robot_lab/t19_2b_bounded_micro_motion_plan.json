@@ -1,0 +1,74 @@
+{
+  "allowed_read_registers": [
+    "Torque_Enable",
+    "Present_Position",
+    "Present_Voltage",
+    "Present_Temperature"
+  ],
+  "allowed_write_registers": [
+    "Torque_Enable",
+    "Goal_Position"
+  ],
+  "authority_not_granted": [
+    "live_hardware_constructor",
+    "physical_motion",
+    "calibration_update",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "policy_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "baseline_position_raw": 1320,
+  "close_contract": {
+    "close_calls": 1,
+    "disable_torque": false
+  },
+  "delta_degrees": 0.7032967032967034,
+  "delta_ticks": 8,
+  "evidence_mode": "offline_fixture_motion_harness",
+  "hardware_accessed": false,
+  "identity_sha256": "739002d9c4a5fa55a35710ed6b428e5eac00baad6eb09bb12217bbc479b4fb25",
+  "immutable_servo_ids": [
+    1,
+    2,
+    3,
+    4,
+    6
+  ],
+  "maximum_settle_polls_per_leg": 8,
+  "maximum_temperature_celsius": 45,
+  "physical_follower_commanded": false,
+  "plan_name": "pi05_t19_2b_wrist_roll_subdegree_delta_and_return",
+  "position_tolerance_ticks": 3,
+  "schema_version": "scenesmith.bounded_micro_motion_plan.v1",
+  "selected_joint": "wrist_roll",
+  "selected_servo_id": 5,
+  "settle_consecutive_samples": 2,
+  "source_calibration_identity_sha256": "24db6f2457e9638866234cb795a413f4b855266a64878f77c1db51c39f9b7cea",
+  "source_t19_1_identity_sha256": "f423f5d3a7bfa2a5017ae686ba73ca74d335eb5dfcd675f0275c1b113fd7c192",
+  "success_write_sequence": [
+    [
+      "Torque_Enable",
+      1
+    ],
+    [
+      "Goal_Position",
+      1328
+    ],
+    [
+      "Goal_Position",
+      1320
+    ],
+    [
+      "Torque_Enable",
+      0
+    ]
+  ],
+  "target_position_raw": 1328,
+  "voltage_range_volts": [
+    11.0,
+    13.0
+  ],
+  "watchdog_duration_ns": 3000000000
+}
