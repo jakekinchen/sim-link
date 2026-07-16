@@ -1,0 +1,566 @@
+{
+  "batch_construction": {
+    "construction": "torch.utils.data.default_collate([dataset_item])",
+    "dataset_item_is_unbatched": true,
+    "preprocessor_must_not_change_existing_batch_axes": true,
+    "processed_action_shape": [
+      1,
+      50,
+      6
+    ],
+    "processed_image_shape_by_key": {
+      "observation.images.base_0_rgb": [
+        1,
+        3,
+        256,
+        256
+      ],
+      "observation.images.left_wrist_0_rgb": [
+        1,
+        3,
+        256,
+        256
+      ]
+    },
+    "processed_state_shape": [
+      1,
+      6
+    ],
+    "reason": "AddBatchDimensionProcessorStep does not add a batch axis to a rank-2 horizon action chunk",
+    "token_batch_size": 1,
+    "token_sequence_length": 48
+  },
+  "brev_compute_started": false,
+  "camera_override": {
+    "cached_features": [
+      "observation.state",
+      "observation.images.camera1",
+      "observation.images.camera2",
+      "observation.images.camera3"
+    ],
+    "canonical_features": [
+      "observation.images.base_0_rgb",
+      "observation.images.left_wrist_0_rgb"
+    ],
+    "duplicate_camera_allowed": false,
+    "empty_cameras": 0,
+    "missing_camera_padding_allowed": false,
+    "override_mode": "replace_cached_image_feature_map_before_model_construction",
+    "processor_uses_configured_feature_keys": true,
+    "silent_camera_drop_allowed": false,
+    "synthetic_camera_allowed": false
+  },
+  "campaign": {
+    "attempt_marker_path": "outputs/robot_lab/t20_36h_exact_smolvla_gate_b_run_001/attempt.json",
+    "batch_size": 1,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "device": "mps",
+    "epsilon": 1e-08,
+    "evaluation_update_schedule": [
+      0,
+      100,
+      250,
+      500,
+      1000,
+      2000
+    ],
+    "fixed_batch_repeated": true,
+    "gradient_clip_norm": 10.0,
+    "inference_seeds": [
+      20260811,
+      20260812,
+      20260813,
+      20260814,
+      20260815
+    ],
+    "learning_rate": 0.0001,
+    "maximum_optimizer_updates": 2000,
+    "network_mode": "offline_local_cache_only",
+    "objective_seeds": [
+      20260821,
+      20260822,
+      20260823,
+      20260824,
+      20260825
+    ],
+    "one_attempt_only": true,
+    "optimizer": "AdamW",
+    "otherwise_stop_after_maximum_updates": true,
+    "retry_or_sweep_allowed": false,
+    "scheduler": null,
+    "scheduler_warmup_steps": 0,
+    "stop_at_first_post_baseline_gate_b_pass": true,
+    "training_seed": 20260801,
+    "weight_decay": 1e-10
+  },
+  "canonical_batch": {
+    "action_horizon": 50,
+    "action_units": "mujoco_radian",
+    "action_variant": "measured",
+    "batch_evidence_required": {
+      "base_image_tensor_sha256": "5ed2cbd3740a3a377bf705eb6fb0bad4b1d0c9d40a8ef91ed0eaadac65e3fa87",
+      "physical_action_chunk_sha256": "5698babc07b2eebc8a3a96d33b28f03bbb33f1bec9b83a97d4e4f8a325c36b7e",
+      "physical_state_sha256": "efd3788785f8c60ac67d91fcb2e754c9b3c13d62798469fbf811a968c8941ec4",
+      "wrist_image_tensor_sha256": "10362eecfea21ed2cda3b0fe4f4b7246700b0dea13237b9575af323c2d9a649d"
+    },
+    "canonical_dataset_episode_index": 0,
+    "canonical_dataset_root": "outputs/robot_lab/t20_23_recovery_augmented_dataset",
+    "frame_index": 0,
+    "image_role_to_dataset_feature": {
+      "top": "observation.images.base_0_rgb",
+      "wrist": "observation.images.left_wrist_0_rgb"
+    },
+    "initial_image_sha256": {
+      "top": "e25756a55d04ce77180780dd9e232b4f694bdf4fd40d9116645adbe736a1f4dc",
+      "wrist": "95e417324300382717637db8282e06eab0cf400612aa099c9ad3ea06bfd52adc"
+    },
+    "initial_observation_state_sha256": "130d1fd111b4a3990014e770c55121711c5cf5a8d7fd1f55e7d3e4d347559169",
+    "joint_names": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "measured_action_chunk_sha256": "4a4e0e2c92a4ad500f6016346bae064a75a319ec901afd3862f676a65bd83b68",
+    "padding_or_inferred_actions": false,
+    "source_episode_file_sha256": "586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54",
+    "source_episode_identity_sha256": "9e186088c9ca82fa9c58cb6e3870f322a9c2a84405d5ea23152b822fb9d4abdb",
+    "source_seed": 0,
+    "source_spec_dataset_root": "outputs/robot_lab/t20_17_lerobot_training_dataset",
+    "task": "Grasp the lightweight anchor, lift 40 mm, hold, lower, release, and retreat."
+  },
+  "checkpoint_contract": {
+    "all_saved_file_sha256_required": true,
+    "config_file": "config.json",
+    "format": "lerobot_save_pretrained_single_model_safetensors",
+    "model_file": "model.safetensors",
+    "optimizer_state_saved": false,
+    "preprocessor_and_postprocessor_saved": true,
+    "save_only_selected_pass_or_terminal_checkpoint": true,
+    "scheduled_evaluations_are_in_memory": true
+  },
+  "checkpoint_tensor_read": false,
+  "closed_loop_rollout": false,
+  "coordinate_round_trip": {
+    "dataset_to_physical_function": "lerobot_to_mujoco",
+    "maximum_round_trip_error_rad": 1e-08,
+    "maximum_runtime_source_target_error_rad": 1e-05,
+    "must_pass_before_model_construction": true,
+    "physical_to_dataset_function": "mujoco_to_lerobot",
+    "source_path": "scenesmith/robot_lab/so101_coordinates.py",
+    "source_sha256": "9382e02106741906380eed572959f991382c285cedd08c8d652d0a3375cf843a"
+  },
+  "evaluation": {
+    "all_action_hashes_must_be_deterministic_per_seed": true,
+    "closed_loop": false,
+    "fixed_noise_seed_count": 5,
+    "flow_decode_steps": 10,
+    "physical_error_basis": "decoded_lerobot_action_converted_to_mujoco_radian_vs_exact_source_measured_chunk",
+    "report_per_joint_and_time_region": true
+  },
+  "execution_task_id": "T20.36h",
+  "external_compute_started": false,
+  "finite_evidence": {
+    "baseline_objective": true,
+    "every_decoded_action_element": true,
+    "every_gradient_norm": true,
+    "every_physical_error_element": true,
+    "every_scheduled_objective": true,
+    "every_training_loss": true,
+    "non_finite_value_fails_closed": true
+  },
+  "gate": {
+    "all_action_dimensions_and_timesteps_must_pass": true,
+    "all_inference_seeds_must_pass": true,
+    "gate_b_threshold_changed": false,
+    "maximum_final_to_baseline_supervised_objective_ratio": 0.1,
+    "maximum_physical_action_error_rad": 0.05,
+    "task_consequence_metrics_report_only": true
+  },
+  "gate_b_threshold_changed": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "fb217f3e142bf082cc8628928bdb2b26c5abdaf8e3355ecd04c32ae17ff8f175",
+  "local_cache": {
+    "checkpoint_integrity_requires_execution_preflight": true,
+    "network_fallback_allowed": false,
+    "policy_config_sha256": "650584b56c104720f7a3c91d1ec6bec9e8de8ac11e60c92ba2fa82d93eda147d",
+    "policy_files": [
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "config.json",
+        "sha256": "650584b56c104720f7a3c91d1ec6bec9e8de8ac11e60c92ba2fa82d93eda147d",
+        "size_bytes": 2299
+      },
+      {
+        "content_read": false,
+        "is_weight_or_tensor_file": true,
+        "name": "model.safetensors",
+        "size_bytes": 906712520
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "policy_postprocessor.json",
+        "sha256": "2b78bb742065288df2ec63b0ee35f97a1f6950171cf2272f7e34b1fe3873b17b",
+        "size_bytes": 660
+      },
+      {
+        "content_read": false,
+        "is_weight_or_tensor_file": true,
+        "name": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+        "size_bytes": 640
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "policy_preprocessor.json",
+        "sha256": "7683d648280a72f0d51e869fb8dd1596beed90b7f84849330cf1bc26634a4bd6",
+        "size_bytes": 1872
+      },
+      {
+        "content_read": false,
+        "is_weight_or_tensor_file": true,
+        "name": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+        "size_bytes": 640
+      }
+    ],
+    "policy_repo_id": "lerobot/smolvla_base",
+    "policy_revision": "c83c3163b8ca9b7e67c509fffd9121e66cb96205",
+    "policy_snapshot": "/Users/kelly/.cache/huggingface/hub/models--lerobot--smolvla_base/snapshots/c83c3163b8ca9b7e67c509fffd9121e66cb96205",
+    "tensor_content_read_at_design": false,
+    "vlm_files": [
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "added_tokens.json",
+        "sha256": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a",
+        "size_bytes": 4739
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "chat_template.json",
+        "sha256": "b585e3598909a5687f9f9d738d35223724dedef256b9b274e1cbfb32b13c74bf",
+        "size_bytes": 430
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "config.json",
+        "sha256": "ea6bc1237e96247f6258de3e202e2e62b93d6f386dc47e7b36b5588bf3a15e17",
+        "size_bytes": 3767
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "generation_config.json",
+        "sha256": "34835060c9f0f74d1acb456cc72ca32746d3843d9eb5f578f9cbffac1d2eb840",
+        "size_bytes": 136
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "merges.txt",
+        "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+        "size_bytes": 466391
+      },
+      {
+        "content_read": false,
+        "is_weight_or_tensor_file": true,
+        "name": "model.safetensors",
+        "size_bytes": 2029990624
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "preprocessor_config.json",
+        "sha256": "149e315d9410368e5491455bb06e0f763426e9e56cca731c13b24404a29b6374",
+        "size_bytes": 599
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "processor_config.json",
+        "sha256": "f3ad45028447b3562b4752be0d5916d6806c1ef589091a469608dcf0faa1737c",
+        "size_bytes": 67
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "special_tokens_map.json",
+        "sha256": "2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60",
+        "size_bytes": 868
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "tokenizer.json",
+        "sha256": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+        "size_bytes": 3548256
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "tokenizer_config.json",
+        "sha256": "dd9ce2ab89a3dd881bd9378f1a79b943a064b9275a7e1706d5b7b47b68977913",
+        "size_bytes": 28626
+      },
+      {
+        "content_read": true,
+        "is_weight_or_tensor_file": false,
+        "name": "vocab.json",
+        "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+        "size_bytes": 800662
+      }
+    ],
+    "vlm_repo_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "vlm_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "vlm_snapshot": "/Users/kelly/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+  },
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "normalization": {
+    "action_normalization_matches_t20_35x_correction_mode": true,
+    "mapping": {
+      "ACTION": "MEAN_STD",
+      "STATE": "MEAN_STD",
+      "VISUAL": "IDENTITY"
+    },
+    "policy_specific_processor_implementation": "lerobot.policies.smolvla.processor_smolvla.make_smolvla_pre_post_processors",
+    "shared_contract_claim_limited_to_dataset_statistics_and_physical_round_trip": true,
+    "statistics": {
+      "action": {
+        "count": [
+          2330
+        ],
+        "mean": [
+          2.5067803526129335,
+          92.83916232391488,
+          -25.055826046333806,
+          -7.419274741487953,
+          88.3151657235469,
+          45.51314309247062
+        ],
+        "std": [
+          0.17726604657538328,
+          13.36737165493642,
+          5.208101545420547,
+          7.927699989639833,
+          10.369881920994251,
+          31.2717095275406
+        ]
+      },
+      "observation.state": {
+        "count": [
+          2330
+        ],
+        "mean": [
+          2.5084697620039846,
+          92.56682140039273,
+          -24.96577545215132,
+          -7.131694166240774,
+          87.92887933428196,
+          45.32283301292059
+        ],
+        "std": [
+          0.1788259462958859,
+          14.03620694425021,
+          5.346221696566796,
+          8.802654238869128,
+          11.570796028283215,
+          31.125057154788802
+        ]
+      }
+    },
+    "statistics_frame_count": 2330,
+    "statistics_source_path": "outputs/robot_lab/t20_23_recovery_augmented_dataset/meta/stats.json",
+    "statistics_source_sha256": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1"
+  },
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "policy_track_selected": false,
+  "required_execution_preflight": {
+    "attempt_marker_precedes_model_construction": true,
+    "default_collated_action_shape": [
+      1,
+      50,
+      6
+    ],
+    "finite_loss_and_gradient_smoke": true,
+    "free_disk_bytes_minimum": 6442450944,
+    "full_policy_and_vlm_checkpoint_hashes": true,
+    "mps_backend_available": true,
+    "mps_forward_backward_smoke": true,
+    "mps_model_construction_smoke": true,
+    "no_cpu_parameter_or_buffer_fallback": true,
+    "offline_exact_snapshot_resolution": true,
+    "remote_source_commit_match": true,
+    "runtime_dtype_inventory": true,
+    "runtime_trainable_parameter_inventory": true,
+    "task_specific_central_authority": true,
+    "two_camera_processor_shapes_and_tokens": true
+  },
+  "result_contract": {
+    "evaluation_schedule_complete_through_selected_update": true,
+    "path": "outputs/robot_lab/t20_36h_exact_smolvla_gate_b_run_001/result.json",
+    "signed_canonical_json": true,
+    "source_spec_authority_permit_attempt_and_checkpoint_bound": true
+  },
+  "result_routing": {
+    "fail": "localize_smolvla_architecture_optimizer_and_boundary_error",
+    "gate_c_authorized_by_spec": false,
+    "pass": "design_separate_smolvla_gate_c_training_episode_reproduction",
+    "policy_track_selected_by_result_claim": false
+  },
+  "runtime_contract": {
+    "compile_model": false,
+    "cpu_fallback_allowed": false,
+    "huggingface_hub_offline": true,
+    "local_files_only": true,
+    "model_train_mode_required_before_optimizer": true,
+    "network_access_allowed": false,
+    "observed_buffer_dtype_inventory_required": true,
+    "observed_parameter_dtype_inventory_required": true,
+    "policy_checkpoint_path": "/Users/kelly/.cache/huggingface/hub/models--lerobot--smolvla_base/snapshots/c83c3163b8ca9b7e67c509fffd9121e66cb96205",
+    "policy_config_passed_explicitly": true,
+    "policy_constructor": "SmolVLAPolicy.from_pretrained",
+    "requested_device": "mps",
+    "torch_transformers_safetensors_versions_required": true,
+    "transformers_offline": true,
+    "vlm_checkpoint_path": "/Users/kelly/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "vlm_constructor_requested_dtype_from_source": "bfloat16",
+    "vlm_source_repo_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct"
+  },
+  "schema_version": "scenesmith.t20_36g_exact_smolvla_gate_b_entry_spec.v1",
+  "scope": "design_only_exact_local_smolvla_one_batch_gate_b_entry",
+  "smolvla_config": {
+    "adapt_to_pi_aloha": false,
+    "add_image_special_tokens": false,
+    "attention_mode": "cross_attn",
+    "chunk_size": 50,
+    "compile_model": false,
+    "device": "mps",
+    "empty_cameras": 0,
+    "expert_width_multiplier": 0.75,
+    "freeze_vision_encoder": true,
+    "input_features": {
+      "observation.images.base_0_rgb": {
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "type": "VISUAL"
+      },
+      "observation.images.left_wrist_0_rgb": {
+        "shape": [
+          3,
+          256,
+          256
+        ],
+        "type": "VISUAL"
+      },
+      "observation.state": {
+        "shape": [
+          6
+        ],
+        "type": "STATE"
+      }
+    },
+    "load_vlm_weights": true,
+    "max_action_dim": 32,
+    "max_state_dim": 32,
+    "n_action_steps": 50,
+    "n_obs_steps": 1,
+    "normalization_mapping": {
+      "ACTION": "MEAN_STD",
+      "STATE": "MEAN_STD",
+      "VISUAL": "IDENTITY"
+    },
+    "num_expert_layers": 0,
+    "num_steps": 10,
+    "num_vlm_layers": 16,
+    "output_features": {
+      "action": {
+        "shape": [
+          6
+        ],
+        "type": "ACTION"
+      }
+    },
+    "pad_language_to": "max_length",
+    "prefix_length": 0,
+    "resize_imgs_with_padding": [
+      512,
+      512
+    ],
+    "self_attn_every_n_layers": 2,
+    "tokenizer_max_length": 48,
+    "train_expert_only": true,
+    "train_state_proj": true,
+    "use_amp": false,
+    "use_cache": true,
+    "use_delta_joint_actions_aloha": false,
+    "vlm_model_name": "/Users/kelly/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+  },
+  "smolvla_entry_authorized": false,
+  "source_files": [
+    {
+      "path": "external/lerobot/src/lerobot/policies/smolvla/configuration_smolvla.py",
+      "sha256": "2fb637cb428fa2fdf1d114646dcffaf4728216bfe5b7039d5d0cac4857ffc4e0"
+    },
+    {
+      "path": "external/lerobot/src/lerobot/policies/smolvla/modeling_smolvla.py",
+      "sha256": "5daaa297954acf9ae89397b571322f07bf30798e72f566e61a09393342cb1f99"
+    },
+    {
+      "path": "external/lerobot/src/lerobot/policies/smolvla/processor_smolvla.py",
+      "sha256": "d34594291b2ecf7801f8c27a940a998c52a7e308cbc89f2403c9cbecfb368f22"
+    },
+    {
+      "path": "external/lerobot/src/lerobot/policies/smolvla/smolvlm_with_expert.py",
+      "sha256": "f7542fa2bf904f9ef64d26843809f913a5e93c4dfa538dda06db0b288391ab4d"
+    },
+    {
+      "path": "external/lerobot/src/lerobot/policies/pretrained.py",
+      "sha256": "39e30b8ff6216d71c59a1a798b5693cbb356659d9fc23597d83232c76eaf0e36"
+    },
+    {
+      "path": "external/lerobot/src/lerobot/processor/batch_processor.py",
+      "sha256": "3e5c1d21468b6852bfe5df6c0ab03a81731f580dc4f69623c0aa458c52ae88f6"
+    },
+    {
+      "path": "external/lerobot/src/lerobot/processor/normalize_processor.py",
+      "sha256": "e9c4745d44f6f3808a84ed7ee9bc23b99ad930cc14222030e9167d4999da1012"
+    },
+    {
+      "path": "external/lerobot/src/lerobot/processor/tokenizer_processor.py",
+      "sha256": "7ba06e58a833a013421e67f74ffa992e6237df838c2b787711bf0c3156895b72"
+    }
+  ],
+  "source_identities": {
+    "act_decode_localization": "472e5ec5aabf36d9f280d2daf3f90b40988ccbc6d236b27cf3b3289755681ffb",
+    "act_gate_b_control_result": "2ea2c2460527ee863275da11a008aa2b75832f08040daf4fd64459c9520769c6",
+    "canonical_batch_spec": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+    "lerobot_head": "e40b58a8dfa9e7b86918c374791599d070518d11",
+    "local_policy_preflight": "61fcf124ab23d2e27672f8335ade0e74df10254ca58d4aec5a77b606ef328bcb"
+  },
+  "task_id": "T20.36g",
+  "trainable_scope": {
+    "freeze_vision_encoder": true,
+    "full_vlm_training": false,
+    "mode": "pretrained_policy_expert_only_plus_state_projection",
+    "peft": false,
+    "runtime_trainable_parameter_inventory_required": true,
+    "train_expert_only": true,
+    "train_state_proj": true
+  }
+}
