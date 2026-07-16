@@ -1,0 +1,213 @@
+{
+  "artifact_paths": {
+    "attempt_marker": "outputs/robot_lab/t20_36j_exact_smolvla_gate_b/attempt.json",
+    "authority_decision": "configurations/robot_lab/t20_36j_simulation_training_authority_decision.json",
+    "corrected_preflight": "configurations/robot_lab/t20_36j_corrected_environment_preflight.json",
+    "owner_authorization": "configurations/robot_lab/t20_36j_owner_replacement_authorization.json",
+    "result": "configurations/robot_lab/t20_36j_exact_smolvla_gate_b_result.json",
+    "run_summary": "outputs/robot_lab/t20_36j_exact_smolvla_gate_b/run_summary.json",
+    "training_permit": "configurations/robot_lab/t20_36j_exact_smolvla_gate_b_permit.json"
+  },
+  "attempt_marker_created": false,
+  "brev_compute_started": false,
+  "checkpoint_tensor_read": false,
+  "dependency_install_performed": false,
+  "environment_mutated": false,
+  "exact_offline_cache_packages": [
+    {
+      "artifact": null,
+      "artifact_sha256": null,
+      "cache_entry": "wheels-v5/pypi/accelerate/1.14.0-py3-none-any",
+      "cache_kind": "cached_wheel",
+      "content_file_count": 90,
+      "content_total_bytes": 1531254,
+      "content_tree_sha256": "7b552de1b03e416720fc9cffc7290f6e363b31b93fbee2507169b983d2525e29",
+      "metadata": "accelerate-1.14.0.dist-info/METADATA",
+      "metadata_sha256": "ed1c0dd9cca2d1449bbae7d641208431f5fccc7d5e06e20bec802c1d81340f6c",
+      "package": "accelerate",
+      "requires_python": ">=3.10.0",
+      "resolved_archive_entry": "archive-v0/ZIbWY4-bfmQAGn4DBvqvc",
+      "runtime_requirements": [
+        "huggingface_hub>=0.21.0",
+        "numpy>=1.17",
+        "packaging>=20.0",
+        "psutil",
+        "pyyaml",
+        "safetensors>=0.4.3",
+        "torch>=2.0.0"
+      ],
+      "version": "1.14.0"
+    },
+    {
+      "artifact": "sdists-v9/pypi/docopt/0.6.2/b8Cs620DXaH2nvQkxO_aW/docopt-0.6.2-py2.py3-none-any.whl",
+      "artifact_sha256": "32501c8d18dbda0f6c89245c375d84de2c06ad0fa57762c2528e36e1eee2bbb9",
+      "cache_entry": "sdists-v9/pypi/docopt/0.6.2/b8Cs620DXaH2nvQkxO_aW/docopt-0.6.2-py2.py3-none-any",
+      "cache_kind": "cached_sdist_built_wheel",
+      "content_file_count": 6,
+      "content_total_bytes": 39729,
+      "content_tree_sha256": "91942b0ca0c17f02091ed2510db87cd5f6814848006b26ab96986062fc0d7043",
+      "metadata": "docopt-0.6.2.dist-info/METADATA",
+      "metadata_sha256": "d4c3ef35e6f87c733814ee02bcd50e34c431f4044195d4f997a79201f49c5176",
+      "package": "docopt",
+      "requires_python": null,
+      "resolved_archive_entry": "archive-v0/2Vacd_9iToVMXXHxY-unE",
+      "runtime_requirements": [],
+      "version": "0.6.2"
+    },
+    {
+      "artifact": null,
+      "artifact_sha256": null,
+      "cache_entry": "wheels-v5/pypi/num2words/0.5.14-py3-none-any",
+      "cache_kind": "cached_wheel",
+      "content_file_count": 68,
+      "content_total_bytes": 545155,
+      "content_tree_sha256": "069902e22873c1ced673170426c082a17360765653ea17bc4bac9cc2bf444088",
+      "metadata": "num2words-0.5.14.dist-info/METADATA",
+      "metadata_sha256": "7b5b9217db18274db0fdb75c1e7dee83c61be4f408be4d9d796a2253d55786df",
+      "package": "num2words",
+      "requires_python": null,
+      "resolved_archive_entry": "archive-v0/sROXXgzFrnll67WNgcZpd",
+      "runtime_requirements": [
+        "docopt>=0.6.2"
+      ],
+      "version": "0.5.14"
+    },
+    {
+      "artifact": null,
+      "artifact_sha256": null,
+      "cache_entry": "wheels-v5/pypi/psutil/7.2.2-cp36-abi3-macosx_11_0_arm64",
+      "cache_kind": "cached_wheel",
+      "content_file_count": 16,
+      "content_total_bytes": 475567,
+      "content_tree_sha256": "709ee8d823dd847a3e34de104664d57cd4372a453fbd6741af65be6fb00d04de",
+      "metadata": "psutil-7.2.2.dist-info/METADATA",
+      "metadata_sha256": "525f8ba78523cf7bc3759d62a105e7c57fd679ea702402b9449fb0746aa0217f",
+      "package": "psutil",
+      "requires_python": ">=3.6",
+      "resolved_archive_entry": "archive-v0/Vwuq2JyYaN2LwdbaIRZIU",
+      "runtime_requirements": [],
+      "version": "7.2.2"
+    }
+  ],
+  "exact_offline_install": [
+    {
+      "package": "accelerate",
+      "version": "1.14.0"
+    },
+    {
+      "package": "docopt",
+      "version": "0.6.2"
+    },
+    {
+      "package": "num2words",
+      "version": "0.5.14"
+    },
+    {
+      "package": "psutil",
+      "version": "7.2.2"
+    }
+  ],
+  "external_compute_started": false,
+  "identity_sha256": "cb018b69c89e4410499e3d7d1f13a15d8cfd57774455c6055c78be25833e679c",
+  "installed_closure_contract": {
+    "active_marker_evaluation_required": true,
+    "every_distribution_metadata_sha256_required": true,
+    "every_version_bound_must_pass": true,
+    "exact_environment_manifest_identity_required": true,
+    "missing_or_mismatched_package_fails_before_processor": true,
+    "optional_extras_ignored_unless_explicitly_active": true,
+    "recursive_requires_dist_required": true
+  },
+  "live_auto_processor_smoke_performed": false,
+  "model_constructed": false,
+  "network_accessed": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "processor_smoke": {
+    "constructor": "transformers.AutoProcessor.from_pretrained",
+    "exact_vlm_snapshot": "/Users/kelly/.cache/huggingface/hub/models--HuggingFaceTB--SmolVLM2-500M-Video-Instruct/snapshots/7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+    "is_model_construction": false,
+    "local_files_only_required": true,
+    "must_complete_before_attempt_marker": true,
+    "network_attempt_forbidden": true,
+    "offline_environment": {
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "weight_or_tensor_file_read_forbidden": true
+  },
+  "replacement_attempt_authorized": false,
+  "replacement_attempt_ready": false,
+  "replacement_boundary": {
+    "authorized_attempt_count_if_granted": 1,
+    "full_policy_construction_is_counted": true,
+    "gate_b_threshold_changed": false,
+    "gate_c_authorized": false,
+    "new_central_authority_decision_required": true,
+    "new_owner_authorization_required": true,
+    "retry_or_sweep_allowed": false,
+    "runtime_smoke_after_policy_load_is_counted": true
+  },
+  "required_stage_order": [
+    {
+      "ordinal": 1,
+      "stage": "recursive_installed_closure"
+    },
+    {
+      "ordinal": 2,
+      "stage": "offline_auto_processor_smoke"
+    },
+    {
+      "ordinal": 3,
+      "stage": "attempt_marker"
+    },
+    {
+      "ordinal": 4,
+      "stage": "full_policy_construction"
+    }
+  ],
+  "root_requirements": [
+    "lerobot==0.6.1",
+    "transformers>=5.5.0,<6.0.0",
+    "num2words>=0.5.14,<0.6.0",
+    "accelerate>=1.14.0,<2.0.0"
+  ],
+  "schema_version": "scenesmith.t20_36j_b_corrected_preflight_contract.v1",
+  "scope": "model_free_corrected_replacement_preflight_contract",
+  "smolvla_gate_b_evaluated": false,
+  "source_identities": {
+    "consumed_runtime_failure": "3804eff6962470e22166fd6bb7c4c22c0f97832b914aafb2ed40f4295be4ce33",
+    "dependency_closure": "0804fd4fda9b255509428f70c50f24672bf99ea91f9a2c6166410d5b6a45cee8",
+    "offline_cache_manifest": "6cc7235cbc19c79fca9b180836a3996f5fc9afa7dd10e064d765394271790b7c",
+    "offline_resolution": "8dec69ae95e87718405be8e5ef5e580aeda9e3b665254b9aded0c0bc796a5530",
+    "smolvla_gate_b_spec": "fb217f3e142bf082cc8628928bdb2b26c5abdaf8e3355ecd04c32ae17ff8f175"
+  },
+  "source_refs": {
+    "dependency_closure": {
+      "file_sha256": "25e2db4e29a03f97cd5c834dc673af627d97928ce7571661f462ec64a5702d6c",
+      "identity_sha256": "0804fd4fda9b255509428f70c50f24672bf99ea91f9a2c6166410d5b6a45cee8",
+      "path": "configurations/robot_lab/t20_36i_smolvla_dependency_closure.json",
+      "schema_version": "scenesmith.t20_36i_smolvla_dependency_closure.v1"
+    },
+    "failure": {
+      "file_sha256": "720d25e9aac429b7da70f173489e82db18b222fe7b7d8f15413dd2c2caae418c",
+      "identity_sha256": "3804eff6962470e22166fd6bb7c4c22c0f97832b914aafb2ed40f4295be4ce33",
+      "path": "configurations/robot_lab/t20_36h_exact_smolvla_gate_b_failure_result.json",
+      "schema_version": "scenesmith.t20_36h_exact_smolvla_gate_b_failure_result.v1"
+    },
+    "offline_resolution": {
+      "file_sha256": "9b863d746df462c97eafd56ccd9b67ba92e6ee0c7e33acb3eea481a2db1a9848",
+      "identity_sha256": "8dec69ae95e87718405be8e5ef5e580aeda9e3b665254b9aded0c0bc796a5530",
+      "path": "configurations/robot_lab/t20_36j_a_offline_cache_resolution.json",
+      "schema_version": "scenesmith.t20_36j_a_offline_cache_resolution.v1"
+    },
+    "spec": {
+      "file_sha256": "84fca847760568679175bb886d975198d17470535c1f12cbfb077b49e9b0a5d6",
+      "identity_sha256": "fb217f3e142bf082cc8628928bdb2b26c5abdaf8e3355ecd04c32ae17ff8f175",
+      "path": "configurations/robot_lab/t20_36g_exact_smolvla_gate_b_entry_spec.json",
+      "schema_version": "scenesmith.t20_36g_exact_smolvla_gate_b_entry_spec.v1"
+    }
+  },
+  "task_id": "T20.36j-B"
+}

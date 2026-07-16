@@ -923,9 +923,12 @@ closure validation and offline AutoProcessor construction before any future
 marker. T20.36j-A result `8dec69ae...` now proves the full closure resolves
 offline: 24 existing distributions plus four cached additions bound by manifest
 `6cc7235c...`; network acquisition is unnecessary. Reviewer 253 verifies the
-read-only audit. T20.36j remains blocked pending explicit owner authority for
-that exact offline installation and at most one unchanged-Gate-B replacement
-attempt.
+read-only audit. Brief 202 opens T20.36j-B only to implement and test the
+corrected fail-closed preflight contract: recursive installed closure and
+offline AutoProcessor construction must pass before a marker, while full policy
+construction stays counted. T20.36j remains blocked pending explicit owner
+authority for that exact offline installation and at most one unchanged-Gate-B
+replacement attempt.
 
 ## Durable State
 
