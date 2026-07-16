@@ -154,3 +154,11 @@ manifest `1a7e3202...`, and rematerializes every derived-noise hash. The
 prospective signed spec is `50e0569d...`. Reviewer 272 verifies implementation
 only and requires commit/push/origin confirmation before the spec artifact is
 written. No model or optimizer action exists.
+
+## Verified Optimizer Spec
+
+Implementation `ec32f4e` is on origin and exact signed spec `50e0569d...`
+materializes with file SHA `412f73ae...`, 250 examples, manifest
+`1a7e3202...`, and all five normalized target hashes. Reviewer 273 verifies the
+artifact and routes next only to separate authority/preflight/permit
+implementation. No model or optimizer action exists.

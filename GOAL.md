@@ -1059,6 +1059,10 @@ The retained-path compiler now reconstructs all 250 frozen correction examples,
 matches start-zero normalized target `b7c73491...`, and produces prospective
 spec `50e0569d...` without a model. Reviewer 272 requires remote preservation
 before materializing that optimizer spec; no optimizer authority exists yet.
+Implementation `ec32f4e` is on origin and signed optimizer spec `50e0569d...`
+now verifies with 250 examples and manifest `1a7e3202...`. Reviewer 273 permits
+only separate optimizer authority/preflight/permit implementation next; no
+model or optimizer action exists.
 
 ## Durable State
 
