@@ -53,9 +53,29 @@ authority composer.
 - A dependency-light shared contracts package, unless two real schema versions
   first demonstrate repeated semantic drift.
 
+### Prepare now for the Gate F scene adversary
+
+- After the active T20.36l boundary, add one policy-independent quantitative
+  strict-v2 receipt with raw and normalized signed predicate margins, hard
+  actor/evidence guards, and bottleneck semantics. This derives new receipts;
+  it does not rewrite historical policy artifacts.
+- Add a content-addressed counterexample receipt/archive schema and bootstrap it
+  from T20.19's gripper-1.05 boundary negative. That seed is not yet a learned-
+  policy counterexample because T20.19 did not compare a policy with a freshly
+  re-derived expert on the same perturbed scene.
+- After Gate C, every checkpoint eligible for selection must replay the fixed
+  active archive. Scene mutation/search remains blocked until a policy passes
+  Gate D; operationally, a Gate E nominal success should precede Gate F search.
+- Replace T21.6's generic curriculum with the bounded, expert-competence-gated
+  CEGIS scene adversary described in
+  [`cegis-scene-adversary-adoption-plan.md`](./autonomous-workflow/cegis-scene-adversary-adoption-plan.md).
+
 ### Cut until evidence creates a need
 
-- RL and a reward/curriculum compiler.
+- A generalized reward/curriculum compiler, learned scene adversary, or
+  automatic counterexample-to-training path. The bounded Gate F CEGIS
+  falsifier is a later evaluation task, not an exception that opens these
+  learning systems now.
 - Learned world models or residual dynamics.
 - Skill-graph infrastructure or a new scientist-agent module.
 - Gaussian splats, dual renderers, tactile distillation, Genesis backend,
@@ -80,6 +100,9 @@ authority composer.
 7. **The existing loop is the scientist harness.** Briefs, gates, signed
    artifacts, reviews, and quarantines already encode hypotheses and evidence.
    Add typed diagnostics to that loop only when a concrete task needs them.
+8. **Counterexamples are evidence before they are data.** Archive replay may
+   block regression, but a failure trace cannot enter training without a
+   separate source-bound compiler, mixture, and central-authority decision.
 
 ## Capability Ladder For Policy Adaptation
 
@@ -136,8 +159,12 @@ not inherit authority from this document.
 | 13j-B | **T20.36j-B — corrected replacement-preflight contract (verified)** | Contract `cb018b69...` independently reconstructs recursive installed closure and makes offline AutoProcessor construction a mandatory pre-marker gate while full policy construction remains counted. | Verified T20.36j-A; Brief 202; Reviewer 254 | Package install, live AutoProcessor/model access, permit, marker, replacement execution, Gate B change, Gate C, hardware, external compute, Brev |
 | 13j | **T20.36j — corrected SmolVLA replacement attempt (verified negative)** | Result `08ef923d...` completes 2,000 updates with deterministic seeds and objective ratio 0.022866, but maximum physical error 0.266024 rad fails unchanged Gate B. SmolVLA replacement closes; no retry or Gate C. | Verified T20.36j-B; Brief 203; Reviewer 260 | Second attempt; retry/sweep; relabel as pass; Gate C; hardware; external compute; Brev |
 | 13k | **T20.36k — consequence-calibrated Gate B amendment design (verified)** | Result `a3b39178...` binds 252 symmetric model-free perturbation pairs: 202 pass, 50 fail, zero non-monotonic cells. Wrist roll is insensitive through 0.4 rad; shoulder lift and gripper retain task-critical 0.025/0.01-rad phase ceilings. No gate changes here. | Verified-negative T20.36e/T20.36f/T20.36j; Brief 204; Reviewer 261 | Candidate-derived thresholds, ACT/SmolVLA retry, model load/inference, optimizer, Gate C execution, policy selection, hardware, external compute, Brev |
-| 13l | **T20.36l — frozen consequence Gate B amendment (in progress)** | Freeze T20.36k's phase/joint thresholds, retain the strict uniform metric as report-only, and score immutable ACT/SmolVLA tensors without model loading or inference. Any pass routes only to separate Gate C authority. | Verified T20.36k; owner pre-authorization; Brief 205 | Threshold fitting, retry, model load/inference, optimizer, new decode, Gate C execution, policy selection, hardware, external compute, Brev |
+| 13l | **T20.36l — frozen consequence Gate B amendment (verified fail-closed)** | Gate `463477dc...` is frozen before scoring. ACT conclusively fails three retained witnesses; SmolVLA is indeterminate because hashes/aggregates but no decoded tensors were retained. Result `0f8ae393...`; no Gate C route. | Verified T20.36k; Brief 205; Reviewer 262 | Threshold fitting, retry, model load/inference, optimizer, new decode, Gate C execution, policy selection, hardware, external compute, Brev |
+| 13m | **T20.36m — SmolVLA tensor-only reproduction (pending authority)** | Proposed one-use offline/MPS reproduction of the ten already-evaluated 50x6 tensors. All five existing hash pairs must match before frozen scoring; any pass routes only to separate Gate C authority. | Verified T20.36l; exact new owner and central inference authority required; proposed Brief 206 | Optimizer, training, new seeds/repeats, threshold change, ACT work, Gate C execution, policy selection, hardware, network, external compute, Brev |
 | 14 | **T20.37 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
+| 15 | **T20.38 — quantitative strict-v2 receipt contract (planned)** | Derive one policy-independent receipt with raw/normalized signed margins, hard evidence/actor guards, bottleneck semantics, source identities, and deterministic verification. Historical artifacts remain immutable; no model or rollout is needed. | Active T20.36l reaches a preserved boundary; existing strict-v2 and T20.36k evidence | Model load/inference, optimizer, gate change, history rewrite, Gate C execution, policy selection, hardware, external compute, Brev |
+| 16 | **T20.39 — counterexample archive schema/bootstrap (planned)** | Versioned receipt, routing matrix, duplicate/stale lifecycle, replay tiers, and archive seed 0001 from T20.19 gripper-1.05 honestly labelled `source_controller_boundary_negative`. | T20.19; T20.38 | Scene search, policy blame without expert competence, replay gate activation, training ingestion, hardware, external compute, Brev |
+| 17 | **T20.40 — fixed archive replay harness (Gate C contingent)** | Replay the complete active manifest on every checkpoint eligible for selection; report open challenges and block regressions of required cases. No scene mutation or training. | Mechanical Gate C pass; T20.39 | Active adversarial search, optimizer, automatic training ingestion, policy acceptance, hardware, external compute, Brev |
 
 T20.36c's read-only preflight routes ACT as the cheapest diagnostic control,
 not as a product-policy selection. T20.36f closes ACT with a reproduced

@@ -5,15 +5,15 @@ Updated: 2026-07-16
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-16T00:33:37-05:00 through hard closeout 2026-07-16T08:33:37-05:00; no new major slice after 2026-07-16T07:48:37-05:00; owner authorized the exact offline SmolVLA environment correction, corrected preflight, and at most one replacement attempt
-run_state: T20.36k verified a candidate-independent model-free consequence calibration over 252 symmetric pairs. The replacement alphabet remains closed; Brief 205 now freezes the evidence-derived amendment before scoring retained ACT/SmolVLA tensors.
+run_state: T20.36l froze the candidate-independent amendment and scored retained evidence. ACT conclusively fails; SmolVLA is indeterminate because decoded tensors were not retained. Brief 206 is proposed but grants no inference authority.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.36l in progress under Brief 205 for a frozen consequence Gate B amendment and retained-evidence scoring; no model load, retraining, new decode, Gate C execution, or policy acceptance is authorized
+current_task: T20.36m pending exact owner and central inference authority under proposed Brief 206 for tensor-only SmolVLA reproduction; no model construction/load or inference is currently authorized
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: the T20.36k calibration exists but its frozen amendment has not yet scored the retained candidates; sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no physical authority; external compute and Brev remain unauthorized
-next_step: execute Brief 205 from signed T20.36k evidence: freeze the reach/grasp phase-joint thresholds, reconstruct retained ACT/SmolVLA tensors without model loading, and route any pass only to a separate one-episode Gate C authority request
+blockers: SmolVLA's retained run has hashes and aggregates but no decoded 50x6 tensors; exact owner and central inference authority are required before one tensor-only reproduction; sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no physical authority; external compute and Brev remain unauthorized
+next_step: obtain exact owner authority for proposed Brief 206, then compose a one-use central local-MPS inference permit that reproduces the existing five hash pairs, persists ten tensors, and scores frozen Gate B without optimizer or Gate C execution
 ```
 
 ## Rules
@@ -1119,6 +1119,19 @@ visible, and no model, optimizer, Gate C, hardware, external compute, or Brev
 action occurred. Brief 205 opens only the frozen amendment and retained-tensor
 scoring path.
 
+## 2026-07-16 - T20.36l frozen amendment scores retained evidence fail-closed
+
+Owner decision `32d7e193...` freezes reach/grasp phase-joint thresholds in
+gate `463477dc...` before any retained candidate score. Result `0f8ae393...`
+uses T20.36f witnesses to prove ACT false at shoulder lift t0, wrist roll t0,
+and gripper t49. SmolVLA's objective and deterministic hashes pass, but the
+retained run contains no standalone or embedded 50x6 decoded tensor, so its
+amended result is indeterminate and fails closed. Implementation `e4c00bd` is
+on origin; Reviewer 262 verifies that no checkpoint weight was read and no
+model, inference, optimizer, new decode, Gate C, selection, hardware, external
+compute, or Brev action occurred. Proposed Brief 206 requests exact new owner
+authority for tensor-only reproduction and grants nothing itself.
+
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
 The owner opened a fresh simulation-only window (20:10 CDT through hard
@@ -1956,6 +1969,9 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T20.15 | verified | T20.14 | Isolate PI0.5 state-token versus action-postprocessor normalizer effects | Brief 135/Reviewer 165; action postprocessor arm effect 0.95872 rad, state effect 0.23586, interaction 0.26037; no optimizer or rollout |
 | T20.16 | verified | T20.15 | Test checkpoint arm/state scaling with dataset-derived gripper-only action postprocessing | Brief 136/Reviewer 166; frame-zero arm/gripper errors 0.03088/0.12015 rad passed; trajectory MAE 0.90603 rad, zero strict contacts, 0.0003007 mm lift; zero conversion clipping/projection; five reviewed keyframes; hybrid retired |
 | T20.17 | in progress | T20.16 | Consolidate the recreation at package boundaries before any clean pi05_base campaign | Briefs 137–139 retain compact bespoke IP, remove only unreferenced test-only surfaces, bind native LeRobot episode provenance, and observe actual PI0.5 processor outputs; a source dataset and separate authority are still required before any optimizer or campaign |
+| T20.38 | pending | preserved T20.36l boundary | Derive a policy-independent quantitative strict-v2 receipt contract | Raw/normalized signed margins, hard actor/evidence guards, bottleneck semantics, immutable source references, deterministic verifier; no model/rollout/training |
+| T20.39 | pending | T20.19,T20.38 | Define the counterexample archive schema and bootstrap T20.19 gripper-1.05 | Content-addressed receipt, expert-competence routing, duplicate/stale lifecycle, replay tiers; seed remains `source_controller_boundary_negative`, not policy blame |
+| T20.40 | pending | T20.39,mechanical Gate C pass | Replay the fixed active archive on every checkpoint eligible for selection | Complete replay manifest, open-challenge reporting, required-regression enforcement; no scene mutation, optimizer, or training ingestion |
 
 The external-example disposition and adversarial semantic-success requirements are
 recorded in `docs/autonomous-workflow/so-frame-adoption-decision.md`. They add no
@@ -1971,7 +1987,7 @@ hardware authority.
 | T21.3 | pending | T21.2 | Add residual-RL readiness gate | Blocks without repeatable strict success and deployment-honest actor inputs |
 | T21.4 | pending | T21.3 | Adapt EXPO-style learner/client interfaces | Frozen base, bounded residual, privileged critic allowed, actor privilege rejected |
 | T21.5 | pending | T21.4 | Run bounded residual-RL experiment | Budget/safety logs and paired accept/reject evaluation |
-| T21.6 | pending | T21.2-T21.5 | Add one-factor curriculum over the qualified posterior | Competence-gated levels and untouched realism holdout |
+| T21.6 | pending | T20.40,Gate D competent policy; T19.5 for posterior mode | Run an expert-competence-gated CEGIS scene adversary: one-factor search first, then bounded compound edits only after useful yield | Expert-policy regret receipts, actionable counterexample archive, complete regression replay, fixed budget and untouched realism holdout; training ingestion remains separate |
 | T21.7 | pending | T21.5-T21.6 | Final promotion/rollback decision | Accepted-pointer integrity and proof matrix |
 
 ## M22 - Physical Shadow And Closeout

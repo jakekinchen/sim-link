@@ -970,6 +970,14 @@ zero non-monotonic phase/joint cells. Wrist roll remains insensitive through
 Reviewer 261 verifies the non-authorizing calibration. Brief 205 now freezes
 that evidence before scoring retained ACT/SmolVLA tensors; it cannot load a
 model, fit to candidate errors, execute Gate C, or accept a policy.
+T20.36l now verifies owner decision `32d7e193...`, frozen amendment
+`463477dc...`, and fail-closed result `0f8ae393...`. ACT still fails on shoulder
+lift t0, wrist roll t0, and gripper t49. SmolVLA retained only deterministic
+hashes and aggregate errors, not its 50x6 tensors, so its amended score is
+indeterminate and no Gate C route opens. Implementation `e4c00bd` is on origin
+and Reviewer 262 closes the authorized slice. Proposed Brief 206 requests one
+exact inference-only tensor reproduction; it grants nothing without fresh
+owner and central authority.
 
 ## Durable State
 

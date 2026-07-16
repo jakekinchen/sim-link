@@ -44,3 +44,14 @@ a separately authorized one-training-episode Gate C attempt.
 Threshold fitting to candidate errors, ACT/SmolVLA retry, model load,
 inference, optimizer, new decode, silent relabeling of T20.36e/T20.36j, Gate C
 execution, policy acceptance/promotion, hardware, external compute, or Brev.
+
+## Verified Result
+
+Owner decision `32d7e193...` and frozen amendment `463477dc...` bind the exact
+T20.36k reach/grasp matrix before candidate scoring. Result `0f8ae393...`
+conclusively fails ACT on shoulder lift t0, wrist roll t0, and gripper t49.
+SmolVLA remains indeterminate and fails closed because its run retained five
+matching hashes and aggregates but no 50x6 decoded tensor. No checkpoint weight
+was read and no model, inference, optimizer, new decode, Gate C, selection,
+hardware, external compute, or Brev action occurred. Implementation `e4c00bd`
+is on origin; Reviewer 262 verifies this brief.
