@@ -177,6 +177,13 @@ the parent preflight runtime has MuJoCo 3.3.5. Terminal receipt `b64ec6d...`
 binds the exact partial outputs and no-retry state. Reviewer 293 closes R1 as
 an infrastructure failure, not trained ACT evidence, and routes next to a
 fresh T20.44 SmolVLA brief with an exact child-renderer smoke gate.
+Origin commit `2e6a3e3` preserves that terminal boundary. Brief 220 now opens
+T20.44 implementation/tests only: cached-base SmolVLA on exact R0, the
+validated expert-plus-state-projection scope, official AdamW/cosine recipe at
+batch 8 for 5,000 updates, checkpoints `[0,500,1000,2500,5000]`, both rollout
+semantics, and a mandatory real-entrypoint renderer smoke with the exact future
+runner interpreter. Model weights, live smoke, authority, optimizer, and
+rollout remain closed pending reviewed origin boundaries.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
