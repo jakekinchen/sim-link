@@ -1,0 +1,22 @@
+{
+  "attempt_number": 1,
+  "authority_decision_identity_sha256": "8834322db1afde27d6b00fa910f57a34a6f15daebe7276a3baffa2b0816e8f88",
+  "checkpoint_tensor_read": false,
+  "checkpoint_written": false,
+  "created_before_checkpoint_tensor_read": true,
+  "created_before_model_construction": true,
+  "created_before_optimizer_creation": true,
+  "gate_c_authorized": false,
+  "identity_sha256": "424b88e9f19acd5ee7790c1e9b15590fbfe84c7c3fd147341b070245d5893939",
+  "model_constructed": false,
+  "model_loaded": false,
+  "optimizer_created": false,
+  "optimizer_spec_identity_sha256": "50e0569d430fe268f103ee20210b06f25f23a4c6f0efe43d4621a1b4ea32ed26",
+  "optimizer_training": false,
+  "optimizer_update_count": 0,
+  "schema_version": "scenesmith.t20_36o_optimizer_attempt.v1",
+  "source_checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
+  "source_commit": "26146fa0985dc127f4f6b38c8657756fae69729f",
+  "task_id": "T20.36o",
+  "training_permit_identity_sha256": "f9bad1aee7a6d25c38a9b717cff4c10fd65208fed87dc83cbdb4f8e3e5123bdb"
+}
