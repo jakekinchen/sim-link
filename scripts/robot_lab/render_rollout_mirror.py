@@ -70,6 +70,10 @@ from scenesmith.robot_lab.t20_43_r1_act_runner import (  # noqa: E402
     TRACE_SCHEMA_VERSION as T20_43_TRACE_SCHEMA_VERSION,
     verify_trace as verify_t20_43_trace,
 )
+from scenesmith.robot_lab.t20_44_r2_smolvla_runner import (  # noqa: E402
+    TRACE_SCHEMA_VERSION as T20_44_TRACE_SCHEMA_VERSION,
+    verify_trace as verify_t20_44_trace,
+)
 
 PANEL_SIZE = 512
 TEXT_BAR_HEIGHT = 56
@@ -90,6 +94,8 @@ def _load_trace(path: Path) -> dict:
         verify_t20_36_trace(payload, threshold=threshold)
     elif schema == T20_43_TRACE_SCHEMA_VERSION:
         verify_t20_43_trace(payload)
+    elif schema == T20_44_TRACE_SCHEMA_VERSION:
+        verify_t20_44_trace(payload)
     else:
         raise SystemExit(f"Unsupported trace schema: {payload.get('schema_version')}")
     return payload
@@ -286,21 +292,23 @@ def main() -> int:
         if encoder.wait() != 0:
             raise SystemExit("ffmpeg failed while encoding the mirror video")
 
-    manifest = sign_payload({
-        "schema_version": "scenesmith.rollout_mirror_render.v1",
-        "purpose": "diagnostic visualization of signed trace evidence; no authority",
-        "trace_path": str(args.trace),
-        "trace_identity_sha256": trace.get("identity_sha256"),
-        "adapter_id": adapter,
-        "seed": seed,
-        "seed_role": trace.get("seed_role"),
-        "frame_count": len(rows),
-        "panels": captions,
-        "anchor_orientation": "held at initial value (position-only playback)",
-        "output_mp4": str(output),
-        "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
-        "output_bytes": output.stat().st_size,
-    })
+    manifest = sign_payload(
+        {
+            "schema_version": "scenesmith.rollout_mirror_render.v1",
+            "purpose": "diagnostic visualization of signed trace evidence; no authority",
+            "trace_path": str(args.trace),
+            "trace_identity_sha256": trace.get("identity_sha256"),
+            "adapter_id": adapter,
+            "seed": seed,
+            "seed_role": trace.get("seed_role"),
+            "frame_count": len(rows),
+            "panels": captions,
+            "anchor_orientation": "held at initial value (position-only playback)",
+            "output_mp4": str(output),
+            "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
+            "output_bytes": output.stat().st_size,
+        }
+    )
     manifest_path = output.with_suffix(".manifest.json")
     dump_canonical_json(manifest_path, manifest)
     print(output, len(rows), manifest["identity_sha256"])

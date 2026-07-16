@@ -184,6 +184,12 @@ batch 8 for 5,000 updates, checkpoints `[0,500,1000,2500,5000]`, both rollout
 semantics, and a mandatory real-entrypoint renderer smoke with the exact future
 runner interpreter. Model weights, live smoke, authority, optimizer, and
 rollout remain closed pending reviewed origin boundaries.
+Spec `0cc8dcaa...` and the complete T20.44 model-free Gate A/cache/dependency/
+renderer-smoke/authority/runner/evidence/failure implementation now pass
+Reviewer 294, ten focused tests, and 80 broader tests plus 30 subtests. Only
+live model-free Gate A, exact-interpreter renderer smoke, and compact authority
+materialization open after this boundary is exact on origin. Policy/VLM weight
+reads, model, optimizer, and rollout remain closed pending Reviewer 295.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

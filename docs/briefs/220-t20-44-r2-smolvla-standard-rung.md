@@ -46,7 +46,9 @@ weights.
 - Use LeRobot's official SmolVLA presets: batch size 8, AdamW learning rate
   `1e-4`, betas `(0.9,0.95)`, epsilon `1e-8`, weight decay `1e-10`, gradient
   clipping 10.0, and cosine decay with 1,000 warmup steps, 30,000 decay steps,
-  and `2.5e-6` floor. Seed all Python/NumPy/Torch/sampler streams with
+  and `2.5e-6` floor. At the bounded 5,000-step budget, the official LeRobot
+  scheduler auto-scales those declarations to 166 warmup and 5,000 decay
+  steps; retain the complete realized LR trace. Seed all Python/NumPy/Torch/sampler streams with
   `20260831`. Shuffle full R0 windows; no fixed-batch repetition, oversampling,
   correction objective, sample weighting, held-out ingestion, or sweep.
 - Run exactly 5,000 maximum optimizer updates with scheduled checkpoints
@@ -129,3 +131,13 @@ Gate B entry barrier, threshold change, archive replay, T20.45 activation,
 hardware/camera/serial access, physical motion, network/download, package
 installation, external compute, Brev, physical transfer, promotion, or
 destructive operation.
+
+## Implementation boundary
+
+Spec `0cc8dcaa...` and the complete model-free Gate A/cache/dependency/exact-
+interpreter-renderer-smoke/authority/runner/trace/video/result/failure/verifier
+implementation pass ten focused and 80 focused-plus-broad tests plus 30
+subtests. Ruff, formatting, compilation, strict spec reconstruction, pointer,
+and whitespace checks pass. Reviewer 294 opens only compact live model-free
+materialization after this implementation is exact on origin. No live smoke,
+policy/VLM weight, model, optimizer, checkpoint, or rollout action has occurred.
