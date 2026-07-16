@@ -52,6 +52,11 @@ proof stack are fixed by
 - `clock_source` for every timestamped stream.
 - Separate proposed, issued/safety-modified, and measured/applied action fields.
   Existing requested/executed semantics must be extended, not relabelled.
+- `human_video` raw-record type with capture, consent, license, and
+  PII-handling fields; a pairing manifest binding human video to a
+  twin-reconstructed robot episode; `event_label_source` distinguishing
+  robot-side strict-v2 event times from human-side weak labels. Schema stubs
+  only until the paired-corpus track opens post-Gate-D.
 
 ### Defer until the first verified sim-to-hardware task success
 
@@ -77,6 +82,22 @@ proof stack are fixed by
 - Replace T21.6's generic curriculum with the bounded, expert-competence-gated
   CEGIS scene adversary described in
   [`cegis-scene-adversary-adoption-plan.md`](./autonomous-workflow/cegis-scene-adversary-adoption-plan.md).
+
+### Prepare for human-video paired-corpus steering (post-Gate-D)
+
+- Adopt the direction in
+  [`human-video-paired-corpus-adoption-plan.md`](./autonomous-workflow/human-video-paired-corpus-adoption-plan.md):
+  the twin plus constructive expert manufacture the robot side of
+  human↔robot pairs without teleoperation; the pair corpus is the durable
+  data-scaling asset independent of which external adaptation method wins.
+- Now: schema stubs only (listed above). Human-viewpoint renders are derived
+  later from R0 episodes by deterministic replay; the T19.2 printed
+  checkerboard doubles as the human-recording registration mat.
+- Governance: human video is evidence before it is data — no human-derived
+  frame enters training without a separate source-bound compiler, mixture,
+  and central-authority decision (mirrors design rule 8).
+- No pairing pipeline, video perception, or test-time adaptation module
+  before a Gate D pass and a fresh owner decision.
 
 ### Cut until evidence creates a need
 
