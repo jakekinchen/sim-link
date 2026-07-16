@@ -228,6 +228,13 @@ Eleven focused, 30 targeted/regression, and 34 pointer/composer/receipt tests pa
 with offline lint/format and compilation. Reviewer 299 opens only model-free
 Gate A/smoke/authority materialization after the implementation is exact on
 origin; model tensors, optimizer, rollout, and retry remain closed.
+Authority commit `5f8a31e` is now exact on origin with fresh renderer smoke
+`35224058...`, Gate A `ea65f3d1...`, central decision `3b534f91...`, runtime
+preflight `549c0db2...`, and one-use permit `c7e8e1ca...`. Reviewer 301 accepts
+only the sole unchanged 10,000-update ACT replacement after signed acceptance
+`525de8dc...` is exact on origin and the owner window remains active. No marker,
+model, optimizer, checkpoint, rollout, retry, hardware, network, external
+compute, or Brev action has occurred.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

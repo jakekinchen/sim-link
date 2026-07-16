@@ -114,3 +114,16 @@ spec reconstruction, CLI import, JSON, and whitespace checks pass. Reviewer
 299 opens model-free materialization only after this implementation is exact on
 origin. No live smoke, authority, marker, model, optimizer, or rollout action
 has occurred.
+
+## Pre-run authority boundary
+
+Authority commit `5f8a31e` is exact on origin and preserves fresh renderer smoke
+`35224058...`, Gate A `ea65f3d1...`, owner/request/decision
+`09111fcb...`/`fd13930f...`/`3b534f91...`, runtime `549c0db2...`, and sole
+permit `c7e8e1ca...`. Reviewer 301 reconstructs all seven and accepts signed
+pre-run receipt `525de8dc...` for origin preservation. The smoke emits a valid
+745,243-byte MP4 from exact retained trace bytes, Gate A preserves exact R0 and
+held-out exclusion, and all attempt/result paths remain absent and unaliased.
+After acceptance origin confirmation and only while the owner window is active,
+the sole marker may consume the replacement and run the unchanged campaign.
+No marker, model, optimizer, checkpoint, or rollout exists at this boundary.
