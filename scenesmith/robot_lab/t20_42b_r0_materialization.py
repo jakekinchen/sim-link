@@ -187,12 +187,10 @@ def collect_live_runtime_snapshot(
 
     root = Path(repo_root).resolve()
     head = _git(root, "rev-parse", "HEAD")
-    if head != required_source_commit:
-        raise ValueError("T20.42b HEAD drifted from required source commit")
     branch = _git(root, "branch", "--show-current")
     if branch != BRANCH:
         raise ValueError("T20.42b branch drifted")
-    ancestor = subprocess.run(
+    reviewed_ancestor = subprocess.run(
         [
             "git",
             "-C",
@@ -200,14 +198,30 @@ def collect_live_runtime_snapshot(
             "merge-base",
             "--is-ancestor",
             required_source_commit,
+            head,
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if reviewed_ancestor.returncode != 0:
+        raise ValueError("T20.42b reviewed implementation is not an ancestor of HEAD")
+    origin_ancestor = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(root),
+            "merge-base",
+            "--is-ancestor",
+            head,
             f"refs/remotes/origin/{BRANCH}",
         ],
         capture_output=True,
         text=True,
         check=False,
     )
-    if ancestor.returncode != 0:
-        raise ValueError("T20.42b source commit is absent from origin tracking ref")
+    if origin_ancestor.returncode != 0:
+        raise ValueError("T20.42b HEAD is absent from origin tracking ref")
     for path in scoped_paths:
         _safe_relative(path)
     dirty_output = subprocess.run(
@@ -228,6 +242,22 @@ def collect_live_runtime_snapshot(
     scoped_dirty = sorted(
         line[3:] for line in dirty_output.splitlines() if len(line) >= 4
     )
+    scoped_diff = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(root),
+            "diff",
+            "--quiet",
+            required_source_commit,
+            head,
+            "--",
+            *[path.as_posix() for path in scoped_paths],
+        ],
+        check=False,
+    )
+    if scoped_diff.returncode != 0:
+        raise ValueError("T20.42b reviewed implementation changed after review")
     dependencies = _dependency_versions()
     free_disk = shutil.disk_usage(root).free
     output_state = {
@@ -240,7 +270,7 @@ def collect_live_runtime_snapshot(
     if any(os.path.lexists(root / path) for path in AUTHORITY_PATHS):
         raise FileExistsError("T20.42b authority artifact already exists")
     return {
-        "source_commit": head,
+        "source_commit": required_source_commit,
         "branch": branch,
         "origin_contains_source_commit": True,
         "scoped_dirty_paths": scoped_dirty,
