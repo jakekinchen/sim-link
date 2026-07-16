@@ -22,6 +22,18 @@ Generated from tracked parametric source and independently parsed from every fin
 
 All 13 meshes open as binary STL, have zero boundary/non-manifold edges, zero duplicate or degenerate faces, consistent stored normals, positive signed volume, and matching Blender source validation.
 
+## Batched 3MF plate results
+
+| Plate | Bed mm | Objects | Min edge mm | Min spacing mm | 3MF |
+|---|---|---|---|---|---|
+| WCW-1A_R1_Bambu_plate00_fit-coupon_fits180mm.3mf | 180 x 180 | 1 | 45.0 | n/a | PASS |
+| WCW-1A_R1_Bambu_256mm_plate01_full-production-kit.3mf | 256 x 256 | 12 | 10.0 | 10.0 | PASS |
+| WCW-1A_R1_Bambu_180mm_plate01_C1-fit-check.3mf | 180 x 180 | 2 | 57.0 | 16.0 | PASS |
+| WCW-1A_R1_Bambu_180mm_plate02_remaining-hardware.3mf | 180 x 180 | 9 | 8.0 | 6.0 | PASS |
+| WCW-1A_R1_Bambu_180mm_plate03_body.3mf | 180 x 180 | 1 | 60.0 | n/a | PASS |
+
+Every plate is a CRC-valid 3MF Core OPC package in millimetres with independent named mesh objects and explicit build translations. All vertices are finite; triangle indices, object counts, source-STL hashes/counts/bounds, support-free orientations, z=0 placement, edge margins, pairwise spacing, and declared-bed bounds pass. The common 256 mm path is two jobs including the coupon; the 180 mm fallback is four. Bambu Studio is not installed on this Mac, so a native slicer-open test was not claimed; Zane must select his actual profile and review the slice preview.
+
 ## Assembled mass and center of mass
 
 | Config | Balls | Est. mass g | CoM x,y,z mm | Shift from C0 mm |

@@ -97,8 +97,8 @@
       "Author:          SceneSmith WCW-1A release generator",
       "Creator:         anonymous",
       "Producer:        ReportLab PDF Library - (opensource)",
-      "CreationDate:    Thu Jul 16 18:10:51 2026 CDT",
-      "ModDate:         Thu Jul 16 18:10:51 2026 CDT",
+      "CreationDate:    Thu Jul 16 18:29:24 2026 CDT",
+      "ModDate:         Thu Jul 16 18:29:24 2026 CDT",
       "Custom Metadata: no",
       "Metadata Stream: no",
       "Tagged:          no",
@@ -115,7 +115,7 @@
       "PDF version:     1.4"
     ],
     "print_instruction_present": true,
-    "sha256": "87a94cd8d093a4ef829273067cff0f22df8d3cce8c63874fc3b8855a05ecff8c",
+    "sha256": "6a4220e9a928cba305711f04352f062c8b768f6e9e79fb66598a9e1305ca7202",
     "verification_line_mm": 100.0
   },
   "schema_version": "scenesmith.wcw1a_apriltag_validation.v1"

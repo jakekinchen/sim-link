@@ -9,3 +9,5 @@
 - 5 printed AprilTag 36h11 paper/vinyl labels from the included 1:1 PDF: IDs 0-4.
 - Matte PLA/PLA+, preferably white/light gray for the body. Internal colors may use ordinary filament already available.
 - Label adhesive or self-adhesive label stock. No screws, magnets, threaded inserts, or precision purchased hardware are required.
+
+The `plates/` directory batches these same copy counts into a two-job 256 mm route or four-job 180 mm route. Do not print both routes.

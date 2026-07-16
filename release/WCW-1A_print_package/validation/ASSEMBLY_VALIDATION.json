@@ -6,7 +6,7 @@
       "ball_count": 0,
       "center_of_mass_body_frame_mm": [
         -0.32891205523007383,
-        -0.01990070072349214,
+        -0.019900700723492145,
         -8.722299603405704
       ],
       "center_of_mass_shift_from_C0_mm": [
@@ -32,7 +32,7 @@
       ],
       "center_of_mass_shift_from_C0_mm": [
         -0.15204221337873014,
-        0.004573880356940197,
+        0.0045738803569402,
         -0.9764855032405286
       ],
       "estimated_solid_printed_plus_nominal_ball_mass_g": 133.79875952012142
@@ -79,7 +79,7 @@
       ],
       "center_of_mass_shift_from_C0_mm": [
         -0.25865558404737476,
-        0.008630582331385658,
+        0.008630582331385661,
         -1.6574450369367337
       ],
       "estimated_solid_printed_plus_nominal_ball_mass_g": 157.66483143314838
@@ -100,12 +100,12 @@
       "ball_count": 2,
       "center_of_mass_body_frame_mm": [
         -0.5881101932316103,
-        -0.01040215579568178,
+        -0.010402155795681779,
         -10.37992774733078
       ],
       "center_of_mass_shift_from_C0_mm": [
         -0.25919813800153646,
-        0.009498544927810361,
+        0.009498544927810366,
         -1.657628143925077
       ],
       "estimated_solid_printed_plus_nominal_ball_mass_g": 157.65935672180962
@@ -170,7 +170,7 @@
     "C1_C2_y_com_shift_mm": 2.6781986658492487,
     "C3_C4_ball_count_equal": true,
     "C3_C4_estimated_mass_difference_g": 0.005474711338763427,
-    "C3_C4_y_com_difference_mm": 0.0008679625964247029,
+    "C3_C4_y_com_difference_mm": 0.0008679625964247047,
     "C3_ball_second_moment_y2_mm2": 242.0,
     "C4_ball_second_moment_y2_mm2": 450.0
   },

@@ -36,6 +36,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from scenesmith.robot_lab.wcw1a_spec import TagPlacement, Wcw1aSpec  # noqa: E402
+from scenesmith.robot_lab.wcw1a_batched_plates import build_batched_plate_assets  # noqa: E402
 
 
 SPEC = Wcw1aSpec()
@@ -560,7 +561,7 @@ def markdown_table(rows: list[list[str]], headers: list[str]) -> str:
     )
 
 
-def write_docs(root: Path, stl: dict, assembly: dict) -> None:
+def write_docs(root: Path, stl: dict, assembly: dict, batched: dict) -> None:
     stl_rows = []
     for record in stl["records"]:
         dims = " x ".join(f"{value:.2f}" for value in record["dimensions_mm"])
@@ -570,10 +571,34 @@ def write_docs(root: Path, stl: dict, assembly: dict) -> None:
         com = record["center_of_mass_body_frame_mm"]
         shift = record["center_of_mass_shift_from_C0_mm"]
         assembly_rows.append([name, str(record["ball_count"]), f"{record['estimated_solid_printed_plus_nominal_ball_mass_g']:.2f}", f"({com[0]:.3f}, {com[1]:.3f}, {com[2]:.3f})", f"({shift[0]:.3f}, {shift[1]:.3f}, {shift[2]:.3f})"])
+    plate_rows = [
+        [Path(record["file"]).name, " x ".join(f"{value:.0f}" for value in record["bed_mm"]), str(record["object_count"]), record["route"]]
+        for record in batched["plates"]
+    ]
 
     readme = f"""# WCW-1A printing instructions
 
-This package is ready to slice in millimetres. Print every STL as a separate part; do not arrange an assembled cube in the slicer.
+This replacement package is ready to slice in millimetres. Prefer the arranged 3MF plate files below; the individual STLs remain available as a fallback or for reprinting one damaged part. Never import the assembled render as geometry.
+
+## Bambu Studio batched print paths
+
+The 3MF files contain independent, named objects already rotated into the documented support-free orientations and arranged at z=0. They are standard 3MF files, not a printer-specific sliced job: in Bambu Studio, select the actual printer/nozzle/plate and the settings below, confirm every object remains on the bed, and slice. Do not use auto-arrange unless you intentionally want to replace the verified spacing.
+
+**Preferred 256 x 256 mm path (typical Bambu A1, P1, and X1 class): two print jobs total.**
+
+1. Print `plates/WCW-1A_R1_Bambu_plate00_fit-coupon_fits180mm.3mf`. Let it cool and verify all six selected balls pass the 20.8 mm ring.
+2. If the coupon passes, print `plates/WCW-1A_R1_Bambu_256mm_plate01_full-production-kit.3mf`. It contains all 12 production parts exactly once: body, lid, five carriers, and five retainers.
+
+**180 x 180 mm fallback (Bambu A1 mini or another small bed): four print jobs total.**
+
+1. Universal fit coupon above.
+2. `plates/WCW-1A_R1_Bambu_180mm_plate01_C1-fit-check.3mf` - C1 carrier and retainer.
+3. After the C1 pair slides and detents correctly, `plates/WCW-1A_R1_Bambu_180mm_plate02_remaining-hardware.3mf` - the other eight cartridge parts plus lid.
+4. `plates/WCW-1A_R1_Bambu_180mm_plate03_body.3mf` - body alone for the safest tall-part adhesion.
+
+{markdown_table(plate_rows, ['3MF plate', 'Declared bed mm', 'Objects', 'Route'])}
+
+Use one filament for a no-intervention batch. If an AMS is available, Zane may assign white/light gray to the body and neutral colors to internal objects, but color assignment is optional and is not embedded in these neutral standard 3MFs.
 
 ## Primary material and settings
 
@@ -587,7 +612,7 @@ This package is ready to slice in millimetres. Print every STL as a separate par
 
 ## Print the coupon first
 
-Print `WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl`. After cooling, every ball intended for the kit must pass freely through the labeled 20.8 mm ring. The 20.4 and 20.6 mm rings show the printer's actual hole bias. If 20.8 mm does not pass, use the slicer's hole-size compensation to recover the measured 20.8 mm opening (typically about +0.10 mm, never more than +0.20 mm without rechecking), reprint the coupon, and do not scale the whole model.
+Use `plates/WCW-1A_R1_Bambu_plate00_fit-coupon_fits180mm.3mf`; the equivalent individual fallback is `stl/WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl`. After cooling, every ball intended for the kit must pass freely through the labeled 20.8 mm ring. The 20.4 and 20.6 mm rings show the printer's actual hole bias. If 20.8 mm does not pass, use the slicer's hole-size compensation to recover the measured 20.8 mm opening (typically about +0.10 mm, never more than +0.20 mm without rechecking), reprint the coupon, and do not scale the whole model.
 
 ## Copy count and orientation
 
@@ -599,7 +624,7 @@ Print `WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl`. After cooling, every bal
 - C0-C4 retainers: flat exterior face on the bed; spring bosses upward.
 - Coupon: broad flat face on the bed, engraved labels upward.
 
-Recommended order: coupon; one C1 carrier and C1 retainer for fit confirmation; remaining carriers/retainers; lid; body last.
+Recommended order is the two-job 256 mm path when the selected Bambu profile shows a 256 x 256 mm bed; otherwise use the four-job 180 mm fallback. The individual-STL order remains coupon; C1 carrier/retainer; remaining hardware; body.
 
 The AprilTag PDF/PNGs are labels. Do not print them as plastic geometry. Print the PDF at Actual Size / 100%, verify the 100.0 mm line, cut on the gray border, and apply after dimensional QC.
 """
@@ -653,12 +678,17 @@ Use `renders/WCW-1A_tag_placement_diagram.png`. IDs: top/+z 0, +y 1, -y 2, +x 3,
 - 5 printed AprilTag 36h11 paper/vinyl labels from the included 1:1 PDF: IDs 0-4.
 - Matte PLA/PLA+, preferably white/light gray for the body. Internal colors may use ordinary filament already available.
 - Label adhesive or self-adhesive label stock. No screws, magnets, threaded inserts, or precision purchased hardware are required.
+
+The `plates/` directory batches these same copy counts into a two-job 256 mm route or four-job 180 mm route. Do not print both routes.
 """
     (root / "BOM.md").write_text(bom, encoding="utf-8")
 
     qc = """# WCW-1A QC checklist
 
 - [ ] Print at 100% scale in millimetres; do not scale any STL.
+- [ ] In Bambu Studio, select the actual printer and 0.4 mm nozzle before slicing; confirm the chosen 3MF route fits that displayed bed.
+- [ ] The arranged 3MF objects remain at z=0 with no auto-arrange, duplicates, overlap, or out-of-bed warning.
+- [ ] Print only one route: coupon + 256 mm full kit, or coupon + the three 180 mm fallback plates.
 - [ ] All six selected balls pass the cooled 20.8 mm coupon ring freely.
 - [ ] Body measures 40.0 x 60.0 x 65.0 mm within the printer's normal tolerance.
 - [ ] Body grasp faces are flat across the central 18 mm band with no brim scar or tag overlap.
@@ -683,6 +713,12 @@ Generated from tracked parametric source and independently parsed from every fin
 {markdown_table([[Path(r['file']).name, ' x '.join(f'{v:.2f}' for v in r['dimensions_mm']), str(r['unique_vertex_count']), str(r['triangle_count']), f"{r['volume_mm3']:.1f}", f"{r['solid_pla_mass_estimate_g']:.2f}", 'PASS'] for r in stl['records']], ['File', 'Bounds mm', 'Vertices', 'Faces', 'Volume mm3', 'PLA g', 'Mesh'])}
 
 All 13 meshes open as binary STL, have zero boundary/non-manifold edges, zero duplicate or degenerate faces, consistent stored normals, positive signed volume, and matching Blender source validation.
+
+## Batched 3MF plate results
+
+{markdown_table([[Path(record['file']).name, ' x '.join(f'{value:.0f}' for value in record['bed_mm']), str(record['object_count']), f"{record['minimum_edge_margin_actual_mm']:.1f}", 'n/a' if record['minimum_pairwise_spacing_actual_mm'] is None else f"{record['minimum_pairwise_spacing_actual_mm']:.1f}", 'PASS'] for record in batched['plates']], ['Plate', 'Bed mm', 'Objects', 'Min edge mm', 'Min spacing mm', '3MF'])}
+
+Every plate is a CRC-valid 3MF Core OPC package in millimetres with independent named mesh objects and explicit build translations. All vertices are finite; triangle indices, object counts, source-STL hashes/counts/bounds, support-free orientations, z=0 placement, edge margins, pairwise spacing, and declared-bed bounds pass. The common 256 mm path is two jobs including the coupon; the 180 mm fallback is four. Bambu Studio is not installed on this Mac, so a native slicer-open test was not claimed; Zane must select his actual profile and review the slice preview.
 
 ## Assembled mass and center of mass
 
@@ -719,6 +755,13 @@ No software-only workflow can prove a specific printer's hole bias, layer adhesi
 
     changelog = """# WCW-1A changelog
 
+## WCW-1A-R1.1 batched packaging - 2026-07-16
+
+- Added a standard-3MF 256 x 256 mm full-production plate containing all 12 cube parts in one job after the fit coupon.
+- Added a conservative four-job 180 x 180 mm fallback: coupon, C1 fit pair, remaining hardware/lid, and body.
+- Bound every named 3MF object to its source STL hash, verified support-free orientation, z=0 placement, object spacing, bed margins, XML/OPC structure, CRC, and triangle indices.
+- Added five rendered top-view plate maps and explicit Bambu Studio printer-profile/slice-review instructions. Frozen part geometry and AprilTag artwork are unchanged.
+
 ## WCW-1A-R1 - 2026-07-16
 
 - Replaced the historical WCW-1 exact-20.000-mm/G25 assumption with a parameterized 20.0 mm nominal ball plus 0.8 mm diametral FDM fit allowance and 19.8-20.2 mm expected ordinary-ball range.
@@ -736,6 +779,7 @@ def copy_sources(root: Path) -> None:
     source.mkdir(parents=True, exist_ok=True)
     for path in (
         REPO_ROOT / "scenesmith" / "robot_lab" / "wcw1a_spec.py",
+        REPO_ROOT / "scenesmith" / "robot_lab" / "wcw1a_batched_plates.py",
         REPO_ROOT / "scripts" / "robot_lab" / "wcw1a_cad.py",
         REPO_ROOT / "scripts" / "robot_lab" / "build_wcw1a_release.py",
     ):
@@ -799,6 +843,9 @@ def build_zip(root: Path, zip_path: Path) -> dict:
             f"{root.name}/QC_CHECKLIST.md",
             f"{root.name}/DESIGN_VALIDATION.md",
             f"{root.name}/MANIFEST.json",
+            f"{root.name}/plates/WCW-1A_R1_Bambu_plate00_fit-coupon_fits180mm.3mf",
+            f"{root.name}/plates/WCW-1A_R1_Bambu_256mm_plate01_full-production-kit.3mf",
+            f"{root.name}/validation/BATCHED_PLATE_VALIDATION.json",
         }
         if not required <= set(names):
             raise RuntimeError(f"ZIP missing required files: {required - set(names)}")
@@ -859,7 +906,11 @@ def main() -> None:
     (build_dir / "validation" / "ASSEMBLY_VALIDATION.json").write_text(
         json.dumps(assembly, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
-    write_docs(build_dir, stl_validation, assembly)
+    batched = build_batched_plate_assets(build_dir)
+    (build_dir / "validation" / "BATCHED_PLATE_VALIDATION.json").write_text(
+        json.dumps(batched, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    write_docs(build_dir, stl_validation, assembly, batched)
     copy_sources(build_dir)
     manifest = write_manifest(build_dir, stl_validation)
 
@@ -887,6 +938,10 @@ def main() -> None:
         "reversible_assembly": True,
         "cartridges_uniquely_identified": True,
         "grasp_tags_unobstructed": True,
+        "batched_3mf_plates_verified": True,
+        "primary_256mm_print_job_count_including_coupon": 2,
+        "fallback_180mm_print_job_count_including_coupon": 4,
+        "bambu_studio_local_open_test": "not_run_bambu_studio_not_installed",
         "zip_verified": True,
     }
     (release_dir / "validation" / "FINAL_GATE.json").write_text(

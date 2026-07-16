@@ -1,0 +1,843 @@
+{
+  "actual_printer_profile_must_be_selected_before_slicing": true,
+  "bambu_studio_local_open_test": "not_run_bambu_studio_not_installed",
+  "fallback_180mm_route": {
+    "all_parts_exactly_once": true,
+    "plates": [
+      "universal_coupon",
+      "bambu_180_c1_fit",
+      "bambu_180_remaining",
+      "bambu_180_body"
+    ],
+    "print_job_count_including_coupon": 4
+  },
+  "package_revision": "WCW-1A-R1.1-batched",
+  "plates": [
+    {
+      "all_objects_at_z0": true,
+      "all_objects_within_declared_bed": true,
+      "all_triangle_indices_valid": true,
+      "bed_mm": [
+        180.0,
+        180.0
+      ],
+      "crc_test_passed": true,
+      "file": "plates/WCW-1A_R1_Bambu_plate00_fit-coupon_fits180mm.3mf",
+      "format": "3MF Core standard OPC package",
+      "job_number": 0,
+      "key": "universal_coupon",
+      "layout_render": "renders/WCW-1A_R1_Bambu_plate00_fit-coupon_fits180mm_layout.png",
+      "minimum_edge_margin_actual_mm": 45.0,
+      "minimum_edge_margin_required_mm": 8.0,
+      "minimum_pairwise_spacing_actual_mm": null,
+      "minimum_pairwise_spacing_required_mm": 6.0,
+      "object_count": 1,
+      "objects": [
+        {
+          "label": "Ball-fit coupon",
+          "part_key": "coupon",
+          "plate_bounds_mm": {
+            "dimensions": [
+              90.0,
+              38.0,
+              4.0
+            ],
+            "max": [
+              135.0,
+              109.0,
+              4.0
+            ],
+            "min": [
+              45.0,
+              71.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_z_face_down",
+          "source_stl": "stl/WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl",
+          "source_stl_sha256": "a32926234143b41ffffa2d898feae9507cb8ccc012410e1d67523f5201e89d10",
+          "triangle_count": 5340,
+          "vertex_count": 2666
+        }
+      ],
+      "opc_entries": [
+        "3D/3dmodel.model",
+        "[Content_Types].xml",
+        "_rels/.rels"
+      ],
+      "route": "universal_preflight",
+      "sha256": "42fe0aed56ed60d55a7ef50aa234fa6ca7ef8e1d581ff4f6d6b538c41e7ab750",
+      "size_bytes": 53514,
+      "source_stl_counts_and_bounds_match": true,
+      "title": "WCW-1A fit coupon - fits 180 mm and larger plates",
+      "units": "millimeter"
+    },
+    {
+      "all_objects_at_z0": true,
+      "all_objects_within_declared_bed": true,
+      "all_triangle_indices_valid": true,
+      "bed_mm": [
+        256.0,
+        256.0
+      ],
+      "crc_test_passed": true,
+      "file": "plates/WCW-1A_R1_Bambu_256mm_plate01_full-production-kit.3mf",
+      "format": "3MF Core standard OPC package",
+      "job_number": 1,
+      "key": "bambu_256_full_kit",
+      "layout_render": "renders/WCW-1A_R1_Bambu_256mm_plate01_full-production-kit_layout.png",
+      "minimum_edge_margin_actual_mm": 10.0,
+      "minimum_edge_margin_required_mm": 10.0,
+      "minimum_pairwise_spacing_actual_mm": 9.999998000000005,
+      "minimum_pairwise_spacing_required_mm": 10.0,
+      "object_count": 12,
+      "objects": [
+        {
+          "label": "Body",
+          "part_key": "body",
+          "plate_bounds_mm": {
+            "dimensions": [
+              40.0,
+              60.0,
+              65.0
+            ],
+            "max": [
+              50.0,
+              70.0,
+              65.0
+            ],
+            "min": [
+              10.0,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "top_face_down",
+          "source_stl": "stl/WCW-1A_R1_body_top-down.stl",
+          "source_stl_sha256": "e6593655be627c3b22ed9edc68a46ebe7b1c0ed19842e2e6544200cbb2afe9af",
+          "triangle_count": 178,
+          "vertex_count": 91
+        },
+        {
+          "label": "Bottom lid",
+          "part_key": "lid",
+          "plate_bounds_mm": {
+            "dimensions": [
+              39.400002,
+              59.400002,
+              6.1
+            ],
+            "max": [
+              99.400002,
+              69.400002,
+              6.1
+            ],
+            "min": [
+              60.0,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_z_face_down",
+          "source_stl": "stl/WCW-1A_R1_bottom-lid_outer-face-down.stl",
+          "source_stl_sha256": "38b53e2ade9b97c73e503a26db850e5c515481b5f0a7bde276b6e449ea7e94c9",
+          "triangle_count": 476,
+          "vertex_count": 240
+        },
+        {
+          "label": "C0 carrier",
+          "part_key": "C0_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              134.4,
+              64.400002,
+              33.5
+            ],
+            "min": [
+              109.4,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C0_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "a1d1aac1122064dcd24b498fc389dee72c018f14b809d743be3fc6244c53c890",
+          "triangle_count": 302,
+          "vertex_count": 153
+        },
+        {
+          "label": "C0 retainer",
+          "part_key": "C0_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              1.6
+            ],
+            "max": [
+              69.0,
+              129.9,
+              1.6
+            ],
+            "min": [
+              45.0,
+              80.0,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C0_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "fb9788dc3cf1f4fd2389b5d3ff2a689e90020f52730db394fd06a9e61e229512",
+          "triangle_count": 1650,
+          "vertex_count": 825
+        },
+        {
+          "label": "C1 carrier",
+          "part_key": "C1_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              169.4,
+              64.400002,
+              33.5
+            ],
+            "min": [
+              144.4,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C1_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "4a3789715275915e2d40ac489ed2daa0677eb3374ac2ac231b21ae12983c587c",
+          "triangle_count": 696,
+          "vertex_count": 350
+        },
+        {
+          "label": "C1 retainer",
+          "part_key": "C1_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              5.900001
+            ],
+            "max": [
+              103.0,
+              129.9,
+              5.900001
+            ],
+            "min": [
+              79.0,
+              80.0,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C1_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "fad15e69c6a80bd90366e04e3189327c4459e20fc40d7472764dc8cd03f2ed9f",
+          "triangle_count": 2356,
+          "vertex_count": 1174
+        },
+        {
+          "label": "C2 carrier",
+          "part_key": "C2_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              204.4,
+              64.400002,
+              33.5
+            ],
+            "min": [
+              179.4,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C2_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "5519d54a4ece4d11432d6b3bd4c51e4bd8bb6779d17ebba623e4527608d675b8",
+          "triangle_count": 702,
+          "vertex_count": 353
+        },
+        {
+          "label": "C2 retainer",
+          "part_key": "C2_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              5.900001
+            ],
+            "max": [
+              137.0,
+              129.9,
+              5.900001
+            ],
+            "min": [
+              113.0,
+              80.0,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C2_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "b1877b76939e244fdd18cd7d40b863c22e5da7858c0f5ec7e0b6f86c53611d91",
+          "triangle_count": 2624,
+          "vertex_count": 1306
+        },
+        {
+          "label": "C3 carrier",
+          "part_key": "C3_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              239.4,
+              64.400002,
+              33.5
+            ],
+            "min": [
+              214.4,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C3_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "718e47046b653c1960613fbbd82ce3f3349b285e62c88a524b5a70048a62d598",
+          "triangle_count": 1080,
+          "vertex_count": 542
+        },
+        {
+          "label": "C3 retainer",
+          "part_key": "C3_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              5.900001
+            ],
+            "max": [
+              171.0,
+              129.9,
+              5.900001
+            ],
+            "min": [
+              147.0,
+              80.0,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C3_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "3776deb94457e035a45bedf833e18ff1e1ae459b6b1b201b428e0cd86ac27109",
+          "triangle_count": 3326,
+          "vertex_count": 1653
+        },
+        {
+          "label": "C4 carrier",
+          "part_key": "C4_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              35.0,
+              134.400002,
+              33.5
+            ],
+            "min": [
+              10.0,
+              80.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C4_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "2eddf3ea2d1af13c526e3302947682d88c68ee7af5c6ed6d7b82eab789a49791",
+          "triangle_count": 1102,
+          "vertex_count": 553
+        },
+        {
+          "label": "C4 retainer",
+          "part_key": "C4_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              5.900001
+            ],
+            "max": [
+              205.0,
+              129.9,
+              5.900001
+            ],
+            "min": [
+              181.0,
+              80.0,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C4_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "6ec108f7c1b43b80d16e3e0b5d6e9acd85639690781aa94c9245dcfd98cd6321",
+          "triangle_count": 3600,
+          "vertex_count": 1788
+        }
+      ],
+      "opc_entries": [
+        "3D/3dmodel.model",
+        "[Content_Types].xml",
+        "_rels/.rels"
+      ],
+      "route": "primary_256mm",
+      "sha256": "bd5ffcacecef7801460e3e3fabaf64796afadb1726341f71025c66eaf42f0498",
+      "size_bytes": 165580,
+      "source_stl_counts_and_bounds_match": true,
+      "title": "WCW-1A complete 12-part production kit - 256 mm plate",
+      "units": "millimeter"
+    },
+    {
+      "all_objects_at_z0": true,
+      "all_objects_within_declared_bed": true,
+      "all_triangle_indices_valid": true,
+      "bed_mm": [
+        180.0,
+        180.0
+      ],
+      "crc_test_passed": true,
+      "file": "plates/WCW-1A_R1_Bambu_180mm_plate01_C1-fit-check.3mf",
+      "format": "3MF Core standard OPC package",
+      "job_number": 1,
+      "key": "bambu_180_c1_fit",
+      "layout_render": "renders/WCW-1A_R1_Bambu_180mm_plate01_C1-fit-check_layout.png",
+      "minimum_edge_margin_actual_mm": 57.0,
+      "minimum_edge_margin_required_mm": 8.0,
+      "minimum_pairwise_spacing_actual_mm": 16.0,
+      "minimum_pairwise_spacing_required_mm": 6.0,
+      "object_count": 2,
+      "objects": [
+        {
+          "label": "C1 carrier",
+          "part_key": "C1_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              82.0,
+              117.200002,
+              33.5
+            ],
+            "min": [
+              57.0,
+              62.8,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C1_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "4a3789715275915e2d40ac489ed2daa0677eb3374ac2ac231b21ae12983c587c",
+          "triangle_count": 696,
+          "vertex_count": 350
+        },
+        {
+          "label": "C1 retainer",
+          "part_key": "C1_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              5.900001
+            ],
+            "max": [
+              122.0,
+              114.94999999999999,
+              5.900001
+            ],
+            "min": [
+              98.0,
+              65.05,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C1_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "fad15e69c6a80bd90366e04e3189327c4459e20fc40d7472764dc8cd03f2ed9f",
+          "triangle_count": 2356,
+          "vertex_count": 1174
+        }
+      ],
+      "opc_entries": [
+        "3D/3dmodel.model",
+        "[Content_Types].xml",
+        "_rels/.rels"
+      ],
+      "route": "fallback_180mm",
+      "sha256": "4d692913b2ae3c63ae884b4817f137d34812234a511a00738ebe925981b467e1",
+      "size_bytes": 29397,
+      "source_stl_counts_and_bounds_match": true,
+      "title": "WCW-1A C1 carrier and retainer fit check - 180 mm plate",
+      "units": "millimeter"
+    },
+    {
+      "all_objects_at_z0": true,
+      "all_objects_within_declared_bed": true,
+      "all_triangle_indices_valid": true,
+      "bed_mm": [
+        180.0,
+        180.0
+      ],
+      "crc_test_passed": true,
+      "file": "plates/WCW-1A_R1_Bambu_180mm_plate02_remaining-hardware.3mf",
+      "format": "3MF Core standard OPC package",
+      "job_number": 2,
+      "key": "bambu_180_remaining",
+      "layout_render": "renders/WCW-1A_R1_Bambu_180mm_plate02_remaining-hardware_layout.png",
+      "minimum_edge_margin_actual_mm": 8.0,
+      "minimum_edge_margin_required_mm": 8.0,
+      "minimum_pairwise_spacing_actual_mm": 6.0,
+      "minimum_pairwise_spacing_required_mm": 6.0,
+      "object_count": 9,
+      "objects": [
+        {
+          "label": "C0 carrier",
+          "part_key": "C0_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              33.0,
+              64.400002,
+              33.5
+            ],
+            "min": [
+              8.0,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C0_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "a1d1aac1122064dcd24b498fc389dee72c018f14b809d743be3fc6244c53c890",
+          "triangle_count": 302,
+          "vertex_count": 153
+        },
+        {
+          "label": "C2 carrier",
+          "part_key": "C2_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              64.0,
+              64.400002,
+              33.5
+            ],
+            "min": [
+              39.0,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C2_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "5519d54a4ece4d11432d6b3bd4c51e4bd8bb6779d17ebba623e4527608d675b8",
+          "triangle_count": 702,
+          "vertex_count": 353
+        },
+        {
+          "label": "C3 carrier",
+          "part_key": "C3_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              95.0,
+              64.400002,
+              33.5
+            ],
+            "min": [
+              70.0,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C3_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "718e47046b653c1960613fbbd82ce3f3349b285e62c88a524b5a70048a62d598",
+          "triangle_count": 1080,
+          "vertex_count": 542
+        },
+        {
+          "label": "C4 carrier",
+          "part_key": "C4_carrier",
+          "plate_bounds_mm": {
+            "dimensions": [
+              25.0,
+              54.400002,
+              33.5
+            ],
+            "max": [
+              126.0,
+              64.400002,
+              33.5
+            ],
+            "min": [
+              101.0,
+              10.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C4_carrier_print-minus-x-face-down.stl",
+          "source_stl_sha256": "2eddf3ea2d1af13c526e3302947682d88c68ee7af5c6ed6d7b82eab789a49791",
+          "triangle_count": 1102,
+          "vertex_count": 553
+        },
+        {
+          "label": "Bottom lid",
+          "part_key": "lid",
+          "plate_bounds_mm": {
+            "dimensions": [
+              39.400002,
+              59.400002,
+              6.1
+            ],
+            "max": [
+              171.400002,
+              67.400002,
+              6.1
+            ],
+            "min": [
+              132.0,
+              8.0,
+              0.0
+            ]
+          },
+          "source_orientation": "minus_z_face_down",
+          "source_stl": "stl/WCW-1A_R1_bottom-lid_outer-face-down.stl",
+          "source_stl_sha256": "38b53e2ade9b97c73e503a26db850e5c515481b5f0a7bde276b6e449ea7e94c9",
+          "triangle_count": 476,
+          "vertex_count": 240
+        },
+        {
+          "label": "C0 retainer",
+          "part_key": "C0_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              1.6
+            ],
+            "max": [
+              32.0,
+              123.9,
+              1.6
+            ],
+            "min": [
+              8.0,
+              74.0,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C0_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "fb9788dc3cf1f4fd2389b5d3ff2a689e90020f52730db394fd06a9e61e229512",
+          "triangle_count": 1650,
+          "vertex_count": 825
+        },
+        {
+          "label": "C2 retainer",
+          "part_key": "C2_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              5.900001
+            ],
+            "max": [
+              62.0,
+              123.9,
+              5.900001
+            ],
+            "min": [
+              38.0,
+              74.0,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C2_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "b1877b76939e244fdd18cd7d40b863c22e5da7858c0f5ec7e0b6f86c53611d91",
+          "triangle_count": 2624,
+          "vertex_count": 1306
+        },
+        {
+          "label": "C3 retainer",
+          "part_key": "C3_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              5.900001
+            ],
+            "max": [
+              92.0,
+              123.9,
+              5.900001
+            ],
+            "min": [
+              68.0,
+              74.0,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C3_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "3776deb94457e035a45bedf833e18ff1e1ae459b6b1b201b428e0cd86ac27109",
+          "triangle_count": 3326,
+          "vertex_count": 1653
+        },
+        {
+          "label": "C4 retainer",
+          "part_key": "C4_retainer",
+          "plate_bounds_mm": {
+            "dimensions": [
+              24.0,
+              49.9,
+              5.900001
+            ],
+            "max": [
+              122.0,
+              123.9,
+              5.900001
+            ],
+            "min": [
+              98.0,
+              74.0,
+              0.0
+            ]
+          },
+          "source_orientation": "plus_x_face_down",
+          "source_stl": "stl/WCW-1A_R1_C4_ball-retainer_exterior-face-down.stl",
+          "source_stl_sha256": "6ec108f7c1b43b80d16e3e0b5d6e9acd85639690781aa94c9245dcfd98cd6321",
+          "triangle_count": 3600,
+          "vertex_count": 1788
+        }
+      ],
+      "opc_entries": [
+        "3D/3dmodel.model",
+        "[Content_Types].xml",
+        "_rels/.rels"
+      ],
+      "route": "fallback_180mm",
+      "sha256": "8c232c6b08a824eaefc0044e44fed0e5387078463b5075b6f5fbac249f9db172",
+      "size_bytes": 135871,
+      "source_stl_counts_and_bounds_match": true,
+      "title": "WCW-1A remaining carriers, retainers, and lid - 180 mm plate",
+      "units": "millimeter"
+    },
+    {
+      "all_objects_at_z0": true,
+      "all_objects_within_declared_bed": true,
+      "all_triangle_indices_valid": true,
+      "bed_mm": [
+        180.0,
+        180.0
+      ],
+      "crc_test_passed": true,
+      "file": "plates/WCW-1A_R1_Bambu_180mm_plate03_body.3mf",
+      "format": "3MF Core standard OPC package",
+      "job_number": 3,
+      "key": "bambu_180_body",
+      "layout_render": "renders/WCW-1A_R1_Bambu_180mm_plate03_body_layout.png",
+      "minimum_edge_margin_actual_mm": 60.0,
+      "minimum_edge_margin_required_mm": 8.0,
+      "minimum_pairwise_spacing_actual_mm": null,
+      "minimum_pairwise_spacing_required_mm": 6.0,
+      "object_count": 1,
+      "objects": [
+        {
+          "label": "Body",
+          "part_key": "body",
+          "plate_bounds_mm": {
+            "dimensions": [
+              40.0,
+              60.0,
+              65.0
+            ],
+            "max": [
+              110.0,
+              120.0,
+              65.0
+            ],
+            "min": [
+              70.0,
+              60.0,
+              0.0
+            ]
+          },
+          "source_orientation": "top_face_down",
+          "source_stl": "stl/WCW-1A_R1_body_top-down.stl",
+          "source_stl_sha256": "e6593655be627c3b22ed9edc68a46ebe7b1c0ed19842e2e6544200cbb2afe9af",
+          "triangle_count": 178,
+          "vertex_count": 91
+        }
+      ],
+      "opc_entries": [
+        "3D/3dmodel.model",
+        "[Content_Types].xml",
+        "_rels/.rels"
+      ],
+      "route": "fallback_180mm",
+      "sha256": "8a3ddc6c9e7557e99a976ca9d41bb9ed128ab8d61feeff51c672a3ab06b59ecf",
+      "size_bytes": 2538,
+      "source_stl_counts_and_bounds_match": true,
+      "title": "WCW-1A body - 180 mm plate",
+      "units": "millimeter"
+    }
+  ],
+  "primary_256mm_route": {
+    "plates": [
+      "universal_coupon",
+      "bambu_256_full_kit"
+    ],
+    "print_job_count_including_coupon": 2,
+    "production_plate_object_count": 12
+  },
+  "schema_version": "scenesmith.wcw1a_batched_plate_validation.v1",
+  "slicer_profile_embedded": false,
+  "three_mf_core_namespace": "http://schemas.microsoft.com/3dmanufacturing/core/2015/02"
+}

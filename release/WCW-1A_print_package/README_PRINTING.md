@@ -1,6 +1,32 @@
 # WCW-1A printing instructions
 
-This package is ready to slice in millimetres. Print every STL as a separate part; do not arrange an assembled cube in the slicer.
+This replacement package is ready to slice in millimetres. Prefer the arranged 3MF plate files below; the individual STLs remain available as a fallback or for reprinting one damaged part. Never import the assembled render as geometry.
+
+## Bambu Studio batched print paths
+
+The 3MF files contain independent, named objects already rotated into the documented support-free orientations and arranged at z=0. They are standard 3MF files, not a printer-specific sliced job: in Bambu Studio, select the actual printer/nozzle/plate and the settings below, confirm every object remains on the bed, and slice. Do not use auto-arrange unless you intentionally want to replace the verified spacing.
+
+**Preferred 256 x 256 mm path (typical Bambu A1, P1, and X1 class): two print jobs total.**
+
+1. Print `plates/WCW-1A_R1_Bambu_plate00_fit-coupon_fits180mm.3mf`. Let it cool and verify all six selected balls pass the 20.8 mm ring.
+2. If the coupon passes, print `plates/WCW-1A_R1_Bambu_256mm_plate01_full-production-kit.3mf`. It contains all 12 production parts exactly once: body, lid, five carriers, and five retainers.
+
+**180 x 180 mm fallback (Bambu A1 mini or another small bed): four print jobs total.**
+
+1. Universal fit coupon above.
+2. `plates/WCW-1A_R1_Bambu_180mm_plate01_C1-fit-check.3mf` - C1 carrier and retainer.
+3. After the C1 pair slides and detents correctly, `plates/WCW-1A_R1_Bambu_180mm_plate02_remaining-hardware.3mf` - the other eight cartridge parts plus lid.
+4. `plates/WCW-1A_R1_Bambu_180mm_plate03_body.3mf` - body alone for the safest tall-part adhesion.
+
+| 3MF plate | Declared bed mm | Objects | Route |
+|---|---|---|---|
+| WCW-1A_R1_Bambu_plate00_fit-coupon_fits180mm.3mf | 180 x 180 | 1 | universal_preflight |
+| WCW-1A_R1_Bambu_256mm_plate01_full-production-kit.3mf | 256 x 256 | 12 | primary_256mm |
+| WCW-1A_R1_Bambu_180mm_plate01_C1-fit-check.3mf | 180 x 180 | 2 | fallback_180mm |
+| WCW-1A_R1_Bambu_180mm_plate02_remaining-hardware.3mf | 180 x 180 | 9 | fallback_180mm |
+| WCW-1A_R1_Bambu_180mm_plate03_body.3mf | 180 x 180 | 1 | fallback_180mm |
+
+Use one filament for a no-intervention batch. If an AMS is available, Zane may assign white/light gray to the body and neutral colors to internal objects, but color assignment is optional and is not embedded in these neutral standard 3MFs.
 
 ## Primary material and settings
 
@@ -14,7 +40,7 @@ This package is ready to slice in millimetres. Print every STL as a separate par
 
 ## Print the coupon first
 
-Print `WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl`. After cooling, every ball intended for the kit must pass freely through the labeled 20.8 mm ring. The 20.4 and 20.6 mm rings show the printer's actual hole bias. If 20.8 mm does not pass, use the slicer's hole-size compensation to recover the measured 20.8 mm opening (typically about +0.10 mm, never more than +0.20 mm without rechecking), reprint the coupon, and do not scale the whole model.
+Use `plates/WCW-1A_R1_Bambu_plate00_fit-coupon_fits180mm.3mf`; the equivalent individual fallback is `stl/WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl`. After cooling, every ball intended for the kit must pass freely through the labeled 20.8 mm ring. The 20.4 and 20.6 mm rings show the printer's actual hole bias. If 20.8 mm does not pass, use the slicer's hole-size compensation to recover the measured 20.8 mm opening (typically about +0.10 mm, never more than +0.20 mm without rechecking), reprint the coupon, and do not scale the whole model.
 
 ## Copy count and orientation
 
@@ -40,6 +66,6 @@ Print `WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl`. After cooling, every bal
 - C0-C4 retainers: flat exterior face on the bed; spring bosses upward.
 - Coupon: broad flat face on the bed, engraved labels upward.
 
-Recommended order: coupon; one C1 carrier and C1 retainer for fit confirmation; remaining carriers/retainers; lid; body last.
+Recommended order is the two-job 256 mm path when the selected Bambu profile shows a 256 x 256 mm bed; otherwise use the four-job 180 mm fallback. The individual-STL order remains coupon; C1 carrier/retainer; remaining hardware; body.
 
 The AprilTag PDF/PNGs are labels. Do not print them as plastic geometry. Print the PDF at Actual Size / 100%, verify the 100.0 mm line, cut on the gray border, and apply after dimensional QC.
