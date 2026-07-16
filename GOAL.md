@@ -937,6 +937,11 @@ and preserved on origin. Reviewer 255 permits the exact four cached packages
 to be installed offline and the corrected preflight to run. The attempt marker
 remains closed until the resulting closure, processor smoke, preflight, and
 one-use permit are committed, pushed, and origin-confirmed.
+The four-package offline correction is complete. The first uncounted preflight
+stopped before AutoProcessor on editable LeRobot's `PKG-INFO` metadata variant;
+correction `9e9272c` is remote and live recursive closure `ac8abed1...` passes
+across 57 active packages. Reviewer 256 permits one corrected preflight retry.
+No attempt marker exists.
 
 ## Durable State
 

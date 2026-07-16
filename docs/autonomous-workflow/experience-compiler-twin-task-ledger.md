@@ -1029,6 +1029,22 @@ offline installation and corrected preflight now. No attempt marker may exist
 until the resulting closure, processor smoke, preflight, and one-use permit are
 committed, pushed, and confirmed on origin.
 
+## 2026-07-16 - T20.36j offline correction complete; metadata collector corrected
+
+Offline uv resolution reverified cache result `8dec69ae...`, observed all four
+authorized packages absent, and installed exactly Accelerate 1.14.0, docopt
+0.6.2, num2words 0.5.14, and psutil 7.2.2 with offline/no-download flags. The
+first corrected-preflight call stopped before AutoProcessor because editable
+LeRobot exposes a second `egg-info/PKG-INFO` distribution alongside
+`dist-info/METADATA`. Both files have SHA-256 `ceb9917f...`; no preflight or
+attempt artifact was written. Correction `9e9272c` accepts either standard
+metadata filename and accepts duplicates only when version, metadata hash, and
+dependency rows agree. Live closure `ac8abed1...` now covers 57 active packages
+with no missing or mismatched requirement. Seventy post-install applicable
+T20.36 tests and 12 pointer tests pass; the two excluded historical audit tests
+correctly assert the pre-install missing-package state. Reviewer 256 authorizes
+one corrected preflight retry, still before any marker.
+
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
 The owner opened a fresh simulation-only window (20:10 CDT through hard
