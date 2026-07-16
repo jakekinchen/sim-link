@@ -128,10 +128,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "220",
-    "commit": "9869cba846f0a7740fd138e89369a88716e941fe",
-    "reviewer_decision_id": "297",
-    "summary": "reviewer_297_verifies_t20_44_terminal_negative_and_routes_t20_43b_after_origin"
+    "brief_id": "222",
+    "commit": "5e8a2187bccd41377c53812487c8eeb299b41e54",
+    "reviewer_decision_id": "299",
+    "summary": "reviewer_299_accepts_t20_43b_stable_act_replacement_implementation_for_model_free_materialization_after_origin"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -4884,12 +4884,14 @@
       "state": "in_progress",
       "depends_on": ["T20.44_terminal_boundary_on_origin", "owner_addendum_8b4a206"],
       "active_brief_id": "222",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
-      "result": "Brief 222 opens implementation and fixture tests only for exactly one stable-runtime ACT replacement with the unchanged T20.43 recipe; live smoke, authority materialization, model, optimizer, and rollout remain closed",
+      "latest_verified_brief_id": "222",
+      "review_decision_id": "299",
+      "source_commit": "5e8a2187bccd41377c53812487c8eeb299b41e54",
+      "result": "Reviewer 299 accepts the exact unchanged-recipe T20.43b stable-runtime ACT replacement implementation for model-free Gate A, real renderer smoke, and authority materialization after origin confirmation; model, optimizer, rollout, and retry remain closed",
       "owner_authorization_commit": "8b4a20669a804b2d4fbed2805ea2fa6af305e2d7",
       "recipe_source_identity_sha256": "b3a510f84402d6574333800b73c3d95f5dcfb24af7e77740985f2f3c997449d2",
-      "authority_granted": ["open_fresh_t20_43b_brief_after_t20_44_state_origin_confirmation","activate_brief_222","implement_and_fixture_test_stable_runtime_act_replacement_contracts"],
+      "implementation": {"implementation_commit":"5e8a2187bccd41377c53812487c8eeb299b41e54","spec_path":"configurations/robot_lab/t20_43b_r1_act_standard_spec.json","spec_identity_sha256":"13c5bb4b2cadf8c451a25e7c11e9e0a1d824468f593774fdb60dbf7fa5197461","focused_test_count":11,"targeted_regression_test_count":30,"authority_pointer_receipt_test_count":34,"stable_interpreter":"external/lerobot/.venv/bin/python","stable_mujoco_support_cache_bound":true,"fresh_renderer_smoke_required":true,"attempt_marker_exists":false,"model_constructed":false,"optimizer_created":false,"gate_c_executed":false,"live_materialization_executed":false},
+      "authority_granted": ["open_fresh_t20_43b_brief_after_t20_44_state_origin_confirmation","activate_brief_222","implement_and_fixture_test_stable_runtime_act_replacement_contracts","t20_43b_implementation_valid","materialize_model_free_gate_a_renderer_smoke_and_compact_authority_after_origin_confirmation"],
       "authority_not_granted": ["activate_before_t20_44_state_origin_confirmation","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","learned_policy_rollout","gate_c_execution","second_replacement","recipe_change","correction_objective","threshold_change","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.44": {
