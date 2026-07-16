@@ -1023,6 +1023,15 @@ That bridge uses a new `n_action_steps=50` queue contract: one reset, starts
 0/50/100/150/200, executed lengths 50/50/50/50/44, and the final six predicted
 tail actions excluded from acceptance and actor evidence. Gate C route is open;
 Gate C execution remains closed.
+T20.36o design `b44bd55b...` now verifies those semantics against exact PI0.5
+source `b05b6afe...` and all episode-0 source/data records. It freezes a strict
+minimum-across-phases acceptance envelope, five state-bound probe sets, and a
+baseline-first route. X must be loaded once under a fresh inference-only permit
+to capture five states x five seeds x two repeats before any optimizer. A
+baseline pass skips training; a failure retains 250 denoise-path examples and
+only then permits a separate 2,500-update-ceiling training authority request.
+Reviewer 267 verifies the model-free boundary. No model or optimizer action has
+occurred.
 
 ## Durable State
 

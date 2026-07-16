@@ -4712,11 +4712,13 @@
       "review_decision_id": null,
       "source_commit": "a20f2a4de1b4d8ec7f12142015d44bdecff6a345",
       "implementation_commits": [],
-      "result": "active model-free X episode-0 bridge execution/window/correction/authority design; Gate C route open and execution closed",
+      "result": "model-free bridge design verified as b44bd55b... by Reviewer 267; exact five-state baseline inference authority/preflight is next, Gate C route open and execution closed",
+      "design_review_decision_id": "267",
+      "design_artifact": {"path":"configurations/robot_lab/t20_36o_episode_bridge_design.json","schema_version":"scenesmith.t20_36o_episode_bridge_design.v1","identity_sha256":"b44bd55bdf99d684223bf8c1b4c195f12b841ba1b1323df0e488939df60f3845","file_sha256":"7893785bd66b2cd6dbe7c6029bff49b8d5e1bcc168a421fbc7a1bb07dda23ea3","correction_example_count":250,"optimizer_update_count_ceiling":2500,"probe_update_counts":[0,500,1000,1500,2000,2500],"baseline_precedes_optimizer":true},
       "execution_contract": {"n_action_steps":50,"queue_reset_count":1,"rollout_frame_count":244,"chunk_start_frames":[0,50,100,150,200],"executed_lengths":[50,50,50,50,44],"final_unexecuted_tail_count":6,"legacy_action_horizon_5_allowed":false,"unexecuted_tail_actor_valid":false},
       "frozen_gate_identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
       "owner_authority_granted": ["design_bounded_x_episode_0_bridge","prepare_separate_simulation_training_authority","request_gate_c_only_after_bridge_pass"],
-      "authority_granted": ["read_signed_t20_35x_and_episode_0_artifacts","activate_brief_208","implement_model_free_execution_window_spec","derive_bounded_update_and_probe_contract"],
+      "authority_granted": ["read_signed_t20_35x_and_episode_0_artifacts","activate_brief_208","implement_model_free_execution_window_spec","derive_bounded_update_and_probe_contract","verify_model_free_bridge_design","implement_separate_baseline_inference_authority_and_preflight"],
       "authority_not_granted": ["model_construction","model_load","model_inference","optimizer_creation","optimizer_training","checkpoint_mutation","gate_c_execution","threshold_change","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
     },
     "T19.0": {

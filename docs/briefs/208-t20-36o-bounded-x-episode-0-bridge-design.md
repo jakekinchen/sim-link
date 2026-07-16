@@ -63,11 +63,37 @@ artifacts and cached dataset records but may not construct a model or optimizer.
   mask, source identities, probe uniqueness, and failure on stale or missing
   evidence.
 - Model-free update-budget/replay critique with one frozen selection rule.
-- Central training-authority request and preflight in a later separately
-  reviewed boundary; no model or optimizer action in this slice.
+- Central baseline-inference authority request and preflight in a later
+  separately reviewed boundary; no model or optimizer action in this slice.
+
+## Baseline-First Route
+
+Before any optimizer creation, load X once under a separate one-use permit and
+capture both decoded chunks and complete denoise paths for the five bound
+states, five registered seeds, and two exact repeats. If update 0 passes every
+executed cell, skip optimization and request separate Gate C authority. If it
+fails, retain the 250 exact correction trajectories, close the inference
+permit, and compose a separate training specification and permit from those
+artifacts. This prevents a 2,500-update run when X already covers the real
+chunk-start states and prevents optimizer authority from being inferred from
+an observation-only probe.
 
 ## Prohibited Actions
 
 No model construction/load/inference, optimizer creation/training, checkpoint
 mutation, Gate C rollout, threshold change, candidate substitution, physical
 hardware, network/download, external compute, or Brev.
+
+## Verified Design Boundary
+
+Artifact `b44bd55b...` binds policy source `b05b6afe...`, LeRobot revision
+`e40b58a8...`, exact episode-0 observations and targets, phase runs, starts
+`[0,50,100,150,200]`, lengths `[50,50,50,50,44]`, and final mask
+`44 true + 6 false`. Its strict acceptance envelope takes the minimum frozen
+threshold across reach/grasp for every joint, so it cannot weaken amendment
+`463477dc...`. The bounded fallback preserves X's ten uses per correction
+example: 250 examples, 2,500 updates maximum, unchanged `2.5e-5` LR, 1:1
+unique standard replay, probes at 0/500/1000/1500/2000/2500, and first
+confirmed pass selection. Six focused tests and the exact verifier pass.
+Reviewer 267 verifies the model-free design and permits only implementation of
+the separate baseline-inference authority boundary next.
