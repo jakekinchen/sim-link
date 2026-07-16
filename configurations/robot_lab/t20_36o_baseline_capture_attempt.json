@@ -1,0 +1,20 @@
+{
+  "attempt_number": 1,
+  "authority_decision_identity_sha256": "e649d3dc9643c9900a83434e059d3ccf78a2a924d1ac31adb99804b9c59e6c4d",
+  "baseline_permit_identity_sha256": "3d6a1548e450828af2a63ec23eae91821f64011c59df76330ef917380f27de12",
+  "bridge_spec_identity_sha256": "8294c63be101dbb1ea3536d2b2da1447d23ca9aa71d2145eb501452547c30c0c",
+  "checkpoint_tensor_read": false,
+  "created_before_checkpoint_tensor_read": true,
+  "identity_sha256": "f89d3c040c5dbd4d1fe21c6b793618a225038a67eb7b571c4a9e6e1973c8f67d",
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "schema_version": "scenesmith.t20_36o_baseline_capture_attempt.v1",
+  "source_checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
+  "source_commit": "a40573a7821fe3cb1e6e41b4c90e05120f8c502f",
+  "task_id": "T20.36o",
+  "tensor_artifact_written": false,
+  "trajectory_artifact_written": false
+}

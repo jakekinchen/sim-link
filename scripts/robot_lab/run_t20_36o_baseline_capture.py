@@ -42,6 +42,7 @@ from scenesmith.robot_lab.t20_35c_expert_only_capacity_ceiling import (  # noqa:
 from scenesmith.robot_lab.t20_35x_physical_gate_joint_weighted_correction import (  # noqa: E402
     ACTIVE_ACTION_DIMENSIONS,
     MAXIMUM_ACTION_DIMENSIONS,
+    RESULT_PATH as SOURCE_RESULT_PATH,
 )
 from scenesmith.robot_lab.t20_36o_baseline_capture import (  # noqa: E402
     ATTEMPT_PATH,
@@ -70,11 +71,15 @@ from scenesmith.robot_lab.t20_36o_baseline_capture import (  # noqa: E402
     verify_result,
     verify_run_summary,
     verify_tensor_artifact,
+    verify_tracked_result,
     verify_trajectory_artifact,
 )
 from scenesmith.robot_lab.t20_36o_baseline_inference_authority import (  # noqa: E402
     require_active_authority,
     verify_authority,
+)
+from scenesmith.robot_lab.t20_36o_episode_bridge_design import (  # noqa: E402
+    SPEC_PATH as BRIDGE_SPEC_PATH,
 )
 from scripts.robot_lab.run_t20_35x_physical_gate_joint_weighted_correction import (  # noqa: E402
     CHECKPOINT_CONFIG_PATH as SOURCE_CHECKPOINT_CONFIG_PATH,
@@ -165,7 +170,12 @@ def load_t20_36o_batches(*, sources: dict[str, Any]) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verify", action="store_true")
+    parser.add_argument("--verify-retained", action="store_true")
     args = parser.parse_args()
+    if args.verify and args.verify_retained:
+        raise ValueError("T20.36o choose one verification mode")
+    if args.verify_retained:
+        return _verify_retained_outputs()
     authority = (
         verify_authority(repo_root=REPO_ROOT)
         if args.verify
@@ -623,6 +633,30 @@ def _verify_outputs(
         trajectory_artifact=trajectory_artifact,
     )
     verify_result(result, run=run)
+    print(result["identity_sha256"], result["decision"])
+    return 0
+
+
+def _verify_retained_outputs() -> int:
+    permit = load_strict_json(
+        REPO_ROOT
+        / "configurations/robot_lab/t20_36o_baseline_capture_permit.json"
+    )
+    attempt = load_strict_json(REPO_ROOT / TRACKED_ATTEMPT_PATH)
+    tensor_artifact = load_strict_json(REPO_ROOT / TENSOR_PATH)
+    trajectory_artifact = load_strict_json(REPO_ROOT / TRAJECTORY_PATH)
+    result = load_strict_json(REPO_ROOT / RESULT_PATH)
+    bridge_spec = load_strict_json(REPO_ROOT / BRIDGE_SPEC_PATH)
+    source_result = load_strict_json(REPO_ROOT / SOURCE_RESULT_PATH)
+    verify_tracked_result(
+        permit=permit,
+        attempt=attempt,
+        tensor_artifact=tensor_artifact,
+        trajectory_artifact=trajectory_artifact,
+        result=result,
+        bridge_spec=bridge_spec,
+        source_result=source_result,
+    )
     print(result["identity_sha256"], result["decision"])
     return 0
 

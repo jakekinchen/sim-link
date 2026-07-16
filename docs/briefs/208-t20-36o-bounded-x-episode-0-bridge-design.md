@@ -134,3 +134,14 @@ does not discard any path value. Reviewer 270 verifies the complete runner
 diff and requires commit/push/origin confirmation before the marker exists.
 Implementation `781e0e0` is now preserved on origin; only this canonical
 pointer boundary remains to be pushed and confirmed before execution.
+
+## Verified Baseline Result
+
+The sole attempt produced result `e6537428...`: all start-zero hashes and all
+decoded/denoise repeats reproduce, while the frozen bridge fails at update 0.
+Start 0 passes 3/5 seeds with the prior five small gripper misses; starts
+50/100/150/200 pass 0/5 with 649/543/513/505 violations. The retained source
+objective ratio still passes. Complete tensors and 500 denoise records are
+tracked under receipt `1154d524...`, and the tracked-only verifier reconstructs
+the result without the ignored run summary. Reviewer 271 routes only to a
+separate bounded optimizer authority; no optimizer or Gate C authority exists.

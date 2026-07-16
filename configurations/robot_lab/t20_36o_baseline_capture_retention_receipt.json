@@ -1,0 +1,46 @@
+{
+  "artifacts": [
+    {
+      "file_sha256": "b8487e8794bdc584dfe7bf88cd7bcd09f3641a52093939a3ca17f4623d536017",
+      "identity_sha256": "f89d3c040c5dbd4d1fe21c6b793618a225038a67eb7b571c4a9e6e1973c8f67d",
+      "path": "configurations/robot_lab/t20_36o_baseline_capture_attempt.json",
+      "schema_version": "scenesmith.t20_36o_baseline_capture_attempt.v1",
+      "size_bytes": 997
+    },
+    {
+      "file_sha256": "d1f30a67914810f796104517db998124718eea926a290fa066184dffbaa04692",
+      "identity_sha256": "40bf3b018c388cc6b755e566fdd66ee09895346597171daca4b26d764330fe3a",
+      "path": "configurations/robot_lab/t20_36o_baseline_decoded_action_tensors.json",
+      "schema_version": "scenesmith.t20_36o_baseline_decoded_action_tensors.v1",
+      "size_bytes": 526705
+    },
+    {
+      "file_sha256": "1d351b557230700036c948050c67d6a7d14ef9b8021dd4a57af593fe7dd983c8",
+      "identity_sha256": "202ace386bdb05a8888d887a31b83e6335c836e30da145a0d444a813365b680b",
+      "path": "configurations/robot_lab/t20_36o_baseline_denoise_trajectories.json",
+      "schema_version": "scenesmith.t20_36o_baseline_denoise_trajectories.v1",
+      "size_bytes": 8747899
+    },
+    {
+      "file_sha256": "c89149031e7b48fb7fcb3ec04200b26bb6432c8869c6ca9a15981ae3c1ea423a",
+      "identity_sha256": "e653742885cc086219cb08a36b84606dbc066941b8751fcc890bf8897c0b2e97",
+      "path": "configurations/robot_lab/t20_36o_baseline_capture_result.json",
+      "schema_version": "scenesmith.t20_36o_baseline_capture_result.v1",
+      "size_bytes": 809991
+    }
+  ],
+  "brev_compute_started": false,
+  "external_compute_started": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "1154d5244fbe65f90d30c6e2ad0e39b677f2010dd7051157579fa7bfd93765e7",
+  "ignored_run_summary_required_for_rescore": false,
+  "network_accessed": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "result_identity_sha256": "e653742885cc086219cb08a36b84606dbc066941b8751fcc890bf8897c0b2e97",
+  "schema_version": "scenesmith.t20_36o_baseline_capture_retention_receipt.v1",
+  "source_commit": "a40573a7821fe3cb1e6e41b4c90e05120f8c502f",
+  "task_id": "T20.36o",
+  "tracked_only_verifier": "PYTHONPATH=. external/lerobot/.venv/bin/python scripts/robot_lab/run_t20_36o_baseline_capture.py --verify-retained"
+}

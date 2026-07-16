@@ -1050,6 +1050,11 @@ The permit-bound runner and signed tensor/trajectory/result contracts now pass
 this boundary must be pushed and origin-confirmed before its marker can exist.
 Implementation `781e0e0` is on origin; the canonical state pointer is the last
 remote-preservation step before the one-use baseline attempt.
+The sole T20.36o attempt is now an exact negative: result `e6537428...` retains
+all 50 decoded chunks and 500 denoise records, reproduces all start-zero and
+repeat hashes, but passes only 3/5 start-zero probes and 0/5 at every later
+start. Reviewer 271 routes next to separate bounded optimizer authority after
+this complete tracked result is remotely preserved. Gate C remains closed.
 
 ## Durable State
 

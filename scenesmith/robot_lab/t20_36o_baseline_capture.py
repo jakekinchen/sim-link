@@ -974,6 +974,55 @@ def verify_result(payload: dict[str, Any], *, run: dict[str, Any]) -> None:
         raise ValueError("T20.36o baseline result drifted")
 
 
+def verify_tracked_result(
+    *,
+    permit: dict[str, Any],
+    attempt: dict[str, Any],
+    tensor_artifact: dict[str, Any],
+    trajectory_artifact: dict[str, Any],
+    result: dict[str, Any],
+    bridge_spec: dict[str, Any],
+    source_result: dict[str, Any],
+) -> None:
+    """Rebuild and rescore the result without gitignored run artifacts."""
+    for label, payload in (
+        ("permit", permit),
+        ("attempt", attempt),
+        ("tensor artifact", tensor_artifact),
+        ("trajectory artifact", trajectory_artifact),
+        ("result", result),
+        ("bridge spec", bridge_spec),
+        ("source result", source_result),
+    ):
+        verify_signed_payload(payload, label=f"T20.36o tracked {label}")
+    if (
+        permit.get("bridge_spec_identity_sha256")
+        != bridge_spec.get("identity_sha256")
+        or permit.get("source_result_identity_sha256")
+        != source_result.get("identity_sha256")
+        or result.get("tracked_attempt_path")
+        != TRACKED_ATTEMPT_PATH.as_posix()
+        or result.get("tracked_tensor_artifact_path") != TENSOR_PATH.as_posix()
+        or result.get("tracked_trajectory_artifact_path")
+        != TRAJECTORY_PATH.as_posix()
+    ):
+        raise ValueError("T20.36o tracked result lineage drifted")
+    authority_identity = permit["authority_decision_identity_sha256"]
+    run = build_run_summary(
+        sources={
+            "bridge_spec": bridge_spec,
+            "x_runtime": {"source_result": source_result},
+        },
+        authority_identity=authority_identity,
+        permit=permit,
+        attempt=attempt,
+        tensor_artifact=tensor_artifact,
+        trajectory_artifact=trajectory_artifact,
+    )
+    if result != build_result(run=run):
+        raise ValueError("T20.36o tracked result rescore drifted")
+
+
 def build_failure(
     *,
     permit: dict[str, Any],
