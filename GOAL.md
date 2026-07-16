@@ -113,6 +113,13 @@ compute/Brev field remains false. This still is not an authority-artifact or
 generation boundary. The inherited owner/run windows have expired; T20.42
 awaits a fresh brief and active bounded owner window before materialization,
 pre-run review, or the first MuJoCo candidate.
+The owner now opens that fresh simulation-only window from 12:35:56 through
+20:35:56 CDT for the sole fixed 119+9 R0 attempt. Brief 218 activates T20.42b:
+implement and review the live collector, exclusive authority materializer, and
+fixed scripted generation/compiler/dataset runner first; then materialize and
+preserve the exact pre-run authority for a second review before the marker.
+Hardware, network, external compute, Brev, model/optimizer work, retries, and
+R1 remain closed.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
