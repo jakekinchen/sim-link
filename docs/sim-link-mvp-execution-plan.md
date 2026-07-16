@@ -90,7 +90,7 @@ not spent on a higher gate while a lower one is unmet.
 | Gate | Proof | A failure localizes to | Status |
 | --- | --- | --- | --- |
 | A | Exact train/inference parity: dataset statistics, image/state/action normalization, chunk interpretation, joint order, gripper representation, postprocessing, cadence/hold, with round-trip tests on known values | Contract or preprocessing parity | Largely verified: T20.12 round-trip, T20.13 statistics, T20.26 determinism, T20.28-T20.31 sampler/quantile chain |
-| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | T20.36f reproduces ACT and proves 14 normalized/physical boundary exceedances with direct/queue equality. ACT closes; T20.36g designs exact SmolVLA entry under the unchanged gate |
+| B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | T20.36g freezes exact offline SmolVLA entry `fb217f3e...`; T20.36h implements and separately authorizes its one-use unchanged-gate attempt |
 | C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Blocked behind Gate B; T20.32 diverges at frame zero before execution feedback |
 | D | Full training-set success: strict-v2 across all eight constructive episodes | Dataset coverage or adaptation capacity | Open |
 | E | Held-out nominal starts: seeds 6-7 and small initial-state variation | Generalization | Open (0/2 at T20.24 and T20.31) |
@@ -129,15 +129,17 @@ not inherit authority from this document.
 | 13d | **T20.36d — exact ACT Gate B control design (verified)** | Spec `45c90dc0...` binds the fresh compact ACT, canonical batch/statistics, 2,000-update ceiling, pre-registered checkpoint schedule, deterministic repeats, unchanged Gate B conjunction, stop rules, and one-use boundary. | Verified T20.36c preflight | Model load, optimizer creation/training, run authority, SmolVLA entry, gate change, Gate C, hardware, external compute, Brev |
 | 13e | **T20.36e — exact ACT control (verified negative)** | The sole 2,000-update attempt signs result `2ea2c246...`: objective ratio passes at 0.054918 and five hashes agree, but maximum physical error is 0.442487 rad. No retry; no Gate C. | Verified T20.36d design and pre-run | Retry, sweep, policy selection, Gate B amendment, Gate C, hardware, external compute, Brev |
 | 13f | **T20.36f — ACT decode/per-joint localization (verified)** | Result `472e5ec5...` reproduces objective/hash and direct/queue equality; 14 exceedances concentrate at t0 and the late endpoint and already exist in normalized output. ACT retry closes. | Verified-negative T20.36e | Optimizer, retry, second training attempt, policy selection, gate change, Gate C, hardware, external compute, Brev |
-| 13g | **T20.36g — exact SmolVLA Gate B entry design (active)** | Bind local source/cache lineage, two-camera override, canonical batch/stats, MPS preflight, one frozen attempt/schedule, unchanged Gate B, and conservative result routes before any model load. | Verified T20.36f localization | Model load, inference, optimizer, policy selection, Gate B amendment, Gate C, hardware, external compute, Brev |
+| 13g | **T20.36g — exact SmolVLA Gate B entry design (verified)** | Spec `fb217f3e...` binds exact offline policy/VLM snapshots, real two-camera configuration, canonical batch/stats, MPS no-fallback smoke, one frozen attempt/schedule, unchanged Gate B, finite evidence, selected-only checkpoint, and conservative routes. | Verified T20.36f localization; Brief 198; Reviewer 249 | Model load, inference, optimizer, policy selection, Gate B amendment, Gate C, hardware, external compute, Brev |
+| 13h | **T20.36h — exact SmolVLA Gate B attempt (pre-run active)** | Brief 199 implements the one-use runner/verifier, raw checkpoint integrity inventory, static preflight, and central authority boundary before any attempt or model access. | Verified T20.36g design | Attempt before remote review, retry, sweep, policy selection, Gate B amendment, Gate C, hardware, external compute, Brev |
 | 14 | **T20.37 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
 
 T20.36c's read-only preflight routes ACT as the cheapest diagnostic control,
-not as a product-policy selection. T20.36f closes the ACT diagnostic with a
-reproduced normalized boundary/endpoint miss, so Brief 198 now designs
-SmolVLA's exact Gate B entry. SmolVLA becomes a policy track only after a
-separate verified execution result; PI0.5 remains the compatibility/stress
-baseline. CUDA, A100, external compute, and Brev remain closed.
+not as a product-policy selection. T20.36f closes ACT with a reproduced
+normalized boundary/endpoint miss. T20.36g now freezes SmolVLA's exact local
+entry, and Brief 199 opens only its pre-run implementation/authority boundary.
+SmolVLA becomes a policy track only after a separate verified execution result;
+PI0.5 remains the compatibility/stress baseline. CUDA, A100, external compute,
+and Brev remain closed.
 
 ### Support tooling
 

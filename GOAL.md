@@ -899,6 +899,14 @@ same-side, misaligned, malformed, and non-finite witnesses. This is an
 antipodal two-jaw proxy, not actual MuJoCo grasp or full 6D wrench closure. The
 next simulation search must compile consistently oriented MuJoCo normals and
 complete unassisted lift, hold, lower, release, and retreat through v2.
+The current M20 capability ladder has since closed PI0.5 and ACT Gate B retry
+paths through signed localization. T20.36g is now verified by Reviewer 249:
+spec `fb217f3e...` freezes exact offline SmolVLA policy/VLM snapshots, the real
+two-camera canonical batch, MPS-only preflight, one bounded constant-LR
+schedule, and the unchanged 0.10 objective/0.05-rad physical conjunction.
+Brief 199 opens T20.36h pre-run implementation and central authority only. No
+attempt, model access, optimizer, Gate C, hardware, external compute, or Brev
+is authorized before that boundary is remotely reviewed.
 
 ## Durable State
 

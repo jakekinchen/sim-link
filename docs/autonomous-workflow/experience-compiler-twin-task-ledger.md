@@ -5,15 +5,15 @@ Updated: 2026-07-15
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-15T07:27:47-05:00 through hard closeout 2026-07-15T23:27:47-05:00; no new major slice after 2026-07-15T22:42:47-05:00; owner-requested simulation-only T20 capability-ladder continuation starting at T20.35, evening extension recorded 2026-07-15T10:20:00-05:00 for the MVP demo composition
-run_state: T20.36f signed localization 472e5ec5... reproduces the ACT objective/hash and proves direct/queue identity. Fourteen physical exceedances concentrate at chunk boundaries, with normalized t0 wrist-flex/roll errors already large. Reviewer 248 closes ACT and routes SmolVLA entry design without amending Gate B.
+run_state: T20.36g signed design fb217f3e... freezes exact offline SmolVLA policy/VLM snapshots, real two-camera configuration, canonical batch/statistics, MPS no-fallback smoke, one 2,000-update schedule, unchanged Gate B, finite evidence, and conservative routes. Reviewer 249 verifies design only; Brief 199 opens pre-run implementation with no model access.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.36g in progress under Brief 198; design the exact local SmolVLA Gate B entry from verified source/cache/runtime constraints without loading a model or selecting a policy
+current_task: T20.36h in progress under Brief 199; implement and remotely preserve the exact one-use SmolVLA runner, raw checkpoint integrity inventory, static preflight, and central authority boundary before any attempt or model access
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
 blockers: sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no fresh physical read or motion authority; no physical transfer/promotion authority; external compute and Brev remain unauthorized
-next_step: preserve T20.36f localization, then bind SmolVLA's two-camera configuration, local-cache lineage, MPS preflight requirements, one-batch processor contract, and one-attempt unchanged-Gate-B schedule before any model load
+next_step: implement and test T20.36h pre-run, bind raw checkpoint hashes and exact local snapshots, compose task-specific authority, review the complete boundary, and confirm it on origin before the sole counted attempt
 ```
 
 ## Rules
@@ -915,6 +915,22 @@ closes ACT retry and routes Brief 198 to design SmolVLA's exact Gate B entry.
 Gate B remains unchanged because task-relevant shoulder and gripper errors are
 among the failures. No optimizer, policy selection, SmolVLA model load, Gate C,
 rollout, hardware, external compute, or Brev is authorized.
+
+## 2026-07-15 - T20.36g exact SmolVLA Gate B entry design verified
+
+Spec `fb217f3e...` and implementation `1c5faf3` bind the exact local policy and
+VLM snapshots, pinned SmolVLA plus shared processor/checkpoint source files,
+canonical episode-0 two-camera batch, T20.23 statistics, and physical round
+trip. The cached third-camera expectation is replaced before construction;
+empty, duplicate, synthetic, aliased, and silently dropped cameras are
+forbidden. Pretrained expert-only plus state projection is the sole trainable
+scope. The future runtime must remain offline and MPS-only, inventory dtype,
+device, buffers, and trainable parameters, pass finite forward/backward smoke,
+then follow one constant-`1e-4` 2,000-update schedule with the unchanged Gate B.
+Forty-seven T20.36 tests pass. Reviewer 249 verifies design only and opens
+Brief 199 for pre-run implementation and central authority. No attempt, tensor
+deserialization, model, inference, optimizer, policy selection, Gate C,
+hardware, network, external compute, or Brev action occurred.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 

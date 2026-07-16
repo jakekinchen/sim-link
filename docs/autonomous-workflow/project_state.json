@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "197",
-    "commit": "489be59ad0b87f6485866a78d580b549002500f9",
-    "reviewer_decision_id": "248",
-    "summary": "verified_inference_only_localization_exact_objective_and_direct"
+    "brief_id": "198",
+    "commit": "1c5faf315e09bebff5de681d7e06de6787f1a8cb",
+    "reviewer_decision_id": "249",
+    "summary": "verified_design_only_exact_smolvla_gate_b_entry"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36g",
-  "next_eligible_task": "T20.36g",
+  "current_task": "T20.36h",
+  "next_eligible_task": "T20.36h",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4349,16 +4349,45 @@
       "authority_not_granted": ["optimizer_creation","optimizer_training","training_retry","second_inference_attempt","policy_track_selected","smolvla_model_load","smolvla_inference","smolvla_optimizer","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36g": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36f"],
-      "active_brief_id": "198",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "198",
+      "review_decision_id": "249",
+      "source_commit": "8f7cb8e1a1ad11e0275803a4482248af58108ca1",
+      "implementation_commits": ["1c5faf315e09bebff5de681d7e06de6787f1a8cb"],
+      "result": "verified design-only exact SmolVLA Gate B entry fb217f3e... binds exact offline policy/VLM snapshots, real two-camera configuration, canonical batch/statistics, MPS no-fallback smoke requirements, one 2,000-update schedule, unchanged gate, finite evidence, and conservative routes without model or tensor access",
+      "artifact": {
+        "path": "configurations/robot_lab/t20_36g_exact_smolvla_gate_b_entry_spec.json",
+        "schema_version": "scenesmith.t20_36g_exact_smolvla_gate_b_entry_spec.v1",
+        "identity_sha256": "fb217f3e142bf082cc8628928bdb2b26c5abdaf8e3355ecd04c32ae17ff8f175",
+        "file_sha256": "84fca847760568679175bb886d975198d17470535c1f12cbfb077b49e9b0a5d6",
+        "size_bytes": 19683,
+        "execution_task_id": "T20.36h",
+        "model_constructed": false,
+        "checkpoint_tensor_read": false,
+        "model_loaded": false,
+        "model_inference": false,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "smolvla_entry_authorized": false,
+        "gate_b_threshold_changed": false,
+        "gate_c_authorized": false
+      },
+      "authority_granted": ["exact_smolvla_gate_b_entry_design_verified","t20_36h_pre_run_implementation_routed"],
+      "authority_not_granted": ["checkpoint_tensor_read","model_load","model_inference","optimizer_creation","optimizer_training","policy_track_selected","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.36h": {
+      "state": "in_progress",
+      "depends_on": ["T20.36g"],
+      "active_brief_id": "199",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_commit": "8f7cb8e1a1ad11e0275803a4482248af58108ca1",
+      "source_commit": "1c5faf315e09bebff5de681d7e06de6787f1a8cb",
       "implementation_commits": [],
-      "result": "design-only exact SmolVLA Gate B entry is active; bind local source/cache, two-camera override, canonical batch/statistics, MPS preflight, one-attempt schedule, unchanged gate, and conservative routes before any model load",
-      "authority_granted": ["design_exact_smolvla_gate_b_entry"],
-      "authority_not_granted": ["model_load","model_inference","optimizer_creation","optimizer_training","policy_track_selected","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "result": "pre-run implementation is active under Brief 199; implement the exact one-use SmolVLA runner, raw checkpoint integrity inventory, static preflight, and central authority boundary without constructing or loading a model",
+      "authority_granted": ["implement_t20_36h_pre_run_boundary","hash_exact_local_checkpoint_files_without_tensor_deserialization"],
+      "authority_not_granted": ["attempt_marker_creation","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","policy_track_selected","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",
