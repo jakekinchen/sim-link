@@ -81,9 +81,18 @@ proof states must remain distinct.
 
 ## Current Milestone
 
-M19 - Physical Hardware Twin Qualification (bounded T19.1 read-only side lane)
+M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
+
+The recorded T20.41 owner route decision at `e9d0507` resolves the capability-
+route blocker. Brief 216 now opens T20.42/R0 as the sole active simulation
+slice: implement and fixture-test the deterministic 64-128-success dataset-
+construction contract, with existing seeds 6-7 plus one fresh pose band held
+outside training and MEAN_STD statistics. No R0 generation may run before the
+implementation is reviewed on origin and a fresh central decision, preflight,
+and one-use permit agree. T19.2c remains a separate pending physical side lane
+and is not coupled to or required by R0.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
@@ -1090,9 +1099,10 @@ T20.38 receipt `042bf0be...` and T20.39 archive receipt/index
 `60babc53...`/`043d45b3...` are now verified through additive Brief 211 and
 Reviewer 280 with guard-preempting bottleneck, routing-bound authority,
 exact-duplicate, and stale-source lifecycle checks. T20.40
-is deferred because Gate C did not pass. Morning closeout is complete and
-T20.41 is blocked on a new owner-selected capability route; do not resume the
-T20.35/T20.36 alphabet without a fresh brief and authority.
+is deferred because Gate C did not pass. Morning closeout is complete.
+The T20.41 owner decision now selects dataset construction followed by
+standard-recipe ACT, SmolVLA, and conditional pi0.5 rungs. Brief 216 opens only
+T20.42/R0; the T20.35/T20.36 correction-objective alphabet stays closed.
 Brief 212 therefore opens the dependency-ready T19.1 side lane under the
 separate owner-present hardware window. No device access is allowed until the
 same-thread unrestricted/no-prompt profile, central read-only session decision,
