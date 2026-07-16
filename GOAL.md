@@ -1072,6 +1072,16 @@ Implementation `ae9992b` is on origin. Exact optimizer owner grant
 `dee9ae59...`, central decision `8834322d...`, preflight `672c59cc...`, and
 one-use permit `f9bad1ae...` now verify. Reviewer 275 permits only runner
 implementation before a separate pre-run review; no model or optimizer exists.
+Runner `9f3538e` and Reviewer 276 then authorized the sole bounded attempt from
+origin boundary `26146fa`. Result `ec7fb323...` completed 2,500 finite updates
+but failed every registered amended bridge checkpoint; the final checkpoint
+passes 0/25 with 1,677 violations. Uniform supplement `70e98c06...` also fails.
+Reviewer 277 closes X and the current Gate C route without a rollout or retry.
+T20.38 receipt `02268a1a...` and T20.39 archive receipt/index
+`8277b09f...`/`05908b6d...` are now verified through Reviewers 278-279. T20.40
+is deferred because Gate C did not pass. Morning closeout is complete and
+T20.41 is blocked on a new owner-selected capability route; do not resume the
+T20.35/T20.36 alphabet without a fresh brief and authority.
 
 ## Durable State
 

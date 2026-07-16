@@ -112,3 +112,14 @@ new verified proof-state entries belong here with their brief/reviewer anchors.
   evidence only. Manager intervention 015 applies the owner review: canonical
   disconnect proof, consumed-permit state, all-alias holder coverage, and
   `Torque_Enable` evidence are mandatory before another live-gate review.
+- Reviewer decision 277 verifies T20.36o as a terminal bounded negative:
+  2,500 finite updates preserve source objective but the final checkpoint
+  passes 0/25 amended bridge probes. Gate C was not executed and no retry or
+  policy acceptance follows.
+- Reviewer decision 278 verifies quantitative strict-v2 receipt `02268a1a...`
+  on analytic fixture evidence only; its 33 predicates and hard conjunction do
+  not create pure-policy, actual-MuJoCo, physical, or training proof.
+- Reviewer decision 279 verifies counterexample archive seed `8277b09f...`
+  and index `05908b6d...` as evidence-only. The missing remotely retained trace
+  keeps replay/training inactive. T20.40 is deferred and T20.41 requires a new
+  owner route decision.

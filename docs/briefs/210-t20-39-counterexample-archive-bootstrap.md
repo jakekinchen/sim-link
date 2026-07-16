@@ -51,3 +51,14 @@ No simulation or policy replay, model action, optimizer, training ingestion,
 replay-gate activation, policy blame without policy-owned evidence, source
 rewrite, hardware, camera/serial access, network/download, external compute,
 Brev, promotion, or destructive deletion.
+
+## Verified Result
+
+Implementation `80d2992` is exact on origin. Receipt `8277b09f...` binds the
+T20.19 1.05 gripper-scale worst cell and truthfully classifies it as a
+source-controller boundary negative. Index `05908b6d...` contains one active
+canonical entry with replay/training inactive. Because full trace bytes are
+not remotely retained, seed `0001` is evidence-only and replay-ineligible.
+Fifteen tests and exact write/verify pass. Reviewer 279 verifies T20.39,
+defers Gate-C-contingent T20.40, and routes to mandatory closeout/T20.41 owner
+decision.
