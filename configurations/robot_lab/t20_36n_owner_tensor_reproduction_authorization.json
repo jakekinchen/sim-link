@@ -1,0 +1,72 @@
+{
+  "authorization_id": "t20_36n_t20_35x_tensor_reproduction_grant",
+  "authorization_scope": "one_exact_retained_t20_35x_five_seed_two_repeat_tensor_reproduction_and_frozen_gate_score",
+  "authorization_source": "owner_eight_hour_research_critique_continue_authorization_2026_07_16",
+  "authorized_actions": [
+    "offline_restore_exact_source_dependency",
+    "simulation_model_construction",
+    "simulation_model_load",
+    "simulation_model_inference",
+    "persist_reproduced_action_tensors",
+    "score_frozen_gate_b"
+  ],
+  "authorized_attempt_count": 1,
+  "base_model_spec_ref": {
+    "file_sha256": "b377784deef2de01703ef6c2b212c4ae5b74539ee25665b2d7ba61cd6ec2b6e0",
+    "identity_sha256": "8898aeede6723c76f7bc2c38c8e922587a95fb14288cb672a855402b187d7df9",
+    "path": "configurations/robot_lab/t20_17_clean_base_training_spec.json",
+    "schema_version": "scenesmith.t20_17_clean_base_training_spec.v1"
+  },
+  "brev_compute_authorized": false,
+  "existing_hashes_must_reproduce_before_scoring": true,
+  "external_compute_authorized": false,
+  "frozen_gate_ref": {
+    "file_sha256": "730d0fc069d9902ba721770aa384fde041b3ba405bcbb852fe36ec224adfe5e5",
+    "identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
+    "path": "configurations/robot_lab/t20_36l_frozen_consequence_gate.json",
+    "schema_version": "scenesmith.t20_36l_frozen_consequence_gate.v1"
+  },
+  "frozen_score_ref": {
+    "file_sha256": "f62bd384a6b6b450919c6b79fa5e7fb9caffdb4f738b6ed9e819973718d53308",
+    "identity_sha256": "0f8ae393c48a2b7384033ac37b9994959a1a826565f00319e03115e53da786f1",
+    "path": "configurations/robot_lab/t20_36l_retained_candidate_scoring.json",
+    "schema_version": "scenesmith.t20_36l_retained_candidate_scoring.v1"
+  },
+  "gate_c_authorized": false,
+  "identity_sha256": "a2b45382f5c7b8b6989b5121686d5c04a3cc13b38696fd0cf6ce0a7343fc8fe2",
+  "inference_seed_count": 5,
+  "issued_at": "2026-07-16T01:44:12-05:00",
+  "network_access_authorized": false,
+  "offline_dependency_restore": {
+    "cache_only": true,
+    "from_version": "24.0.0",
+    "package": "pyarrow",
+    "reject_any_other_dependency_drift": true,
+    "to_version": "25.0.0"
+  },
+  "optimizer_authorized": false,
+  "physical_transfer_authorized": false,
+  "policy_track_selection_authorized": false,
+  "promotion_authorized": false,
+  "repeats_per_seed": 2,
+  "schema_version": "scenesmith.owner_inference_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "source_checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
+  "source_result_ref": {
+    "file_sha256": "981082fd51f15b3067af6e1a4724d46b5941f3016b8212dc9af385c3167501e4",
+    "identity_sha256": "e79dacff684dac507295d839527fb15d4eced8fa9c83973f5534bdf7e99ec6cd",
+    "path": "configurations/robot_lab/t20_35x_physical_gate_joint_weighted_result.json",
+    "schema_version": "scenesmith.t20_35x_physical_gate_joint_weighted_result.v1"
+  },
+  "source_run_ref": {
+    "file_sha256": "b05fd6c68ea13f2e140861249f16b42a95f517d1b9ab24e36b6995c954a8f02d",
+    "identity_sha256": "b5cc16ef53a415a7e0a4b8519332a4197201544fc9ebe5186565562e048c054b",
+    "path": "outputs/robot_lab/t20_35x_physical_gate_joint_weighted_run_001/run_summary.json",
+    "schema_version": "scenesmith.t20_35x_physical_gate_joint_weighted_run.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "threshold_change_authorized": false,
+  "training_retry_authorized": false,
+  "valid_until": "2026-07-16T09:44:12-05:00"
+}

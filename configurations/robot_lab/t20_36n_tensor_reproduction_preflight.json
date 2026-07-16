@@ -1,0 +1,88 @@
+{
+  "attempt_exists": false,
+  "authority_decision_identity_sha256": "5b40131ba6de7cd3f4a3e8f00bbd2920330b43c02d31dc50935c660e85ed13d8",
+  "batch_evidence_identity_sha256": "5698babc07b2eebc8a3a96d33b28f03bbb33f1bec9b83a97d4e4f8a325c36b7e",
+  "brev_compute_started": false,
+  "checkpoint_bytes_hashed": true,
+  "checkpoint_tensor_deserialized": false,
+  "checkpoint_tree": [
+    {
+      "path": "physical_gate_joint_weighted_config.json",
+      "sha256": "896868f1c50868e732dfb46e38d577ca541fe94b15b2db4fa680980d15f75ba8",
+      "size_bytes": 64389
+    },
+    {
+      "path": "physical_gate_joint_weighted_model.safetensors",
+      "sha256": "52058ecbbd49b15fd5a2b3d4d1f22581a885131122d69ab43959119ec6ad3865",
+      "size_bytes": 2773721000
+    }
+  ],
+  "dependency_versions": {
+    "datasets": "4.8.5",
+    "lerobot": "0.6.1",
+    "pyarrow": "25.0.0",
+    "safetensors": "0.8.0",
+    "torch": "2.11.0",
+    "transformers": "5.5.4"
+  },
+  "external_compute_started": false,
+  "extra_repeat": false,
+  "free_disk_bytes": 93197979648,
+  "frozen_gate_identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
+  "frozen_score_identity_sha256": "0f8ae393c48a2b7384033ac37b9994959a1a826565f00319e03115e53da786f1",
+  "gate_c_authorized": false,
+  "identity_sha256": "8e99f9ada35b084e1572b105e4bc528672a26ff8b58ac0eb061ffabd146dc5ea",
+  "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "minimum_free_disk_bytes": 2147483648,
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "mps_available": true,
+  "network_accessed": false,
+  "new_seed": false,
+  "offline_dependency_restore_only": true,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "python_major_minor": [
+    3,
+    12
+  ],
+  "remote_source_commit": "a77a829b4b951e861a11f55ac6991735c5d78f2b",
+  "remote_source_commit_matches": true,
+  "result_exists": false,
+  "schema_version": "scenesmith.t20_36n_tensor_reproduction_preflight.v1",
+  "snapshot_files_hashed_without_tensor_deserialization": true,
+  "snapshot_revision": "7de663972b7817d2c4cf2d84c821153dfea772e9",
+  "snapshot_tree": [
+    {
+      "path": "config.json",
+      "sha256": "367869712a2847c27e95c431ecb03f17bec4eee01a63995e2fb2d91940752b53",
+      "size_bytes": 1896
+    },
+    {
+      "path": "model.safetensors",
+      "sha256": "0eb11ca9587678c1d2ef8cf32807c29f8ce53a2bfdfc1aa4a4c96f16fca59b0f",
+      "size_bytes": 14467165872
+    },
+    {
+      "path": "policy_postprocessor.json",
+      "sha256": "142c8b622aeac5c14631e057279df058d3005f616d909cfe30a04524de0b0891",
+      "size_bytes": 567
+    },
+    {
+      "path": "policy_preprocessor.json",
+      "sha256": "be2cd1acc33229d42be0640cb55b5d5a4bb3e8d8e27ddfcdcf3f99f1fe3beaef",
+      "size_bytes": 1241
+    }
+  ],
+  "snapshot_tree_identity_sha256": "55544131f74838489d0a7e3196ff2991f2369fbffe6c25a8189499055394eda7",
+  "source_checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
+  "source_commit": "a77a829b4b951e861a11f55ac6991735c5d78f2b",
+  "source_result_identity_sha256": "e79dacff684dac507295d839527fb15d4eced8fa9c83973f5534bdf7e99ec6cd",
+  "source_run_identity_sha256": "b5cc16ef53a415a7e0a4b8519332a4197201544fc9ebe5186565562e048c054b",
+  "source_runtime_preflight_identity_sha256": "292a5b10c66b208bf87947840639be5b4ea5e7cb575e91d5c3331df7e1c041b9",
+  "source_training_permit_identity_sha256": "c497dbed89c5d5ae3b0a512b6e4d0237d4271d721b4326dc938f7a9ce0523e24",
+  "task_id": "T20.36n",
+  "threshold_changed": false
+}

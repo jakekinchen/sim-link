@@ -1004,6 +1004,12 @@ violations. The mandated three-candidate comparison is not complete: retained
 T20.35x stores only hashes and aggregates, not its five 50x6 tensors. Brief 207
 therefore opens T20.36n for one hash-bound X reproduction and frozen amended-
 gate score. Gate C remains closed pending that result.
+T20.36n's exact cached PyArrow 25 runtime, trainable checkpoint, pinned
+four-file frozen-base snapshot tree `55544131...`, construction RNG seed, and
+five base-noise hashes are now bound. Central decision `5b40131b...`, preflight
+`8e99f9ad...`, and permit `2c6a1e78...` verify without a checkpoint tensor read
+or model action. Reviewer 265 authorizes the sole attempt only after this
+corrected pre-run boundary is committed, pushed, and origin-confirmed.
 
 ## Durable State
 

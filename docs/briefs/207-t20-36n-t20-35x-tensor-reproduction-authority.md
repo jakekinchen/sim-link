@@ -60,3 +60,17 @@ match per seed; the ten finite 50x6 tensors are directly bound by a tracked
 result; frozen amended-gate scoring is complete; exact/focused/pointer tests and
 same-agent adversarial review pass; and the pre-run and result boundaries are
 scoped, pushed, and confirmed on origin.
+
+## Verified Pre-Run Boundary
+
+Implementations `69a2f46`, `1aab35f`, and `a77a829` are on origin. The exact cached
+PyArrow correction restored `24.0.0` to the source-required `25.0.0` offline;
+all six required dependency versions now match. Owner grant `a2b45382...`,
+central decision `5b40131b...`, runtime preflight `8e99f9ad...`, and one-use
+permit `2c6a1e78...` reconstruct exactly. The preflight byte-hashes both the
+2.77 GB trainable checkpoint tree and exact pinned 14.47 GB frozen-base
+snapshot tree `55544131...` without tensor deserialization. The runner mirrors
+source RNG construction and validates every base-noise hash before decode. No
+model construction/load/inference, optimizer action, or hardware access has
+occurred. Reviewer 265 authorizes exactly one five-seed/two-repeat attempt only
+after this corrected boundary is committed, pushed, and confirmed on origin.
