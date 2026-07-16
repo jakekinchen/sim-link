@@ -233,7 +233,7 @@
   },
   "gate_c_executed": false,
   "hardware_accessed": false,
-  "identity_sha256": "0cc8dcaa972a55c87b1ec6307e1561aefec4c6dc2bac2cf1644fdd0e0aec6799",
+  "identity_sha256": "ec45331c7022f955d9b41503aa9599224fc7f0951e9552a6599c2a562fb1d84d",
   "learned_policy_rollout": false,
   "lerobot_source_commit": "e40b58a8dfa9e7b86918c374791599d070518d11",
   "model_constructed": false,
@@ -479,6 +479,12 @@
     }
   },
   "source_result_commit": "2e6a3e34406e0b251b9af4b7a6b83100e18af785",
+  "stable_runtime": {
+    "mujoco_support_site_packages": "/Users/kelly/.cache/uv/archive-v0/jImpGSbFmnkCImQkijLNh/lib/python3.12/site-packages",
+    "package_installation_allowed": false,
+    "python_interpreter": "/Users/kelly/Developer/sim-link/external/lerobot/.venv/bin/python",
+    "temporary_uv_build_interpreter_allowed": false
+  },
   "t20_45_activated": false,
   "task_id": "T20.44"
 }

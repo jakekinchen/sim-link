@@ -134,10 +134,21 @@ destructive operation.
 
 ## Implementation boundary
 
-Spec `0cc8dcaa...` and the complete model-free Gate A/cache/dependency/exact-
+Spec `ec45331c...` and the complete model-free Gate A/cache/dependency/exact-
 interpreter-renderer-smoke/authority/runner/trace/video/result/failure/verifier
 implementation pass ten focused and 80 focused-plus-broad tests plus 30
 subtests. Ruff, formatting, compilation, strict spec reconstruction, pointer,
 and whitespace checks pass. Reviewer 294 opens only compact live model-free
 materialization after this implementation is exact on origin. No live smoke,
 policy/VLM weight, model, optimizer, checkpoint, or rollout action has occurred.
+
+## Stable-interpreter correction
+
+The first live model-free smoke rendered correctly but exposed an ephemeral
+`uv --with` interpreter path before preservation. Its authority artifacts are
+rejected and untracked; no marker or model action occurred. Spec `ec45331c...`
+now binds stable `external/lerobot/.venv/bin/python` plus the already-cached
+MuJoCo 3.3.5 support site-packages tree, hashes that tree, and requires the
+same pair for smoke, runner, and every mirror subprocess. Reviewer 295 opens
+only bounded cleanup of the newly created rejected artifacts and one stable
+rematerialization after origin confirmation.

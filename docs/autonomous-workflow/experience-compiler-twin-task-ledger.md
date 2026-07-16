@@ -5,20 +5,31 @@ Updated: 2026-07-16
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: fresh owner-authorized fixed T20.42/R0 simulation-only window 2026-07-16T12:35:56-05:00 through 20:35:56 CDT; no new major slice after 19:50:56; hardware, network, external compute, and Brev remain closed
-run_state: Reviewer 294 accepts T20.44 spec 0cc8dcaa and the model-free cache/dependency/Gate A/exact-interpreter-renderer-smoke/standard-runner/evidence/failure implementation. No live smoke, authority, model, or optimizer exists; implementation must be origin-preserved before materialization.
+run_state: The first T20.44 model-free smoke rendered valid output but its uv temporary interpreter disappeared, so all untracked authority artifacts are rejected before preservation. Reviewer 295 accepts stable-interpreter spec ec45331c; no marker/model/optimizer exists.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.44 in progress under Brief 220; commit/push Reviewer 294 and complete implementation, confirm origin, then materialize only the model-free Gate A/renderer/dependency/compact authority boundary
+current_task: T20.44 in progress under Brief 220; preserve Reviewer 295 stable-interpreter correction, then clean only rejected untracked smoke/authority outputs and rematerialize for Reviewer 296
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: owner authorizes bounded simulation-only continuation through 20:35:56 CDT; Brief 220 opens only T20.44 implementation/tests and later still requires reviewed origin-preserved Gate A/renderer/dependency/composer/preflight/one-use authority; camera/serial/robot/hardware, network, package install, external compute, and Brev are not authorized
-blockers: T20.43 cannot retry and produced no trained ACT result; T20.44 live model-free materialization remains closed until Reviewer 294 implementation is exact on origin, and weight/model/optimizer/rollout remain closed until a later Reviewer 295 acceptance; T20.40 remains ineligible without Gate C
-next_step: commit/push Reviewer 294 and implementation/spec 0cc8dcaa, confirm origin, then materialize only Gate A, exact-interpreter renderer smoke, owner/request/decision/runtime, and one-use permit for separate pre-run review
+blockers: rejected T20.44 artifacts use an ephemeral interpreter and cannot be preserved; cleanup/rematerialization waits for Reviewer 295 origin confirmation, and weight/model/optimizer/rollout remain closed until Reviewer 296 acceptance; T20.40 remains ineligible without Gate C
+next_step: commit/push Reviewer 295 and spec ec45331c, confirm origin, delete only the untracked rejected T20.44 smoke/authority artifacts, then rematerialize with the stable direct interpreter
 ```
+
+## 2026-07-16 - T20.44 stable interpreter correction accepted
+
+The first model-free renderer smoke passed but recorded a deleted temporary uv
+interpreter, so its untracked authority boundary is rejected. No marker, tensor
+deserialization, model, optimizer, or rollout occurred. Spec `ec45331c...`
+binds stable `external/lerobot/.venv/bin/python` plus an existing cached MuJoCo
+3.3.5 support tree and requires that exact pair for preflight, run, and mirror
+subprocesses. Twenty-two focused/pointer tests and direct stable imports pass.
+Reviewer 295 opens only bounded rejected-artifact cleanup and stable
+rematerialization after origin; Reviewer 296 remains required before the run.
 
 ## 2026-07-16 - T20.44 implementation accepted for model-free materialization
 
-Spec `0cc8dcaa...` binds exact R0, pinned SmolVLA/VLM snapshots, validated
+Spec `ec45331c...` binds exact R0, pinned SmolVLA/VLM snapshots, validated
 expert-plus-state-projection scope, official batch-8 AdamW/cosine recipe for
 5,000 updates, and five dual-semantics rollout checkpoints. The implementation
 adds model-free Gate A, recursive dependency/cache checks, exact-runner-
@@ -2204,7 +2215,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T20.42a | verified | reviewed T20.42 contract implementation | Implement R0 central request/runtime preflight/one-use permit/marker contracts | Brief 217/Reviewer 287; 9 focused + 70 broad + 8 MuJoCo source tests; authority artifacts, marker, and generation remain prohibited |
 | T20.42b | verified | verified T20.42a + fresh owner window | Implement/review live collector, authority materializer, and sole fixed R0 runner; materialize/review/execute the pre-run boundary | Brief 218/Reviewers 288-290; one attempt, no retry, result `d238379b...`, mixture `37b30d34...`, statistics `02ba0e70...`, retention `19d19fba...` |
 | T20.43 | verified | verified T20.42 | R1 ACT standard rung | Brief 219/Reviewer 293; sole marker `064e5650...`; zero updates; checkpoint-0 chunk-50 trace `6133ce58...`; renderer child lacks MuJoCo; terminal receipt `b64ec6d0...`; no retry; trained ACT unresolved |
-| T20.44 | in_progress | verified T20.42,T20.43 boundary | R2 SmolVLA standard rung | Brief 220/Reviewer 294; spec `0cc8dcaa...`; 10 focused + 80 broad + 30 subtests; model-free materialization only after implementation origin preservation |
+| T20.44 | in_progress | verified T20.42,T20.43 boundary | R2 SmolVLA standard rung | Brief 220/Reviewer 295; spec `ec45331c...`; ephemeral smoke rejected untracked; stable LeRobot Python + cached MuJoCo support bound; rematerialization only after origin |
 | T20.45 | pending | R1/R2 evidence | R3 conditional pi0.5 standard rung or costed external-compute proposal | Local run or proposal only under a fresh brief; external compute/Brev consumption remains unauthorized |
 
 The external-example disposition and adversarial semantic-success requirements are

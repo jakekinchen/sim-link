@@ -184,12 +184,19 @@ batch 8 for 5,000 updates, checkpoints `[0,500,1000,2500,5000]`, both rollout
 semantics, and a mandatory real-entrypoint renderer smoke with the exact future
 runner interpreter. Model weights, live smoke, authority, optimizer, and
 rollout remain closed pending reviewed origin boundaries.
-Spec `0cc8dcaa...` and the complete T20.44 model-free Gate A/cache/dependency/
+Spec `ec45331c...` and the complete T20.44 model-free Gate A/cache/dependency/
 renderer-smoke/authority/runner/evidence/failure implementation now pass
 Reviewer 294, ten focused tests, and 80 broader tests plus 30 subtests. Only
 live model-free Gate A, exact-interpreter renderer smoke, and compact authority
 materialization open after this boundary is exact on origin. Policy/VLM weight
 reads, model, optimizer, and rollout remain closed pending Reviewer 295.
+The first live model-free smoke rendered valid evidence but recorded an
+ephemeral `uv --with` interpreter and was rejected before commit. No marker or
+model action occurred. Reviewer 295 accepts spec `ec45331c...`, which binds the
+stable LeRobot Python plus an existing cached MuJoCo 3.3.5 support tree for the
+preflight, runner, and mirrors. After this correction is exact on origin, only
+the newly created rejected artifacts may be cleaned and rematerialized; a
+fresh Reviewer 296 is still required before weights or optimizer work.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

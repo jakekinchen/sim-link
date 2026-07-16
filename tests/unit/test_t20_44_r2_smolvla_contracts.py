@@ -248,6 +248,11 @@ class T2044R2SmolVLAContractsTest(unittest.TestCase):
             ),
             "renderer_smoke_identity_sha256": "a" * 64,
             "renderer_interpreter": "/runtime/python",
+            "mujoco_support_site_packages": (
+                "/Users/kelly/.cache/uv/archive-v0/jImpGSbFmnkCImQkijLNh/"
+                "lib/python3.12/site-packages"
+            ),
+            "mujoco_support_tree_identity_sha256": "b" * 64,
             "renderer_interpreter_matches_runner": True,
             "renderer_smoke_exit_code": 0,
             "output_path_state": {

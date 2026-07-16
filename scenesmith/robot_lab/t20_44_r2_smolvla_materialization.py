@@ -23,6 +23,7 @@ from scenesmith.robot_lab.t20_44_r2_smolvla_contracts import (
     AUTHORITY_PATHS,
     BRANCH,
     GATE_A_PATH,
+    MUJOCO_SUPPORT_SITE_PACKAGES,
     OUTPUT_PATHS,
     OWNER_GRANT_PATH,
     PERMIT_PATH,
@@ -359,6 +360,10 @@ def collect_live_runtime_snapshot(
         ),
         "renderer_smoke_identity_sha256": renderer_smoke["identity_sha256"],
         "renderer_interpreter": renderer_smoke["runner_interpreter"],
+        "mujoco_support_site_packages": str(MUJOCO_SUPPORT_SITE_PACKAGES),
+        "mujoco_support_tree_identity_sha256": _tree_identity(
+            MUJOCO_SUPPORT_SITE_PACKAGES
+        ),
         "renderer_interpreter_matches_runner": True,
         "renderer_smoke_exit_code": 0,
         "output_path_state": output_state,
@@ -404,7 +409,8 @@ def run_renderer_smoke(
             "TRANSFORMERS_OFFLINE": "1",
             "PYTHONPATH": (
                 f"{root / 'external/lerobot/src'}:"
-                f"{root / 'external/lerobot/.venv/lib/python3.12/site-packages'}"
+                f"{root / 'external/lerobot/.venv/lib/python3.12/site-packages'}:"
+                f"{MUJOCO_SUPPORT_SITE_PACKAGES}"
             ),
         },
     )

@@ -55,6 +55,7 @@ from scenesmith.robot_lab.t20_44_r2_smolvla_contracts import (
     FAILURE_PATH,
     GATE_A_PATH,
     MAXIMUM_OPTIMIZER_UPDATES,
+    MUJOCO_SUPPORT_SITE_PACKAGES,
     OWNER_GRANT_PATH,
     PERMIT_PATH,
     POLICY_SNAPSHOT_PATH,
@@ -790,6 +791,8 @@ def _run_authorized_attempt(
     _require_active_time(bundle[OWNER_GRANT_PATH.as_posix()], started_at)
     if runtime_preflight.get("renderer_interpreter") != sys.executable:
         raise ValueError("T20.44 runner interpreter drifted from renderer smoke")
+    if str(MUJOCO_SUPPORT_SITE_PACKAGES) not in sys.path:
+        raise ValueError("T20.44 stable MuJoCo support path is absent")
     _require_remote_preservation(permit, acceptance, repo_root=root)
     if any(
         os.path.lexists(root / path) for path in (ATTEMPT_PATH, RUN_ROOT, RESULT_PATH)
@@ -1348,7 +1351,8 @@ def _render_mirror(*, trace_path: Path, video_path: Path, repo_root: Path) -> No
             **os.environ,
             "PYTHONPATH": (
                 f"{repo_root / 'external/lerobot/src'}:"
-                f"{repo_root / 'external/lerobot/.venv/lib/python3.12/site-packages'}"
+                f"{repo_root / 'external/lerobot/.venv/lib/python3.12/site-packages'}:"
+                f"{MUJOCO_SUPPORT_SITE_PACKAGES}"
             ),
         },
     )

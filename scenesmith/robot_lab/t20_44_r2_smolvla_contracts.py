@@ -164,6 +164,10 @@ POLICY_WEIGHTS_SHA256 = (
 POLICY_WEIGHTS_BYTES = 906_712_520
 VLM_WEIGHTS_SHA256 = "b9bfd456c9472c0acd5719d6e514c4b859891af205ee1a736552fd3497b8b0c3"
 VLM_WEIGHTS_BYTES = 2_029_990_624
+MUJOCO_SUPPORT_SITE_PACKAGES = Path(
+    "/Users/kelly/.cache/uv/archive-v0/jImpGSbFmnkCImQkijLNh/"
+    "lib/python3.12/site-packages"
+)
 RENDERER_SMOKE_TRACE_PATH = Path(
     "outputs/robot_lab/t20_43_r1_act_run_001/rollouts/step_00000_chunk_50.json"
 )
@@ -405,6 +409,14 @@ def build_spec(*, sources: dict[str, Any]) -> dict[str, Any]:
             "vlm_weights_size_bytes": VLM_WEIGHTS_BYTES,
             "retained_t20_36j_finetuned_checkpoint_allowed": False,
             "network_fallback_allowed": False,
+        },
+        "stable_runtime": {
+            "python_interpreter": (
+                "/Users/kelly/Developer/sim-link/external/lerobot/.venv/bin/python"
+            ),
+            "mujoco_support_site_packages": str(MUJOCO_SUPPORT_SITE_PACKAGES),
+            "temporary_uv_build_interpreter_allowed": False,
+            "package_installation_allowed": False,
         },
         "smolvla_config": {
             "policy_type": "smolvla",
@@ -1166,6 +1178,8 @@ def _verify_runtime_snapshot(snapshot: Any, *, owner_grant: dict[str, Any]) -> N
         "processor_smoke_identity_sha256",
         "renderer_smoke_identity_sha256",
         "renderer_interpreter",
+        "mujoco_support_site_packages",
+        "mujoco_support_tree_identity_sha256",
         "renderer_interpreter_matches_runner",
         "renderer_smoke_exit_code",
         "output_path_state",
@@ -1198,6 +1212,9 @@ def _verify_runtime_snapshot(snapshot: Any, *, owner_grant: dict[str, Any]) -> N
         or not isinstance(snapshot["renderer_smoke_identity_sha256"], str)
         or len(snapshot["renderer_smoke_identity_sha256"]) != 64
         or not isinstance(snapshot["renderer_interpreter"], str)
+        or snapshot["mujoco_support_site_packages"] != str(MUJOCO_SUPPORT_SITE_PACKAGES)
+        or not isinstance(snapshot["mujoco_support_tree_identity_sha256"], str)
+        or len(snapshot["mujoco_support_tree_identity_sha256"]) != 64
         or snapshot["renderer_interpreter_matches_runner"] is not True
         or snapshot["renderer_smoke_exit_code"] != 0
         or snapshot["authority_artifacts_materialized"] is not False
@@ -1322,6 +1339,7 @@ __all__ = [
     "FAILURE_PATH",
     "GATE_A_PATH",
     "MAXIMUM_OPTIMIZER_UPDATES",
+    "MUJOCO_SUPPORT_SITE_PACKAGES",
     "OUTPUT_PATHS",
     "OWNER_GRANT_PATH",
     "PERMIT_PATH",
