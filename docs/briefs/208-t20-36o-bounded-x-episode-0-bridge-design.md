@@ -179,3 +179,15 @@ Implementation `ae9992b` is on origin. Owner `dee9ae59...`, decision
 spec `50e0569d...`, the exact X/base trees, 85.20 GB free, and absent outputs.
 Reviewer 275 permits only runner implementation next. No marker, model,
 optimizer, or training action exists.
+
+## Verified Optimizer Runner Boundary
+
+Runner implementation `9f3538e` is on origin and passes 36 combined tests.
+It enforces marker-first tensor/model/optimizer access, the exact five masked
+correction contexts, 250 retained examples, unique 1:1 standard replay, the
+frozen optimizer schedule, base-noise-before-decode checks, two exact repeats,
+full tracked probe tensors, first-confirmed-pass stopping, and the 2,500-update
+negative ceiling. The non-consuming preflight returned permit `f9bad1ae...`
+and spec `50e0569d...` while leaving every output absent. Reviewer 276
+authorizes the sole local-MPS optimizer attempt only after this review and
+canonical state boundary are preserved on origin. Gate C remains closed.
