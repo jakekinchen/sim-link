@@ -55,10 +55,11 @@ authority composer.
 
 ### Prepare now for the Gate F scene adversary
 
-- After the active T20.36l boundary, add one policy-independent quantitative
-  strict-v2 receipt with raw and normalized signed predicate margins, hard
-  actor/evidence guards, and bottleneck semantics. This derives new receipts;
-  it does not rewrite historical policy artifacts.
+- T20.36l is now verified fail-closed and T20.36m remains authority-pending.
+  After the T20.36m authority disposition is recorded, add one policy-
+  independent quantitative strict-v2 receipt with raw and normalized signed
+  predicate margins, hard actor/evidence guards, and bottleneck semantics. This
+  derives new receipts; it does not rewrite historical policy artifacts.
 - Add a content-addressed counterexample receipt/archive schema and bootstrap it
   from T20.19's gripper-1.05 boundary negative. That seed is not yet a learned-
   policy counterexample because T20.19 did not compare a policy with a freshly
@@ -162,7 +163,7 @@ not inherit authority from this document.
 | 13l | **T20.36l — frozen consequence Gate B amendment (verified fail-closed)** | Gate `463477dc...` is frozen before scoring. ACT conclusively fails three retained witnesses; SmolVLA is indeterminate because hashes/aggregates but no decoded tensors were retained. Result `0f8ae393...`; no Gate C route. | Verified T20.36k; Brief 205; Reviewer 262 | Threshold fitting, retry, model load/inference, optimizer, new decode, Gate C execution, policy selection, hardware, external compute, Brev |
 | 13m | **T20.36m — SmolVLA tensor-only reproduction (pending authority)** | Proposed one-use offline/MPS reproduction of the ten already-evaluated 50x6 tensors. All five existing hash pairs must match before frozen scoring; any pass routes only to separate Gate C authority. | Verified T20.36l; exact new owner and central inference authority required; proposed Brief 206 | Optimizer, training, new seeds/repeats, threshold change, ACT work, Gate C execution, policy selection, hardware, network, external compute, Brev |
 | 14 | **T20.37 — observable-evaluator qualification** | Run the T20.20 observable role beside strict-v2 over all nominal, recovery, and grid episodes; signed confusion matrix with a low-false-positive requirement; ambiguous outcomes fail closed; prerequisite for any canary planning. | A strict-v2-passing policy worth transferring | Camera access, VLM-only success, physical qualification |
-| 15 | **T20.38 — quantitative strict-v2 receipt contract (planned)** | Derive one policy-independent receipt with raw/normalized signed margins, hard evidence/actor guards, bottleneck semantics, source identities, and deterministic verification. Historical artifacts remain immutable; no model or rollout is needed. | Active T20.36l reaches a preserved boundary; existing strict-v2 and T20.36k evidence | Model load/inference, optimizer, gate change, history rewrite, Gate C execution, policy selection, hardware, external compute, Brev |
+| 15 | **T20.38 — quantitative strict-v2 receipt contract (planned)** | Derive one policy-independent receipt with raw/normalized signed margins, hard evidence/actor guards, bottleneck semantics, source identities, and deterministic verification. Historical artifacts remain immutable; no model or rollout is needed. | Verified T20.36l; T20.36m authority disposition recorded; existing strict-v2 and T20.36k evidence | Model load/inference, optimizer, gate change, history rewrite, Gate C execution, policy selection, hardware, external compute, Brev |
 | 16 | **T20.39 — counterexample archive schema/bootstrap (planned)** | Versioned receipt, routing matrix, duplicate/stale lifecycle, replay tiers, and archive seed 0001 from T20.19 gripper-1.05 honestly labelled `source_controller_boundary_negative`. | T20.19; T20.38 | Scene search, policy blame without expert competence, replay gate activation, training ingestion, hardware, external compute, Brev |
 | 17 | **T20.40 — fixed archive replay harness (Gate C contingent)** | Replay the complete active manifest on every checkpoint eligible for selection; report open challenges and block regressions of required cases. No scene mutation or training. | Mechanical Gate C pass; T20.39 | Active adversarial search, optimizer, automatic training ingestion, policy acceptance, hardware, external compute, Brev |
 
