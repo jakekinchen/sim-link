@@ -920,10 +920,12 @@ installation and any replacement attempt require new owner authority.
 T20.36i now verifies closure `0804fd4f...`: LeRobot and Transformers pass,
 while num2words and Accelerate are missing. Reviewer 252 requires recursive
 closure validation and offline AutoProcessor construction before any future
-marker. Brief 201 opens T20.36j-A only for a read-only offline cache-resolution
-audit that may narrow the exact install set without mutating the environment.
-T20.36j remains blocked pending explicit owner authority for bounded
-installation and at most one unchanged-Gate-B replacement attempt.
+marker. T20.36j-A result `8dec69ae...` now proves the full closure resolves
+offline: 24 existing distributions plus four cached additions bound by manifest
+`6cc7235c...`; network acquisition is unnecessary. Reviewer 253 verifies the
+read-only audit. T20.36j remains blocked pending explicit owner authority for
+that exact offline installation and at most one unchanged-Gate-B replacement
+attempt.
 
 ## Durable State
 

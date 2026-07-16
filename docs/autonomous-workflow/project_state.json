@@ -100,10 +100,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "200",
-    "commit": "9c08d21fa0f0c3c7a566cd27f160ea8a62d62524",
-    "reviewer_decision_id": "252",
-    "summary": "verified_read_only_recursive_closure_audit_0804fd4f_pinned"
+    "brief_id": "201",
+    "commit": "7734e2406996275a643332c9098084b486c27168",
+    "reviewer_decision_id": "253",
+    "summary": "verified_read_only_offline_resolution_8dec69ae_and_cache"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -295,8 +295,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36j-A",
-  "next_eligible_task": "T20.36j-A",
+  "current_task": "T20.36j",
+  "next_eligible_task": "T20.36j",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4454,26 +4454,51 @@
       "authority_not_granted": ["dependency_install","environment_mutation","attempt_marker_creation","replacement_attempt","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","policy_track_selected","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36j-A": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36i"],
-      "active_brief_id": "201",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
+      "active_brief_id": null,
+      "latest_verified_brief_id": "201",
+      "review_decision_id": "253",
       "source_commit": "b9ad9e74b87bbb48e338605070a9c679bc395f78",
-      "implementation_commits": [],
-      "result": "read-only offline cache resolution audit in progress; no installation, environment mutation, network access, model construction, or replacement attempt is authorized",
-      "authority_granted": ["read_only_offline_cache_resolution_audit"],
+      "implementation_commits": ["7734e2406996275a643332c9098084b486c27168"],
+      "result": "verified read-only offline resolution 8dec69ae... and cache manifest 6cc7235c...: 28-package closure reuses 24 installed distributions and needs exactly four already-cached additions (Accelerate 1.14.0, docopt 0.6.2, num2words 0.5.14, psutil 7.2.2), so network acquisition is unnecessary; installation and replacement execution remain owner-gated",
+      "artifact": {
+        "path": "configurations/robot_lab/t20_36j_a_offline_cache_resolution.json",
+        "schema_version": "scenesmith.t20_36j_a_offline_cache_resolution.v1",
+        "identity_sha256": "8dec69ae95e87718405be8e5ef5e580aeda9e3b665254b9aded0c0bc796a5530",
+        "file_sha256": "9b863d746df462c97eafd56ccd9b67ba92e6ee0c7e33acb3eea481a2db1a9848",
+        "size_bytes": 6793,
+        "cache_manifest_identity_sha256": "6cc7235cbc19c79fca9b180836a3996f5fc9afa7dd10e064d765394271790b7c",
+        "network_acquisition_required": false,
+        "dependency_install_performed": false,
+        "environment_mutated": false,
+        "replacement_attempt_authorized": false
+      },
+      "evidence": {
+        "offline_resolution_identity_sha256": "8dec69ae95e87718405be8e5ef5e580aeda9e3b665254b9aded0c0bc796a5530",
+        "cache_manifest_identity_sha256": "6cc7235cbc19c79fca9b180836a3996f5fc9afa7dd10e064d765394271790b7c",
+        "resolved_package_count": 28,
+        "existing_package_count": 24,
+        "cached_install_count": 4,
+        "network_acquisition_required": false,
+        "dependency_install_performed": false,
+        "environment_mutated": false,
+        "replacement_attempt_authorized": false,
+        "model_constructed": false,
+        "optimizer_created": false
+      },
+      "authority_granted": ["exact_offline_smolvla_cache_closure_verified","network_not_required_for_bounded_install"],
       "authority_not_granted": ["dependency_install","environment_mutation","network_download","attempt_marker_creation","replacement_attempt","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36j": {
       "state": "blocked",
-      "depends_on": ["T20.36i"],
+      "depends_on": ["T20.36j-A"],
       "active_brief_id": null,
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_commit": "9c08d21fa0f0c3c7a566cd27f160ea8a62d62524",
+      "source_commit": "7734e2406996275a643332c9098084b486c27168",
       "implementation_commits": [],
-      "result": "blocked on new owner authority: install only the pinned SmolVLA extra closure into the existing Python 3.12 venv, sign the corrected environment and offline AutoProcessor smoke before a marker, and authorize at most one replacement local-MPS attempt under unchanged Gate B",
+      "result": "blocked on new owner authority: install only the four distributions bound by offline cache manifest 6cc7235c... into the existing Python 3.12 venv with network disabled, sign the corrected environment and offline AutoProcessor smoke before a marker, and authorize at most one replacement local-MPS attempt under unchanged Gate B",
       "authority_granted": [],
       "authority_not_granted": ["dependency_install","environment_mutation","replacement_attempt","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
