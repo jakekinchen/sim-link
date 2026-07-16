@@ -74,3 +74,16 @@ source RNG construction and validates every base-noise hash before decode. No
 model construction/load/inference, optimizer action, or hardware access has
 occurred. Reviewer 265 authorizes exactly one five-seed/two-repeat attempt only
 after this corrected boundary is committed, pushed, and confirmed on origin.
+
+## Verified Result
+
+The sole attempt reproduced all five signed X hashes with bit-identical
+repeats. Tracked attempt `141fc0ba...`, tensor `9d7a517a...`, run
+`95e2279a...`, and result `f8d7866e...` are exact. The retained objective ratio
+`0.00252212` and uniform 0.05-rad Gate B both pass. The frozen amendment passes
+3/5 seeds and fails only five grasp-phase gripper cells at timesteps 33-36;
+excesses over 0.025 rad are `0.00034185`-`0.00441953` rad. Reviewer 266
+verifies the exact negative amended-gate result. Per the owner priority order,
+X remains the eligible bridge candidate: T20.36o must correct the complete
+episode-0 chunk-start window set and pass the amendment at every derived state
+before any Gate C rollout. Gate C route is open; Gate C execution is closed.

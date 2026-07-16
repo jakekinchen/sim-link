@@ -538,7 +538,25 @@ def verify_training_spec(
         dataset_stats=dataset_stats,
         dataset_stats_file_sha256=dataset_stats_file_sha256,
     )
-    if payload != expected:
+    archived_examples_hash = hashlib.sha256(
+        canonical_json_bytes(payload.get("correction_examples"))
+    ).hexdigest()
+    if archived_examples_hash != payload.get("correction_examples_sha256"):
+        raise ValueError("T20.35x archived correction example hash drifted")
+    ignored_rebuild_keys = {"identity_sha256", "correction_examples_sha256"}
+    archived = {
+        key: value for key, value in payload.items() if key not in ignored_rebuild_keys
+    }
+    rebuilt = {
+        key: value for key, value in expected.items() if key not in ignored_rebuild_keys
+    }
+    # Historical dataset reduction order can move derived float leaves by a
+    # few ulps after an otherwise exact dependency restore. The signed archive
+    # remains byte-exact; rebuild verification therefore uses the same bounded
+    # tolerance approach as the T20.35x result verifier.
+    if not _equal_with_float_tolerance(
+        archived, rebuilt, absolute_tolerance=5e-14
+    ):
         raise ValueError("T20.35x training spec drifted")
 
 

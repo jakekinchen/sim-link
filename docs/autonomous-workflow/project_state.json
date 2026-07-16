@@ -323,8 +323,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36n",
-  "next_eligible_task": "T20.36n",
+  "current_task": "T20.36o",
+  "next_eligible_task": "T20.36o",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4689,19 +4689,35 @@
       "authority_not_granted": ["retry","model_reconstruction","model_inference","optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
     },
     "T20.36n": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36m"],
-      "active_brief_id": "207",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "207",
+      "review_decision_id": "266",
+      "source_commit": "a5e7c6adf7f2c51b6708640a419a1c14989da6bf",
+      "implementation_commits": ["69a2f464cca7838c7357039dcf0a824e074ab6c1","1aab35f43deb47a279566e7156dfc5c86c4517aa","a77a829b4b951e861a11f55ac6991735c5d78f2b","a10514343aaad023d8194a766d3b9dd57358cce0","a20f2a4de1b4d8ec7f12142015d44bdecff6a345"],
+      "result": "verified exact X reproduction with all five source hashes and bit-identical repeats; original uniform Gate B passes 5/5 while frozen amendment passes 3/5 and fails only five grasp/gripper cells at t33-36 by 0.00034185-0.00441953 rad; no retry, X remains owner-designated bounded bridge candidate",
+      "source_evidence": {"t20_35x_spec_identity_sha256":"96efc6d35115126268684c91346b7388077342c573e458b7e708e98714113cfd","t20_35x_run_identity_sha256":"b5cc16ef53a415a7e0a4b8519332a4197201544fc9ebe5186565562e048c054b","t20_35x_result_identity_sha256":"e79dacff684dac507295d839527fb15d4eced8fa9c83973f5534bdf7e99ec6cd","t20_35x_checkpoint_identity_sha256":"40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50","frozen_gate_identity_sha256":"463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f","retained_tensor_available":true},
+      "pre_run_authority": {"owner_grant_identity_sha256":"a2b45382f5c7b8b6989b5121686d5c04a3cc13b38696fd0cf6ce0a7343fc8fe2","central_request_identity_sha256":"210d804e1c3695af60fa50e48a5fad90defa7784b2cddd2c840ec498cf39d50e","central_decision_identity_sha256":"5b40131ba6de7cd3f4a3e8f00bbd2920330b43c02d31dc50935c660e85ed13d8","runtime_preflight_identity_sha256":"8e99f9ada35b084e1572b105e4bc528672a26ff8b58ac0eb061ffabd146dc5ea","one_use_permit_identity_sha256":"2c6a1e787299fd6663bbc440a642002a5a46341393559eeb6e8ea406093d5c46","snapshot_revision":"7de663972b7817d2c4cf2d84c821153dfea772e9","snapshot_tree_identity_sha256":"55544131f74838489d0a7e3196ff2991f2369fbffe6c25a8189499055394eda7","required_source_commit":"a77a829b4b951e861a11f55ac6991735c5d78f2b","review_decision_id":"265","attempt_marker_exists":true,"checkpoint_tensor_deserialized":true,"model_constructed":true,"model_loaded":true,"model_inference":true},
+      "artifact": {"path":"configurations/robot_lab/t20_36n_tensor_reproduction_result.json","schema_version":"scenesmith.t20_36n_tensor_reproduction_result.v1","identity_sha256":"f8d7866e852a9b9a288b724016abe104dc94bf631251023faa8d26dbf5b86eb7","file_sha256":"78b591b503463fedda174031b65ee3568df9cf50fa8cdb694bb55cadb78892d8","attempt_identity_sha256":"141fc0ba77b4b6347526fda60612c9d433dab3f368ed371f14c3ea912eda0e2b","tensor_artifact_identity_sha256":"9d7a517a5fef520d68182c127eacf2ff2a29d0f93cf50746d79f6d5a39fd4ab1","tensor_file_sha256":"6e684ede640fffcc0b442b7622ef728b7bac2da026e8f5dcf1ee4c319e185b72","run_identity_sha256":"95e2279a5597811f6fb83b08ced5c80c83a138f827068fc8d7a16b49b3f03435","all_expected_hashes_reproduced":true,"all_repeats_bit_identical":true,"uniform_gate_b_passed":true,"amended_gate_b_passed":false,"amended_passing_seed_count":3,"total_violation_count":5},
+      "owner_authority_granted": ["restore_exact_cached_pyarrow_25_offline","construct_exact_retained_t20_35x_model_once_after_pre_run_boundary","load_exact_retained_t20_35x_checkpoint_once_after_pre_run_boundary","run_five_registered_inference_seeds_with_two_repeats","persist_ten_50x6_physical_action_tensors","score_frozen_t20_36l_gate_b"],
+      "authority_granted": ["read_existing_signed_t20_35x_artifacts","activate_brief_207","implement_central_inference_authority","implement_runtime_preflight_and_one_use_permit","execute_one_hash_bound_local_mps_tensor_reproduction_after_remote_preservation","verify_exact_x_mixed_negative","route_owner_designated_bounded_episode_bridge"],
+      "authority_not_granted": ["checkpoint_tensor_read_before_attempt_marker","model_construction_before_attempt_marker","model_load_before_attempt_marker","model_inference_before_attempt_marker","optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
+    },
+    "T20.36o": {
+      "state": "in_progress",
+      "depends_on": ["T20.36n"],
+      "active_brief_id": "208",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_commit": "a5e7c6adf7f2c51b6708640a419a1c14989da6bf",
-      "implementation_commits": ["69a2f464cca7838c7357039dcf0a824e074ab6c1","1aab35f43deb47a279566e7156dfc5c86c4517aa","a77a829b4b951e861a11f55ac6991735c5d78f2b"],
-      "result": "active owner-directed hash-bound reproduction of the five retained T20.35x decoded tensors before frozen amended-gate scoring; retained artifacts contain hashes and aggregates only",
-      "source_evidence": {"t20_35x_spec_identity_sha256":"96efc6d35115126268684c91346b7388077342c573e458b7e708e98714113cfd","t20_35x_run_identity_sha256":"b5cc16ef53a415a7e0a4b8519332a4197201544fc9ebe5186565562e048c054b","t20_35x_result_identity_sha256":"e79dacff684dac507295d839527fb15d4eced8fa9c83973f5534bdf7e99ec6cd","t20_35x_checkpoint_identity_sha256":"40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50","frozen_gate_identity_sha256":"463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f","retained_tensor_available":false},
-      "pre_run_authority": {"owner_grant_identity_sha256":"a2b45382f5c7b8b6989b5121686d5c04a3cc13b38696fd0cf6ce0a7343fc8fe2","central_request_identity_sha256":"210d804e1c3695af60fa50e48a5fad90defa7784b2cddd2c840ec498cf39d50e","central_decision_identity_sha256":"5b40131ba6de7cd3f4a3e8f00bbd2920330b43c02d31dc50935c660e85ed13d8","runtime_preflight_identity_sha256":"8e99f9ada35b084e1572b105e4bc528672a26ff8b58ac0eb061ffabd146dc5ea","one_use_permit_identity_sha256":"2c6a1e787299fd6663bbc440a642002a5a46341393559eeb6e8ea406093d5c46","snapshot_revision":"7de663972b7817d2c4cf2d84c821153dfea772e9","snapshot_tree_identity_sha256":"55544131f74838489d0a7e3196ff2991f2369fbffe6c25a8189499055394eda7","required_source_commit":"a77a829b4b951e861a11f55ac6991735c5d78f2b","review_decision_id":"265","attempt_marker_exists":false,"checkpoint_tensor_deserialized":false,"model_constructed":false,"model_loaded":false,"model_inference":false},
-      "owner_authority_granted": ["restore_exact_cached_pyarrow_25_offline","construct_exact_retained_t20_35x_model_once_after_pre_run_boundary","load_exact_retained_t20_35x_checkpoint_once_after_pre_run_boundary","run_five_registered_inference_seeds_with_two_repeats","persist_ten_50x6_physical_action_tensors","score_frozen_t20_36l_gate_b"],
-      "authority_granted": ["read_existing_signed_t20_35x_artifacts","activate_brief_207","implement_central_inference_authority","implement_runtime_preflight_and_one_use_permit","execute_one_hash_bound_local_mps_tensor_reproduction_after_remote_preservation"],
-      "authority_not_granted": ["checkpoint_tensor_read_before_attempt_marker","model_construction_before_attempt_marker","model_load_before_attempt_marker","model_inference_before_attempt_marker","optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
+      "source_commit": "a20f2a4de1b4d8ec7f12142015d44bdecff6a345",
+      "implementation_commits": [],
+      "result": "active model-free X episode-0 bridge execution/window/correction/authority design; Gate C route open and execution closed",
+      "execution_contract": {"n_action_steps":50,"queue_reset_count":1,"rollout_frame_count":244,"chunk_start_frames":[0,50,100,150,200],"executed_lengths":[50,50,50,50,44],"final_unexecuted_tail_count":6,"legacy_action_horizon_5_allowed":false,"unexecuted_tail_actor_valid":false},
+      "frozen_gate_identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
+      "owner_authority_granted": ["design_bounded_x_episode_0_bridge","prepare_separate_simulation_training_authority","request_gate_c_only_after_bridge_pass"],
+      "authority_granted": ["read_signed_t20_35x_and_episode_0_artifacts","activate_brief_208","implement_model_free_execution_window_spec","derive_bounded_update_and_probe_contract"],
+      "authority_not_granted": ["model_construction","model_load","model_inference","optimizer_creation","optimizer_training","checkpoint_mutation","gate_c_execution","threshold_change","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

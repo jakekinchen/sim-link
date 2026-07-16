@@ -1010,6 +1010,19 @@ five base-noise hashes are now bound. Central decision `5b40131b...`, preflight
 `8e99f9ad...`, and permit `2c6a1e78...` verify without a checkpoint tensor read
 or model action. Reviewer 265 authorizes the sole attempt only after this
 corrected pre-run boundary is committed, pushed, and origin-confirmed.
+The sole T20.36n attempt now verifies exact X reproduction through tracked
+result `f8d7866e...` and result boundary `a20f2a4`. All five source hashes and
+both repeats match. The retained objective and original uniform 0.05-rad Gate
+B pass, while frozen amendment `463477dc...` passes three of five seeds and
+fails only five grasp-phase gripper cells at timesteps 33-36 by
+`0.00034185`-`0.00441953` rad. Reviewer 266 verifies this mixed-negative without
+retry. Per the owner's priority-3 direction, X remains the eligible episode-0
+bridge candidate. T20.36o must freeze and pass the amendment at every executed
+action from the five real PI0.5 chunk-start states before Gate C execution.
+That bridge uses a new `n_action_steps=50` queue contract: one reset, starts
+0/50/100/150/200, executed lengths 50/50/50/50/44, and the final six predicted
+tail actions excluded from acceptance and actor evidence. Gate C route is open;
+Gate C execution remains closed.
 
 ## Durable State
 

@@ -4,7 +4,11 @@ import copy
 import hashlib
 import unittest
 
-from scenesmith.robot_lab.artifact_contract import canonical_json_bytes, sign_payload
+from scenesmith.robot_lab.artifact_contract import (
+    canonical_json_bytes,
+    load_strict_json,
+    sign_payload,
+)
 from scenesmith.robot_lab.t20_35x_physical_gate_joint_weighted_correction import (
     CORRECTION_EXAMPLE_COUNT,
     EXPECTED_DEPENDENCY_VERSIONS,
@@ -13,6 +17,7 @@ from scenesmith.robot_lab.t20_35x_physical_gate_joint_weighted_correction import
     OPTIMIZER_UPDATES,
     RECONSTRUCTION_TOLERANCE,
     RUN_SCHEMA_VERSION,
+    SPEC_PATH,
     build_correction_examples,
     build_result,
     build_runtime_preflight,
@@ -116,6 +121,10 @@ class T2035xPhysicalGateJointWeightedCorrectionTests(unittest.TestCase):
         self.assertTrue(spec["one_run_permit_required"])
         self.assertFalse(spec["closed_loop_rollout"])
 
+    def test_signed_historical_spec_survives_float_reduction_order_drift(self) -> None:
+        archived = load_strict_json(SPEC_PATH)
+        self._verify_spec(archived)
+
     def test_live_loss_surface_weights_all_dimensions_but_raw_is_active_only(
         self,
     ) -> None:
@@ -164,6 +173,12 @@ class T2035xPhysicalGateJointWeightedCorrectionTests(unittest.TestCase):
             mutation(drift)
             with self.assertRaises(ValueError):
                 self._verify_spec(sign_payload(drift))
+        hash_drift = copy.deepcopy(spec)
+        hash_drift["correction_examples"][0][
+            "baseline_joint_weighted_correction_objective"
+        ] += 1e-14
+        with self.assertRaises(ValueError):
+            self._verify_spec(sign_payload(hash_drift))
         route_drift = copy.deepcopy(self.sources["outlier_audit"])
         route_drift["gate_b_passed"] = True
         with self.assertRaises(ValueError):
