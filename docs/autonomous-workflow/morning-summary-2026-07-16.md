@@ -17,6 +17,10 @@ T19.2 readiness `5476d01d...` subsequently converted the next broad calibration
 step into eight explicit missing proofs. Reviewer 283 routes T19.2a to build the
 metric-target contract and watchdog/deadman/stop/exact-return harness offline;
 no motion gate is open.
+Brief 214/Reviewer 284 also produced a rendered, print-ready metric checkerboard
+PDF `02af20f0...` and signed geometry spec `6359a62f...`. It must still be
+printed at Actual Size and placed; T19.2b remains the offline motion-harness
+slice before any live actuation can be proposed.
 
 ## Operational verdict
 

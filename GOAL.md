@@ -1104,6 +1104,11 @@ offline timing thresholds are bound, but metric target, intrinsics, extrinsics,
 held-out joint offsets, metric aperture, live timing, watchdog/exact-return,
 and central motion authority remain absent. T19.2a is the exact offline target
 and bounded-motion-harness implementation slice; no further live gate is open.
+Brief 214/Reviewer 284 now supplies the missing print-ready metric target:
+signed spec `6359a62f...` binds vector PDF `02af20f0...`, a 9 x 6 inner-corner
+board with exact 20.00 mm squares and a 100.00 mm verification bar. The PDF was
+rendered and visually checked. Printing/placement/observation remain physical
+facts; T19.2b is next to build the bounded watchdog/exact-return harness.
 
 ## Durable State
 
