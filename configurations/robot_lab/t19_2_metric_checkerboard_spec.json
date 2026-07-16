@@ -1,0 +1,70 @@
+{
+  "authority_not_granted": [
+    "target_printed_at_scale",
+    "target_physically_observed",
+    "camera_access",
+    "serial_access",
+    "register_write",
+    "torque_change",
+    "motion",
+    "calibration_update",
+    "twin_update",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "policy_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "checkerboard": {
+    "active_height_mm": 140.0,
+    "active_width_mm": 200.0,
+    "board_origin_from_page_bottom_left_mm": [
+      7.949999999999989,
+      82.0
+    ],
+    "columns": 10,
+    "corner_coordinate_convention": "origin_at_top_left_inner_corner_x_right_y_down",
+    "inner_corners_columns": 9,
+    "inner_corners_rows": 6,
+    "rows": 7,
+    "square_size_mm": 20.0,
+    "top_left_square": "black"
+  },
+  "generator": {
+    "deterministic_invariant_pdf": true,
+    "path": "scenesmith/robot_lab/metric_calibration_target.py",
+    "sha256": "3a5f98c15811ab31c6bdf222391b916a2b37ef6b03594581d03a7e3bb04d0b5c",
+    "size_bytes": 7449
+  },
+  "hardware_accessed": false,
+  "identity_sha256": "6359a62fcce98d666a444df8cf316e8ea50d93b8cb31cf88f0bd7b9e6945af06",
+  "local_capabilities": [
+    "printable_metric_calibration_target_artifact_valid"
+  ],
+  "page": {
+    "height_mm": 279.4,
+    "height_points": 792.0,
+    "media": "US Letter portrait",
+    "page_count": 1,
+    "width_mm": 215.89999999999998,
+    "width_points": 612.0
+  },
+  "pdf": {
+    "path": "output/pdf/pi05_t19_2_metric_checkerboard.pdf",
+    "sha256": "02af20f043c89e81172e36cceff3886b34ce1e3ef926f052f9ada024ece7d586",
+    "size_bytes": 4506,
+    "vector_geometry": true
+  },
+  "physical_follower_commanded": false,
+  "print_contract": {
+    "fit_to_page": false,
+    "maximum_scale_error_mm": 0.2,
+    "printer_mode": "actual_size",
+    "scale_percent": 100,
+    "shrink_oversized_pages": false,
+    "verification_bar_mm": 100.0
+  },
+  "schema_version": "scenesmith.metric_calibration_target.v1",
+  "target_id": "pi05_t19_2_metric_checkerboard_v1",
+  "target_kind": "planar_checkerboard"
+}

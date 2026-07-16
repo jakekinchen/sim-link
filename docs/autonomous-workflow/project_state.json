@@ -5247,13 +5247,13 @@
       "authority_not_granted": ["camera_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     },
     "T19.2a": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["T19.2_readiness_matrix", "owner_present_motion_authority"],
-      "active_brief_id": null,
+      "active_brief_id": "214",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "Implement and fixture-test the metric calibration-target contract plus bounded watchdog/deadman/stop/exact-return motion harness before proposing any new live gate",
-      "authority_granted": ["read_t19_2_readiness_sources", "design_offline_target_and_motion_harness"],
+      "result": "Brief 214 is active to generate and render-verify the exact printable metric calibration target before the separate bounded-motion harness slice",
+      "authority_granted": ["read_t19_2_readiness_sources", "activate_brief_214", "generate_offline_printable_metric_calibration_target"],
       "authority_not_granted": ["camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     }
   }
