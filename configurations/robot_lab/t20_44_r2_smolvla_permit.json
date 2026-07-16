@@ -1,0 +1,39 @@
+{
+  "attempt_marker_path": "configurations/robot_lab/t20_44_r2_smolvla_attempt.json",
+  "authority_decision_identity_sha256": "f9e817c4d9fdec94b73186ac797161a75d7b937390204f1d8f3bc6bc7008d318",
+  "authorized_attempt_count": 1,
+  "brev_compute_authorized": false,
+  "checkpoint_schedule": [
+    0,
+    500,
+    1000,
+    2500,
+    5000
+  ],
+  "correction_objective_authorized": false,
+  "evaluation_action_steps": [
+    50,
+    10
+  ],
+  "external_compute_authorized": false,
+  "gate_a_identity_sha256": "ef79292d7f4120012d0c6f492966052fb106594551fb7f07ad77f091ba7f15af",
+  "hardware_authorized": false,
+  "identity_sha256": "5301aa32a809e2350d1ddb2c4c335d9a437d3fec4c460fb6a6aba45d3d2145e9",
+  "marker_follows_renderer_and_dependency_smoke": true,
+  "marker_precedes_policy_or_vlm_tensor_read_model_inference_optimizer": true,
+  "maximum_optimizer_updates": 5000,
+  "network_authorized": false,
+  "owner_grant_identity_sha256": "6cc7f650f5454d25a4c15c849cfbc338384b4d81b54fefd30eb067af7e0483fb",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "r2_authorized": true,
+  "renderer_smoke_identity_sha256": "11cbcca31a546b100acd92e173a8cb68c57c27cf6c20485c67be7fb1b2c7cc35",
+  "required_source_commit": "e79a5c7dfbf6407e5908e0a2656f7afdc4f14ef0",
+  "retry_or_sweep_authorized": false,
+  "runtime_preflight_identity_sha256": "7a3231a35b222e64dc67658188457e5e0a67036f69bbf5a39eb13205b3361cc6",
+  "schema_version": "scenesmith.t20_44_r2_smolvla_permit.v1",
+  "spec_identity_sha256": "ec45331c7022f955d9b41503aa9599224fc7f0951e9552a6599c2a562fb1d84d",
+  "t20_45_authorized": false,
+  "task_id": "T20.44",
+  "threshold_change_authorized": false
+}
