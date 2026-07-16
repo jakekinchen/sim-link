@@ -4652,18 +4652,20 @@
       "authority_not_granted": ["fit_thresholds_to_candidate_errors","act_retry","smolvla_retry","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","new_decode","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36m": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["T20.36l"],
-      "active_brief_id": null,
-      "proposed_brief_id": "206",
+      "active_brief_id": "206",
+      "proposed_brief_id": null,
       "latest_verified_brief_id": null,
       "review_decision_id": null,
       "source_commit": "e4c00bdbf0f0262b41d799f91b90cded94d7d8a2",
       "implementation_commits": [],
-      "result": "pending exact owner and central authority for one inference-only reproduction of the already-evaluated SmolVLA ten 50x6 tensors; all five signed hash pairs must match before frozen Gate B scoring and any pass still requires separate Gate C authority",
-      "missing": ["exact_owner_model_load_and_inference_authority","central_one_use_inference_decision_and_permit"],
-      "authority_granted": ["read_t20_36l_result","draft_proposed_inference_only_brief"],
-      "authority_not_granted": ["model_construction","model_load","model_inference","optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
+      "result": "owner-authorized one-use inference-only reproduction of the already-evaluated SmolVLA ten 50x6 tensors; all five signed hash pairs must match before frozen Gate B scoring and any pass still requires separate Gate C authority",
+      "run_window": {"start":"2026-07-16T01:44:12-05:00","hard_close":"2026-07-16T09:44:12-05:00","no_new_major_slice_after":"2026-07-16T08:59:12-05:00"},
+      "missing": ["central_one_use_inference_decision_and_permit"],
+      "owner_authority_granted": ["construct_exact_retained_smolvla_model_once","load_exact_retained_checkpoint_once","run_five_registered_inference_seeds_with_two_repeats","persist_ten_50x6_physical_action_tensors","score_frozen_t20_36l_gate_b"],
+      "authority_granted": ["read_t20_36l_result","activate_brief_206","implement_central_inference_authority","implement_runtime_preflight_and_one_use_permit"],
+      "authority_not_granted": ["optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

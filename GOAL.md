@@ -978,6 +978,13 @@ indeterminate and no Gate C route opens. Implementation `e4c00bd` is on origin
 and Reviewer 262 closes the authorized slice. Proposed Brief 206 requests one
 exact inference-only tensor reproduction; it grants nothing without fresh
 owner and central authority.
+At 2026-07-16T01:44:12-05:00 the owner opened a fresh eight-hour autonomous
+research/critique window through 09:44:12 CDT and explicitly activated Brief
+206. T20.36m may construct/load the exact retained SmolVLA model once and
+reproduce only the five registered seeds with two repeats after a fresh central
+decision, verified preflight, committed one-use permit, and remote parity. No
+optimizer, threshold change, Gate C, hardware, network, external compute, or
+Brev authority follows from the window.
 
 ## Durable State
 

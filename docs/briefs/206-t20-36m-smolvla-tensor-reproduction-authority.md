@@ -2,8 +2,11 @@
 
 ## Status
 
-Proposed and pending an exact owner authorization. This brief grants nothing by
-itself.
+Active under the owner's 2026-07-16 eight-hour continuation authorization.
+The execution window is 01:44:12-09:44:12 CDT with no new major slice after
+08:59:12. This activates only the requested local simulation/model authority
+below; it does not grant optimizer, Gate C, hardware, network, external-compute,
+or Brev authority.
 
 ## Objective
 
