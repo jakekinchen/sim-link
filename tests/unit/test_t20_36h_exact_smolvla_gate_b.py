@@ -16,6 +16,7 @@ from scenesmith.robot_lab.t20_36h_exact_smolvla_gate_b import (
     build_attempt_marker,
     build_evaluation_row,
     build_failure,
+    build_failure_result,
     build_result,
     build_run_summary,
     build_runtime_preflight,
@@ -26,6 +27,7 @@ from scenesmith.robot_lab.t20_36h_exact_smolvla_gate_b import (
     verify_runtime_preflight,
     verify_training_permit,
     verify_failure,
+    verify_failure_result,
 )
 from scripts.robot_lab.run_t20_36h_exact_smolvla_gate_b import _build_config
 
@@ -223,6 +225,23 @@ class T2036hExactSmolVLAGateBTests(unittest.TestCase):
         )
         self.assertTrue(failure["attempt_consumed"])
         self.assertFalse(failure["retry_or_sweep_allowed"])
+        result = build_failure_result(
+            spec=self.spec,
+            authority_identity=self.authority,
+            training_permit=self.permit,
+            attempt=self.attempt,
+            failure=failure,
+        )
+        verify_failure_result(
+            result,
+            spec=self.spec,
+            authority_identity=self.authority,
+            training_permit=self.permit,
+            attempt=self.attempt,
+            failure=failure,
+        )
+        self.assertFalse(result["smolvla_gate_b_evaluated"])
+        self.assertFalse(result["retry_or_sweep_allowed"])
 
     def _runtime_kwargs(self):
         return {

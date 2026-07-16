@@ -30,6 +30,9 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 RUN_ROOT = ATTEMPT_PATH.parent
 RUN_SUMMARY_PATH = RUN_ROOT / "run_summary.json"
 FAILURE_PATH = RUN_ROOT / "failure.json"
+FAILURE_RESULT_PATH = Path(
+    "configurations/robot_lab/t20_36h_exact_smolvla_gate_b_failure_result.json"
+)
 CHECKPOINT_ROOT = RUN_ROOT / "checkpoint"
 RUNTIME_PREFLIGHT_PATH = Path(
     "configurations/robot_lab/t20_36h_exact_smolvla_gate_b_preflight.json"
@@ -54,6 +57,9 @@ EVALUATION_SCHEMA_VERSION = (
 RUN_SCHEMA_VERSION = "scenesmith.t20_36h_exact_smolvla_gate_b_run.v1"
 RESULT_SCHEMA_VERSION = "scenesmith.t20_36h_exact_smolvla_gate_b_result.v1"
 FAILURE_SCHEMA_VERSION = "scenesmith.t20_36h_exact_smolvla_gate_b_failure.v1"
+FAILURE_RESULT_SCHEMA_VERSION = (
+    "scenesmith.t20_36h_exact_smolvla_gate_b_failure_result.v1"
+)
 MINIMUM_FREE_DISK_BYTES = 6 * 1024 * 1024 * 1024
 SMOKE_SEED = 20260800
 EXPECTED_DEPENDENCY_VERSIONS = {
@@ -432,6 +438,99 @@ def verify_failure(
     )
     if payload != expected:
         raise ValueError("T20.36h failure evidence drifted")
+
+
+def build_failure_result(
+    *,
+    spec: dict[str, Any],
+    authority_identity: str,
+    training_permit: dict[str, Any],
+    attempt: dict[str, Any],
+    failure: dict[str, Any],
+) -> dict[str, Any]:
+    verify_failure(
+        failure,
+        spec=spec,
+        authority_identity=authority_identity,
+        training_permit=training_permit,
+        attempt=attempt,
+    )
+    missing_num2words = (
+        failure["error_type"] == "ImportError"
+        and "num2words" in failure["error_message"]
+    )
+    return sign_payload(
+        {
+            "schema_version": FAILURE_RESULT_SCHEMA_VERSION,
+            "task_id": TASK_ID,
+            "training_spec_identity_sha256": spec["identity_sha256"],
+            "authority_decision_identity_sha256": authority_identity,
+            "training_permit_identity_sha256": training_permit[
+                "identity_sha256"
+            ],
+            "attempt_identity_sha256": attempt["identity_sha256"],
+            "failure_identity_sha256": failure["identity_sha256"],
+            "failure_stage": failure["failure_stage"],
+            "error_type": failure["error_type"],
+            "error_message": failure["error_message"],
+            "failure_class": (
+                "missing_smolvla_extra_dependency"
+                if missing_num2words
+                else "bounded_smolvla_runtime_failure"
+            ),
+            "missing_dependency_observed": (
+                "num2words" if missing_num2words else None
+            ),
+            "optimizer_update_count": failure["optimizer_update_count"],
+            "attempt_consumed": True,
+            "retry_or_sweep_allowed": False,
+            "smolvla_gate_b_evaluated": False,
+            "gate_b_passed": False,
+            "decision": "smolvla_attempt_runtime_dependency_failure",
+            "selected_next_hypothesis": (
+                "audit_exact_smolvla_extra_dependency_closure_without_model_retry"
+            ),
+            "model_constructed": failure["model_constructed"],
+            "checkpoint_tensor_read": failure["checkpoint_tensor_read"],
+            "model_loaded": failure["model_loaded"],
+            "model_inference": False,
+            "optimizer_created": False,
+            "optimizer_training": False,
+            "policy_track_selected": False,
+            "gate_b_threshold_changed": False,
+            "gate_c_authorized": False,
+            "closed_loop_rollout": False,
+            "simulation_policy_accepted": False,
+            "physical_actuation": False,
+            "network_accessed": False,
+            "weights_downloaded": False,
+            "external_compute_started": False,
+            "brev_compute_started": False,
+            "physical_transfer_ready": False,
+            "promotion_eligible": False,
+        }
+    )
+
+
+def verify_failure_result(
+    payload: dict[str, Any],
+    *,
+    spec: dict[str, Any],
+    authority_identity: str,
+    training_permit: dict[str, Any],
+    attempt: dict[str, Any],
+    failure: dict[str, Any],
+) -> None:
+    verify_signed_payload(payload, label="T20.36h failure result")
+    expected = build_failure_result(
+        spec=spec,
+        authority_identity=authority_identity,
+        training_permit=training_permit,
+        attempt=attempt,
+        failure=failure,
+    )
+    if payload != expected:
+        raise ValueError("T20.36h failure result drifted")
 
 
 def build_evaluation_row(
