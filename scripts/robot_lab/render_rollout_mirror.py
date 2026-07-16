@@ -66,6 +66,10 @@ from scenesmith.robot_lab.t20_36_bounded_corrected_coverage import (  # noqa: E4
     TRACE_SCHEMA_VERSION as T20_36_TRACE_SCHEMA_VERSION,
     verify_trace as verify_t20_36_trace,
 )
+from scenesmith.robot_lab.t20_43_r1_act_runner import (  # noqa: E402
+    TRACE_SCHEMA_VERSION as T20_43_TRACE_SCHEMA_VERSION,
+    verify_trace as verify_t20_43_trace,
+)
 
 PANEL_SIZE = 512
 TEXT_BAR_HEIGHT = 56
@@ -84,6 +88,8 @@ def _load_trace(path: Path) -> dict:
         verify_t20_32_trace(payload, threshold=threshold)
     elif schema == T20_36_TRACE_SCHEMA_VERSION:
         verify_t20_36_trace(payload, threshold=threshold)
+    elif schema == T20_43_TRACE_SCHEMA_VERSION:
+        verify_t20_43_trace(payload)
     else:
         raise SystemExit(f"Unsupported trace schema: {payload.get('schema_version')}")
     return payload

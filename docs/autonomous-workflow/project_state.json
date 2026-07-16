@@ -4870,9 +4870,11 @@
       "latest_verified_brief_id": null,
       "review_decision_id": null,
       "source_commit": "f46c8aae0a0dc291ebc80ec1094033311fa0f717",
-      "result": "Brief 219 opens tests-first implementation of exact R0 Gate A, the full 10000-update ACT standard recipe, fixed dual-semantics rollout schedule, central authority, one-use runner, and evidence contracts; no model or optimizer action is open",
+      "result": "Reviewer 291 accepts spec b3a510f8 and the model-free Gate A, full 10000-update ACT runner, dual-semantics trace/video, authority, permit, marker, result, and verifier implementation; only origin-preserved compact Gate A/authority materialization opens next",
       "recipe": {"training_seed":20260801,"maximum_optimizer_updates":10000,"batch_size":8,"checkpoint_schedule":[0,500,1000,2500,5000,7500,10000],"chunk_size":50,"training_n_action_steps":50,"evaluation_action_steps":[50,10],"optimizer":"AdamW","learning_rate":1e-5,"weight_decay":1e-4,"scheduler":null,"device":"mps","dtype":"float32"},
-      "authority_granted": ["open_fresh_t20_43_r1_act_brief", "read_verified_t20_42_r0_artifacts", "implement_and_fixture_test_r1_act_spec_authority_runner_and_evidence_contracts"],
+      "implementation_review_decision_id": "291",
+      "implementation": {"spec_path":"configurations/robot_lab/t20_43_r1_act_standard_spec.json","spec_identity_sha256":"b3a510f84402d6574333800b73c3d95f5dcfb24af7e77740985f2f3c997449d2","model_free_gate_a_probe_identity_sha256":"90217d2b2e91c95d4c3dd3b0538dc215bf5042b00b5e22313be4b09bb2e63b8a","focused_test_count":9,"focused_plus_broad_test_count":75,"model_constructed":false,"optimizer_created":false,"gate_c_executed":false},
+      "authority_granted": ["open_fresh_t20_43_r1_act_brief", "read_verified_t20_42_r0_artifacts", "implement_and_fixture_test_r1_act_spec_authority_runner_and_evidence_contracts", "r1_act_implementation_valid", "materialize_compact_gate_a_and_authority_after_origin_confirmation"],
       "authority_not_granted": ["r1_activation_without_fresh_brief_and_composed_authority","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","checkpoint_creation","learned_policy_rollout","gate_c_execution","retry","correction_objective","threshold_change","hardware","camera_access","serial_access","physical_motion","network_access","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.44": {

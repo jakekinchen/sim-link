@@ -157,6 +157,12 @@ chunk-50 plus receding-10 rollout-primary strict-v2 evaluation, complete trace/
 mirror evidence, and task-specific central/preflight/one-use contracts. Model,
 optimizer, inference, rollout, and Gate C remain closed until implementation
 and a separate materialized pre-run boundary are reviewed on origin.
+Spec `b3a510f8...` and the complete model-free Gate A/full ACT/dual-rollout/
+authority/runner/verifier implementation now pass Reviewer 291. Gate A probe
+`90217d2b...`, nine focused tests, and 75 focused-plus-broad regressions pass.
+Only compact Gate A/authority materialization opens after this implementation
+is exact on origin; backbone tensor read, model, optimizer, rollout, and Gate C
+remain closed until the separate Reviewer 292 boundary.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

@@ -5,7 +5,7 @@ Updated: 2026-07-16
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: fresh owner-authorized fixed T20.42/R0 simulation-only window 2026-07-16T12:35:56-05:00 through 20:35:56 CDT; no new major slice after 19:50:56; hardware, network, external compute, and Brev remain closed
-run_state: The sole fixed R0 attempt and independent verifier both exit 0 at result d238379b: 119/119 training plus 9/9 fresh-held-out strict-v2 successes, exact base once, 129 training episodes, and 31,366 training frames. Reviewer 290 accepts R0; compact preservation must be confirmed on origin before Brief 219 activates R1.
+run_state: Reviewer 291 accepts T20.43 spec b3a510f8 and the model-free Gate A/full ACT/dual-rollout/authority/runner/verifier implementation. Gate A probe 90217d2b passes, but no live authority or model action exists; implementation must be origin-preserved before compact materialization.
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.43 in progress under Brief 219; implementation/review of exact Gate A, ACT recipe, dual-semantics evaluation, authority, and one-use evidence contracts must precede any model action
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
@@ -13,8 +13,20 @@ evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: owner authorizes bounded simulation-only continuation through 20:35:56 CDT; T20.43 still requires a fresh brief, central composition, runtime preflight, reviewed one-use permit, and origin confirmation before optimizer creation; camera/serial/robot/hardware, network, external compute, and Brev are not authorized
 blockers: T20.43 model/optimizer/rollout actions remain closed until Brief 219 implementation is reviewed on origin and a separately materialized Gate A/central/preflight/permit boundary is origin-preserved and accepted; T20.40 remains ineligible without Gate C; physical gaps remain on the independent T19.x track
-next_step: implement and fixture-test Brief 219's exact Gate A, full ACT recipe, checkpoint/dual-rollout evidence, central authority, preflight, marker-first runner, and verifier without reading cached backbone tensors or constructing a model
+next_step: commit/push Reviewer 291 and the complete implementation/spec, confirm origin, then materialize only the six compact Gate A/owner/request/decision/runtime/permit artifacts for separate Reviewer 292 pre-run acceptance
 ```
+
+## 2026-07-16 - T20.43 implementation accepted for compact materialization
+
+Spec `b3a510f8...` fixes the full 10,000-update ACT recipe and seven dual-
+semantics rollout checkpoints. Gate A probe `90217d2b...` verifies the R0
+package, processors, training-only statistics, held-out exclusions, and
+coordinate round trip without constructing a model. The central authority,
+runtime, permit, marker, complete trace/T20.38/amended-report/mirror evidence,
+first-pass selection, result, retention, and full verifier contracts pass nine
+focused and 75 focused-plus-broad tests. Reviewer 291 opens only compact Gate A
+and authority materialization after this implementation is exact on origin;
+the marker and all model/optimizer/rollout actions remain closed.
 
 ## 2026-07-16 - Brief 219 opens T20.43 R1 ACT standard rung
 
@@ -2140,7 +2152,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T20.42 | verified | T20.41,T17.5b,T20.18,T20.23 | R0 dataset expansion by construction | Briefs 216-218/Reviewer 290; sole result `d238379b...` passes 119/119 training and 9/9 fresh held out; exact base once; 129 episodes/31,366 frames; independent verifier exit 0 |
 | T20.42a | verified | reviewed T20.42 contract implementation | Implement R0 central request/runtime preflight/one-use permit/marker contracts | Brief 217/Reviewer 287; 9 focused + 70 broad + 8 MuJoCo source tests; authority artifacts, marker, and generation remain prohibited |
 | T20.42b | verified | verified T20.42a + fresh owner window | Implement/review live collector, authority materializer, and sole fixed R0 runner; materialize/review/execute the pre-run boundary | Brief 218/Reviewers 288-290; one attempt, no retry, result `d238379b...`, mixture `37b30d34...`, statistics `02ba0e70...`, retention `19d19fba...` |
-| T20.43 | in_progress | verified T20.42 | R1 ACT standard rung | Brief 219; implement/review exact Gate A, full 10k ACT recipe, fixed checkpoints, dual-semantics strict-v2 rollout evidence, central authority, and one-use runner before any model action |
+| T20.43 | in_progress | verified T20.42 | R1 ACT standard rung | Brief 219/Reviewer 291; spec `b3a510f8...`; Gate A probe `90217d2b...`; 9 focused + 75 broad; compact authority materialization only after implementation origin preservation |
 | T20.44 | pending | verified T20.42,T20.43 boundary | R2 SmolVLA standard rung | One bounded cached-base standard-recipe run after R1 boundary; separate brief required |
 | T20.45 | pending | R1/R2 evidence | R3 conditional pi0.5 standard rung or costed external-compute proposal | Local run or proposal only under a fresh brief; external compute/Brev consumption remains unauthorized |
 

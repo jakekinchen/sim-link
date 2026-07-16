@@ -114,3 +114,15 @@ learned-policy rollout, Gate C/D/E claim, retry, correction objective, Gate B
 entry barrier, threshold change, archive replay, hardware/camera/serial access,
 physical motion, network/download, external compute, Brev, physical transfer,
 promotion, destructive operation, R2 activation, or second architecture.
+
+## Implementation boundary
+
+Spec `b3a510f8...` and the model-free Gate A/authority/materializer/runner/
+trace/video/verifier implementation are complete. Gate A probe `90217d2b...`
+passes the exact 129-episode/31,366-frame package with zero manual MEAN_STD
+error, 3.8147e-6 postprocessor inverse error, and 1.4211e-14 coordinate round-
+trip error. Nine focused and 75 focused-plus-broad tests pass; Ruff, formatting,
+compilation, spec reconstruction, strict JSON, and whitespace checks pass.
+Reviewer 291 accepts only origin-preserved compact Gate A/authority
+materialization followed by a separate pre-run review. No model or optimizer
+action has occurred.
