@@ -51,3 +51,13 @@ No model construction/load/inference, optimizer, rollout, gate or threshold
 change, history rewrite, policy selection, physical hardware, camera/serial
 access, network/download, external compute, Brev, promotion, or destructive
 operation.
+
+## Verified Result
+
+Implementation `f9c3682` and receipt `02268a1a...` are exact on origin. The
+receipt binds strict-v2 fixture `950e7568...`, evaluator source `8dd97c79...`,
+33 predicate margins, hard conjunction, and deterministic bottleneck
+selection. It agrees with analytic source success while explicitly withholding
+pure-policy, actual-MuJoCo, physical, training, and promotion claims. Twenty-
+four tests and exact write/verify pass. Reviewer 278 verifies T20.38 and
+activates Brief 210 / T20.39.

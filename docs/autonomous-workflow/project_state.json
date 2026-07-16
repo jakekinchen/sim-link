@@ -118,10 +118,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "208",
-    "commit": "f1744a020ec5553330fd6085aec4b42762ac405e",
-    "reviewer_decision_id": "277",
-    "summary": "verified_terminal_bounded_negative_2_500_finite_updates"
+    "brief_id": "209",
+    "commit": "f9c36824664130c716be97c7dda8c3fd3e5ac74e",
+    "reviewer_decision_id": "278",
+    "summary": "verified_policy_independent_quantitative_strict_v2_receipt_with"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -323,8 +323,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.38",
-  "next_eligible_task": "T20.38",
+  "current_task": "T20.39",
+  "next_eligible_task": "T20.39",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4737,14 +4737,27 @@
       "authority_not_granted": ["second_baseline_attempt","second_optimizer_attempt","optimizer_retry","gate_c_execution","threshold_change","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
     },
     "T20.38": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36o"],
-      "active_brief_id": "209",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "209",
+      "review_decision_id": "278",
+      "source_commit": "7ff09091db1b3647a728b0d29c78d389d46c6ec4",
+      "implementation_commits": ["f9c36824664130c716be97c7dda8c3fd3e5ac74e"],
+      "result": "verified policy-independent quantitative strict-v2 receipt with 33 direction-correct guarded margins, exact source conjunction agreement, and deterministic zero-headroom grasp-contact bottleneck; analytic fixture only",
+      "artifact": {"path":"configurations/robot_lab/t20_38_strict_v2_quantitative_receipt.simulation_only.json","schema_version":"scenesmith.quantitative_strict_v2_receipt.v1","identity_sha256":"02268a1a32feae0b17f04b14e3e24937e8e3b6c31c3603684e3ea17de442207b","file_sha256":"5ad14c6f9687d29d44ffb3cd0c58a123f9194beeb11f9c04b00dbffb1c8b916f","size_bytes":17851,"source_fixture_identity_sha256":"950e7568025f4fe09b9e51633da71b3ee90212ee5ea9c86be8194863cea2e640","evaluator_source_sha256":"8dd97c798c1fb8e6824351e9a21e17b56f7e7a0c1bf87da1bd16d7e1dffc50a5","predicate_count":33,"hard_conjunction_passed":true,"bottleneck_predicate_id":"grasp_confirmed_contacts","bottleneck_normalized_signed_margin":0.0,"pure_policy_success":false,"actual_mujoco_grasp_success":false,"physical_proof":false},
+      "authority_granted": ["read_existing_signed_strict_v2_artifacts","activate_brief_209","implement_quantitative_strict_v2_receipt","write_one_simulation_only_example_receipt","quantitative_strict_v2_receipt_verified"],
+      "authority_not_granted": ["model_construction","model_load","model_inference","optimizer_creation","optimizer_training","rollout","gate_change","threshold_change","history_rewrite","policy_selection","physical_actuation","camera_access","serial_access","network_access","external_compute","brev_compute","promotion"]
+    },
+    "T20.39": {
+      "state": "in_progress",
+      "depends_on": ["T20.19", "T20.38"],
+      "active_brief_id": "210",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "Brief 209 active for one model-free policy-independent quantitative strict-v2 receipt contract after the current Gate C route closed",
-      "authority_granted": ["read_existing_signed_strict_v2_artifacts","activate_brief_209","implement_quantitative_strict_v2_receipt","write_one_simulation_only_example_receipt"],
-      "authority_not_granted": ["model_construction","model_load","model_inference","optimizer_creation","optimizer_training","rollout","gate_change","threshold_change","history_rewrite","policy_selection","physical_actuation","camera_access","serial_access","network_access","external_compute","brev_compute","promotion"]
+      "result": "Brief 210 active for a versioned model-free counterexample receipt/index and truthful T20.19 gripper_scale_high evidence-only seed 0001",
+      "authority_granted": ["read_existing_signed_t20_19_artifacts","activate_brief_210","implement_counterexample_archive_contract","write_archive_seed_0001_and_index"],
+      "authority_not_granted": ["simulation_replay","policy_replay","model_construction","model_inference","optimizer_creation","optimizer_training","replay_gate_activation","training_ingestion","policy_blame","source_rewrite","physical_actuation","camera_access","serial_access","network_access","external_compute","brev_compute","promotion","destructive_delete"]
     },
     "T19.0": {
       "state": "verified",
