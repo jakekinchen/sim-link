@@ -132,3 +132,5 @@ fail-closed retained results. Denoise matrices use signed base64 float32
 little-endian payloads with exact shape and byte hashes so remote retention
 does not discard any path value. Reviewer 270 verifies the complete runner
 diff and requires commit/push/origin confirmation before the marker exists.
+Implementation `781e0e0` is now preserved on origin; only this canonical
+pointer boundary remains to be pushed and confirmed before execution.

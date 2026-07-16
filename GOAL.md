@@ -1048,6 +1048,8 @@ The permit-bound runner and signed tensor/trajectory/result contracts now pass
 27 combined tests plus a live five-observation dataset-only preflight. Reviewer
 270 verifies the runner and exact compact retention of all 500 denoise records;
 this boundary must be pushed and origin-confirmed before its marker can exist.
+Implementation `781e0e0` is on origin; the canonical state pointer is the last
+remote-preservation step before the one-use baseline attempt.
 
 ## Durable State
 

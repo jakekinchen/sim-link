@@ -23,4 +23,5 @@
 ## Result
 
 Reviewer 270 verifies runner implementation only. No marker or model action
-exists. The boundary must be remotely preserved before the one-use attempt.
+exists. Implementation `781e0e0` is remotely preserved; the canonical pointer
+boundary must also be preserved before the one-use attempt.
