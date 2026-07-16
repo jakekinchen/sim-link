@@ -5411,6 +5411,16 @@
       "result": "Reviewer 298 accepts the 13-STL WCW-1A-R1 offline print package at b24ac30; ZIP b650af2a passed CRC and manifest verification and Gmail sent it with the separate README to the owner-named printer as message 19f6d356a4121193",
       "authority_granted": ["read_historical_wcw1_sources", "activate_brief_221", "generate_offline_parametric_cad_mesh_tag_and_document_artifacts", "verify_offline_wcw1a_print_package", "send_verified_package_to_owner_named_printer"],
       "authority_not_granted": ["physical_print_proof","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","package_download","external_compute","brev_compute","promotion"]
+    },
+    "T19.2e": {
+      "state": "in_progress",
+      "depends_on": ["T19.2d", "owner_batched_plate_request"],
+      "active_brief_id": "223",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "result": "Add validated 256 mm full-kit and 180 mm staged Bambu-compatible 3MF layouts without changing frozen WCW-1A-R1 geometry",
+      "authority_granted": ["read_verified_t19_2d_package", "activate_brief_223", "generate_offline_batched_3mf_layouts", "rebuild_and_send_verified_replacement_package"],
+      "authority_not_granted": ["physical_print_proof","printer_access","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","package_download","external_compute","brev_compute","promotion"]
     }
   }
 }
