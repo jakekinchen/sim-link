@@ -21,6 +21,10 @@ Brief 214/Reviewer 284 also produced a rendered, print-ready metric checkerboard
 PDF `02af20f0...` and signed geometry spec `6359a62f...`. It must still be
 printed at Actual Size and placed; T19.2b remains the offline motion-harness
 slice before any live actuation can be proposed.
+Brief 215/Reviewer 285 then verified the fixture-only +8-tick / 0.7033-degree
+wrist-roll deadman/watchdog/exact-return harness `1282784f...`. T19.2c still
+must bind a physically printed target, current runtime, central motion decision,
+and one-use permit; no live motion gate exists.
 
 ## Operational verdict
 

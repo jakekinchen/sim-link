@@ -118,10 +118,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "214",
-    "commit": "476de8fe48fb33ca506398e70b8b168eb06b65d4",
-    "reviewer_decision_id": "284",
-    "summary": "verified_printable_metric_calibration_target_artifact"
+    "brief_id": "215",
+    "commit": "17a20b5adbae009c4a0371ee2c2565475b6a06fe",
+    "reviewer_decision_id": "285",
+    "summary": "verified_fixture_only_bounded_micro_motion_harness"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -323,8 +323,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M19 physical hardware twin qualification",
-  "current_task": "T19.2b",
-  "next_eligible_task": "T19.2b",
+  "current_task": "T19.2c",
+  "next_eligible_task": "T19.2c",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -5259,13 +5259,25 @@
       "authority_not_granted": ["camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     },
     "T19.2b": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T19.2a", "owner_present_motion_authority"],
-      "active_brief_id": "215",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "215",
+      "review_decision_id": "285",
+      "implementation_commit": "17a20b5adbae009c4a0371ee2c2565475b6a06fe",
+      "result": "Reviewer 285 verifies a fixture-only +8-tick/0.7033-degree wrist-roll watchdog/deadman/stop/exact-return harness with bounded emergency cleanup, exact return, torque off, and no live constructor",
+      "artifact": {"plan_path":"configurations/robot_lab/t19_2b_bounded_micro_motion_plan.json","plan_identity_sha256":"739002d9c4a5fa55a35710ed6b428e5eac00baad6eb09bb12217bbc479b4fb25","plan_file_sha256":"289e25022adc330850ef14fb3e79043b3f261b179315d3bf53f4bef50a05d66e","plan_size_bytes":1780,"result_path":"configurations/robot_lab/t19_2b_bounded_micro_motion_fixture.json","result_identity_sha256":"1282784f13aa9d28597598f67468e844d4a7641325bd7e9821bcda5fd9597c2f","result_file_sha256":"4c0d21adffd84a7d027b199e13e873d0cad796ed867852d20a8feab1d5f7abee","result_size_bytes":3956,"selected_joint":"wrist_roll","baseline_position_raw":1320,"delta_ticks":8,"delta_degrees":0.7032967032967034,"read_count":12,"write_count":4,"torque_change_count":2,"motion_command_count":2,"close_count":1,"returned_to_baseline":true,"final_torque_disabled":true,"watchdog_conformant":true,"hardware_accessed":false},
+      "authority_granted": ["read_verified_metric_target_contract", "activate_brief_215", "implement_offline_bounded_motion_harness", "bounded_micro_motion_harness_fixture_conformant"],
+      "authority_not_granted": ["camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
+    },
+    "T19.2c": {
+      "state": "pending",
+      "depends_on": ["T19.2a", "T19.2b", "owner_present_motion_authority"],
+      "active_brief_id": null,
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "Brief 215 is active to implement and fixture-test a sub-degree single-joint watchdog/deadman/stop/exact-return harness with no live constructor",
-      "authority_granted": ["read_verified_metric_target_contract", "activate_brief_215", "implement_offline_bounded_motion_harness"],
+      "result": "Integrate printed-target placement evidence, current runtime/state, central motion decision, and a one-use session permit around a separately reviewed live adapter; no live gate exists",
+      "authority_granted": ["read_verified_target_and_fixture_harness", "design_offline_live_authority_integration"],
       "authority_not_granted": ["camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     }
   }

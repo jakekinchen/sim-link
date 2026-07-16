@@ -1109,6 +1109,12 @@ signed spec `6359a62f...` binds vector PDF `02af20f0...`, a 9 x 6 inner-corner
 board with exact 20.00 mm squares and a 100.00 mm verification bar. The PDF was
 rendered and visually checked. Printing/placement/observation remain physical
 facts; T19.2b is next to build the bounded watchdog/exact-return harness.
+Brief 215/Reviewer 285 now verifies fixture-only plan `739002d9...` and result
+`1282784f...`: wrist roll +8 ticks / 0.7033 degrees, continuous deadman and
+watchdog gates, bounded settling, exact baseline return, final torque off, and
+one no-torque close. No physical command occurred. T19.2c next binds printed-
+target evidence and central one-use authority around a separately reviewed live
+adapter; no motion gate exists.
 
 ## Durable State
 
