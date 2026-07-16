@@ -99,6 +99,42 @@ def generate_episode_payload(
     """Run one bounded unassisted episode and convert it into raw records."""
 
     _validate_episode_spec(spec)
+    return _generate_validated_episode_payload(spec, raw_trace_sink=raw_trace_sink)
+
+
+def generate_bounded_episode_payload(
+    spec: dict[str, Any],
+    *,
+    raw_trace_sink: Callable[[dict[str, Any]], None] | None = None,
+) -> dict[str, Any]:
+    """Run one envelope-valid episode supplied by a separately reviewed manifest.
+
+    This entrypoint grants no manifest, training, or retry authority. Callers
+    must bind and verify their own candidate identity/order before invoking it.
+    """
+
+    validate_bounded_episode_spec(spec)
+    return _generate_validated_episode_payload(spec, raw_trace_sink=raw_trace_sink)
+
+
+def validate_bounded_episode_spec(spec: dict[str, Any]) -> None:
+    """Validate only the source expert's already-proven pose envelope."""
+
+    if not isinstance(spec, dict) or set(spec) != {
+        "seed",
+        "planar_offset_m",
+        "yaw_offset_rad",
+    }:
+        raise ValueError("Bounded episode specification fields drifted")
+    _require_seed(spec.get("seed"))
+    _validate_episode_envelope(spec)
+
+
+def _generate_validated_episode_payload(
+    spec: dict[str, Any],
+    *,
+    raw_trace_sink: Callable[[dict[str, Any]], None] | None = None,
+) -> dict[str, Any]:
     contract = load_strict_json(REPO_ROOT / CONTRACT_PATH)
     verify_experience_record_contract(contract, repo_root=REPO_ROOT)
     grasp = load_strict_json(REPO_ROOT / GEOMETRY_GRASP_PATH)
@@ -684,6 +720,10 @@ def _validate_episode_spec(spec: dict[str, Any]) -> None:
     seed = _require_seed(spec.get("seed"))
     if seed not in {entry["seed"] for entry in EPISODE_SPECS} or spec != EPISODE_SPECS[seed]:
         raise ValueError("Episode specification is not one of the fixed seeds")
+    _validate_episode_envelope(spec)
+
+
+def _validate_episode_envelope(spec: dict[str, Any]) -> None:
     offset = spec.get("planar_offset_m")
     yaw = spec.get("yaw_offset_rad")
     if (

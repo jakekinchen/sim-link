@@ -799,7 +799,7 @@ def _validated_runtime_snapshot(
         _nonblank(value, label=f"platform {name}")
     output_state = payload.get("output_path_state")
     expected_paths = [path.as_posix() for path in OUTPUT_PATHS]
-    if not isinstance(output_state, dict) or list(output_state) != expected_paths:
+    if not isinstance(output_state, dict) or set(output_state) != set(expected_paths):
         raise ValueError("T20.42a runtime output path set drifted")
     for relative, state in output_state.items():
         _safe_relative_path(Path(relative), label="runtime output path")
