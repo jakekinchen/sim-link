@@ -215,7 +215,7 @@ def construct_offline_processor_smoke(
 ) -> dict[str, Any]:
     """Construct only AutoProcessor under explicit offline and file-open guards."""
 
-    snapshot = Path(expected_vlm_snapshot).resolve()
+    snapshot = Path(os.path.abspath(os.path.expanduser(expected_vlm_snapshot)))
     if not snapshot.is_dir():
         raise FileNotFoundError(snapshot)
     os.environ.update(

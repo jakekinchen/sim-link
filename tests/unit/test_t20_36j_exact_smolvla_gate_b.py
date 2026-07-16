@@ -208,6 +208,27 @@ class T2036jExactSmolVLAGateBTests(unittest.TestCase):
                 guard.opened_snapshot_files, {"processor_config.json"}
             )
 
+    def test_processor_guard_preserves_lexical_snapshot_contract_path(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            physical = base / "physical"
+            physical.mkdir()
+            (physical / "processor_config.json").write_text(
+                "{}", encoding="utf-8"
+            )
+            lexical = base / "lexical"
+            lexical.symlink_to(physical, target_is_directory=True)
+            with guarded_processor_access(lexical) as guard:
+                self.assertEqual(
+                    (lexical / "processor_config.json").read_text(
+                        encoding="utf-8"
+                    ),
+                    "{}",
+                )
+            self.assertEqual(
+                guard.opened_snapshot_files, {"processor_config.json"}
+            )
+
     def test_editable_distribution_pkg_info_is_valid_metadata(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory) / "lerobot.egg-info"
