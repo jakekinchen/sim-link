@@ -962,6 +962,14 @@ fails the unchanged gate after 2,000 updates. Reviewer 260 closes the SmolVLA
 replacement alphabet. Brief 204 opens the owner-pre-authorized model-free
 consequence-calibration design; strict uniform error remains report-only, no
 gate changes now, and no ACT/SmolVLA retry or Gate C execution is authorized.
+T20.36k now verifies result `a3b39178...`: the exact source replay passes and
+252 fixed symmetric perturbation pairs produce 202 passes, 50 failures, and
+zero non-monotonic phase/joint cells. Wrist roll remains insensitive through
+0.4 rad in every phase, while shoulder lift and gripper retain task-critical
+0.025/0.01-rad phase ceilings. Implementation `fbdb0aa` is on origin and
+Reviewer 261 verifies the non-authorizing calibration. Brief 205 now freezes
+that evidence before scoring retained ACT/SmolVLA tensors; it cannot load a
+model, fit to candidate errors, execute Gate C, or accept a policy.
 
 ## Durable State
 

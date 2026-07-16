@@ -109,10 +109,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "203",
-    "commit": "73674a493fa3cb04ca77a8761d487f2d8a0eeeab",
-    "reviewer_decision_id": "260",
-    "summary": "verified_negative_sole_smolvla_replacement_08ef923d_all_2"
+    "brief_id": "204",
+    "commit": "fbdb0aad4f268268ae567836fc69866c97e528b1",
+    "reviewer_decision_id": "261",
+    "summary": "verified_non_authorizing_consequence_calibration_a3b39178_canonical_replay"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -304,8 +304,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36k",
-  "next_eligible_task": "T20.36k",
+  "current_task": "T20.36l",
+  "next_eligible_task": "T20.36l",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4601,17 +4601,42 @@
       "authority_not_granted": ["second_attempt","retry","sweep","model_reconstruction","post_run_inference","optimizer_creation","optimizer_training","gate_b_threshold_change_without_t20_36k_evidence","gate_c_execution","closed_loop_rollout","policy_track_selected","simulation_policy_accepted","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36k": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36e","T20.36f","T20.36j"],
-      "active_brief_id": "204",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "204",
+      "review_decision_id": "261",
+      "source_commit": "73674a493fa3cb04ca77a8761d487f2d8a0eeeab",
+      "implementation_commits": ["fbdb0aad4f268268ae567836fc69866c97e528b1"],
+      "result": "verified non-authorizing consequence calibration a3b39178...: canonical replay passes; 252 symmetric pairs yield 202 passes, 50 failures, and zero non-monotonic cells. Wrist roll is insensitive through 0.4 rad; shoulder lift and gripper retain task-critical 0.025/0.01-rad phase ceilings. Strict uniform Gate B remains report-only and Gate C remains the eventual behavioral arbiter",
+      "artifact": {
+        "path": "configurations/robot_lab/t20_36k_consequence_gate_design.json",
+        "schema_version": "scenesmith.t20_36k_consequence_gate_design.v1",
+        "identity_sha256": "a3b391784eaca8fef2cb9ff6abe45cc21346cada8f9483be60692dac0faf1f66",
+        "file_sha256": "714b50ed820866fb99ebb186847bff38d2ef33eac23ac70eac622d99e9381391",
+        "symmetric_pair_count": 252,
+        "passing_pair_count": 202,
+        "failing_pair_count": 50,
+        "non_monotonic_cell_count": 0
+      },
+      "test_commands": ["PYTHONPATH=. .mujoco_venv/bin/python scripts/robot_lab/run_t20_36k_consequence_gate_design.py --verify",".mujoco_venv/bin/python -m unittest tests.unit.test_t20_36k_consequence_gate_design tests.unit.test_act_grasp_closed_loop","PYTHONPATH=external/lerobot/src:. external/lerobot/.venv/bin/python -m unittest discover -s tests/unit -p 'test_t20_36*.py'"],
+      "verification_summary": "13 focused tests pass; broader T20.36 discovery passes 80/82, with two historical-state tests invalidated by the already-authorized T20.36j offline dependency install",
+      "owner_authority_granted": ["design_task_consequence_sensitivity_calibration","retain_strict_uniform_metric_as_report_only","design_gate_c_one_episode_arbiter"],
+      "authority_granted": ["read_existing_signed_act_and_smolvla_results","run_model_free_simulation_sensitivity_analysis","write_non_authorizing_amendment_design","freeze_t20_36k_thresholds_in_t20_36l","score_retained_candidate_tensors_without_model_load"],
+      "authority_not_granted": ["change_gate_b_now","select_thresholds_from_candidate_errors","act_retry","smolvla_retry","model_construction","model_inference","optimizer_training","gate_c_execution","policy_selection","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.36l": {
+      "state": "in_progress",
+      "depends_on": ["T20.36k"],
+      "active_brief_id": "205",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_commit": "73674a493fa3cb04ca77a8761d487f2d8a0eeeab",
+      "source_commit": "fbdb0aad4f268268ae567836fc69866c97e528b1",
       "implementation_commits": [],
-      "result": "owner-pre-authorized consequence-calibrated Gate B amendment design using the completed ACT and SmolVLA negative controls. Strict uniform 0.05-rad evidence remains reported; thresholds must derive from bounded task-consequence sensitivity rather than candidate results; one-episode Gate C remains the behavioral arbiter",
-      "owner_authority_granted": ["design_task_consequence_sensitivity_calibration","retain_strict_uniform_metric_as_report_only","design_gate_c_one_episode_arbiter"],
-      "authority_granted": ["read_existing_signed_act_and_smolvla_results","run_model_free_simulation_sensitivity_analysis","write_non_authorizing_amendment_design"],
-      "authority_not_granted": ["change_gate_b_now","select_thresholds_from_candidate_errors","act_retry","smolvla_retry","model_construction","model_inference","optimizer_training","gate_c_execution","policy_selection","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
+      "result": "freeze the candidate-independent T20.36k reach/grasp threshold matrix and score immutable ACT/SmolVLA tensors under one identical amended conjunction without model loading, inference, training, new decode, Gate C execution, or policy acceptance",
+      "owner_authority_granted": ["record_pre_result_gate_b_amendment_authorization","freeze_consequence_derived_thresholds","retain_uniform_metric_as_report_only","score_existing_act_and_smolvla_evidence","route_pass_only_to_separate_gate_c_authority"],
+      "authority_granted": ["read_existing_signed_run_artifacts","write_frozen_gate_b_amendment_contract","perform_model_free_retained_tensor_scoring"],
+      "authority_not_granted": ["fit_thresholds_to_candidate_errors","act_retry","smolvla_retry","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","new_decode","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

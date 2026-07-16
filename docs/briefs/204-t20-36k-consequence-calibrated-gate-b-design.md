@@ -51,3 +51,15 @@ track. Neither may be retried.
 ACT/SmolVLA retry, model construction/inference, optimizer training, immediate
 Gate B amendment, fitting thresholds to candidate errors, Gate C execution,
 policy selection/promotion, hardware, external compute, or Brev.
+
+## Verified Result
+
+Result `a3b391784eaca8fef2cb9ff6abe45cc21346cada8f9483be60692dac0faf1f66`
+binds 252 symmetric pairs across six joints, seven phase groups, and six fixed
+magnitudes. The canonical replay passes all strict-v2 gates; 202 pairs pass and
+50 fail, with zero non-monotonic cells. Wrist roll is insensitive through
+0.4 rad in every phase, while shoulder lift reaches a 0.025-rad evidenced
+ceiling during lift and gripper reaches 0.01 rad during lift, hold, and lower.
+Strict uniform 0.05 rad remains report-only, Gate B is unchanged, and Gate C
+is not authorized. Implementation commit `fbdb0aa` is confirmed on origin;
+Reviewer 261 verifies this brief.

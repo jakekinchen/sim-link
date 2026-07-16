@@ -5,15 +5,15 @@ Updated: 2026-07-16
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-16T00:33:37-05:00 through hard closeout 2026-07-16T08:33:37-05:00; no new major slice after 2026-07-16T07:48:37-05:00; owner authorized the exact offline SmolVLA environment correction, corrected preflight, and at most one replacement attempt
-run_state: T20.36j completed its sole corrected SmolVLA attempt as a verified objective-pass/action-fail negative. The replacement alphabet is closed. The owner-pre-authorized consequence-weighted gate review now proceeds model-free under Brief 204 using existing ACT and SmolVLA evidence.
+run_state: T20.36k verified a candidate-independent model-free consequence calibration over 252 symmetric pairs. The replacement alphabet remains closed; Brief 205 now freezes the evidence-derived amendment before scoring retained ACT/SmolVLA tensors.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.36k in progress under Brief 204 for a model-free task-consequence sensitivity and Gate B amendment design; no gate has changed and no retraining or Gate C execution is authorized
+current_task: T20.36l in progress under Brief 205 for a frozen consequence Gate B amendment and retained-evidence scoring; no model load, retraining, new decode, Gate C execution, or policy acceptance is authorized
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: completed disconnect scope was exactly one follower call with inherent torque-disable plus response/status/zero-holder proof; permit is consumed and cannot be reused; reconnect only if proven no-motion-safe; initial supervised_micro_motion confirmation remains separately gated
-blockers: strict uniform Gate B rejects both ACT and SmolVLA despite objective memorization, while no task-consequence calibration yet exists; sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no physical authority; external compute and Brev remain unauthorized
-next_step: execute Brief 204 model-free sensitivity design from existing signed ACT/SmolVLA evidence; retain strict uniform error as report-only and require evidence-derived consequence thresholds plus a one-episode Gate C arbiter before any amendment can be accepted
+blockers: the T20.36k calibration exists but its frozen amendment has not yet scored the retained candidates; sorting scene mismatch; no metric camera/workcell transform; no physical aperture/current mapping; no physical authority; external compute and Brev remain unauthorized
+next_step: execute Brief 205 from signed T20.36k evidence: freeze the reach/grasp phase-joint thresholds, reconstruct retained ACT/SmolVLA tensors without model loading, and route any pass only to a separate one-episode Gate C authority request
 ```
 
 ## Rules
@@ -1103,6 +1103,21 @@ post-failure amendment path before this result existed, Brief 204 opens
 T20.36k: model-free task-consequence calibration using existing evidence,
 strict uniform error retained as report-only, and Gate C one-episode behavior
 as the eventual arbiter.
+
+## 2026-07-16 - T20.36k model-free consequence calibration verified
+
+Canonical seed-0 action replay passes every strict-v2, contact, safety,
+release, retreat, projection, and assistance gate. Result `a3b39178...` binds
+252 candidate-independent symmetric perturbation pairs across six joints,
+seven exhaustive phase groups, and magnitudes 0.01 through 0.4 rad. Exactly
+202 pairs pass and 50 fail; all 42 phase/joint rows are monotonic. Wrist roll
+is insensitive through 0.4 rad in every phase, shoulder lift reaches a
+0.025-rad ceiling during lift, and gripper reaches 0.01 rad during lift, hold,
+and lower. Implementation `fbdb0aa` is on origin. Reviewer 261 verifies the
+non-authorizing design: Gate B remains unchanged, strict uniform 0.05 rad stays
+visible, and no model, optimizer, Gate C, hardware, external compute, or Brev
+action occurred. Brief 205 opens only the frozen amendment and retained-tensor
+scoring path.
 
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
