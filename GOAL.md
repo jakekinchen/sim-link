@@ -1038,6 +1038,12 @@ permit, and marker-first contracts are now implemented and tested. Reviewer
 origin before authority materialization can hash checkpoint/base bytes. No
 baseline authority artifact, marker, checkpoint tensor read, model, or
 optimizer action exists yet.
+Implementation `467ad92` is now on origin. Baseline owner grant `e3d80dcd...`,
+central decision `e649d3dc...`, exact preflight `f0794abd...`, and permit
+`3d6a1548...` verify against the corrected design, X checkpoint, base snapshot,
+runtime, and origin. Reviewer 269 authorizes exactly one marker-first
+five-state/five-seed/two-repeat capture after this pre-run boundary is remotely
+preserved. No optimizer or Gate C authority follows, and no marker exists yet.
 
 ## Durable State
 

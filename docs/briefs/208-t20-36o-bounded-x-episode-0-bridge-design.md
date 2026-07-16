@@ -112,3 +112,13 @@ requires it to be committed, pushed, and origin-confirmed before the
 materializer may hash the checkpoint/base snapshot and emit authority files.
 No baseline authority artifact, marker, checkpoint tensor read, model action,
 or optimizer action exists at this boundary.
+
+## Verified Pre-Run Boundary
+
+Implementation `467ad92` is on origin. Owner grant `e3d80dcd...`, central
+decision `e649d3dc...`, live preflight `f0794abd...`, and one-use permit
+`3d6a1548...` reconstruct exactly. The permit binds 50 decoded chunks, 500
+denoise-step records, the five start-zero hashes, base-noise checks before each
+decode, and marker-first tensor access. Reviewer 269 authorizes the sole
+baseline attempt only after this boundary is committed, pushed, and confirmed
+on origin. No marker or model action exists yet.

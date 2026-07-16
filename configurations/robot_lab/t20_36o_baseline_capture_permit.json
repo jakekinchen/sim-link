@@ -1,0 +1,181 @@
+{
+  "attempt_marker_path": "outputs/robot_lab/t20_36o_baseline_capture_run_001/attempt.json",
+  "authority_decision_identity_sha256": "e649d3dc9643c9900a83434e059d3ccf78a2a924d1ac31adb99804b9c59e6c4d",
+  "authorized_actions": [
+    "simulation_model_construction_once",
+    "simulation_model_load_once",
+    "simulation_model_inference_exact_registered_probe_matrix",
+    "persist_fifty_decoded_action_chunks",
+    "persist_five_hundred_denoise_step_records",
+    "score_frozen_bridge_acceptance"
+  ],
+  "authorized_attempt_count": 1,
+  "base_noise_hash_must_precede_each_decode": true,
+  "base_noise_sha256_by_seed": [
+    "7eb7dff02036ff9e333e87717b64532b08bdfb9a703ae0a3be907967c387812e",
+    "78f970b711b4bf49a38ad18fd442b9b3c0763555f849425a387c458464bad707",
+    "52128e7e1595282861bd968f7c35a69729be060468722a30a065726db59a11b6",
+    "406784a0ca3ed2513580aee22e11351d2945e7e6c15b4833ac3a08b8882dc89f",
+    "01597685ad0d3db1f3446b8393959a27ac63766a7e063566b2be67cdff10ab3f"
+  ],
+  "brev_compute_started": false,
+  "bridge_spec_identity_sha256": "8294c63be101dbb1ea3536d2b2da1447d23ca9aa71d2145eb501452547c30c0c",
+  "chunk_start_frames": [
+    0,
+    50,
+    100,
+    150,
+    200
+  ],
+  "closed_loop_rollout": false,
+  "construction_seed": 20260718,
+  "decoded_chunk_count": 50,
+  "denoise_step_count": 10,
+  "denoise_step_record_count": 500,
+  "executed_lengths": [
+    50,
+    50,
+    50,
+    50,
+    44
+  ],
+  "expected_start_zero_hashes": [
+    "ab47fa1dd0631f72c7147cbc40e0588fa9161df8ed96a2d6382744a834968762",
+    "daeb453986f1449bb8b9058ea2946e1ec9eb178ad51d930b26a8fb5bfd85cc02",
+    "34a758673ce8e9cb484d56f367f99af5c1fac966b3e06f83896b7bee64f206c0",
+    "8a89f1a9c248c5994d925e413d3961bf404c5f4cec7b77945a4dcf2294f3ba8a",
+    "6b95263746dead2b582dba92bf8de6a10b63c4c416a7d1094b55aabe0a7809e1"
+  ],
+  "external_compute_started": false,
+  "extra_repeat": false,
+  "frozen_gate_identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
+  "gate_c_authorized": false,
+  "identity_sha256": "3d6a1548e450828af2a63ec23eae91821f64011c59df76330ef917380f27de12",
+  "inference_seeds": [
+    20260721,
+    20260722,
+    20260723,
+    20260724,
+    20260725
+  ],
+  "local_execution_eligible_after_remote_preservation": true,
+  "marker_must_precede_checkpoint_tensor_read": true,
+  "network_accessed": false,
+  "new_seed": false,
+  "new_start": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "policy_track_selected": false,
+  "probe_seed_by_start": [
+    {
+      "inference_seeds": [
+        20260721,
+        20260722,
+        20260723,
+        20260724,
+        20260725
+      ],
+      "start_frame": 0
+    },
+    {
+      "inference_seeds": [
+        20260721,
+        20260722,
+        20260723,
+        20260724,
+        20260725
+      ],
+      "start_frame": 50
+    },
+    {
+      "inference_seeds": [
+        20260721,
+        20260722,
+        20260723,
+        20260724,
+        20260725
+      ],
+      "start_frame": 100
+    },
+    {
+      "inference_seeds": [
+        20260721,
+        20260722,
+        20260723,
+        20260724,
+        20260725
+      ],
+      "start_frame": 150
+    },
+    {
+      "inference_seeds": [
+        20260721,
+        20260722,
+        20260723,
+        20260724,
+        20260725
+      ],
+      "start_frame": 200
+    }
+  ],
+  "repeats_per_start_seed": 2,
+  "required_source_commit": "467ad92786be7c65e3bfa0ba95a6980473643b25",
+  "retry_authorized": false,
+  "runtime_preflight_identity_sha256": "f0794abd5666adf87767ca42835fcc64bf16f972214cacfd6d604184d24f1f01",
+  "schema_version": "scenesmith.t20_36o_baseline_capture_permit.v1",
+  "snapshot_revision": "7de663972b7817d2c4cf2d84c821153dfea772e9",
+  "snapshot_tree_identity_sha256": "55544131f74838489d0a7e3196ff2991f2369fbffe6c25a8189499055394eda7",
+  "source_checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
+  "source_result_identity_sha256": "e79dacff684dac507295d839527fb15d4eced8fa9c83973f5534bdf7e99ec6cd",
+  "source_run_identity_sha256": "b5cc16ef53a415a7e0a4b8519332a4197201544fc9ebe5186565562e048c054b",
+  "start_zero_hashes_must_match_before_new_evidence_is_accepted": true,
+  "target_bindings": [
+    {
+      "dataset_observation_identity_sha256": "c31eaf965ddfdc516a47bfdbaa3edc43f55dbad62dfb82484cb4321ee6c9cabf",
+      "executed_length": 50,
+      "executed_mask_sha256": "da46d619481d68a93a465de306fef0c7c85c50549cfa38c5009e461e3d914471",
+      "padded_target_action_sha256": "4a4e0e2c92a4ad500f6016346bae064a75a319ec901afd3862f676a65bd83b68",
+      "start_frame": 0,
+      "start_observation_identity_sha256": "7cc5d0fdd33fdbe98653ad6f6042298a189916b723c6ba1a3f576d98f7139c1b"
+    },
+    {
+      "dataset_observation_identity_sha256": "4a806a1f8536df024a9fd7e9f12fcab11bf38a5ce660d3ac0d6441a5e6c0e33f",
+      "executed_length": 50,
+      "executed_mask_sha256": "da46d619481d68a93a465de306fef0c7c85c50549cfa38c5009e461e3d914471",
+      "padded_target_action_sha256": "1be2bc4b01ef923f15d37e2550bb1a6613e5fc1458743390fab2921f4d32df6e",
+      "start_frame": 50,
+      "start_observation_identity_sha256": "64fd5ca9e33b7fdcd45e8f539a68561697b949a7e5ecb4672bff43436041a1df"
+    },
+    {
+      "dataset_observation_identity_sha256": "0a482aed6a64da882d7ae12a2bad919bda67cffa96b79a8b7ba4e47c1390beaa",
+      "executed_length": 50,
+      "executed_mask_sha256": "da46d619481d68a93a465de306fef0c7c85c50549cfa38c5009e461e3d914471",
+      "padded_target_action_sha256": "be8ca9f48a77b0abe56932e2f31b4a0e6b62384b8a5f16d7cf88ea98ff837a26",
+      "start_frame": 100,
+      "start_observation_identity_sha256": "eb71b611b0572295fb3f3bca8bb84b93df10454cb8adda605016c7394a3597c6"
+    },
+    {
+      "dataset_observation_identity_sha256": "4b311fca63b03e2290bb60e3d270e964f2a4684d9114a9409add74169754074d",
+      "executed_length": 50,
+      "executed_mask_sha256": "da46d619481d68a93a465de306fef0c7c85c50549cfa38c5009e461e3d914471",
+      "padded_target_action_sha256": "adc51cd6ac871823a27a4bc65ef203302409192dcf798011abfdcff13bc7063d",
+      "start_frame": 150,
+      "start_observation_identity_sha256": "dc68759ae6f38267ab077c7acfa70dec76db16aa8aa798fe5dbe9adf7d6056f3"
+    },
+    {
+      "dataset_observation_identity_sha256": "5f0b0cc80379a20783a0e787af7e39f80c3b2755146c8bceb759898bbbbc5a49",
+      "executed_length": 44,
+      "executed_mask_sha256": "16777e337df979baa5da5a36d147d92422b08f3d03aeb826fe0b914e42a9363d",
+      "padded_target_action_sha256": "b41b880b91b69fab03ec3d57ff60025fdd2b2e74d5132470313f8879803ff006",
+      "start_frame": 200,
+      "start_observation_identity_sha256": "3a452e2ac066d388e23f861b9206d7b94095addf51523ac57cea4e67112d2ebd"
+    }
+  ],
+  "task_id": "T20.36o",
+  "tensor_artifact_path": "configurations/robot_lab/t20_36o_baseline_decoded_action_tensors.json",
+  "threshold_changed": false,
+  "training_authorized": false,
+  "trajectory_artifact_path": "configurations/robot_lab/t20_36o_baseline_denoise_trajectories.json",
+  "unexecuted_tail_must_remain_masked": true
+}
