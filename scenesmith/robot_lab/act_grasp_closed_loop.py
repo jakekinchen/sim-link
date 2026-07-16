@@ -108,6 +108,7 @@ def run_policy_grasp_closed_loop(
     frame_observer: FrameObserver | None = None,
     simulator_state_observer: SimulatorStateObserver | None = None,
     release_clearance_basis: str = LEGACY_RELEASE_CLEARANCE_BASIS,
+    capture_images: bool = True,
 ) -> dict[str, Any]:
     """Run one bounded held-out rollout for a named policy evidence contract."""
 
@@ -121,6 +122,8 @@ def run_policy_grasp_closed_loop(
             raise ValueError(f"Closed-loop {name} must be a non-empty string")
     if release_clearance_basis not in RELEASE_CLEARANCE_BASES:
         raise ValueError("Closed-loop release-clearance basis is unsupported")
+    if not isinstance(capture_images, bool):
+        raise ValueError("Closed-loop capture_images must be boolean")
 
     spec = next((dict(item) for item in EPISODE_SPECS if item["seed"] == seed), None)
     if spec is None:
@@ -182,14 +185,18 @@ def run_policy_grasp_closed_loop(
             frames.append(row)
             if frame_observer is not None:
                 frame_observer(json.loads(json.dumps(row)))
-            retain_rendered_keyframe(rendered, frame, images)
+            if images:
+                retain_rendered_keyframe(rendered, frame, images)
 
         expert = CausalSortExpert(
             scene,
             scene_xml,
             seed=1701 + seed,
             frame_sink=retain,
-            config=CausalSortExpertConfig(image_size=256, capture_images=True),
+            config=CausalSortExpertConfig(
+                image_size=256,
+                capture_images=capture_images,
+            ),
         )
         try:
             pad_roles = compiled_pad_geom_roles(expert.mujoco, expert.model)
@@ -216,10 +223,14 @@ def run_policy_grasp_closed_loop(
             ctrl_min = expert.model.actuator_ctrlrange[: expert.model.nu, 0]
             ctrl_max = expert.model.actuator_ctrlrange[: expert.model.nu, 1]
             for frame_index in range(ROLLOUT_FRAMES):
-                images = {
-                    "top": expert._capture("cam1_overhead", 0),
-                    "wrist": expert._capture("cam2_wrist", 1),
-                }
+                images = (
+                    {
+                        "top": expert._capture("cam1_overhead", 0),
+                        "wrist": expert._capture("cam2_wrist", 1),
+                    }
+                    if capture_images
+                    else {}
+                )
                 state = np.concatenate(
                     [
                         expert.data.qpos[: expert.model.nu],
@@ -268,7 +279,9 @@ def run_policy_grasp_closed_loop(
         "applied_action_last": applied_actions[-1],
         "projected_action_frame_count": len(projected_frames),
         "projected_action_frame_indices": projected_frames,
-        "rendered_keyframes": finalize_rendered_keyframes(rendered),
+        "rendered_keyframes": (
+            finalize_rendered_keyframes(rendered) if capture_images else []
+        ),
         **evidence,
         "policy_controls_owned_all_frames": True,
         "physical_actuation": False,
@@ -278,6 +291,8 @@ def run_policy_grasp_closed_loop(
         "promotion_eligible": False,
         "simulation_policy_accepted": False,
     }
+    if not capture_images:
+        payload["image_capture_enabled"] = False
     if release_clearance_basis != LEGACY_RELEASE_CLEARANCE_BASIS:
         payload["release_clearance_basis"] = release_clearance_basis
     return sign_payload(payload)

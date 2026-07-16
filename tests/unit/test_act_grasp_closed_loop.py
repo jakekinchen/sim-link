@@ -44,6 +44,20 @@ class ActGraspClosedLoopTest(unittest.TestCase):
                 policy_label="test",
             )
 
+    def test_capture_images_must_be_boolean_before_simulation(self) -> None:
+        with self.assertRaisesRegex(ValueError, "capture_images"):
+            run_policy_grasp_closed_loop(
+                lambda images, state: state[:6],
+                checkpoint_sha256="a" * 64,
+                training_run_summary_sha256="b" * 64,
+                seed=2,
+                schema_version="schema.v1",
+                task_id="test",
+                evidence_mode="test",
+                policy_label="test",
+                capture_images="no",  # type: ignore[arg-type]
+            )
+
     def test_release_clearance_distinguishes_force_from_geometry(self) -> None:
         zero_force_overlap = {
             "all_robot_object_contact_geoms": ["fixed_fingertip_pad_collision"],
