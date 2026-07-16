@@ -162,3 +162,16 @@ exact on origin. Renderer smoke `11cbcca3...`, Gate A `ef79292d...`, owner
 marker-bound R2 attempt, and acceptance `6e84de9e...` binds the reviewer bytes
 and authority commit. No marker or model action has occurred; the run opens
 only after acceptance origin preservation while the owner window is active.
+
+## Terminal result boundary
+
+The sole marker `cb01bcfb...` consumed the permit and the frozen run completed
+5,000 finite updates, all five checkpoints, and all ten dual-semantics
+rollouts. Producer and independent verifier agree on terminal-negative result
+`9d916206...` and run `3d49f4df...`; no strict-v2 pass or selected checkpoint
+exists. The strongest partial result, checkpoint 1,000/receding-10, reached
+73 strict-contact frames and 18.061 mm lift but still failed the complete
+25 mm and phase-duration conjunction. Reviewer 297 verifies the compact
+result/scorecard/retention boundary and closes T20.44 with no retry. Owner
+addendum `8b4a206` makes one fresh T20.43b ACT replacement the next route only
+after this closeout is exact on origin; no replacement action is opened here.

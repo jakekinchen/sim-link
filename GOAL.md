@@ -203,6 +203,16 @@ Gate A `ef79292d...`, owner/request/decision/runtime/permit identities
 Reviewer 296 accepts the one-use boundary and signed acceptance `6e84de9e...`.
 After this acceptance is exact on origin, the sole 5,000-update SmolVLA attempt
 may run; no retry or other authority opens.
+The sole T20.44 marker `cb01bcfb...` was then consumed and the frozen run
+completed 5,000 finite updates, checkpoints `[0,500,1000,2500,5000]`, and all
+ten chunk-50/receding-10 strict-v2 rollouts. Producer and independent verifier
+agree on terminal-negative result `9d916206...`; no Gate C pass or selected
+checkpoint exists. Checkpoint 1,000/receding-10 was the strongest partial
+interaction at 73 strict-contact frames and 18.061 mm lift, but it still failed
+the unchanged 25 mm and phase-duration conjunction. Reviewer 297 closes R2
+with no retry. Owner addendum `8b4a206` routes next to exactly one fresh
+T20.43b ACT replacement using the stable renderer runtime and unchanged ACT
+recipe after this closeout is preserved on origin; T20.45 remains pending.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
