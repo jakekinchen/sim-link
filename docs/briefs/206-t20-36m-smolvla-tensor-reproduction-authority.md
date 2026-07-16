@@ -44,3 +44,12 @@ candidate, optimizer run, or Gate C attempt.
 No optimizer, training update, checkpoint mutation, new seed, third repeat,
 threshold change, ACT work, Gate C execution, policy acceptance/promotion,
 hardware, network/download, external compute, or Brev.
+
+## Verified Pre-Run Boundary
+
+Implementation `52f15cc` is on origin. Central decision `31eabbbd...`, live
+preflight `970342fe...`, and one-use permit `374ad4f2...` reconstruct exactly.
+The preflight byte-hashes the immutable checkpoint but does not deserialize a
+tensor or construct/load a model. Reviewer 263 authorizes exactly the five
+registered seeds with two repeats after the attempt marker; the permit is
+consumed by the first marker even on failure.

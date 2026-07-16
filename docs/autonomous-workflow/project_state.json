@@ -4659,12 +4659,13 @@
       "latest_verified_brief_id": null,
       "review_decision_id": null,
       "source_commit": "e4c00bdbf0f0262b41d799f91b90cded94d7d8a2",
-      "implementation_commits": [],
+      "implementation_commits": ["52f15cc25b1122b8dadac1d336cb6fffeb527e65"],
       "result": "owner-authorized one-use inference-only reproduction of the already-evaluated SmolVLA ten 50x6 tensors; all five signed hash pairs must match before frozen Gate B scoring and any pass still requires separate Gate C authority",
       "run_window": {"start":"2026-07-16T01:44:12-05:00","hard_close":"2026-07-16T09:44:12-05:00","no_new_major_slice_after":"2026-07-16T08:59:12-05:00"},
-      "missing": ["central_one_use_inference_decision_and_permit"],
+      "missing": [],
+      "pre_run_authority": {"owner_grant_identity_sha256":"155a73382c7e8b64958774fc5980ef9fb98d43ff94342ec36764b78471690813","central_request_identity_sha256":"0e0aec0d3dc0e081d8190cb362b6bbc705ca51c98315fb2eda427fb52de73b07","central_decision_identity_sha256":"31eabbbdc2f5c39db97188490907884b8ceae78607f023b43f5e618f83c13cdd","runtime_preflight_identity_sha256":"970342fe4cf8ee9e4507097cbfb47da8ac593415ff2082c610fc2d4ff198b989","one_use_permit_identity_sha256":"374ad4f27ef976fae8ed9f59b7db274c4fe39edf124c119fd9cb7e852e2cb8a9","review_decision_id":"263","required_source_commit":"52f15cc25b1122b8dadac1d336cb6fffeb527e65","attempt_marker_exists":false},
       "owner_authority_granted": ["construct_exact_retained_smolvla_model_once","load_exact_retained_checkpoint_once","run_five_registered_inference_seeds_with_two_repeats","persist_ten_50x6_physical_action_tensors","score_frozen_t20_36l_gate_b"],
-      "authority_granted": ["read_t20_36l_result","activate_brief_206","implement_central_inference_authority","implement_runtime_preflight_and_one_use_permit"],
+      "authority_granted": ["read_t20_36l_result","activate_brief_206","implement_central_inference_authority","implement_runtime_preflight_and_one_use_permit","execute_one_hash_bound_local_mps_tensor_reproduction_after_remote_preservation"],
       "authority_not_granted": ["optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
     },
     "T19.0": {
