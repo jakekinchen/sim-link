@@ -6,6 +6,14 @@ Active model-free design/authority slice under the owner's 2026-07-16
 continuation and priority-3 direction. T20.36n is verified mixed-negative by
 Reviewer 266. Gate C route is open; Gate C execution remains closed.
 
+**Manager review correction resolved (2026-07-16T03:08 CDT):** The first
+preserved design used a minimum-across-phases envelope and is superseded by the
+follow-up artifact `8294c63b...`. The effective design applies frozen amendment
+`463477dc...` unchanged at each chunk: offsets `0..31 = reach`, offsets
+`32..49 = grasp`, the exact signed phase/joint tables, and only the six
+unexecuted terminal positions masked. Code, artifact reconstruction, and six
+focused tests prove the correction without rewriting history.
+
 ## Objective
 
 Freeze the exact episode-0 PI0.5 execution semantics, source windows, target
@@ -86,14 +94,21 @@ hardware, network/download, external compute, or Brev.
 
 ## Verified Design Boundary
 
-Artifact `b44bd55b...` binds policy source `b05b6afe...`, LeRobot revision
+Artifact `8294c63b...` binds policy source `b05b6afe...`, LeRobot revision
 `e40b58a8...`, exact episode-0 observations and targets, phase runs, starts
 `[0,50,100,150,200]`, lengths `[50,50,50,50,44]`, and final mask
-`44 true + 6 false`. Its strict acceptance envelope takes the minimum frozen
-threshold across reach/grasp for every joint, so it cannot weaken amendment
-`463477dc...`. The bounded fallback preserves X's ten uses per correction
+`44 true + 6 false`. It preserves amendment `463477dc...` exactly with
+per-chunk offsets `0..31 = reach` and `32..49 = grasp`; it neither weakens nor
+tightens the signed gate. The bounded fallback preserves X's ten uses per correction
 example: 250 examples, 2,500 updates maximum, unchanged `2.5e-5` LR, 1:1
 unique standard replay, probes at 0/500/1000/1500/2000/2500, and first
 confirmed pass selection. Six focused tests and the exact verifier pass.
 Reviewer 267 verifies the model-free design and permits only implementation of
 the separate baseline-inference authority boundary next.
+
+The baseline authority/preflight/permit implementation now passes 25 combined
+focused/design/pointer tests. Reviewer 268 verifies implementation only and
+requires it to be committed, pushed, and origin-confirmed before the
+materializer may hash the checkpoint/base snapshot and emit authority files.
+No baseline authority artifact, marker, checkpoint tensor read, model action,
+or optimizer action exists at this boundary.

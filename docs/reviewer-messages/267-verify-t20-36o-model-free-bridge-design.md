@@ -8,7 +8,7 @@ Brief 208; owner priority-3 direction; Reviewer 266; frozen amendment
 `463477dc...`; T20.36n result `f8d7866e...`; X checkpoint `40c94f66...`;
 PI0.5 source `b05b6afe...` at LeRobot revision `e40b58a8...`; episode-0 raw
 rollout `9e186088...` and source bytes `586a3e67...`; dataset parquet
-`7843e531...`; bridge design `b44bd55b...`; exact generator/verifier; six
+`7843e531...`; corrected bridge design `8294c63b...`; exact generator/verifier; six
 focused tests; project-pointer tests; branch/remote parity; and the complete
 scoped diff.
 
@@ -27,9 +27,12 @@ scoped diff.
 - All 244 executed source actions, frame IDs, record identities, and phase runs
   are retained. The final six values repeat the last source action only for
   tensor shape and are false for loss, gate, and actor evidence.
-- Bridge acceptance uses the minimum of the frozen reach/grasp threshold for
-  each joint. This is a conservative envelope over amendment `463477dc...`,
-  not a threshold fit or weakening.
+- Manager review found that the first preserved minimum-across-phases envelope
+  silently tightened two reach thresholds. The corrected artifact applies
+  amendment `463477dc...` unchanged at every chunk: offsets 0-31 use the
+  signed reach table, offsets 32-49 use the signed grasp table, and only the
+  six unexecuted terminal positions are masked. The earlier artifact remains
+  history but is superseded and cannot authorize baseline capture.
 - The update-0 baseline probe precedes optimizer creation. A complete pass
   skips training. A failure retains 250 current-path correction trajectories
   before a separately reviewed training request.

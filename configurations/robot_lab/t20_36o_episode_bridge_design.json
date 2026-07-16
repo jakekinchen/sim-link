@@ -6,16 +6,36 @@
     "frozen_gate_identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
     "gate_c_execution_authorized_by_pass": false,
     "maximum_source_batch_objective_ratio": 0.1,
-    "strict_phase_envelope_rad": {
-      "elbow_flex": 0.1,
-      "gripper": 0.025,
-      "shoulder_lift": 0.05,
-      "shoulder_pan": 0.1,
-      "wrist_flex": 0.1,
-      "wrist_roll": 0.4
+    "phase_joint_maximum_error_rad": {
+      "grasp": {
+        "elbow_flex": 0.1,
+        "gripper": 0.025,
+        "shoulder_lift": 0.05,
+        "shoulder_pan": 0.1,
+        "wrist_flex": 0.1,
+        "wrist_roll": 0.4
+      },
+      "reach": {
+        "elbow_flex": 0.1,
+        "gripper": 0.1,
+        "shoulder_lift": 0.05,
+        "shoulder_pan": 0.1,
+        "wrist_flex": 0.4,
+        "wrist_roll": 0.4
+      }
     },
     "strict_uniform_maximum_absolute_error_rad_report_only": 0.05,
-    "threshold_rule": "minimum_across_frozen_reach_and_grasp_thresholds",
+    "threshold_rule": "exact_frozen_relative_timestep_phase_mapping_per_chunk",
+    "timestep_phase_mapping": {
+      "grasp": [
+        32,
+        50
+      ],
+      "reach": [
+        0,
+        32
+      ]
+    },
     "unexecuted_tail_is_scored": false
   },
   "authority_refs": {
@@ -6969,7 +6989,7 @@
   },
   "external_compute_started": false,
   "gate_c_executed": false,
-  "identity_sha256": "b44bd55bdf99d684223bf8c1b4c195f12b841ba1b1323df0e488939df60f3845",
+  "identity_sha256": "8294c63be101dbb1ea3536d2b2da1447d23ca9aa71d2145eb501452547c30c0c",
   "model_constructed": false,
   "model_inference": false,
   "model_loaded": false,

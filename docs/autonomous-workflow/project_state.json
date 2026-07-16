@@ -118,10 +118,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "206",
-    "commit": "a5e7c6adf7f2c51b6708640a419a1c14989da6bf",
-    "reviewer_decision_id": "264",
-    "summary": "verified_t20_36m_exact_hash_reproduction_and_smolvla_amended_gate_failure"
+    "brief_id": "207",
+    "commit": "a20f2a4de1b4d8ec7f12142015d44bdecff6a345",
+    "reviewer_decision_id": "266",
+    "summary": "verified_exact_x_reproduction_with_all_five_source"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -4712,13 +4712,14 @@
       "review_decision_id": null,
       "source_commit": "a20f2a4de1b4d8ec7f12142015d44bdecff6a345",
       "implementation_commits": [],
-      "result": "model-free bridge design verified as b44bd55b... by Reviewer 267; exact five-state baseline inference authority/preflight is next, Gate C route open and execution closed",
+      "result": "corrected model-free bridge design 8294c63b... and baseline authority/preflight/permit implementation verified through Reviewer 268; exact frozen reach/grasp mapping is preserved, authority artifacts are not materialized, Gate C route open and execution closed",
       "design_review_decision_id": "267",
-      "design_artifact": {"path":"configurations/robot_lab/t20_36o_episode_bridge_design.json","schema_version":"scenesmith.t20_36o_episode_bridge_design.v1","identity_sha256":"b44bd55bdf99d684223bf8c1b4c195f12b841ba1b1323df0e488939df60f3845","file_sha256":"7893785bd66b2cd6dbe7c6029bff49b8d5e1bcc168a421fbc7a1bb07dda23ea3","correction_example_count":250,"optimizer_update_count_ceiling":2500,"probe_update_counts":[0,500,1000,1500,2000,2500],"baseline_precedes_optimizer":true},
+      "authority_implementation_review_decision_id": "268",
+      "design_artifact": {"path":"configurations/robot_lab/t20_36o_episode_bridge_design.json","schema_version":"scenesmith.t20_36o_episode_bridge_design.v1","identity_sha256":"8294c63be101dbb1ea3536d2b2da1447d23ca9aa71d2145eb501452547c30c0c","file_sha256":"4a0d2850a279d93df3429fdd98bb27e6bebc734023ecc75b67e06e1b772d5dbb","correction_example_count":250,"optimizer_update_count_ceiling":2500,"probe_update_counts":[0,500,1000,1500,2000,2500],"baseline_precedes_optimizer":true},
       "execution_contract": {"n_action_steps":50,"queue_reset_count":1,"rollout_frame_count":244,"chunk_start_frames":[0,50,100,150,200],"executed_lengths":[50,50,50,50,44],"final_unexecuted_tail_count":6,"legacy_action_horizon_5_allowed":false,"unexecuted_tail_actor_valid":false},
       "frozen_gate_identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
       "owner_authority_granted": ["design_bounded_x_episode_0_bridge","prepare_separate_simulation_training_authority","request_gate_c_only_after_bridge_pass"],
-      "authority_granted": ["read_signed_t20_35x_and_episode_0_artifacts","activate_brief_208","implement_model_free_execution_window_spec","derive_bounded_update_and_probe_contract","verify_model_free_bridge_design","implement_separate_baseline_inference_authority_and_preflight"],
+      "authority_granted": ["read_signed_t20_35x_and_episode_0_artifacts","activate_brief_208","implement_model_free_execution_window_spec","derive_bounded_update_and_probe_contract","verify_model_free_bridge_design","implement_separate_baseline_inference_authority_and_preflight","materialize_baseline_authority_after_remote_preservation"],
       "authority_not_granted": ["model_construction","model_load","model_inference","optimizer_creation","optimizer_training","checkpoint_mutation","gate_c_execution","threshold_change","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
     },
     "T19.0": {

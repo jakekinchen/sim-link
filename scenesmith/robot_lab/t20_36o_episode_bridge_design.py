@@ -289,13 +289,14 @@ def build_bridge_spec(*, sources: dict[str, Any]) -> dict[str, Any]:
         STANDARD_REPLAY_SEED_BASE + update
         for update in range(OPTIMIZER_UPDATE_COUNT)
     ]
-    frozen_thresholds = sources["frozen_gate"]["amended_gate_b_conjunction"][
-        "phase_joint_maximum_error_rad"
-    ]
-    strict_envelope = {
-        joint: min(frozen_thresholds["reach"][joint], frozen_thresholds["grasp"][joint])
-        for joint in JOINT_NAMES
-    }
+    frozen_thresholds = copy.deepcopy(
+        sources["frozen_gate"]["amended_gate_b_conjunction"][
+            "phase_joint_maximum_error_rad"
+        ]
+    )
+    frozen_timestep_mapping = copy.deepcopy(
+        sources["frozen_gate"]["timestep_phase_mapping"]
+    )
     x_spec = sources["t20_35x_spec"]
     return sign_payload(
         {
@@ -401,8 +402,9 @@ def build_bridge_spec(*, sources: dict[str, Any]) -> dict[str, Any]:
             },
             "acceptance": {
                 "frozen_gate_identity_sha256": EXPECTED_FROZEN_GATE_IDENTITY,
-                "threshold_rule": "minimum_across_frozen_reach_and_grasp_thresholds",
-                "strict_phase_envelope_rad": strict_envelope,
+                "threshold_rule": "exact_frozen_relative_timestep_phase_mapping_per_chunk",
+                "timestep_phase_mapping": frozen_timestep_mapping,
+                "phase_joint_maximum_error_rad": frozen_thresholds,
                 "all_executed_actions_must_pass": True,
                 "all_starts_and_probe_seeds_must_pass": True,
                 "all_confirming_repeats_must_be_hash_identical": True,

@@ -69,25 +69,39 @@ class T2036oEpisodeBridgeDesignTest(unittest.TestCase):
         self.assertEqual(schedule["probe_update_counts"], [0, 500, 1000, 1500, 2000, 2500])
         self.assertEqual(schedule["selection_rule"], "first_complete_confirmed_pass")
 
-    def test_acceptance_is_stricter_than_either_frozen_phase_mapping(self) -> None:
-        thresholds = self.spec["acceptance"]["strict_phase_envelope_rad"]
+    def test_acceptance_preserves_the_exact_frozen_phase_mapping(self) -> None:
+        acceptance = self.spec["acceptance"]
         self.assertEqual(
-            thresholds,
+            acceptance["timestep_phase_mapping"],
+            {"reach": [0, 32], "grasp": [32, 50]},
+        )
+        self.assertEqual(
+            acceptance["phase_joint_maximum_error_rad"],
             {
-                "shoulder_pan": 0.1,
-                "shoulder_lift": 0.05,
-                "elbow_flex": 0.1,
-                "wrist_flex": 0.1,
-                "wrist_roll": 0.4,
-                "gripper": 0.025,
+                "reach": {
+                    "shoulder_pan": 0.1,
+                    "shoulder_lift": 0.05,
+                    "elbow_flex": 0.1,
+                    "wrist_flex": 0.4,
+                    "wrist_roll": 0.4,
+                    "gripper": 0.1,
+                },
+                "grasp": {
+                    "shoulder_pan": 0.1,
+                    "shoulder_lift": 0.05,
+                    "elbow_flex": 0.1,
+                    "wrist_flex": 0.1,
+                    "wrist_roll": 0.4,
+                    "gripper": 0.025,
+                },
             },
         )
         self.assertEqual(
-            self.spec["acceptance"]["threshold_rule"],
-            "minimum_across_frozen_reach_and_grasp_thresholds",
+            acceptance["threshold_rule"],
+            "exact_frozen_relative_timestep_phase_mapping_per_chunk",
         )
-        self.assertTrue(self.spec["acceptance"]["all_executed_actions_must_pass"])
-        self.assertFalse(self.spec["acceptance"]["unexecuted_tail_is_scored"])
+        self.assertTrue(acceptance["all_executed_actions_must_pass"])
+        self.assertFalse(acceptance["unexecuted_tail_is_scored"])
 
     def test_semantic_or_authority_drift_fails_closed(self) -> None:
         for mutation in (
