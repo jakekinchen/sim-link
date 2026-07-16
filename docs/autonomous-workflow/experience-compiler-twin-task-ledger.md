@@ -1059,6 +1059,20 @@ network are observed. Six focused tests, 71 applicable post-install T20.36
 tests, and 12 pointer tests pass. Reviewer 257 authorizes the corrected
 preflight retry; no attempt marker exists.
 
+## 2026-07-16 - T20.36j lexical snapshot identity corrected
+
+The third uncounted preflight passed recursive closure, offline processor
+construction, network/tensor guards, batch load, and checkpoint hashing, then
+failed linkage because resolving the owner/spec path under offloaded
+`~/.cache` changed it to `/Volumes/cerebro/...`. No artifact or marker was
+written. Correction `ad051d0` preserves the exact lexical contract path in
+signed evidence while using physical resolution only for access-control target
+mapping. Real processor evidence `5223d8f0...` now verifies directly against
+contract `cb018b69...`, with the same six safe files and no network/weights.
+Seven focused tests, 72 applicable post-install T20.36 tests, and 12 pointer
+tests pass. Reviewer 258 authorizes the corrected preflight retry; no marker
+exists.
+
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
 The owner opened a fresh simulation-only window (20:10 CDT through hard

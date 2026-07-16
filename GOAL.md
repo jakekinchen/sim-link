@@ -947,6 +947,11 @@ evidence because Hugging Face resolved snapshot symlinks to blob paths.
 Correction `54339c2` is remote; real guarded smoke `3f9a4a0c...` now records six
 safe files, exact classes, no network, and no weights. Reviewer 257 authorizes
 the corrected preflight retry. No marker exists.
+The next uncounted preflight exposed only the offloaded-cache spelling seam:
+physical resolution changed the spec's exact `~/.cache` path to
+`/Volumes/cerebro`. Correction `ad051d0` preserves lexical contract identity
+and resolves only for access control; smoke `5223d8f0...` now verifies.
+Reviewer 258 authorizes the corrected preflight retry. No marker exists.
 
 ## Durable State
 
