@@ -1,0 +1,38 @@
+{
+  "attempt_marker_path": "configurations/robot_lab/t20_43b_r1_act_attempt.json",
+  "authority_decision_identity_sha256": "3b534f91daed81a67fb8d2ad211cdd42855939c58b4df1d153b11e2840e4395b",
+  "authorized_attempt_count": 1,
+  "brev_compute_authorized": false,
+  "checkpoint_schedule": [
+    0,
+    500,
+    1000,
+    2500,
+    5000,
+    7500,
+    10000
+  ],
+  "correction_objective_authorized": false,
+  "evaluation_action_steps": [
+    50,
+    10
+  ],
+  "external_compute_authorized": false,
+  "gate_a_identity_sha256": "ea65f3d1298b936e24c88f5c1e3810eb6cd6c93dc1bc8a088af6323748048798",
+  "hardware_authorized": false,
+  "identity_sha256": "c7e8e1ca60007442cf7ec34cf5a56722b768c07d67585f82d8266c09d658f469",
+  "marker_precedes_backbone_tensor_read_model_inference_optimizer": true,
+  "maximum_optimizer_updates": 10000,
+  "network_authorized": false,
+  "owner_grant_identity_sha256": "09111fcb84dd5554f3d73c7964e94cda3028148c15f3c1e5cdb5789c4b95106f",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "required_source_commit": "eb2aa9a3933988d3a5f29bcdc4a6758c99fb746e",
+  "retry_or_sweep_authorized": false,
+  "runtime_preflight_identity_sha256": "549c0db2fa6ee525c02db38aa4f2e0dc566bf6d12a40c6b805905c53ae923df0",
+  "schema_version": "scenesmith.t20_43b_r1_act_permit.v1",
+  "spec_identity_sha256": "13c5bb4b2cadf8c451a25e7c11e9e0a1d824468f593774fdb60dbf7fa5197461",
+  "t20_45_authorized": false,
+  "task_id": "T20.43b",
+  "threshold_change_authorized": false
+}

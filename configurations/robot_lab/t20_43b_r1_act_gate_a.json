@@ -1,0 +1,86 @@
+{
+  "brev_compute_started": false,
+  "camera_accessed": false,
+  "evidence": {
+    "action_shape": [
+      50,
+      6
+    ],
+    "all_values_finite": true,
+    "coordinate_round_trip_passed": true,
+    "dataset_episode_count": 129,
+    "dataset_frame_count": 31366,
+    "dataset_info_file_sha256": "1084a4b1e9e6ae016d2796bd2a9f25721d77a3b92da4e3d4b1698d995ef9f933",
+    "dataset_manifest_identity_sha256": "bd36b7c491ba3c3e08ae3efd87febdbbb1f52f917cb258399484ba4f5311a184",
+    "dataset_stats_file_sha256": "e11f73c259c3fa6383ab53630432b12b51d1ad2afa1e08630cb2464a5adb53d1",
+    "dataset_stats_match_compact_statistics": true,
+    "dataset_tree_identity_sha256": "05f13c069742f9b9d3726895e71c4b8e4faa531931ca9b11c120c3220d3a6034",
+    "existing_held_out_training_rows": 0,
+    "fresh_held_out_training_rows": 0,
+    "image_shapes": {
+      "observation.images.base_0_rgb": [
+        3,
+        256,
+        256
+      ],
+      "observation.images.left_wrist_0_rgb": [
+        3,
+        256,
+        256
+      ]
+    },
+    "maximum_coordinate_round_trip_error_rad": 1.4210854715202004e-14,
+    "maximum_postprocessor_inverse_error": 3.814697265625e-06,
+    "maximum_processor_manual_error": 0.0,
+    "normalized_tensor_identity_sha256": "0e8b7b323655cc230d3190b8c97ae61e78848edb5003d52dd70e3e15c90869b5",
+    "postprocessed_action_identity_sha256": "7c0cdd84e95bd0df0e423d2b3093e93e2111a1da629abc038ebeed7e479a577a",
+    "postprocessor_inverse_matches_actions": true,
+    "processor_matches_manual_mean_std": true,
+    "sample_count": 16,
+    "sample_indices": [
+      0,
+      2091,
+      4182,
+      6273,
+      8364,
+      10455,
+      12546,
+      14637,
+      16728,
+      18819,
+      20910,
+      23001,
+      25092,
+      27183,
+      29274,
+      31365
+    ],
+    "sample_tensor_identity_sha256": "9cbd3691b04fb7ecf0d97a2d302b3e1fe3a678e389454b8391cb0aa96850d60d",
+    "state_shape": [
+      6
+    ]
+  },
+  "external_compute_started": false,
+  "gate_c_executed": false,
+  "hardware_accessed": false,
+  "identity_sha256": "ea65f3d1298b936e24c88f5c1e3810eb6cd6c93dc1bc8a088af6323748048798",
+  "learned_policy_rollout": false,
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "network_accessed": false,
+  "open_loop_entry_barrier": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_43b_r1_act_gate_a.v1",
+  "serial_accessed": false,
+  "simulation_policy_accepted": false,
+  "spec_identity_sha256": "13c5bb4b2cadf8c451a25e7c11e9e0a1d824468f593774fdb60dbf7fa5197461",
+  "status": "pass",
+  "t20_45_activated": false,
+  "task_id": "T20.43b"
+}
