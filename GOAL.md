@@ -55,6 +55,14 @@ proof states must remain distinct.
   accepts the zero-drift private-v2 bracket and current camera roles, while
   rejecting sorting-scene match because the required cubes and trays are not
   visible.
+- Owner overnight continuation recorded 2026-07-16: window
+  `01:44:12`–`09:44:12` CDT, no new major slice after `08:59:12`, autonomous
+  research→critique→iterate-or-maintain-course loop authorized by owner chat.
+  Priority ordering, post-T20.36m branch routing, the one-episode Gate C
+  bridge, and mandatory closeout are pre-registered in
+  `docs/autonomous-workflow/owner-direction-2026-07-16-overnight.md`. All
+  previously closed authorities (hardware, physical transfer, promotion,
+  network, external compute, Brev) remain closed.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 

@@ -133,6 +133,13 @@ it is never a product path.
 Only the first dependency-ready task is active. Later tasks are planned and do
 not inherit authority from this document.
 
+Owner overnight direction (2026-07-16, window 01:44–09:44 CDT): after the
+T20.36m disposition is recorded, the one-episode Gate C bridge for the best
+amended-gate candidate precedes T20.38/T20.39; on a SmolVLA fail, the retained
+T20.35x checkpoint is re-designated an eligible bridge candidate. Routing,
+stop rules, and closeout are pre-registered in
+[`owner-direction-2026-07-16-overnight.md`](./autonomous-workflow/owner-direction-2026-07-16-overnight.md).
+
 | Order | Task | Required output and gate | Depends on | Explicitly excluded |
 | --- | --- | --- | --- | --- |
 | 1 | **T20.17 — clean-base dataset-native PI0.5** | One clean `pi05_base` initialized with exact source-dataset statistics; bounded local training; frozen held-out evaluation; unassisted strict-v2 result; all dataset, processor, normalizer, checkpoint, and evaluation identities signed. A non-passing policy is recorded as a negative result, never promoted. | Verified T20.16 diagnosis, source-backed native dataset/processor boundary, current mechanical training authority | Hardware, Brev, external compute, projection/assistance, hybrid postprocessor reuse |
