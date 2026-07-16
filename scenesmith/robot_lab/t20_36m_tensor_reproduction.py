@@ -594,11 +594,26 @@ def build_result(
 ) -> dict[str, Any]:
     verify_signed_payload(run, label="T20.36m run summary")
     passed = run.get("amended_gate_b_passed") is True
+    score_summary = [
+        {
+            "seed_index": row["seed_index"],
+            "inference_seed": row["inference_seed"],
+            "action_chunk_sha256": row["action_chunk_sha256"],
+            "passed": row["passed"],
+            "maximum_absolute_error_rad": row["maximum_absolute_error_rad"],
+            "maximum_threshold_ratio": row["maximum_threshold_ratio"],
+            "violation_count": row["violation_count"],
+        }
+        for row in run["score_rows"]
+    ]
     return sign_payload(
         {
             "schema_version": RESULT_SCHEMA_VERSION,
             "task_id": TASK_ID,
             "run_identity_sha256": run["identity_sha256"],
+            "tensor_artifact_identity_sha256": run[
+                "tensor_artifact_identity_sha256"
+            ],
             "source_run_identity_sha256": sources["source_run_identity_sha256"],
             "source_result_identity_sha256": sources[
                 "source_result_identity_sha256"
@@ -612,6 +627,10 @@ def build_result(
             ],
             "all_repeats_bit_identical": run["all_repeats_bit_identical"],
             "amended_gate_b_passed": passed,
+            "score_summary": score_summary,
+            "total_violation_count": sum(
+                row["violation_count"] for row in score_summary
+            ),
             "decision": (
                 "route_separate_gate_c_authority_request"
                 if passed

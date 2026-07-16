@@ -8,6 +8,7 @@ from scenesmith.robot_lab.t20_36m_tensor_reproduction import (
     INFERENCE_SEEDS,
     build_attempt_marker,
     build_inference_permit,
+    build_result,
     build_runtime_preflight,
     score_action_tensor,
 )
@@ -114,6 +115,31 @@ class T2036mTensorReproductionTest(unittest.TestCase):
         )
         mutation = sign_payload({**permit, "optimizer_created": True})
         self.assertNotEqual(mutation, permit)
+
+    def test_result_directly_binds_tensor_identity_and_seed_scores(self) -> None:
+        run = sign_payload(
+            {
+                "tensor_artifact_identity_sha256": "8" * 64,
+                "amended_gate_b_passed": False,
+                "all_expected_hashes_reproduced": True,
+                "all_repeats_bit_identical": True,
+                "score_rows": [
+                    {
+                        "seed_index": 0,
+                        "inference_seed": INFERENCE_SEEDS[0],
+                        "action_chunk_sha256": EXPECTED_ACTION_HASHES[0],
+                        "passed": False,
+                        "maximum_absolute_error_rad": 0.2,
+                        "maximum_threshold_ratio": 8.0,
+                        "violation_count": 3,
+                    }
+                ],
+            }
+        )
+        result = build_result(sources=self.sources, run=run)
+        self.assertEqual(result["tensor_artifact_identity_sha256"], "8" * 64)
+        self.assertEqual(result["total_violation_count"], 3)
+        self.assertEqual(result["score_summary"][0]["inference_seed"], INFERENCE_SEEDS[0])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,79 @@
+{
+  "all_expected_hashes_reproduced": true,
+  "all_repeats_bit_identical": true,
+  "amended_gate_b_passed": false,
+  "brev_compute_started": false,
+  "decision": "close_learned_policy_gate_b_branch",
+  "external_compute_started": false,
+  "extra_repeat": false,
+  "frozen_gate_identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
+  "gate_c_authorized": false,
+  "gate_c_executed": false,
+  "gate_c_route_open": false,
+  "identity_sha256": "4f101f38c87c2a7d8d64aab8956a0da41d036019f8df697ed2d7c6863bbd9532",
+  "network_accessed": false,
+  "new_seed": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "policy_track_selected": false,
+  "promotion_eligible": false,
+  "run_identity_sha256": "0b7c98b67ee7bcc5bd1b742c7ed0d884c1c3959934bd136f3d9c0fb51fa8217a",
+  "schema_version": "scenesmith.t20_36m_tensor_reproduction_result.v1",
+  "score_summary": [
+    {
+      "action_chunk_sha256": "4e347f1aca45c75302b0cc4be6e6134ee9c4fefddde752e91da280ae7e9bac61",
+      "inference_seed": 20260811,
+      "maximum_absolute_error_rad": 0.18264895647512525,
+      "maximum_threshold_ratio": 7.036344317687986,
+      "passed": false,
+      "seed_index": 0,
+      "violation_count": 40
+    },
+    {
+      "action_chunk_sha256": "b0bfdec2be39340042a99d6ff5f8ce25440f121518c75a29dc5117ffee7455a4",
+      "inference_seed": 20260812,
+      "maximum_absolute_error_rad": 0.19293749311523434,
+      "maximum_threshold_ratio": 7.363162282348634,
+      "passed": false,
+      "seed_index": 1,
+      "violation_count": 25
+    },
+    {
+      "action_chunk_sha256": "b8e1154dc233ae49d56877caeb95bc51d5f1fb2ed77e40f2120d66fab85232ee",
+      "inference_seed": 20260813,
+      "maximum_absolute_error_rad": 0.2299786396575929,
+      "maximum_threshold_ratio": 9.199145586303716,
+      "passed": false,
+      "seed_index": 2,
+      "violation_count": 52
+    },
+    {
+      "action_chunk_sha256": "b578627eb74d8e86277118ef141d869da885efc287140576cdb25a700b984eb6",
+      "inference_seed": 20260814,
+      "maximum_absolute_error_rad": 0.2660243509765625,
+      "maximum_threshold_ratio": 10.6409740390625,
+      "passed": false,
+      "seed_index": 3,
+      "violation_count": 27
+    },
+    {
+      "action_chunk_sha256": "64e925f9a8f4c8e43a703bfab2bfaba0355202a0849c8b9256f57c55b1f29b4d",
+      "inference_seed": 20260815,
+      "maximum_absolute_error_rad": 0.14533002724609378,
+      "maximum_threshold_ratio": 5.079013417327882,
+      "passed": false,
+      "seed_index": 4,
+      "violation_count": 18
+    }
+  ],
+  "simulation_policy_accepted": false,
+  "source_checkpoint_identity_sha256": "32f0bd3035a984d3b0ee2a752c1195fd252f61e9b2a560d1762e856f44ce81fa",
+  "source_result_identity_sha256": "08ef923d1ebcffde26055834db271e92bb068e0eb09f75c60078f2d8b548c4a1",
+  "source_run_identity_sha256": "7e7304c5217bed1c95ae5403c009d1f4aa78a75c387f5449299dd50421d2a1bb",
+  "task_id": "T20.36m",
+  "tensor_artifact_identity_sha256": "45a3369d3944b0c7090cc86e571006f0701a7a29d7db37b9e536a3034f62392c",
+  "threshold_changed": false,
+  "total_violation_count": 162
+}
