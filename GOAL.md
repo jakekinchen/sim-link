@@ -67,6 +67,15 @@ proof states must remain distinct.
   verifier, central composition, and a finite per-session permit before any
   camera, serial, or robot access. Physical transfer, promotion, network,
   external compute, and Brev remain closed.
+- Owner route decision recorded 2026-07-16 for T20.41: dataset expansion by
+  construction (T20.42/R0), then standard-recipe ACT → SmolVLA → conditional
+  π0.5 rungs with rollout-primary evaluation; no correction objectives, no
+  Gate B re-proof, amendment `463477dc...` unchanged as routing vocabulary.
+  Full routing, evaluation doctrine, and stop rules:
+  `docs/autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md`. The
+  next session begins with a fresh brief for T20.42. Hardware, network,
+  external compute, and Brev remain closed; T19.x stays a separate
+  owner-present track.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
