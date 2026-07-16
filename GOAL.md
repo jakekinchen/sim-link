@@ -912,6 +912,11 @@ Reviewer 250 now accepts implementation `29b9525`, raw-checkpoint preflight
 may begin only after this boundary is confirmed on origin; runtime smoke
 consumes the permit on failure, and neither result can select a policy or
 execute Gate C by claim.
+That attempt is now consumed by signed runtime failure `56415b28...`: exact
+local VLM construction stopped on missing `num2words` before policy checkpoint
+load, inference, or optimizer creation. Gate B was not evaluated. Reviewer 251
+opens Brief 200 for a read-only recursive SmolVLA dependency-closure audit;
+installation and any replacement attempt require new owner authority.
 
 ## Durable State
 
