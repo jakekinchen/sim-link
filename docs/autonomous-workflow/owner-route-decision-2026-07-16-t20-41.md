@@ -119,3 +119,35 @@ R0 first and alone; R1 after R0 verifies; R2 after R1's boundary; R3
 conditional on R1/R2 evidence. Model-free receipt/archive work may fill
 training waits. The next session begins with a fresh brief for T20.42/R0
 under this route.
+
+## Addendum (2026-07-16 ~17:35 CDT) — owner authorizes one T20.43b ACT replacement
+
+Recorded by Claude at the owner's chat instruction after reviewing the T20.43
+terminal receipt. Grounds: T20.43 was consumed as a pure infrastructure
+failure — the mirror child venv failed `import mujoco` (exit 1) and
+terminated the run with **zero optimizer updates executed** (receipt
+`b64ec6d0...`, Reviewer 293) — so trained-ACT capability on the R0 dataset
+remains unresolved while its rung is closed. Precedent: the T20.36h
+dependency failure was followed by the owner-authorized T20.36j replacement
+with a corrected environment.
+
+The owner therefore authorizes **exactly one T20.43b ACT replacement rung**,
+under all of the following:
+
+- Opens only after the T20.44 terminal boundary (result, review, and state)
+  is preserved on origin; if the current run window lacks room, T20.43b is
+  the first task of the next owner window.
+- Reuses the stable T20.44 runtime interpreter and the renderer-entrypoint
+  smoke gate (real renderer execution producing a valid nonempty
+  MP4/manifest before any attempt marker), so the T20.43 failure mode cannot
+  recur unproven.
+- Same fixed official ACT recipe lineage as spec `b3a510f8...` (10,000
+  updates, batch 8, fixed checkpoints, chunk-50 plus receding-10 rollout
+  semantics, first-pass selection) — no recipe changes.
+- Full fresh ceremony: new brief, Gate A probe against the R0 package,
+  central authority, runtime preflight, one-use permit, remote preservation
+  before the marker.
+- This supersedes T20.43's "no replacement" exclusion for exactly one
+  replacement and nothing else: no second replacement, no correction
+  objectives, no threshold changes, and hardware, network, external compute,
+  and Brev remain closed. T20.44 and its result are not modified.
