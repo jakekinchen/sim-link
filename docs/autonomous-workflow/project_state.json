@@ -109,10 +109,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "202",
-    "commit": "79b567080b22e23f914c2e0199e55c49819f2f35",
-    "reviewer_decision_id": "254",
-    "summary": "verified_model_free_corrected_preflight_contract_cb018b69_mechanically"
+    "brief_id": "203",
+    "commit": "73674a493fa3cb04ca77a8761d487f2d8a0eeeab",
+    "reviewer_decision_id": "260",
+    "summary": "verified_negative_sole_smolvla_replacement_08ef923d_all_2"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -304,8 +304,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36j",
-  "next_eligible_task": "T20.36j",
+  "current_task": "T20.36k",
+  "next_eligible_task": "T20.36k",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4533,14 +4533,14 @@
       "authority_not_granted": ["dependency_install","environment_mutation","network_download","live_auto_processor_construction","attempt_marker_creation","replacement_attempt","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
     "T20.36j": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36j-B"],
-      "active_brief_id": "203",
-      "latest_verified_brief_id": null,
-      "review_decision_id": "259",
-      "source_commit": "a19d48df29465978a96c1a2aa67afbe1a46c7b2c",
-      "implementation_commits": ["b35acd182ca6520aa762f9adc11ab3cce1800422","9e9272c5a9dca584b69db5963036c22b37668f26","54339c2cca0ff575fa2842d8bd731bec4338f87b","ad051d0529a1a484a655dbcf046bfdb030b6983d","a19d48df29465978a96c1a2aa67afbe1a46c7b2c"],
-      "result": "Reviewer 259 verifies remotely preserved corrected preflight 3c9b5af9... and one-use permit effa3b65.... Closure ac8abed1... covers 57 packages, processor smoke 5223d8f0... records six safe files, and live stack/batch/checkpoint identities independently reproduce. Exactly one local-MPS counted replacement attempt is authorized under unchanged Gate B; its first marker consumes the permit",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "203",
+      "review_decision_id": "260",
+      "source_commit": "73674a493fa3cb04ca77a8761d487f2d8a0eeeab",
+      "implementation_commits": ["b35acd182ca6520aa762f9adc11ab3cce1800422","9e9272c5a9dca584b69db5963036c22b37668f26","54339c2cca0ff575fa2842d8bd731bec4338f87b","ad051d0529a1a484a655dbcf046bfdb030b6983d","a19d48df29465978a96c1a2aa67afbe1a46c7b2c","73674a493fa3cb04ca77a8761d487f2d8a0eeeab"],
+      "result": "Verified negative sole SmolVLA replacement 08ef923d...: all 2,000 MPS updates and five deterministic decode seeds completed; final objective ratio 0.022866 passes but maximum physical error 0.266024 rad fails unchanged Gate B. No retry, Gate C, or policy selection follows. The SmolVLA replacement alphabet closes and T20.36k uses existing ACT/SmolVLA evidence to design the pre-authorized consequence calibration without retraining",
       "pre_run_implementation": {
         "implementation_commit": "b35acd182ca6520aa762f9adc11ab3cce1800422",
         "metadata_collector_correction_commit": "9e9272c5a9dca584b69db5963036c22b37668f26",
@@ -4578,9 +4578,40 @@
         "attempt_marker_created": false,
         "model_constructed": false
       },
+      "artifact": {
+        "path": "configurations/robot_lab/t20_36j_exact_smolvla_gate_b_result.json",
+        "schema_version": "scenesmith.t20_36j_exact_smolvla_gate_b_result.v1",
+        "identity_sha256": "08ef923d1ebcffde26055834db271e92bb068e0eb09f75c60078f2d8b548c4a1",
+        "file_sha256": "c5b31b9568ab99f6eb4431431cf2a43da62713fcaf8dd71a68f4928a991487da",
+        "size_bytes": 1471,
+        "attempt_identity_sha256": "ceea58cfff2777e807349d450c0a057000b7b993a97fea945d4472d848bd9263",
+        "run_identity_sha256": "7e7304c5217bed1c95ae5403c009d1f4aa78a75c387f5449299dd50421d2a1bb",
+        "checkpoint_identity_sha256": "32f0bd3035a984d3b0ee2a752c1195fd252f61e9b2a560d1762e856f44ce81fa",
+        "optimizer_update_count": 2000,
+        "final_to_baseline_supervised_objective_ratio": 0.022866289854542872,
+        "final_maximum_absolute_error_rad": 0.2660243509765625,
+        "all_seed_repeats_deterministic": true,
+        "gate_b_passed": false,
+        "smolvla_alphabet_closed": true,
+        "local_checkpoint_retained": true,
+        "local_checkpoint_size": "865M"
+      },
       "owner_authority_granted": ["install_exact_four_cached_distributions_offline","construct_auto_processor_offline_before_marker","execute_at_most_one_local_mps_replacement_attempt_after_verified_central_authority"],
-      "authority_granted": ["owner_authorized_exact_environment_correction","central_composer_granted_simulation_training_ready","exact_offline_install_verified","corrected_preflight_and_one_use_permit_verified","create_one_counted_attempt_marker","execute_one_local_mps_replacement_attempt"],
-      "authority_not_granted": ["network_download","second_attempt","retry","sweep","gate_b_threshold_change","gate_c_execution_before_gate_b_pass","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
+      "authority_granted": ["t20_36j_negative_result_verified","smolvla_replacement_alphabet_closed","reuse_existing_act_and_smolvla_evidence_for_t20_36k_design"],
+      "authority_not_granted": ["second_attempt","retry","sweep","model_reconstruction","post_run_inference","optimizer_creation","optimizer_training","gate_b_threshold_change_without_t20_36k_evidence","gate_c_execution","closed_loop_rollout","policy_track_selected","simulation_policy_accepted","physical_actuation","external_compute","brev_compute"]
+    },
+    "T20.36k": {
+      "state": "in_progress",
+      "depends_on": ["T20.36e","T20.36f","T20.36j"],
+      "active_brief_id": "204",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "source_commit": "73674a493fa3cb04ca77a8761d487f2d8a0eeeab",
+      "implementation_commits": [],
+      "result": "owner-pre-authorized consequence-calibrated Gate B amendment design using the completed ACT and SmolVLA negative controls. Strict uniform 0.05-rad evidence remains reported; thresholds must derive from bounded task-consequence sensitivity rather than candidate results; one-episode Gate C remains the behavioral arbiter",
+      "owner_authority_granted": ["design_task_consequence_sensitivity_calibration","retain_strict_uniform_metric_as_report_only","design_gate_c_one_episode_arbiter"],
+      "authority_granted": ["read_existing_signed_act_and_smolvla_results","run_model_free_simulation_sensitivity_analysis","write_non_authorizing_amendment_design"],
+      "authority_not_granted": ["change_gate_b_now","select_thresholds_from_candidate_errors","act_retry","smolvla_retry","model_construction","model_inference","optimizer_training","gate_c_execution","policy_selection","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

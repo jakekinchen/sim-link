@@ -956,6 +956,12 @@ Corrected preflight `3c9b5af9...` and one-use permit `effa3b65...` now verify
 and are preserved on origin with closure `ac8abed1...` and processor smoke
 `5223d8f0...`. Reviewer 259 authorizes exactly one local-MPS counted
 replacement under unchanged Gate B; its first marker consumes the permit.
+That sole attempt now verifies negative as result `08ef923d...`: objective ratio
+`0.022866` passes, but deterministic maximum physical error `0.266024` rad
+fails the unchanged gate after 2,000 updates. Reviewer 260 closes the SmolVLA
+replacement alphabet. Brief 204 opens the owner-pre-authorized model-free
+consequence-calibration design; strict uniform error remains report-only, no
+gate changes now, and no ACT/SmolVLA retry or Gate C execution is authorized.
 
 ## Durable State
 
