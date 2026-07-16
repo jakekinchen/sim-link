@@ -1,0 +1,40 @@
+{
+  "authorization_id": "t20_36f_act_decode_localization_grant",
+  "authorization_scope": "one_exact_act_checkpoint_decode_localization",
+  "authorization_source": "owner_resumed_goal_loop_and_evidence_routed_post_act_decode_localization_2026_07_15",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "authorized_attempt_count": 1,
+  "brev_compute_authorized": false,
+  "external_compute_authorized": false,
+  "gate_b_amendment_authorized": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "9a96cc1663dff5f3a27189b7bacb35350a5d550c867070020bbeb4f46c6e9be7",
+  "issued_at": "2026-07-15T07:27:47-05:00",
+  "optimizer_authorized": false,
+  "physical_transfer_authorized": false,
+  "policy_track_selection_authorized": false,
+  "promotion_authorized": false,
+  "schema_version": "scenesmith.owner_inference_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "smolvla_entry_authorized": false,
+  "source_checkpoint_identity_sha256": "01b5713472ae6113ea55b265cbeb02042f3be2b473178a366a6b996e1b75dd21",
+  "source_result_ref": {
+    "file_sha256": "3eb305e3e0892c76357d237076b5405af45941fbaa9d0ee5434fb3b863cc4ec5",
+    "identity_sha256": "2ea2c2460527ee863275da11a008aa2b75832f08040daf4fd64459c9520769c6",
+    "path": "configurations/robot_lab/t20_36e_exact_act_gate_b_control_result.json",
+    "schema_version": "scenesmith.t20_36e_exact_act_gate_b_control_result.v1"
+  },
+  "source_spec_ref": {
+    "file_sha256": "3caf7e6a59c33755b839f989de1ad84a92559f364a14ed6e6919febecb7dc66d",
+    "identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+    "path": "configurations/robot_lab/t20_36d_exact_act_gate_b_control_spec.json",
+    "schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1"
+  },
+  "subject_id": "pi05_so101_sorting_system",
+  "training_retry_authorized": false,
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}

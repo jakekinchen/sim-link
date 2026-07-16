@@ -30,10 +30,11 @@ T20.36e completed negative with signed result `2ea2c246...`: the final objective
 ratio passes at `0.054918`, but the maximum physical error fails at `0.442487`
 rad despite matching five-repeat hashes and `0.0145525`-rad mean error. Reviewer
 246 closes the attempt and all retries. T20.36f is current under Brief 197 for
-an exact checkpoint-reload/per-joint localization pre-run boundary. It may
-implement and test only; no model load or inference occurs before separate
-authority, review, commit, and remote preservation. SmolVLA entry, Gate B
-amendment, Gate C, and rollout remain closed.
+an exact checkpoint-reload/per-joint localization. Implementation `489be59`,
+central decision `de30947f...`, model-free preflight `40e24b5e...`, and one-use
+permit `d9daae7b...` are reviewed by Decision 247. The sole checkpoint load and
+inference audit may run only after this evidence boundary is remotely
+preserved. SmolVLA entry, Gate B amendment, Gate C, and rollout remain closed.
 
 The run remains simulation-only. Hardware, cameras, serial devices, physical
 motion, external compute, Brev, promotion, and physical-transfer authority are

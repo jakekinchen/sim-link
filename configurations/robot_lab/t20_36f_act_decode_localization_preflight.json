@@ -1,0 +1,53 @@
+{
+  "attempt_exists": false,
+  "authority_decision_identity_sha256": "de30947fd7aac8d660de97875e387e383f57cbb3319288682b753c6f73b1ff78",
+  "brev_compute_started": false,
+  "checkpoint_bytes_hashed": true,
+  "checkpoint_tensor_read": false,
+  "checkpoint_tree": [
+    {
+      "path": "config.json",
+      "sha256": "a54498c853555b9e51a4efe9ac8d67d72dc650b4a11ca01979c27068cf0e646a",
+      "size_bytes": 1684
+    },
+    {
+      "path": "model.safetensors",
+      "sha256": "336c32951ee327b8ff23d7e2f2b8601127c8efe1480263b9f0cb00e1ebc2ea6c",
+      "size_bytes": 45251096
+    }
+  ],
+  "dependency_versions": {
+    "datasets": "4.8.5",
+    "lerobot": "0.6.1",
+    "numpy": "2.2.6",
+    "pyarrow": "24.0.0",
+    "torch": "2.11.0",
+    "torchvision": "0.26.0"
+  },
+  "external_compute_started": false,
+  "free_disk_bytes": 21483372544,
+  "identity_sha256": "40e24b5efd79173bd8f57e45a0f0be2cbd745769087e1ebcbf0e208102311853",
+  "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "minimum_free_disk_bytes": 2147483648,
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "mps_available": true,
+  "network_accessed": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "python_major_minor": [
+    3,
+    12
+  ],
+  "remote_source_commit": "489be59ad0b87f6485866a78d580b549002500f9",
+  "remote_source_commit_matches": true,
+  "result_exists": false,
+  "schema_version": "scenesmith.t20_36f_act_decode_localization_preflight.v1",
+  "source_checkpoint_identity_sha256": "01b5713472ae6113ea55b265cbeb02042f3be2b473178a366a6b996e1b75dd21",
+  "source_commit": "489be59ad0b87f6485866a78d580b549002500f9",
+  "source_result_identity_sha256": "2ea2c2460527ee863275da11a008aa2b75832f08040daf4fd64459c9520769c6",
+  "source_run_identity_sha256": "9911e51c45dad591691502a47d6ea3baa871ca6c3e3b6b549f81bc2af4423478",
+  "task_id": "T20.36f"
+}

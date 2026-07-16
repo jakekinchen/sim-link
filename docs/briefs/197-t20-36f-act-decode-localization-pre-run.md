@@ -48,3 +48,18 @@ Before the reviewed boundary: model load, checkpoint tensor read, or inference.
 Throughout: optimizer creation/training, training retry, second ACT campaign,
 dataset/statistics mutation, policy selection, SmolVLA entry, Gate B change,
 Gate C, rollout, hardware, camera, serial, external compute, or Brev.
+
+## Pre-Run Evidence
+
+- Implementation `489be59` is remotely preserved; 41 T20.36 regressions pass.
+- Central decision `de30947f...` grants only the repository's central ready
+  state. Owner grant `9a96cc16...` and one-use permit `d9daae7b...` restrict the
+  task to one checkpoint load plus simulation inference, with optimizer and
+  training retry false.
+- Model-free preflight `40e24b5e...` rehashes checkpoint `01b57134...` as the
+  exact 1,684-byte config plus 45,251,096-byte safe tensor, binds MPS and the
+  pinned dependency/runtime identities, and confirms remote source `489be59`.
+  Checkpoint tensors were not parsed and no attempt marker exists.
+
+Reviewer Decision 247 verifies this boundary and opens its sole inference audit
+only after the signed evidence and review are confirmed on origin.

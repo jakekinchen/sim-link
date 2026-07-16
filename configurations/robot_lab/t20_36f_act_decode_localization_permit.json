@@ -1,0 +1,29 @@
+{
+  "attempt_marker_path": "outputs/robot_lab/t20_36f_act_decode_localization_run_001/attempt.json",
+  "authority_decision_identity_sha256": "de30947fd7aac8d660de97875e387e383f57cbb3319288682b753c6f73b1ff78",
+  "authorized_actions": [
+    "simulation_model_load",
+    "simulation_model_inference"
+  ],
+  "authorized_attempt_count": 1,
+  "brev_compute_started": false,
+  "closed_loop_rollout": false,
+  "external_compute_started": false,
+  "gate_b_threshold_changed": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "d9daae7b6617298a854de0956d596858b95836729c17582f4c3151bbbf2dbd5a",
+  "local_execution_eligible_after_remote_preservation": true,
+  "marker_must_precede_checkpoint_tensor_read": true,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "policy_track_selected": false,
+  "required_source_commit": "489be59ad0b87f6485866a78d580b549002500f9",
+  "runtime_preflight_identity_sha256": "40e24b5efd79173bd8f57e45a0f0be2cbd745769087e1ebcbf0e208102311853",
+  "schema_version": "scenesmith.t20_36f_act_decode_localization_permit.v1",
+  "smolvla_entry_authorized": false,
+  "source_checkpoint_identity_sha256": "01b5713472ae6113ea55b265cbeb02042f3be2b473178a366a6b996e1b75dd21",
+  "source_result_identity_sha256": "2ea2c2460527ee863275da11a008aa2b75832f08040daf4fd64459c9520769c6",
+  "task_id": "T20.36f",
+  "training_retry": false
+}
