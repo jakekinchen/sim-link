@@ -1,0 +1,97 @@
+{
+  "archive_sequence": 1,
+  "brev_compute_started": false,
+  "canonical_counterexample_id": "cex-0001",
+  "capability_stage": "source_controller_boundary",
+  "cell": {
+    "cell_id": "gripper_scale_high",
+    "cell_index": 11,
+    "factor": "gripper_command_scale",
+    "one_factor_only": true,
+    "value": 1.05
+  },
+  "controller_owner": "source_bound_recovery_controller",
+  "counterexample_id": "cex-0001",
+  "duplicate_of_counterexample_id": null,
+  "ensemble_scope": "fixed_discrete_uncalibrated_one_factor_recovery_falsification",
+  "external_compute_started": false,
+  "failure_class": "source_controller_boundary_negative",
+  "identity_sha256": "8277b09fb0f0a03d0003246d84a267faa98acd14608becea328e442c884b04aa",
+  "lifecycle_state": "active",
+  "model_constructed": false,
+  "model_inference": false,
+  "network_accessed": false,
+  "object_scope": "analytic_turquoise_anchor_cousin_v1",
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "policy_regression_blame_allowed": false,
+  "policy_replay_executed": false,
+  "posterior_calibrated": false,
+  "predicate_evidence": {
+    "first_trace_sha256": "0d7a2e82bc13d1bdd48b870ca6f660328ff885396db5c9061fbc9d62eec4ed4a",
+    "maximum_anchor_lift_m": 0.031849000000000016,
+    "replays_hash_identical": true,
+    "second_trace_sha256": "0d7a2e82bc13d1bdd48b870ca6f660328ff885396db5c9061fbc9d62eec4ed4a",
+    "simulation_semantic_strict_success": false,
+    "strict_contact_frame_count": 77,
+    "terminal_outcome": "lifted_without_strict_cycle"
+  },
+  "promotion_eligible": false,
+  "provenance_class": "simulation_source_controller",
+  "replay_eligible": false,
+  "replay_gate_activation_allowed": false,
+  "replay_ineligibility_reason": "full_trace_bytes_not_remotely_retained",
+  "replay_tier": "evidence_only_no_remotely_retained_trace",
+  "routing": {
+    "archive_eligible": true,
+    "fixed_replay_eligible": false,
+    "policy_regression_blame_allowed": false,
+    "replay_gate_activation_allowed": false,
+    "training_ingestion_eligible": false
+  },
+  "routing_class": "evidence_only",
+  "schema_version": "scenesmith.counterexample_receipt.v1",
+  "semantic_core": {
+    "capability_stage": "source_controller_boundary",
+    "cell_id": "gripper_scale_high",
+    "factor": "gripper_command_scale",
+    "failure_class": "source_controller_boundary_negative",
+    "provenance_class": "simulation_source_controller",
+    "source_manifest_identity_sha256": "2842bb35296e1a5b1504ba07932ddb425cff4f1a68115249a26d259ebf708688",
+    "source_scorecard_identity_sha256": "19834ecd0198764a1243b3be6d34d37ab19b14b94e095f843aa8f7fdc81cac0f",
+    "terminal_outcome": "lifted_without_strict_cycle",
+    "trace_sha256": "0d7a2e82bc13d1bdd48b870ca6f660328ff885396db5c9061fbc9d62eec4ed4a",
+    "value": 1.05
+  },
+  "semantic_fingerprint_sha256": "5b6db2718989a8367da355fc470c7cad6ddaa1b1dfc67609616fbe974a82b055",
+  "simulation_replay_executed": false,
+  "source_artifact_mutated": false,
+  "source_refs": {
+    "cell_manifest": {
+      "file_sha256": "99332c9c8b1615316f06682073d27a4c38e77c460ab42a3aa9a460954a1a8c36",
+      "identity_sha256": "2842bb35296e1a5b1504ba07932ddb425cff4f1a68115249a26d259ebf708688",
+      "path": "configurations/robot_lab/t20_19_discrete_recovery_cells.json",
+      "schema_version": "scenesmith.t20_19_discrete_recovery_ensemble.v1",
+      "size_bytes": 2960
+    },
+    "full_trace_evidence": {
+      "file_sha256": "46a597e8f961ca641dcbac6a9582bca3134d2303137d125a25309724f89e8c9b",
+      "identity_sha256": "67c0003ef46961a5cb932a3a7ab0b78b117ed75b3a1e26e580a9d1b10175a12b",
+      "local_copy_verified_for_archive": false,
+      "path": "outputs/robot_lab/t20_19_discrete_recovery_ensemble.json",
+      "receipt_derived_without_trace_bytes": true,
+      "remotely_retained": false
+    },
+    "scorecard_gate": {
+      "file_sha256": "827905f470d173fc6d23b49acaa414cd46fdaf7277c7f9b33aa413e2acf61d57",
+      "identity_sha256": "1205e336a81b68b650013572bd96ac8f6d452a5262ab924966aa14b7fa5e10c6",
+      "path": "configurations/robot_lab/t20_19_discrete_recovery_scorecard_gate.json",
+      "schema_version": "scenesmith.t20_19_discrete_recovery_scorecard_gate.v1",
+      "size_bytes": 8198
+    }
+  },
+  "task_id": "T20.39",
+  "task_scope": "anchor_grasp_strict_v2",
+  "training_ingestion_authorized": false,
+  "training_ingestion_eligible": false
+}

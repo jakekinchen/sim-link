@@ -1,0 +1,92 @@
+{
+  "active_entry_count": 1,
+  "active_semantic_fingerprints": [
+    {
+      "canonical_counterexample_id": "cex-0001",
+      "semantic_fingerprint_sha256": "5b6db2718989a8367da355fc470c7cad6ddaa1b1dfc67609616fbe974a82b055"
+    }
+  ],
+  "archive_version": 1,
+  "brev_compute_started": false,
+  "duplicate_policy": "one_active_canonical_receipt_per_semantic_fingerprint;_exact_duplicates_reference_canonical;_conflicts_and_aliases_fail_closed",
+  "entries": [
+    {
+      "counterexample_id": "cex-0001",
+      "file_sha256": "9740a38384034dd5156383258ed64c0a3764c39482728cd9947c38a0962a50cf",
+      "identity_sha256": "8277b09fb0f0a03d0003246d84a267faa98acd14608becea328e442c884b04aa",
+      "lifecycle_state": "active",
+      "path": "configurations/robot_lab/t20_39_counterexample_receipt_0001.json",
+      "routing_class": "evidence_only",
+      "schema_version": "scenesmith.counterexample_receipt.v1",
+      "semantic_fingerprint_sha256": "5b6db2718989a8367da355fc470c7cad6ddaa1b1dfc67609616fbe974a82b055",
+      "size_bytes": 4341
+    }
+  ],
+  "entry_count": 1,
+  "external_compute_started": false,
+  "identity_sha256": "05908b6d1d9f9f9e27a813d42f4aa90f8104c844fa3aeb5d400d4dd6b3126497",
+  "lifecycle_states": [
+    "active",
+    "superseded",
+    "retired",
+    "invalid"
+  ],
+  "lifecycle_transitions": {
+    "active": [
+      "superseded",
+      "retired",
+      "invalid"
+    ],
+    "invalid": [],
+    "retired": [
+      "invalid"
+    ],
+    "superseded": [
+      "invalid"
+    ]
+  },
+  "model_constructed": false,
+  "model_inference": false,
+  "network_accessed": false,
+  "next_archive_sequence": 2,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "policy_replay_executed": false,
+  "promotion_eligible": false,
+  "replay_gate_active": false,
+  "routing_matrix": {
+    "compiler_quarantine": {
+      "archive_eligible": true,
+      "fixed_replay_eligible": false,
+      "policy_regression_blame_allowed": false,
+      "replay_gate_activation_allowed": false,
+      "training_ingestion_eligible": false
+    },
+    "evidence_only": {
+      "archive_eligible": true,
+      "fixed_replay_eligible": false,
+      "policy_regression_blame_allowed": false,
+      "replay_gate_activation_allowed": false,
+      "training_ingestion_eligible": false
+    },
+    "fixed_regression_candidate": {
+      "archive_eligible": true,
+      "fixed_replay_eligible": true,
+      "policy_regression_blame_allowed": false,
+      "replay_gate_activation_allowed": false,
+      "training_ingestion_eligible": false
+    },
+    "policy_regression_candidate": {
+      "archive_eligible": true,
+      "fixed_replay_eligible": true,
+      "policy_regression_blame_allowed": true,
+      "replay_gate_activation_allowed": false,
+      "training_ingestion_eligible": false
+    }
+  },
+  "schema_version": "scenesmith.counterexample_archive_index.v1",
+  "simulation_replay_executed": false,
+  "stale_source_policy": "missing_or_drifted_source_marks_receipt_invalid_and_replay_ineligible_without_deleting_history",
+  "task_id": "T20.39",
+  "training_ingestion_active": false
+}
