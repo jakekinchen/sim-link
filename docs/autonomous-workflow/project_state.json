@@ -118,10 +118,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "211",
-    "commit": "83d51c52d47b937a27df625df93f9043b69c84cd",
-    "reviewer_decision_id": "280",
-    "summary": "verified_fail_closed_receipt_archive_hardening"
+    "brief_id": "212",
+    "commit": "288e938b4ce9b0458af1ffdd45a63cb5af31e46f",
+    "reviewer_decision_id": "281",
+    "summary": "verified_fail_closed_t19_1_readonly_session_path_gate_open_pending_remote_transition"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -5164,9 +5164,13 @@
       "depends_on": ["M16", "owner_present_read_authority"],
       "active_brief_id": "212",
       "latest_verified_brief_id": null,
-      "review_decision_id": null,
-      "result": "Brief 212 opened for one centrally composed, finite, owner-present read-only six-servo hardware census; no device access has occurred",
-      "live_gate": "closed_pending_review_and_remote_confirmation",
+      "review_decision_id": "281",
+      "implementation_commit": "288e938b4ce9b0458af1ffdd45a63cb5af31e46f",
+      "result": "Brief 212 implementation is remotely preserved and Reviewer 281 opens one centrally composed, finite, owner-present read-only six-servo census only after this transition is confirmed on origin; no device access has occurred",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-16T07:08:30-05:00",
+      "live_gate_valid_until": "2026-07-16T09:44:12-05:00",
+      "live_gate_basis_commit": "288e938b4ce9b0458af1ffdd45a63cb5af31e46f",
       "session_limit": 1,
       "sessions_started": 0,
       "owner_window_valid_until": "2026-07-16T10:05:00-05:00",
@@ -5181,11 +5185,12 @@
       "authority_granted": [
         "read_verified_t16_5a_t16_5b_sources",
         "activate_brief_212",
-        "implement_and_test_t19_1_fail_closed_authority_and_census_path"
+        "implement_and_test_t19_1_fail_closed_authority_and_census_path",
+        "compose_one_finite_readonly_session_only_after_remote_gate_confirmation"
       ],
       "authority_not_granted": [
-        "serial_enumeration_before_open_gate",
-        "serial_open_before_open_gate",
+        "serial_enumeration_without_current_central_decision_and_permit",
+        "serial_open_without_current_central_decision_and_permit",
         "camera_access",
         "register_write",
         "torque_change",

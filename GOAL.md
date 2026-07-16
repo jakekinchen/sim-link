@@ -1088,6 +1088,10 @@ Brief 212 therefore opens the dependency-ready T19.1 side lane under the
 separate owner-present hardware window. No device access is allowed until the
 same-thread unrestricted/no-prompt profile, central read-only session decision,
 finite one-use permit, and remotely confirmed open-gate boundary all agree.
+Implementation `288e938` is on origin and Reviewer 281 verifies the fail-closed
+serial-only 54-read/no-retry path. Its one-session gate becomes effective only
+after the current transition is also confirmed on origin; no hardware was
+enumerated or opened at the implementation/review boundary.
 
 ## Durable State
 
