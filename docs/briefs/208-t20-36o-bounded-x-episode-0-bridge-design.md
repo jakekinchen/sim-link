@@ -191,3 +191,16 @@ negative ceiling. The non-consuming preflight returned permit `f9bad1ae...`
 and spec `50e0569d...` while leaving every output absent. Reviewer 276
 authorizes the sole local-MPS optimizer attempt only after this review and
 canonical state boundary are preserved on origin. Gate C remains closed.
+
+## Verified Terminal Result
+
+The sole attempt completed all 2,500 finite updates. Probe artifact
+`ea56b602...` retains 250 decoded tensors with exact repeats; result
+`ec7fb323...` passes the source-objective gate at every checkpoint but fails
+the amended action gate at 500/1000/1500/2000/2500. Update 2,000 passes only
+the five start-zero probes; the final checkpoint passes 0/25 with 1,677
+violations. Report-only uniform supplement `70e98c06...` binds the immutable
+result and reports 0/25, 3,613 violations, and 0.553656-rad worst error at the
+selected checkpoint. Result bundle `f1744a0` is on origin and both retained
+verifiers pass. Reviewer 277 closes the X/current-candidate Gate C route with
+no retry and activates Brief 209 / T20.38.

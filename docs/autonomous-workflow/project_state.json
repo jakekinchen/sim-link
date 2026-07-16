@@ -118,10 +118,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "207",
-    "commit": "a20f2a4de1b4d8ec7f12142015d44bdecff6a345",
-    "reviewer_decision_id": "266",
-    "summary": "verified_exact_x_reproduction_with_all_five_source"
+    "brief_id": "208",
+    "commit": "f1744a020ec5553330fd6085aec4b42762ac405e",
+    "reviewer_decision_id": "277",
+    "summary": "verified_terminal_bounded_negative_2_500_finite_updates"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -323,8 +323,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.36o",
-  "next_eligible_task": "T20.36o",
+  "current_task": "T20.38",
+  "next_eligible_task": "T20.38",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4705,14 +4705,14 @@
       "authority_not_granted": ["checkpoint_tensor_read_before_attempt_marker","model_construction_before_attempt_marker","model_load_before_attempt_marker","model_inference_before_attempt_marker","optimizer_creation","optimizer_training","new_seed","extra_repeat","threshold_change","gate_c_execution","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
     },
     "T20.36o": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.36n"],
-      "active_brief_id": "208",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
+      "active_brief_id": null,
+      "latest_verified_brief_id": "208",
+      "review_decision_id": "277",
       "source_commit": "a20f2a4de1b4d8ec7f12142015d44bdecff6a345",
-      "implementation_commits": ["80966ff9b34f4a90cdd43c592670622bc42262b3","e6eede136c6bc2028516a1dd446ef3a0b42a223d","467ad92786be7c65e3bfa0ba95a6980473643b25","781e0e095da07b9b431daacb9ef1a336d8b2200b","9f3538eaa3bcc5584d15b95955318b70ab6f4fe0"],
-      "result": "runner 9f3538e is verified through Reviewer 276 with 36 tests and an exact non-consuming preflight; the sole permit-bound optimizer attempt is next after this review boundary reaches origin; no marker, model, optimizer, or checkpoint exists",
+      "implementation_commits": ["80966ff9b34f4a90cdd43c592670622bc42262b3","e6eede136c6bc2028516a1dd446ef3a0b42a223d","467ad92786be7c65e3bfa0ba95a6980473643b25","781e0e095da07b9b431daacb9ef1a336d8b2200b","9f3538eaa3bcc5584d15b95955318b70ab6f4fe0","f1744a020ec5553330fd6085aec4b42762ac405e"],
+      "result": "verified terminal bounded negative: 2,500 finite updates, all source-objective gates pass, final amended gate passes 0/25 with 1,677 violations; result ec7fb323 and uniform supplement 70e98c06 verify; no retry and current Gate C route closed without execution",
       "design_review_decision_id": "267",
       "authority_implementation_review_decision_id": "268",
       "baseline_pre_run_review_decision_id": "269",
@@ -4723,9 +4723,11 @@
       "bounded_optimizer_authority_implementation_review_decision_id": "274",
       "bounded_optimizer_authority_review_decision_id": "275",
       "bounded_optimizer_runner_review_decision_id": "276",
+      "bounded_optimizer_result_review_decision_id": "277",
       "design_artifact": {"path":"configurations/robot_lab/t20_36o_episode_bridge_design.json","schema_version":"scenesmith.t20_36o_episode_bridge_design.v1","identity_sha256":"8294c63be101dbb1ea3536d2b2da1447d23ca9aa71d2145eb501452547c30c0c","file_sha256":"4a0d2850a279d93df3429fdd98bb27e6bebc734023ecc75b67e06e1b772d5dbb","correction_example_count":250,"optimizer_update_count_ceiling":2500,"probe_update_counts":[0,500,1000,1500,2000,2500],"baseline_precedes_optimizer":true},
       "bounded_optimizer_spec_artifact": {"path":"configurations/robot_lab/t20_36o_bounded_optimizer_spec.json","schema_version":"scenesmith.t20_36o_bounded_optimizer_spec.v1","identity_sha256":"50e0569d430fe268f103ee20210b06f25f23a4c6f0efe43d4621a1b4ea32ed26","file_sha256":"412f73ae370474b28860d29f566c91a43ffca62b50ecdb6206aa745e4c698b46","size_bytes":399102,"correction_example_count":250,"correction_examples_sha256":"1a7e3202377804c34ef48c5ba63708ae9db0b3751b3dab301a3a85d0d29cc30f","optimizer_update_count_ceiling":2500,"optimizer_created":false},
-      "bounded_optimizer_pre_run_authority": {"owner_grant_identity_sha256":"dee9ae593dded648cad66f5499e4ac6bb0466d09070f37a63cc589d916dd7e04","central_request_identity_sha256":"c325cb123320549ab8024f72d633e85028d132f85003fdc45484715ead5cce4f","central_decision_identity_sha256":"8834322db1afde27d6b00fa910f57a34a6f15daebe7276a3baffa2b0816e8f88","runtime_preflight_identity_sha256":"672c59cc3665b8c3683647e4611dbc743e5f1b0e09990863e06840b43a1383f6","training_permit_identity_sha256":"f9bad1aee7a6d25c38a9b717cff4c10fd65208fed87dc83cbdb4f8e3e5123bdb","required_source_commit":"ae9992bad232b70c2d1e23b6156290abb7c8077f","attempt_marker_exists":false,"checkpoint_tensor_deserialized":false,"model_constructed":false,"model_loaded":false,"optimizer_created":false,"optimizer_training":false,"output_checkpoint_exists":false},
+      "bounded_optimizer_pre_run_authority": {"owner_grant_identity_sha256":"dee9ae593dded648cad66f5499e4ac6bb0466d09070f37a63cc589d916dd7e04","central_request_identity_sha256":"c325cb123320549ab8024f72d633e85028d132f85003fdc45484715ead5cce4f","central_decision_identity_sha256":"8834322db1afde27d6b00fa910f57a34a6f15daebe7276a3baffa2b0816e8f88","runtime_preflight_identity_sha256":"672c59cc3665b8c3683647e4611dbc743e5f1b0e09990863e06840b43a1383f6","training_permit_identity_sha256":"f9bad1aee7a6d25c38a9b717cff4c10fd65208fed87dc83cbdb4f8e3e5123bdb","required_source_commit":"ae9992bad232b70c2d1e23b6156290abb7c8077f","attempt_marker_exists":true,"checkpoint_tensor_deserialized":true,"model_constructed":true,"model_loaded":true,"optimizer_created":true,"optimizer_training":true,"output_checkpoint_exists":true},
+      "bounded_optimizer_result_artifacts": {"source_commit":"26146fa0985dc127f4f6b38c8657756fae69729f","remote_bundle_commit":"f1744a020ec5553330fd6085aec4b42762ac405e","attempt":{"path":"configurations/robot_lab/t20_36o_optimizer_attempt.json","identity_sha256":"424b88e9f19acd5ee7790c1e9b15590fbfe84c7c3fd147341b070245d5893939","file_sha256":"f47053ce607e7cda15ce5a7c9c4517a4b1c019ed31620c44a34b32f335a1f4f7","size_bytes":1071},"probes":{"path":"configurations/robot_lab/t20_36o_optimizer_probe_tensors.json","identity_sha256":"ea56b602310de2608ae20b86fea40dc08e2512cb6c61575fb2f4ca8093ca35b4","file_sha256":"e5992711187a8e9d50c52270e986eb375d1036d050a183e69e41f12f056522ab","size_bytes":6638972,"decoded_tensor_count":250,"all_repeats_bit_identical":true},"result":{"path":"configurations/robot_lab/t20_36o_optimizer_result.json","identity_sha256":"ec7fb3239dc7275950dc9bc1c2c661dc5873f7699ce3dd694bbf8fe4f8cffd15","file_sha256":"a785dca887b28d7f5f95a5b526b27603dfa5c5192404db1fc4e353ef8e5617b1","size_bytes":256119,"optimizer_update_count":2500,"bridge_gate_passed":false,"gate_c_request_eligible":false},"uniform_report":{"path":"configurations/robot_lab/t20_36o_optimizer_uniform_report.json","identity_sha256":"70e98c062b0d5039059ded8a6a5eacfb94f654f01b6093e005a5ce56047e116a","file_sha256":"f623e6be19cadd6802486419c1013e021418c46a73d27ad12f30ec854bb1d465","size_bytes":6036628,"selected_strict_uniform_report_only_passed":false},"checkpoint_identity_sha256":"6e202dc58c6c6d67796b9f963eb4b2a9e13ea08dc2faa2cdab2fc26e14f76314","probe_violation_counts":[2045,2010,1368,1738,1677],"final_passing_probe_count":0},
       "execution_contract": {"n_action_steps":50,"queue_reset_count":1,"rollout_frame_count":244,"chunk_start_frames":[0,50,100,150,200],"executed_lengths":[50,50,50,50,44],"final_unexecuted_tail_count":6,"legacy_action_horizon_5_allowed":false,"unexecuted_tail_actor_valid":false},
       "frozen_gate_identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
       "baseline_pre_run_authority": {"owner_grant_identity_sha256":"e3d80dcde8d12e0dae52f1129a337080a26682fd61131422bcbdd5ebc7cd021f","central_request_identity_sha256":"1520ee889f542b327bcaa1b8729a29abb85e6f4bab4570729abd6c8b84f8243b","central_decision_identity_sha256":"e649d3dc9643c9900a83434e059d3ccf78a2a924d1ac31adb99804b9c59e6c4d","runtime_preflight_identity_sha256":"f0794abd5666adf87767ca42835fcc64bf16f972214cacfd6d604184d24f1f01","one_use_permit_identity_sha256":"3d6a1548e450828af2a63ec23eae91821f64011c59df76330ef917380f27de12","required_source_commit":"467ad92786be7c65e3bfa0ba95a6980473643b25","attempt_marker_exists":true,"checkpoint_tensor_deserialized":true,"model_constructed":true,"model_loaded":true,"model_inference":true,"optimizer_created":false},
@@ -4733,6 +4735,16 @@
       "owner_authority_granted": ["design_bounded_x_episode_0_bridge","prepare_separate_simulation_training_authority","request_gate_c_only_after_bridge_pass"],
       "authority_granted": ["read_signed_t20_35x_and_episode_0_artifacts","activate_brief_208","implement_model_free_execution_window_spec","derive_bounded_update_and_probe_contract","verify_model_free_bridge_design","implement_separate_baseline_inference_authority_and_preflight","materialize_baseline_authority_after_remote_preservation","execute_one_x_baseline_capture_after_pre_run_remote_preservation","verify_exact_baseline_negative","retain_complete_correction_trajectories","implement_model_free_bounded_optimizer_spec_compiler","materialize_bounded_optimizer_spec_after_compiler_remote_preservation","compose_separate_bounded_optimizer_authority_after_result_remote_preservation","implement_permit_bound_optimizer_runner_after_authority_remote_preservation","execute_one_permit_bound_optimizer_attempt_after_reviewer_276_remote_preservation"],
       "authority_not_granted": ["second_baseline_attempt","second_optimizer_attempt","optimizer_retry","gate_c_execution","threshold_change","policy_selection","simulation_policy_accepted","physical_actuation","network_access","external_compute","brev_compute"]
+    },
+    "T20.38": {
+      "state": "in_progress",
+      "depends_on": ["T20.36o"],
+      "active_brief_id": "209",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "result": "Brief 209 active for one model-free policy-independent quantitative strict-v2 receipt contract after the current Gate C route closed",
+      "authority_granted": ["read_existing_signed_strict_v2_artifacts","activate_brief_209","implement_quantitative_strict_v2_receipt","write_one_simulation_only_example_receipt"],
+      "authority_not_granted": ["model_construction","model_load","model_inference","optimizer_creation","optimizer_training","rollout","gate_change","threshold_change","history_rewrite","policy_selection","physical_actuation","camera_access","serial_access","network_access","external_compute","brev_compute","promotion"]
     },
     "T19.0": {
       "state": "verified",

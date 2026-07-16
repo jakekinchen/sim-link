@@ -5,15 +5,15 @@ Updated: 2026-07-16
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-16T01:44:12-05:00 through hard closeout 2026-07-16T09:44:12-05:00; no new major slice after 2026-07-16T08:59:12-05:00; owner authorized autonomous research/critique iteration plus exact T20.36m local inference-only tensor reproduction under fresh central authority and a one-use permit
-run_state: T20.36o runner 9f3538e is on origin and verifies through Reviewer 276 with 36 tests and an exact non-consuming preflight. Permit f9bad1ae... binds one 2,500-update-maximum local-MPS attempt with first confirmed pass stopping and no retry. No marker, model, optimizer, or checkpoint exists; Gate C remains closed.
+run_state: T20.36o is verified terminal negative through Reviewer 277 and origin bundle f1744a0. Result ec7fb323... completes 2,500 finite updates but passes 0/25 final amended probes with 1,677 violations; uniform supplement 70e98c06... also fails. No retry or Gate C execution. Brief 209 opens model-free T20.38.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.36o in progress under active Brief 208; commit/push/origin-confirm Reviewer 276 and the runner boundary, then execute exactly one permit-bound optimizer attempt and review its retained result
+current_task: T20.38 in progress under active Brief 209; implement and verify the policy-independent quantitative strict-v2 receipt without model, rollout, optimizer, hardware, or gate changes
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: owner presence and physical-hardware access granted approximately 2026-07-16T02:05:00-05:00 through approximately 10:05 CDT; every camera/serial/robot session still requires the formal same-thread danger-full-access and approval-policy-never verifier, central composition, and a finite per-session permit; no physical access has occurred in this window
-blockers: Gate C execution is blocked until the T20.36o bridge passes frozen amendment 463477dc... at every executed action of every derived chunk-start state; sorting scene mismatch, no metric camera/workcell transform, and no physical aperture/current mapping remain; external compute/Brev remain out of scope
-next_step: remotely preserve Reviewer 276 and the canonical runner boundary, then consume permit f9bad1ae... exactly once and route the retained first-pass-or-ceiling result without retry
+blockers: the current adjudicated ACT/SmolVLA/X Gate C route is closed after terminal bridge failure; sorting scene mismatch, no metric camera/workcell transform, and no physical aperture/current mapping remain; external compute/Brev remain out of scope
+next_step: execute Brief 209's model-free strict-v2 quantitative receipt contract, then T20.39 if time remains; begin mandatory closeout no later than 09:00 CDT
 ```
 
 ## Rules
@@ -50,6 +50,17 @@ non-consuming preflight returned permit `f9bad1ae...` and spec `50e0569d...`
 with every output still absent. Reviewer 276 authorizes the sole attempt only
 after this review boundary is confirmed on origin. Gate C, hardware, network,
 external compute, and Brev remain closed.
+
+## 2026-07-16 - T20.36o terminal bounded negative
+
+The sole attempt completed exactly 2,500 finite updates and all five registered
+probe checkpoints. Source-objective ratios pass throughout, but amended action
+violations remain 2,045/2,010/1,368/1,738/1,677 and the final checkpoint passes
+0/25 probes. Update 2,000 briefly passes only start zero. Result `ec7fb323...`,
+probe artifact `ea56b602...`, uniform supplement `70e98c06...`, and local
+checkpoint tree `6e202dc5...` verify; bundle `f1744a0` is on origin. Reviewer
+277 closes the X/current-candidate Gate C route without a rollout or retry and
+activates model-free Brief 209 / T20.38.
 
 ## 2026-07-15 - Owner continuation resumes T20.35 capability ladder
 
