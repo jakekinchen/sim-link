@@ -246,11 +246,26 @@ class T2042aR0GenerationAuthorityTests(unittest.TestCase):
         drift["source_commit"] = "b" * 40
         with self.assertRaises(ValueError):
             verify_attempt_marker(sign_payload(drift), permit=self.permit)
+        forged_permit = copy.deepcopy(self.permit)
+        forged_permit["output_paths"][0] = "outputs/robot_lab/escaped.json"
+        with self.assertRaises(ValueError):
+            build_attempt_marker(
+                permit=sign_payload(forged_permit),
+                source_commit=self.source_commit,
+                started_at="2026-07-16T10:45:00-05:00",
+            )
         with tempfile.TemporaryDirectory() as raw:
             root = Path(raw)
             written = write_attempt_marker(marker, permit=self.permit, repo_root=root)
             self.assertEqual(written, root / ATTEMPT_PATH)
             with self.assertRaises(FileExistsError):
+                write_attempt_marker(marker, permit=self.permit, repo_root=root)
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            target = root / "aliased-target"
+            target.mkdir()
+            (root / "configurations").symlink_to(target, target_is_directory=True)
+            with self.assertRaises(ValueError):
                 write_attempt_marker(marker, permit=self.permit, repo_root=root)
 
     def test_all_prohibited_authority_fields_remain_false(self) -> None:
