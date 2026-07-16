@@ -100,6 +100,10 @@ candidates and nine disjoint fresh-held-out specs; all initialization deltas
 remain zero and no physics randomization exists. This is not R0 generation:
 `generation_ready=false`, and a fresh central decision, runtime preflight,
 one-use permit, and separate pre-run review are still required.
+Brief 217 now opens T20.42a to implement and fixture-test those exact central,
+preflight, one-use-permit, and marker-first contracts against origin review
+boundary `c87ee84`. This boundary may not materialize authority artifacts or
+execute a candidate.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
