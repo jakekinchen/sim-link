@@ -138,3 +138,15 @@ replay activation, hardware/camera/serial access, physical motion, network or
 download, external compute, Brev, physical transfer, promotion, destructive
 operation, or R1 activation is granted. T20.43 may open only after T20.42 has a
 separately reviewed verified boundary.
+
+## Accepted implementation boundary
+
+Implementation `23cb5fb7a9d5739db869cce7f457be05791ad032` is
+exact on origin. Construction spec `b58a6b31...` freezes 119 unique training
+candidates and nine disjoint fresh-held-out specifications while preserving
+the exact ten-episode T20.23 base and seeds 6-7 exclusions. Admission fixture
+`b7b1eb77...` proves base-once plus 64-new-success membership and training-only
+MEAN_STD inputs. Preflight `5ff8c5cc...` remains `generation_ready=false`.
+Reviewer 286 accepts only the contract implementation and routes next to a
+fresh generation-authority design/review boundary; no episode generation or
+dataset materialization has run.

@@ -4807,8 +4807,15 @@
       "latest_verified_brief_id": null,
       "review_decision_id": null,
       "source_commit": "e9d0507ce7c79ed77997d1c2334db9a14c6fbf1d",
-      "result": "Brief 216 active for tests-first deterministic R0 dataset-construction and preflight contracts; no episode generation, model, optimizer, or hardware action authorized at this boundary",
-      "authority_granted": ["read_verified_t17_5b_t20_18_t20_23_sources", "activate_brief_216", "implement_and_fixture_test_r0_construction_preflight_contract"],
+      "implementation_commits": ["23cb5fb7a9d5739db869cce7f457be05791ad032"],
+      "implementation_review_decision_id": "286",
+      "result": "Reviewer 286 accepts the deterministic R0 construction, admission-fixture, and fail-closed preflight implementation; 119 training candidates and 9 fresh held-out specs are frozen, while generation_ready remains false",
+      "implementation_artifacts": {
+        "construction_spec": {"path":"configurations/robot_lab/t20_42_r0_construction_spec.json","schema_version":"scenesmith.t20_42_r0_construction_spec.v1","identity_sha256":"b58a6b31d0a3d892cfce8e319c4736d2da9aab2864663a5b2fc89c752e221458","file_sha256":"accb216dc17165c5cdc1ad01cd9173fa8838590325a16abd3020c4230a26d86a","size_bytes":115780,"training_candidate_count":119,"fresh_held_out_candidate_count":9},
+        "admission_fixture": {"path":"configurations/robot_lab/t20_42_r0_admission_fixture.json","schema_version":"scenesmith.t20_42_r0_dataset_admission_fixture.v1","identity_sha256":"b7b1eb7746cf3736a12ae7f0fa3e7bffdf58a92cf702d8d7648366e7350553ba","file_sha256":"ee5ff97f85b2e117c34d2c8ec0e54b5081393cbb9a09321c30728488e5657e06","size_bytes":33107,"fixture_training_episode_count":74},
+        "construction_preflight": {"path":"configurations/robot_lab/t20_42_r0_construction_preflight.json","schema_version":"scenesmith.t20_42_r0_construction_preflight.v1","identity_sha256":"5ff8c5cca2abfe3ceb2b15296fb065c66ff416b98888eb3dba0a1a9074136250","file_sha256":"e7558a46126e9e6ecd5018f5ba305af7961e1e73e0c23bcd07de57b85e39fff6","size_bytes":2532,"generation_ready":false}
+      },
+      "authority_granted": ["read_verified_t17_5b_t20_18_t20_23_sources", "activate_brief_216", "implement_and_fixture_test_r0_construction_preflight_contract", "r0_construction_preflight_contract_valid", "r0_dataset_admission_fixture_valid"],
       "authority_not_granted": ["r0_episode_generation_execution","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","checkpoint_creation","learned_policy_rollout","gate_c_execution","threshold_change","archive_replay","hardware","camera_access","serial_access","physical_motion","network_access","external_compute","brev_compute","physical_transfer","promotion","destructive_operation","r1_activation"]
     },
     "T19.0": {

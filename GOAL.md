@@ -93,6 +93,13 @@ outside training and MEAN_STD statistics. No R0 generation may run before the
 implementation is reviewed on origin and a fresh central decision, preflight,
 and one-use permit agree. T19.2c remains a separate pending physical side lane
 and is not coupled to or required by R0.
+Implementation `23cb5fb` is now exact on origin and Reviewer 286 accepts its
+construction spec `b58a6b31...`, admission fixture `b7b1eb77...`, and
+fail-closed preflight `5ff8c5cc...`. The fixed set contains 119 training
+candidates and nine disjoint fresh-held-out specs; all initialization deltas
+remain zero and no physics randomization exists. This is not R0 generation:
+`generation_ready=false`, and a fresh central decision, runtime preflight,
+one-use permit, and separate pre-run review are still required.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
