@@ -1023,6 +1023,38 @@ def verify_tracked_result(
         raise ValueError("T20.36o tracked result rescore drifted")
 
 
+def decode_trajectory_matrix(
+    step: dict[str, Any], *, field: str
+) -> list[list[float]]:
+    """Decode one retained 50x32 float32 denoise matrix exactly."""
+    if field not in {"state", "learned_velocity"}:
+        raise ValueError("T20.36o unsupported trajectory matrix field")
+    encoded_field = f"{field}_f32le_base64"
+    digest_field = f"{field}_f32le_sha256"
+    encoded = step.get(encoded_field)
+    if not isinstance(encoded, str) or not encoded:
+        raise ValueError("T20.36o retained trajectory matrix is missing")
+    try:
+        raw = base64.b64decode(encoded, validate=True)
+    except (ValueError, TypeError) as error:
+        raise ValueError("T20.36o retained trajectory matrix is invalid") from error
+    expected_size = TARGET_HORIZON * MAXIMUM_ACTION_DIMENSIONS * 4
+    if (
+        len(raw) != expected_size
+        or hashlib.sha256(raw).hexdigest() != step.get(digest_field)
+    ):
+        raise ValueError("T20.36o retained trajectory matrix identity drifted")
+    values = struct.unpack(
+        f"<{TARGET_HORIZON * MAXIMUM_ACTION_DIMENSIONS}f", raw
+    )
+    if any(not math.isfinite(value) for value in values):
+        raise ValueError("T20.36o retained trajectory matrix is non-finite")
+    return [
+        list(values[offset : offset + MAXIMUM_ACTION_DIMENSIONS])
+        for offset in range(0, len(values), MAXIMUM_ACTION_DIMENSIONS)
+    ]
+
+
 def build_failure(
     *,
     permit: dict[str, Any],

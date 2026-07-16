@@ -145,3 +145,12 @@ objective ratio still passes. Complete tensors and 500 denoise records are
 tracked under receipt `1154d524...`, and the tracked-only verifier reconstructs
 the result without the ignored run summary. Reviewer 271 routes only to a
 separate bounded optimizer authority; no optimizer or Gate C authority exists.
+
+## Verified Optimizer-Spec Implementation
+
+The model-free compiler now decodes the retained float32 paths, reproduces
+start-zero normalized target `b7c73491...`, constructs the frozen 250-example
+manifest `1a7e3202...`, and rematerializes every derived-noise hash. The
+prospective signed spec is `50e0569d...`. Reviewer 272 verifies implementation
+only and requires commit/push/origin confirmation before the spec artifact is
+written. No model or optimizer action exists.

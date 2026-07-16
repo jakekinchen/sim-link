@@ -1055,6 +1055,10 @@ all 50 decoded chunks and 500 denoise records, reproduces all start-zero and
 repeat hashes, but passes only 3/5 start-zero probes and 0/5 at every later
 start. Reviewer 271 routes next to separate bounded optimizer authority after
 this complete tracked result is remotely preserved. Gate C remains closed.
+The retained-path compiler now reconstructs all 250 frozen correction examples,
+matches start-zero normalized target `b7c73491...`, and produces prospective
+spec `50e0569d...` without a model. Reviewer 272 requires remote preservation
+before materializing that optimizer spec; no optimizer authority exists yet.
 
 ## Durable State
 

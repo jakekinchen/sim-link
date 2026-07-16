@@ -15,6 +15,7 @@ from scenesmith.robot_lab.t20_36o_baseline_capture import (
     build_baseline_permit,
     build_runtime_preflight,
     score_action_tensor,
+    decode_trajectory_matrix,
     verify_tensor_artifact,
     verify_trajectory_artifact,
     verify_result,
@@ -285,6 +286,10 @@ class T2036oBaselineCaptureContractTest(unittest.TestCase):
             trajectory["matrix_encoding"],
             "base64_float32_little_endian_c_order",
         )
+        decoded_state = decode_trajectory_matrix(
+            trajectory["rows"][0]["steps"][0], field="state"
+        )
+        self.assertEqual(decoded_state, [[0.0] * 32 for _ in range(50)])
         thresholds = {
             phase: {joint: 0.1 for joint in (
                 "shoulder_pan",
