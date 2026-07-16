@@ -26,6 +26,7 @@ in the same commit as the work.
 | ST15E | World-first Studio Operations canvas and runtime-event projection | pending | blocked by ST15D; interactive 3D actors, lifecycle motion, spatial HUD, replay timeline, and inspector drawer; operational stream stays separate from signed evidence |
 | ST15F | End-to-end replay/idempotency/staleness demo and proof package | pending | blocked by ST15E; browser demo, restart/replay equality, regression gate, documented limits, scoped commits, and remote preservation |
 | ST16 | Foundry Stage visual shell reframe over existing read-only artifacts | done | world-first home, always-on selectable 3D workcell, camera presets/sweep, real replay projection/transport, mission rail, spatial workflow ribbon, responsive proof; no new server mutation |
+| ST17 | Full-bleed foundry world and spatial task projection | in_progress | remove the dashboard frame, compact the Foundry shell, animate real cube-to-tray paths, float evidence/replay instruments over the world, retract mission details; no new server mutation |
 
 Rules: never touch governed paths (see GOAL.md), never push to
 `codex/pi05-autolearn-loop`, commit small and often to `studio/app-shell`.
@@ -426,3 +427,59 @@ must not be the dominant first impression.
   fast-refresh advisory; all 6 server unit tests pass; live status, workcell,
   and bounded event-registry API reads pass. No server route or write action
   changed.
+
+## ST17 - Full-Bleed Foundry World
+
+ST16 made the workcell the largest panel, but the resulting composition still
+read as a dashboard containing a visualizer: permanent wide navigation, page
+heading, stage frame, right status column, bottom dock, and separate evidence
+panel all competed with the robot world. ST17 treats that operator feedback as
+a real acceptance failure and removes the remaining frame.
+
+### Design contract
+
+**Subject:** the SceneSmith simulation foundry. **Audience:** an operator or
+reviewer trying to understand what world is compiled, what the task means
+spatially, what was observed, and where the evidence lives. **Single job:**
+make the current world understandable before asking the operator to read.
+
+Palette remains source-specific rather than ornamental: void graphite
+`#070a0e`, instrument cyan `#53d7e5`, task amber `#ffb454`, replay violet
+`#9b91ff`, safety mint `#4be39d`, and blueprint chalk `#ecf4ff`. Archivo stays
+the restrained display face; IBM Plex Mono remains the instrument/evidence
+face.
+
+```text
++----+---------------------------------------------------------------+
+| ◆  | mission / task prompt                         proof + drawer  |
+| ╎  |                                                               |
+| ▶  |                  FULL-BLEED 3D WORLD                           |
+| ⌁  |       cube  ---- animated task path ---->  matching tray      |
+| ▦  |                                                               |
+| ✦  | camera instruments                  scene / replay launcher   |
+| ⌾  | evidence observation waveform ------------------------------> |
++----+---------------------------------------------------------------+
+```
+
+The signature element is a set of animated, color-matched task-flow paths
+derived from the compiled scene's real cube and tray transforms. They are not
+telemetry and must never imply an executed motion. The visual risk is the
+full-bleed world beneath floating instruments; restraint comes from removing
+the page title, card borders, permanent mission column, and decorative panels.
+
+### Acceptance
+
+1. At normal laptop width, the 3D world or recorded replay occupies nearly all
+   space to the right of a compact navigation rail; no page header, footer,
+   permanent mission column, or below-stage card grid remains on `/`.
+2. Each color-matched cube/tray pair visible in the compiled XML receives a
+   labelled route and animated packet/rings in the Three.js world. It is
+   explicitly labelled as a task plan, not an executed trajectory.
+3. Mission detail is closed by default and opens as a reversible overlay.
+   Current slice, simulation-only proof, replay launch, scene selection,
+   camera controls, and Event Ledger access remain visible without it.
+4. Replay uses the same full-bleed stage with transport and provenance docked
+   over the recording instead of consuming separate stacked rows.
+5. Desktop and narrow-laptop screenshots show a coherent world-first
+   hierarchy; keyboard focus, reduced motion, live API data, console checks,
+   production build, lint, and server tests pass.

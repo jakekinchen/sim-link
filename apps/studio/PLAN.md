@@ -102,3 +102,6 @@ etc.) drive the studio programmatically — the "agent workspace" contract.
 - **S7:** visual shell reframe — Foundry Stage as the primary experience using
   live read-only workcells, mirrors, episode traces, and workflow evidence;
   document tables and JSON remain secondary workbenches.
+- **S8:** full-bleed foundry world — collapse home-page chrome into a compact
+  instrument rail, project real cube-to-tray task paths and workflow activity
+  over the world, and move mission/replay controls into retractable overlays.
