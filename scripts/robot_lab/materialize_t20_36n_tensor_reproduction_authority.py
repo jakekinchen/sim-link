@@ -41,6 +41,7 @@ from scenesmith.robot_lab.t20_36n_tensor_reproduction_authority import (  # noqa
 )
 from scripts.robot_lab.run_t20_36n_tensor_reproduction import (  # noqa: E402
     load_t20_35x_batch,
+    snapshot_file_tree,
 )
 
 
@@ -80,7 +81,8 @@ def main() -> int:
     dependencies = _ensure_exact_dependency_versions(
         sources["required_dependency_versions"]
     )
-    load_t20_35x_batch(sources=sources)
+    batch = load_t20_35x_batch(sources=sources)
+    snapshot_tree = snapshot_file_tree(batch["snapshot"])
 
     import torch
 
@@ -98,6 +100,8 @@ def main() -> int:
         mps_available=torch.backends.mps.is_available(),
         checkpoint_tree=_file_tree(Path(SOURCE_CHECKPOINT_ROOT)),
         dependency_versions=dependencies,
+        snapshot_revision=batch["snapshot"].name,
+        snapshot_tree=snapshot_tree,
         free_disk_bytes=shutil.disk_usage(REPO_ROOT).free,
         source_commit=source_commit,
         remote_source_commit=remote_commit,

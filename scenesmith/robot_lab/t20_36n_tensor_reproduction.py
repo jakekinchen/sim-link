@@ -85,6 +85,7 @@ def load_verified_sources(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     authority_sources = load_authority_sources(repo_root=root)
     spec = authority_sources["t20_35x_spec"]
     run = authority_sources["t20_35x_run"]
+    base_model_spec = authority_sources["base_model_spec"]
     source_runtime_preflight = load_strict_json(root / SOURCE_RUNTIME_PREFLIGHT_PATH)
     source_training_permit = load_strict_json(root / SOURCE_TRAINING_PERMIT_PATH)
     source_authority_identity = run["authority_decision_identity_sha256"]
@@ -107,6 +108,14 @@ def load_verified_sources(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     )
     if hashes != EXPECTED_ACTION_HASHES:
         raise ValueError("T20.36n source action hashes drifted")
+    snapshot = base_model_spec["model_snapshot"]
+    if (
+        snapshot.get("revision") != spec["model"]["revision"]
+        or snapshot.get("repo_id") != spec["model"]["repo_id"]
+        or not isinstance(snapshot.get("files"), list)
+    ):
+        raise ValueError("T20.36n base-model snapshot source drifted")
+    snapshot_tree = snapshot["files"]
     return {
         "checkpoint_identity_sha256": EXPECTED_CHECKPOINT_IDENTITY,
         "source_run_identity_sha256": EXPECTED_T20_35X_RUN_IDENTITY,
@@ -123,6 +132,11 @@ def load_verified_sources(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         "lerobot_stack_identity_sha256": spec["lerobot_stack_identity_sha256"],
         "batch_evidence_identity_sha256": spec["dataset_action_chunk_sha256"],
         "required_dependency_versions": spec["required_dependency_versions"],
+        "snapshot_revision": snapshot["revision"],
+        "snapshot_tree": snapshot_tree,
+        "snapshot_tree_identity_sha256": hashlib.sha256(
+            canonical_json_bytes(snapshot_tree)
+        ).hexdigest(),
         "source_run": run,
         "source_result": authority_sources["t20_35x_result"],
         "t20_35x_spec": spec,
@@ -141,6 +155,8 @@ def build_runtime_preflight(
     mps_available: bool,
     checkpoint_tree: list[dict[str, Any]],
     dependency_versions: dict[str, str],
+    snapshot_revision: str,
+    snapshot_tree: list[dict[str, Any]],
     free_disk_bytes: int,
     source_commit: str,
     remote_source_commit: str,
@@ -167,6 +183,8 @@ def build_runtime_preflight(
         or mps_available is not True
         or checkpoint_tree != sources.get("checkpoint_tree")
         or dependency_versions != sources.get("required_dependency_versions")
+        or snapshot_revision != sources.get("snapshot_revision")
+        or snapshot_tree != sources.get("snapshot_tree")
         or isinstance(free_disk_bytes, bool)
         or not isinstance(free_disk_bytes, int)
         or free_disk_bytes < MINIMUM_FREE_DISK_BYTES
@@ -208,6 +226,12 @@ def build_runtime_preflight(
             "checkpoint_tree": checkpoint_tree,
             "dependency_versions": dependency_versions,
             "offline_dependency_restore_only": True,
+            "snapshot_revision": snapshot_revision,
+            "snapshot_tree": snapshot_tree,
+            "snapshot_tree_identity_sha256": hashlib.sha256(
+                canonical_json_bytes(snapshot_tree)
+            ).hexdigest(),
+            "snapshot_files_hashed_without_tensor_deserialization": True,
             "checkpoint_bytes_hashed": True,
             "checkpoint_tensor_deserialized": False,
             "minimum_free_disk_bytes": MINIMUM_FREE_DISK_BYTES,
@@ -248,6 +272,8 @@ def verify_runtime_preflight(
         mps_available=payload.get("mps_available"),
         checkpoint_tree=payload.get("checkpoint_tree"),
         dependency_versions=payload.get("dependency_versions"),
+        snapshot_revision=payload.get("snapshot_revision"),
+        snapshot_tree=payload.get("snapshot_tree"),
         free_disk_bytes=payload.get("free_disk_bytes"),
         source_commit=payload.get("source_commit"),
         remote_source_commit=payload.get("remote_source_commit"),
@@ -287,6 +313,10 @@ def build_inference_permit(
             "authority_decision_identity_sha256": authority_identity,
             "runtime_preflight_identity_sha256": runtime_preflight[
                 "identity_sha256"
+            ],
+            "snapshot_revision": runtime_preflight["snapshot_revision"],
+            "snapshot_tree_identity_sha256": runtime_preflight[
+                "snapshot_tree_identity_sha256"
             ],
             "required_source_commit": runtime_preflight["source_commit"],
             "authorized_attempt_count": 1,
@@ -364,6 +394,10 @@ def build_attempt_marker(
             ],
             "source_run_identity_sha256": permit["source_run_identity_sha256"],
             "frozen_gate_identity_sha256": permit["frozen_gate_identity_sha256"],
+            "snapshot_revision": permit["snapshot_revision"],
+            "snapshot_tree_identity_sha256": permit[
+                "snapshot_tree_identity_sha256"
+            ],
             "authority_decision_identity_sha256": authority_identity,
             "inference_permit_identity_sha256": permit["identity_sha256"],
             "source_commit": source_commit,
@@ -566,6 +600,10 @@ def build_run_summary(
             "source_checkpoint_identity_sha256": sources[
                 "checkpoint_identity_sha256"
             ],
+            "snapshot_revision": permit["snapshot_revision"],
+            "snapshot_tree_identity_sha256": permit[
+                "snapshot_tree_identity_sha256"
+            ],
             "frozen_gate_identity_sha256": sources["frozen_gate_identity_sha256"],
             "retained_objective_ratio": retained_ratio,
             "retained_objective_ratio_threshold": objective_threshold,
@@ -635,6 +673,10 @@ def build_result(
             ],
             "source_checkpoint_identity_sha256": sources[
                 "checkpoint_identity_sha256"
+            ],
+            "snapshot_revision": run["snapshot_revision"],
+            "snapshot_tree_identity_sha256": run[
+                "snapshot_tree_identity_sha256"
             ],
             "frozen_gate_identity_sha256": sources["frozen_gate_identity_sha256"],
             "all_expected_hashes_reproduced": run[
@@ -746,6 +788,9 @@ def verify_tracked_result(
         != sources["checkpoint_identity_sha256"]
         or result.get("frozen_gate_identity_sha256")
         != sources["frozen_gate_identity_sha256"]
+        or result.get("snapshot_revision") != sources["snapshot_revision"]
+        or result.get("snapshot_tree_identity_sha256")
+        != sources["snapshot_tree_identity_sha256"]
         or tensor_artifact.get("tensor_count") != 10
         or tensor_artifact.get("shape_per_tensor")
         != [TARGET_HORIZON, len(JOINT_NAMES)]

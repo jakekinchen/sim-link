@@ -8,6 +8,7 @@ import copy
 import gc
 import hashlib
 import os
+import random
 import subprocess
 import sys
 
@@ -44,6 +45,7 @@ from scenesmith.robot_lab.t20_35c_expert_only_capacity_ceiling import (  # noqa:
 from scenesmith.robot_lab.t20_35x_physical_gate_joint_weighted_correction import (  # noqa: E402
     ACTIVE_ACTION_DIMENSIONS,
     MAXIMUM_ACTION_DIMENSIONS,
+    TRAINING_SEED,
 )
 from scenesmith.robot_lab.t20_36n_tensor_reproduction import (  # noqa: E402
     ATTEMPT_PATH,
@@ -129,6 +131,24 @@ def load_t20_35x_batch(*, sources):
     }
 
 
+def snapshot_file_tree(snapshot: Path) -> list[dict[str, object]]:
+    """Hash the exact frozen base files without tensor deserialization."""
+    rows = []
+    for path in sorted(item for item in Path(snapshot).rglob("*") if item.is_file()):
+        digest = hashlib.sha256()
+        with path.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(64 * 1024 * 1024), b""):
+                digest.update(chunk)
+        rows.append(
+            {
+                "path": path.relative_to(snapshot).as_posix(),
+                "sha256": digest.hexdigest(),
+                "size_bytes": path.stat().st_size,
+            }
+        )
+    return rows
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--verify", action="store_true")
@@ -177,6 +197,16 @@ def main() -> int:
     if stack["identity_sha256"] != preflight["lerobot_stack_identity_sha256"]:
         raise ValueError("T20.36n LeRobot stack drifted after preflight")
     batch_source = load_t20_35x_batch(sources=sources)
+    snapshot_tree = snapshot_file_tree(batch_source["snapshot"])
+    snapshot_identity = hashlib.sha256(
+        canonical_json_bytes(snapshot_tree)
+    ).hexdigest()
+    if (
+        snapshot_tree != preflight["snapshot_tree"]
+        or snapshot_identity != preflight["snapshot_tree_identity_sha256"]
+        or batch_source["snapshot"].name != preflight["snapshot_revision"]
+    ):
+        raise ValueError("T20.36n base-model snapshot drifted after preflight")
     current_commit = _git("rev-parse", "HEAD")
     attempt = build_attempt_marker(
         permit=permit,
@@ -274,6 +304,9 @@ def _execute(
     config.num_inference_steps = spec["evaluation"]["num_inference_steps"]
     config.train_expert_only = True
     config.freeze_vision_encoder = True
+    torch.manual_seed(TRAINING_SEED)
+    np.random.seed(TRAINING_SEED)
+    random.seed(TRAINING_SEED)
     state["model_constructed"] = True
     policy = make_policy(config, ds_meta=batch_source["dataset"].meta).to("mps")
     all_named = list(policy.named_parameters())
@@ -337,11 +370,24 @@ def _execute(
     state["stage"] = "tensor_reproduction"
     rows = []
     for index, seed in enumerate(permit["inference_seeds"]):
+        expected_noise_hash = spec["evaluation"][
+            "base_noise_sha256_by_seed"
+        ][index]
         first_physical = _decode_pi05(
-            policy, postprocessor, processed_observation, torch, seed=seed
+            policy,
+            postprocessor,
+            processed_observation,
+            torch,
+            seed=seed,
+            expected_noise_hash=expected_noise_hash,
         )
         second_physical = _decode_pi05(
-            policy, postprocessor, processed_observation, torch, seed=seed
+            policy,
+            postprocessor,
+            processed_observation,
+            torch,
+            seed=seed,
+            expected_noise_hash=expected_noise_hash,
         )
         rows.append(
             {
@@ -384,7 +430,15 @@ def _execute(
     return result
 
 
-def _decode_pi05(policy, postprocessor, processed_observation, torch, *, seed):
+def _decode_pi05(
+    policy,
+    postprocessor,
+    processed_observation,
+    torch,
+    *,
+    seed,
+    expected_noise_hash,
+):
     torch.manual_seed(seed)
     policy.reset()
     noise_shape = (
@@ -399,6 +453,14 @@ def _decode_pi05(policy, postprocessor, processed_observation, torch, *, seed):
         device="mps",
     ).view(1, 1, MAXIMUM_ACTION_DIMENSIONS)
     base_noise = policy.model.sample_noise(noise_shape, "mps")
+    base_noise_values = (
+        base_noise.detach().cpu().float().numpy().astype(float).tolist()
+    )
+    if (
+        hashlib.sha256(canonical_json_bytes(base_noise_values)).hexdigest()
+        != expected_noise_hash
+    ):
+        raise ValueError("T20.36n base noise failed exact reproduction")
     actions = policy.predict_action_chunk(
         processed_observation,
         noise=base_noise * mask,

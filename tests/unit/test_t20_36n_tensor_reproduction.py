@@ -28,6 +28,10 @@ class T2036nTensorReproductionTest(unittest.TestCase):
             "lerobot_stack_identity_sha256": "3" * 64,
             "batch_evidence_identity_sha256": "4" * 64,
             "required_dependency_versions": {"pyarrow": "25.0.0"},
+            "snapshot_revision": "7" * 40,
+            "snapshot_tree": [
+                {"path": "model.safetensors", "sha256": "8" * 64, "size_bytes": 2}
+            ],
         }
 
     def test_preflight_and_permit_are_inference_only_and_marker_first(self) -> None:
@@ -38,6 +42,8 @@ class T2036nTensorReproductionTest(unittest.TestCase):
             mps_available=True,
             checkpoint_tree=self.sources["checkpoint_tree"],
             dependency_versions=self.sources["required_dependency_versions"],
+            snapshot_revision=self.sources["snapshot_revision"],
+            snapshot_tree=self.sources["snapshot_tree"],
             free_disk_bytes=10_000_000_000,
             source_commit="6" * 40,
             remote_source_commit="6" * 40,
@@ -69,6 +75,8 @@ class T2036nTensorReproductionTest(unittest.TestCase):
             mps_available=True,
             checkpoint_tree=self.sources["checkpoint_tree"],
             dependency_versions=self.sources["required_dependency_versions"],
+            snapshot_revision=self.sources["snapshot_revision"],
+            snapshot_tree=self.sources["snapshot_tree"],
             free_disk_bytes=10_000_000_000,
             source_commit="6" * 40,
             remote_source_commit="7" * 40,
@@ -106,6 +114,8 @@ class T2036nTensorReproductionTest(unittest.TestCase):
             mps_available=True,
             checkpoint_tree=self.sources["checkpoint_tree"],
             dependency_versions=self.sources["required_dependency_versions"],
+            snapshot_revision=self.sources["snapshot_revision"],
+            snapshot_tree=self.sources["snapshot_tree"],
             free_disk_bytes=10_000_000_000,
             source_commit="6" * 40,
             remote_source_commit="6" * 40,
@@ -127,6 +137,8 @@ class T2036nTensorReproductionTest(unittest.TestCase):
                 "tracked_tensor_artifact_path": "configurations/robot_lab/fake.json",
                 "target_action_sha256": "9" * 64,
                 "target_action": [[0.0] * 6 for _ in range(50)],
+                "snapshot_revision": self.sources["snapshot_revision"],
+                "snapshot_tree_identity_sha256": "a" * 64,
                 "amended_gate_b_passed": False,
                 "uniform_gate_b_passed": True,
                 "all_expected_hashes_reproduced": True,

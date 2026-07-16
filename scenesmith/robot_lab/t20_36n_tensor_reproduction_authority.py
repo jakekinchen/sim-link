@@ -28,6 +28,9 @@ from scenesmith.robot_lab.t20_23_simulation_training_authority import (
     DECISION_PATH as T20_23_DECISION_PATH,
     REQUEST_PATH as T20_23_REQUEST_PATH,
 )
+from scenesmith.robot_lab.t20_17_clean_base_preflight import (
+    TRAINING_SPEC_PATH as BASE_MODEL_SPEC_PATH,
+)
 from scenesmith.robot_lab.t20_35x_physical_gate_joint_weighted_correction import (
     RESULT_PATH as T20_35X_RESULT_PATH,
     SPEC_PATH as T20_35X_SPEC_PATH,
@@ -90,6 +93,7 @@ EXPECTED_FROZEN_SCORE_IDENTITY = (
 def load_verified_sources(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     root = Path(repo_root)
     paths = {
+        "base_model_spec": BASE_MODEL_SPEC_PATH,
         "t20_35x_spec": T20_35X_SPEC_PATH,
         "t20_35x_run": T20_35X_RUN_PATH,
         "t20_35x_result": T20_35X_RESULT_PATH,
@@ -131,6 +135,10 @@ def load_verified_sources(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     if (
         spec.get("identity_sha256")
         != "96efc6d35115126268684c91346b7388077342c573e458b7e708e98714113cfd"
+        or sources["base_model_spec"].get("identity_sha256")
+        != "8898aeede6723c76f7bc2c38c8e922587a95fb14288cb672a855402b187d7df9"
+        or sources["base_model_spec"].get("model_snapshot", {}).get("revision")
+        != spec.get("model", {}).get("revision")
         or run.get("identity_sha256") != EXPECTED_T20_35X_RUN_IDENTITY
         or result.get("identity_sha256") != EXPECTED_T20_35X_RESULT_IDENTITY
         or run.get("checkpoint_identity_sha256") != EXPECTED_CHECKPOINT_IDENTITY
@@ -178,6 +186,11 @@ def build_owner_grant(
             "source_result_ref": artifact_ref(
                 path=T20_35X_RESULT_PATH,
                 payload=sources["t20_35x_result"],
+                repo_root=root,
+            ),
+            "base_model_spec_ref": artifact_ref(
+                path=BASE_MODEL_SPEC_PATH,
+                payload=sources["base_model_spec"],
                 repo_root=root,
             ),
             "frozen_gate_ref": artifact_ref(
@@ -264,6 +277,11 @@ def build_production_authority(
             payload=sources["t20_35x_result"],
             repo_root=root,
         ),
+        "base_model_spec": artifact_ref(
+            path=BASE_MODEL_SPEC_PATH,
+            payload=sources["base_model_spec"],
+            repo_root=root,
+        ),
         "frozen_gate": artifact_ref(
             path=FROZEN_GATE_PATH,
             payload=sources["frozen_gate"],
@@ -285,11 +303,13 @@ def build_production_authority(
         "structural_contract_valid": [
             refs["inherited_authority"],
             refs["t20_35x_spec"],
+            refs["base_model_spec"],
             refs["frozen_gate"],
         ],
         "executable_stack_valid": [
             refs["t20_35x_run"],
             refs["t20_35x_result"],
+            refs["base_model_spec"],
         ],
         "coordinate_contract_valid": [refs["t20_35x_spec"], refs["frozen_gate"]],
         "normalization_contract_valid": [refs["t20_35x_spec"], refs["t20_35x_run"]],
