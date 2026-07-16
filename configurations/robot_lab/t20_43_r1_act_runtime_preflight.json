@@ -1,0 +1,93 @@
+{
+  "attempt_marker_exists": false,
+  "authority_artifacts_materialized": false,
+  "authority_decision_identity_sha256": "6da74892acd04b572dba1f7be338d5159eda5e52f0b132b1924e5a6e639bac57",
+  "authority_request_identity_sha256": "79e190dd3c2714867e2797067e8ac5f0ef2a55382bb889db53b5da5cdec5406c",
+  "branch": "codex/pi05-autolearn-loop",
+  "brev_compute_started": false,
+  "cached_backbone_file_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+  "cached_backbone_size_bytes": 46830571,
+  "camera_accessed": false,
+  "dependencies": {
+    "datasets": "4.8.5",
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.5",
+    "numpy": "2.2.6",
+    "pillow": "12.3.0",
+    "pyarrow": "25.0.0",
+    "python": "3.12.12",
+    "torch": "2.11.0",
+    "torchvision": "0.26.0"
+  },
+  "dependency_fallback_enabled": false,
+  "external_compute_started": false,
+  "free_disk_bytes": 67342274560,
+  "gate_a_identity_sha256": "90217d2b2e91c95d4c3dd3b0538dc215bf5042b00b5e22313be4b09bb2e63b8a",
+  "gate_c_executed": false,
+  "hardware_accessed": false,
+  "identity_sha256": "860fabd7e4788fb6592aa57fe0d72d78b6ad53be2dc00173f2a9240447f95d46",
+  "learned_policy_rollout": false,
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "mps_available": true,
+  "network_accessed": false,
+  "network_enabled": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "origin_contains_source_commit": true,
+  "output_path_state": {
+    "configurations/robot_lab/t20_43_r1_act_attempt.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43_r1_act_pre_run_acceptance.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43_r1_act_result.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43_r1_act_retention_receipt.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43_r1_act_scorecard.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_43_r1_act_run_001": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_43_r1_act_run_001/checkpoints": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_43_r1_act_run_001/mirrors": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_43_r1_act_run_001/rollouts": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_43_r1_act_run_001/run_summary.json": {
+      "exists": false,
+      "is_symlink": false
+    }
+  },
+  "owner_grant_identity_sha256": "60b3b8cb1c8b5975057d0e54ea16738500495cb466d09a1b384b0bd7b401295a",
+  "physical_actuation": false,
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "r2_activated": false,
+  "schema_version": "scenesmith.t20_43_r1_act_runtime_preflight.v1",
+  "scoped_dirty_paths": [],
+  "serial_accessed": false,
+  "source_commit": "9a03a86c05a00afbdb1d37878fd78e07a9b4c22b",
+  "spec_identity_sha256": "b3a510f84402d6574333800b73c3d95f5dcfb24af7e77740985f2f3c997449d2",
+  "task_id": "T20.43"
+}
