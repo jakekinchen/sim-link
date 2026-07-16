@@ -1,0 +1,302 @@
+{
+  "artifact_count_excluding_manifest_files": 40,
+  "artifacts": [
+    {
+      "dimensions_mm": null,
+      "file": "ASSEMBLY.md",
+      "sha256": "c5499df9bec1128fb936d5b1d206d1653070b76ed8e68f4298e01a3bcb9b8014",
+      "size_bytes": 2123
+    },
+    {
+      "dimensions_mm": null,
+      "file": "BOM.md",
+      "sha256": "f37cc0312ef22724b43e453442511a78740bb54a01ae902815b934e8d9f02508",
+      "size_bytes": 753
+    },
+    {
+      "dimensions_mm": null,
+      "file": "CHANGELOG.md",
+      "sha256": "7c7e43cdf64634a9a7bc2ea2ade292dfaaa2834dfc8200bf91a92c3e62cd4dc5",
+      "size_bytes": 942
+    },
+    {
+      "dimensions_mm": null,
+      "file": "DESIGN_VALIDATION.md",
+      "sha256": "952aee81d27a4b44df03220a74e62bc09b27fee8e9f0d8d0793c72489ee7ecb2",
+      "size_bytes": 5062
+    },
+    {
+      "dimensions_mm": null,
+      "file": "QC_CHECKLIST.md",
+      "sha256": "58bfb1b34c438cec33cbf547386f6f4816308311d9db23f975b2059eac177592",
+      "size_bytes": 1096
+    },
+    {
+      "dimensions_mm": null,
+      "file": "README_PRINTING.md",
+      "sha256": "8b598a249088a999f46cc0eddb8b083c63f8cf2ecd54e2e22a0377db79b2c6c4",
+      "size_bytes": 3495
+    },
+    {
+      "dimensions_mm": null,
+      "file": "WCW-1A_AprilTag36h11_labels_1to1.pdf",
+      "sha256": "87a94cd8d093a4ef829273067cff0f22df8d3cce8c63874fc3b8855a05ecff8c",
+      "size_bytes": 106784
+    },
+    {
+      "dimensions_mm": null,
+      "file": "renders/WCW-1A_all_cartridges.png",
+      "sha256": "89e0952c05e7a55e6eb3321c24de7cd5e5620393561011a97a99150b0f3456f3",
+      "size_bytes": 1094396
+    },
+    {
+      "dimensions_mm": null,
+      "file": "renders/WCW-1A_assembled.png",
+      "sha256": "a3070af55b288bc2d3dd514be1120419839d72148f9d5f94e1bdbca8786f6594",
+      "size_bytes": 1322513
+    },
+    {
+      "dimensions_mm": null,
+      "file": "renders/WCW-1A_ball_retention_section.png",
+      "sha256": "e9a1f3d11ddf22dfe58ab7ed04679a4bff01f2916fab75edb304ce5e22dfa8df",
+      "size_bytes": 1263482
+    },
+    {
+      "dimensions_mm": null,
+      "file": "renders/WCW-1A_exploded.png",
+      "sha256": "fa4a5bf74929770bdf0bfba56222cba0b9e879da45b0c7ddbf0f80f52b251b3f",
+      "size_bytes": 1409040
+    },
+    {
+      "dimensions_mm": null,
+      "file": "renders/WCW-1A_tag_placement_diagram.png",
+      "sha256": "647585c36330e110e1e8159d5838b44a637dc43d9d4e17577e9a86f037b020dc",
+      "size_bytes": 48540
+    },
+    {
+      "dimensions_mm": null,
+      "file": "source/SOURCE_PROVENANCE.md",
+      "sha256": "f450a416755a8637817915d0b6ea436e4154df5672f05d47a292d3cad431dacb",
+      "size_bytes": 312
+    },
+    {
+      "dimensions_mm": null,
+      "file": "source/WCW-1A_R1_parameters.json",
+      "sha256": "c6a27aadefd40b9cfda53aeac0348d1a7255c0851daf76e42732b06863bdb5ff",
+      "size_bytes": 2795
+    },
+    {
+      "dimensions_mm": null,
+      "file": "source/build_wcw1a_release.py",
+      "sha256": "8e4637416e81f01a1d79b6da1a1a0c937119f110d31937155bc37e36b8921698",
+      "size_bytes": 44467
+    },
+    {
+      "dimensions_mm": null,
+      "file": "source/wcw1a_cad.py",
+      "sha256": "26f0d48fb2aa8d73d2d455f4fa682a103250b80462656a8d28a9ef760d074936",
+      "size_bytes": 29291
+    },
+    {
+      "dimensions_mm": null,
+      "file": "source/wcw1a_spec.py",
+      "sha256": "cad65ca128e801f3766bfeaec66128b4c6b48674ead03327bd9a0fa091c7eadf",
+      "size_bytes": 7353
+    },
+    {
+      "dimensions_mm": [
+        1.6,
+        49.9,
+        24.0
+      ],
+      "file": "stl/WCW-1A_R1_C0_ball-retainer_exterior-face-down.stl",
+      "sha256": "55a62bddd8a5caf7cc70f2fc9b08798f575e3ee05873cf1662e579902aac081f",
+      "size_bytes": 82584
+    },
+    {
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "file": "stl/WCW-1A_R1_C0_carrier_print-minus-x-face-down.stl",
+      "sha256": "a1d1aac1122064dcd24b498fc389dee72c018f14b809d743be3fc6244c53c890",
+      "size_bytes": 15184
+    },
+    {
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "file": "stl/WCW-1A_R1_C1_ball-retainer_exterior-face-down.stl",
+      "sha256": "0045531019e4ccdd445e42c92497c5a89c250527c3a68287713aa8824b86d055",
+      "size_bytes": 117884
+    },
+    {
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "file": "stl/WCW-1A_R1_C1_carrier_print-minus-x-face-down.stl",
+      "sha256": "4a3789715275915e2d40ac489ed2daa0677eb3374ac2ac231b21ae12983c587c",
+      "size_bytes": 34884
+    },
+    {
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "file": "stl/WCW-1A_R1_C2_ball-retainer_exterior-face-down.stl",
+      "sha256": "978040bf1d72f116f4255c98212a55d1e6aae8d5d1089963f14bd45efb76225e",
+      "size_bytes": 131284
+    },
+    {
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "file": "stl/WCW-1A_R1_C2_carrier_print-minus-x-face-down.stl",
+      "sha256": "5519d54a4ece4d11432d6b3bd4c51e4bd8bb6779d17ebba623e4527608d675b8",
+      "size_bytes": 35184
+    },
+    {
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "file": "stl/WCW-1A_R1_C3_ball-retainer_exterior-face-down.stl",
+      "sha256": "aa98297fb6008c3df67c924b5191cd9763e33a3ae7c0b8bf2e887b5d7b73864d",
+      "size_bytes": 166384
+    },
+    {
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "file": "stl/WCW-1A_R1_C3_carrier_print-minus-x-face-down.stl",
+      "sha256": "718e47046b653c1960613fbbd82ce3f3349b285e62c88a524b5a70048a62d598",
+      "size_bytes": 54084
+    },
+    {
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "file": "stl/WCW-1A_R1_C4_ball-retainer_exterior-face-down.stl",
+      "sha256": "21f2122cc66fff699c1069db8aabb71c6ea21aa545d98ca91df7f51a42d78f1e",
+      "size_bytes": 180084
+    },
+    {
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "file": "stl/WCW-1A_R1_C4_carrier_print-minus-x-face-down.stl",
+      "sha256": "2eddf3ea2d1af13c526e3302947682d88c68ee7af5c6ed6d7b82eab789a49791",
+      "size_bytes": 55184
+    },
+    {
+      "dimensions_mm": [
+        90.0,
+        38.0,
+        4.0
+      ],
+      "file": "stl/WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl",
+      "sha256": "a32926234143b41ffffa2d898feae9507cb8ccc012410e1d67523f5201e89d10",
+      "size_bytes": 267084
+    },
+    {
+      "dimensions_mm": [
+        40.0,
+        60.0,
+        65.0
+      ],
+      "file": "stl/WCW-1A_R1_body_top-down.stl",
+      "sha256": "e6593655be627c3b22ed9edc68a46ebe7b1c0ed19842e2e6544200cbb2afe9af",
+      "size_bytes": 8984
+    },
+    {
+      "dimensions_mm": [
+        39.400002,
+        59.400002,
+        6.1
+      ],
+      "file": "stl/WCW-1A_R1_bottom-lid_outer-face-down.stl",
+      "sha256": "38b53e2ade9b97c73e503a26db850e5c515481b5f0a7bde276b6e449ea7e94c9",
+      "size_bytes": 23884
+    },
+    {
+      "dimensions_mm": null,
+      "file": "tags/WCW-1A_tag36h11_ID0_30mm.png",
+      "sha256": "ec9aedf16e36b6e79c9e1b82fd2031698820352c0a7a8aae66f79efa21478a2c",
+      "size_bytes": 3076
+    },
+    {
+      "dimensions_mm": null,
+      "file": "tags/WCW-1A_tag36h11_ID1_30mm.png",
+      "sha256": "9f127463218117cd0304e54abf84a72b18e7cdf5544b4ac1032ee7417907f05b",
+      "size_bytes": 3082
+    },
+    {
+      "dimensions_mm": null,
+      "file": "tags/WCW-1A_tag36h11_ID2_30mm.png",
+      "sha256": "69a87258b4766041250cf315a16edd28142f6d5af8ddebf274e531c4a67ffee5",
+      "size_bytes": 3082
+    },
+    {
+      "dimensions_mm": null,
+      "file": "tags/WCW-1A_tag36h11_ID3_20mm.png",
+      "sha256": "6302bd6374406f7382496675697a3d008f6cf44cd2b0063393ea60307e3daf7d",
+      "size_bytes": 1710
+    },
+    {
+      "dimensions_mm": null,
+      "file": "tags/WCW-1A_tag36h11_ID4_20mm.png",
+      "sha256": "d073cf5b02c348733b74bb9d0058833b724a7f32abf7ada79250bc83cc09723d",
+      "size_bytes": 1713
+    },
+    {
+      "dimensions_mm": null,
+      "file": "validation/APRILTAG_VALIDATION.json",
+      "sha256": "c0a6e15e9609b31990c5f5720d7b50a7497de21d8bb8f6d2bab9d5e547a45051",
+      "size_bytes": 2937
+    },
+    {
+      "dimensions_mm": null,
+      "file": "validation/ASSEMBLY_VALIDATION.json",
+      "sha256": "3942a62c6d0c498cbe4472606b703439d61ff22d146020e62edd1dca9d06a683",
+      "size_bytes": 4859
+    },
+    {
+      "dimensions_mm": null,
+      "file": "validation/BLENDER_BUILD_VALIDATION.json",
+      "sha256": "759fa4c44f1e94705ae52c07cb71a4ec82c4e0c12832359d78c791bd14b599e4",
+      "size_bytes": 7140
+    },
+    {
+      "dimensions_mm": null,
+      "file": "validation/FINAL_GATE.json",
+      "sha256": "330b8d75e5c70daa3541336ac9dcf9d29ca126f58c3c7becef55431dbc308112",
+      "size_bytes": 419
+    },
+    {
+      "dimensions_mm": null,
+      "file": "validation/STL_VALIDATION.json",
+      "sha256": "c14bb489783a2262e4ff4438f3d64adca9c85269d9581747334bf162a14a1cc2",
+      "size_bytes": 21009
+    }
+  ],
+  "manifest_policy": "MANIFEST.json excludes itself and MANIFEST.sha256; MANIFEST.sha256 hashes MANIFEST.json and every listed artifact.",
+  "release": "WCW-1A-R1",
+  "schema_version": "scenesmith.wcw1a_release_manifest.v1",
+  "spec_identity_sha256": "14baa9dbb7813bc2b2961def7a4e0b065ea8ce675fce1b9457ea49eb4d70d3cd",
+  "units": "mm"
+}

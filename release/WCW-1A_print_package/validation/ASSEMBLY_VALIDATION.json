@@ -1,0 +1,180 @@
+{
+  "all_five_cartridges_ball_count": 6,
+  "assemblies": {
+    "C0": {
+      "ball_centers_body_frame_mm": [],
+      "ball_count": 0,
+      "center_of_mass_body_frame_mm": [
+        -0.32891205523007383,
+        -0.01990070072349214,
+        -8.722299603405704
+      ],
+      "center_of_mass_shift_from_C0_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "estimated_solid_printed_plus_nominal_ball_mass_g": 109.92646437135056
+    },
+    "C1": {
+      "ball_centers_body_frame_mm": [
+        [
+          0.0,
+          0.0,
+          -14.2
+        ]
+      ],
+      "ball_count": 1,
+      "center_of_mass_body_frame_mm": [
+        -0.48095426860880397,
+        -0.015326820366551945,
+        -9.698785106646232
+      ],
+      "center_of_mass_shift_from_C0_mm": [
+        -0.15204221337873014,
+        0.004573880356940197,
+        -0.9764855032405286
+      ],
+      "estimated_solid_printed_plus_nominal_ball_mass_g": 133.79875952012142
+    },
+    "C2": {
+      "ball_centers_body_frame_mm": [
+        [
+          0.0,
+          15.0,
+          -14.2
+        ]
+      ],
+      "ball_count": 1,
+      "center_of_mass_body_frame_mm": [
+        -0.4816294582920651,
+        2.6628718454826967,
+        -9.698588328832605
+      ],
+      "center_of_mass_shift_from_C0_mm": [
+        -0.15271740306199127,
+        2.6827725462061887,
+        -0.976288725426901
+      ],
+      "estimated_solid_printed_plus_nominal_ball_mass_g": 133.79291054681352
+    },
+    "C3": {
+      "ball_centers_body_frame_mm": [
+        [
+          0.0,
+          -11.0,
+          -14.2
+        ],
+        [
+          0.0,
+          11.0,
+          -14.2
+        ]
+      ],
+      "ball_count": 2,
+      "center_of_mass_body_frame_mm": [
+        -0.5875676392774486,
+        -0.011270118392106484,
+        -10.379744640342437
+      ],
+      "center_of_mass_shift_from_C0_mm": [
+        -0.25865558404737476,
+        0.008630582331385658,
+        -1.6574450369367337
+      ],
+      "estimated_solid_printed_plus_nominal_ball_mass_g": 157.66483143314838
+    },
+    "C4": {
+      "ball_centers_body_frame_mm": [
+        [
+          0.0,
+          -15.0,
+          -14.2
+        ],
+        [
+          0.0,
+          15.0,
+          -14.2
+        ]
+      ],
+      "ball_count": 2,
+      "center_of_mass_body_frame_mm": [
+        -0.5881101932316103,
+        -0.01040215579568178,
+        -10.37992774733078
+      ],
+      "center_of_mass_shift_from_C0_mm": [
+        -0.25919813800153646,
+        0.009498544927810361,
+        -1.657628143925077
+      ],
+      "estimated_solid_printed_plus_nominal_ball_mass_g": 157.65935672180962
+    }
+  },
+  "assembly_reversible_without_destroying_parts": true,
+  "balls_installable_after_printing": true,
+  "balls_retained_by_conical_seat_and_spring_retainer": true,
+  "configuration_coordinates_are_body_and_cartridge_frame": true,
+  "coordinate_convention": {
+    "origin": "outer_body_centroid",
+    "x": "grasp_thickness_40mm",
+    "y": "non_grasp_width_60mm",
+    "z": "height_65mm_up"
+  },
+  "fit_and_interference_results": {
+    "ball_to_pocket": {
+      "expected_ball_range_mm": [
+        19.8,
+        20.2
+      ],
+      "intentional_retainer_preload_mm": 0.2,
+      "minimum_diametral_clearance_mm": 0.6000000000000014,
+      "pocket_diameter_mm": 20.8,
+      "unintended_interference": false
+    },
+    "cartridge_to_body": {
+      "asymmetric_key_notch_clearance_mm": 0.4,
+      "unintended_interference": false,
+      "x_minus": 0.6000000000000014,
+      "x_plus": 1.1000000000000014,
+      "y_each_side": 0.40000000000000213
+    },
+    "lid_to_body": {
+      "intentional_detent_interference_each_side_mm": 0.15,
+      "plug_clearance_each_side_mm": 0.3500000000000014,
+      "unintended_interference": false
+    },
+    "lid_to_cartridge": {
+      "carrier_hard_stop_z_mm": -1.7,
+      "intentional_crush_rib_interference_mm": 0.3,
+      "unintended_interference": false
+    },
+    "retainer_to_carrier_rails": {
+      "intentional_edge_detent_interference_mm": 0.1,
+      "total_slide_clearance_mm": 0.2,
+      "unintended_interference": false
+    }
+  },
+  "minimum_material_mm": {
+    "C3_inter_pocket_web": 1.2,
+    "ball_pocket_outer_y_at_15mm": 1.8,
+    "ball_pocket_outer_z": 2.1,
+    "body_roof": 2.8,
+    "body_wall": 2.4,
+    "minimum": 1.1999999999999993
+  },
+  "owner_ball_inventory": 10,
+  "pairwise_experiment_checks": {
+    "C1_C2_ball_count_equal": true,
+    "C1_C2_estimated_mass_difference_g": 0.0058489733079056805,
+    "C1_C2_y_com_shift_mm": 2.6781986658492487,
+    "C3_C4_ball_count_equal": true,
+    "C3_C4_estimated_mass_difference_g": 0.005474711338763427,
+    "C3_C4_y_com_difference_mm": 0.0008679625964247029,
+    "C3_ball_second_moment_y2_mm2": 242.0,
+    "C4_ball_second_moment_y2_mm2": 450.0
+  },
+  "schema_version": "scenesmith.wcw1a_assembly_validation.v1",
+  "spare_ball_count": 4,
+  "units": "mm"
+}

@@ -1,0 +1,830 @@
+{
+  "all_required_stls_present": true,
+  "all_stls_opened": true,
+  "all_stls_outward_wound": true,
+  "all_stls_watertight_manifold": true,
+  "records": [
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          15.7,
+          25.1,
+          12.0
+        ],
+        "bounds_min_mm": [
+          14.099999,
+          -24.799999,
+          -12.0
+        ],
+        "dimensions_mm": [
+          1.6,
+          49.9,
+          24.0
+        ],
+        "edges": 1542,
+        "faces": 717,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 825,
+        "volume_mm3": 1890.375096,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        14.099999,
+        -24.799999,
+        -12.0
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        1.6,
+        49.9,
+        24.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C0_ball-retainer_exterior-face-down.stl",
+      "file_size_bytes": 82584,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "55a62bddd8a5caf7cc70f2fc9b08798f575e3ee05873cf1662e579902aac081f",
+      "signed_volume_mm3": 1890.3755208785126,
+      "solid_pla_mass_estimate_g": 2.344065645889356,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 1650,
+      "unique_vertex_count": 825,
+      "volume_centroid_mm": [
+        14.899999618515357,
+        0.05933053918527463,
+        0.020866288930300608
+      ],
+      "volume_mm3": 1890.3755208785126,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          16.5,
+          27.200001,
+          12.5
+        ],
+        "bounds_min_mm": [
+          -17.0,
+          -27.200001,
+          -12.5
+        ],
+        "dimensions_mm": [
+          33.5,
+          54.400002,
+          25.0
+        ],
+        "edges": 253,
+        "faces": 102,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 153,
+        "volume_mm3": 42133.518451,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C0_carrier_print-minus-x-face-down.stl",
+      "file_size_bytes": 15184,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "a1d1aac1122064dcd24b498fc389dee72c018f14b809d743be3fc6244c53c890",
+      "signed_volume_mm3": 42133.518498827085,
+      "solid_pla_mass_estimate_g": 52.24556293854559,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 302,
+      "unique_vertex_count": 153,
+      "volume_centroid_mm": [
+        -1.3149144862701025,
+        -0.11710695807514106,
+        0.0004277938628252846
+      ],
+      "volume_mm3": 42133.518498827085,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          15.7,
+          25.1,
+          12.0
+        ],
+        "bounds_min_mm": [
+          9.799999,
+          -24.799999,
+          -12.0
+        ],
+        "dimensions_mm": [
+          5.900001,
+          49.9,
+          24.0
+        ],
+        "edges": 2075,
+        "faces": 897,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 1174,
+        "volume_mm3": 1961.09746,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        9.799999,
+        -24.799999,
+        -12.0
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C1_ball-retainer_exterior-face-down.stl",
+      "file_size_bytes": 117884,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "0045531019e4ccdd445e42c92497c5a89c250527c3a68287713aa8824b86d055",
+      "signed_volume_mm3": 1961.0978723039525,
+      "solid_pla_mass_estimate_g": 2.431761361656901,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 2356,
+      "unique_vertex_count": 1174,
+      "volume_centroid_mm": [
+        14.717242876502205,
+        0.11348925911124376,
+        0.06647179063757301
+      ],
+      "volume_mm3": 1961.0978723039525,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          16.5,
+          27.200001,
+          12.5
+        ],
+        "bounds_min_mm": [
+          -17.0,
+          -27.200001,
+          -12.5
+        ],
+        "dimensions_mm": [
+          33.5,
+          54.400002,
+          25.0
+        ],
+        "edges": 643,
+        "faces": 295,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 350,
+        "volume_mm3": 34932.024849,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C1_carrier_print-minus-x-face-down.stl",
+      "file_size_bytes": 34884,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "4a3789715275915e2d40ac489ed2daa0677eb3374ac2ac231b21ae12983c587c",
+      "signed_volume_mm3": 34932.024896909024,
+      "solid_pla_mass_estimate_g": 43.315710872167195,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 696,
+      "unique_vertex_count": 350,
+      "volume_centroid_mm": [
+        -2.2568171256061356,
+        -0.14124941794705206,
+        0.0005159867109401585
+      ],
+      "volume_mm3": 34932.024896909024,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          15.7,
+          25.1,
+          12.0
+        ],
+        "bounds_min_mm": [
+          9.799999,
+          -24.799999,
+          -12.0
+        ],
+        "dimensions_mm": [
+          5.900001,
+          49.9,
+          24.0
+        ],
+        "edges": 2275,
+        "faces": 963,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 1306,
+        "volume_mm3": 1956.078936,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        9.799999,
+        -24.799999,
+        -12.0
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C2_ball-retainer_exterior-face-down.stl",
+      "file_size_bytes": 131284,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "978040bf1d72f116f4255c98212a55d1e6aae8d5d1089963f14bd45efb76225e",
+      "signed_volume_mm3": 1956.0793467237418,
+      "solid_pla_mass_estimate_g": 2.42553838993744,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 2624,
+      "unique_vertex_count": 1306,
+      "volume_centroid_mm": [
+        14.716773990428099,
+        0.7510338672831897,
+        0.06664232610379742
+      ],
+      "volume_mm3": 1956.0793467237418,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          16.5,
+          27.200001,
+          12.5
+        ],
+        "bounds_min_mm": [
+          -17.0,
+          -27.200001,
+          -12.5
+        ],
+        "dimensions_mm": [
+          33.5,
+          54.400002,
+          25.0
+        ],
+        "edges": 648,
+        "faces": 297,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 353,
+        "volume_mm3": 34932.326461,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C2_carrier_print-minus-x-face-down.stl",
+      "file_size_bytes": 35184,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "5519d54a4ece4d11432d6b3bd4c51e4bd8bb6779d17ebba623e4527608d675b8",
+      "signed_volume_mm3": 34932.32650853125,
+      "solid_pla_mass_estimate_g": 43.316084870578756,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 702,
+      "unique_vertex_count": 353,
+      "volume_centroid_mm": [
+        -2.256677597086762,
+        -3.2333644734303633,
+        0.0005159823113462
+      ],
+      "volume_mm3": 34932.32650853125,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          15.7,
+          25.1,
+          12.0
+        ],
+        "bounds_min_mm": [
+          9.799999,
+          -24.799999,
+          -12.0
+        ],
+        "dimensions_mm": [
+          5.900001,
+          49.9,
+          24.0
+        ],
+        "edges": 2806,
+        "faces": 1143,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 1653,
+        "volume_mm3": 2026.801308,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        9.799999,
+        -24.799999,
+        -12.0
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C3_ball-retainer_exterior-face-down.stl",
+      "file_size_bytes": 166384,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "aa98297fb6008c3df67c924b5191cd9763e33a3ae7c0b8bf2e887b5d7b73864d",
+      "signed_volume_mm3": 2026.8017060253221,
+      "solid_pla_mass_estimate_g": 2.5132341154713993,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 3326,
+      "unique_vertex_count": 1653,
+      "volume_centroid_mm": [
+        14.546335150742236,
+        0.218756791430178,
+        0.08936365238045756
+      ],
+      "volume_mm3": 2026.8017060253221,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          16.5,
+          27.200001,
+          12.5
+        ],
+        "bounds_min_mm": [
+          -17.0,
+          -27.200001,
+          -12.5
+        ],
+        "dimensions_mm": [
+          33.5,
+          54.400002,
+          25.0
+        ],
+        "edges": 1028,
+        "faces": 488,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 542,
+        "volume_mm3": 27730.531026,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C3_carrier_print-minus-x-face-down.stl",
+      "file_size_bytes": 54084,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "718e47046b653c1960613fbbd82ce3f3349b285e62c88a524b5a70048a62d598",
+      "signed_volume_mm3": 27730.531074191877,
+      "solid_pla_mass_estimate_g": 34.385858531997926,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 1080,
+      "unique_vertex_count": 542,
+      "volume_centroid_mm": [
+        -3.6879355343511047,
+        -0.17793125458819897,
+        0.0006499861328806994
+      ],
+      "volume_mm3": 27730.531074191877,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          15.7,
+          25.1,
+          12.0
+        ],
+        "bounds_min_mm": [
+          9.799999,
+          -24.799999,
+          -12.0
+        ],
+        "dimensions_mm": [
+          5.900001,
+          49.9,
+          24.0
+        ],
+        "edges": 3013,
+        "faces": 1213,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 1788,
+        "volume_mm3": 2021.782775,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        9.799999,
+        -24.799999,
+        -12.0
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C4_ball-retainer_exterior-face-down.stl",
+      "file_size_bytes": 180084,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "21f2122cc66fff699c1069db8aabb71c6ea21aa545d98ca91df7f51a42d78f1e",
+      "signed_volume_mm3": 2021.7831721926332,
+      "solid_pla_mass_estimate_g": 2.507011133518865,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 3600,
+      "unique_vertex_count": 1788,
+      "volume_centroid_mm": [
+        14.54545727999698,
+        0.27390829951000123,
+        0.06972783335867742
+      ],
+      "volume_mm3": 2021.7831721926332,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          16.5,
+          27.200001,
+          12.5
+        ],
+        "bounds_min_mm": [
+          -17.0,
+          -27.200001,
+          -12.5
+        ],
+        "dimensions_mm": [
+          33.5,
+          54.400002,
+          25.0
+        ],
+        "edges": 1043,
+        "faces": 492,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 553,
+        "volume_mm3": 27731.13447,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_C4_carrier_print-minus-x-face-down.stl",
+      "file_size_bytes": 55184,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "2eddf3ea2d1af13c526e3302947682d88c68ee7af5c6ed6d7b82eab789a49791",
+      "signed_volume_mm3": 27731.134518235256,
+      "solid_pla_mass_estimate_g": 34.386606802611716,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 1102,
+      "unique_vertex_count": 553,
+      "volume_centroid_mm": [
+        -3.6875528259748696,
+        -0.17792738270969988,
+        0.0006499719880258983
+      ],
+      "volume_mm3": 27731.134518235256,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          45.0,
+          19.0,
+          2.0
+        ],
+        "bounds_min_mm": [
+          -45.0,
+          -19.0,
+          -2.0
+        ],
+        "dimensions_mm": [
+          90.0,
+          38.0,
+          4.0
+        ],
+        "edges": 5044,
+        "faces": 2374,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 2666,
+        "volume_mm3": 9303.601618,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        45.0,
+        19.0,
+        2.0
+      ],
+      "bounds_min_mm": [
+        -45.0,
+        -19.0,
+        -2.0
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        90.0,
+        38.0,
+        4.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl",
+      "file_size_bytes": 267084,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "a32926234143b41ffffa2d898feae9507cb8ccc012410e1d67523f5201e89d10",
+      "signed_volume_mm3": 9303.601609332112,
+      "solid_pla_mass_estimate_g": 11.536465995571819,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 5340,
+      "unique_vertex_count": 2666,
+      "volume_centroid_mm": [
+        -0.16792626675939684,
+        -1.2750855672791699,
+        -0.0015501684860735822
+      ],
+      "volume_mm3": 9303.601609332112,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          20.0,
+          30.0,
+          32.5
+        ],
+        "bounds_min_mm": [
+          -20.0,
+          -30.0,
+          -32.5
+        ],
+        "dimensions_mm": [
+          40.0,
+          60.0,
+          65.0
+        ],
+        "edges": 155,
+        "faces": 66,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 91,
+        "volume_mm3": 34143.972948,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        20.0,
+        30.0,
+        32.5
+      ],
+      "bounds_min_mm": [
+        -20.0,
+        -30.0,
+        -32.5
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        40.0,
+        60.0,
+        65.0
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_body_top-down.stl",
+      "file_size_bytes": 8984,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "e6593655be627c3b22ed9edc68a46ebe7b1c0ed19842e2e6544200cbb2afe9af",
+      "signed_volume_mm3": 34143.972950194,
+      "solid_pla_mass_estimate_g": 42.338526458240565,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 178,
+      "unique_vertex_count": 91,
+      "volume_centroid_mm": [
+        -0.06588667521184713,
+        0.10518053339135301,
+        4.906100333320846
+      ],
+      "volume_mm3": 34143.972950194,
+      "watertight_manifold": true
+    },
+    {
+      "blender_source_validation": {
+        "boundary_edges": 0,
+        "bounds_max_mm": [
+          19.700001,
+          29.700001,
+          4.8
+        ],
+        "bounds_min_mm": [
+          -19.700001,
+          -29.700001,
+          -1.3
+        ],
+        "dimensions_mm": [
+          39.400002,
+          59.400002,
+          6.1
+        ],
+        "edges": 389,
+        "faces": 151,
+        "non_manifold_edges": 0,
+        "self_intersection_pairs": 0,
+        "vertices": 240,
+        "volume_mm3": 10482.507523,
+        "watertight_manifold": true
+      },
+      "boundary_edge_count": 0,
+      "bounds_max_mm": [
+        19.700001,
+        29.700001,
+        4.8
+      ],
+      "bounds_min_mm": [
+        -19.700001,
+        -29.700001,
+        -1.3
+      ],
+      "degenerate_face_count": 0,
+      "dimensions_mm": [
+        39.400002,
+        59.400002,
+        6.1
+      ],
+      "duplicate_face_count": 0,
+      "file": "stl/WCW-1A_R1_bottom-lid_outer-face-down.stl",
+      "file_size_bytes": 23884,
+      "format": "binary_stl",
+      "non_manifold_edge_count": 0,
+      "outward_winding": true,
+      "sha256": "38b53e2ade9b97c73e503a26db850e5c515481b5f0a7bde276b6e449ea7e94c9",
+      "signed_volume_mm3": 10482.507523125045,
+      "solid_pla_mass_estimate_g": 12.998309328675056,
+      "stored_normal_mismatch_count": 0,
+      "triangle_count": 476,
+      "unique_vertex_count": 240,
+      "volume_centroid_mm": [
+        0.031179112036937087,
+        -0.050895710988195945,
+        1.0863027610179155
+      ],
+      "volume_mm3": 10482.507523125045,
+      "watertight_manifold": true
+    }
+  ],
+  "required_stl_count": 13,
+  "schema_version": "scenesmith.wcw1a_stl_validation.v1",
+  "units": "mm"
+}

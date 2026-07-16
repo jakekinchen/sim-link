@@ -1,0 +1,123 @@
+{
+  "ball_density_g_cm3": 7.81,
+  "ball_expected_max_mm": 20.2,
+  "ball_expected_min_mm": 19.8,
+  "ball_fit_allowance_diametral_mm": 0.8,
+  "ball_nominal_diameter_mm": 20.0,
+  "ball_retainer_preload_mm": 0.2,
+  "body_cavity_x_mm": 35.2,
+  "body_cavity_y_mm": 55.2,
+  "body_edge_chamfer_mm": 2.0,
+  "body_roof_mm": 2.8,
+  "body_wall_mm": 2.4,
+  "body_x_mm": 40.0,
+  "body_y_mm": 60.0,
+  "body_z_mm": 65.0,
+  "carrier_x_max_mm": 14.0,
+  "carrier_x_min_mm": -17.0,
+  "carrier_y_mm": 54.4,
+  "carrier_z_mm": 25.0,
+  "cartridge_assembly_z_mm": -14.2,
+  "cartridge_frame_y_offset_mm": 0.0,
+  "configuration_seats_y_mm": {
+    "C0": [],
+    "C1": [
+      0.0
+    ],
+    "C2": [
+      15.0
+    ],
+    "C3": [
+      -11.0,
+      11.0
+    ],
+    "C4": [
+      -15.0,
+      15.0
+    ]
+  },
+  "derived": {
+    "ball_nominal_mass_g": 32.71445149938171,
+    "ball_pocket_diameter_mm": 20.8,
+    "minimum_ball_wall_mm": 1.1999999999999993,
+    "total_balls_for_all_cartridges": 6
+  },
+  "fit_coupon_pocket_diameters_mm": [
+    20.4,
+    20.6,
+    20.8
+  ],
+  "grasp_band_height_mm": 18.0,
+  "lid_assembly_z_mm": -31.2,
+  "lid_crush_rib_interference_mm": 0.3,
+  "lid_detent_interference_each_side_mm": 0.15,
+  "lid_flange_thickness_mm": 2.6,
+  "lid_flange_x_mm": 39.4,
+  "lid_flange_y_mm": 59.4,
+  "lid_plug_height_mm": 2.4,
+  "lid_plug_x_mm": 34.5,
+  "lid_plug_y_mm": 54.5,
+  "pla_density_g_cm3": 1.24,
+  "retainer_plate_thickness_mm": 1.6,
+  "retainer_slide_total_clearance_mm": 0.2,
+  "retainer_x_max_mm": 16.5,
+  "revision": "WCW-1A-R1",
+  "tags": [
+    {
+      "black_square_mm": 24.0,
+      "center_x_mm": 0.0,
+      "center_y_mm": 0.0,
+      "center_z_mm": 0.0,
+      "face": "+z",
+      "face_up_direction": "+y",
+      "full_label_mm": 30.0,
+      "name": "top",
+      "tag_id": 0
+    },
+    {
+      "black_square_mm": 24.0,
+      "center_x_mm": 0.0,
+      "center_y_mm": 0.0,
+      "center_z_mm": 0.0,
+      "face": "+y",
+      "face_up_direction": "+z",
+      "full_label_mm": 30.0,
+      "name": "side_py",
+      "tag_id": 1
+    },
+    {
+      "black_square_mm": 24.0,
+      "center_x_mm": 0.0,
+      "center_y_mm": 0.0,
+      "center_z_mm": 0.0,
+      "face": "-y",
+      "face_up_direction": "+z",
+      "full_label_mm": 30.0,
+      "name": "side_ny",
+      "tag_id": 2
+    },
+    {
+      "black_square_mm": 16.0,
+      "center_x_mm": 0.0,
+      "center_y_mm": 0.0,
+      "center_z_mm": 21.5,
+      "face": "+x",
+      "face_up_direction": "+z",
+      "full_label_mm": 20.0,
+      "name": "grasp_px",
+      "tag_id": 3
+    },
+    {
+      "black_square_mm": 16.0,
+      "center_x_mm": 0.0,
+      "center_y_mm": 0.0,
+      "center_z_mm": 21.5,
+      "face": "-x",
+      "face_up_direction": "+z",
+      "full_label_mm": 20.0,
+      "name": "grasp_nx",
+      "tag_id": 4
+    }
+  ],
+  "units": "mm"
+}
