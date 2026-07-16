@@ -213,6 +213,13 @@ the unchanged 25 mm and phase-duration conjunction. Reviewer 297 closes R2
 with no retry. Owner addendum `8b4a206` routes next to exactly one fresh
 T20.43b ACT replacement using the stable renderer runtime and unchanged ACT
 recipe after this closeout is preserved on origin; T20.45 remains pending.
+Closeout commit `9869cba` and synchronized state `b24ac30` are now exact on
+origin. Brief 222 activates T20.43b implementation/tests only: reuse the stable
+T20.44 interpreter and cached MuJoCo support tree, prove the real renderer
+entrypoint before any future marker, and preserve the exact original ACT
+10,000-update recipe and dual-semantics schedule. Live smoke/authority, model
+weights, optimizer, rollout, retry, hardware, network, external compute, and
+Brev remain closed pending separate reviewed origin boundaries.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

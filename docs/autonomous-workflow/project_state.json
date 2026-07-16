@@ -333,7 +333,7 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.44",
+  "current_task": "T20.43b",
   "next_eligible_task": "T20.43b",
   "tasks": {
     "T16.1": {
@@ -4881,15 +4881,15 @@
       "authority_not_granted": ["t20_43_second_attempt","t20_43_retry","t20_43_replacement","checkpoint_continuation","result_fabrication","correction_objective","threshold_change","schedule_change","archive_replay","t20_44_model_action_before_fresh_brief_and_composed_authority","hardware","camera_access","serial_access","physical_motion","network_access","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.43b": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["T20.44_terminal_boundary_on_origin", "owner_addendum_8b4a206"],
-      "active_brief_id": null,
+      "active_brief_id": "222",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "Exactly one ACT replacement may open under a fresh brief after the verified T20.44 terminal boundary is synchronized on origin; stable T20.44 runtime/renderer smoke and unchanged T20.43 recipe are mandatory",
+      "result": "Brief 222 opens implementation and fixture tests only for exactly one stable-runtime ACT replacement with the unchanged T20.43 recipe; live smoke, authority materialization, model, optimizer, and rollout remain closed",
       "owner_authorization_commit": "8b4a20669a804b2d4fbed2805ea2fa6af305e2d7",
       "recipe_source_identity_sha256": "b3a510f84402d6574333800b73c3d95f5dcfb24af7e77740985f2f3c997449d2",
-      "authority_granted": ["open_fresh_t20_43b_brief_after_t20_44_state_origin_confirmation"],
+      "authority_granted": ["open_fresh_t20_43b_brief_after_t20_44_state_origin_confirmation","activate_brief_222","implement_and_fixture_test_stable_runtime_act_replacement_contracts"],
       "authority_not_granted": ["activate_before_t20_44_state_origin_confirmation","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","learned_policy_rollout","gate_c_execution","second_replacement","recipe_change","correction_objective","threshold_change","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.44": {
