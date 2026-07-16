@@ -220,6 +220,14 @@ entrypoint before any future marker, and preserve the exact original ACT
 10,000-update recipe and dual-semantics schedule. Live smoke/authority, model
 weights, optimizer, rollout, retry, hardware, network, external compute, and
 Brev remain closed pending separate reviewed origin boundaries.
+Spec `13c5bb4b...` and the complete T20.43b implementation now preserve the
+original ACT campaign/configuration/dataset/evaluation objects exactly while
+binding the stable T20.44 interpreter, cached MuJoCo support tree, fresh real
+renderer smoke, trace identity `6133ce58...`, and trace-file SHA `f9dc0e6d...`.
+Eleven focused, 30 targeted/regression, and 34 pointer/composer/receipt tests pass
+with offline lint/format and compilation. Reviewer 299 opens only model-free
+Gate A/smoke/authority materialization after the implementation is exact on
+origin; model tensors, optimizer, rollout, and retry remain closed.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

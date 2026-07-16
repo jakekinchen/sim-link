@@ -100,3 +100,17 @@ replacement, recipe/schedule/threshold change, correction objective, archive
 replay, T20.45 activation, hardware/camera/serial access, physical motion,
 network/download, package installation, external compute, Brev, transfer,
 promotion, or destructive operation.
+
+## Implementation boundary
+
+Spec `13c5bb4b...` and the complete T20.43b contract/materializer/runner/CLI/
+test implementation preserve the original signed campaign, ACT configuration,
+dataset, and evaluation objects exactly. The only operational correction is
+the stable T20.44 interpreter plus cached MuJoCo support tree and a fresh real
+renderer smoke that binds trace identity `6133ce58...` and trace-file SHA
+`f9dc0e6d...` before any marker. Eleven focused, 30 targeted/regression, and 34
+pointer/composer/receipt tests pass; offline lint/format, compilation, strict
+spec reconstruction, CLI import, JSON, and whitespace checks pass. Reviewer
+299 opens model-free materialization only after this implementation is exact on
+origin. No live smoke, authority, marker, model, optimizer, or rollout action
+has occurred.

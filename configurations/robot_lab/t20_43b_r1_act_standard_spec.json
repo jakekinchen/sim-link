@@ -1,0 +1,426 @@
+{
+  "act_config": {
+    "chunk_size": 50,
+    "compile_model": false,
+    "device": "mps",
+    "dim_feedforward": 3200,
+    "dim_model": 512,
+    "dropout": 0.1,
+    "dtype": "float32",
+    "feedforward_activation": "relu",
+    "fresh_policy_initialization": true,
+    "kl_weight": 10.0,
+    "latent_dim": 32,
+    "n_action_steps": 50,
+    "n_decoder_layers": 1,
+    "n_encoder_layers": 4,
+    "n_heads": 8,
+    "n_obs_steps": 1,
+    "n_vae_encoder_layers": 4,
+    "normalization_mapping": {
+      "ACTION": "MEAN_STD",
+      "STATE": "MEAN_STD",
+      "VISUAL": "MEAN_STD"
+    },
+    "policy_type": "act",
+    "pre_norm": false,
+    "pretrained_act_checkpoint": null,
+    "pretrained_backbone_weights": "ResNet18_Weights.IMAGENET1K_V1",
+    "replace_final_stride_with_dilation": false,
+    "temporal_ensemble_coeff": null,
+    "use_amp": false,
+    "use_vae": true,
+    "vision_backbone": "resnet18"
+  },
+  "act_source_files": [
+    {
+      "file_sha256": "35a60c0dd3c811b137b5eb035bdbd40d40e2c24ba0cda61756052e6e1c829282",
+      "path": "external/lerobot/src/lerobot/policies/act/configuration_act.py",
+      "size_bytes": 8697
+    },
+    {
+      "file_sha256": "a6c1a49c5daafa513b9abee9b986205d327e25c70ed13623ab2e6c0ab6b1f577",
+      "path": "external/lerobot/src/lerobot/policies/act/modeling_act.py",
+      "size_bytes": 35084
+    },
+    {
+      "file_sha256": "2bff84913c264eba5c2e65239d685ca1b497c1d9d2259958da293ec604b5830a",
+      "path": "external/lerobot/src/lerobot/policies/act/processor_act.py",
+      "size_bytes": 3253
+    },
+    {
+      "file_sha256": "7d8a74352cb8691bd59de44a478b6f3a2bbe212583fdb04a5c19b669311b4ebe",
+      "path": "external/lerobot/src/lerobot/policies/factory.py",
+      "size_bytes": 28328
+    },
+    {
+      "file_sha256": "da387f34291a659d27b5fad0f87372f243259ec4cb7f824d459fe414c293dd28",
+      "path": "external/lerobot/src/lerobot/datasets/lerobot_dataset.py",
+      "size_bytes": 40180
+    },
+    {
+      "file_sha256": "f715aaaa1118ef8901928f92975f7bc08bca412860f072bbcca84555303cc38e",
+      "path": "external/lerobot/src/lerobot/datasets/sampler.py",
+      "size_bytes": 8565
+    },
+    {
+      "file_sha256": "c4e1f98b36f9e20bf57458044c24fd088de45b008aeed43ca531d850c7fc98f7",
+      "path": "external/lerobot/src/lerobot/optim/factory.py",
+      "size_bytes": 1768
+    },
+    {
+      "file_sha256": "d18c77a8c966164f364149ca14b38758225e9765c96fbf190b25e5af869b353d",
+      "path": "scenesmith/robot_lab/act_grasp_closed_loop.py",
+      "size_bytes": 17847
+    },
+    {
+      "file_sha256": "9382e02106741906380eed572959f991382c285cedd08c8d652d0a3375cf843a",
+      "path": "scenesmith/robot_lab/so101_coordinates.py",
+      "size_bytes": 3929
+    },
+    {
+      "file_sha256": "8dd97c798c1fb8e6824351e9a21e17b56f7e7a0c1bf87da1bd16d7e1dffc50a5",
+      "path": "scenesmith/robot_lab/strict_grasp.py",
+      "size_bytes": 32436
+    },
+    {
+      "file_sha256": "2f399219df280a7c4c4f0401103d526c0480a03dd1b60cf68dfac27093050d6e",
+      "path": "scripts/robot_lab/render_rollout_mirror.py",
+      "size_bytes": 12237
+    }
+  ],
+  "attempt_contract": {
+    "authorized_attempt_count": 1,
+    "marker_path": "configurations/robot_lab/t20_43b_r1_act_attempt.json",
+    "marker_precedes_backbone_tensor_read_model_inference_optimizer": true,
+    "retry_authorized": false
+  },
+  "brev_compute_started": false,
+  "cached_backbone": {
+    "act_policy_checkpoint": false,
+    "file_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "kind": "torchvision_ResNet18_Weights.IMAGENET1K_V1",
+    "network_fallback_allowed": false,
+    "path": "/Users/kelly/.cache/torch/hub/checkpoints/resnet18-f37072fd.pth",
+    "size_bytes": 46830571
+  },
+  "camera_accessed": false,
+  "campaign": {
+    "backbone_learning_rate": 1e-05,
+    "batch_size": 8,
+    "checkpoint_schedule": [
+      0,
+      500,
+      1000,
+      2500,
+      5000,
+      7500,
+      10000
+    ],
+    "continue_to_maximum_after_gate_c_pass": true,
+    "correction_objective": null,
+    "gradient_clip_norm": 10.0,
+    "learning_rate": 1e-05,
+    "maximum_optimizer_updates": 10000,
+    "num_workers": 0,
+    "one_attempt_only": true,
+    "optimizer": "AdamW",
+    "retry_or_sweep_allowed": false,
+    "sample_weighting": null,
+    "sampler": "lerobot.datasets.EpisodeAwareSampler",
+    "sampler_shuffle": true,
+    "scheduler": null,
+    "training_seed": 20260801,
+    "weight_decay": 0.0001
+  },
+  "checkpoint_retention": {
+    "compact_evidence_git_tracking": true,
+    "local_tree_only": true,
+    "multi_gigabyte_git_tracking": false,
+    "tree_identity_required": true
+  },
+  "dataset": {
+    "episode_count": 129,
+    "existing_held_out_training_rows": 0,
+    "frame_count": 31366,
+    "fresh_held_out_training_rows": 0,
+    "image_features": [
+      "observation.images.base_0_rgb",
+      "observation.images.left_wrist_0_rgb"
+    ],
+    "joint_names": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "normalization": "MEAN_STD",
+    "repo_id": "scenesmith/t20-42-r0-anchor-grasp-train",
+    "root": "outputs/robot_lab/t20_42_r0_generation_run_001/lerobot_dataset",
+    "sample_indices": [
+      0,
+      2091,
+      4182,
+      6273,
+      8364,
+      10455,
+      12546,
+      14637,
+      16728,
+      18819,
+      20910,
+      23001,
+      25092,
+      27183,
+      29274,
+      31365
+    ],
+    "statistics_source": "frozen_training_split_only"
+  },
+  "evaluation": {
+    "checkpoint_schedule": [
+      0,
+      500,
+      1000,
+      2500,
+      5000,
+      7500,
+      10000
+    ],
+    "first_pass_cannot_be_replaced": true,
+    "frame_count": 244,
+    "gate_c": "first_scheduled_checkpoint_with_unassisted_episode_0_strict_v2_pass_under_either_variant",
+    "oracle": "strict_v2_only",
+    "required_evidence": [
+      "complete_trace",
+      "first_source_divergence",
+      "strict_v2_margins",
+      "t20_38_bound_quantitative_margins",
+      "frozen_amended_gate_report",
+      "uniform_0_05_rad_report",
+      "decode_and_action_hashes",
+      "mirror_mp4_and_manifest"
+    ],
+    "same_checkpoint_tie_breaker": "chunk_50",
+    "seed": 0,
+    "variants": [
+      {
+        "decode_starts": [
+          0,
+          50,
+          100,
+          150,
+          200
+        ],
+        "executed_lengths": [
+          50,
+          50,
+          50,
+          50,
+          44
+        ],
+        "n_action_steps": 50,
+        "queue_reset_count": 1,
+        "unexecuted_tail_actions": 6,
+        "variant_id": "chunk_50"
+      },
+      {
+        "decode_starts": [
+          0,
+          10,
+          20,
+          30,
+          40,
+          50,
+          60,
+          70,
+          80,
+          90,
+          100,
+          110,
+          120,
+          130,
+          140,
+          150,
+          160,
+          170,
+          180,
+          190,
+          200,
+          210,
+          220,
+          230,
+          240
+        ],
+        "executed_lengths": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          4
+        ],
+        "n_action_steps": 10,
+        "queue_reset_count": 1,
+        "unexecuted_tail_actions_per_decode_excluded": true,
+        "variant_id": "receding_10"
+      }
+    ]
+  },
+  "external_compute_started": false,
+  "gate_a": {
+    "checks": [
+      "r0_artifact_and_local_tree_identity",
+      "dataset_count_feature_and_order",
+      "training_only_statistics_match",
+      "fixed_sample_tensor_hashes",
+      "act_preprocessor_manual_mean_std_parity",
+      "action_postprocessor_inverse_parity",
+      "dataset_mujoco_coordinate_round_trip",
+      "held_out_exclusion"
+    ],
+    "model_construction": false,
+    "must_pass_before_marker": true,
+    "open_loop_gate_blocks_rollout": false,
+    "optimizer_creation": false
+  },
+  "gate_c_executed": false,
+  "hardware_accessed": false,
+  "identity_sha256": "13c5bb4b2cadf8c451a25e7c11e9e0a1d824468f593774fdb60dbf7fa5197461",
+  "learned_policy_rollout": false,
+  "lerobot_source_commit": "e40b58a8dfa9e7b86918c374791599d070518d11",
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "network_accessed": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "owner_addendum_commit": "8b4a20669a804b2d4fbed2805ea2fa6af305e2d7",
+  "physical_actuation": false,
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "replacement_contract": {
+    "corrected_fault_class": "renderer_child_dependency_missing",
+    "original_spec_identity_sha256": "b3a510f84402d6574333800b73c3d95f5dcfb24af7e77740985f2f3c997449d2",
+    "original_terminal_failure_identity_sha256": "b64ec6d07296526c9931ccb061c005c037b59e828b392ceaa7dacc0e46b26a0c",
+    "recipe_changes": [],
+    "replacement_ordinal": 1,
+    "second_replacement_authorized": false,
+    "t20_44_terminal_result_identity_sha256": "9d916206cbbb86b67a42d3449953bc7b272e1de5171996df224e29772369e14f"
+  },
+  "schema_version": "scenesmith.t20_43b_r1_act_standard_spec.v1",
+  "scope": "one_owner_authorized_stable_runtime_act_replacement_with_rollout_primary_evaluation",
+  "serial_accessed": false,
+  "simulation_policy_accepted": false,
+  "source_refs": {
+    "frozen_gate": {
+      "file_sha256": "730d0fc069d9902ba721770aa384fde041b3ba405bcbb852fe36ec224adfe5e5",
+      "identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
+      "path": "configurations/robot_lab/t20_36l_frozen_consequence_gate.json",
+      "schema_version": "scenesmith.t20_36l_frozen_consequence_gate.v1"
+    },
+    "inherited_decision": {
+      "file_sha256": "7fe1df6f47a54b754fa6489fa714b26235a60968def1fda5f7b5485e0ba1f968",
+      "identity_sha256": "6c2b822ce1d89aecea26d0914f1b3a503bd142d6f2feb62f4481fbda37a5dad5",
+      "path": "configurations/robot_lab/t20_23_simulation_training_authority_decision.json",
+      "schema_version": "scenesmith.authority_composition_decision.v1"
+    },
+    "original_act_failure": {
+      "file_sha256": "661da2f2a1776162d71047a23fbdcddd722a6908d71aa3bef5ef076216ed2075",
+      "identity_sha256": "b64ec6d07296526c9931ccb061c005c037b59e828b392ceaa7dacc0e46b26a0c",
+      "path": "configurations/robot_lab/t20_43_r1_act_terminal_failure.json",
+      "schema_version": "scenesmith.t20_43_r1_act_terminal_failure.v1"
+    },
+    "original_act_spec": {
+      "file_sha256": "b96b47f7428c69151b85bca20c74646a382fefb24aa1380a971efe682146dc76",
+      "identity_sha256": "b3a510f84402d6574333800b73c3d95f5dcfb24af7e77740985f2f3c997449d2",
+      "path": "configurations/robot_lab/t20_43_r1_act_standard_spec.json",
+      "schema_version": "scenesmith.t20_43_r1_act_standard_spec.v1"
+    },
+    "r0_dataset_manifest": {
+      "file_sha256": "6b7abd88602a20a01dc446b04439200a7b38ae4d24da37675235baab8d5dc387",
+      "identity_sha256": "bd36b7c491ba3c3e08ae3efd87febdbbb1f52f917cb258399484ba4f5311a184",
+      "path": "outputs/robot_lab/t20_42_r0_generation_run_001/lerobot_dataset_manifest.json",
+      "schema_version": "scenesmith.lerobot_native_episode_manifest.v1"
+    },
+    "r0_mixture": {
+      "file_sha256": "5b2618b0b0bea3b7ae1801ef1df3a83fc187a32079b52e06748df1dac5826f1e",
+      "identity_sha256": "37b30d342313710f51c05b6c53f80f3dddc93c93cb0ff2c443bf5970dff203df",
+      "path": "configurations/robot_lab/t20_42_r0_dataset_mixture_manifest.json",
+      "schema_version": "scenesmith.t20_42_r0_dataset_mixture_manifest.v1"
+    },
+    "r0_result": {
+      "file_sha256": "3c1a853e4a476d68610288a35f475ad398c7b5dc29793a724ae0cf4fd42b0807",
+      "identity_sha256": "d238379bce62d884833da0a449535e3dc24f988b8da573513ae684bbb19a5969",
+      "path": "configurations/robot_lab/t20_42_r0_generation_result.json",
+      "schema_version": "scenesmith.t20_42_r0_generation_result.v1"
+    },
+    "r0_retention": {
+      "file_sha256": "65f423accc9ee6794d3ca3d4b7b1458a1cbee6781b97110b9e336a546e1525c3",
+      "identity_sha256": "19d19fbaa315511fa0e7df736d3895089827da8f0b8a2aecd15a2a75885bd495",
+      "path": "configurations/robot_lab/t20_42_r0_retention_receipt.json",
+      "schema_version": "scenesmith.t20_42_r0_retention_receipt.v1"
+    },
+    "r0_statistics": {
+      "file_sha256": "67e47d618f36ae1989e55a6fba3aa55a3aa95e78f66a9a062f97c4c2f419c608",
+      "identity_sha256": "02ba0e701da708680e162493aecececa5827914be2d07a0e1f9e20335d9388ae",
+      "path": "configurations/robot_lab/t20_42_r0_dataset_statistics.json",
+      "schema_version": "scenesmith.t20_42_r0_mean_std_statistics.v1"
+    },
+    "t20_38_receipt": {
+      "file_sha256": "2a4c5f1301a578ec1653ec33580ca0eb13a1964b113db8dacebebc24579f9583",
+      "identity_sha256": "042bf0bee9dcca28449311a39f5e884106deabf604febc05b53b026ecaf71b4e",
+      "path": "configurations/robot_lab/t20_38_strict_v2_quantitative_receipt.simulation_only.json",
+      "schema_version": "scenesmith.quantitative_strict_v2_receipt.v1"
+    },
+    "t20_44_renderer_smoke": {
+      "file_sha256": "88f55972b4cdc75d01eb8b303c33600f0b01508caf30cc3fe24811957d5ae7f2",
+      "identity_sha256": "11cbcca31a546b100acd92e173a8cb68c57c27cf6c20485c67be7fb1b2c7cc35",
+      "path": "configurations/robot_lab/t20_44_r2_renderer_smoke.json",
+      "schema_version": "scenesmith.t20_44_r2_renderer_smoke.v1"
+    },
+    "t20_44_result": {
+      "file_sha256": "1989c4b49d9b94fb753074e058e11d02e305ba59915920770f0de714bf13977a",
+      "identity_sha256": "9d916206cbbb86b67a42d3449953bc7b272e1de5171996df224e29772369e14f",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_result.json",
+      "schema_version": "scenesmith.t20_44_r2_smolvla_result.v1"
+    }
+  },
+  "source_result_commit": "b24ac30dbc132199baec04b80091f23fb9309b3c",
+  "stable_runtime": {
+    "fresh_renderer_smoke_required_before_marker": true,
+    "mujoco_support_site_packages": "/Users/kelly/.cache/uv/archive-v0/jImpGSbFmnkCImQkijLNh/lib/python3.12/site-packages",
+    "package_installation_allowed": false,
+    "renderer_smoke_output_path": "outputs/robot_lab/t20_43b_r1_renderer_smoke_001/checkpoint_0_chunk_50.mp4",
+    "renderer_smoke_trace_file_sha256": "f9dc0e6d2b74a817dbe5005a6dc1a46c478a8b4fe7d6198c1f981f0e45c24373",
+    "renderer_smoke_trace_identity_sha256": "6133ce582936d6f2057cff2877df1a7d66b7cb2397fbcc1032286fbf16a59507",
+    "renderer_smoke_trace_path": "outputs/robot_lab/t20_43_r1_act_run_001/rollouts/step_00000_chunk_50.json",
+    "runner_interpreter": "external/lerobot/.venv/bin/python",
+    "source_renderer_smoke_identity_sha256": "11cbcca31a546b100acd92e173a8cb68c57c27cf6c20485c67be7fb1b2c7cc35",
+    "temporary_interpreter_allowed": false
+  },
+  "t20_45_activated": false,
+  "task_id": "T20.43b"
+}
