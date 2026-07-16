@@ -1,11 +1,15 @@
 import copy
 import math
+import tempfile
 import unittest
+
+from pathlib import Path
 
 from scenesmith.robot_lab.quantitative_strict_v2_receipt import (
     build_quantitative_margin,
     build_quantitative_receipt,
     load_verified_sources,
+    summarize_predicates,
 )
 
 
@@ -60,6 +64,38 @@ class QuantitativeStrictV2ReceiptTest(unittest.TestCase):
             blocked["blocking_reasons"],
             ["actor_guard_failed", "evidence_guard_failed"],
         )
+        summary = summarize_predicates(
+            predicates=[blocked],
+            source_strict_success=False,
+        )
+        self.assertEqual(summary["hard_guard_blocker_count"], 1)
+        self.assertEqual(summary["effective_bottleneck"]["kind"], "hard_guard")
+        self.assertEqual(
+            summary["effective_bottleneck"]["predicate_id"], "hard_guard"
+        )
+        self.assertIsNone(
+            summary["effective_bottleneck"]["normalized_signed_margin"]
+        )
+
+    def test_genuine_conjunction_contradiction_fails_closed(self) -> None:
+        passed = build_quantitative_margin(
+            predicate_id="declared_success",
+            observed_value=True,
+            comparator="eq",
+            threshold=True,
+            normalization_scale=1.0,
+            units="boolean",
+        )
+        with self.assertRaisesRegex(ValueError, "contradicts source evaluator"):
+            summarize_predicates(
+                predicates=[passed],
+                source_strict_success=False,
+            )
+
+    def test_missing_bound_sources_fail_before_receipt(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaises(FileNotFoundError):
+                load_verified_sources(repo_root=Path(directory))
 
     def test_nonfinite_zero_scale_and_inverted_ranges_fail(self) -> None:
         common = {
@@ -97,6 +133,11 @@ class QuantitativeStrictV2ReceiptTest(unittest.TestCase):
         self.assertFalse(receipt["actual_mujoco_grasp_success"])
         self.assertFalse(receipt["physical_proof"])
         self.assertFalse(receipt["average_or_compensating_pass_allowed"])
+        self.assertEqual(receipt["hard_guard_blockers"], [])
+        self.assertEqual(receipt["hard_guard_blocker_count"], 0)
+        self.assertEqual(
+            receipt["effective_bottleneck"]["kind"], "normalized_margin"
+        )
         self.assertGreater(receipt["predicate_count"], 25)
         minimum = min(
             receipt["predicates"],

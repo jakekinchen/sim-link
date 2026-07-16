@@ -323,8 +323,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.41",
-  "next_eligible_task": "T20.41",
+  "current_task": "T20.39a",
+  "next_eligible_task": "T20.39a",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4761,6 +4761,18 @@
       "artifact": {"path":"configurations/robot_lab/t20_39_counterexample_archive_index.json","schema_version":"scenesmith.counterexample_archive_index.v1","identity_sha256":"05908b6d1d9f9f9e27a813d42f4aa90f8104c844fa3aeb5d400d4dd6b3126497","file_sha256":"a3389dd189b1b58552d4392810d7829f7395c6b142ace5e10b974f3c0c152351","size_bytes":3069,"archive_version":1,"entry_count":1,"active_entry_count":1,"replay_gate_active":false,"training_ingestion_active":false,"receipt":{"path":"configurations/robot_lab/t20_39_counterexample_receipt_0001.json","identity_sha256":"8277b09fb0f0a03d0003246d84a267faa98acd14608becea328e442c884b04aa","file_sha256":"9740a38384034dd5156383258ed64c0a3764c39482728cd9947c38a0962a50cf","size_bytes":4341,"semantic_fingerprint_sha256":"5b6db2718989a8367da355fc470c7cad6ddaa1b1dfc67609616fbe974a82b055","failure_class":"source_controller_boundary_negative","replay_eligible":false,"training_ingestion_eligible":false}},
       "authority_granted": ["read_existing_signed_t20_19_artifacts","activate_brief_210","implement_counterexample_archive_contract","write_archive_seed_0001_and_index","counterexample_archive_bootstrap_verified"],
       "authority_not_granted": ["simulation_replay","policy_replay","model_construction","model_inference","optimizer_creation","optimizer_training","replay_gate_activation","training_ingestion","policy_blame","source_rewrite","physical_actuation","camera_access","serial_access","network_access","external_compute","brev_compute","promotion","destructive_delete"]
+    },
+    "T20.39a": {
+      "state": "in_progress",
+      "depends_on": ["T20.38", "T20.39"],
+      "active_brief_id": "211",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "source_commit": "387088ca089a83e69f3f0f1abf9fd73522af478e",
+      "implementation_commits": [],
+      "result": "Brief 211 active for additive fail-closed hardening of T20.38 guard/bottleneck and T20.39 routing/duplicate/source-lifecycle verification",
+      "authority_granted": ["read_verified_t20_38_t20_39_artifacts", "activate_brief_211", "harden_model_free_receipt_and_archive_verifiers", "regenerate_derived_example_artifacts"],
+      "authority_not_granted": ["model_construction","model_load","model_inference","optimizer_creation","optimizer_training","simulation_replay","policy_replay","gate_c_execution","replay_gate_activation","training_ingestion","policy_blame","source_rewrite","physical_actuation","camera_access","serial_access","network_access","external_compute","brev_compute","promotion","destructive_delete"]
     },
     "T20.40": {
       "state": "deferred",

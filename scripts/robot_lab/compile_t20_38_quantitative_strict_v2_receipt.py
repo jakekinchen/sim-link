@@ -28,6 +28,11 @@ from scenesmith.robot_lab.quantitative_strict_v2_receipt import (  # noqa: E402
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verify", action="store_true")
+    parser.add_argument(
+        "--rewrite-derived",
+        action="store_true",
+        help="Rewrite only the checked-in derived receipt after a reviewed schema change.",
+    )
     args = parser.parse_args()
     sources = load_verified_sources(repo_root=REPO_ROOT)
     expected = build_quantitative_receipt(sources=sources)
@@ -35,7 +40,7 @@ def main() -> int:
         payload = load_strict_json(REPO_ROOT / RECEIPT_PATH)
         verify_quantitative_receipt(payload, sources=sources)
     else:
-        if (REPO_ROOT / RECEIPT_PATH).exists():
+        if (REPO_ROOT / RECEIPT_PATH).exists() and not args.rewrite_derived:
             raise FileExistsError("T20.38 quantitative receipt already exists")
         dump_canonical_json(REPO_ROOT / RECEIPT_PATH, expected)
     print(expected["identity_sha256"], flush=True)

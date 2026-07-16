@@ -120,6 +120,94 @@ def build_quantitative_margin(
     }
 
 
+def summarize_predicates(
+    *,
+    predicates: list[dict[str, Any]],
+    source_strict_success: bool,
+) -> dict[str, Any]:
+    """Derive fail-closed conjunction and bottleneck semantics.
+
+    Raw and normalized margins remain measurements of the declared comparator.
+    Actor/evidence guards are separate hard blockers and therefore preempt the
+    numeric bottleneck instead of being hidden behind a positive margin.
+    """
+
+    if (
+        not isinstance(predicates, list)
+        or not predicates
+        or not isinstance(source_strict_success, bool)
+    ):
+        raise ValueError("Strict-v2 predicate summary input is invalid")
+    predicate_ids = [row.get("predicate_id") for row in predicates]
+    if (
+        not all(isinstance(value, str) and value for value in predicate_ids)
+        or len(predicate_ids) != len(set(predicate_ids))
+    ):
+        raise ValueError("Strict-v2 predicate ids are missing or duplicated")
+    for row in predicates:
+        _finite(
+            row.get("normalized_signed_margin"),
+            label="normalized signed margin",
+        )
+        if not all(
+            isinstance(row.get(field), bool)
+            for field in ("actor_valid", "evidence_valid", "effective_passed")
+        ):
+            raise ValueError("Strict-v2 predicate guard state is invalid")
+
+    hard_guard_blockers = [
+        {
+            "predicate_id": row["predicate_id"],
+            "actor_valid": row["actor_valid"],
+            "evidence_valid": row["evidence_valid"],
+            "blocking_reasons": [
+                reason
+                for reason in row["blocking_reasons"]
+                if reason in {"actor_guard_failed", "evidence_guard_failed"}
+            ],
+        }
+        for row in predicates
+        if not row["actor_valid"] or not row["evidence_valid"]
+    ]
+    hard_conjunction_passed = all(row["effective_passed"] for row in predicates)
+    if hard_conjunction_passed != source_strict_success:
+        raise ValueError(
+            "Strict-v2 compiled conjunction contradicts source evaluator"
+        )
+    numeric_bottleneck = min(
+        predicates,
+        key=lambda row: row["normalized_signed_margin"],
+    )
+    if hard_guard_blockers:
+        effective_bottleneck = {
+            "kind": "hard_guard",
+            "predicate_id": hard_guard_blockers[0]["predicate_id"],
+            "normalized_signed_margin": None,
+        }
+    else:
+        effective_bottleneck = {
+            "kind": "normalized_margin",
+            "predicate_id": numeric_bottleneck["predicate_id"],
+            "normalized_signed_margin": numeric_bottleneck[
+                "normalized_signed_margin"
+            ],
+        }
+    return {
+        "hard_conjunction_passed": hard_conjunction_passed,
+        "hard_guard_blockers": hard_guard_blockers,
+        "hard_guard_blocker_count": len(hard_guard_blockers),
+        "numeric_bottleneck_predicate_id": numeric_bottleneck["predicate_id"],
+        "numeric_bottleneck_normalized_signed_margin": numeric_bottleneck[
+            "normalized_signed_margin"
+        ],
+        "effective_bottleneck": effective_bottleneck,
+        "bottleneck_semantics": (
+            "hard_actor_or_evidence_guards_preempt_numeric_margin;_numeric_"
+            "bottleneck_is_reported_without_averaging_or_compensation"
+        ),
+    }
+
+
 def load_verified_sources(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     root = Path(repo_root)
     fixture_path = root / SOURCE_FIXTURE_PATH
@@ -161,14 +249,10 @@ def build_quantitative_receipt(*, sources: dict[str, Any]) -> dict[str, Any]:
     if evaluation != stored_evaluation:
         raise ValueError("T20.38 source evaluation drifted")
     predicates = _compile_predicates(spec=spec, trajectory=trajectory)
-    hard_conjunction = all(row["effective_passed"] for row in predicates)
-    if hard_conjunction != evaluation["strict_grasp_success"]:
-        raise ValueError("T20.38 receipt/evaluator conjunction disagrees")
-    bottleneck_index = min(
-        range(len(predicates)),
-        key=lambda index: predicates[index]["normalized_signed_margin"],
+    summary = summarize_predicates(
+        predicates=predicates,
+        source_strict_success=evaluation["strict_grasp_success"],
     )
-    bottleneck = predicates[bottleneck_index]
     return sign_payload(
         {
             "schema_version": SCHEMA_VERSION,
@@ -195,13 +279,15 @@ def build_quantitative_receipt(*, sources: dict[str, Any]) -> dict[str, Any]:
             "proof_mode": evaluation["proof_mode"],
             "predicate_count": len(predicates),
             "predicates": predicates,
-            "hard_conjunction_passed": hard_conjunction,
+            **summary,
             "source_strict_grasp_success": evaluation["strict_grasp_success"],
             "source_strict_success_agrees": True,
-            "bottleneck_predicate_id": bottleneck["predicate_id"],
-            "bottleneck_normalized_signed_margin": bottleneck[
-                "normalized_signed_margin"
-            ],
+            "bottleneck_predicate_id": summary[
+                "effective_bottleneck"
+            ]["predicate_id"],
+            "bottleneck_normalized_signed_margin": summary[
+                "effective_bottleneck"
+            ]["normalized_signed_margin"],
             "average_or_compensating_pass_allowed": False,
             "pure_policy_success": evaluation["pure_policy_success"],
             "actual_mujoco_grasp_success": False,
@@ -289,6 +375,9 @@ def _compile_predicates(
         scale: float,
         units: str,
         detail: dict[str, Any] | None = None,
+        *,
+        actor_valid: bool = True,
+        evidence_valid: bool = True,
     ) -> None:
         rows.append(
             build_quantitative_margin(
@@ -298,6 +387,8 @@ def _compile_predicates(
                 threshold=threshold,
                 normalization_scale=scale,
                 units=units,
+                actor_valid=actor_valid,
+                evidence_valid=evidence_valid,
                 evidence_detail=detail,
             )
         )
@@ -329,14 +420,18 @@ def _compile_predicates(
             1.0,
             "boolean",
         )
+    actor_fields_allowed = not bool(
+        actor_fields & set(spec["prohibited_actor_observation_fields"])
+    )
     add(
         "actor_observation_fields_allowed",
-        not bool(actor_fields & set(spec["prohibited_actor_observation_fields"])),
+        actor_fields_allowed,
         "eq",
         True,
         1.0,
         "boolean",
         {"actor_observation_fields": sorted(actor_fields)},
+        actor_valid=actor_fields_allowed,
     )
     add(
         "maximum_object_speed",
@@ -355,7 +450,16 @@ def _compile_predicates(
         "N",
     )
     currents = [row["actuator_current_ma_max"] for row in trajectory]
-    add("actuator_current_present", all(value is not None for value in currents), "eq", True, 1.0, "boolean")
+    currents_present = all(value is not None for value in currents)
+    add(
+        "actuator_current_present",
+        currents_present,
+        "eq",
+        True,
+        1.0,
+        "boolean",
+        evidence_valid=currents_present,
+    )
     add(
         "maximum_actuator_current",
         max(value for value in currents if value is not None),
@@ -363,9 +467,19 @@ def _compile_predicates(
         spec["maximum_actuator_current_ma"],
         spec["maximum_actuator_current_ma"],
         "mA",
+        evidence_valid=currents_present,
     )
     apertures = [row["gripper_aperture_m"] for row in trajectory]
-    add("gripper_aperture_present", all(value is not None for value in apertures), "eq", True, 1.0, "boolean")
+    apertures_present = all(value is not None for value in apertures)
+    add(
+        "gripper_aperture_present",
+        apertures_present,
+        "eq",
+        True,
+        1.0,
+        "boolean",
+        evidence_valid=apertures_present,
+    )
     add("grasp_confirmed_present", bool(confirmed), "eq", True, 1.0, "boolean")
     add(
         "grasp_confirmed_contacts",
@@ -452,6 +566,7 @@ def _compile_predicates(
         spec["minimum_release_aperture_m"],
         spec["minimum_release_aperture_m"],
         "m",
+        evidence_valid=apertures_present,
     )
     add("retreat_present", bool(retreat), "eq", True, 1.0, "boolean")
     add("retreat_contacts_clear", retreat[0]["fingertip_contacts"] if retreat else -1, "eq", 0, 1.0, "count")
@@ -468,7 +583,15 @@ def _compile_predicates(
         spec["minimum_retreat_distance_m"],
         "m",
     )
-    add("analytic_expert_actor_contract", pure_analytic_owner, "eq", True, 1.0, "boolean")
+    add(
+        "analytic_expert_actor_contract",
+        pure_analytic_owner,
+        "eq",
+        True,
+        1.0,
+        "boolean",
+        actor_valid=pure_analytic_owner,
+    )
     return rows
 
 

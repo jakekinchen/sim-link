@@ -3,7 +3,7 @@
   "active_semantic_fingerprints": [
     {
       "canonical_counterexample_id": "cex-0001",
-      "semantic_fingerprint_sha256": "5b6db2718989a8367da355fc470c7cad6ddaa1b1dfc67609616fbe974a82b055"
+      "semantic_fingerprint_sha256": "91ad1e002866afa7a2a4b557685d59acb5a818a34b66b71cb9705427f866025a"
     }
   ],
   "archive_version": 1,
@@ -12,19 +12,19 @@
   "entries": [
     {
       "counterexample_id": "cex-0001",
-      "file_sha256": "9740a38384034dd5156383258ed64c0a3764c39482728cd9947c38a0962a50cf",
-      "identity_sha256": "8277b09fb0f0a03d0003246d84a267faa98acd14608becea328e442c884b04aa",
+      "file_sha256": "f85730407e156cec65466519fd2536edee765897994956af3030e81eea91173f",
+      "identity_sha256": "60babc53062c016532af509262eb5f75fa717a40708b89b870b1e20a39acada1",
       "lifecycle_state": "active",
       "path": "configurations/robot_lab/t20_39_counterexample_receipt_0001.json",
       "routing_class": "evidence_only",
       "schema_version": "scenesmith.counterexample_receipt.v1",
-      "semantic_fingerprint_sha256": "5b6db2718989a8367da355fc470c7cad6ddaa1b1dfc67609616fbe974a82b055",
-      "size_bytes": 4341
+      "semantic_fingerprint_sha256": "91ad1e002866afa7a2a4b557685d59acb5a818a34b66b71cb9705427f866025a",
+      "size_bytes": 4676
     }
   ],
   "entry_count": 1,
   "external_compute_started": false,
-  "identity_sha256": "05908b6d1d9f9f9e27a813d42f4aa90f8104c844fa3aeb5d400d4dd6b3126497",
+  "identity_sha256": "043d45b3b9c754c6873d2a188834c1602406075489c7b95be6ff28ab1437386b",
   "lifecycle_states": [
     "active",
     "superseded",

@@ -29,6 +29,11 @@ from scenesmith.robot_lab.counterexample_archive import (  # noqa: E402
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verify", action="store_true")
+    parser.add_argument(
+        "--rewrite-derived",
+        action="store_true",
+        help="Rewrite only the derived seed/index after a reviewed schema change.",
+    )
     args = parser.parse_args()
     sources = load_verified_sources(repo_root=REPO_ROOT)
     expected_receipt = build_seed_receipt(sources=sources)
@@ -47,7 +52,10 @@ def main() -> int:
             receipts=[receipt],
         )
     else:
-        if (REPO_ROOT / RECEIPT_PATH).exists() or (REPO_ROOT / INDEX_PATH).exists():
+        if (
+            (REPO_ROOT / RECEIPT_PATH).exists()
+            or (REPO_ROOT / INDEX_PATH).exists()
+        ) and not args.rewrite_derived:
             raise FileExistsError("T20.39 counterexample archive output already exists")
         dump_canonical_json(REPO_ROOT / RECEIPT_PATH, expected_receipt)
         dump_canonical_json(REPO_ROOT / INDEX_PATH, expected_index)

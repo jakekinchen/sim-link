@@ -1,4 +1,5 @@
 import copy
+import tempfile
 import unittest
 
 from pathlib import Path
@@ -10,6 +11,7 @@ from scenesmith.robot_lab.counterexample_archive import (
     build_receipt_ref,
     build_seed_receipt,
     load_verified_sources,
+    derive_source_lifecycle_disposition,
     validate_lifecycle_transition,
     validate_routing,
 )
@@ -87,6 +89,62 @@ class CounterexampleArchiveTest(unittest.TestCase):
         self.assertEqual(index["entry_count"], 2)
         self.assertEqual(index["active_entry_count"], 1)
 
+        conflicting = copy.deepcopy(reference)
+        conflicting["posterior_calibrated"] = True
+        conflicting = sign_payload(conflicting)
+        conflicting_ref = build_receipt_ref(
+            path=Path(
+                "configurations/robot_lab/t20_39_counterexample_receipt_0002.json"
+            ),
+            payload=conflicting,
+        )
+        with self.assertRaisesRegex(ValueError, "conflicting duplicate"):
+            build_archive_index(
+                receipt_refs=[self.ref, conflicting_ref],
+                receipts=[self.receipt, conflicting],
+            )
+
+    def test_top_level_routing_escalation_fails_closed(self) -> None:
+        for field in (
+            "replay_eligible",
+            "policy_regression_blame_allowed",
+            "replay_gate_activation_allowed",
+            "training_ingestion_eligible",
+            "training_ingestion_authorized",
+        ):
+            with self.subTest(field=field):
+                drift = copy.deepcopy(self.receipt)
+                drift[field] = True
+                drift = sign_payload(drift)
+                ref = build_receipt_ref(path=RECEIPT_PATH, payload=drift)
+                with self.assertRaisesRegex(ValueError, "routing authority"):
+                    build_archive_index(receipt_refs=[ref], receipts=[drift])
+
+        cell_drift = copy.deepcopy(self.receipt)
+        cell_drift["cell"]["value"] = 1.0
+        cell_drift = sign_payload(cell_drift)
+        cell_ref = build_receipt_ref(path=RECEIPT_PATH, payload=cell_drift)
+        with self.assertRaisesRegex(ValueError, "cell contradicts"):
+            build_archive_index(receipt_refs=[cell_ref], receipts=[cell_drift])
+
+    def test_deterministic_order_rejects_sequence_permutation(self) -> None:
+        reference = copy.deepcopy(self.receipt)
+        reference["archive_sequence"] = 2
+        reference["counterexample_id"] = "cex-0002"
+        reference["lifecycle_state"] = "superseded"
+        reference["canonical_counterexample_id"] = "cex-0001"
+        reference["duplicate_of_counterexample_id"] = "cex-0001"
+        reference = sign_payload(reference)
+        reference_path = Path(
+            "configurations/robot_lab/t20_39_counterexample_receipt_0002.json"
+        )
+        reference_ref = build_receipt_ref(path=reference_path, payload=reference)
+        with self.assertRaisesRegex(ValueError, "entry drifted"):
+            build_archive_index(
+                receipt_refs=[reference_ref, self.ref],
+                receipts=[reference, self.receipt],
+            )
+
     def test_lifecycle_transitions_are_one_way_and_history_preserving(self) -> None:
         for target in ("superseded", "retired", "invalid"):
             validate_lifecycle_transition(current="active", target=target)
@@ -140,6 +198,33 @@ class CounterexampleArchiveTest(unittest.TestCase):
         drift["manifest"]["cells"][11]["value"] = 1.0
         with self.assertRaises(ValueError):
             build_seed_receipt(sources=drift)
+
+    def test_missing_and_stale_sources_require_invalid_without_deletion(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            missing = derive_source_lifecycle_disposition(
+                payload=self.receipt,
+                repo_root=Path(directory),
+            )
+            self.assertFalse(missing["sources_valid"])
+            self.assertEqual(missing["required_lifecycle_state"], "invalid")
+            self.assertFalse(missing["replay_eligible"])
+            self.assertFalse(missing["history_delete_allowed"])
+            self.assertTrue(missing["history_preserved"])
+
+            manifest_ref = self.receipt["source_refs"]["cell_manifest"]
+            manifest_path = Path(directory) / manifest_ref["path"]
+            manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            manifest_path.write_text("stale\n")
+            stale = derive_source_lifecycle_disposition(
+                payload=self.receipt,
+                repo_root=Path(directory),
+            )
+            reasons = {
+                (row["source"], row["reason"])
+                for row in stale["stale_or_missing_sources"]
+            }
+            self.assertIn(("cell_manifest", "file_drifted"), reasons)
+            self.assertIn(("scorecard_gate", "file_missing"), reasons)
 
 
 if __name__ == "__main__":
