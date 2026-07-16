@@ -952,6 +952,10 @@ physical resolution changed the spec's exact `~/.cache` path to
 `/Volumes/cerebro`. Correction `ad051d0` preserves lexical contract identity
 and resolves only for access control; smoke `5223d8f0...` now verifies.
 Reviewer 258 authorizes the corrected preflight retry. No marker exists.
+Corrected preflight `3c9b5af9...` and one-use permit `effa3b65...` now verify
+and are preserved on origin with closure `ac8abed1...` and processor smoke
+`5223d8f0...`. Reviewer 259 authorizes exactly one local-MPS counted
+replacement under unchanged Gate B; its first marker consumes the permit.
 
 ## Durable State
 

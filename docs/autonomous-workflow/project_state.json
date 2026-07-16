@@ -4537,10 +4537,10 @@
       "depends_on": ["T20.36j-B"],
       "active_brief_id": "203",
       "latest_verified_brief_id": null,
-      "review_decision_id": "258",
-      "source_commit": "ad051d0529a1a484a655dbcf046bfdb030b6983d",
-      "implementation_commits": ["b35acd182ca6520aa762f9adc11ab3cce1800422","9e9272c5a9dca584b69db5963036c22b37668f26","54339c2cca0ff575fa2842d8bd731bec4338f87b","ad051d0529a1a484a655dbcf046bfdb030b6983d"],
-      "result": "The third uncounted preflight passed closure, processor construction, guards, and checkpoint hashing but rejected the processor evidence because resolving the offloaded ~/.cache path changed the exact snapshot spelling. Correction ad051d0 preserves the lexical contract path while resolving only for access control. Real processor smoke 5223d8f0... now verifies against cb018b69.... Reviewer 258 authorizes the corrected preflight retry; no marker exists",
+      "review_decision_id": "259",
+      "source_commit": "a19d48df29465978a96c1a2aa67afbe1a46c7b2c",
+      "implementation_commits": ["b35acd182ca6520aa762f9adc11ab3cce1800422","9e9272c5a9dca584b69db5963036c22b37668f26","54339c2cca0ff575fa2842d8bd731bec4338f87b","ad051d0529a1a484a655dbcf046bfdb030b6983d","a19d48df29465978a96c1a2aa67afbe1a46c7b2c"],
+      "result": "Reviewer 259 verifies remotely preserved corrected preflight 3c9b5af9... and one-use permit effa3b65.... Closure ac8abed1... covers 57 packages, processor smoke 5223d8f0... records six safe files, and live stack/batch/checkpoint identities independently reproduce. Exactly one local-MPS counted replacement attempt is authorized under unchanged Gate B; its first marker consumes the permit",
       "pre_run_implementation": {
         "implementation_commit": "b35acd182ca6520aa762f9adc11ab3cce1800422",
         "metadata_collector_correction_commit": "9e9272c5a9dca584b69db5963036c22b37668f26",
@@ -4559,12 +4559,28 @@
         "pre_marker_preflight_failures": ["editable_lerobot_pkg_info_metadata_path","resolved_huggingface_blob_path_not_mapped_to_snapshot","offloaded_cache_physical_path_did_not_match_lexical_contract_path"],
         "processor_smoke_performed": true,
         "processor_smoke_identity_sha256": "5223d8f06f215e188e0b044ff2a078e0b1997da9120f93b9edd1be6cf14a75c3",
-        "processor_smoke_persisted": false,
+        "processor_smoke_persisted": true,
         "attempt_marker_created": false
       },
+      "pre_run_artifacts": {
+        "artifact_commit": "a19d48df29465978a96c1a2aa67afbe1a46c7b2c",
+        "required_source_commit": "ad3d89caf6856d98a27f4cae7ec63dbd95ca2fa8",
+        "installed_closure_identity_sha256": "ac8abed17c87b46cd0aa1dbead3ed6d675be0a1fa4cae0d5c07a55bbe685d0af",
+        "environment_manifest_identity_sha256": "3f645a25301532ec99923dbc4436fc17b11b7048c5900d487eb3f0103df434fa",
+        "processor_smoke_identity_sha256": "5223d8f06f215e188e0b044ff2a078e0b1997da9120f93b9edd1be6cf14a75c3",
+        "corrected_preflight_identity_sha256": "3c9b5af93848b28e6454451b56bbce0740820b9e6741274d1db91638f24d9de4",
+        "training_permit_identity_sha256": "effa3b655f33a4f5b9f7c95241c4ccde128d3282db285d626bc29185d25c51fc",
+        "authorized_attempt_count": 1,
+        "maximum_optimizer_updates": 2000,
+        "gate_b_objective_ratio": 0.1,
+        "gate_b_maximum_error_rad": 0.05,
+        "remote_preserved": true,
+        "attempt_marker_created": false,
+        "model_constructed": false
+      },
       "owner_authority_granted": ["install_exact_four_cached_distributions_offline","construct_auto_processor_offline_before_marker","execute_at_most_one_local_mps_replacement_attempt_after_verified_central_authority"],
-      "authority_granted": ["owner_authorized_exact_environment_correction","central_composer_granted_simulation_training_ready","install_exact_four_cached_distributions_offline","run_corrected_preflight_without_attempt_marker"],
-      "authority_not_granted": ["network_download","attempt_marker_before_remote_corrected_preflight_and_permit","second_attempt","retry","sweep","gate_b_threshold_change","gate_c_execution_before_gate_b_pass","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
+      "authority_granted": ["owner_authorized_exact_environment_correction","central_composer_granted_simulation_training_ready","exact_offline_install_verified","corrected_preflight_and_one_use_permit_verified","create_one_counted_attempt_marker","execute_one_local_mps_replacement_attempt"],
+      "authority_not_granted": ["network_download","second_attempt","retry","sweep","gate_b_threshold_change","gate_c_execution_before_gate_b_pass","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

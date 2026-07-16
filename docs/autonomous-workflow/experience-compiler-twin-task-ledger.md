@@ -1073,6 +1073,20 @@ Seven focused tests, 72 applicable post-install T20.36 tests, and 12 pointer
 tests pass. Reviewer 258 authorizes the corrected preflight retry; no marker
 exists.
 
+## 2026-07-16 - T20.36j corrected preflight and one-use permit verified
+
+The complete pre-marker run persisted closure `ac8abed1...` over 57 packages,
+environment manifest `3f645a25...`, processor smoke `5223d8f0...`, corrected
+preflight `3c9b5af9...`, and one-use permit `effa3b65...`. Artifact commit
+`a19d48d` is confirmed on origin. Independent reconstruction matches the live
+LeRobot stack, canonical batch, and raw checkpoint hashes. The preflight binds
+source/origin `ad3d89c`, records closure and processor stages complete, and
+leaves marker/model stages false. The permit imports the frozen T20.36h
+evaluator, schedule 0/100/250/500/1000/2000, maximum 2,000 updates, objective
+ratio 0.10, maximum physical error 0.05 rad, no retry/sweep, and no Gate C
+authority. Reviewer 259 authorizes exactly one local-MPS counted replacement;
+the first marker consumes it even on runtime failure.
+
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
 The owner opened a fresh simulation-only window (20:10 CDT through hard
