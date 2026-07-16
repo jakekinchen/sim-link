@@ -1,0 +1,92 @@
+{
+  "amended_gate_b_conjunction": {
+    "all_fixed_repetitions_must_be_deterministic": true,
+    "all_timesteps_and_joints_must_pass": true,
+    "gate_c_behavior_still_required": true,
+    "maximum_objective_ratio": 0.1,
+    "phase_joint_maximum_error_rad": {
+      "grasp": {
+        "elbow_flex": 0.1,
+        "gripper": 0.025,
+        "shoulder_lift": 0.05,
+        "shoulder_pan": 0.1,
+        "wrist_flex": 0.1,
+        "wrist_roll": 0.4
+      },
+      "reach": {
+        "elbow_flex": 0.1,
+        "gripper": 0.1,
+        "shoulder_lift": 0.05,
+        "shoulder_pan": 0.1,
+        "wrist_flex": 0.4,
+        "wrist_roll": 0.4
+      }
+    }
+  },
+  "brev_compute_started": false,
+  "calibration_implementation_commit": "fbdb0aad4f268268ae567836fc69866c97e528b1",
+  "decision": "frozen_consequence_gate_non_authorizing",
+  "external_compute_started": false,
+  "gate_c_authorized": false,
+  "gate_c_executed": false,
+  "identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "new_decode": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "policy_track_selected": false,
+  "promotion_eligible": false,
+  "reviewer_decision": {
+    "file_sha256": "54a731661a933053075aaceb3078ee6bd9e0a91567186e34c2811b70a887a443",
+    "id": "261",
+    "path": "docs/reviewer-messages/261-verify-t20-36k-consequence-calibration.md"
+  },
+  "schema_version": "scenesmith.t20_36l_frozen_consequence_gate.v1",
+  "simulation_policy_accepted": false,
+  "source_refs": {
+    "calibration": {
+      "file_sha256": "35954595f7c3e936d9b50f5d3f51299528feda7c866f1848faaa64ec2281f477",
+      "identity_sha256": "a3b391784eaca8fef2cb9ff6abe45cc21346cada8f9483be60692dac0faf1f66",
+      "path": "configurations/robot_lab/t20_36k_consequence_gate_design.json",
+      "schema_version": "scenesmith.t20_36k_consequence_gate_design.v1"
+    },
+    "historical_gate": {
+      "file_sha256": "3caf7e6a59c33755b839f989de1ad84a92559f364a14ed6e6919febecb7dc66d",
+      "identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+      "path": "configurations/robot_lab/t20_36d_exact_act_gate_b_control_spec.json",
+      "schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1"
+    },
+    "owner_decision": {
+      "file_sha256": "023f50b1a19455bbd9c000d62984868abab173d522076a062176a53a8dcdc05a",
+      "identity_sha256": "32d7e193c795c6b6b6cac0ce5ea138f09fe75da2f32dbf9404e2d11d31fb5a46",
+      "path": "configurations/robot_lab/t20_36l_owner_gate_b_amendment_decision.json",
+      "schema_version": "scenesmith.t20_36l_owner_decision.v1"
+    }
+  },
+  "strict_uniform_report_only": {
+    "all_original_negative_results_remain_visible": true,
+    "historical_results_relabelled": false,
+    "maximum_absolute_error_rad": 0.05
+  },
+  "target_horizon": 50,
+  "task_id": "T20.36l",
+  "threshold_derivation": {
+    "candidate_outputs_are_inputs": false,
+    "source": "t20_36k_model_free_symmetric_consequence_calibration",
+    "thresholds_frozen_before_retained_candidate_scoring": true
+  },
+  "timestep_phase_mapping": {
+    "grasp": [
+      32,
+      50
+    ],
+    "reach": [
+      0,
+      32
+    ]
+  }
+}

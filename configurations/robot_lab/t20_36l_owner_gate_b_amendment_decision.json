@@ -1,0 +1,41 @@
+{
+  "authority_not_granted": [
+    "threshold_fit_to_candidate_errors",
+    "model_load",
+    "model_inference",
+    "optimizer",
+    "new_decode",
+    "gate_c_execution",
+    "policy_acceptance",
+    "physical_actuation",
+    "external_compute",
+    "brev_compute"
+  ],
+  "authorization_timing": "pre_registered_before_t20_36j_result_and_reaffirmed_after",
+  "authorized_scope": [
+    "freeze_candidate_independent_consequence_thresholds",
+    "retain_uniform_metric_as_report_only",
+    "score_existing_act_and_smolvla_evidence",
+    "route_pass_only_to_separate_gate_c_authority"
+  ],
+  "brev_compute_started": false,
+  "external_compute_started": false,
+  "gate_c_authorized": false,
+  "gate_c_executed": false,
+  "identity_sha256": "32d7e193c795c6b6b6cac0ce5ea138f09fe75da2f32dbf9404e2d11d31fb5a46",
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "new_decode": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "owner_statement_record": "Proceed. I authorize all of this.",
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "policy_track_selected": false,
+  "promotion_eligible": false,
+  "schema_version": "scenesmith.t20_36l_owner_decision.v1",
+  "simulation_policy_accepted": false,
+  "source_calibration_identity_sha256": "a3b391784eaca8fef2cb9ff6abe45cc21346cada8f9483be60692dac0faf1f66",
+  "task_id": "T20.36l"
+}

@@ -1,0 +1,189 @@
+{
+  "brev_compute_started": false,
+  "candidate_scores": {
+    "ACT": {
+      "action_gate_status": "fail_with_retained_witness",
+      "aggregate_witness_sufficient_to_fail": true,
+      "amended_gate_b_passed": false,
+      "candidate": "ACT",
+      "deterministic_repetitions_passed": true,
+      "failure_witnesses": [
+        {
+          "excess_rad": 0.07531747522817316,
+          "frozen_threshold_rad": 0.05,
+          "joint_name": "shoulder_lift",
+          "maximum_absolute_error_rad": 0.12531747522817316,
+          "phase_group": "reach",
+          "timestep": 0
+        },
+        {
+          "excess_rad": 0.04248722989824316,
+          "frozen_threshold_rad": 0.4,
+          "joint_name": "wrist_roll",
+          "maximum_absolute_error_rad": 0.4424872298982432,
+          "phase_group": "reach",
+          "timestep": 0
+        },
+        {
+          "excess_rad": 0.21663626124038673,
+          "frozen_threshold_rad": 0.025,
+          "joint_name": "gripper",
+          "maximum_absolute_error_rad": 0.24163626124038673,
+          "phase_group": "grasp",
+          "timestep": 49
+        }
+      ],
+      "gate_c_route_open": false,
+      "objective_ratio": 0.05491797738436701,
+      "objective_ratio_passed": true,
+      "retained_decoded_tensor_available": false,
+      "source_final_evaluation_identity_sha256": "16d868b0d75163e64534983617c0d505410fb002d23c61dd3ca352567fc5a48a",
+      "strict_uniform_gate_passed": false,
+      "strict_uniform_maximum_error_rad": 0.4424872298982432,
+      "strict_uniform_status": "reported_original_negative_unchanged",
+      "strict_uniform_threshold_rad": 0.05
+    },
+    "SmolVLA": {
+      "action_gate_status": "indeterminate_fail_closed_missing_retained_tensor",
+      "amended_gate_b_passed": false,
+      "candidate": "SmolVLA",
+      "deterministic_repetitions_passed": true,
+      "gate_c_route_open": false,
+      "objective_ratio": 0.022866289854542872,
+      "objective_ratio_passed": true,
+      "retained_action_hashes": [
+        "4e347f1aca45c75302b0cc4be6e6134ee9c4fefddde752e91da280ae7e9bac61",
+        "b0bfdec2be39340042a99d6ff5f8ce25440f121518c75a29dc5117ffee7455a4",
+        "b8e1154dc233ae49d56877caeb95bc51d5f1fb2ed77e40f2120d66fab85232ee",
+        "b578627eb74d8e86277118ef141d869da885efc287140576cdb25a700b984eb6",
+        "64e925f9a8f4c8e43a703bfab2bfaba0355202a0849c8b9256f57c55b1f29b4d"
+      ],
+      "retained_decoded_tensor_available": false,
+      "source_final_evaluation_identity_sha256": "7dfa8876293a48e1b09cbe3c3ab38478226ba73305639779823ef5cbf149f5cd",
+      "strict_uniform_gate_passed": false,
+      "strict_uniform_maximum_error_rad": 0.2660243509765625,
+      "strict_uniform_status": "reported_original_negative_unchanged",
+      "strict_uniform_threshold_rad": 0.05
+    }
+  },
+  "candidate_source_refs": {
+    "act_localization": {
+      "file_sha256": "b58fc79fb3929adab1b486780c88987c923f7df22fb9b73458819cfedd738cc4",
+      "identity_sha256": "472e5ec5aabf36d9f280d2daf3f90b40988ccbc6d236b27cf3b3289755681ffb",
+      "path": "configurations/robot_lab/t20_36f_act_decode_localization_result.json",
+      "schema_version": "scenesmith.t20_36f_act_decode_localization_result.v1"
+    },
+    "act_result": {
+      "file_sha256": "3eb305e3e0892c76357d237076b5405af45941fbaa9d0ee5434fb3b863cc4ec5",
+      "identity_sha256": "2ea2c2460527ee863275da11a008aa2b75832f08040daf4fd64459c9520769c6",
+      "path": "configurations/robot_lab/t20_36e_exact_act_gate_b_control_result.json",
+      "schema_version": "scenesmith.t20_36e_exact_act_gate_b_control_result.v1"
+    },
+    "act_run": {
+      "file_sha256": "a1944bce0a0941ae087f6d2b58a5a67a9568f0493fd8982a1e3c24ab99960249",
+      "identity_sha256": "9911e51c45dad591691502a47d6ea3baa871ca6c3e3b6b549f81bc2af4423478",
+      "path": "outputs/robot_lab/t20_36e_exact_act_gate_b_control_run_001/run_summary.json",
+      "schema_version": "scenesmith.t20_36e_exact_act_gate_b_control_run.v1"
+    },
+    "smolvla_result": {
+      "file_sha256": "c5b31b9568ab99f6eb4431431cf2a43da62713fcaf8dd71a68f4928a991487da",
+      "identity_sha256": "08ef923d1ebcffde26055834db271e92bb068e0eb09f75c60078f2d8b548c4a1",
+      "path": "configurations/robot_lab/t20_36j_exact_smolvla_gate_b_result.json",
+      "schema_version": "scenesmith.t20_36j_exact_smolvla_gate_b_result.v1"
+    },
+    "smolvla_run": {
+      "file_sha256": "16f7617c435e8a7091961bdb897b30baa170be2e99dd9f2953f638d3624551c7",
+      "identity_sha256": "7e7304c5217bed1c95ae5403c009d1f4aa78a75c387f5449299dd50421d2a1bb",
+      "path": "outputs/robot_lab/t20_36j_exact_smolvla_gate_b/run_summary.json",
+      "schema_version": "scenesmith.t20_36j_exact_smolvla_gate_b_run.v1"
+    }
+  },
+  "decision": "no_amended_gate_b_pass_smolvla_tensor_missing",
+  "external_compute_started": false,
+  "gate_b_amendment_frozen": true,
+  "gate_c_authorized": false,
+  "gate_c_executed": false,
+  "historical_results_relabelled": false,
+  "identity_sha256": "0f8ae393c48a2b7384033ac37b9994959a1a826565f00319e03115e53da786f1",
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "new_authority_required": "model_load_and_inference_only_tensor_reproduction",
+  "new_decode": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "policy_track_selected": false,
+  "promotion_eligible": false,
+  "retained_evidence_scoring_complete": true,
+  "retained_tensor_inventory": {
+    "ACT": {
+      "checkpoint_weight_files_not_read": [
+        "model.safetensors"
+      ],
+      "embedded_50x6_numeric_tensor_paths": [],
+      "final_evaluation_keys": [
+        "all_actions_within_threshold",
+        "all_repetition_action_hashes_match",
+        "baseline_objective_mean",
+        "final_to_baseline_supervised_objective_ratio",
+        "gate_b_control_passed",
+        "identity_sha256",
+        "maximum_absolute_error_rad",
+        "objective_ratio_within_threshold",
+        "optimizer_update_count",
+        "repetitions",
+        "schema_version",
+        "supervised_objective_mean",
+        "task_id"
+      ],
+      "model_load_or_inference_performed": false,
+      "retained_decoded_action_tensor_available": false,
+      "retained_decoded_action_tensor_files": [],
+      "run_root": "outputs/robot_lab/t20_36e_exact_act_gate_b_control_run_001",
+      "run_summary_file_sha256": "a1944bce0a0941ae087f6d2b58a5a67a9568f0493fd8982a1e3c24ab99960249"
+    },
+    "SmolVLA": {
+      "checkpoint_weight_files_not_read": [
+        "model.safetensors",
+        "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+        "policy_preprocessor_step_5_normalizer_processor.safetensors"
+      ],
+      "embedded_50x6_numeric_tensor_paths": [],
+      "final_evaluation_keys": [
+        "all_actions_within_threshold",
+        "all_seed_repeats_deterministic",
+        "baseline_objective_mean",
+        "final_to_baseline_supervised_objective_ratio",
+        "gate_b_passed",
+        "identity_sha256",
+        "inference_rows",
+        "maximum_absolute_error_rad",
+        "objective_ratio_within_threshold",
+        "objective_seeds",
+        "optimizer_update_count",
+        "schema_version",
+        "supervised_objective_by_seed",
+        "supervised_objective_mean",
+        "task_id"
+      ],
+      "model_load_or_inference_performed": false,
+      "retained_decoded_action_tensor_available": false,
+      "retained_decoded_action_tensor_files": [],
+      "run_root": "outputs/robot_lab/t20_36j_exact_smolvla_gate_b",
+      "run_summary_file_sha256": "16f7617c435e8a7091961bdb897b30baa170be2e99dd9f2953f638d3624551c7"
+    }
+  },
+  "schema_version": "scenesmith.t20_36l_retained_candidate_scoring.v1",
+  "simulation_policy_accepted": false,
+  "smolvla_scoring_blocker": "full_50x6_per_seed_decoded_tensors_not_retained",
+  "smolvla_scoring_complete": false,
+  "spec_ref": {
+    "file_sha256": "730d0fc069d9902ba721770aa384fde041b3ba405bcbb852fe36ec224adfe5e5",
+    "identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
+    "path": "configurations/robot_lab/t20_36l_frozen_consequence_gate.json",
+    "schema_version": "scenesmith.t20_36l_frozen_consequence_gate.v1"
+  },
+  "task_id": "T20.36l"
+}
