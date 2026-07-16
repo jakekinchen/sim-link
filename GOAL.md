@@ -150,6 +150,13 @@ zero fitted rows. Producer and independent verification exit 0 with result
 `d238379b...`. Reviewer 290 verifies T20.42/R0 and routes to a fresh Brief 219
 for T20.43 ACT. This is scripted-expert dataset evidence, not learned-policy,
 Gate C, metric-twin, hardware, transfer, or promotion proof.
+Origin commit `f46c8aa` now preserves that result boundary. Brief 219 activates
+T20.43 implementation only: exact R0 Gate A, the full official ACT recipe at
+10,000 updates, fixed checkpoints `[0,500,1000,2500,5000,7500,10000]`,
+chunk-50 plus receding-10 rollout-primary strict-v2 evaluation, complete trace/
+mirror evidence, and task-specific central/preflight/one-use contracts. Model,
+optimizer, inference, rollout, and Gate C remain closed until implementation
+and a separate materialized pre-run boundary are reviewed on origin.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
