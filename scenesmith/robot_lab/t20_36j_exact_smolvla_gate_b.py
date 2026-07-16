@@ -96,17 +96,10 @@ def collect_installed_closure() -> dict[str, Any]:
         if not raw_name:
             continue
         name = canonicalize_name(raw_name)
-        metadata_root = getattr(distribution, "_path", None)
-        metadata_path = (
-            Path(metadata_root) / "METADATA" if metadata_root is not None else None
-        )
-        if metadata_path is None or not metadata_path.is_file():
-            raise ValueError(f"T20.36j METADATA path is unavailable for {name}")
+        metadata_bytes = _distribution_metadata_bytes(distribution, name=name)
         row = {
             "version": distribution.version,
-            "metadata_sha256": hashlib.sha256(
-                metadata_path.read_bytes()
-            ).hexdigest(),
+            "metadata_sha256": hashlib.sha256(metadata_bytes).hexdigest(),
             "requires_dist": list(distribution.requires or []),
         }
         if name in distributions and distributions[name] != row:
@@ -121,6 +114,23 @@ def collect_installed_closure() -> dict[str, Any]:
     )
     verify_installed_closure(closure)
     return closure
+
+
+def _distribution_metadata_bytes(distribution: Any, *, name: str) -> bytes:
+    """Read wheel METADATA or its byte-identical editable PKG-INFO form."""
+
+    candidates: list[Path] = []
+    metadata_root = getattr(distribution, "_path", None)
+    if metadata_root is not None:
+        root = Path(metadata_root)
+        candidates.extend((root / "METADATA", root / "PKG-INFO"))
+    for entry in distribution.files or []:
+        if Path(entry).name in {"METADATA", "PKG-INFO"}:
+            candidates.append(Path(distribution.locate_file(entry)))
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate.read_bytes()
+    raise ValueError(f"T20.36j METADATA or PKG-INFO is unavailable for {name}")
 
 
 class ProcessorAccessGuard:

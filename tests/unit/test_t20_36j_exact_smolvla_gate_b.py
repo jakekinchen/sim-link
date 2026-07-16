@@ -20,6 +20,7 @@ from scenesmith.robot_lab.t20_36j_b_corrected_preflight_contract import (
     verify_contract_file,
 )
 from scenesmith.robot_lab.t20_36j_exact_smolvla_gate_b import (
+    _distribution_metadata_bytes,
     build_attempt_marker,
     build_failure,
     build_failure_result,
@@ -186,6 +187,23 @@ class T2036jExactSmolVLAGateBTests(unittest.TestCase):
                 guard.opened_snapshot_files, {"processor_config.json"}
             )
             self.assertTrue(guard.network_attempted)
+
+    def test_editable_distribution_pkg_info_is_valid_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "lerobot.egg-info"
+            root.mkdir()
+            (root / "PKG-INFO").write_bytes(b"Name: lerobot\nVersion: 0.6.1\n")
+
+            class EditableDistribution:
+                _path = root
+                files = None
+
+            self.assertEqual(
+                _distribution_metadata_bytes(
+                    EditableDistribution(), name="lerobot"
+                ),
+                b"Name: lerobot\nVersion: 0.6.1\n",
+            )
 
     @staticmethod
     def _marker_environment():
