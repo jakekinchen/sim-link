@@ -171,3 +171,11 @@ prospective owner `dee9ae59...`, request `c325cb12...`, and decision
 verifies implementation and marker-first 2,500-update limits, but requires
 commit/push/origin confirmation before any authority artifact is materialized.
 No model or optimizer action exists.
+
+## Verified Optimizer Authority Boundary
+
+Implementation `ae9992b` is on origin. Owner `dee9ae59...`, decision
+`8834322d...`, preflight `672c59cc...`, and permit `f9bad1ae...` verify against
+spec `50e0569d...`, the exact X/base trees, 85.20 GB free, and absent outputs.
+Reviewer 275 permits only runner implementation next. No marker, model,
+optimizer, or training action exists.

@@ -1068,6 +1068,10 @@ prospective owner `dee9ae59...`, request `c325cb12...`, and decision
 `8834322d...` with only `simulation_training_ready`. Reviewer 274 requires the
 implementation to be on origin before materializing preflight/permit artifacts;
 no model or optimizer action exists.
+Implementation `ae9992b` is on origin. Exact optimizer owner grant
+`dee9ae59...`, central decision `8834322d...`, preflight `672c59cc...`, and
+one-use permit `f9bad1ae...` now verify. Reviewer 275 permits only runner
+implementation before a separate pre-run review; no model or optimizer exists.
 
 ## Durable State
 
