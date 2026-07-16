@@ -127,3 +127,16 @@ held-out exclusion, and all attempt/result paths remain absent and unaliased.
 After acceptance origin confirmation and only while the owner window is active,
 the sole marker may consume the replacement and run the unchanged campaign.
 No marker, model, optimizer, checkpoint, or rollout exists at this boundary.
+
+## Window closeout
+
+Reviewer 302 stops before the marker at `2026-07-16T18:50:03-05:00`. Only
+6,353 seconds remained before hard close, versus 7,506 seconds consumed by the
+closest completed standardized 5,000-update/10-rollout campaign. This is a
+completion-budget comparison, not an ACT runtime estimate; there is no measured
+proof that the 10,000-update/14-rollout noninterruptible replacement fits.
+Acceptance commit `5f2abf3` is exact on origin, all attempt/run/result paths are
+absent, and the replacement is unconsumed and capability-unresolved. After the
+current grant expires, a future owner window must separately review a fresh
+administrative authority epoch that proves marker absence without changing the
+recipe, attempt ordinal, or one-replacement limit.

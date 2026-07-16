@@ -235,6 +235,13 @@ only the sole unchanged 10,000-update ACT replacement after signed acceptance
 `525de8dc...` is exact on origin and the owner window remains active. No marker,
 model, optimizer, checkpoint, rollout, retry, hardware, network, external
 compute, or Brev action has occurred.
+Acceptance commit `5f2abf3` is exact on origin. Reviewer 302 stops before the
+one-use marker because only 6,353 seconds remained to hard close, while the
+closest completed standardized campaign consumed 7,506 seconds for half the
+updates and fewer rollouts; that comparison is a budget bound, not an ACT speed
+claim. T20.43b remains unconsumed and capability-unresolved. The next window
+must refresh only the expired administrative authority epoch after proving the
+marker is still absent; it must not create a second replacement.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
