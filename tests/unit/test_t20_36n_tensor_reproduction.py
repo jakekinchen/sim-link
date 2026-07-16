@@ -27,6 +27,7 @@ class T2036nTensorReproductionTest(unittest.TestCase):
             "source_training_permit_identity_sha256": "2" * 64,
             "lerobot_stack_identity_sha256": "3" * 64,
             "batch_evidence_identity_sha256": "4" * 64,
+            "required_dependency_versions": {"pyarrow": "25.0.0"},
         }
 
     def test_preflight_and_permit_are_inference_only_and_marker_first(self) -> None:
@@ -36,6 +37,7 @@ class T2036nTensorReproductionTest(unittest.TestCase):
             python_major_minor=[3, 12],
             mps_available=True,
             checkpoint_tree=self.sources["checkpoint_tree"],
+            dependency_versions=self.sources["required_dependency_versions"],
             free_disk_bytes=10_000_000_000,
             source_commit="6" * 40,
             remote_source_commit="6" * 40,
@@ -66,6 +68,7 @@ class T2036nTensorReproductionTest(unittest.TestCase):
             python_major_minor=[3, 12],
             mps_available=True,
             checkpoint_tree=self.sources["checkpoint_tree"],
+            dependency_versions=self.sources["required_dependency_versions"],
             free_disk_bytes=10_000_000_000,
             source_commit="6" * 40,
             remote_source_commit="7" * 40,
@@ -102,6 +105,7 @@ class T2036nTensorReproductionTest(unittest.TestCase):
             python_major_minor=[3, 12],
             mps_available=True,
             checkpoint_tree=self.sources["checkpoint_tree"],
+            dependency_versions=self.sources["required_dependency_versions"],
             free_disk_bytes=10_000_000_000,
             source_commit="6" * 40,
             remote_source_commit="6" * 40,

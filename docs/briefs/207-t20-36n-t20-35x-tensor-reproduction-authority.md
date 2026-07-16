@@ -20,6 +20,9 @@ or a new candidate.
 - Construct and load the exact retained T20.35x checkpoint once locally after
   fresh central composition, runtime preflight, one-use permit, review, remote
   preservation, and attempt-marker creation.
+- Restore only the exact cached `pyarrow==25.0.0` distribution offline if the
+  live source runtime still reports the known `24.0.0` drift; reject any other
+  dependency difference and bind the complete live version map into preflight.
 - Run exactly inference seeds 20260721-20260725 with two repeats each on the
   original canonical one-batch observation.
 - Persist ten 50x6 physical action tensors and require their hashes to equal
@@ -47,7 +50,8 @@ or a new candidate.
 
 No optimizer, training update, checkpoint mutation, new seed, third repeat,
 threshold change, Gate C execution, policy acceptance/promotion, hardware,
-camera, serial, network/download, external compute, or Brev.
+camera, serial, network/download, any dependency change other than the exact
+offline PyArrow 24-to-25 restore above, external compute, or Brev.
 
 ## Acceptance
 

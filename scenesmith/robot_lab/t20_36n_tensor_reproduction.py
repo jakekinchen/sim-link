@@ -122,6 +122,7 @@ def load_verified_sources(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         ],
         "lerobot_stack_identity_sha256": spec["lerobot_stack_identity_sha256"],
         "batch_evidence_identity_sha256": spec["dataset_action_chunk_sha256"],
+        "required_dependency_versions": spec["required_dependency_versions"],
         "source_run": run,
         "source_result": authority_sources["t20_35x_result"],
         "t20_35x_spec": spec,
@@ -139,6 +140,7 @@ def build_runtime_preflight(
     python_major_minor: list[int],
     mps_available: bool,
     checkpoint_tree: list[dict[str, Any]],
+    dependency_versions: dict[str, str],
     free_disk_bytes: int,
     source_commit: str,
     remote_source_commit: str,
@@ -164,6 +166,7 @@ def build_runtime_preflight(
         python_major_minor != [3, 12]
         or mps_available is not True
         or checkpoint_tree != sources.get("checkpoint_tree")
+        or dependency_versions != sources.get("required_dependency_versions")
         or isinstance(free_disk_bytes, bool)
         or not isinstance(free_disk_bytes, int)
         or free_disk_bytes < MINIMUM_FREE_DISK_BYTES
@@ -203,6 +206,8 @@ def build_runtime_preflight(
             "python_major_minor": python_major_minor,
             "mps_available": True,
             "checkpoint_tree": checkpoint_tree,
+            "dependency_versions": dependency_versions,
+            "offline_dependency_restore_only": True,
             "checkpoint_bytes_hashed": True,
             "checkpoint_tensor_deserialized": False,
             "minimum_free_disk_bytes": MINIMUM_FREE_DISK_BYTES,
@@ -242,6 +247,7 @@ def verify_runtime_preflight(
         python_major_minor=payload.get("python_major_minor"),
         mps_available=payload.get("mps_available"),
         checkpoint_tree=payload.get("checkpoint_tree"),
+        dependency_versions=payload.get("dependency_versions"),
         free_disk_bytes=payload.get("free_disk_bytes"),
         source_commit=payload.get("source_commit"),
         remote_source_commit=payload.get("remote_source_commit"),

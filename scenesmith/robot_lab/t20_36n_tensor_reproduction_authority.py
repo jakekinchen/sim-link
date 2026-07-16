@@ -61,6 +61,7 @@ VALID_FROM = "2026-07-16T01:44:12-05:00"
 VALID_UNTIL = "2026-07-16T09:44:12-05:00"
 EVALUATION_TIME = VALID_FROM
 AUTHORIZED_ACTIONS = (
+    "offline_restore_exact_source_dependency",
     "simulation_model_construction",
     "simulation_model_load",
     "simulation_model_inference",
@@ -195,6 +196,13 @@ def build_owner_grant(
             "inference_seed_count": INFERENCE_SEED_COUNT,
             "repeats_per_seed": REPEATS_PER_SEED,
             "existing_hashes_must_reproduce_before_scoring": True,
+            "offline_dependency_restore": {
+                "package": "pyarrow",
+                "from_version": "24.0.0",
+                "to_version": "25.0.0",
+                "cache_only": True,
+                "reject_any_other_dependency_drift": True,
+            },
             "network_access_authorized": False,
             "optimizer_authorized": False,
             "training_retry_authorized": False,

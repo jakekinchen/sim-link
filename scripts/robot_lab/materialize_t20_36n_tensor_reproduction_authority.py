@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import importlib.metadata
+import os
 import shutil
 import subprocess
 import sys
@@ -76,12 +77,9 @@ def main() -> int:
     stack = activate_lerobot_stack(repo_root=REPO_ROOT, stage="inference")
     if stack["identity_sha256"] != sources["lerobot_stack_identity_sha256"]:
         raise ValueError("T20.36n LeRobot stack identity drifted")
-    dependencies = {
-        package: importlib.metadata.version(package)
-        for package in sources["t20_35x_spec"]["required_dependency_versions"]
-    }
-    if dependencies != sources["t20_35x_spec"]["required_dependency_versions"]:
-        raise ValueError("T20.36n installed dependency versions drifted")
+    dependencies = _ensure_exact_dependency_versions(
+        sources["required_dependency_versions"]
+    )
     load_t20_35x_batch(sources=sources)
 
     import torch
@@ -99,6 +97,7 @@ def main() -> int:
         python_major_minor=[sys.version_info.major, sys.version_info.minor],
         mps_available=torch.backends.mps.is_available(),
         checkpoint_tree=_file_tree(Path(SOURCE_CHECKPOINT_ROOT)),
+        dependency_versions=dependencies,
         free_disk_bytes=shutil.disk_usage(REPO_ROOT).free,
         source_commit=source_commit,
         remote_source_commit=remote_commit,
@@ -133,6 +132,50 @@ def _file_tree(root: Path) -> list[dict[str, object]]:
             }
         )
     return rows
+
+
+def _ensure_exact_dependency_versions(expected: dict[str, str]) -> dict[str, str]:
+    actual = {package: importlib.metadata.version(package) for package in expected}
+    if actual == expected:
+        return actual
+    differences = {
+        package: (actual.get(package), expected[package])
+        for package in expected
+        if actual.get(package) != expected[package]
+    }
+    if differences != {"pyarrow": ("24.0.0", "25.0.0")}:
+        raise ValueError("T20.36n installed dependency versions drifted")
+    uv = shutil.which("uv")
+    if uv is None:
+        raise ValueError("T20.36n offline uv executable is unavailable")
+    environment = os.environ.copy()
+    environment.update(
+        {
+            "UV_OFFLINE": "1",
+            "UV_PYTHON_DOWNLOADS": "never",
+            "PIP_DISABLE_PIP_VERSION_CHECK": "1",
+        }
+    )
+    subprocess.run(
+        [
+            uv,
+            "pip",
+            "install",
+            "--offline",
+            "--python",
+            str(REPO_ROOT / "external/lerobot/.venv/bin/python"),
+            "pyarrow==25.0.0",
+        ],
+        cwd=REPO_ROOT,
+        env=environment,
+        check=True,
+    )
+    restored = {
+        package: importlib.metadata.version(package) for package in expected
+    }
+    if restored != expected:
+        raise ValueError("T20.36n offline dependency restore failed closed")
+    return restored
 
 
 def _git(*args: str) -> str:
