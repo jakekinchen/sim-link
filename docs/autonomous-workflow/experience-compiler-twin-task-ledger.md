@@ -29,6 +29,19 @@ tests pass with offline lint/format and compilation. Reviewer 299 opens only
 model-free materialization after origin; model, optimizer, rollout, retry,
 hardware, network, external compute, and Brev remain closed.
 
+## 2026-07-16 - T19.2e WCW-1A batched replacement verified and delivered
+
+Brief 223/Reviewer 300 accepts the geometry-preserving WCW-1A-R1.1 packaging
+at `fb0800e`. Five standard millimetre 3MF files provide a two-job 256 mm route
+(coupon, then all 12 production parts together) and a four-job 180 mm fallback.
+Every named object binds to its source STL and passes OPC/XML, CRC, triangle,
+z=0, bed, spacing, margin, and exact-part-set checks; canonical comparison
+proves all 13 STLs are geometrically unchanged. ZIP `553e8c63...` is 5,959,684
+bytes with 54 CRC-valid entries and 52 manifest artifacts. Gmail replacement
+message `19f6d4d052383966` tells the owner-named printer to disregard the older
+ZIP and attaches the new ZIP plus README. Native Bambu Studio slice and all
+physical print/QC evidence remain open and grant no T19.2c or robot authority.
+
 ## 2026-07-16 - T19.2d WCW-1A print package verified and delivered
 
 Brief 221/Reviewer 298 accepts the offline WCW-1A-R1 printer package preserved
@@ -2245,6 +2258,7 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T19.1 | verified | M16, read authority | Run read-only servo/firmware/register census | Brief 212/Reviewer 282; centrally composed session `t19-1-20260716-0712-cdt`; six model-777 firmware-3.9 servos, torque off 6/6, 54/54 reads, zero retries/writes/torque changes/motion/unexpected operations, one no-torque close, no cameras; manifest `f423f5d3...` |
 | T19.2 | in_progress | T19.1, motion authority | Calibrate cameras, joint offsets, kinematics, timing, and gripper aperture | Brief 213/Reviewer 283 readiness; Brief 214/Reviewer 284 target; Brief 215/Reviewer 285 fixture-only +8-tick/0.7033-degree wrist-roll watchdog/deadman/exact-return harness `1282784f...`; T19.2c next binds printed-target evidence and central one-use live authority, with no gate yet |
 | T19.2d | verified | historical WCW-1, owner request | Produce and deliver a printer-ready weighted AprilTag cube without opening physical calibration authority | Brief 221/Reviewer 298; source commit `b24ac30`; 13 watertight/manifold/outward STLs with zero source self-intersections; six ordinary nominal 20 mm balls; tag36h11 IDs 0-4; ZIP `b650af2a...`; Gmail message `19f6d356a4121193`; physical print/QC remains unproven |
+| T19.2e | verified | T19.2d, owner batched-plate request | Batch the verified WCW-1A parts for Bambu-class plates and deliver a replacement package | Brief 223/Reviewer 300; source commit `fb0800e`; standard-3MF two-job 256 mm and four-job 180 mm routes; unchanged 13-STL geometry; ZIP `553e8c63...`; Gmail replacement `19f6d4d052383966`; native slice/physical QC remains unproven |
 | T19.3 | pending | T19.1-T19.2, motion authority | Identify delay, saturation, settling, directionality, backlash, friction, compliance | Per-joint fitted distributions and held-out trajectory evidence |
 | T19.4 | pending | T19.2-T19.3, contact authority | Identify fingertip/table friction, slip, force/current, and object profiles | Held-out grasp/lift/slip/release envelope |
 | T19.5 | pending | T16.4, T19.2-T19.4 | Fit posterior and run held-out qualification | Every TwinQualificationSpec metric passes or is explicitly failed |

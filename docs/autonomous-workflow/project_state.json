@@ -5415,12 +5415,13 @@
       "authority_not_granted": ["physical_print_proof","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","package_download","external_compute","brev_compute","promotion"]
     },
     "T19.2e": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T19.2d", "owner_batched_plate_request"],
-      "active_brief_id": "223",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
-      "result": "Add validated 256 mm full-kit and 180 mm staged Bambu-compatible 3MF layouts without changing frozen WCW-1A-R1 geometry",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "223",
+      "review_decision_id": "300",
+      "source_commit": "fb0800e1709f588e4c5740dae8bf0c53ac5af9c4",
+      "result": "Reviewer 300 accepts the geometry-preserving standard-3MF WCW-1A-R1.1 replacement at fb0800e: two jobs on 256 mm or four on 180 mm, ZIP 553e8c63 CRC/manifest verified, and Gmail replacement message 19f6d4d052383966 delivered with ZIP plus README",
       "authority_granted": ["read_verified_t19_2d_package", "activate_brief_223", "generate_offline_batched_3mf_layouts", "rebuild_and_send_verified_replacement_package"],
       "authority_not_granted": ["physical_print_proof","printer_access","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","package_download","external_compute","brev_compute","promotion"]
     }
