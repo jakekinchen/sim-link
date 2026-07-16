@@ -122,3 +122,13 @@ denoise-step records, the five start-zero hashes, base-noise checks before each
 decode, and marker-first tensor access. Reviewer 269 authorizes the sole
 baseline attempt only after this boundary is committed, pushed, and confirmed
 on origin. No marker or model action exists yet.
+
+## Verified Runner Boundary
+
+The one-use runner now binds exact live observation/target checks, source RNG
+initialization, noise-before-decode verification, start-zero-first hash gating,
+50 decoded chunks, 500 complete denoise records, frozen masked scoring, and
+fail-closed retained results. Denoise matrices use signed base64 float32
+little-endian payloads with exact shape and byte hashes so remote retention
+does not discard any path value. Reviewer 270 verifies the complete runner
+diff and requires commit/push/origin confirmation before the marker exists.

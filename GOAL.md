@@ -1044,6 +1044,10 @@ central decision `e649d3dc...`, exact preflight `f0794abd...`, and permit
 runtime, and origin. Reviewer 269 authorizes exactly one marker-first
 five-state/five-seed/two-repeat capture after this pre-run boundary is remotely
 preserved. No optimizer or Gate C authority follows, and no marker exists yet.
+The permit-bound runner and signed tensor/trajectory/result contracts now pass
+27 combined tests plus a live five-observation dataset-only preflight. Reviewer
+270 verifies the runner and exact compact retention of all 500 denoise records;
+this boundary must be pushed and origin-confirmed before its marker can exist.
 
 ## Durable State
 
