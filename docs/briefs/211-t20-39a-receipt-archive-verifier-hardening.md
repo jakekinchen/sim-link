@@ -2,7 +2,7 @@
 
 ## Status
 
-Active additive correction after the closeout review independently identified
+Verified additive correction after the closeout review independently identified
 two fail-closed verification gaps in the new T20.38/T20.39 model-free
 contracts. Historical commits and signed artifacts remain preserved; any
 replacement artifact is a new derived view, never a rewrite of its source.
@@ -49,3 +49,11 @@ No model construction/load/inference, optimizer, training, simulation or policy
 replay, Gate C, replay-gate activation, training ingestion, policy blame,
 source rewrite, hardware/camera/serial access, network/download, external
 compute, Brev, promotion, or destructive deletion.
+
+## Verified Result
+
+Implementation `83d51c5` is exact on origin. Amended T20.38 receipt
+`042bf0be...`, T20.39 receipt `60babc53...`, and archive index `043d45b3...`
+reconstruct exactly. Twenty-four relevant tests and 12 pointer tests pass.
+Reviewer 280 verifies the hardening, amends Reviewer 278/279's verifier-
+completeness claims, and returns the substantive route to blocked T20.41.

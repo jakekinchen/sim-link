@@ -2,7 +2,7 @@
 
 ## Status
 
-Active model-free filler after Reviewer 277 closes the current Gate C route.
+Verified model-free filler, amended by Brief 211 / Reviewer 280.
 The owner overnight direction explicitly routes T20.38 before T20.39 when no
 candidate Gate C route remains.
 
@@ -61,3 +61,12 @@ selection. It agrees with analytic source success while explicitly withholding
 pure-policy, actual-MuJoCo, physical, training, and promotion claims. Twenty-
 four tests and exact write/verify pass. Reviewer 278 verifies T20.38 and
 activates Brief 210 / T20.39.
+
+## Additive Verification Amendment
+
+Brief 211 preserves the original receipt in history and replaces the active
+derived view with `042bf0be...`. Hard actor/evidence blockers now preempt the
+effective bottleneck without changing raw margins; missing-source and genuine
+evaluator-contradiction cases fail closed. Implementation `83d51c5` and
+Reviewer 280 amends the completeness claim while preserving the analytic-only
+proof boundary.

@@ -2,7 +2,7 @@
 
 ## Status
 
-Active model-free filler after Reviewer 278 verifies T20.38.
+Verified model-free filler, amended by Brief 211 / Reviewer 280.
 
 ## Objective
 
@@ -62,3 +62,12 @@ not remotely retained, seed `0001` is evidence-only and replay-ineligible.
 Fifteen tests and exact write/verify pass. Reviewer 279 verifies T20.39,
 defers Gate-C-contingent T20.40, and routes to mandatory closeout/T20.41 owner
 decision.
+
+## Additive Verification Amendment
+
+Brief 211 preserves the initial seed/index in history and replaces their active
+derived views with receipt `60babc53...` and index `043d45b3...`. Generic
+validation now binds all top-level authority flags to routing/source evidence,
+rejects conflicting inactive duplicates, and emits deterministic invalid/no-
+delete lifecycle disposition for stale or missing sources. Reviewer 280 amends
+the completeness claim; seed `cex-0001` remains evidence-only.

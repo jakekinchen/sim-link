@@ -35,10 +35,10 @@ model-free filler work and stopped at a genuine owner-route decision.
   Update 2,000 briefly passed only the five start-zero probes. Uniform report
   `70e98c06...` also failed at the selected checkpoint: 0/25, 3,613
   violations, 0.553656 rad worst error. No retry.
-- T20.38 receipt `02268a1a...` added 33 direction-correct strict-v2 margins,
-  hard actor/evidence guards, and a deterministic zero-headroom contact-count
-  bottleneck without upgrading analytic fixture proof.
-- T20.39 receipt `8277b09f...` and index `05908b6d...` bootstrapped one truthful
+- T20.38 receipt `042bf0be...` added 33 direction-correct strict-v2 margins,
+  explicit hard actor/evidence blockers, and a deterministic zero-headroom
+  contact-count bottleneck without upgrading analytic fixture proof.
+- T20.39 receipt `60babc53...` and index `043d45b3...` bootstrapped one truthful
   evidence-only source-controller counterexample. Replay and training remain
   inactive because full T20.19 trace bytes are not remotely retained.
 
@@ -95,3 +95,14 @@ origin parity is verified by the closeout commit containing this summary. No
 Brev resource was created or used, so the Brev inventory protocol was not
 triggered. Unrelated pre-existing dirty/untracked paths were preserved rather
 than cleaned destructively.
+
+## Additive closeout correction
+
+Independent review after the first closeout found bounded verifier gaps in the
+new model-free T20.38/T20.39 surfaces. Brief 211 / Reviewer 280 corrects them at
+implementation `83d51c5`: missing-source and genuine contradiction coverage,
+guard-preempting bottleneck semantics, routing-bound top-level authority,
+exact inactive duplicates, deterministic order, and invalid/no-replay/no-
+delete stale-source disposition. The corrected identities above supersede only
+the initial derived receipt/index views; no policy result, gate status,
+checkpoint, source artifact, or T20.41 blocker changed.

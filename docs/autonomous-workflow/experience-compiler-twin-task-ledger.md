@@ -5,15 +5,15 @@ Updated: 2026-07-16
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
 run_window: open 2026-07-16T01:44:12-05:00 through hard closeout 2026-07-16T09:44:12-05:00; no new major slice after 2026-07-16T08:59:12-05:00; owner authorized autonomous research/critique iteration plus exact T20.36m local inference-only tensor reproduction under fresh central authority and a one-use permit
-run_state: autonomous policy route remains closed after the verified T20.36o terminal negative. Independent closeout review opened additive model-free Brief 211 because T20.38/T20.39 acceptance claims require stronger hard-guard, duplicate, routing, and stale-source verification before the morning closeout is final.
+run_state: autonomous policy route closed after verified T20.36o terminal negative. Additive Brief 211 hardening is verified at implementation 83d51c5 with amended T20.38 receipt 042bf0be... and T20.39 receipt/index 60babc53.../043d45b3... through Reviewer 280; Gate C/replay/hardware were not executed.
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.39a in progress under Brief 211; harden only T20.38/T20.39 model-free verifiers and derived receipts, then restore T20.41 as the owner-blocked substantive next task
+current_task: T20.41 blocked on owner route decision after the adjudicated ACT/SmolVLA/X field failed; no additional optimizer, architecture, Gate C, hardware, or replay action is authorized
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: owner presence and physical-hardware access granted approximately 2026-07-16T02:05:00-05:00 through approximately 10:05 CDT; every camera/serial/robot session still requires the formal same-thread danger-full-access and approval-policy-never verifier, central composition, and a finite per-session permit; no physical access has occurred in this window
 blockers: T20.41 requires a new owner-selected capability route; the current ACT/SmolVLA/X route is exhausted, Gate C was not reached, and T20.40 is ineligible; physical sorting-scene/metric-transform/aperture-current gaps remain
-next_step: complete additive Brief 211 verification hardening without model/replay/hardware action, amend Reviewer 278/279 and the morning summary, then return to owner-blocked T20.41
+next_step: owner selects and authorizes T20.41's next capability strategy in a future brief; do not resume the T20.35/T20.36 alphabet
 ```
 
 ## 2026-07-16 - Brief 211 opens additive receipt/archive hardening
@@ -26,6 +26,18 @@ a non-active same-fingerprint duplicate to drift outside its semantic core.
 Brief 211 opens a model-free additive correction only. Historical results,
 policy routing, Gate C, replay, training, hardware, network, external compute,
 and Brev remain closed.
+
+## 2026-07-16 - T20.39a receipt/archive hardening verified
+
+Implementation `83d51c5` is exact on origin. T20.38 receipt `042bf0be...`
+adds explicit hard-guard blockers, guard-preempting effective bottleneck, and
+missing-source/genuine-contradiction coverage. T20.39 receipt `60babc53...`
+and index `043d45b3...` bind top-level authority to routing/source proof,
+reject conflicting inactive duplicates, and deterministically require invalid,
+replay-ineligible, history-preserving disposition for stale sources. Twenty-
+four contract tests, 12 pointer tests, and both exact CLIs pass. Reviewer 280
+amends Reviewer 278/279's completeness claims without changing their proof
+boundaries or the blocked T20.41 route.
 
 ## Rules
 
@@ -75,23 +87,23 @@ activates model-free Brief 209 / T20.38.
 
 ## 2026-07-16 - T20.38 quantitative strict-v2 receipt verified
 
-Receipt `02268a1a...` binds the immutable strict-v2 analytic fixture and
+Historical receipt `02268a1a...` first bound the immutable strict-v2 analytic fixture and
 evaluator source into 33 direction-correct, actor/evidence-guarded predicate
 margins with hard conjunction and deterministic bottleneck semantics. It
 agrees with source semantic success while explicitly withholding policy,
 actual-MuJoCo, physical, and training claims. Twenty-four tests pass;
-implementation `f9c3682` is on origin. Reviewer 278 verifies T20.38 and opens
-Brief 210 / T20.39.
+implementation `f9c3682` is on origin. Reviewer 280 amends the current derived
+receipt to `042bf0be...` through hardening implementation `83d51c5`.
 
 ## 2026-07-16 - T20.39 archive verified and window closed
 
-Receipt `8277b09f...` and index `05908b6d...` bind one active, evidence-only
+Historical receipt `8277b09f...` and index `05908b6d...` first bound one active, evidence-only
 T20.19 source-controller boundary negative with replay/training/policy-blame
 denied. The full trace is not remotely retained, so replay remains ineligible.
-Fifteen tests pass and implementation `80d2992` is on origin. Reviewer 279
-verifies T20.39, defers T20.40 because Gate C did not pass, and blocks T20.41
-on a new owner route decision. Morning summary `morning-summary-2026-07-16.md`
-is the durable closeout.
+Fifteen tests pass and implementation `80d2992` is on origin. Reviewer 280
+amends the current derived receipt/index to `60babc53...`/`043d45b3...`
+through hardening implementation `83d51c5`; T20.40 remains deferred and
+T20.41 remains owner-blocked.
 
 ## 2026-07-15 - Owner continuation resumes T20.35 capability ladder
 
@@ -2023,8 +2035,9 @@ Next step: canonical review reconciliation, then a fresh no-prompt Full Access t
 | T20.15 | verified | T20.14 | Isolate PI0.5 state-token versus action-postprocessor normalizer effects | Brief 135/Reviewer 165; action postprocessor arm effect 0.95872 rad, state effect 0.23586, interaction 0.26037; no optimizer or rollout |
 | T20.16 | verified | T20.15 | Test checkpoint arm/state scaling with dataset-derived gripper-only action postprocessing | Brief 136/Reviewer 166; frame-zero arm/gripper errors 0.03088/0.12015 rad passed; trajectory MAE 0.90603 rad, zero strict contacts, 0.0003007 mm lift; zero conversion clipping/projection; five reviewed keyframes; hybrid retired |
 | T20.17 | in progress | T20.16 | Consolidate the recreation at package boundaries before any clean pi05_base campaign | Briefs 137–139 retain compact bespoke IP, remove only unreferenced test-only surfaces, bind native LeRobot episode provenance, and observe actual PI0.5 processor outputs; a source dataset and separate authority are still required before any optimizer or campaign |
-| T20.38 | verified | preserved T20.36l boundary | Derive a policy-independent quantitative strict-v2 receipt contract | Brief 209/Reviewer 278; receipt `02268a1a...` binds 33 predicates and remains analytic-fixture evidence only |
-| T20.39 | verified | T20.19,T20.38 | Define the counterexample archive schema and bootstrap T20.19 gripper-1.05 | Brief 210/Reviewer 279; receipt `8277b09f...`, index `05908b6d...`; evidence only, replay/training inactive |
+| T20.38 | verified | preserved T20.36l boundary | Derive a policy-independent quantitative strict-v2 receipt contract | Briefs 209/211, Reviewer 280; receipt `042bf0be...` binds 33 predicates with guard-preempting bottleneck and remains analytic-fixture evidence only |
+| T20.39 | verified | T20.19,T20.38 | Define the counterexample archive schema and bootstrap T20.19 gripper-1.05 | Briefs 210/211, Reviewer 280; receipt `60babc53...`, index `043d45b3...`; routing-bound, evidence only, replay/training inactive |
+| T20.39a | verified | T20.38,T20.39 | Harden receipt/archive guard, duplicate, routing, and stale-source verification | Brief 211/Reviewer 280; implementation `83d51c5`; 24 contract + 12 pointer tests; no model/replay/hardware action |
 | T20.40 | deferred | T20.39,mechanical Gate C pass | Replay the fixed active archive on every checkpoint eligible for selection | Required Gate C pass is absent; no replay authority granted |
 | T20.41 | blocked | T20.36o,T20.39,owner decision | Select and authorize the next capability strategy after ACT, SmolVLA, and X failed forward routing | New owner route and fresh brief required; no silent optimizer/architecture continuation |
 

@@ -1077,8 +1077,10 @@ origin boundary `26146fa`. Result `ec7fb323...` completed 2,500 finite updates
 but failed every registered amended bridge checkpoint; the final checkpoint
 passes 0/25 with 1,677 violations. Uniform supplement `70e98c06...` also fails.
 Reviewer 277 closes X and the current Gate C route without a rollout or retry.
-T20.38 receipt `02268a1a...` and T20.39 archive receipt/index
-`8277b09f...`/`05908b6d...` are now verified through Reviewers 278-279. T20.40
+T20.38 receipt `042bf0be...` and T20.39 archive receipt/index
+`60babc53...`/`043d45b3...` are now verified through additive Brief 211 and
+Reviewer 280 with guard-preempting bottleneck, routing-bound authority,
+exact-duplicate, and stale-source lifecycle checks. T20.40
 is deferred because Gate C did not pass. Morning closeout is complete and
 T20.41 is blocked on a new owner-selected capability route; do not resume the
 T20.35/T20.36 alphabet without a fresh brief and authority.

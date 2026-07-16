@@ -123,3 +123,10 @@ new verified proof-state entries belong here with their brief/reviewer anchors.
   and index `05908b6d...` as evidence-only. The missing remotely retained trace
   keeps replay/training inactive. T20.40 is deferred and T20.41 requires a new
   owner route decision.
+- Reviewer decision 280 amends the verifier-completeness portion of Decisions
+  278-279. Current receipt identities are T20.38 `042bf0be...` and T20.39
+  receipt/index `60babc53...`/`043d45b3...`; hard guards preempt the effective
+  bottleneck, top-level archive authority is routing-bound, conflicting
+  inactive duplicates fail, and stale sources require invalid/no-replay/no-
+  delete disposition. The analytic/evidence-only proof boundaries and blocked
+  T20.41 route are unchanged.
