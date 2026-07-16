@@ -55,3 +55,27 @@ inference, optimizer, or training. Throughout: no network/download, cached ACT
 checkpoint, pretrained backbone, policy selection, SmolVLA entry, Gate B
 amendment, Gate C, rollout, hardware, camera, serial, external compute, A100,
 or Brev.
+
+## Pre-Run Evidence
+
+- Implementation commit `0f0caa7` is remotely preserved on the required
+  branch. Thirty-five T20.36 regressions pass, including fail-closed source,
+  gate, schedule, result, and authority cases.
+- Model-free rehearsal found and corrected two runtime/API hazards before the
+  one-use boundary: ACTConfig does not accept `dtype` or `compile_model`, and
+  the ACT batch processor does not add a leading dimension to a horizon-50
+  action tensor. Explicit single-item collation now yields action `(1,50,6)`,
+  pad `(1,50)`, state `(1,6)`, and two image `(1,3,256,256)` tensors on MPS.
+- Central decision `9c2a16d2...` grants only
+  `simulation_training_ready`. Runtime preflight `d29b93e7...` rebinds the
+  exact source/image/action/state hashes, Python 3.12, pinned dependencies,
+  MPS, 20.12 GiB free, and remote source commit `0f0caa7` without constructing
+  a model or creating the attempt marker.
+- One-use permit `75f5e163...` authorizes only model construction, inference,
+  and optimizer training for the frozen schedule after this complete pre-run
+  boundary is remotely preserved. Retry, sweep, policy selection, SmolVLA,
+  gate amendment, Gate C, rollout, hardware, external compute, and Brev remain
+  false.
+
+Reviewer Decision 245 verifies the pre-run boundary and opens exactly the sole
+declared local-MPS attempt after its evidence commit is confirmed on origin.

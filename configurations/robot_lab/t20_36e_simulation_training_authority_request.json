@@ -1,0 +1,318 @@
+{
+  "claims": [
+    {
+      "capability_id": "coordinate_contract_valid",
+      "claim_id": "t20_36e_coordinate_contract_valid",
+      "evidence_refs": [
+        {
+          "artifact_identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1",
+          "evidence_identity_sha256": "1f738ef19303db70b6d968816e97955806dc01cac75d9d4c2f6569eb066cbb81",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        },
+        {
+          "artifact_identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.lerobot_native_episode_manifest.v1",
+          "evidence_identity_sha256": "4c3fd267d6fa71f4528caeedd22dbebfbad182f060b421d90b58d876af03e92d",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        }
+      ],
+      "identity_sha256": "ebb541b41d999587a5d4bff51cd9a688ed302f59cc5e22476625a4cfff085ba4",
+      "issuer": {
+        "authority_id": "scenesmith.repository_verifier.v1",
+        "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+      },
+      "provenance_class": "repository",
+      "schema_version": "scenesmith.component_capability_claim.v1",
+      "scope_id": "pi05_so101_authority",
+      "subject_id": "pi05_so101_sorting_system",
+      "validity": {
+        "max_age_seconds": 57600,
+        "observed_at": "2026-07-15T19:04:00-05:00",
+        "valid_from": "2026-07-15T07:27:47-05:00",
+        "valid_until": "2026-07-15T23:27:47-05:00"
+      },
+      "value": true
+    },
+    {
+      "capability_id": "executable_stack_valid",
+      "claim_id": "t20_36e_executable_stack_valid",
+      "evidence_refs": [
+        {
+          "artifact_identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1",
+          "evidence_identity_sha256": "1f738ef19303db70b6d968816e97955806dc01cac75d9d4c2f6569eb066cbb81",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        },
+        {
+          "artifact_identity_sha256": "61fcf124ab23d2e27672f8335ade0e74df10254ca58d4aec5a77b606ef328bcb",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.t20_36c_local_policy_track_preflight.v1",
+          "evidence_identity_sha256": "b4f48db3724d934e692858b4922ca79c87e6c0ab91c34af52e20b887360fa6f7",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        }
+      ],
+      "identity_sha256": "d5f3d91f50604b4393b9c44a135352a68c44e064815aa2d432658f5c3c530635",
+      "issuer": {
+        "authority_id": "scenesmith.repository_verifier.v1",
+        "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+      },
+      "provenance_class": "repository",
+      "schema_version": "scenesmith.component_capability_claim.v1",
+      "scope_id": "pi05_so101_authority",
+      "subject_id": "pi05_so101_sorting_system",
+      "validity": {
+        "max_age_seconds": 57600,
+        "observed_at": "2026-07-15T19:04:00-05:00",
+        "valid_from": "2026-07-15T07:27:47-05:00",
+        "valid_until": "2026-07-15T23:27:47-05:00"
+      },
+      "value": true
+    },
+    {
+      "capability_id": "experience_compiler_valid",
+      "claim_id": "t20_36e_experience_compiler_valid",
+      "evidence_refs": [
+        {
+          "artifact_identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1",
+          "evidence_identity_sha256": "1f738ef19303db70b6d968816e97955806dc01cac75d9d4c2f6569eb066cbb81",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        },
+        {
+          "artifact_identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.lerobot_native_episode_manifest.v1",
+          "evidence_identity_sha256": "4c3fd267d6fa71f4528caeedd22dbebfbad182f060b421d90b58d876af03e92d",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        },
+        {
+          "artifact_identity_sha256": "6c2b822ce1d89aecea26d0914f1b3a503bd142d6f2feb62f4481fbda37a5dad5",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.authority_composition_decision.v1",
+          "evidence_identity_sha256": "7863bfc71163e9256ff5482a9a3ccd98fe7f8c7ed2108349430314edd359afba",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        }
+      ],
+      "identity_sha256": "93c2024f3dd4fd2d9cf28c67d0886b9ebf8649f9a5d4fe44b5a1c1e5e9757875",
+      "issuer": {
+        "authority_id": "scenesmith.repository_verifier.v1",
+        "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+      },
+      "provenance_class": "repository",
+      "schema_version": "scenesmith.component_capability_claim.v1",
+      "scope_id": "pi05_so101_authority",
+      "subject_id": "pi05_so101_sorting_system",
+      "validity": {
+        "max_age_seconds": 57600,
+        "observed_at": "2026-07-15T19:04:00-05:00",
+        "valid_from": "2026-07-15T07:27:47-05:00",
+        "valid_until": "2026-07-15T23:27:47-05:00"
+      },
+      "value": true
+    },
+    {
+      "capability_id": "normalization_contract_valid",
+      "claim_id": "t20_36e_normalization_contract_valid",
+      "evidence_refs": [
+        {
+          "artifact_identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1",
+          "evidence_identity_sha256": "1f738ef19303db70b6d968816e97955806dc01cac75d9d4c2f6569eb066cbb81",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        },
+        {
+          "artifact_identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.lerobot_native_episode_manifest.v1",
+          "evidence_identity_sha256": "4c3fd267d6fa71f4528caeedd22dbebfbad182f060b421d90b58d876af03e92d",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        }
+      ],
+      "identity_sha256": "0e95bf6eae9d74753607492686d59dcef5a5b857db1d8fca392df7528a28aa78",
+      "issuer": {
+        "authority_id": "scenesmith.repository_verifier.v1",
+        "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+      },
+      "provenance_class": "repository",
+      "schema_version": "scenesmith.component_capability_claim.v1",
+      "scope_id": "pi05_so101_authority",
+      "subject_id": "pi05_so101_sorting_system",
+      "validity": {
+        "max_age_seconds": 57600,
+        "observed_at": "2026-07-15T19:04:00-05:00",
+        "valid_from": "2026-07-15T07:27:47-05:00",
+        "valid_until": "2026-07-15T23:27:47-05:00"
+      },
+      "value": true
+    },
+    {
+      "capability_id": "required_simulation_properties_available",
+      "claim_id": "t20_36e_required_simulation_properties_available",
+      "evidence_refs": [
+        {
+          "artifact_identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.lerobot_native_episode_manifest.v1",
+          "evidence_identity_sha256": "1219a7dca0f4358d6c5e76b8a06996d08a628eb1525a24ad15cc732e15ad843b",
+          "provenance_class": "simulation",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        },
+        {
+          "artifact_identity_sha256": "61fcf124ab23d2e27672f8335ade0e74df10254ca58d4aec5a77b606ef328bcb",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.t20_36c_local_policy_track_preflight.v1",
+          "evidence_identity_sha256": "1291a0a7712e301ca40156036d3a077c7e2012d3d33ddf138e8c0871c5098430",
+          "provenance_class": "simulation",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        },
+        {
+          "artifact_identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1",
+          "evidence_identity_sha256": "d754e5cf2835e78b1c8698d11d4b8e1242beeab0fabee4c3b32f736164b58f85",
+          "provenance_class": "simulation",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        }
+      ],
+      "identity_sha256": "8cf8d542e93fd88263295ed291a21e7cacde40013a9e3b33a021230b0bcf05d6",
+      "issuer": {
+        "authority_id": "scenesmith.simulation_qualification_authority.v1",
+        "authority_identity_sha256": "4397f6817aec9d1fc8ea4dd6a2b536db18b1a6e51115bd8f8572479cbd37dcfc"
+      },
+      "provenance_class": "simulation",
+      "schema_version": "scenesmith.component_capability_claim.v1",
+      "scope_id": "pi05_so101_authority",
+      "subject_id": "pi05_so101_sorting_system",
+      "validity": {
+        "max_age_seconds": 57600,
+        "observed_at": "2026-07-15T19:04:00-05:00",
+        "valid_from": "2026-07-15T07:27:47-05:00",
+        "valid_until": "2026-07-15T23:27:47-05:00"
+      },
+      "value": true
+    },
+    {
+      "capability_id": "required_training_authority_present",
+      "claim_id": "t20_36e_required_training_authority_present",
+      "evidence_refs": [
+        {
+          "artifact_identity_sha256": "c2b3df01d9ac8d426954cfaa13e5269142011a030611d8cbea86f6a17e53f36c",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.owner_training_authorization.v1",
+          "evidence_identity_sha256": "beaf14f82bbb4d945ee2e742cac48aedb2683bddeb37566eff09bfa5d6f68c48",
+          "provenance_class": "deployment_authority",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        }
+      ],
+      "identity_sha256": "1b120c1949749af01b3878eca0af5ed0dffe6551a41c958fecd09f4756a596ac",
+      "issuer": {
+        "authority_id": "scenesmith.deployment_authority.v1",
+        "authority_identity_sha256": "5df225ad4cce10f60884923a2f8acbc23f5f6469c2329418e1ebb813c4929214"
+      },
+      "provenance_class": "deployment_authority",
+      "schema_version": "scenesmith.component_capability_claim.v1",
+      "scope_id": "pi05_so101_authority",
+      "subject_id": "pi05_so101_sorting_system",
+      "validity": {
+        "max_age_seconds": 57600,
+        "observed_at": "2026-07-15T19:04:00-05:00",
+        "valid_from": "2026-07-15T07:27:47-05:00",
+        "valid_until": "2026-07-15T23:27:47-05:00"
+      },
+      "value": true
+    },
+    {
+      "capability_id": "structural_contract_valid",
+      "claim_id": "t20_36e_structural_contract_valid",
+      "evidence_refs": [
+        {
+          "artifact_identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1",
+          "evidence_identity_sha256": "1f738ef19303db70b6d968816e97955806dc01cac75d9d4c2f6569eb066cbb81",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        },
+        {
+          "artifact_identity_sha256": "6c2b822ce1d89aecea26d0914f1b3a503bd142d6f2feb62f4481fbda37a5dad5",
+          "artifact_kind": "t20_36e_exact_act_control_evidence",
+          "artifact_schema_version": "scenesmith.authority_composition_decision.v1",
+          "evidence_identity_sha256": "7863bfc71163e9256ff5482a9a3ccd98fe7f8c7ed2108349430314edd359afba",
+          "provenance_class": "repository",
+          "schema_version": "scenesmith.capability_evidence_ref.v1",
+          "scope_id": "pi05_so101_authority",
+          "subject_id": "pi05_so101_sorting_system"
+        }
+      ],
+      "identity_sha256": "6de2bf58564bf45a9e507d1e891ab7b3c236aec8ed6180a54790527f34a10036",
+      "issuer": {
+        "authority_id": "scenesmith.repository_verifier.v1",
+        "authority_identity_sha256": "8a849bf0e28951422953f2083d0ce53eb1365fda2847019e4766b6c647efa791"
+      },
+      "provenance_class": "repository",
+      "schema_version": "scenesmith.component_capability_claim.v1",
+      "scope_id": "pi05_so101_authority",
+      "subject_id": "pi05_so101_sorting_system",
+      "validity": {
+        "max_age_seconds": 57600,
+        "observed_at": "2026-07-15T19:04:00-05:00",
+        "valid_from": "2026-07-15T07:27:47-05:00",
+        "valid_until": "2026-07-15T23:27:47-05:00"
+      },
+      "value": true
+    }
+  ],
+  "composition_mode": "production",
+  "contract_ref": {
+    "identity_sha256": "bbc353920e704b38b623038bfb26b6ead9a6a5a3ab7eea7afaedc2f6fc872bf0",
+    "schema_version": "scenesmith.authority_composition_contract.v1"
+  },
+  "evaluation_time": "2026-07-15T19:04:00-05:00",
+  "identity_sha256": "54de30ec606eb092541f18462532e2f32d101ec7a65730b46e9824d6e63a6d8a",
+  "schema_version": "scenesmith.authority_composition_request.v1",
+  "scope_id": "pi05_so101_authority",
+  "subject_id": "pi05_so101_sorting_system"
+}

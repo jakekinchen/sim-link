@@ -1,0 +1,35 @@
+{
+  "authorization_id": "t20_36e_exact_act_gate_b_control_grant",
+  "authorization_scope": "one_exact_act_one_batch_simulation_only_gate_b_diagnostic_control",
+  "authorization_source": "owner_resumed_goal_loop_and_pre_registered_post_x_act_control_2026_07_15",
+  "authorized_actions": [
+    "simulation_model_construction",
+    "simulation_model_inference",
+    "simulation_optimizer_training"
+  ],
+  "authorized_attempt_count": 1,
+  "brev_compute_authorized": false,
+  "external_compute_authorized": false,
+  "gate_b_amendment_authorized": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "c2b3df01d9ac8d426954cfaa13e5269142011a030611d8cbea86f6a17e53f36c",
+  "issued_at": "2026-07-15T07:27:47-05:00",
+  "maximum_optimizer_updates": 2000,
+  "physical_transfer_authorized": false,
+  "policy_track_selection_authorized": false,
+  "promotion_authorized": false,
+  "retry_or_sweep_authorized": false,
+  "schema_version": "scenesmith.owner_training_authorization.v1",
+  "scope_id": "pi05_so101_authority",
+  "simulation_only": true,
+  "smolvla_entry_authorized": false,
+  "source_training_spec_ref": {
+    "file_sha256": "3caf7e6a59c33755b839f989de1ad84a92559f364a14ed6e6919febecb7dc66d",
+    "identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+    "path": "configurations/robot_lab/t20_36d_exact_act_gate_b_control_spec.json",
+    "schema_version": "scenesmith.t20_36d_exact_act_gate_b_control_spec.v1"
+  },
+  "stop_at_first_gate_pass": true,
+  "subject_id": "pi05_so101_sorting_system",
+  "valid_until": "2026-07-15T23:27:47-05:00"
+}

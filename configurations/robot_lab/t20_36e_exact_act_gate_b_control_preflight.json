@@ -1,0 +1,76 @@
+{
+  "attempt_exists": false,
+  "attempt_marker_created": false,
+  "authority_decision_identity_sha256": "9c2a16d2a52c2ceb0886e28c4f7323fcfd6e760058c99264cc709a6cec07ca63",
+  "batch_evidence": {
+    "action_pad_count": 0,
+    "action_shape": [
+      50,
+      6
+    ],
+    "dataset_episode_index": 0,
+    "dataset_frame_index": 0,
+    "image_shapes": {
+      "observation.images.base_0_rgb": [
+        3,
+        256,
+        256
+      ],
+      "observation.images.left_wrist_0_rgb": [
+        3,
+        256,
+        256
+      ]
+    },
+    "image_tensor_sha256": {
+      "observation.images.base_0_rgb": "5ed2cbd3740a3a377bf705eb6fb0bad4b1d0c9d40a8ef91ed0eaadac65e3fa87",
+      "observation.images.left_wrist_0_rgb": "10362eecfea21ed2cda3b0fe4f4b7246700b0dea13237b9575af323c2d9a649d"
+    },
+    "maximum_coordinate_round_trip_error_rad": 2.220446049250313e-16,
+    "maximum_source_action_error_rad": 7.109611699362972e-08,
+    "maximum_source_state_error_rad": 4.207105996911764e-08,
+    "physical_action_chunk_sha256": "5698babc07b2eebc8a3a96d33b28f03bbb33f1bec9b83a97d4e4f8a325c36b7e",
+    "physical_state_sha256": "efd3788785f8c60ac67d91fcb2e754c9b3c13d62798469fbf811a968c8941ec4",
+    "state_shape": [
+      6
+    ],
+    "task": "Grasp the lightweight anchor, lift 40 mm, hold, lower, release, and retreat."
+  },
+  "brev_compute_started": false,
+  "checkpoint_tensor_read": false,
+  "dependency_versions": {
+    "datasets": "4.8.5",
+    "lerobot": "0.6.1",
+    "numpy": "2.2.6",
+    "pyarrow": "24.0.0",
+    "torch": "2.11.0",
+    "torchvision": "0.26.0"
+  },
+  "external_compute_started": false,
+  "free_disk_bytes": 21606891520,
+  "identity_sha256": "d29b93e726607a202fcefc08778480d99d07fb00bf760fb6057da5c19d6830b0",
+  "lerobot_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "minimum_free_disk_bytes": 6442450944,
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "mps_available": true,
+  "network_accessed": false,
+  "offline_environment_required": true,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "python_major_minor": [
+    3,
+    12
+  ],
+  "remote_source_commit": "0f0caa7631058dfbd9353a833de324eac78eecac",
+  "remote_source_commit_matches": true,
+  "result_exists": false,
+  "run_exists": false,
+  "schema_version": "scenesmith.t20_36e_exact_act_gate_b_control_preflight.v1",
+  "source_commit": "0f0caa7631058dfbd9353a833de324eac78eecac",
+  "task_id": "T20.36e",
+  "training_spec_identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b",
+  "weights_downloaded": false
+}

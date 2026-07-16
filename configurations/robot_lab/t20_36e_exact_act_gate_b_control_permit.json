@@ -1,0 +1,39 @@
+{
+  "attempt_marker_must_precede_model_construction": true,
+  "attempt_marker_path": "outputs/robot_lab/t20_36e_exact_act_gate_b_control_run_001/attempt.json",
+  "authority_decision_identity_sha256": "9c2a16d2a52c2ceb0886e28c4f7323fcfd6e760058c99264cc709a6cec07ca63",
+  "authorized_actions": [
+    "simulation_model_construction",
+    "simulation_model_inference",
+    "simulation_optimizer_training"
+  ],
+  "authorized_attempt_count": 1,
+  "brev_compute_started": false,
+  "closed_loop_rollout": false,
+  "evaluation_update_schedule": [
+    0,
+    100,
+    250,
+    500,
+    1000,
+    2000
+  ],
+  "external_compute_started": false,
+  "gate_b_threshold_changed": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "75f5e1635a83f85d65cc5243355f6e46061a3340bb01d4c8a171f5a58d50bdb6",
+  "local_execution_eligible_after_remote_preservation": true,
+  "maximum_optimizer_updates": 2000,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "policy_track_selected": false,
+  "promotion_eligible": false,
+  "required_source_commit": "0f0caa7631058dfbd9353a833de324eac78eecac",
+  "retry_or_sweep_allowed": false,
+  "runtime_preflight_identity_sha256": "d29b93e726607a202fcefc08778480d99d07fb00bf760fb6057da5c19d6830b0",
+  "schema_version": "scenesmith.t20_36e_exact_act_gate_b_control_permit.v1",
+  "simulation_policy_accepted": false,
+  "smolvla_entry_authorized": false,
+  "task_id": "T20.36e",
+  "training_spec_identity_sha256": "45c90dc05578546e589cbde28ac3f072e0a8b87c2dd1001f343a8d7f4d586a4b"
+}

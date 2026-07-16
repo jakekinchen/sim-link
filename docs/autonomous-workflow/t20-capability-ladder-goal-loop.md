@@ -26,14 +26,13 @@ Narrative claims never override a closed or absent machine-readable grant.
 
 ## Active Boundary
 
-T20.36d spec `45c90dc0...`, remotely preserved at `b8b19cd`, fixes the exact
-ACT diagnostic design and pre-registered checkpoint schedule. T20.36e is
-current under Brief 196. It may implement and test only the runner, immutable
-attempt/result contracts, dependency preflight, and task-specific central
-authority path. It may not create an attempt marker, download or read weights,
-construct or load a model, run inference or an optimizer, select a policy
-track, execute a rollout, amend a gate, or start the control before the complete
-pre-run boundary is reviewed and remotely preserved.
+T20.36e implementation is remotely preserved at `0f0caa7`. Central decision
+`9c2a16d2...`, model-free preflight `d29b93e7...`, and one-use permit
+`75f5e163...` bind the exact source, batch, runtime, MPS device, schedule, and
+three authorized simulation actions. Reviewer 245 verifies the pre-run
+boundary. The sole attempt may create its marker and execute only after this
+complete evidence/review boundary is remotely preserved. No retry, sweep,
+policy selection, SmolVLA entry, gate amendment, Gate C, or rollout is opened.
 
 The run remains simulation-only. Hardware, cameras, serial devices, physical
 motion, external compute, Brev, promotion, and physical-transfer authority are
@@ -67,9 +66,10 @@ Repeat while the run window and authority permit:
   coverage. T20.36b must encode actual standard-ratio plus five-seed physical
   maxima as the retention decision; proxy losses may be reported but never
   substitute for either Gate B conjunct.
-- T20.36d fixes the exact ACT Gate B control design. T20.36e must preserve its
-  runner, attempt/result contracts, dependency proof, and task-specific central
-  authority before the sole attempt. A control pass routes only a separately
+- T20.36d fixes the exact ACT Gate B control design. T20.36e has preserved its
+  runner and verified its attempt/result contracts, dependency proof, and
+  task-specific central authority; its evidence commit must reach origin before
+  the sole attempt. A control pass routes only a separately
   reviewed SmolVLA entry design; a fail routes shared-path diagnosis first.
 - Gate C opens only after Gate B is mechanically proven. A first learned
   closed-loop grasp must be labeled autonomous only when every action is policy
