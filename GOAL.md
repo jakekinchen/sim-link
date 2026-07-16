@@ -135,6 +135,12 @@ Implementation `d24ad0e` plus `c435809` are now exact on origin and Reviewer
 below-64 terminal-negative route. Only compact authority materialization is
 open. Reviewer 289 must reconstruct and accept that origin-preserved boundary
 before the permit-consuming marker or first R0 MuJoCo candidate.
+Authority commit `93d7708` now preserves owner/request/decision/runtime/permit
+identities `b5d08b77...`/`5c5b99fc...`/`f6121762...`/`ffa95218...`/
+`94d7f2b2...`. Reviewer 289 accepts the active pre-run boundary and signed gate
+`97694eb5...`. After this acceptance is itself exact on origin, the runner may
+create the sole marker and execute the fixed 119+9 manifest once; no retry or
+other authority opens.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

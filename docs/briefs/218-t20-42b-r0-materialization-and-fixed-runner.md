@@ -64,6 +64,15 @@ and more than 73 GB free. The pre-run acceptance, marker, and R0 execution
 remain closed until the materialized boundary is separately preserved and
 accepted by Reviewer 289.
 
+Authority commit `93d7708222d6f564a37f25289957fe55736725b2` is now exact
+on origin. Reviewer 289 independently reconstructs owner grant `b5d08b77...`,
+request `5c5b99fc...`, decision `f6121762...`, runtime `ffa95218...`, and
+one-use permit `94d7f2b2...`; the active window, unchanged implementation,
+offline dependency facts, free disk, and output absence all pass. Signed
+pre-run acceptance `97694eb5...` binds that review and authority commit. Once
+this acceptance boundary is confirmed on origin, the one fixed marker/run is
+eligible; every excluded action remains closed.
+
 ## Sole attempt and result rules
 
 - After pre-run acceptance, create the immutable marker first. That consumes
