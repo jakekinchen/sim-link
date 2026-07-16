@@ -1030,8 +1030,8 @@ baseline-first route. X must be loaded once under a fresh inference-only permit
 to capture five states x five seeds x two repeats before any optimizer. A
 baseline pass skips training; a failure retains 250 denoise-path examples and
 only then permits a separate 2,500-update-ceiling training authority request.
-Reviewer 267 verifies the model-free boundary. No model or optimizer action has
-occurred.
+Reviewer 267 verifies the corrected model-free boundary. No model or optimizer
+action has occurred.
 The inference-only central composer, exact runtime preflight, finite probe
 permit, and marker-first contracts are now implemented and tested. Reviewer
 268 verifies implementation only: the code must be committed and confirmed on

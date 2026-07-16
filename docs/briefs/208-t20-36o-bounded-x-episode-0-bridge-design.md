@@ -103,8 +103,8 @@ tightens the signed gate. The bounded fallback preserves X's ten uses per correc
 example: 250 examples, 2,500 updates maximum, unchanged `2.5e-5` LR, 1:1
 unique standard replay, probes at 0/500/1000/1500/2000/2500, and first
 confirmed pass selection. Six focused tests and the exact verifier pass.
-Reviewer 267 verifies the model-free design and permits only implementation of
-the separate baseline-inference authority boundary next.
+Reviewer 267 verifies corrected design `8294c63b...` and permits only
+implementation of the separate baseline-inference authority boundary next.
 
 The baseline authority/preflight/permit implementation now passes 25 combined
 focused/design/pointer tests. Reviewer 268 verifies implementation only and
