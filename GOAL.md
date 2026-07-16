@@ -197,6 +197,12 @@ stable LeRobot Python plus an existing cached MuJoCo 3.3.5 support tree for the
 preflight, runner, and mirrors. After this correction is exact on origin, only
 the newly created rejected artifacts may be cleaned and rematerialized; a
 fresh Reviewer 296 is still required before weights or optimizer work.
+Stable authority commit `37ae581` now preserves renderer smoke `11cbcca3...`,
+Gate A `ef79292d...`, owner/request/decision/runtime/permit identities
+`6cc7f650...`/`4a5163c1...`/`f9e817c4...`/`7a3231a3...`/`5301aa32...`.
+Reviewer 296 accepts the one-use boundary and signed acceptance `6e84de9e...`.
+After this acceptance is exact on origin, the sole 5,000-update SmolVLA attempt
+may run; no retry or other authority opens.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

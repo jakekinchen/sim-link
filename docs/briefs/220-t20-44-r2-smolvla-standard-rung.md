@@ -152,3 +152,13 @@ MuJoCo 3.3.5 support site-packages tree, hashes that tree, and requires the
 same pair for smoke, runner, and every mirror subprocess. Reviewer 295 opens
 only bounded cleanup of the newly created rejected artifacts and one stable
 rematerialization after origin confirmation.
+
+## Pre-run authority boundary
+
+Corrected implementation `e79a5c7` and stable authority commit `37ae581` are
+exact on origin. Renderer smoke `11cbcca3...`, Gate A `ef79292d...`, owner
+`6cc7f650...`, request `4a5163c1...`, decision `f9e817c4...`, runtime
+`7a3231a3...`, and permit `5301aa32...` reconstruct. Reviewer 296 accepts one
+marker-bound R2 attempt, and acceptance `6e84de9e...` binds the reviewer bytes
+and authority commit. No marker or model action has occurred; the run opens
+only after acceptance origin preservation while the owner window is active.
