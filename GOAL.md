@@ -1063,6 +1063,11 @@ Implementation `ec32f4e` is on origin and signed optimizer spec `50e0569d...`
 now verifies with 250 examples and manifest `1a7e3202...`. Reviewer 273 permits
 only separate optimizer authority/preflight/permit implementation next; no
 model or optimizer action exists.
+The separate bounded optimizer authority implementation now composes
+prospective owner `dee9ae59...`, request `c325cb12...`, and decision
+`8834322d...` with only `simulation_training_ready`. Reviewer 274 requires the
+implementation to be on origin before materializing preflight/permit artifacts;
+no model or optimizer action exists.
 
 ## Durable State
 

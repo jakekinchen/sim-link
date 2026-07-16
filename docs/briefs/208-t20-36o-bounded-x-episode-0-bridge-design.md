@@ -162,3 +162,12 @@ materializes with file SHA `412f73ae...`, 250 examples, manifest
 `1a7e3202...`, and all five normalized target hashes. Reviewer 273 verifies the
 artifact and routes next only to separate authority/preflight/permit
 implementation. No model or optimizer action exists.
+
+## Verified Optimizer-Authority Implementation
+
+The separate owner/composer/preflight/permit implementation now builds
+prospective owner `dee9ae59...`, request `c325cb12...`, and decision
+`8834322d...`, with only `simulation_training_ready` granted. Reviewer 274
+verifies implementation and marker-first 2,500-update limits, but requires
+commit/push/origin confirmation before any authority artifact is materialized.
+No model or optimizer action exists.
