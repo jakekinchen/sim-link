@@ -169,6 +169,14 @@ permit identities `90217d2b...`/`60b3b8cb...`/`79e190dd...`/`6da74892...`/
 one-use boundary and signed acceptance `7d742980...`. After this acceptance is
 itself exact on origin, the runner may create the sole marker and execute the
 fixed full 10,000-update ACT attempt once. No retry or other authority opens.
+The sole T20.43 marker `064e5650...` was consumed. Full ACT construction,
+checkpoint 0, and one chunk-50 rollout completed with zero optimizer updates;
+strict-v2 failed with zero contact and 0.000304 mm lift. Mirror rendering then
+failed because its separately selected LeRobot venv lacks MuJoCo even though
+the parent preflight runtime has MuJoCo 3.3.5. Terminal receipt `b64ec6d...`
+binds the exact partial outputs and no-retry state. Reviewer 293 closes R1 as
+an infrastructure failure, not trained ACT evidence, and routes next to a
+fresh T20.44 SmolVLA brief with an exact child-renderer smoke gate.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

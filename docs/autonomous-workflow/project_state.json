@@ -333,8 +333,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.43",
-  "next_eligible_task": "T20.43",
+  "current_task": "T20.44",
+  "next_eligible_task": "T20.44",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -4864,20 +4864,21 @@
       "authority_not_granted": ["second_attempt","retry","replacement_or_resampling","adaptive_manifest_extension","seed_6_or_7_regeneration","physics_randomization","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","learned_policy_rollout","gate_c_execution","threshold_change","archive_replay","hardware","camera_access","serial_access","physical_motion","network_access","external_compute","brev_compute","physical_transfer","promotion","destructive_operation","r1_activation_without_fresh_brief_and_composed_authority"]
     },
     "T20.43": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.42"],
-      "active_brief_id": "219",
-      "latest_verified_brief_id": null,
-      "review_decision_id": "292",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "219",
+      "review_decision_id": "293",
       "source_commit": "f46c8aae0a0dc291ebc80ec1094033311fa0f717",
-      "result": "Reviewer 292 accepts the exact origin-preserved Gate A/owner/composer/runtime/one-use permit boundary and signed acceptance 7d742980; the sole full 10000-update ACT attempt opens after acceptance origin confirmation",
+      "result": "Reviewer 293 verifies the sole marker consumed on a renderer child-environment failure after untrained checkpoint-0 chunk-50 inference and before any optimizer update; receipt b64ec6d0 binds the exact partial boundary; no retry and trained ACT capability unresolved",
       "recipe": {"training_seed":20260801,"maximum_optimizer_updates":10000,"batch_size":8,"checkpoint_schedule":[0,500,1000,2500,5000,7500,10000],"chunk_size":50,"training_n_action_steps":50,"evaluation_action_steps":[50,10],"optimizer":"AdamW","learning_rate":1e-5,"weight_decay":1e-4,"scheduler":null,"device":"mps","dtype":"float32"},
       "implementation_review_decision_id": "291",
-      "implementation": {"implementation_commit":"9a03a86c05a00afbdb1d37878fd78e07a9b4c22b","spec_path":"configurations/robot_lab/t20_43_r1_act_standard_spec.json","spec_identity_sha256":"b3a510f84402d6574333800b73c3d95f5dcfb24af7e77740985f2f3c997449d2","model_free_gate_a_probe_identity_sha256":"90217d2b2e91c95d4c3dd3b0538dc215bf5042b00b5e22313be4b09bb2e63b8a","focused_test_count":9,"focused_plus_broad_test_count":75,"model_constructed":false,"optimizer_created":false,"gate_c_executed":false},
+      "implementation": {"implementation_commit":"9a03a86c05a00afbdb1d37878fd78e07a9b4c22b","spec_path":"configurations/robot_lab/t20_43_r1_act_standard_spec.json","spec_identity_sha256":"b3a510f84402d6574333800b73c3d95f5dcfb24af7e77740985f2f3c997449d2","model_free_gate_a_probe_identity_sha256":"90217d2b2e91c95d4c3dd3b0538dc215bf5042b00b5e22313be4b09bb2e63b8a","focused_test_count":9,"focused_plus_broad_test_count":75},
       "materialized_authority": {"authority_commit":"2f2a2caa195fdae0e49a3b3f6d56359876d083e8","gate_a_identity_sha256":"90217d2b2e91c95d4c3dd3b0538dc215bf5042b00b5e22313be4b09bb2e63b8a","owner_grant_identity_sha256":"60b3b8cb1c8b5975057d0e54ea16738500495cb466d09a1b384b0bd7b401295a","central_request_identity_sha256":"79e190dd3c2714867e2797067e8ac5f0ef2a55382bb889db53b5da5cdec5406c","central_decision_identity_sha256":"6da74892acd04b572dba1f7be338d5159eda5e52f0b132b1924e5a6e639bac57","runtime_preflight_identity_sha256":"860fabd7e4788fb6592aa57fe0d72d78b6ad53be2dc00173f2a9240447f95d46","permit_identity_sha256":"7530e79db6b390d9bc5bca62f149f2a8e4ce9ca83b910faf622798d8edf555fa","authorized_attempt_count":1,"retry_authorized":false},
       "pre_run_acceptance": {"reviewer_decision_id":"292","path":"configurations/robot_lab/t20_43_r1_act_pre_run_acceptance.json","identity_sha256":"7d7429800090556b7380ef6689f825c5681b68b4bd12205bff310d99d17c1601","file_sha256":"f79c62466104ad98300a56e9197c344598ff18d0b90ee1e577f88a307cfc4f2a","authority_commit":"2f2a2caa195fdae0e49a3b3f6d56359876d083e8","decision":"ACCEPT_ONE_T20_43_R1_ACT_STANDARD_ATTEMPT","attempt_marker_exists":false,"model_or_optimizer_action_executed":false},
-      "authority_granted": ["open_fresh_t20_43_r1_act_brief", "read_verified_t20_42_r0_artifacts", "implement_and_fixture_test_r1_act_spec_authority_runner_and_evidence_contracts", "r1_act_implementation_valid", "materialize_compact_gate_a_and_authority_after_origin_confirmation", "write_and_preserve_signed_pre_run_acceptance", "create_one_permit_consuming_marker_after_acceptance_origin_confirmation", "execute_one_fixed_full_act_standard_attempt"],
-      "authority_not_granted": ["second_attempt","retry","resampling","sweep","correction_objective","threshold_change","schedule_change","checkpoint_replacement","archive_replay","r2_activation","hardware","camera_access","serial_access","physical_motion","network_access","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
+      "execution_result": {"status":"verified_terminal_infrastructure_failure","attempt_marker_identity_sha256":"064e56506598cfa79e8bee7fea5ef0427d4fe8b080b56b67d8bdc637b8a196cc","terminal_failure_identity_sha256":"b64ec6d07296526c9931ccb061c005c037b59e828b392ceaa7dacc0e46b26a0c","terminal_failure_file_sha256":"661da2f2a1776162d71047a23fbdcddd722a6908d71aa3bef5ef076216ed2075","checkpoint_0_identity_sha256":"916200d071995a84577a53dc35b552e2f7db2452194adf8cc18b9a6d54ec8b55","chunk_50_trace_identity_sha256":"6133ce582936d6f2057cff2877df1a7d66b7cb2397fbcc1032286fbf16a59507","attempt_count":1,"optimizer_update_count":0,"checkpoint_count":1,"policy_owned_rollout_count":1,"completed_mirror_count":0,"gate_c_passed":false,"retry_authorized":false,"trained_act_capability_resolved":false,"failure_code":"RENDERER_CHILD_DEPENDENCY_MISSING"},
+      "authority_granted": ["open_fresh_t20_43_r1_act_brief", "read_verified_t20_42_r0_artifacts", "implement_and_fixture_test_r1_act_spec_authority_runner_and_evidence_contracts", "r1_act_implementation_valid", "materialize_compact_gate_a_and_authority_after_origin_confirmation", "write_and_preserve_signed_pre_run_acceptance", "create_one_permit_consuming_marker_after_acceptance_origin_confirmation", "execute_one_fixed_full_act_standard_attempt", "preserve_terminal_infrastructure_failure", "close_t20_43_consumed_attempt_boundary", "open_fresh_t20_44_brief_after_origin_confirmation"],
+      "authority_not_granted": ["t20_43_second_attempt","t20_43_retry","t20_43_replacement","checkpoint_continuation","result_fabrication","correction_objective","threshold_change","schedule_change","archive_replay","t20_44_model_action_before_fresh_brief_and_composed_authority","hardware","camera_access","serial_access","physical_motion","network_access","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.44": {
       "state": "pending",

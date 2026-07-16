@@ -137,3 +137,15 @@ ACT attempt, and signed acceptance `7d742980...` binds the reviewer bytes and
 authority commit. No cached backbone tensor, model, optimizer, inference, or
 rollout action has occurred yet. The marker/run may begin only after this
 acceptance boundary is exact on origin and while the owner window is active.
+
+## Terminal disposition
+
+The sole marker `064e5650...` consumed permit `7530e79d...`. Full ACT,
+checkpoint 0, and one chunk-50 rollout completed, but zero optimizer updates
+ran. Trace `6133ce58...` fails strict-v2 with zero strict contacts and
+`3.0422519e-7` m lift. The mirror subprocess then failed because the pinned
+LeRobot venv interpreter lacks MuJoCo; the parent preflight environment has
+MuJoCo 3.3.5. Receipt `b64ec6d0...` binds the exact attempt/partial-output/
+failure state. Reviewer 293 closes Brief 219 as a consumed infrastructure
+failure, not a trained ACT result. T20.43 cannot retry; the owner route moves
+to a fresh T20.44 brief after origin preservation.

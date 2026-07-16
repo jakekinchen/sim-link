@@ -1,0 +1,118 @@
+{
+  "absent_full_result_paths": [
+    "outputs/robot_lab/t20_43_r1_act_run_001/run_summary.json",
+    "configurations/robot_lab/t20_43_r1_act_result.json",
+    "configurations/robot_lab/t20_43_r1_act_scorecard.json",
+    "configurations/robot_lab/t20_43_r1_act_retention_receipt.json"
+  ],
+  "attempt_count": 1,
+  "attempt_file_sha256": "adff2047ddfaad45f91c11a899bc8dc07d322c623026846b3756834ea73bb75b",
+  "attempt_identity_sha256": "064e56506598cfa79e8bee7fea5ef0427d4fe8b080b56b67d8bdc637b8a196cc",
+  "brev_compute_started": false,
+  "camera_accessed": false,
+  "checkpoint_0": {
+    "files": [
+      {
+        "path": "config.json",
+        "sha256": "1b2ba89880e421180962a0c862b37bfc854d16e5f8811e82210a64ecf6d09aaf",
+        "size_bytes": 1714
+      },
+      {
+        "path": "model.safetensors",
+        "sha256": "acc865fb2504849ce39a403b08c5bff6b6660460d5622d3089f243c8868cf912",
+        "size_bytes": 206494928
+      }
+    ],
+    "identity_sha256": "916200d071995a84577a53dc35b552e2f7db2452194adf8cc18b9a6d54ec8b55"
+  },
+  "chunk_50_trace": {
+    "decode_start_frames": [
+      0,
+      50,
+      100,
+      150,
+      200
+    ],
+    "executed_lengths": [
+      50,
+      50,
+      50,
+      50,
+      44
+    ],
+    "file_sha256": "f9dc0e6d2b74a817dbe5005a6dc1a46c478a8b4fe7d6198c1f981f0e45c24373",
+    "identity_sha256": "6133ce582936d6f2057cff2877df1a7d66b7cb2397fbcc1032286fbf16a59507",
+    "lift_displacement_m": 3.042251932594553e-07,
+    "path": "outputs/robot_lab/t20_43_r1_act_run_001/rollouts/step_00000_chunk_50.json",
+    "schema_version": "scenesmith.t20_43_r1_act_closed_loop_trace.v1",
+    "size_bytes": 818993,
+    "strict_contact_frame_count": 0,
+    "strict_v2_passed": false,
+    "unexecuted_tail_actions_excluded": true
+  },
+  "compact_failure_receipt_tracked_in_git": true,
+  "execution": {
+    "cached_backbone_deserialized": true,
+    "checkpoint_count": 1,
+    "completed_mirror_count": 0,
+    "fresh_act_policy_constructed": true,
+    "gate_c_evaluation_executed": true,
+    "gate_c_passed": false,
+    "optimizer_created": true,
+    "optimizer_training_executed": false,
+    "optimizer_update_count": 0,
+    "policy_inference_executed": true,
+    "policy_owned_rollout_count": 1,
+    "simulation_policy_accepted": false,
+    "trained_policy_rollout_count": 0
+  },
+  "external_compute_started": false,
+  "failure": {
+    "code": "RENDERER_CHILD_DEPENDENCY_MISSING",
+    "exception_message": "No module named 'mujoco'",
+    "exception_type": "ModuleNotFoundError",
+    "main_runtime_mujoco_version": "3.3.5",
+    "preflight_environment_mismatch": true,
+    "renderer_child_import_exit_code": 1,
+    "renderer_child_import_stderr_sha256": "55fcdaa04c69f1b9e460c29e17ade81ab585670e69eb520376f805b63c0652ef",
+    "renderer_child_interpreter": "external/lerobot/.venv/bin/python",
+    "stage": "checkpoint_0_chunk_50_mirror_render"
+  },
+  "hardware_accessed": false,
+  "identity_sha256": "b64ec6d07296526c9931ccb061c005c037b59e828b392ceaa7dacc0e46b26a0c",
+  "large_partial_outputs_tracked_in_git": false,
+  "network_accessed": false,
+  "partial_output_file_count": 3,
+  "partial_output_files": [
+    {
+      "path": "checkpoints/step_00000/config.json",
+      "sha256": "1b2ba89880e421180962a0c862b37bfc854d16e5f8811e82210a64ecf6d09aaf",
+      "size_bytes": 1714
+    },
+    {
+      "path": "checkpoints/step_00000/model.safetensors",
+      "sha256": "acc865fb2504849ce39a403b08c5bff6b6660460d5622d3089f243c8868cf912",
+      "size_bytes": 206494928
+    },
+    {
+      "path": "rollouts/step_00000_chunk_50.json",
+      "sha256": "f9dc0e6d2b74a817dbe5005a6dc1a46c478a8b4fe7d6198c1f981f0e45c24373",
+      "size_bytes": 818993
+    }
+  ],
+  "permit_consumed": true,
+  "permit_identity_sha256": "7530e79db6b390d9bc5bca62f149f2a8e4ce9ca83b910faf622798d8edf555fa",
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "r2_activated": false,
+  "raw_partial_outputs_rewritten": false,
+  "retry_authorized": false,
+  "retry_executed": false,
+  "schema_version": "scenesmith.t20_43_r1_act_terminal_failure.v1",
+  "serial_accessed": false,
+  "started_at": "2026-07-16T15:11:58-05:00",
+  "status": "verified_terminal_infrastructure_failure",
+  "task_id": "T20.43",
+  "terminated_at": "2026-07-16T15:12:37-05:00"
+}
