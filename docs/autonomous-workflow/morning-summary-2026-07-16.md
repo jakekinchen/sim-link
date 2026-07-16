@@ -13,6 +13,10 @@ manifest is `f423f5d3...`; private exact evidence is retained locally. The gate
 is consumed and closed. T19.2 remains pending a distinct calibration/motion
 brief and permit; this does not make the physical twin qualified or rescue the
 failed ACT/SmolVLA/X policy field.
+T19.2 readiness `5476d01d...` subsequently converted the next broad calibration
+step into eight explicit missing proofs. Reviewer 283 routes T19.2a to build the
+metric-target contract and watchdog/deadman/stop/exact-return harness offline;
+no motion gate is open.
 
 ## Operational verdict
 

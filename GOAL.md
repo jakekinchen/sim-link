@@ -1098,6 +1098,12 @@ Session `t19-1-20260716-0712-cdt` then completed under central decision
 changes/motion/unexpected operations, one no-torque close, and no camera
 access. Reviewer 282 accepts manifest `f423f5d3...`, closes the consumed gate,
 and routes T19.2 only to a separately reviewed bounded calibration design.
+Brief 213/Reviewer 283 then verifies T19.2 readiness matrix `5476d01d...`:
+servo telemetry, calibration semantics, historical camera identity/mode, and
+offline timing thresholds are bound, but metric target, intrinsics, extrinsics,
+held-out joint offsets, metric aperture, live timing, watchdog/exact-return,
+and central motion authority remain absent. T19.2a is the exact offline target
+and bounded-motion-harness implementation slice; no further live gate is open.
 
 ## Durable State
 

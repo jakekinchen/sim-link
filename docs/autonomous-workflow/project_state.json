@@ -118,10 +118,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "212",
-    "commit": "288e938b4ce9b0458af1ffdd45a63cb5af31e46f",
-    "reviewer_decision_id": "282",
-    "summary": "verified_t19_1_live_readonly_hardware_snapshot_gate_consumed_and_closed"
+    "brief_id": "213",
+    "commit": "9cfd5fd258c4e07387889c32025203a79c28d9fd",
+    "reviewer_decision_id": "283",
+    "summary": "verified_fail_closed_t19_2_physical_calibration_readiness_matrix"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -323,8 +323,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M19 physical hardware twin qualification",
-  "current_task": "T19.2",
-  "next_eligible_task": "T19.2",
+  "current_task": "T19.2a",
+  "next_eligible_task": "T19.2a",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -5237,12 +5237,24 @@
     "T19.2": {
       "state": "in_progress",
       "depends_on": ["T19.1", "motion_authority"],
-      "active_brief_id": "213",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "213",
+      "review_decision_id": "283",
+      "implementation_commits": ["a0d36045fa748f87eb129aaef023b645d1eb4636", "9cfd5fd258c4e07387889c32025203a79c28d9fd"],
+      "result": "Reviewer 283 verifies signed readiness matrix 5476d01d: four local source-bound facts exist, while eight named target, camera, joint, aperture, timing, watchdog, and central-motion prerequisites remain missing; T19.2a is routed",
+      "readiness_artifact": {"path":"configurations/robot_lab/t19_2_calibration_readiness.json","schema_version":"scenesmith.t19_2_calibration_readiness.v1","identity_sha256":"5476d01d665a38108000ed1e25e08a53a49c1ccb9fe445f2b8ce9ba85d462b8e","file_sha256":"86b8d97b6ae29de6c84158b3e0a5f0ee92ec0ee8829fa14ed57e4cf56f682bdc","size_bytes":4390,"calibration_session_ready":false,"motion_authority_ready":false,"missing_prerequisite_count":8,"selected_next_slice":"t19_2a_calibration_target_and_bounded_micro_motion_harness","hardware_accessed":false,"physical_follower_commanded":false},
+      "authority_granted": ["read_verified_t19_1_snapshot", "activate_brief_213", "build_offline_physical_calibration_readiness_contract", "t19_2_calibration_readiness_matrix_valid", "design_t19_2a_target_and_bounded_motion_harness"],
+      "authority_not_granted": ["camera_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
+    },
+    "T19.2a": {
+      "state": "pending",
+      "depends_on": ["T19.2_readiness_matrix", "owner_present_motion_authority"],
+      "active_brief_id": null,
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "Brief 213 is active to build a source-bound physical calibration readiness matrix and route the smallest safe target-plus-micro-motion harness slice; no new hardware access is granted",
-      "authority_granted": ["read_verified_t19_1_snapshot", "activate_brief_213", "build_offline_physical_calibration_readiness_contract"],
-      "authority_not_granted": ["camera_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
+      "result": "Implement and fixture-test the metric calibration-target contract plus bounded watchdog/deadman/stop/exact-return motion harness before proposing any new live gate",
+      "authority_granted": ["read_t19_2_readiness_sources", "design_offline_target_and_motion_harness"],
+      "authority_not_granted": ["camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     }
   }
 }
