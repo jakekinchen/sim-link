@@ -1,0 +1,120 @@
+{
+  "authority_granted": [
+    "t19_2_calibration_readiness_matrix_valid"
+  ],
+  "authority_not_granted": [
+    "camera_access",
+    "serial_access",
+    "register_write",
+    "torque_change",
+    "motion",
+    "calibration_update",
+    "twin_update",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "policy_actuation",
+    "promotion_eligible",
+    "external_compute",
+    "brev_compute"
+  ],
+  "calibration_session_ready": false,
+  "evidence_mode": "offline_source_bound_readiness_audit",
+  "hardware_accessed": false,
+  "identity_sha256": "5476d01d665a38108000ed1e25e08a53a49c1ccb9fe445f2b8ce9ba85d462b8e",
+  "missing_prerequisite_ids": [
+    "central_motion_session_authority_granted",
+    "current_metric_calibration_target_observed",
+    "camera_intrinsics_measured",
+    "camera_to_robot_base_extrinsics_measured",
+    "joint_offset_held_out_motion_samples",
+    "gripper_metric_aperture_samples",
+    "live_monotonic_timing_samples",
+    "watchdog_deadman_stop_return_harness_verified"
+  ],
+  "motion_authority_ready": false,
+  "physical_follower_commanded": false,
+  "physical_transfer_ready": false,
+  "physical_twin_qualified": false,
+  "present_local_capabilities": {
+    "fresh_readonly_servo_identity_and_telemetry": true,
+    "historical_camera_identity_and_mode_review_bound": true,
+    "joint_calibration_semantics_source_bound": true,
+    "offline_timing_threshold_contract_bound": true
+  },
+  "qualification_scope": "physical_calibration_preflight",
+  "report_name": "pi05_t19_2_physical_calibration_readiness",
+  "required_physical_evidence": [
+    {
+      "evidence": null,
+      "prerequisite_id": "central_motion_session_authority_granted",
+      "satisfied": false
+    },
+    {
+      "evidence": null,
+      "prerequisite_id": "current_metric_calibration_target_observed",
+      "satisfied": false
+    },
+    {
+      "evidence": null,
+      "prerequisite_id": "camera_intrinsics_measured",
+      "satisfied": false
+    },
+    {
+      "evidence": null,
+      "prerequisite_id": "camera_to_robot_base_extrinsics_measured",
+      "satisfied": false
+    },
+    {
+      "evidence": null,
+      "prerequisite_id": "joint_offset_held_out_motion_samples",
+      "satisfied": false
+    },
+    {
+      "evidence": null,
+      "prerequisite_id": "gripper_metric_aperture_samples",
+      "satisfied": false
+    },
+    {
+      "evidence": null,
+      "prerequisite_id": "live_monotonic_timing_samples",
+      "satisfied": false
+    },
+    {
+      "evidence": null,
+      "prerequisite_id": "watchdog_deadman_stop_return_harness_verified",
+      "satisfied": false
+    }
+  ],
+  "schema_version": "scenesmith.t19_2_calibration_readiness.v1",
+  "selected_next_slice": "t19_2a_calibration_target_and_bounded_micro_motion_harness",
+  "source_artifacts": {
+    "calibration_profile": {
+      "file_sha256": "fe1e2e124f6f1b96990aa7a65b31c885325fbdd901707cf4976e31553f53b550",
+      "identity_sha256": "24db6f2457e9638866234cb795a413f4b855266a64878f77c1db51c39f9b7cea",
+      "path": "configurations/robot_lab/pi05_calibration_profile.json",
+      "schema_version": "scenesmith.calibration_profile.v1",
+      "size_bytes": 6543
+    },
+    "camera_review": {
+      "file_sha256": "c765200dd4b44d568cb00593d63a41b48cd59be9026ea8be74c53b0122808b81",
+      "identity_sha256": "0930c3c96e397c996604ea95be234dbc2e15bfb797e96836a504aa8163d2c584",
+      "path": "configurations/robot_lab/pi05_static_pose_live_session_t16-5c-20260713-0958-cdt.redacted.json",
+      "schema_version": "scenesmith.static_pose_live_session_review_manifest.v1",
+      "size_bytes": 9186
+    },
+    "t19_1_snapshot": {
+      "file_sha256": "3db665e29901343cfe2898b0778b0348016906d25333be086db3667d55f999b6",
+      "identity_sha256": "f423f5d3a7bfa2a5017ae686ba73ca74d335eb5dfcd675f0275c1b113fd7c192",
+      "path": "configurations/robot_lab/t19_1_readonly_hardware_snapshot_20260716_0712.json",
+      "schema_version": "scenesmith.t19_1_readonly_hardware_snapshot_manifest.v1",
+      "size_bytes": 6762
+    },
+    "timing_fixture": {
+      "file_sha256": "d937aea8f34a0ea06356f9250d6f0d9ddc40328033fb9ec041b5d595a7146552",
+      "identity_sha256": "b97c38868234a95db23e0a81910b365e486a577e736737f6ded87b55219fac1d",
+      "path": "configurations/robot_lab/t20_22_timing_latency_certificate.json",
+      "schema_version": "scenesmith.timing_latency_fixture.v1",
+      "size_bytes": 31829
+    }
+  }
+}

@@ -5235,13 +5235,13 @@
       ]
     },
     "T19.2": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["T19.1", "motion_authority"],
-      "active_brief_id": null,
+      "active_brief_id": "213",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "T19.1 is verified; T19.2 requires a separately reviewed calibration design, central motion decision, exact bounded motion plan, runtime preflight, and finite permit before any camera access, write, torque change, or motion",
-      "authority_granted": ["read_verified_t19_1_snapshot", "design_next_bounded_calibration_brief"],
+      "result": "Brief 213 is active to build a source-bound physical calibration readiness matrix and route the smallest safe target-plus-micro-motion harness slice; no new hardware access is granted",
+      "authority_granted": ["read_verified_t19_1_snapshot", "activate_brief_213", "build_offline_physical_calibration_readiness_contract"],
       "authority_not_granted": ["camera_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     }
   }
