@@ -907,6 +907,11 @@ schedule, and the unchanged 0.10 objective/0.05-rad physical conjunction.
 Brief 199 opens T20.36h pre-run implementation and central authority only. No
 attempt, model access, optimizer, Gate C, hardware, external compute, or Brev
 is authorized before that boundary is remotely reviewed.
+Reviewer 250 now accepts implementation `29b9525`, raw-checkpoint preflight
+`b7e2938f...`, and one-use permit `5fa7c1d2...`. Exactly one local-MPS attempt
+may begin only after this boundary is confirmed on origin; runtime smoke
+consumes the permit on failure, and neither result can select a policy or
+execute Gate C by claim.
 
 ## Durable State
 

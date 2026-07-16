@@ -1,0 +1,41 @@
+{
+  "attempt_marker_must_precede_model_construction": true,
+  "attempt_marker_path": "outputs/robot_lab/t20_36h_exact_smolvla_gate_b_run_001/attempt.json",
+  "authority_decision_identity_sha256": "b6b8851861f23ab87bfbe022144d68b0c94d91c882a5916e6d5c5026406a5f43",
+  "authorized_actions": [
+    "simulation_model_construction",
+    "simulation_model_inference",
+    "simulation_optimizer_training"
+  ],
+  "authorized_attempt_count": 1,
+  "brev_compute_started": false,
+  "checkpoint_tree_identity_sha256": "00b67c568bf273bcefee95b1dcc0c19e279ddc036566f19ba5ad8039b4b1fda2",
+  "closed_loop_rollout": false,
+  "evaluation_update_schedule": [
+    0,
+    100,
+    250,
+    500,
+    1000,
+    2000
+  ],
+  "external_compute_started": false,
+  "gate_b_threshold_changed": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "5fa7c1d2b653e39eb5617c81d35060fa63a4ae25e39b11746b879943c87dfc04",
+  "local_execution_eligible_after_remote_preservation": true,
+  "maximum_optimizer_updates": 2000,
+  "physical_actuation": false,
+  "physical_transfer_ready": false,
+  "policy_track_selected": false,
+  "promotion_eligible": false,
+  "required_source_commit": "29b95256a3d7e1988afb0e8f96bb3de9178e8289",
+  "retry_or_sweep_allowed": false,
+  "runtime_preflight_identity_sha256": "b7e2938ff64bcb6b25fea7b7c9fff83ad50b0c3ce0627fcec50114f1c73bdc63",
+  "runtime_smoke_is_part_of_counted_attempt": true,
+  "schema_version": "scenesmith.t20_36h_exact_smolvla_gate_b_permit.v1",
+  "simulation_policy_accepted": false,
+  "smoke_failure_consumes_attempt": true,
+  "task_id": "T20.36h",
+  "training_spec_identity_sha256": "fb217f3e142bf082cc8628928bdb2b26c5abdaf8e3355ecd04c32ae17ff8f175"
+}

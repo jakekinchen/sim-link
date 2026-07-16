@@ -4382,12 +4382,27 @@
       "depends_on": ["T20.36g"],
       "active_brief_id": "199",
       "latest_verified_brief_id": null,
-      "review_decision_id": null,
+      "review_decision_id": "250",
       "source_commit": "1c5faf315e09bebff5de681d7e06de6787f1a8cb",
-      "implementation_commits": [],
-      "result": "pre-run implementation is active under Brief 199; implement the exact one-use SmolVLA runner, raw checkpoint integrity inventory, static preflight, and central authority boundary without constructing or loading a model",
-      "authority_granted": ["implement_t20_36h_pre_run_boundary","hash_exact_local_checkpoint_files_without_tensor_deserialization"],
-      "authority_not_granted": ["attempt_marker_creation","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","policy_track_selected","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
+      "implementation_commits": ["29b95256a3d7e1988afb0e8f96bb3de9178e8289"],
+      "result": "reviewed pre-run boundary is ready: exact source commit, four raw checkpoint hashes, canonical batch, MPS, 17.0 GB free disk, runner/verifier, central simulation-training decision, and one-use permit agree; the sole counted local attempt is next after this boundary is confirmed on origin",
+      "pre_run_artifacts": {
+        "authority_decision_identity_sha256": "b6b8851861f23ab87bfbe022144d68b0c94d91c882a5916e6d5c5026406a5f43",
+        "runtime_preflight_path": "configurations/robot_lab/t20_36h_exact_smolvla_gate_b_preflight.json",
+        "runtime_preflight_identity_sha256": "b7e2938ff64bcb6b25fea7b7c9fff83ad50b0c3ce0627fcec50114f1c73bdc63",
+        "runtime_preflight_file_sha256": "513237ee2dd6175f6265355ead41e7809bb4a79d3f44a0489a803d3bb17d14db",
+        "training_permit_path": "configurations/robot_lab/t20_36h_exact_smolvla_gate_b_permit.json",
+        "training_permit_identity_sha256": "5fa7c1d2b653e39eb5617c81d35060fa63a4ae25e39b11746b879943c87dfc04",
+        "training_permit_file_sha256": "dced1991d8147e1350ce6332531016f0528d9f211443dc27819992f448cff918",
+        "required_source_commit": "29b95256a3d7e1988afb0e8f96bb3de9178e8289",
+        "authorized_attempt_count": 1,
+        "checkpoint_file_count": 4,
+        "checkpoint_tensor_deserialized": false,
+        "model_constructed": false,
+        "optimizer_created": false
+      },
+      "authority_granted": ["one_exact_t20_36h_local_mps_attempt_after_remote_preservation","simulation_model_construction","simulation_model_inference","maximum_2000_update_simulation_optimizer_training","early_stop_at_first_gate_b_pass"],
+      "authority_not_granted": ["second_attempt","retry","sweep","network_download","cpu_fallback","policy_track_selected","gate_b_threshold_change","gate_c_execution","closed_loop_rollout","simulation_policy_accepted","physical_transfer_ready","promotion_eligible","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",
