@@ -140,22 +140,34 @@ class ProcessorAccessGuard:
         self.snapshot = snapshot.resolve()
         self.opened_snapshot_files: set[str] = set()
         self.network_attempted = False
+        self._resolved_targets: dict[Path, set[str]] = {}
+        for path in self.snapshot.rglob("*"):
+            if not path.is_file():
+                continue
+            relative = path.relative_to(self.snapshot).as_posix()
+            self._resolved_targets.setdefault(path.resolve(), set()).add(relative)
 
     def observe_path(self, raw_path: Any) -> None:
         if isinstance(raw_path, int):
             return
         try:
-            path = Path(os.fspath(raw_path)).resolve()
+            lexical = Path(os.path.abspath(os.fspath(raw_path)))
         except (OSError, TypeError, ValueError):
             return
-        if not path.is_relative_to(self.snapshot):
-            return
-        relative = path.relative_to(self.snapshot).as_posix()
-        if relative.lower().endswith(WEIGHT_OR_TENSOR_SUFFIXES):
-            raise PermissionError(
-                f"T20.36j processor smoke blocked tensor/weight read: {relative}"
-            )
-        self.opened_snapshot_files.add(relative)
+        if lexical.is_relative_to(self.snapshot):
+            relative_paths = {lexical.relative_to(self.snapshot).as_posix()}
+        else:
+            try:
+                relative_paths = self._resolved_targets.get(lexical.resolve(), set())
+            except OSError:
+                relative_paths = set()
+        for relative in relative_paths:
+            if relative.lower().endswith(WEIGHT_OR_TENSOR_SUFFIXES):
+                raise PermissionError(
+                    "T20.36j processor smoke blocked tensor/weight read: "
+                    f"{relative}"
+                )
+            self.opened_snapshot_files.add(relative)
 
     def block_network(self, *_args: Any, **_kwargs: Any) -> Any:
         self.network_attempted = True

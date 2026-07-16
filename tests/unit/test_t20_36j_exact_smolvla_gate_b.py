@@ -171,7 +171,8 @@ class T2036jExactSmolVLAGateBTests(unittest.TestCase):
 
     def test_processor_guard_blocks_tensor_and_network_access(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory) / "snapshot"
+            root.mkdir()
             (root / "processor_config.json").write_text("{}", encoding="utf-8")
             (root / "model.safetensors").write_bytes(b"weights")
             with guarded_processor_access(root) as guard:
@@ -187,6 +188,25 @@ class T2036jExactSmolVLAGateBTests(unittest.TestCase):
                 guard.opened_snapshot_files, {"processor_config.json"}
             )
             self.assertTrue(guard.network_attempted)
+
+    def test_processor_guard_maps_resolved_blob_targets_to_snapshot(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "snapshot"
+            root.mkdir()
+            config_blob = base / "config-blob"
+            weight_blob = base / "weight-blob"
+            config_blob.write_text("{}", encoding="utf-8")
+            weight_blob.write_bytes(b"weights")
+            (root / "processor_config.json").symlink_to(config_blob)
+            (root / "model.safetensors").symlink_to(weight_blob)
+            with guarded_processor_access(root) as guard:
+                self.assertEqual(config_blob.read_text(encoding="utf-8"), "{}")
+                with self.assertRaises(PermissionError):
+                    weight_blob.read_bytes()
+            self.assertEqual(
+                guard.opened_snapshot_files, {"processor_config.json"}
+            )
 
     def test_editable_distribution_pkg_info_is_valid_metadata(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
