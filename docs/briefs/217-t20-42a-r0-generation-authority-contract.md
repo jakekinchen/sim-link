@@ -71,6 +71,17 @@ authorized pre-run boundary.
 - Focused and relevant broad tests, Ruff, compilation, JSON, pointer, diff, and
   same-agent adversarial review must pass before implementation is accepted.
 
+## Reviewed result
+
+Implementation commits `c2a4512346e7d92bc26a4d25375b9738cb5e5cda`
+and `953067175ed286a98404651e3b2c6e548e22e5f0` are exact on origin. Reviewer
+287 accepts the construction-only contracts: exact source/file hashes,
+central composition, runtime facts, the one-use permit, and immutable marker
+semantics all fail closed under focused and broad regression. No authority
+artifact or execution output was materialized. Brief 217 is complete; a fresh
+brief and active owner window remain mandatory before materialization or a
+pre-run decision.
+
 ## Authority withheld
 
 No authority artifact materialization, attempt marker, R0 episode generation,

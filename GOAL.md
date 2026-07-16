@@ -104,6 +104,15 @@ Brief 217 now opens T20.42a to implement and fixture-test those exact central,
 preflight, one-use-permit, and marker-first contracts against origin review
 boundary `c87ee84`. This boundary may not materialize authority artifacts or
 execute a candidate.
+Implementation `c2a4512` plus adversarial coverage `9530671` are now exact on
+origin, and Reviewer 287 accepts the construction-only authority contracts.
+The code binds the 119+9 manifest, existing seeds 6-7 as references only, a
+10-GiB runtime floor, ten absent/unaliased output paths, and an exclusive
+permit-consuming marker while every model/optimizer/hardware/network/external-
+compute/Brev field remains false. This still is not an authority-artifact or
+generation boundary. The inherited owner/run windows have expired; T20.42
+awaits a fresh brief and active bounded owner window before materialization,
+pre-run review, or the first MuJoCo candidate.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
