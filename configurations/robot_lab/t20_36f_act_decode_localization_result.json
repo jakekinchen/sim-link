@@ -1,0 +1,174 @@
+{
+  "all_action_hashes_reproduced": true,
+  "attempt_identity_sha256": "8896662194b7894dc88dc43b3180d3d27668a1bd6b49079c98394b2dc0ce57f9",
+  "brev_compute_started": false,
+  "closed_loop_rollout": false,
+  "decision": "act_decode_localization_verified",
+  "direct_action_hash": "ecaa2e4ccd5c34bcac5ecebfaed00e3a421b710c066f73b155f393773fd721e0",
+  "direct_queue_consistent": true,
+  "direct_queue_maximum_error_rad": 0.0,
+  "error_concentration": "distributed_physical_error",
+  "external_compute_started": false,
+  "gate_b_threshold_changed": false,
+  "gate_c_authorized": false,
+  "identity_sha256": "472e5ec5aabf36d9f280d2daf3f90b40988ccbc6d236b27cf3b3289755681ffb",
+  "inference_permit_identity_sha256": "d9daae7b6617298a854de0956d596858b95836729c17582f4c3151bbbf2dbd5a",
+  "maximum_error": {
+    "absolute_error_rad": 0.4424872298982432,
+    "joint_index": 4,
+    "joint_name": "wrist_roll",
+    "predicted_action": 0.4134040939096542,
+    "target_action": -0.029083135988588988,
+    "timestep": 0
+  },
+  "normalized_per_joint": [
+    {
+      "joint_name": "shoulder_pan",
+      "maximum_absolute_error": 0.10933899879455566,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 0.010433080606162548
+    },
+    {
+      "joint_name": "shoulder_lift",
+      "maximum_absolute_error": 0.5371408462524414,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 0.038404859602451324
+    },
+    {
+      "joint_name": "elbow_flex",
+      "maximum_absolute_error": 0.25862789154052734,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 0.0306606013327837
+    },
+    {
+      "joint_name": "wrist_flex",
+      "maximum_absolute_error": 2.6474709510803223,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 0.17058390378952026
+    },
+    {
+      "joint_name": "wrist_roll",
+      "maximum_absolute_error": 2.444835662841797,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 0.17186316847801208
+    },
+    {
+      "joint_name": "gripper",
+      "maximum_absolute_error": 0.402476966381073,
+      "maximum_error_timestep": 49,
+      "mean_absolute_error": 0.03469116613268852
+    }
+  ],
+  "objective_reproduced_within_tolerance": true,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_mean_absolute_error_rad": 0.014552497364601862,
+  "physical_per_joint": [
+    {
+      "joint_name": "shoulder_pan",
+      "maximum_absolute_error": 0.0003382797150889086,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 3.227901043987347e-05,
+      "threshold_exceedance_count": 0
+    },
+    {
+      "joint_name": "shoulder_lift",
+      "maximum_absolute_error": 0.12531747522817316,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 0.008960028387359103,
+      "threshold_exceedance_count": 1
+    },
+    {
+      "joint_name": "elbow_flex",
+      "maximum_absolute_error": 0.023508873510944106,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 0.0027870021587333227,
+      "threshold_exceedance_count": 0
+    },
+    {
+      "joint_name": "wrist_flex",
+      "maximum_absolute_error": 0.3663159437276362,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 0.023602752602530516,
+      "threshold_exceedance_count": 4
+    },
+    {
+      "joint_name": "wrist_roll",
+      "maximum_absolute_error": 0.4424872298982432,
+      "maximum_error_timestep": 0,
+      "mean_absolute_error": 0.03110528115347209,
+      "threshold_exceedance_count": 4
+    },
+    {
+      "joint_name": "gripper",
+      "maximum_absolute_error": 0.24163626124038673,
+      "maximum_error_timestep": 49,
+      "mean_absolute_error": 0.020827640875076266,
+      "threshold_exceedance_count": 5
+    }
+  ],
+  "physical_threshold_rad": 0.05,
+  "policy_track_selected": false,
+  "repetition_action_hashes": [
+    "ecaa2e4ccd5c34bcac5ecebfaed00e3a421b710c066f73b155f393773fd721e0",
+    "ecaa2e4ccd5c34bcac5ecebfaed00e3a421b710c066f73b155f393773fd721e0",
+    "ecaa2e4ccd5c34bcac5ecebfaed00e3a421b710c066f73b155f393773fd721e0",
+    "ecaa2e4ccd5c34bcac5ecebfaed00e3a421b710c066f73b155f393773fd721e0",
+    "ecaa2e4ccd5c34bcac5ecebfaed00e3a421b710c066f73b155f393773fd721e0"
+  ],
+  "reproduced_objective": 0.07610613852739334,
+  "schema_version": "scenesmith.t20_36f_act_decode_localization_result.v1",
+  "smolvla_entry_authorized": false,
+  "source_action_hash": "ecaa2e4ccd5c34bcac5ecebfaed00e3a421b710c066f73b155f393773fd721e0",
+  "source_checkpoint_identity_sha256": "01b5713472ae6113ea55b265cbeb02042f3be2b473178a366a6b996e1b75dd21",
+  "source_final_evaluation_identity_sha256": "16d868b0d75163e64534983617c0d505410fb002d23c61dd3ca352567fc5a48a",
+  "source_final_objective": 0.07610613852739334,
+  "source_result_identity_sha256": "2ea2c2460527ee863275da11a008aa2b75832f08040daf4fd64459c9520769c6",
+  "source_run_identity_sha256": "9911e51c45dad591691502a47d6ea3baa871ca6c3e3b6b549f81bc2af4423478",
+  "task_id": "T20.36f",
+  "threshold_exceedance_count": 14,
+  "time_regions": [
+    {
+      "label": "steps_0_9",
+      "maximum_absolute_error_rad": 0.4424872298982432,
+      "mean_absolute_error_rad": 0.046208378720214646,
+      "start_timestep": 0,
+      "stop_timestep_exclusive": 10,
+      "threshold_exceedance_count": 9
+    },
+    {
+      "label": "steps_10_19",
+      "maximum_absolute_error_rad": 0.028333503995407516,
+      "mean_absolute_error_rad": 0.004778401184406921,
+      "start_timestep": 10,
+      "stop_timestep_exclusive": 20,
+      "threshold_exceedance_count": 0
+    },
+    {
+      "label": "steps_20_29",
+      "maximum_absolute_error_rad": 0.01824534920043952,
+      "mean_absolute_error_rad": 0.003607507505592004,
+      "start_timestep": 20,
+      "stop_timestep_exclusive": 30,
+      "threshold_exceedance_count": 0
+    },
+    {
+      "label": "steps_30_39",
+      "maximum_absolute_error_rad": 0.05459426106567378,
+      "mean_absolute_error_rad": 0.004377226722856429,
+      "start_timestep": 30,
+      "stop_timestep_exclusive": 40,
+      "threshold_exceedance_count": 1
+    },
+    {
+      "label": "steps_40_49",
+      "maximum_absolute_error_rad": 0.24163626124038673,
+      "mean_absolute_error_rad": 0.013790972689939304,
+      "start_timestep": 40,
+      "stop_timestep_exclusive": 50,
+      "threshold_exceedance_count": 4
+    }
+  ],
+  "training_retry": false
+}

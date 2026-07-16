@@ -29,12 +29,13 @@ Narrative claims never override a closed or absent machine-readable grant.
 T20.36e completed negative with signed result `2ea2c246...`: the final objective
 ratio passes at `0.054918`, but the maximum physical error fails at `0.442487`
 rad despite matching five-repeat hashes and `0.0145525`-rad mean error. Reviewer
-246 closes the attempt and all retries. T20.36f is current under Brief 197 for
-an exact checkpoint-reload/per-joint localization. Implementation `489be59`,
-central decision `de30947f...`, model-free preflight `40e24b5e...`, and one-use
-permit `d9daae7b...` are reviewed by Decision 247. The sole checkpoint load and
-inference audit may run only after this evidence boundary is remotely
-preserved. SmolVLA entry, Gate B amendment, Gate C, and rollout remain closed.
+T20.36f result `472e5ec5...` reproduces the ACT objective and action hashes and
+proves direct/queue equality. Fourteen errors above 0.05 rad concentrate at the
+chunk boundaries and already appear as large normalized errors, rejecting
+decode/queue and physical scaling as the cause. Reviewer 248 closes ACT retry.
+T20.36g is current under Brief 198 for design-only SmolVLA Gate B entry; model
+load, inference, optimizer, policy selection, Gate B amendment, Gate C, and
+rollout remain closed.
 
 The run remains simulation-only. Hardware, cameras, serial devices, physical
 motion, external compute, Brev, promotion, and physical-transfer authority are
@@ -68,11 +69,10 @@ Repeat while the run window and authority permit:
   coverage. T20.36b must encode actual standard-ratio plus five-seed physical
   maxima as the retention decision; proxy losses may be reported but never
   substitute for either Gate B conjunct.
-- T20.36e fails the unchanged physical maximum after passing its objective
-  ratio. T20.36f must reproduce the final action hash from the exact checkpoint,
-  localize normalized and physical error by joint/time, and compare direct
-  chunk prediction with queued decoding. Only that evidence may route a shared-
-  path correction or a separately reviewed SmolVLA entry design.
+- T20.36f proves ACT direct and queued decoding are identical and localizes the
+  miss to sparse normalized boundary/endpoint output, including task-relevant
+  shoulder and gripper errors. T20.36g may now design SmolVLA's exact local
+  Gate B entry, but no model or gate change is authorized by that route.
 - Gate C opens only after Gate B is mechanically proven. A first learned
   closed-loop grasp must be labeled autonomous only when every action is policy
   owned and the strict-v2 evaluator passes.

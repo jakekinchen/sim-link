@@ -63,3 +63,18 @@ Gate C, rollout, hardware, camera, serial, external compute, or Brev.
 
 Reviewer Decision 247 verifies this boundary and opens its sole inference audit
 only after the signed evidence and review are confirmed on origin.
+
+## Audit Result
+
+Signed result `472e5ec5...` reproduces the final objective and all direct/queued
+action hashes exactly; direct-versus-queue physical error is zero. The largest
+normalized errors already occur at timestep 0 on wrist flex (`2.64747`) and
+wrist roll (`2.44484`), decoding to `0.366316` and `0.442487` rad. Shoulder
+lift also reaches `0.125317` rad at timestep 0; gripper reaches `0.241636` rad
+at timestep 49. Fourteen elements exceed 0.05 rad: 9 in steps 0-9, 1 in steps
+30-39, and 4 in steps 40-49. This localizes sparse boundary/endpoint model
+underfit before physical unnormalization, not queue/decode inconsistency.
+
+Reviewer Decision 248 verifies T20.36f and routes Brief 198 to a design-only
+SmolVLA Gate B entry boundary. ACT training is not retried and Gate B is not
+amended; shoulder-lift and gripper misses make a consequence waiver premature.
