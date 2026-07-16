@@ -26,12 +26,12 @@ proof states must remain distinct.
 - Owner evening extension recorded at `2026-07-15T10:20:00-05:00` for the
   tonight MVP demo composition in the MVP execution plan; scope, gates, and
   all closed authorities are unchanged.
-- This owner-requested continuation is simulation-only diagnostic and bounded
-  training work under M20. The active loop is
+- This owner-requested continuation began as simulation-only diagnostic and
+  bounded training work under M20. The active loop is
   `docs/autonomous-workflow/t20-capability-ladder-goal-loop.md`; it starts at
   T20.35's single rank-16 Gate B discriminator and follows only the lowest
   unmet evidence-routed gate in `docs/sim-link-mvp-execution-plan.md`. It
-  grants no hardware,
+  granted no hardware until the separately recorded owner-present window below,
   physical-transfer, promotion, external-compute, or Brev authority. Historical
   physical-session notes below are retained only as consumed-gate history.
 - Reviewer 098's one-session gate was consumed and closed at `08:42` CDT after
@@ -72,7 +72,7 @@ proof states must remain distinct.
 
 ## Current Milestone
 
-M20 - Simulation-Only Clean Supervision And Capability Falsification
+M19 - Physical Hardware Twin Qualification (bounded T19.1 read-only side lane)
 
 ## Current Slice
 
@@ -1084,6 +1084,10 @@ exact-duplicate, and stale-source lifecycle checks. T20.40
 is deferred because Gate C did not pass. Morning closeout is complete and
 T20.41 is blocked on a new owner-selected capability route; do not resume the
 T20.35/T20.36 alphabet without a fresh brief and authority.
+Brief 212 therefore opens the dependency-ready T19.1 side lane under the
+separate owner-present hardware window. No device access is allowed until the
+same-thread unrestricted/no-prompt profile, central read-only session decision,
+finite one-use permit, and remotely confirmed open-gate boundary all agree.
 
 ## Durable State
 

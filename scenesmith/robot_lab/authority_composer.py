@@ -6,13 +6,15 @@ path that can emit SceneSmith's global readiness decisions.
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import re
+import subprocess
 
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from scenesmith.robot_lab.artifact_contract import (
     canonical_json_bytes,
@@ -21,6 +23,9 @@ from scenesmith.robot_lab.artifact_contract import (
     require_nonblank,
     sign_payload,
     verify_signed_payload,
+)
+from scenesmith.robot_lab.census_runtime_binding import (
+    EXPECTED_READ_REGISTER_WIDTHS,
 )
 
 
@@ -31,6 +36,15 @@ COMPOSITION_REQUEST_SCHEMA_VERSION = "scenesmith.authority_composition_request.v
 AUTHORITY_DECISION_SCHEMA_VERSION = "scenesmith.authority_composition_decision.v1"
 SIMULATION_POLICY_ACCEPTANCE_SCHEMA_VERSION = (
     "scenesmith.simulation_policy_acceptance_decision.v1"
+)
+T19_1_READONLY_SESSION_REQUEST_SCHEMA_VERSION = (
+    "scenesmith.t19_1_readonly_session_request.v1"
+)
+T19_1_READONLY_SESSION_DECISION_SCHEMA_VERSION = (
+    "scenesmith.t19_1_readonly_session_decision.v1"
+)
+T19_1_READONLY_SESSION_PERMIT_SCHEMA_VERSION = (
+    "scenesmith.t19_1_readonly_session_permit.v1"
 )
 
 DEFAULT_AUTHORITY_CONTRACT_PATH = Path(
@@ -47,6 +61,36 @@ DEFAULT_T20_8_RUN_ROOT = Path(
     "outputs/robot_lab/t20_7_four_model_training_run_001"
 )
 REQUIRED_POLICY_ACCEPTANCE_REPEAT_COUNT = 3
+T19_1_MAX_SESSION_SECONDS = 300
+T19_1_MAX_REGISTER_READ_COUNT = 54
+T19_1_READ_PLAN = tuple(
+    {
+        "register": register,
+        "width_bytes": width_bytes,
+        "servo_ids": list(range(1, 7)),
+    }
+    for register, width_bytes in EXPECTED_READ_REGISTER_WIDTHS.items()
+)
+T19_1_READONLY_ALLOWED_OPERATIONS = (
+    "serial_metadata_enumeration",
+    "serial_identity_holder_snapshot",
+    "serial_connect_without_handshake",
+    "scalar_allowlisted_register_read",
+    "serial_disconnect_without_torque_change",
+)
+T19_1_READONLY_AUTHORITY_NOT_GRANTED = (
+    "camera_access",
+    "register_write",
+    "torque_change",
+    "motion",
+    "calibration",
+    "policy_actuation",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "external_compute",
+    "brev_compute",
+)
 
 GLOBAL_DECISION_IDS = (
     "simulation_training_ready",
@@ -1309,6 +1353,458 @@ def _acceptance_margin(
         "margin": margin,
         "passed": passed,
     }
+
+
+def compose_t19_1_readonly_session_authority(
+    *,
+    project_state: dict[str, Any],
+    runtime_profile: dict[str, Any],
+    repo_root: Path,
+    session_id: str,
+    issued_at: str,
+    expires_at: str,
+    private_output_dir: str,
+    manifest_output: str,
+    repository_state_loader: Callable[..., dict[str, Any]] | None = None,
+    runtime_profile_verifier: Callable[..., None] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any] | None]:
+    """Mechanically compose one finite T19.1 physical read-only session."""
+
+    root = Path(repo_root).resolve()
+    session = require_nonblank(session_id, label="T19.1 session_id")
+    if re.fullmatch(r"[a-z0-9][a-z0-9._-]{7,127}", session) is None:
+        raise ValueError("T19.1 session_id is malformed")
+    private_relative = _t19_1_scoped_relative_path(
+        root=root,
+        value=private_output_dir,
+        required_root=Path("outputs/robot_lab/t19_1/private"),
+        label="T19.1 private output",
+    )
+    manifest_relative = _t19_1_scoped_relative_path(
+        root=root,
+        value=manifest_output,
+        required_root=Path("configurations/robot_lab"),
+        label="T19.1 manifest output",
+    )
+    if Path(manifest_relative).suffix != ".json":
+        raise ValueError("T19.1 manifest output must be JSON")
+    if Path(private_relative).name != session:
+        raise ValueError("T19.1 private output must be named by the exact session")
+
+    issued = _parse_timestamp(issued_at, label="T19.1 issued_at")
+    expires = _parse_timestamp(expires_at, label="T19.1 expires_at")
+    branch = require_nonblank(project_state.get("branch"), label="project branch")
+    loader = repository_state_loader or _capture_t19_1_repository_state
+    repository_state = loader(repo_root=root, branch=branch)
+    _validate_t19_1_repository_state(repository_state)
+    runtime_identity = _sha256(
+        runtime_profile.get("identity_sha256"),
+        label="T19.1 runtime profile identity",
+    )
+
+    task = copy.deepcopy(project_state.get("tasks", {}).get("T19.1"))
+    owner_window = copy.deepcopy(
+        project_state.get("owner_authority", {}).get(
+            "current_hardware_access_window"
+        )
+    )
+    state_projection = {
+        "schema_version": project_state.get("schema_version"),
+        "branch": branch,
+        "run_window": {
+            "hard_closeout": project_state.get("run_window", {}).get(
+                "hard_closeout"
+            ),
+            "hardware_authority": project_state.get("run_window", {}).get(
+                "hardware_authority"
+            ),
+        },
+        "owner_window": owner_window,
+        "prerequisite_tasks": {
+            task_id: {"state": project_state.get("tasks", {}).get(task_id, {}).get("state")}
+            for task_id in ("T16.5a", "T16.5b")
+        },
+        "task": task,
+    }
+    request = sign_payload(
+        {
+            "schema_version": T19_1_READONLY_SESSION_REQUEST_SCHEMA_VERSION,
+            "request_name": "pi05_t19_1_readonly_hardware_census_session",
+            "task_id": "T19.1",
+            "session_id": session,
+            "issued_at": issued.isoformat(),
+            "expires_at": expires.isoformat(),
+            "branch": branch,
+            "repository_state": copy.deepcopy(repository_state),
+            "remote_boundary_commit": repository_state["remote_head"],
+            "runtime_profile_identity_sha256": runtime_identity,
+            "private_output_dir": private_relative,
+            "manifest_output": manifest_relative,
+            "source_state": state_projection,
+            "source_state_identity_sha256": hashlib.sha256(
+                canonical_json_bytes(state_projection)
+            ).hexdigest(),
+        }
+    )
+
+    satisfied: list[str] = []
+    missing: list[str] = []
+    denials: list[str] = []
+
+    def prerequisite(condition: bool, name: str, denial: str) -> None:
+        if condition:
+            satisfied.append(name)
+        else:
+            missing.append(name)
+            denials.append(denial)
+
+    prerequisite(
+        project_state.get("tasks", {}).get("T16.5a", {}).get("state")
+        == "verified"
+        and project_state.get("tasks", {}).get("T16.5b", {}).get("state")
+        == "verified",
+        "m16_readonly_prerequisites_verified",
+        "M16_READONLY_PREREQUISITES_NOT_VERIFIED",
+    )
+    prerequisite(
+        isinstance(task, dict)
+        and task.get("state") == "in_progress"
+        and task.get("active_brief_id") == "212",
+        "t19_1_task_and_brief_active",
+        "T19_1_TASK_NOT_ACTIVE",
+    )
+    prerequisite(
+        isinstance(task, dict) and task.get("live_gate") == "open",
+        "t19_1_live_gate_open",
+        "T19_1_LIVE_GATE_NOT_OPEN",
+    )
+    prerequisite(
+        isinstance(task, dict)
+        and task.get("session_limit") == 1
+        and task.get("sessions_started") == 0,
+        "single_session_unused",
+        "T19_1_SESSION_ALREADY_CONSUMED_OR_AMBIGUOUS",
+    )
+    owner_state = (
+        "owner_presence_and_access_granted_pending_central_and_session_permits"
+    )
+    prerequisite(
+        project_state.get("run_window", {}).get("hardware_authority")
+        == owner_state
+        and isinstance(owner_window, dict)
+        and owner_window.get("state") == owner_state
+        and owner_window.get("owner_present") is True
+        and owner_window.get("hardware_access_authorized") is True
+        and owner_window.get("physical_access_performed_in_window") is False,
+        "owner_present_read_authority_consistent",
+        "OWNER_READ_AUTHORITY_NOT_CONSISTENT",
+    )
+
+    owner_window_active = False
+    finite_window_valid = False
+    try:
+        owner_start = _parse_timestamp(
+            owner_window.get("recorded_at_approximate"),
+            label="T19.1 owner window start",
+        )
+        owner_end = _parse_timestamp(
+            owner_window.get("valid_through_approximate"),
+            label="T19.1 owner window end",
+        )
+        hard_closeout = _parse_timestamp(
+            project_state.get("run_window", {}).get("hard_closeout"),
+            label="T19.1 run hard closeout",
+        )
+        effective_end = min(owner_end, hard_closeout)
+        owner_window_active = owner_start <= issued < effective_end
+        duration = int((expires - issued).total_seconds())
+        finite_window_valid = (
+            0 < duration <= T19_1_MAX_SESSION_SECONDS
+            and expires <= effective_end
+        )
+    except (AttributeError, TypeError, ValueError):
+        owner_window_active = False
+        finite_window_valid = False
+    prerequisite(
+        owner_window_active,
+        "owner_window_active",
+        "OWNER_WINDOW_INACTIVE",
+    )
+    prerequisite(
+        finite_window_valid,
+        "finite_session_window_valid",
+        "FINITE_SESSION_WINDOW_INVALID",
+    )
+
+    runtime_valid = True
+    verifier = runtime_profile_verifier or _verify_t19_1_runtime_profile
+    try:
+        verifier(runtime_profile, repo_root=root, now=issued.isoformat())
+    except (OSError, RuntimeError, TypeError, ValueError):
+        runtime_valid = False
+    prerequisite(
+        runtime_valid,
+        "same_thread_full_access_no_prompt_runtime_verified",
+        "RUNTIME_PROFILE_NOT_VERIFIED",
+    )
+    repository_aligned = (
+        repository_state.get("branch") == branch
+        and branch == "codex/pi05-autolearn-loop"
+        and len(
+            {
+                repository_state.get("head"),
+                repository_state.get("upstream_head"),
+                repository_state.get("remote_head"),
+            }
+        )
+        == 1
+        and repository_state.get("scoped_source_diff_clean") is True
+        and repository_state.get("gate_state_diff_clean") is True
+    )
+    prerequisite(
+        repository_aligned,
+        "exact_branch_remote_boundary_confirmed",
+        "REMOTE_BOUNDARY_NOT_CONFIRMED",
+    )
+
+    granted = not missing
+    decision = sign_payload(
+        {
+            "schema_version": T19_1_READONLY_SESSION_DECISION_SCHEMA_VERSION,
+            "decision_id": "t19_1_readonly_hardware_census_session",
+            "request_identity_sha256": request["identity_sha256"],
+            "task_id": "T19.1",
+            "granted": granted,
+            "satisfied_prerequisites": sorted(satisfied),
+            "missing_prerequisites": sorted(missing),
+            "denial_reasons": sorted(set(denials)),
+            "remote_boundary_commit": repository_state["remote_head"],
+            "runtime_profile_identity_sha256": runtime_identity,
+            "issued_at": issued.isoformat(),
+            "expires_at": expires.isoformat(),
+            "authority_granted": (
+                ["t19_1_readonly_hardware_census_session_authorized"]
+                if granted
+                else []
+            ),
+            "authority_not_granted": list(T19_1_READONLY_AUTHORITY_NOT_GRANTED),
+        }
+    )
+    if not granted:
+        return request, decision, None
+
+    permit = sign_payload(
+        {
+            "schema_version": T19_1_READONLY_SESSION_PERMIT_SCHEMA_VERSION,
+            "permit_name": "pi05_t19_1_one_use_readonly_hardware_census",
+            "task_id": "T19.1",
+            "session_id": session,
+            "request_identity_sha256": request["identity_sha256"],
+            "decision_identity_sha256": decision["identity_sha256"],
+            "runtime_profile_identity_sha256": runtime_identity,
+            "branch": branch,
+            "remote_boundary_commit": repository_state["remote_head"],
+            "issued_at": issued.isoformat(),
+            "expires_at": expires.isoformat(),
+            "use_limit": 1,
+            "maximum_register_read_count": T19_1_MAX_REGISTER_READ_COUNT,
+            "read_plan": copy.deepcopy(list(T19_1_READ_PLAN)),
+            "expected_servo_ids": list(range(1, 7)),
+            "allowed_operations": list(T19_1_READONLY_ALLOWED_OPERATIONS),
+            "register_write_count": 0,
+            "torque_change_count": 0,
+            "motion_command_count": 0,
+            "camera_access": False,
+            "private_output_dir": private_relative,
+            "manifest_output": manifest_relative,
+            "authority_not_granted": list(T19_1_READONLY_AUTHORITY_NOT_GRANTED),
+        }
+    )
+    return request, decision, permit
+
+
+def verify_t19_1_readonly_session_authority(
+    *,
+    request: dict[str, Any],
+    decision: dict[str, Any],
+    permit: dict[str, Any] | None,
+    project_state: dict[str, Any],
+    runtime_profile: dict[str, Any],
+    repo_root: Path,
+    now: str,
+    repository_state_loader: Callable[..., dict[str, Any]] | None = None,
+    runtime_profile_verifier: Callable[..., None] | None = None,
+) -> None:
+    """Recompose a T19.1 session and reject re-signed or stale authority."""
+
+    verify_signed_payload(request, label="T19.1 read-only session request")
+    verify_signed_payload(decision, label="T19.1 read-only session decision")
+    if request.get("schema_version") != T19_1_READONLY_SESSION_REQUEST_SCHEMA_VERSION:
+        raise ValueError("T19.1 request schema is unsupported")
+    if decision.get("schema_version") != T19_1_READONLY_SESSION_DECISION_SCHEMA_VERSION:
+        raise ValueError("T19.1 decision schema is unsupported")
+    expected_request, expected_decision, expected_permit = (
+        compose_t19_1_readonly_session_authority(
+            project_state=project_state,
+            runtime_profile=runtime_profile,
+            repo_root=repo_root,
+            session_id=request.get("session_id"),
+            issued_at=request.get("issued_at"),
+            expires_at=request.get("expires_at"),
+            private_output_dir=request.get("private_output_dir"),
+            manifest_output=request.get("manifest_output"),
+            repository_state_loader=repository_state_loader,
+            runtime_profile_verifier=runtime_profile_verifier,
+        )
+    )
+    if request != expected_request:
+        raise ValueError("T19.1 request drifted from central recomposition")
+    if decision != expected_decision:
+        raise ValueError("T19.1 central decision or boundary drifted")
+    if decision.get("granted") is not True:
+        if permit is not None:
+            raise ValueError("Denied T19.1 decision cannot carry a permit")
+        return
+    if permit is None:
+        raise ValueError("Granted T19.1 decision is missing its permit")
+    verify_signed_payload(permit, label="T19.1 read-only session permit")
+    if permit != expected_permit:
+        raise ValueError("T19.1 permit drifted from central decision")
+    observed = _parse_timestamp(now, label="T19.1 permit verification time")
+    issued = _parse_timestamp(permit.get("issued_at"), label="T19.1 permit issued_at")
+    expires = _parse_timestamp(permit.get("expires_at"), label="T19.1 permit expires_at")
+    if observed < issued or observed > expires:
+        raise ValueError("T19.1 permit is not active")
+    verifier = runtime_profile_verifier or _verify_t19_1_runtime_profile
+    verifier(runtime_profile, repo_root=Path(repo_root).resolve(), now=observed.isoformat())
+
+
+def _verify_t19_1_runtime_profile(
+    payload: dict[str, Any],
+    *,
+    repo_root: Path,
+    now: str,
+) -> None:
+    from scenesmith.robot_lab.hardware_execution_profile import (
+        verify_hardware_execution_profile_evidence,
+    )
+
+    verify_hardware_execution_profile_evidence(
+        payload,
+        repo_root=repo_root,
+        now=now,
+        expected_thread_id=require_nonblank(
+            payload.get("thread_id"), label="T19.1 runtime thread ID"
+        ),
+    )
+
+
+def _capture_t19_1_repository_state(
+    *,
+    repo_root: Path,
+    branch: str,
+) -> dict[str, Any]:
+    root = Path(repo_root).resolve()
+
+    def run(arguments: list[str]) -> str:
+        completed = subprocess.run(
+            arguments,
+            cwd=str(root),
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if completed.returncode != 0 or completed.stderr.strip():
+            raise RuntimeError("T19.1 repository boundary command failed")
+        return completed.stdout.strip()
+
+    observed_branch = run(["git", "branch", "--show-current"])
+    head = run(["git", "rev-parse", "HEAD"])
+    upstream = run(["git", "rev-parse", "@{upstream}"])
+    remote_output = run(
+        [
+            "git",
+            "ls-remote",
+            "--heads",
+            "origin",
+            f"refs/heads/{branch}",
+        ]
+    )
+    remote_lines = [line.split() for line in remote_output.splitlines() if line]
+    if len(remote_lines) != 1 or len(remote_lines[0]) != 2:
+        raise ValueError("T19.1 remote branch did not resolve exactly once")
+
+    def diff_clean(paths: list[str]) -> bool:
+        completed = subprocess.run(
+            ["git", "diff", "--quiet", "--", *paths],
+            cwd=str(root),
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if completed.returncode not in {0, 1} or completed.stderr.strip():
+            raise RuntimeError("T19.1 scoped repository diff check failed")
+        return completed.returncode == 0
+
+    return {
+        "branch": observed_branch,
+        "head": head,
+        "upstream_head": upstream,
+        "remote_head": remote_lines[0][0],
+        "scoped_source_diff_clean": diff_clean(
+            [
+                "scenesmith/robot_lab/authority_composer.py",
+                "scenesmith/robot_lab/live_readonly_observation.py",
+                "scenesmith/robot_lab/t19_1_readonly_hardware_snapshot.py",
+                "scripts/robot_lab/run_t19_1_readonly_hardware_snapshot.py",
+            ]
+        ),
+        "gate_state_diff_clean": diff_clean(
+            ["docs/autonomous-workflow/project_state.json"]
+        ),
+    }
+
+
+def _validate_t19_1_repository_state(payload: Any) -> None:
+    if not isinstance(payload, dict) or set(payload) != {
+        "branch",
+        "head",
+        "upstream_head",
+        "remote_head",
+        "scoped_source_diff_clean",
+        "gate_state_diff_clean",
+    }:
+        raise ValueError("T19.1 repository state is malformed")
+    require_nonblank(payload.get("branch"), label="T19.1 repository branch")
+    if (
+        not isinstance(payload.get("scoped_source_diff_clean"), bool)
+        or not isinstance(payload.get("gate_state_diff_clean"), bool)
+    ):
+        raise ValueError("T19.1 repository clean-state evidence is malformed")
+    for field in ("head", "upstream_head", "remote_head"):
+        value = require_nonblank(payload.get(field), label=f"T19.1 repository {field}")
+        if len(value) != 40 or any(character not in "0123456789abcdef" for character in value):
+            raise ValueError(f"T19.1 repository {field} is not a commit identity")
+
+
+def _t19_1_scoped_relative_path(
+    *,
+    root: Path,
+    value: Any,
+    required_root: Path,
+    label: str,
+) -> str:
+    text = require_nonblank(value, label=label)
+    relative = Path(text)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError(f"{label} escapes the repository")
+    resolved = (root / relative).resolve()
+    required = (root / required_root).resolve()
+    if not resolved.is_relative_to(required) or resolved == required:
+        raise ValueError(f"{label} escapes its required root")
+    return resolved.relative_to(root).as_posix()
 
 
 def _source_ref(repo_root: Path, path: Path, payload: dict[str, Any]) -> dict[str, Any]:

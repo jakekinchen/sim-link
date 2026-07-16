@@ -953,6 +953,29 @@ def execute_live_servo_census(
     return result
 
 
+def verify_live_servo_result(
+    payload: dict[str, Any],
+    *,
+    execution_contract_identity_sha256: str,
+    live_census_contract: dict[str, Any],
+) -> None:
+    """Publicly verify a live servo result against its exact read-only contract."""
+
+    _verify_live_servo_result(
+        payload,
+        execution_contract={
+            "identity_sha256": execution_contract_identity_sha256,
+            "live_census_contract": live_census_contract,
+        },
+    )
+
+
+def verify_live_discovery_snapshot(payload: dict[str, Any]) -> None:
+    """Publicly verify signed live metadata discovery without opening devices."""
+
+    _verify_discovery_snapshot(payload)
+
+
 def capture_finite_camera_frames(
     execution_contract: dict[str, Any],
     *,

@@ -7,9 +7,9 @@
     "no_new_major_slice_after": "2026-07-16T08:59:12-05:00",
     "hard_closeout": "2026-07-16T09:44:12-05:00",
     "owner_authorization_recorded_at": "2026-07-16T01:44:12-05:00",
-    "scope": "owner_authorized_autonomous_research_critique_iterate_or_maintain_course_loop",
-    "simulation_only": true,
-    "hardware_authority": "closed",
+    "scope": "owner_authorized_autonomous_research_critique_iterate_or_maintain_course_loop_plus_separately_gated_owner_present_readonly_hardware_census",
+    "simulation_only": false,
+    "hardware_authority": "owner_presence_and_access_granted_pending_central_and_session_permits",
     "external_compute_authority": "closed",
     "brev_authority": "closed"
   },
@@ -322,9 +322,9 @@
   },
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
-  "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.41",
-  "next_eligible_task": "T20.41",
+  "current_milestone": "M19 physical hardware twin qualification",
+  "current_task": "T19.1",
+  "next_eligible_task": "T19.1",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -5157,6 +5157,46 @@
         "simulation_training_ready",
         "physical_twin_qualified",
         "physical_actuation"
+      ]
+    },
+    "T19.1": {
+      "state": "in_progress",
+      "depends_on": ["M16", "owner_present_read_authority"],
+      "active_brief_id": "212",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "result": "Brief 212 opened for one centrally composed, finite, owner-present read-only six-servo hardware census; no device access has occurred",
+      "live_gate": "closed_pending_review_and_remote_confirmation",
+      "session_limit": 1,
+      "sessions_started": 0,
+      "owner_window_valid_until": "2026-07-16T10:05:00-05:00",
+      "effective_hard_closeout": "2026-07-16T09:44:12-05:00",
+      "required_before_any_access": [
+        "same_thread_danger_full_access_verified",
+        "same_thread_approval_policy_never_verified",
+        "fresh_central_readonly_session_decision_granted",
+        "finite_content_addressed_one_use_session_permit_valid",
+        "open_gate_boundary_confirmed_on_origin"
+      ],
+      "authority_granted": [
+        "read_verified_t16_5a_t16_5b_sources",
+        "activate_brief_212",
+        "implement_and_test_t19_1_fail_closed_authority_and_census_path"
+      ],
+      "authority_not_granted": [
+        "serial_enumeration_before_open_gate",
+        "serial_open_before_open_gate",
+        "camera_access",
+        "register_write",
+        "torque_change",
+        "motion",
+        "calibration",
+        "physical_twin_qualified",
+        "physical_transfer_ready",
+        "policy_actuation",
+        "external_compute",
+        "brev_compute",
+        "promotion"
       ]
     }
   }
