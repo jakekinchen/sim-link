@@ -1014,6 +1014,21 @@ one-use permit must agree before any marker. Network, extra packages, retry,
 sweep, Gate B amendment, Gate C execution before a pass, hardware, external
 compute, and Brev remain closed.
 
+## 2026-07-16 - T20.36j implementation and central authority remotely verified
+
+Implementation `b35acd182ca6520aa762f9adc11ab3cce1800422` is preserved on
+`origin/codex/pi05-autolearn-loop`. Fresh central decision `aa0992e6...` grants
+only `simulation_training_ready` inside the owner window and binds corrected
+contract `cb018b69...`, cache manifest `6cc7235c...`, the exact four-package
+offline install, one attempt, 2,000 updates maximum, and unchanged Gate B.
+The new runtime path is isolated from consumed T20.36h, rejects network and
+processor tensor reads, binds the complete recursive installed closure, and
+reuses the frozen T20.36h evaluator so 0.10/0.05 cannot drift. Seventy-six
+T20.36 tests and 12 pointer tests pass. Reviewer 255 permits the exact cached
+offline installation and corrected preflight now. No attempt marker may exist
+until the resulting closure, processor smoke, preflight, and one-use permit are
+committed, pushed, and confirmed on origin.
+
 ## 2026-07-14 - Brief 163 owner continuation opens T20.32 divergence localization
 
 The owner opened a fresh simulation-only window (20:10 CDT through hard

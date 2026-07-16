@@ -4537,13 +4537,25 @@
       "depends_on": ["T20.36j-B"],
       "active_brief_id": "203",
       "latest_verified_brief_id": null,
-      "review_decision_id": null,
-      "source_commit": "3f5d88119b6f5d25fda7b2c5934ba3678c04ce50",
-      "implementation_commits": [],
-      "result": "owner authorization received for the exact four-package offline environment correction, live corrected preflight contract cb018b69..., and at most one unchanged-Gate-B local-MPS replacement attempt; implementation and central authority boundary in progress before any mutation",
+      "review_decision_id": "255",
+      "source_commit": "b35acd182ca6520aa762f9adc11ab3cce1800422",
+      "implementation_commits": ["b35acd182ca6520aa762f9adc11ab3cce1800422"],
+      "result": "Reviewer 255 verifies remotely preserved implementation b35acd1 and fresh central authority aa0992e6... for the exact owner-bounded correction. The exact four cached packages may now be installed offline and the corrected preflight may run; no attempt marker is authorized until its signed closure, processor smoke, preflight, and one-use permit are committed, pushed, and origin-confirmed",
+      "pre_run_implementation": {
+        "implementation_commit": "b35acd182ca6520aa762f9adc11ab3cce1800422",
+        "authority_decision_identity_sha256": "aa0992e6f2d053b64c9e9e128d609f9515a8bdebec541ec245ee7b0eb820ce22",
+        "corrected_preflight_contract_identity_sha256": "cb018b69c89e4410499e3d7d1f13a15d8cfd57774455c6055c78be25833e679c",
+        "offline_cache_manifest_identity_sha256": "6cc7235cbc19c79fca9b180836a3996f5fc9afa7dd10e064d765394271790b7c",
+        "t20_36_test_count": 76,
+        "pointer_test_count": 12,
+        "remote_preserved": true,
+        "dependency_install_performed": false,
+        "processor_smoke_performed": false,
+        "attempt_marker_created": false
+      },
       "owner_authority_granted": ["install_exact_four_cached_distributions_offline","construct_auto_processor_offline_before_marker","execute_at_most_one_local_mps_replacement_attempt_after_verified_central_authority"],
-      "authority_granted": ["owner_authorized_exact_environment_correction_subject_to_reviewed_implementation","owner_authorized_one_replacement_attempt_subject_to_central_composer_and_fresh_permit"],
-      "authority_not_granted": ["unreviewed_dependency_install","network_download","attempt_before_remote_preflight_and_permit","second_attempt","retry","sweep","gate_b_threshold_change","gate_c_execution_before_gate_b_pass","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
+      "authority_granted": ["owner_authorized_exact_environment_correction","central_composer_granted_simulation_training_ready","install_exact_four_cached_distributions_offline","run_corrected_preflight_without_attempt_marker"],
+      "authority_not_granted": ["network_download","attempt_marker_before_remote_corrected_preflight_and_permit","second_attempt","retry","sweep","gate_b_threshold_change","gate_c_execution_before_gate_b_pass","closed_loop_rollout","physical_actuation","external_compute","brev_compute"]
     },
     "T19.0": {
       "state": "verified",

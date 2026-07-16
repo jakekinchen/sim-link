@@ -932,6 +932,11 @@ corrected preflight, and at most one unchanged-Gate-B replacement attempt.
 Brief 203 opens the implementation and execution boundary; central authority,
 remote preservation, signed closure/processor evidence, and a fresh one-use
 permit remain mandatory before a marker.
+Implementation `b35acd1` and central decision `aa0992e6...` are now verified
+and preserved on origin. Reviewer 255 permits the exact four cached packages
+to be installed offline and the corrected preflight to run. The attempt marker
+remains closed until the resulting closure, processor smoke, preflight, and
+one-use permit are committed, pushed, and origin-confirmed.
 
 ## Durable State
 
