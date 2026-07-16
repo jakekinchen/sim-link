@@ -51,6 +51,9 @@ RESULT_PATH = Path(
 )
 RUN_ROOT = Path("outputs/robot_lab/t20_36n_tensor_reproduction_run_001")
 ATTEMPT_PATH = RUN_ROOT / "attempt.json"
+TRACKED_ATTEMPT_PATH = Path(
+    "configurations/robot_lab/t20_36n_tensor_reproduction_attempt.json"
+)
 TENSOR_PATH = Path("configurations/robot_lab/t20_36n_decoded_action_tensors.json")
 RUN_SUMMARY_PATH = RUN_ROOT / "run_summary.json"
 FAILURE_PATH = RUN_ROOT / "failure.json"
@@ -661,6 +664,14 @@ def build_result(
             "schema_version": RESULT_SCHEMA_VERSION,
             "task_id": TASK_ID,
             "run_identity_sha256": run["identity_sha256"],
+            "authority_decision_identity_sha256": run[
+                "authority_decision_identity_sha256"
+            ],
+            "inference_permit_identity_sha256": run[
+                "inference_permit_identity_sha256"
+            ],
+            "attempt_identity_sha256": run["attempt_identity_sha256"],
+            "tracked_attempt_path": str(TRACKED_ATTEMPT_PATH),
             "tensor_artifact_identity_sha256": run[
                 "tensor_artifact_identity_sha256"
             ],
@@ -761,11 +772,13 @@ def verify_result(
 
 def verify_tracked_result(
     *,
+    attempt: dict[str, Any],
     tensor_artifact: dict[str, Any],
     result: dict[str, Any],
     sources: dict[str, Any],
 ) -> None:
     """Rescore tracked tensors without ignored attempt/run artifacts."""
+    verify_signed_payload(attempt, label="T20.36n tracked attempt")
     verify_signed_payload(tensor_artifact, label="T20.36n tracked tensor artifact")
     verify_signed_payload(result, label="T20.36n tracked result")
     target = _matrix(result.get("target_action"), label="tracked result target")
@@ -776,6 +789,17 @@ def verify_tracked_result(
         or result.get("schema_version") != RESULT_SCHEMA_VERSION
         or result.get("task_id") != TASK_ID
         or result.get("tracked_tensor_artifact_path") != str(TENSOR_PATH)
+        or result.get("tracked_attempt_path") != str(TRACKED_ATTEMPT_PATH)
+        or result.get("attempt_identity_sha256") != attempt.get("identity_sha256")
+        or tensor_artifact.get("attempt_identity_sha256")
+        != attempt.get("identity_sha256")
+        or result.get("inference_permit_identity_sha256")
+        != attempt.get("inference_permit_identity_sha256")
+        or result.get("authority_decision_identity_sha256")
+        != attempt.get("authority_decision_identity_sha256")
+        or attempt.get("task_id") != TASK_ID
+        or attempt.get("attempt_number") != 1
+        or attempt.get("created_before_checkpoint_tensor_read") is not True
         or result.get("tensor_artifact_identity_sha256")
         != tensor_artifact.get("identity_sha256")
         or result.get("target_action_sha256") != target_sha256

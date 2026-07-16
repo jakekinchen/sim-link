@@ -2,7 +2,7 @@ import unittest
 
 from copy import deepcopy
 
-from scenesmith.robot_lab.artifact_contract import sign_payload
+from scenesmith.robot_lab.artifact_contract import load_strict_json, sign_payload
 from scenesmith.robot_lab.t20_36n_tensor_reproduction import (
     EXPECTED_ACTION_HASHES,
     INFERENCE_SEEDS,
@@ -10,7 +10,13 @@ from scenesmith.robot_lab.t20_36n_tensor_reproduction import (
     build_inference_permit,
     build_result,
     build_runtime_preflight,
+    REPO_ROOT,
+    RESULT_PATH,
+    TENSOR_PATH,
+    TRACKED_ATTEMPT_PATH,
+    load_verified_sources,
     score_action_tensor,
+    verify_tracked_result,
 )
 
 
@@ -134,6 +140,9 @@ class T2036nTensorReproductionTest(unittest.TestCase):
         run = sign_payload(
             {
                 "tensor_artifact_identity_sha256": "8" * 64,
+                "authority_decision_identity_sha256": "5" * 64,
+                "inference_permit_identity_sha256": "6" * 64,
+                "attempt_identity_sha256": "7" * 64,
                 "tracked_tensor_artifact_path": "configurations/robot_lab/fake.json",
                 "target_action_sha256": "9" * 64,
                 "target_action": [[0.0] * 6 for _ in range(50)],
@@ -161,6 +170,14 @@ class T2036nTensorReproductionTest(unittest.TestCase):
         self.assertEqual(result["total_violation_count"], 3)
         self.assertEqual(result["score_summary"][0]["inference_seed"], INFERENCE_SEEDS[0])
         self.assertTrue(result["uniform_gate_b_passed"])
+
+    def test_tracked_result_rescores_without_ignored_run_artifacts(self) -> None:
+        verify_tracked_result(
+            attempt=load_strict_json(REPO_ROOT / TRACKED_ATTEMPT_PATH),
+            tensor_artifact=load_strict_json(REPO_ROOT / TENSOR_PATH),
+            result=load_strict_json(REPO_ROOT / RESULT_PATH),
+            sources=load_verified_sources(repo_root=REPO_ROOT),
+        )
 
 
 if __name__ == "__main__":

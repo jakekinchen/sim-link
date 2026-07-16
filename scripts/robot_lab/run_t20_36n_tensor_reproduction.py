@@ -55,6 +55,7 @@ from scenesmith.robot_lab.t20_36n_tensor_reproduction import (  # noqa: E402
     RUN_ROOT,
     RUN_SUMMARY_PATH,
     SOURCE_CHECKPOINT_ROOT,
+    TRACKED_ATTEMPT_PATH,
     TENSOR_PATH,
     build_attempt_marker,
     build_failure,
@@ -63,6 +64,7 @@ from scenesmith.robot_lab.t20_36n_tensor_reproduction import (  # noqa: E402
     build_run_summary,
     build_tensor_artifact,
     load_live_contracts,
+    load_verified_sources,
     verify_attempt_marker,
     verify_result,
     verify_run_summary,
@@ -159,9 +161,11 @@ def main() -> int:
     if args.verify_retained:
         verify_authority(repo_root=REPO_ROOT)
         sources = load_verified_sources(repo_root=REPO_ROOT)
+        attempt = load_strict_json(REPO_ROOT / TRACKED_ATTEMPT_PATH)
         tensor = load_strict_json(REPO_ROOT / TENSOR_PATH)
         result = load_strict_json(REPO_ROOT / RESULT_PATH)
         verify_tracked_result(
+            attempt=attempt,
             tensor_artifact=tensor,
             result=result,
             sources=sources,
@@ -181,7 +185,12 @@ def main() -> int:
         return _verify_outputs(sources, authority_identity, permit)
     if (REPO_ROOT / RUN_ROOT).exists() or any(
         (REPO_ROOT / path).exists()
-        for path in (RESULT_PATH, FAILURE_RESULT_PATH, TENSOR_PATH)
+        for path in (
+            RESULT_PATH,
+            FAILURE_RESULT_PATH,
+            TENSOR_PATH,
+            TRACKED_ATTEMPT_PATH,
+        )
     ):
         raise FileExistsError("T20.36n immutable tensor reproduction already exists")
     _require_remote_preservation(permit)
@@ -215,6 +224,7 @@ def main() -> int:
     )
     (REPO_ROOT / RUN_ROOT).mkdir(parents=True, exist_ok=False)
     dump_canonical_json(REPO_ROOT / ATTEMPT_PATH, attempt)
+    dump_canonical_json(REPO_ROOT / TRACKED_ATTEMPT_PATH, attempt)
     verify_attempt_marker(
         attempt, permit=permit, authority_identity=authority_identity
     )

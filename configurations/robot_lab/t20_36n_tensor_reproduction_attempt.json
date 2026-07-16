@@ -1,0 +1,22 @@
+{
+  "attempt_number": 1,
+  "authority_decision_identity_sha256": "5b40131ba6de7cd3f4a3e8f00bbd2920330b43c02d31dc50935c660e85ed13d8",
+  "checkpoint_tensor_read": false,
+  "created_before_checkpoint_tensor_read": true,
+  "frozen_gate_identity_sha256": "463477dc91e3fb36b0550b88d461a788709a7258f9825ad6644f98bf0c77e48f",
+  "identity_sha256": "141fc0ba77b4b6347526fda60612c9d433dab3f368ed371f14c3ea912eda0e2b",
+  "inference_permit_identity_sha256": "2c6a1e787299fd6663bbc440a642002a5a46341393559eeb6e8ea406093d5c46",
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "schema_version": "scenesmith.t20_36n_tensor_reproduction_attempt.v1",
+  "snapshot_revision": "7de663972b7817d2c4cf2d84c821153dfea772e9",
+  "snapshot_tree_identity_sha256": "55544131f74838489d0a7e3196ff2991f2369fbffe6c25a8189499055394eda7",
+  "source_checkpoint_identity_sha256": "40c94f66e24f0e949c1b48c057de7643b868468cc3ee0025e15778c25b8cad50",
+  "source_commit": "a10514343aaad023d8194a766d3b9dd57358cce0",
+  "source_run_identity_sha256": "b5cc16ef53a415a7e0a4b8519332a4197201544fc9ebe5186565562e048c054b",
+  "task_id": "T20.36n",
+  "tensor_artifact_written": false
+}

@@ -29,6 +29,7 @@ from scenesmith.robot_lab.t20_36n_tensor_reproduction import (  # noqa: E402
     RUNTIME_PREFLIGHT_PATH,
     SOURCE_CHECKPOINT_ROOT,
     TENSOR_PATH,
+    TRACKED_ATTEMPT_PATH,
     build_inference_permit,
     build_runtime_preflight,
     load_verified_sources,
@@ -88,7 +89,11 @@ def main() -> int:
 
     source_commit = _git("rev-parse", "HEAD")
     remote_commit = _remote_head()
-    attempt_exists = (REPO_ROOT / RUN_ROOT).exists() or (REPO_ROOT / ATTEMPT_PATH).exists()
+    attempt_exists = (
+        (REPO_ROOT / RUN_ROOT).exists()
+        or (REPO_ROOT / ATTEMPT_PATH).exists()
+        or (REPO_ROOT / TRACKED_ATTEMPT_PATH).exists()
+    )
     result_exists = any(
         (REPO_ROOT / path).exists()
         for path in (RESULT_PATH, FAILURE_RESULT_PATH, TENSOR_PATH)
