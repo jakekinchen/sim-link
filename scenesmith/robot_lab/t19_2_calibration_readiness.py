@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import copy
 import hashlib
 
 from pathlib import Path
@@ -85,13 +84,6 @@ def build_t19_2_calibration_readiness(
         ("camera review", camera_review),
     ):
         verify_signed_payload(payload, label=label)
-    verify_calibration_profile(
-        calibration,
-        calibration_path=RAW_CALIBRATION_PATH,
-        manifest_path=accepted_manifest_path,
-    )
-    verify_timing_latency_fixture(timing)
-
     t19_state = project_state.get("tasks", {}).get("T19.1", {})
     camera_state = (
         project_state.get("tasks", {})
@@ -109,6 +101,12 @@ def build_t19_2_calibration_readiness(
         raise ValueError("T19.2 readiness camera review/state binding drifted")
     if project_state.get("tasks", {}).get("T16.6", {}).get("state") != "pending":
         raise ValueError("T19.2 readiness T16.6 motion state drifted")
+    verify_calibration_profile(
+        calibration,
+        calibration_path=RAW_CALIBRATION_PATH,
+        manifest_path=accepted_manifest_path,
+    )
+    verify_timing_latency_fixture(timing)
 
     present = {
         "fresh_readonly_servo_identity_and_telemetry": True,
