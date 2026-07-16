@@ -8,9 +8,41 @@ interface SceneSummary {
   boxes: number
   cubes: number
   trays: number
+  flows: TaskFlowSummary[]
+}
+
+interface TaskFlowSummary {
+  id: string
+  label: string
+  color: string
+}
+
+interface AnimatedFlow {
+  id: string
+  curve: THREE.CatmullRomCurve3
+  group: THREE.Group
+  packet: THREE.Mesh
+  sourceRing: THREE.Mesh
+  targetRing: THREE.Mesh
+  phase: number
 }
 
 type CameraPreset = 'perspective' | 'overhead' | 'side'
+
+const TASK_COLORS: Record<string, number> = {
+  red: 0xff4f57,
+  blue: 0x2d8cff,
+  green: 0x4be39d,
+  yellow: 0xffd35c,
+  purple: 0xa896ff,
+  orange: 0xff9a4d,
+}
+
+function taskColor(name: string): { name: string; hex: number } | null {
+  const normalized = name.toLowerCase()
+  const match = Object.entries(TASK_COLORS).find(([color]) => normalized.includes(color))
+  return match ? { name: match[0], hex: match[1] } : null
+}
 
 function numbers(value: string | null, fallback: number[]): number[] {
   if (!value) return fallback
@@ -138,7 +170,11 @@ function addRobotPlaceholder(root: THREE.Group) {
   root.add(gripper)
 }
 
-function buildSceneGeometry(xmlText: string, root: THREE.Group): SceneSummary {
+function buildSceneGeometry(
+  xmlText: string,
+  root: THREE.Group,
+  animatedFlows: AnimatedFlow[],
+): SceneSummary {
   const document = new DOMParser().parseFromString(xmlText, 'application/xml')
   if (document.querySelector('parsererror')) throw new Error('Compiled workcell XML could not be parsed.')
   const worldbody = document.querySelector('worldbody')
@@ -179,7 +215,125 @@ function buildSceneGeometry(xmlText: string, root: THREE.Group): SceneSummary {
   }
   visit(worldbody, root)
   addRobotPlaceholder(root)
-  return { boxes, cubes: cubes.size, trays: trays.size }
+  root.updateMatrixWorld(true)
+
+  const cubeObjects = Array.from(cubes)
+    .map((name) => root.getObjectByName(name))
+    .filter((object): object is THREE.Object3D => Boolean(object))
+  const trayObjects = Array.from(trays)
+    .map((name) => root.getObjectByName(name))
+    .filter((object): object is THREE.Object3D => Boolean(object))
+  const flows: TaskFlowSummary[] = []
+
+  cubeObjects.forEach((cube, index) => {
+    const color = taskColor(cube.name)
+    if (!color) return
+    const tray = trayObjects.find((candidate) => taskColor(candidate.name)?.name === color.name)
+    if (!tray) return
+
+    const start = cube.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 0.055))
+    const end = tray.getWorldPosition(new THREE.Vector3()).add(new THREE.Vector3(0, 0, 0.075))
+    const distance = start.distanceTo(end)
+    const middle = start
+      .clone()
+      .lerp(end, 0.5)
+      .add(new THREE.Vector3(0, 0, Math.max(0.12, distance * 0.34)))
+    const curve = new THREE.CatmullRomCurve3([
+      start,
+      start.clone().lerp(middle, 0.58),
+      middle,
+      middle.clone().lerp(end, 0.58),
+      end,
+    ])
+    const flowGroup = new THREE.Group()
+    flowGroup.name = `task_flow_${color.name}`
+
+    const route = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 72, 0.0042, 8, false),
+      new THREE.MeshBasicMaterial({
+        color: color.hex,
+        transparent: true,
+        opacity: 0.46,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      }),
+    )
+    flowGroup.add(route)
+
+    const halo = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 72, 0.009, 8, false),
+      new THREE.MeshBasicMaterial({
+        color: color.hex,
+        transparent: true,
+        opacity: 0.07,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      }),
+    )
+    flowGroup.add(halo)
+
+    const packet = new THREE.Mesh(
+      new THREE.SphereGeometry(0.013, 18, 12),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, toneMapped: false }),
+    )
+    const packetGlow = new THREE.Mesh(
+      new THREE.SphereGeometry(0.025, 18, 12),
+      new THREE.MeshBasicMaterial({
+        color: color.hex,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      }),
+    )
+    packet.add(packetGlow)
+    flowGroup.add(packet)
+
+    const ringMaterial = new THREE.MeshBasicMaterial({
+      color: color.hex,
+      transparent: true,
+      opacity: 0.62,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    })
+    const sourceRing = new THREE.Mesh(new THREE.TorusGeometry(0.034, 0.003, 8, 32), ringMaterial)
+    sourceRing.position.copy(start)
+    flowGroup.add(sourceRing)
+    const targetRing = new THREE.Mesh(
+      new THREE.TorusGeometry(0.045, 0.003, 8, 32),
+      ringMaterial.clone(),
+    )
+    targetRing.position.copy(end)
+    flowGroup.add(targetRing)
+
+    const tangent = curve.getTangent(0.92).normalize()
+    const arrow = new THREE.Mesh(
+      new THREE.ConeGeometry(0.018, 0.045, 14),
+      new THREE.MeshBasicMaterial({ color: color.hex, transparent: true, opacity: 0.86 }),
+    )
+    arrow.position.copy(curve.getPoint(0.92))
+    arrow.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), tangent)
+    flowGroup.add(arrow)
+
+    root.add(flowGroup)
+    const id = `${color.name}-${index}`
+    animatedFlows.push({
+      id,
+      curve,
+      group: flowGroup,
+      packet,
+      sourceRing,
+      targetRing,
+      phase: index / Math.max(1, cubeObjects.length),
+    })
+    flows.push({
+      id,
+      label: `${cube.name.replaceAll('_', ' ')} → ${tray.name.replaceAll('_', ' ')}`,
+      color: color.name,
+    })
+  })
+
+  return { boxes, cubes: cubes.size, trays: trays.size, flows }
 }
 
 function OrbitCanvas({
@@ -193,12 +347,14 @@ function OrbitCanvas({
 }) {
   const mountRef = useRef<HTMLDivElement>(null)
   const setViewRef = useRef<(preset: CameraPreset) => void>(() => undefined)
+  const setFlowFocusRef = useRef<(flowId: string | null) => void>(() => undefined)
   const autoOrbitRef = useRef(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [summary, setSummary] = useState<SceneSummary | null>(null)
   const [cameraPreset, setCameraPreset] = useState<CameraPreset | null>('perspective')
   const [autoOrbit, setAutoOrbit] = useState(false)
+  const [activeFlow, setActiveFlow] = useState<string | null>(null)
 
   useEffect(() => {
     autoOrbitRef.current = autoOrbit
@@ -207,12 +363,19 @@ function OrbitCanvas({
   useEffect(() => {
     const mount = mountRef.current
     if (!mount) return
+    setLoading(true)
+    setSummary(null)
+    setActiveFlow(null)
+    setFlowFocusRef.current = () => undefined
     const abortController = new AbortController()
     let disposed = false
     let animationFrame = 0
     let renderer: THREE.WebGLRenderer | null = null
     let controls: OrbitControls | null = null
     let resizeObserver: ResizeObserver | null = null
+    const animatedFlows: AnimatedFlow[] = []
+    const animationStartedAt = Date.now()
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(immersive ? 0x080b10 : 0x0b0e13)
     scene.fog = new THREE.Fog(immersive ? 0x080b10 : 0x0b0e13, 1.6, 3.2)
@@ -291,6 +454,15 @@ function OrbitCanvas({
     const animate = () => {
       if (disposed || !renderer) return
       if (controls) controls.autoRotate = autoOrbitRef.current
+      const elapsed = reduceMotion ? 0 : (Date.now() - animationStartedAt) / 1000
+      animatedFlows.forEach((flow) => {
+        const progress = reduceMotion ? 0.52 : (elapsed * 0.11 + flow.phase) % 1
+        flow.packet.position.copy(flow.curve.getPoint(progress))
+        const sourcePulse = 1 + Math.sin(elapsed * 2.6 + flow.phase * Math.PI * 2) * 0.18
+        const targetPulse = 1 + Math.sin(elapsed * 2.6 + flow.phase * Math.PI * 2 + Math.PI) * 0.16
+        flow.sourceRing.scale.setScalar(sourcePulse)
+        flow.targetRing.scale.setScalar(targetPulse)
+      })
       controls?.update()
       renderer.render(scene, camera)
       animationFrame = requestAnimationFrame(animate)
@@ -304,7 +476,14 @@ function OrbitCanvas({
       })
       .then((xmlText) => {
         if (disposed) return
-        setSummary(buildSceneGeometry(xmlText, root))
+        const nextSummary = buildSceneGeometry(xmlText, root, animatedFlows)
+        setSummary(nextSummary)
+        setActiveFlow(null)
+        setFlowFocusRef.current = (flowId) => {
+          animatedFlows.forEach((flow) => {
+            flow.group.visible = flowId === null || flow.id === flowId
+          })
+        }
         setError(null)
       })
       .catch((sceneError: unknown) => {
@@ -343,6 +522,12 @@ function OrbitCanvas({
     const next = !autoOrbit
     setAutoOrbit(next)
     if (next) setCameraPreset(null)
+  }
+
+  const chooseFlow = (flowId: string) => {
+    const next = activeFlow === flowId ? null : flowId
+    setActiveFlow(next)
+    setFlowFocusRef.current(next)
   }
 
   return (
@@ -391,6 +576,31 @@ function OrbitCanvas({
         role="img"
         aria-label={`Interactive 3D orbit view for ${sceneId}`}
       />
+      {immersive && summary && summary.flows.length > 0 && (
+        <div className="foundry-flow-map" aria-label="Compiled task plan routes">
+          <div className="foundry-flow-heading">
+            <span className="foundry-flow-kicker">task plan</span>
+            <strong>{summary.flows.length} color routes</strong>
+            <span>visual intent only · not an executed trajectory</span>
+          </div>
+          <div className="foundry-flow-list">
+            {summary.flows.map((flow) => (
+              <button
+                key={flow.id}
+                type="button"
+                className={`foundry-flow-route flow-${flow.color} ${activeFlow === flow.id ? 'active' : ''}`}
+                onClick={() => chooseFlow(flow.id)}
+                aria-pressed={activeFlow === flow.id}
+              >
+                <span className="foundry-flow-route-line" aria-hidden>
+                  <i />
+                </span>
+                <span>{flow.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       {immersive && loading && (
         <div className="foundry-orbit-loading">
           <Led tone="cyan" pulse />

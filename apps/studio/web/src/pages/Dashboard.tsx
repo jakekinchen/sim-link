@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { api, mediaUrl, usePoll } from '../api/client'
 import type { RunWindow, StudioEvent, WorkcellManifest } from '../api/types'
 import ReplayStage from '../components/ReplayStage'
-import { ErrorState, Led, Tag } from '../components/ui'
+import { ErrorState, Led } from '../components/ui'
 import { countdownTo, fmtCountdown, fmtLocal, shortHash } from '../lib/format'
 import { useNow } from '../lib/useNow'
 import { useStatus } from '../state/StatusContext'
@@ -91,7 +91,15 @@ function ActivityRibbon({ events, now }: { events: StudioEvent[]; now: number })
   )
 }
 
-function MissionRail({ now }: { now: number }) {
+function MissionRail({
+  now,
+  open,
+  onClose,
+}: {
+  now: number
+  open: boolean
+  onClose: () => void
+}) {
   const { data: status, syncedAt } = useStatus()
   if (!status) return null
   const ledger = status.ledger ?? {}
@@ -106,7 +114,16 @@ function MissionRail({ now }: { now: number }) {
     : null
 
   return (
-    <aside className="foundry-mission-rail">
+    <aside className={`foundry-mission-rail ${open ? 'open' : ''}`} aria-hidden={!open}>
+      <div className="foundry-mission-drawer-head">
+        <span>
+          <Led tone="amber" pulse />
+          <span className="cap text-ink">mission instruments</span>
+        </span>
+        <button type="button" className="btn btn-quiet" onClick={onClose}>
+          close
+        </button>
+      </div>
       <section className="foundry-mission-block foundry-mission-primary">
         <span className="cap text-amber">active mission</span>
         <h2>{status.current_task ?? '——'}</h2>
@@ -181,6 +198,7 @@ export default function Dashboard() {
   const eventPoll = usePoll((signal) => api.events(80, signal), 5_000)
   const now = useNow(1000)
   const [mode, setMode] = useState<StageMode>('scene')
+  const [missionOpen, setMissionOpen] = useState(false)
   const [selectedSceneId, setSelectedSceneId] = useState<string | null>(null)
   const [selectedEpisodeId, setSelectedEpisodeId] = useState<string | null>(null)
 
@@ -219,101 +237,104 @@ export default function Dashboard() {
 
   return (
     <div className="foundry-home">
-      <header className="foundry-heading">
-        <div>
-          <span className="cap text-amber">robot-learning foundry</span>
-          <h1>Foundry stage</h1>
+      <section className="foundry-stage-shell" aria-label="Interactive foundry stage">
+        <div className="foundry-world-intro">
+          <span className="foundry-world-eyebrow">
+            <Led tone={combinedError ? 'red' : 'green'} pulse={!combinedError} />
+            {status.current_task ?? 'foundry'} · simulation only
+          </span>
+          <h1>{selectedWorkcell?.scene_id ?? 'Foundry world'}</h1>
           <p>
             {selectedWorkcell?.task_prompt ??
               'Inspect a compiled workcell, then project a recorded policy episode into the stage.'}
           </p>
-        </div>
-        <div className="foundry-heading-state">
-          <Tag tone="cyan">live artifact view</Tag>
-          <Tag tone="amber">simulation only</Tag>
-          <span className="flex items-center gap-2">
-            <Led tone={combinedError ? 'red' : 'green'} pulse={!combinedError} />
-            <span className="cap">{combinedError ? 'partial link' : 'foundry linked'}</span>
-          </span>
-        </div>
-      </header>
-
-      <div className="foundry-layout">
-        <section className="foundry-stage-shell" aria-label="Interactive foundry stage">
-          <div className="foundry-stage-topbar">
-            <div className="foundry-mode-switch" aria-label="Stage projection mode">
-              <button
-                type="button"
-                className={mode === 'scene' ? 'active' : ''}
-                onClick={() => setMode('scene')}
-                aria-pressed={mode === 'scene'}
-              >
-                3D workcell
-              </button>
-              <button
-                type="button"
-                className={mode === 'replay' ? 'active' : ''}
-                onClick={() => selectedEpisode && setMode('replay')}
-                disabled={!selectedEpisode}
-                aria-pressed={mode === 'replay'}
-              >
-                recorded replay
-              </button>
-            </div>
-            <span className="foundry-stage-proof">
-              <Led tone={mode === 'scene' ? 'cyan' : 'amber'} pulse />
-              {mode === 'scene' ? 'compiled simulation fixture' : 'recorded mirror · read only'}
+          {selectedWorkcell && (
+            <span className="foundry-world-vitals">
+              {selectedWorkcell.cube_count ?? '—'} cubes
+              <i />
+              {selectedWorkcell.tray_count ?? '—'} trays
+              <i />
+              {selectedWorkcell.all_cubes_stable ? 'settled' : 'stability unverified'}
             </span>
-          </div>
+          )}
+        </div>
 
-          <div className="foundry-stage-viewport">
-            {mode === 'scene' ? (
-              selectedWorkcell?.scene_xml ? (
-                <>
-                  <Suspense
-                    fallback={
-                      <div className="flex h-[32rem] items-center justify-center gap-2">
-                        <Led tone="cyan" pulse />
-                        <span className="cap">lighting 3D scene…</span>
-                      </div>
-                    }
-                  >
-                    <WorkcellOrbit
-                      sceneXml={selectedWorkcell.scene_xml}
-                      sceneId={selectedWorkcell.scene_id}
-                      immersive
-                    />
-                  </Suspense>
-                  <div className="foundry-scene-identity">
-                    <span className="cap text-cyan">compiled workcell</span>
-                    <strong>{selectedWorkcell.scene_id}</strong>
-                    <span>
-                      {selectedWorkcell.cube_count ?? '—'} cubes · {selectedWorkcell.tray_count ?? '—'} trays ·{' '}
-                      {selectedWorkcell.all_cubes_stable ? 'settled' : 'stability unverified'}
-                    </span>
+        <div className="foundry-stage-topbar">
+          <div className="foundry-mode-switch" aria-label="Stage projection mode">
+            <button
+              type="button"
+              className={mode === 'scene' ? 'active' : ''}
+              onClick={() => setMode('scene')}
+              aria-pressed={mode === 'scene'}
+            >
+              world
+            </button>
+            <button
+              type="button"
+              className={mode === 'replay' ? 'active' : ''}
+              onClick={() => selectedEpisode && setMode('replay')}
+              disabled={!selectedEpisode}
+              aria-pressed={mode === 'replay'}
+            >
+              replay
+            </button>
+          </div>
+          <span className="foundry-stage-proof">
+            <Led tone={mode === 'scene' ? 'cyan' : 'amber'} pulse />
+            {mode === 'scene' ? 'compiled fixture' : 'recorded mirror · read only'}
+          </span>
+          <Link to="/events" className="foundry-instrument-button">
+            evidence
+          </Link>
+          <button
+            type="button"
+            className={`foundry-instrument-button ${missionOpen ? 'active' : ''}`}
+            onClick={() => setMissionOpen((value) => !value)}
+            aria-pressed={missionOpen}
+          >
+            mission
+          </button>
+        </div>
+
+        <div className="foundry-stage-viewport">
+          {mode === 'scene' ? (
+            selectedWorkcell?.scene_xml ? (
+              <Suspense
+                fallback={
+                  <div className="flex h-full items-center justify-center gap-2">
+                    <Led tone="cyan" pulse />
+                    <span className="cap">lighting 3D scene…</span>
                   </div>
-                </>
-              ) : (
-                <div className="flex h-full items-center justify-center">
-                  <span className="cap">no compiled workcell available</span>
-                </div>
-              )
-            ) : selectedEpisode ? (
-              <ReplayStage
-                key={selectedEpisode.id}
-                episode={selectedEpisode}
-                episodes={mirroredEpisodes}
-                onSelect={setSelectedEpisodeId}
-                onReturnToScene={() => setMode('scene')}
-              />
+                }
+              >
+                <WorkcellOrbit
+                  sceneXml={selectedWorkcell.scene_xml}
+                  sceneId={selectedWorkcell.scene_id}
+                  immersive
+                />
+              </Suspense>
             ) : (
               <div className="flex h-full items-center justify-center">
-                <span className="cap">no recorded mirror available</span>
+                <span className="cap">no compiled workcell available</span>
               </div>
-            )}
-          </div>
+            )
+          ) : selectedEpisode ? (
+            <ReplayStage
+              key={selectedEpisode.id}
+              episode={selectedEpisode}
+              episodes={mirroredEpisodes}
+              onSelect={setSelectedEpisodeId}
+              onReturnToScene={() => setMode('scene')}
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center">
+              <span className="cap">no recorded mirror available</span>
+            </div>
+          )}
+        </div>
 
-          {mode === 'scene' && (
+        {mode === 'scene' && (
+          <>
             <div className="foundry-stage-dock">
               <button
                 type="button"
@@ -323,8 +344,8 @@ export default function Dashboard() {
               >
                 <span className="foundry-launch-plus" aria-hidden>+</span>
                 <span>
-                  <strong>Launch recorded replay</strong>
-                  <small>watch an existing episode · no new execution</small>
+                  <strong>Project recorded run</strong>
+                  <small>existing episode · no new execution</small>
                 </span>
               </button>
 
@@ -336,7 +357,7 @@ export default function Dashboard() {
                 />
               )}
               <label className="foundry-scene-select">
-                <span className="cap">scene</span>
+                <span className="cap">compiled world</span>
                 <select
                   value={selectedWorkcell?.scene_id ?? ''}
                   onChange={(event) => setSelectedSceneId(event.target.value)}
@@ -349,18 +370,27 @@ export default function Dashboard() {
                   ))}
                 </select>
               </label>
-              <Link to="/workcells" className="btn btn-quiet">
-                open workbench
+              <Link to="/workcells" className="foundry-instrument-button">
+                edit world
               </Link>
             </div>
-          )}
-        </section>
+            <ActivityRibbon events={eventPoll.data?.events ?? []} now={now} />
+          </>
+        )}
 
-        <MissionRail now={now} />
-      </div>
-
-      <ActivityRibbon events={eventPoll.data?.events ?? []} now={now} />
-      {combinedError && <ErrorState error={combinedError} />}
+        {missionOpen && (
+          <>
+            <button
+              type="button"
+              className="foundry-mission-scrim"
+              onClick={() => setMissionOpen(false)}
+              aria-label="Close mission instruments"
+            />
+            <MissionRail now={now} open onClose={() => setMissionOpen(false)} />
+          </>
+        )}
+        {combinedError && <div className="foundry-error"><ErrorState error={combinedError} /></div>}
+      </section>
     </div>
   )
 }

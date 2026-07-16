@@ -26,7 +26,7 @@ in the same commit as the work.
 | ST15E | World-first Studio Operations canvas and runtime-event projection | pending | blocked by ST15D; interactive 3D actors, lifecycle motion, spatial HUD, replay timeline, and inspector drawer; operational stream stays separate from signed evidence |
 | ST15F | End-to-end replay/idempotency/staleness demo and proof package | pending | blocked by ST15E; browser demo, restart/replay equality, regression gate, documented limits, scoped commits, and remote preservation |
 | ST16 | Foundry Stage visual shell reframe over existing read-only artifacts | done | world-first home, always-on selectable 3D workcell, camera presets/sweep, real replay projection/transport, mission rail, spatial workflow ribbon, responsive proof; no new server mutation |
-| ST17 | Full-bleed foundry world and spatial task projection | in_progress | remove the dashboard frame, compact the Foundry shell, animate real cube-to-tray paths, float evidence/replay instruments over the world, retract mission details; no new server mutation |
+| ST17 | Full-bleed foundry world and spatial task projection | done | full-height world behind a 68px instrument rail; actual XML-derived cube-to-tray route animation/isolation; floating evidence, replay, and retractable mission instruments; no new server mutation |
 
 Rules: never touch governed paths (see GOAL.md), never push to
 `codex/pi05-autolearn-loop`, commit small and often to `studio/app-shell`.
@@ -483,3 +483,32 @@ the page title, card borders, permanent mission column, and decorative panels.
 5. Desktop and narrow-laptop screenshots show a coherent world-first
    hierarchy; keyboard focus, reduced motion, live API data, console checks,
    production build, lint, and server tests pass.
+
+### Delivered proof
+
+- `/` now removes the wide navigation, shell header/footer, page heading,
+  permanent mission column, bordered stage, and below-stage panels. A compact
+  68-pixel instrument rail leaves the Three.js world or mirror projection at
+  full viewport height.
+- The workcell parser matches cube and tray bodies by the six allowed color
+  names, reads their compiled world transforms, and draws a luminous 3D arc,
+  moving packet, source/target rings, and directional marker for every matched
+  pair. The live two-cube fixture produces red and blue routes. Route labels
+  can isolate or restore a path and say `visual intent only · not an executed
+  trajectory`; reduced-motion mode freezes ambient route motion.
+- Current task, prompt, object counts, stability, projection mode, fixture
+  proof, Event Ledger, mission drawer, camera instruments, scene selector,
+  workbench, and recorded-run projector are now floating instruments over the
+  world. Mission details are absent from the tab order until explicitly opened
+  and close by button or scrim.
+- Recorded replay fills the same viewport. Its real 9.76-second mirror,
+  outcome/seed/frame HUD, phase strip, native scrub, speed, replay selector,
+  evidence link, and return control are overlaid rather than stacked as a new
+  dashboard section.
+- Live browser proof at 1280 x 720 and 1024 x 768 verified both routes,
+  single-route isolation, drawer open/close, workcell switching, full-bleed
+  replay, playback advancing, and a fresh-load console with zero warnings or
+  errors. `bun run build` passes with the Three.js world lazy-loaded;
+  `bun run lint` exits zero with only the existing `StatusContext.tsx`
+  advisory; all 6 server unit tests pass. No server file, API route, data-root
+  artifact, or mutation boundary changed.
