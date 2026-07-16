@@ -69,3 +69,12 @@ A successful reviewed result may grant only
 `t19_1_live_readonly_hardware_snapshot_observed`. It does not calibrate the
 twin, grant motion/contact authority, prove physical transfer, accept a policy,
 or change promotion authority. T19.2 remains separately gated.
+
+## Execution result
+
+Reviewer 282 accepts session `t19-1-20260716-0712-cdt`. The centrally composed
+one-use permit produced exactly 54/54 successful reads, zero retries, one
+no-torque close, six model-777/firmware-3.9/torque-disabled servo records, zero
+writes, zero torque changes, zero motion, zero unexpected operations, and no
+camera access. Tracked redacted manifest identity is `f423f5d3...`; the gate is
+consumed and closed.

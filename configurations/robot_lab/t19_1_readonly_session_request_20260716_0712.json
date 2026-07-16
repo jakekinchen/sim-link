@@ -1,0 +1,111 @@
+{
+  "branch": "codex/pi05-autolearn-loop",
+  "expires_at": "2026-07-16T07:14:34-05:00",
+  "identity_sha256": "cdfb5517ea75e69b4990a3c832955fd6de4ab7fd62a7c61927b5506283c807bb",
+  "issued_at": "2026-07-16T07:09:34-05:00",
+  "manifest_output": "configurations/robot_lab/t19_1_readonly_hardware_snapshot_20260716_0712.json",
+  "private_output_dir": "outputs/robot_lab/t19_1/private/t19-1-20260716-0712-cdt",
+  "remote_boundary_commit": "80628ee10e79cb2b614cb8c429eeda25459bd9df",
+  "repository_state": {
+    "branch": "codex/pi05-autolearn-loop",
+    "gate_state_diff_clean": true,
+    "head": "80628ee10e79cb2b614cb8c429eeda25459bd9df",
+    "remote_head": "80628ee10e79cb2b614cb8c429eeda25459bd9df",
+    "scoped_source_diff_clean": true,
+    "upstream_head": "80628ee10e79cb2b614cb8c429eeda25459bd9df"
+  },
+  "request_name": "pi05_t19_1_readonly_hardware_census_session",
+  "runtime_profile_identity_sha256": "0ab95c4e8501d9575f6efd433a975bda38fab59a55521ba74e5ae6842a9907ad",
+  "schema_version": "scenesmith.t19_1_readonly_session_request.v1",
+  "session_id": "t19-1-20260716-0712-cdt",
+  "source_state": {
+    "branch": "codex/pi05-autolearn-loop",
+    "owner_window": {
+      "hardware_access_authorized": true,
+      "not_authorized": [
+        "brev_compute",
+        "paid_external_compute",
+        "destructive_operation",
+        "promotion",
+        "physical_transfer_claim",
+        "evidence_gate_weakening",
+        "unbounded_policy_actuation"
+      ],
+      "owner_present": true,
+      "physical_access_performed_in_window": false,
+      "recorded_at_approximate": "2026-07-16T02:05:00-05:00",
+      "required_before_any_access": [
+        "same_thread_danger_full_access_verified",
+        "same_thread_approval_policy_never_verified",
+        "fresh_central_authority_decision",
+        "finite_content_addressed_session_permit",
+        "remote_preservation_and_review"
+      ],
+      "state": "owner_presence_and_access_granted_pending_central_and_session_permits",
+      "valid_through_approximate": "2026-07-16T10:05:00-05:00"
+    },
+    "prerequisite_tasks": {
+      "T16.5a": {
+        "state": "verified"
+      },
+      "T16.5b": {
+        "state": "verified"
+      }
+    },
+    "run_window": {
+      "hard_closeout": "2026-07-16T09:44:12-05:00",
+      "hardware_authority": "owner_presence_and_access_granted_pending_central_and_session_permits"
+    },
+    "schema_version": "scenesmith.project_state.v1",
+    "task": {
+      "active_brief_id": "212",
+      "authority_granted": [
+        "read_verified_t16_5a_t16_5b_sources",
+        "activate_brief_212",
+        "implement_and_test_t19_1_fail_closed_authority_and_census_path",
+        "compose_one_finite_readonly_session_only_after_remote_gate_confirmation"
+      ],
+      "authority_not_granted": [
+        "serial_enumeration_without_current_central_decision_and_permit",
+        "serial_open_without_current_central_decision_and_permit",
+        "camera_access",
+        "register_write",
+        "torque_change",
+        "motion",
+        "calibration",
+        "physical_twin_qualified",
+        "physical_transfer_ready",
+        "policy_actuation",
+        "external_compute",
+        "brev_compute",
+        "promotion"
+      ],
+      "depends_on": [
+        "M16",
+        "owner_present_read_authority"
+      ],
+      "effective_hard_closeout": "2026-07-16T09:44:12-05:00",
+      "implementation_commit": "288e938b4ce9b0458af1ffdd45a63cb5af31e46f",
+      "latest_verified_brief_id": null,
+      "live_gate": "open",
+      "live_gate_basis_commit": "288e938b4ce9b0458af1ffdd45a63cb5af31e46f",
+      "live_gate_opened_at": "2026-07-16T07:08:30-05:00",
+      "live_gate_valid_until": "2026-07-16T09:44:12-05:00",
+      "owner_window_valid_until": "2026-07-16T10:05:00-05:00",
+      "required_before_any_access": [
+        "same_thread_danger_full_access_verified",
+        "same_thread_approval_policy_never_verified",
+        "fresh_central_readonly_session_decision_granted",
+        "finite_content_addressed_one_use_session_permit_valid",
+        "open_gate_boundary_confirmed_on_origin"
+      ],
+      "result": "Brief 212 implementation is remotely preserved and Reviewer 281 opens one centrally composed, finite, owner-present read-only six-servo census only after this transition is confirmed on origin; no device access has occurred",
+      "review_decision_id": "281",
+      "session_limit": 1,
+      "sessions_started": 0,
+      "state": "in_progress"
+    }
+  },
+  "source_state_identity_sha256": "fb18d2e8d5ae70a4e3b0d83c6cc21b7125136c64ed8b3d1200b03cb56a452323",
+  "task_id": "T19.1"
+}

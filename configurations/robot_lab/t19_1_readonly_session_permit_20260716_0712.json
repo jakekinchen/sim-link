@@ -1,0 +1,160 @@
+{
+  "allowed_operations": [
+    "serial_metadata_enumeration",
+    "serial_identity_holder_snapshot",
+    "serial_connect_without_handshake",
+    "scalar_allowlisted_register_read",
+    "serial_disconnect_without_torque_change"
+  ],
+  "authority_not_granted": [
+    "camera_access",
+    "register_write",
+    "torque_change",
+    "motion",
+    "calibration",
+    "policy_actuation",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "external_compute",
+    "brev_compute"
+  ],
+  "branch": "codex/pi05-autolearn-loop",
+  "camera_access": false,
+  "decision_identity_sha256": "2fd92308fcf3c902c6220193c0009af22f4a79a84380d224236a32bdc3ea95a4",
+  "expected_servo_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "expires_at": "2026-07-16T07:14:34-05:00",
+  "identity_sha256": "93b229f42dac6e602beeba48d23c4530096f64d2dfb67b57bdfe046f1167fc70",
+  "issued_at": "2026-07-16T07:09:34-05:00",
+  "manifest_output": "configurations/robot_lab/t19_1_readonly_hardware_snapshot_20260716_0712.json",
+  "maximum_register_read_count": 54,
+  "motion_command_count": 0,
+  "permit_name": "pi05_t19_1_one_use_readonly_hardware_census",
+  "private_output_dir": "outputs/robot_lab/t19_1/private/t19-1-20260716-0712-cdt",
+  "read_plan": [
+    {
+      "register": "Model_Number",
+      "servo_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "width_bytes": 2
+    },
+    {
+      "register": "Firmware_Major_Version",
+      "servo_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "width_bytes": 1
+    },
+    {
+      "register": "Firmware_Minor_Version",
+      "servo_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "width_bytes": 1
+    },
+    {
+      "register": "ID",
+      "servo_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "width_bytes": 1
+    },
+    {
+      "register": "Baud_Rate",
+      "servo_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "width_bytes": 1
+    },
+    {
+      "register": "Torque_Enable",
+      "servo_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "width_bytes": 1
+    },
+    {
+      "register": "Present_Position",
+      "servo_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "width_bytes": 2
+    },
+    {
+      "register": "Present_Voltage",
+      "servo_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "width_bytes": 1
+    },
+    {
+      "register": "Present_Temperature",
+      "servo_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "width_bytes": 1
+    }
+  ],
+  "register_write_count": 0,
+  "remote_boundary_commit": "80628ee10e79cb2b614cb8c429eeda25459bd9df",
+  "request_identity_sha256": "cdfb5517ea75e69b4990a3c832955fd6de4ab7fd62a7c61927b5506283c807bb",
+  "runtime_profile_identity_sha256": "0ab95c4e8501d9575f6efd433a975bda38fab59a55521ba74e5ae6842a9907ad",
+  "schema_version": "scenesmith.t19_1_readonly_session_permit.v1",
+  "session_id": "t19-1-20260716-0712-cdt",
+  "task_id": "T19.1",
+  "torque_change_count": 0,
+  "use_limit": 1
+}

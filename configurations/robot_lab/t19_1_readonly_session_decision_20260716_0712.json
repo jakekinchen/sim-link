@@ -1,0 +1,41 @@
+{
+  "authority_granted": [
+    "t19_1_readonly_hardware_census_session_authorized"
+  ],
+  "authority_not_granted": [
+    "camera_access",
+    "register_write",
+    "torque_change",
+    "motion",
+    "calibration",
+    "policy_actuation",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "external_compute",
+    "brev_compute"
+  ],
+  "decision_id": "t19_1_readonly_hardware_census_session",
+  "denial_reasons": [],
+  "expires_at": "2026-07-16T07:14:34-05:00",
+  "granted": true,
+  "identity_sha256": "2fd92308fcf3c902c6220193c0009af22f4a79a84380d224236a32bdc3ea95a4",
+  "issued_at": "2026-07-16T07:09:34-05:00",
+  "missing_prerequisites": [],
+  "remote_boundary_commit": "80628ee10e79cb2b614cb8c429eeda25459bd9df",
+  "request_identity_sha256": "cdfb5517ea75e69b4990a3c832955fd6de4ab7fd62a7c61927b5506283c807bb",
+  "runtime_profile_identity_sha256": "0ab95c4e8501d9575f6efd433a975bda38fab59a55521ba74e5ae6842a9907ad",
+  "satisfied_prerequisites": [
+    "exact_branch_remote_boundary_confirmed",
+    "finite_session_window_valid",
+    "m16_readonly_prerequisites_verified",
+    "owner_present_read_authority_consistent",
+    "owner_window_active",
+    "same_thread_full_access_no_prompt_runtime_verified",
+    "single_session_unused",
+    "t19_1_live_gate_open",
+    "t19_1_task_and_brief_active"
+  ],
+  "schema_version": "scenesmith.t19_1_readonly_session_decision.v1",
+  "task_id": "T19.1"
+}

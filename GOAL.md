@@ -1092,6 +1092,12 @@ Implementation `288e938` is on origin and Reviewer 281 verifies the fail-closed
 serial-only 54-read/no-retry path. Its one-session gate becomes effective only
 after the current transition is also confirmed on origin; no hardware was
 enumerated or opened at the implementation/review boundary.
+Session `t19-1-20260716-0712-cdt` then completed under central decision
+`2fd92308...` and permit `93b229f4...`: six model-777 firmware-3.9 servos,
+54/54 reads, torque disabled on all six, zero retries/writes/torque
+changes/motion/unexpected operations, one no-torque close, and no camera
+access. Reviewer 282 accepts manifest `f423f5d3...`, closes the consumed gate,
+and routes T19.2 only to a separately reviewed bounded calibration design.
 
 ## Durable State
 

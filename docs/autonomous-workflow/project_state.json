@@ -120,8 +120,8 @@
   "latest_verified_task_implementation_boundary": {
     "brief_id": "212",
     "commit": "288e938b4ce9b0458af1ffdd45a63cb5af31e46f",
-    "reviewer_decision_id": "281",
-    "summary": "verified_fail_closed_t19_1_readonly_session_path_gate_open_pending_remote_transition"
+    "reviewer_decision_id": "282",
+    "summary": "verified_t19_1_live_readonly_hardware_snapshot_gate_consumed_and_closed"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -171,7 +171,7 @@
       "hardware_access_authorized": true,
       "required_before_any_access": ["same_thread_danger_full_access_verified","same_thread_approval_policy_never_verified","fresh_central_authority_decision","finite_content_addressed_session_permit","remote_preservation_and_review"],
       "not_authorized": ["brev_compute","paid_external_compute","destructive_operation","promotion","physical_transfer_claim","evidence_gate_weakening","unbounded_policy_actuation"],
-      "physical_access_performed_in_window": false
+      "physical_access_performed_in_window": true
     },
     "follower_release_correction_authority": {
       "authority_id": "owner_follower_release_correction_2026_07_12_1814",
@@ -323,8 +323,8 @@
   "training_lock": "open",
   "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
   "current_milestone": "M19 physical hardware twin qualification",
-  "current_task": "T19.1",
-  "next_eligible_task": "T19.1",
+  "current_task": "T19.2",
+  "next_eligible_task": "T19.2",
   "tasks": {
     "T16.1": {
       "state": "verified",
@@ -5160,19 +5160,21 @@
       ]
     },
     "T19.1": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["M16", "owner_present_read_authority"],
-      "active_brief_id": "212",
-      "latest_verified_brief_id": null,
-      "review_decision_id": "281",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "212",
+      "review_decision_id": "282",
       "implementation_commit": "288e938b4ce9b0458af1ffdd45a63cb5af31e46f",
-      "result": "Brief 212 implementation is remotely preserved and Reviewer 281 opens one centrally composed, finite, owner-present read-only six-servo census only after this transition is confirmed on origin; no device access has occurred",
-      "live_gate": "open",
+      "result": "Reviewer 282 accepts one centrally composed owner-present serial-only snapshot: six model-777 firmware-3.9 servos, 54/54 reads, torque disabled on all six, one no-torque close, zero writes/torque changes/motion/unexpected operations, and no camera access",
+      "live_gate": "closed",
       "live_gate_opened_at": "2026-07-16T07:08:30-05:00",
       "live_gate_valid_until": "2026-07-16T09:44:12-05:00",
       "live_gate_basis_commit": "288e938b4ce9b0458af1ffdd45a63cb5af31e46f",
+      "live_gate_closed_at": "2026-07-16T07:10:38-05:00",
+      "live_gate_close_reason": "one_use_readonly_hardware_snapshot_accepted_and_gate_consumed",
       "session_limit": 1,
-      "sessions_started": 0,
+      "sessions_started": 1,
       "owner_window_valid_until": "2026-07-16T10:05:00-05:00",
       "effective_hard_closeout": "2026-07-16T09:44:12-05:00",
       "required_before_any_access": [
@@ -5182,15 +5184,43 @@
         "finite_content_addressed_one_use_session_permit_valid",
         "open_gate_boundary_confirmed_on_origin"
       ],
+      "artifact": {
+        "path": "configurations/robot_lab/t19_1_readonly_hardware_snapshot_20260716_0712.json",
+        "schema_version": "scenesmith.t19_1_readonly_hardware_snapshot_manifest.v1",
+        "identity_sha256": "f423f5d3a7bfa2a5017ae686ba73ca74d335eb5dfcd675f0275c1b113fd7c192",
+        "file_sha256": "3db665e29901343cfe2898b0778b0348016906d25333be086db3667d55f999b6",
+        "size_bytes": 6762,
+        "runtime_profile_identity_sha256": "0ab95c4e8501d9575f6efd433a975bda38fab59a55521ba74e5ae6842a9907ad",
+        "request_identity_sha256": "cdfb5517ea75e69b4990a3c832955fd6de4ab7fd62a7c61927b5506283c807bb",
+        "decision_identity_sha256": "2fd92308fcf3c902c6220193c0009af22f4a79a84380d224236a32bdc3ea95a4",
+        "permit_identity_sha256": "93b229f42dac6e602beeba48d23c4530096f64d2dfb67b57bdfe046f1167fc70",
+        "private_identity_sha256": "c0c877a028a2a7db7cd9aa4c0764337c21c389786b839f276e90e6f4851750f8",
+        "servo_result_identity_sha256": "a76634986631616d62506dabc6c0ef54aae23c1b3f79205f8a36dfd949d6fe20",
+        "servo_count": 6,
+        "model_numbers": [777, 777, 777, 777, 777, 777],
+        "firmware_versions": ["3.9", "3.9", "3.9", "3.9", "3.9", "3.9"],
+        "torque_enable_raw_values": [0, 0, 0, 0, 0, 0],
+        "voltage_range_volts": [12.1, 12.3],
+        "temperature_range_celsius": [29, 34],
+        "read_attempts": 54,
+        "read_successes": 54,
+        "read_retries": 0,
+        "motor_register_writes": 0,
+        "torque_changes": 0,
+        "motion_commands": 0,
+        "unexpected_operations": 0,
+        "camera_accessed": false,
+        "physical_follower_commanded": false
+      },
       "authority_granted": [
         "read_verified_t16_5a_t16_5b_sources",
         "activate_brief_212",
         "implement_and_test_t19_1_fail_closed_authority_and_census_path",
-        "compose_one_finite_readonly_session_only_after_remote_gate_confirmation"
+        "compose_one_finite_readonly_session_only_after_remote_gate_confirmation",
+        "t19_1_live_readonly_hardware_snapshot_observed"
       ],
       "authority_not_granted": [
-        "serial_enumeration_without_current_central_decision_and_permit",
-        "serial_open_without_current_central_decision_and_permit",
+        "additional_t19_1_session",
         "camera_access",
         "register_write",
         "torque_change",
@@ -5203,6 +5233,16 @@
         "brev_compute",
         "promotion"
       ]
+    },
+    "T19.2": {
+      "state": "pending",
+      "depends_on": ["T19.1", "motion_authority"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "result": "T19.1 is verified; T19.2 requires a separately reviewed calibration design, central motion decision, exact bounded motion plan, runtime preflight, and finite permit before any camera access, write, torque change, or motion",
+      "authority_granted": ["read_verified_t19_1_snapshot", "design_next_bounded_calibration_brief"],
+      "authority_not_granted": ["camera_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","external_compute","brev_compute","promotion"]
     }
   }
 }

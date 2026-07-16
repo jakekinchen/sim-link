@@ -1,5 +1,19 @@
 # Morning Summary - 2026-07-16
 
+## Owner-present T19.1 addendum
+
+After the simulation closeout, the owner separately authorized an eight-hour
+hardware window while present. Brief 212/Reviewers 281-282 used that authority
+only for one centrally composed, five-minute-or-shorter, serial-only read
+session. T19.1 now has a fresh immutable six-servo snapshot: model 777 and
+firmware 3.9 on all joints; torque disabled 6/6; 54/54 reads; zero retries,
+writes, torque changes, motion, unexpected operations, follower commands, or
+camera access; and one successful no-torque close. The tracked redacted
+manifest is `f423f5d3...`; private exact evidence is retained locally. The gate
+is consumed and closed. T19.2 remains pending a distinct calibration/motion
+brief and permit; this does not make the physical twin qualified or rescue the
+failed ACT/SmolVLA/X policy field.
+
 ## Operational verdict
 
 No learned policy reached Gate C. The owner-designated X bridge completed its

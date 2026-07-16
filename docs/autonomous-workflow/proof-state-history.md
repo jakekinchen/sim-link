@@ -4,6 +4,20 @@ This file is the append-only history formerly embedded in `GOAL.md`.  The
 active goal keeps only the current mission, window, milestone, and pointers;
 new verified proof-state entries belong here with their brief/reviewer anchors.
 
+## 2026-07-16 - T19.1 live read-only hardware snapshot verified
+
+- Brief 212 and Reviewers 281-282 bound one owner-present session to the exact
+  Full Access/no-prompt thread, remote boundary `80628ee`, central decision
+  `2fd92308...`, and one-use permit `93b229f4...`.
+- Six STS3215 servos reported model 777, firmware 3.9, and torque disabled.
+  The session completed 54/54 reads with zero retry, write, torque-change,
+  motion, unexpected-operation, follower-command, or camera counts and one
+  no-torque close.
+- Manifest `f423f5d3...` grants only
+  `t19_1_live_readonly_hardware_snapshot_observed`; the consumed live gate is
+  closed. Calibration, physical-twin qualification, transfer, policy
+  actuation, promotion, external compute, and Brev remain ungranted.
+
 ## Historical Proof State
 
 - PI0.5 inference, five-step LoRA training, save, finalize, reload, evaluation,
