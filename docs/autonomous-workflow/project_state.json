@@ -345,8 +345,8 @@
       "policy_projected_assisted"
     ]
   },
-  "training_lock": "open",
-  "training_authority_valid_until": "2026-07-17T06:02:13-05:00",
+  "training_lock": "closed",
+  "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "T20.43c",
   "next_eligible_task": "T20.43c",
@@ -410,12 +410,13 @@
     "K2": {
       "state": "in_progress",
       "active_brief_id": "226",
-      "result": "Brief 226 refreshes the non-authorizing reconstruction capsule to T20.43b closeout commit 4d8f951 and adds model-free mirror dispatch for the already defined T20.43b trace schema; the consumed attempt remains immutable and no retry is authorized",
+      "result": "Brief 226 owns W1 bootstrap, T20.43c terminal interpretation, and the simplified fork spine; current dual-runtime/all-schema proof remains required before the fork collapses to one pinned LeRobot interpreter, while W2/W3/W5 stay isolated until reviewed",
       "authority_granted": [
-        "read_tracked_t20_43b_terminal_evidence",
-        "implement_model_free_t20_43b_mirror_trace_dispatch",
-        "run_model_free_renderer_and_regression_tests",
-        "refresh_portable_reconstruction_documentation_manifest_and_export"
+        "read_and_verify_tracked_t20_43b_and_t20_43c_terminal_evidence",
+        "maintain_signed_portable_asset_pack_and_w1_bootstrap",
+        "integrate_annex_fork_decisions_into_living_documentation_spine",
+        "pin_and_rehearse_clean_portable_export_from_local_external_checkouts",
+        "review_isolated_w2_w3_w5_handoffs_only_after_evidence_exists"
       ],
       "authority_not_granted": [
         "policy_retry",
@@ -5034,20 +5035,21 @@
       "authority_not_granted": ["patch_and_resume_consumed_attempt","second_replacement","retry","continuation","sweep","recipe_change","schedule_change","correction_objective","threshold_change","archive_replay","t20_45_activation","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.43c": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.43b_verified_terminal_boundary_on_origin", "owner_recovery_direction_2026_07_16_2142", "immutable_safe_renderer_v2_37c5da6"],
-      "active_brief_id": "227",
+      "active_brief_id": null,
       "latest_verified_brief_id": "227",
-      "review_decision_id": "310",
+      "review_decision_id": "314",
       "source_commit": "770121ec3ded5ca8a8b77d5725cbca2b6397c2e6",
-      "result": "Reviewer 310 accepts origin authority commit 02496f0 and signed acceptance 010d0a43 for one local-simulation continuation; marker remains absent and update 1 is barred until post-marker bit-exact equivalence passes",
+      "result": "Reviewer 314 verifies exact zero-update ACT equivalence, actual-schema rendering, 728 finite optimizer updates, and terminal interruption d848a1a8 after a superseded scheduling instruction; no Gate C verdict exists, ACT-on-R0 remains unresolved, and retry is false",
       "owner_direction": {"recorded_at_approximate":"2026-07-16T21:42:00-05:00","statement":"proceed, i authorize anything further actions that resolve this for us.","path":"docs/autonomous-workflow/owner-addendum-2026-07-16-t20-43c-act-resolution.md"},
       "immutable_source": {"attempt_identity_sha256":"d67cf38e7d7a441da93c3af55cdcfeefe64b55ce9cf3f0b95894299a88fdca09","terminal_failure_identity_sha256":"89b6dbff17f5da345b1c8d8fa9951989eda092998b702737dd7da16c42db2e92","checkpoint_0_identity_sha256":"916200d071995a84577a53dc35b552e2f7db2452194adf8cc18b9a6d54ec8b55","checkpoint_0_model_file_sha256":"acc865fb2504849ce39a403b08c5bff6b6660460d5622d3089f243c8868cf912","chunk_50_trace_identity_sha256":"b707b815ab3b204e29dbbc8e50114307058019da3116f8f5ac496c1b6e05f4bd","chunk_50_trace_file_sha256":"0c01265d4536bff9f2220a0e6e26462342b5987927204db7b998f7e50f3eac46"},
       "implementation_review": {"reviewer_decision_id":"308","focused_test_count":7,"selected_regression_test_count":70,"initial_review_subtest_count":15,"empty_partial_run_tree_terminal_preservation":true,"source_boundary_separate_and_immutable":true,"actual_schema_renderer_smoke_required":true,"bit_exact_equivalence_required_before_update_1":true,"checkpoint_tensor_read_executed":false,"model_or_optimizer_action_executed":false},
       "materialization_recovery_review": {"reviewer_decision_id":"309","selected_regression_test_count":58,"selected_subtest_count":15,"smoke_video_file_sha256":"955ad918538165c8db2de57f75e4aaa7fed89931e4b9a35f5d0738227aaf8b25","smoke_manifest_identity_sha256":"00494310d8f27d4522007324a8731f9dc7f4bf9ddbe4d68425c0f15708719e40","authority_artifact_count":0,"checkpoint_tensor_read_executed":false,"model_or_optimizer_action_executed":false},
       "materialized_authority": {"authority_commit":"02496f0eb9f09b4d84d06750143ddf06d202592a","required_source_commit":"ca9b9ccbdbb22e49e566e1b4f81076dfbfac29fd","renderer_smoke_identity_sha256":"9e8783dcc891e21e41f42ab9280020716297c9ea660118f43dfc34892c6786b3","owner_grant_identity_sha256":"315aef8228fda9ad5e37ec30376dfc17e378b32a79ce9149f845bdd47b84ddd8","central_request_identity_sha256":"bf53bcc0c4a4792183623a99cb3d13f92df116bbcbe2ec5c95675362e39aaab5","central_decision_identity_sha256":"c316bf01f0415569845d2a97717b117fc86997b5ca27ac86562bf218abc961f2","runtime_preflight_identity_sha256":"8d4fbf8918fbf54699646fa6b7d673132c0372b73238b50df5712f8b1493c56a","permit_identity_sha256":"166a6cd053d9fd7d1a827f5cd03ee8816fba1ca8cd7aa853795acf7728baa397","valid_from":"2026-07-16T22:12:13-05:00","valid_until":"2026-07-17T06:02:13-05:00","authorized_attempt_count":1,"retry_authorized":false,"acceptance_exists":true,"checkpoint_tensor_read_executed":false,"model_or_optimizer_action_executed":false},
       "pre_run_acceptance": {"reviewer_decision_id":"310","path":"configurations/robot_lab/t20_43c_act_pre_run_acceptance.json","identity_sha256":"010d0a43d1072205b1374387e5bf233dbbed8784abbc68d0de89947099567056","file_sha256":"b1afe12ffcbc6bc364bbd537c838302007d034269b6f3c3f216d633ad14e5e29","reviewer_file_sha256":"5973c8ee506f88feee74430964ae0206a97f2ecd2ed3be2ff8f77bd32bfcd38b","authority_commit":"02496f0eb9f09b4d84d06750143ddf06d202592a","decision":"ACCEPT_ONE_T20_43C_ZERO_UPDATE_ACT_CONTINUATION","continuation_marker_exists":false,"model_or_optimizer_action_executed":false},
-      "authority_granted": ["activate_brief_227","read_and_hash_t20_43b_terminal_boundary","implement_model_free_zero_update_equivalence_contract","implement_actual_schema_renderer_smoke","implement_continuation_authority_and_runner_contracts","run_model_free_fixture_tests","t20_43c_implementation_valid","materialize_one_model_free_actual_schema_smoke_and_compact_authority_after_origin_confirmation","t20_43c_model_free_authority_materialized","review_and_accept_t20_43c_authority_after_origin_confirmation","write_and_preserve_signed_pre_run_acceptance","create_sole_continuation_marker_after_acceptance_origin_confirmation","prove_bit_exact_zero_update_equivalence","execute_unchanged_act_updates_1_through_10000_and_fixed_evaluations_once"],
+      "execution_result": {"status":"verified_inconclusive_owner_directive_interruption","continuation_marker_identity_sha256":"e086c293505385d8d85b095d86f993a65266b70abe7047bc83d5bba319d9ed60","equivalence_receipt_identity_sha256":"85087b2ae94d54ea493ec49a10e6a183369b43c6160e73f79205a7624bb65014","terminal_failure_identity_sha256":"d848a1a8d9c803c0d8782e2c51c102cfd4550f1ca5bf22a629a16f34f834bd68","partial_run_tree_identity_sha256":"e0aea95f9df15e4cc0fb817875d8c887d6b9ece6723b48f029114c18ade169b9","equivalence_maximum_absolute_error":0.0,"optimizer_state_entry_count_before_training":0,"sampler_unadvanced_before_training":true,"optimizer_update_count":728,"checkpoint_500_retained":true,"gate_c_passed":false,"campaign_verdict":null,"trained_act_capability_resolved":false,"infrastructure_failure":false,"trained_negative":false,"retry_authorized":false},
+      "authority_granted": ["activate_brief_227","read_and_hash_t20_43b_terminal_boundary","implement_model_free_zero_update_equivalence_contract","implement_actual_schema_renderer_smoke","implement_continuation_authority_and_runner_contracts","run_model_free_fixture_tests","t20_43c_implementation_valid","materialize_one_model_free_actual_schema_smoke_and_compact_authority_after_origin_confirmation","t20_43c_model_free_authority_materialized","review_and_accept_t20_43c_authority_after_origin_confirmation","write_and_preserve_signed_pre_run_acceptance","create_sole_continuation_marker_after_acceptance_origin_confirmation","prove_bit_exact_zero_update_equivalence","execute_unchanged_act_updates_1_through_10000_and_fixed_evaluations_once","preserve_verified_inconclusive_terminal_interruption"],
       "authority_not_granted": ["fresh_replacement_execution","retry_after_continuation_marker","second_continuation","rewrite_t20_43b_evidence","recipe_change","schedule_change","correction_objective","threshold_change","dataset_change","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.44": {

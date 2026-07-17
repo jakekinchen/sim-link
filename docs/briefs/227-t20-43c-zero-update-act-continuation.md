@@ -80,3 +80,13 @@ Reviewer 310 accepts origin authority commit `02496f0...`. Signed acceptance
 Once this acceptance boundary is exact on origin and the window is active, the
 sole marker and post-marker equivalence gate may run once; update 1 remains
 barred until equivalence passes.
+
+## Terminal disposition
+
+The sole marker was consumed. Equivalence passed exactly and the unchanged ACT
+recipe reached optimizer update 728 with checkpoint-500 dual-cadence evidence.
+A sibling thread then interrupted the process under a superseded scheduling
+instruction. Reviewer 314 accepts terminal artifact `d848a1a8...` as an
+inconclusive owner-directive interruption: not a trained negative, not an
+infrastructure failure, not a Gate C pass, and not retry authority. Training
+authority is closed and ACT-on-R0 remains unresolved.

@@ -95,8 +95,9 @@ proof states must remain distinct.
   the real Robo Scan/I5 metric twin, and a separately permitted physical-policy
   canary. This is task ordering and proof definition only; it grants no
   hardware, network, external-compute, Brev, promotion, or retry authority.
-- Owner final-hour direction recorded 2026-07-16 ~21:50 CDT: one more hour of
-  agent work, then freeze at tag `freeze-2026-07-16-hackathon-fork`.
+- Owner final-hour direction recorded 2026-07-16 ~21:50 CDT originally targeted
+  tag `freeze-2026-07-16-hackathon-fork`; the later overnight foundation
+  direction superseded that cutoff and moved the freeze to the next morning.
   Priorities: (1) land and verify the reconstruction kit with the T20.43c
   ready-package and hackathon annex, (2) owner-present RGB-only camera census
   (D405 UVC + C922 confirmed enumerated; depth out-of-scope on macOS),
@@ -113,6 +114,10 @@ proof states must remain distinct.
   `docs/autonomous-workflow/owner-direction-2026-07-16-overnight-foundation.md`.
   Network, installs, external compute, Brev, and non-census hardware remain
   closed; rehearsals clone external pins from local checkouts only.
+- The fork-target simplifications are recorded only by pointer here:
+  `docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md`. They describe
+  the new repo after freeze and do not replace this checkout's live authority,
+  runtime, evaluator, or evidence contracts.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
@@ -122,23 +127,22 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.43c under Brief 227 is the active recovery slice. Reviewer 309 accepts a
-model-free recovery after the actual-schema smoke succeeded but dependency
-inventory failed before authority JSON. The resumed smoke and compact authority
-now verify at origin commit `02496f0...`; Reviewer 310 and acceptance
-`010d0a43...` open one local-simulation continuation while update 1 remains
-barred until bit-exact equivalence passes. The
-owner explicitly authorizes further action to resolve ACT-on-R0. T20.43b remains
-byte-immutable at terminal failure `89b6dbff...`: zero optimizer updates, one
-checkpoint, and one untrained chunk-50 rollout. T20.43c must first prove that
-checkpoint-0 tensors equal a fresh seeded ACT, optimizer/sampler state is truly
-zero, and the actual trace schema renders through the immutable-safe v2
-entrypoint. Only after implementation, origin review, fresh central authority,
-runtime preflight, one-use continuation permit, and separate acceptance may it
-continue updates 1-10,000 once. Failure of any equivalence gate routes to a
-fresh replacement design without model action. T20.42/R0 remains verified and
-T20.44 SmolVLA remains a terminal negative. Hardware, network, external
+T20.43c under Brief 227 has reached a signed terminal interruption. It proved
+checkpoint-0 tensor equivalence exactly, empty optimizer state, an unadvanced
+sampler, and actual-schema mirror dispatch, then trained through update 728 and
+retained checkpoint-500 rollout/mirror evidence. Another agent interrupted the
+run after applying a superseded scheduling instruction. Terminal identity
+`d848a1a8...` therefore records an inconclusive owner-directive interruption,
+not a trained negative and not an infrastructure failure. Its sole continuation
+marker is consumed and `retry_authorized=false`; ACT-on-R0 remains unresolved.
+T20.42/R0 remains verified and T20.44 SmolVLA remains a terminal negative.
+Hardware remains closed unless separately composed under K3; network, external
 compute, Brev, physical transfer, and promotion remain closed.
+
+Support task K2/Brief 226 owns the canonical checkout's current W1 work: finish
+the one-command local bootstrap, reconcile the living reconstruction spine,
+and rehearse a clean export. W2, W3, and W5 remain isolated candidate lanes
+until their handoffs are reviewed and explicitly integrated.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean

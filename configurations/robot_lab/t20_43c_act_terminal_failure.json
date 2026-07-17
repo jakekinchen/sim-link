@@ -1,0 +1,101 @@
+{
+  "brev_compute_authorized": false,
+  "continuation_marker_identity_sha256": "e086c293505385d8d85b095d86f993a65266b70abe7047bc83d5bba319d9ed60",
+  "error_message": "Stopped with SIGINT at optimizer update 728 after the newer final-hour owner directive required no third ACT attempt tonight; process exited 130 with KeyboardInterrupt.",
+  "error_type": "OwnerDirectiveInterruption",
+  "external_compute_authorized": false,
+  "hardware_authorized": false,
+  "identity_sha256": "d848a1a8d9c803c0d8782e2c51c102cfd4550f1ca5bf22a629a16f34f834bd68",
+  "network_authorized": false,
+  "partial_run_tree": [
+    {
+      "path": "checkpoints/step_00500/config.json",
+      "sha256": "1b2ba89880e421180962a0c862b37bfc854d16e5f8811e82210a64ecf6d09aaf",
+      "size_bytes": 1714
+    },
+    {
+      "path": "checkpoints/step_00500/model.safetensors",
+      "sha256": "a85d4894d650ab5330b0e1d891be3c30c0a462ee5ac8dc22bcabc81114a4093b",
+      "size_bytes": 206494928
+    },
+    {
+      "path": "mirrors/step_00000_chunk_50.manifest.json",
+      "sha256": "23e51fe7fa170dfe09f07b3d32dc6c64599b0ed023d778ab7c0f8a71f190ade9",
+      "size_bytes": 924
+    },
+    {
+      "path": "mirrors/step_00000_chunk_50.mp4",
+      "sha256": "955ad918538165c8db2de57f75e4aaa7fed89931e4b9a35f5d0738227aaf8b25",
+      "size_bytes": 745243
+    },
+    {
+      "path": "mirrors/step_00000_receding_10.manifest.json",
+      "sha256": "94cf9b68bf6ee27e7461639a55a4e9500c45d73334ec11e4eb33489032136569",
+      "size_bytes": 943
+    },
+    {
+      "path": "mirrors/step_00000_receding_10.mp4",
+      "sha256": "63f69bb4e740564b73588bc538e091b980a675a5362ab9ae0b3d2378144a026d",
+      "size_bytes": 789568
+    },
+    {
+      "path": "mirrors/step_00500_chunk_50.manifest.json",
+      "sha256": "c0617b8a610f6801c2ff095c07a7b9c63ee5d57cc21ba1ed97118685e9feeade",
+      "size_bytes": 934
+    },
+    {
+      "path": "mirrors/step_00500_chunk_50.mp4",
+      "sha256": "1c7becd13b98adaae2338271a3f50c6f7593b20a9c82ee92653b26840a56af1e",
+      "size_bytes": 690340
+    },
+    {
+      "path": "mirrors/step_00500_receding_10.manifest.json",
+      "sha256": "11f7210ccf81cee0c5c9ecd7698572daddb1b8b9fdd0dabc67b386221a4c47e2",
+      "size_bytes": 943
+    },
+    {
+      "path": "mirrors/step_00500_receding_10.mp4",
+      "sha256": "af5b8a32c9163858263ffed63c70a99cf5333ee54100395f174b75a9934acef5",
+      "size_bytes": 690067
+    },
+    {
+      "path": "progress.json",
+      "sha256": "32a8c5cea316e0781e9cda32f5a7f5167f9230c7c91e2584be7ab72f31b4510e",
+      "size_bytes": 274
+    },
+    {
+      "path": "rollouts/step_00000_receding_10.json",
+      "sha256": "4aa52990b62f54db5badac63563bbf2e84cc18f14baf8a68abffc4bc103e13c1",
+      "size_bytes": 1239041
+    },
+    {
+      "path": "rollouts/step_00500_chunk_50.json",
+      "sha256": "6f4acd053a6acd061b058f08118031108c1f736fa36e3bec8dfebed298cdf14a",
+      "size_bytes": 835216
+    },
+    {
+      "path": "rollouts/step_00500_receding_10.json",
+      "sha256": "3fc1dbea2fe3fe3b2c1444bb84e60298622fbecf6afe4d00aab9eccb6683eb76",
+      "size_bytes": 1309701
+    }
+  ],
+  "partial_run_tree_identity_sha256": "e0aea95f9df15e4cc0fb817875d8c887d6b9ece6723b48f029114c18ade169b9",
+  "physical_transfer_authorized": false,
+  "progress": {
+    "equivalence_proven": true,
+    "model_constructed": true,
+    "model_inference": true,
+    "model_loaded": true,
+    "optimizer_created": true,
+    "optimizer_training": true,
+    "optimizer_update_count": 728,
+    "stage": "optimizer_training",
+    "training_batches_consumed": 728
+  },
+  "promotion_authorized": false,
+  "retry_authorized": false,
+  "schema_version": "scenesmith.t20_43c_act_terminal_failure.v1",
+  "source_failure_identity_sha256": "89b6dbff17f5da345b1c8d8fa9951989eda092998b702737dd7da16c42db2e92",
+  "t20_45_authorized": false,
+  "task_id": "T20.43c"
+}
