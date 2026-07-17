@@ -348,7 +348,7 @@
   "training_lock": "closed",
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "F0b",
+  "current_task": "F3",
   "next_eligible_task": "F3",
   "active_support_task": null,
   "support_tasks": {
@@ -5297,14 +5297,15 @@
       "authority_not_granted": ["optimizer_creation", "optimizer_training", "retry", "additional_checkpoint", "additional_seed", "additional_rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "F3": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["F0b_verified_on_origin", "K2_verified_on_origin"],
-      "active_brief_id": null,
+      "active_brief_id": "233",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "F3 is next eligible only as a fresh reconstruction-kit and documentation fold of immutable R2, K2, F0, F0a, and F0b truth; it may verify portability and prepare a separately reviewed freeze boundary but grants no model, optimizer, rollout, Brev, hardware, transfer, promotion, or tag action",
-      "authority_granted": [],
-      "authority_not_granted": ["activate_before_f0b_closeout_origin_confirmation", "checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
+      "source_boundary_commit": "e630c6390397a88478e78a4f1e49c8d93fa610e3",
+      "result": "Brief 233 activates a deterministic reconstruction-kit and living-documentation fold of immutable R2, K2, F0, F0a, and F0b truth plus scratch export/bootstrap verification; no model, optimizer, rollout, Brev, hardware, transfer, promotion, or tag action is authorized before a separate terminal review is exact on origin",
+      "authority_granted": ["activate_brief_233", "read_and_hash_immutable_r2_k2_f0_f0a_f0b_sources", "update_reconstruction_and_living_documentation_spines", "integrate_compact_f0_f0a_f0b_source_tests_and_replayable_evidence", "regenerate_manifest_from_committed_source_boundary", "run_offline_kit_export_bootstrap_and_verification", "harden_project_state_pointer_task_id_parsing"],
+      "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag_before_terminal_review_and_origin_confirmation"]
     },
     "T20.45": {
       "state": "pending",

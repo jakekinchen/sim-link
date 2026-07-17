@@ -205,6 +205,15 @@ unselected and unconsumed. The next eligible task is a fresh F3 brief to fold
 current R2/F0/F0a/F0b truth into the reconstruction kit and verify the fork
 boundary; the freeze tag itself remains separately gated.
 
+F3/Brief 233 is now active for the current-truth reconstruction fold. It may
+reconcile the living docs and `reconstruction-kit/`, preserve the compact
+F0/F0a/F0b source and replayable evidence, repin the source manifest from a
+committed boundary, harden deterministic portability checks, and verify a
+fresh scratch export/bootstrap. It may not load a model, train, roll out a
+policy, use network/external compute/Brev, access hardware, transfer or promote
+a policy, or create the freeze tag before terminal review and exact origin
+confirmation.
+
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
 export receipt `729addbb...`, while excluding bulk/private content and live
