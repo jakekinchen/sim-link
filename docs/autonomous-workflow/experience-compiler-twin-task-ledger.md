@@ -3,19 +3,31 @@
 Updated: 2026-07-16
 
 ```text
-training_lock: closed; T20.43c-R2 has one materialized model-free authority bundle but no acceptance or marker
-run_window: owner bundle is finite from 2026-07-16T23:07:00-05:00 through 2026-07-17T07:00:00-05:00; no policy run, hardware, network, external compute, or Brev is authorized before separate pre-run acceptance
-run_state: central decision bf7908b5 grants only simulation_training_ready; the first continuation remains terminal at update 728 and no R2 model action has occurred
+training_lock: open only for one T20.43c-R2 attempt after acceptance origin confirmation; no marker exists yet
+run_window: owner bundle is finite from 2026-07-16T23:07:00-05:00 through 2026-07-17T07:00:00-05:00; hardware, network, external compute, and Brev remain closed
+run_state: Reviewer 316 accepts receipt a61b23eb bound to origin authority 391811e and permit f063e034; the first continuation remains terminal at update 728 and no R2 model action has occurred
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.43c-R2 in_progress under Brief 229; preserve the model-free authority bundle on origin, then perform a separate pre-run review
+current_task: T20.43c-R2 in_progress under Brief 229; preserve Reviewer 316 and acceptance a61b23eb on origin before the sole marker
 support_task: K2 in_progress under Brief 226; W1 bootstrap and the fork spine are being reconciled while W2/W3/W5 remain isolated candidate lanes
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: the direct W0 delegation authorizes one manual, separately rooted T20.43c-R2 replacement after the operator-direction interruption; it grants no automatic retry, network, external compute, Brev, hardware, transfer, or promotion
-blockers: the materialized authority bundle is not yet exact on origin or accepted by a separate pre-run review; acceptance and marker remain barred
-next_step: preserve the model-free T20.43c-R2 authority bundle on origin, reconstruct it independently, and issue a separate acceptance decision only if every pre-run gate remains exact
+blockers: Reviewer 316 and acceptance a61b23eb are not yet exact on origin; the marker remains barred until they are
+next_step: preserve the T20.43c-R2 acceptance boundary on origin, recheck the completion budget and output absence, then create the sole marker and run once
 ```
+
+## 2026-07-16 - Reviewer 316 accepts T20.43c-R2 pre-run authority
+
+Authority commit `391811e...` is exact on origin. Reviewer 316 independently
+reconstructs all six artifacts, confirms the signed actual R2 trace-schema
+smoke, re-verifies the immutable update-728 interruption, observes more than
+27,800 seconds remaining against the 14,400-second minimum, and passes 19
+focused tests. Acceptance `a61b23eb...` (file SHA `4f89c16f...`) binds permit
+`f063e034...`, Reviewer file SHA `ad8d00b1...`, and zero pre-marker model
+action. No marker, checkpoint read, model, optimizer, rollout, Gate C action,
+hardware, network, external compute, or Brev action occurred. Once this
+boundary is exact on origin, the sole replacement may run once; no retry.
 
 ## 2026-07-16 - T20.43c-R2 model-free authority materialized
 

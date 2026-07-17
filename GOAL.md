@@ -144,9 +144,11 @@ closed. The origin-confirmed implementation has now produced one model-free
 authority bundle: owner `d95ddd8a...`, request `1f528d2e...`, decision
 `bf7908b5...`, runtime `79689c7f...`, and permit `f063e034...`. The composer
 grants exactly `simulation_training_ready` for the finite 23:07-07:00 CDT
-window. These artifacts must be preserved on origin and independently reviewed
-before any acceptance. No R2 acceptance, marker, checkpoint read, model,
-optimizer, rollout, or Gate C action exists yet.
+window. Authority commit `391811e...` is exact on origin, and Reviewer 316 now
+accepts signed pre-run receipt `a61b23eb...`, which binds permit `f063e034...`
+and records zero pre-marker model action. This acceptance boundary must itself
+be exact on origin before the sole R2 marker. No R2 marker, checkpoint read,
+model, optimizer, rollout, or Gate C action exists yet.
 T20.42/R0 remains verified and T20.44 SmolVLA remains a terminal negative.
 Hardware remains closed unless separately composed under K3; network, external
 compute, Brev, physical transfer, and promotion remain closed.

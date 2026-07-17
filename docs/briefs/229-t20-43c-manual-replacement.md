@@ -65,3 +65,10 @@ The one model-free authority bundle has now materialized from origin source
 grants exactly `simulation_training_ready`; all hardware/network/external/Brev
 fields remain false. Training remains locked until this bundle is exact on
 origin and a separate pre-run review plus signed acceptance are preserved.
+
+Authority commit `391811e...` is now exact on origin. Reviewer 316 independently
+reconstructs all six artifacts, verifies 19 focused tests, the actual R2 trace
+schema, more than 27,800 seconds of completion budget, and absent/unalias
+irreversible outputs. Signed acceptance `a61b23eb...` binds Reviewer 316, permit
+`f063e034...`, and authority commit `391811e...`. Once this acceptance boundary
+is exact on origin, the sole R2 marker may be created; no retry is authorized.
