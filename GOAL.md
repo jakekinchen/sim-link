@@ -147,8 +147,11 @@ grants exactly `simulation_training_ready` for the finite 23:07-07:00 CDT
 window. Authority commit `391811e...` is exact on origin, and Reviewer 316 now
 accepts signed pre-run receipt `a61b23eb...`, which binds permit `f063e034...`
 and records zero pre-marker model action. This acceptance boundary must itself
-be exact on origin before the sole R2 marker. No R2 marker, checkpoint read,
-model, optimizer, rollout, or Gate C action exists yet.
+be exact on origin before the sole R2 marker. Reviewer 317 additionally caught
+that status prose had changed implementation-scoped Brief 229 after the reviewed
+source; the brief is restored byte-exact and that correction must also be exact
+on origin before the marker. No R2 marker, checkpoint read, model, optimizer,
+rollout, or Gate C action exists yet.
 T20.42/R0 remains verified and T20.44 SmolVLA remains a terminal negative.
 Hardware remains closed unless separately composed under K3; network, external
 compute, Brev, physical transfer, and promotion remain closed.
