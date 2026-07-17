@@ -58,12 +58,18 @@ EXPECTED_RUNTIME = {
 }
 TEST_MODULES = (
     "tests.unit.test_artifact_contract",
-    "tests.unit.test_authority_composer",
     "tests.unit.test_so101_coordinates",
     "tests.unit.test_so101_processor",
     "tests.unit.test_strict_grasp_v2",
     "tests.unit.test_lerobot_stack",
 )
+SOURCE_BOUND_TEST_EXCLUSIONS = {
+    "tests.unit.test_authority_composer": (
+        "The source lock intentionally binds an untracked external/leLab/uv.lock. "
+        "The export carries the composer as inert history but does not reconstruct "
+        "or grant repository-bound authority."
+    )
+}
 REQUIRED_CHECKOUT_NAMES = ("LeRobot", "SO-ARM100", "leLab")
 
 
@@ -392,6 +398,7 @@ def main() -> int:
             "runtime_versions": versions,
             "stack_identity_sha256": stack_report["stack_identity_sha256"],
             "focused_test_modules": list(TEST_MODULES),
+            "source_bound_test_exclusions": SOURCE_BOUND_TEST_EXCLUSIONS,
             "expert_episode": runtime_report["expert_episode"],
             "renderer_smokes": runtime_report["renderer_smokes"],
             "elapsed_seconds": round(time.monotonic() - started, 6),

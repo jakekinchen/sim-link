@@ -109,6 +109,12 @@ third attempt at the same ACT recipe or a weakened Gate C.
 - Ephemeral `uv --with` environments are unsuitable evidence identities. The
   corrected path binds one stable interpreter plus the exact cached MuJoCo
   support-tree identity.
+- The source authority lock also binds an untracked 584 KB leLab `uv.lock` as
+  dirty-checkout evidence. A fresh Git clone cannot reproduce that byte from a
+  revision. The portable bootstrap therefore verifies the canonical leLab
+  revision/origin/URDF but deliberately does not execute the source-repository
+  authority-composer rebuild. The composer and lock travel as inert history;
+  the destination creates its own authority rather than fabricating parity.
 - T20.43c then proved the correction: actual-schema mirrors passed, checkpoint
   tensors were bit-exact, AdamW state was empty, the sampler was unadvanced,
   and training reached update 728 with checkpoint-500 evidence. A sibling agent

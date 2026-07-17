@@ -41,13 +41,15 @@ python3 tools/bootstrap.py \
   --offline
 ```
 
-On a new machine with network access, omit both flags. Add
-`--include-optional-lelab` only if the UI/URDF reference is needed.
+On a new machine with network access, omit both flags. The current source-proof
+bootstrap always clones leLab because its pinned URDF is part of the dependency
+boundary; the leLab UI itself remains optional.
 
 The command fails closed unless it can:
 
 1. verify the pristine export receipt and asset identity;
-2. clone the exact LeRobot and SO-ARM100 revisions and verify the tracked patch;
+2. clone exact LeRobot, SO-ARM100, and leLab revisions, canonicalize their
+   origins, and verify the tracked patch and required geometry files;
 3. build the pinned Python 3.12 runtime and exact critical package versions;
 4. verify the executable LeRobot stack and focused model-free tests;
 5. generate one unassisted strict-v2 seed-0 expert episode; and
@@ -57,6 +59,11 @@ The command fails closed unless it can:
 It writes a signed receipt under
 `outputs/reconstruction/bootstrap_run_001/`. It creates no optimizer, accesses
 no hardware, and grants no authority.
+
+The source authority-composer rebuild is intentionally listed as excluded in
+that receipt. Its historical lock binds an untracked local leLab `uv.lock`, and
+the export must not recreate or grant source-repository authority. The composer
+and lock remain available as inert design/history inputs.
 
 The verified package target is:
 

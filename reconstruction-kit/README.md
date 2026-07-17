@@ -65,10 +65,14 @@ failure payload do not travel.
 `tools/bootstrap.py` is the day-one entrypoint in an exported repo. It verifies
 the pristine receipt and asset pack before writing, clones exact dependency
 pins from a local source or their upstream URLs, creates the pinned runtime,
-verifies the stack, runs focused tests, generates one strict-v2 expert episode,
-and renders a one-frame smoke from every retained schema. The source-repo W1
-rehearsal must prove the existing dual-runtime path. At fork birth, the target
-architecture deliberately collapses to one LeRobot venv and in-process render.
+verifies the stack, runs focused non-authorizing tests, generates one strict-v2
+expert episode, and renders a one-frame smoke from every retained schema. The
+source-repository authority composer is retained as inert history but is not
+rebuilt in the export because its lock deliberately binds an untracked local
+leLab `uv.lock`; manufacturing that dirty checkout would misstate portability
+and authority. The source-repo W1 rehearsal must prove the existing
+dual-runtime path. At fork birth, the target architecture deliberately
+collapses to one LeRobot venv and in-process render.
 
 ## Verify and export
 

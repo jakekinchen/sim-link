@@ -71,6 +71,14 @@ class ReconstructionKitTest(unittest.TestCase):
             "frontend/public/so-101-urdf/urdf/so101_new_calib.urdf",
         )
 
+    def test_bootstrap_keeps_repository_authority_inert(self) -> None:
+        module = "tests.unit.test_authority_composer"
+        self.assertNotIn(module, bootstrap.TEST_MODULES)
+        self.assertIn(module, bootstrap.SOURCE_BOUND_TEST_EXCLUSIONS)
+        reason = bootstrap.SOURCE_BOUND_TEST_EXCLUSIONS[module]
+        self.assertIn("external/leLab/uv.lock", reason)
+        self.assertIn("does not reconstruct", reason)
+
     def test_local_bootstrap_clone_restores_canonical_origin(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
