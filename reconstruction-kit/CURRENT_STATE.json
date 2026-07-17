@@ -1,0 +1,61 @@
+{
+  "schema_version": "scenesmith.reconstruction_current_state.v1",
+  "recorded_date": "2026-07-16",
+  "source_branch": "codex/pi05-autolearn-loop",
+  "source_commit": "6c53d9309f7f41f0d3ac351c049436ddda20e50f",
+  "capabilities": {
+    "constructive_strict_v2_source_success": true,
+    "native_dataset_and_processor_boundary_verified": true,
+    "content_addressed_authority_boundary_verified": true,
+    "learned_policy_strict_v2_success": false,
+    "physical_twin_qualified": false,
+    "physical_transfer_ready": false,
+    "promotion_eligible": false
+  },
+  "r0": {
+    "status": "verified",
+    "result_identity_sha256": "d238379bce62d884833da0a449535e3dc24f988b8da573513ae684bbb19a5969",
+    "new_training_strict_success_count": 119,
+    "fresh_held_out_strict_success_count": 9,
+    "training_episode_count": 129,
+    "training_frame_count": 31366,
+    "window_count": 59904,
+    "held_out_rows_in_training": 0
+  },
+  "act_replacement": {
+    "task_id": "T20.43b",
+    "status": "pre_run_accepted_unconsumed",
+    "spec_identity_sha256": "13c5bb4b2cadf8c451a25e7c11e9e0a1d824468f593774fdb60dbf7fa5197461",
+    "pre_run_acceptance_identity_sha256": "525de8dc417d9522c94573d4b781e8631126c9346029c961821eedbf9b1af772",
+    "maximum_optimizer_updates": 10000,
+    "checkpoint_count": 7,
+    "rollout_count": 14,
+    "attempt_marker_exists": false,
+    "replacement_consumed": false,
+    "capability_resolved": false,
+    "fresh_owner_window_required": true,
+    "fresh_administrative_authority_epoch_required": true
+  },
+  "smolvla": {
+    "task_id": "T20.44",
+    "status": "verified_terminal_negative",
+    "result_identity_sha256": "9d916206cbbb86b67a42d3449953bc7b272e1de5171996df224e29772369e14f",
+    "optimizer_update_count": 5000,
+    "checkpoint_count": 5,
+    "rollout_count": 10,
+    "gate_c_passed": false,
+    "strongest_partial_checkpoint": 1000,
+    "strongest_partial_adapter": "receding_10",
+    "strongest_partial_contact_frame_count": 73,
+    "strongest_partial_lift_m": 0.018061304225193253,
+    "retry_authorized": false
+  },
+  "authority": {
+    "authority_transferred_to_new_repository": false,
+    "hardware_authorized": false,
+    "network_acquisition_authorized": false,
+    "external_compute_authorized": false,
+    "brev_compute_authorized": false,
+    "stale_permit_reuse_authorized": false
+  }
+}

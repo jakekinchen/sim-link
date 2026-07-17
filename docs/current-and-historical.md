@@ -34,6 +34,8 @@ These are maintained explainers, not time-capsule evidence:
 - [Minimal live-adapter recreation](./autonomous-workflow/minimal-live-adapter-recreation.md)
 - [Robo Scan integration boundary](./robo-scan-integration.md)
 - [Robo Scan and sim-link integration roadmap](./robo-scan-sim-link-integration-roadmap.md)
+- [Portable reconstruction kit](../reconstruction-kit/README.md) — a pinned,
+  non-authorizing seed-repository snapshot, not a replacement for live state.
 - [Autonomous workflow](./autonomous-workflow/README.md)
 
 Update these when a durable boundary, ownership rule, or reader route changes.
@@ -52,6 +54,9 @@ Do not put time-sensitive task status here.
 
 An older positive result is not a current permit. A retained negative result is
 not a failure to ignore; it is often a guard against repeating the same mistake.
+A reconstruction receipt proves copied bytes and exclusions only. It does not
+make the copied project state, owner grants, permits, or proof labels current in
+the destination repository.
 
 ## Superseded Or Historical Routes
 
@@ -62,6 +67,7 @@ entry point for the current M20 clean-supervision work:
 | --- | --- | --- |
 | [`pi05-autonomous-sorting-goal-loop.md`](./autonomous-workflow/pi05-autonomous-sorting-goal-loop.md) and its task ledger | Earlier sorting-transfer program; later work records its negative-transfer disposition. | Investigating why the current program does not reuse its checkpoint/path. |
 | T19 search briefs and frozen diagnostic JSON | Retired search wrappers produced durable diagnostic evidence; the live primitive is now constructive geometry. | Auditing the grasp design decision. |
+| T20.33-T20.36 one-batch and correction alphabet | It localized PI0.5 plumbing, denoise interference, normalized/physical loss mismatch, and gate consequences; the T20.41 owner route closed further correction rungs. | Auditing those mechanisms or designing a genuinely different discriminator, never as the default forward training plan. |
 | Historical live-observation modules and briefs | Evidence is retained; the future minimal adapter is only a design contract. | Reviewing actual past live proof, never as an automatic runtime dependency. |
 | A Robo Scan checkout or unsealed scan result | It is governed by the separate Robo Scan state and has no automatic sim-link authority. The accepted reference-only receipt is useful only through the pinned I2/I3 adapter. | Evaluating a future metric I4 handoff under a new reviewed sim-link brief. |
 | Original SceneSmith paper README | Describes the broader research repository. | Installing or studying the paper’s scene-generation pipeline. |

@@ -34,6 +34,9 @@ PREFLIGHT_SCHEMA_VERSION = "scenesmith.t20_42_r0_construction_preflight.v1"
 ROUTE_DECISION_PATH = Path(
     "docs/autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md"
 )
+ROUTE_DECISION_SNAPSHOT_PATH = Path(
+    "configurations/robot_lab/t20_41_owner_route_decision_e9d0507.snapshot.md"
+)
 ROUTE_DECISION_COMMIT = "e9d0507ce7c79ed77997d1c2334db9a14c6fbf1d"
 ROUTE_DECISION_FILE_SHA256 = (
     "ae75bb594ab93a046afe848b3befb6bb919485f4814f1ab423aad9c36cbea1d5"
@@ -118,7 +121,10 @@ def load_source_snapshot(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     """Read and verify only compact tracked sources; no raw episode bytes."""
 
     root = Path(repo_root).resolve()
-    route_path = _safe_file(root, ROUTE_DECISION_PATH)
+    # ROUTE_DECISION_PATH later received a separately authorized addendum.
+    # Read the tracked byte-for-byte e9d0507 snapshot so this historical R0
+    # source remains portable and its original signed reference stays exact.
+    route_path = _safe_file(root, ROUTE_DECISION_SNAPSHOT_PATH)
     snapshot = {
         "route_decision_file_sha256": _sha256_file(route_path),
         "route_decision_ref": {

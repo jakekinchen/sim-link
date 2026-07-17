@@ -1,0 +1,2665 @@
+{
+  "authority_transferred": false,
+  "excluded_data_classes": [
+    "credentials and environment secrets",
+    "untracked external checkouts",
+    "datasets and camera observations",
+    "model checkpoints and optimizer state",
+    "gitignored outputs and rendered campaign media",
+    "physical hardware receipts containing private observations"
+  ],
+  "external_dependencies": [
+    {
+      "license": "Apache-2.0",
+      "local_patch": "scripts/robot_lab/patches/pi05_gripper_loss_weight.patch",
+      "name": "LeRobot",
+      "patch_sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+      "repository": "https://github.com/huggingface/lerobot.git",
+      "revision": "e40b58a8dfa9e7b86918c374791599d070518d11",
+      "version": "0.6.1"
+    },
+    {
+      "license": "Apache-2.0",
+      "name": "SO-ARM100",
+      "repository": "https://github.com/TheRobotStudio/SO-ARM100.git",
+      "required_file": "Simulation/SO101/so101_new_calib.xml",
+      "required_file_sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+      "revision": "fda892cba81032c46c40976a48c9ceadbf40a9ca"
+    },
+    {
+      "license": "Apache-2.0",
+      "name": "leLab",
+      "repository": "https://github.com/huggingface/leLab.git",
+      "required_file": "frontend/public/so-101-urdf/urdf/so101_new_calib.urdf",
+      "required_file_sha256": "443d38d756e01bac7d3455b24430047ddc6427105e0d3454b2003116f5f67236",
+      "revision": "def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da",
+      "role": "optional UI and URDF reference"
+    },
+    {
+      "license": "Apache-2.0",
+      "name": "MuJoCo Menagerie robotstudio_so101",
+      "repository": "https://github.com/google-deepmind/mujoco_menagerie.git",
+      "revision": "71f066ad0be9cd271f7ed58c030243ef157af9f4",
+      "role": "vendored structural reference"
+    },
+    {
+      "license": "Apache-2.0",
+      "name": "openpi",
+      "repository": "https://github.com/Physical-Intelligence/openpi.git",
+      "revision": "15a9616a00943ada6c20a0f158e3adb39df2ccac",
+      "role": "semantic reference only"
+    }
+  ],
+  "files": [
+    {
+      "git_mode": "100644",
+      "path": "LICENSE",
+      "role": "license",
+      "sha256": "30212e735d45b5013e87107cf80a2eee4ec8e06834b7a1540f55f978f93ebf42",
+      "size_bytes": 1071,
+      "tier": "required"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/centered_contact_face_audit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "d141fea2b6b57b32c91e5ab12c774e881a29c0793b2135016e21b1f9a2ed3167",
+      "size_bytes": 89736,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/dataset_mixture_manifest.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3b9f6092de878e87e06e34b9ff1f29e821434b1a5140a1cd23328fec9c802629",
+      "size_bytes": 110612,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/experience_record_contract.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e0ad93a0e4ee97180049fa7d5ae8d91af9723eafc7fd339d1c12ad484cc52c86",
+      "size_bytes": 20469,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
+      "size_bytes": 204305,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/gripper_geometry_audit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "45d74b3d3e98fb361877ed6a754b6c9fc30f87aac655bf07681ad45e45532494",
+      "size_bytes": 42890,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/normalization_bundle.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "0d20428fbe20a27d0c60ad9f8b75ce3613a01f244aa6771e21fa474913ea3bda",
+      "size_bytes": 8835,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_assembly_inertials.blocked_missing_measurements.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3f7cab7ad131857f9a8fcea45cfb93d785c03be12a07590e8432f5c42166ce28",
+      "size_bytes": 6349,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_authority_composition_contract.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "af6acbf5bb22e2d619bcf83ade0aab391a0d87a7ae1e3ba10b253702eaffb92e",
+      "size_bytes": 14881,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_authority_decision.fixture_denied.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "1ea75e392845cadf42195919a8d0e465191dd0aa44ae460054344006e6befd82",
+      "size_bytes": 5450,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_fixture_model_ready_tensor_parity.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "071643a7f193cddaf9bbd9f849f316fa80e236132778eb9606de4321e86dd2af",
+      "size_bytes": 29788,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_lerobot_runtime.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "db612d0ca3c6d74d3d844aeb597333d6325d57e4274efbf64ce9865d3546e88e",
+      "size_bytes": 936,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_measured_mass_intake.awaiting_measurements.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "4739b1f991a4f818a9f77d563c0128e184471208368795d7917507284d8f45cc",
+      "size_bytes": 32132,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "169f04ee953604193f1f0dc9a3821acbb2de7dc49fcce1aba066c338c1eb7f12",
+      "size_bytes": 13051,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_structural_twin_diff.simulation_only.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "d8dd9670be2125be171b8b2dce91b271920d45865dc19cb424b851e9c91a1be1",
+      "size_bytes": 95468,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_twin_profile.simulation_only.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "09da7945144aa8cbdd6b67475d8da3c195b1e63a479128a1fbac591ef8e36b38",
+      "size_bytes": 8039,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_twin_qualification_report.simulation_only.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "93e14856b7702b169ba7dc3346ea7f34ccefabfa2529167442369a993f1b2199",
+      "size_bytes": 1433,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/pi05_twin_qualification_spec.simulation_only.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "dde14c0d8902d7f99d3af3cdfd9c5b56a05bf6c61c2e2860cb138f8ac5c23af3",
+      "size_bytes": 1652,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/robo_scan_export_lock.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "0738ce3c31543c9525e7b20ad754da60597125c13970c84463ff042c77dd4a7f",
+      "size_bytes": 905,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/so101_canonical_processor_contract.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3145f4ae1efb86463df2398775315cd0b764a74bca954448c6a1d0f57eb8f503",
+      "size_bytes": 3945,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/strict_anchor_grasp_evaluator.fixture.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3be8ac16710b857e302b341b8e563feac56c6ed6238683abee0704cc7a6fb418",
+      "size_bytes": 133859,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/strict_anchor_grasp_evaluator_v2.fixture.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "5ac9c96e7efb1b9980cbc2159d58dda28b033e47e5d063e944367d5a42472e45",
+      "size_bytes": 246755,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t17_5b_episode_generation_manifest.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "72f49c6664a9e2663548ebf8064cbf29de19ea18170fea30bf862de082485084",
+      "size_bytes": 220888,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_17_clean_base_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "b377784deef2de01703ef6c2b212c4ae5b74539ee25665b2d7ba61cd6ec2b6e0",
+      "size_bytes": 5552,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_17_lerobot_dataset_manifest.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "ff0450569c5c8534b1b8636d5ab95f2f705d5dc534fe14e4f8a60e6864d82aa1",
+      "size_bytes": 4505,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_18_recovery_episode_package_gate.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "775d4c8ad808ebcb133b05336b71ba902af60e8aafb1dee9573178b98b1fa637",
+      "size_bytes": 1418,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_1_simulation_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "5a5d24b97e5cc4ed9d462b0804221297b52446d41c4773bfa8a6739f0a59f66b",
+      "size_bytes": 8308,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_20_observer_role_evaluator.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e2d39ae201660bbb2d95d35ea7cf1a7286acc9f90e8409f4c155239f60f125d8",
+      "size_bytes": 22546,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_21_paired_trace_runner.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "45b31d7fcd7aae5b26056128c148ee78265667eef67c9e808cd6c38c3333aaf2",
+      "size_bytes": 30345,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_23_owner_training_authorization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "2efb647045d2e8531ca0482e63fdcfa8c6da7fa93ed5bb806671c0a83eed7103",
+      "size_bytes": 1212,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_23_recovery_augmented_dataset_manifest.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "df6e63d86cd053937c9e4d4c267f057b76aaf418761e7dc3356a9ae08c06fea5",
+      "size_bytes": 5831,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_23_recovery_augmented_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3118cb4a3d8c21d9136a8b6c5b80d868bc1847837a0908f5ab585f000bcaa563",
+      "size_bytes": 12647,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_23_simulation_training_authority_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "7fe1df6f47a54b754fa6489fa714b26235a60968def1fda5f7b5485e0ba1f968",
+      "size_bytes": 6850,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_23_simulation_training_authority_request.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "08e8e4cfd77179977c497209ec7b190b0f7b37c1934970663e512877ed193b25",
+      "size_bytes": 16922,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_28_sampler_exposure_audit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "7d8269c6de14f8970aeeb335ca33f1bae9392c3eaeed56d4f107dd000e054b34",
+      "size_bytes": 13756,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_32_divergence_thresholds.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e91632dcefc104d6ed5596140f9fc1d33080580ab2b16c3f74744b23ce0d7c12",
+      "size_bytes": 952,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_33_one_batch_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "483ca7934b5e7ce0e6b6636fa27740f4db5ce2b6ff2e2f9d70ccd4e13ae0af83",
+      "size_bytes": 2676,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_33_one_batch_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e084e17015bef33f15023bab868ef88f38601e99bd3b7f20163395476967a358",
+      "size_bytes": 3177,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35_rank_capacity_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "4a8c088f242bfed0dcc3719af3fc975dd79cc5379573b2b829d9323c960a3e5c",
+      "size_bytes": 2973,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35_rank_capacity_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "18da457b5f7075b12339583979c02c25e1866b1e8e422959339c3ccb91efdbca",
+      "size_bytes": 3299,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35a_peft_module_coverage.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "64b3b9418cf808c7d93c2d58de31adbdb05f650559767fb017ba25370e11dcf1",
+      "size_bytes": 53319,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35b_pi05_coverage_correction.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f96e070ef6b8833a4086d0bdf725f9074cc7f61bb5066cd32669a8af47a4e381",
+      "size_bytes": 5736,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35c_expert_only_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "ec000e287af20b0899209a46686ac4c6c30eb7e3ef8c4dd28b96ddf12c1f27a7",
+      "size_bytes": 3029,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35c_expert_only_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "745213224ccd4b6069246c1f355f7cb0f50139024d47ab77d59a40b2f23a84a4",
+      "size_bytes": 3955,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35d_evaluation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "611cb594e4b873b02d41b445e7158e00a1609b77bfc2e9a95dbc5a42a9233360",
+      "size_bytes": 1020,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35d_residual_localization_report.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f927b8f641a950d95f769b6dd3a4a9de3755cc5ae776840bd4e11c7daa6dd62a",
+      "size_bytes": 219961,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35d_residual_localization_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "6a537740cd213a44920b9f64607ad8bf9b70ac133f8dce42141d795fcb841a6b",
+      "size_bytes": 3657,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35e_top_two_channel_correction.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "9b84ccd608ad8082ce237f663c01e405ace3651ef092da05adb2b10bd100aa1a",
+      "size_bytes": 3296,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35f_normalized_residual_saturation_audit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "d9b1f42215ba4178339604666013ac8f7cc480b6bcb2f52f68f7fa0c2267320b",
+      "size_bytes": 6771,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35g_attempt_001_runtime_failure.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e49e439770974e91f479c4e189ab29270a8f326447dd72e85d6dee77fb2892c2",
+      "size_bytes": 2218,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35g_denoising_cadence_evaluation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8875c0e680807d275a864bfd6820cc6df28d918f87056ff776fa6006e7c716ea",
+      "size_bytes": 1152,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35g_denoising_cadence_evaluation_permit_attempt_002.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "184aa8f5a24f669b5243230ce3043bba0e574690693a3a65cf6d91fa826a0edc",
+      "size_bytes": 1152,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35g_denoising_cadence_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8ac42c3e63d436287cc482e57105e5195d9e4f220e4bb29fb254372fe5b2d4af",
+      "size_bytes": 184528,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35g_denoising_cadence_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "ab6d7c68cc0b679c193eb6bcbd6c583c717495e7b713ba34bdfdc0674c51f5b1",
+      "size_bytes": 3425,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35g_denoising_cadence_spec_attempt_002.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e70855609a9e1c3555c512fc17b54c36f1efe5755f95e52a7d34b58580b74896",
+      "size_bytes": 4007,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35h_decoded_action_bias_ceiling.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8792ce2b2d9310e71404ef9fb4278665469d40e59d3ef6139b9f6cfa8b6057b8",
+      "size_bytes": 26311,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35i_residual_variance_localization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f65c5e97265ca5dd0f3ab9d7b48a391652c4eb7b06d188bd10fef8752f26a48e",
+      "size_bytes": 108538,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35j_initial_noise_scale_evaluation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e15fd142f6168a4d3bd411d42fc6b2695d5c1a7206c53b2e806c5487e31e1fef",
+      "size_bytes": 1181,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35j_initial_noise_scale_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e3c3948fb00cefcd9118445eb8bf6a6a1a402bda5c11c10db050f00f6497019c",
+      "size_bytes": 186248,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35j_initial_noise_scale_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "fd5e5463fa73d70e4421994ba264efdd59419311865b7e163662bc8228547bbf",
+      "size_bytes": 3655,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35k_sampler_noise_distribution_audit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "16f396183901f4da1b98b18c6ed1db2ce86c6750435f5665131b790a526809cc",
+      "size_bytes": 3561,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35l_active_padded_noise_mask_evaluation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "afe38c090fb8105da21e5c0eb42d0e598a828bbae3bf29bfcb37e6c2d8d5ad27",
+      "size_bytes": 1236,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35l_active_padded_noise_mask_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "7d5436fdd003ca86f750c3a96882a4c996455ea3948452f89640aa75b82f481f",
+      "size_bytes": 248113,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35l_active_padded_noise_mask_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "1e08288b23ce31169a5c372dbc2bd5e0a312af4568f9847fcf4af3f2c7390718",
+      "size_bytes": 4229,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35m_active_padded_factorial_interaction_audit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "5628cbf808484baf31943c5361d8de98b38981460b736a3b77764928ff754684",
+      "size_bytes": 3884,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35n_near_zero_active_noise_scale_evaluation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "6e5f12e6adb5470fb2448602096d17e6f393f83ea38227b209de1ccacfa84e51",
+      "size_bytes": 1229,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35n_near_zero_active_noise_scale_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "81a264c16ad1c820914c1c969b942c86c9fa072531f7fca2a8cc544fff9133f9",
+      "size_bytes": 247609,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35n_near_zero_active_noise_scale_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "87c313c8953236637b67a2f6c2bd7d583eb7eab1cda6fa5eaa68bb3daded3418",
+      "size_bytes": 4070,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35o_flow_trajectory_consistency_evaluation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "74df2ec96d2ad1e5ad5647e5f01fa6e00b520849db0ea55b2349ad4d7ddc0a96",
+      "size_bytes": 1288,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35o_flow_trajectory_consistency_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "bb383c0899af5dc70610fccb289a1aa5d70352d40b137f81c02bbad9558d95a9",
+      "size_bytes": 3380,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35p_terminal_time_flow_consistency_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "9784be93a88afb2b49cdd026910e8dc2aa741e198b22d995f91431cba709ff6c",
+      "size_bytes": 3252,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35p_terminal_time_flow_consistency_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8efd01ee0e62b15d08ed89b979055b94bb2e261198265f93e16f0d3deb26b784",
+      "size_bytes": 17474,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35q_post_training_trajectory_evaluation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8abff6f1587dc4944a46a5864f791fa5f5df468f5c6d28ae21aba2247a73279b",
+      "size_bytes": 1282,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35q_post_training_trajectory_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "aa90f5d74e1c4aee297ed39e09e40f6ab3fb2758352df4242171e9ccf2f281cd",
+      "size_bytes": 3735,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35r_full_path_flow_consistency_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "088a589a533e82cb524db80e5158d89b327cec7c08eb302e348802577bc811b1",
+      "size_bytes": 3342,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35r_full_path_flow_consistency_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f9ff33066735370e5e5bc2e62f15ad710073f79518c48ed03ec384882f19315f",
+      "size_bytes": 37267,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35s_objective_mass_compatibility_audit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "02a84ca88d71507b6f31d09ce35ba0aea5636602d8d5006ad1b2dd915640f3a9",
+      "size_bytes": 7718,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35t_time_normalized_standard_replay_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "dd63204ce68af97338227cf4adb793f740ced2dde4a26e2a62bbed45b086be78",
+      "size_bytes": 3676,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35t_time_normalized_standard_replay_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "ce68a06cdef665d1e7a7edfe6d626df5e9ec5666dd323dda20d21e88ad5ec626",
+      "size_bytes": 46120,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35u_post_training_trajectory_evaluation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "361f44a518aa23d0d645acc17b28a408c119af1027b29ab35a902575501528a0",
+      "size_bytes": 1282,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35u_post_training_trajectory_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "0116542814da61992b47fd1d1c0d4146d1b217b0e2546c30eb8255d574744ba7",
+      "size_bytes": 3877,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35u_runtime_dependency_failure.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "50c35635cc39cce6c0a8678917cb7097b9ebed0a0feba64543273656f3a2adc7",
+      "size_bytes": 1694,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35v_post_training_trajectory_evaluation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "1a7fc5fa779c0fa6afeed3595a0814cc46e57c6f1409c06441ed0e5ffae1f995",
+      "size_bytes": 1444,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35v_post_training_trajectory_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "523f96b25dc200ee0cc9d7fcbca20802850f53da53700f63266c6f36018434df",
+      "size_bytes": 4039,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35v_runtime_dependency_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "7bb37fa9a4b47010f4e541be998e38a1dc89ef2f90f2ef68f80cba8d3d180c19",
+      "size_bytes": 1403,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35w_step_coordinate_action_outlier_audit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3254a6c1fe815af7bbe24a551c5e2b286be25d2f33c1559a6140365e3089de3f",
+      "size_bytes": 426121,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35x_physical_gate_joint_weighted_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "c98ecc4641df1069464e48845b79f890bda72804113774b4e998dadb8809fa2a",
+      "size_bytes": 1199,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35x_physical_gate_joint_weighted_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "981082fd51f15b3067af6e1a4724d46b5941f3016b8212dc9af385c3167501e4",
+      "size_bytes": 3964,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35x_physical_gate_joint_weighted_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "a404128fedd56529b039ec98031aee09073ba156e8cc6f89d3d9b075d5d77e77",
+      "size_bytes": 61558,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_35x_runtime_dependency_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "39fe554449c354a28c59e2403b23ee47cebaa91a6f1cdab772fce7b2df124be7",
+      "size_bytes": 1289,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36_bounded_corrected_coverage_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "fad3ae8197fccce693fb6b611f49fb072539ff06662ad9fbbc2ab6a1b9fa453e",
+      "size_bytes": 1271,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36_bounded_corrected_coverage_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "7927aaafa7d7a403487ac228b8cfe7e058b3414ac0a2a6a56993d77b17ba8ee8",
+      "size_bytes": 1191,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36_bounded_corrected_coverage_training_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8d0b826ab48b9528870747ec1297362f6bf319a53548ff04214a0df96eef211f",
+      "size_bytes": 28596,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36_runtime_dependency_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "b1c564de25066b5f44fbb3788c19d6250bf7d3a2a805404d60ef96d9b1ebc84f",
+      "size_bytes": 1579,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36d_exact_act_gate_b_control_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3caf7e6a59c33755b839f989de1ad84a92559f364a14ed6e6919febecb7dc66d",
+      "size_bytes": 12369,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36e_exact_act_gate_b_control_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "a01e1cb87fe5b8d0da0eb4e5d6e4dccc80ccf5d15729a7f9601a3dfb91dc195a",
+      "size_bytes": 1515,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36e_exact_act_gate_b_control_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "04afa278248e95b0dfd0a5f1b475a3fced9b458fb9a07ecd2bea281e182e405e",
+      "size_bytes": 2643,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36e_exact_act_gate_b_control_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3eb305e3e0892c76357d237076b5405af45941fbaa9d0ee5434fb3b863cc4ec5",
+      "size_bytes": 1541,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36e_owner_training_authorization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "412cea59cae218b20c9adf719b988dbc606108e752de71b9c3287be56d7b1591",
+      "size_bytes": 1576,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36e_simulation_training_authority_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "ce719489dfa25a75c7f4b438d36daa003abda21ada8d27a652d76b17b67585b0",
+      "size_bytes": 6242,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36e_simulation_training_authority_request.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8c0fd2b7bf887ce4a7f7834c4cf38da859587e745362b8dd5707720b277e2366",
+      "size_bytes": 15701,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36f_act_decode_localization_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "628fdf29b30e14c786b3d0f026161abbfa9c576a4f9e2ab564e7c9445c13094c",
+      "size_bytes": 1389,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36f_act_decode_localization_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "b65fe4871a3f4c4cad4870f3370b076b9c424aa09bec365fc755fe605c67c597",
+      "size_bytes": 1949,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36f_act_decode_localization_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "b58fc79fb3929adab1b486780c88987c923f7df22fb9b73458819cfedd738cc4",
+      "size_bytes": 6309,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36f_owner_inference_authorization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "49c563b1c9ec1579f21805e39b8f7feaefb7379e8ffeea959c8d7ac9f328b134",
+      "size_bytes": 1951,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36f_simulation_inference_authority_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "daf13891d45db91b4c69836ad8487eeab8ae8144ac5ce39f6ce6a33d9daa4e5d",
+      "size_bytes": 6090,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36f_simulation_inference_authority_request.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "995d5499229450e13d75e0891118398bd15bc0cddeef840ed11e260fb50e5886",
+      "size_bytes": 14605,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36i_smolvla_dependency_closure.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "25e2db4e29a03f97cd5c834dc673af627d97928ce7571661f462ec64a5702d6c",
+      "size_bytes": 4583,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_a_offline_cache_resolution.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "9b863d746df462c97eafd56ccd9b67ba92e6ee0c7e33acb3eea481a2db1a9848",
+      "size_bytes": 6793,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_b_corrected_preflight_contract.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "850c505930812e77b936f3ac5bca613a8384e685df517d505f10d01bef27fb12",
+      "size_bytes": 8820,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_corrected_environment_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "bd4aca38dee3e45fe924d61125614f25806dd474448db3301dd56d821eac5eb7",
+      "size_bytes": 250913,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_exact_smolvla_gate_b_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "77a11f057925dfc124133a0df84e4375650d6ca26dcd1445610380f3c0897df0",
+      "size_bytes": 2190,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_exact_smolvla_gate_b_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "c5b31b9568ab99f6eb4431431cf2a43da62713fcaf8dd71a68f4928a991487da",
+      "size_bytes": 1471,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_installed_dependency_closure.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "52da191168d92327545c5d5b880f5f70d638be059d46893d007ec1ae4f1fd0ff",
+      "size_bytes": 232002,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_offline_auto_processor_smoke.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "041a83c7cb92815600d4188a7dde36cc8b0a7a1c31e225f749b0b0511d81c236",
+      "size_bytes": 1200,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_owner_replacement_authorization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "bf9790cf8d487f3160d102e24e5c1acf77e350dad7e2d315e177473ed3d63029",
+      "size_bytes": 2505,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_simulation_training_authority_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3e9feac4652727037a5e0b3d518667d19e3f9022cb35fb3f8add0ced137403bb",
+      "size_bytes": 6394,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36j_simulation_training_authority_request.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "5aa498bcc87adf9aabd16278f37242c079c2a8efe62f32671d836a5c0257ee9c",
+      "size_bytes": 17519,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36k_consequence_gate_design.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "35954595f7c3e936d9b50f5d3f51299528feda7c866f1848faaa64ec2281f477",
+      "size_bytes": 1193682,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36l_frozen_consequence_gate.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "730d0fc069d9902ba721770aa384fde041b3ba405bcbb852fe36ec224adfe5e5",
+      "size_bytes": 3311,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36l_owner_gate_b_amendment_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "023f50b1a19455bbd9c000d62984868abab173d522076a062176a53a8dcdc05a",
+      "size_bytes": 1401,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_36l_retained_candidate_scoring.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f62bd384a6b6b450919c6b79fa5e7fb9caffdb4f738b6ed9e819973718d53308",
+      "size_bytes": 8235,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_38_strict_v2_quantitative_receipt.simulation_only.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "2a4c5f1301a578ec1653ec33580ca0eb13a1964b113db8dacebebc24579f9583",
+      "size_bytes": 18330,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42_r0_admission_fixture.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "ee5ff97f85b2e117c34d2c8ec0e54b5081393cbb9a09321c30728488e5657e06",
+      "size_bytes": 33107,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42_r0_construction_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e7558a46126e9e6ecd5018f5ba305af7961e1e73e0c23bcd07de57b85e39fff6",
+      "size_bytes": 2532,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42_r0_construction_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "accb216dc17165c5cdc1ad01cd9173fa8838590325a16abd3020c4230a26d86a",
+      "size_bytes": 115780,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42_r0_dataset_mixture_manifest.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "5b2618b0b0bea3b7ae1801ef1df3a83fc187a32079b52e06748df1dac5826f1e",
+      "size_bytes": 12858,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42_r0_dataset_statistics.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "67e47d618f36ae1989e55a6fba3aa55a3aa95e78f66a9a062f97c4c2f419c608",
+      "size_bytes": 3164,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42_r0_generation_attempt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "572d7bcc6a3f7ee9b3e0862ff9a2e2e921ac5658bd67cf05cd1728b50c0983a9",
+      "size_bytes": 1069,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42_r0_generation_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3c1a853e4a476d68610288a35f475ad398c7b5dc29793a724ae0cf4fd42b0807",
+      "size_bytes": 3103,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42_r0_retention_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "65f423accc9ee6794d3ca3d4b7b1458a1cbee6781b97110b9e336a546e1525c3",
+      "size_bytes": 35963,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42a_r0_generation_authority_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "0a98a226175e7960c2728a6c259d171f077217fe14f198719f671d60786ae168",
+      "size_bytes": 6242,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42a_r0_generation_authority_request.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "7568a3a9c2afd85a61fd780b763848e8c1f2c9cc7b14fe72630fad750d974fd2",
+      "size_bytes": 13812,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42a_r0_generation_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "dbeeb59b63de01ee8134a173a649a2598327b2b190542eb7602b7f4d082fdee1",
+      "size_bytes": 13531,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42a_r0_generation_runtime_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "64b7cf9dc16b0faafce80bd86b126065eaa1784cb5c72a9e98198be7e825b97b",
+      "size_bytes": 4774,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42a_r0_owner_authorization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "d8af6cab80b40e06e8a6d3a1bc059c6da3800646a03fdd2af25761a66a94e3c8",
+      "size_bytes": 2839,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_42b_r0_pre_run_acceptance.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "4d59c57c8b6e560a92e83a8b656a647646c65247706d23846eef89579272f57b",
+      "size_bytes": 2446,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_attempt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "adff2047ddfaad45f91c11a899bc8dc07d322c623026846b3756834ea73bb75b",
+      "size_bytes": 1180,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_authority_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "96bce564bf821f815f58fce52431ccee5e019aac51dcbe972db1d481a152684d",
+      "size_bytes": 6698,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_authority_request.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "84d3f51e5b1de35a48ff61d17bf3628c769469f4454fbd3f39d7f6a647bb11c9",
+      "size_bytes": 14253,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_gate_a.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "02096328552922b18ca91e449a0c38211c42624c945a555786a3bf4abaa19f0e",
+      "size_bytes": 2756,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_owner_authorization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "eabb121148f51837fde8f4507ec90ef387713cd3d6fe88adcd3e855567ab936b",
+      "size_bytes": 1734,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "2e6f7f0441604a8d6cbd87af8d5579d20f4954d901d0a160d4fdfaa11ef7be98",
+      "size_bytes": 1486,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_pre_run_acceptance.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f79c62466104ad98300a56e9197c344598ff18d0b90ee1e577f88a307cfc4f2a",
+      "size_bytes": 1070,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_runtime_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "4d1533905ca1cb02de8647b981631017e47455ee3f45a193f6cc1b84e2d0ba1b",
+      "size_bytes": 3206,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_standard_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "b96b47f7428c69151b85bca20c74646a382fefb24aa1380a971efe682146dc76",
+      "size_bytes": 11931,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43_r1_act_terminal_failure.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "661da2f2a1776162d71047a23fbdcddd722a6908d71aa3bef5ef076216ed2075",
+      "size_bytes": 4274,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_authority_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "4506370098dfedaa8d1202c6d980cd43c71392f00ffb513dca6342f535df42f4",
+      "size_bytes": 6850,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_authority_request.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "006b9eb6a789bb402abe02fe23cf2c56118672575886d121675064d0b7233343",
+      "size_bytes": 14858,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_gate_a.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f9588ec8335927ddfc48e9d400a42977579485fd738fd94e9e8be43baa7186b4",
+      "size_bytes": 2762,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_owner_authorization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "5293125899ad7e7b424ccd8b65b7144431f669d78e25686233c1d2058b1ad75e",
+      "size_bytes": 1741,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e2ea74a3da826ab21458a273caafacec675949c4d1c43707642ea42538519871",
+      "size_bytes": 1493,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_pre_run_acceptance.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "477cd5831d5fa370360029eff616524ef968503ef00e87dafac9f2972ec05494",
+      "size_bytes": 1081,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_runtime_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "fa1317d131158d38cfd6ebf5a6e396df9b790c6785bd6a25ea7644eed1af6258",
+      "size_bytes": 3827,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_standard_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "ee232468af11aea2eaa0e38fd2c2d7cca47c4bd26118372f53cdec270e0b1ad4",
+      "size_bytes": 14907,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_renderer_smoke.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "20eab76b0a282c8b481849af71d18ee112e6745e8b32776e2e4e5a983bd58b6f",
+      "size_bytes": 2289,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_renderer_smoke.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "88f55972b4cdc75d01eb8b303c33600f0b01508caf30cc3fe24811957d5ae7f2",
+      "size_bytes": 2239,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_attempt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "4af2c688cfab6865de54701d8e2324dd12c9ae7e328ae2bdad406bf20193d64a",
+      "size_bytes": 1244,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_authority_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f151c0b64013541e789f71eb843bb49f248d3afd65c9b428a9d582c73987be70",
+      "size_bytes": 6698,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_authority_request.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "586334d70cb072ca06c7e02562248844c5fdf2e2825e34589b91921a517d3561",
+      "size_bytes": 14333,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_gate_a.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "00b6b0caadf3426b928ec01094e2ba16c662f96ae3ea84522ba0f13e172bfd40",
+      "size_bytes": 2764,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_owner_authorization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "1f0e11e78bddacbf08f2dffb2ffe367dea9561176f62fdf556f85541cdfc5c4d",
+      "size_bytes": 1851,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "dae0ac2acb6fcd386cd3f7debdc0b6494528cdf31a5a2c2c17523a60e4e0c41d",
+      "size_bytes": 1666,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_pre_run_acceptance.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "b5beb8e4fcaccd7a4fca1a36c9703f06fdb36bcde465c6436baec911a883e244",
+      "size_bytes": 1086,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "1989c4b49d9b94fb753074e058e11d02e305ba59915920770f0de714bf13977a",
+      "size_bytes": 1079,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_retention_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "a82b6df78a2e30e50240b46bd5bc10141e296b2991bb4da2fd9b93d65250447d",
+      "size_bytes": 12506,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_runtime_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e53fc9fee0cb6c6bcee1235b7c2958f97aec0afb46420d5cd85a8a00e0955c07",
+      "size_bytes": 4628,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_scorecard.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8c67b069518d7f1939f1944907e4aed2f705bb253af1b31264b3ad05e7603d06",
+      "size_bytes": 1027,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_44_r2_smolvla_standard_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "7d7fa368db276e90d6ddfff61b387028b4c2c4c78bcccc66ea8ed3fe39c6968f",
+      "size_bytes": 18021,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_6_phase_outcome_evaluation.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "d6944009acf08592b5aea3dd1bcf7b70e67f64def71841f04ff8fde821142092",
+      "size_bytes": 153094,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_7_model_bakeoff_plan.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "19070c3703ac3f6ee5f1aa1132faa259a6ec1933f7373b4e2ab827edaa6eaead",
+      "size_bytes": 9768,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/training_input_manifest.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f16963708cd82fa29a0fefa333ad0653655e63b6d09afe59327e2b4ef29f1d44",
+      "size_bytes": 147999,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/architecture.md",
+      "role": "canonical reference",
+      "sha256": "67398faf7f330a03e5b9a79d8de1f954fad68540ac47e2ac4093ccea71a7594e",
+      "size_bytes": 10486,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md",
+      "role": "canonical reference",
+      "sha256": "f2538bf6b66582f84f52b6e84485711a0212e931431a11c365f85668bc787209",
+      "size_bytes": 9042,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/briefs/222-t20-43b-act-stable-runtime-replacement.md",
+      "role": "canonical reference",
+      "sha256": "913f544a724e2aefbf1543abf2fec5566692a75a8147b525080d32e29da9d4d3",
+      "size_bytes": 8118,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/requirements-and-contracts.md",
+      "role": "canonical reference",
+      "sha256": "63e0bd5ee00ca2f88a4238f1a168e9624b401c873d6f2e95ed89ef4c6d242987",
+      "size_bytes": 7477,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/261-verify-t20-36k-consequence-calibration.md",
+      "role": "canonical reference",
+      "sha256": "54a731661a933053075aaceb3078ee6bd9e0a91567186e34c2811b70a887a443",
+      "size_bytes": 2176,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/289-accept-t20-42b-r0-pre-run-authority.md",
+      "role": "canonical reference",
+      "sha256": "70a0b7a81584d640d10648d8c50eb1898349c294a79f425ba09d76ebc53dac77",
+      "size_bytes": 3460,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/297-verify-t20-44-r2-smolvla-terminal-negative.md",
+      "role": "canonical reference",
+      "sha256": "5d835c77a0c12aa7656b8a4f7b80a83d8c0ab9c1b0fc5f1ad28424d976850195",
+      "size_bytes": 3560,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/299-verify-t20-43b-stable-act-replacement-implementation.md",
+      "role": "canonical reference",
+      "sha256": "346f11ebcc8d2ad75dd5b8f4f020b4d5e03c3f60bccaf2fcd63b43738cfc3e46",
+      "size_bytes": 3480,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/301-accept-t20-43b-r1-act-pre-run-authority.md",
+      "role": "canonical reference",
+      "sha256": "50f11576efcb771cbcca2d1085a998b799bb51e94b1bcefb40aac1349a99ea2a",
+      "size_bytes": 3818,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/302-close-t20-43b-window-with-unconsumed-permit.md",
+      "role": "canonical reference",
+      "sha256": "e49706f23eeb50ffe7a70cd006a051ecf444f0811009bb31baab3b17629fe403",
+      "size_bytes": 2348,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/robo-scan-integration.md",
+      "role": "canonical reference",
+      "sha256": "4a695f59e333e8f1854341174ef4aa1569d680095f14e1ec82756f001d032d56",
+      "size_bytes": 7362,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/robo-scan-sim-link-integration-roadmap.md",
+      "role": "canonical reference",
+      "sha256": "06795088b8d52787ecd92e7de35e248874af0678462ab6786529f730522373fc",
+      "size_bytes": 22396,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/sim-link-mvp-execution-plan.md",
+      "role": "canonical reference",
+      "sha256": "ba72f90a24bedda9181a221ebaedebd0d41aebdc7f26918b0e6f588a26300e71",
+      "size_bytes": 47941,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/__init__.py",
+      "role": "portable implementation",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/__init__.py",
+      "role": "portable implementation",
+      "sha256": "0409a78de82718068d437e02afccb4aae6001f01b97260998ad58e3d679d31f6",
+      "size_bytes": 773,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/act_grasp_closed_loop.py",
+      "role": "portable implementation",
+      "sha256": "d18c77a8c966164f364149ca14b38758225e9765c96fbf190b25e5af869b353d",
+      "size_bytes": 17847,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/artifact_contract.py",
+      "role": "portable implementation",
+      "sha256": "e63a608fb160c42adf15f20392f4abf772d6350072d739855792ecfb64dde161",
+      "size_bytes": 14503,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/authority_composer.py",
+      "role": "portable implementation",
+      "sha256": "4575307b7a42f51b6518905226da218f7756949b4530c71b5f753a10ad196ec4",
+      "size_bytes": 74847,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/causal_sort_expert.py",
+      "role": "portable implementation",
+      "sha256": "391400e9e54c676b6b5be6dc18dfb9ac8b0bb7e1c66ff940ae328bb089534f34",
+      "size_bytes": 20777,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/census_runtime_binding.py",
+      "role": "portable implementation",
+      "sha256": "0cd94f3b69954eac40c3bb0bbbfd684c692b3eb836b5179b80c16bbb274affb3",
+      "size_bytes": 16409,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/experience_compiler.py",
+      "role": "portable implementation",
+      "sha256": "b93a02435e977c26c07b25cf3b678d28b49a006bb36e4257721fb965f65bb64a",
+      "size_bytes": 23774,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/experience_records.py",
+      "role": "portable implementation",
+      "sha256": "98dc08389a6e6989650a3432ddd708d328d9764bc029cde2593a0d8836c60f85",
+      "size_bytes": 31133,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/experience_window_index.py",
+      "role": "portable implementation",
+      "sha256": "6855d5a26306ced3848ea4536ffbef642348bbd432d10e0975cfe1a946a4d719",
+      "size_bytes": 20567,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/geometry_derived_grasp_primitives.py",
+      "role": "portable implementation",
+      "sha256": "e7857f78f346bd364b3375a9d463e729fd6f64f4248081e44ef8f237eeee2fb0",
+      "size_bytes": 38846,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/geometry_derived_unilateral_grasp.py",
+      "role": "portable implementation",
+      "sha256": "8a43f9ce78e79aa1078cb152280ff20bcd6c449c3678d0a333f12e81e42861e4",
+      "size_bytes": 7760,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/grasp_artifact_schema.py",
+      "role": "portable implementation",
+      "sha256": "ba746b2e9ead6f88495f0fc53eac80f4ceec65a66cebe255fca8ee8d59ad828c",
+      "size_bytes": 204,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/grasp_evidence.py",
+      "role": "portable implementation",
+      "sha256": "6f01155a948523b2604cf1e2e97a6de6604c9e293032a04707e598372d95e86a",
+      "size_bytes": 6035,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/grasp_pose_solver.py",
+      "role": "portable implementation",
+      "sha256": "581a9ff2abb6b4ed09db6fcb32d986b2e3849927152915d3f3d042e505fcc183",
+      "size_bytes": 16607,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/gripper_contact_semantics.py",
+      "role": "portable implementation",
+      "sha256": "7d5be915f1ced88c4db3d4d1e43220eb511859bae26b5037830f4b67372e156a",
+      "size_bytes": 26083,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/hardware_execution_profile.py",
+      "role": "portable implementation",
+      "sha256": "9f1c8ea6007a2591d712034cccf6b424cf78f088674df305c932b5c318dd6c95",
+      "size_bytes": 26953,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/lerobot_native_episode_manifest.py",
+      "role": "portable implementation",
+      "sha256": "a5dec2e010e4179b07cd5070973772862c27b0128ade9a02f9d61cbd68318f37",
+      "size_bytes": 13503,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/lerobot_stack.py",
+      "role": "portable implementation",
+      "sha256": "ea626c3f489b322c9a6081aa3a695f7469de0f51279d67c4b6a9dd04ebea95ff",
+      "size_bytes": 5614,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/measured_inertial_intake.py",
+      "role": "portable implementation",
+      "sha256": "70aae08bda2092ed19ba1519676b677d2eaf306c804a17af183ef5f9397b484f",
+      "size_bytes": 56927,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/model_bakeoff.py",
+      "role": "portable implementation",
+      "sha256": "1cb8f9a048baf4f0ce5cfde9a98d56459467ac2d1b33c689b94ac84bef1cf593",
+      "size_bytes": 32602,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/model_bakeoff_evaluation.py",
+      "role": "portable implementation",
+      "sha256": "9754ce6624004ffa4caba68dd4ca2f225db0b26b26ebe3b68b9ee037d2c3c9c6",
+      "size_bytes": 14762,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/mujoco_anchor_grasp.py",
+      "role": "portable implementation",
+      "sha256": "d0301282fe1ce0e50b52f6fe8182eee7939388469fe757afe6cb902778ca942c",
+      "size_bytes": 14516,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/mujoco_export.py",
+      "role": "portable implementation",
+      "sha256": "dd77bb7e9a972b2b87a9cb06814652b210a21cdf0fe57ad03c86775f17b5ae56",
+      "size_bytes": 12037,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/normalization_bundle.py",
+      "role": "portable implementation",
+      "sha256": "4bdc6fccb5b8c501118830c12a8d6fe4c680287e88bd62dadc221a9333b920b5",
+      "size_bytes": 6084,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/observer_role_evaluator.py",
+      "role": "portable implementation",
+      "sha256": "57fe40618affbaa5bd60f6b148adab1eb81dcf871bb8e5c7e2ae7d4a0ad0cdce",
+      "size_bytes": 26523,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/paired_trace_runner.py",
+      "role": "portable implementation",
+      "sha256": "13e27e4e17d4af97964ca265a3c3b3f9faf158a23fd6175da929323f23217246",
+      "size_bytes": 21035,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/phase_outcome_evaluation.py",
+      "role": "portable implementation",
+      "sha256": "27c290b507f6464cb2aed804fbfcd338c9aa6f8289d19c156917ea85e88db07b",
+      "size_bytes": 12047,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/production_inertial_compiler.py",
+      "role": "portable implementation",
+      "sha256": "f71ee3422566b88cc6d52efb0ea8e14074965ab01d45cbe7f989e5d260b821ec",
+      "size_bytes": 57451,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/quantitative_strict_v2_receipt.py",
+      "role": "portable implementation",
+      "sha256": "939c6ed807af60814bd33045670082314993c95dcd9bd1946cba2df3f7a8f427",
+      "size_bytes": 22891,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/robo_scan_export_receipt.py",
+      "role": "portable implementation",
+      "sha256": "886715c4aee443af058d9dedeee25480fbc401b084283eabda6f3f87c2374bde",
+      "size_bytes": 34605,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/robotics_dependency_lock.py",
+      "role": "portable implementation",
+      "sha256": "823ad9cffbf8c17e546df35d898420758e1a2c9533c75894d067638b35eaf9f3",
+      "size_bytes": 24291,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/scoring.py",
+      "role": "portable implementation",
+      "sha256": "a434642bca08bd705c200c464a0af73d9c36666f52e27b2f8068313cfdb8a27b",
+      "size_bytes": 2880,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/scripted_grasp_episode_generation.py",
+      "role": "portable implementation",
+      "sha256": "80fab5972564ec48090a57c05b08dff43a3f48f0d0c9a52f8f98ad40c885ba7f",
+      "size_bytes": 31797,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/simulation_training_spec.py",
+      "role": "portable implementation",
+      "sha256": "b2e435374d3e8a6574039016870bd344899db8b61f8e12ef2d5a69c8cd650e13",
+      "size_bytes": 17740,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/so101_coordinates.py",
+      "role": "portable implementation",
+      "sha256": "9382e02106741906380eed572959f991382c285cedd08c8d652d0a3375cf843a",
+      "size_bytes": 3929,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/so101_processor.py",
+      "role": "portable implementation",
+      "sha256": "49da4612979a21487f6c3d110c7310a90a62d581a02a8be0443eebc10aef2c36",
+      "size_bytes": 12730,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/spec.py",
+      "role": "portable implementation",
+      "sha256": "e686005c2e2f1f71acdfcc9b3c840cc32fe017e0b1fc159a07fa2850c7f96c0e",
+      "size_bytes": 9803,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/strict_grasp.py",
+      "role": "portable implementation",
+      "sha256": "8dd97c798c1fb8e6824351e9a21e17b56f7e7a0c1bf87da1bd16d7e1dffc50a5",
+      "size_bytes": 32436,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/structural_twin_diff.py",
+      "role": "portable implementation",
+      "sha256": "b3a0a7cb4eda199f2d63d0bef70278afb7253a004776ae0ed410141a7afcbcfc",
+      "size_bytes": 37103,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_17_clean_base_preflight.py",
+      "role": "portable implementation",
+      "sha256": "cff2c9fb6cfaaeaffe099e156cafbfe3b42864d1fc3e83fffadad61639789801",
+      "size_bytes": 19229,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_18_state_fork_recovery.py",
+      "role": "portable implementation",
+      "sha256": "62f328112853d021ebb752d6ea39bc80d1e471b493e80c8d28a0014385a9ddf1",
+      "size_bytes": 32154,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_23_recovery_augmented_preflight.py",
+      "role": "portable implementation",
+      "sha256": "6f4ae4c4411e7900fa7fc73d9bb0148d3eaa4c3ff432ac153ed30dff2ac6786d",
+      "size_bytes": 27437,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_32_closed_loop_divergence.py",
+      "role": "portable implementation",
+      "sha256": "50b233171c9f127b07786f875d5a76fc8a75e4ad0be1ede1d2afead366c65208",
+      "size_bytes": 27234,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_33_one_batch_memorization.py",
+      "role": "portable implementation",
+      "sha256": "5dbe705ae29b585e5a4d9b2e69a389906f9c591275394927089b1e28b925eb5c",
+      "size_bytes": 17598,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35_rank_capacity_discriminator.py",
+      "role": "portable implementation",
+      "sha256": "4250e90ac4ae3f6649d8bd608a55ed5d676fc59debd72e9200422f2ebc305433",
+      "size_bytes": 13006,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35a_peft_module_coverage.py",
+      "role": "portable implementation",
+      "sha256": "685c9b73585077f997b29cc632730de96ea99c209f97a0305df9d30fee68fe7a",
+      "size_bytes": 15655,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35b_pi05_coverage_correction.py",
+      "role": "portable implementation",
+      "sha256": "2250e43d9f3395cf06bcec124037a80bd306458f9f68535c00018b86cf116072",
+      "size_bytes": 11908,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35c_expert_only_capacity_ceiling.py",
+      "role": "portable implementation",
+      "sha256": "8b802526b678fe6ee70a30cf6f173551954b66abc5bf95fcf04e6992103d4b15",
+      "size_bytes": 20068,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35d_decoded_action_residual_localization.py",
+      "role": "portable implementation",
+      "sha256": "b0e08725067cf8cb45c1328b554cc3ba77de45d50b8276cc234a8a796e8301a8",
+      "size_bytes": 20819,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35e_top_two_channel_correction.py",
+      "role": "portable implementation",
+      "sha256": "e9f2ce01560eb57eb91a0a654002f886440e13b6bc9ff540f4214e32f5946b1f",
+      "size_bytes": 8525,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35f_normalized_residual_saturation_audit.py",
+      "role": "portable implementation",
+      "sha256": "61c2a495f01d90ed13ebd22df2bdbf9477a99b91fb97e0ce8ce41e4419f25737",
+      "size_bytes": 24425,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35g_denoising_cadence_discriminator.py",
+      "role": "portable implementation",
+      "sha256": "dde3b8d5b0682b2f53a3a79cd34edb7afd60557fe65a76530e264dd05b6e0833",
+      "size_bytes": 30020,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35h_decoded_action_bias_ceiling.py",
+      "role": "portable implementation",
+      "sha256": "aab6ac458445568f1e662985dfbd558c665629ab9dbb2fc10b72b0d62617670c",
+      "size_bytes": 17259,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35i_residual_variance_localization.py",
+      "role": "portable implementation",
+      "sha256": "5726cd58ef46b2eb99850c14fedcec8daa38ce03a5a035a0418c88d0e0931050",
+      "size_bytes": 21647,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35j_initial_noise_scale_discriminator.py",
+      "role": "portable implementation",
+      "sha256": "ea8e365a140a3825ef02aa545ef548e8792616ebacba62b99bf3b15914af301f",
+      "size_bytes": 24922,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35k_sampler_noise_distribution_audit.py",
+      "role": "portable implementation",
+      "sha256": "ef528df8a6853119684e0ab013791737c7d0483c47af3b6271bc86aee42335ba",
+      "size_bytes": 26361,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35l_active_padded_noise_mask_discriminator.py",
+      "role": "portable implementation",
+      "sha256": "ac272e72acb7e9af94748b1680f0bd5a388abedd6d3a5764ab207f1d0a80fbaf",
+      "size_bytes": 25938,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35m_active_padded_factorial_interaction_audit.py",
+      "role": "portable implementation",
+      "sha256": "4d1660455798f9053e7b2d55917f34248932380d3c8cb4cf4d2de7ce259ba427",
+      "size_bytes": 9548,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35n_near_zero_active_noise_scale_discriminator.py",
+      "role": "portable implementation",
+      "sha256": "963f1467ab5bf4009821796585f5b6239b9ef48d8639d354a10237accf422d6d",
+      "size_bytes": 24433,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35o_flow_trajectory_consistency_audit.py",
+      "role": "portable implementation",
+      "sha256": "8e567a5ca690d08a42fbd37446e28a3c9fe1ab40e463f1dabe4735a9832a01cf",
+      "size_bytes": 26339,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35p_terminal_time_flow_consistency_correction.py",
+      "role": "portable implementation",
+      "sha256": "fd04399838299730838c02c3145e666152e7e12b62237b413c895429bddd0365",
+      "size_bytes": 28513,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35q_post_training_trajectory_audit.py",
+      "role": "portable implementation",
+      "sha256": "ffad8a7a96de9f10aeab6d2459a5e74cdb6775fdf5a2ec42b7e7c21d7ed1494b",
+      "size_bytes": 30591,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35r_full_path_self_consistency_correction.py",
+      "role": "portable implementation",
+      "sha256": "f5bd7984b0e832f18d7e748db70b691077f94709b89e493011399dc9074c906f",
+      "size_bytes": 30439,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35s_objective_mass_compatibility_audit.py",
+      "role": "portable implementation",
+      "sha256": "ed87303296e0358faaa5cf2ccbb41d9f95d742e1d0f18700ba23543ea4fc0c45",
+      "size_bytes": 13626,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35t_time_normalized_standard_replay_correction.py",
+      "role": "portable implementation",
+      "sha256": "b4c53f3b4b13c0a8d03b86e4e7d3791e0820cf6ad8c11e56664970ae2fcd2cdb",
+      "size_bytes": 37087,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35u_post_training_trajectory_audit.py",
+      "role": "portable implementation",
+      "sha256": "0f35fa80557eddde6ae0f69d09a47f5abe55ff5c3919b1b53c45d79f324c61b7",
+      "size_bytes": 31545,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35v_post_training_trajectory_audit.py",
+      "role": "portable implementation",
+      "sha256": "2aa51bab546108205280b5170ab1c9c67063c4f5614001cfce96f4a4e7faf8fa",
+      "size_bytes": 37299,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35w_step_coordinate_action_outlier_audit.py",
+      "role": "portable implementation",
+      "sha256": "b30370e566e2c4b80c70d55d278ce5decfd534b61b1b8601bef5812c2ebf6a74",
+      "size_bytes": 20419,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_35x_physical_gate_joint_weighted_correction.py",
+      "role": "portable implementation",
+      "sha256": "4047d55dadb87cd69d7f873543f07a65e5c7327acfdb9d6922e9cf44f6c3325a",
+      "size_bytes": 53101,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_36_bounded_corrected_coverage.py",
+      "role": "portable implementation",
+      "sha256": "6fd0311232d7b06e402d005c01832df08ff0142fda4385791ec5d8a6c50051d4",
+      "size_bytes": 37050,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_36l_frozen_consequence_gate.py",
+      "role": "portable implementation",
+      "sha256": "a3c689dc722a1f6290ae776958a5378573b9db45812f93c941b8a22cd737ef27",
+      "size_bytes": 26287,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_42_r0_dataset_construction.py",
+      "role": "portable implementation",
+      "sha256": "4d0c0c63844feb91bd4c211d99bad5d2e9b7cdec0e032f0093676d5d44aca2b6",
+      "size_bytes": 44687,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_42a_r0_generation_authority.py",
+      "role": "portable implementation",
+      "sha256": "ea4458a207800dc5daf7929c6b5af5b4ebace4bdd50a0ec7a1ab90989dd311d2",
+      "size_bytes": 38634,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_42b_r0_materialization.py",
+      "role": "portable implementation",
+      "sha256": "78f1b16a717f7e9b8b168fb89de1391c75ff6f9390f1ebeac5ca747153dfe5a6",
+      "size_bytes": 11941,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_42b_r0_runner.py",
+      "role": "portable implementation",
+      "sha256": "f6fb34199d35aea842ea5d7a0b0690a6990effa25704de9ed276be216dd1d44d",
+      "size_bytes": 48345,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43_r1_act_contracts.py",
+      "role": "portable implementation",
+      "sha256": "2e68b91a5e14a0cee16f957d2fcd94189a079075db7c50a011bfe7366fb4c2c2",
+      "size_bytes": 41298,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43_r1_act_materialization.py",
+      "role": "portable implementation",
+      "sha256": "57ec637b0b5a2b4706fa7f077e0a7d865f93c563467f43c2a7fff8b3ea62ad64",
+      "size_bytes": 18619,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43_r1_act_runner.py",
+      "role": "portable implementation",
+      "sha256": "135ee6cfca43cd85fd0c087a54b8494d8cc1322bb78acaa93a35f0ff49f072a0",
+      "size_bytes": 52535,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43b_r1_act_contracts.py",
+      "role": "portable implementation",
+      "sha256": "c49c44c437152a6001fb1c67abd7425ecbad48fe7acacf8729f6af2f3966ce1a",
+      "size_bytes": 50762,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43b_r1_act_materialization.py",
+      "role": "portable implementation",
+      "sha256": "2034fcae4639955c1618ff0cb46d2bf1ec7e8951006188e0805aba85ad940383",
+      "size_bytes": 24182,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43b_r1_act_runner.py",
+      "role": "portable implementation",
+      "sha256": "2039dbd47a58223ef633aabbca191dfff8d78ebfc73f37dd5922373ca8a7d825",
+      "size_bytes": 60773,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_44_r2_smolvla_contracts.py",
+      "role": "portable implementation",
+      "sha256": "2d89b2f1fc64ecd1301d8fb81cc4848caab44490f442bd2eb4c0a76d657ba292",
+      "size_bytes": 53447,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_44_r2_smolvla_materialization.py",
+      "role": "portable implementation",
+      "sha256": "28fc6280fa7dc2e536661cb052c69bb05f31b414cc009456dbf39bb6f160718f",
+      "size_bytes": 25845,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_44_r2_smolvla_runner.py",
+      "role": "portable implementation",
+      "sha256": "b2edcf03f7ceeab61d2fe15318d93bbafdbcd72b3b2a120d97ef55dadfe7e20a",
+      "size_bytes": 62478,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/twin_contract.py",
+      "role": "portable implementation",
+      "sha256": "bfa4e187bfb5ab91761d1b04381ad494b3c964942c74b7ba2ea12b84b9fe14d5",
+      "size_bytes": 32156,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100755",
+      "path": "scripts/robot_lab/compose_robot_authority.py",
+      "role": "reproduction entrypoint",
+      "sha256": "90a4537e207f6a8e3cbe4861f5ab1c4406973a959aa56d835d4ad11ef239d09e",
+      "size_bytes": 2768,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/materialize_t20_42b_r0_authority.py",
+      "role": "reproduction entrypoint",
+      "sha256": "23b83675f58c53b60375f5c269b959a75d65d58c75957b2fefd395a951233611",
+      "size_bytes": 1870,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/materialize_t20_43_r1_act_authority.py",
+      "role": "reproduction entrypoint",
+      "sha256": "f6b9ab180832169b1d9abb790fc34fca18c11f0233cda070f2e47be13d1a8076",
+      "size_bytes": 1438,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/materialize_t20_43b_r1_act_authority.py",
+      "role": "reproduction entrypoint",
+      "sha256": "4ac09d91ef7427180187de3da4bbafe61e3a389a9d8a404378ed6e53baa447e0",
+      "size_bytes": 1440,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/materialize_t20_44_r2_smolvla_authority.py",
+      "role": "reproduction entrypoint",
+      "sha256": "dacdd256bb5b613f07b513bd47a83251ee359638c265392a1f407a628aa7967f",
+      "size_bytes": 1442,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/patches/pi05_gripper_loss_weight.patch",
+      "role": "reproduction entrypoint",
+      "sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+      "size_bytes": 6275,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/render_rollout_mirror.py",
+      "role": "reproduction entrypoint",
+      "sha256": "2f399219df280a7c4c4f0401103d526c0480a03dd1b60cf68dfac27093050d6e",
+      "size_bytes": 12237,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/run_t19_1_readonly_hardware_snapshot.py",
+      "role": "reproduction entrypoint",
+      "sha256": "7f4076b998d4bfd4b9bfb73ac3e97f1b95c037df9f8b2c7793b216c0f95b2a98",
+      "size_bytes": 15387,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/run_t20_42_r0_generation.py",
+      "role": "reproduction entrypoint",
+      "sha256": "bcb525c96e150d283ff4ed50691bdd9447ef6077cae568e87bb03da00b9381c7",
+      "size_bytes": 1994,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/run_t20_43_r1_act.py",
+      "role": "reproduction entrypoint",
+      "sha256": "c16fcfce40561773d4a4735da88a26af54fbc1cc50b80de389723963e740a0f4",
+      "size_bytes": 1600,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/run_t20_43b_r1_act.py",
+      "role": "reproduction entrypoint",
+      "sha256": "c56ace2436b1bf6bbede4b7251a7055da0610117ef2a58ed50ad140285e4e797",
+      "size_bytes": 1602,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/run_t20_44_r2_smolvla.py",
+      "role": "reproduction entrypoint",
+      "sha256": "33d98526ba0eeb9d3769a6e4f8ea582f3b7b940689301dd4aef6c94e18df6f21",
+      "size_bytes": 1608,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/verify_lerobot_stack.py",
+      "role": "reproduction entrypoint",
+      "sha256": "6e0d7c75c0fc3e1b4a9f03ed9cb11bce195f381a33b47b94b7cca54ba0ae8e8c",
+      "size_bytes": 1985,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/verify_robo_scan_export.py",
+      "role": "reproduction entrypoint",
+      "sha256": "bcd5284ed99e3d26dfc56382d630300722e87c294689e82818c45a8a8dae97a2",
+      "size_bytes": 347,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_42_r0_dataset_construction.py",
+      "role": "reproduction entrypoint",
+      "sha256": "3ef8a942cddfa0a715f548084a3dc7dc87f0df6f7dcb108f7da36804c03b7acc",
+      "size_bytes": 2269,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_42b_r0_pre_run_acceptance.py",
+      "role": "reproduction entrypoint",
+      "sha256": "5c4cf65e743f2dcd144502c752ba98a14e420a797fb19210c9abee7e5675c2bd",
+      "size_bytes": 1838,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_43_r1_act_pre_run_acceptance.py",
+      "role": "reproduction entrypoint",
+      "sha256": "d11d6700643e82e7810cf13c6be7ca3b360571e6dfa53443e4fc23a09ee4695a",
+      "size_bytes": 2404,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_43_r1_act_spec.py",
+      "role": "reproduction entrypoint",
+      "sha256": "808e34a723183967367528eb0d187133541afe8a259ac142299b136799812f92",
+      "size_bytes": 1325,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_43b_r1_act_pre_run_acceptance.py",
+      "role": "reproduction entrypoint",
+      "sha256": "80c34790c5320a4c09b4a1343558eeac0f4e6c69f42c7726d7fcec2caa4766c2",
+      "size_bytes": 2408,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_43b_r1_act_spec.py",
+      "role": "reproduction entrypoint",
+      "sha256": "faefe4818062409bcea849ed4e24888f65a559b1910c8a0264a6a08ce50bf3b5",
+      "size_bytes": 1328,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_44_r2_smolvla_pre_run_acceptance.py",
+      "role": "reproduction entrypoint",
+      "sha256": "ca39c1daec4f243ec5564bd8473a2aed834ca8abbb5655d170e2c9ae2845593e",
+      "size_bytes": 2408,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_44_r2_smolvla_spec.py",
+      "role": "reproduction entrypoint",
+      "sha256": "87d0995e571f5fe5802c6591c62f9d32e92bab958ee8e029ddd3fbfa806b3357",
+      "size_bytes": 1328,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_artifact_contract.py",
+      "role": "focused regression",
+      "sha256": "2cc266a2ac505c1f58881d98dd25fdcde3cb757c507d5814710f9c98c7209e1a",
+      "size_bytes": 3600,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_authority_composer.py",
+      "role": "focused regression",
+      "sha256": "f45c5fbbabea8947bb127cf20d79a7b15eba415f76a8c45a321a5d7f710e9334",
+      "size_bytes": 18502,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_gripper_contact_semantics.py",
+      "role": "focused regression",
+      "sha256": "c90dbe8c9f76d149c6cf638e30ae39d38949fb185c9d174b5441fb5d5f0148c6",
+      "size_bytes": 3921,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_lerobot_stack.py",
+      "role": "focused regression",
+      "sha256": "4b22e783b080b8279d61cf2efce96f5ef7a023aabb922c002c0dd93fb05158d8",
+      "size_bytes": 2653,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_observer_role_evaluator.py",
+      "role": "focused regression",
+      "sha256": "39d119476b571a897231e46e4d2491b88c4031dd38cc53c838bf2040c55c127d",
+      "size_bytes": 7756,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_paired_trace_runner.py",
+      "role": "focused regression",
+      "sha256": "41216e386789f5501abcd7dc2c3bc74634d306f3484521dbafe22acf7b4870f0",
+      "size_bytes": 8421,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_phase_outcome_evaluation.py",
+      "role": "focused regression",
+      "sha256": "f1c76653084c48bd50fce4294034d7f51ab447b2e3360312411361a087d87fb9",
+      "size_bytes": 4706,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_quantitative_strict_v2_receipt.py",
+      "role": "focused regression",
+      "sha256": "dde4543a92e319f3d5fc9ff7b44833c796b010cdfaf95630b6275bcd7e2a5bb8",
+      "size_bytes": 6228,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_robo_scan_export_receipt.py",
+      "role": "focused regression",
+      "sha256": "53b84a59441aec15a1a2c313ee54e67fad3c7e336fc994f812865ed5a3fb156e",
+      "size_bytes": 10158,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_robotics_dependency_lock.py",
+      "role": "focused regression",
+      "sha256": "330930fb3c498b8745d6120ea303e1566bc8aba595052588da9854f0d34f1090",
+      "size_bytes": 10826,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_scripted_grasp_episode_generation.py",
+      "role": "focused regression",
+      "sha256": "583edc70325d4dc0d5f34daa70ddb3ee01da438cd2939720256b72abe2b442a1",
+      "size_bytes": 4793,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_so101_coordinates.py",
+      "role": "focused regression",
+      "sha256": "f64b0dff1df3124b198b20668ce18c9ef0a97c893e9f9f5e61ad0d3b45721016",
+      "size_bytes": 446,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_so101_processor.py",
+      "role": "focused regression",
+      "sha256": "f16b1092a23c025c124f23efc551cc437b60a551b0b04eeb447ddd2313ccf426",
+      "size_bytes": 7270,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_strict_grasp.py",
+      "role": "focused regression",
+      "sha256": "374d38d4d6fd490a8cf129afddd1e3fb2d99d1300ba9a6cfd5a26eeb6995241b",
+      "size_bytes": 5604,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_strict_grasp_v2.py",
+      "role": "focused regression",
+      "sha256": "298b5bbb5d81f190716b2a3b68eb11d108f3139cb1b346c23116bb2353b8beca",
+      "size_bytes": 4151,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_t20_42_r0_dataset_construction.py",
+      "role": "focused regression",
+      "sha256": "8d9e0a4d6ea3c5b9121828a606b3d2792df2de22ab0e2abf9e4e74a8d3d7082c",
+      "size_bytes": 10276,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_t20_42a_r0_generation_authority.py",
+      "role": "focused regression",
+      "sha256": "f1cca2fd20feba4f739d99bace71b9a34955aeda46f26ae83934adef9ac4ed26",
+      "size_bytes": 12180,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_t20_42b_r0_materialization.py",
+      "role": "focused regression",
+      "sha256": "00ddb13665db50cbba4083e8bc12b4f8b9e2101a1eeb81b7b4333de08bf84834",
+      "size_bytes": 5069,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_t20_42b_r0_runner.py",
+      "role": "focused regression",
+      "sha256": "1cbe5298d9cbd53aaa48a85fa5aafecb42f998c4dc0796634d563f170858dce1",
+      "size_bytes": 7852,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_t20_43b_r1_act_contracts.py",
+      "role": "focused regression",
+      "sha256": "9be9755817ce05cc377ff04a999254e1f28ba9c5b7311e00cb419009ba602446",
+      "size_bytes": 10913,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_t20_43b_r1_act_runner.py",
+      "role": "focused regression",
+      "sha256": "82c33873b0ece79855f0dd5df8a8f4f71b7b4b8080d36aa63ed3111896ea8e3d",
+      "size_bytes": 10086,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_t20_44_r2_smolvla_contracts.py",
+      "role": "focused regression",
+      "sha256": "5e0181224f3060e118d4e465c19d065c45d53ba71f72d7af56084d23e16b7922",
+      "size_bytes": 10333,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_t20_44_r2_smolvla_runner.py",
+      "role": "focused regression",
+      "sha256": "dec28a1dd803263f59d8548bddb9a6fb989c822acc0e863f0301ddba32c6f137",
+      "size_bytes": 9154,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "third_party/mujoco_menagerie/robotstudio_so101/LICENSE",
+      "role": "license",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size_bytes": 11357,
+      "tier": "required"
+    },
+    {
+      "git_mode": "100644",
+      "path": "third_party/mujoco_menagerie/robotstudio_so101/README.md",
+      "role": "vendored structural reference",
+      "sha256": "e2344e7c14290bed85c7907247aecb8bf6cb4392e3de0d7c45680efe9bb9b5a9",
+      "size_bytes": 1142,
+      "tier": "third_party"
+    },
+    {
+      "git_mode": "100644",
+      "path": "third_party/mujoco_menagerie/robotstudio_so101/scene.xml",
+      "role": "vendored structural reference",
+      "sha256": "d3037f0fd36b61a9b6805b2c79831e7a392276d0f490145d01f718542eee9150",
+      "size_bytes": 825,
+      "tier": "third_party"
+    },
+    {
+      "git_mode": "100644",
+      "path": "third_party/mujoco_menagerie/robotstudio_so101/so101.xml",
+      "role": "vendored structural reference",
+      "sha256": "5ad49f2b45c083baac9ffe5d4d3213a5da7eac8039095bb2df177a697aae8308",
+      "size_bytes": 16670,
+      "tier": "third_party"
+    }
+  ],
+  "forbidden_prefixes": [
+    ".git/",
+    ".env",
+    ".venv/",
+    "data/",
+    "datasets/",
+    "external/",
+    "outputs/",
+    "tmp/"
+  ],
+  "identity_sha256": "f46263d339664dd18c710a908b9783e8d54af03a5c7475e2a27d63b6ec468b3b",
+  "learned_policy_success_claimed": false,
+  "maximum_file_bytes": 2000000,
+  "omitted_source_artifacts": [
+    {
+      "path": "configurations/robot_lab/t17_7_compiler_window_replay_audit.json",
+      "reason": "Historical 4.99 MB replay evidence is content-addressed in the source repository but is not required by the current R0, ACT, SmolVLA, evaluator, or authority reconstruction path.",
+      "sha256": "8a7463c8e1fdb018e22be4682db871b5a24d818ddb7e9398fab6ffc9eb866d9c",
+      "size_bytes": 4988652
+    },
+    {
+      "path": "configurations/robot_lab/t20_35o_flow_trajectory_consistency_result.json",
+      "reason": "Historical PI0.5 diagnostic tensor payload; its decision-relevant finding is summarized in the reconstruction lessons and it is not an input to the current policy ladder.",
+      "sha256": "15a768e653871e72d892250d61333252792b945798cdc1b5e43478dfc23cc92a",
+      "size_bytes": 5815635
+    },
+    {
+      "path": "configurations/robot_lab/t20_35q_post_training_trajectory_result.json",
+      "reason": "Historical PI0.5 diagnostic tensor payload; its decision-relevant finding is summarized in the reconstruction lessons and it is not an input to the current policy ladder.",
+      "sha256": "a73fffb61c70e4812a8868b087c262be2625549251378966a69132c0f55e78ac",
+      "size_bytes": 5789898
+    },
+    {
+      "path": "configurations/robot_lab/t20_35v_post_training_trajectory_result.json",
+      "reason": "Historical PI0.5 diagnostic tensor payload; its decision-relevant finding is summarized in the reconstruction lessons and it is not an input to the current policy ladder.",
+      "sha256": "893fe5544fd3f7c9f18a804b29b0fcc226d51769e7529870bf9f397279dd13e1",
+      "size_bytes": 5789353
+    },
+    {
+      "path": "docs/autonomous-workflow/project_state.json",
+      "reason": "Repository-bound live authority state is deliberately not transplanted; the kit supplies a non-authorizing proof snapshot and the destination must initialize its own state and authority epoch.",
+      "sha256": "244ccfd641d49dca264fc304d7bdf71cd641d3ae49640665b632d6f00b1cc50d",
+      "size_bytes": 426536
+    }
+  ],
+  "physical_proof_transferred": false,
+  "schema_version": "scenesmith.reconstruction_source_manifest.v1",
+  "selection_sha256": "8e7a50f05beb06611d61dc0b89013221b937b08714be9bc7ce9821f547d0b8fd",
+  "source_commit": "6c53d9309f7f41f0d3ac351c049436ddda20e50f",
+  "source_repository": "https://github.com/jakekinchen/sim-link.git"
+}

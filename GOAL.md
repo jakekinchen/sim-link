@@ -20,6 +20,10 @@ proof states must remain distinct.
 
 ## Active Run Window
 
+- Current status: closed at `2026-07-16T18:50:03-05:00` before the T20.43b
+  one-use marker because the remaining interval lacked measured evidence for a
+  safe noninterruptible finish. A fresh owner window and reviewed
+  administrative authority epoch are required before any model action.
 - Actual start: `2026-07-16T12:35:56-05:00`.
 - No new major slice after: `2026-07-16T19:50:56-05:00`.
 - Hard closeout: `2026-07-16T20:35:56-05:00`.
@@ -93,6 +97,23 @@ proof states must remain distinct.
 M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
+
+The policy task remains T20.43b. Its stable-runtime ACT replacement is
+implemented, source-pinned, and pre-run accepted, but unconsumed: marker,
+model, optimizer, checkpoint, rollout, and result paths are absent. T20.42/R0
+is verified constructive source/data evidence; T20.44 SmolVLA is a verified
+terminal negative; no learned policy has passed strict-v2. The next policy
+action is only a fresh administrative authority epoch for the unchanged ACT
+recipe under a window with proven completion budget. Hardware, network,
+external compute, Brev, physical transfer, and promotion remain closed.
+
+Support task K1/Brief 224 creates the non-authorizing portable reconstruction
+kit from this closeout boundary. It may read tracked evidence, write docs and
+dependency-free export/verification tooling, and run model-free tests. It may
+not create a marker, load a model, run simulation/training, copy bulk/private
+artifacts, access hardware, or change T20.43b.
+
+### Retained execution history
 
 The recorded T20.41 owner route decision at `e9d0507` resolves the capability-
 route blocker. Brief 216 now opens T20.42/R0 as the sole active simulation
@@ -1286,18 +1307,17 @@ adapter; no motion gate exists.
 
 ## Durable State
 
-- Goal-loop mandate: `docs/autonomous-workflow/pi05-autonomous-sorting-goal-loop.md`
-- Active overnight loop: `docs/autonomous-workflow/overnight-authority-twin-goal-loop.md`
-- Active execution ledger: `docs/autonomous-workflow/experience-compiler-twin-task-ledger.md`
 - Authoritative machine-readable state: `docs/autonomous-workflow/project_state.json`
-- Rebased loop prompt: `docs/autonomous-workflow/experience-compiler-twin-goal-loop.md`
-- Incremental task ledger: `docs/autonomous-workflow/pi05-autonomous-sorting-task-ledger.md`
+- Active execution ledger: `docs/autonomous-workflow/experience-compiler-twin-task-ledger.md`
+- Capability route decision: `docs/autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md`
+- Capability loop contract: `docs/autonomous-workflow/t20-capability-ladder-goal-loop.md`
 - Invariant milestones: `docs/autonomous-workflow/09-autonomous-milestones.md`
 - Active slice brief: latest numbered file in `docs/briefs/`
 - Execution evidence: `docs/session-logs/`
 - Review decisions: `docs/reviewer-messages/`
 - Accepted checkpoint pointer: `experiments/pi05_autolearn/accepted.json`
 - MVP capability ladder and task queue: `docs/sim-link-mvp-execution-plan.md`
+- Portable non-authorizing handoff: `reconstruction-kit/README.md`
 
 ## Execution Mandate
 
@@ -1313,16 +1333,21 @@ adapter; no motion gate exists.
 9. Continue immediately to the next dependency-ready task unless a stop
    condition applies.
 
-No optimizer run is authorized while the active ledger says `training_lock: closed`.
+No optimizer run is authorized unless the task-specific central decision,
+active owner window, runtime preflight, one-use permit, source commit, output
+absence, and current ledger all agree. A globally open training lock is
+necessary but never sufficient.
 
 ## Stop Conditions
 
-- Stop before any live hardware path until T16.5a is verified and remotely
-  preserved.
-- Stop before any write, torque change, or motion unless it is the exact
-  owner-authorized one-call follower disconnect recorded above, or T16.5a-
-  T16.5c and the exact signed/content-addressed T16.6 session permit, owner-
-  presence lease, watchdog, stop, and shutdown gates all validate.
+- Stop before any live hardware path unless the same-thread unrestricted/
+  no-prompt runtime verifier, current owner presence, central decision, finite
+  per-session permit, hardware identity, and exact reviewed operation all
+  validate together.
+- Stop before any write, torque change, or motion unless that exact operation,
+  watchdog, bounds, return/stop behavior, and shutdown gates are named by the
+  current permit. Historical hardware grants and consumed permits are never
+  reusable.
 - Under the initial confirmed permit, stop before any second joint, gripper,
   reach, contact, task primitive, policy-proposed actuation, or other material
   expansion.

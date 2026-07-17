@@ -9,6 +9,7 @@ work without replacing the canonical state, signed evidence, or slice history.
 | If you want to… | Read this first | Then follow |
 | --- | --- | --- |
 | Understand what is happening now | [Current state](#current-state) | [roadmap](#roadmap-and-next-work) and the active brief |
+| Recreate the useful current stack in a new repository | [Portable reconstruction kit](../reconstruction-kit/README.md) | its current-state snapshot, quick start, manifest, and receipt verifier |
 | Learn how the pieces fit together | [Architecture](./architecture.md) | [requirements and contracts](./requirements-and-contracts.md) |
 | Connect scan or calibration work from Robo Scan | [Robo Scan integration boundary](./robo-scan-integration.md) | [integration and deduplication roadmap](./robo-scan-sim-link-integration-roadmap.md) |
 | See the approved MVP cut and sim-link-only queue | [MVP execution plan](./sim-link-mvp-execution-plan.md) | `GOAL.md`, current brief, and task state |
@@ -32,6 +33,14 @@ Do not infer permission from a past success, a local capability, or a runtime
 setting. The state file and central authority composition decide whether a
 training, live-observation, physical-transfer, or promotion claim is valid.
 
+At the 2026-07-16 closeout boundary, R0 source/data construction is verified,
+SmolVLA is a clean terminal negative after 5,000 updates and ten rollouts, and
+the corrected T20.43b ACT replacement is pre-run accepted but unconsumed. No
+learned policy has passed strict-v2, and no physical qualification, transfer,
+or promotion claim exists. The [reconstruction kit current-state
+snapshot](../reconstruction-kit/CURRENT_STATE.md) compresses this boundary;
+`project_state.json` remains authoritative for any later change.
+
 ## System At A Glance
 
 SceneSmith provides the surrounding simulation and application context.
@@ -42,8 +51,10 @@ thin: content-addressed artifacts, truthful grasp semantics, the SO-101
 coordinate bridge, and fail-closed authority/stack checks.
 
 Robo Scan is the separate upstream modular scan/scene/calibration repository.
-It contributes only through a future explicit artifact handoff; it is not a
-runtime dependency and its local artifacts do not qualify this physical twin.
+Its reference-only I2/I3 handoff is verified but non-authorizing. A real metric
+workcell/calibration handoff and the sim-link I5 compile remain future work; a
+Robo Scan checkout is not a runtime dependency and its local artifacts do not
+qualify this physical twin.
 
 Read [Architecture](./architecture.md) for the component, data, and authority
 flows. Read [Requirements and contracts](./requirements-and-contracts.md) for
@@ -59,6 +70,9 @@ deduplication gates, and definition of integrated, read the
 - [Sim-link MVP execution plan](./sim-link-mvp-execution-plan.md) records the
   current product cut, dependency-ordered local queue, deferrals, and exit
   condition.
+- [Portable reconstruction kit](../reconstruction-kit/README.md) records the
+  evidence-pinned seed-repository boundary and the shortest honest path back to
+  the same proof state.
 
 - [Autonomous milestones](./autonomous-workflow/09-autonomous-milestones.md)
   defines M0–M22 as outcome gates.

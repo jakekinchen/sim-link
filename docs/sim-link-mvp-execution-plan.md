@@ -5,11 +5,14 @@
 The program will optimize for the first truthful, runnable learned-policy demo
 while preserving the complete physical-product exit condition. T20.42/R0 is
 verified at result `d238379b...`: 119 new training successes, nine fresh-held-
-out successes, exact base once, and a 129-episode package. The immediate
-sim-link long pole is now T20.43 ACT with a standard recipe and immediate
-closed-loop strict-v2 evaluation. SmolVLA follows after the ACT boundary;
-PI0.5 remains conditional. Robo Scan proceeds independently toward the real
-metric export required by I5.
+out successes, exact base once, and a 129-episode package. T20.44 SmolVLA is a
+verified terminal negative after 5,000 updates and ten strict-v2 rollouts. The
+immediate sim-link long pole is the corrected T20.43b ACT replacement: its
+standard 10,000-update recipe is implemented and pre-run accepted, but the
+marker was never created and the old administrative window/permit expired.
+The next owner window may refresh that authority epoch without changing the
+recipe or creating a second replacement. PI0.5 remains conditional. Robo Scan
+proceeds independently toward the real metric export required by I5.
 
 This plan is a task-ordering source, not an authority source. Live authority,
 training readiness, and proof labels remain mechanically owned by
@@ -24,8 +27,9 @@ proof stack are fixed by
 
 ### Build in the current sim-link lane
 
-- T20.42 fixed R0 dataset construction, followed by standard-recipe ACT and
-  SmolVLA rungs with rollout-primary strict-v2 evaluation.
+- Preserve verified T20.42 R0, the T20.44 terminal-negative SmolVLA result, and
+  the unconsumed T20.43b ACT boundary; resolve ACT next under its unchanged
+  recipe with rollout-primary strict-v2 evaluation.
 - An explicit, reusable learning/plumbing evidence surface: exact R0 parity
   checks plus the existing signed T20.35x one-batch proof, kept distinct from
   any accepted product policy.
@@ -143,7 +147,7 @@ not spent on a higher gate while a lower one is unmet.
 | --- | --- | --- | --- |
 | A | Exact train/inference parity: dataset statistics, image/state/action normalization, chunk interpretation, joint order, gripper representation, postprocessing, cadence/hold, with round-trip tests on known values | Contract or preprocessing parity | Largely verified: T20.12 round-trip, T20.13 statistics, T20.26 determinism, T20.28-T20.31 sampler/quantile chain |
 | B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | Passed once by T20.35x under frozen uniform Gate B; T20.36 coverage regressed; T20.36n preserves the uniform pass but passes the consequence amendment on only 3/5 single-batch seeds; T20.36o then fails every forward bridge checkpoint and closes current candidate entry. Diagnostic purpose (plumbing localization) is complete per the 2026-07-16 owner route decision; R1–R3 rungs do not re-prove Gate B |
-| C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Not executed: the owner-designated X bridge failed all five pre-registered open-loop checkpoints through 2,500 updates, so the adjudicated ACT/SmolVLA/X Gate C route is closed without a rollout. Reopened for R1–R3 standard-recipe candidates with rollout-primary evaluation per the 2026-07-16 owner route decision |
+| C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Open but unmet for the standard-recipe ladder: SmolVLA completed ten policy rollouts with no strict-v2 pass; T20.43b ACT is pre-run accepted but unconsumed. The older X bridge route is terminal negative and remains closed. |
 | D | Full training-set success: strict-v2 across all eight constructive episodes | Dataset coverage or adaptation capacity | Open |
 | E | Held-out nominal starts: seeds 6-7 and small initial-state variation | Generalization | Open (0/2 at T20.24 and T20.31) |
 | F | Robustness grid and forked recovery starts | Robustness | Open |
@@ -168,10 +172,10 @@ evaluation doctrine, and stop rules are pre-registered in
 [`owner-route-decision-2026-07-16-t20-41.md`](./autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md).
 The consumed overnight direction is retained as history in
 [`owner-direction-2026-07-16-overnight.md`](./autonomous-workflow/owner-direction-2026-07-16-overnight.md).
-Manager Intervention 018 narrows the next-hours delivery order to T20.42 R0,
-then T20.43 ACT, immediate closed-loop evaluation and demo capture, then
-T20.44 SmolVLA. It also preserves the real Robo Scan/I5 metric twin and a
-separately authorized physical-policy canary as non-negotiable full-MVP exits:
+Manager Intervention 018 historically fixed the completed ordering through
+T20.42/T20.43/T20.44. Its durable requirement still preserves the real Robo
+Scan/I5 metric twin and a separately authorized physical-policy canary as
+non-negotiable full-MVP exits:
 [`018-mvp-demo-convergence-directive.md`](./manager-log/018-mvp-demo-convergence-directive.md).
 
 | Order | Task | Required output and gate | Depends on | Explicitly excluded |
@@ -188,7 +192,7 @@ separately authorized physical-policy canary as non-negotiable full-MVP exits:
 | 10 | **T20.33 — Gate B one-batch memorization proof (verified negative)** | One exact batch, 500 finite updates, five fixed-seed decoded chunks; both objective-ratio and action-error gates fail. | Verified T20.32 Gate B route; Brief 164; Reviewer Decision 195 | Gate C cadence/chunk changes, unreviewed sweeps, grid expansion, promotion |
 | 11 | **T20.34 — Gate B plumbing localization (verified)** | Exact base/adapter replay proves active nonzero LoRA, exact checkpoint reload, lower mean error and positive target alignment on all five seeds; routes insufficient optimization/capacity. | Verified-negative T20.33; Brief 165; Reviewer Decision 196 | Optimizer continuation/retry, Gate C changes, second batch, promotion |
 | 12 | **T20.35 — Gate B rank-capacity discriminator (verified negative)** | The sole rank-16 attempt completed 500 finite updates and improved objective ratio from 0.528248 to 0.155307, but missed the 0.10 objective gate and all five 0.05 rad decoded-action gates. | Verified T20.34 capacity/optimization route; Brief 166; Reviewer Decision 199 | Multiple ranks, continuation, second batch, Gate C changes, promotion |
-| 12b | **T20.35.x — conditional Gate B discriminators** | T20.35c's expert-only ceiling passes the objective gate but misses action error; T20.35d-f localize systematic normalized bias without clipping. T20.35g rejects 20/50-step cadence. T20.35h's bias ceilings improve but fail. T20.35i localizes the remaining 96 failures as distributed across all five seeds and four channels; top-two seed/channel and boundary fractions are only 56.25%/67.71%/31.25%, with raw spread up to 0.183018 rad. Route T20.35j to one inference-only initial-noise-scale discriminator before any optimizer correction. | Verified-negative T20.35; T20.35c-i signed evidence; reviewer chain through Decision 212 | Combined-factor changes, unreviewed sweeps, second batch, Gate C changes, promotion |
+| 12b | **T20.35.x — conditional Gate B discriminators (historical/closed)** | The completed alphabet established active model movement, uncovered the stale PEFT time-MLP coverage regex, localized systematic normalized-space/output-channel error and denoise-path interference, and showed that std-derived physical weighting improved but did not clear the frozen consequence route. T20.36n retained X at 3/5 amended-gate seeds; the bounded T20.36o bridge then failed every forward checkpoint. T20.41 closes further correction-objective rungs. | Verified-negative T20.35/T20.36 chain; signed evidence and reviewer decisions through 277 | T20.35y/T20.36p, combined-factor changes, unreviewed sweeps, Gate C claims from open-loop evidence, promotion |
 | 13 | **T20.36 — bounded campaign after Gate B correction (verified negative)** | The sole 500-update campaign passed the standard-objective ratio but regressed all five decoded chunks to 0.1506-0.1870 rad; Gate B failed, so no closed-loop seed was reached. T20.36a verifies weighted-objective/physical-gate non-equivalence; T20.36b is a pure retention contract. | Verified T20.35x Gate B pass | Retry, gate change, promotion, hardware, external compute, Brev |
 | 13c | **T20.36c — local ACT/SmolVLA preflight (verified)** | Source/cache/dataset metadata routes an exact ACT Gate B control design first. Cached ACT is not drop-in; SmolVLA requires a two-camera override and MPS runtime proof. No tensor was read and no policy was selected. | T20.36b no-coverage decision | Model load, inference, optimizer, policy selection, gate change, hardware, external compute, Brev |
 | 13d | **T20.36d — exact ACT Gate B control design (verified)** | Spec `45c90dc0...` binds the fresh compact ACT, canonical batch/statistics, 2,000-update ceiling, pre-registered checkpoint schedule, deterministic repeats, unchanged Gate B conjunction, stop rules, and one-use boundary. | Verified T20.36c preflight | Model load, optimizer creation/training, run authority, SmolVLA entry, gate change, Gate C, hardware, external compute, Brev |
@@ -216,13 +220,12 @@ separately authorized physical-policy canary as non-negotiable full-MVP exits:
 | 21 | **T20.44 — R2 SmolVLA standard rung (verified terminal negative; Brief 220/Reviewer 297)** | Sole result `9d916206...` completes 5,000 finite updates, five checkpoints, and ten dual-semantics rollouts with no strict-v2 pass. Strongest partial result was checkpoint 1,000/receding-10 at 73 contacts and 18.061 mm lift; first-pass selection remains null. | Verified T20.42; T20.43 boundary; Reviewers 294-297 | Retry/replacement, correction objectives, network/download, Gate B/open-loop barrier, threshold changes, hardware, external compute, Brev |
 | 22 | **T20.45 — R3 conditional π0.5 standard rung** | Only after R1/R2 evidence: either one bounded local-MPS standard fine-tune from the cached base, or a costed external-compute proposal document (ABEJA-parity reference) for separate fresh owner authorization. No compute consumption beyond local MPS without that grant. | R1/R2 rollout evidence; fresh owner grant for any external compute | External compute or Brev consumption without fresh owner authorization, correction objectives, promotion |
 
-T20.36c's read-only preflight routes ACT as the cheapest diagnostic control,
-not as a product-policy selection. T20.36f closes ACT with a reproduced
-normalized boundary/endpoint miss. T20.36g now freezes SmolVLA's exact local
-entry, and Brief 199 opens only its pre-run implementation/authority boundary.
-SmolVLA becomes a policy track only after a separate verified execution result;
-PI0.5 remains the compatibility/stress baseline. CUDA, A100, external compute,
-and Brev remain closed.
+The historical T20.36 controls remain diagnostic evidence: ACT exposed a
+normalized boundary/endpoint miss, and SmolVLA exposed dependency-closure and
+decode behavior. The standard R2 SmolVLA campaign is now a clean terminal
+negative; the standard R1 ACT replacement remains unconsumed. PI0.5 stays the
+conditional compatibility/stress baseline. CUDA, A100, external compute, and
+Brev remain closed.
 
 ### Support tooling
 
@@ -232,10 +235,10 @@ policy side/overhead views beside the exact recorded expert top-camera frame
 for the same frame index, with phase, strict-contact, and anchor-lift
 overlays. Output stays under `outputs/robot_lab/rollout_mirror/` with a hash
 manifest. It is kinematic playback of signed evidence — diagnostic
-visualization only, never new evidence or authority. Every future closed-loop
-evaluation slice should retain its mirror MP4 the way rendered keyframes are
-retained today; a later small slice may fold the render into the evaluation
-runner and sign the output.
+visualization only, never new policy evidence or authority. The T20.43b and
+T20.44 standard runners now bind the renderer runtime and require per-rollout
+trace/mirror retention; future runners should preserve that integrated
+contract.
 
 T20.17 is verified negative, T20.18 is verified recovery evidence, T20.19 is
 verified as an uncalibrated grid, T20.20 and T20.21 are verified, and T20.22 is
@@ -245,7 +248,7 @@ start broad calibration, Robo Scan consumption beyond the verified
 reference-only I2/I3 boundary, or canary planning while the learned policy has
 not achieved repeatable strict-v2 success in simulation.
 
-**Current progress:** Brief 147 is verified at `b826e3f` by Reviewer Decision
+**Retained detailed progression:** Brief 147 is verified at `b826e3f` by Reviewer Decision
 177. One actual LeRobotDataset contains six strict-v2 source episodes (seeds
 0-5, 1,464 frames); seeds 6-7 remain frozen outside it and its statistics. The
 complete local `lerobot/pi05_base` snapshot and fixed local-MPS campaign are

@@ -1,0 +1,192 @@
+{
+  "schema_version": "scenesmith.reconstruction_source_selection.v1",
+  "source_commit": "6c53d9309f7f41f0d3ac351c049436ddda20e50f",
+  "source_repository": "https://github.com/jakekinchen/sim-link.git",
+  "maximum_file_bytes": 2000000,
+  "forbidden_prefixes": [
+    ".git/",
+    ".env",
+    ".venv/",
+    "data/",
+    "datasets/",
+    "external/",
+    "outputs/",
+    "tmp/"
+  ],
+  "literal_dependency_prefixes": [
+    "configurations/robot_lab/",
+    "docs/autonomous-workflow/",
+    "docs/reviewer-messages/",
+    "scripts/robot_lab/",
+    "third_party/mujoco_menagerie/robotstudio_so101/"
+  ],
+  "excluded_literal_paths": [
+    {
+      "path": "docs/autonomous-workflow/project_state.json",
+      "reason": "Repository-bound live authority state is deliberately not transplanted; the kit supplies a non-authorizing proof snapshot and the destination must initialize its own state and authority epoch."
+    },
+    {
+      "path": "configurations/robot_lab/t17_7_compiler_window_replay_audit.json",
+      "reason": "Historical 4.99 MB replay evidence is content-addressed in the source repository but is not required by the current R0, ACT, SmolVLA, evaluator, or authority reconstruction path."
+    },
+    {
+      "path": "configurations/robot_lab/t20_35o_flow_trajectory_consistency_result.json",
+      "reason": "Historical PI0.5 diagnostic tensor payload; its decision-relevant finding is summarized in the reconstruction lessons and it is not an input to the current policy ladder."
+    },
+    {
+      "path": "configurations/robot_lab/t20_35q_post_training_trajectory_result.json",
+      "reason": "Historical PI0.5 diagnostic tensor payload; its decision-relevant finding is summarized in the reconstruction lessons and it is not an input to the current policy ladder."
+    },
+    {
+      "path": "configurations/robot_lab/t20_35v_post_training_trajectory_result.json",
+      "reason": "Historical PI0.5 diagnostic tensor payload; its decision-relevant finding is summarized in the reconstruction lessons and it is not an input to the current policy ladder."
+    }
+  ],
+  "explicit_paths": [
+    "LICENSE",
+    "scenesmith/__init__.py",
+    "scenesmith/robot_lab/__init__.py",
+    "configurations/robot_lab/pi05_authority_composition_contract.json",
+    "configurations/robot_lab/pi05_robotics_dependency_lock.json",
+    "configurations/robot_lab/robo_scan_export_lock.json",
+    "configurations/robot_lab/so101_canonical_processor_contract.json",
+    "configurations/robot_lab/strict_anchor_grasp_evaluator_v2.fixture.json",
+    "docs/architecture.md",
+    "docs/requirements-and-contracts.md",
+    "docs/robo-scan-integration.md",
+    "docs/robo-scan-sim-link-integration-roadmap.md",
+    "docs/sim-link-mvp-execution-plan.md",
+    "docs/autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md",
+    "docs/briefs/222-t20-43b-act-stable-runtime-replacement.md",
+    "docs/reviewer-messages/297-verify-t20-44-r2-smolvla-terminal-negative.md",
+    "docs/reviewer-messages/299-verify-t20-43b-stable-act-replacement-implementation.md",
+    "docs/reviewer-messages/301-accept-t20-43b-r1-act-pre-run-authority.md",
+    "docs/reviewer-messages/302-close-t20-43b-window-with-unconsumed-permit.md",
+    "scripts/robot_lab/patches/pi05_gripper_loss_weight.patch",
+    "third_party/mujoco_menagerie/robotstudio_so101/LICENSE",
+    "third_party/mujoco_menagerie/robotstudio_so101/README.md",
+    "third_party/mujoco_menagerie/robotstudio_so101/scene.xml",
+    "third_party/mujoco_menagerie/robotstudio_so101/so101.xml"
+  ],
+  "path_globs": [
+    "configurations/robot_lab/t20_23*.json",
+    "configurations/robot_lab/t20_36d*.json",
+    "configurations/robot_lab/t20_36e*.json",
+    "configurations/robot_lab/t20_36f*.json",
+    "configurations/robot_lab/t20_36i*.json",
+    "configurations/robot_lab/t20_36j*.json",
+    "configurations/robot_lab/t20_36k*.json",
+    "configurations/robot_lab/t20_36l*.json",
+    "configurations/robot_lab/t20_38*.json",
+    "configurations/robot_lab/t20_42*.json",
+    "configurations/robot_lab/t20_43*.json",
+    "configurations/robot_lab/t20_44*.json"
+  ],
+  "python_seeds": [
+    "scenesmith/robot_lab/artifact_contract.py",
+    "scenesmith/robot_lab/authority_composer.py",
+    "scenesmith/robot_lab/lerobot_stack.py",
+    "scenesmith/robot_lab/robotics_dependency_lock.py",
+    "scenesmith/robot_lab/spec.py",
+    "scenesmith/robot_lab/so101_coordinates.py",
+    "scenesmith/robot_lab/so101_processor.py",
+    "scenesmith/robot_lab/strict_grasp.py",
+    "scenesmith/robot_lab/gripper_contact_semantics.py",
+    "scenesmith/robot_lab/phase_outcome_evaluation.py",
+    "scenesmith/robot_lab/quantitative_strict_v2_receipt.py",
+    "scenesmith/robot_lab/observer_role_evaluator.py",
+    "scenesmith/robot_lab/paired_trace_runner.py",
+    "scenesmith/robot_lab/scripted_grasp_episode_generation.py",
+    "scenesmith/robot_lab/t20_42_r0_dataset_construction.py",
+    "scenesmith/robot_lab/t20_42a_r0_generation_authority.py",
+    "scenesmith/robot_lab/t20_42b_r0_materialization.py",
+    "scenesmith/robot_lab/t20_42b_r0_runner.py",
+    "scenesmith/robot_lab/t20_43b_r1_act_contracts.py",
+    "scenesmith/robot_lab/t20_43b_r1_act_materialization.py",
+    "scenesmith/robot_lab/t20_43b_r1_act_runner.py",
+    "scenesmith/robot_lab/t20_44_r2_smolvla_contracts.py",
+    "scenesmith/robot_lab/t20_44_r2_smolvla_materialization.py",
+    "scenesmith/robot_lab/t20_44_r2_smolvla_runner.py",
+    "scenesmith/robot_lab/robo_scan_export_receipt.py",
+    "scripts/robot_lab/materialize_t20_42b_r0_authority.py",
+    "scripts/robot_lab/materialize_t20_43b_r1_act_authority.py",
+    "scripts/robot_lab/materialize_t20_44_r2_smolvla_authority.py",
+    "scripts/robot_lab/render_rollout_mirror.py",
+    "scripts/robot_lab/run_t20_42_r0_generation.py",
+    "scripts/robot_lab/run_t20_43b_r1_act.py",
+    "scripts/robot_lab/run_t20_44_r2_smolvla.py",
+    "scripts/robot_lab/verify_lerobot_stack.py",
+    "scripts/robot_lab/verify_robo_scan_export.py",
+    "scripts/robot_lab/write_t20_42_r0_dataset_construction.py",
+    "scripts/robot_lab/write_t20_42b_r0_pre_run_acceptance.py",
+    "scripts/robot_lab/write_t20_43b_r1_act_pre_run_acceptance.py",
+    "scripts/robot_lab/write_t20_43b_r1_act_spec.py",
+    "scripts/robot_lab/write_t20_44_r2_smolvla_pre_run_acceptance.py",
+    "scripts/robot_lab/write_t20_44_r2_smolvla_spec.py",
+    "tests/unit/test_artifact_contract.py",
+    "tests/unit/test_authority_composer.py",
+    "tests/unit/test_gripper_contact_semantics.py",
+    "tests/unit/test_lerobot_stack.py",
+    "tests/unit/test_observer_role_evaluator.py",
+    "tests/unit/test_paired_trace_runner.py",
+    "tests/unit/test_phase_outcome_evaluation.py",
+    "tests/unit/test_quantitative_strict_v2_receipt.py",
+    "tests/unit/test_robo_scan_export_receipt.py",
+    "tests/unit/test_robotics_dependency_lock.py",
+    "tests/unit/test_scripted_grasp_episode_generation.py",
+    "tests/unit/test_so101_coordinates.py",
+    "tests/unit/test_so101_processor.py",
+    "tests/unit/test_strict_grasp.py",
+    "tests/unit/test_strict_grasp_v2.py",
+    "tests/unit/test_t20_42_r0_dataset_construction.py",
+    "tests/unit/test_t20_42a_r0_generation_authority.py",
+    "tests/unit/test_t20_42b_r0_materialization.py",
+    "tests/unit/test_t20_42b_r0_runner.py",
+    "tests/unit/test_t20_43b_r1_act_contracts.py",
+    "tests/unit/test_t20_43b_r1_act_runner.py",
+    "tests/unit/test_t20_44_r2_smolvla_contracts.py",
+    "tests/unit/test_t20_44_r2_smolvla_runner.py"
+  ],
+  "external_dependencies": [
+    {
+      "name": "LeRobot",
+      "repository": "https://github.com/huggingface/lerobot.git",
+      "revision": "e40b58a8dfa9e7b86918c374791599d070518d11",
+      "version": "0.6.1",
+      "license": "Apache-2.0",
+      "local_patch": "scripts/robot_lab/patches/pi05_gripper_loss_weight.patch",
+      "patch_sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284"
+    },
+    {
+      "name": "SO-ARM100",
+      "repository": "https://github.com/TheRobotStudio/SO-ARM100.git",
+      "revision": "fda892cba81032c46c40976a48c9ceadbf40a9ca",
+      "license": "Apache-2.0",
+      "required_file": "Simulation/SO101/so101_new_calib.xml",
+      "required_file_sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580"
+    },
+    {
+      "name": "leLab",
+      "repository": "https://github.com/huggingface/leLab.git",
+      "revision": "def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da",
+      "license": "Apache-2.0",
+      "role": "optional UI and URDF reference",
+      "required_file": "frontend/public/so-101-urdf/urdf/so101_new_calib.urdf",
+      "required_file_sha256": "443d38d756e01bac7d3455b24430047ddc6427105e0d3454b2003116f5f67236"
+    },
+    {
+      "name": "MuJoCo Menagerie robotstudio_so101",
+      "repository": "https://github.com/google-deepmind/mujoco_menagerie.git",
+      "revision": "71f066ad0be9cd271f7ed58c030243ef157af9f4",
+      "license": "Apache-2.0",
+      "role": "vendored structural reference"
+    },
+    {
+      "name": "openpi",
+      "repository": "https://github.com/Physical-Intelligence/openpi.git",
+      "revision": "15a9616a00943ada6c20a0f158e3adb39df2ccac",
+      "license": "Apache-2.0",
+      "role": "semantic reference only"
+    }
+  ]
+}

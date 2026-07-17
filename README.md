@@ -38,8 +38,11 @@ an active SO-101/MuJoCo/LeRobot program with strict provenance, grasp
 truthfulness, and authority boundaries. Start at the
 [SO-101 documentation hub](docs/README.md) for the current state, architecture,
 roadmap, requirements, contracts, decision records, and historical evidence
-guide. The paper-oriented sections below remain the right entry point for the
-original SceneSmith research pipeline.
+guide. To seed a clean repository from the verified current methods without
+copying datasets, checkpoints, private observations, or expired authority, use
+the [portable reconstruction kit](reconstruction-kit/README.md). The
+paper-oriented sections below remain the right entry point for the original
+SceneSmith research pipeline.
 
 ## Citation
 

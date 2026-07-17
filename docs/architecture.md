@@ -96,11 +96,34 @@ flowchart TD
 ```
 
 The historical compiler’s frames, segments, and windows remain immutable
-evidence. A clean recreation creates one native `LeRobotDataset`, binds it with
-[`lerobot_native_episode_manifest.py`](../scenesmith/robot_lab/lerobot_native_episode_manifest.py),
-and observes the actual package pipeline with
-[`lerobot_actual_processor_observation.py`](../scenesmith/robot_lab/lerobot_actual_processor_observation.py).
-It does not translate that dataset into another training format.
+evidence. The verified R0 path now constructs one native `LeRobotDataset` with
+129 training episodes, 31,366 frames, 59,904 unpadded windows, training-only
+MEAN_STD statistics, and zero held-out rows. It binds that dataset through
+[`t20_42_r0_dataset_construction.py`](../scenesmith/robot_lab/t20_42_r0_dataset_construction.py)
+and [`t20_42b_r0_materialization.py`](../scenesmith/robot_lab/t20_42b_r0_materialization.py),
+then executes the actual pinned processor/policy pipeline. It does not
+translate the dataset into another training format.
+
+## Current Learning Boundary
+
+| Rung | Current result | Architectural consequence |
+| --- | --- | --- |
+| R0 constructive source/data | Verified: 119 new training and nine fresh-held-out strict-v2 successes; exact prior base included once | The source, dataset, held-out, and processor spine is usable, but scripted source success is not learned-policy proof. |
+| R1 ACT | Corrected 10,000-update replacement is pre-run accepted and unconsumed; old window/permit expired | Next policy work refreshes administrative authority without changing the recipe or creating a second replacement. |
+| R2 SmolVLA | Verified terminal negative after 5,000 updates, five checkpoints, and ten dual-cadence rollouts | Stable training and partial interaction do not satisfy strict-v2; no retry is implied. |
+| R3 PI0.5 | Conditional compatibility/stress track; earlier Gate B alphabet is diagnostic history | Do not replay one-off correction rungs before ACT resolves the shared-pipeline control. |
+
+No learned policy has passed strict-v2. Physical-twin qualification, transfer
+readiness, and promotion remain false.
+
+## Closed-Loop Action Contract
+
+Policy evaluations bind both full chunk-50 execution and receding-10
+resampling. For a 244-frame chunk-50 rollout, queue reset occurs once and chunk
+starts are `0, 50, 100, 150, 200`, with executed lengths
+`50, 50, 50, 50, 44`. The six unexecuted tail actions are excluded from actor
+evidence. Cadence, queue, tail, trace, and mirror identities are result data,
+not implementation trivia.
 
 ## Robo Scan Boundary
 
@@ -171,7 +194,9 @@ qualification, transfer readiness, or policy acceptance.
 
 ## Physical Adapter Boundary
 
-The historical live-observation stack is preserved as evidence. A future
+The historical live-observation stack and the separately permitted T19
+read-only/micro-calibration evidence are preserved as bounded physical history;
+neither qualifies the twin or opens a current device session. A minimal future
 replacement is specified—not implemented—in
 [minimal live-adapter recreation](./autonomous-workflow/minimal-live-adapter-recreation.md):
 owner-present permit, central decision, read-only receipt chain, private
@@ -183,4 +208,5 @@ not grant a hardware session, motion permit, or proof label.
 - [Requirements and contracts](./requirements-and-contracts.md)
 - [MVP execution plan](./sim-link-mvp-execution-plan.md)
 - [Current versus historical guide](./current-and-historical.md)
+- [Portable reconstruction kit](../reconstruction-kit/README.md)
 - [Autonomous workflow](./autonomous-workflow/README.md)
