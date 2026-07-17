@@ -337,6 +337,41 @@
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "T20.43b",
   "next_eligible_task": "T20.43b",
+  "active_support_task": "K1",
+  "support_tasks": {
+    "K1": {
+      "state": "in_progress",
+      "active_brief_id": "224",
+      "result": "Brief 224 opens a documentation-and-tooling-only portable reconstruction kit pinned to closeout commit 6c53d93; the active T20.43b policy task and its absent marker remain unchanged",
+      "authority_granted": [
+        "read_tracked_repository_evidence",
+        "create_portable_reconstruction_documentation",
+        "create_dependency_free_manifest_verifier_and_safe_exporter",
+        "run_model_free_tests"
+      ],
+      "authority_not_granted": [
+        "model_or_checkpoint_download",
+        "package_installation",
+        "network_acquisition",
+        "copy_bulk_outputs_checkpoints_datasets_or_private_observations",
+        "model_construction",
+        "model_inference",
+        "optimizer_creation",
+        "optimizer_training",
+        "simulation_campaign",
+        "attempt_marker",
+        "hardware",
+        "camera_access",
+        "serial_access",
+        "physical_motion",
+        "external_compute",
+        "brev_compute",
+        "physical_transfer",
+        "promotion",
+        "destructive_operation"
+      ]
+    }
+  },
   "tasks": {
     "T16.1": {
       "state": "verified",
