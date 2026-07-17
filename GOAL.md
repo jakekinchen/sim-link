@@ -140,9 +140,12 @@ Because no optimizer state was retained, exact resume is impossible. The direct
 W0 delegation therefore opens one separately rooted manual replacement, never
 reuse of the consumed permit. Reviewer 315 accepts its implementation after
 seven focused tests and 67 selected tests plus 15 subtests. Training remains
-closed: Reviewer 315 and commits `75647da9...` through `d0e2b2b9...` must be
-exact on origin before one model-free authority bundle may be materialized for
-a separate pre-run review. No R2 acceptance, marker, checkpoint read, model,
+closed. The origin-confirmed implementation has now produced one model-free
+authority bundle: owner `d95ddd8a...`, request `1f528d2e...`, decision
+`bf7908b5...`, runtime `79689c7f...`, and permit `f063e034...`. The composer
+grants exactly `simulation_training_ready` for the finite 23:07-07:00 CDT
+window. These artifacts must be preserved on origin and independently reviewed
+before any acceptance. No R2 acceptance, marker, checkpoint read, model,
 optimizer, rollout, or Gate C action exists yet.
 T20.42/R0 remains verified and T20.44 SmolVLA remains a terminal negative.
 Hardware remains closed unless separately composed under K3; network, external

@@ -58,3 +58,10 @@ pre-run review. The training lock remains closed. No acceptance, marker,
 checkpoint read, model construction, optimizer, rollout, Gate C action,
 hardware, network, external compute, Brev, transfer, or promotion is authorized
 at this boundary.
+
+The one model-free authority bundle has now materialized from origin source
+`1bc1c773...`: owner `d95ddd8a...`, request `1f528d2e...`, decision
+`bf7908b5...`, runtime `79689c7f...`, and permit `f063e034...`. The decision
+grants exactly `simulation_training_ready`; all hardware/network/external/Brev
+fields remain false. Training remains locked until this bundle is exact on
+origin and a separate pre-run review plus signed acceptance are preserved.

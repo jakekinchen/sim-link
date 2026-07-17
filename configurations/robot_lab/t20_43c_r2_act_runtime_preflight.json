@@ -1,0 +1,89 @@
+{
+  "authority_artifacts_materialized": false,
+  "authority_decision_identity_sha256": "bf7908b50d69c6dcf99d432e9dce671ff49917baf6ccae8b4dfb34972f7248e0",
+  "authority_request_identity_sha256": "1f528d2ec8c5a9daa0480b51da43917e2f5e830e0b6a6b24d782a479ef5b2f00",
+  "branch": "codex/pi05-autolearn-loop",
+  "brev_compute_authorized": false,
+  "checkpoint_tensor_read": false,
+  "continuation_marker_exists": false,
+  "dependencies": {
+    "datasets": "4.8.5",
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.5",
+    "numpy": "2.2.6",
+    "pillow": "12.3.0",
+    "pyarrow": "25.0.0",
+    "python": "3.12.12",
+    "torch": "2.11.0",
+    "torchvision": "0.26.0"
+  },
+  "external_compute_authorized": false,
+  "free_disk_bytes": 29548011520,
+  "gate_c_executed": false,
+  "hardware_authorized": false,
+  "identity_sha256": "79689c7fb6ff52659eec1869faa6b1fbed0ac5a0f4231bdb3e4bb04cae59f637",
+  "learned_policy_rollout": false,
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "mps_available": true,
+  "network_authorized": false,
+  "network_enabled": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "origin_contains_source_commit": true,
+  "output_path_state": {
+    "configurations/robot_lab/t20_43c_r2_act_equivalence_receipt.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43c_r2_act_final_receipt.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43c_r2_act_pre_run_acceptance.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43c_r2_act_replacement_marker.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43c_r2_act_retention_receipt.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43c_r2_act_scorecard.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43c_r2_act_standard_result.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "configurations/robot_lab/t20_43c_r2_act_terminal_failure.json": {
+      "exists": false,
+      "is_symlink": false
+    },
+    "outputs/robot_lab/t20_43c_r2_act_replacement_run_001": {
+      "exists": false,
+      "is_symlink": false
+    }
+  },
+  "owner_identity_sha256": "d95ddd8a4e4fb727a39515f140331e2044300cc28f5d14cb15fef3ea4756b34a",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "renderer_smoke_identity_sha256": "9e8783dcc891e21e41f42ab9280020716297c9ea660118f43dfc34892c6786b3",
+  "schema_version": "scenesmith.t20_43c_r2_act_runtime_preflight.v1",
+  "scoped_dirty_paths": [],
+  "source_attempt_identity_sha256": "d67cf38e7d7a441da93c3af55cdcfeefe64b55ce9cf3f0b95894299a88fdca09",
+  "source_checkpoint_identity_sha256": "916200d071995a84577a53dc35b552e2f7db2452194adf8cc18b9a6d54ec8b55",
+  "source_commit": "1bc1c7731debd657a5cf97b892b67fc74ec3d2a4",
+  "source_failure_identity_sha256": "89b6dbff17f5da345b1c8d8fa9951989eda092998b702737dd7da16c42db2e92",
+  "source_model_file_sha256": "acc865fb2504849ce39a403b08c5bff6b6660460d5622d3089f243c8868cf912",
+  "source_partial_tree_identity_sha256": "9b4b041df466a47e6c73b14cf97d4b861f10167fe938e57ad7b1def4063b32ae",
+  "source_trace_file_sha256": "0c01265d4536bff9f2220a0e6e26462342b5987927204db7b998f7e50f3eac46",
+  "source_trace_identity_sha256": "b707b815ab3b204e29dbbc8e50114307058019da3116f8f5ac496c1b6e05f4bd",
+  "t20_45_authorized": false,
+  "task_id": "T20.43c-R2"
+}
