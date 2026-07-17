@@ -118,6 +118,15 @@ proof states must remain distinct.
   `docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md`. They describe
   the new repo after freeze and do not replace this checkout's live authority,
   runtime, evaluator, or evidence contracts.
+- Owner final overnight exploration recorded 2026-07-17 ~02:15 CDT, closing
+  at the morning fold: F0 release-gap correction for the ACT policy that
+  learned grasp/lift/hold/lower and failed only release; F1 parallel
+  ABEJA-parity π0.5 fine-tune on Brev under the newly recorded owner grant
+  (external compute + scoped network, $100 cap tonight, teardown and
+  inventory receipt by 09:30); F2 gateway serving rehearsal; F3 kit fold,
+  sim2claw naming stamp, and tag. Leader-arm teleop is a documented weekend
+  fallback only. Full ordering:
+  `docs/autonomous-workflow/owner-direction-2026-07-17-final-overnight.md`.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
