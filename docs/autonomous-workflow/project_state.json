@@ -348,7 +348,7 @@
   "training_lock": "closed",
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "F0a",
+  "current_task": "F0b",
   "next_eligible_task": "F0b",
   "active_support_task": null,
   "support_tasks": {
@@ -5200,14 +5200,15 @@
       "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "F0b": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["F0a_verified_on_origin"],
-      "active_brief_id": null,
+      "active_brief_id": "232",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "F0b is next eligible only as a fresh separately reviewed no-training evaluation of the retained ACT checkpoint under frozen hybrid cadence; strict-v2 Gate C, source episode, and thresholds remain unchanged, and no checkpoint/model/inference/rollout action is authorized before its own origin-preserved authority boundary",
-      "authority_granted": [],
-      "authority_not_granted": ["activate_before_f0a_closeout_origin_confirmation", "checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
+      "source_boundary_commit": "951c5254950b734677a6d185c227c56724182b58",
+      "result": "Brief 232 activates implementation and deterministic tests for one retained update-10000 ACT checkpoint hybrid-tail-cadence evaluation; model-free authority and pre-run acceptance must be separately reviewed on origin before any checkpoint tensor read, model construction, inference, simulation rollout, or rendering",
+      "authority_granted": ["activate_brief_232", "read_and_hash_frozen_f0a_t20_43c_r2_and_runtime_sources", "implement_and_fixture_test_f0b_spec_authority_runner_trace_and_terminal_contracts", "write_model_free_f0b_spec_fixture_and_preflight_artifacts"],
+      "authority_not_granted": ["live_authority_materialization", "pre_run_acceptance", "attempt_marker_creation", "checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "simulation_rollout", "live_rendering", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "T20.45": {
       "state": "pending",
