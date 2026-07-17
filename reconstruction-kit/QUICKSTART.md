@@ -154,13 +154,17 @@ update-728 interruption remains inconclusive; R2 is the later full ACT terminal
 negative. The later F0 chain removes three tempting data/objective explanations,
 localizes a delayed/aliased release, and proves that more frequent tail
 re-observation alone still misses frame-219 release. Neither boundary licenses
-a continuation or third ACT attempt in the fork.
+a continuation by itself.
 
-Treat the carried F0b trace as a frozen regression and start new capability
-work with observable 60-frame state tasks. ACT remains the imitation baseline;
-state-based RL is the second primary track. A future long-horizon ACT change
-needs a new discriminator and its own fork `RUN_RECEIPT.json`, not a copied
-source permit.
+The post-freeze owner addendum selected one new discriminator: F0c, a
+release-phase-oversampled, physical-L1-weighted continuation capped at 2,000
+updates and evaluated only with chunk-50 strict-v2. Read
+[F0c first training task](./F0C_FIRST_TRAINING_TASK.md). It is packaged but has
+not run. Implement and review its missing runner, bind the exact R2 checkpoint,
+and issue fresh fork-native authority before executing it exactly once. Treat
+the carried F0b trace as its frozen regression, then continue capability work
+with observable 60-frame state tasks. ACT remains the imitation baseline;
+state-based RL is the second primary track.
 
 Model weights and checkpoints are not in this kit. Obtain them through their
 own licensed, checksum-bound process, and keep raw-byte identities in the new

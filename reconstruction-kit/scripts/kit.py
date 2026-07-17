@@ -39,6 +39,7 @@ KIT_EXPORTS = {
     "QUICKSTART.md": "docs/reconstruction/QUICKSTART.md",
     "RESULTS_AND_LESSONS.md": "docs/reconstruction/RESULTS_AND_LESSONS.md",
     "FORWARD_PLAN.md": "docs/reconstruction/FORWARD_PLAN.md",
+    "F0C_FIRST_TRAINING_TASK.md": "docs/reconstruction/F0C_FIRST_TRAINING_TASK.md",
     "THIRD_PARTY.md": "docs/reconstruction/THIRD_PARTY.md",
     "HARDWARE_READINESS_RGB_CAMERAS.md": "docs/reconstruction/HARDWARE_READINESS_RGB_CAMERAS.md",
     "SOURCE_MANIFEST.json": "docs/reconstruction/SOURCE_MANIFEST.json",
@@ -48,6 +49,14 @@ KIT_EXPORTS = {
     "scripts/bootstrap.py": "tools/bootstrap.py",
     "scripts/bootstrap_runtime.py": "tools/bootstrap_runtime.py",
     "scripts/regenerate_r0.py": "tools/regenerate_r0.py",
+}
+
+# Post-freeze fork inputs are receipt-bound by the export wrapper but are not
+# retroactively inserted into the immutable F3 source manifest.
+POST_FREEZE_REPO_EXPORTS = {
+    "configurations/robot_lab/f0c_release_targeted_continuation_spec.json": (
+        "configurations/robot_lab/f0c_release_targeted_continuation_spec.json"
+    ),
 }
 
 KIT_EXPORT_REWRITES = {
@@ -511,6 +520,15 @@ def export_kit(repo_root: Path, destination: Path) -> dict[str, Any]:
                 dest / safe_relative_path(target),
                 _kit_export_bytes(source, source_path),
                 executable=source.startswith("scripts/"),
+            )
+        for source, target in POST_FREEZE_REPO_EXPORTS.items():
+            source_path = root / safe_relative_path(source)
+            if source_path.is_symlink() or not source_path.is_file():
+                raise KitError(f"post-freeze export source is absent or aliased: {source}")
+            _write_bytes(
+                dest / safe_relative_path(target),
+                source_path.read_bytes(),
+                executable=False,
             )
         for entry in manifest["files"]:
             path = entry["path"]

@@ -47,29 +47,32 @@ audiovisual legacy dataset the fork's fast-RL format.
 
 ## Source-repo route at fork birth
 
-The F0 route is complete and negative. No corrective ACT rung was selected;
-F1/Brev and F2 serving were not opened. The fork begins from that resolved
-evidence instead of inheriting an unfinished optimizer queue. Preserve ACT as
-the imitation baseline, but direct new capability work to observable,
-short-horizon state tasks and separately evaluated consequence gates. Any
-future long-horizon ACT recipe change must state a new discriminator and use a
-new fork run receipt; copied source-repo authority cannot authorize it.
+The F0/F0a/F0b source-repo route is complete and negative; F1/Brev and F2
+serving were not opened. After the F3 freeze, the owner selected one exact
+release-targeted ACT experiment—F0c—as the fork's first training task. Its
+signed spec is packaged but unexecuted, capped at 2,000 updates, chunk-50 only,
+and has no retry. See [F0c first training task](./F0C_FIRST_TRAINING_TASK.md).
+It is a bounded discriminator, not an inherited optimizer queue, and copied
+source-repo authority cannot execute it.
 
 ## P2 — Establish the fork's two primary learning tracks
 
 1. Freeze held-out scenes/seeds before training and publish the constructive
    expert as leaderboard entry zero.
-2. Start a camera-free state tier: joint state plus simulator object pose,
+2. Implement, independently review, and authorize the frozen F0c runner. Run
+   the one-attempt continuation exactly once; preserve either the first
+   strict-v2 pass or the update-2,000 terminal negative.
+3. Start a camera-free state tier: joint state plus simulator object pose,
    light parquet, 60-frame success-terminated reach and push tasks, and
    direction-correct strict-v2 margins for shaped reward.
-3. Run ACT as the imitation baseline and one state-based RL algorithm as the
+4. Keep ACT as the imitation baseline and one state-based RL algorithm as the
    second primary track. Use the R2/F0b release trace as a frozen regression,
    not immediate training data. Do not open SmolVLA or PI0.5 until an
    end-to-end demo works or day-three stretch capacity is genuinely free.
-4. Allow accelerator-nondeterministic training, but judge every checkpoint in
+5. Allow accelerator-nondeterministic training, but judge every checkpoint in
    the separately owned CPU/fp32 evaluator with bit-identical verdicts across
    Macs and Linux.
-5. Auto-emit `RUN_RECEIPT.json` for every run: commit, config hash, dataset
+6. Auto-emit `RUN_RECEIPT.json` for every run: commit, config hash, dataset
    identity, seed, wall clock, and metrics. Keep replayable trace/artifact
    evidence beside the receipt.
 

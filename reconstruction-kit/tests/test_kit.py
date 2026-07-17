@@ -332,8 +332,9 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertEqual(act["optimizer_update_count"], 0)
         self.assertFalse(act["retry_authorized"])
         route = state["current_route"]
-        self.assertEqual(route["task_id"], "F3")
-        self.assertEqual(route["status"], "verified")
+        self.assertEqual(route["task_id"], "F0c")
+        self.assertEqual(route["status"], "packaged_for_fork_day_one")
+        self.assertEqual(route["source_capsule_freeze_task_id"], "F3")
         self.assertFalse(route["model_action_currently_authorized"])
         self.assertFalse(route["t20_43c_retry_authorized"])
         continuation = state["act_continuation"]
@@ -378,6 +379,16 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertFalse(fold["learned_policy_success_claimed"])
         self.assertFalse(fold["authority_transferred"])
         self.assertFalse(fold["model_action_performed"])
+        f0c = state["f0c_first_training_task"]
+        self.assertEqual(f0c["status"], "packaged_for_fork_day_one")
+        self.assertEqual(
+            f0c["spec_identity_sha256"],
+            "6a178138f79236f27adc04b337e0142a5dfa851f1f67d32d55dcc8b41e4da5dd",
+        )
+        self.assertFalse(f0c["source_manifest_reopened"])
+        self.assertFalse(f0c["execution_entrypoint_implemented"])
+        self.assertFalse(f0c["training_executed"])
+        self.assertFalse(f0c["authority_transferred"])
 
     def test_fork_spine_keeps_current_and_future_contracts_distinct(self) -> None:
         required = [
@@ -469,6 +480,22 @@ class ReconstructionKitTest(unittest.TestCase):
                     / "docs/reconstruction/HARDWARE_READINESS_RGB_CAMERAS.md"
                 ).is_file()
             )
+            self.assertTrue(
+                (
+                    destination
+                    / "docs/reconstruction/F0C_FIRST_TRAINING_TASK.md"
+                ).is_file()
+            )
+            f0c_spec = kit.load_strict_json(
+                destination
+                / "configurations/robot_lab/f0c_release_targeted_continuation_spec.json"
+            )
+            self.assertEqual(
+                f0c_spec["identity_sha256"],
+                "6a178138f79236f27adc04b337e0142a5dfa851f1f67d32d55dcc8b41e4da5dd",
+            )
+            self.assertEqual(f0c_spec["status"], "packaged_for_fork_day_one")
+            self.assertFalse(f0c_spec["day_one"]["execution_entrypoint_implemented"])
             self.assertTrue(
                 (
                     destination / "reconstruction-kit/assets/ASSET_MANIFEST.json"

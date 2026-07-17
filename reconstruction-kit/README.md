@@ -29,7 +29,10 @@ late-phase loss mass are not the defect; the policy's release pattern is about
 20 frames late amid lift/lower observation aliasing; and one same-checkpoint
 hybrid-cadence rollout still had both fingertip pads in contact at release-final
 frame 219. Cadence alone is insufficient. No corrective ACT rung or Brev run
-was consumed.
+was consumed in the source-repo window. The later owner addendum selected F0c
+as the fork's first, one-attempt training task: a release-phase-oversampled,
+physical-L1-weighted continuation capped at 2,000 updates. It is packaged but
+unexecuted; the execution runner and fresh fork authority are still required.
 
 ## Reading order
 
@@ -48,6 +51,9 @@ was consumed.
    D405 terminal failure and exact replacement requirement; no readiness pass.
 8. [Hackathon fork annex](../docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md)
    — optional three-day team plan; direction only, never authority.
+9. [F0c first training task](./F0C_FIRST_TRAINING_TASK.md) — the signed
+   post-freeze experiment contract, exact inputs, stop rules, and day-one
+   commands; no model result or transferred authority.
 
 `CURRENT_STATE.json` is the compact machine-readable result snapshot at the
 current portable source boundary. `SOURCE_MANIFEST.json` is generated from
@@ -119,6 +125,10 @@ manifest `ec9084dc...` (444 selected files, 81,458,869 bytes). Pristine export
 `bd2c9575...` passes 29 focused tests, one 244-frame strict-v2 expert episode,
 and all three retained renderer schemas. F3 receipt `bf488607...` binds those
 facts and the unchanged W2 exact-content receipt without granting authority.
+F0c is intentionally not smuggled into that frozen manifest. Its exact signed
+spec `6a178138...` and explanatory document travel as receipt-bound post-freeze
+export-wrapper addenda; the checkpoint remains separately acquired and
+checksum-bound.
 
 ## Verify and export
 
@@ -160,5 +170,6 @@ remain auditable without transplanting stale authority.
 - It does not make old owner grants or one-use permits valid in the new repo.
 - It is not a reason to replay the T20.35 optimizer alphabet. The useful
   mechanisms and negative findings are already distilled here.
-- It is not authority for a third ACT recipe attempt. The single source-repo
-  corrective rung remained unselected and does not transfer to the fork.
+- It is not authority to execute F0c. The post-freeze package selects one exact
+  fork experiment, but the fork must implement/review the runner, bind the
+  immutable checkpoint, and issue fresh native authority before optimizer use.
