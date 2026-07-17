@@ -162,6 +162,62 @@ only if the central evaluator shows ≥85% per-move success by day 3.
     that notation earned its keep in a solo autonomous loop, not in a
     four-person room.
 
+## Adopted from the RoboTTT/ENPIRE review (2026-07-17, owner-approved)
+
+External anchors verified: RoboTTT (NVIDIA GEAR, July 2026 — 8K-timestep
+fast-weights context on GR00T N1.7) and GR00T N1.7 (public, LeRobot
+integration, official SO-101 fine-tune/deploy guide). We reproduce neither;
+we adopt what our own evidence independently supports.
+
+1. **Temporal-context ablation (MPS, first-class experiment).** F0a's
+   aliasing is at heart a *velocity* ambiguity — lifting and lowering states
+   match in position/image space with opposite velocities. Escalation ladder,
+   one rung at a time against the frozen evaluator: (a) F0c data fix →
+   (b) Markov-complete state: add joint/object velocities and previous
+   action → (c) ACT `n_obs_steps` 2–4 (a config knob, not an architecture)
+   → (d) 8–16-step learned history (small GRU/state transformer) only if
+   (a–c) leave signed evidence demanding it. Same scene, same data, same
+   evaluator across variants — the ablation is itself a demo asset.
+2. **Auto-correction episodes (the best new mechanism).** Candidate rollout
+   fails → evaluator locates the first failed margin → MuJoCo forks shortly
+   before it (verified T18.4 branching) → the geometry expert completes the
+   corrected tail → one correction record: failed prefix as context,
+   expert tail as supervision (mask on the tail only), labeled
+   `context_role/context_policy/failure_predicate/correction_owner/
+   supervision_mask`. Admission to training only through the design-rule-8
+   gate (mixture + authority decision). Failures are context; corrections
+   are targets — no fast weights required.
+3. **Demo hierarchy with honest labels.** Level 1: pure learned policy
+   passes strict-v2. Level 2: labeled hybrid — learned policy through
+   lower, explicit state controller for release/verify/retreat (given ACT
+   fails only release, this is the near-guaranteed working demo and its
+   runs generate correction episodes). Level 3: teleop, proving only the
+   gateway and calibration. Never blur the labels.
+4. **NVIDIA lane ordering (amended from the proposal).** π0.5
+   release-fixed continuation stays the *primary* NVIDIA run — proven
+   end-to-end at ~$5.5 — and GR00T N1.7 runs as a **bounded parallel
+   challenger**, never a gate on π0.5: official SO-100/101 smoke → dataset
+   conversion (LeRobot **V3→V2** — budget real time; camera-key/count
+   mismatches killed a prior VLA attempt) → short pilot with early
+   evaluation → same frozen evaluator. One VLA campaign at a time on the
+   lane; SmolVLA stays parked. GR00T fine-tune wants 40 GB+ VRAM (Brev
+   A100 or the local box if real); inference 16 GB+ fits the gateway.
+5. **Experiment registry, not a framework.** Extend `RUN_RECEIPT.json` with
+   `parent_checkpoint`, `hypothesis`, and `promotion_decision`; render the
+   hypothesis tree and leaderboard through the *existing* studio server
+   rather than building an ENPIRE clone. The six-act demo narrative
+   (failure → hypothesis → parallel training → before/after → perturbation
+   → hardware switch) is assembled from artifacts every run already emits
+   (mirrors, margins, receipts) — no bespoke theater code.
+6. **Video-conditioned task specification** (VLM extracts object/target/
+   operation → LLM emits the structured task → state policy executes),
+   honestly labeled as task specification, never as one-shot motor
+   imitation.
+
+Doctrine, updated: **agents for improvement, MPS for fast hypotheses,
+NVIDIA for foundation models, corrections from the expert, state for
+reliable transfer, pixels for generalization.**
+
 ## Two scar-tissue warnings
 
 - Watch for **smooth-but-timid** convergence (seen in the SmolVLA rung: the
