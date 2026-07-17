@@ -80,3 +80,16 @@ Reviewer 304 opens only model-free epoch-2 materialization after this boundary
 and synchronized state are exact on origin.
 Implementation commit `10df153` is exact on origin; the next commit synchronizes
 its identity into canonical state and the active ledger before materialization.
+
+## Materialized and accepted pre-run boundary
+
+The synchronized implementation boundary `677b65c` and epoch-2 authority
+commit `1012028` are exact on origin. Owner/request/decision/runtime/permit
+identities are `fe05f0d2...`/`21ebdab1...`/`061b1c1b...`/`edd06509...`/
+`81b38484...`; the central decision grants only `simulation_training_ready`
+from `2026-07-16T21:25:04-05:00` through
+`2026-07-17T05:25:04-05:00`. Reviewer 305 accepts the reconstructed boundary,
+and acceptance `c6af1030...` binds the exact permit, reviewer file, and
+authority commit. The marker and every run/result path remain absent. Only
+after this acceptance boundary is exact on origin may the runner create the
+sole marker and execute the unchanged campaign once.

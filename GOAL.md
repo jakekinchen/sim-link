@@ -20,13 +20,15 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Current status: closed at `2026-07-16T18:50:03-05:00` before the T20.43b
-  one-use marker because the remaining interval lacked measured evidence for a
-  safe noninterruptible finish. A fresh owner window and reviewed
-  administrative authority epoch are required before any model action.
-- Actual start: `2026-07-16T12:35:56-05:00`.
-- No new major slice after: `2026-07-16T19:50:56-05:00`.
-- Hard closeout: `2026-07-16T20:35:56-05:00`.
+- Current status: active for the sole unchanged T20.43b ACT replacement from
+  `2026-07-16T21:25:04-05:00` through `2026-07-17T05:25:04-05:00`.
+  Epoch-2 authority commit `1012028` and Reviewer 305 acceptance `c6af1030...`
+  reconstruct exactly; the marker remains absent pending preservation of this
+  acceptance boundary on origin.
+- Actual start: `2026-07-16T21:25:04-05:00`.
+- No new major slice after: not applicable; this window authorizes only the
+  already reviewed noninterruptible T20.43b campaign.
+- Hard closeout: `2026-07-17T05:25:04-05:00`.
 - Owner evening extension recorded at `2026-07-15T10:20:00-05:00` for the
   tonight MVP demo composition in the MVP execution plan; scope, gates, and
   all closed authorities are unchanged.
@@ -99,16 +101,16 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 ## Current Slice
 
 The policy task remains T20.43b under Brief 225. Its stable-runtime ACT
-replacement is implemented, source-pinned, and pre-run accepted, but unconsumed: marker,
-model, optimizer, checkpoint, rollout, and result paths are absent. T20.42/R0
-is verified constructive source/data evidence; T20.44 SmolVLA is a verified
-terminal negative; no learned policy has passed strict-v2. The next policy
-action is implementation and model-free review of a separately named epoch-2
-administrative authority wrapper for the unchanged ACT recipe, followed only
-after origin preservation by fresh materialization and review. The owner has
-directed resolution of this final question; epoch 1 remains immutable and this
-direction is not a second replacement or attempt. Hardware, network,
-external compute, Brev, physical transfer, and promotion remain closed.
+replacement and separately named epoch-2 administrative authority are
+implemented, source-pinned, reconstructed, and accepted by Reviewer 305 but
+unconsumed: marker, model, optimizer, checkpoint, rollout, and result paths are
+absent. Authority commit `1012028` is exact on origin; acceptance `c6af1030...`
+must now be preserved on origin before the sole unchanged campaign may create
+the marker. T20.42/R0 is verified constructive source/data evidence; T20.44
+SmolVLA is a verified terminal negative; no learned policy has passed
+strict-v2. Epoch 1 remains immutable and epoch 2 is not a second replacement
+or attempt. Hardware, network, external compute, Brev, physical transfer, and
+promotion remain closed.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
