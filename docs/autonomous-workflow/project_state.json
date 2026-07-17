@@ -446,11 +446,16 @@
     "K3": {
       "state": "in_progress",
       "active_brief_id": "228",
-      "result": "Brief 228 implements and reviews one fail-closed owner-present D405 UVC plus C922 RGB-only census before any camera enumeration or open; live gate remains closed",
-      "live_gate": "closed",
+      "implementation_commit": "cb42ce056c129c9cdcba10fee6fe31d60633c484",
+      "review_decision_id": "311",
+      "result": "Reviewer 311 accepts the fail-closed D405 UVC plus C922 RGB-only census implementation at origin commit cb42ce0; one finite K3 gate is open pending fresh same-thread runtime proof, central decision, and one-use permit, and no hardware has yet been enumerated or opened",
+      "live_gate": "open",
+      "live_gate_opened_at": "2026-07-16T22:41:00-05:00",
+      "live_gate_valid_until": "2026-07-16T23:25:00-05:00",
+      "live_gate_basis_commit": "cb42ce056c129c9cdcba10fee6fe31d60633c484",
       "session_limit": 1,
       "sessions_started": 0,
-      "authority_granted": ["read_owner_final_hour_camera_direction", "implement_and_fixture_test_fail_closed_rgb_camera_census"],
+      "authority_granted": ["read_owner_final_hour_camera_direction", "implement_and_fixture_test_fail_closed_rgb_camera_census", "compose_one_finite_rgb_camera_census_only_after_remote_and_runtime_verification"],
       "authority_not_granted": ["camera_enumeration", "camera_open", "depth_stream", "librealsense", "serial_access", "register_read", "register_write", "torque_change", "motion", "audio_capture", "inference", "training", "network_access", "external_compute", "brev_compute", "physical_qualification", "physical_transfer", "promotion"]
     }
   },
