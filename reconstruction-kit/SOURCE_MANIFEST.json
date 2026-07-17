@@ -3614,7 +3614,7 @@
     "outputs/",
     "tmp/"
   ],
-  "identity_sha256": "bc17b06a686b3849c5c99334c968c91560d7bd00905b9c3c9201f24a85ef3606",
+  "identity_sha256": "ec9084dc41e22e9c7c695b029a8db84cb60c507001ab7c65325e804ecfed5117",
   "learned_policy_success_claimed": false,
   "maximum_file_bytes": 4000000,
   "omitted_source_artifacts": [
@@ -3687,7 +3687,7 @@
   ],
   "physical_proof_transferred": false,
   "schema_version": "scenesmith.reconstruction_source_manifest.v1",
-  "selection_sha256": "235ef77d4ea4a0ef8469f3f54c08abe40af1979d21d67438279ecdce4616df89",
-  "source_commit": "d5358800e4937a44f0b442290a669f6680798069",
+  "selection_sha256": "f49f3c08e927b054ef4066b37f827574114874978ae530288b7feabea79c7e49",
+  "source_commit": "48970159ccd14de6d93fed8a7f318eafcc64b777",
   "source_repository": "https://github.com/jakekinchen/sim-link.git"
 }
