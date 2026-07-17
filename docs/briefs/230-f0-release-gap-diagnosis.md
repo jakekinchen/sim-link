@@ -90,3 +90,34 @@ optimizer creation or training, rollouts, dataset mutation, threshold changes,
 network or package installation, Brev/external compute, cameras, serial or
 robot hardware, physical motion, Gate C execution, transfer, promotion,
 destructive operations, and the freeze tag.
+
+## Closeout
+
+Reviewer 320 verifies this brief at implementation commit
+`698d5644e9add156266f0ab4997aaa27c9b98b10`. Canonical result
+`807d3da7e21bbf3ec846454bb13aa6a2cb92eac4f6dffe8d86becb0ad777e5f9`
+reconstructs all 10,000 update batches over 129 episodes and 31,366 frames.
+The exact consumed path produced 79,996 sampled starts, including two
+six-sample end-of-epoch batches.
+
+The pre-registered tail and mixture rules are falsified: minimum late-frame
+target exposure is 97.085% of the frame-50-to-199 median, late-phase valid-loss
+mass is 113.889% of its geometric share, and frame-200 starts are 97.869% of
+uniform expectation. Tail padding is active with final valid lengths 44 and
+38. The standalone unpadded H50 index contains no release window, but the ACT
+runner does not consume that index.
+
+The R0 action envelope also falsifies the normalization hypothesis. Required
+open gripper is within the pre-registered `1e-4` envelope tolerance at 1.4174
+standard deviations. The physical-L1 coefficient for gripper is 2.6963, and
+retained release error is
+same-direction and contact-relevant, so loss underweighting remains
+mechanistically coherent. It is not enough to select the one corrective rung:
+the retained candidate reproduces the 12-frame source release pattern best at
+a 20-frame shift, reducing MAE from 0.74179 rad to 0.04893 rad, a 15.16x
+alignment improvement.
+
+F0 therefore closes without corrective training. The single corrective ACT
+rung remains unconsumed. A fresh model-free F0a brief may audit chunk timing,
+phase observability, and observation aliasing after this closeout is exact on
+origin. Every closed authority in this brief remains closed.

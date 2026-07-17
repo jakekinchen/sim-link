@@ -164,16 +164,20 @@ Support task K2/Brief 226 is verified by Reviewer 319. Final manifest
 `97daeb06...`, and final-pin W1 receipt `7d9fa11a...` verify the portable stack;
 combined W2 receipt `86739578...` recreates exact R0 with no mismatches and
 independent verifier exit 0. W3's isolated handoff remains 0-of-3 and W5
-remains transport/replay evidence only; neither is integrated. The next
-eligible source-repo task is a fresh F0 brief for release-gap diagnosis. This
-closeout does not open corrective training, F1/Brev, hardware, transfer,
-promotion, or the freeze tag.
+remains transport/replay evidence only; neither is integrated. K2 handed the
+source-repo path to F0 without opening corrective training, F1/Brev, hardware,
+transfer, promotion, or the freeze tag.
 
-F0/Brief 230 is now the active source-repo task. It is a model-free audit of
-the exact R0 sampler, padding, normalization, phase mass, and retained R2
-release trace. The training lock remains closed. No checkpoint read, model,
-optimizer, rollout, dataset mutation, Brev/external compute, hardware, Gate C
-execution, transfer, promotion, or tag is authorized by this activation.
+F0/Brief 230 is verified by Reviewer 320 at implementation commit `698d5644...`.
+Signed diagnosis `807d3da7...` falsifies release-tail starvation, an R0
+open-gripper normalization defect, and late-phase loss-mass underweighting. It
+does confirm a physical-L1 gripper coefficient of 2.6963, but the sharper
+counterexample is temporal: the retained candidate reproduces the source
+release pattern 20 frames late, improving release-pattern MAE by 15.16x after
+alignment. No corrective ACT rung was selected or consumed. The next eligible
+task is a fresh model-free F0a audit of chunk timing and phase observability;
+training, rollout, Brev/external compute, hardware, Gate C execution, transfer,
+promotion, and the tag remain closed.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
