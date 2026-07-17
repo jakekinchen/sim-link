@@ -1,9 +1,17 @@
 import copy
 import hashlib
+import runpy
+import tempfile
 import unittest
 
+from pathlib import Path
+
 from scenesmith.robot_lab.act_grasp_closed_loop import PHASE_PLAN, ROLLOUT_FRAMES
-from scenesmith.robot_lab.artifact_contract import canonical_json_bytes, sign_payload
+from scenesmith.robot_lab.artifact_contract import (
+    canonical_json_bytes,
+    dump_canonical_json,
+    sign_payload,
+)
 from scenesmith.robot_lab.mujoco_anchor_grasp import OBJECT_ID
 from scenesmith.robot_lab.t20_43b_r1_act_contracts import CHECKPOINT_SCHEDULE
 from scenesmith.robot_lab.t20_43b_r1_act_runner import (
@@ -123,6 +131,20 @@ class T2043bR1ACTRunnerTest(unittest.TestCase):
                 attempt={"identity_sha256": "b" * 64},
                 partial_run_tree=[],
             )
+
+    def test_rollout_mirror_v2_accepts_t20_43b_trace_schema(self) -> None:
+        trace = self._trace(update=0, n_action_steps=50, strict=False)
+        renderer = runpy.run_path(
+            str(
+                Path(__file__).resolve().parents[2]
+                / "scripts/robot_lab/render_rollout_mirror_v2.py"
+            )
+        )
+        with tempfile.TemporaryDirectory() as raw:
+            path = Path(raw) / "trace.json"
+            dump_canonical_json(path, trace)
+            loaded = renderer["load_trace"](path)
+        self.assertEqual(loaded, trace)
 
     def _run(self, *, pass_update, pass_variants) -> dict:
         checkpoints = []

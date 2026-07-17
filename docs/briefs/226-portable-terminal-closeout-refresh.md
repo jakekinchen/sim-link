@@ -1,7 +1,7 @@
 # Slice Brief 226 - Portable Terminal Closeout Refresh
 
-**Date:** 2026-07-16  
-**Support task:** K2  
+**Date:** 2026-07-16
+**Support task:** K2
 **Policy boundary preserved:** T20.43b verified terminal runtime failure
 
 ## Objective
