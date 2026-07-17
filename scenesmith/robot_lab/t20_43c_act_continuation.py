@@ -204,6 +204,9 @@ def build_renderer_smoke(*, evidence: dict[str, Any]) -> dict[str, Any]:
         "manifest_identity_sha256": evidence.get("manifest_identity_sha256"),
         "manifest_file_sha256": evidence.get("manifest_file_sha256"),
         "runner_interpreter": evidence.get("runner_interpreter"),
+        "resumed_after_post_render_materialization_failure": evidence.get(
+            "resumed_after_post_render_materialization_failure"
+        ),
         "exit_code": 0,
     }
     _sha(required["renderer_v2_file_sha256"])
@@ -221,6 +224,10 @@ def build_renderer_smoke(*, evidence: dict[str, Any]) -> dict[str, Any]:
         or not required["runner_interpreter"]
     ):
         raise ValueError("T20.43c renderer smoke interpreter is absent")
+    if not isinstance(
+        required["resumed_after_post_render_materialization_failure"], bool
+    ):
+        raise ValueError("T20.43c renderer smoke resume state is invalid")
     return sign_payload(
         {
             "schema_version": SMOKE_SCHEMA,
@@ -249,6 +256,7 @@ def verify_renderer_smoke(payload: dict[str, Any]) -> None:
             "manifest_identity_sha256",
             "manifest_file_sha256",
             "runner_interpreter",
+            "resumed_after_post_render_materialization_failure",
         )
     }
     if payload != build_renderer_smoke(evidence=evidence):

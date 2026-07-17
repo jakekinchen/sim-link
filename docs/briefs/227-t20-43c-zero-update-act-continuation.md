@@ -51,11 +51,20 @@ renderer, authority, and evidence equivalence are mechanically proven.
 
 ## Current authority
 
-Reviewer 307 accepts the implementation and model-free fixture boundary after
-57 selected tests and 15 subtests. Once that boundary is committed and exact on
+Reviewer 308 accepts the hardened implementation and model-free fixture
+boundary after 70 selected regressions; Reviewer 307's separately recorded 15
+subtests remain part of the initial review evidence. The terminal-failure path
+now signs even when a consumed marker is followed by failure before the run
+root contains its first file. Once that boundary is committed and exact on
 origin, one actual-schema renderer smoke and compact model-free authority
 materialization may run. The training lock remains closed. No continuation
 marker, checkpoint tensor read, model construction/load/inference, optimizer,
 training, rollout, Gate C execution, retry, fresh replacement, hardware,
 network, external compute, Brev, transfer, promotion, or destructive operation
 is authorized until a second review and signed acceptance are exact on origin.
+
+Reviewer 309 additionally accepts one model-free administrative recovery after
+the actual-schema smoke completed but dependency inventory received an
+obsolete Python-3.11 MuJoCo path. No authority JSON or model action was written.
+The recovery must reuse only the re-verified smoke MP4/manifest, record that
+resume in the signed smoke receipt, and use the bound Python-3.12 support path.

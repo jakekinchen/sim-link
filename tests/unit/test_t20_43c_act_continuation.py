@@ -33,6 +33,7 @@ from scenesmith.robot_lab.t20_43c_act_continuation import (
 )
 from scenesmith.robot_lab.t20_43b_r1_act_contracts import EXPECTED_DEPENDENCIES
 from scenesmith.robot_lab.t20_43c_act_continuation_runner import (
+    _partial_run_tree,
     _prove_tensor_equivalence,
 )
 
@@ -59,6 +60,7 @@ def authority(sources):
             "manifest_identity_sha256": "5" * 64,
             "manifest_file_sha256": "6" * 64,
             "runner_interpreter": "external/lerobot/.venv/bin/python",
+            "resumed_after_post_render_materialization_failure": False,
         }
     )
     owner = build_owner_grant(
@@ -207,6 +209,19 @@ def test_tensor_equivalence_is_bit_exact_and_fails_on_value_change():
     changed["a"][0] += 1
     with pytest.raises(ValueError, match="tensor mismatch"):
         _prove_tensor_equivalence(fresh_state=fresh, saved_state=changed, torch=torch)
+
+
+def test_partial_run_tree_accepts_empty_boundary_and_rejects_alias(tmp_path):
+    run_root = tmp_path / "run"
+    assert _partial_run_tree(run_root) == []
+    run_root.mkdir()
+    assert _partial_run_tree(run_root) == []
+    (run_root / "progress.json").write_text("{}\n", encoding="utf-8")
+    rows = _partial_run_tree(run_root)
+    assert [row["path"] for row in rows] == ["progress.json"]
+    (run_root / "alias").symlink_to(run_root / "progress.json")
+    with pytest.raises(ValueError, match="contains a symlink"):
+        _partial_run_tree(run_root)
 
 
 def test_outer_receipt_binds_original_failure_and_continuation(authority):

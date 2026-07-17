@@ -3,19 +3,41 @@
 Updated: 2026-07-16
 
 ```text
-training_lock: closed; Reviewer 307 accepts T20.43c implementation and model-free materialization only, while marker/model/optimizer/rollout authority remains absent
+training_lock: closed; Reviewer 309 accepts only recovery of the unconsumed model-free T20.43c materialization, while marker/model/optimizer/rollout authority remains absent
 run_window: closed at 2026-07-16T21:32:23-05:00 on verified T20.43b terminal runtime failure 89b6dbff; no retry or second replacement is authorized
-run_state: T20.43c implementation is accepted by Reviewer 307 after 57 tests and 15 subtests; one model-free actual-schema smoke and authority materialization is next
+run_state: the actual-schema smoke succeeded, then dependency inventory failed before any authority JSON because an obsolete Python-3.11 MuJoCo path reached the Python-3.12 runner; Reviewer 309 accepts exact smoke reuse and administrative recovery
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.43c in_progress at accepted implementation boundary; materialize model-free authority, then perform a second pre-marker review
+current_task: T20.43c in_progress at reviewed model-free recovery boundary; preserve the correction on origin, then resume authority materialization from the exact smoke bytes
 support_task: K1 verified under Brief 224 and Reviewer 303; portable manifest 5067d1c2 and clean export receipt 729addbb preserve current methods/results without changing T20.43b, copying bulk/private artifacts, or carrying authority into a new repo
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: the owner explicitly directs any further actions needed to resolve ACT-on-R0; Brief 227 narrows this to a separately reviewed exact zero-update continuation or, if equivalence fails before model action, a clean replacement design; hardware, network, package install, external compute, and Brev remain closed
 blockers: no implementation blocker; model action remains closed until fresh central authority and separate acceptance are exact on origin, then post-marker equivalence must pass before update 1
-next_step: commit and push Reviewer 307's implementation boundary, materialize the actual-schema smoke and compact authority, review it, and preserve acceptance before any marker
+next_step: preserve Reviewer 309's correction on origin, resume the unconsumed model-free authority materialization, then review and preserve acceptance before any marker
 ```
+
+## 2026-07-16 - Reviewer 309 accepts model-free materialization recovery
+
+The actual-schema smoke completed with MP4 SHA `955ad918...` and manifest
+identity `00494310...`; dependency inventory then imported an obsolete
+Python-3.11 MuJoCo path under Python 3.12. No authority artifact, permit,
+marker, tensor read, model, or optimizer exists. The correction re-verifies and
+reuses those exact smoke bytes, records the resume in the signed receipt,
+inserts the bound Python-3.12 support path, and retains partial-tree alias
+hardening. The selected recovery regression set passes 58 tests and 15
+subtests. Training remains locked.
+
+## 2026-07-16 - Reviewer 308 hardens T20.43c terminal preservation
+
+The model-free continuation package now hashes an absent, empty, or partially
+populated T20.43c run root without weakening symlink rejection. This closes the
+post-marker edge where an infrastructure failure during initial directory
+creation could otherwise consume the marker before a signed terminal receipt
+was written. Seven focused tests and 70 selected T20.43/T20.43b/T20.43c/T20.44,
+authority-composer, and pointer regressions pass. No authority artifacts,
+checkpoint tensor reads, model construction, optimizer, rollout, hardware,
+network, external compute, or Brev action occurred.
 
 ## 2026-07-16 - Reviewer 307 accepts T20.43c implementation
 

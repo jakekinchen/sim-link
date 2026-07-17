@@ -120,9 +120,7 @@ def run_authorized_continuation(
                     "equivalence_proven": False,
                 }
             )
-            partial_tree = (
-                _file_tree(root / RUN_ROOT) if (root / RUN_ROOT).is_dir() else []
-            )
+            partial_tree = _partial_run_tree(root / RUN_ROOT)
             failure = build_terminal_failure(
                 marker=marker,
                 progress=progress,
@@ -475,7 +473,7 @@ def verify_all_continuation_outputs(*, repo_root: Path = REPO_ROOT) -> dict[str,
         if (root / FINAL_RECEIPT_PATH).exists():
             raise ValueError("T20.43c failure and final receipt coexist")
         failure = load_strict_json(root / FAILURE_PATH)
-        partial_tree = _file_tree(root / RUN_ROOT) if (root / RUN_ROOT).is_dir() else []
+        partial_tree = _partial_run_tree(root / RUN_ROOT)
         verify_terminal_failure(failure, marker=marker, partial_run_tree=partial_tree)
         return failure
     equivalence = load_strict_json(root / EQUIVALENCE_PATH)
@@ -692,8 +690,31 @@ def _path_or_parent_is_symlink(root: Path, relative: Path) -> bool:
     return False
 
 
+def _partial_run_tree(root: Path) -> list[dict[str, Any]]:
+    """Hash any partial files without rejecting a just-created empty run root."""
+
+    if not root.exists():
+        return []
+    if not root.is_dir() or root.is_symlink():
+        raise ValueError(f"T20.43c partial run tree is absent or aliased: {root}")
+    rows = []
+    for path in sorted(root.rglob("*")):
+        if path.is_symlink():
+            raise ValueError(f"T20.43c partial run tree contains a symlink: {path}")
+        if path.is_file():
+            rows.append(
+                {
+                    "path": path.relative_to(root).as_posix(),
+                    "size_bytes": path.stat().st_size,
+                    "sha256": _sha_file(path),
+                }
+            )
+    return rows
+
+
 __all__ = [
     "run_authorized_continuation",
     "verify_all_continuation_outputs",
+    "_partial_run_tree",
     "_prove_tensor_equivalence",
 ]

@@ -68,8 +68,8 @@ IMPLEMENTATION_SCOPED_PATHS = (
 def run_renderer_smoke(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     root = Path(repo_root).resolve()
     load_continuation_sources(repo_root=root)
-    if any(os.path.lexists(root / path) for path in (SMOKE_ROOT, SMOKE_RECEIPT_PATH)):
-        raise FileExistsError("T20.43c renderer smoke output already exists")
+    if os.path.lexists(root / SMOKE_RECEIPT_PATH):
+        raise FileExistsError("T20.43c renderer smoke receipt already exists")
     command = [
         STABLE_RUNNER_INTERPRETER.as_posix(),
         str(root / "scripts/robot_lab/render_rollout_mirror_v2.py"),
@@ -80,27 +80,34 @@ def run_renderer_smoke(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         "--fps",
         "25",
     ]
-    completed = subprocess.run(
-        command,
-        cwd=root,
-        capture_output=True,
-        check=False,
-        env={
-            **os.environ,
-            "HF_HUB_OFFLINE": "1",
-            "TRANSFORMERS_OFFLINE": "1",
-            "PYTHONPATH": (
-                f"{root / 'external/lerobot/src'}:"
-                f"{root / 'external/lerobot/.venv/lib/python3.12/site-packages'}:"
-                f"{MUJOCO_SUPPORT_SITE_PACKAGES}"
-            ),
-        },
-    )
-    if completed.returncode != 0:
-        raise RuntimeError(
-            "T20.43c actual-schema renderer smoke failed: "
-            + completed.stderr.decode("utf-8", errors="replace")[-2000:]
+    resumed = os.path.lexists(root / SMOKE_ROOT)
+    if resumed:
+        if not (root / SMOKE_VIDEO_PATH).is_file() or not (
+            root / SMOKE_MANIFEST_PATH
+        ).is_file():
+            raise FileExistsError("T20.43c partial renderer smoke cannot be resumed")
+    else:
+        completed = subprocess.run(
+            command,
+            cwd=root,
+            capture_output=True,
+            check=False,
+            env={
+                **os.environ,
+                "HF_HUB_OFFLINE": "1",
+                "TRANSFORMERS_OFFLINE": "1",
+                "PYTHONPATH": (
+                    f"{root / 'external/lerobot/src'}:"
+                    f"{root / 'external/lerobot/.venv/lib/python3.12/site-packages'}:"
+                    f"{MUJOCO_SUPPORT_SITE_PACKAGES}"
+                ),
+            },
         )
+        if completed.returncode != 0:
+            raise RuntimeError(
+                "T20.43c actual-schema renderer smoke failed: "
+                + completed.stderr.decode("utf-8", errors="replace")[-2000:]
+            )
     video = root / SMOKE_VIDEO_PATH
     manifest_path = root / SMOKE_MANIFEST_PATH
     manifest = load_strict_json(manifest_path)
@@ -126,6 +133,7 @@ def run_renderer_smoke(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
             "manifest_identity_sha256": manifest["identity_sha256"],
             "manifest_file_sha256": _sha_file(manifest_path),
             "runner_interpreter": STABLE_RUNNER_INTERPRETER.as_posix(),
+            "resumed_after_post_render_materialization_failure": resumed,
         }
     )
     verify_renderer_smoke(smoke)
@@ -321,6 +329,9 @@ def _write_bundle_exclusively(
 
 
 def _dependency_versions() -> dict[str, str]:
+    support_path = str(MUJOCO_SUPPORT_SITE_PACKAGES)
+    if support_path not in sys.path:
+        sys.path.insert(0, support_path)
     import datasets
     import lerobot
     import mujoco
