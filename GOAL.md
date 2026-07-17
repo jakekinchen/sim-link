@@ -95,6 +95,13 @@ proof states must remain distinct.
   the real Robo Scan/I5 metric twin, and a separately permitted physical-policy
   canary. This is task ordering and proof definition only; it grants no
   hardware, network, external-compute, Brev, promotion, or retry authority.
+- Owner final-hour direction recorded 2026-07-16 ~21:50 CDT: one more hour of
+  agent work, then freeze at tag `freeze-2026-07-16-hackathon-fork`.
+  Priorities: (1) land and verify the reconstruction kit with the T20.43c
+  ready-package and hackathon annex, (2) owner-present RGB-only camera census
+  (D405 UVC + C922 confirmed enumerated; depth out-of-scope on macOS),
+  (3) freeze protocol. No third ACT attempt tonight. Full ordering:
+  `docs/autonomous-workflow/owner-direction-2026-07-16-final-hour.md`.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
