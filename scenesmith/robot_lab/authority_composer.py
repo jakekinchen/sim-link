@@ -2212,9 +2212,11 @@ def _capture_rgb_camera_census_repository_state(
         "scoped_source_diff_clean": diff_clean(
             [
                 "scenesmith/robot_lab/authority_composer.py",
+                "scenesmith/robot_lab/hardware_execution_profile.py",
                 "scenesmith/robot_lab/rgb_camera_census.py",
                 "scripts/robot_lab/run_rgb_camera_census.py",
                 "tests/unit/test_rgb_camera_census.py",
+                "tests/unit/test_static_pose_live_execution.py",
                 "docs/briefs/228-owner-present-rgb-camera-census.md",
             ]
         ),

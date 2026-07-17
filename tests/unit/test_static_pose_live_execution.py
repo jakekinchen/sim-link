@@ -505,6 +505,7 @@ class HardwareExecutionProfileTests(unittest.TestCase):
             ],
         )
         self.assertFalse(observed["kwargs"]["shell"])
+        self.assertEqual(observed["kwargs"]["timeout"], 60)
         self.assertEqual(evidence["thread_id"], THREAD_ID)
         self.assertEqual(evidence["approval_policy"], "never")
         self.assertEqual(evidence["sandbox_mode"], "danger-full-access")

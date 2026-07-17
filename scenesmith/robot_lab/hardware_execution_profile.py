@@ -40,6 +40,7 @@ DOCTOR_COMMAND = [
     "--no-color",
 ]
 MAX_PROFILE_AGE_SECONDS = 300
+DOCTOR_TIMEOUT_SECONDS = 60
 
 _PROJECT_DEFAULT_PATH = Path(".codex/config.toml")
 _HARDWARE_PROFILE_PATH = Path(".codex/profiles/hardware-supervised.toml")
@@ -157,7 +158,7 @@ def capture_hardware_execution_profile_evidence(
         check=False,
         capture_output=True,
         text=True,
-        timeout=30,
+        timeout=DOCTOR_TIMEOUT_SECONDS,
         shell=False,
     )
     if type(completed.returncode) is not int or completed.returncode not in {0, 1}:
