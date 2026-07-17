@@ -1,8 +1,11 @@
 # Current Proof State
 
-Snapshot source: `sim-link` commit
+Evidence snapshot source: `sim-link` commit
 `6c53d9309f7f41f0d3ac351c049436ddda20e50f` on
-`codex/pi05-autolearn-loop`, recorded 2026-07-16.
+`codex/pi05-autolearn-loop`, recorded 2026-07-16. The portable implementation
+and reconciled documentation are pinned separately at
+`605e4d3624a87593a1b5da9a97cd263f6bade78a`; that later source boundary does
+not change the signed result state below.
 
 ## Operational verdict
 

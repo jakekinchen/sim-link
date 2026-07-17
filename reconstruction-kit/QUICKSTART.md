@@ -25,8 +25,9 @@ git add -- .
 git commit -m "Seed SO-101 reconstruction from verified SceneSmith capsule"
 ```
 
-At this point you have exact compact source/evidence parity with closeout commit
-`6c53d93...`, but no external packages, datasets, weights, or authority.
+At this point you have exact compact source parity with portable boundary
+`605e4d3...` and an evidence-state snapshot from `6c53d93...`, but no external
+packages, datasets, weights, or authority.
 
 ## Stage 1 — Recreate the pinned local runtime
 

@@ -4,18 +4,33 @@ Updated: 2026-07-16
 
 ```text
 training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
-run_window: fresh owner-authorized fixed T20.42/R0 simulation-only window 2026-07-16T12:35:56-05:00 through 20:35:56 CDT; no new major slice after 19:50:56; hardware, network, external compute, and Brev remain closed
+run_window: closed at 2026-07-16T18:50:03-05:00 before the T20.43b marker; a fresh owner window and reviewed administrative authority epoch are required before model action
 run_state: Reviewer 302 closes the current window before the T20.43b marker; acceptance commit 5f2abf3 is exact on origin, all run/result paths remain absent, and the sole ACT replacement is unconsumed and capability-unresolved
 current_milestone: M20 simulation-only clean supervision
 current_task: T20.43b unconsumed replacement under Brief 222; next window must open a fresh reviewed administrative authority epoch while preserving the same recipe and attempt ordinal
-support_task: K1 in progress under Brief 224; build a portable reconstruction kit from tracked evidence only without changing T20.43b, copying bulk/private artifacts, or carrying authority into a new repo
+support_task: K1 verified under Brief 224 and Reviewer 303; portable manifest 5067d1c2 and clean export receipt 729addbb preserve current methods/results without changing T20.43b, copying bulk/private artifacts, or carrying authority into a new repo
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
-owner_authority: owner authorizes bounded simulation-only continuation through 20:35:56 CDT and addendum 8b4a206 authorizes exactly one T20.43b ACT replacement after the T20.44 terminal boundary is exact on origin; camera/serial/robot/hardware, network, package install, external compute, and Brev are not authorized
+owner_authority: addendum 8b4a206 authorizes exactly one T20.43b ACT replacement in principle, but its administrative window/permit are expired; no current marker/model action, camera/serial/robot/hardware, network, package install, external compute, or Brev authority exists
 blockers: the current T20.43b grant expires at 20:35:56 and lacks a safe completion budget; after expiry, model action remains closed until a fresh owner window and separately reviewed administrative authority epoch prove the old marker absent; T20.40 remains ineligible without Gate C; T20.45 awaits restored R1 evidence
 next_step: in the next owner window, open the smallest authority-epoch refresh brief for the still-unconsumed T20.43b attempt; preserve recipe, attempt ordinal, acceptance evidence, and marker absence, then run only if the full hard-close budget is safe
 ```
+
+## 2026-07-16 - K1 portable reconstruction kit verified
+
+Brief 224 and Reviewer 303 accept the non-authorizing `reconstruction-kit/`.
+Portable source commit `605e4d3...` is exact on origin. Manifest
+`5067d1c2...` selects 321 tracked implementation/evidence files (8,614,788
+bytes) and records five explicit hashed omissions (22,811,274 bytes), including
+live repository state. A fresh 336-file export verifies as receipt
+`729addbb...` before and after 31 dependency-light clean-room tests. Six kit
+tests, 153 focused source regressions, strict JSON, compilation, link checks,
+and manifest rebuild/verification pass. The T20.42 original route decision is
+now read from an exact `e9d0507` snapshot, preventing a later addendum at the
+living path from invalidating signed R0 history. No model, optimizer, rollout,
+marker, hardware, network, external compute, Brev, or authority transfer
+occurred. T20.43b remains the next policy task and is still unconsumed.
 
 ## 2026-07-16 - T20.43b window closed before marker
 

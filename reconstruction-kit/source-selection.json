@@ -1,6 +1,6 @@
 {
   "schema_version": "scenesmith.reconstruction_source_selection.v1",
-  "source_commit": "6c53d9309f7f41f0d3ac351c049436ddda20e50f",
+  "source_commit": "605e4d3624a87593a1b5da9a97cd263f6bade78a",
   "source_repository": "https://github.com/jakekinchen/sim-link.git",
   "maximum_file_bytes": 2000000,
   "forbidden_prefixes": [
@@ -18,6 +18,7 @@
     "docs/autonomous-workflow/",
     "docs/reviewer-messages/",
     "scripts/robot_lab/",
+    "tests/fixtures/",
     "third_party/mujoco_menagerie/robotstudio_so101/"
   ],
   "excluded_literal_paths": [
@@ -51,17 +52,6 @@
     "configurations/robot_lab/robo_scan_export_lock.json",
     "configurations/robot_lab/so101_canonical_processor_contract.json",
     "configurations/robot_lab/strict_anchor_grasp_evaluator_v2.fixture.json",
-    "docs/architecture.md",
-    "docs/requirements-and-contracts.md",
-    "docs/robo-scan-integration.md",
-    "docs/robo-scan-sim-link-integration-roadmap.md",
-    "docs/sim-link-mvp-execution-plan.md",
-    "docs/autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md",
-    "docs/briefs/222-t20-43b-act-stable-runtime-replacement.md",
-    "docs/reviewer-messages/297-verify-t20-44-r2-smolvla-terminal-negative.md",
-    "docs/reviewer-messages/299-verify-t20-43b-stable-act-replacement-implementation.md",
-    "docs/reviewer-messages/301-accept-t20-43b-r1-act-pre-run-authority.md",
-    "docs/reviewer-messages/302-close-t20-43b-window-with-unconsumed-permit.md",
     "scripts/robot_lab/patches/pi05_gripper_loss_weight.patch",
     "third_party/mujoco_menagerie/robotstudio_so101/LICENSE",
     "third_party/mujoco_menagerie/robotstudio_so101/README.md",

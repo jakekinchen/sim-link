@@ -147,6 +147,15 @@ def _module_path(module: str, tree: set[str]) -> str | None:
     return package if package in tree else None
 
 
+def _package_initializers(path: str, tree: set[str]) -> set[str]:
+    parts = PurePosixPath(path).parts[:-1]
+    return {
+        "/".join(parts[:index]) + "/__init__.py"
+        for index in range(1, len(parts) + 1)
+        if "/".join(parts[:index]) + "/__init__.py" in tree
+    }
+
+
 def _imported_modules(tree: ast.AST, current_path: str) -> set[str]:
     modules: set[str] = set()
     current_module = current_path[:-3].replace("/", ".")
@@ -291,6 +300,11 @@ def build_manifest(repo_root: Path) -> dict[str, Any]:
             raise KitError(f"Python seed/import is absent: {path}")
         seen_python.add(path)
         selected.add(path)
+        initializers = _package_initializers(path, source_tree)
+        selected.update(initializers)
+        queue.extend(
+            initializer for initializer in sorted(initializers) if initializer not in seen_python
+        )
         parsed = ast.parse(git_blob(root, commit, path), filename=path)
         for dependency in _literal_dependencies(
             parsed,

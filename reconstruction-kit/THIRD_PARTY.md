@@ -11,7 +11,7 @@ copies the local `external/` checkouts.
 | leLab | `def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da` | Apache-2.0 | Optional UI/runtime and URDF reference |
 | MuJoCo Menagerie | `71f066ad0be9cd271f7ed58c030243ef157af9f4` | Apache-2.0 | Vendored robotstudio_so101 structural reference |
 | openpi | `15a9616a00943ada6c20a0f158e3adb39df2ccac` | Apache-2.0 | PI0.5 semantic reference only |
-| SceneSmith capsule | source commit `6c53d93...` | MIT | Governance shell, simulation/data/evaluation integration |
+| SceneSmith capsule | portable source commit `605e4d3...`; evidence snapshot `6c53d93...` | MIT | Governance shell, simulation/data/evaluation integration |
 
 ## Required byte checks
 

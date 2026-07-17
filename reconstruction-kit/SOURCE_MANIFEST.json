@@ -1037,6 +1037,14 @@
     },
     {
       "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_41_owner_route_decision_e9d0507.snapshot.md",
+      "role": "signed compact evidence or contract",
+      "sha256": "ae75bb594ab93a046afe848b3befb6bb919485f4814f1ab423aad9c36cbea1d5",
+      "size_bytes": 7227,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
       "path": "configurations/robot_lab/t20_42_r0_admission_fixture.json",
       "role": "signed compact evidence or contract",
       "sha256": "ee5ff97f85b2e117c34d2c8ec0e54b5081393cbb9a09321c30728488e5657e06",
@@ -1429,34 +1437,10 @@
     },
     {
       "git_mode": "100644",
-      "path": "docs/architecture.md",
-      "role": "canonical reference",
-      "sha256": "67398faf7f330a03e5b9a79d8de1f954fad68540ac47e2ac4093ccea71a7594e",
-      "size_bytes": 10486,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
       "path": "docs/autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md",
       "role": "canonical reference",
       "sha256": "f2538bf6b66582f84f52b6e84485711a0212e931431a11c365f85668bc787209",
       "size_bytes": 9042,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
-      "path": "docs/briefs/222-t20-43b-act-stable-runtime-replacement.md",
-      "role": "canonical reference",
-      "sha256": "913f544a724e2aefbf1543abf2fec5566692a75a8147b525080d32e29da9d4d3",
-      "size_bytes": 8118,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
-      "path": "docs/requirements-and-contracts.md",
-      "role": "canonical reference",
-      "sha256": "63e0bd5ee00ca2f88a4238f1a168e9624b401c873d6f2e95ed89ef4c6d242987",
-      "size_bytes": 7477,
       "tier": "reference"
     },
     {
@@ -1473,62 +1457,6 @@
       "role": "canonical reference",
       "sha256": "70a0b7a81584d640d10648d8c50eb1898349c294a79f425ba09d76ebc53dac77",
       "size_bytes": 3460,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
-      "path": "docs/reviewer-messages/297-verify-t20-44-r2-smolvla-terminal-negative.md",
-      "role": "canonical reference",
-      "sha256": "5d835c77a0c12aa7656b8a4f7b80a83d8c0ab9c1b0fc5f1ad28424d976850195",
-      "size_bytes": 3560,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
-      "path": "docs/reviewer-messages/299-verify-t20-43b-stable-act-replacement-implementation.md",
-      "role": "canonical reference",
-      "sha256": "346f11ebcc8d2ad75dd5b8f4f020b4d5e03c3f60bccaf2fcd63b43738cfc3e46",
-      "size_bytes": 3480,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
-      "path": "docs/reviewer-messages/301-accept-t20-43b-r1-act-pre-run-authority.md",
-      "role": "canonical reference",
-      "sha256": "50f11576efcb771cbcca2d1085a998b799bb51e94b1bcefb40aac1349a99ea2a",
-      "size_bytes": 3818,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
-      "path": "docs/reviewer-messages/302-close-t20-43b-window-with-unconsumed-permit.md",
-      "role": "canonical reference",
-      "sha256": "e49706f23eeb50ffe7a70cd006a051ecf444f0811009bb31baab3b17629fe403",
-      "size_bytes": 2348,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
-      "path": "docs/robo-scan-integration.md",
-      "role": "canonical reference",
-      "sha256": "4a695f59e333e8f1854341174ef4aa1569d680095f14e1ec82756f001d032d56",
-      "size_bytes": 7362,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
-      "path": "docs/robo-scan-sim-link-integration-roadmap.md",
-      "role": "canonical reference",
-      "sha256": "06795088b8d52787ecd92e7de35e248874af0678462ab6786529f730522373fc",
-      "size_bytes": 22396,
-      "tier": "reference"
-    },
-    {
-      "git_mode": "100644",
-      "path": "docs/sim-link-mvp-execution-plan.md",
-      "role": "canonical reference",
-      "sha256": "ba72f90a24bedda9181a221ebaedebd0d41aebdc7f26918b0e6f588a26300e71",
-      "size_bytes": 47941,
       "tier": "reference"
     },
     {
@@ -1585,6 +1513,22 @@
       "role": "portable implementation",
       "sha256": "0cd94f3b69954eac40c3bb0bbbfd684c692b3eb836b5179b80c16bbb274affb3",
       "size_bytes": 16409,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/desk_sort.py",
+      "role": "portable implementation",
+      "sha256": "755fbf97089c1529dee545e1538e298bc50e7337b730d1475b62020d6a9a94bf",
+      "size_bytes": 18847,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/domain_randomization.py",
+      "role": "portable implementation",
+      "sha256": "d45106a71fed1fbf5c225cd093cc938d5b4c9e25dcd3937d3574ca911228c4a3",
+      "size_bytes": 13805,
       "tier": "core"
     },
     {
@@ -1665,6 +1609,14 @@
       "role": "portable implementation",
       "sha256": "9f1c8ea6007a2591d712034cccf6b424cf78f088674df305c932b5c318dd6c95",
       "size_bytes": 26953,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/lerobot_bridge.py",
+      "role": "portable implementation",
+      "sha256": "0eb3bbae4bb2552fe4bfe3c86ae143659b410f7943f9a4a0c7e995bd0e6d3303",
+      "size_bytes": 6041,
       "tier": "core"
     },
     {
@@ -2111,8 +2063,8 @@
       "git_mode": "100644",
       "path": "scenesmith/robot_lab/t20_42_r0_dataset_construction.py",
       "role": "portable implementation",
-      "sha256": "4d0c0c63844feb91bd4c211d99bad5d2e9b7cdec0e032f0093676d5d44aca2b6",
-      "size_bytes": 44687,
+      "sha256": "106ff0b741024732ce310e1a1dff84dcfc99a73a9c5ab5a3fbe9d5eeb22ab3e8",
+      "size_bytes": 45042,
       "tier": "core"
     },
     {
@@ -2209,6 +2161,14 @@
       "role": "portable implementation",
       "sha256": "b2edcf03f7ceeab61d2fe15318d93bbafdbcd72b3b2a120d97ef55dadfe7e20a",
       "size_bytes": 62478,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/threejs_export.py",
+      "role": "portable implementation",
+      "sha256": "b8c684cb485796603791afc44a04101c2f35a6c743b0351af257ace121720218",
+      "size_bytes": 15641,
       "tier": "core"
     },
     {
@@ -2394,6 +2354,54 @@
       "sha256": "87d0995e571f5fe5802c6591c62f9d32e92bab958ee8e029ddd3fbfa806b3357",
       "size_bytes": 1328,
       "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/__init__.py",
+      "role": "focused regression",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/fixtures/robot_lab/lerobot_stack/sample.json",
+      "role": "focused regression",
+      "sha256": "e753a4c1cbb6af920935004f7096980323e4efabfd1a1923f10aa68b41f537e8",
+      "size_bytes": 112,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/fixtures/robot_lab/measured_mass/production_mixed_source.fixture.json",
+      "role": "focused regression",
+      "sha256": "2639e84d067da3d4484a0043fd5fba0d2f8a6c8495c23e1380271335d16542c0",
+      "size_bytes": 20214,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/fixtures/robot_lab/measured_mass/production_mixed_source.output.json",
+      "role": "focused regression",
+      "sha256": "c307c057ffb93c9a2b57d4768929d460d1d76d8952ebf88a86bae7e02a36346e",
+      "size_bytes": 29052,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/fixtures/robot_lab/measured_mass/synthetic_complete.json",
+      "role": "focused regression",
+      "sha256": "ac674d06f2f6e2b3fc48c2c6013cee2e7143c79949ce891f2d7e0e384fc8dd58",
+      "size_bytes": 8312,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/__init__.py",
+      "role": "focused regression",
+      "sha256": "1522ae290b7729c8095319901c398d5ec605b2bc03dd7c4eb52d8017c561c033",
+      "size_bytes": 306,
+      "tier": "validation"
     },
     {
       "git_mode": "100644",
@@ -2622,7 +2630,7 @@
     "outputs/",
     "tmp/"
   ],
-  "identity_sha256": "f46263d339664dd18c710a908b9783e8d54af03a5c7475e2a27d63b6ec468b3b",
+  "identity_sha256": "5067d1c29c4a285f70a96720f90f52e312a8f61d60e74a2de030c9d3ec910303",
   "learned_policy_success_claimed": false,
   "maximum_file_bytes": 2000000,
   "omitted_source_artifacts": [
@@ -2653,13 +2661,13 @@
     {
       "path": "docs/autonomous-workflow/project_state.json",
       "reason": "Repository-bound live authority state is deliberately not transplanted; the kit supplies a non-authorizing proof snapshot and the destination must initialize its own state and authority epoch.",
-      "sha256": "244ccfd641d49dca264fc304d7bdf71cd641d3ae49640665b632d6f00b1cc50d",
-      "size_bytes": 426536
+      "sha256": "ab567764d8ad66d3d67e30b2ce196a9ee3e46ef7aee914ec1526feffaaf379a7",
+      "size_bytes": 427736
     }
   ],
   "physical_proof_transferred": false,
   "schema_version": "scenesmith.reconstruction_source_manifest.v1",
-  "selection_sha256": "8e7a50f05beb06611d61dc0b89013221b937b08714be9bc7ce9821f547d0b8fd",
-  "source_commit": "6c53d9309f7f41f0d3ac351c049436ddda20e50f",
+  "selection_sha256": "e85e1c593a839ff98373a474c4077b208e1169d22efd0031164f86a7ed29e6c2",
+  "source_commit": "605e4d3624a87593a1b5da9a97cd263f6bade78a",
   "source_repository": "https://github.com/jakekinchen/sim-link.git"
 }

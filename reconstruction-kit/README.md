@@ -31,9 +31,12 @@ promotion claim exists.
 6. [Third-party boundary](./THIRD_PARTY.md) — exact external pins, licenses, and
    what is deliberately not copied.
 
-`CURRENT_STATE.json` is the compact machine-readable snapshot.
-`SOURCE_MANIFEST.json` is generated from `source-selection.json` and binds every
-curated source byte to closeout commit `6c53d93...`.
+`CURRENT_STATE.json` is the compact machine-readable result snapshot at
+`6c53d93...`. `SOURCE_MANIFEST.json` is generated from
+`source-selection.json` and binds every curated implementation/evidence byte,
+including the immutable T20.41 route snapshot, to portable source commit
+`605e4d3...`. The export receipt separately binds the compressed reconciled
+documentation in this directory.
 
 ## Verify and export
 
@@ -52,6 +55,12 @@ The exporter requires a new destination outside this repository. It copies the
 curated Git objects plus the kit, emits `RECONSTRUCTION_RECEIPT.json`, and fails
 closed on hash drift, symlinks, traversal, collisions, extra files, or authority
 escalation.
+
+The finalized manifest contains 321 curated files (8,614,788 bytes). It
+explicitly records five omitted source artifacts totaling 22,811,274 bytes:
+four bulky historical replay/tensor payloads plus the repository-bound live
+project state. Their hashes and omission reasons remain auditable without
+transplanting bulk history or stale authority.
 
 ## What this kit is not
 

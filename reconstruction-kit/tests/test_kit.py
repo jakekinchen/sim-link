@@ -3,6 +3,8 @@ from __future__ import annotations
 import copy
 import importlib.util
 import re
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -96,6 +98,25 @@ class ReconstructionKitTest(unittest.TestCase):
             self.assertEqual(receipt, verified)
             self.assertTrue((destination / "README.md").is_file())
             self.assertTrue((destination / "tools/reconstruction_kit.py").is_file())
+            self.assertTrue((destination / "tests/__init__.py").is_file())
+            self.assertTrue((destination / "tests/unit/__init__.py").is_file())
+            self.assertTrue(
+                (destination / "tests/fixtures/robot_lab/lerobot_stack/sample.json").is_file()
+            )
+            imported = subprocess.run(
+                [
+                    sys.executable,
+                    "-B",
+                    "-c",
+                    "import scenesmith.robot_lab.artifact_contract; "
+                    "import tests.unit.test_artifact_contract",
+                ],
+                cwd=destination,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(imported.returncode, 0, msg=imported.stderr)
             self.assertFalse((destination / "outputs").exists())
             self.assertFalse((destination / "external").exists())
             self.assertFalse(receipt["bulk_outputs_copied"])

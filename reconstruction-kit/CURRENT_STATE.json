@@ -3,6 +3,7 @@
   "recorded_date": "2026-07-16",
   "source_branch": "codex/pi05-autolearn-loop",
   "source_commit": "6c53d9309f7f41f0d3ac351c049436ddda20e50f",
+  "portable_source_commit": "605e4d3624a87593a1b5da9a97cd263f6bade78a",
   "capabilities": {
     "constructive_strict_v2_source_success": true,
     "native_dataset_and_processor_boundary_verified": true,

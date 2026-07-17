@@ -2,6 +2,7 @@
 
 **Date:** 2026-07-16
 **Support task:** K1
+**Status:** Verified by Reviewer 303
 
 ## Objective
 
@@ -13,7 +14,11 @@ alphabet or importing misleading capability claims.
 
 ## Source boundary
 
-- Canonical closeout commit: `6c53d9309f7f41f0d3ac351c049436ddda20e50f`.
+- Canonical result-state snapshot: `6c53d9309f7f41f0d3ac351c049436ddda20e50f`.
+- Portable source/documentation boundary: implementation commit
+  `605e4d3624a87593a1b5da9a97cd263f6bade78a`; the generated source manifest
+  must pin this commit so corrected living docs and the immutable T20.41 route
+  snapshot are exported without changing the earlier signed results.
 - Live-state sources: `GOAL.md`, `docs/autonomous-workflow/project_state.json`,
   and the active task ledger.
 - Architecture/contract sources: `docs/architecture.md`,
