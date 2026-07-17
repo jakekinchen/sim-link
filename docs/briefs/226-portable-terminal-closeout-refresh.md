@@ -131,3 +131,16 @@ slice.
 - Focused tests, doc/link/manifest checks, and the same-agent contradiction
   review pass; scoped commits are pushed and origin-confirmed before the fork
   spine is called integrated.
+
+## Closeout evidence
+
+Source boundary `992ed2f5e40d11e3979cc206eebdfac20a004073` is preserved on
+origin. Final source manifest `d5396251...` selects 417 files. Source-pin
+validation export `ae7cfd7c...` verifies 438 files; after the closeout wrapper
+edits, final wrapper export `97daeb06...` independently verifies 438 files /
+77,918,520 bytes. Final-pin W1 receipt `7d9fa11a...` repeats the 29 focused
+tests, strict 244-frame expert episode, and all three schema renders. Combined
+W2 receipt `86739578...` remains exact under independent verification.
+Reviewer 319 closes K2 while keeping every model, optimizer, hardware,
+network, external-compute, Brev, transfer, promotion, and authority-transfer
+field false.

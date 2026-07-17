@@ -1,6 +1,6 @@
 {
   "schema_version": "scenesmith.reconstruction_source_selection.v1",
-  "source_commit": "1e4773d6736890b48adb67dff6978ec565874ac7",
+  "source_commit": "992ed2f5e40d11e3979cc206eebdfac20a004073",
   "source_repository": "https://github.com/jakekinchen/sim-link.git",
   "maximum_file_bytes": 2000000,
   "forbidden_prefixes": [

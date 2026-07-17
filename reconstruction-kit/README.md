@@ -95,6 +95,12 @@ W2 receipt `86739578...` then recreates the exact legacy R0 boundary in
 receipts explicitly keep authority, model construction, optimizer work,
 hardware, network, external compute, and Brev false.
 
+After the combined receipt was preserved, the source capsule was re-pinned at
+`992ed2f...`. Final manifest `d5396251...`, source-pin validation export
+`ae7cfd7c...`, and W1 recheck `7d9fa11a...` all verify. The W2 run is not
+repeated merely to make fresh timestamps or wrapper hashes agree; its exact
+content gate and receipt remain the decisive data-parity proof.
+
 ## Verify and export
 
 From the `sim-link` repository root:

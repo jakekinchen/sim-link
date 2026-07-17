@@ -1,6 +1,6 @@
 {
   "schema_version": "scenesmith.project_state.v1",
-  "updated": "2026-07-16",
+  "updated": "2026-07-17",
   "run_window": {
     "actual_start": "2026-07-16T21:25:04-05:00",
     "total_duration_hours": 8,
@@ -349,8 +349,8 @@
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "T20.43c-R2",
-  "next_eligible_task": "K2",
-  "active_support_task": "K2",
+  "next_eligible_task": "F0",
+  "active_support_task": null,
   "support_tasks": {
     "K1": {
       "state": "verified",
@@ -408,9 +408,40 @@
       ]
     },
     "K2": {
-      "state": "in_progress",
-      "active_brief_id": "226",
-      "result": "Brief 226 now has one pristine export passing W1 dual-runtime/all-schema bootstrap receipt 392fcc8b and exact W2 R0 recreation receipt 86739578 with independent verify exit 0; K2 remains in progress only for source-manifest re-pin and closeout review, while W3 and W5 remain unintegrated",
+      "state": "verified",
+      "active_brief_id": null,
+      "brief_id": "226",
+      "latest_verified_brief_id": "226",
+      "review_decision_id": "319",
+      "source_boundary_commit": "992ed2f5e40d11e3979cc206eebdfac20a004073",
+      "result": "Reviewer 319 accepts the reconstruction foundation: final manifest d5396251 selects 417 files, source-pin validation export ae7cfd7c and final wrapper export 97daeb06 each verify 438 files, final-pin W1 receipt 7d9fa11a passes 29 tests plus strict expert and all-schema renders, and combined W2 receipt 86739578 exactly recreates R0 with independent verify exit 0; W3 and W5 remain unintegrated",
+      "evidence": {
+        "source_manifest_identity_sha256": "d53962511a6e178e5a06269ceda193b40b9d9c8667514deaae8902d695c6989e",
+        "source_manifest_file_count": 417,
+        "source_manifest_total_bytes": 77602177,
+        "omitted_artifact_count": 5,
+        "omitted_total_bytes": 22834010,
+        "source_pin_validation_export_receipt_identity_sha256": "ae7cfd7c8881e7c4ad9aea102cba72a3bc15e962fda32cbe62239fe83c049040",
+        "source_pin_validation_export_file_count": 438,
+        "source_pin_validation_export_total_bytes": 77916341,
+        "final_wrapper_export_receipt_identity_sha256": "97daeb06ad02fca076bd97902eea1390ab4978eaf32a92aa577a393460faa9eb",
+        "final_wrapper_export_file_count": 438,
+        "final_wrapper_export_total_bytes": 77918520,
+        "final_pin_w1_receipt_identity_sha256": "7d9fa11ae1d4823f8cb56b68c24576412dfad42b951fcdb654b31c51b9df7cf4",
+        "final_pin_w1_receipt_file_sha256": "d4a75a74ed2e8f125626e92f0da0da8f69ab82652008fd9fe5d0646242523636",
+        "combined_w1_receipt_identity_sha256": "392fcc8b3b07e4a63e5029d95218d0672bedbc9d9a84ed0247310dfbeb733aa7",
+        "combined_w2_receipt_identity_sha256": "86739578ecde6bf983a2239645e00f51701f30f8c339fda2f73f14cad1e5c2eb",
+        "combined_w2_receipt_file_sha256": "97a7bcd67c8a5b60f7d90a9e0988c4441072b9acd4ee672be12fa428f14e2db4",
+        "combined_w2_elapsed_seconds": 4110.434219,
+        "combined_w2_independent_verify_exit_code": 0,
+        "kit_test_count": 13,
+        "r0_contract_test_count": 7,
+        "w1_focused_test_count": 29,
+        "learned_policy_success_claimed": false,
+        "authority_transferred": false,
+        "hardware_accessed": false,
+        "external_compute_used": false
+      },
       "authority_granted": [
         "read_and_verify_tracked_t20_43b_and_t20_43c_terminal_evidence",
         "maintain_signed_portable_asset_pack_and_w1_bootstrap",

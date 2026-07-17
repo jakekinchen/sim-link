@@ -42,6 +42,9 @@ competence.
 - W2 proof: 119+9 strict successes, 129 episodes, 31,366 frames, 59,904
   windows, mixture `37b30d34...`, statistics `02ba0e70...`, no mismatches,
   and independent verification exit 0 after 4,110.434219 seconds.
+- Final source-pin manifest: `d53962511a6e178e5a06269ceda193b40b9d9c8667514deaae8902d695c6989e`.
+- Source-pin validation export: `ae7cfd7c8881e7c4ad9aea102cba72a3bc15e962fda32cbe62239fe83c049040`.
+- Final-pin W1 recheck: `7d9fa11ae1d4823f8cb56b68c24576412dfad42b951fcdb654b31c51b9df7cf4`.
 
 These receipts prove compatibility from a clean export. They do not transfer
 source-repository authority, include the generated 2.7 GB R0 tree, or establish

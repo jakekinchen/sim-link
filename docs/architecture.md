@@ -122,6 +122,12 @@ not a new training result or authority grant.
 No learned policy has passed strict-v2. Physical-twin qualification, transfer
 readiness, and promotion remain false.
 
+The owner-recorded F0 release-gap route is a new, separately reviewed
+experiment derived from the R2 counterexample; it is not a reinterpretation or
+retry grant from the terminal receipt. The fork architecture remains ACT plus
+state-based RL as primary, regardless of the optional source-repo F1 PI0.5
+experiment.
+
 ## Fork Target Architecture
 
 The portable fork is a deliberate simplification target, not a description of

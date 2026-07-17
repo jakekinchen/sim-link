@@ -39,6 +39,17 @@ episodes, 31,366 frames, 59,904 windows, mixture `37b30d34...`, and statistics
 compatibility gate without transferring authority or making the full
 audiovisual legacy dataset the fork's fast-RL format.
 
+## Immediate source-repo route before fork birth
+
+The owner-recorded F0 route interrogates the R2 release-phase counterexample
+before any new ACT rung: measure tail-window under-representation, verify the
+open-gripper command lies inside the R0 normalization envelope, then inspect
+release-phase mixture and gripper weighting. Only a separately reviewed brief
+may choose one corrective ACT rung from that diagnosis. A scoped F1 PI0.5/Brev
+experiment is an optional parallel source-repo lane under its own cost and
+teardown contract; it does not make PI0.5 a fork-primary policy and it does not
+block F0. Neither lane is authorized by this reconstruction kit.
+
 ## P2 — Establish the fork's two primary learning tracks
 
 1. Freeze held-out scenes/seeds before training and publish the constructive

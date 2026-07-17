@@ -12,21 +12,26 @@ inconclusive owner-directive interruption at update 728. T20.43c-R2 then
 completed the unchanged ACT recipe through 10,000 updates, seven checkpoints,
 and fourteen rollouts with no infrastructure failure and no Gate C pass. It is
 the decisive ACT-on-R0 terminal negative; no retry or third ACT attempt is
-authorized. The most useful counterexample is its chunk-50 release phase:
+authorized by that result itself. The later owner-recorded F0 route separately
+opens diagnosis of that counterexample and at most one corrective ACT rung
+after a fresh reviewed brief. The most useful counterexample is its chunk-50 release phase:
 45.674304 mm maximum lift and 37.655304 mm final lift, with only
 `release_final_contact_clear` failing in the final rollout. Learned strict-v2
 success, rather than ACT plumbing, is now the sim-link long pole. PI0.5 remains
-conditional/day-three stretch. Robo Scan proceeds independently toward the
-real metric export required by I5.
+day-three stretch in the fork; the separately scoped F1/Brev experiment is a
+source-repo parallel lane and does not change that fork priority. Robo Scan
+proceeds independently toward the real metric export required by I5.
 
 This plan is a task-ordering source, not an authority source. Live authority,
 training readiness, and proof labels remain mechanically owned by
 [`project_state.json`](./autonomous-workflow/project_state.json) and the central
 authority composer.
 
-The next-hours convergence order, demo checkpoint, proof bundle, and full-MVP
-proof stack are fixed by
-[`Manager Intervention 018`](./manager-log/018-mvp-demo-convergence-directive.md).
+The current next-hours route is fixed by
+[`Owner Direction — Final Overnight Exploration`](./autonomous-workflow/owner-direction-2026-07-17-final-overnight.md):
+F0 release-gap diagnosis first, optional separately scoped F1 in parallel, F2
+serving after a grasping checkpoint, then F3 fold. Manager Intervention 018 is
+retained as superseded convergence history.
 
 ## Product Cut
 

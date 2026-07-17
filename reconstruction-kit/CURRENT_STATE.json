@@ -1,8 +1,8 @@
 {
   "schema_version": "scenesmith.reconstruction_current_state.v1",
-  "recorded_date": "2026-07-16",
+  "recorded_date": "2026-07-17",
   "source_branch": "codex/pi05-autolearn-loop",
-  "source_commit": "1e4773d6736890b48adb67dff6978ec565874ac7",
+  "source_commit": "992ed2f5e40d11e3979cc206eebdfac20a004073",
   "terminal_result_source_commit": "cdc44c863597869f48049b11fbb79c21fc231811",
   "portable_source_commit": "6d28e0c6e5aa2d7b283b4d3d84f0e95d969e71fd",
   "renderer_fix_commit": "37c5da61df43da021d087789475bc5d423c54012",
@@ -133,6 +133,23 @@
     "physical_hardware_accessed": false,
     "external_compute_used": false
   },
+  "w1_final_pin_verification": {
+    "status": "verified",
+    "receipt_identity_sha256": "7d9fa11ae1d4823f8cb56b68c24576412dfad42b951fcdb654b31c51b9df7cf4",
+    "receipt_file_sha256": "d4a75a74ed2e8f125626e92f0da0da8f69ab82652008fd9fe5d0646242523636",
+    "pristine_export_receipt_identity_sha256": "ae7cfd7c8881e7c4ad9aea102cba72a3bc15e962fda32cbe62239fe83c049040",
+    "source_commit": "992ed2f5e40d11e3979cc206eebdfac20a004073",
+    "source_manifest_identity_sha256": "d53962511a6e178e5a06269ceda193b40b9d9c8667514deaae8902d695c6989e",
+    "elapsed_seconds": 54.828011,
+    "focused_test_count": 29,
+    "expert_episode_frame_count": 244,
+    "expert_episode_strict_success": true,
+    "retained_trace_schema_smoke_count": 3,
+    "authority_transferred": false,
+    "optimizer_created": false,
+    "physical_hardware_accessed": false,
+    "external_compute_used": false
+  },
   "w2_r0_recreation": {
     "status": "verified_combined_clean_export",
     "candidate_receipt_identity_sha256": "fd83af1d629242925dabc564d49c60738f20db4099fe542b196534b44f3d560a",
@@ -157,8 +174,9 @@
   },
   "current_route": {
     "task_id": "K2",
-    "status": "portable_bootstrap_and_r0_recreation_verified_pending_manifest_repin_and_closeout_review",
+    "status": "verified",
     "brief_id": "226",
+    "review_decision_id": "319",
     "owner_overnight_foundation_direction_recorded": true,
     "t20_43c_terminal_boundaries_preserved": true,
     "t20_43c_r2_terminal_negative_preserved": true,
@@ -167,6 +185,7 @@
     "w2_handoff_integrated": true,
     "w3_handoff_integrated": false,
     "w5_handoff_integrated": false,
+    "next_eligible_task": "F0",
     "hackathon_annex_path": "docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md"
   },
   "authority": {

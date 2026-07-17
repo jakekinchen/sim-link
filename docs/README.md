@@ -50,6 +50,12 @@ transfer, or promotion claim exists. The
 snapshot](../reconstruction-kit/CURRENT_STATE.md) compresses this boundary;
 `project_state.json` remains authoritative for any later change.
 
+R2 itself grants no retry. The later owner-recorded F0 route is a distinct
+forward task: diagnose release-tail coverage, open-gripper normalization, and
+release weighting before a fresh brief may select at most one corrective ACT
+rung. The separately scoped F1/Brev lane is optional and does not change the
+fork's ACT-plus-state-RL primary architecture.
+
 The kit's combined portability proof is also complete: W1 receipt
 `392fcc8b...` verifies the current dual-runtime/all-schema stack from a
 pristine export, and W2 receipt `86739578...` independently recreates the

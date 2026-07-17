@@ -1,0 +1,90 @@
+{
+  "authority_transferred": false,
+  "dependency_source": "local",
+  "elapsed_seconds": 54.828011,
+  "expert_episode": {
+    "episode_file_sha256": "586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54",
+    "frame_count": 244,
+    "receipt_identity_sha256": "fb77ab5ba2ff462aa5c8b5b5a86e943b8e543ef3b49db0ce952b8df93fb506b0",
+    "receipt_path": "outputs/reconstruction/bootstrap_run_001/expert_seed0_receipt.json",
+    "strict_success": true
+  },
+  "external_checkouts": [
+    {
+      "name": "LeRobot",
+      "patch_sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+      "revision": "e40b58a8dfa9e7b86918c374791599d070518d11"
+    },
+    {
+      "name": "SO-ARM100",
+      "required_file_sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+      "revision": "fda892cba81032c46c40976a48c9ceadbf40a9ca"
+    },
+    {
+      "name": "leLab",
+      "required_file_sha256": "443d38d756e01bac7d3455b24430047ddc6427105e0d3454b2003116f5f67236",
+      "revision": "def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da"
+    }
+  ],
+  "external_compute_used": false,
+  "focused_test_modules": [
+    "tests.unit.test_artifact_contract",
+    "tests.unit.test_so101_coordinates",
+    "tests.unit.test_so101_processor",
+    "tests.unit.test_strict_grasp_v2",
+    "tests.unit.test_lerobot_stack"
+  ],
+  "identity_sha256": "7d9fa11ae1d4823f8cb56b68c24576412dfad42b951fcdb654b31c51b9df7cf4",
+  "optimizer_created": false,
+  "physical_hardware_accessed": false,
+  "portable_asset_manifest_identity_sha256": "935c3da1cc59cc1236716056be7226b4527032c036fc80b3df36ce07f77916aa",
+  "pristine_export_receipt_identity_sha256": "ae7cfd7c8881e7c4ad9aea102cba72a3bc15e962fda32cbe62239fe83c049040",
+  "python_install_offline": true,
+  "renderer_smokes": [
+    {
+      "frame_count": 1,
+      "name": "t20_43_act_chunk_50",
+      "output_bytes": 22637,
+      "output_sha256": "ad931788084be4ef5c85598e46645160485ab7682f95e0a8ece3c80c1f50d974",
+      "render_manifest_identity_sha256": "528d25924b8de33d1a461fcc56ee6cf37b3076a966d79820fc2621e100e27f6d",
+      "trace_identity_sha256": "6133ce582936d6f2057cff2877df1a7d66b7cb2397fbcc1032286fbf16a59507",
+      "trace_schema_version": "scenesmith.t20_43_r1_act_closed_loop_trace.v1"
+    },
+    {
+      "frame_count": 1,
+      "name": "t20_43b_act_chunk_50",
+      "output_bytes": 22637,
+      "output_sha256": "ad931788084be4ef5c85598e46645160485ab7682f95e0a8ece3c80c1f50d974",
+      "render_manifest_identity_sha256": "e0bcb9767847b0fa6057173386d2707cc5ffefb26b8a309168d7fe265bccba81",
+      "trace_identity_sha256": "b707b815ab3b204e29dbbc8e50114307058019da3116f8f5ac496c1b6e05f4bd",
+      "trace_schema_version": "scenesmith.t20_43b_r1_act_closed_loop_trace.v1"
+    },
+    {
+      "frame_count": 1,
+      "name": "t20_44_smolvla_chunk_50",
+      "output_bytes": 22637,
+      "output_sha256": "ad931788084be4ef5c85598e46645160485ab7682f95e0a8ece3c80c1f50d974",
+      "render_manifest_identity_sha256": "6de0ca047651cbb5a5d16a9a48a7e3e7cfde6bed85fb2d3b95e12525e604a55e",
+      "trace_identity_sha256": "927c6e3dde1387cffcd3da18c0cd80df52a71a03813fd5f6f846b34f1578e49b",
+      "trace_schema_version": "scenesmith.t20_44_r2_smolvla_closed_loop_trace.v1"
+    }
+  ],
+  "runtime_versions": {
+    "Pillow": "12.3.0",
+    "datasets": "4.8.5",
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.5",
+    "numpy": "2.2.6",
+    "pyarrow": "25.0.0",
+    "torch": "2.11.0",
+    "torchvision": "0.26.0"
+  },
+  "schema_version": "scenesmith.reconstruction_bootstrap.v1",
+  "source_bound_test_exclusions": {
+    "tests.unit.test_authority_composer": "The source lock intentionally binds an untracked external/leLab/uv.lock. The export carries the composer as inert history but does not reconstruct or grant repository-bound authority."
+  },
+  "source_commit": "992ed2f5e40d11e3979cc206eebdfac20a004073",
+  "source_manifest_identity_sha256": "d53962511a6e178e5a06269ceda193b40b9d9c8667514deaae8902d695c6989e",
+  "stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "training_authorized": false
+}

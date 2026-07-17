@@ -159,13 +159,15 @@ T20.42/R0 remains verified and T20.44 SmolVLA remains a terminal negative.
 Hardware remains closed unless separately composed under K3; network, external
 compute, Brev, physical transfer, and promotion remain closed.
 
-Support task K2/Brief 226 has now passed W1 and W2 together from one pristine
-export. W1 receipt `392fcc8b...` proves the existing dual-runtime/all-schema
-stack; W2 receipt `86739578...` recreates exact R0 with no mismatches and an
-independent verifier exit 0. K2 remains in progress only for the new receipt's
-source-manifest pin and closeout review. W3 remains a blocked-dependency
-0-of-3 candidate and W5 remains a reviewed transport/replay candidate only;
-neither is integrated.
+Support task K2/Brief 226 is verified by Reviewer 319. Final manifest
+`d5396251...`, source-pin validation export `ae7cfd7c...`, final wrapper export
+`97daeb06...`, and final-pin W1 receipt `7d9fa11a...` verify the portable stack;
+combined W2 receipt `86739578...` recreates exact R0 with no mismatches and
+independent verifier exit 0. W3's isolated handoff remains 0-of-3 and W5
+remains transport/replay evidence only; neither is integrated. The next
+eligible source-repo task is a fresh F0 brief for release-gap diagnosis. This
+closeout does not open corrective training, F1/Brev, hardware, transfer,
+promotion, or the freeze tag.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean

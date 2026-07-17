@@ -103,8 +103,16 @@
       "git_mode": "100644",
       "path": "configurations/robot_lab/k2_w1_portable_bootstrap_receipt.json",
       "role": "signed compact evidence or contract",
-      "sha256": "4c9a3cdf5788b30e5501f4a4f59883196b0b6824745d9c486e7a77f9f6b123c2",
+      "sha256": "304448dfe11ab4654694ff1134c0847af910c54f1df11dd7002573dfd768d535",
       "size_bytes": 4083,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/k2_w2_combined_r0_recreation_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "97a7bcd67c8a5b60f7d90a9e0988c4441072b9acd4ee672be12fa428f14e2db4",
+      "size_bytes": 8186,
       "tier": "evidence"
     },
     {
@@ -1677,6 +1685,14 @@
     },
     {
       "git_mode": "100644",
+      "path": "docs/autonomous-workflow/owner-direction-2026-07-17-final-overnight.md",
+      "role": "canonical reference",
+      "sha256": "2a5fb017f0e82a2863fecbde4783b0f8cf0774538831692ab92757227a3bfe47",
+      "size_bytes": 5042,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
       "path": "docs/autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md",
       "role": "canonical reference",
       "sha256": "f2538bf6b66582f84f52b6e84485711a0212e931431a11c365f85668bc787209",
@@ -1687,8 +1703,8 @@
       "git_mode": "100644",
       "path": "docs/briefs/226-portable-terminal-closeout-refresh.md",
       "role": "canonical reference",
-      "sha256": "faaecb6a7b171af856aeb672b71bc6180b9ddb584d7a8119dde8a3322bb8dca2",
-      "size_bytes": 7404,
+      "sha256": "096cd7b537746f1a221045097f14f4a99818b0274058b69f735f0f47b2fd4572",
+      "size_bytes": 7731,
       "tier": "reference"
     },
     {
@@ -3382,7 +3398,7 @@
     "outputs/",
     "tmp/"
   ],
-  "identity_sha256": "c7de94b3c7005cc4689a018f9193b267de9a969c2f47295504d155e9af78f3ca",
+  "identity_sha256": "d53962511a6e178e5a06269ceda193b40b9d9c8667514deaae8902d695c6989e",
   "learned_policy_success_claimed": false,
   "maximum_file_bytes": 2000000,
   "omitted_source_artifacts": [
@@ -3413,13 +3429,13 @@
     {
       "path": "docs/autonomous-workflow/project_state.json",
       "reason": "Repository-bound live authority state is deliberately not transplanted; the kit supplies a non-authorizing proof snapshot and the destination must initialize its own state and authority epoch.",
-      "sha256": "63d9e3f262f794dc97b6bb67dd0cf3a93b7f73428f130fa59e1884cad9dbf67c",
-      "size_bytes": 450437
+      "sha256": "67ccf7d667614e98a5aafc3efae0663b8888ea446ea995d6c7f341bcea5b3882",
+      "size_bytes": 450472
     }
   ],
   "physical_proof_transferred": false,
   "schema_version": "scenesmith.reconstruction_source_manifest.v1",
-  "selection_sha256": "e1c1a451155ecc465b564dd688536b3455b800df833b7c13ce4eec1634914707",
-  "source_commit": "1e4773d6736890b48adb67dff6978ec565874ac7",
+  "selection_sha256": "addb9d5dd1d12f286018a357ed11c632bb390abdc5e241cbaf03f8b5d5b948e6",
+  "source_commit": "992ed2f5e40d11e3979cc206eebdfac20a004073",
   "source_repository": "https://github.com/jakekinchen/sim-link.git"
 }
