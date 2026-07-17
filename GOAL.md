@@ -127,6 +127,11 @@ proof states must remain distinct.
   sim2claw naming stamp, and tag. Leader-arm teleop is a documented weekend
   fallback only. Full ordering:
   `docs/autonomous-workflow/owner-direction-2026-07-17-final-overnight.md`.
+- Handoff recorded 2026-07-17 ~10:40 CDT: all lanes closed; clone the fork at
+  tag `handoff-2026-07-17-f0c-packaged` (the earlier freeze tag misses the
+  F0c package and F1 fold). Four-person day-one lanes, the R2 checkpoint
+  acquisition gotcha, and budget state are in
+  `docs/autonomous-workflow/handoff-runbook-2026-07-17.md`.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 
