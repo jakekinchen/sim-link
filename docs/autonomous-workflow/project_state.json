@@ -130,10 +130,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "222",
-    "commit": "5e8a2187bccd41377c53812487c8eeb299b41e54",
-    "reviewer_decision_id": "299",
-    "summary": "reviewer_299_accepts_t20_43b_stable_act_replacement_implementation_for_model_free_materialization_after_origin"
+    "brief_id": "223",
+    "commit": "fb0800e1709f588e4c5740dae8bf0c53ac5af9c4",
+    "reviewer_decision_id": "300",
+    "summary": "reviewer_300_accepts_the_geometry_preserving_standard_3mf"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -337,12 +337,35 @@
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "T20.43b",
   "next_eligible_task": "T20.43b",
-  "active_support_task": "K1",
+  "active_support_task": null,
   "support_tasks": {
     "K1": {
-      "state": "in_progress",
-      "active_brief_id": "224",
-      "result": "Brief 224 opens a documentation-and-tooling-only portable reconstruction kit pinned to closeout commit 6c53d93; the active T20.43b policy task and its absent marker remain unchanged",
+      "state": "verified",
+      "active_brief_id": null,
+      "brief_id": "224",
+      "latest_verified_brief_id": "224",
+      "review_decision_id": "303",
+      "implementation_commit": "605e4d3624a87593a1b5da9a97cd263f6bade78a",
+      "result": "Reviewer 303 accepts the portable reconstruction kit: 321 curated source files are pinned by manifest 5067d1c2, a 336-file clean export verifies as receipt 729addbb, current living docs are reconciled, and T20.43b remains unchanged and unconsumed",
+      "evidence": {
+        "result_state_snapshot_commit": "6c53d9309f7f41f0d3ac351c049436ddda20e50f",
+        "portable_source_commit": "605e4d3624a87593a1b5da9a97cd263f6bade78a",
+        "source_selection_sha256": "e85e1c593a839ff98373a474c4077b208e1169d22efd0031164f86a7ed29e6c2",
+        "source_manifest_identity_sha256": "5067d1c29c4a285f70a96720f90f52e312a8f61d60e74a2de030c9d3ec910303",
+        "source_file_count": 321,
+        "source_total_bytes": 8614788,
+        "omitted_artifact_count": 5,
+        "omitted_total_bytes": 22811274,
+        "clean_export_receipt_identity_sha256": "729addbb9d52ddd8ec7e6917ec6c5f18e06220d6c85a5ec43775474742cc2404",
+        "clean_export_file_count": 336,
+        "clean_export_total_bytes": 8782408,
+        "kit_test_count": 6,
+        "focused_robotics_test_count": 153,
+        "clean_export_dependency_light_test_count": 31,
+        "learned_policy_success_claimed": false,
+        "authority_transferred": false,
+        "bulk_or_external_content_copied": false
+      },
       "authority_granted": [
         "read_tracked_repository_evidence",
         "create_portable_reconstruction_documentation",

@@ -110,11 +110,12 @@ directed resolution of this final question; epoch 1 remains immutable and this
 direction is not a second replacement or attempt. Hardware, network,
 external compute, Brev, physical transfer, and promotion remain closed.
 
-Support task K1/Brief 224 creates the non-authorizing portable reconstruction
-kit from this closeout boundary. It may read tracked evidence, write docs and
-dependency-free export/verification tooling, and run model-free tests. It may
-not create a marker, load a model, run simulation/training, copy bulk/private
-artifacts, access hardware, or change T20.43b.
+Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
+portable reconstruction kit pins source manifest `5067d1c2...` and clean
+export receipt `729addbb...`, while excluding bulk/private content and live
+repository authority. It created no marker, model, optimizer, rollout,
+hardware, network, external-compute, or Brev action and did not change
+T20.43b.
 
 ### Retained execution history
 
