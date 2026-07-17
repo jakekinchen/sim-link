@@ -4,8 +4,8 @@
 The historical T20.43b specification content-addresses
 ``render_rollout_mirror.py``. This compatibility entrypoint delegates every
 existing schema to those exact legacy bytes and adds dispatch for the already
-defined T20.43b trace schema. It does not run a policy, optimizer, or physics
-rollout.
+defined T20.43b and F0b trace schemas. It does not run a policy, optimizer, or
+physics rollout.
 """
 
 from __future__ import annotations
@@ -29,19 +29,29 @@ from scenesmith.robot_lab.t20_43b_r1_act_runner import (  # noqa: E402
     TRACE_SCHEMA_VERSION as T20_43B_TRACE_SCHEMA_VERSION,
     verify_trace as verify_t20_43b_trace,
 )
+from scenesmith.robot_lab.f0b_hybrid_tail_cadence import (  # noqa: E402
+    TRACE_SCHEMA as F0B_TRACE_SCHEMA,
+    _source_episode_zero as load_f0b_source_episode_zero,
+    verify_trace as verify_f0b_trace,
+)
 
 
 def dispatch_trace(
     path: Path, *, legacy_loader: Callable[[Path], dict[str, Any]]
 ) -> dict[str, Any]:
-    """Verify T20.43b locally and delegate every legacy schema unchanged."""
+    """Verify current schemas locally and delegate legacy schemas unchanged."""
 
     payload = load_strict_json(path)
-    if payload.get("schema_version") != T20_43B_TRACE_SCHEMA_VERSION:
-        return legacy_loader(path)
-    verify_signed_payload(payload, label="rollout mirror source trace")
-    verify_t20_43b_trace(payload)
-    return payload
+    schema = payload.get("schema_version")
+    if schema == T20_43B_TRACE_SCHEMA_VERSION:
+        verify_signed_payload(payload, label="rollout mirror source trace")
+        verify_t20_43b_trace(payload)
+        return payload
+    if schema == F0B_TRACE_SCHEMA:
+        verify_signed_payload(payload, label="rollout mirror source trace")
+        verify_f0b_trace(payload)
+        return payload
+    return legacy_loader(path)
 
 
 def _legacy_namespace() -> dict[str, Any]:
@@ -53,12 +63,39 @@ def load_trace(path: Path) -> dict[str, Any]:
     return dispatch_trace(path, legacy_loader=namespace["_load_trace"])
 
 
+def dispatch_source_episode(
+    trace: dict[str, Any],
+    seed: int,
+    *,
+    legacy_loader: Callable[[int], list[dict[str, Any]]],
+) -> list[dict[str, Any]]:
+    """Use F0b's exact hash-bound source episode; preserve legacy routing otherwise."""
+
+    if trace.get("schema_version") != F0B_TRACE_SCHEMA:
+        return legacy_loader(seed)
+    if seed != 0:
+        raise ValueError("F0b renderer seed drifted")
+    _, frames = load_f0b_source_episode_zero(REPO_ROOT)
+    return frames
+
+
 def main() -> int:
     namespace = _legacy_namespace()
     legacy_loader = namespace["_load_trace"]
+    legacy_source_loader = namespace["_source_episode_frames"]
     legacy_main = namespace["main"]
-    legacy_main.__globals__["_load_trace"] = lambda path: dispatch_trace(
-        path, legacy_loader=legacy_loader
+    loaded: dict[str, dict[str, Any]] = {}
+
+    def routed_trace(path: Path) -> dict[str, Any]:
+        payload = dispatch_trace(path, legacy_loader=legacy_loader)
+        loaded["trace"] = payload
+        return payload
+
+    legacy_main.__globals__["_load_trace"] = routed_trace
+    legacy_main.__globals__["_source_episode_frames"] = lambda seed: (
+        dispatch_source_episode(
+            loaded["trace"], seed, legacy_loader=legacy_source_loader
+        )
     )
     return int(legacy_main())
 

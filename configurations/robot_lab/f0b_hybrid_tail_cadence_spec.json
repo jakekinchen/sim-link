@@ -1,0 +1,483 @@
+{
+  "brev_compute_started": false,
+  "brief_activation_commit": "fe552f02ffe59e133924a79d53df9806b4a92139",
+  "camera_accessed": false,
+  "checkpoint": {
+    "identity_sha256": "c77ee36250f921dbdfc7b19802ab8705c9795b298fa14d4a2b1825acf68451ab",
+    "load_count": 1,
+    "optimizer_update_count": 10000,
+    "path": "outputs/robot_lab/t20_43c_r2_act_replacement_run_001/checkpoints/step_10000",
+    "tree": [
+      {
+        "path": "config.json",
+        "sha256": "1b2ba89880e421180962a0c862b37bfc854d16e5f8811e82210a64ecf6d09aaf",
+        "size_bytes": 1714
+      },
+      {
+        "path": "model.safetensors",
+        "sha256": "673c87a5c411997e5a0e146702df95a0e301ba8585ec1cba64dca25b6d55170c",
+        "size_bytes": 206494928
+      }
+    ]
+  },
+  "checkpoint_tensor_read": false,
+  "dataset_mutated": false,
+  "decision": {
+    "corrective_training_selected": false,
+    "failure_is_terminal_for_f0b": true,
+    "infrastructure_failure_is_not_policy_negative": true,
+    "pass_requires_strict_v2_conjunction": true,
+    "pass_routes_to_separate_kit_fold_f2_decision": true,
+    "retry_authorized": false,
+    "single_corrective_rung_consumed": false
+  },
+  "dependency_revisions": {
+    "lerobot": {
+      "head": "e40b58a8dfa9e7b86918c374791599d070518d11",
+      "tree": "2fcde03d7b9920a4db01d12e0fe20704698ba5cf"
+    },
+    "so_arm_100": {
+      "head": "fda892cba81032c46c40976a48c9ceadbf40a9ca",
+      "tree": "3694b619d148dfeec39b4ee239a176db864ce424"
+    }
+  },
+  "evaluation": {
+    "baseline_rerun": false,
+    "decode_starts": [
+      0,
+      50,
+      100,
+      150,
+      176,
+      186,
+      196,
+      206,
+      216,
+      226,
+      236
+    ],
+    "episode_count": 1,
+    "executed_lengths": [
+      50,
+      50,
+      50,
+      26,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      8
+    ],
+    "frame_count": 244,
+    "full_decoded_chunks_retained": true,
+    "full_observed_frames_retained": true,
+    "manual_discard_count": 24,
+    "manual_discard_frame": 176,
+    "manual_queue_reset_count": 1,
+    "release_clearance_basis": "force_bearing_pad_or_nonpad_contact",
+    "selected_prefix_lengths": [
+      50,
+      50,
+      50,
+      50,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ],
+    "signed_mp4_required": true,
+    "simulation_seed": 0,
+    "strict_v2_oracle_unchanged": true,
+    "terminal_unexecuted_selected_count": 2,
+    "training_seed_before_policy_construction": 20260801
+  },
+  "external_compute_started": false,
+  "freeze_tag_authorized": false,
+  "hardware_accessed": false,
+  "identity_sha256": "00d7c7f300e2b8536e0a24437fadd7bf946c3580fa5eef6bfc0e632d0479953f",
+  "live_rendering": false,
+  "model_constructed": false,
+  "model_inference": false,
+  "model_loaded": false,
+  "network_accessed": false,
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "physical_actuation": false,
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "runtime": {
+    "device": "mps",
+    "dtype": "float32",
+    "interpreter": "external/lerobot/.venv/bin/python",
+    "mujoco_support_site_packages": "/Users/kelly/.cache/uv/archive-v0/jImpGSbFmnkCImQkijLNh/lib/python3.12/site-packages",
+    "offline_only": true
+  },
+  "scene_asset_tree": {
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "103328279b4e3d5cd498e74d16c13b9245f557127f3af75be312ac6236efbd14",
+        "size_bytes": 1431
+      },
+      {
+        "path": "assets/base_motor_holder_so101_v1.part",
+        "sha256": "3fc04275864139676a50041a322caf8807a063c0d6e73e7f74aa136eb8368df9",
+        "size_bytes": 443
+      },
+      {
+        "path": "assets/base_motor_holder_so101_v1.stl",
+        "sha256": "8cd2f241037ea377af1191fffe0dd9d9006beea6dcc48543660ed41647072424",
+        "size_bytes": 1877084
+      },
+      {
+        "path": "assets/base_so101_v2.part",
+        "sha256": "6c611cca00540c8f1aef67b1caba15e6674d5a1380eb51aa9c9216c6bfda37ac",
+        "size_bytes": 430
+      },
+      {
+        "path": "assets/base_so101_v2.stl",
+        "sha256": "bb12b7026575e1f70ccc7240051f9d943553bf34e5128537de6cd86fae33924d",
+        "size_bytes": 471584
+      },
+      {
+        "path": "assets/motor_holder_so101_base_v1.part",
+        "sha256": "1b4035c9fec35cd43ef5ecf74ad84827c45eed184b2194fe0a0f70ec42e464d7",
+        "size_bytes": 443
+      },
+      {
+        "path": "assets/motor_holder_so101_base_v1.stl",
+        "sha256": "31242ae6fb59d8b15c66617b88ad8e9bded62d57c35d11c0c43a70d2f4caa95b",
+        "size_bytes": 1129384
+      },
+      {
+        "path": "assets/motor_holder_so101_wrist_v1.part",
+        "sha256": "4ee9c4242bb7dec967ae1555e934995b5fe2fb9373af6db4741301b73082d4d6",
+        "size_bytes": 444
+      },
+      {
+        "path": "assets/motor_holder_so101_wrist_v1.stl",
+        "sha256": "887f92e6013cb64ea3a1ab8675e92da1e0beacfd5e001f972523540545e08011",
+        "size_bytes": 1052184
+      },
+      {
+        "path": "assets/moving_jaw_so101_v1.part",
+        "sha256": "97f6cefdce9495f86924ffb57f00f2cad8f8d5381e14f1932d6a51d00df1081e",
+        "size_bytes": 436
+      },
+      {
+        "path": "assets/moving_jaw_so101_v1.stl",
+        "sha256": "785a9dded2f474bc1d869e0d3dae398a3dcd9c0c345640040472210d2861fa9d",
+        "size_bytes": 1413584
+      },
+      {
+        "path": "assets/rotation_pitch_so101_v1.part",
+        "sha256": "0b7b24211a542555168d0a415ff4f05e6a4a9803045e8e31ffe1984fc3135e91",
+        "size_bytes": 440
+      },
+      {
+        "path": "assets/rotation_pitch_so101_v1.stl",
+        "sha256": "9be900cc2a2bf718102841ef82ef8d2873842427648092c8ed2ca1e2ef4ffa34",
+        "size_bytes": 883684
+      },
+      {
+        "path": "assets/sts3215_03a_no_horn_v1.part",
+        "sha256": "fdb32d86e6127a8f7642dd82dac283a0e7d2b45d5df537d003daa642c15e0ffa",
+        "size_bytes": 439
+      },
+      {
+        "path": "assets/sts3215_03a_no_horn_v1.stl",
+        "sha256": "75ef3781b752e4065891aea855e34dc161a38a549549cd0970cedd07eae6f887",
+        "size_bytes": 865884
+      },
+      {
+        "path": "assets/sts3215_03a_v1.part",
+        "sha256": "82eed501939906901c5bab37f01ba428bcab39856d244f9bd6fe07f441ceb0e0",
+        "size_bytes": 431
+      },
+      {
+        "path": "assets/sts3215_03a_v1.stl",
+        "sha256": "a37c871fb502483ab96c256baf457d36f2e97afc9205313d9c5ab275ef941cd0",
+        "size_bytes": 954084
+      },
+      {
+        "path": "assets/under_arm_so101_v1.part",
+        "sha256": "352adb8567f41a1fa517d0f0e8960749691a1d7079af73f15f1072c838c69709",
+        "size_bytes": 435
+      },
+      {
+        "path": "assets/under_arm_so101_v1.stl",
+        "sha256": "d01d1f2de365651dcad9d6669e94ff87ff7652b5bb2d10752a66a456a86dbc71",
+        "size_bytes": 1975884
+      },
+      {
+        "path": "assets/upper_arm_so101_v1.part",
+        "sha256": "63541673e4b9662974a8b148ea077a9067898a316d8c29aade06b20e22b05cb1",
+        "size_bytes": 435
+      },
+      {
+        "path": "assets/upper_arm_so101_v1.stl",
+        "sha256": "475056e03a17e71919b82fd88ab9a0b898ab50164f2a7943652a6b2941bb2d4f",
+        "size_bytes": 1303484
+      },
+      {
+        "path": "assets/waveshare_mounting_plate_so101_v2.part",
+        "sha256": "4a616d2126b70d46a939460ead1bbaf235aa1775672b35dd3e210811e6aa7dfb",
+        "size_bytes": 450
+      },
+      {
+        "path": "assets/waveshare_mounting_plate_so101_v2.stl",
+        "sha256": "e197e24005a07d01bbc06a8c42311664eaeda415bf859f68fa247884d0f1a6e9",
+        "size_bytes": 62784
+      },
+      {
+        "path": "assets/wrist_roll_follower_so101_v1.part",
+        "sha256": "93d674dfca5e566d1b033676f1fc50b4f0cc22e564a82ad7895f3dfd66b68848",
+        "size_bytes": 445
+      },
+      {
+        "path": "assets/wrist_roll_follower_so101_v1.stl",
+        "sha256": "4b17b410a12d64ec39554abc3e8054d8a97384b2dc4a8d95a5ecb2a93670f5f4",
+        "size_bytes": 1439884
+      },
+      {
+        "path": "assets/wrist_roll_pitch_so101_v2.part",
+        "sha256": "e9ba6151922dfc8312a54c73ae19224c0b16b863595e0eba86081eaf676ed376",
+        "size_bytes": 442
+      },
+      {
+        "path": "assets/wrist_roll_pitch_so101_v2.stl",
+        "sha256": "6c7ec5525b4d8b9e397a30ab4bb0037156a5d5f38a4adf2c7d943d6c56eda5ae",
+        "size_bytes": 2699784
+      },
+      {
+        "path": "joints_properties.xml",
+        "sha256": "abbcc92761943befe3a24b1c13e82c62c5b8c2914303818f3c870b1f51cd45ed",
+        "size_bytes": 470
+      },
+      {
+        "path": "scene.xml",
+        "sha256": "3b79a253a742f55ff0b16682173609229560d97744be472a238ea2e0a6a31ef6",
+        "size_bytes": 931
+      },
+      {
+        "path": "so101_new_calib.urdf",
+        "sha256": "3a65d2d35e68a8d2f0c2cc176d19b884506543c93ba72980145b80abe276022c",
+        "size_bytes": 16231
+      },
+      {
+        "path": "so101_new_calib.xml",
+        "sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+        "size_bytes": 13921
+      },
+      {
+        "path": "so101_old_calib.urdf",
+        "sha256": "a8151e4f7e5818d066680671d372ce49e7d30c4d068edb1666ab1bab2d5a8afc",
+        "size_bytes": 15422
+      },
+      {
+        "path": "so101_old_calib.xml",
+        "sha256": "2e2c8453613edc7291931dd12e236721d6520a0e0766afc2fccc399cd21b5d04",
+        "size_bytes": 13567
+      }
+    ],
+    "identity_sha256": "2cf012477d630936efe7045e52e83644d447ec7dd6762438beeb16fed14b5eb4",
+    "path": "external/SO-ARM100/Simulation/SO101"
+  },
+  "schema_version": "scenesmith.f0b_hybrid_tail_cadence_spec.v1",
+  "serial_accessed": false,
+  "simulation_rollout": false,
+  "source_boundary_commit": "951c5254950b734677a6d185c227c56724182b58",
+  "source_episode_ref": {
+    "file_sha256": "586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54",
+    "path": "outputs/robot_lab/t17_5b_raw_store/586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54.json",
+    "raw_rollout_identity_sha256": "9e186088c9ca82fa9c58cb6e3870f322a9c2a84405d5ea23152b822fb9d4abdb"
+  },
+  "source_refs": [
+    {
+      "file_sha256": "35a60c0dd3c811b137b5eb035bdbd40d40e2c24ba0cda61756052e6e1c829282",
+      "label": "act_configuration_source",
+      "path": "external/lerobot/src/lerobot/policies/act/configuration_act.py",
+      "size_bytes": 8697
+    },
+    {
+      "file_sha256": "a6c1a49c5daafa513b9abee9b986205d327e25c70ed13623ab2e6c0ab6b1f577",
+      "label": "act_model_source",
+      "path": "external/lerobot/src/lerobot/policies/act/modeling_act.py",
+      "size_bytes": 35084
+    },
+    {
+      "file_sha256": "2bff84913c264eba5c2e65239d685ca1b497c1d9d2259958da293ec604b5830a",
+      "label": "act_processor_source",
+      "path": "external/lerobot/src/lerobot/policies/act/processor_act.py",
+      "size_bytes": 3253
+    },
+    {
+      "file_sha256": "e63a608fb160c42adf15f20392f4abf772d6350072d739855792ecfb64dde161",
+      "label": "artifact_contract_source",
+      "path": "scenesmith/robot_lab/artifact_contract.py",
+      "size_bytes": 14503
+    },
+    {
+      "file_sha256": "6fe6186e285dd60b369c0e0e2886818e1e09d6d1445cc1ff1b3059efeb45d1be",
+      "label": "authority_composer_source",
+      "path": "scenesmith/robot_lab/authority_composer.py",
+      "size_bytes": 91357
+    },
+    {
+      "file_sha256": "00a5b66b6baabaa8edefe852d25574eff60b48b11efb4f8d3e23e5ba268c30a0",
+      "label": "brief_source",
+      "path": "docs/briefs/232-f0b-hybrid-tail-cadence-evaluation.md",
+      "size_bytes": 7843
+    },
+    {
+      "file_sha256": "d18c77a8c966164f364149ca14b38758225e9765c96fbf190b25e5af869b353d",
+      "label": "closed_loop_source",
+      "path": "scenesmith/robot_lab/act_grasp_closed_loop.py",
+      "size_bytes": 17847
+    },
+    {
+      "file_sha256": "c357f4e10d57c8cffde4a96ca3ac2dd1a9ce86e7e21210b85f0cbd0f8ff9bfb3",
+      "identity_sha256": "77bf82ce917c2a30cc3bfc915b887f0e6af98c8c8a397f022b633ccf23c7d19c",
+      "label": "comparator_trace",
+      "path": "outputs/robot_lab/t20_43c_r2_act_replacement_run_001/rollouts/step_10000_chunk_50.json",
+      "size_bytes": 721358
+    },
+    {
+      "file_sha256": "9382e02106741906380eed572959f991382c285cedd08c8d652d0a3375cf843a",
+      "label": "coordinate_source",
+      "path": "scenesmith/robot_lab/so101_coordinates.py",
+      "size_bytes": 3929
+    },
+    {
+      "file_sha256": "2ef689c7f51784a799db20cba5dec5f35c51422608b5a78ff4bd94346da06fa6",
+      "identity_sha256": "278e8bc772dc879622a226abe22665d320421925045ad9b3cb1f88b1c31153a4",
+      "label": "f0a_result",
+      "path": "configurations/robot_lab/f0a_chunk_phase_observability.json",
+      "size_bytes": 63485
+    },
+    {
+      "file_sha256": "dbacdfc2ff02400fa4662f6b556668e2c1c3fe5c73d6cfa5118af02a3f2e1bd9",
+      "label": "f0b_implementation_source",
+      "path": "scenesmith/robot_lab/f0b_hybrid_tail_cadence.py",
+      "size_bytes": 95906
+    },
+    {
+      "file_sha256": "b03e3965f6244658d946cac6195e3981528b85426495305b45e373083816c98c",
+      "label": "f0b_test_source",
+      "path": "tests/unit/test_f0b_hybrid_tail_cadence.py",
+      "size_bytes": 16707
+    },
+    {
+      "file_sha256": "e7857f78f346bd364b3375a9d463e729fd6f64f4248081e44ef8f237eeee2fb0",
+      "label": "geometry_source",
+      "path": "scenesmith/robot_lab/geometry_derived_grasp_primitives.py",
+      "size_bytes": 38846
+    },
+    {
+      "file_sha256": "2f399219df280a7c4c4f0401103d526c0480a03dd1b60cf68dfac27093050d6e",
+      "label": "legacy_renderer_source",
+      "path": "scripts/robot_lab/render_rollout_mirror.py",
+      "size_bytes": 12237
+    },
+    {
+      "file_sha256": "39e30b8ff6216d71c59a1a798b5693cbb356659d9fc23597d83232c76eaf0e36",
+      "label": "lerobot_pretrained_source",
+      "path": "external/lerobot/src/lerobot/policies/pretrained.py",
+      "size_bytes": 22361
+    },
+    {
+      "file_sha256": "d0301282fe1ce0e50b52f6fe8182eee7939388469fe757afe6cb902778ca942c",
+      "label": "mujoco_anchor_source",
+      "path": "scenesmith/robot_lab/mujoco_anchor_grasp.py",
+      "size_bytes": 14516
+    },
+    {
+      "file_sha256": "dd77bb7e9a972b2b87a9cb06814652b210a21cdf0fe57ad03c86775f17b5ae56",
+      "label": "mujoco_export_source",
+      "path": "scenesmith/robot_lab/mujoco_export.py",
+      "size_bytes": 12037
+    },
+    {
+      "file_sha256": "65f423accc9ee6794d3ca3d4b7b1458a1cbee6781b97110b9e336a546e1525c3",
+      "identity_sha256": "19d19fbaa315511fa0e7df736d3895089827da8f0b8a2aecd15a2a75885bd495",
+      "label": "r0_retention",
+      "path": "configurations/robot_lab/t20_42_r0_retention_receipt.json",
+      "size_bytes": 35963
+    },
+    {
+      "file_sha256": "67e47d618f36ae1989e55a6fba3aa55a3aa95e78f66a9a062f97c4c2f419c608",
+      "identity_sha256": "02ba0e701da708680e162493aecececa5827914be2d07a0e1f9e20335d9388ae",
+      "label": "r0_statistics",
+      "path": "configurations/robot_lab/t20_42_r0_dataset_statistics.json",
+      "size_bytes": 3164
+    },
+    {
+      "file_sha256": "039fd46438139225caf97cd15459ffe1138fde910a992c9ef75582e8c26d03bf",
+      "identity_sha256": "be11a258b6662baa10341acac13fe09055cd4ded7c2eaba4236d466977dfac5e",
+      "label": "r2_final",
+      "path": "configurations/robot_lab/t20_43c_r2_act_final_receipt.json",
+      "size_bytes": 1489
+    },
+    {
+      "file_sha256": "d2bcb8bb9cfcedb69d08b751bf3f2f4706b256a5c225d2dd89ae6d273bc5b04e",
+      "identity_sha256": "bf2c8b466597ac23ff76ad88e8697b7b5d70a09b9016bc11442010243c984327",
+      "label": "r2_result",
+      "path": "configurations/robot_lab/t20_43c_r2_act_standard_result.json",
+      "size_bytes": 1078
+    },
+    {
+      "file_sha256": "55cca117d21289ea36a86abf7b45e39baaeb6ee0f609dfc8413cbdc102881e37",
+      "identity_sha256": "e565e17a5d4f8a52c4d894d3d61f03cf4b38beaf1df0bec3b83ade7f05afc023",
+      "label": "r2_retention",
+      "path": "configurations/robot_lab/t20_43c_r2_act_retention_receipt.json",
+      "size_bytes": 10634
+    },
+    {
+      "file_sha256": "53af01ad90f483d9ad0e780e68b1effcfb1d120676717df80180a8abc2b5d259",
+      "identity_sha256": "82a0608386375f029a56be8ca9f972bc0e83939d30ad286164db828aa22dc851",
+      "label": "r2_run",
+      "path": "outputs/robot_lab/t20_43c_r2_act_replacement_run_001/run_summary.json",
+      "size_bytes": 495633
+    },
+    {
+      "file_sha256": "3b6448f534b33d54a395e162abf9c0fa86bdfc72e0edcc0e441ceb54f0fc9074",
+      "label": "renderer_source",
+      "path": "scripts/robot_lab/render_rollout_mirror_v2.py",
+      "size_bytes": 3341
+    },
+    {
+      "file_sha256": "e686005c2e2f1f71acdfcc9b3c840cc32fe017e0b1fc159a07fa2850c7f96c0e",
+      "label": "scene_spec_source",
+      "path": "scenesmith/robot_lab/spec.py",
+      "size_bytes": 9803
+    },
+    {
+      "file_sha256": "586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54",
+      "identity_sha256": "9e186088c9ca82fa9c58cb6e3870f322a9c2a84405d5ea23152b822fb9d4abdb",
+      "label": "source_episode",
+      "path": "outputs/robot_lab/t17_5b_raw_store/586a3e67034a577bf046381837aebe68d3d5febdce6b1c51dbcb6f0be4968b54.json",
+      "size_bytes": 12416926
+    },
+    {
+      "file_sha256": "80fab5972564ec48090a57c05b08dff43a3f48f0d0c9a52f8f98ad40c885ba7f",
+      "label": "source_episode_generator",
+      "path": "scenesmith/robot_lab/scripted_grasp_episode_generation.py",
+      "size_bytes": 31797
+    },
+    {
+      "file_sha256": "8dd97c798c1fb8e6824351e9a21e17b56f7e7a0c1bf87da1bd16d7e1dffc50a5",
+      "label": "strict_v2_source",
+      "path": "scenesmith/robot_lab/strict_grasp.py",
+      "size_bytes": 32436
+    }
+  ],
+  "statistics_changed": false,
+  "task_id": "F0b",
+  "training_lock": "closed"
+}
