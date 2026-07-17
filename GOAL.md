@@ -247,13 +247,16 @@ was confirmed at 06:10:58 CDT, and authenticated canonical inventory remained
 empty. No training, compute start, hardware, or authority action occurred in
 the fold; F0c packaging and the F3 freeze tag remain unchanged.
 
-Support task K4/Brief 236 is active as a documentation-only reconciliation of
-the owner-approved corrections to the post-tag fork doctrine. It may align the
-living annex, reconstruction forward plan/architecture/results, handoff
-runbook, and deterministic text invariants. It may not change the immutable
-`sim2claw-genesis` boundary, the frozen reconstruction manifest, F0c's signed
-contract, or any training, rollout, hardware, external-compute, Brev, transfer,
-or promotion authority.
+Support task K4/Brief 236 is verified and closed by Reviewer 329 at
+implementation `99c13d0...`. The living post-tag fork doctrine now tries native
+pinned-LeRobot GR00T before standalone conversion, treats ACT history as an
+implementation slice, branches correction episodes at causal divergence with
+full-state expert replanning, keeps promotion in evaluator-owned artifacts, and
+records the exact doctrine commit in immutable run receipts. PI0.5 remains the
+primary NVIDIA experiment; the learned hybrid is simulation-strong but physical
+only after gateway/calibration/shadow/canary gates. The immutable
+`sim2claw-genesis` boundary, frozen manifest, F0c contract, and every training,
+hardware, external-compute, Brev, transfer, and promotion gate are unchanged.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
