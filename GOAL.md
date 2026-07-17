@@ -271,6 +271,8 @@ implementation: it freezes replacement/attempt ordinal 1, reuses the unchanged
 recipe and output paths, re-hashes epoch 1, and fails closed unless the marker
 and all run/result paths remain absent. Only model-free epoch-2 materialization
 opens after the implementation and synchronized state are exact on origin.
+Implementation commit `10df153` is now exact on origin; only the synchronized
+state/ledger boundary remains before model-free epoch-2 materialization.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20

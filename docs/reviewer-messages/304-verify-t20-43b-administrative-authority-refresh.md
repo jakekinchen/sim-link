@@ -66,3 +66,9 @@ optimizer, checkpoint, rollout, Gate C result, retry, second replacement,
 recipe/schedule/threshold change, hardware/camera/serial access, physical
 motion, network/package installation, external compute, Brev, transfer,
 promotion, or destructive operation.
+
+## Remote preservation
+
+Implementation commit `10df15319e1fcb4ca2aacc129948427fa2ecb15a` is exact
+on `origin/codex/pi05-autolearn-loop`. A separate synchronization commit records
+that identity before any model-free epoch-2 materialization.

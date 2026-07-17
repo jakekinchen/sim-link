@@ -78,3 +78,5 @@ T20.43/T20.43b/T20.44 tests, and 42 artifact/composer/pointer/receipt tests pass
 with offline lint/format, compilation, CLI, JSON, and whitespace checks.
 Reviewer 304 opens only model-free epoch-2 materialization after this boundary
 and synchronized state are exact on origin.
+Implementation commit `10df153` is exact on origin; the next commit synchronizes
+its identity into canonical state and the active ledger before materialization.

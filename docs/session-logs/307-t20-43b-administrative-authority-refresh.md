@@ -15,3 +15,6 @@ pointer/receipt tests pass. Reviewer 304 accepts implementation for origin
 preservation and then model-free authority materialization. No marker, model,
 optimizer, checkpoint, rollout, hardware, network, external compute, or Brev
 action occurred.
+
+Implementation commit `10df153` is exact on origin. Canonical synchronization
+is the final boundary before model-free epoch-2 materialization.
