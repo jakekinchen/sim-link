@@ -9,7 +9,6 @@ import copy
 import fnmatch
 import hashlib
 import json
-import os
 import shutil
 import stat
 import subprocess
@@ -43,6 +42,9 @@ KIT_EXPORTS = {
     "SOURCE_MANIFEST.json": "docs/reconstruction/SOURCE_MANIFEST.json",
     "source-selection.json": "docs/reconstruction/source-selection.json",
     "scripts/kit.py": "tools/reconstruction_kit.py",
+    "scripts/portable_assets.py": "tools/portable_assets.py",
+    "scripts/bootstrap.py": "tools/bootstrap.py",
+    "scripts/bootstrap_runtime.py": "tools/bootstrap_runtime.py",
 }
 
 
@@ -233,13 +235,16 @@ def _validate_selection(selection: dict[str, Any]) -> None:
     if set(selection) != required:
         raise KitError("source selection fields drifted")
     commit = selection["source_commit"]
-    if not isinstance(commit, str) or len(commit) != 40 or any(
-        c not in "0123456789abcdef" for c in commit
+    if (
+        not isinstance(commit, str)
+        or len(commit) != 40
+        or any(c not in "0123456789abcdef" for c in commit)
     ):
         raise KitError("source commit is not a full lowercase SHA-1")
-    if not isinstance(selection["maximum_file_bytes"], int) or selection[
-        "maximum_file_bytes"
-    ] <= 0:
+    if (
+        not isinstance(selection["maximum_file_bytes"], int)
+        or selection["maximum_file_bytes"] <= 0
+    ):
         raise KitError("maximum file size is invalid")
     for field in (
         "forbidden_prefixes",
@@ -274,7 +279,9 @@ def build_manifest(repo_root: Path) -> dict[str, Any]:
         if path in excluded_literal_paths:
             raise KitError(f"duplicate excluded literal path: {path}")
         if path not in source_tree:
-            raise KitError(f"excluded literal path is absent at closeout commit: {path}")
+            raise KitError(
+                f"excluded literal path is absent at closeout commit: {path}"
+            )
         if not isinstance(reason, str) or not reason.strip():
             raise KitError(f"excluded literal path reason is empty: {path}")
         excluded_literal_paths[path] = reason
@@ -303,7 +310,9 @@ def build_manifest(repo_root: Path) -> dict[str, Any]:
         initializers = _package_initializers(path, source_tree)
         selected.update(initializers)
         queue.extend(
-            initializer for initializer in sorted(initializers) if initializer not in seen_python
+            initializer
+            for initializer in sorted(initializers)
+            if initializer not in seen_python
         )
         parsed = ast.parse(git_blob(root, commit, path), filename=path)
         for dependency in _literal_dependencies(
@@ -407,7 +416,10 @@ def verify_manifest(manifest: dict[str, Any], repo_root: Path) -> None:
         "learned_policy_success_claimed",
         "identity_sha256",
     }
-    if set(manifest) != expected_fields or manifest.get("schema_version") != MANIFEST_SCHEMA:
+    if (
+        set(manifest) != expected_fields
+        or manifest.get("schema_version") != MANIFEST_SCHEMA
+    ):
         raise KitError("source manifest fields or schema drifted")
     if manifest.get("identity_sha256") != payload_identity(manifest):
         raise KitError("source manifest identity drifted")
@@ -503,7 +515,9 @@ def export_kit(repo_root: Path, destination: Path) -> dict[str, Any]:
         receipt["identity_sha256"] = payload_identity(receipt)
         _write_bytes(
             dest / RECEIPT_NAME,
-            (json.dumps(receipt, indent=2, sort_keys=True, allow_nan=False) + "\n").encode(),
+            (
+                json.dumps(receipt, indent=2, sort_keys=True, allow_nan=False) + "\n"
+            ).encode(),
         )
         verify_export(dest)
         return receipt

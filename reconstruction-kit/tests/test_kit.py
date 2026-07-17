@@ -18,6 +18,22 @@ assert SPEC and SPEC.loader
 kit = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(kit)
 
+ASSET_SCRIPT_PATH = REPO_ROOT / "reconstruction-kit/scripts/portable_assets.py"
+ASSET_SPEC = importlib.util.spec_from_file_location(
+    "reconstruction_assets", ASSET_SCRIPT_PATH
+)
+assert ASSET_SPEC and ASSET_SPEC.loader
+assets = importlib.util.module_from_spec(ASSET_SPEC)
+ASSET_SPEC.loader.exec_module(assets)
+
+BOOTSTRAP_SCRIPT_PATH = REPO_ROOT / "reconstruction-kit/scripts/bootstrap.py"
+BOOTSTRAP_SPEC = importlib.util.spec_from_file_location(
+    "reconstruction_bootstrap", BOOTSTRAP_SCRIPT_PATH
+)
+assert BOOTSTRAP_SPEC and BOOTSTRAP_SPEC.loader
+bootstrap = importlib.util.module_from_spec(BOOTSTRAP_SPEC)
+BOOTSTRAP_SPEC.loader.exec_module(bootstrap)
+
 MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 
 
@@ -32,6 +48,32 @@ def local_markdown_targets(path: Path) -> list[Path]:
 
 
 class ReconstructionKitTest(unittest.TestCase):
+    def test_bootstrap_contract_is_non_authorizing(self) -> None:
+        signed = bootstrap._sign(
+            {
+                "schema_version": bootstrap.SCHEMA_VERSION,
+                "authority_transferred": False,
+            }
+        )
+        self.assertEqual(
+            signed["identity_sha256"], bootstrap._sign(signed)["identity_sha256"]
+        )
+
+    def test_minimal_portable_assets_verify_without_full_r0_or_authority(self) -> None:
+        manifest = assets.verify_asset_pack()
+        base = manifest["base_dataset"]
+        self.assertEqual(base["episode_count"], 10)
+        self.assertEqual(base["frame_count"], 2330)
+        self.assertEqual(len(base["files"]), 5)
+        self.assertEqual(len(manifest["trace_fixtures"]), 3)
+        self.assertFalse(manifest["full_r0_dataset_included"])
+        self.assertFalse(manifest["model_checkpoint_included"])
+        self.assertFalse(manifest["private_observation_included"])
+        self.assertFalse(manifest["authority_transferred"])
+        for row in base["files"]:
+            for chunk in row["chunks"]:
+                self.assertLessEqual(chunk["size_bytes"], manifest["chunk_size_bytes"])
+
     def test_generated_manifest_is_current_and_verifies(self) -> None:
         expected = kit.build_manifest(REPO_ROOT)
         actual = kit.load_strict_json(kit.MANIFEST_PATH)
@@ -40,9 +82,34 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertFalse(actual["authority_transferred"])
         self.assertFalse(actual["learned_policy_success_claimed"])
         self.assertGreater(len(actual["files"]), 50)
+        paths = [row["path"] for row in actual["files"]]
+        self.assertIn(
+            "scripts/robot_lab/render_rollout_mirror_v2.py",
+            paths,
+        )
+        self.assertIn(
+            "configurations/robot_lab/t20_43b_r1_act_attempt.json",
+            paths,
+        )
+        self.assertIn(
+            "configurations/robot_lab/t20_43b_r1_act_terminal_failure.json",
+            paths,
+        )
+        self.assertIn(
+            "docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md",
+            paths,
+        )
+        self.assertIn(
+            "docs/briefs/227-t20-43c-zero-update-act-continuation.md",
+            paths,
+        )
+        self.assertNotIn(
+            "scenesmith/robot_lab/t20_43c_act_continuation.py",
+            paths,
+        )
         self.assertNotIn(
             "docs/autonomous-workflow/project_state.json",
-            [row["path"] for row in actual["files"]],
+            paths,
         )
         self.assertEqual(
             [row["path"] for row in actual["omitted_source_artifacts"]],
@@ -54,6 +121,19 @@ class ReconstructionKitTest(unittest.TestCase):
                 "docs/autonomous-workflow/project_state.json",
             ],
         )
+        state = kit.load_strict_json(kit.KIT_ROOT / "CURRENT_STATE.json")
+        act = state["act_replacement"]
+        self.assertEqual(
+            act["status"],
+            "verified_terminal_runtime_failure_capability_unresolved",
+        )
+        self.assertTrue(act["replacement_consumed"])
+        self.assertEqual(act["optimizer_update_count"], 0)
+        self.assertFalse(act["retry_authorized"])
+        route = state["current_route"]
+        self.assertEqual(route["task_id"], "T20.43c")
+        self.assertFalse(route["model_action_currently_authorized"])
+        self.assertFalse(route["third_act_attempt_tonight_authorized"])
 
     def test_current_and_reconstruction_document_links_resolve(self) -> None:
         documents = [
@@ -98,10 +178,15 @@ class ReconstructionKitTest(unittest.TestCase):
             self.assertEqual(receipt, verified)
             self.assertTrue((destination / "README.md").is_file())
             self.assertTrue((destination / "tools/reconstruction_kit.py").is_file())
+            self.assertTrue((destination / "tools/portable_assets.py").is_file())
+            self.assertTrue((destination / "tools/bootstrap.py").is_file())
+            self.assertTrue((destination / "tools/bootstrap_runtime.py").is_file())
             self.assertTrue((destination / "tests/__init__.py").is_file())
             self.assertTrue((destination / "tests/unit/__init__.py").is_file())
             self.assertTrue(
-                (destination / "tests/fixtures/robot_lab/lerobot_stack/sample.json").is_file()
+                (
+                    destination / "tests/fixtures/robot_lab/lerobot_stack/sample.json"
+                ).is_file()
             )
             imported = subprocess.run(
                 [

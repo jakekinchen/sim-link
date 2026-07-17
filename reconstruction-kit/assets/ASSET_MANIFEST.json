@@ -1,0 +1,279 @@
+{
+  "authority_transferred": false,
+  "base_dataset": {
+    "episode_count": 10,
+    "files": [
+      {
+        "chunks": [
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00000",
+            "sha256": "380361b8a29dc430d08a86476eba09653ce38e235e4d93c841dc24416b0b6d07",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00001",
+            "sha256": "3cf6bd5940e3e6107ddafa72e7d762936eb88df21a5e25376e8b368970acaa48",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00002",
+            "sha256": "f8fc899b29d6bc25d37cba5785a0e5b5ba4801f7c033655dc699d90521d38f9a",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00003",
+            "sha256": "71f670556a114f5e7ee30f9943e1052d2676ae3fec8196b3432c3974f08a47fc",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00004",
+            "sha256": "0fd697f18fc36fcd2ae5f9d96ffdab08ac593693d2d2e1bba69ae97aa7eeac71",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00005",
+            "sha256": "a89ac234b9dd5ac5d8758d89a82ec297a3fc6d6675ae7b4beb8a702bab21a877",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00006",
+            "sha256": "97717cc2f5028d7f51206e9afc396d60cf0cfe035114dafd1bba7ba03b6fad6a",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00007",
+            "sha256": "e0a25fa5a32635a6de1696c77d96014b90db7d3573ef232686266e0b64e46775",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00008",
+            "sha256": "c857555f1c8d6ffbfc0e3c8c7a51f1c5cd995b1d00f6a2c4a8e9bf9183d87617",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00009",
+            "sha256": "aa3961fc907a3176a3da47ce3492792badd35f3439727c89d29b910113bec193",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00010",
+            "sha256": "56a7867fc329395f4124c662bdb8109b567375a24b2dd43535c35f3c7743ee7c",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00011",
+            "sha256": "5540247169dac479447e54708f3e6a3ebfeae493ffbe3da9b5351eecce10df54",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00012",
+            "sha256": "8ff0fd55804c41e17f756ca8f0de1bffca319ee4fc4847cfb27e070ce19fde95",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00013",
+            "sha256": "d961729c4ab2149c8d016210f247e673c6e44a3669b05473d51560f577b1d7c7",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00014",
+            "sha256": "b81e5f18a658a04cee949521691389cd3ca6ae7816045b36972c23d13cc77299",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00015",
+            "sha256": "762962441d9f421903c17f59b7983a1980b883ee59d27a3debee62475bf98bdd",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00016",
+            "sha256": "cbe68cb320d6f480a12e383f97286876afd753dfe68232bdf1abdd310636a5b2",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00017",
+            "sha256": "63fea10a8adcbfce5a9771e80625128280bf9f9450bc461b07284ee4fe29a3c7",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00018",
+            "sha256": "5ab9aacd7887f9f37039a2ae65d87c699b84b68ea52127499f6607902f29e4ef",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00019",
+            "sha256": "6720998e752fabaed7650995766d87e93ca27d91d7ca05e8c3007cab0962b99d",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00020",
+            "sha256": "88c350b7b39d27ab5ed0f7d5539d228fe8616400915a438f9e086192b4595ef2",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00021",
+            "sha256": "6b03af2d8c0585d13f87fbf429548793f7b614ddc433d738fe438ca5dc66d464",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00022",
+            "sha256": "487489ae8bb2b584108d45c382090f1ea03370d9c9599e6191eced75601ffb34",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00023",
+            "sha256": "df42c30e8f7cf141fcf186ec811a3937e2028751b52c8e8b560ff74aa494cbcd",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00024",
+            "sha256": "d7aabe5937a7c446489585bf77e991e20b2e33ae6d0f7940995d53c9b18d58f8",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00025",
+            "sha256": "4dceb6a2eb6716860b2341e4ad9daa55350907970d3d578a9ec3798088d463de",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00026",
+            "sha256": "2264ce81f4a7c3363481f8cde31ef893221c348c1b81e738480fb5919438402e",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00027",
+            "sha256": "0c5a4f23fb136b19f5a1fb6031afe4d5c006fa44121a8895d49ede1a23b9957c",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00028",
+            "sha256": "0b4992273d03c8dfd7352726340023bfc579f99d834035612980d620bd208d18",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00029",
+            "sha256": "8d3633306984895228487531d91efdf4e9026f3ca74fa0399c55ae4b9ac4ae72",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00030",
+            "sha256": "631ee5810e308fd864d85cd62cd2645f61ea545ca16bcda528740f10eb5d29a8",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00031",
+            "sha256": "b48e0f936c32c9a4687ace99b174cd27627cb3f3992a6c05d1026dc26a97d68b",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00032",
+            "sha256": "393cd34c34791af2ede890cfc935e741a33ba922b0d7317bbbeae9358370d10c",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00033",
+            "sha256": "f903e048614dc3bbb6be6cc75677ef209733733a6c6384a134e7f821694a4e3e",
+            "size_bytes": 1900000
+          },
+          {
+            "path": "base_dataset/data/chunk-000/file-000.parquet.parts/part-00034",
+            "sha256": "b45c4d21ef804bf70d93d599fcc1c2eb88750acfab1c8bdb23b0c74ad6cd8efc",
+            "size_bytes": 1514877
+          }
+        ],
+        "relative_path": "data/chunk-000/file-000.parquet",
+        "sha256": "fc861cd7a7fb0dcced958fcd5f3bbebeab6172202e438da92cc387e1c02c4ecf",
+        "size_bytes": 66114877
+      },
+      {
+        "chunks": [
+          {
+            "path": "base_dataset/meta/episodes/chunk-000/file-000.parquet.parts/part-00000",
+            "sha256": "01974d0f5e66b2fa96fcfe8a263e2765e755f65847eaa22ef3fa6173a40e50bd",
+            "size_bytes": 59881
+          }
+        ],
+        "relative_path": "meta/episodes/chunk-000/file-000.parquet",
+        "sha256": "01974d0f5e66b2fa96fcfe8a263e2765e755f65847eaa22ef3fa6173a40e50bd",
+        "size_bytes": 59881
+      },
+      {
+        "chunks": [
+          {
+            "path": "base_dataset/meta/info.json.parts/part-00000",
+            "sha256": "789ab860cae39d100f1d28e0e547e2229b860cdcacc2916c230074ff5e7ed9fc",
+            "size_bytes": 2445
+          }
+        ],
+        "relative_path": "meta/info.json",
+        "sha256": "789ab860cae39d100f1d28e0e547e2229b860cdcacc2916c230074ff5e7ed9fc",
+        "size_bytes": 2445
+      },
+      {
+        "chunks": [
+          {
+            "path": "base_dataset/meta/stats.json.parts/part-00000",
+            "sha256": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1",
+            "size_bytes": 13075
+          }
+        ],
+        "relative_path": "meta/stats.json",
+        "sha256": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1",
+        "size_bytes": 13075
+      },
+      {
+        "chunks": [
+          {
+            "path": "base_dataset/meta/tasks.parquet.parts/part-00000",
+            "sha256": "75d507d99b8f12e63006844a0034e3ce8570ca47b22d7417f2096c29dbfa3f4f",
+            "size_bytes": 2372
+          }
+        ],
+        "relative_path": "meta/tasks.parquet",
+        "sha256": "75d507d99b8f12e63006844a0034e3ce8570ca47b22d7417f2096c29dbfa3f4f",
+        "size_bytes": 2372
+      }
+    ],
+    "frame_count": 2330,
+    "materialized_target_root": "outputs/reconstruction/r0_base_dataset",
+    "source_manifest_file_sha256": "df6e63d86cd053937c9e4d4c267f057b76aaf418761e7dc3356a9ae08c06fea5",
+    "source_manifest_identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+    "source_manifest_path": "configurations/robot_lab/t20_23_recovery_augmented_dataset_manifest.json",
+    "source_root": "outputs/robot_lab/t20_23_recovery_augmented_dataset"
+  },
+  "chunk_size_bytes": 1900000,
+  "full_r0_dataset_included": false,
+  "identity_sha256": "935c3da1cc59cc1236716056be7226b4527032c036fc80b3df36ce07f77916aa",
+  "model_checkpoint_included": false,
+  "private_observation_included": false,
+  "schema_version": "scenesmith.reconstruction_asset_pack.v1",
+  "trace_fixtures": [
+    {
+      "asset_path": "traces/t20_43_act_chunk_50.json",
+      "file_sha256": "f9dc0e6d2b74a817dbe5005a6dc1a46c478a8b4fe7d6198c1f981f0e45c24373",
+      "identity_sha256": "6133ce582936d6f2057cff2877df1a7d66b7cb2397fbcc1032286fbf16a59507",
+      "name": "t20_43_act_chunk_50",
+      "schema_version": "scenesmith.t20_43_r1_act_closed_loop_trace.v1",
+      "size_bytes": 818993,
+      "source_path": "outputs/robot_lab/t20_43_r1_act_run_001/rollouts/step_00000_chunk_50.json"
+    },
+    {
+      "asset_path": "traces/t20_43b_act_chunk_50.json",
+      "file_sha256": "0c01265d4536bff9f2220a0e6e26462342b5987927204db7b998f7e50f3eac46",
+      "identity_sha256": "b707b815ab3b204e29dbbc8e50114307058019da3116f8f5ac496c1b6e05f4bd",
+      "name": "t20_43b_act_chunk_50",
+      "schema_version": "scenesmith.t20_43b_r1_act_closed_loop_trace.v1",
+      "size_bytes": 819002,
+      "source_path": "outputs/robot_lab/t20_43b_r1_act_run_001/rollouts/step_00000_chunk_50.json"
+    },
+    {
+      "asset_path": "traces/t20_44_smolvla_chunk_50.json",
+      "file_sha256": "cc2d3b90bdc85c7f2ac09b12125de6112730fed7947905b6ea9054a27763dde4",
+      "identity_sha256": "927c6e3dde1387cffcd3da18c0cd80df52a71a03813fd5f6f846b34f1578e49b",
+      "name": "t20_44_smolvla_chunk_50",
+      "schema_version": "scenesmith.t20_44_r2_smolvla_closed_loop_trace.v1",
+      "size_bytes": 804438,
+      "source_path": "outputs/robot_lab/t20_44_r2_smolvla_run_001/rollouts/step_00000_chunk_50.json"
+    }
+  ]
+}
