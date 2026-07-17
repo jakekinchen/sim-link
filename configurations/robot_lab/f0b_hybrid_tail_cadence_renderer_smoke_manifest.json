@@ -1,0 +1,20 @@
+{
+  "adapter_id": "chunk_50",
+  "anchor_orientation": "held at initial value (position-only playback)",
+  "frame_count": 244,
+  "identity_sha256": "86d4f7ad2c6e1200172cd5deb17e2f568c262907ad2fef1c33544f9754780d4d",
+  "output_bytes": 620673,
+  "output_mp4": "outputs/robot_lab/f0b_hybrid_tail_cadence_renderer_smoke_001/retained_chunk_50.mp4",
+  "output_sha256": "4ab15f7ac69374052dcfd1f238d5270aa01a073d66b907996201aebc21c0087b",
+  "panels": [
+    "policy side cam (re-render)",
+    "policy overhead cam (re-render)",
+    "expert top cam (recorded)"
+  ],
+  "purpose": "diagnostic visualization of signed trace evidence; no authority",
+  "schema_version": "scenesmith.rollout_mirror_render.v1",
+  "seed": 0,
+  "seed_role": "training",
+  "trace_identity_sha256": "77bf82ce917c2a30cc3bfc915b887f0e6af98c8c8a397f022b633ccf23c7d19c",
+  "trace_path": "outputs/robot_lab/t20_43c_r2_act_replacement_run_001/rollouts/step_10000_chunk_50.json"
+}
