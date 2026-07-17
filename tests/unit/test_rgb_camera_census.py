@@ -12,11 +12,13 @@ from scenesmith.robot_lab.authority_composer import (
     verify_rgb_camera_census_authority,
 )
 from scenesmith.robot_lab.rgb_camera_census import (
+    build_redacted_rgb_camera_failure_manifest,
     build_private_rgb_camera_census,
     build_redacted_rgb_camera_manifest,
     build_rgb_camera_discovery,
     execute_rgb_camera_census,
     verify_private_rgb_camera_census,
+    verify_redacted_rgb_camera_failure_manifest,
     verify_redacted_rgb_camera_manifest,
     write_private_rgb_camera_bundle,
 )
@@ -402,7 +404,7 @@ class RgbCameraCensusAuthorityTests(unittest.TestCase):
             )
         self.assertEqual(opened, [])
 
-    def test_unsupported_mode_and_camera_property_write_reject(self) -> None:
+    def test_unsupported_mode_rejects(self) -> None:
         _, _, permit = self.compose()
         discovery = _discovery()
         unsupported = copy.deepcopy(discovery)
@@ -427,6 +429,55 @@ class RgbCameraCensusAuthorityTests(unittest.TestCase):
                 wall_time=lambda: NOW,
             )
 
+    def test_terminal_failure_manifest_preserves_consumed_negative_boundary(self) -> None:
+        request, decision, permit = self.compose()
+        failure = sign_payload(
+            {
+                "schema_version": "scenesmith.rgb_camera_census_failure.v1",
+                "status": "rejected",
+                "failed_at": NOW,
+                "runtime_profile_identity_sha256": _runtime()["identity_sha256"],
+                "request_identity_sha256": request["identity_sha256"],
+                "decision_identity_sha256": decision["identity_sha256"],
+                "permit_identity_sha256": permit["identity_sha256"],
+                "hardware_enumeration_attempted": True,
+                "camera_open_attempted": True,
+                "error_type": "ValueError",
+                "error_message": (
+                    "Captured camera frame dimensions drifted from the signed "
+                    "input mode"
+                ),
+                "proof_labels": [],
+                "depth_stream_authorized": False,
+                "serial_access_authorized": False,
+                "motion_authorized": False,
+                "physical_follower_commanded": False,
+            }
+        )
+        manifest = build_redacted_rgb_camera_failure_manifest(
+            failure=failure,
+            request=request,
+            decision=decision,
+            permit=permit,
+            private_failure_file_sha256="d" * 64,
+            private_failure_size_bytes=1024,
+        )
+        verify_redacted_rgb_camera_failure_manifest(
+            manifest,
+            failure=failure,
+            request=request,
+            decision=decision,
+            permit=permit,
+            private_failure_file_sha256="d" * 64,
+            private_failure_size_bytes=1024,
+        )
+        self.assertTrue(manifest["permit_consumed"])
+        self.assertEqual(manifest["accepted_signed_frame_count"], 0)
+        self.assertFalse(manifest["hardware_readiness_granted"])
+        self.assertFalse(manifest["additional_camera_session_authorized"])
+
+    def test_camera_property_write_rejects(self) -> None:
+        _, _, permit = self.compose()
         clock = _Clock()
 
         class UnsafeCamera(_FakeCamera):

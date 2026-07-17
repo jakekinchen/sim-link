@@ -1,0 +1,104 @@
+{
+  "branch": "codex/pi05-autolearn-loop",
+  "expires_at": "2026-07-16T22:55:44-05:00",
+  "identity_sha256": "a937115614c4b0d1d9c24a3652790baf42a991a3f41610a654998ee71e55815d",
+  "issued_at": "2026-07-16T22:45:44-05:00",
+  "manifest_output": "configurations/robot_lab/rgb_camera_census_20260716_2242.json",
+  "private_output_dir": "outputs/robot_lab/rgb_camera_census/private/rgb-census-20260716-2242-cdt",
+  "remote_boundary_commit": "105bc4e5b5eaa9dbb90c89e2aa4428cae20da92f",
+  "repository_state": {
+    "branch": "codex/pi05-autolearn-loop",
+    "gate_state_diff_clean": true,
+    "head": "105bc4e5b5eaa9dbb90c89e2aa4428cae20da92f",
+    "remote_head": "105bc4e5b5eaa9dbb90c89e2aa4428cae20da92f",
+    "scoped_source_diff_clean": true,
+    "upstream_head": "105bc4e5b5eaa9dbb90c89e2aa4428cae20da92f"
+  },
+  "request_name": "owner_present_d405_c922_rgb_camera_census",
+  "runtime_profile_identity_sha256": "a7d61d0e72dd373354ef0e4c755c0369060a200a7b567c69ec4afa5d92d41b5e",
+  "schema_version": "scenesmith.rgb_camera_census_request.v1",
+  "session_id": "rgb-census-20260716-2242-cdt",
+  "source_state": {
+    "branch": "codex/pi05-autolearn-loop",
+    "owner_window": {
+      "camera_access_authorized": true,
+      "not_authorized": [
+        "depth_stream",
+        "librealsense",
+        "serial_access",
+        "register_read",
+        "register_write",
+        "torque_change",
+        "motion",
+        "audio_capture",
+        "inference",
+        "training",
+        "network_access",
+        "external_compute",
+        "brev_compute",
+        "physical_qualification",
+        "physical_transfer",
+        "promotion"
+      ],
+      "owner_present": true,
+      "physical_access_performed_in_window": false,
+      "recorded_at": "2026-07-16T22:25:00-05:00",
+      "required_before_any_access": [
+        "same_thread_danger_full_access_verified",
+        "same_thread_approval_policy_never_verified",
+        "fresh_central_camera_session_decision",
+        "finite_content_addressed_one_use_camera_permit",
+        "remote_preservation_and_review"
+      ],
+      "scope": [
+        "d405_uvc_rgb_metadata_and_one_frame",
+        "c922_rgb_metadata_and_one_frame",
+        "coarse_host_observation_latency"
+      ],
+      "state": "owner_presence_and_rgb_camera_access_granted_pending_central_and_session_permits",
+      "valid_through": "2026-07-16T23:25:00-05:00"
+    },
+    "schema_version": "scenesmith.project_state.v1",
+    "support_task": {
+      "active_brief_id": "228",
+      "authority_granted": [
+        "read_owner_final_hour_camera_direction",
+        "implement_and_fixture_test_fail_closed_rgb_camera_census",
+        "compose_one_finite_rgb_camera_census_only_after_remote_and_runtime_verification"
+      ],
+      "authority_not_granted": [
+        "camera_enumeration",
+        "camera_open",
+        "depth_stream",
+        "librealsense",
+        "serial_access",
+        "register_read",
+        "register_write",
+        "torque_change",
+        "motion",
+        "audio_capture",
+        "inference",
+        "training",
+        "network_access",
+        "external_compute",
+        "brev_compute",
+        "physical_qualification",
+        "physical_transfer",
+        "promotion"
+      ],
+      "implementation_commit": "cb42ce056c129c9cdcba10fee6fe31d60633c484",
+      "live_gate": "open",
+      "live_gate_basis_commit": "e6db0b95cb43b3066da449f92610731e395c8763",
+      "live_gate_opened_at": "2026-07-16T22:41:00-05:00",
+      "live_gate_valid_until": "2026-07-16T23:25:00-05:00",
+      "result": "Reviewer 312 accepts the fail-closed D405 UVC plus C922 RGB-only census implementation and bounded 60-second formal doctor timeout at origin commit e6db0b9; one finite K3 gate remains open pending fresh same-thread runtime proof, central decision, and one-use permit, and no hardware has yet been enumerated or opened",
+      "review_decision_id": "312",
+      "runtime_timeout_correction_commit": "e6db0b95cb43b3066da449f92610731e395c8763",
+      "session_limit": 1,
+      "sessions_started": 0,
+      "state": "in_progress"
+    }
+  },
+  "source_state_identity_sha256": "734c28e68e151d5d0e615cdc86c919f1e674117386f5480e04875632d9c6e61b",
+  "task_id": "K3"
+}

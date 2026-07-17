@@ -1,0 +1,46 @@
+{
+  "authority_granted": [
+    "owner_present_rgb_camera_census_session_authorized"
+  ],
+  "authority_not_granted": [
+    "depth_stream",
+    "librealsense",
+    "serial_access",
+    "register_read",
+    "register_write",
+    "torque_change",
+    "motion",
+    "audio_capture",
+    "calibration",
+    "clock_synchronization",
+    "inference",
+    "optimizer_training",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "external_compute",
+    "brev_compute"
+  ],
+  "decision_id": "owner_present_d405_c922_rgb_camera_census",
+  "denial_reasons": [],
+  "expires_at": "2026-07-16T22:55:44-05:00",
+  "granted": true,
+  "identity_sha256": "7990e413732937a9529d6a947744c49f97069247d7de0482ed0f00ea7093c3a2",
+  "issued_at": "2026-07-16T22:45:44-05:00",
+  "missing_prerequisites": [],
+  "remote_boundary_commit": "105bc4e5b5eaa9dbb90c89e2aa4428cae20da92f",
+  "request_identity_sha256": "a937115614c4b0d1d9c24a3652790baf42a991a3f41610a654998ee71e55815d",
+  "runtime_profile_identity_sha256": "a7d61d0e72dd373354ef0e4c755c0369060a200a7b567c69ec4afa5d92d41b5e",
+  "satisfied_prerequisites": [
+    "exact_branch_remote_boundary_confirmed",
+    "finite_camera_session_window_valid",
+    "k3_brief_228_active",
+    "k3_live_gate_open",
+    "one_camera_session_unused",
+    "owner_present_rgb_only_authority_consistent",
+    "owner_window_active",
+    "same_thread_full_access_no_prompt_runtime_verified"
+  ],
+  "schema_version": "scenesmith.rgb_camera_census_decision.v1",
+  "task_id": "K3"
+}

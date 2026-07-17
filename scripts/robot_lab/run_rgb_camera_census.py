@@ -33,11 +33,13 @@ from scenesmith.robot_lab.live_readonly_observation import (
 )
 from scenesmith.robot_lab.rgb_camera_census import (
     build_private_rgb_camera_census,
+    build_redacted_rgb_camera_failure_manifest,
     build_redacted_rgb_camera_manifest,
     build_rgb_camera_discovery,
     execute_rgb_camera_census,
     verify_private_rgb_camera_census,
     verify_redacted_rgb_camera_manifest,
+    verify_redacted_rgb_camera_failure_manifest,
     write_private_rgb_camera_bundle,
 )
 
@@ -68,6 +70,12 @@ def parse_args() -> argparse.Namespace:
     verify = commands.add_parser("verify")
     verify.add_argument("--private-output-dir", type=Path, required=True)
     verify.add_argument("--manifest", type=Path, required=True)
+    failure_manifest = commands.add_parser("failure-manifest")
+    failure_manifest.add_argument("--private-failure", type=Path, required=True)
+    failure_manifest.add_argument("--request", type=Path, required=True)
+    failure_manifest.add_argument("--decision", type=Path, required=True)
+    failure_manifest.add_argument("--permit", type=Path, required=True)
+    failure_manifest.add_argument("--output", type=Path, required=True)
     return parser.parse_args()
 
 
@@ -78,6 +86,8 @@ def main() -> int:
         return _preflight(args, state)
     if args.command == "capture":
         return _capture(args, state)
+    if args.command == "failure-manifest":
+        return _failure_manifest(args)
     return _verify(args)
 
 
@@ -321,6 +331,55 @@ def _verify(args: argparse.Namespace) -> int:
     return 0
 
 
+def _failure_manifest(args: argparse.Namespace) -> int:
+    failure_path = _resolve_private_file(args.private_failure)
+    request = load_strict_json(_resolve_configuration(args.request))
+    decision = load_strict_json(_resolve_configuration(args.decision))
+    permit = load_strict_json(_resolve_configuration(args.permit))
+    failure = load_strict_json(failure_path)
+    manifest = build_redacted_rgb_camera_failure_manifest(
+        failure=failure,
+        request=request,
+        decision=decision,
+        permit=permit,
+        private_failure_file_sha256=hashlib.sha256(
+            failure_path.read_bytes()
+        ).hexdigest(),
+        private_failure_size_bytes=failure_path.stat().st_size,
+    )
+    verify_redacted_rgb_camera_failure_manifest(
+        manifest,
+        failure=failure,
+        request=request,
+        decision=decision,
+        permit=permit,
+        private_failure_file_sha256=hashlib.sha256(
+            failure_path.read_bytes()
+        ).hexdigest(),
+        private_failure_size_bytes=failure_path.stat().st_size,
+    )
+    output = _resolve_configuration(args.output)
+    if output.exists() or output.is_symlink():
+        raise ValueError("Refusing to overwrite RGB camera failure manifest")
+    dump_canonical_json(output, manifest)
+    print(
+        json.dumps(
+            {
+                "status": "rgb_camera_census_failure_manifest_written",
+                "output": str(output),
+                "manifest_identity_sha256": manifest["identity_sha256"],
+                "private_failure_identity_sha256": failure["identity_sha256"],
+                "permit_consumed": True,
+                "proof_labels": [],
+                "hardware_readiness_granted": False,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
 def _write_failure(
     *,
     output_directory: Path,
@@ -385,6 +444,14 @@ def _resolve_private_directory(path: Path) -> Path:
     root = (REPO_ROOT / "outputs/robot_lab/rgb_camera_census/private").resolve()
     if not resolved.is_relative_to(root) or resolved == root:
         raise ValueError("RGB camera private path escapes required root")
+    return resolved
+
+
+def _resolve_private_file(path: Path) -> Path:
+    resolved = _resolve_repo(path)
+    root = (REPO_ROOT / "outputs/robot_lab/rgb_camera_census/private").resolve()
+    if not resolved.is_relative_to(root) or not resolved.is_file() or resolved.is_symlink():
+        raise ValueError("RGB camera private file escapes required root")
     return resolved
 
 

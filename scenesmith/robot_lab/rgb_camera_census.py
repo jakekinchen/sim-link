@@ -36,6 +36,10 @@ FRAME_SCHEMA_VERSION = "scenesmith.rgb_camera_signed_frame.v1"
 PRIVATE_SCHEMA_VERSION = "scenesmith.rgb_camera_census_private.v1"
 PRIVATE_REFS_SCHEMA_VERSION = "scenesmith.rgb_camera_census_private_refs.v1"
 MANIFEST_SCHEMA_VERSION = "scenesmith.rgb_camera_census_manifest.v1"
+FAILURE_SCHEMA_VERSION = "scenesmith.rgb_camera_census_failure.v1"
+FAILURE_MANIFEST_SCHEMA_VERSION = (
+    "scenesmith.rgb_camera_census_failure_manifest.v1"
+)
 PROOF_LABEL = "owner_present_rgb_camera_census_observed"
 
 
@@ -534,6 +538,122 @@ def verify_redacted_rgb_camera_manifest(
     ]
     if any(value in str(payload) for value in private_unique_ids):
         raise ValueError("RGB camera manifest leaked a private unique ID")
+
+
+def build_redacted_rgb_camera_failure_manifest(
+    *,
+    failure: dict[str, Any],
+    request: dict[str, Any],
+    decision: dict[str, Any],
+    permit: dict[str, Any],
+    private_failure_file_sha256: str,
+    private_failure_size_bytes: int,
+) -> dict[str, Any]:
+    """Build a tracked terminal receipt for a consumed failed camera session."""
+
+    verify_signed_payload(failure, label="private RGB camera census failure")
+    _verify_authority_linkage(request=request, decision=decision, permit=permit)
+    if (
+        failure.get("schema_version") != FAILURE_SCHEMA_VERSION
+        or failure.get("status") != "rejected"
+        or failure.get("runtime_profile_identity_sha256")
+        != permit.get("runtime_profile_identity_sha256")
+        or failure.get("request_identity_sha256")
+        != request.get("identity_sha256")
+        or failure.get("decision_identity_sha256")
+        != decision.get("identity_sha256")
+        or failure.get("permit_identity_sha256")
+        != permit.get("identity_sha256")
+        or failure.get("hardware_enumeration_attempted") is not True
+        or failure.get("camera_open_attempted") is not True
+        or failure.get("error_type") != "ValueError"
+        or failure.get("error_message")
+        != "Captured camera frame dimensions drifted from the signed input mode"
+        or failure.get("proof_labels") != []
+        or failure.get("depth_stream_authorized") is not False
+        or failure.get("serial_access_authorized") is not False
+        or failure.get("motion_authorized") is not False
+        or failure.get("physical_follower_commanded") is not False
+    ):
+        raise ValueError("Private RGB camera failure classification drifted")
+    if (
+        not isinstance(private_failure_file_sha256, str)
+        or len(private_failure_file_sha256) != 64
+        or any(c not in "0123456789abcdef" for c in private_failure_file_sha256)
+        or isinstance(private_failure_size_bytes, bool)
+        or not isinstance(private_failure_size_bytes, int)
+        or private_failure_size_bytes <= 0
+    ):
+        raise ValueError("Private RGB camera failure file reference is malformed")
+    return sign_payload(
+        {
+            "schema_version": FAILURE_MANIFEST_SCHEMA_VERSION,
+            "manifest_name": "owner_present_rgb_camera_census_terminal_failure",
+            "status": "rejected",
+            "proof_labels": [],
+            "session_id": permit["session_id"],
+            "failed_at": failure["failed_at"],
+            "remote_boundary_commit": permit["remote_boundary_commit"],
+            "runtime_profile_identity_sha256": permit[
+                "runtime_profile_identity_sha256"
+            ],
+            "request_identity_sha256": request["identity_sha256"],
+            "decision_identity_sha256": decision["identity_sha256"],
+            "permit_identity_sha256": permit["identity_sha256"],
+            "private_failure_identity_sha256": failure["identity_sha256"],
+            "private_failure_file_sha256": private_failure_file_sha256,
+            "private_failure_size_bytes": private_failure_size_bytes,
+            "permit_consumed": True,
+            "failure_stage": "first_d405_decoded_frame_dimension_validation",
+            "failure_reason": "decoded_png_dimensions_differed_from_signed_input_mode",
+            "d405_rgb_open_attempts": 1,
+            "d405_decoded_pngs_received": 1,
+            "d405_accepted_signed_frames": 0,
+            "c922_rgb_open_attempts": 0,
+            "c922_accepted_signed_frames": 0,
+            "advertised_stream_configs_preserved": False,
+            "accepted_signed_frame_count": 0,
+            "rgb_stream_cleanup_complete": True,
+            "live_ffmpeg_processes_after_failure": 0,
+            "depth_streams_opened": 0,
+            "serial_devices_enumerated": 0,
+            "serial_devices_opened": 0,
+            "register_reads": 0,
+            "register_writes": 0,
+            "torque_changes": 0,
+            "motion_commands": 0,
+            "audio_streams_opened": 0,
+            "physical_follower_commanded": False,
+            "hardware_readiness_granted": False,
+            "additional_camera_session_authorized": False,
+            "authority_not_granted": list(
+                RGB_CAMERA_CENSUS_AUTHORITY_NOT_GRANTED
+            ),
+        }
+    )
+
+
+def verify_redacted_rgb_camera_failure_manifest(
+    payload: dict[str, Any],
+    *,
+    failure: dict[str, Any],
+    request: dict[str, Any],
+    decision: dict[str, Any],
+    permit: dict[str, Any],
+    private_failure_file_sha256: str,
+    private_failure_size_bytes: int,
+) -> None:
+    verify_signed_payload(payload, label="RGB camera failure manifest")
+    expected = build_redacted_rgb_camera_failure_manifest(
+        failure=failure,
+        request=request,
+        decision=decision,
+        permit=permit,
+        private_failure_file_sha256=private_failure_file_sha256,
+        private_failure_size_bytes=private_failure_size_bytes,
+    )
+    if payload != expected:
+        raise ValueError("RGB camera failure manifest drifted")
 
 
 def _resolve_target_cameras(

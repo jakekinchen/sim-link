@@ -1,0 +1,65 @@
+{
+  "allowed_operations": [
+    "camera_metadata_enumeration",
+    "named_avfoundation_rgb_open",
+    "one_png_frame_capture_per_camera",
+    "named_avfoundation_rgb_close"
+  ],
+  "audio_capture_authorized": false,
+  "authority_not_granted": [
+    "depth_stream",
+    "librealsense",
+    "serial_access",
+    "register_read",
+    "register_write",
+    "torque_change",
+    "motion",
+    "audio_capture",
+    "calibration",
+    "clock_synchronization",
+    "inference",
+    "optimizer_training",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "external_compute",
+    "brev_compute"
+  ],
+  "branch": "codex/pi05-autolearn-loop",
+  "decision_identity_sha256": "7990e413732937a9529d6a947744c49f97069247d7de0482ed0f00ea7093c3a2",
+  "depth_stream_authorized": false,
+  "expires_at": "2026-07-16T22:55:44-05:00",
+  "frame_count_per_camera": 1,
+  "identity_sha256": "6341a190d32e0345c0878dc680c1fcb85e6843e1859d5919e15b48015e15eb2d",
+  "issued_at": "2026-07-16T22:45:44-05:00",
+  "manifest_output": "configurations/robot_lab/rgb_camera_census_20260716_2242.json",
+  "maximum_camera_open_count": 2,
+  "maximum_capture_duration_seconds": 600,
+  "motion_authorized": false,
+  "permit_name": "one_use_d405_c922_rgb_camera_census",
+  "private_output_dir": "outputs/robot_lab/rgb_camera_census/private/rgb-census-20260716-2242-cdt",
+  "remote_boundary_commit": "105bc4e5b5eaa9dbb90c89e2aa4428cae20da92f",
+  "request_identity_sha256": "a937115614c4b0d1d9c24a3652790baf42a991a3f41610a654998ee71e55815d",
+  "rgb_stream_authorized": true,
+  "runtime_profile_identity_sha256": "a7d61d0e72dd373354ef0e4c755c0369060a200a7b567c69ec4afa5d92d41b5e",
+  "schema_version": "scenesmith.rgb_camera_census_permit.v1",
+  "serial_access_authorized": false,
+  "session_id": "rgb-census-20260716-2242-cdt",
+  "target_cameras": [
+    {
+      "camera_role": "d405_uvc_rgb",
+      "required_model_substrings": [
+        "VendorID_32902",
+        "ProductID_2907"
+      ],
+      "required_name_substring": "RealSense"
+    },
+    {
+      "camera_role": "c922_rgb",
+      "required_model_substrings": [],
+      "required_name_substring": "C922"
+    }
+  ],
+  "task_id": "K3",
+  "use_limit": 1
+}

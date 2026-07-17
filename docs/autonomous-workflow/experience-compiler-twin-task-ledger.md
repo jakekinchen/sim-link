@@ -3737,3 +3737,14 @@ Blockers: none for offline T16.4 implementation
 Training lock: closed
 Next step: compile measured-part mass inputs and fail closed on ambiguous assembly inertia/COM evidence through brief 023
 ```
+
+## 2026-07-16 - K3 owner-present RGB camera census closed safely
+
+Brief 228 and Reviewer 313 preserve one consumed RGB-only camera session as a
+terminal infrastructure failure. D405 returned a decoded PNG but failed exact
+signed input-mode dimension validation; C922 was not opened. Receipt
+`5c0edf59...` grants no proof label, stream-config census, latency result, or
+hardware readiness. Depth, serial, register operations, torque, motion, audio,
+and follower commands remained zero. Any replacement requires new owner
+authority after discovery-first requested-versus-decoded dimension evidence is
+reviewed.
