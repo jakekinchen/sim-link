@@ -50,11 +50,17 @@ transfer, or promotion claim exists. The
 snapshot](../reconstruction-kit/CURRENT_STATE.md) compresses this boundary;
 `project_state.json` remains authoritative for any later change.
 
+The kit's combined portability proof is also complete: W1 receipt
+`392fcc8b...` verifies the current dual-runtime/all-schema stack from a
+pristine export, and W2 receipt `86739578...` independently recreates the
+exact 129-episode R0 boundary with no mismatches. These are reconstruction
+compatibility results, not learned-policy, hardware, or authority proof.
+
 ## Fork Target, Not Current Authority
 
 The new-repository fork intentionally carries less machinery than this source
-repo. Tonight's W1 rehearsal still proves the existing parent/child runtime and
-all three retained trace schemas because that is the stack being exported. At
+repo. W1 has proved the existing parent/child runtime and all three retained
+trace schemas because that is the stack being exported. At
 fork birth, the design collapses to one pinned LeRobot venv, in-process
 rendering, and no subprocess dispatch layer.
 

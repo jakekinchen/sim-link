@@ -40,6 +40,11 @@ interruption at update 728. T20.43c-R2 is retained separately as the later full
 10,000-update terminal negative. Every source-repo marker and permit is
 consumed and inert here.
 
+After bootstrap, `external/lerobot/.venv/bin/python tools/regenerate_r0.py run`
+recreates the legacy R0 compatibility dataset and `verify` checks it
+independently. The source reference receipts are W1 `392fcc8b...` and W2
+`86739578...`; neither receipt is live authority or learned-policy proof.
+
 Fork defaults:
 
 - one pinned LeRobot venv and in-process rendering;

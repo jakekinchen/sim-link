@@ -115,6 +115,12 @@ The expected R0 boundary is 119 new training strict successes, 9 fresh held-out
 strict successes, 129 total training episodes, 31,366 frames, and 59,904
 windows. Any mismatch is a new dataset, not a recreation.
 
+The source repo's combined reference run records pristine export `fc2a1909...`,
+W1 bootstrap `392fcc8b...`, and W2 reconstruction `86739578...`. W2 completed
+in 4,110.434219 seconds with no mismatches and an independent verifier exit 0.
+Fresh execution IDs and elapsed time may differ; the frozen content/count gates
+may not.
+
 The exact full R0 recreation is the W2 compatibility gate. It is deliberately
 separate from the future light state-only parquet and 60-frame
 success-terminated tasks used for fast RL iteration. Those fork-birth assets

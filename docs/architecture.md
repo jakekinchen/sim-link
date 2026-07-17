@@ -104,6 +104,12 @@ and [`t20_42b_r0_materialization.py`](../scenesmith/robot_lab/t20_42b_r0_materia
 then executes the actual pinned processor/policy pipeline. It does not
 translate the dataset into another training format.
 
+The portable compatibility path now recreates that exact legacy R0 boundary
+from a pristine export. Combined W2 receipt `86739578...` matches all frozen
+counts plus mixture `37b30d34...` and statistics `02ba0e70...`, with no
+mismatches and an independent verifier exit 0. This is reconstruction proof,
+not a new training result or authority grant.
+
 ## Current Learning Boundary
 
 | Rung | Current result | Architectural consequence |
@@ -123,7 +129,7 @@ the current checkout or a grant of authority.
 
 | Concern | Source repo through freeze | Fork target |
 | --- | --- | --- |
-| Interpreter/render path | W1 must verify the existing parent/child dual-runtime and all retained trace schemas | one pinned LeRobot venv; rollout and render in-process; subprocess dispatch deleted |
+| Interpreter/render path | W1 verifies the existing parent/child dual-runtime and all retained trace schemas (`392fcc8b...`) | one pinned LeRobot venv; rollout and render in-process; subprocess dispatch deleted |
 | Fast learning tier | full observation/evidence stack remains available | camera-free joint state plus simulator object pose; light parquet; 60-frame success-terminated reach/push episodes |
 | Demo/VLA tier | native audiovisual LeRobotDataset and mirrors | cameras and full audiovisual data only here, not in the fast RL loop |
 | Primary policies | preserve ACT/SmolVLA/PI0.5 evidence honestly | ACT plus state-based RL until an end-to-end demo works; SmolVLA/PI0.5 are day-three stretch |

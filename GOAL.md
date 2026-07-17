@@ -159,10 +159,13 @@ T20.42/R0 remains verified and T20.44 SmolVLA remains a terminal negative.
 Hardware remains closed unless separately composed under K3; network, external
 compute, Brev, physical transfer, and promotion remain closed.
 
-Support task K2/Brief 226 owns the canonical checkout's current W1 work: finish
-the one-command local bootstrap, reconcile the living reconstruction spine,
-and rehearse a clean export. W2, W3, and W5 remain isolated candidate lanes
-until their handoffs are reviewed and explicitly integrated.
+Support task K2/Brief 226 has now passed W1 and W2 together from one pristine
+export. W1 receipt `392fcc8b...` proves the existing dual-runtime/all-schema
+stack; W2 receipt `86739578...` recreates exact R0 with no mismatches and an
+independent verifier exit 0. K2 remains in progress only for the new receipt's
+source-manifest pin and closeout review. W3 remains a blocked-dependency
+0-of-3 candidate and W5 remains a reviewed transport/replay candidate only;
+neither is integrated.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean

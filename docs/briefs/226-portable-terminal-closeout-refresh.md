@@ -15,8 +15,9 @@ one pinned LeRobot interpreter, in-process rendering, state-first simulation,
 automatic run receipts, and no historical task alphabet.
 
 This brief owns W1 bootstrap/current-kit integration and the later W6 refresh.
-W2 R0 regeneration, W3 portability rehearsal, and W5 gateway work remain
-isolated candidate lanes until their signed handoffs are reviewed and
+W2 R0 regeneration has now been reviewed, integrated, and reproduced from the
+same clean export that passed W1. W3 portability rehearsal and W5 gateway work
+remain isolated candidate lanes until their signed handoffs are reviewed and
 explicitly integrated.
 
 ## Ground-truth inputs
@@ -37,17 +38,18 @@ explicitly integrated.
   maximum chunk-50 lift was 0.04567430422519325 m; final receding-10 had no
   grasp hold and lifted 0.000502 m.
 - Commit `6d28e0c` preserves the W1 bootstrap foundation and signed portable
-  asset pack. W1 must still prove the current repository's parent/child
+  asset pack. W1 was required to prove the current repository's parent/child
   runtime and every retained trace schema before the fork deletes subprocess
-  dispatch.
-- W1 clean-export bootstrap receipt `42fcbe94...` now proves the pinned local
+  dispatch; the combined-export receipt below now satisfies that requirement.
+- Combined-export W1 receipt `392fcc8b...` now proves the pinned local
   dependency/runtime boundary, 29 focused tests, one 244-frame strict-v2
-  expert episode, and all three retained trace-schema smokes in 45.841226 s;
+  expert episode, and all three retained trace-schema smokes in 47.017594 s;
   it explicitly grants no authority and creates no optimizer.
-- Reviewed W2 candidate receipt `fd83af1d...` proves exact full-R0 recreation in
-  4,425.745176 s with 119+9 successes, 129 episodes, 31,366 frames, 59,904
-  windows, and no mismatches. Its seven-path overlay is integrated; a fresh
-  combined W1+W2 export rehearsal remains required before K2 closes.
+- Reviewed W2 candidate receipt `fd83af1d...` first proved the isolated path.
+  The integrated clean-export receipt `86739578...` now proves exact full-R0
+  recreation in 4,110.434219 s with 119+9 successes, 129 episodes, 31,366
+  frames, 59,904 windows, mixture `37b30d34...`, statistics `02ba0e70...`, no
+  mismatches, and independent verification exit 0.
 - Owner overnight direction `4589437` supersedes the old same-night freeze.
   The new target is `freeze-2026-07-17-hackathon-fork` after a full morning
   refresh.
@@ -70,8 +72,9 @@ explicitly integrated.
   fork decisions while keeping current-repository truth explicit.
 - Pin the curated source manifest to a reviewed commit, export into a clean
   scratch directory, and run the offline/local W1 bootstrap rehearsal.
-- Review W2, W3, or W5 handoffs only after their evidence exists; integration
-  requires a separate explicit, path-scoped decision.
+- Review W3 or W5 handoffs only after their evidence exists; integration
+  requires a separate explicit, path-scoped decision. W2's seven-path handoff
+  is already reviewed and integrated.
 - Run model-free focused tests, formatting, link/manifest checks, clean-export
   checks, and a fresh contradiction review.
 
@@ -123,7 +126,8 @@ slice.
   from local external pins, including one constructive-expert episode and
   all-schema render smoke, and emits a signed non-authorizing rehearsal
   receipt with wall-clock timing.
-- W2/W3/W5 outcomes are not claimed or integrated without reviewed evidence.
+- W2 is claimed only at its verified compatibility boundary. W3/W5 outcomes
+  are not claimed or integrated without reviewed evidence.
 - Focused tests, doc/link/manifest checks, and the same-agent contradiction
   review pass; scoped commits are pushed and origin-confirmed before the fork
   spine is called integrated.

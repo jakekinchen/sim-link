@@ -1,6 +1,6 @@
 # Forward Plan
 
-## P0 — Prove the portable bootstrap
+## P0 — Portable bootstrap verified
 
 1. Verify the pristine export receipt and signed 66 MB asset pack before any
    write.
@@ -21,7 +21,7 @@ counterexample—not another retry—is the useful starting point: chunk-50 reac
 45.674304 mm maximum lift and the final rollout failed only release. All source
 markers and permits are consumed/inert and are not runnable fork authority.
 
-## P1 — Regenerate R0 under a portable parity contract
+## P1 — Portable R0 parity verified
 
 Materialize the included exact 10-episode base, regenerate the frozen 119+9
 candidate set, and build the 129-episode/31,366-frame R0 dataset. Exact content
@@ -31,11 +31,13 @@ and MEAN_STD values. Fresh local execution IDs, paths, timestamps, and
 permit-bound wrapper identities are expected to differ and must never be forced
 to match by reusing historical authority.
 
-The reviewed W2 runner is now integrated. Its isolated rehearsal receipt
-`fd83af1d...` records an exact 4,425.745176-second recreation with no mismatches,
-and independent verification exited 0. The combined W1+W2 clean-export
-rehearsal remains the final integration gate; until it passes, preserve the
-isolated result label rather than claiming the canonical kit has reproduced R0.
+The reviewed W2 runner is integrated and now passes from the same pristine
+export that passed W1. Combined receipt `86739578...` records an exact
+4,110.434219-second recreation with no mismatches, 119+9 successes, 129
+episodes, 31,366 frames, 59,904 windows, mixture `37b30d34...`, and statistics
+`02ba0e70...`; independent verification exits 0. This closes the W2
+compatibility gate without transferring authority or making the full
+audiovisual legacy dataset the fork's fast-RL format.
 
 ## P2 — Establish the fork's two primary learning tracks
 

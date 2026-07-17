@@ -1,0 +1,148 @@
+{
+  "authority_transferred": false,
+  "brev_compute_started": false,
+  "camera_accessed": false,
+  "classification": "compatibility_evidence",
+  "current_live_authority": false,
+  "dataset_tiers": {
+    "compatibility": {
+      "dataset": "exact_existing_full_r0_recreation",
+      "episode_count": 129,
+      "evidence_role": "compatibility_evidence",
+      "frame_count": 31366,
+      "w2_hard_gate": true
+    },
+    "full_audiovisual_lerobot_dataset": {
+      "may_replace_fast_rl_tier": false,
+      "role": "VLA/demo-only"
+    },
+    "future_fast_rl": {
+      "dataset": "light_state_only_parquet",
+      "may_alter_w2_gate": false,
+      "short_success_terminated_task_frames": 60,
+      "status": "deferred_fork_birth_follow_on_not_part_of_w2"
+    }
+  },
+  "elapsed_seconds": 4110.434219,
+  "evidence_labels_preserved": [
+    "fixture",
+    "simulation",
+    "replay"
+  ],
+  "expected": {
+    "asset_manifest_identity_sha256": "935c3da1cc59cc1236716056be7226b4527032c036fc80b3df36ce07f77916aa",
+    "base_dataset_manifest_identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+    "compiler_frame_count": 31232,
+    "compiler_frames_sha256": "ba0226ab226ac9540b75d8463c8fc0338e723027a5ae801971d202328b8171cc",
+    "compiler_manifest_file_sha256": "47637a52cabcb11b937c06a112c49da9ac49644f43ac3fd83432e6b76a0543fa",
+    "compiler_segment_count": 1408,
+    "compiler_segments_sha256": "bb44aa1be3d5fd82af142509cb29803c2312126ba657957e49629871d2072166",
+    "completed_episode_count": 128,
+    "configured_candidate_count": 128,
+    "construction_identity_sha256": "b58a6b31d0a3d892cfce8e319c4736d2da9aab2864663a5b2fc89c752e221458",
+    "dataset_manifest_file_sha256": "6b7abd88602a20a01dc446b04439200a7b38ae4d24da37675235baab8d5dc387",
+    "dataset_manifest_identity_sha256": "bd36b7c491ba3c3e08ae3efd87febdbbb1f52f917cb258399484ba4f5311a184",
+    "dataset_meta_stats_file_sha256": "e11f73c259c3fa6383ab53630432b12b51d1ad2afa1e08630cb2464a5adb53d1",
+    "episode_store_file_sha256": "1e1ffea5e6660efd0b2819549dd07a8bb8f794244c0a01c46609b193ab48e491",
+    "episode_store_identity_sha256": "922c2ef8c5f6050d67981b2d4b51ce1d21338252044461c9ace1885311fe780a",
+    "fresh_held_out_strict_success_count": 9,
+    "historical_attempt_marker_identity_sha256": "1ff232aa4b9af03cac113ed5aff8d909cfe3a49f194f29f8c780eb3397b9fd66",
+    "historical_generation_permit_identity_sha256": "94d7f2b21045e80c84d54678bdd8e1e5a92dac85dce96ce38bc211df12de55ea",
+    "mixture_file_sha256": "5b2618b0b0bea3b7ae1801ef1df3a83fc187a32079b52e06748df1dac5826f1e",
+    "mixture_identity_sha256": "37b30d342313710f51c05b6c53f80f3dddc93c93cb0ff2c443bf5970dff203df",
+    "new_training_strict_success_count": 119,
+    "result_file_sha256": "3c1a853e4a476d68610288a35f475ad398c7b5dc29793a724ae0cf4fd42b0807",
+    "result_identity_sha256": "d238379bce62d884833da0a449535e3dc24f988b8da573513ae684bbb19a5969",
+    "statistics_file_sha256": "67e47d618f36ae1989e55a6fba3aa55a3aa95e78f66a9a062f97c4c2f419c608",
+    "statistics_identity_sha256": "02ba0e701da708680e162493aecececa5827914be2d07a0e1f9e20335d9388ae",
+    "training_episode_count": 129,
+    "training_frame_count": 31366,
+    "window_count": 59904,
+    "window_index_sha256": "af8e2ef312460ecad2bef3b94d135d859bf7f58f869c1c570a003df27cc36fce",
+    "window_manifest_file_sha256": "7f230e1697b3201a6a99cd2032caeb06e9a4efa4e7ac9f699e0d59c8a0cd08d3"
+  },
+  "external_compute_started": false,
+  "generated_paths": {
+    "mixture": "outputs/reconstruction/r0_local_epochs/3e8610afe5af479696b71171f396ab70/generated_mixture.json",
+    "result": "outputs/reconstruction/r0_local_epochs/3e8610afe5af479696b71171f396ab70/generated_result.json",
+    "statistics": "outputs/reconstruction/r0_local_epochs/3e8610afe5af479696b71171f396ab70/generated_statistics.json"
+  },
+  "hardware_accessed": false,
+  "historical_authority_disposition": "expired_inert_evidence_only_not_reused_as_authority",
+  "historical_permit_reused_as_authority": false,
+  "identity_sha256": "86739578ecde6bf983a2239645e00f51701f30f8c339fda2f73f14cad1e5c2eb",
+  "learned_policy_rollout": false,
+  "local_dependencies": {
+    "LeRobot": {
+      "patch_sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+      "revision": "e40b58a8dfa9e7b86918c374791599d070518d11"
+    },
+    "SO-ARM100": {
+      "required_file_sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+      "revision": "fda892cba81032c46c40976a48c9ceadbf40a9ca"
+    }
+  },
+  "local_epoch_ref": {
+    "identity_sha256": "2744850b6290ff3fbf7dc771f2c38ff059c9b55736b40e5a703330a51aa8b8a6",
+    "path": "outputs/reconstruction/r0_local_epochs/3e8610afe5af479696b71171f396ab70/LOCAL_EPOCH.json"
+  },
+  "message": "exact legacy R0 recreated; not current live authority",
+  "mismatches": {},
+  "model_constructed": false,
+  "model_inference": false,
+  "network_accessed": false,
+  "observed": {
+    "asset_manifest_identity_sha256": "935c3da1cc59cc1236716056be7226b4527032c036fc80b3df36ce07f77916aa",
+    "base_dataset_manifest_identity_sha256": "f12c95a3cdf3e0005fa093000a5e44e1cddd08dbfb049ab405f462e2c9e760fa",
+    "compiler_frame_count": 31232,
+    "compiler_frames_sha256": "ba0226ab226ac9540b75d8463c8fc0338e723027a5ae801971d202328b8171cc",
+    "compiler_manifest_file_sha256": "47637a52cabcb11b937c06a112c49da9ac49644f43ac3fd83432e6b76a0543fa",
+    "compiler_segment_count": 1408,
+    "compiler_segments_sha256": "bb44aa1be3d5fd82af142509cb29803c2312126ba657957e49629871d2072166",
+    "completed_episode_count": 128,
+    "configured_candidate_count": 128,
+    "construction_identity_sha256": "b58a6b31d0a3d892cfce8e319c4736d2da9aab2864663a5b2fc89c752e221458",
+    "dataset_manifest_file_sha256": "6b7abd88602a20a01dc446b04439200a7b38ae4d24da37675235baab8d5dc387",
+    "dataset_manifest_identity_sha256": "bd36b7c491ba3c3e08ae3efd87febdbbb1f52f917cb258399484ba4f5311a184",
+    "dataset_meta_stats_file_sha256": "e11f73c259c3fa6383ab53630432b12b51d1ad2afa1e08630cb2464a5adb53d1",
+    "episode_store_file_sha256": "1e1ffea5e6660efd0b2819549dd07a8bb8f794244c0a01c46609b193ab48e491",
+    "episode_store_identity_sha256": "922c2ef8c5f6050d67981b2d4b51ce1d21338252044461c9ace1885311fe780a",
+    "fresh_held_out_strict_success_count": 9,
+    "historical_attempt_marker_identity_sha256": "1ff232aa4b9af03cac113ed5aff8d909cfe3a49f194f29f8c780eb3397b9fd66",
+    "historical_generation_permit_identity_sha256": "94d7f2b21045e80c84d54678bdd8e1e5a92dac85dce96ce38bc211df12de55ea",
+    "mixture_file_sha256": "5b2618b0b0bea3b7ae1801ef1df3a83fc187a32079b52e06748df1dac5826f1e",
+    "mixture_identity_sha256": "37b30d342313710f51c05b6c53f80f3dddc93c93cb0ff2c443bf5970dff203df",
+    "new_training_strict_success_count": 119,
+    "result_file_sha256": "3c1a853e4a476d68610288a35f475ad398c7b5dc29793a724ae0cf4fd42b0807",
+    "result_identity_sha256": "d238379bce62d884833da0a449535e3dc24f988b8da573513ae684bbb19a5969",
+    "statistics_file_sha256": "67e47d618f36ae1989e55a6fba3aa55a3aa95e78f66a9a062f97c4c2f419c608",
+    "statistics_identity_sha256": "02ba0e701da708680e162493aecececa5827914be2d07a0e1f9e20335d9388ae",
+    "training_episode_count": 129,
+    "training_frame_count": 31366,
+    "window_count": 59904,
+    "window_index_sha256": "af8e2ef312460ecad2bef3b94d135d859bf7f58f869c1c570a003df27cc36fce",
+    "window_manifest_file_sha256": "7f230e1697b3201a6a99cd2032caeb06e9a4efa4e7ac9f699e0d59c8a0cd08d3"
+  },
+  "optimizer_created": false,
+  "optimizer_training": false,
+  "package_installed": false,
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "receipt_role": "fork_handoff_receipt_not_current_live_authority",
+  "runtime": {
+    "datasets": "4.8.5",
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.5",
+    "numpy": "2.2.6",
+    "pillow": "12.3.0",
+    "pyarrow": "25.0.0",
+    "python": "3.12.12"
+  },
+  "runtime_interpreter": "/Users/kelly/.local/share/uv/python/cpython-3.12.12-macos-aarch64-none/bin/python3.12",
+  "schema_version": "scenesmith.fork_r0_run_receipt.v1",
+  "serial_accessed": false,
+  "started_at": "2026-07-17T02:10:22-05:00",
+  "status": "exact_legacy_r0_recreation",
+  "training_authorized": false
+}

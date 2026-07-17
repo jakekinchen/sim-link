@@ -127,7 +127,7 @@ proof stack are fixed by
 The source repo keeps its existing evidence and authority semantics through the
 freeze. The new-repository fork starts from the following subtractive design:
 
-1. W1 first proves this repo's dual-runtime and every retained trace schema.
+1. W1 has now proved this repo's dual-runtime and every retained trace schema.
    The fork then uses the pinned LeRobot venv as its sole interpreter, renders
    in-process, and deletes subprocess dispatch.
 2. Reach and push train camera-free from joint state plus simulator object pose
@@ -440,7 +440,9 @@ metric-twin, and physical proof distinct.
 6. **Publish the proof index and reconstruction boundary.** Preserve exact run
    and verification commands, plumbing/policy/dataset/twin/canary labels, and
    the R2 release-phase near-miss without calling it learned success. The K2
-   reconstruction kit is the durable handoff for the next repository.
+   reconstruction kit is the durable handoff for the next repository; its
+   combined W1/W2 clean-export receipts now prove bootstrap plus exact R0
+   recreation without transferring authority.
 
 This composition is a **demo-ready simulation-learning MVP** only after a
 learned, unassisted nominal strict-v2 Gate C pass. The complete product MVP

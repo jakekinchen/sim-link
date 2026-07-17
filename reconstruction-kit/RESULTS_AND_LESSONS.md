@@ -39,6 +39,16 @@ must be retained, along with queue reset, chunk-start states, executed tail
 lengths, and MP4/trace identities. A post-hoc render is useful evidence; a
 render integrated into every evaluation is better.
 
+### 6. A thin capsule can recreate the full data boundary
+
+The 66 MB signed asset pack plus exact source/dependency pins reproduced the
+2.7 GB legacy R0 output from a pristine export. W1 receipt `392fcc8b...`
+verified the existing dual-runtime and all three retained trace schemas; W2
+receipt `86739578...` then matched 119+9 successes, 129 episodes, 31,366
+frames, 59,904 windows, mixture `37b30d34...`, and statistics `02ba0e70...`
+with no mismatches and independent verification exit 0. Carry compact causes
+and regenerators, not committed output trees.
+
 ## Clean negative findings
 
 ### SmolVLA

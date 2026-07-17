@@ -11,6 +11,7 @@ snapshot interprets them without rewriting or conflating any result.
 | --- | --- | --- |
 | Constructive simulation source | Verified | Deterministic geometry-derived controller produces strict-v2 grasp/lift episodes under the bounded R0 construction space. |
 | Dataset and processor | Verified | R0 has 129 training episodes, 31,366 frames, 59,904 windows, training-only MEAN_STD statistics, and zero held-out rows admitted to training. |
+| Portable reconstruction | Verified | One pristine export passed W1 dual-runtime/all-schema bootstrap and then reproduced exact legacy R0 under W2 with no mismatches and independent verification exit 0. |
 | Evidence and authority | Verified | Canonical JSON/SHA-256, source identities, central composition, renderer smoke, trace mirroring, and one-use permits fail closed. |
 | SmolVLA learned policy | Verified terminal negative | One 5,000-update, five-checkpoint, ten-rollout campaign produced no Gate C pass. |
 | ACT learned policy | Verified terminal negative | T20.43b ended in mirror-schema infrastructure at zero updates. Original T20.43c proved exact continuation and ended inconclusively at update 728. T20.43c-R2 then completed 10,000 updates, seven checkpoints, and fourteen rollouts without a Gate C pass or infrastructure failure. |
@@ -30,6 +31,21 @@ snapshot interprets them without rewriting or conflating any result.
 
 This proves source behavior and dataset construction, not learned-policy
 competence.
+
+## Verified portable reconstruction
+
+- Pristine export receipt: `fc2a19090f5313de89ba86091bb5832c53127a35c5dbbe0214d01e4fb8719d07`.
+- W1 bootstrap receipt: `392fcc8b3b07e4a63e5029d95218d0672bedbc9d9a84ed0247310dfbeb733aa7`.
+- W1 proof: 29 focused tests, one 244-frame strict-v2 expert episode, and
+  one-frame renders from all three retained trace schemas.
+- W2 reconstruction receipt: `86739578ecde6bf983a2239645e00f51701f30f8c339fda2f73f14cad1e5c2eb`.
+- W2 proof: 119+9 strict successes, 129 episodes, 31,366 frames, 59,904
+  windows, mixture `37b30d34...`, statistics `02ba0e70...`, no mismatches,
+  and independent verification exit 0 after 4,110.434219 seconds.
+
+These receipts prove compatibility from a clean export. They do not transfer
+source-repository authority, include the generated 2.7 GB R0 tree, or establish
+learned-policy success.
 
 ## SmolVLA result
 

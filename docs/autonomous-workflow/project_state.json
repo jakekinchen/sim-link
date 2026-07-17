@@ -410,7 +410,7 @@
     "K2": {
       "state": "in_progress",
       "active_brief_id": "226",
-      "result": "Brief 226 owns W1 bootstrap, T20.43c terminal interpretation, and the simplified fork spine; current dual-runtime/all-schema proof remains required before the fork collapses to one pinned LeRobot interpreter, while W2/W3/W5 stay isolated until reviewed",
+      "result": "Brief 226 now has one pristine export passing W1 dual-runtime/all-schema bootstrap receipt 392fcc8b and exact W2 R0 recreation receipt 86739578 with independent verify exit 0; K2 remains in progress only for source-manifest re-pin and closeout review, while W3 and W5 remain unintegrated",
       "authority_granted": [
         "read_and_verify_tracked_t20_43b_and_t20_43c_terminal_evidence",
         "maintain_signed_portable_asset_pack_and_w1_bootstrap",

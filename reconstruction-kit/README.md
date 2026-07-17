@@ -87,6 +87,14 @@ recreation`. The receipt is compatibility evidence, never current authority.
 The future light state-only parquet/60-frame RL tier remains a separate
 fork-birth follow-on; full audiovisual data remains VLA/demo-only.
 
+The combined clean-export rehearsal now verifies this path end to end. W1
+receipt `392fcc8b...` proves the pinned dual-runtime source stack, one
+244-frame strict-v2 expert episode, and all three retained render schemas.
+W2 receipt `86739578...` then recreates the exact legacy R0 boundary in
+4,110.434219 seconds with no mismatches; an independent `verify` exits 0. Both
+receipts explicitly keep authority, model construction, optimizer work,
+hardware, network, external compute, and Brev false.
+
 ## Verify and export
 
 From the `sim-link` repository root:
