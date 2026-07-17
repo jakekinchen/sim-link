@@ -335,8 +335,8 @@
   "training_lock": "closed",
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.43b",
-  "next_eligible_task": "T20.43b",
+  "current_task": "T20.43c",
+  "next_eligible_task": "T20.43c",
   "active_support_task": "K2",
   "support_tasks": {
     "K1": {
@@ -4999,6 +4999,19 @@
       "terminal_verifier_repair": {"commit":"4d8f951fc5e0f16d3f47dc44965e3221fe0c3778","model_free":true,"focused_runner_test_count":6,"t20_43_t20_43b_t20_44_regression_test_count":35,"rejects_success_failure_coexistence":true,"binds_attempt_identity":true,"binds_partial_run_tree":true},
       "authority_granted": ["open_fresh_t20_43b_brief_after_t20_44_state_origin_confirmation","activate_brief_222","implement_and_fixture_test_stable_runtime_act_replacement_contracts","t20_43b_implementation_valid","materialize_model_free_gate_a_renderer_smoke_and_compact_authority_after_origin_confirmation","write_and_preserve_signed_pre_run_acceptance","activate_brief_225","implement_and_fixture_test_epoch_2_administrative_refresh","epoch_2_refresh_implementation_valid","materialize_epoch_2_administrative_authority_after_origin_confirmation","accept_epoch_2_pre_run_authority","create_sole_permit_consuming_marker_after_acceptance_origin_confirmation","execute_one_unchanged_t20_43b_act_campaign","preserve_terminal_runtime_failure","implement_model_free_terminal_failure_verifier","close_consumed_t20_43b_boundary"],
       "authority_not_granted": ["patch_and_resume_consumed_attempt","second_replacement","retry","continuation","sweep","recipe_change","schedule_change","correction_objective","threshold_change","archive_replay","t20_45_activation","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
+    },
+    "T20.43c": {
+      "state": "in_progress",
+      "depends_on": ["T20.43b_verified_terminal_boundary_on_origin", "owner_recovery_direction_2026_07_16_2142", "immutable_safe_renderer_v2_37c5da6"],
+      "active_brief_id": "227",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "source_commit": "37c5da61df43da021d087789475bc5d423c54012",
+      "result": "Brief 227 opens implementation and model-free tests for an exact zero-update ACT continuation; checkpoint, optimizer, sampler, renderer, authority, and evidence equivalence must pass before any new model action",
+      "owner_direction": {"recorded_at_approximate":"2026-07-16T21:42:00-05:00","statement":"proceed, i authorize anything further actions that resolve this for us.","path":"docs/autonomous-workflow/owner-addendum-2026-07-16-t20-43c-act-resolution.md"},
+      "immutable_source": {"attempt_identity_sha256":"d67cf38e7d7a441da93c3af55cdcfeefe64b55ce9cf3f0b95894299a88fdca09","terminal_failure_identity_sha256":"89b6dbff17f5da345b1c8d8fa9951989eda092998b702737dd7da16c42db2e92","checkpoint_0_identity_sha256":"916200d071995a84577a53dc35b552e2f7db2452194adf8cc18b9a6d54ec8b55","checkpoint_0_model_file_sha256":"acc865fb2504849ce39a403b08c5bff6b6660460d5622d3089f243c8868cf912","chunk_50_trace_identity_sha256":"b707b815ab3b204e29dbbc8e50114307058019da3116f8f5ac496c1b6e05f4bd","chunk_50_trace_file_sha256":"0c01265d4536bff9f2220a0e6e26462342b5987927204db7b998f7e50f3eac46"},
+      "authority_granted": ["activate_brief_227","read_and_hash_t20_43b_terminal_boundary","implement_model_free_zero_update_equivalence_contract","implement_actual_schema_renderer_smoke","implement_continuation_authority_and_runner_contracts","run_model_free_fixture_tests"],
+      "authority_not_granted": ["authority_artifact_materialization","continuation_marker","checkpoint_tensor_read","model_construction","model_load","model_inference","optimizer_creation","optimizer_training","policy_rollout","gate_c_execution","fresh_replacement_execution","retry_after_continuation_marker","rewrite_t20_43b_evidence","recipe_change","schedule_change","correction_objective","threshold_change","dataset_change","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.44": {
       "state": "verified",

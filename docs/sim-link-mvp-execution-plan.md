@@ -29,8 +29,9 @@ proof stack are fixed by
 ### Build in the current sim-link lane
 
 - Preserve verified T20.42 R0, the T20.44 terminal-negative SmolVLA result, and
-  the unconsumed T20.43b ACT boundary; resolve ACT next under its unchanged
-  recipe with rollout-primary strict-v2 evaluation.
+  the consumed T20.43b terminal infrastructure boundary. ACT-on-R0 remains
+  unresolved; validate exact-schema evidence dispatch first, then require a new
+  owner route decision before any further campaign.
 - An explicit, reusable learning/plumbing evidence surface: exact R0 parity
   checks plus the existing signed T20.35x one-batch proof, kept distinct from
   any accepted product policy.
@@ -218,6 +219,7 @@ non-negotiable full-MVP exits:
 | 19 | **T20.42 — R0 dataset expansion by construction (verified; Briefs 216-218)** | Sole result `d238379b...` completes 119/119 training and 9/9 fresh-held-out strict-v2 successes. Exact T20.23 base once; 129 training episodes, 31,366 frames, 59,904 windows; held-out rows excluded; mixture `37b30d34...`, statistics `02ba0e70...`, retention `19d19fba...`; independent verifier exit 0. | Recorded T20.41 route; verified scripted expert and randomization contracts; Briefs 216-218; Reviewers 286-290 | Retry, relabel scripted data as learned-policy proof, model/optimizer work inside R0, hardware, external compute, Brev |
 | 20 | **T20.43 — R1 ACT standard rung (terminal infrastructure failure; Brief 219/Reviewer 293)** | Sole marker `064e5650...` consumed. Full ACT, optimizer, checkpoint 0, and one chunk-50 rollout completed with zero updates; trace `6133ce58...` failed strict-v2. Mirror child used a venv without MuJoCo and terminated the run. Receipt `b64ec6d0...` preserves the exact partial boundary. No retry; trained ACT capability remains unresolved. | Verified T20.42/Reviewer 290; Brief 219; Reviewer 293 | T20.43 retry/replacement, fabricating a trained ACT result, correction objectives, threshold changes, hardware, external compute, Brev |
 | 20b | **T20.43b — R1 ACT replacement rung (verified terminal runtime failure; Briefs 222/225, Reviewer 306)** | Sole marker `d67cf38e...` consumed. Fresh ACT/optimizer, checkpoint 0, and one untrained chunk-50 rollout completed, then mirror dispatch rejected the T20.43b trace schema. Receipt `89b6dbff...` binds zero updates, one checkpoint, one rollout, no Gate C, and no retry. ACT-on-R0 capability remains unresolved. | Verified T20.44 terminal boundary; owner addendum `8b4a206`; accepted epoch-2 authority; Reviewers 299/301/302/304-306 | Patch-and-resume, second replacement or attempt, retry, relabel as trained negative, recipe changes, correction objectives, threshold changes, hardware, network, external compute, Brev |
+| 20c | **T20.43c — exact zero-update ACT recovery (implementation in progress; Brief 227)** | Prove immutable checkpoint-0 equals fresh seeded ACT, optimizer and sampler are unadvanced, and actual-schema mirror v2 works; only then may a separately reviewed continuation complete the unchanged 10,000-update/14-rollout campaign once. | Owner recovery direction; T20.43b receipt `89b6dbff...`; immutable-safe renderer v2 `37c5da6` | Model action before equivalence/origin/central/pre-run review, rewriting T20.43b, correction objective, recipe/gate/data change, retry after continuation marker, hardware, network, external compute, Brev |
 | 21 | **T20.44 — R2 SmolVLA standard rung (verified terminal negative; Brief 220/Reviewer 297)** | Sole result `9d916206...` completes 5,000 finite updates, five checkpoints, and ten dual-semantics rollouts with no strict-v2 pass. Strongest partial result was checkpoint 1,000/receding-10 at 73 contacts and 18.061 mm lift; first-pass selection remains null. | Verified T20.42; T20.43 boundary; Reviewers 294-297 | Retry/replacement, correction objectives, network/download, Gate B/open-loop barrier, threshold changes, hardware, external compute, Brev |
 | 22 | **T20.45 — R3 conditional π0.5 standard rung** | Only after R1/R2 evidence: either one bounded local-MPS standard fine-tune from the cached base, or a costed external-compute proposal document (ABEJA-parity reference) for separate fresh owner authorization. No compute consumption beyond local MPS without that grant. | R1/R2 rollout evidence; fresh owner grant for any external compute | External compute or Brev consumption without fresh owner authorization, correction objectives, promotion |
 
@@ -231,8 +233,11 @@ closed.
 
 ### Support tooling
 
-`scripts/robot_lab/render_rollout_mirror.py` renders any signed
-`t20_32_closed_loop_trace.v1` artifact as a side-by-side MP4: re-rendered
+`scripts/robot_lab/render_rollout_mirror.py` is the immutable historical
+renderer bound by prior signed specs. `render_rollout_mirror_v2.py` delegates
+legacy schemas to those exact bytes and adds T20.43b dispatch. The renderer
+produces a side-by-side MP4 from a signed
+`t20_32_closed_loop_trace.v1` artifact: re-rendered
 policy side/overhead views beside the exact recorded expert top-camera frame
 for the same frame index, with phase, strict-contact, and anchor-lift
 overlays. Output stays under `outputs/robot_lab/rollout_mirror/` with a hash
@@ -240,7 +245,7 @@ manifest. It is kinematic playback of signed evidence — diagnostic
 visualization only, never new policy evidence or authority. The T20.43b and
 T20.44 standard runners now bind the renderer runtime and require per-rollout
 trace/mirror retention; future runners should preserve that integrated
-contract.
+contract and smoke-test the exact trace schema they will emit.
 
 T20.17 is verified negative, T20.18 is verified recovery evidence, T20.19 is
 verified as an uncalibrated grid, T20.20 and T20.21 are verified, and T20.22 is

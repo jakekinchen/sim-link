@@ -28,6 +28,11 @@ proof states must remain distinct.
 - No new major slice after: not applicable; this window authorizes only the
   already reviewed noninterruptible T20.43b campaign.
 - Hard closeout: `2026-07-17T05:25:04-05:00`.
+- Owner recovery direction recorded at approximately `2026-07-16T21:42:00-05:00`:
+  “proceed, i authorize anything further actions that resolve this for us.”
+  Brief 227 interprets this as one separately reviewed local-simulation recovery
+  boundary for the zero-update T20.43b failure. It does not itself open model
+  action, hardware, network, external compute, or Brev.
 - Owner evening extension recorded at `2026-07-15T10:20:00-05:00` for the
   tonight MVP demo composition in the MVP execution plan; scope, gates, and
   all closed authorities are unchanged.
@@ -99,17 +104,18 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.43b under Brief 225 is closed by Reviewer 306 at verified terminal runtime
-failure `89b6dbff...`. The accepted epoch-2 marker was consumed once; fresh ACT,
-optimizer, checkpoint 0, and one untrained chunk-50 rollout completed, then the
-mirror renderer rejected the new T20.43b trace schema before any optimizer
-update. The checkpoint-0 rollout had zero strict contacts and 0.000304225 mm
-lift, but that is not learned-policy evidence. ACT-on-R0 capability therefore
-remains unresolved, no trained Gate C attempt occurred, and no retry or second
-replacement is authorized. T20.42/R0 remains verified constructive source/data
-evidence and T20.44 SmolVLA remains a verified terminal negative. Hardware,
-network, external compute, Brev, physical transfer, and promotion remain
-closed.
+T20.43c under Brief 227 is the active implementation-only recovery slice. The
+owner explicitly authorizes further action to resolve ACT-on-R0. T20.43b remains
+byte-immutable at terminal failure `89b6dbff...`: zero optimizer updates, one
+checkpoint, and one untrained chunk-50 rollout. T20.43c must first prove that
+checkpoint-0 tensors equal a fresh seeded ACT, optimizer/sampler state is truly
+zero, and the actual trace schema renders through the immutable-safe v2
+entrypoint. Only after implementation, origin review, fresh central authority,
+runtime preflight, one-use continuation permit, and separate acceptance may it
+continue updates 1-10,000 once. Failure of any equivalence gate routes to a
+fresh replacement design without model action. T20.42/R0 remains verified and
+T20.44 SmolVLA remains a terminal negative. Hardware, network, external
+compute, Brev, physical transfer, and promotion remain closed.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
