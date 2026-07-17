@@ -348,7 +348,7 @@
   "training_lock": "closed",
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "F0",
+  "current_task": "F0a",
   "next_eligible_task": "F0a",
   "active_support_task": null,
   "support_tasks": {
@@ -5159,13 +5159,14 @@
       "authority_not_granted": ["corrective_act_rung", "checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "F0a": {
-      "state": "pending",
+      "state": "in_progress",
       "depends_on": ["F0_verified_on_origin"],
-      "active_brief_id": null,
+      "active_brief_id": "231",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "A fresh model-free chunk-timing and phase-observability audit is next eligible; it must test observation aliasing and the 20-frame delayed release counterexample before any corrective ACT proposal",
-      "authority_granted": [],
+      "source_boundary_commit": "c433177b36baea3e7eea048ce743b509b61e3799",
+      "result": "Brief 231 opens a model-free audit of the lift/lower reversal observation contract and fixed chunk-50 release-gate coupling; no checkpoint, model, optimizer, inference, rollout, dataset mutation, Brev/external compute, or hardware action is authorized",
+      "authority_granted": ["activate_brief_231", "read_and_hash_frozen_f0_r0_and_t20_43c_r2_sources", "decode_retained_png_bytes_in_memory", "implement_and_fixture_test_model_free_f0a_audit", "write_compact_signed_f0a_result"],
       "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "T20.45": {

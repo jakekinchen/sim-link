@@ -179,6 +179,14 @@ task is a fresh model-free F0a audit of chunk timing and phase observability;
 training, rollout, Brev/external compute, hardware, Gate C execution, transfer,
 promotion, and the tag remain closed.
 
+F0a/Brief 231 is now active as a model-free discriminator. It compares the
+exact lift/lower reversal corridor, retained images, omitted velocity/phase
+fields, candidate state lag, and chunk-50 observation schedule under frozen
+relative thresholds. It may route a separately reviewed no-training hybrid
+tail-cadence evaluation, but it cannot load the checkpoint or run that
+evaluation itself. The corrective ACT rung remains unspent and every F0
+closeout authority stays closed.
+
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
 export receipt `729addbb...`, while excluding bulk/private content and live
