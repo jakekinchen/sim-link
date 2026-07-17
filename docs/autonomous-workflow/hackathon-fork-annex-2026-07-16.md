@@ -173,42 +173,69 @@ we adopt what our own evidence independently supports.
    aliasing is at heart a *velocity* ambiguity — lifting and lowering states
    match in position/image space with opposite velocities. Escalation ladder,
    one rung at a time against the frozen evaluator: (a) F0c data fix →
-   (b) Markov-complete state: add joint/object velocities and previous
-   action → (c) ACT `n_obs_steps` 2–4 (a config knob, not an architecture)
-   → (d) 8–16-step learned history (small GRU/state transformer) only if
-   (a–c) leave signed evidence demanding it. Same scene, same data, same
-   evaluator across variants — the ablation is itself a demo asset.
+   (b) **Markov-augmented state candidate**: add joint/object velocities and
+   previous action (augmented, not proven complete — contact mode, actuator
+   lag, and controller state stay hidden; the experiment tests sufficiency)
+   → (c) explicit 2–4-step state/action history stack via a reviewed
+   fork-local wrapper — **verified NOT a config knob**: the pinned ACT
+   raises `ValueError` at `n_obs_steps != 1`
+   (configuration_act.py:148), so this rung is an implementation slice with
+   new processor semantics → (d) 8–16-step learned history (small GRU)
+   only if (a–c) leave signed evidence demanding it.
+   **Velocity observability parity caveat for rung (b):** sim reads exact
+   `qvel`; hardware only gets finite-differenced AprilTag/encoder deltas.
+   Train on the same estimator the hardware will use (finite differences
+   with the same filter), or rung (b) fixes aliasing while quietly opening
+   a new sim2real gap.
 2. **Auto-correction episodes (the best new mechanism).** Candidate rollout
-   fails → evaluator locates the first failed margin → MuJoCo forks shortly
-   before it (verified T18.4 branching) → the geometry expert completes the
-   corrected tail → one correction record: failed prefix as context,
-   expert tail as supervision (mask on the tail only), labeled
+   fails → evaluator localizes the failure → MuJoCo restores a full-state
+   branch (qpos, qvel, actuator/controller state, randomization identity —
+   the verified T18.4 snapshot surface) at the **causal divergence, not the
+   terminal predicate** (release fails formally at frame 219 but lags
+   ~17–20 frames earlier; record both `terminal_failure_frame` and
+   `causal_intervention_frame`) → the geometry expert **replans from that
+   exact branch state** (never pastes the original tail) → one correction
+   record with supervision masked to the corrected tail, labeled
    `context_role/context_policy/failure_predicate/correction_owner/
-   supervision_mask`. Admission to training only through the design-rule-8
-   gate (mixture + authority decision). Failures are context; corrections
-   are targets — no fast weights required.
+   supervision_mask`. For today's one-observation ACT this is honestly
+   "policy-induced branch states as corrective training starts"; it becomes
+   literal failure-as-context only once a history stack exists. Admission
+   only through the design-rule-8 gate, as a **bounded mixture fraction
+   with the nominal expert episodes preserved as the training floor**.
 3. **Demo hierarchy with honest labels.** Level 1: pure learned policy
    passes strict-v2. Level 2: labeled hybrid — learned policy through
-   lower, explicit state controller for release/verify/retreat (given ACT
-   fails only release, this is the near-guaranteed working demo and its
-   runs generate correction episodes). Level 3: teleop, proving only the
-   gateway and calibration. Never blur the labels.
-4. **NVIDIA lane ordering (amended from the proposal).** π0.5
-   release-fixed continuation stays the *primary* NVIDIA run — proven
-   end-to-end at ~$5.5 — and GR00T N1.7 runs as a **bounded parallel
-   challenger**, never a gate on π0.5: official SO-100/101 smoke → dataset
-   conversion (LeRobot **V3→V2** — budget real time; camera-key/count
-   mismatches killed a prior VLA attempt) → short pilot with early
-   evaluation → same frozen evaluator. One VLA campaign at a time on the
-   lane; SmolVLA stays parked. GR00T fine-tune wants 40 GB+ VRAM (Brev
-   A100 or the local box if real); inference 16 GB+ fits the gateway.
-5. **Experiment registry, not a framework.** Extend `RUN_RECEIPT.json` with
-   `parent_checkpoint`, `hypothesis`, and `promotion_decision`; render the
-   hypothesis tree and leaderboard through the *existing* studio server
-   rather than building an ENPIRE clone. The six-act demo narrative
-   (failure → hypothesis → parallel training → before/after → perturbation
-   → hardware switch) is assembled from artifacts every run already emits
-   (mirrors, margins, receipts) — no bespoke theater code.
+   lower, explicit state controller for release/verify/retreat. Level 2 is
+   the **strongest simulation fallback** (ACT fails only release) and the
+   most promising physical candidate *after* gateway, calibration, shadow
+   mode, and a bounded canary; the near-guaranteed **physical** fallback is
+   state-based primitives with the explicit release controller. Level 3:
+   teleop, proving only the gateway and calibration. Never blur the labels.
+4. **NVIDIA lane ordering.** π0.5 release-fixed continuation stays the
+   *primary* NVIDIA run — proven end-to-end at ~$5.5 — and GR00T N1.7 runs
+   as a **bounded parallel challenger**, never a gate on π0.5. Challenger
+   path order: **native pinned-LeRobot `groot` policy first** (verified
+   present in the pinned checkout at
+   `external/lerobot/src/lerobot/policies/groot/`; consumes v3 datasets
+   through the normal stack — still run a dependency preflight, the
+   T20.35u lesson, since groot may pull extras beyond the pinned lock);
+   the **V3→V2 conversion plus `modality.json` applies only to the
+   standalone Isaac-GR00T fallback path**. Both paths gate on exact
+   camera-key/action-order/units/gripper/normalization parity before any
+   training. Parallel means data-mapping/smoke/gateway work may overlap;
+   only one expensive VLA training campaign occupies the lane at once.
+   SmolVLA stays parked. Fine-tune wants 40 GB+ VRAM; inference 16 GB+.
+5. **Experiment registry, not a framework — with evaluation ownership
+   preserved.** `RUN_RECEIPT.json` gains `parent_checkpoint`,
+   `hypothesis_id`, `candidate_id`, `doctrine_commit` (the exact annex
+   revision the run operated under — the doctrine evolves on the branch
+   past `sim2claw-genesis`), and `evaluation_decision_ref: null`. **A
+   training runner never writes its own promotion**: the separately owned
+   evaluator emits its own signed decision artifact (`candidate_id`,
+   `evaluator_commit`, `frozen_evaluation_set`, `promotion_decision`
+   promote/reject/retain_as_counterexample — the last feeding the T20.39
+   archive — `decision_reason`, `selected_checkpoint`, identity). The
+   studio server joins the two records by `candidate_id`. The six-act demo
+   narrative is assembled from artifacts every run already emits.
 6. **Video-conditioned task specification** (VLM extracts object/target/
    operation → LLM emits the structured task → state policy executes),
    honestly labeled as task specification, never as one-shot motor
