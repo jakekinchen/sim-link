@@ -191,17 +191,19 @@ F0b brief for a no-training hybrid-tail-cadence evaluation. No checkpoint,
 model, inference, rollout, corrective training, F1/Brev, hardware, Gate C,
 transfer, promotion, or tag authority follows from F0a.
 
-F0b/Brief 232 implementation, including its owner-attribution correction, is
-verified by Reviewers 322-323 at commit `8edf1687...`. Signed spec
-`ddf71cf9...` freezes the update-10,000 ACT
-checkpoint, seed-0 source episode, unchanged strict-v2 gates, chunk-50
-execution through frame 175, one 24-action queue discard at frame 176, and
-ten-step tail re-decodes through frame 236. The next allowed slice is only a
-model-free authority bundle plus one retained-comparator renderer smoke; those
-are now verified by Reviewer 324 with acceptance `4ca23f81...`. After that
-acceptance is exact on origin, one marker-first checkpoint load and seed-0
-simulation rollout may run. No optimizer, training, retry, additional
-checkpoint/seed, hardware, transfer, or promotion is part of F0b.
+F0b/Brief 232 is verified and closed by Reviewer 325. The sole attempt loaded
+the retained update-10,000 ACT checkpoint once and ran one seed-0 rollout under
+unchanged strict-v2 gates. Full trace `af62a3b5...` proves the hybrid schedule
+is identical to chunk-50 through frame 175 and first diverges at the planned
+frame-176 re-observation. It increases strict retreat-contact frames from 1 to
+17, yet both fingertip pads remain in contact at release-final frame 219; Gate
+C still fails only `release_final_contact_clear`. Result `8fb34ff4...` is a
+clean terminal policy negative, not an infrastructure failure. No optimizer,
+training, retry, additional checkpoint/seed, network, Brev, hardware,
+transfer, or promotion occurred, and the corrective ACT rung remains
+unselected and unconsumed. The next eligible task is a fresh F3 brief to fold
+current R2/F0/F0a/F0b truth into the reconstruction kit and verify the fork
+boundary; the freeze tag itself remains separately gated.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean

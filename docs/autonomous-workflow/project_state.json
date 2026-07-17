@@ -131,9 +131,9 @@
   },
   "latest_verified_task_implementation_boundary": {
     "brief_id": "232",
-    "commit": "8edf1687168750781a257a39d9f5cace3a5e57f5",
-    "reviewer_decision_id": "323",
-    "summary": "reviewer_323_verifies_f0b_owner_authority_attribution_correction_and_reopens_model_free_materialization"
+    "commit": "2d39bcc076c7328364777712cd1bf7828bc1cae9",
+    "reviewer_decision_id": "325",
+    "summary": "reviewer_325_verifies_f0b_hybrid_tail_cadence_terminal_negative_8fb34ff4_and_routes_to_f3_reconstruction_fold"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -349,7 +349,7 @@
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "F0b",
-  "next_eligible_task": "F0b",
+  "next_eligible_task": "F3",
   "active_support_task": null,
   "support_tasks": {
     "K1": {
@@ -5200,16 +5200,17 @@
       "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "F0b": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["F0a_verified_on_origin"],
-      "active_brief_id": "232",
+      "active_brief_id": null,
       "latest_verified_brief_id": "232",
-      "review_decision_id": "324",
+      "review_decision_id": "325",
       "source_boundary_commit": "951c5254950b734677a6d185c227c56724182b58",
       "brief_activation_commit": "fe552f02ffe59e133924a79d53df9806b4a92139",
       "base_implementation_commit": "1b23f6bc372e66ce5c0982d0da97d7a9fe8c1275",
       "implementation_commit": "8edf1687168750781a257a39d9f5cace3a5e57f5",
-      "result": "Reviewers 322-323 verify Brief 232 implementation and owner-attribution correction; Reviewer 324 accepts exactly one marker-first load of the retained update-10000 ACT checkpoint and one seed-0 hybrid-tail-cadence simulation rollout after acceptance 4ca23f81 is exact on origin, with optimizer/training, retry, extra seeds/checkpoints, network, Brev, hardware, transfer, and promotion closed",
+      "result_preservation_commit": "2d39bcc076c7328364777712cd1bf7828bc1cae9",
+      "result": "Reviewer 325 verifies the sole F0b attempt as a clean terminal policy negative: hybrid cadence is identical to chunk-50 through frame 175 and improves strict retreat-contact coverage from 1 to 17 frames, but both fingertip pads remain in contact at release-final frame 219 and Gate C still fails only release_final_contact_clear; no infrastructure failure, optimizer, training, retry, extra checkpoint/seed, network, Brev, hardware, transfer, or promotion occurred, and F3 is next eligible",
       "artifact": {
         "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_spec.json",
         "schema_version": "scenesmith.f0b_hybrid_tail_cadence_spec.v1",
@@ -5263,8 +5264,47 @@
         "simulation_rollout": false,
         "retry_authorized": false
       },
-      "authority_granted": ["activate_brief_232", "read_and_hash_frozen_f0a_t20_43c_r2_and_runtime_sources", "implement_and_fixture_test_f0b_spec_authority_runner_trace_and_terminal_contracts", "write_model_free_f0b_spec_fixture_and_preflight_artifacts", "f0b_implementation_verified", "materialize_model_free_f0b_authority_bundle", "execute_one_retained_comparator_trace_renderer_smoke_without_checkpoint_or_model_access", "accept_one_f0b_marker_first_checkpoint_load_and_seed_0_hybrid_tail_rollout_after_origin_confirmation", "preserve_one_pass_policy_negative_or_infrastructure_failure_bundle"],
+      "execution": {
+        "attempt_marker_identity_sha256": "274356f5069caee0b860c4a96a00ad26a9dd0058f2531743c263074ef39ec0e4",
+        "trace_identity_sha256": "af62a3b5d47b315609590765445a4aa7db99effb2fe20b4d3a4d1c3bd9bbb3f9",
+        "trace_file_sha256": "831a10756b5adac21ddec66b9e83671b9a58631af443b104148c0cf269d00b7e",
+        "result_identity_sha256": "8fb34ff4a0619d59f414ec6bb81cb028fd5cf3d31bb26c4655a9dd41855f185d",
+        "scorecard_identity_sha256": "c24cd471963b397003a42d7f7887040b358c8c644a4b73d9db35722a408a0d9c",
+        "retention_identity_sha256": "4c3c74d0ba18f0dccda936e66b0b0510b0edd7f0319fd4728ca1e556df26b436",
+        "final_receipt_identity_sha256": "7b7f4f772ca37f69732c99418ca3429402c256f051855603f1458b77e5a89fb8",
+        "mirror_manifest_identity_sha256": "acaa395a895f2beb172ae78f122ec818651da15032de7bfd900094c130765a1d",
+        "mirror_manifest_file_sha256": "300f290643a3515626b4934e0adda5c9e0a003460aaf89678abd70bd76ed09a0",
+        "mirror_mp4_sha256": "db088a4d9cc1bce841a71e64a6985a519d41e068d8a7c32e482e7ffeef1f2f89",
+        "mirror_mp4_bytes": 629126,
+        "model_load_count": 1,
+        "rollout_count": 1,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "retry_performed": false,
+        "gate_c_executed": true,
+        "gate_c_passed": false,
+        "failed_gate": "release_final_contact_clear",
+        "maximum_anchor_lift_m": 0.037655304225193253,
+        "first_action_divergence_frame": 176,
+        "first_state_divergence_frame": 177,
+        "original_retreat_strict_contact_frames": 1,
+        "hybrid_retreat_strict_contact_frames": 17,
+        "corrective_training_selected": false,
+        "single_corrective_rung_consumed": false,
+        "infrastructure_failure": false
+      },
+      "authority_granted": ["activate_brief_232", "read_and_hash_frozen_f0a_t20_43c_r2_and_runtime_sources", "implement_and_fixture_test_f0b_spec_authority_runner_trace_and_terminal_contracts", "write_model_free_f0b_spec_fixture_and_preflight_artifacts", "f0b_implementation_verified", "materialize_model_free_f0b_authority_bundle", "execute_one_retained_comparator_trace_renderer_smoke_without_checkpoint_or_model_access", "accept_one_f0b_marker_first_checkpoint_load_and_seed_0_hybrid_tail_rollout_after_origin_confirmation", "preserve_one_pass_policy_negative_or_infrastructure_failure_bundle", "f0b_terminal_negative_verified", "open_fresh_f3_reconstruction_fold_brief_after_origin_confirmation"],
       "authority_not_granted": ["optimizer_creation", "optimizer_training", "retry", "additional_checkpoint", "additional_seed", "additional_rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
+    },
+    "F3": {
+      "state": "pending",
+      "depends_on": ["F0b_verified_on_origin", "K2_verified_on_origin"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "result": "F3 is next eligible only as a fresh reconstruction-kit and documentation fold of immutable R2, K2, F0, F0a, and F0b truth; it may verify portability and prepare a separately reviewed freeze boundary but grants no model, optimizer, rollout, Brev, hardware, transfer, promotion, or tag action",
+      "authority_granted": [],
+      "authority_not_granted": ["activate_before_f0b_closeout_origin_confirmation", "checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "T20.45": {
       "state": "pending",
