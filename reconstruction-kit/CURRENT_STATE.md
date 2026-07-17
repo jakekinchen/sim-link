@@ -156,11 +156,14 @@ unconsumed. F3/Brief 233 is verified by Reviewer 326: implementation `48970159..
 `ec9084dc...`, pristine export `57b4623b...`, offline W1 bootstrap
 `bd2c9575...`, and retained exact W2 receipt `86739578...` close the sim2claw
 capsule fold. F3 receipt `bf488607...` grants no model work, F1/Brev, hardware,
-transfer, or promotion authority. The freeze tag records this boundary only.
+transfer, or promotion authority. Remote tag
+`freeze-2026-07-17-hackathon-fork` targets F3 closeout commit `04a52929...` and
+records this boundary only.
 
 ## Packaged post-freeze F0c task
 
-The later owner addendum selected F0c as the fork's first training task. Signed
+The later owner addendum selected F0c as the fork's first training task.
+Reviewer 327 verifies implementation `91bb8769...` only as a package. Signed
 spec `6a178138f79236f27adc04b337e0142a5dfa851f1f67d32d55dcc8b41e4da5dd`
 freezes one release-phase-oversampled, physical-L1-weighted continuation from
 the immutable R2 update-10,000 checkpoint. It is capped at 2,000 updates,
@@ -170,7 +173,7 @@ investigation is allowed.
 
 F0c was not executed before the source-repo cutoff: no checkpoint tensor was
 read, model/optimizer constructed, training or rollout performed, or authority
-opened. Its execution runner remains a reviewed fork deliverable, and the
+opened. Its execution runner remains a future reviewed fork deliverable, and the
 checkpoint is not included in this kit. See
 [F0c first training task](./F0C_FIRST_TRAINING_TASK.md).
 

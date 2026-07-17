@@ -20,9 +20,11 @@ F0b changed only tail observation cadence but still failed release at frame
 45.674304 mm maximum lift and 37.655304 mm final lift, with only
 `release_final_contact_clear` failing in the final rollout. Learned strict-v2
 success, rather than ACT plumbing, is now the sim-link long pole. The corrective
-ACT rung was not selected or consumed, cadence alone is insufficient, and no
-F1/Brev run was started. PI0.5 remains day-three stretch in the fork. Robo Scan
-proceeds independently toward the real metric export required by I5.
+ACT rung was not selected or consumed at the F0b/F3 boundary, cadence alone is
+insufficient, and no F1/Brev run was started. The 06:35 owner addendum later
+selected F0c as one exact fork experiment; Reviewer 327 verifies its package,
+not a run. PI0.5 remains day-three stretch in the fork. Robo Scan proceeds
+independently toward the real metric export required by I5.
 
 This plan is a task-ordering source, not an authority source. Live authority,
 training readiness, and proof labels remain mechanically owned by
@@ -38,6 +40,13 @@ verified sim2claw reconstruction boundary. Manifest `ec9084dc...`, export
 `86739578...` verify the handoff. Manager Intervention 018 is retained as
 superseded convergence history.
 
+Post-freeze F0c spec `6a178138...` attacks the remaining release deficit with
+4x release/release-settle start weighting plus F0's physical-L1 coefficients,
+fresh AdamW, a 2,000-update ceiling, and chunk-50-only strict-v2 evaluation.
+Budget review rejected source-repo execution before marker creation. Export
+`dce41616...` carries the exact spec outside the unchanged F3 manifest; the
+fork must still implement/review the runner and create fresh native authority.
+
 ## Product Cut
 
 ### Build in the current sim-link lane
@@ -51,7 +60,8 @@ superseded convergence history.
 - Preserve F0 result `807d3da7...`, F0a result `278e8bc7...`, and the full
   replayable F0b trace/result `af62a3b5...`/`8fb34ff4...`. These establish a
   delayed/aliased release mechanism and falsify hybrid cadence alone; they do
-  not establish learned success or authorize corrective training.
+  not establish learned success or authorize corrective training by
+  themselves. F0c is the separately selected, one-attempt fork contract.
 - An explicit, reusable learning/plumbing evidence surface: exact R0 parity
   checks plus the existing signed T20.35x one-batch proof, kept distinct from
   any accepted product policy.
@@ -275,6 +285,7 @@ non-negotiable full-MVP exits:
 | F0 | **Release-gap diagnosis (verified model-free; Reviewer 320)** | Result `807d3da7...` falsifies tail-window starvation, R0 open-gripper normalization failure, and late-phase loss-mass underweighting. It localizes a 20-frame delayed release pattern and keeps the corrective rung unselected. | T20.43c-R2 terminal counterexample | Model/checkpoint load, optimizer/training, rollout, gate change, F1/Brev, hardware |
 | F0a | **Chunk/phase observability audit (verified model-free; Reviewer 321)** | Result `278e8bc7...` finds 20/24 qpos-near/image-near lift/lower pairs with opposite hidden velocity and conflicting futures; candidate frame 200 is 17 frames behind the nearest lower state. Candidate-image equivalence is not claimed. | Verified F0 | Model/checkpoint load, optimizer/training, rollout, wall-clock phase token, hardware |
 | F0b | **Hybrid tail-cadence evaluation (verified terminal negative; Reviewer 325)** | One same-checkpoint/same-seed rollout is identical through frame 175 and re-observes at frame 176. Strict retreat-contact frames rise 1→17, but both pads still contact at release-final frame 219 and Gate C fails only release. Result `8fb34ff4...`; no retry or corrective rung. | Verified F0a; Brief 232 | Retry, extra checkpoint/seed, optimizer/training, gate change, F1/Brev, hardware, promotion |
+| F0c | **Release-targeted first fork training task (verified package, unexecuted; Reviewer 327)** | Spec `6a178138...` freezes 4x release/release-settle start weighting, active-mean-one physical-L1 coefficients, fresh AdamW, ≤2,000 updates, and chunk-50 strict-v2 checks at 0/500/1000/2000. Budget rejected a source-repo half-run; exact spec travels in export `dce41616...`. | Verified F0b/F3; Brief 234; implementation `91bb876...` | Source-repo execution, missing runner/review/authority, retry, receding-10, gate/data/statistics change, hardware, network, external compute, Brev |
 | 21 | **T20.44 — R2 SmolVLA standard rung (verified terminal negative; Brief 220/Reviewer 297)** | Sole result `9d916206...` completes 5,000 finite updates, five checkpoints, and ten dual-semantics rollouts with no strict-v2 pass. Strongest partial result was checkpoint 1,000/receding-10 at 73 contacts and 18.061 mm lift; first-pass selection remains null. | Verified T20.42; T20.43 boundary; Reviewers 294-297 | Retry/replacement, correction objectives, network/download, Gate B/open-loop barrier, threshold changes, hardware, external compute, Brev |
 | 22 | **T20.45 — R3 conditional π0.5 standard rung** | Only after R1/R2 evidence: either one bounded local-MPS standard fine-tune from the cached base, or a costed external-compute proposal document (ABEJA-parity reference) for separate fresh owner authorization. No compute consumption beyond local MPS without that grant. | R1/R2 rollout evidence; fresh owner grant for any external compute | External compute or Brev consumption without fresh owner authorization, correction objectives, promotion |
 

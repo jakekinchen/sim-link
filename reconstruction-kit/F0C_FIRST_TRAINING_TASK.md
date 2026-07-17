@@ -3,7 +3,8 @@
 F0c is the first training task selected for the sim2claw fork after the frozen
 F3 reconstruction boundary. It is a signed, unexecuted experiment contract—not
 a model result, transferred permit, or claim that learned strict-v2 success is
-solved.
+solved. Reviewer 327 verifies source implementation `91bb8769...` only as this
+portable package.
 
 The canonical machine-readable contract travels at
 `configurations/robot_lab/f0c_release_targeted_continuation_spec.json`. Its

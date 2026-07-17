@@ -130,10 +130,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "233",
-    "commit": "8066e59b515edba848e221aadddb26e5bb104b1d",
-    "reviewer_decision_id": "326",
-    "summary": "reviewer_326_verifies_f3_receipt_bf488607_source_implementation"
+    "brief_id": "234",
+    "commit": "91bb87695f6676a06371aa146240c60b39e0a59b",
+    "reviewer_decision_id": "327",
+    "summary": "reviewer_327_verifies_f0c_spec_6a178138_as_fork_day_one_package_without_execution"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -5297,13 +5297,13 @@
       "authority_not_granted": ["optimizer_creation", "optimizer_training", "retry", "additional_checkpoint", "additional_seed", "additional_rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "F0c": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["F0b_verified_on_origin", "F3_verified_on_origin", "owner_direction_2026_07_17_final_overnight_addendum_0635"],
-      "active_brief_id": "234",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
-      "source_boundary_commit": "8bb39a1da460a1dd269ce0ec5a5d6b74e5cb746a",
-      "result": "Brief 234 records that the complete reviewed 2000-update continuation boundary cannot fit the 5048 seconds remaining before 10:00 CDT and opens only deterministic packaging of F0c as the fork's first release-targeted training task; no marker, checkpoint read, model, optimizer, training, rollout, retry, receding-10, hardware, network, external compute, or Brev action is authorized",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "234",
+      "review_decision_id": "327",
+      "source_boundary_commit": "91bb87695f6676a06371aa146240c60b39e0a59b",
+      "result": "Reviewer 327 verifies F0c only as packaged_for_fork_day_one: signed spec 6a178138 and pristine export dce41616 preserve the exact release-targeted one-attempt contract while the F3 manifest/tag remain unchanged; no marker, tensor read, model, optimizer, training, rollout, retry, receding-10, hardware, network, external compute, or Brev action occurred",
       "budget": {
         "assessed_at": "2026-07-17T08:35:52-05:00",
         "cutoff": "2026-07-17T10:00:00-05:00",
@@ -5315,7 +5315,31 @@
         "shortfall_seconds": 1338.4,
         "execute_before_cutoff": false
       },
-      "authority_granted": ["activate_brief_234", "read_and_hash_immutable_r2_r0_f0_f0a_f0b_sources", "write_and_test_signed_f0c_day_one_package", "update_living_state_and_reconstruction_forward_plan", "preserve_package_on_origin"],
+      "evidence": {
+        "activation_commit": "126121d28b2c495332a71436b2313e0ccb54c69f",
+        "implementation_commit": "91bb87695f6676a06371aa146240c60b39e0a59b",
+        "spec_identity_sha256": "6a178138f79236f27adc04b337e0142a5dfa851f1f67d32d55dcc8b41e4da5dd",
+        "spec_file_sha256": "9ff872537c10e529cbb8618090c887a3cd1e081e1d67910a91a199c99aae9297",
+        "immutable_checkpoint_identity_sha256": "c77ee36250f921dbdfc7b19802ab8705c9795b298fa14d4a2b1825acf68451ab",
+        "f3_source_manifest_identity_sha256": "ec9084dc41e22e9c7c695b029a8db84cb60c507001ab7c65325e804ecfed5117",
+        "post_freeze_export_receipt_identity_sha256": "dce41616c663f38a156c5422db5a7093d0f1de0e35524ed35ccb2784ef2ccd21",
+        "post_freeze_export_file_count": 467,
+        "freeze_tag_target_commit": "04a52929f8a9645ff6cc82081bc43b6a26780e27",
+        "package_test_count": 7,
+        "kit_test_count": 13,
+        "documentation_test_count": 6,
+        "project_state_pointer_test_count": 15,
+        "attempt_marker_created": false,
+        "checkpoint_tensor_read": false,
+        "model_constructed": false,
+        "optimizer_created": false,
+        "optimizer_training": false,
+        "rollout_executed": false,
+        "gate_c_executed": false,
+        "learned_policy_success_claimed": false,
+        "authority_transferred": false
+      },
+      "authority_granted": ["activate_brief_234", "read_and_hash_immutable_r2_r0_f0_f0a_f0b_sources", "write_and_test_signed_f0c_day_one_package", "update_living_state_and_reconstruction_forward_plan", "preserve_package_on_origin", "f0c_day_one_package_verified"],
       "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "attempt_marker", "authority_materialization", "pre_run_acceptance", "retry", "receding_10_evaluation", "dataset_mutation", "statistics_mutation", "threshold_change", "additional_seed", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "reopen_f1_f2_f3"]
     },
     "F3": {

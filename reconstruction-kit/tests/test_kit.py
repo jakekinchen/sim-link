@@ -381,6 +381,11 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertFalse(fold["model_action_performed"])
         f0c = state["f0c_first_training_task"]
         self.assertEqual(f0c["status"], "packaged_for_fork_day_one")
+        self.assertEqual(f0c["review_decision_id"], "327")
+        self.assertEqual(
+            f0c["implementation_commit"],
+            "91bb87695f6676a06371aa146240c60b39e0a59b",
+        )
         self.assertEqual(
             f0c["spec_identity_sha256"],
             "6a178138f79236f27adc04b337e0142a5dfa851f1f67d32d55dcc8b41e4da5dd",
@@ -389,6 +394,11 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertFalse(f0c["execution_entrypoint_implemented"])
         self.assertFalse(f0c["training_executed"])
         self.assertFalse(f0c["authority_transferred"])
+        self.assertTrue(route["freeze_tag_created_in_recorded_snapshot"])
+        self.assertEqual(
+            route["freeze_tag_target_commit"],
+            "04a52929f8a9645ff6cc82081bc43b6a26780e27",
+        )
 
     def test_fork_spine_keeps_current_and_future_contracts_distinct(self) -> None:
         required = [

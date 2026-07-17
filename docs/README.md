@@ -60,8 +60,8 @@ cadence hypothesis once with the same checkpoint and seed. Re-observing at
 frame 176 increased strict retreat-contact frames from 1 to 17 but still left
 both fingertip pads in contact at the frozen release-final frame 219. Gate C
 again failed only `release_final_contact_clear`. Cadence alone is therefore not
-the repair, no corrective ACT rung was selected or consumed, and no F1/Brev
-run was started.
+the repair. At the F0b/F3 boundary no corrective ACT rung had been selected or
+consumed, and no F1/Brev run was started.
 
 F3/Brief 233 is verified by Reviewer 326. Source implementation `48970159...`,
 manifest `ec9084dc...`, pristine export `57b4623b...`, and offline W1 bootstrap
@@ -70,6 +70,14 @@ still proves exact R0 parity without another generation run. The separately
 gated freeze tag records this boundary only. It does not change the fork's
 ACT-plus-state-RL primary architecture or grant model, hardware, transfer, or
 promotion authority.
+
+The later 06:35 owner addendum selected one post-freeze discriminator: F0c.
+Reviewer 327 verifies signed spec `6a178138...` as the fork's first training
+task: 4x release/release-settle start weighting, F0 physical-L1 coefficients,
+fresh AdamW, at most 2,000 updates, and chunk-50-only strict-v2 evaluation. It
+was packaged, not executed. Fresh export `dce41616...` carries the exact JSON
+outside the unchanged F3 manifest; the runner, checkpoint acquisition, and
+fresh fork-native authority remain future prerequisites.
 
 The kit's combined portability proof is also complete: W1 receipt
 `392fcc8b...` verifies the current dual-runtime/all-schema stack from a

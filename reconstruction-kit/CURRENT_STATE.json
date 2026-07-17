@@ -175,6 +175,9 @@
   "f0c_first_training_task": {
     "task_id": "F0c",
     "status": "packaged_for_fork_day_one",
+    "activation_commit": "126121d28b2c495332a71436b2313e0ccb54c69f",
+    "implementation_commit": "91bb87695f6676a06371aa146240c60b39e0a59b",
+    "review_decision_id": "327",
     "spec_identity_sha256": "6a178138f79236f27adc04b337e0142a5dfa851f1f67d32d55dcc8b41e4da5dd",
     "spec_file_sha256": "9ff872537c10e529cbb8618090c887a3cd1e081e1d67910a91a199c99aae9297",
     "source_capsule_freeze_task_id": "F3",
@@ -275,6 +278,8 @@
   "current_route": {
     "task_id": "F0c",
     "status": "packaged_for_fork_day_one",
+    "review_decision_id": "327",
+    "implementation_commit": "91bb87695f6676a06371aa146240c60b39e0a59b",
     "source_capsule_freeze_task_id": "F3",
     "source_capsule_review_decision_id": "326",
     "owner_overnight_foundation_direction_recorded": true,
@@ -292,7 +297,9 @@
     "f0c_execution_entrypoint_implemented": false,
     "next_eligible_task": "fork_implement_review_authorize_f0c_runner",
     "freeze_tag_authorized_after_exact_origin_confirmation": true,
-    "freeze_tag_created_in_recorded_snapshot": false,
+    "freeze_tag_created_in_recorded_snapshot": true,
+    "freeze_tag_name": "freeze-2026-07-17-hackathon-fork",
+    "freeze_tag_target_commit": "04a52929f8a9645ff6cc82081bc43b6a26780e27",
     "hackathon_annex_path": "docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md"
   },
   "authority": {

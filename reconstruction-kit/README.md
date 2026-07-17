@@ -32,7 +32,8 @@ frame 219. Cadence alone is insufficient. No corrective ACT rung or Brev run
 was consumed in the source-repo window. The later owner addendum selected F0c
 as the fork's first, one-attempt training task: a release-phase-oversampled,
 physical-L1-weighted continuation capped at 2,000 updates. It is packaged but
-unexecuted; the execution runner and fresh fork authority are still required.
+unexecuted by Reviewer 327; the execution runner and fresh fork authority are
+still required.
 
 ## Reading order
 
@@ -125,6 +126,8 @@ manifest `ec9084dc...` (444 selected files, 81,458,869 bytes). Pristine export
 `bd2c9575...` passes 29 focused tests, one 244-frame strict-v2 expert episode,
 and all three retained renderer schemas. F3 receipt `bf488607...` binds those
 facts and the unchanged W2 exact-content receipt without granting authority.
+Remote tag `freeze-2026-07-17-hackathon-fork` targets F3 closeout
+`04a52929...`; it is a marker, not authority.
 F0c is intentionally not smuggled into that frozen manifest. Its exact signed
 spec `6a178138...` and explanatory document travel as receipt-bound post-freeze
 export-wrapper addenda; the checkpoint remains separately acquired and
