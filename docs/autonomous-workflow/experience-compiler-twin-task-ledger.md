@@ -7,14 +7,14 @@ training_lock: closed; T20.43c-R2 completed its sole authorized attempt as a ver
 run_window: closed after 10,000 finite optimizer updates, seven checkpoints, and 14 rollouts; hardware, network, external compute, and Brev remained closed
 run_state: Reviewer 318 verifies exact zero-update equivalence and a clean completed campaign; chunk-50 learned grasp-lift-hold-lower but never clean release, so Gate C is false and the result is not an infrastructure failure
 current_milestone: M20 simulation-only clean supervision
-current_task: F0a in_progress under Brief 231; model-free reversal-alias and chunk/gate-coupling audit only
+current_task: F0a verified under Brief 231 and Reviewer 321; F0b is next eligible as a separately reviewed retained-checkpoint hybrid-cadence evaluation
 support_task: K2 verified under Brief 226 and Reviewer 319; W3 remains an unintegrated 0-of-3 handoff and W5 remains unintegrated transport/replay evidence
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: owner-direction-2026-07-17-final-overnight.md opens model-free F0 release-gap diagnosis and permits at most one separately reviewed corrective ACT rung; it separately bounds optional F1 Brev work but grants no automatic training, hardware, transfer, promotion, or tag
-blockers: learned strict-v2 task completion and Gate C remain scientifically unmet; corrective training, F1/Brev, hardware, transfer, promotion, and the freeze tag remain closed at the F0 boundary
-next_step: implement and verify the source-calibrated reversal-alias and fixed-cadence release-gate audit before any checkpoint or optimizer action
+blockers: learned strict-v2 task completion and Gate C remain scientifically unmet; F0b checkpoint/model/inference/rollout authority, corrective training, F1/Brev, hardware, transfer, promotion, and the freeze tag remain closed at the F0a boundary
+next_step: open and review a fresh F0b brief for the frozen hybrid-tail cadence before any checkpoint read, model construction, inference, or rollout
 ```
 
 ## 2026-07-17 - Reviewer 318 closes T20.43c-R2 as a terminal negative
@@ -3872,3 +3872,23 @@ rung. Training stays locked. F0a is next eligible only as a fresh model-free
 chunk-timing, phase-observability, and observation-aliasing audit. No model,
 optimizer, rollout, Brev/external compute, hardware, Gate C, transfer,
 promotion, or freeze-tag authority follows.
+
+## 2026-07-17 - Reviewer 321 verifies F0a and routes to separate F0b
+
+Brief 231 result `278e8bc7...` proves the consumed ACT input contains two RGB
+images and qpos, while upstream velocity and dataset timestamp do not reach the
+policy and phase/progress are absent. Source-calibrated reversal analysis finds
+20 of 24 lower frames have a state-near and image-near lift counterpart with
+opposite hidden velocity and a conflicting future target. The image result is
+source-to-source evidence; the retained candidate trace has no candidate image
+payload, so no candidate-image identity is claimed.
+
+Candidate frame 200 is nearest source lower frame 183 at normalized L2
+0.5811592 and almost equally near lift frame 93 at 0.5813088. Its 17-frame lag
+aligns within three frames of F0's 20-frame delayed release. Fixed chunk-50
+cadence provides no new observation before aligned release onset frame 220,
+one frame after the failed release gate; retreat-final clearance still is not
+a Gate C pass. Reviewer 321 therefore permits only a fresh F0b brief for one
+unchanged-checkpoint hybrid-tail-cadence evaluation. No checkpoint read, model,
+inference, rollout, optimizer, corrective training, F1/Brev, hardware, Gate C,
+transfer, promotion, or freeze-tag authority follows.

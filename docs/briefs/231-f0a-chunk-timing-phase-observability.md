@@ -114,3 +114,30 @@ dataset or statistics mutation, gate/threshold changes, network or package
 installation, Brev/external compute, cameras, serial or robot hardware,
 physical motion, Gate C execution, transfer, promotion, destructive operations,
 and the freeze tag.
+
+## Closeout
+
+Implementation commit `f81fa9aa90ba4eaf93a125433f1f341992cca54b` is
+exact on origin. Canonical result
+`278e8bc772dc879622a226abe22665d320421925045ad9b3cb1f88b1c31153a4`
+(file SHA-256
+`2ef689c7f51784a799db20cba5dec5f35c51422608b5a78ff4bd94346da06fa6`)
+passes its live source reconstruction and Reviewer 321.
+
+Twenty of 24 lower-corridor source frames have a qpos-near and image-near lift
+counterpart with opposite hidden velocity and a conflicting future target.
+The retained candidate's frame-200 qpos is nearest lower frame 183 at normalized
+L2 `0.5811591805297467` and almost equally near lift frame 93 at
+`0.5813087817685448`; its 17-frame lower-state lag is within three frames of
+F0's 20-frame release-pattern delay. These are deliberately separate evidence
+claims: image similarity is measured between exact source frames, not invented
+for candidate camera observations absent from the retained trace.
+
+The fixed chunk-50 actor observes at frame 200 and not again before the delayed
+release onset at frame 220, one frame after the frozen release gate at frame
+219. The release gate fails while retreat-final clearance passes. The
+pre-registered decision therefore routes to a fresh, separately reviewed F0b
+hybrid-tail-cadence evaluation. No checkpoint tensor, model, inference,
+optimizer, rollout, simulator, dataset, gate, hardware, network, external
+compute, or Brev action occurred, and no corrective rung was selected or
+consumed.

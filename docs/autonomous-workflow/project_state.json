@@ -130,10 +130,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "230",
-    "commit": "698d5644e9add156266f0ab4997aaa27c9b98b10",
-    "reviewer_decision_id": "320",
-    "summary": "reviewer_320_verifies_model_free_f0_release_gap_diagnosis_807d3da7"
+    "brief_id": "231",
+    "commit": "f81fa9aa90ba4eaf93a125433f1f341992cca54b",
+    "reviewer_decision_id": "321",
+    "summary": "reviewer_321_verifies_model_free_f0a_chunk_phase_observability_278e8bc7"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -349,7 +349,7 @@
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "F0a",
-  "next_eligible_task": "F0a",
+  "next_eligible_task": "F0b",
   "active_support_task": null,
   "support_tasks": {
     "K1": {
@@ -5159,15 +5159,55 @@
       "authority_not_granted": ["corrective_act_rung", "checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "F0a": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["F0_verified_on_origin"],
-      "active_brief_id": "231",
+      "active_brief_id": null,
+      "latest_verified_brief_id": "231",
+      "review_decision_id": "321",
+      "source_boundary_commit": "c433177b36baea3e7eea048ce743b509b61e3799",
+      "brief_activation_commit": "a6efa4b64b8a6e56aa090df8b7fd43006ec40c55",
+      "implementation_commit": "f81fa9aa90ba4eaf93a125433f1f341992cca54b",
+      "result": "Reviewer 321 verifies signed model-free F0a result 278e8bc7: 20 of 24 source lower frames have state-near and image-near lift counterparts with opposite hidden velocity and conflicting future targets; candidate frame 200 has a 17-frame lower-state lag aligned to F0's 20-frame release delay, and fixed chunk-50 cadence provides no new observation before delayed release starts one frame after the failed gate; candidate-image equivalence is not claimed and F0b is only next eligible as a fresh separately reviewed hybrid-cadence evaluation",
+      "artifact": {
+        "path": "configurations/robot_lab/f0a_chunk_phase_observability.json",
+        "schema_version": "scenesmith.f0a_chunk_phase_observability.v1",
+        "identity_sha256": "278e8bc772dc879622a226abe22665d320421925045ad9b3cb1f88b1c31153a4",
+        "file_sha256": "2ef689c7f51784a799db20cba5dec5f35c51422608b5a78ff4bd94346da06fa6",
+        "alias_pass_count": 20,
+        "alias_pair_count": 24,
+        "adjacent_state_l2_p95": 0.13180902191868454,
+        "adjacent_image_mae_p95": 0.017136876723345587,
+        "image_near_threshold": 0.034273753446691174,
+        "frame_200_nearest_lower_frame": 183,
+        "frame_200_nearest_lower_normalized_l2": 0.5811591805297467,
+        "frame_200_nearest_lift_frame": 93,
+        "frame_200_nearest_lift_normalized_l2": 0.5813087817685448,
+        "frame_200_lower_state_lag_frames": 17,
+        "f0_release_pattern_shift_frames": 20,
+        "aligned_candidate_release_onset_frame": 220,
+        "release_settle_final_gate_frame": 219,
+        "reversal_observability_defect_supported": true,
+        "tail_cadence_gate_coupling_supported": true,
+        "wall_clock_phase_token_licensed": false,
+        "corrective_training_selected": false,
+        "single_corrective_rung_consumed": false,
+        "focused_test_count": 7,
+        "relevant_unittest_count": 53,
+        "continuation_regression_count": 14,
+        "live_verifier_exit_code": 0
+      },
+      "authority_granted": ["activate_brief_231", "read_and_hash_frozen_f0_r0_and_t20_43c_r2_sources", "decode_retained_png_bytes_in_memory", "implement_and_fixture_test_model_free_f0a_audit", "write_compact_signed_f0a_result", "f0a_model_free_chunk_phase_observability_verified", "open_fresh_f0b_brief_after_origin_confirmation"],
+      "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
+    },
+    "F0b": {
+      "state": "pending",
+      "depends_on": ["F0a_verified_on_origin"],
+      "active_brief_id": null,
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "source_boundary_commit": "c433177b36baea3e7eea048ce743b509b61e3799",
-      "result": "Brief 231 opens a model-free audit of the lift/lower reversal observation contract and fixed chunk-50 release-gate coupling; no checkpoint, model, optimizer, inference, rollout, dataset mutation, Brev/external compute, or hardware action is authorized",
-      "authority_granted": ["activate_brief_231", "read_and_hash_frozen_f0_r0_and_t20_43c_r2_sources", "decode_retained_png_bytes_in_memory", "implement_and_fixture_test_model_free_f0a_audit", "write_compact_signed_f0a_result"],
-      "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
+      "result": "F0b is next eligible only as a fresh separately reviewed no-training evaluation of the retained ACT checkpoint under frozen hybrid cadence; strict-v2 Gate C, source episode, and thresholds remain unchanged, and no checkpoint/model/inference/rollout action is authorized before its own origin-preserved authority boundary",
+      "authority_granted": [],
+      "authority_not_granted": ["activate_before_f0a_closeout_origin_confirmation", "checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "T20.45": {
       "state": "pending",
