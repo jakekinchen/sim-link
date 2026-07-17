@@ -31,6 +31,7 @@ Reviewer 306 accepts the deterministic terminal-verifier repair after 6
 focused and 35 T20.43/T20.43b/T20.44 tests plus live verifier exit 0. This is a
 verified infrastructure failure, not a trained-ACT negative: ACT-on-R0 remains
 unresolved, and no further attempt or T20.45 activation is authorized.
+Closeout commit `4d8f951` is exact on origin.
 
 ## 2026-07-16 - T20.43b epoch-2 refresh implementation accepted
 

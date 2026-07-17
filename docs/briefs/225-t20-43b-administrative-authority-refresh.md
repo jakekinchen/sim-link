@@ -104,3 +104,4 @@ updates, no Gate C pass, and no retry. Reviewer 306 accepts the repaired
 model-free terminal verifier and closes T20.43b as a verified runtime failure,
 not a trained-ACT negative. The ACT-on-R0 capability question remains
 unresolved and no second replacement or attempt is authorized.
+Closeout commit `4d8f951` is exact on origin.
