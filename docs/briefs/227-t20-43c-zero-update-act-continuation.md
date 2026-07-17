@@ -68,3 +68,9 @@ the actual-schema smoke completed but dependency inventory received an
 obsolete Python-3.11 MuJoCo path. No authority JSON or model action was written.
 The recovery must reuse only the re-verified smoke MP4/manifest, record that
 resume in the signed smoke receipt, and use the bound Python-3.12 support path.
+
+That model-free recovery now verifies as smoke `9e8783dc...` and central
+decision `c316bf01...`, granting only `simulation_training_ready` through permit
+`166a6cd0...`. Training remains locked until the six-artifact bundle is exact
+on origin and a separate reviewer decision plus signed acceptance are written
+and preserved.

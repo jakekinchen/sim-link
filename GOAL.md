@@ -115,8 +115,9 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 T20.43c under Brief 227 is the active recovery slice. Reviewer 309 accepts a
 model-free recovery after the actual-schema smoke succeeded but dependency
-inventory failed before authority JSON; exact smoke reuse and compact authority
-materialization are next while the training lock remains closed. The
+inventory failed before authority JSON. The resumed smoke and compact authority
+now verify; origin preservation and separate acceptance are next while the
+training lock remains closed. The
 owner explicitly authorizes further action to resolve ACT-on-R0. T20.43b remains
 byte-immutable at terminal failure `89b6dbff...`: zero optimizer updates, one
 checkpoint, and one untrained chunk-50 rollout. T20.43c must first prove that

@@ -1,0 +1,40 @@
+{
+  "authority_decision_identity_sha256": "c316bf01f0415569845d2a97717b117fc86997b5ca27ac86562bf218abc961f2",
+  "authorized_attempt_count": 1,
+  "brev_compute_authorized": false,
+  "checkpoint_schedule": [
+    0,
+    500,
+    1000,
+    2500,
+    5000,
+    7500,
+    10000
+  ],
+  "continuation_marker_path": "configurations/robot_lab/t20_43c_act_continuation_marker.json",
+  "equivalence_required_before_update_1": true,
+  "evaluation_action_steps": [
+    50,
+    10
+  ],
+  "external_compute_authorized": false,
+  "fresh_replacement_authorized": false,
+  "hardware_authorized": false,
+  "identity_sha256": "166a6cd053d9fd7d1a827f5cd03ee8816fba1ca8cd7aa853795acf7728baa397",
+  "marker_precedes_checkpoint_tensor_read_and_model_construction": true,
+  "maximum_optimizer_updates": 10000,
+  "network_authorized": false,
+  "owner_identity_sha256": "315aef8228fda9ad5e37ec30376dfc17e378b32a79ce9149f845bdd47b84ddd8",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "required_source_commit": "ca9b9ccbdbb22e49e566e1b4f81076dfbfac29fd",
+  "retry_or_sweep_authorized": false,
+  "runtime_preflight_identity_sha256": "8d4fbf8918fbf54699646fa6b7d673132c0372b73238b50df5712f8b1493c56a",
+  "schema_version": "scenesmith.t20_43c_act_permit.v1",
+  "source_attempt_identity_sha256": "d67cf38e7d7a441da93c3af55cdcfeefe64b55ce9cf3f0b95894299a88fdca09",
+  "source_checkpoint_identity_sha256": "916200d071995a84577a53dc35b552e2f7db2452194adf8cc18b9a6d54ec8b55",
+  "source_failure_identity_sha256": "89b6dbff17f5da345b1c8d8fa9951989eda092998b702737dd7da16c42db2e92",
+  "source_trace_identity_sha256": "b707b815ab3b204e29dbbc8e50114307058019da3116f8f5ac496c1b6e05f4bd",
+  "t20_45_authorized": false,
+  "task_id": "T20.43c"
+}
