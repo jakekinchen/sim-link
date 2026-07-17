@@ -20,10 +20,13 @@ F0b changed only tail observation cadence but still failed release at frame
 45.674304 mm maximum lift and 37.655304 mm final lift, with only
 `release_final_contact_clear` failing in the final rollout. Learned strict-v2
 success, rather than ACT plumbing, is now the sim-link long pole. The corrective
-ACT rung was not selected or consumed at the F0b/F3 boundary, cadence alone is
-insufficient, and no F1/Brev run was started. The 06:35 owner addendum later
-selected F0c as one exact fork experiment; Reviewer 327 verifies its package,
-not a run. PI0.5 remains day-three stretch in the fork. Robo Scan proceeds
+ACT rung was not selected or consumed at the F0b/F3 boundary, and cadence alone
+is insufficient. The separately authorized off-ledger F1 lane later completed
+one 5,000-step ABEJA-parity PI0.5 full fine-tune and ten rollouts. Its selected
+step-1,000 chunk-50 checkpoint reached 37.519304 mm but failed strict grasp
+hold; no rollout passed Gate C and no gateway result exists. The 06:35 owner
+addendum later selected F0c as one exact fork experiment; Reviewer 327 verifies
+its package, not a run. PI0.5 remains day-three stretch in the fork. Robo Scan proceeds
 independently toward the real metric export required by I5.
 
 This plan is a task-ordering source, not an authority source. Live authority,
@@ -33,12 +36,14 @@ authority composer.
 
 The terminal fold required by
 [`Owner Direction — Final Overnight Exploration`](./autonomous-workflow/owner-direction-2026-07-17-final-overnight.md):
-F0 is closed as a structured terminal negative, F1 and F2 were not opened, and
+F0 is closed as a structured terminal negative, F2 was not opened, and
 F3/Brief 233 has compressed the current evidence and architecture into the
 verified sim2claw reconstruction boundary. Manifest `ec9084dc...`, export
 `57b4623b...`, W1 bootstrap `bd2c9575...`, and retained exact W2 receipt
-`86739578...` verify the handoff. Manager Intervention 018 is retained as
-superseded convergence history.
+`86739578...` verify the handoff. F1 subsequently ran off-ledger and is folded
+by compact evidence `1e933429...` as a completed negative/no-Gate-C result;
+it does not alter the frozen F3 manifest or tag. Manager Intervention 018 is
+retained as superseded convergence history.
 
 Post-freeze F0c spec `6a178138...` attacks the remaining release deficit with
 4x release/release-settle start weighting plus F0's physical-L1 coefficients,

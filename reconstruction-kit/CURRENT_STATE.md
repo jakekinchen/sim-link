@@ -15,7 +15,7 @@ snapshot interprets them without rewriting or conflating any result.
 | Evidence and authority | Verified | Canonical JSON/SHA-256, source identities, central composition, renderer smoke, trace mirroring, and one-use permits fail closed. |
 | SmolVLA learned policy | Verified terminal negative | One 5,000-update, five-checkpoint, ten-rollout campaign produced no Gate C pass. |
 | ACT learned policy | Verified terminal negative | T20.43b ended in mirror-schema infrastructure at zero updates. Original T20.43c proved exact continuation and ended inconclusively at update 728. T20.43c-R2 completed 10,000 updates, seven checkpoints, and fourteen rollouts without a Gate C pass or infrastructure failure. F0/F0a/F0b localized delayed/aliased release and falsified cadence alone without training. |
-| PI0.5 learned policy | Negative diagnostic history | Extensive Gate B work localized structured decode/objective mismatch; no learned Gate C success exists. |
+| PI0.5 learned policy | Verified terminal negative | Extensive Gate B work localized structured decode/objective mismatch. The later F1 full fine-tune completed 5,000 updates and ten rollouts; its selected 37.519304 mm partial failed strict grasp hold and no rollout passed Gate C. |
 | RGB camera readiness | Terminal infrastructure failure | One D405 decoded frame failed signed input-mode dimension validation; C922 was not opened and no frame, mode census, latency result, or readiness label was accepted. |
 | Physical twin/transfer | Not qualified | Physical calibration, metric Robo Scan handoff, task proof, transfer, and promotion remain open. |
 
@@ -62,6 +62,27 @@ learned-policy success.
 - Retry/replacement: closed.
 
 This is a clean model result, not an infrastructure failure.
+
+## F1 PI0.5 terminal negative
+
+- Run receipt: `ca9a23b183c9854266d3960b66bc60f0d7cf4aea8d0dc40ad96293e9201d8716`.
+- Canonical fold: `1e9334299675e42e3104c3d49f29909afa21e7f6eea43ff881221738c7147755`.
+- Training: one ABEJA-parity full fine-tune of `lerobot/pi05_base`, 5,000
+  updates, checkpoints 1,000/2,000/3,000/4,000/5,000, no retry.
+- Evaluation: chunk-50 plus receding-10 at every checkpoint, ten rollouts,
+  zero strict successes and no Gate C pass.
+- Selected partial: step 1,000/chunk-50, 37.519304 mm maximum lift, failing
+  only `grasp_hold_strict_v2`.
+- Cost: `$5.526` calculated from the displayed rate, not a provider invoice.
+- Teardown: receipt `7343ad9f...` records deletion confirmed at 06:10:58 CDT
+  and zero resources at 06:11:07; the canonical fold's authenticated inventory
+  also found no workspace.
+- Retained checkpoint: outside Git at
+  `/Volumes/cerebro/CodexOffload/f1-pi05-r0-20260717/checkpoint-001000/pretrained_model`,
+  model SHA-256 `7555449565...` and config SHA-256 `1f17178a8b...`.
+
+This is policy-training evidence only. It is not a successful policy, gateway
+result, physical proof, transfer claim, or authority for another Brev run.
 
 ## ACT terminal boundaries
 

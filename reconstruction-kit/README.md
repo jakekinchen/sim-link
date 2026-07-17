@@ -29,7 +29,10 @@ late-phase loss mass are not the defect; the policy's release pattern is about
 20 frames late amid lift/lower observation aliasing; and one same-checkpoint
 hybrid-cadence rollout still had both fingertip pads in contact at release-final
 frame 219. Cadence alone is insufficient. No corrective ACT rung or Brev run
-was consumed in the source-repo window. The later owner addendum selected F0c
+was consumed at the F0b/F3 freeze boundary. A later, separately authorized
+off-ledger F1 Brev run completed one 5,000-step PI0.5 full fine-tune and ten
+rollouts, but its selected 37.519304 mm chunk-50 partial failed strict grasp
+hold and zero rollouts passed Gate C. The later owner addendum selected F0c
 as the fork's first, one-attempt training task: a release-phase-oversampled,
 physical-L1-weighted continuation capped at 2,000 updates. It is packaged but
 unexecuted by Reviewer 327; the execution runner and fresh fork authority are
@@ -55,6 +58,11 @@ still required.
 9. [F0c first training task](./F0C_FIRST_TRAINING_TASK.md) — the signed
    post-freeze experiment contract, exact inputs, stop rules, and day-one
    commands; no model result or transferred authority.
+
+The compact canonical F1 pointer remains in the source repository at
+`configurations/robot_lab/f1_brev_evidence_fold.json`. The 9.35 GB retained
+checkpoint and the off-ledger receipt workspace are deliberately not copied
+into this kit.
 
 `CURRENT_STATE.json` is the compact machine-readable result snapshot at the
 current portable source boundary. `SOURCE_MANIFEST.json` is generated from

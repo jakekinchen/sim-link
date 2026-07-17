@@ -156,6 +156,12 @@ localizes a delayed/aliased release, and proves that more frequent tail
 re-observation alone still misses frame-219 release. Neither boundary licenses
 a continuation by itself.
 
+A later off-ledger source-repo F1 run did exercise PI0.5 once: 5,000 full-model
+updates, ten strict-v2 rollouts, zero Gate C passes, and a selected 37.519304 mm
+chunk-50 partial that failed strict grasp hold. That negative is evidence for
+the stretch track, not inherited compute authority or a change to this fork's
+ACT-plus-state-RL day-one order.
+
 The post-freeze owner addendum selected one new discriminator: F0c, a
 release-phase-oversampled, physical-L1-weighted continuation capped at 2,000
 updates and evaluated only with chunk-50 strict-v2. Read

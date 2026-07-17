@@ -90,6 +90,15 @@ evidence-path failures and the original T20.43c interruption, T20.43c-R2
 completed the unchanged 10,000-update campaign and fourteen rollouts without a
 Gate C pass or infrastructure failure.
 
+The later F1 lane supplied the missing full-model PI0.5 result without changing
+that strategy. One ABEJA-parity 5,000-step full fine-tune evaluated five
+checkpoints under chunk-50 and receding-10 for ten rollouts total. None passed
+Gate C. The selected step-1,000 chunk-50 partial lifted 37.519304 mm and failed
+only strict grasp hold. This is a useful compatibility/stress negative, not a
+successful policy or a reason to put PI0.5 ahead of the fork's ACT and
+state-based RL tracks. The displayed-rate spend was $5.526, the workspace was
+deleted, and an authenticated closeout inventory remained empty.
+
 ### ACT
 
 The terminal ACT result is structured, not featureless. Chunk-50 checkpoints

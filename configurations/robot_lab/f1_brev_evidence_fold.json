@@ -1,0 +1,189 @@
+{
+  "canonical_closeout_inventory": {
+    "authenticated": true,
+    "checked_at": "2026-07-17T09:24:21-05:00",
+    "command": "brev ls --json",
+    "mutation_performed": false,
+    "remaining_resource_count": 0,
+    "workspaces": null
+  },
+  "canonical_fold": {
+    "activation_commit": "c0718594818673d5c8292b1560bacaaa4245957b",
+    "brief_id": "235",
+    "historical_evidence_only": true,
+    "starting_commit": "4fe7f685d63e72c21bcf2b1aa3c071bf86ba3a88"
+  },
+  "cost": {
+    "actual_spend_usd": 5.526,
+    "basis": "displayed_rate_not_provider_invoice",
+    "billable_duration_seconds": 12014,
+    "displayed_price_usd_per_hour": 1.656
+  },
+  "evaluation": {
+    "checkpoint_count": 5,
+    "completed_attempt_environment": "MUJOCO_GL=egl PYOPENGL_PLATFORM=egl",
+    "gate_c_passed": false,
+    "gateway_result": false,
+    "rollout_count": 10,
+    "selected": {
+      "checkpoint_step": 1000,
+      "failed_gates": [
+        "grasp_hold_strict_v2"
+      ],
+      "maximum_anchor_lift_m": 0.03751930418757199,
+      "rollout_receipt_identity_sha256": "e03c690e89aed47b85e198bdf03530fdd24f3894cfb9ffd5b6ae85d417ea92b9",
+      "terminal_outcome": "lifted_without_strict_cycle",
+      "variant": "chunk_50"
+    },
+    "startup_attempt_1": "headless_GLFW_without_DISPLAY_before_rollout",
+    "strict_success_count": 0,
+    "variants": [
+      "chunk_50",
+      "receding_10"
+    ]
+  },
+  "identity_sha256": "1e9334299675e42e3104c3d49f29909afa21e7f6eea43ff881221738c7147755",
+  "proof_boundary": {
+    "authority_transferred": false,
+    "brev_resource_created_by_fold": false,
+    "external_compute_started_by_fold": false,
+    "f0c_reopened": false,
+    "f2_reopened": false,
+    "f3_reopened": false,
+    "freeze_tag_changed": false,
+    "gate_c_passed": false,
+    "gateway_result": false,
+    "hardware_accessed_by_fold": false,
+    "physical_proof": false,
+    "physical_transfer_ready": false,
+    "policy_training_evidence_only": true,
+    "promotion_eligible": false,
+    "successful_policy_claimed": false,
+    "training_started_by_fold": false
+  },
+  "receipts": {
+    "evaluation_summary": {
+      "file_sha256": "f64f1d0ce46de8793212f874f5087dcb639417be6cbd7990b1d936da5c8175c3",
+      "identity_sha256": "992cf3fdd3f12c8543b643000691504003a080ff063fbedf98992425ab7a0b50",
+      "path": "outputs/evaluations/EVALUATION_SUMMARY.json"
+    },
+    "launch": {
+      "file_sha256": "d29f7e3b1a9d37897307780f8a41f8882a361c4228b96052e4df5d03760ae088",
+      "identity_sha256": "7e1698fcf8b22bffbc47bf0c5bf01e9bbd3c86e4e48d4cd5c73799dfe63ffc99",
+      "path": "receipts/LAUNCH_RECEIPT.json"
+    },
+    "preflight": {
+      "file_sha256": "9d18468fcb0f997d22a5f03a49a26438d0352217e0593a19e8d0d927af2e5445",
+      "identity_sha256": "edcd861f70613517bf3aabc50f49f385b356c52238a5a3601114006947b1c962",
+      "path": "receipts/REMOTE_PREFLIGHT.json"
+    },
+    "run": {
+      "file_sha256": "d7677389a48ca8bd724ba95707ced6fb13bda1da496452c912218b34d53133d6",
+      "identity_sha256": "ca9a23b183c9854266d3960b66bc60f0d7cf4aea8d0dc40ad96293e9201d8716",
+      "path": "receipts/RUN_RECEIPT.json"
+    },
+    "spend": {
+      "file_sha256": "0561795cd6a25ae71138be5972ad91d09a540ba3134e6f097f93fe959465e98a",
+      "identity_sha256": "c949abbf50fea57513bd6a67899f6544cb5d9a99b05cd9bc63354fec6a3cecd9",
+      "path": "receipts/SPEND_LEDGER.json"
+    },
+    "teardown": {
+      "file_sha256": "03402dfea75472a7e88e158589dcdfa71a60c2a4501f1a2d464adbb4d3c4397d",
+      "identity_sha256": "7343ad9fc1bc1802ec00bd13eab65807ca2d41818c8d59210957b980b2b66064",
+      "path": "receipts/TEARDOWN_INVENTORY_RECEIPT.json"
+    }
+  },
+  "retained_checkpoint": {
+    "config_sha256": "1f17178a8bf1a7d62f9ef89673b79eb4ef839158485e5c09dda2ad9c4eb125d9",
+    "file_count": 7,
+    "included_in_repository": false,
+    "model_sha256": "755544956570297f09f72c48874f5dc9643e02f14a0c934109b81a9e66aec7fb",
+    "path": "/Volumes/cerebro/CodexOffload/f1-pi05-r0-20260717/checkpoint-001000/pretrained_model",
+    "verified_without_tensor_deserialization": true
+  },
+  "rollout_receipts": [
+    {
+      "file_sha256": "e1a2d4916785d06e629968eb09dc1d99fb81db4840bd0de5871fb39596abc145",
+      "identity_sha256": "e03c690e89aed47b85e198bdf03530fdd24f3894cfb9ffd5b6ae85d417ea92b9",
+      "path": "outputs/evaluations/step_01000_chunk_50.json"
+    },
+    {
+      "file_sha256": "82cff6a2a9831b08c1c3f7e14b9b5b94c0aa41eae0fc04b8996449590bf8b01d",
+      "identity_sha256": "b8090c22f95361ea2ca1510c26b2ae22dba4eb4eba31ca54f3eee4756c3dee22",
+      "path": "outputs/evaluations/step_01000_receding_10.json"
+    },
+    {
+      "file_sha256": "37ec6ce6657fafb74a29b02a090430b3e5aa3f9241023356ea5d9018aae5b58f",
+      "identity_sha256": "ecddb96d2e78d4a1b503a96a1be2472480aac1898631150d7f1ec66e9442c4fb",
+      "path": "outputs/evaluations/step_02000_chunk_50.json"
+    },
+    {
+      "file_sha256": "a0430e01331653b840c5e2d215c40f95a6c019540333caadac87bbb3403e8b1f",
+      "identity_sha256": "f74bd620f7b759fbd7d1abbb62a5d3290c82cbfa98a257c57bb7ad76f24d966b",
+      "path": "outputs/evaluations/step_02000_receding_10.json"
+    },
+    {
+      "file_sha256": "bf3a048ddf4158542bcb9f6050a83e5bee465ecfe9ec76390dd614a5a1d220b7",
+      "identity_sha256": "4fbe16143d3dbf6727b9468e020214500319b4aa7d52c523478ff84f94d108e5",
+      "path": "outputs/evaluations/step_03000_chunk_50.json"
+    },
+    {
+      "file_sha256": "59fe0330b749eac5e3f7c636463afaed0ebd26eca61a3a5bc09e25be99cda7b0",
+      "identity_sha256": "e6882a57f9ecaa6a7b13cee6b8e8de25aaf5f41ecb343da30bdd0a0e9f93a2a2",
+      "path": "outputs/evaluations/step_03000_receding_10.json"
+    },
+    {
+      "file_sha256": "58abfa5e441710a58759d302a8329153737b61433fd91207d13219b4ba002698",
+      "identity_sha256": "7d98e30f1441974927ddd6db978e373030bfaa6903056516cd0e2bdec7633d1a",
+      "path": "outputs/evaluations/step_04000_chunk_50.json"
+    },
+    {
+      "file_sha256": "f12579d06ce2aba19105dc760eac117afe51999b391ce813a2b40a67e13fbf17",
+      "identity_sha256": "e1277d65110999bd4071d9e4905f7453f216fb0219498a505b14789f219d003a",
+      "path": "outputs/evaluations/step_04000_receding_10.json"
+    },
+    {
+      "file_sha256": "39603ffbbf47f19e95b1a34a11c72a549b046d763a9ebb00bbf7c787960f3120",
+      "identity_sha256": "5d86dd63acd66dc6ec56a4f9bf2490944eb86f666dc113f31dbff4722d886320",
+      "path": "outputs/evaluations/step_05000_chunk_50.json"
+    },
+    {
+      "file_sha256": "279a3d0e25f4615bb93651ff62ae1057e40c905526b291ae533c6a03ae8919c4",
+      "identity_sha256": "fc897ad186429beea3b8c3ede7ed488f3324e336309c54849a78896a56e0c93f",
+      "path": "outputs/evaluations/step_05000_receding_10.json"
+    }
+  ],
+  "schema_version": "scenesmith.f1_brev_evidence_fold.v1",
+  "source": {
+    "root": "/Users/kelly/Documents/Codex/2026-07-17/sim-link-f1-pi05-brev",
+    "source_archive_sha256": "19598e23557e14c5ba973240eaed61c927d7229d53b0a8939cce084ce33bf806",
+    "source_commit": "471b7582a756e618aebd37845adcaccde880741d",
+    "stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4"
+  },
+  "status": "verified_terminal_negative_no_gate_c",
+  "task_id": "F1",
+  "teardown": {
+    "delete_requested_at": "2026-07-17T06:10:23-05:00",
+    "deletion_confirmed_at": "2026-07-17T06:10:58-05:00",
+    "final_inventory_checked_at": "2026-07-17T06:11:07-05:00",
+    "remaining_resource_count": 0
+  },
+  "training": {
+    "automatic_retry": false,
+    "base_model_repo_id": "lerobot/pi05_base",
+    "base_model_revision": "7de663972b7817d2c4cf2d84c821153dfea772e9",
+    "checkpoint_steps": [
+      1000,
+      2000,
+      3000,
+      4000,
+      5000
+    ],
+    "full_finetune": true,
+    "optimizer_update_count": 5000,
+    "policy": "pi05",
+    "recipe": "ABEJA-parity scaled from 10000 to 5000 steps",
+    "run_count": 1,
+    "seed": 20260717
+  }
+}

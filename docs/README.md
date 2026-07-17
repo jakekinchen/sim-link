@@ -61,7 +61,12 @@ frame 176 increased strict retreat-contact frames from 1 to 17 but still left
 both fingertip pads in contact at the frozen release-final frame 219. Gate C
 again failed only `release_final_contact_clear`. Cadence alone is therefore not
 the repair. At the F0b/F3 boundary no corrective ACT rung had been selected or
-consumed, and no F1/Brev run was started.
+consumed. A separately authorized off-ledger F1 run later completed one
+5,000-step PI0.5 full fine-tune and ten strict-v2 rollouts on Brev. Its selected
+step-1,000 chunk-50 checkpoint lifted 37.519304 mm but failed
+`grasp_hold_strict_v2`; zero rollouts passed Gate C. Canonical fold
+`1e933429...` records the negative and clean teardown without making it a
+gateway or successful-policy result.
 
 F3/Brief 233 is verified by Reviewer 326. Source implementation `48970159...`,
 manifest `ec9084dc...`, pristine export `57b4623b...`, and offline W1 bootstrap

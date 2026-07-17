@@ -47,13 +47,19 @@ audiovisual legacy dataset the fork's fast-RL format.
 
 ## Source-repo route at fork birth
 
-The F0/F0a/F0b source-repo route is complete and negative; F1/Brev and F2
-serving were not opened. After the F3 freeze, the owner selected one exact
+The F0/F0a/F0b source-repo route is complete and negative; F2 serving was not
+opened. After the F3 freeze, the owner selected one exact
 release-targeted ACT experiment—F0c—as the fork's first training task. Its
 signed spec is packaged but unexecuted, capped at 2,000 updates, chunk-50 only,
 and has no retry. See [F0c first training task](./F0C_FIRST_TRAINING_TASK.md).
 It is a bounded discriminator, not an inherited optimizer queue, and copied
 source-repo authority cannot execute it.
+
+The later off-ledger F1 lane is also closed: one ABEJA-parity 5,000-step PI0.5
+full fine-tune produced ten strict-v2 rollouts and zero Gate C passes. Its
+selected step-1,000 chunk-50 partial lifted 37.519304 mm but failed strict grasp
+hold. Preserve it as a compatibility/stress negative, not as a reason to move
+PI0.5 ahead of ACT plus state-based RL in the fork.
 
 ## P2 — Establish the fork's two primary learning tracks
 

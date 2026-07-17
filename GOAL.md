@@ -229,6 +229,19 @@ rollout, retry, receding-10, hardware, network, external compute, or Brev
 action occurred or is authorized by the package slice. The next fork work is
 to implement/review the runner and create fresh native authority.
 
+F1/Brief 235 is a separate historical evidence fold and does not reopen F0c.
+Exact off-ledger receipts verify one 5,000-step ABEJA-parity PI0.5 full
+fine-tune, five checkpoints, and ten strict-v2 rollouts. Zero rollouts passed
+Gate C. The frozen selection is step 1,000/chunk-50 at 37.519304 mm lift,
+failing only `grasp_hold_strict_v2`; it is not a successful policy or gateway
+result. Run identity `ca9a23b1...`, teardown identity `7343ad9f...`, and
+canonical fold `1e933429...` bind the result. The retained checkpoint remains
+off-repo at the recorded `/Volumes/cerebro/CodexOffload/...` path with model
+hash `75554495...`. Spend was `$5.526` by displayed-rate calculation, deletion
+was confirmed at 06:10:58 CDT, and authenticated canonical inventory remained
+empty. No training, compute start, hardware, or authority action occurred in
+the fold; F0c packaging and the F3 freeze tag remain unchanged.
+
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
 export receipt `729addbb...`, while excluding bulk/private content and live
