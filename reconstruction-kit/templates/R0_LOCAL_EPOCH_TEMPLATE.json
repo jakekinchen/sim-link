@@ -1,0 +1,48 @@
+{
+  "allowed_actions": [
+    "materialize_portable_base_fixture",
+    "execute_deterministic_scripted_expert_simulation",
+    "compile_replay_frames_segments_and_windows",
+    "materialize_legacy_full_lerobot_dataset_for_compatibility",
+    "compare_against_signed_legacy_r0_boundary",
+    "write_non_authorizing_fork_handoff_receipt"
+  ],
+  "authority_not_granted": [
+    "live_authority",
+    "historical_permit_reuse",
+    "training_authority",
+    "model_construction",
+    "model_inference",
+    "optimizer_creation",
+    "optimizer_training",
+    "learned_policy_rollout",
+    "hardware_access",
+    "camera_access",
+    "serial_access",
+    "physical_motion",
+    "network_access",
+    "package_installation",
+    "external_compute",
+    "brev_compute",
+    "physical_transfer",
+    "promotion"
+  ],
+  "dataset_tiers": {
+    "compatibility": "exact_existing_full_r0_recreation",
+    "future_fast_rl": "light_state_only_parquet_follow_on_not_part_of_w2"
+  },
+  "evidence_labels_preserved": [
+    "fixture",
+    "simulation",
+    "replay"
+  ],
+  "full_audiovisual_lerobot_dataset_role": "vla_and_demo_only",
+  "historical_authority_is_inert_evidence_only": true,
+  "identity_sha256": "853e08f3b7905085b6fffcac3f0ac54be6904bb7e7ff73b93f24629faf6a32c1",
+  "live_authority": false,
+  "non_live_template": true,
+  "run_receipt_role": "fork_handoff_receipt_not_current_live_authority",
+  "schema_version": "scenesmith.fork_r0_local_epoch_template.v1",
+  "short_60_frame_success_terminated_state_tasks": "fork_birth_follow_on_not_part_of_w2",
+  "target": "exact_legacy_r0_compatibility_recreation"
+}

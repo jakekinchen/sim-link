@@ -213,6 +213,10 @@ class ReconstructionKitTest(unittest.TestCase):
             paths,
         )
         self.assertIn(
+            "configurations/robot_lab/k2_w1_portable_bootstrap_receipt.json",
+            paths,
+        )
+        self.assertIn(
             "scenesmith/robot_lab/t20_43c_act_continuation.py",
             paths,
         )
@@ -379,6 +383,12 @@ class ReconstructionKitTest(unittest.TestCase):
             self.assertTrue((destination / "tools/portable_assets.py").is_file())
             self.assertTrue((destination / "tools/bootstrap.py").is_file())
             self.assertTrue((destination / "tools/bootstrap_runtime.py").is_file())
+            self.assertTrue((destination / "tools/regenerate_r0.py").is_file())
+            self.assertTrue(
+                (
+                    destination / "docs/reconstruction/R0_LOCAL_EPOCH_TEMPLATE.json"
+                ).is_file()
+            )
             self.assertTrue(
                 (
                     destination
@@ -388,6 +398,12 @@ class ReconstructionKitTest(unittest.TestCase):
             self.assertTrue(
                 (
                     destination / "reconstruction-kit/assets/ASSET_MANIFEST.json"
+                ).is_file()
+            )
+            self.assertTrue(
+                (
+                    destination
+                    / "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00034"
                 ).is_file()
             )
             self.assertTrue((destination / "tests/__init__.py").is_file())

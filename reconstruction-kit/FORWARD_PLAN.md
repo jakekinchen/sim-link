@@ -31,8 +31,11 @@ and MEAN_STD values. Fresh local execution IDs, paths, timestamps, and
 permit-bound wrapper identities are expected to differ and must never be forced
 to match by reusing historical authority.
 
-This W2 runner and its receipt are integrated only after the isolated candidate
-handoff is reviewed. This document does not claim that rehearsal has passed.
+The reviewed W2 runner is now integrated. Its isolated rehearsal receipt
+`fd83af1d...` records an exact 4,425.745176-second recreation with no mismatches,
+and independent verification exited 0. The combined W1+W2 clean-export
+rehearsal remains the final integration gate; until it passes, preserve the
+isolated result label rather than claiming the canonical kit has reproduced R0.
 
 ## P2 — Establish the fork's two primary learning tracks
 

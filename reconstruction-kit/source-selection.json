@@ -1,6 +1,6 @@
 {
   "schema_version": "scenesmith.reconstruction_source_selection.v1",
-  "source_commit": "54468f5ee1ed214f7a9c3866608590e421bafe3d",
+  "source_commit": "3fbfebc5693d5b7d0428ba4c2c579a9b05e22bb5",
   "source_repository": "https://github.com/jakekinchen/sim-link.git",
   "maximum_file_bytes": 2000000,
   "forbidden_prefixes": [
@@ -51,6 +51,7 @@
     "docs/autonomous-workflow/owner-direction-2026-07-16-overnight-foundation.md",
     "docs/briefs/226-portable-terminal-closeout-refresh.md",
     "docs/briefs/227-t20-43c-zero-update-act-continuation.md",
+    "configurations/robot_lab/k2_w1_portable_bootstrap_receipt.json",
     "configurations/robot_lab/t20_43c_r2_act_equivalence_receipt.json",
     "configurations/robot_lab/t20_43c_r2_act_final_receipt.json",
     "configurations/robot_lab/t20_43c_r2_act_replacement_marker.json",

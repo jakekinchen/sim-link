@@ -31,6 +31,7 @@ KIT_EXPORTS = {
     "templates/AGENTS.md": "AGENTS.md",
     "templates/pyproject.toml": "pyproject.toml",
     "templates/gitignore": ".gitignore",
+    "templates/R0_LOCAL_EPOCH_TEMPLATE.json": "docs/reconstruction/R0_LOCAL_EPOCH_TEMPLATE.json",
     "README.md": "docs/reconstruction/README.md",
     "CURRENT_STATE.md": "docs/reconstruction/CURRENT_STATE.md",
     "CURRENT_STATE.json": "docs/reconstruction/CURRENT_STATE.json",
@@ -46,6 +47,7 @@ KIT_EXPORTS = {
     "scripts/portable_assets.py": "tools/portable_assets.py",
     "scripts/bootstrap.py": "tools/bootstrap.py",
     "scripts/bootstrap_runtime.py": "tools/bootstrap_runtime.py",
+    "scripts/regenerate_r0.py": "tools/regenerate_r0.py",
 }
 
 KIT_EXPORT_REWRITES = {
@@ -508,7 +510,7 @@ def export_kit(repo_root: Path, destination: Path) -> dict[str, Any]:
             _write_bytes(
                 dest / safe_relative_path(target),
                 _kit_export_bytes(source, source_path),
-                executable=source.endswith("scripts/kit.py"),
+                executable=source.startswith("scripts/"),
             )
         for entry in manifest["files"]:
             path = entry["path"]

@@ -40,6 +40,14 @@ explicitly integrated.
   asset pack. W1 must still prove the current repository's parent/child
   runtime and every retained trace schema before the fork deletes subprocess
   dispatch.
+- W1 clean-export bootstrap receipt `42fcbe94...` now proves the pinned local
+  dependency/runtime boundary, 29 focused tests, one 244-frame strict-v2
+  expert episode, and all three retained trace-schema smokes in 45.841226 s;
+  it explicitly grants no authority and creates no optimizer.
+- Reviewed W2 candidate receipt `fd83af1d...` proves exact full-R0 recreation in
+  4,425.745176 s with 119+9 successes, 129 episodes, 31,366 frames, 59,904
+  windows, and no mismatches. Its seven-path overlay is integrated; a fresh
+  combined W1+W2 export rehearsal remains required before K2 closes.
 - Owner overnight direction `4589437` supersedes the old same-night freeze.
   The new target is `freeze-2026-07-17-hackathon-fork` after a full morning
   refresh.

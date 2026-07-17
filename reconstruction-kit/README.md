@@ -3,7 +3,9 @@
 This directory is the compressed, portable handoff for the SO-101/MuJoCo/
 LeRobot program developed inside SceneSmith. It is designed to be copied into a
 new repository without copying the full numbered experiment history, private
-observations, datasets, checkpoints, ignored outputs, or expired authority.
+observations, the full R0 dataset, checkpoints, ignored outputs, or expired
+authority. It carries only the verified ten-episode base fixture needed to
+recreate R0 locally.
 
 ## Honest status in one paragraph
 
@@ -74,6 +76,17 @@ and authority. The source-repo W1 rehearsal must prove the existing
 dual-runtime path. At fork birth, the target architecture deliberately
 collapses to one LeRobot venv and in-process render.
 
+`tools/regenerate_r0.py` is the reviewed W2 compatibility command. After the
+bootstrap passes, it creates a fresh non-live local epoch, materializes the
+portable base, runs the unchanged 119+9 constructive generation, rebuilds the
+legacy full `LeRobotDataset`, and emits root `RUN_RECEIPT.json`. It passes only
+when all 129 episodes, 31,366 frames, 59,904 windows, mixture
+`37b30d34...`, statistics `02ba0e70...`, and the lower-level store/compiler/
+dataset identities match exactly. Any drift is classified `new dataset, not a
+recreation`. The receipt is compatibility evidence, never current authority.
+The future light state-only parquet/60-frame RL tier remains a separate
+fork-birth follow-on; full audiovisual data remains VLA/demo-only.
+
 ## Verify and export
 
 From the `sim-link` repository root:
@@ -83,6 +96,7 @@ python3 reconstruction-kit/scripts/kit.py build-manifest --check
 python3 reconstruction-kit/scripts/kit.py verify
 python3 reconstruction-kit/scripts/portable_assets.py verify
 python3 -m unittest reconstruction-kit/tests/test_kit.py
+python3 reconstruction-kit/tests/test_regenerate_r0.py
 python3 reconstruction-kit/scripts/kit.py export ../so101-reconstruction
 python3 ../so101-reconstruction/tools/reconstruction_kit.py \
   verify-export ../so101-reconstruction

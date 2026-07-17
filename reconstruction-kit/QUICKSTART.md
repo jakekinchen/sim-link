@@ -86,21 +86,40 @@ layer instead of carrying it forward.
 ## Stage 2 — Reach data parity
 
 The asset pack carries the exact 10-episode/2,330-frame base in 63 MB of
-content-addressed chunks, not the 2.7 GB full R0 output tree. Verify or
-materialize it with:
+content-addressed chunks, not the 2.7 GB full R0 output tree. After Stage 1
+passes, recreate the legacy compatibility dataset with one command from the
+fresh export root:
 
 ```bash
-external/lerobot/.venv/bin/python tools/portable_assets.py verify
-external/lerobot/.venv/bin/python tools/portable_assets.py materialize-base
+HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+  PYTHONDONTWRITEBYTECODE=1 \
+  external/lerobot/.venv/bin/python tools/regenerate_r0.py run
 ```
 
-The turnkey full-R0 regeneration command is integrated only after its isolated
-W2 candidate and rehearsal receipt pass review. Until then, do not improvise by
-executing copied historical T20.42 grants or permits.
+Then independently verify the generated artifacts and receipt:
+
+```bash
+HF_HUB_OFFLINE=1 HF_DATASETS_OFFLINE=1 TRANSFORMERS_OFFLINE=1 \
+  PYTHONDONTWRITEBYTECODE=1 \
+  external/lerobot/.venv/bin/python tools/regenerate_r0.py verify
+```
+
+The runner creates a fresh scratch `LOCAL_EPOCH.json`, materializes the
+portable base, executes the unchanged 119+9 scripted-expert construction,
+rebuilds the full legacy `LeRobotDataset`, and writes `RUN_RECEIPT.json`. The
+epoch and receipt are fork compatibility evidence, not current live authority.
+Historical permit/marker identities appear only as inert constants required to
+compare the legacy signed bytes; their files are never loaded or executed.
 
 The expected R0 boundary is 119 new training strict successes, 9 fresh held-out
 strict successes, 129 total training episodes, 31,366 frames, and 59,904
 windows. Any mismatch is a new dataset, not a recreation.
+
+The exact full R0 recreation is the W2 compatibility gate. It is deliberately
+separate from the future light state-only parquet and 60-frame
+success-terminated tasks used for fast RL iteration. Those fork-birth assets
+may not change W2's count or identity gates; full audiovisual data remains
+VLA/demo-only.
 
 Portable parity requires exact candidate order, episode content, native dataset
 manifest, compiler/window content, held-out exclusion, and statistics semantics.
