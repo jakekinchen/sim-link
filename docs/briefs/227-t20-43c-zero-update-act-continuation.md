@@ -51,8 +51,11 @@ renderer, authority, and evidence equivalence are mechanically proven.
 
 ## Current authority
 
-This brief opens implementation and model-free fixture tests only. It grants no
-authority materialization, continuation marker, checkpoint tensor read, model
-construction/load/inference, optimizer, training, rollout, Gate C execution,
-retry after a new marker, fresh replacement, hardware, network, external
-compute, Brev, transfer, promotion, or destructive operation.
+Reviewer 307 accepts the implementation and model-free fixture boundary after
+57 selected tests and 15 subtests. Once that boundary is committed and exact on
+origin, one actual-schema renderer smoke and compact model-free authority
+materialization may run. The training lock remains closed. No continuation
+marker, checkpoint tensor read, model construction/load/inference, optimizer,
+training, rollout, Gate C execution, retry, fresh replacement, hardware,
+network, external compute, Brev, transfer, promotion, or destructive operation
+is authorized until a second review and signed acceptance are exact on origin.

@@ -37,6 +37,16 @@ attempts died to haste-shaped gaps, and a third under freeze pressure risks
 consuming the question's credibility along with another permit. The unresolved
 state transfers cleanly; a rushed third failure does not.
 
+### Later owner supersession in the active T20.43c thread
+
+After this ordering note was recorded, the owner explicitly instructed the
+active T20.43c thread: "proceed, i authorize anything further actions that
+resolve this for us." Brief 227 and the dedicated owner addendum narrow that
+newer instruction to one separately reviewed, local-simulation, exact
+zero-update continuation. It supersedes only the scheduling prohibition above;
+all central-composer, preflight, review, one-use, equivalence, no-retry,
+hardware, network, external-compute, and Brev boundaries remain in force.
+
 ## Priority 2 — owner-present RGB camera census (physical thread)
 
 The owner is present and authorizes one bounded, read-only, RGB-only camera

@@ -100,7 +100,9 @@ proof states must remain distinct.
   Priorities: (1) land and verify the reconstruction kit with the T20.43c
   ready-package and hackathon annex, (2) owner-present RGB-only camera census
   (D405 UVC + C922 confirmed enumerated; depth out-of-scope on macOS),
-  (3) freeze protocol. No third ACT attempt tonight. Full ordering:
+  (3) freeze protocol. The original no-third-attempt scheduling direction was
+  later superseded only for the separately reviewed T20.43c local continuation
+  by the owner's explicit proceed instruction. Full ordering and supersession:
   `docs/autonomous-workflow/owner-direction-2026-07-16-final-hour.md`.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
@@ -111,7 +113,9 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.43c under Brief 227 is the active implementation-only recovery slice. The
+T20.43c under Brief 227 is the active recovery slice. Reviewer 307 accepts its
+implementation and model-free tests; one actual-schema smoke and compact
+authority materialization is next while the training lock remains closed. The
 owner explicitly authorizes further action to resolve ACT-on-R0. T20.43b remains
 byte-immutable at terminal failure `89b6dbff...`: zero optimizer updates, one
 checkpoint, and one untrained chunk-50 rollout. T20.43c must first prove that
