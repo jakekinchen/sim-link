@@ -71,6 +71,57 @@ class ReconstructionKitTest(unittest.TestCase):
             "frontend/public/so-101-urdf/urdf/so101_new_calib.urdf",
         )
 
+    def test_local_bootstrap_clone_restores_canonical_origin(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = root / "source/external/fixture"
+            source.mkdir(parents=True)
+            subprocess.run(["git", "init", "--quiet"], cwd=source, check=True)
+            (source / "fixture.txt").write_text("fixture\n", encoding="utf-8")
+            subprocess.run(["git", "add", "fixture.txt"], cwd=source, check=True)
+            subprocess.run(
+                [
+                    "git",
+                    "-c",
+                    "user.name=Reconstruction Test",
+                    "-c",
+                    "user.email=reconstruction-test@example.invalid",
+                    "commit",
+                    "--quiet",
+                    "-m",
+                    "fixture",
+                ],
+                cwd=source,
+                check=True,
+            )
+            revision = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=source,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            destination = root / "destination"
+            canonical = "https://example.invalid/fixture.git"
+            bootstrap._clone_exact(
+                {
+                    "name": "fixture",
+                    "repository": canonical,
+                    "revision": revision,
+                },
+                destination,
+                local_source_root=root / "source",
+                source_directory_name="fixture",
+            )
+            origin = subprocess.run(
+                ["git", "remote", "get-url", "origin"],
+                cwd=destination,
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            self.assertEqual(origin, canonical)
+
     def test_minimal_portable_assets_verify_without_full_r0_or_authority(self) -> None:
         manifest = assets.verify_asset_pack()
         base = manifest["base_dataset"]

@@ -183,6 +183,13 @@ def _clone_exact(
         raise BootstrapError(
             f"external checkout revision drifted: {dependency['name']}"
         )
+    if local_source_root is not None:
+        _run(
+            ["git", "remote", "set-url", "origin", dependency["repository"]],
+            cwd=destination,
+        )
+    if _git(destination, "remote", "get-url", "origin") != dependency["repository"]:
+        raise BootstrapError(f"external checkout origin drifted: {dependency['name']}")
 
 
 def _prepare_checkouts(
