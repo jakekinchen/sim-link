@@ -197,11 +197,11 @@ verified by Reviewers 322-323 at commit `8edf1687...`. Signed spec
 checkpoint, seed-0 source episode, unchanged strict-v2 gates, chunk-50
 execution through frame 175, one 24-action queue discard at frame 176, and
 ten-step tail re-decodes through frame 236. The next allowed slice is only a
-model-free authority bundle plus one retained-comparator renderer smoke. A
-separate pre-run acceptance must still be reviewed and exact on origin before
-the attempt marker or any checkpoint tensor, model, inference, simulator,
-rollout, or policy-result render action. No optimizer, training, or retry is
-part of F0b.
+model-free authority bundle plus one retained-comparator renderer smoke; those
+are now verified by Reviewer 324 with acceptance `4ca23f81...`. After that
+acceptance is exact on origin, one marker-first checkpoint load and seed-0
+simulation rollout may run. No optimizer, training, retry, additional
+checkpoint/seed, hardware, transfer, or promotion is part of F0b.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean

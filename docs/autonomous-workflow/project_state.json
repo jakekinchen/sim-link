@@ -5204,12 +5204,12 @@
       "depends_on": ["F0a_verified_on_origin"],
       "active_brief_id": "232",
       "latest_verified_brief_id": "232",
-      "review_decision_id": "323",
+      "review_decision_id": "324",
       "source_boundary_commit": "951c5254950b734677a6d185c227c56724182b58",
       "brief_activation_commit": "fe552f02ffe59e133924a79d53df9806b4a92139",
       "base_implementation_commit": "1b23f6bc372e66ce5c0982d0da97d7a9fe8c1275",
       "implementation_commit": "8edf1687168750781a257a39d9f5cace3a5e57f5",
-      "result": "Reviewers 322-323 verify Brief 232 implementation and its pre-materialization owner-attribution correction, with signed spec ddf71cf9 for one retained update-10000 ACT hybrid-tail-cadence evaluation; only a model-free retained-trace renderer smoke and owner/central/runtime/permit authority bundle may be materialized next, while checkpoint tensor read, model construction/loading, inference, attempt marker, simulation rollout, Gate C execution, policy-result rendering, optimizer/training, retry, and all physical or promotion authority remain closed pending a separate reviewed pre-run acceptance",
+      "result": "Reviewers 322-323 verify Brief 232 implementation and owner-attribution correction; Reviewer 324 accepts exactly one marker-first load of the retained update-10000 ACT checkpoint and one seed-0 hybrid-tail-cadence simulation rollout after acceptance 4ca23f81 is exact on origin, with optimizer/training, retry, extra seeds/checkpoints, network, Brev, hardware, transfer, and promotion closed",
       "artifact": {
         "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_spec.json",
         "schema_version": "scenesmith.f0b_hybrid_tail_cadence_spec.v1",
@@ -5235,8 +5235,36 @@
         "optimizer_created": false,
         "optimizer_training": false
       },
-      "authority_granted": ["activate_brief_232", "read_and_hash_frozen_f0a_t20_43c_r2_and_runtime_sources", "implement_and_fixture_test_f0b_spec_authority_runner_trace_and_terminal_contracts", "write_model_free_f0b_spec_fixture_and_preflight_artifacts", "f0b_implementation_verified", "materialize_model_free_f0b_authority_bundle_after_reviewer_323_origin_confirmation", "execute_one_retained_comparator_trace_renderer_smoke_without_checkpoint_or_model_access"],
-      "authority_not_granted": ["pre_run_acceptance", "attempt_marker_creation", "checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "simulation_rollout", "policy_result_live_rendering", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
+      "materialized_authority": {
+        "authority_commit": "4f70e0c738540dd4e5192413b334c848d821e5fc",
+        "smoke_manifest_preservation_commit": "4cd4a533d10ad17c28b00463841a7d3d9c4f0fb3",
+        "owner_grant_identity_sha256": "b28101ec61e5f651e96f977dc6cf8263b08580e5c5e563cabaafded86529171d",
+        "central_request_identity_sha256": "f5020b3d8fc24ed118004fc3d3bed32b39afbdbb0b4388d107be242d61b7856c",
+        "central_decision_identity_sha256": "00ec322718fb1e20ea6d56f15e78c901f516fa7b78ec09703130fbc119e28cc2",
+        "runtime_preflight_identity_sha256": "e36c53ddda321da618f5bc4260e607f6b4efda4af4427b85fcfa7e71f1142d9b",
+        "permit_identity_sha256": "4a3843555efb86b7158820c8328276d26a9298c47c07184e9ae73a073ffbd686",
+        "renderer_smoke_identity_sha256": "2f1a9ef498547b76fe4604f4a8b377b16f22b5aedf4e1a9229a7bbbfe921fea8",
+        "renderer_manifest_identity_sha256": "86d4f7ad2c6e1200172cd5deb17e2f568c262907ad2fef1c33544f9754780d4d",
+        "valid_from": "2026-07-17T05:17:00-05:00",
+        "valid_until": "2026-07-17T09:45:00-05:00",
+        "authorized_attempt_count": 1,
+        "retry_authorized": false
+      },
+      "pre_run_acceptance": {
+        "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_pre_run_acceptance.json",
+        "identity_sha256": "4ca23f81f1ef2f9cf216523b164d0bae8aa5da4a2fccab8a59683b0ba877717c",
+        "file_sha256": "3df51d555822984a8dcdf403af9b933504afcd766186259d141dd1cb7febd7f2",
+        "reviewer_decision_id": "324",
+        "reviewer_file_sha256": "4a91a56ab1330277277f86890c6af0f923f3711013dde1a4d051cbd46f079bd3",
+        "attempt_marker_exists": false,
+        "checkpoint_tensor_read": false,
+        "model_constructed": false,
+        "model_inference": false,
+        "simulation_rollout": false,
+        "retry_authorized": false
+      },
+      "authority_granted": ["activate_brief_232", "read_and_hash_frozen_f0a_t20_43c_r2_and_runtime_sources", "implement_and_fixture_test_f0b_spec_authority_runner_trace_and_terminal_contracts", "write_model_free_f0b_spec_fixture_and_preflight_artifacts", "f0b_implementation_verified", "materialize_model_free_f0b_authority_bundle", "execute_one_retained_comparator_trace_renderer_smoke_without_checkpoint_or_model_access", "accept_one_f0b_marker_first_checkpoint_load_and_seed_0_hybrid_tail_rollout_after_origin_confirmation", "preserve_one_pass_policy_negative_or_infrastructure_failure_bundle"],
+      "authority_not_granted": ["optimizer_creation", "optimizer_training", "retry", "additional_checkpoint", "additional_seed", "additional_rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "T20.45": {
       "state": "pending",

@@ -7,14 +7,14 @@ training_lock: closed; T20.43c-R2 completed its sole authorized attempt as a ver
 run_window: closed after 10,000 finite optimizer updates, seven checkpoints, and 14 rollouts; hardware, network, external compute, and Brev remained closed
 run_state: Reviewer 318 verifies exact zero-update equivalence and a clean completed campaign; chunk-50 learned grasp-lift-hold-lower but never clean release, so Gate C is false and the result is not an infrastructure failure
 current_milestone: M20 simulation-only clean supervision
-current_task: F0b in_progress under Brief 232; Reviewer 323 verifies corrected implementation commit 8edf168 and opens only model-free authority materialization plus one retained-trace renderer smoke
+current_task: F0b in_progress under Brief 232; Reviewer 324 accepts one marker-first no-training seed-0 hybrid-tail rollout after acceptance 4ca23f81 is exact on origin
 support_task: K2 verified under Brief 226 and Reviewer 319; W3 remains an unintegrated 0-of-3 handoff and W5 remains unintegrated transport/replay evidence
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: owner-direction-2026-07-17-final-overnight.md opens model-free F0 release-gap diagnosis and permits at most one separately reviewed corrective ACT rung; it separately bounds optional F1 Brev work but grants no automatic training, hardware, transfer, promotion, or tag
-blockers: learned strict-v2 task completion and Gate C remain scientifically unmet; F0b pre-run acceptance and all checkpoint/model/inference/rollout action, corrective training, F1/Brev, hardware, transfer, promotion, and the freeze tag remain closed
-next_step: materialize and review Brief 232's model-free owner/central/runtime/permit bundle and one exact retained-comparator renderer smoke; do not read checkpoint tensors or construct a model
+blockers: learned strict-v2 task completion and Gate C remain scientifically unmet; corrective training, retry, F1/Brev, hardware, transfer, promotion, and the freeze tag remain closed
+next_step: after the Reviewer-324 acceptance commit is exact on origin, consume the permit once with marker first, one retained checkpoint load, and one seed-0 hybrid-tail rollout; preserve pass, policy negative, or infrastructure failure without retry
 ```
 
 ## 2026-07-17 - Reviewer 318 closes T20.43c-R2 as a terminal negative
@@ -3946,3 +3946,17 @@ overnight document only as task ordering. Regenerated spec `ddf71cf9...` passes
 15 focused tests and exact reconstruction. Reviewer 323 restores only the
 model-free materialization route; every pre-run and model action remains
 closed.
+
+## 2026-07-17 - Reviewer 324 accepts one F0b evaluation
+
+Authority commit `4f70e0c...` preserves owner `b28101ec...`, central decision
+`00ec3227...`, runtime `e36c53dd...`, and one-use permit `4a384355...`.
+Fresh model-free smoke `2f1a9ef4...` rendered 244 H.264 frames; signed manifest
+`86d4f7ad...` is tracked exactly while the MP4 remains local diagnostic
+evidence at SHA-256 `4ab15f7a...`. Acceptance `4ca23f81...` binds Reviewer 324
+and retry false.
+
+After this boundary reaches origin, exactly one marker-first load of checkpoint
+`c77ee362...` and one seed-0 hybrid-tail rollout may run. The permit authorizes
+no optimizer, training, retry, extra seed/checkpoint, network, Brev, hardware,
+transfer, promotion, destructive operation, or freeze tag.
