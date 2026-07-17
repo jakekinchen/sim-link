@@ -127,7 +127,8 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.43c under Brief 227 has reached a signed terminal interruption. It proved
+T20.43c-R2 under Brief 229 is the active W0 slice. T20.43c itself reached a
+signed terminal interruption: it proved
 checkpoint-0 tensor equivalence exactly, empty optimizer state, an unadvanced
 sampler, and actual-schema mirror dispatch, then trained through update 728 and
 retained checkpoint-500 rollout/mirror evidence. Another agent interrupted the
@@ -135,6 +136,14 @@ run after applying a superseded scheduling instruction. Terminal identity
 `d848a1a8...` therefore records an inconclusive owner-directive interruption,
 not a trained negative and not an infrastructure failure. Its sole continuation
 marker is consumed and `retry_authorized=false`; ACT-on-R0 remains unresolved.
+Because no optimizer state was retained, exact resume is impossible. The direct
+W0 delegation therefore opens one separately rooted manual replacement, never
+reuse of the consumed permit. Reviewer 315 accepts its implementation after
+seven focused tests and 67 selected tests plus 15 subtests. Training remains
+closed: Reviewer 315 and commits `75647da9...` through `d0e2b2b9...` must be
+exact on origin before one model-free authority bundle may be materialized for
+a separate pre-run review. No R2 acceptance, marker, checkpoint read, model,
+optimizer, rollout, or Gate C action exists yet.
 T20.42/R0 remains verified and T20.44 SmolVLA remains a terminal negative.
 Hardware remains closed unless separately composed under K3; network, external
 compute, Brev, physical transfer, and promotion remain closed.

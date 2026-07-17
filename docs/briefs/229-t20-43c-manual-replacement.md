@@ -50,8 +50,11 @@ check.
 
 ## Current authority
 
-Implementation and model-free fixture tests only. The training lock remains
-closed. No new owner/request/decision/runtime/permit, acceptance, marker,
+Reviewer 315 accepts implementation commits `75647da9...`, `da7ea6a1...`, and
+`d0e2b2b9...` after seven focused tests and 67 selected tests plus 15 subtests.
+Once this implementation/review boundary is exact on origin, one model-free
+owner/request/decision/runtime/permit bundle may be materialized for a separate
+pre-run review. The training lock remains closed. No acceptance, marker,
 checkpoint read, model construction, optimizer, rollout, Gate C action,
 hardware, network, external compute, Brev, transfer, or promotion is authorized
-until review and remote preservation make each prerequisite exact.
+at this boundary.

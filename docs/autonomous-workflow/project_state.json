@@ -348,8 +348,8 @@
   "training_lock": "closed",
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.43c",
-  "next_eligible_task": "T20.43c",
+  "current_task": "T20.43c-R2",
+  "next_eligible_task": "T20.43c-R2",
   "active_support_task": "K2",
   "support_tasks": {
     "K1": {
@@ -5051,6 +5051,20 @@
       "execution_result": {"status":"verified_inconclusive_owner_directive_interruption","continuation_marker_identity_sha256":"e086c293505385d8d85b095d86f993a65266b70abe7047bc83d5bba319d9ed60","equivalence_receipt_identity_sha256":"85087b2ae94d54ea493ec49a10e6a183369b43c6160e73f79205a7624bb65014","terminal_failure_identity_sha256":"d848a1a8d9c803c0d8782e2c51c102cfd4550f1ca5bf22a629a16f34f834bd68","partial_run_tree_identity_sha256":"e0aea95f9df15e4cc0fb817875d8c887d6b9ece6723b48f029114c18ade169b9","equivalence_maximum_absolute_error":0.0,"optimizer_state_entry_count_before_training":0,"sampler_unadvanced_before_training":true,"optimizer_update_count":728,"checkpoint_500_retained":true,"gate_c_passed":false,"campaign_verdict":null,"trained_act_capability_resolved":false,"infrastructure_failure":false,"trained_negative":false,"retry_authorized":false},
       "authority_granted": ["activate_brief_227","read_and_hash_t20_43b_terminal_boundary","implement_model_free_zero_update_equivalence_contract","implement_actual_schema_renderer_smoke","implement_continuation_authority_and_runner_contracts","run_model_free_fixture_tests","t20_43c_implementation_valid","materialize_one_model_free_actual_schema_smoke_and_compact_authority_after_origin_confirmation","t20_43c_model_free_authority_materialized","review_and_accept_t20_43c_authority_after_origin_confirmation","write_and_preserve_signed_pre_run_acceptance","create_sole_continuation_marker_after_acceptance_origin_confirmation","prove_bit_exact_zero_update_equivalence","execute_unchanged_act_updates_1_through_10000_and_fixed_evaluations_once","preserve_verified_inconclusive_terminal_interruption"],
       "authority_not_granted": ["fresh_replacement_execution","retry_after_continuation_marker","second_continuation","rewrite_t20_43b_evidence","recipe_change","schedule_change","correction_objective","threshold_change","dataset_change","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
+    },
+    "T20.43c-R2": {
+      "state": "in_progress",
+      "depends_on": ["T20.43c_verified_inconclusive_terminal_interruption_on_origin", "owner_manual_replacement_addendum_2026_07_16", "immutable_safe_renderer_v2_37c5da6"],
+      "active_brief_id": "229",
+      "latest_verified_brief_id": "229",
+      "review_decision_id": "315",
+      "source_commit": "d0e2b2b92fe32ed9d619716f26fbe40fcaadb75a",
+      "result": "Reviewer 315 accepts one separately rooted manual replacement implementation after 67 selected tests plus 15 subtests; training remains closed and only model-free authority materialization may follow origin preservation",
+      "owner_direction": {"path":"docs/autonomous-workflow/owner-addendum-2026-07-16-t20-43c-manual-replacement.md","manual_replacement_authorized":true,"automatic_retry_authorized":false},
+      "immutable_prior_boundary": {"continuation_marker_identity_sha256":"e086c293505385d8d85b095d86f993a65266b70abe7047bc83d5bba319d9ed60","equivalence_receipt_identity_sha256":"85087b2ae94d54ea493ec49a10e6a183369b43c6160e73f79205a7624bb65014","terminal_failure_identity_sha256":"d848a1a8d9c803c0d8782e2c51c102cfd4550f1ca5bf22a629a16f34f834bd68","partial_run_tree_identity_sha256":"e0aea95f9df15e4cc0fb817875d8c887d6b9ece6723b48f029114c18ade169b9","optimizer_update_count":728,"optimizer_state_retained":false,"exact_resume_possible":false},
+      "implementation": {"implementation_commit":"75647da9c637420d10b2dc22cd03376d8753c565","terminal_hardening_commit":"da7ea6a1d472f15048dbd1c31cc47aaa9c0d7bde","tracked_input_hardening_commit":"d0e2b2b92fe32ed9d619716f26fbe40fcaadb75a","focused_test_count":7,"selected_test_count":67,"selected_subtest_count":15,"completion_budget_seconds":14400,"disjoint_output_paths":true,"checkpoint_tensor_read_executed":false,"model_or_optimizer_action_executed":false},
+      "authority_granted": ["activate_brief_229","implement_and_fixture_test_disjoint_manual_replacement","verify_prior_interruption_and_model_free_central_preview","t20_43c_r2_implementation_valid","materialize_one_model_free_t20_43c_r2_authority_bundle_after_origin_confirmation"],
+      "authority_not_granted": ["write_pre_run_acceptance","create_replacement_marker","checkpoint_tensor_read","model_construction","model_loading","model_inference","optimizer_creation","optimizer_training","policy_rollout","gate_c_execution","retry_after_replacement_marker","recipe_change","schedule_change","dataset_change","threshold_change","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.44": {
       "state": "verified",
