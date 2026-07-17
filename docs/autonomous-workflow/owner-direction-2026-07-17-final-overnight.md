@@ -93,3 +93,36 @@ not block on F0. Receding-10's grasp fragility is a weekend investigation,
 not tonight's. No hardware motion. Prefer one completed lane over two
 half-finished ones; if forced to choose, F0 is the priority — the cheapest
 path to the project's first Gate C pass.
+
+## Addendum (06:35 CDT) — F0c corrective rung survives the fold; F1 outcome recorded
+
+Checkpoint findings at 06:23: F0/F0a/F0b verified a complete diagnosis chain
+(20-frame release localization, tail observation aliasing, and a terminal
+cadence negative — re-observation at frame 176 widened retreat contact from 1
+to 17 frames yet `release_final_contact_clear` still fails; the policy holds
+until the anchor is back at desk height). The one authorized corrective ACT
+rung was never consumed. Separately, the F1 lane completed off-ledger in the
+Codex workspace `~/Documents/Codex/2026-07-17/sim-link-f1-pi05-brev`: the sole
+5,000-step `pi05_base` full fine-tune on one A100-80GB cost $5.526 with
+confirmed teardown and zero remaining resources; best checkpoint (step 1,000,
+chunk-50) lifted 37.519 mm and failed only `grasp_hold_strict_v2`. Signed
+receipts live in that workspace; the next ledger fold should ingest them.
+
+The owner direction therefore clarifies:
+
+1. **The single authorized corrective ACT rung (F0c) remains open after the
+   F3 fold and freeze tag.** The tag is a source boundary, not a stop order;
+   an F0c result lands as a post-tag addendum and day-one evidence for the
+   fork. Deadline discipline: completion-budget check first; if the budget
+   does not fit before ~10:00, F0c becomes the fork's first training task
+   instead, exactly as specced.
+2. **F0c design, from the verified diagnosis:** attack the learned release
+   deficit with release-targeted data, not cadence. Preferred: a short
+   (~2,000-update) continuation from the retained update-10,000 R2 checkpoint
+   on a release-corrected view — post-release dwell/retreat augmentation via
+   the turnkey W2-style regeneration or a release-phase-oversampled mixture
+   with gripper-weighted loss (T20.35x precedent) — chosen by whichever the
+   evidence favors after checking open-gripper normalization headroom. One
+   bounded run, rollout-primary chunk-50 evaluation, no retry.
+3. **F1 is closed cleanly within its cap** and needs no further action;
+   $494 of Brev credit remains for the weekend.
