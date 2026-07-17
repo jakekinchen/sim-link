@@ -46,6 +46,15 @@ T19_1_READONLY_SESSION_DECISION_SCHEMA_VERSION = (
 T19_1_READONLY_SESSION_PERMIT_SCHEMA_VERSION = (
     "scenesmith.t19_1_readonly_session_permit.v1"
 )
+RGB_CAMERA_CENSUS_REQUEST_SCHEMA_VERSION = (
+    "scenesmith.rgb_camera_census_request.v1"
+)
+RGB_CAMERA_CENSUS_DECISION_SCHEMA_VERSION = (
+    "scenesmith.rgb_camera_census_decision.v1"
+)
+RGB_CAMERA_CENSUS_PERMIT_SCHEMA_VERSION = (
+    "scenesmith.rgb_camera_census_permit.v1"
+)
 
 DEFAULT_AUTHORITY_CONTRACT_PATH = Path(
     "configurations/robot_lab/pi05_authority_composition_contract.json"
@@ -85,6 +94,44 @@ T19_1_READONLY_AUTHORITY_NOT_GRANTED = (
     "motion",
     "calibration",
     "policy_actuation",
+    "physical_twin_qualified",
+    "physical_transfer_ready",
+    "promotion_eligible",
+    "external_compute",
+    "brev_compute",
+)
+RGB_CAMERA_CENSUS_MAX_SESSION_SECONDS = 600
+RGB_CAMERA_CENSUS_ALLOWED_OPERATIONS = (
+    "camera_metadata_enumeration",
+    "named_avfoundation_rgb_open",
+    "one_png_frame_capture_per_camera",
+    "named_avfoundation_rgb_close",
+)
+RGB_CAMERA_CENSUS_TARGETS = (
+    {
+        "camera_role": "d405_uvc_rgb",
+        "required_name_substring": "RealSense",
+        "required_model_substrings": ["VendorID_32902", "ProductID_2907"],
+    },
+    {
+        "camera_role": "c922_rgb",
+        "required_name_substring": "C922",
+        "required_model_substrings": [],
+    },
+)
+RGB_CAMERA_CENSUS_AUTHORITY_NOT_GRANTED = (
+    "depth_stream",
+    "librealsense",
+    "serial_access",
+    "register_read",
+    "register_write",
+    "torque_change",
+    "motion",
+    "audio_capture",
+    "calibration",
+    "clock_synchronization",
+    "inference",
+    "optimizer_training",
     "physical_twin_qualified",
     "physical_transfer_ready",
     "promotion_eligible",
@@ -1679,6 +1726,327 @@ def verify_t19_1_readonly_session_authority(
     verifier(runtime_profile, repo_root=Path(repo_root).resolve(), now=observed.isoformat())
 
 
+def compose_rgb_camera_census_authority(
+    *,
+    project_state: dict[str, Any],
+    runtime_profile: dict[str, Any],
+    repo_root: Path,
+    session_id: str,
+    issued_at: str,
+    expires_at: str,
+    private_output_dir: str,
+    manifest_output: str,
+    repository_state_loader: Callable[..., dict[str, Any]] | None = None,
+    runtime_profile_verifier: Callable[..., None] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any] | None]:
+    """Compose one finite, camera-only D405/C922 RGB census."""
+
+    root = Path(repo_root).resolve()
+    session = require_nonblank(session_id, label="RGB camera census session_id")
+    if re.fullmatch(r"[a-z0-9][a-z0-9._-]{7,127}", session) is None:
+        raise ValueError("RGB camera census session_id is malformed")
+    private_relative = _t19_1_scoped_relative_path(
+        root=root,
+        value=private_output_dir,
+        required_root=Path("outputs/robot_lab/rgb_camera_census/private"),
+        label="RGB camera census private output",
+    )
+    manifest_relative = _t19_1_scoped_relative_path(
+        root=root,
+        value=manifest_output,
+        required_root=Path("configurations/robot_lab"),
+        label="RGB camera census manifest output",
+    )
+    if Path(private_relative).name != session:
+        raise ValueError("RGB camera census private output must match session_id")
+    if Path(manifest_relative).suffix != ".json":
+        raise ValueError("RGB camera census manifest output must be JSON")
+
+    issued = _parse_timestamp(issued_at, label="RGB camera census issued_at")
+    expires = _parse_timestamp(expires_at, label="RGB camera census expires_at")
+    branch = require_nonblank(project_state.get("branch"), label="project branch")
+    loader = repository_state_loader or _capture_rgb_camera_census_repository_state
+    repository_state = loader(repo_root=root, branch=branch)
+    _validate_t19_1_repository_state(repository_state)
+    runtime_identity = _sha256(
+        runtime_profile.get("identity_sha256"),
+        label="RGB camera census runtime profile identity",
+    )
+    task = copy.deepcopy(project_state.get("support_tasks", {}).get("K3"))
+    owner_window = copy.deepcopy(
+        project_state.get("owner_authority", {}).get(
+            "current_rgb_camera_census_window"
+        )
+    )
+    state_projection = {
+        "schema_version": project_state.get("schema_version"),
+        "branch": branch,
+        "owner_window": owner_window,
+        "support_task": task,
+    }
+    request = sign_payload(
+        {
+            "schema_version": RGB_CAMERA_CENSUS_REQUEST_SCHEMA_VERSION,
+            "request_name": "owner_present_d405_c922_rgb_camera_census",
+            "task_id": "K3",
+            "session_id": session,
+            "issued_at": issued.isoformat(),
+            "expires_at": expires.isoformat(),
+            "branch": branch,
+            "repository_state": copy.deepcopy(repository_state),
+            "remote_boundary_commit": repository_state["remote_head"],
+            "runtime_profile_identity_sha256": runtime_identity,
+            "private_output_dir": private_relative,
+            "manifest_output": manifest_relative,
+            "source_state": state_projection,
+            "source_state_identity_sha256": hashlib.sha256(
+                canonical_json_bytes(state_projection)
+            ).hexdigest(),
+        }
+    )
+
+    satisfied: list[str] = []
+    missing: list[str] = []
+    denials: list[str] = []
+
+    def prerequisite(condition: bool, name: str, denial: str) -> None:
+        if condition:
+            satisfied.append(name)
+        else:
+            missing.append(name)
+            denials.append(denial)
+
+    prerequisite(
+        isinstance(task, dict)
+        and task.get("state") == "in_progress"
+        and task.get("active_brief_id") == "228",
+        "k3_brief_228_active",
+        "K3_BRIEF_228_NOT_ACTIVE",
+    )
+    prerequisite(
+        isinstance(task, dict) and task.get("live_gate") == "open",
+        "k3_live_gate_open",
+        "K3_LIVE_GATE_NOT_OPEN",
+    )
+    prerequisite(
+        isinstance(task, dict)
+        and task.get("session_limit") == 1
+        and task.get("sessions_started") == 0,
+        "one_camera_session_unused",
+        "K3_SESSION_ALREADY_CONSUMED_OR_AMBIGUOUS",
+    )
+    expected_window_state = (
+        "owner_presence_and_rgb_camera_access_granted_pending_"
+        "central_and_session_permits"
+    )
+    required_scope = {
+        "d405_uvc_rgb_metadata_and_one_frame",
+        "c922_rgb_metadata_and_one_frame",
+        "coarse_host_observation_latency",
+    }
+    required_forbidden = {
+        "depth_stream",
+        "librealsense",
+        "serial_access",
+        "register_read",
+        "register_write",
+        "torque_change",
+        "motion",
+        "audio_capture",
+        "inference",
+        "training",
+        "network_access",
+        "external_compute",
+        "brev_compute",
+        "physical_qualification",
+        "physical_transfer",
+        "promotion",
+    }
+    prerequisite(
+        isinstance(owner_window, dict)
+        and owner_window.get("state") == expected_window_state
+        and owner_window.get("owner_present") is True
+        and owner_window.get("camera_access_authorized") is True
+        and set(owner_window.get("scope", [])) == required_scope
+        and required_forbidden.issubset(
+            set(owner_window.get("not_authorized", []))
+        )
+        and owner_window.get("physical_access_performed_in_window") is False,
+        "owner_present_rgb_only_authority_consistent",
+        "OWNER_RGB_CAMERA_AUTHORITY_NOT_CONSISTENT",
+    )
+    owner_window_active = False
+    finite_window_valid = False
+    try:
+        owner_start = _parse_timestamp(
+            owner_window.get("recorded_at"), label="RGB camera owner window start"
+        )
+        owner_end = _parse_timestamp(
+            owner_window.get("valid_through"), label="RGB camera owner window end"
+        )
+        owner_window_active = owner_start <= issued < owner_end
+        duration = int((expires - issued).total_seconds())
+        finite_window_valid = (
+            0 < duration <= RGB_CAMERA_CENSUS_MAX_SESSION_SECONDS
+            and expires <= owner_end
+        )
+    except (AttributeError, TypeError, ValueError):
+        owner_window_active = False
+        finite_window_valid = False
+    prerequisite(owner_window_active, "owner_window_active", "OWNER_WINDOW_INACTIVE")
+    prerequisite(
+        finite_window_valid,
+        "finite_camera_session_window_valid",
+        "FINITE_CAMERA_SESSION_WINDOW_INVALID",
+    )
+
+    verifier = runtime_profile_verifier or _verify_t19_1_runtime_profile
+    runtime_valid = True
+    try:
+        verifier(runtime_profile, repo_root=root, now=issued.isoformat())
+    except (OSError, RuntimeError, TypeError, ValueError):
+        runtime_valid = False
+    prerequisite(
+        runtime_valid,
+        "same_thread_full_access_no_prompt_runtime_verified",
+        "RUNTIME_PROFILE_NOT_VERIFIED",
+    )
+    repository_aligned = (
+        repository_state.get("branch") == branch
+        and branch == "codex/pi05-autolearn-loop"
+        and len(
+            {
+                repository_state.get("head"),
+                repository_state.get("upstream_head"),
+                repository_state.get("remote_head"),
+            }
+        )
+        == 1
+        and repository_state.get("scoped_source_diff_clean") is True
+        and repository_state.get("gate_state_diff_clean") is True
+    )
+    prerequisite(
+        repository_aligned,
+        "exact_branch_remote_boundary_confirmed",
+        "REMOTE_BOUNDARY_NOT_CONFIRMED",
+    )
+
+    granted = not missing
+    decision = sign_payload(
+        {
+            "schema_version": RGB_CAMERA_CENSUS_DECISION_SCHEMA_VERSION,
+            "decision_id": "owner_present_d405_c922_rgb_camera_census",
+            "request_identity_sha256": request["identity_sha256"],
+            "task_id": "K3",
+            "granted": granted,
+            "satisfied_prerequisites": sorted(satisfied),
+            "missing_prerequisites": sorted(missing),
+            "denial_reasons": sorted(set(denials)),
+            "remote_boundary_commit": repository_state["remote_head"],
+            "runtime_profile_identity_sha256": runtime_identity,
+            "issued_at": issued.isoformat(),
+            "expires_at": expires.isoformat(),
+            "authority_granted": (
+                ["owner_present_rgb_camera_census_session_authorized"]
+                if granted
+                else []
+            ),
+            "authority_not_granted": list(
+                RGB_CAMERA_CENSUS_AUTHORITY_NOT_GRANTED
+            ),
+        }
+    )
+    if not granted:
+        return request, decision, None
+
+    permit = sign_payload(
+        {
+            "schema_version": RGB_CAMERA_CENSUS_PERMIT_SCHEMA_VERSION,
+            "permit_name": "one_use_d405_c922_rgb_camera_census",
+            "task_id": "K3",
+            "session_id": session,
+            "request_identity_sha256": request["identity_sha256"],
+            "decision_identity_sha256": decision["identity_sha256"],
+            "runtime_profile_identity_sha256": runtime_identity,
+            "branch": branch,
+            "remote_boundary_commit": repository_state["remote_head"],
+            "issued_at": issued.isoformat(),
+            "expires_at": expires.isoformat(),
+            "use_limit": 1,
+            "target_cameras": copy.deepcopy(list(RGB_CAMERA_CENSUS_TARGETS)),
+            "maximum_camera_open_count": 2,
+            "frame_count_per_camera": 1,
+            "maximum_capture_duration_seconds": (
+                RGB_CAMERA_CENSUS_MAX_SESSION_SECONDS
+            ),
+            "allowed_operations": list(RGB_CAMERA_CENSUS_ALLOWED_OPERATIONS),
+            "rgb_stream_authorized": True,
+            "depth_stream_authorized": False,
+            "serial_access_authorized": False,
+            "motion_authorized": False,
+            "audio_capture_authorized": False,
+            "private_output_dir": private_relative,
+            "manifest_output": manifest_relative,
+            "authority_not_granted": list(
+                RGB_CAMERA_CENSUS_AUTHORITY_NOT_GRANTED
+            ),
+        }
+    )
+    return request, decision, permit
+
+
+def verify_rgb_camera_census_authority(
+    *,
+    request: dict[str, Any],
+    decision: dict[str, Any],
+    permit: dict[str, Any] | None,
+    project_state: dict[str, Any],
+    runtime_profile: dict[str, Any],
+    repo_root: Path,
+    now: str,
+    repository_state_loader: Callable[..., dict[str, Any]] | None = None,
+    runtime_profile_verifier: Callable[..., None] | None = None,
+) -> None:
+    """Recompose and verify one fresh camera-only authority boundary."""
+
+    verify_signed_payload(request, label="RGB camera census request")
+    verify_signed_payload(decision, label="RGB camera census decision")
+    if request.get("schema_version") != RGB_CAMERA_CENSUS_REQUEST_SCHEMA_VERSION:
+        raise ValueError("RGB camera census request schema is unsupported")
+    if decision.get("schema_version") != RGB_CAMERA_CENSUS_DECISION_SCHEMA_VERSION:
+        raise ValueError("RGB camera census decision schema is unsupported")
+    expected = compose_rgb_camera_census_authority(
+        project_state=project_state,
+        runtime_profile=runtime_profile,
+        repo_root=repo_root,
+        session_id=request.get("session_id"),
+        issued_at=request.get("issued_at"),
+        expires_at=request.get("expires_at"),
+        private_output_dir=request.get("private_output_dir"),
+        manifest_output=request.get("manifest_output"),
+        repository_state_loader=repository_state_loader,
+        runtime_profile_verifier=runtime_profile_verifier,
+    )
+    if request != expected[0] or decision != expected[1]:
+        raise ValueError("RGB camera central authority drifted")
+    if decision.get("granted") is not True:
+        if permit is not None:
+            raise ValueError("Denied RGB camera decision cannot carry a permit")
+        return
+    if permit is None:
+        raise ValueError("Granted RGB camera decision is missing its permit")
+    verify_signed_payload(permit, label="RGB camera census permit")
+    if permit != expected[2]:
+        raise ValueError("RGB camera census permit drifted from central decision")
+    observed = _parse_timestamp(now, label="RGB camera permit verification time")
+    issued = _parse_timestamp(permit.get("issued_at"), label="RGB camera issued_at")
+    expires = _parse_timestamp(permit.get("expires_at"), label="RGB camera expires_at")
+    if observed < issued or observed > expires:
+        raise ValueError("RGB camera census permit is not active")
+    verifier = runtime_profile_verifier or _verify_t19_1_runtime_profile
+    verifier(runtime_profile, repo_root=Path(repo_root).resolve(), now=observed.isoformat())
+
+
 def _verify_t19_1_runtime_profile(
     payload: dict[str, Any],
     *,
@@ -1787,6 +2155,73 @@ def _validate_t19_1_repository_state(payload: Any) -> None:
         value = require_nonblank(payload.get(field), label=f"T19.1 repository {field}")
         if len(value) != 40 or any(character not in "0123456789abcdef" for character in value):
             raise ValueError(f"T19.1 repository {field} is not a commit identity")
+
+
+def _capture_rgb_camera_census_repository_state(
+    *, repo_root: Path, branch: str
+) -> dict[str, Any]:
+    root = Path(repo_root).resolve()
+
+    def run(arguments: list[str]) -> str:
+        completed = subprocess.run(
+            arguments,
+            cwd=str(root),
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if completed.returncode != 0 or completed.stderr.strip():
+            raise RuntimeError("RGB camera repository boundary command failed")
+        return completed.stdout.strip()
+
+    observed_branch = run(["git", "branch", "--show-current"])
+    head = run(["git", "rev-parse", "HEAD"])
+    upstream = run(["git", "rev-parse", "@{upstream}"])
+    remote_output = run(
+        [
+            "git",
+            "ls-remote",
+            "--heads",
+            "origin",
+            f"refs/heads/{branch}",
+        ]
+    )
+    remote_lines = [line.split() for line in remote_output.splitlines() if line]
+    if len(remote_lines) != 1 or len(remote_lines[0]) != 2:
+        raise ValueError("RGB camera remote branch did not resolve exactly once")
+
+    def diff_clean(paths: list[str]) -> bool:
+        completed = subprocess.run(
+            ["git", "diff", "--quiet", "--", *paths],
+            cwd=str(root),
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if completed.returncode not in {0, 1} or completed.stderr.strip():
+            raise RuntimeError("RGB camera scoped repository diff check failed")
+        return completed.returncode == 0
+
+    return {
+        "branch": observed_branch,
+        "head": head,
+        "upstream_head": upstream,
+        "remote_head": remote_lines[0][0],
+        "scoped_source_diff_clean": diff_clean(
+            [
+                "scenesmith/robot_lab/authority_composer.py",
+                "scenesmith/robot_lab/rgb_camera_census.py",
+                "scripts/robot_lab/run_rgb_camera_census.py",
+                "tests/unit/test_rgb_camera_census.py",
+                "docs/briefs/228-owner-present-rgb-camera-census.md",
+            ]
+        ),
+        "gate_state_diff_clean": diff_clean(
+            ["docs/autonomous-workflow/project_state.json"]
+        ),
+    }
 
 
 def _t19_1_scoped_relative_path(

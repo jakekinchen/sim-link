@@ -175,6 +175,17 @@
   },
   "owner_authority": {
     "authority_id": "owner_supervised_physical_poc_2026_07_11",
+    "current_rgb_camera_census_window": {
+      "state": "owner_presence_and_rgb_camera_access_granted_pending_central_and_session_permits",
+      "recorded_at": "2026-07-16T22:25:00-05:00",
+      "valid_through": "2026-07-16T23:25:00-05:00",
+      "owner_present": true,
+      "camera_access_authorized": true,
+      "scope": ["d405_uvc_rgb_metadata_and_one_frame", "c922_rgb_metadata_and_one_frame", "coarse_host_observation_latency"],
+      "required_before_any_access": ["same_thread_danger_full_access_verified", "same_thread_approval_policy_never_verified", "fresh_central_camera_session_decision", "finite_content_addressed_one_use_camera_permit", "remote_preservation_and_review"],
+      "not_authorized": ["depth_stream", "librealsense", "serial_access", "register_read", "register_write", "torque_change", "motion", "audio_capture", "inference", "training", "network_access", "external_compute", "brev_compute", "physical_qualification", "physical_transfer", "promotion"],
+      "physical_access_performed_in_window": false
+    },
     "current_hardware_access_window": {
       "state": "owner_presence_and_access_granted_pending_central_and_session_permits",
       "recorded_at_approximate": "2026-07-16T02:05:00-05:00",
@@ -431,6 +442,16 @@
         "copy_bulk_or_private_artifacts",
         "destructive_operation"
       ]
+    },
+    "K3": {
+      "state": "in_progress",
+      "active_brief_id": "228",
+      "result": "Brief 228 implements and reviews one fail-closed owner-present D405 UVC plus C922 RGB-only census before any camera enumeration or open; live gate remains closed",
+      "live_gate": "closed",
+      "session_limit": 1,
+      "sessions_started": 0,
+      "authority_granted": ["read_owner_final_hour_camera_direction", "implement_and_fixture_test_fail_closed_rgb_camera_census"],
+      "authority_not_granted": ["camera_enumeration", "camera_open", "depth_stream", "librealsense", "serial_access", "register_read", "register_write", "torque_change", "motion", "audio_capture", "inference", "training", "network_access", "external_compute", "brev_compute", "physical_qualification", "physical_transfer", "promotion"]
     }
   },
   "tasks": {
