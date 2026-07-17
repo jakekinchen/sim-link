@@ -205,14 +205,14 @@ unselected and unconsumed. The next eligible task is a fresh F3 brief to fold
 current R2/F0/F0a/F0b truth into the reconstruction kit and verify the fork
 boundary; the freeze tag itself remains separately gated.
 
-F3/Brief 233 is now active for the current-truth reconstruction fold. It may
-reconcile the living docs and `reconstruction-kit/`, preserve the compact
-F0/F0a/F0b source and replayable evidence, repin the source manifest from a
-committed boundary, harden deterministic portability checks, and verify a
-fresh scratch export/bootstrap. It may not load a model, train, roll out a
-policy, use network/external compute/Brev, access hardware, transfer or promote
-a policy, or create the freeze tag before terminal review and exact origin
-confirmation.
+F3/Brief 233 is verified by Reviewer 326. Implementation `48970159...`, source
+pin `8066e59b...`, manifest `ec9084dc...`, fresh export `57b4623b...`, offline
+W1 bootstrap `bd2c9575...`, and retained exact W2 receipt `86739578...` close
+the current-truth sim2claw reconstruction fold. F3 receipt `bf488607...`
+records no model load, optimizer, training, rollout, network acquisition,
+external compute, Brev, hardware, transfer, or promotion. Reviewer 326 permits
+only the annotated `freeze-2026-07-17-hackathon-fork` tag after the scoped
+closeout commit is exact on origin; the tag is a boundary marker, not authority.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean

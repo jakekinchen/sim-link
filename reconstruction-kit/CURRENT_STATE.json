@@ -148,6 +148,30 @@
     "corrective_training_selected": false,
     "single_corrective_rung_consumed": false
   },
+  "f3_reconstruction_truth_fold": {
+    "task_id": "F3",
+    "status": "verified_reconstruction_truth_fold",
+    "review_decision_id": "326",
+    "receipt_identity_sha256": "bf4886077c98239c18ee8848718d50db0ff4de911236a14e4cdb2794d66bf537",
+    "implementation_commit": "48970159ccd14de6d93fed8a7f318eafcc64b777",
+    "source_pin_commit": "8066e59b515edba848e221aadddb26e5bb104b1d",
+    "source_manifest_identity_sha256": "ec9084dc41e22e9c7c695b029a8db84cb60c507001ab7c65325e804ecfed5117",
+    "pristine_export_receipt_identity_sha256": "57b4623b4643a4cc9f8bd9e55ee6a093a6182a57b5a16165d4ba00aac844430e",
+    "w1_bootstrap_receipt_identity_sha256": "bd2c957534020b6393e358944cabf7b27a25ca4ea07b8408cdc8346de703941a",
+    "w2_combined_receipt_identity_sha256": "86739578ecde6bf983a2239645e00f51701f30f8c339fda2f73f14cad1e5c2eb",
+    "kit_test_count": 13,
+    "documentation_test_count": 6,
+    "project_state_pointer_test_count": 15,
+    "r0_contract_test_count": 7,
+    "f0_chain_test_count": 27,
+    "w1_bootstrap_test_count": 29,
+    "learned_policy_success_claimed": false,
+    "authority_transferred": false,
+    "model_action_performed": false,
+    "hardware_accessed": false,
+    "external_compute_used": false,
+    "freeze_tag_records_boundary_only": true
+  },
   "smolvla": {
     "task_id": "T20.44",
     "status": "verified_terminal_negative",
@@ -232,9 +256,9 @@
   },
   "current_route": {
     "task_id": "F3",
-    "status": "in_progress",
+    "status": "verified",
     "brief_id": "233",
-    "review_decision_id": null,
+    "review_decision_id": "326",
     "owner_overnight_foundation_direction_recorded": true,
     "t20_43c_terminal_boundaries_preserved": true,
     "t20_43c_r2_terminal_negative_preserved": true,
@@ -247,7 +271,9 @@
     "f0a_observability_verified": true,
     "f0b_hybrid_cadence_terminal_negative_preserved": true,
     "corrective_act_rung_consumed": false,
-    "next_eligible_task": "F3",
+    "next_eligible_task": "fork_birth_after_freeze_tag",
+    "freeze_tag_authorized_after_exact_origin_confirmation": true,
+    "freeze_tag_created_in_recorded_snapshot": false,
     "hackathon_annex_path": "docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md"
   },
   "authority": {

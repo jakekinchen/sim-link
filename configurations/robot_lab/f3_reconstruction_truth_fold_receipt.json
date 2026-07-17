@@ -1,0 +1,87 @@
+{
+  "authority_transferred": false,
+  "brev_compute_used": false,
+  "corrective_act_rung_consumed": false,
+  "external_compute_used": false,
+  "f0_chain": {
+    "f0_result_identity_sha256": "807d3da7e21bbf3ec846454bb13aa6a2cb92eac4f6dffe8d86becb0ad777e5f9",
+    "f0a_result_identity_sha256": "278e8bc772dc879622a226abe22665d320421925045ad9b3cb1f88b1c31153a4",
+    "f0b_result_identity_sha256": "8fb34ff4a0619d59f414ec6bb81cb028fd5cf3d31bb26c4655a9dd41855f185d",
+    "f0b_trace_identity_sha256": "af62a3b5d47b315609590765445a4aa7db99effb2fe20b4d3a4d1c3bd9bbb3f9"
+  },
+  "freeze_tag": {
+    "created": false,
+    "name": "freeze-2026-07-17-hackathon-fork",
+    "requires_terminal_review_and_exact_origin_confirmation": true
+  },
+  "hardware_accessed": false,
+  "identity_sha256": "bf4886077c98239c18ee8848718d50db0ff4de911236a14e4cdb2794d66bf537",
+  "implementation_commit": "48970159ccd14de6d93fed8a7f318eafcc64b777",
+  "learned_policy_gate_c_passed": false,
+  "manifest": {
+    "file_count": 444,
+    "file_sha256": "65451227efca940cb89cca57a55714cc91d07b1e90293f37ef42ad025ffdfee2",
+    "identity_sha256": "ec9084dc41e22e9c7c695b029a8db84cb60c507001ab7c65325e804ecfed5117",
+    "omitted_file_count": 11,
+    "omitted_total_bytes": 22876530,
+    "source_commit": "48970159ccd14de6d93fed8a7f318eafcc64b777",
+    "total_bytes": 81458869
+  },
+  "model_constructed": false,
+  "network_acquisition_used": false,
+  "optimizer_created": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "recorded_at": "2026-07-17T06:00:55-05:00",
+  "r2_terminal_negative": {
+    "equivalence_receipt_identity_sha256": "fdc062972a8aef00b77e8719d9c61451f5ed3d05dd4187aa98fb7db1e9df9548",
+    "final_receipt_identity_sha256": "be11a258b6662baa10341acac13fe09055cd4ded7c2eaba4236d466977dfac5e",
+    "gate_c_passed": false,
+    "replacement_marker_identity_sha256": "dfe3ff05a78f65122d44d87c84dea72f1b40f539eb77ec34a09c8efe5ceba63b",
+    "result_identity_sha256": "bf2c8b466597ac23ff76ad88e8697b7b5d70a09b9016bc11442010243c984327",
+    "retention_receipt_identity_sha256": "e565e17a5d4f8a52c4d894d3d61f03cf4b38beaf1df0bec3b83ade7f05afc023",
+    "run_identity_sha256": "82a0608386375f029a56be8ca9f972bc0e83939d30ad286164db828aa22dc851",
+    "scorecard_identity_sha256": "6f848570dafbc2fde2558a4e62613315890fbc251b93b1ee0c92cdf73ebb1ab7"
+  },
+  "schema_version": "scenesmith.f3_reconstruction_truth_fold_receipt.v1",
+  "scratch_export": {
+    "file_count": 465,
+    "file_sha256": "1090b8417edc9941d51fec0b944137d0a666db1c8ad3db4c6f30a707788d3844",
+    "identity_sha256": "57b4623b4643a4cc9f8bd9e55ee6a093a6182a57b5a16165d4ba00aac844430e",
+    "independent_verify_exit_code": 0,
+    "scratch_absolute_path_signed": false,
+    "total_bytes": 81798833
+  },
+  "source_pin_commit": "8066e59b515edba848e221aadddb26e5bb104b1d",
+  "status": "verified_reconstruction_truth_fold",
+  "task_id": "F3",
+  "tests": {
+    "documentation_information_architecture": 6,
+    "f0_f0a_f0b": 27,
+    "kit": 13,
+    "project_state_pointer": 15,
+    "r0_regeneration_contract": 7,
+    "w1_bootstrap_focused": 29
+  },
+  "training_authorized": false,
+  "w1_bootstrap": {
+    "elapsed_seconds": 47.904293,
+    "expert_episode_frame_count": 244,
+    "expert_episode_strict_success": true,
+    "file_sha256": "9426e8afcb229e5edfb21151fb3a5266bf3548e51f2278030277ad9b479e1a8c",
+    "identity_sha256": "bd2c957534020b6393e358944cabf7b27a25ca4ea07b8408cdc8346de703941a",
+    "renderer_schema_smoke_count": 3
+  },
+  "w2_r0_recreation": {
+    "candidate_receipt_identity_sha256": "fd83af1d629242925dabc564d49c60738f20db4099fe542b196534b44f3d560a",
+    "file_sha256": "97a7bcd67c8a5b60f7d90a9e0988c4441072b9acd4ee672be12fa428f14e2db4",
+    "fresh_held_out_strict_success_count": 9,
+    "identity_sha256": "86739578ecde6bf983a2239645e00f51701f30f8c339fda2f73f14cad1e5c2eb",
+    "independent_verify_exit_code": 0,
+    "mismatches": {},
+    "new_training_strict_success_count": 119,
+    "training_episode_count": 129,
+    "training_frame_count": 31366,
+    "window_count": 59904
+  }
+}

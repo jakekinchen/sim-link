@@ -63,9 +63,11 @@ again failed only `release_final_contact_clear`. Cadence alone is therefore not
 the repair, no corrective ACT rung was selected or consumed, and no F1/Brev
 run was started.
 
-F3/Brief 233 is the active route: fold these exact results and the verified K2
-bootstrap/R0 reconstruction into the sim2claw seed, then verify a fresh export
-before the separately gated freeze tag. This does not change the fork's
+F3/Brief 233 is verified by Reviewer 326. Source implementation `48970159...`,
+manifest `ec9084dc...`, pristine export `57b4623b...`, and offline W1 bootstrap
+`bd2c9575...` bind the current sim2claw seed; retained W2 receipt `86739578...`
+still proves exact R0 parity without another generation run. The separately
+gated freeze tag records this boundary only. It does not change the fork's
 ACT-plus-state-RL primary architecture or grant model, hardware, transfer, or
 promotion authority.
 

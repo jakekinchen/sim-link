@@ -7,16 +7,39 @@ training_lock: closed; T20.43c-R2 completed its sole authorized attempt as a ver
 run_window: closed after 10,000 finite optimizer updates, seven checkpoints, and 14 rollouts; hardware, network, external compute, and Brev remained closed
 run_state: Reviewer 318 verifies exact zero-update equivalence and a clean completed campaign; chunk-50 learned grasp-lift-hold-lower but never clean release, so Gate C is false and the result is not an infrastructure failure
 current_milestone: M20 simulation-only clean supervision
-current_task: F3 in_progress under Brief 233; fold immutable R2/K2/F0/F0a/F0b truth into the reconstruction kit, verify a fresh export/bootstrap, and keep the tag closed until terminal review
+current_task: F3 verified under Brief 233 and Reviewer 326; current R2/K2/F0/F0a/F0b truth is folded into the verified sim2claw reconstruction boundary
 next_task: F3
 support_task: K2 verified under Brief 226 and Reviewer 319; W3 remains an unintegrated 0-of-3 handoff and W5 remains unintegrated transport/replay evidence
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
 owner_authority: owner-direction-2026-07-17-final-overnight.md opens model-free F0 release-gap diagnosis and permits at most one separately reviewed corrective ACT rung; it separately bounds optional F1 Brev work but grants no automatic training, hardware, transfer, promotion, or tag
-blockers: learned strict-v2 task completion and Gate C remain scientifically unmet; corrective training, retry, F1/Brev, hardware, transfer, promotion, and the freeze tag remain closed
-next_step: implement Brief 233 only after its activation is exact on origin; repin the manifest from a committed boundary, run kit/link/export/bootstrap checks, then perform a fresh same-agent terminal review before any tag
+blockers: learned strict-v2 task completion and Gate C remain scientifically unmet; corrective training, retry, F1/Brev, hardware, transfer, and promotion remain closed
+next_step: after the scoped F3 closeout is exact on origin, create and remotely verify only the annotated freeze-2026-07-17-hackathon-fork boundary tag; activate no new source-repo model task
 ```
+
+## 2026-07-17 - Reviewer 326 verifies F3 reconstruction truth fold
+
+Implementation `48970159...` and source-pin commit `8066e59b...` are exact on
+origin. Manifest `ec9084dc...` selects 444 files / 81,458,869 bytes and records
+11 deliberate omissions. Fresh export `57b4623b...` independently verifies 465
+files / 81,798,833 bytes. Offline W1 bootstrap `bd2c9575...` passes 29 focused
+tests, one strict 244-frame expert episode, and all three retained renderer
+schemas. Retained W2 receipt `86739578...` independently verifies its signed
+exact-content equality and seven deterministic contracts; its hour-long data
+generation was not repeated.
+
+F3 receipt `bf488607...` binds the immutable R2 identities, F0/F0a/F0b results,
+manifest, export, bootstrap, W2 parity, and full test ledger. The contradiction
+review finds no learned-policy success, retry, candidate-image equality, W3
+completion, W5 gRPC/policy-quality, transferred authority, or active permit
+claim. No model, optimizer, training, rollout, hardware, network acquisition,
+external compute, or Brev action occurred.
+
+F3 is verified and closed. After the closeout commit containing Reviewer 326
+is exact on origin, one annotated `freeze-2026-07-17-hackathon-fork` tag may be
+created on that exact commit and remotely verified. The tag records a source
+boundary only; it grants no live authority or new model task.
 
 ## 2026-07-17 - Brief 233 activates F3 reconstruction fold
 

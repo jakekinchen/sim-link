@@ -130,10 +130,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "232",
-    "commit": "2d39bcc076c7328364777712cd1bf7828bc1cae9",
-    "reviewer_decision_id": "325",
-    "summary": "reviewer_325_verifies_f0b_hybrid_tail_cadence_terminal_negative_8fb34ff4_and_routes_to_f3_reconstruction_fold"
+    "brief_id": "233",
+    "commit": "8066e59b515edba848e221aadddb26e5bb104b1d",
+    "reviewer_decision_id": "326",
+    "summary": "reviewer_326_verifies_f3_receipt_bf488607_source_implementation"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -5297,14 +5297,41 @@
       "authority_not_granted": ["optimizer_creation", "optimizer_training", "retry", "additional_checkpoint", "additional_seed", "additional_rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "F3": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["F0b_verified_on_origin", "K2_verified_on_origin"],
-      "active_brief_id": "233",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
-      "source_boundary_commit": "e630c6390397a88478e78a4f1e49c8d93fa610e3",
-      "result": "Brief 233 activates a deterministic reconstruction-kit and living-documentation fold of immutable R2, K2, F0, F0a, and F0b truth plus scratch export/bootstrap verification; no model, optimizer, rollout, Brev, hardware, transfer, promotion, or tag action is authorized before a separate terminal review is exact on origin",
-      "authority_granted": ["activate_brief_233", "read_and_hash_immutable_r2_k2_f0_f0a_f0b_sources", "update_reconstruction_and_living_documentation_spines", "integrate_compact_f0_f0a_f0b_source_tests_and_replayable_evidence", "regenerate_manifest_from_committed_source_boundary", "run_offline_kit_export_bootstrap_and_verification", "harden_project_state_pointer_task_id_parsing"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "233",
+      "review_decision_id": "326",
+      "source_boundary_commit": "8066e59b515edba848e221aadddb26e5bb104b1d",
+      "result": "Reviewer 326 verifies F3 receipt bf488607: source implementation 48970159, manifest ec9084dc, pristine export 57b4623b, offline W1 bootstrap bd2c9575, and retained exact W2 receipt 86739578 close the current-truth sim2claw fold; the boundary tag is permitted only after the scoped closeout is exact on origin and grants no authority",
+      "evidence": {
+        "receipt_identity_sha256": "bf4886077c98239c18ee8848718d50db0ff4de911236a14e4cdb2794d66bf537",
+        "receipt_file_sha256": "b7bd2c7329c62bda7a463c6e6fb001412603faaa8635cd766a1b283bd1acdcdc",
+        "implementation_commit": "48970159ccd14de6d93fed8a7f318eafcc64b777",
+        "source_pin_commit": "8066e59b515edba848e221aadddb26e5bb104b1d",
+        "source_manifest_identity_sha256": "ec9084dc41e22e9c7c695b029a8db84cb60c507001ab7c65325e804ecfed5117",
+        "source_manifest_file_sha256": "65451227efca940cb89cca57a55714cc91d07b1e90293f37ef42ad025ffdfee2",
+        "source_manifest_file_count": 444,
+        "pristine_export_receipt_identity_sha256": "57b4623b4643a4cc9f8bd9e55ee6a093a6182a57b5a16165d4ba00aac844430e",
+        "pristine_export_file_count": 465,
+        "w1_bootstrap_receipt_identity_sha256": "bd2c957534020b6393e358944cabf7b27a25ca4ea07b8408cdc8346de703941a",
+        "w1_bootstrap_focused_test_count": 29,
+        "combined_w2_receipt_identity_sha256": "86739578ecde6bf983a2239645e00f51701f30f8c339fda2f73f14cad1e5c2eb",
+        "isolated_w2_candidate_receipt_identity_sha256": "fd83af1d629242925dabc564d49c60738f20db4099fe542b196534b44f3d560a",
+        "kit_test_count": 13,
+        "documentation_test_count": 6,
+        "project_state_pointer_test_count": 15,
+        "r0_contract_test_count": 7,
+        "f0_chain_test_count": 27,
+        "learned_policy_success_claimed": false,
+        "authority_transferred": false,
+        "model_action_performed": false,
+        "hardware_accessed": false,
+        "external_compute_used": false,
+        "brev_compute_used": false,
+        "final_wrapper_export_receipt_identity_sha256": "480059b39172d0afa690f5f041e7bfe60f358e393ac220786a3e41cee1038fa9"
+      },
+      "authority_granted": ["activate_brief_233", "read_and_hash_immutable_r2_k2_f0_f0a_f0b_sources", "update_reconstruction_and_living_documentation_spines", "integrate_compact_f0_f0a_f0b_source_tests_and_replayable_evidence", "regenerate_manifest_from_committed_source_boundary", "run_offline_kit_export_bootstrap_and_verification", "harden_project_state_pointer_task_id_parsing", "create_one_annotated_freeze_tag_after_closeout_commit_is_exact_on_origin"],
       "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag_before_terminal_review_and_origin_confirmation"]
     },
     "T20.45": {

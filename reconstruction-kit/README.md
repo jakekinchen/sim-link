@@ -113,6 +113,13 @@ content gate and receipt remain the decisive data-parity proof. F3 re-verifies
 the final capsule/export/bootstrap boundary after folding the release findings,
 without pretending documentation changes require another hour-long generation.
 
+F3 source implementation `48970159...` is pinned by commit `8066e59b...` and
+manifest `ec9084dc...` (444 selected files, 81,458,869 bytes). Pristine export
+`57b4623b...` independently verifies 465 files, and offline W1 bootstrap
+`bd2c9575...` passes 29 focused tests, one 244-frame strict-v2 expert episode,
+and all three retained renderer schemas. F3 receipt `bf488607...` binds those
+facts and the unchanged W2 exact-content receipt without granting authority.
+
 ## Verify and export
 
 From the `sim-link` repository root:

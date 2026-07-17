@@ -333,6 +333,7 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertFalse(act["retry_authorized"])
         route = state["current_route"]
         self.assertEqual(route["task_id"], "F3")
+        self.assertEqual(route["status"], "verified")
         self.assertFalse(route["model_action_currently_authorized"])
         self.assertFalse(route["t20_43c_retry_authorized"])
         continuation = state["act_continuation"]
@@ -368,6 +369,15 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertEqual(cadence["first_action_divergence_frame"], 176)
         self.assertEqual(cadence["hybrid_retreat_strict_contact_frames"], 17)
         self.assertFalse(cadence["single_corrective_rung_consumed"])
+        fold = state["f3_reconstruction_truth_fold"]
+        self.assertEqual(fold["status"], "verified_reconstruction_truth_fold")
+        self.assertEqual(
+            fold["receipt_identity_sha256"],
+            "bf4886077c98239c18ee8848718d50db0ff4de911236a14e4cdb2794d66bf537",
+        )
+        self.assertFalse(fold["learned_policy_success_claimed"])
+        self.assertFalse(fold["authority_transferred"])
+        self.assertFalse(fold["model_action_performed"])
 
     def test_fork_spine_keeps_current_and_future_contracts_distinct(self) -> None:
         required = [

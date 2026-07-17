@@ -151,10 +151,25 @@ lifted 0.037655304225193253 m and failed only
   Gate C still fails only release. No optimizer, training, retry, or
   infrastructure failure occurred.
 
-The corrective ACT rung remains unselected and unconsumed. F3/Brief 233 is the
-active source-repo route only to reconcile and verify the sim2claw capsule; it
-does not authorize model work, F1/Brev, hardware, transfer, promotion, or the
-freeze tag before terminal review.
+The corrective ACT rung remains unselected and unconsumed. F3/Brief 233 is
+verified by Reviewer 326: implementation `48970159...`, manifest
+`ec9084dc...`, pristine export `57b4623b...`, offline W1 bootstrap
+`bd2c9575...`, and retained exact W2 receipt `86739578...` close the sim2claw
+capsule fold. F3 receipt `bf488607...` grants no model work, F1/Brev, hardware,
+transfer, or promotion authority. The freeze tag records this boundary only.
+
+## Verified F3 reconstruction fold
+
+- Manifest: 444 selected files / 81,458,869 bytes; 11 deliberate omissions
+  remain hashed and explained.
+- Fresh export: 465 files / 81,798,833 bytes; independent verification exits
+  zero without signing its ephemeral absolute scratch path.
+- Offline W1: Python 3.12.12, 29 focused tests, one strict 244-frame expert
+  episode, and three renderer-schema smokes in 47.904293 seconds.
+- Retained W2: exact 129-episode R0 recreation, 31,366 frames, 59,904 windows,
+  119 new training successes, nine fresh-held-out successes, and no mismatch.
+- Model construction, optimizer action, training, policy rollout, hardware,
+  external compute, network acquisition, and Brev were all absent from F3.
 
 See the optional [hackathon fork annex](../docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md)
 for the three-day distributed plan. It is task direction, not transferred

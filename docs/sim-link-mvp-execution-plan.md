@@ -29,12 +29,14 @@ training readiness, and proof labels remain mechanically owned by
 [`project_state.json`](./autonomous-workflow/project_state.json) and the central
 authority composer.
 
-The current route is the terminal fold required by
+The terminal fold required by
 [`Owner Direction — Final Overnight Exploration`](./autonomous-workflow/owner-direction-2026-07-17-final-overnight.md):
 F0 is closed as a structured terminal negative, F1 and F2 were not opened, and
-F3/Brief 233 now compresses the current evidence and architecture into the
-verified sim2claw reconstruction boundary. Manager Intervention 018 is retained
-as superseded convergence history.
+F3/Brief 233 has compressed the current evidence and architecture into the
+verified sim2claw reconstruction boundary. Manifest `ec9084dc...`, export
+`57b4623b...`, W1 bootstrap `bd2c9575...`, and retained exact W2 receipt
+`86739578...` verify the handoff. Manager Intervention 018 is retained as
+superseded convergence history.
 
 ## Product Cut
 
