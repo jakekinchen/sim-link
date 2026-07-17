@@ -1,0 +1,26 @@
+{
+  "comparator_failed_gate": "release_final_contact_clear",
+  "comparator_gate_c_passed": false,
+  "failed_gate_margins": [
+    {
+      "comparison": "==",
+      "gate": "release_final_contact_clear",
+      "margin": -1.0,
+      "measured": 0,
+      "passed": false,
+      "threshold": 1
+    }
+  ],
+  "gate_c_passed": false,
+  "identity_sha256": "c24cd471963b397003a42d7f7887040b358c8c644a4b73d9db35722a408a0d9c",
+  "only_execution_cadence_changed": true,
+  "physical_proof": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "result_identity_sha256": "8fb34ff4a0619d59f414ec6bb81cb028fd5cf3d31bb26c4655a9dd41855f185d",
+  "same_checkpoint_and_seed": true,
+  "schema_version": "scenesmith.f0b_hybrid_tail_cadence_scorecard.v1",
+  "task_id": "F0b",
+  "terminal_outcome": "lifted_without_strict_cycle",
+  "trace_identity_sha256": "af62a3b5d47b315609590765445a4aa7db99effb2fe20b4d3a4d1c3bd9bbb3f9"
+}

@@ -1,0 +1,20 @@
+{
+  "adapter_id": "hybrid_tail_chunk_50_to_10",
+  "anchor_orientation": "held at initial value (position-only playback)",
+  "frame_count": 244,
+  "identity_sha256": "acaa395a895f2beb172ae78f122ec818651da15032de7bfd900094c130765a1d",
+  "output_bytes": 629126,
+  "output_mp4": "outputs/robot_lab/f0b_hybrid_tail_cadence_run_001/mirror.mp4",
+  "output_sha256": "db088a4d9cc1bce841a71e64a6985a519d41e068d8a7c32e482e7ffeef1f2f89",
+  "panels": [
+    "policy side cam (re-render)",
+    "policy overhead cam (re-render)",
+    "expert top cam (recorded)"
+  ],
+  "purpose": "diagnostic visualization of signed trace evidence; no authority",
+  "schema_version": "scenesmith.rollout_mirror_render.v1",
+  "seed": 0,
+  "seed_role": null,
+  "trace_identity_sha256": "af62a3b5d47b315609590765445a4aa7db99effb2fe20b4d3a4d1c3bd9bbb3f9",
+  "trace_path": "outputs/robot_lab/f0b_hybrid_tail_cadence_run_001/trace.json"
+}
