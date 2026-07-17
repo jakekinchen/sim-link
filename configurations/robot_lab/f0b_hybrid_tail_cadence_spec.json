@@ -99,7 +99,7 @@
   "external_compute_started": false,
   "freeze_tag_authorized": false,
   "hardware_accessed": false,
-  "identity_sha256": "00d7c7f300e2b8536e0a24437fadd7bf946c3580fa5eef6bfc0e632d0479953f",
+  "identity_sha256": "ddf71cf91bcfcd4a1d40573a4ce5cfd648ee9dc141b3b6186bfbbd5fc16184ce",
   "live_rendering": false,
   "model_constructed": false,
   "model_inference": false,
@@ -362,16 +362,16 @@
       "size_bytes": 63485
     },
     {
-      "file_sha256": "dbacdfc2ff02400fa4662f6b556668e2c1c3fe5c73d6cfa5118af02a3f2e1bd9",
+      "file_sha256": "57dbcc5d29d3bf97f011212964d39819f0726279a18b13b9c2e84e7c29901070",
       "label": "f0b_implementation_source",
       "path": "scenesmith/robot_lab/f0b_hybrid_tail_cadence.py",
-      "size_bytes": 95906
+      "size_bytes": 96273
     },
     {
-      "file_sha256": "b03e3965f6244658d946cac6195e3981528b85426495305b45e373083816c98c",
+      "file_sha256": "38a2b7bffd8716b974f726d428feb97d07647b5ceb459a9ff770d513bf2a1f95",
       "label": "f0b_test_source",
       "path": "tests/unit/test_f0b_hybrid_tail_cadence.py",
-      "size_bytes": 16707
+      "size_bytes": 17160
     },
     {
       "file_sha256": "e7857f78f346bd364b3375a9d463e729fd6f64f4248081e44ef8f237eeee2fb0",
@@ -475,6 +475,12 @@
       "label": "strict_v2_source",
       "path": "scenesmith/robot_lab/strict_grasp.py",
       "size_bytes": 32436
+    },
+    {
+      "file_sha256": "2a5fb017f0e82a2863fecbde4783b0f8cf0774538831692ab92757227a3bfe47",
+      "label": "task_ordering_source",
+      "path": "docs/autonomous-workflow/owner-direction-2026-07-17-final-overnight.md",
+      "size_bytes": 5042
     }
   ],
   "statistics_changed": false,

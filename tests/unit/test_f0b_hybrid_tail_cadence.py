@@ -29,6 +29,9 @@ from scenesmith.robot_lab.f0b_hybrid_tail_cadence import (
     FORCE_BEARING_RELEASE_CLEARANCE_BASIS,
     LEROBOT_CHECKOUT_HEAD,
     LEROBOT_CHECKOUT_TREE,
+    OWNER_AUTHORIZATION_SOURCE,
+    OWNER_DIRECTION_PATH,
+    OWNER_STATEMENT_RECORD,
     SO101_ASSET_TREE_IDENTITY,
     SO_ARM_CHECKOUT_HEAD,
     SO_ARM_CHECKOUT_TREE,
@@ -268,6 +271,12 @@ class F0bHybridTailCadenceTests(unittest.TestCase):
         verify_signed_payload(request, label="F0b test request")
         self.assertEqual(decision["authority_granted"], ["simulation_training_ready"])
         self.assertEqual(owner["authorized_attempt_count"], 1)
+        self.assertEqual(owner["authorization_source"], OWNER_AUTHORIZATION_SOURCE)
+        self.assertEqual(owner["owner_statement_record"], OWNER_STATEMENT_RECORD)
+        self.assertEqual(owner["task_ordering_source"], OWNER_DIRECTION_PATH.as_posix())
+        self.assertNotEqual(
+            owner["authorization_source"], owner["task_ordering_source"]
+        )
         self.assertFalse(owner["optimizer_authorized"])
         self.assertFalse(owner["training_authorized"])
         self.assertFalse(owner["retry_authorized"])

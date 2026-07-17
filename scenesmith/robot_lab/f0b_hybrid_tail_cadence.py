@@ -60,6 +60,10 @@ from scenesmith.robot_lab.t20_43b_r1_act_contracts import (
 REPO_ROOT = Path(__file__).resolve().parents[2]
 BRANCH = "codex/pi05-autolearn-loop"
 TASK_ID = "F0b"
+OWNER_AUTHORIZATION_SOURCE = (
+    "owner_direct_chat_eight_hour_continue_authorization_2026_07_17"
+)
+OWNER_STATEMENT_RECORD = "Okay. I authorize all of this for the next eight hours."
 TRAINING_SEED = 20260801
 SIMULATION_SEED = 0
 CHUNK_SIZE = 50
@@ -520,6 +524,7 @@ def build_spec(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         ),
         ("f0b_test_source", Path("tests/unit/test_f0b_hybrid_tail_cadence.py")),
         ("brief_source", BRIEF_PATH),
+        ("task_ordering_source", OWNER_DIRECTION_PATH),
     ):
         source_refs.append(_file_ref(root, label, root / relative))
     checkpoint_tree = _file_tree(root / CHECKPOINT_PATH)
@@ -651,7 +656,9 @@ def build_owner_grant(
             "schema_version": OWNER_SCHEMA,
             "task_id": TASK_ID,
             "authorization_id": "f0b_one_retained_act_hybrid_tail_cadence_evaluation",
-            "authorization_source": OWNER_DIRECTION_PATH.as_posix(),
+            "authorization_source": OWNER_AUTHORIZATION_SOURCE,
+            "owner_statement_record": OWNER_STATEMENT_RECORD,
+            "task_ordering_source": OWNER_DIRECTION_PATH.as_posix(),
             "subject_id": DEFAULT_AUTHORITY_SUBJECT_ID,
             "scope_id": DEFAULT_AUTHORITY_SCOPE_ID,
             "required_source_commit": _commit(required_source_commit),
