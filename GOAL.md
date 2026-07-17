@@ -127,31 +127,25 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-T20.43c-R2 under Brief 229 is the active W0 slice. T20.43c itself reached a
-signed terminal interruption: it proved
-checkpoint-0 tensor equivalence exactly, empty optimizer state, an unadvanced
-sampler, and actual-schema mirror dispatch, then trained through update 728 and
-retained checkpoint-500 rollout/mirror evidence. Another agent interrupted the
-run after applying a superseded scheduling instruction. Terminal identity
-`d848a1a8...` therefore records an inconclusive owner-directive interruption,
-not a trained negative and not an infrastructure failure. Its sole continuation
-marker is consumed and `retry_authorized=false`; ACT-on-R0 remains unresolved.
-Because no optimizer state was retained, exact resume is impossible. The direct
-W0 delegation therefore opens one separately rooted manual replacement, never
-reuse of the consumed permit. Reviewer 315 accepts its implementation after
-seven focused tests and 67 selected tests plus 15 subtests. Training remains
-closed. The origin-confirmed implementation has now produced one model-free
-authority bundle: owner `d95ddd8a...`, request `1f528d2e...`, decision
-`bf7908b5...`, runtime `79689c7f...`, and permit `f063e034...`. The composer
-grants exactly `simulation_training_ready` for the finite 23:07-07:00 CDT
-window. Authority commit `391811e...` is exact on origin, and Reviewer 316 now
-accepts signed pre-run receipt `a61b23eb...`, which binds permit `f063e034...`
-and records zero pre-marker model action. This acceptance boundary must itself
-be exact on origin before the sole R2 marker. Reviewer 317 additionally caught
-that status prose had changed implementation-scoped Brief 229 after the reviewed
-source; the brief is restored byte-exact and that correction must also be exact
-on origin before the marker. No R2 marker, checkpoint read, model, optimizer,
-rollout, or Gate C action exists yet.
+T20.43c-R2 under Brief 229 is a verified terminal negative. Its separately
+rooted replacement marker `dfe3ff05...` was consumed once after the reviewed
+source, authority, acceptance, and pre-marker correction were exact on origin.
+Zero-update receipt `fdc06297...` proves bit-exact equality across 234 float32
+tensors and 51,617,414 elements, empty AdamW state, an unadvanced sampler, and
+maximum absolute error 0. The fixed ACT recipe then completed all 10,000 finite
+optimizer updates, retained seven checkpoints, and produced 14 strict-v2
+rollouts without an infrastructure failure.
+
+Reviewer 318 finds no Gate C pass. Chunk-50 nevertheless learned the substantive
+grasp-lift-hold-lower sequence: the final checkpoint lifted 37.655 mm and passed
+every frozen Gate C predicate except `release_final_contact_clear`; update 7500
+had the same sole release failure at 40.025 mm, while update 5000 retained 183
+strict-v2 frames and failed only release plus retreat clearance. The maximum
+observed lift was 45.674 mm. Final receding-10 execution regressed to zero grasp
+hold and 0.502 mm lift. ACT-on-R0 is therefore resolved as a clean negative with
+a release-phase counterexample, not an infrastructure failure and not a retry
+grant. Final receipt `be11a258...` closes training; Gate C, retry, transfer, and
+promotion remain false.
 T20.42/R0 remains verified and T20.44 SmolVLA remains a terminal negative.
 Hardware remains closed unless separately composed under K3; network, external
 compute, Brev, physical transfer, and promotion remain closed.

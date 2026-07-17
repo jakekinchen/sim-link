@@ -1,0 +1,39 @@
+{
+  "brev_compute_started": false,
+  "demo_ready_simulation_learning_mvp": false,
+  "external_compute_started": false,
+  "full_scenesmith_mvp": false,
+  "hardware_accessed": false,
+  "identity_sha256": "6f848570dafbc2fde2558a4e62613315890fbc251b93b1ee0c92cdf73ebb1ab7",
+  "learning_plumbing": {
+    "all_finite": true,
+    "gate_a_passed": true,
+    "updates_completed": 10000
+  },
+  "metric_twin": {
+    "real_robo_scan_i5_verified": false
+  },
+  "network_accessed": false,
+  "physical_actuation": false,
+  "physical_canary": {
+    "learned_policy_canary_verified": false
+  },
+  "physical_transfer_ready": false,
+  "policy_behavior": {
+    "evaluated_variants": [
+      "chunk_50",
+      "receding_10"
+    ],
+    "first_gate_c_pass": null,
+    "rollout_primary": true,
+    "strict_v2_gate_c_passed": false
+  },
+  "promotion_eligible": false,
+  "r0_dataset": {
+    "episode_count": 129,
+    "frame_count": 31366,
+    "verified": true
+  },
+  "schema_version": "scenesmith.t20_43b_r1_act_scorecard.v1",
+  "task_id": "T20.43b"
+}

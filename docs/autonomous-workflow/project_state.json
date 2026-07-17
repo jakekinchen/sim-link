@@ -345,11 +345,11 @@
       "policy_projected_assisted"
     ]
   },
-  "training_lock": "open",
-  "training_authority_valid_until": "2026-07-17T07:00:00-05:00",
+  "training_lock": "closed",
+  "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "T20.43c-R2",
-  "next_eligible_task": "T20.43c-R2",
+  "next_eligible_task": "K2",
   "active_support_task": "K2",
   "support_tasks": {
     "K1": {
@@ -5053,20 +5053,21 @@
       "authority_not_granted": ["fresh_replacement_execution","retry_after_continuation_marker","second_continuation","rewrite_t20_43b_evidence","recipe_change","schedule_change","correction_objective","threshold_change","dataset_change","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.43c-R2": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.43c_verified_inconclusive_terminal_interruption_on_origin", "owner_manual_replacement_addendum_2026_07_16", "immutable_safe_renderer_v2_37c5da6"],
-      "active_brief_id": "229",
+      "active_brief_id": null,
       "latest_verified_brief_id": "229",
-      "review_decision_id": "317",
-      "source_commit": "d0e2b2b92fe32ed9d619716f26fbe40fcaadb75a",
-      "result": "Reviewer 317 catches and corrects pre-marker Brief 229 scoped-input drift by restoring its reviewed 1bc1c773 bytes; authority and acceptance remain unchanged, no marker or model action exists, and the sole attempt may follow only after the correction is exact on origin",
+      "review_decision_id": "318",
+      "source_commit": "7bf832653be5cc68b51fad50888aafe26229b30e",
+      "result": "Reviewer 318 verifies a terminal ACT-on-R0 negative after exact zero-update equivalence, 10,000 finite updates, seven checkpoints, and 14 strict-v2 rollouts; chunk-50 learned grasp-lift-hold-lower but the final checkpoint failed only clean release, so Gate C remains false and no retry is authorized",
       "owner_direction": {"path":"docs/autonomous-workflow/owner-addendum-2026-07-16-t20-43c-manual-replacement.md","manual_replacement_authorized":true,"automatic_retry_authorized":false},
       "immutable_prior_boundary": {"continuation_marker_identity_sha256":"e086c293505385d8d85b095d86f993a65266b70abe7047bc83d5bba319d9ed60","equivalence_receipt_identity_sha256":"85087b2ae94d54ea493ec49a10e6a183369b43c6160e73f79205a7624bb65014","terminal_failure_identity_sha256":"d848a1a8d9c803c0d8782e2c51c102cfd4550f1ca5bf22a629a16f34f834bd68","partial_run_tree_identity_sha256":"e0aea95f9df15e4cc0fb817875d8c887d6b9ece6723b48f029114c18ade169b9","optimizer_update_count":728,"optimizer_state_retained":false,"exact_resume_possible":false},
       "implementation": {"implementation_commit":"75647da9c637420d10b2dc22cd03376d8753c565","terminal_hardening_commit":"da7ea6a1d472f15048dbd1c31cc47aaa9c0d7bde","tracked_input_hardening_commit":"d0e2b2b92fe32ed9d619716f26fbe40fcaadb75a","focused_test_count":7,"selected_test_count":67,"selected_subtest_count":15,"completion_budget_seconds":14400,"disjoint_output_paths":true,"checkpoint_tensor_read_executed":false,"model_or_optimizer_action_executed":false},
       "materialized_authority": {"authority_commit":"391811e098b65d8d22e4a6d646fc3293ab3f9b63","required_source_commit":"1bc1c7731debd657a5cf97b892b67fc74ec3d2a4","owner_grant_identity_sha256":"d95ddd8a4e4fb727a39515f140331e2044300cc28f5d14cb15fef3ea4756b34a","central_request_identity_sha256":"1f528d2ec8c5a9daa0480b51da43917e2f5e830e0b6a6b24d782a479ef5b2f00","central_decision_identity_sha256":"bf7908b50d69c6dcf99d432e9dce671ff49917baf6ccae8b4dfb34972f7248e0","runtime_preflight_identity_sha256":"79689c7fb6ff52659eec1869faa6b1fbed0ac5a0f4231bdb3e4bb04cae59f637","permit_identity_sha256":"f063e0344749bf1d6b0373efc0659194f848cbcb6e783a8fd62bd4d39deed2a3","valid_from":"2026-07-16T23:07:00-05:00","valid_until":"2026-07-17T07:00:00-05:00","authorized_attempt_count":1,"retry_authorized":false,"acceptance_exists":true,"checkpoint_tensor_read_executed":false,"model_or_optimizer_action_executed":false},
       "pre_run_acceptance": {"reviewer_decision_id":"316","path":"configurations/robot_lab/t20_43c_r2_act_pre_run_acceptance.json","identity_sha256":"a61b23eb613d478f41a6541c37399c87c65cb089708d5b88bb14e769ae278fa1","file_sha256":"4f89c16f0c64139b6cbadb0439da86e4935185fb23ecc482726675c789fd61f0","reviewer_file_sha256":"ad8d00b18a6b35d74625bfaf72711d0e60bbd83ae629a4757adda4e294f88aec","authority_commit":"391811e098b65d8d22e4a6d646fc3293ab3f9b63","decision":"ACCEPT_ONE_T20_43C_MANUAL_REPLACEMENT","replacement_marker_exists":false,"model_or_optimizer_action_executed":false},
       "pre_marker_correction": {"reviewer_decision_id":"317","finding":"brief_229_changed_after_required_source_despite_implementation_scoped_status","corrective_action":"restore_brief_229_byte_exact_to_1bc1c773","authority_artifacts_changed":false,"acceptance_changed":false,"marker_exists":false,"checkpoint_tensor_read_executed":false,"model_or_optimizer_action_executed":false},
-      "authority_granted": ["activate_brief_229","implement_and_fixture_test_disjoint_manual_replacement","verify_prior_interruption_and_model_free_central_preview","t20_43c_r2_implementation_valid","materialize_one_model_free_t20_43c_r2_authority_bundle_after_origin_confirmation","t20_43c_r2_model_free_authority_materialized","review_and_accept_t20_43c_r2_authority_after_origin_confirmation","write_and_preserve_signed_t20_43c_r2_pre_run_acceptance","restore_reviewed_brief_229_bytes_before_marker","create_sole_replacement_marker_after_correction_origin_confirmation","prove_bit_exact_zero_update_equivalence","execute_unchanged_act_updates_1_through_10000_and_fixed_evaluations_once"],
+      "execution_result": {"status":"verified_terminal_negative","replacement_marker_identity_sha256":"dfe3ff05a78f65122d44d87c84dea72f1b40f539eb77ec34a09c8efe5ceba63b","equivalence_receipt_identity_sha256":"fdc062972a8aef00b77e8719d9c61451f5ed3d05dd4187aa98fb7db1e9df9548","run_identity_sha256":"82a0608386375f029a56be8ca9f972bc0e83939d30ad286164db828aa22dc851","result_identity_sha256":"bf2c8b466597ac23ff76ad88e8697b7b5d70a09b9016bc11442010243c984327","scorecard_identity_sha256":"6f848570dafbc2fde2558a4e62613315890fbc251b93b1ee0c92cdf73ebb1ab7","retention_identity_sha256":"e565e17a5d4f8a52c4d894d3d61f03cf4b38beaf1df0bec3b83ade7f05afc023","final_receipt_identity_sha256":"be11a258b6662baa10341acac13fe09055cd4ded7c2eaba4236d466977dfac5e","optimizer_update_count":10000,"checkpoint_count":7,"rollout_count":14,"gate_c_passed":false,"first_gate_c_pass":null,"infrastructure_failure":false,"terminal_failure_exists":false,"strongest_chunk_checkpoint":10000,"strongest_chunk_failed_predicates":["release_final_contact_clear"],"strongest_chunk_lift_m":0.037655304225193253,"maximum_lift_m":0.04567430422519325,"retry_authorized":false},
+      "authority_granted": ["activate_brief_229","implement_and_fixture_test_disjoint_manual_replacement","verify_prior_interruption_and_model_free_central_preview","t20_43c_r2_implementation_valid","materialize_one_model_free_t20_43c_r2_authority_bundle_after_origin_confirmation","t20_43c_r2_model_free_authority_materialized","review_and_accept_t20_43c_r2_authority_after_origin_confirmation","write_and_preserve_signed_t20_43c_r2_pre_run_acceptance","restore_reviewed_brief_229_bytes_before_marker","create_sole_replacement_marker_after_correction_origin_confirmation","prove_bit_exact_zero_update_equivalence","execute_unchanged_act_updates_1_through_10000_and_fixed_evaluations_once","verify_and_close_t20_43c_r2_terminal_negative","fold_verified_release_phase_counterexample_into_fork_kit"],
       "authority_not_granted": ["create_replacement_marker_before_acceptance_origin_confirmation","retry_after_replacement_marker","second_replacement","exact_update_728_resume_claim","recipe_change","schedule_change","dataset_change","threshold_change","correction_objective","t20_45_activation","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.44": {
