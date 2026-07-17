@@ -35,7 +35,8 @@ setting. The state file and central authority composition decide whether a
 training, live-observation, physical-transfer, or promotion claim is valid.
 
 At the current 2026-07-17 boundary, R0 source/data construction is verified and
-both standard learned-policy campaigns are terminal negatives. SmolVLA ran
+the standard SmolVLA and ACT learned-policy campaigns are terminal negatives.
+SmolVLA ran
 5,000 updates and ten rollouts without a Gate C pass. The original T20.43c
 continuation remains an immutable inconclusive interruption at update 728;
 T20.43c-R2 subsequently completed the unchanged ACT recipe through 10,000

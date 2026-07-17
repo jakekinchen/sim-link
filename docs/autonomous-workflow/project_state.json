@@ -130,10 +130,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "234",
-    "commit": "91bb87695f6676a06371aa146240c60b39e0a59b",
-    "reviewer_decision_id": "327",
-    "summary": "reviewer_327_verifies_f0c_spec_6a178138_as_fork_day_one_package_without_execution"
+    "brief_id": "235",
+    "commit": "fc46257b67b97b927ac6b8d8bda2ec243d62b572",
+    "reviewer_decision_id": "328",
+    "summary": "reviewer_328_verifies_f1_fold_1e933429_as_completed_pi05_negative_without_gate_c_or_new_authority"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -350,16 +350,36 @@
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "F0c",
   "next_eligible_task": "F0c",
-  "active_support_task": "F1-evidence-fold",
+  "active_support_task": null,
   "support_tasks": {
     "F1-evidence-fold": {
-      "state": "in_progress",
-      "active_brief_id": "235",
+      "state": "verified",
+      "active_brief_id": null,
+      "brief_id": "235",
+      "latest_verified_brief_id": "235",
+      "review_decision_id": "328",
+      "implementation_commit": "fc46257b67b97b927ac6b8d8bda2ec243d62b572",
       "depends_on": [
         "off_ledger_f1_receipts_available",
         "canonical_head_4fe7f68_verified_on_origin"
       ],
-      "result": "Brief 235 is active for read-only verification and canonical folding of the completed off-ledger F1 Brev negative; no training, compute creation, rollout, hardware, or authority action is allowed",
+      "result": "Reviewer 328 verifies compact fold 1e933429 as the canonical record of one completed off-ledger 5,000-step PI0.5 full-fine-tune negative with ten rollouts, zero Gate C passes, selected 37.519304 mm chunk-50 partial, $5.526 displayed-rate spend, retained off-repo checkpoint, and zero Brev resources; the fold grants no new authority",
+      "evidence": {
+        "fold_identity_sha256": "1e9334299675e42e3104c3d49f29909afa21e7f6eea43ff881221738c7147755",
+        "fold_file_sha256": "f2ff09c029f0fba7e79f6958c7d59d096298fba76a73e564f83118044a35fead",
+        "run_receipt_identity_sha256": "ca9a23b183c9854266d3960b66bc60f0d7cf4aea8d0dc40ad96293e9201d8716",
+        "teardown_receipt_identity_sha256": "7343ad9fc1bc1802ec00bd13eab65807ca2d41818c8d59210957b980b2b66064",
+        "retained_checkpoint_model_sha256": "755544956570297f09f72c48874f5dc9643e02f14a0c934109b81a9e66aec7fb",
+        "focused_test_count": 6,
+        "reconstruction_kit_test_count": 13,
+        "documentation_test_count": 6,
+        "project_state_pointer_test_count": 15,
+        "authenticated_inventory_checked_at": "2026-07-17T09:34:41-05:00",
+        "remaining_brev_resource_count": 0,
+        "brev_mutation_performed": false,
+        "bulk_artifact_imported": false,
+        "authority_transferred": false
+      },
       "authority_granted": [
         "read_and_hash_compact_off_ledger_f1_receipts",
         "read_and_hash_retained_off_repo_checkpoint_files_without_deserialization",
@@ -5381,6 +5401,48 @@
       },
       "authority_granted": ["activate_brief_234", "read_and_hash_immutable_r2_r0_f0_f0a_f0b_sources", "write_and_test_signed_f0c_day_one_package", "update_living_state_and_reconstruction_forward_plan", "preserve_package_on_origin", "f0c_day_one_package_verified"],
       "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "attempt_marker", "authority_materialization", "pre_run_acceptance", "retry", "receding_10_evaluation", "dataset_mutation", "statistics_mutation", "threshold_change", "additional_seed", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "reopen_f1_f2_f3"]
+    },
+    "F1": {
+      "state": "verified",
+      "depends_on": ["completed_off_ledger_f1_receipts", "brief_235_activation_on_origin"],
+      "active_brief_id": null,
+      "latest_verified_brief_id": "235",
+      "review_decision_id": "328",
+      "source_boundary_commit": "fc46257b67b97b927ac6b8d8bda2ec243d62b572",
+      "result": "Reviewer 328 verifies F1 only as a completed PI0.5 policy-training negative: one 5,000-step ABEJA-parity full fine-tune, ten strict-v2 rollouts, zero Gate C passes, and a selected step-1000 chunk-50 37.519304 mm partial that failed grasp_hold_strict_v2; it is not a successful policy or gateway result",
+      "evidence": {
+        "fold_path": "configurations/robot_lab/f1_brev_evidence_fold.json",
+        "fold_identity_sha256": "1e9334299675e42e3104c3d49f29909afa21e7f6eea43ff881221738c7147755",
+        "fold_file_sha256": "f2ff09c029f0fba7e79f6958c7d59d096298fba76a73e564f83118044a35fead",
+        "run_receipt_identity_sha256": "ca9a23b183c9854266d3960b66bc60f0d7cf4aea8d0dc40ad96293e9201d8716",
+        "evaluation_summary_identity_sha256": "992cf3fdd3f12c8543b643000691504003a080ff063fbedf98992425ab7a0b50",
+        "spend_ledger_identity_sha256": "c949abbf50fea57513bd6a67899f6544cb5d9a99b05cd9bc63354fec6a3cecd9",
+        "teardown_receipt_identity_sha256": "7343ad9fc1bc1802ec00bd13eab65807ca2d41818c8d59210957b980b2b66064",
+        "optimizer_update_count": 5000,
+        "checkpoint_count": 5,
+        "rollout_count": 10,
+        "strict_success_count": 0,
+        "gate_c_passed": false,
+        "gateway_result": false,
+        "selected_checkpoint_step": 1000,
+        "selected_variant": "chunk_50",
+        "selected_maximum_anchor_lift_m": 0.03751930418757199,
+        "selected_failed_gate": "grasp_hold_strict_v2",
+        "actual_spend_usd_displayed_rate_basis": 5.526,
+        "retained_checkpoint_path": "/Volumes/cerebro/CodexOffload/f1-pi05-r0-20260717/checkpoint-001000/pretrained_model",
+        "retained_checkpoint_model_sha256": "755544956570297f09f72c48874f5dc9643e02f14a0c934109b81a9e66aec7fb",
+        "retained_checkpoint_config_sha256": "1f17178a8bf1a7d62f9ef89673b79eb4ef839158485e5c09dda2ad9c4eb125d9",
+        "retained_checkpoint_in_repo": false,
+        "historical_delete_requested_at": "2026-07-17T06:10:23-05:00",
+        "historical_deletion_confirmed_at": "2026-07-17T06:10:58-05:00",
+        "historical_final_inventory_checked_at": "2026-07-17T06:11:07-05:00",
+        "canonical_inventory_checked_at": "2026-07-17T09:34:41-05:00",
+        "remaining_brev_resource_count": 0,
+        "successful_policy_claimed": false,
+        "authority_transferred": false
+      },
+      "authority_granted": ["verify_compact_historical_receipts", "record_completed_f1_negative", "preserve_fold_on_origin"],
+      "authority_not_granted": ["training", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "retry", "gate_c_execution", "gateway_result", "brev_resource_creation", "external_compute_start", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "bulk_artifact_import", "reopen_f0_f0c_f2_f3", "freeze_tag_change", "destructive_operation"]
     },
     "F3": {
       "state": "verified",
