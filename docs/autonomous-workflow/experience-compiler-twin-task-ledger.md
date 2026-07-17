@@ -3,20 +3,37 @@
 Updated: 2026-07-17
 
 ```text
-training_lock: closed; T20.43c-R2 completed its sole authorized attempt as a verified terminal negative and no retry is authorized
-run_window: canonical R2 window closed after 10,000 finite optimizer updates, seven checkpoints, and 14 rollouts; a separately authorized off-ledger F1 Brev run later completed and tore down to zero resources
-run_state: Reviewer 318 verifies exact zero-update equivalence and a clean completed campaign; chunk-50 learned grasp-lift-hold-lower but never clean release, so Gate C is false and the result is not an infrastructure failure
-current_milestone: M20 simulation-only clean supervision
-current_task: F0c verified as packaged_for_fork_day_one under Brief 234 and Reviewer 327; no source-repo execution occurred
-next_task: F0c
-support_task: K4 fork-doctrine spine correction verified under Brief 236 and Reviewer 329; no new authority
+training_lock: closed; all source-repo training and recovery authorities are consumed or inert
+run_window: source run closed; F1 Brev completed and tore down; successor F0c passed strict Gate C at update 500
+run_state: source T20.43c-R2 remains a clean release-only terminal negative; the sim2claw successor resolved that counterexample affirmatively without transferring authority back
+current_milestone: source repository archive closure
+current_task: none; F0c was packaged here and completed only in sim2claw
+next_task: none in sim-link; current work is /Users/kelly/Developer/sim2claw
+support_task: K5 archive cleanup reconciliation verified under Brief 237 and Reviewer 330; no new deletion or authority
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
-remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
+remaining: successor-only evaluator promotion, frozen robustness replay, learned-checkpoint gateway serving, W3 portability receipts, real Robo Scan metric bundle, and separately authorized physical calibration/canary
 owner_authority: owner-direction-2026-07-17-final-overnight.md bounded the now-completed off-ledger F1 Brev lane; its canonical fold records the negative and clean teardown but grants no automatic training, hardware, transfer, promotion, gateway, or tag authority
-blockers: learned strict-v2 task completion and Gate C remain scientifically unmet; fork execution requires the missing reviewed runner, exact checkpoint acquisition, and fresh fork-native authority
-next_step: in the fork, implement and review the frozen F0c runner, bind the exact R2 checkpoint, then issue fresh native authority before the sole attempt
+blockers: none for source closure; successor work retains its own evaluation, gateway, portability, and physical-authority gates
+next_step: leave codex/pi05-autolearn-loop unmerged as the complete archive and continue only in sim2claw
 ```
+
+## 2026-07-17 - Reviewer 330 verifies K5 archive cleanup reconciliation
+
+The recorded tier-1/tier-2 output plan was stale: those exact trees had already
+been deleted under earlier owner authorization. Preserved evidence records
+`DELETE_TOTAL_KiB 96967592` (96.97 GB decimal / 92.48 GiB), reducing
+`outputs/` from 113 G to 21 G. The current audit finds every named bulk target
+absent, the tracked `autolearn` receipt restored, tier 3 retained, and all R0,
+R2/F0c, raw-store, mirror/rollout, weights, and external F1 keepers present.
+No new destructive operation occurred.
+
+The successor spine export is verified on `sim2claw` main `5ade87c...`: 15
+portable living-doctrine files reproduce their hashes, while project state,
+permits, markers, and reviewer artifacts are explicitly reference-only. Fresh
+Brev inventory is zero. No sim-link training process or cron exists; unrelated
+Studio processes and user crons remain untouched. Reviewer 330 stops source
+work, leaves the branch unmerged, and transfers no authority.
 
 ## 2026-07-17 - Owner closure: F0c passes strict Gate C in the sim2claw fork
 

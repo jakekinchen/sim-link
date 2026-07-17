@@ -34,8 +34,10 @@ longer ends on "packaged, unresolved."
 - **Robo Scan**: first real metric bundle still pending; producer/consumer
   boundary unchanged.
 - **Studio track**: separate worktree `../sim-link-studio` (branch
-  `studio/app-shell`); a studio server has been running on :8790 since
-  July 8. Untouched by closure.
+  `studio/app-shell`) remains independent. The live :8790 server audited at
+  closure belongs to `/Users/kelly/Developer/so-101-sim`; installed Studio
+  app/backend processes point at `sim-link-studio` build products. Both are
+  untouched by this repository closure.
 
 ## Local state noted at closure
 
@@ -75,8 +77,9 @@ longer ends on "packaged, unresolved."
    would add nothing but noise. If a single-branch archive is wanted later,
    fast-forward `main` in a quiet moment.
 
-Nothing else remains here. Authorities are consumed or closed, Brev inventory
-is zero, no crons or background training runs exist, and the fork carries the
-live doctrine.
+Nothing else remains here. Authorities are consumed or closed, a fresh Brev
+inventory is zero, no sim-link-owned cron or background training run exists,
+and the fork carries the live doctrine. Two unrelated user crons and the
+separately owned Studio surfaces were observed and deliberately left alone.
 
 Future work happens in `/Users/kelly/Developer/sim2claw`.

@@ -125,7 +125,8 @@
   ],
   "branch": "codex/pi05-autolearn-loop",
   "archive_closure": {
-    "status": "implementation_complete_pending_same_agent_review",
+    "status": "verified_source_archive_closed",
+    "last_source_task": "F0c",
     "source_closure_baseline_commit": "4674e2bd630edd5ad4ee1696f924d88ccb6a17cc",
     "successor_repository": "/Users/kelly/Developer/sim2claw",
     "successor_spine_commit": "5ade87cb8e870bb4dc66c69e528ff0948c442d60",
@@ -148,6 +149,8 @@
       "weights_retained": true
     },
     "branch_disposition": "leave_unmerged_archive_recommended_owner_not_required_for_successor_work",
+    "reviewer_decision_id": "330",
+    "reviewed_implementation_commit": "ac95b22947836fe8bc23413113fe7db7f6b5f21d",
     "authority_transferred": false
   },
   "verified_implementation_boundary": {
@@ -373,22 +376,26 @@
   },
   "training_lock": "closed",
   "training_authority_valid_until": null,
-  "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "F0c",
+  "current_milestone": "ARCHIVE source repository closed",
+  "current_task": null,
   "next_eligible_task": null,
-  "active_support_task": "K5",
+  "active_support_task": null,
   "support_tasks": {
     "K5": {
-      "state": "implementation_complete_pending_review",
-      "active_brief_id": "237",
+      "state": "verified",
+      "active_brief_id": null,
       "brief_id": "237",
+      "latest_verified_brief_id": "237",
+      "review_decision_id": "330",
+      "activation_commit": "f25d63ea2a7dfd2d6bde7df830253b9d18648951",
+      "implementation_commit": "ac95b22947836fe8bc23413113fe7db7f6b5f21d",
       "depends_on": [
         "owner_authorized_tier_1_and_tier_2_cleanup",
         "source_closure_commit_4674e2b",
         "successor_gate_c_pass_preserved"
       ],
       "objective": "reconcile the already-executed output cleanup, close the source archive without extra deletion, and prepare an authority-safe successor spine handoff",
-      "result": "the owner-authorized tier-1/tier-2 cleanup was proven already complete at 96967592 KiB reclaimed; no surviving path was reinterpreted as a delete target; protected assets remain; sim2claw spine export is verified at 5ade87c",
+      "result": "Reviewer 330 verifies the owner-authorized tier-1/tier-2 cleanup was already complete at 96967592 KiB reclaimed; no surviving path was reinterpreted as a delete target; protected assets remain; fresh Brev inventory is zero; sim2claw spine export is verified at 5ade87c; source work stops without authority transfer",
       "evidence": {
         "cleanup_delete_total_kib": 96967592,
         "outputs_current_gib": 21,
@@ -398,6 +405,10 @@
         "successor_spine_commit": "5ade87cb8e870bb4dc66c69e528ff0948c442d60",
         "successor_spine_portable_file_count": 15,
         "successor_spine_hashes_verified": 15,
+        "focused_test_count": 21,
+        "brev_inventory_zero": true,
+        "sim_link_background_training_process_count": 0,
+        "sim_link_owned_cron_count": 0,
         "hardware_accessed": false,
         "external_compute_used": false,
         "brev_compute_used": false,
