@@ -337,7 +337,7 @@
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "T20.43b",
   "next_eligible_task": "T20.43b",
-  "active_support_task": null,
+  "active_support_task": "K2",
   "support_tasks": {
     "K1": {
       "state": "verified",
@@ -391,6 +391,44 @@
         "brev_compute",
         "physical_transfer",
         "promotion",
+        "destructive_operation"
+      ]
+    },
+    "K2": {
+      "state": "in_progress",
+      "active_brief_id": "226",
+      "result": "Brief 226 refreshes the non-authorizing reconstruction capsule to T20.43b closeout commit 4d8f951 and adds model-free mirror dispatch for the already defined T20.43b trace schema; the consumed attempt remains immutable and no retry is authorized",
+      "authority_granted": [
+        "read_tracked_t20_43b_terminal_evidence",
+        "implement_model_free_t20_43b_mirror_trace_dispatch",
+        "run_model_free_renderer_and_regression_tests",
+        "refresh_portable_reconstruction_documentation_manifest_and_export"
+      ],
+      "authority_not_granted": [
+        "policy_retry",
+        "continuation",
+        "second_replacement",
+        "attempt_marker",
+        "model_or_checkpoint_load",
+        "model_inference",
+        "optimizer_creation",
+        "optimizer_training",
+        "policy_rollout",
+        "gate_c_execution",
+        "recipe_gate_or_data_change",
+        "t20_45_activation",
+        "hardware",
+        "camera_access",
+        "serial_access",
+        "physical_motion",
+        "network_access",
+        "package_installation",
+        "external_compute",
+        "brev_compute",
+        "physical_transfer",
+        "promotion",
+        "authority_transfer",
+        "copy_bulk_or_private_artifacts",
         "destructive_operation"
       ]
     }
