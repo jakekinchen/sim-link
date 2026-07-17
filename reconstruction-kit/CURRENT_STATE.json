@@ -2,7 +2,7 @@
   "schema_version": "scenesmith.reconstruction_current_state.v1",
   "recorded_date": "2026-07-16",
   "source_branch": "codex/pi05-autolearn-loop",
-  "source_commit": "3fbfebc5693d5b7d0428ba4c2c579a9b05e22bb5",
+  "source_commit": "1e4773d6736890b48adb67dff6978ec565874ac7",
   "terminal_result_source_commit": "cdc44c863597869f48049b11fbb79c21fc231811",
   "portable_source_commit": "6d28e0c6e5aa2d7b283b4d3d84f0e95d969e71fd",
   "renderer_fix_commit": "37c5da61df43da021d087789475bc5d423c54012",

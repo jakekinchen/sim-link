@@ -33,7 +33,7 @@
       "required_file": "frontend/public/so-101-urdf/urdf/so101_new_calib.urdf",
       "required_file_sha256": "443d38d756e01bac7d3455b24430047ddc6427105e0d3454b2003116f5f67236",
       "revision": "def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da",
-      "role": "optional UI and URDF reference"
+      "role": "URDF required by current source proof; optional UI and runtime reference"
     },
     {
       "license": "Apache-2.0",
@@ -97,6 +97,14 @@
       "role": "signed compact evidence or contract",
       "sha256": "45d74b3d3e98fb361877ed6a754b6c9fc30f87aac655bf07681ad45e45532494",
       "size_bytes": 42890,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/k2_w1_portable_bootstrap_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "4c9a3cdf5788b30e5501f4a4f59883196b0b6824745d9c486e7a77f9f6b123c2",
+      "size_bytes": 4083,
       "tier": "evidence"
     },
     {
@@ -193,6 +201,14 @@
       "role": "signed compact evidence or contract",
       "sha256": "dde14c0d8902d7f99d3af3cdfd9c5b56a05bf6c61c2e2860cb138f8ac5c23af3",
       "size_bytes": 1652,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/rgb_camera_census_failure_20260716_2242.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e83ab273f719c50d22525b74b2c3e8f66f33d6f97462b76a9cea57117ff2c8b1",
+      "size_bytes": 2353,
       "tier": "evidence"
     },
     {
@@ -1237,6 +1253,14 @@
     },
     {
       "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_attempt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "f816fbac541124a4393e0a4d329732965c2e7d0f20c56319fb067cfecd2b8d9b",
+      "size_bytes": 1186,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
       "path": "configurations/robot_lab/t20_43b_r1_act_authority_decision.json",
       "role": "signed compact evidence or contract",
       "sha256": "4506370098dfedaa8d1202c6d980cd43c71392f00ffb513dca6342f535df42f4",
@@ -1245,10 +1269,26 @@
     },
     {
       "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_authority_decision_epoch_002.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "510ff0e26eb420fe7d1ca358c6f1f17ece6dc38548f12b1318055c305e0dd7e3",
+      "size_bytes": 7002,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
       "path": "configurations/robot_lab/t20_43b_r1_act_authority_request.json",
       "role": "signed compact evidence or contract",
       "sha256": "006b9eb6a789bb402abe02fe23cf2c56118672575886d121675064d0b7233343",
       "size_bytes": 14858,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_authority_request_epoch_002.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "81f7ef785ac031676192e37471237122f78849a26ee5ec48b9903379bc67fef6",
+      "size_bytes": 15616,
       "tier": "evidence"
     },
     {
@@ -1269,10 +1309,26 @@
     },
     {
       "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_owner_authorization_epoch_002.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e7816d9aba9fc0e006d5075df8359dcb89386c84f286e256a09ad3a9be563ea0",
+      "size_bytes": 2686,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
       "path": "configurations/robot_lab/t20_43b_r1_act_permit.json",
       "role": "signed compact evidence or contract",
       "sha256": "e2ea74a3da826ab21458a273caafacec675949c4d1c43707642ea42538519871",
       "size_bytes": 1493,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_permit_epoch_002.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "4d0c66e0492b6ec4f616cccb7f9c07c8d4908d6ded67d70dee99cc20b9f76c05",
+      "size_bytes": 1765,
       "tier": "evidence"
     },
     {
@@ -1285,10 +1341,26 @@
     },
     {
       "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_pre_run_acceptance_epoch_002.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "c3ee9e56a266329f828f723d4f280bc63b12aa9185847e314ada68f3f8a5f6b1",
+      "size_bytes": 1143,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
       "path": "configurations/robot_lab/t20_43b_r1_act_runtime_preflight.json",
       "role": "signed compact evidence or contract",
       "sha256": "fa1317d131158d38cfd6ebf5a6e396df9b790c6785bd6a25ea7644eed1af6258",
       "size_bytes": 3827,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_runtime_preflight_epoch_002.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "02ef603d31cea29a05401b05913a3be6d7f9edba4489edc62dd89b3ba4f065ed",
+      "size_bytes": 5059,
       "tier": "evidence"
     },
     {
@@ -1301,10 +1373,146 @@
     },
     {
       "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43b_r1_act_terminal_failure.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "429431d6f00e9078685184660a3be07b69bc8a5cd9f67c96be86fe6a3bda2cd9",
+      "size_bytes": 2382,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
       "path": "configurations/robot_lab/t20_43b_r1_renderer_smoke.json",
       "role": "signed compact evidence or contract",
       "sha256": "20eab76b0a282c8b481849af71d18ee112e6745e8b32776e2e4e5a983bd58b6f",
       "size_bytes": 2289,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_act_authority_decision.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "313f88eecc420b7bbd14453dfeb3484a5337411a1e60f1d18e57e8629c452ccc",
+      "size_bytes": 6850,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_act_authority_request.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "7faccad9ac032e5b89e3aa7e122be16fa7c73e74aef44e89a376d3738d61bdf4",
+      "size_bytes": 14992,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_act_continuation_marker.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "ba42bc00abe1eabd79e1dca57f05b4d51cb8d534729659b546cd03fa33edf34b",
+      "size_bytes": 1422,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_act_equivalence_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8f7db4957e63babddd49d9c3599b54bc32485111051c8995a0951f03db89149d",
+      "size_bytes": 1542,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_act_owner_authorization.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "e390b6d6b47090b3267999bac8133a2563b0cc4ee53864704ed89e3d260fb136",
+      "size_bytes": 1975,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_act_permit.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "1040cbf971dbb6d315b9839bdc1332684e56dd6bc25ee0413b2ba8d42554687b",
+      "size_bytes": 1729,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_act_pre_run_acceptance.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "b1afe12ffcbc6bc364bbd537c838302007d034269b6f3c3f216d633ad14e5e29",
+      "size_bytes": 994,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_act_runtime_preflight.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "aeff6cdbb37190bf244fcba3c6e325a03744a674621dd43d2ad09469459ae65e",
+      "size_bytes": 3540,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_act_terminal_failure.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "b8f5d245a2a4082e3fc86380afe983a9286bea517ddeb3de2f8b6ad4e44b3aa1",
+      "size_bytes": 3815,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_r2_act_equivalence_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "a296a9e2693a4ca53e2cea8982345d2c7b5b15a7ccc74463690448fa9a64239b",
+      "size_bytes": 1744,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_r2_act_final_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "039fd46438139225caf97cd15459ffe1138fde910a992c9ef75582e8c26d03bf",
+      "size_bytes": 1489,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_r2_act_replacement_marker.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "2362ef8626a221eaf70a615c1ad2d8e03867f3e6d0156c79fa3317965b5d0cf7",
+      "size_bytes": 1427,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_r2_act_retention_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "55cca117d21289ea36a86abf7b45e39baaeb6ee0f609dfc8413cbdc102881e37",
+      "size_bytes": 10634,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_r2_act_scorecard.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "8af404e755317a177af57f09956f35ae41e2e2ccb42500f640553d96a76022b7",
+      "size_bytes": 1026,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_r2_act_standard_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "d2bcb8bb9cfcedb69d08b751bf3f2f4706b256a5c225d2dd89ae6d273bc5b04e",
+      "size_bytes": 1078,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/t20_43c_renderer_smoke.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "1c53c4eeb75691e1149b96ca3ee939ca9282787222a3d1129581b094fba3d043",
+      "size_bytes": 1687,
       "tier": "evidence"
     },
     {
@@ -1437,10 +1645,58 @@
     },
     {
       "git_mode": "100644",
+      "path": "docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md",
+      "role": "canonical reference",
+      "sha256": "786b22b01bb644cfc7c9dffb3987b00d500f3a978669868bc147f14924c87d5f",
+      "size_bytes": 7939,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/autonomous-workflow/owner-addendum-2026-07-16-t20-43c-act-resolution.md",
+      "role": "canonical reference",
+      "sha256": "a07b75a7734b2f74853061d92e7a633014a34ed87266d6bbbd1e7c79cb8013bf",
+      "size_bytes": 2751,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/autonomous-workflow/owner-direction-2026-07-16-final-hour.md",
+      "role": "canonical reference",
+      "sha256": "e026d13f76dd9e6336b7c241d5650246b2f0426f9f18be973b89ca40f6ac49bd",
+      "size_bytes": 4266,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/autonomous-workflow/owner-direction-2026-07-16-overnight-foundation.md",
+      "role": "canonical reference",
+      "sha256": "92d11420f338041848bd7dc56fc60308deb1b013750f82c7e81735dde647a22d",
+      "size_bytes": 6501,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
       "path": "docs/autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md",
       "role": "canonical reference",
       "sha256": "f2538bf6b66582f84f52b6e84485711a0212e931431a11c365f85668bc787209",
       "size_bytes": 9042,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/briefs/226-portable-terminal-closeout-refresh.md",
+      "role": "canonical reference",
+      "sha256": "faaecb6a7b171af856aeb672b71bc6180b9ddb584d7a8119dde8a3322bb8dca2",
+      "size_bytes": 7404,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/briefs/227-t20-43c-zero-update-act-continuation.md",
+      "role": "canonical reference",
+      "sha256": "b2055694c1536400de74813361fe252d7dd148ad75d2ee92146057617c891e84",
+      "size_bytes": 5038,
       "tier": "reference"
     },
     {
@@ -1457,6 +1713,406 @@
       "role": "canonical reference",
       "sha256": "70a0b7a81584d640d10648d8c50eb1898349c294a79f425ba09d76ebc53dac77",
       "size_bytes": 3460,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/302-close-t20-43b-window-with-unconsumed-permit.md",
+      "role": "canonical reference",
+      "sha256": "e49706f23eeb50ffe7a70cd006a051ecf444f0811009bb31baab3b17629fe403",
+      "size_bytes": 2348,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/313-close-rgb-camera-census-terminal-failure.md",
+      "role": "canonical reference",
+      "sha256": "a62622df1b7edcfc0e5f0a873a7672fe426b675ff75b54841644e391678a140a",
+      "size_bytes": 1443,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/314-close-t20-43c-terminal-interruption.md",
+      "role": "canonical reference",
+      "sha256": "285456623efe41a3cd6079f77fe117187dfe15525d89089307edec75f6cdbf62",
+      "size_bytes": 2418,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/318-verify-t20-43c-r2-terminal-negative.md",
+      "role": "canonical reference",
+      "sha256": "4bb2bf78a5b84ec8355f9279d07843b9e78c77042f6faa8fdca5a23209f9e598",
+      "size_bytes": 3404,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/session-logs/317-rgb-camera-census-terminal-failure.md",
+      "role": "canonical reference",
+      "sha256": "3a12876a8900762a1ad7ef435ead6af160feb6bbe310ac641c7a65a62a350a83",
+      "size_bytes": 1278,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/session-logs/318-t20-43c-terminal-interruption.md",
+      "role": "canonical reference",
+      "sha256": "0c5c04bdf617788ceae376cd0070fcbfff6907cdaf737acd412702d39b49b9a5",
+      "size_bytes": 2545,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/session-logs/323-t20-43c-r2-terminal-negative.md",
+      "role": "canonical reference",
+      "sha256": "e29e5202b4e9eb8f58b4e5ba9d4f757c4f595b6b6458110d3276611492145678",
+      "size_bytes": 1609,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/ASSET_MANIFEST.json",
+      "role": "source",
+      "sha256": "68c3049cf00fc05a321abc1f48aca7801a4d6feee2e8b4128cde86fc196c6efc",
+      "size_bytes": 12542,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00000",
+      "role": "source",
+      "sha256": "380361b8a29dc430d08a86476eba09653ce38e235e4d93c841dc24416b0b6d07",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00001",
+      "role": "source",
+      "sha256": "3cf6bd5940e3e6107ddafa72e7d762936eb88df21a5e25376e8b368970acaa48",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00002",
+      "role": "source",
+      "sha256": "f8fc899b29d6bc25d37cba5785a0e5b5ba4801f7c033655dc699d90521d38f9a",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00003",
+      "role": "source",
+      "sha256": "71f670556a114f5e7ee30f9943e1052d2676ae3fec8196b3432c3974f08a47fc",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00004",
+      "role": "source",
+      "sha256": "0fd697f18fc36fcd2ae5f9d96ffdab08ac593693d2d2e1bba69ae97aa7eeac71",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00005",
+      "role": "source",
+      "sha256": "a89ac234b9dd5ac5d8758d89a82ec297a3fc6d6675ae7b4beb8a702bab21a877",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00006",
+      "role": "source",
+      "sha256": "97717cc2f5028d7f51206e9afc396d60cf0cfe035114dafd1bba7ba03b6fad6a",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00007",
+      "role": "source",
+      "sha256": "e0a25fa5a32635a6de1696c77d96014b90db7d3573ef232686266e0b64e46775",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00008",
+      "role": "source",
+      "sha256": "c857555f1c8d6ffbfc0e3c8c7a51f1c5cd995b1d00f6a2c4a8e9bf9183d87617",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00009",
+      "role": "source",
+      "sha256": "aa3961fc907a3176a3da47ce3492792badd35f3439727c89d29b910113bec193",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00010",
+      "role": "source",
+      "sha256": "56a7867fc329395f4124c662bdb8109b567375a24b2dd43535c35f3c7743ee7c",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00011",
+      "role": "source",
+      "sha256": "5540247169dac479447e54708f3e6a3ebfeae493ffbe3da9b5351eecce10df54",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00012",
+      "role": "source",
+      "sha256": "8ff0fd55804c41e17f756ca8f0de1bffca319ee4fc4847cfb27e070ce19fde95",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00013",
+      "role": "source",
+      "sha256": "d961729c4ab2149c8d016210f247e673c6e44a3669b05473d51560f577b1d7c7",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00014",
+      "role": "source",
+      "sha256": "b81e5f18a658a04cee949521691389cd3ca6ae7816045b36972c23d13cc77299",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00015",
+      "role": "source",
+      "sha256": "762962441d9f421903c17f59b7983a1980b883ee59d27a3debee62475bf98bdd",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00016",
+      "role": "source",
+      "sha256": "cbe68cb320d6f480a12e383f97286876afd753dfe68232bdf1abdd310636a5b2",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00017",
+      "role": "source",
+      "sha256": "63fea10a8adcbfce5a9771e80625128280bf9f9450bc461b07284ee4fe29a3c7",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00018",
+      "role": "source",
+      "sha256": "5ab9aacd7887f9f37039a2ae65d87c699b84b68ea52127499f6607902f29e4ef",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00019",
+      "role": "source",
+      "sha256": "6720998e752fabaed7650995766d87e93ca27d91d7ca05e8c3007cab0962b99d",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00020",
+      "role": "source",
+      "sha256": "88c350b7b39d27ab5ed0f7d5539d228fe8616400915a438f9e086192b4595ef2",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00021",
+      "role": "source",
+      "sha256": "6b03af2d8c0585d13f87fbf429548793f7b614ddc433d738fe438ca5dc66d464",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00022",
+      "role": "source",
+      "sha256": "487489ae8bb2b584108d45c382090f1ea03370d9c9599e6191eced75601ffb34",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00023",
+      "role": "source",
+      "sha256": "df42c30e8f7cf141fcf186ec811a3937e2028751b52c8e8b560ff74aa494cbcd",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00024",
+      "role": "source",
+      "sha256": "d7aabe5937a7c446489585bf77e991e20b2e33ae6d0f7940995d53c9b18d58f8",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00025",
+      "role": "source",
+      "sha256": "4dceb6a2eb6716860b2341e4ad9daa55350907970d3d578a9ec3798088d463de",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00026",
+      "role": "source",
+      "sha256": "2264ce81f4a7c3363481f8cde31ef893221c348c1b81e738480fb5919438402e",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00027",
+      "role": "source",
+      "sha256": "0c5a4f23fb136b19f5a1fb6031afe4d5c006fa44121a8895d49ede1a23b9957c",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00028",
+      "role": "source",
+      "sha256": "0b4992273d03c8dfd7352726340023bfc579f99d834035612980d620bd208d18",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00029",
+      "role": "source",
+      "sha256": "8d3633306984895228487531d91efdf4e9026f3ca74fa0399c55ae4b9ac4ae72",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00030",
+      "role": "source",
+      "sha256": "631ee5810e308fd864d85cd62cd2645f61ea545ca16bcda528740f10eb5d29a8",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00031",
+      "role": "source",
+      "sha256": "b48e0f936c32c9a4687ace99b174cd27627cb3f3992a6c05d1026dc26a97d68b",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00032",
+      "role": "source",
+      "sha256": "393cd34c34791af2ede890cfc935e741a33ba922b0d7317bbbeae9358370d10c",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00033",
+      "role": "source",
+      "sha256": "f903e048614dc3bbb6be6cc75677ef209733733a6c6384a134e7f821694a4e3e",
+      "size_bytes": 1900000,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/data/chunk-000/file-000.parquet.parts/part-00034",
+      "role": "source",
+      "sha256": "b45c4d21ef804bf70d93d599fcc1c2eb88750acfab1c8bdb23b0c74ad6cd8efc",
+      "size_bytes": 1514877,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/meta/episodes/chunk-000/file-000.parquet.parts/part-00000",
+      "role": "source",
+      "sha256": "01974d0f5e66b2fa96fcfe8a263e2765e755f65847eaa22ef3fa6173a40e50bd",
+      "size_bytes": 59881,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/meta/info.json.parts/part-00000",
+      "role": "source",
+      "sha256": "789ab860cae39d100f1d28e0e547e2229b860cdcacc2916c230074ff5e7ed9fc",
+      "size_bytes": 2445,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/meta/stats.json.parts/part-00000",
+      "role": "source",
+      "sha256": "aae49a26834aa3684d17bede1da1407f2664c61d0bb9f33a650b269af6123bc1",
+      "size_bytes": 13075,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/base_dataset/meta/tasks.parquet.parts/part-00000",
+      "role": "source",
+      "sha256": "75d507d99b8f12e63006844a0034e3ce8570ca47b22d7417f2096c29dbfa3f4f",
+      "size_bytes": 2372,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/traces/t20_43_act_chunk_50.json",
+      "role": "source",
+      "sha256": "f9dc0e6d2b74a817dbe5005a6dc1a46c478a8b4fe7d6198c1f981f0e45c24373",
+      "size_bytes": 818993,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/traces/t20_43b_act_chunk_50.json",
+      "role": "source",
+      "sha256": "0c01265d4536bff9f2220a0e6e26462342b5987927204db7b998f7e50f3eac46",
+      "size_bytes": 819002,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "reconstruction-kit/assets/traces/t20_44_smolvla_chunk_50.json",
+      "role": "source",
+      "sha256": "cc2d3b90bdc85c7f2ac09b12125de6112730fed7947905b6ea9054a27763dde4",
+      "size_bytes": 804438,
       "tier": "reference"
     },
     {
@@ -1495,8 +2151,8 @@
       "git_mode": "100644",
       "path": "scenesmith/robot_lab/authority_composer.py",
       "role": "portable implementation",
-      "sha256": "4575307b7a42f51b6518905226da218f7756949b4530c71b5f753a10ad196ec4",
-      "size_bytes": 74847,
+      "sha256": "6fe6186e285dd60b369c0e0e2886818e1e09d6d1445cc1ff1b3059efeb45d1be",
+      "size_bytes": 91357,
       "tier": "core"
     },
     {
@@ -1607,8 +2263,8 @@
       "git_mode": "100644",
       "path": "scenesmith/robot_lab/hardware_execution_profile.py",
       "role": "portable implementation",
-      "sha256": "9f1c8ea6007a2591d712034cccf6b424cf78f088674df305c932b5c318dd6c95",
-      "size_bytes": 26953,
+      "sha256": "47eb5ee422106b5e6d46b9bfa5d649a062fd6a9a093232d09b87d8b1fa4b0a4f",
+      "size_bytes": 27001,
       "tier": "core"
     },
     {
@@ -2117,6 +2773,14 @@
     },
     {
       "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43b_r1_act_authority_refresh.py",
+      "role": "portable implementation",
+      "sha256": "65477ceb062538a5890e0ad9055b233f8f9c6f2347f215c2fc73bd72e2021760",
+      "size_bytes": 40751,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
       "path": "scenesmith/robot_lab/t20_43b_r1_act_contracts.py",
       "role": "portable implementation",
       "sha256": "c49c44c437152a6001fb1c67abd7425ecbad48fe7acacf8729f6af2f3966ce1a",
@@ -2135,8 +2799,32 @@
       "git_mode": "100644",
       "path": "scenesmith/robot_lab/t20_43b_r1_act_runner.py",
       "role": "portable implementation",
-      "sha256": "2039dbd47a58223ef633aabbca191dfff8d78ebfc73f37dd5922373ca8a7d825",
-      "size_bytes": 60773,
+      "sha256": "fff8560807160f883997a166e054f4a8548d87139cdfb6da1ca0547998a7faea",
+      "size_bytes": 61908,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43c_act_continuation.py",
+      "role": "portable implementation",
+      "sha256": "c4b2a4a2be8354841e6a7096470a52928e0f9f1ff69b782b5e00347a62b9cf1c",
+      "size_bytes": 39067,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43c_act_continuation_materialization.py",
+      "role": "portable implementation",
+      "sha256": "0c714ee08667773953452a3ff3597cf0df7acc962422f82060cba06d8e503207",
+      "size_bytes": 13223,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/t20_43c_act_continuation_runner.py",
+      "role": "portable implementation",
+      "sha256": "5f47e8ba96ffb803d8c512d5347d1c7a69faf06a4db2db025602b53efca4b8ca",
+      "size_bytes": 27523,
       "tier": "core"
     },
     {
@@ -2213,6 +2901,22 @@
     },
     {
       "git_mode": "100644",
+      "path": "scripts/robot_lab/materialize_t20_43b_r1_act_authority_refresh.py",
+      "role": "reproduction entrypoint",
+      "sha256": "03f2f3d000c36e50120c1ceac3eee101dd3903a730b222770598314a2e7467c0",
+      "size_bytes": 1438,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/materialize_t20_43c_act_continuation.py",
+      "role": "reproduction entrypoint",
+      "sha256": "a47af21b8f89873a298d6cd3514bd472f77b4eb09eafc427c22d4e511948cee6",
+      "size_bytes": 1511,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
       "path": "scripts/robot_lab/materialize_t20_44_r2_smolvla_authority.py",
       "role": "reproduction entrypoint",
       "sha256": "dacdd256bb5b613f07b513bd47a83251ee359638c265392a1f407a628aa7967f",
@@ -2233,6 +2937,22 @@
       "role": "reproduction entrypoint",
       "sha256": "2f399219df280a7c4c4f0401103d526c0480a03dd1b60cf68dfac27093050d6e",
       "size_bytes": 12237,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/render_rollout_mirror_v2.py",
+      "role": "reproduction entrypoint",
+      "sha256": "44a021eab6f59f1901afbd9165cad7ce2e60cde95b451265b19014f1bdf8dcd8",
+      "size_bytes": 2022,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/run_rgb_camera_census.py",
+      "role": "reproduction entrypoint",
+      "sha256": "29f66fdcfdd556dff54f49115e64577449997bac634d34187bf20a2bc55c05ba",
+      "size_bytes": 18060,
       "tier": "entrypoint"
     },
     {
@@ -2265,6 +2985,14 @@
       "role": "reproduction entrypoint",
       "sha256": "c56ace2436b1bf6bbede4b7251a7055da0610117ef2a58ed50ad140285e4e797",
       "size_bytes": 1602,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/run_t20_43c_act_continuation.py",
+      "role": "reproduction entrypoint",
+      "sha256": "10ef2bf96cbd4040f23eda0449453553c95c5baff99f682bba8662250a36db3f",
+      "size_bytes": 1036,
       "tier": "entrypoint"
     },
     {
@@ -2333,10 +3061,26 @@
     },
     {
       "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_43b_r1_act_refresh_acceptance.py",
+      "role": "reproduction entrypoint",
+      "sha256": "f56a4502e759652eac5623b462ab4fbee2468a4f9569b5bf9218c3c87ca6b430",
+      "size_bytes": 2344,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
       "path": "scripts/robot_lab/write_t20_43b_r1_act_spec.py",
       "role": "reproduction entrypoint",
       "sha256": "faefe4818062409bcea849ed4e24888f65a559b1910c8a0264a6a08ce50bf3b5",
       "size_bytes": 1328,
+      "tier": "entrypoint"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scripts/robot_lab/write_t20_43c_act_continuation_acceptance.py",
+      "role": "reproduction entrypoint",
+      "sha256": "486b25da32beee8eacf6678c9f433028d30d0af5acdc1c65a395bc3909439f6c",
+      "size_bytes": 2228,
       "tier": "entrypoint"
     },
     {
@@ -2567,8 +3311,16 @@
       "git_mode": "100644",
       "path": "tests/unit/test_t20_43b_r1_act_runner.py",
       "role": "focused regression",
-      "sha256": "82c33873b0ece79855f0dd5df8a8f4f71b7b4b8080d36aa63ed3111896ea8e3d",
-      "size_bytes": 10086,
+      "sha256": "404033b67c3e52e207ba210631661a7d7d97466e0ecfe2c8652499c5f70fb762",
+      "size_bytes": 12219,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_t20_43c_act_continuation.py",
+      "role": "focused regression",
+      "sha256": "b91488ca7366ba129c4f7e79865f1af7e11c55cb2a46aa1f06b3cf5a5b3eab45",
+      "size_bytes": 9017,
       "tier": "validation"
     },
     {
@@ -2630,7 +3382,7 @@
     "outputs/",
     "tmp/"
   ],
-  "identity_sha256": "5067d1c29c4a285f70a96720f90f52e312a8f61d60e74a2de030c9d3ec910303",
+  "identity_sha256": "c7de94b3c7005cc4689a018f9193b267de9a969c2f47295504d155e9af78f3ca",
   "learned_policy_success_claimed": false,
   "maximum_file_bytes": 2000000,
   "omitted_source_artifacts": [
@@ -2661,13 +3413,13 @@
     {
       "path": "docs/autonomous-workflow/project_state.json",
       "reason": "Repository-bound live authority state is deliberately not transplanted; the kit supplies a non-authorizing proof snapshot and the destination must initialize its own state and authority epoch.",
-      "sha256": "ab567764d8ad66d3d67e30b2ce196a9ee3e46ef7aee914ec1526feffaaf379a7",
-      "size_bytes": 427736
+      "sha256": "63d9e3f262f794dc97b6bb67dd0cf3a93b7f73428f130fa59e1884cad9dbf67c",
+      "size_bytes": 450437
     }
   ],
   "physical_proof_transferred": false,
   "schema_version": "scenesmith.reconstruction_source_manifest.v1",
-  "selection_sha256": "e85e1c593a839ff98373a474c4077b208e1169d22efd0031164f86a7ed29e6c2",
-  "source_commit": "605e4d3624a87593a1b5da9a97cd263f6bade78a",
+  "selection_sha256": "e1c1a451155ecc465b564dd688536b3455b800df833b7c13ce4eec1634914707",
+  "source_commit": "1e4773d6736890b48adb67dff6978ec565874ac7",
   "source_repository": "https://github.com/jakekinchen/sim-link.git"
 }
