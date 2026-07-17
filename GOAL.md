@@ -191,13 +191,16 @@ F0b brief for a no-training hybrid-tail-cadence evaluation. No checkpoint,
 model, inference, rollout, corrective training, F1/Brev, hardware, Gate C,
 transfer, promotion, or tag authority follows from F0a.
 
-F0b/Brief 232 is now active for implementation and deterministic tests only.
-It freezes the update-10,000 ACT checkpoint, seed-0 source episode, unchanged
-strict-v2 gates, chunk-50 execution through frame 175, one 24-action queue
-discard at frame 176, and ten-step tail re-decodes through frame 236. A
-model-free authority bundle and separate pre-run acceptance must be reviewed
-and exact on origin before any checkpoint tensor, model, inference, simulator,
-rollout, or live-render action. No optimizer or retry is part of F0b.
+F0b/Brief 232 implementation is verified by Reviewer 322 at commit
+`1b23f6bc...`. Signed spec `00d7c7f3...` freezes the update-10,000 ACT
+checkpoint, seed-0 source episode, unchanged strict-v2 gates, chunk-50
+execution through frame 175, one 24-action queue discard at frame 176, and
+ten-step tail re-decodes through frame 236. The next allowed slice is only a
+model-free authority bundle plus one retained-comparator renderer smoke. A
+separate pre-run acceptance must still be reviewed and exact on origin before
+the attempt marker or any checkpoint tensor, model, inference, simulator,
+rollout, or policy-result render action. No optimizer, training, or retry is
+part of F0b.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
