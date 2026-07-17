@@ -348,8 +348,8 @@
   "training_lock": "closed",
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "F3",
-  "next_eligible_task": "F3",
+  "current_task": "F0c",
+  "next_eligible_task": "F0c",
   "active_support_task": null,
   "support_tasks": {
     "K1": {
@@ -5295,6 +5295,28 @@
       },
       "authority_granted": ["activate_brief_232", "read_and_hash_frozen_f0a_t20_43c_r2_and_runtime_sources", "implement_and_fixture_test_f0b_spec_authority_runner_trace_and_terminal_contracts", "write_model_free_f0b_spec_fixture_and_preflight_artifacts", "f0b_implementation_verified", "materialize_model_free_f0b_authority_bundle", "execute_one_retained_comparator_trace_renderer_smoke_without_checkpoint_or_model_access", "accept_one_f0b_marker_first_checkpoint_load_and_seed_0_hybrid_tail_rollout_after_origin_confirmation", "preserve_one_pass_policy_negative_or_infrastructure_failure_bundle", "f0b_terminal_negative_verified", "open_fresh_f3_reconstruction_fold_brief_after_origin_confirmation"],
       "authority_not_granted": ["optimizer_creation", "optimizer_training", "retry", "additional_checkpoint", "additional_seed", "additional_rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
+    },
+    "F0c": {
+      "state": "in_progress",
+      "depends_on": ["F0b_verified_on_origin", "F3_verified_on_origin", "owner_direction_2026_07_17_final_overnight_addendum_0635"],
+      "active_brief_id": "234",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "source_boundary_commit": "8bb39a1da460a1dd269ce0ec5a5d6b74e5cb746a",
+      "result": "Brief 234 records that the complete reviewed 2000-update continuation boundary cannot fit the 5048 seconds remaining before 10:00 CDT and opens only deterministic packaging of F0c as the fork's first release-targeted training task; no marker, checkpoint read, model, optimizer, training, rollout, retry, receding-10, hardware, network, external compute, or Brev action is authorized",
+      "budget": {
+        "assessed_at": "2026-07-17T08:35:52-05:00",
+        "cutoff": "2026-07-17T10:00:00-05:00",
+        "available_seconds": 5048,
+        "historical_r2_run_seconds": 7732,
+        "estimated_2000_update_seconds": 1586.4,
+        "mandatory_reviewed_boundary_reserve_seconds": 4800,
+        "minimum_complete_boundary_seconds": 6386.4,
+        "shortfall_seconds": 1338.4,
+        "execute_before_cutoff": false
+      },
+      "authority_granted": ["activate_brief_234", "read_and_hash_immutable_r2_r0_f0_f0a_f0b_sources", "write_and_test_signed_f0c_day_one_package", "update_living_state_and_reconstruction_forward_plan", "preserve_package_on_origin"],
+      "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "attempt_marker", "authority_materialization", "pre_run_acceptance", "retry", "receding_10_evaluation", "dataset_mutation", "statistics_mutation", "threshold_change", "additional_seed", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "physical_transfer", "promotion", "destructive_operation", "reopen_f1_f2_f3"]
     },
     "F3": {
       "state": "verified",

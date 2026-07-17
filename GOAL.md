@@ -214,6 +214,17 @@ external compute, Brev, hardware, transfer, or promotion. Reviewer 326 permits
 only the annotated `freeze-2026-07-17-hackathon-fork` tag after the scoped
 closeout commit is exact on origin; the tag is a boundary marker, not authority.
 
+F0c/Brief 234 is now the sole active scientific lane under the 06:35 addendum.
+The `08:35:52` completion-budget check found 5,048 seconds available versus a
+6,386.4-second minimum complete implementation/authority/run/preservation
+boundary. F0c therefore fails closed before marker creation and is being
+packaged as the sim2claw fork's first training task: immutable R2 update-10,000
+weights, exact R0, 4x release/release-settle start weighting, F0's physical-L1
+joint coefficients, fresh AdamW, at most 2,000 updates, and chunk-50-only
+strict-v2 rollout evaluation. No checkpoint read, model, optimizer, training,
+rollout, retry, receding-10, hardware, network, external compute, or Brev action
+is authorized by the package slice.
+
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
 export receipt `729addbb...`, while excluding bulk/private content and live
