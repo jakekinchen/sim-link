@@ -41,14 +41,25 @@ compute-and-model doctrine. Kit export flow:
 2. **Hub + evaluator (person 2).** Stand up the episode hub and CPU-pinned
    frozen evaluator from the W4 assets; freeze the fork's held-out scene/seed
    set BEFORE anyone trains; post the constructive expert as leaderboard
-   entry #1. Their bootstrap doubles as a W3 instance.
+   entry #1. Emit evaluator-owned signed decisions separately from immutable
+   run receipts and join them only by `candidate_id`. Their bootstrap doubles
+   as a W3 instance.
 3. **NVIDIA box (person 3).** `nvidia-smi` first (settle the "800 GB"
    question); host the hub; finish W5 into a real serving loopback (policy
    server → sim client); RealSense depth as observer-role. Their bootstrap
-   is another W3 instance.
+   is another W3 instance. The release-fixed PI0.5 continuation is the primary
+   NVIDIA campaign. GR00T N1.7 is the bounded challenger: smoke the native
+   pinned-LeRobot path on R0 v3 first, and use the V3-to-V2 plus `modality.json`
+   standalone Isaac-GR00T path only as fallback. Mapping/smoke/gateway work may
+   overlap, but only one expensive VLA campaign trains on this lane at once.
 4. **Physical/demo lane (person 4).** Camera mounts per the RGB census
    (D405 UVC + C922 fallback), AprilTag mat placement, demo scene build,
-   and the teleop-fallback session checklist kept warm but unused.
+   and the teleop-fallback session checklist kept warm but unused. The labeled
+   learned/scripted hybrid is the strongest simulation fallback; it becomes a
+   physical candidate only after gateway, calibration, shadow mode, and a
+   bounded canary. Until then, keep explicit AprilTag/object-state
+   approach/grasp/place plus release/verify/retreat primitives as the reliable
+   physical fallback through the same gateway.
 
 ## Budget and doctrine reminders
 
@@ -62,3 +73,18 @@ Three rules everywhere: held-outs frozen first, every claim has a replayable
 artifact, evaluation code owned separately. Chunk-50 is the demo semantics.
 North star: language-commanded pick-and-place live on hardware; chess is the
 encore only at ≥85% per-move reliability.
+
+Every immutable `RUN_RECEIPT.json` also records `parent_checkpoint`,
+`hypothesis_id`, `candidate_id`, exact `doctrine_commit`, and nullable
+`evaluation_decision_ref`. It contains no promotion decision. The evaluator's
+separate signed artifact owns `promotion_decision`, reason, selected checkpoint,
+frozen evaluation set, evaluator commit, and identity; the studio index joins
+the records by `candidate_id` without mutating either one.
+
+After F0c, run the temporal-observability ladder before learned memory: test a
+Markov-augmented state candidate, then implement a reviewed two-to-four-step
+state/action wrapper, then consider a small GRU/state Transformer. The pinned
+ACT rejects `n_obs_steps != 1`, so history is not a config-only experiment.
+Correction episodes preserve `causal_intervention_frame` separately from the
+terminal failure, restore full simulator dynamics state, and require the expert
+to replan from that branch rather than paste the original demonstration tail.

@@ -432,6 +432,54 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertIn("dual-runtime", combined)
         self.assertIn("current-repo authority", combined)
 
+    def test_fork_doctrine_preserves_reviewer_corrected_execution_contract(self) -> None:
+        annex = (
+            REPO_ROOT
+            / "docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md"
+        ).read_text(encoding="utf-8")
+        living_spine = "\n".join(
+            path.read_text(encoding="utf-8")
+            for path in (
+                REPO_ROOT / "reconstruction-kit/FORWARD_PLAN.md",
+                REPO_ROOT / "reconstruction-kit/ARCHITECTURE.md",
+                REPO_ROOT / "reconstruction-kit/RESULTS_AND_LESSONS.md",
+                REPO_ROOT
+                / "docs/autonomous-workflow/handoff-runbook-2026-07-17.md",
+            )
+        )
+
+        for phrase in (
+            "Markov-augmented state candidate",
+            "raises `ValueError` at `n_obs_steps != 1`",
+            "causal_intervention_frame",
+            "replans from that exact branch state",
+            "native pinned-LeRobot `groot` policy first",
+            "V3→V2 conversion plus `modality.json` applies only",
+            "`doctrine_commit`",
+            "A training runner never writes its own promotion",
+            "strongest simulation fallback",
+        ):
+            self.assertIn(phrase, annex)
+        for stale in (
+            "Markov-complete state",
+            "ACT `n_obs_steps` 2–4 (a config knob",
+            "this is the near-guaranteed working demo",
+            "dataset conversion (LeRobot **V3→V2**",
+            "no visual sim2real gap at all",
+        ):
+            self.assertNotIn(stale, annex)
+
+        for phrase in (
+            "native pinned-LeRobot",
+            "standalone Isaac-GR00T",
+            "causal_intervention_frame",
+            "doctrine_commit",
+            "evaluation_decision_ref",
+            "evaluator-owned",
+            "strongest simulation fallback",
+        ):
+            self.assertIn(phrase, living_spine)
+
     def test_current_and_reconstruction_document_links_resolve(self) -> None:
         documents = [
             REPO_ROOT / "README.md",

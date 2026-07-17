@@ -208,14 +208,49 @@ short-horizon tasks—not to manufacture a third source-repo attempt.
 Use two primary tracks against one separately owned evaluator:
 
 1. ACT as the deterministic imitation baseline.
-2. State-based RL on joint state plus object pose, light parquet, 60-frame
-   success-terminated tasks, and T20.38 direction-correct margins.
+2. State-based RL beginning with a Markov-augmented state candidate: joint
+   positions/velocities, object pose/velocity, gripper aperture, previous
+   action, and goal pose; light parquet; 60-frame success-terminated tasks;
+   and T20.38 direction-correct margins. Use the same velocity estimator in
+   simulation that hardware can reproduce.
 
-SmolVLA and PI0.5 are day-three stretch tracks, not parallel blockers. Training
-may be nondeterministic across MPS/CUDA; CPU/fp32 evaluation verdicts must be
-bit-identical across Macs and Linux. Freeze one workcell XML and add tasks as
-registry data. Emit one `RUN_RECEIPT.json` per run and keep outputs ignored from
-the first fork commit.
+The NVIDIA VLA lane stays off the demo-critical path rather than blocking ACT
+or state-based RL. PI0.5 remains its measured primary experiment, GR00T its
+bounded challenger, and SmolVLA stays parked. Training may be nondeterministic
+across MPS/CUDA; CPU/fp32 evaluation verdicts must be bit-identical across Macs
+and Linux. Freeze one workcell XML and add tasks as registry data. Emit one
+`RUN_RECEIPT.json` per run and keep outputs ignored from the first fork commit.
+
+Within the NVIDIA VLA lane, the measured release-fixed PI0.5 continuation is
+primary and GR00T N1.7 is the bounded challenger. Test the native pinned-LeRobot
+path on LeRobot v3 data first; reserve V3-to-V2 conversion plus `modality.json`
+for the standalone Isaac-GR00T fallback. Schema/action/camera/processor parity
+is mandatory either way, and only one expensive VLA campaign occupies the lane
+at once.
+
+F0a makes the temporal ladder evidence-based: F0c first, then the
+Markov-augmented candidate, then an explicit two-to-four-step state/action
+wrapper, then a small recurrent model only if needed. The pinned ACT rejects
+`n_obs_steps != 1`, so the history rung is an implementation change rather than
+a config edit.
+
+Correction episodes should branch at diagnosed causal divergence, record both
+`causal_intervention_frame` and `terminal_failure_frame`, restore complete
+dynamics-relevant simulator state, and have the geometry expert replan from the
+branch. The original tail is not pasted onto a policy prefix. For current
+one-observation ACT this is a corrective training start, not literal failed
+behavior supplied as temporal context.
+
+Run receipts record `parent_checkpoint`, `hypothesis_id`, `candidate_id`, exact
+`doctrine_commit`, and nullable `evaluation_decision_ref`. Promotion belongs in
+a separate evaluator-owned signed decision artifact joined by `candidate_id`;
+the training receipt remains immutable and cannot self-promote.
+
+The learned/scripted Level-2 hybrid is the strongest simulation fallback, but
+is only a physical candidate after gateway, calibration, shadow mode, and a
+bounded canary. Explicit state-based approach/grasp/place and
+release/verify/retreat primitives remain the reliable physical fallback until
+those gates pass.
 
 Once one learned policy passes Gate C, add counterexample-guided,
 posterior-constrained domain randomization: search only plausible scene/twin

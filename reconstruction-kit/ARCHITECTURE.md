@@ -147,30 +147,52 @@ flowchart LR
     E --> S[State tier\njoints + object pose + light parquet]
     E --> V[VLA/demo tier\nRGB + audiovisual LeRobotDataset]
     S --> A[ACT or state RL]
-    V --> X[Day-3 VLA stretch]
-    A --> C[CPU/fp32 central evaluator]
-    X --> C
-    C --> R[RUN_RECEIPT.json + replayable artifacts]
-    C --> H[Episode/checkpoint hub]
+    V --> X[PI0.5 primary NVIDIA\nGR00T bounded challenger]
+    A --> R[Immutable RUN_RECEIPT.json\nreplayable artifacts]
+    X --> R
+    R --> C[CPU/fp32 central evaluator]
+    C --> D[Signed evaluator-owned decision]
+    R -. candidate_id .-> D
+    C --> Q[Counterexample archive]
+    Q --> B[Full-state causal branch\nexpert replan]
+    B --> H[Episode/checkpoint hub]
+    D --> H
     G[Single robot gateway] -. later teleop/tests/demo .-> H
 ```
 
 - The pinned LeRobot venv becomes the sole interpreter; rollout and rendering
   are in-process and subprocess dispatch is removed.
 - State-first reach/push is camera-free and terminates on success within 60
-  frames. Cameras and full audiovisual data belong only to the VLA/demo tier.
+  frames. Its first temporal candidate retains positions/object/goal state and
+  adds joint/object velocity plus previous action, using a hardware-reproducible
+  estimator. Cameras and full audiovisual data belong only to the VLA/demo
+  tier.
 - Training may differ across MPS/CUDA. Evaluation runs CPU/fp32 and must produce
   bit-identical verdicts on Macs and Linux.
-- ACT and state-based RL are the only primary tracks until an end-to-end demo
-  works. SmolVLA and PI0.5 are stretch tracks.
+- ACT and state-based RL are the overall primary tracks until an end-to-end demo
+  works. Within the later NVIDIA VLA lane, release-fixed PI0.5 is primary,
+  native pinned-LeRobot GR00T N1.7 is the bounded challenger, and the standalone
+  Isaac-GR00T conversion route is fallback-only. SmolVLA stays parked.
 - One frozen XML plus task-registry data replaces per-task scene editing.
 - `RUN_RECEIPT.json` replaces source-repo ceremony only in the fork and records
-  commit, config hash, dataset identity, seed, wall clock, and metrics.
+  commit/config/dataset/seed/timing/metrics plus `parent_checkpoint`,
+  `hypothesis_id`, `candidate_id`, `doctrine_commit`, and nullable
+  `evaluation_decision_ref`. It is immutable and cannot contain a trainer-owned
+  promotion. A separate evaluator-owned decision records the verdict and joins
+  by `candidate_id`.
 - Outputs are ignored from fork commit one and use human run names. A single
   gateway is the only future robot-facing surface.
 
 Frozen held-out scenes/seeds, replayable signed claims, and evaluator ownership
 separate from training survive the simplification unchanged.
+
+The temporal ladder is F0c, a Markov-augmented state candidate, an explicit
+two-to-four-step state/action wrapper, then a small GRU/state Transformer only
+if required. Pinned ACT rejects `n_obs_steps != 1`, so history changes processor
+and model semantics. Correction episodes keep `terminal_failure_frame` distinct
+from `causal_intervention_frame`, restore all dynamics-relevant state, and make
+the geometry expert replan; original demonstration tails are never pasted onto
+policy-induced branch states.
 
 ## Action cadence contract
 

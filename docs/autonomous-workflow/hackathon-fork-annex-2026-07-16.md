@@ -45,8 +45,8 @@ scripted expert.
 
 ## Hardware assignments
 
-- 96 GB Macs: local ACT/state-RL training and simulation work; SmolVLA only as
-  day-three stretch.
+- 96 GB Macs: local ACT/state-RL training and simulation work plus VLA
+  compatibility smoke; SmolVLA stays parked.
 - The NVIDIA box ("800 GB" is almost certainly system RAM, not VRAM — run
   `nvidia-smi` day one): episode hub, central evaluator, RealSense **depth as
   observer-role only** (librealsense is first-class on Linux), and **robot
@@ -85,10 +85,11 @@ future.**
   evaluator.
 - **The reliable live-hardware path is state, not pixels:** the AprilTag mat
   gives real-time object poses, joints come from the robot bus, so a
-  state-conditioned policy runs on hardware with **no visual sim2real gap at
-  all**. Sim-trained RGB policies (from-scratch ACT especially) face an
-  uncalibrated visual gap. Plan the demo policy state-first with RGB as the
-  stretch, and let the teleop fallback trigger only if both fail Saturday
+  state-conditioned policy avoids the raw-RGB appearance-domain gap. It does
+  not remove tag/camera calibration, estimator noise/latency, controller lag,
+  or dynamics mismatch. Sim-trained RGB policies (from-scratch ACT especially)
+  add an uncalibrated visual gap. Plan the demo policy state-first with RGB as
+  the stretch, and let the teleop fallback trigger only if both fail Saturday
   evening.
 
 ## Camera decision (2026-07-16)
@@ -139,9 +140,9 @@ only if the central evaluator shows ≥85% per-move success by day 3.
    success-triggered termination, not 244-frame full episodes, for the RL
    ladder's lower rungs. Episode length is the single biggest rollout-cost
    knob.
-4. **Two policy tracks only.** ACT (IL baseline) and state-based RL (e.g.,
-   SAC) until a demo works end-to-end. SmolVLA/π0.5 are day-3 stretch, not
-   parallel workstreams.
+4. **Two local/demo policy tracks only.** ACT (IL baseline) and state-based RL
+   (e.g., SAC) remain the demo-critical tracks. The separate NVIDIA VLA lane
+   keeps π0.5 primary and GR00T bounded; SmolVLA stays parked.
 5. **Auto-emitted `RUN_RECEIPT.json` replaces ceremony.** Every run's harness
    writes one file: git commit, config hash, dataset identity, seed, wall
    clock, metrics. That is the entire authority story in the fork.
@@ -173,15 +174,17 @@ we adopt what our own evidence independently supports.
    aliasing is at heart a *velocity* ambiguity — lifting and lowering states
    match in position/image space with opposite velocities. Escalation ladder,
    one rung at a time against the frozen evaluator: (a) F0c data fix →
-   (b) **Markov-augmented state candidate**: add joint/object velocities and
+   (b) **Markov-augmented state candidate**: retain joint positions, object
+   pose, gripper aperture, and goal pose, then add joint/object velocities and
    previous action (augmented, not proven complete — contact mode, actuator
-   lag, and controller state stay hidden; the experiment tests sufficiency)
+   lag, gripper load/current, compliance/backlash, filtered controller state,
+   and observation timing can stay hidden; the experiment tests sufficiency)
    → (c) explicit 2–4-step state/action history stack via a reviewed
    fork-local wrapper — **verified NOT a config knob**: the pinned ACT
    raises `ValueError` at `n_obs_steps != 1`
    (configuration_act.py:148), so this rung is an implementation slice with
-   new processor semantics → (d) 8–16-step learned history (small GRU)
-   only if (a–c) leave signed evidence demanding it.
+   new processor/model semantics → (d) 8–16-step learned history (small GRU
+   or state Transformer) only if (a–c) leave signed evidence demanding it.
    **Velocity observability parity caveat for rung (b):** sim reads exact
    `qvel`; hardware only gets finite-differenced AprilTag/encoder deltas.
    Train on the same estimator the hardware will use (finite differences
@@ -189,12 +192,14 @@ we adopt what our own evidence independently supports.
    a new sim2real gap.
 2. **Auto-correction episodes (the best new mechanism).** Candidate rollout
    fails → evaluator localizes the failure → MuJoCo restores a full-state
-   branch (qpos, qvel, actuator/controller state, randomization identity —
-   the verified T18.4 snapshot surface) at the **causal divergence, not the
+   branch (qpos, qvel, object pose/velocity, actuator/controller state,
+   reconstructible contact state, timestep, and randomization identity — the
+   verified T18.4 snapshot surface) at the **causal divergence, not the
    terminal predicate** (release fails formally at frame 219 but lags
-   ~17–20 frames earlier; record both `terminal_failure_frame` and
-   `causal_intervention_frame`) → the geometry expert **replans from that
-   exact branch state** (never pastes the original tail) → one correction
+   ~17–20 frames earlier, so start near frame 195–200 or release-phase start;
+   record both `terminal_failure_frame` and `causal_intervention_frame`) → the
+   geometry expert replans from that exact branch state (never pastes the
+   original tail) → one correction
    record with supervision masked to the corrected tail, labeled
    `context_role/context_policy/failure_predicate/correction_owner/
    supervision_mask`. For today's one-observation ACT this is honestly
@@ -219,8 +224,10 @@ we adopt what our own evidence independently supports.
    through the normal stack — still run a dependency preflight, the
    T20.35u lesson, since groot may pull extras beyond the pinned lock);
    the **V3→V2 conversion plus `modality.json` applies only to the
-   standalone Isaac-GR00T fallback path**. Both paths gate on exact
-   camera-key/action-order/units/gripper/normalization parity before any
+   standalone Isaac-GR00T fallback path**. Both paths gate on exact camera
+   keys and order; action dimension, order, units, and absolute-versus-relative
+   semantics; gripper semantics; language-task fields; image size/aspect-ratio
+   handling; chunk horizon; normalization; and processor parity before any
    training. Parallel means data-mapping/smoke/gateway work may overlap;
    only one expensive VLA training campaign occupies the lane at once.
    SmolVLA stays parked. Fine-tune wants 40 GB+ VRAM; inference 16 GB+.
@@ -228,13 +235,15 @@ we adopt what our own evidence independently supports.
    preserved.** `RUN_RECEIPT.json` gains `parent_checkpoint`,
    `hypothesis_id`, `candidate_id`, `doctrine_commit` (the exact annex
    revision the run operated under — the doctrine evolves on the branch
-   past `sim2claw-genesis`), and `evaluation_decision_ref: null`. **A
-   training runner never writes its own promotion**: the separately owned
+   past `sim2claw-genesis`), and `evaluation_decision_ref: null`. The signed
+   training receipt is immutable and is not patched after evaluation.
+   A training runner never writes its own promotion. The separately owned
    evaluator emits its own signed decision artifact (`candidate_id`,
    `evaluator_commit`, `frozen_evaluation_set`, `promotion_decision`
    promote/reject/retain_as_counterexample — the last feeding the T20.39
-   archive — `decision_reason`, `selected_checkpoint`, identity). The
-   studio server joins the two records by `candidate_id`. The six-act demo
+   archive — `decision_reason`, `selected_checkpoint`, identity). The studio
+   index resolves the evaluator artifact and joins the two immutable records
+   by `candidate_id`. The six-act demo
    narrative is assembled from artifacts every run already emits.
 6. **Video-conditioned task specification** (VLM extracts object/target/
    operation → LLM emits the structured task → state policy executes),

@@ -68,19 +68,63 @@ PI0.5 ahead of ACT plus state-based RL in the fork.
 2. Implement, independently review, and authorize the frozen F0c runner. Run
    the one-attempt continuation exactly once; preserve either the first
    strict-v2 pass or the update-2,000 terminal negative.
-3. Start a camera-free state tier: joint state plus simulator object pose,
-   light parquet, 60-frame success-terminated reach and push tasks, and
-   direction-correct strict-v2 margins for shaped reward.
+3. Start a camera-free state tier with a **Markov-augmented state candidate**:
+   joint positions/velocities, object pose/velocity, gripper aperture, previous
+   action, and goal pose; light parquet; 60-frame success-terminated reach and
+   push tasks; and direction-correct strict-v2 margins for shaped reward. Train
+   against the same finite-difference/filter estimator the physical system can
+   supply rather than exact simulator-only velocity.
 4. Keep ACT as the imitation baseline and one state-based RL algorithm as the
-   second primary track. Use the R2/F0b release trace as a frozen regression,
-   not immediate training data. Do not open SmolVLA or PI0.5 until an
-   end-to-end demo works or day-three stretch capacity is genuinely free.
+   second demo-critical track. Use the R2/F0b release trace as a frozen
+   regression, not immediate training data. After F0c, run the measured
+   release-fixed PI0.5 path as the primary NVIDIA background experiment without
+   waiting for GR00T integration; keep SmolVLA parked.
 5. Allow accelerator-nondeterministic training, but judge every checkpoint in
    the separately owned CPU/fp32 evaluator with bit-identical verdicts across
    Macs and Linux.
-6. Auto-emit `RUN_RECEIPT.json` for every run: commit, config hash, dataset
-   identity, seed, wall clock, and metrics. Keep replayable trace/artifact
-   evidence beside the receipt.
+6. Auto-emit an immutable `RUN_RECEIPT.json` for every run: commit, config
+   hash, dataset identity, seed, wall clock, metrics, `parent_checkpoint`,
+   `hypothesis_id`, `candidate_id`, `doctrine_commit`, and nullable
+   `evaluation_decision_ref`. Keep replayable trace/artifact evidence beside
+   the receipt; the training process never writes a promotion decision.
+
+### Temporal-observability and correction ladder
+
+Run the smallest evidence-routed temporal change at a time against the same
+frozen evaluator:
+
+1. Execute the already packaged F0c data/loss correction.
+2. Test the Markov-augmented state candidate above. It is a sufficiency
+   hypothesis, not a claim of full Markov completeness.
+3. If ambiguity remains, implement and review an explicit two-to-four-step
+   state/action history wrapper with new processor/model semantics. The pinned
+   ACT raises `ValueError` at `n_obs_steps != 1`; this is not a YAML-only rung.
+4. Add a small GRU or state Transformer only if the explicit stack leaves
+   signed evidence that learned memory is necessary.
+
+Generate corrective data from policy-induced branch states, not by pasting a
+demonstration tail. The evaluator records `terminal_failure_frame` and the
+earlier `causal_intervention_frame`; MuJoCo restores qpos/qvel, object
+pose/velocity, actuator/controller state, reconstructible contact state,
+timestep, and randomization identity; then the geometry expert replans from
+that exact state. Supervise only the correction tail and admit it as a bounded
+mixture with nominal expert episodes preserved as the floor. For current
+one-observation ACT these are corrective training starts, not literal
+failed-prefix temporal context.
+
+### NVIDIA experiment ordering
+
+After the local ACT/F0c rung, the release-fixed PI0.5 continuation is the
+primary NVIDIA experiment because its installation, training, evaluation, and
+cost path are measured. GR00T N1.7 is a bounded challenger: smoke the native
+pinned-LeRobot `groot` path against the R0 LeRobot v3 dataset first; use the
+V3-to-V2 conversion plus `modality.json` only for the standalone Isaac-GR00T
+fallback. Both paths must prove exact camera keys/order, action
+dimension/order/units/absolute-relative semantics, gripper semantics,
+language-task fields, image size/aspect ratio, chunk horizon, normalization,
+and processor parity before training. Data mapping, smoke, and gateway work may
+overlap, but only one expensive VLA campaign occupies the NVIDIA lane at once.
+SmolVLA stays parked.
 
 Only after the first learned strict-v2 pass, replay the frozen challenge archive
 and run the bounded recovery/grid checks. Counterexamples remain evidence until
@@ -92,6 +136,14 @@ Once W1 and the R0 parity boundary are stable, add a small episode/checkpoint
 hub and CPU/fp32 evaluator skeleton. The evaluator owns frozen seeds and verdict
 logic separately from training. A candidate is not selected until its retained
 artifact replays to the same verdict.
+
+For each candidate, the evaluator emits a separate signed, evaluator-owned
+decision artifact with `candidate_id`, `evaluator_commit`,
+`frozen_evaluation_set`, `promotion_decision` (`promote`, `reject`, or
+`retain_as_counterexample`), `decision_reason`, `selected_checkpoint`, and its
+content identity. The studio index joins that artifact to the immutable run
+receipt by `candidate_id`; it never mutates a training receipt or permits a
+trainer to self-promote.
 
 Define one robot gateway protocol with action chunks, observation timestamps,
 latency/hold fields, reset/abort semantics, and simulation loopback. Teleop,
@@ -124,6 +176,13 @@ Physical execution begins only after:
 
 The initial physical canary must be bounded and supervised. Simulation success
 does not transfer automatically.
+
+The learned/scripted Level-2 hybrid is the strongest simulation fallback and a
+physical candidate only after gateway, calibration, shadow mode, and a bounded
+canary. Until those gates pass, the most reliable physical fallback is explicit
+AprilTag/object-state approach/grasp/place plus release/verify/retreat
+primitives through the same gateway; teleoperation remains the final labeled
+fallback.
 
 ## Stop rules
 
