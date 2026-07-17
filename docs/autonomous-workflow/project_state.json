@@ -350,8 +350,44 @@
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "F0c",
   "next_eligible_task": "F0c",
-  "active_support_task": null,
+  "active_support_task": "K5",
   "support_tasks": {
+    "K5": {
+      "state": "in_progress",
+      "active_brief_id": "237",
+      "brief_id": "237",
+      "depends_on": [
+        "owner_authorized_tier_1_and_tier_2_cleanup",
+        "source_closure_commit_4674e2b",
+        "successor_gate_c_pass_preserved"
+      ],
+      "objective": "reconcile the already-executed output cleanup, close the source archive without extra deletion, and prepare an authority-safe successor spine handoff",
+      "authority_granted": [
+        "inventory_recorded_cleanup_paths",
+        "verify_preserved_artifacts",
+        "amend_closure_and_living_state",
+        "write_closeout_evidence",
+        "prepare_successor_spine_export_contract",
+        "commit_and_push_scoped_documentation"
+      ],
+      "authority_not_granted": [
+        "delete_tier_3",
+        "delete_preserved_artifacts",
+        "training",
+        "model_action",
+        "retry",
+        "hardware",
+        "camera_access",
+        "serial_access",
+        "physical_motion",
+        "external_compute",
+        "brev_resource_creation",
+        "promotion",
+        "merge",
+        "rebase",
+        "branch_deletion"
+      ]
+    },
     "K4": {
       "state": "verified",
       "active_brief_id": null,
