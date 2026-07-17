@@ -55,8 +55,41 @@ scripted expert.
   any checkpoint of any size can drive the robot while a Mac keeps the serial
   driver. If VRAM is genuinely ~80 GB+, it can also host the π0.5 fine-tune
   locally instead of Brev.
-- $500 Brev credits: reserve for one π0.5 fine-tune (ABEJA-parity reference
-  is ~5–20 A100-hours) only after local candidates prove the dataset.
+- $500 Brev credits: F1 proved the full protocol at **$5.53 per 5,000-step
+  π0.5 full fine-tune** (A100-80GB, 3.3 h, receipted teardown). Brev is
+  therefore a standing iteration lane, not a single reserved shot — soft cap
+  ~$50/day, every run using the F1 pattern (spend ledger, teardown inventory
+  receipt, signed evaluation summary).
+
+## Weekend compute-and-model doctrine (updated 2026-07-17 post-F1/R2)
+
+**MPS for iteration, NVIDIA for scale, state for the demo, pixels for the
+future.**
+
+- **MPS lane (every Mac):** ACT training (proven: clean 10k-update campaign
+  locally) and short continuations (~40 min), all state-RL, all data
+  generation, all sim rollouts. This is the per-person fast loop — many
+  small experiments against the shared frozen held-outs.
+- **NVIDIA/Brev lane:** all π0.5 work (full fine-tune needs ~70 GB+ → Brev
+  A100-80GB unless the local box's VRAM matches), batched 1–3 runs/day with
+  targeted variations (release-fixed data, early stopping near step 1,000
+  where F1 peaked before overfitting). SmolVLA stays parked: both MPS VLA
+  attempts were the weakest results per compute hour.
+- **Where VLAs fit:** NOT on the live-demo critical path. The
+  language-commanded demo grounds language in the LLM planner, which selects
+  object/target poses; the policy underneath only needs to be
+  goal-conditioned — ACT or state-RL suffices. VLAs are the *robustness and
+  sim2real bet*: π0.5's pretrained visual priors are the best candidate for
+  transferring RGB policies to real cameras, so keep iterating it cheaply on
+  Brev in the background and adopt it the moment it beats ACT on the frozen
+  evaluator.
+- **The reliable live-hardware path is state, not pixels:** the AprilTag mat
+  gives real-time object poses, joints come from the robot bus, so a
+  state-conditioned policy runs on hardware with **no visual sim2real gap at
+  all**. Sim-trained RGB policies (from-scratch ACT especially) face an
+  uncalibrated visual gap. Plan the demo policy state-first with RGB as the
+  stretch, and let the teleop fallback trigger only if both fail Saturday
+  evening.
 
 ## Camera decision (2026-07-16)
 

@@ -3,11 +3,12 @@
 Recorded ~10:40 CDT by Claude at the owner's instruction, after all agent
 lanes closed. This is the four-person start plan. Task-ordering only.
 
-## Clone point — use the handoff tag, not the freeze tag
+## Clone point — use `sim2claw-genesis`, the final authoritative tag
 
-Clone/export at **`handoff-2026-07-17-f0c-packaged`** (branch HEAD `d3c8e7e`).
-The earlier `freeze-2026-07-17-hackathon-fork` tag predates seven commits and
-is missing the F0c fork package and the F1 evidence fold. Kit export flow:
+Clone/export at **`sim2claw-genesis`**. It supersedes both earlier tags:
+`freeze-2026-07-17-hackathon-fork` predates the F0c package and F1 fold, and
+`handoff-2026-07-17-f0c-packaged` predates this runbook and the weekend
+compute-and-model doctrine. Kit export flow:
 `reconstruction-kit/scripts/kit.py verify && ... export` per QUICKSTART.
 
 ## State inherited at handoff
@@ -51,8 +52,12 @@ is missing the F0c fork package and the F1 evidence fold. Kit export flow:
 
 ## Budget and doctrine reminders
 
-Brev: $494 remains; reserve for one larger π0.5 attempt only after F0c's
-result and only with spend logging plus teardown receipts (the F1 pattern).
+Brev: $494 remains and is a standing lane at ~$5.5 per π0.5 run (soft cap
+~$50/day, always the F1 receipt pattern). After F0c, launch π0.5 iteration
+2 on Brev with release-fixed data and early stopping near step 1,000. Full
+compute-and-model doctrine: see the annex's "Weekend compute-and-model
+doctrine" section (state-first demo path via AprilTag poses; VLAs as the
+robustness/sim2real bet, off the demo critical path).
 Three rules everywhere: held-outs frozen first, every claim has a replayable
 artifact, evaluation code owned separately. Chunk-50 is the demo semantics.
 North star: language-commanded pick-and-place live on hardware; chess is the
