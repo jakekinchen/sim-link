@@ -131,9 +131,9 @@
   },
   "latest_verified_task_implementation_boundary": {
     "brief_id": "232",
-    "commit": "1b23f6bc372e66ce5c0982d0da97d7a9fe8c1275",
-    "reviewer_decision_id": "322",
-    "summary": "reviewer_322_verifies_f0b_hybrid_tail_cadence_implementation_and_opens_model_free_authority_materialization"
+    "commit": "8edf1687168750781a257a39d9f5cace3a5e57f5",
+    "reviewer_decision_id": "323",
+    "summary": "reviewer_323_verifies_f0b_owner_authority_attribution_correction_and_reopens_model_free_materialization"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -5204,16 +5204,19 @@
       "depends_on": ["F0a_verified_on_origin"],
       "active_brief_id": "232",
       "latest_verified_brief_id": "232",
-      "review_decision_id": "322",
+      "review_decision_id": "323",
       "source_boundary_commit": "951c5254950b734677a6d185c227c56724182b58",
       "brief_activation_commit": "fe552f02ffe59e133924a79d53df9806b4a92139",
-      "implementation_commit": "1b23f6bc372e66ce5c0982d0da97d7a9fe8c1275",
-      "result": "Reviewer 322 verifies Brief 232 implementation and signed spec 00d7c7f3 for one retained update-10000 ACT hybrid-tail-cadence evaluation; only a model-free retained-trace renderer smoke and owner/central/runtime/permit authority bundle may be materialized next, while checkpoint tensor read, model construction/loading, inference, attempt marker, simulation rollout, Gate C execution, policy-result rendering, optimizer/training, retry, and all physical or promotion authority remain closed pending a separate reviewed pre-run acceptance",
+      "base_implementation_commit": "1b23f6bc372e66ce5c0982d0da97d7a9fe8c1275",
+      "implementation_commit": "8edf1687168750781a257a39d9f5cace3a5e57f5",
+      "result": "Reviewers 322-323 verify Brief 232 implementation and its pre-materialization owner-attribution correction, with signed spec ddf71cf9 for one retained update-10000 ACT hybrid-tail-cadence evaluation; only a model-free retained-trace renderer smoke and owner/central/runtime/permit authority bundle may be materialized next, while checkpoint tensor read, model construction/loading, inference, attempt marker, simulation rollout, Gate C execution, policy-result rendering, optimizer/training, retry, and all physical or promotion authority remain closed pending a separate reviewed pre-run acceptance",
       "artifact": {
         "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_spec.json",
         "schema_version": "scenesmith.f0b_hybrid_tail_cadence_spec.v1",
-        "identity_sha256": "00d7c7f300e2b8536e0a24437fadd7bf946c3580fa5eef6bfc0e632d0479953f",
-        "file_sha256": "d699d451487ad6dc1ef3fc1e8fc61125a3ab0809a902df7fa03c927aacb460a1",
+        "identity_sha256": "ddf71cf91bcfcd4a1d40573a4ce5cfd648ee9dc141b3b6186bfbbd5fc16184ce",
+        "file_sha256": "3513a75aa201275e121a3c1fbe120c3f671104513c75fc65c41c726ff8d3a53b",
+        "owner_authorization_source": "owner_direct_chat_eight_hour_continue_authorization_2026_07_17",
+        "task_ordering_source": "docs/autonomous-workflow/owner-direction-2026-07-17-final-overnight.md",
         "checkpoint_identity_sha256": "c77ee36250f921dbdfc7b19802ab8705c9795b298fa14d4a2b1825acf68451ab",
         "so101_asset_tree_identity_sha256": "2cf012477d630936efe7045e52e83644d447ec7dd6762438beeb16fed14b5eb4",
         "decode_starts": [0, 50, 100, 150, 176, 186, 196, 206, 216, 226, 236],
@@ -5232,7 +5235,7 @@
         "optimizer_created": false,
         "optimizer_training": false
       },
-      "authority_granted": ["activate_brief_232", "read_and_hash_frozen_f0a_t20_43c_r2_and_runtime_sources", "implement_and_fixture_test_f0b_spec_authority_runner_trace_and_terminal_contracts", "write_model_free_f0b_spec_fixture_and_preflight_artifacts", "f0b_implementation_verified", "materialize_model_free_f0b_authority_bundle_after_reviewer_322_origin_confirmation", "execute_one_retained_comparator_trace_renderer_smoke_without_checkpoint_or_model_access"],
+      "authority_granted": ["activate_brief_232", "read_and_hash_frozen_f0a_t20_43c_r2_and_runtime_sources", "implement_and_fixture_test_f0b_spec_authority_runner_trace_and_terminal_contracts", "write_model_free_f0b_spec_fixture_and_preflight_artifacts", "f0b_implementation_verified", "materialize_model_free_f0b_authority_bundle_after_reviewer_323_origin_confirmation", "execute_one_retained_comparator_trace_renderer_smoke_without_checkpoint_or_model_access"],
       "authority_not_granted": ["pre_run_acceptance", "attempt_marker_creation", "checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "simulation_rollout", "policy_result_live_rendering", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "T20.45": {
