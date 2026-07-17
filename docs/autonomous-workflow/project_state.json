@@ -348,7 +348,7 @@
   "training_lock": "closed",
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
-  "current_task": "T20.43c-R2",
+  "current_task": "F0",
   "next_eligible_task": "F0",
   "active_support_task": null,
   "support_tasks": {
@@ -5117,6 +5117,17 @@
       "execution_result": {"status":"verified_terminal_negative","attempt_marker_identity_sha256":"cb01bcfb5826af2cb9c30d718994872b54a7aa59fc9d11c803744f23f11fc1d8","run_identity_sha256":"3d49f4df8be368392bc9f44fed05b716e468c312232ba8d51fe8dfc3a7c26bf6","result_identity_sha256":"9d916206cbbb86b67a42d3449953bc7b272e1de5171996df224e29772369e14f","scorecard_identity_sha256":"c8d7e3f0249ab2db6b3a90a5e1ef0f7c28b839ec47e8a3851bd3234b0da9c906","retention_identity_sha256":"727b40677e8ea595b8cfb377346a6802f78de2c80d66a1cb27472802b400d938","attempt_count":1,"optimizer_update_count":5000,"checkpoint_count":5,"rollout_count":10,"gate_c_passed":false,"first_gate_c_pass":null,"strongest_partial_checkpoint":1000,"strongest_partial_adapter":"receding_10","strongest_partial_strict_contact_frame_count":73,"strongest_partial_lift_displacement_m":0.018061304225193253,"independent_verifier_exit_code":0,"retry_authorized":false},
       "authority_granted": ["activate_brief_220", "read_verified_t20_42_t20_43_and_t20_36i_j_sources", "implement_and_fixture_test_t20_44_gate_a_renderer_smoke_authority_runner_and_evidence_contracts", "t20_44_implementation_valid", "materialize_model_free_gate_a_renderer_smoke_and_compact_authority_after_origin_confirmation", "write_and_preserve_signed_pre_run_acceptance", "create_one_permit_consuming_marker_after_acceptance_origin_confirmation", "execute_one_fixed_5000_update_smolvla_attempt", "verify_and_close_terminal_negative", "open_fresh_t20_43b_brief_after_state_origin_confirmation"],
       "authority_not_granted": ["second_attempt","retry","replacement","correction_objective","gate_b_entry_barrier","threshold_change","schedule_change","checkpoint_replacement","archive_replay","t20_45_activation","package_installation","network_access","external_compute","brev_compute","hardware","camera_access","serial_access","physical_motion","physical_transfer","promotion","destructive_operation"]
+    },
+    "F0": {
+      "state": "in_progress",
+      "depends_on": ["T20.43c-R2_verified_terminal_negative_on_origin", "K2_verified_reconstruction_foundation_on_origin", "owner_direction_2026_07_17_final_overnight"],
+      "active_brief_id": "230",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "source_boundary_commit": "545bba080c1af4033423e595f66b6c15fdf11a1f",
+      "result": "Brief 230 opens a deterministic model-free release-gap diagnosis; training_lock remains closed and no checkpoint, model, optimizer, rollout, Brev, external compute, or hardware action is authorized",
+      "authority_granted": ["read_and_hash_frozen_r0_and_t20_43c_r2_sources", "activate_brief_230", "implement_and_fixture_test_model_free_release_gap_audit", "write_compact_signed_f0_diagnostic_result"],
+      "authority_not_granted": ["checkpoint_tensor_read", "model_construction", "model_loading", "model_inference", "optimizer_creation", "optimizer_training", "rollout", "dataset_mutation", "threshold_change", "network_access", "package_installation", "external_compute", "brev_compute", "hardware", "camera_access", "serial_access", "physical_motion", "gate_c_execution", "physical_transfer", "promotion", "destructive_operation", "freeze_tag"]
     },
     "T20.45": {
       "state": "pending",

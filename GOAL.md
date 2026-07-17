@@ -169,6 +169,12 @@ eligible source-repo task is a fresh F0 brief for release-gap diagnosis. This
 closeout does not open corrective training, F1/Brev, hardware, transfer,
 promotion, or the freeze tag.
 
+F0/Brief 230 is now the active source-repo task. It is a model-free audit of
+the exact R0 sampler, padding, normalization, phase mass, and retained R2
+release trace. The training lock remains closed. No checkpoint read, model,
+optimizer, rollout, dataset mutation, Brev/external compute, hardware, Gate C
+execution, transfer, promotion, or tag is authorized by this activation.
+
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
 export receipt `729addbb...`, while excluding bulk/private content and live
