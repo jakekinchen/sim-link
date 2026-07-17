@@ -1,0 +1,36 @@
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight
+/home/shadeform/sim-link-f1/deps/lerobot/.venv/lib/python3.12/site-packages/glfw/__init__.py:917: GLFWError: (65550) b'X11: The DISPLAY environment variable is missing'
+  warnings.warn(message, GLFWError)
+/home/shadeform/sim-link-f1/deps/lerobot/.venv/lib/python3.12/site-packages/glfw/__init__.py:917: GLFWError: (65537) b'The GLFW library is not initialized'
+  warnings.warn(message, GLFWError)
+The PI05 model is a direct port of the OpenPI implementation. 
+This implementation follows the original OpenPI structure for compatibility. 
+Original implementation: https://github.com/Physical-Intelligence/openpi
+Loading model from: /home/shadeform/sim-link-f1/outputs/training/checkpoints/001000/pretrained_model
+✓ Loaded state dict from model.safetensors
+All keys loaded successfully!
+Traceback (most recent call last):
+  File "/home/shadeform/sim-link-f1/scripts/evaluate_pi05_checkpoints.py", line 233, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/shadeform/sim-link-f1/scripts/evaluate_pi05_checkpoints.py", line 158, in main
+    rollout = run_policy_grasp_closed_loop(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/shadeform/sim-link-f1/sim-link/scenesmith/robot_lab/act_grasp_closed_loop.py", line 191, in run_policy_grasp_closed_loop
+    expert = CausalSortExpert(
+             ^^^^^^^^^^^^^^^^^
+  File "/home/shadeform/sim-link-f1/sim-link/scenesmith/robot_lab/causal_sort_expert.py", line 102, in __init__
+    mujoco.Renderer(
+  File "/home/shadeform/sim-link-f1/deps/lerobot/.venv/lib/python3.12/site-packages/mujoco/renderer.py", line 89, in __init__
+    self._mjr_context = _render.MjrContext(model, font_scale.value)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mujoco.FatalError: an OpenGL platform library has not been loaded into this process, this most likely means that a valid OpenGL context has not been created before mjr_makeContext was called
+Exception ignored in: <function Renderer.__del__ at 0x7ab3d24244a0>
+Traceback (most recent call last):
+  File "/home/shadeform/sim-link-f1/deps/lerobot/.venv/lib/python3.12/site-packages/mujoco/renderer.py", line 337, in __del__
+    self.close()
+  File "/home/shadeform/sim-link-f1/deps/lerobot/.venv/lib/python3.12/site-packages/mujoco/renderer.py", line 325, in close
+    if self._mjr_context:
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'Renderer' object has no attribute '_mjr_context'

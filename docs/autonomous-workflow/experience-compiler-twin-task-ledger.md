@@ -18,6 +18,26 @@ blockers: learned strict-v2 task completion and Gate C remain scientifically unm
 next_step: in the fork, implement and review the frozen F0c runner, bind the exact R2 checkpoint, then issue fresh native authority before the sole attempt
 ```
 
+## 2026-07-17 - Owner closure: F0c passes strict Gate C in the sim2claw fork
+
+Recorded by Claude at the owner's instruction as this repository's closing
+scientific entry. The F0c release-targeted continuation packaged here as
+`packaged_for_fork_day_one` was executed in the sim2claw fork
+(`/Users/kelly/Developer/sim2claw`, origin/main `f17ba6a`): the third
+authorized attempt loaded the immutable R2 checkpoint once, proved exact
+update-0 equivalence, completed 500 finite local-MPS AdamW updates, and
+**passed strict Gate C at the first scheduled evaluation** (~400 s runtime;
+accepted checkpoint tree `8ecf7bb9...`, final receipt `9e957708...`; the two
+prior attempts are recorded as pre-learning infrastructure failures). The
+capability question this repository carried from T20.2 onward — can a
+learned policy complete the strict unassisted grasp cycle — is resolved
+affirmative in the successor repository. Held-out generalization,
+evaluator-owned promotion, and gateway serving proceed there under the
+fork's day-one closeout direction. The F1 Brev workspace evidence bytes are
+archived in `docs/autonomous-workflow/f1-brev-workspace-archive/`; no
+sim-link authority, permit, or marker transfers. This entry is historical
+record only.
+
 ## 2026-07-17 - Reviewer 329 verifies K4 corrected fork doctrine spine
 
 Implementation `99c13d0...` propagates annex amendment `aae542a...` through the

@@ -132,6 +132,14 @@ proof states must remain distinct.
   F0c package and F1 fold). Four-person day-one lanes, the R2 checkpoint
   acquisition gotcha, and budget state are in
   `docs/autonomous-workflow/handoff-runbook-2026-07-17.md`.
+- Closure recorded 2026-07-17: F0c passed strict Gate C in the sim2claw fork
+  (checkpoint `8ecf7bb9...`, receipt `9e957708...`) — the capability question
+  this repository carried is resolved affirmative in the successor. F1
+  workspace evidence archived in-repo; open threads (T19.2c, Robo Scan,
+  studio track), local-state notes, the recorded-not-executed disk-cleanup
+  tiers, and the two remaining owner decisions are in
+  `docs/autonomous-workflow/sim-link-closure-2026-07-17.md`. Future work:
+  `/Users/kelly/Developer/sim2claw`.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 

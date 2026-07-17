@@ -1,0 +1,46 @@
+{
+  "schema_version": "sim_link.f1_brev_provisioning_price.v1",
+  "precreate_checked_at": "2026-07-17T02:49:20-0500",
+  "inventory_command": "brev ls --json",
+  "inventory_result": {"workspaces": null},
+  "search_command": "brev search gpu --gpu-name A100 --min-vram 80 --sort price --json",
+  "selected": {
+    "type": "massedcompute_A100_sxm4_80G_DGX",
+    "provider": "shadeform",
+    "cloud": "massedcompute",
+    "gpu_name": "A100",
+    "gpu_count": 1,
+    "vram_per_gpu_gb": 80,
+    "vcpus": 16,
+    "ram_gb": 160,
+    "disk_gb": 1000,
+    "stoppable": false,
+    "displayed_price_usd_per_hour": 1.656
+  },
+  "completion_budget": {
+    "hard_credit_cap_usd": 100.0,
+    "mandatory_teardown_deadline": "2026-07-17T09:30:00-05:00",
+    "hours_remaining_at_check": 6.678,
+    "absolute_deadline_bound_usd": 11.059,
+    "projected_setup_transfer_train_eval_preserve_teardown_hours": 5.5,
+    "projected_spend_usd": 9.108,
+    "abeja_reference_10k_steps_a100_hours": 5.0,
+    "scaled_5k_training_estimate_hours": 2.5,
+    "passes_credit_cap": true,
+    "passes_completion_window": true
+  },
+  "creation_boundary": {
+    "instance_count": 1,
+    "instance_type_count": 1,
+    "automatic_fallback_types": 0,
+    "training_run_count": 1,
+    "automatic_retry": false,
+    "h100": false,
+    "multi_gpu": false
+  },
+  "create_requested_at": "2026-07-17T02:50:08-05:00",
+  "created_at": "2026-07-17T02:50:44-05:00",
+  "instance_name": "sim-link-f1-pi05-20260717",
+  "instance_id": "8h7sb60wa",
+  "status": "created_starting"
+}

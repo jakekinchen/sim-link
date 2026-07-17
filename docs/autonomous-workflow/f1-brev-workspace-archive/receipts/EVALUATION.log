@@ -1,0 +1,51 @@
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight
+The PI05 model is a direct port of the OpenPI implementation. 
+This implementation follows the original OpenPI structure for compatibility. 
+Original implementation: https://github.com/Physical-Intelligence/openpi
+Loading model from: /home/shadeform/sim-link-f1/outputs/training/checkpoints/001000/pretrained_model
+✓ Loaded state dict from model.safetensors
+All keys loaded successfully!
+1000 chunk_50 False 0.03751930418757199 lifted_without_strict_cycle
+1000 receding_10 False 0.0015803041875719903 contact_without_strict_lift
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight
+The PI05 model is a direct port of the OpenPI implementation. 
+This implementation follows the original OpenPI structure for compatibility. 
+Original implementation: https://github.com/Physical-Intelligence/openpi
+Loading model from: /home/shadeform/sim-link-f1/outputs/training/checkpoints/002000/pretrained_model
+✓ Loaded state dict from model.safetensors
+All keys loaded successfully!
+2000 chunk_50 False 0.03445830418757195 lifted_without_strict_cycle
+2000 receding_10 False 0.019316304187571964 contact_without_strict_lift
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight
+The PI05 model is a direct port of the OpenPI implementation. 
+This implementation follows the original OpenPI structure for compatibility. 
+Original implementation: https://github.com/Physical-Intelligence/openpi
+Loading model from: /home/shadeform/sim-link-f1/outputs/training/checkpoints/003000/pretrained_model
+✓ Loaded state dict from model.safetensors
+All keys loaded successfully!
+3000 chunk_50 False 0.033656304187571984 lifted_without_strict_cycle
+3000 receding_10 False 0.034609304187571965 lifted_without_strict_cycle
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight
+The PI05 model is a direct port of the OpenPI implementation. 
+This implementation follows the original OpenPI structure for compatibility. 
+Original implementation: https://github.com/Physical-Intelligence/openpi
+Loading model from: /home/shadeform/sim-link-f1/outputs/training/checkpoints/004000/pretrained_model
+✓ Loaded state dict from model.safetensors
+All keys loaded successfully!
+4000 chunk_50 False 0.029106304187571985 lifted_without_strict_cycle
+4000 receding_10 False 0.011058304187571977 contact_without_strict_lift
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.bias
+WARNING:root:Vision embedding key might need handling: model.paligemma_with_expert.paligemma.model.vision_tower.vision_model.embeddings.patch_embedding.weight
+The PI05 model is a direct port of the OpenPI implementation. 
+This implementation follows the original OpenPI structure for compatibility. 
+Original implementation: https://github.com/Physical-Intelligence/openpi
+Loading model from: /home/shadeform/sim-link-f1/outputs/training/checkpoints/005000/pretrained_model
+✓ Loaded state dict from model.safetensors
+All keys loaded successfully!
+5000 chunk_50 False 0.0020263041875719923 contact_without_strict_lift
+5000 receding_10 False 0.03557530418757199 lifted_without_strict_cycle
+992cf3fdd3f12c8543b643000691504003a080ff063fbedf98992425ab7a0b50

@@ -1,0 +1,110 @@
+{
+  "schema_version": "sim_link.f1_pi05_run_receipt.v1",
+  "status": "training_and_evaluation_complete_no_strict_grasp",
+  "source_commit": "471b7582a756e618aebd37845adcaccde880741d",
+  "source_archive_sha256": "19598e23557e14c5ba973240eaed61c927d7229d53b0a8939cce084ce33bf806",
+  "instance": {
+    "name": "sim-link-f1-pi05-20260717",
+    "id": "8h7sb60wa",
+    "type": "massedcompute_A100_sxm4_80G_DGX",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "gpu_count": 1,
+    "displayed_price_usd_per_hour": 1.656
+  },
+  "preflight": {
+    "status": "pass",
+    "identity_sha256": "edcd861f70613517bf3aabc50f49f385b356c52238a5a3601114006947b1c962",
+    "file_sha256": "9d18468fcb0f997d22a5f03a49a26438d0352217e0593a19e8d0d927af2e5445",
+    "output_paths_verified_empty_before_model_action": true
+  },
+  "dataset": {
+    "selection": "R0_as_is_from_completed_W2_scratch_receipt",
+    "manifest_identity_sha256": "bd36b7c491ba3c3e08ae3efd87febdbbb1f52f917cb258399484ba4f5311a184",
+    "mixture_identity_sha256": "37b30d342313710f51c05b6c53f80f3dddc93c93cb0ff2c443bf5970dff203df",
+    "statistics_identity_sha256": "02ba0e701da708680e162493aecececa5827914be2d07a0e1f9e20335d9388ae",
+    "w2_run_receipt_identity_sha256": "fd83af1d629242925dabc564d49c60738f20db4099fe542b196534b44f3d560a",
+    "dataset_tree_identity_sha256": "3ea03babc3c2ad7585b829dd858b15f09045edd106d0beba8d75540c403eebb8",
+    "episode_count": 129,
+    "frame_count": 31366,
+    "window_count": 59904
+  },
+  "base_model": {
+    "repo_id": "lerobot/pi05_base",
+    "revision": "7de663972b7817d2c4cf2d84c821153dfea772e9",
+    "raw_model_sha256": "0eb11ca9587678c1d2ef8cf32807c29f8ce53a2bfdfc1aa4a4c96f16fca59b0f"
+  },
+  "stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+  "training": {
+    "run_count": 1,
+    "automatic_retry": false,
+    "full_finetune": true,
+    "steps": 5000,
+    "batch_size": 8,
+    "dtype": "bfloat16",
+    "seed": 20260717,
+    "checkpoint_steps": [1000, 2000, 3000, 4000, 5000],
+    "launch_command": "env F1_ROOT=/home/shadeform/sim-link-f1 bash /home/shadeform/sim-link-f1/scripts/run_train.sh",
+    "launch_requested_at": "2026-07-17T03:44:17-05:00",
+    "final_step_logged_at": "2026-07-17T10:22:03+00:00",
+    "final_logged_loss": 0.006,
+    "training_log_sha256": "3c386c488ea5184d741288614187e35288eaff7c8078c7415bed7bbb47914e5e",
+    "launcher_sha256": "9d7d2a3fc11a907ee02ff6c7a87885457433260dec6d9b0d57d0996295118456"
+  },
+  "evaluation": {
+    "checkpoint_count": 5,
+    "rollout_receipt_count": 10,
+    "variants": ["chunk_50", "receding_10"],
+    "simulation_device": "cpu",
+    "model_device": "cuda:0",
+    "seed": 0,
+    "attempt_1": {
+      "status": "startup_failed_before_rollout",
+      "reason": "headless_GLFW_without_DISPLAY",
+      "exit_code": 1,
+      "log_sha256": "afcd5191146cd7418d440024b080ebbfd55d327f6cd193ba683cdd31106920a4"
+    },
+    "egl_preflight": "pass_64x64_rgb_uint8",
+    "attempt_2": {
+      "status": "complete",
+      "exit_code": 0,
+      "environment": "MUJOCO_GL=egl PYOPENGL_PLATFORM=egl",
+      "completed_at": "2026-07-17T10:41:09.178655+00:00",
+      "log_sha256": "2850ee614ced89ae91507b76b02a75006a8b431989681d0571fc67360088241f"
+    },
+    "summary_identity_sha256": "992cf3fdd3f12c8543b643000691504003a080ff063fbedf98992425ab7a0b50",
+    "summary_file_sha256": "f64f1d0ce46de8793212f874f5087dcb639417be6cbd7990b1d936da5c8175c3",
+    "strict_success_count": 0
+  },
+  "best": {
+    "checkpoint_step": 1000,
+    "variant": "chunk_50",
+    "actions_per_chunk": 50,
+    "strict_success": false,
+    "maximum_anchor_lift_m": 0.03751930418757199,
+    "terminal_outcome": "lifted_without_strict_cycle",
+    "failed_gates": ["grasp_hold_strict_v2"],
+    "checkpoint_model_sha256": "755544956570297f09f72c48874f5dc9643e02f14a0c934109b81a9e66aec7fb",
+    "checkpoint_config_sha256": "1f17178a8bf1a7d62f9ef89673b79eb4ef839158485e5c09dda2ad9c4eb125d9",
+    "rollout_receipt_identity_sha256": "e03c690e89aed47b85e198bdf03530fdd24f3894cfb9ffd5b6ae85d417ea92b9",
+    "artifact_location": "/Volumes/cerebro/CodexOffload/f1-pi05-r0-20260717/checkpoint-001000/pretrained_model",
+    "artifact_file_count": 7,
+    "artifact_verified_after_copy": true
+  },
+  "f2": {
+    "endpoint_created": false,
+    "reason": "no_strict_simulation_grasp",
+    "intentionally_live": false
+  },
+  "scope": {
+    "policy_training_evidence_only": true,
+    "hardware_accessed": false,
+    "camera_accessed": false,
+    "serial_accessed": false,
+    "physical_motion": false,
+    "physical_proof": false
+  },
+  "spend_ledger_identity_sha256": "c949abbf50fea57513bd6a67899f6544cb5d9a99b05cd9bc63354fec6a3cecd9",
+  "teardown_inventory_identity_sha256": "7343ad9fc1bc1802ec00bd13eab65807ca2d41818c8d59210957b980b2b66064",
+  "paid_compute_running_at_closeout": false,
+  "identity_sha256": "ca9a23b183c9854266d3960b66bc60f0d7cf4aea8d0dc40ad96293e9201d8716"
+}

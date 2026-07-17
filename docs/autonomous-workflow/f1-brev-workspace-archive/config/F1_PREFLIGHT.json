@@ -1,0 +1,137 @@
+{
+  "schema_version": "sim_link.f1_pi05_brev_preflight.v1",
+  "status": "frozen_before_provision",
+  "source_commit": "471b7582a756e618aebd37845adcaccde880741d",
+  "source_branch": "origin/codex/pi05-autolearn-loop",
+  "source_archive_sha256": "19598e23557e14c5ba973240eaed61c927d7229d53b0a8939cce084ce33bf806",
+  "canonical_checkout_read_only": true,
+  "dataset": {
+    "selection": "r0_as_is",
+    "release_fixed_dataset_received": false,
+    "source": "W2 rehearsal-export-003 exact compatibility recreation",
+    "w2_run_receipt_identity_sha256": "fd83af1d629242925dabc564d49c60738f20db4099fe542b196534b44f3d560a",
+    "w2_run_receipt_file_sha256": "6de06a4b313babaa9e0daba5ac789032765c48d6412f988165532d95f5553615",
+    "manifest_identity_sha256": "bd36b7c491ba3c3e08ae3efd87febdbbb1f52f917cb258399484ba4f5311a184",
+    "manifest_file_sha256": "6b7abd88602a20a01dc446b04439200a7b38ae4d24da37675235baab8d5dc387",
+    "mixture_identity_sha256": "37b30d342313710f51c05b6c53f80f3dddc93c93cb0ff2c443bf5970dff203df",
+    "mixture_file_sha256": "5b2618b0b0bea3b7ae1801ef1df3a83fc187a32079b52e06748df1dac5826f1e",
+    "statistics_identity_sha256": "02ba0e701da708680e162493aecececa5827914be2d07a0e1f9e20335d9388ae",
+    "statistics_file_sha256": "67e47d618f36ae1989e55a6fba3aa55a3aa95e78f66a9a062f97c4c2f419c608",
+    "legacy_retention_receipt_identity_sha256": "19d19fbaa315511fa0e7df736d3895089827da8f0b8a2aecd15a2a75885bd495",
+    "legacy_retention_tree_identity_sha256": "05f13c069742f9b9d3726895e71c4b8e4faa531931ca9b11c120c3220d3a6034",
+    "raw_byte_source": "completed W2 scratch receipt dataset, frozen before launch",
+    "dataset_tree_identity_sha256": "3ea03babc3c2ad7585b829dd858b15f09045edd106d0beba8d75540c403eebb8",
+    "dataset_file_count": 13,
+    "dataset_size_bytes": 887660244,
+    "raw_byte_tree": {
+      "file_count": 13,
+      "files": [
+        {"path": "data/chunk-000/file-000.parquet", "size_bytes": 100666683, "sha256": "895bf4a9d567c0a7bef064cb8a2d1e023a3a1da719c4e6f57a55fff83c87d617"},
+        {"path": "data/chunk-000/file-001.parquet", "size_bytes": 103465599, "sha256": "cc86c0357547bf4312b96af03d5e9ae4538f762da9f7a0b3a7d34c7a08b331a7"},
+        {"path": "data/chunk-000/file-002.parquet", "size_bytes": 103600297, "sha256": "2d924e8c1907fb1934694ba5031348035560787b9d2cc684c166da0007af728a"},
+        {"path": "data/chunk-000/file-003.parquet", "size_bytes": 103423651, "sha256": "db1804b776d5b35a4d7071618373c9072a68bd3d3b5cbeaf29f599c4f23ce8b0"},
+        {"path": "data/chunk-000/file-004.parquet", "size_bytes": 103564442, "sha256": "6cff53a839dc280186e79610c77bd990172514a4ed9d6a3f7f488f92b5ae3869"},
+        {"path": "data/chunk-000/file-005.parquet", "size_bytes": 103292991, "sha256": "d8d69ba488e8611804c688bb33ca627c0ee1cea01528ecc395e5ca1137af5698"},
+        {"path": "data/chunk-000/file-006.parquet", "size_bytes": 103419669, "sha256": "fdeca5b5e59dcffff7ad08069a5ffa69b14d5ff27e873e96474318e691951c2c"},
+        {"path": "data/chunk-000/file-007.parquet", "size_bytes": 103460137, "sha256": "0ef8b4cdb323eafef06d41f2e92e54227e07819d62990ad333ab79c73b1b1478"},
+        {"path": "data/chunk-000/file-008.parquet", "size_bytes": 62269117, "sha256": "1139fccc30ed24a8a717e1201e387b996ea56ffc5e87bdbd92418db8a6a71c9e"},
+        {"path": "meta/episodes/chunk-000/file-000.parquet", "size_bytes": 479752, "sha256": "de37348708a49a60f6a45b11b59347bea2d51b6b64974cae3676968b96c9b737"},
+        {"path": "meta/info.json", "size_bytes": 2448, "sha256": "1084a4b1e9e6ae016d2796bd2a9f25721d77a3b92da4e3d4b1698d995ef9f933"},
+        {"path": "meta/stats.json", "size_bytes": 13086, "sha256": "e11f73c259c3fa6383ab53630432b12b51d1ad2afa1e08630cb2464a5adb53d1"},
+        {"path": "meta/tasks.parquet", "size_bytes": 2372, "sha256": "55302e0007b5f51cf1ea305985c2d8b257e71e8998792c2651da82c15d0bb95c"}
+      ],
+      "size_bytes": 887660244
+    },
+    "episode_count": 129,
+    "frame_count": 31366,
+    "window_count": 59904,
+    "dataset_repo_id": "scenesmith/t20-42-r0-anchor-grasp-train"
+  },
+  "model": {
+    "repo_id": "lerobot/pi05_base",
+    "revision": "7de663972b7817d2c4cf2d84c821153dfea772e9",
+    "files": [
+      {"path": "config.json", "size_bytes": 1896, "sha256": "367869712a2847c27e95c431ecb03f17bec4eee01a63995e2fb2d91940752b53"},
+      {"path": "model.safetensors", "size_bytes": 14467165872, "sha256": "0eb11ca9587678c1d2ef8cf32807c29f8ce53a2bfdfc1aa4a4c96f16fca59b0f"},
+      {"path": "policy_postprocessor.json", "size_bytes": 567, "sha256": "142c8b622aeac5c14631e057279df058d3005f616d909cfe30a04524de0b0891"},
+      {"path": "policy_preprocessor.json", "size_bytes": 1241, "sha256": "be2cd1acc33229d42be0640cb55b5d5a4bb3e8d8e27ddfcdcf3f99f1fe3beaef"}
+    ]
+  },
+  "tokenizer": {
+    "repo_id": "google/paligemma-3b-pt-224",
+    "revision": "35e4f46485b4d07967e7e9935bc3786aad50687c",
+    "files": [
+      {"path": "added_tokens.json", "size_bytes": 24, "sha256": "7d0bad90030d638a4bf89a82e91206e25f1fbe0012f14bca21666a64b643bc49"},
+      {"path": "tokenizer_config.json", "size_bytes": 39968, "sha256": "3259402b1d1802e02417d7bff75a889ec61d359d15be6050a957b307c48edbbe"},
+      {"path": "special_tokens_map.json", "size_bytes": 607, "sha256": "5ef37093ae4236587b6e8266acb815b46e2db8ce656c66552bfa574d32880405"},
+      {"path": "config.json", "size_bytes": 1027, "sha256": "e00c72cdff16296bf1229c3267b99f5247d8c740cae84336866338d64fa7918f"},
+      {"path": "tokenizer.json", "size_bytes": 17549604, "sha256": "ef6773c135b77b834de1d13c75a4c98ab7a3684ffd602d1831e1f1bf5467c563"}
+    ]
+  },
+  "stack": {
+    "lerobot_revision": "e40b58a8dfa9e7b86918c374791599d070518d11",
+    "lerobot_patch_sha256": "efe912e3cf75c76a3b0a01d2baec8f0856ce2e2a981f4845978f0e9e34155284",
+    "lerobot_uv_lock_sha256": "367f3d6635ce0975bff459a02ea01ecd847836f491223c5394253d7d054b9280",
+    "lerobot_pyproject_sha256": "d9e8960c33b69f963af3e7753ef05b902385c5f632444a73a10fd52fbc79851c",
+    "unified_stack_identity_sha256": "c8e903e7f1b75215864719398c902d864d8cbd7f43e01f03ffb22c8de240a7a4",
+    "so_arm100_revision": "fda892cba81032c46c40976a48c9ceadbf40a9ca",
+    "active_mjcf_sha256": "d75253eb568e8a7214db9c631ab7bed4217f608a26f7276ebe9a7636cac82580",
+    "openpi_semantic_revision": "15a9616a00943ada6c20a0f158e3adb39df2ccac",
+    "python": "3.12",
+    "frozen_linux_packages": {
+      "lerobot": "0.6.1",
+      "torch": "2.11.0+cu128",
+      "torchvision": "0.26.0+cu128",
+      "transformers": "5.5.4",
+      "datasets": "4.8.5",
+      "numpy": "2.2.6",
+      "pillow": "12.3.0",
+      "peft": "0.19.1"
+    },
+    "scenesmith_eval_overrides": {
+      "mujoco": "3.3.5",
+      "pyarrow": "25.0.0"
+    }
+  },
+  "training": {
+    "recipe": "ABEJA-parity scaled from 10k to 5k",
+    "full_finetune": true,
+    "freeze_vision_encoder": false,
+    "train_expert_only": false,
+    "steps": 5000,
+    "batch_size": 8,
+    "num_workers": 2,
+    "dtype": "bfloat16",
+    "gradient_checkpointing": true,
+    "compile_model": true,
+    "scheduler_decay_steps": 5000,
+    "normalization_mapping": {"ACTION": "MEAN_STD", "STATE": "MEAN_STD", "VISUAL": "IDENTITY"},
+    "seed": 20260717,
+    "save_freq": 1000,
+    "checkpoint_steps": [1000, 2000, 3000, 4000, 5000]
+  },
+  "evaluation": {
+    "simulator": "MuJoCo CPU",
+    "model_device": "cuda:0",
+    "seed": 0,
+    "action_consumption": [
+      {"variant_id": "chunk_50", "n_action_steps": 50},
+      {"variant_id": "receding_10", "n_action_steps": 10}
+    ],
+    "checkpoint_steps": [1000, 2000, 3000, 4000, 5000]
+  },
+  "remote_paths": {
+    "root": "$HOME/sim-link-f1",
+    "training_output": "$HOME/sim-link-f1/outputs/training",
+    "evaluation_output": "$HOME/sim-link-f1/outputs/evaluations"
+  },
+  "local_best_checkpoint_destination": "/Volumes/cerebro/CodexOffload/f1-pi05-r0-20260717",
+  "output_paths_verified_empty_before_model_action": false,
+  "hardware_accessed": false,
+  "camera_accessed": false,
+  "serial_accessed": false,
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "identity_sha256": "PENDING_REMOTE_EMPTY_PATH_CHECK"
+}

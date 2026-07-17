@@ -1,0 +1,33 @@
+{
+  "schema_version": "sim_link.f1_brev_teardown_inventory.v1",
+  "instance_name": "sim-link-f1-pi05-20260717",
+  "instance_id": "8h7sb60wa",
+  "provider_instance_stoppable": false,
+  "teardown_action": "delete",
+  "predelete_inventory": {
+    "checked_at": "2026-07-17T06:10:21-05:00",
+    "workspace_count": 1,
+    "workspace_name": "sim-link-f1-pi05-20260717",
+    "status": "RUNNING",
+    "shell_status": "READY",
+    "health_status": "HEALTHY"
+  },
+  "delete_requested_at": "2026-07-17T06:10:23-05:00",
+  "deletion_confirmed_inventory": {
+    "checked_at": "2026-07-17T06:10:58-05:00",
+    "workspaces": null,
+    "remaining_workspace_count": 0
+  },
+  "final_inventory": {
+    "checked_at": "2026-07-17T06:11:07-05:00",
+    "command": "brev ls --json",
+    "workspaces": null,
+    "remaining_workspace_count": 0,
+    "remaining_resources": []
+  },
+  "paid_compute_running_at_closeout": false,
+  "teardown_before_deadline": true,
+  "mandatory_deadline": "2026-07-17T09:30:00-05:00",
+  "recoverability": "deleted_workspace_and_provider_volumes_are_not_recoverable",
+  "identity_sha256": "7343ad9fc1bc1802ec00bd13eab65807ca2d41818c8d59210957b980b2b66064"
+}
