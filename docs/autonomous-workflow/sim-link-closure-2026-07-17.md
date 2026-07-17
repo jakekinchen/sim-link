@@ -43,28 +43,40 @@ longer ends on "packaged, unresolved."
   (owner's agent config), `external/` pinned checkouts (acquisition is
   scripted in the kit), `tmp/` scratch, and one stale Claude worktree
   (`.claude/worktrees/keen-clarke-401502`, detached).
-- **Disk cleanup plan (recorded, NOT executed)** for `outputs/` (113 G
-  total, ~90 G recoverable). Tier 1 (~72 G): `so101_desk_cube_sort/{evals,
-  train,datasets,models}` and `autolearn/` — pre-ladder sprawl, zero
-  current references. Tier 2 (~17 G): closed-negative tensor trees
-  `t20_35c/p/r/t`, `t20_36`, `t20_36o`, and
-  `t20_44_r2_smolvla_run_001/checkpoints` (keep its `mirrors/` and
-  `rollouts/`). Tier 3 (delete last, 2.6 G): `t20_35x` — the sole
-  Gate-B-passing π0.5 tree. Never delete: `t20_42_r0_generation_run_001`,
+- **Disk cleanup completed and reconciled.** The tier-1 and tier-2 deletion
+  had already run under the owner's earlier exact-path authorization before
+  this closure note was written. Its preserved audit recorded
+  `DELETE_TOTAL_KiB 96967592`: `outputs/` fell from 113 G to 21 G. The targets
+  were `so101_desk_cube_sort/{evals,train,datasets,models}`, the generated
+  `autolearn/` bulk, closed-negative tensor trees
+  `t20_35c_expert_only_run_001`, `t20_35p_terminal_flow_run_001`,
+  `t20_35r_full_path_run_001`,
+  `t20_35t_time_normalized_standard_replay_run_001`,
+  `t20_36_bounded_corrected_coverage_run_001`,
+  `t20_36o_bounded_optimizer_run_001`, and
+  `t20_44_r2_smolvla_run_001/checkpoints`, all under
+  `outputs/robot_lab/`. One tracked `autolearn` receipt was restored after the
+  bulk deletion and remains in Git.
+- The owner's new go-ahead was audited against the filesystem rather than
+  applied to different surviving paths: every tier-1/tier-2 bulk target was
+  already absent, so no second destructive operation occurred. Current audit:
+  `outputs/` 21 G and 146 GiB filesystem free. Tier 3
+  `t20_35x_physical_gate_joint_weighted_run_001` remains deliberately retained
+  at 2.6 G. Also retained: `t20_42_r0_generation_run_001`,
   `t20_43c_r2_act_replacement_run_001` (F0c's source checkpoint),
-  `t17_5b_raw_store` (append-only), small dataset/receipt dirs, `weights/`.
-  Execution requires an explicit owner go and a one-line disposal note here.
+  `t17_5b_raw_store`, SmolVLA `mirrors/` and `rollouts/`, small
+  dataset/receipt directories, and `weights/`.
 
-## Remaining owner decisions (the complete list)
+## Remaining owner decision
 
-1. **Disk cleanup go/no-go** (tiers above).
-2. **Branch disposition**: `codex/pi05-autolearn-loop` holds the complete
+- **Branch disposition**: `codex/pi05-autolearn-loop` holds the complete
    record and is fully pushed. Recommendation: leave unmerged and archive
    the repository as-is — the fork is the successor; a merge to `main`
    would add nothing but noise. If a single-branch archive is wanted later,
    fast-forward `main` in a quiet moment.
-3. Nothing else. Authorities are consumed or closed, Brev inventory is
-   zero, no crons or background training runs exist, and the fork carries
-   the live doctrine.
+
+Nothing else remains here. Authorities are consumed or closed, Brev inventory
+is zero, no crons or background training runs exist, and the fork carries the
+live doctrine.
 
 Future work happens in `/Users/kelly/Developer/sim2claw`.

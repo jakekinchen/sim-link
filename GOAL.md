@@ -136,8 +136,8 @@ proof states must remain distinct.
   (checkpoint `8ecf7bb9...`, receipt `9e957708...`) — the capability question
   this repository carried is resolved affirmative in the successor. F1
   workspace evidence archived in-repo; open threads (T19.2c, Robo Scan,
-  studio track), local-state notes, the recorded-not-executed disk-cleanup
-  tiers, and the two remaining owner decisions are in
+  studio track), local-state notes, the already-executed 96.97 GiB cleanup
+  reconciliation, and the sole remaining branch-disposition decision are in
   `docs/autonomous-workflow/sim-link-closure-2026-07-17.md`. Future work:
   `/Users/kelly/Developer/sim2claw`.
 - Prior windows are retained in

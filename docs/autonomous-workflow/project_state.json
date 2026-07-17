@@ -124,6 +124,32 @@
     }
   ],
   "branch": "codex/pi05-autolearn-loop",
+  "archive_closure": {
+    "status": "implementation_complete_pending_same_agent_review",
+    "source_closure_baseline_commit": "4674e2bd630edd5ad4ee1696f924d88ccb6a17cc",
+    "successor_repository": "/Users/kelly/Developer/sim2claw",
+    "successor_spine_commit": "5ade87cb8e870bb4dc66c69e528ff0948c442d60",
+    "successor_gate_c_checkpoint_tree_sha256": "8ecf7bb959c68ba34524aa503b2a0c548540e51a3c1261de143b7d5b57836830",
+    "successor_gate_c_final_receipt_sha256": "9e957708219a31d683643714c45bead0398447a984555da1961cb12e5e66352a",
+    "cleanup": {
+      "status": "previously_executed_and_currently_reconciled",
+      "delete_total_kib": 96967592,
+      "outputs_before_gib": 113,
+      "outputs_after_gib": 21,
+      "current_filesystem_free_gib": 146,
+      "new_deletion_performed_during_reconciliation": false,
+      "tier_1_and_2_bulk_targets_absent": true,
+      "tracked_autolearn_receipt_restored": true,
+      "tier_3_retained": true,
+      "f0c_source_checkpoint_retained": true,
+      "r0_generator_retained": true,
+      "append_only_raw_store_retained": true,
+      "smolvla_mirrors_and_rollouts_retained": true,
+      "weights_retained": true
+    },
+    "branch_disposition": "leave_unmerged_archive_recommended_owner_not_required_for_successor_work",
+    "authority_transferred": false
+  },
   "verified_implementation_boundary": {
     "brief_id": "071",
     "commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
@@ -349,11 +375,11 @@
   "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "F0c",
-  "next_eligible_task": "F0c",
+  "next_eligible_task": null,
   "active_support_task": "K5",
   "support_tasks": {
     "K5": {
-      "state": "in_progress",
+      "state": "implementation_complete_pending_review",
       "active_brief_id": "237",
       "brief_id": "237",
       "depends_on": [
@@ -362,6 +388,21 @@
         "successor_gate_c_pass_preserved"
       ],
       "objective": "reconcile the already-executed output cleanup, close the source archive without extra deletion, and prepare an authority-safe successor spine handoff",
+      "result": "the owner-authorized tier-1/tier-2 cleanup was proven already complete at 96967592 KiB reclaimed; no surviving path was reinterpreted as a delete target; protected assets remain; sim2claw spine export is verified at 5ade87c",
+      "evidence": {
+        "cleanup_delete_total_kib": 96967592,
+        "outputs_current_gib": 21,
+        "filesystem_free_current_gib": 146,
+        "new_deletion_performed": false,
+        "tracked_autolearn_receipt": "outputs/robot_lab/autolearn/m13-rung-250/development-comparison.json",
+        "successor_spine_commit": "5ade87cb8e870bb4dc66c69e528ff0948c442d60",
+        "successor_spine_portable_file_count": 15,
+        "successor_spine_hashes_verified": 15,
+        "hardware_accessed": false,
+        "external_compute_used": false,
+        "brev_compute_used": false,
+        "authority_transferred": false
+      },
       "authority_granted": [
         "inventory_recorded_cleanup_paths",
         "verify_preserved_artifacts",
