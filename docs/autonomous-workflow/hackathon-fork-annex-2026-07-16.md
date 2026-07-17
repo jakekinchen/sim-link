@@ -85,6 +85,43 @@ only if the central evaluator shows ≥85% per-move success by day 3.
 4. Per-device camera RGB checklist (resolution/fps/latency); stand up the
    episode hub and central evaluator; post the expert to the leaderboard.
 
+## Simplifications adopted for the fork (subtract, don't add)
+
+1. **One runtime environment.** The parent-python/child-venv split killed
+   three one-use attempts. The fork uses the pinned LeRobot venv as THE
+   interpreter for everything — training, rollout, rendering in-process. The
+   subprocess dispatch layer is deleted, not smoked.
+2. **State-first, camera-free training loops.** Task 0–1 (reach, push) train
+   on joint state + object pose from the simulator, no rendering in the loop
+   — orders of magnitude faster on laptops. Cameras and video datasets exist
+   only for the VLA track and demo mirrors.
+3. **Short episodes with early termination.** A 60-frame reach task with
+   success-triggered termination, not 244-frame full episodes, for the RL
+   ladder's lower rungs. Episode length is the single biggest rollout-cost
+   knob.
+4. **Two policy tracks only.** ACT (IL baseline) and state-based RL (e.g.,
+   SAC) until a demo works end-to-end. SmolVLA/π0.5 are day-3 stretch, not
+   parallel workstreams.
+5. **Auto-emitted `RUN_RECEIPT.json` replaces ceremony.** Every run's harness
+   writes one file: git commit, config hash, dataset identity, seed, wall
+   clock, metrics. That is the entire authority story in the fork.
+6. **CPU-pinned evaluator.** MuJoCo is CPU anyway; run eval-side policy
+   inference on CPU/fp32 so verdicts are bit-identical across all Macs and
+   the Linux box. Train fast and nondeterministically; judge slowly and
+   identically.
+7. **Task registry instead of scene editing.** One frozen workcell XML plus a
+   registry mapping task_id → scene variant + predicate set + reward margins.
+   Adding a task is a registry entry; nobody touches MuJoCo XML.
+8. **Two dataset tiers.** Light state-only parquet for RL iteration; full
+   audiovisual LeRobotDataset only for VLA training and demo evidence.
+9. **The gateway is the only road to the robot.** All hardware access —
+   teleop, tests, demo — goes through the policy-server protocol. One
+   integration surface, one timing contract, one thing to debug.
+10. **Born-clean repo hygiene.** Outputs gitignored from the first commit,
+    plain human run names (`runs/2026-07-17_act_a/`), no task alphabet —
+    that notation earned its keep in a solo autonomous loop, not in a
+    four-person room.
+
 ## Two scar-tissue warnings
 
 - Watch for **smooth-but-timid** convergence (seen in the SmolVLA rung: the
