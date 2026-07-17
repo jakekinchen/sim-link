@@ -247,6 +247,14 @@ was confirmed at 06:10:58 CDT, and authenticated canonical inventory remained
 empty. No training, compute start, hardware, or authority action occurred in
 the fold; F0c packaging and the F3 freeze tag remain unchanged.
 
+Support task K4/Brief 236 is active as a documentation-only reconciliation of
+the owner-approved corrections to the post-tag fork doctrine. It may align the
+living annex, reconstruction forward plan/architecture/results, handoff
+runbook, and deterministic text invariants. It may not change the immutable
+`sim2claw-genesis` boundary, the frozen reconstruction manifest, F0c's signed
+contract, or any training, rollout, hardware, external-compute, Brev, transfer,
+or promotion authority.
+
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean
 export receipt `729addbb...`, while excluding bulk/private content and live

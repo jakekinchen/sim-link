@@ -350,8 +350,53 @@
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "F0c",
   "next_eligible_task": "F0c",
-  "active_support_task": null,
+  "active_support_task": "K4",
   "support_tasks": {
+    "K4": {
+      "state": "in_progress",
+      "active_brief_id": "236",
+      "brief_id": "236",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "source_boundary_commit": "aae542a0a2f66328e0e8b88877eb6c467340579d",
+      "depends_on": [
+        "owner_requested_fork_doctrine_spine_correction",
+        "annex_amendment_aae542a_verified_on_origin"
+      ],
+      "result": "Brief 236 activates a documentation-only reconciliation of the corrected GR00T path, ACT temporal ladder, causal correction episodes, evaluator-owned promotion decision, doctrine commit receipt field, and simulation-qualified Level-2 language across the living fork spine",
+      "authority_granted": [
+        "read_tracked_fork_doctrine_and_reconstruction_sources",
+        "reconcile_living_fork_spine_documents",
+        "add_documentation_invariant_tests",
+        "update_canonical_state_ledger_review_and_session_records",
+        "preserve_scoped_verified_closeout_on_origin"
+      ],
+      "authority_not_granted": [
+        "training",
+        "model_construction",
+        "model_loading",
+        "model_inference",
+        "optimizer_creation",
+        "optimizer_training",
+        "rollout",
+        "gate_c_execution",
+        "dataset_conversion",
+        "network_access",
+        "package_installation",
+        "external_compute",
+        "brev_compute",
+        "hardware",
+        "camera_access",
+        "serial_access",
+        "physical_motion",
+        "physical_transfer",
+        "promotion",
+        "source_manifest_regeneration",
+        "sim2claw_genesis_tag_change",
+        "f0c_contract_change",
+        "destructive_operation"
+      ]
+    },
     "F1-evidence-fold": {
       "state": "verified",
       "active_brief_id": null,
