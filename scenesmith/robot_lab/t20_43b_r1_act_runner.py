@@ -77,14 +77,17 @@ from scenesmith.robot_lab.t20_43b_r1_act_contracts import (
     build_attempt_marker,
     load_verified_sources,
     verify_attempt_marker,
-    verify_pre_run_acceptance,
     verify_spec,
 )
-from scenesmith.robot_lab.t20_43b_r1_act_materialization import (
-    IMPLEMENTATION_SCOPED_PATHS,
-    verify_materialized_authority,
+from scenesmith.robot_lab.t20_43b_r1_act_authority_refresh import (
+    REFRESH_ACCEPTANCE_PATH,
+    REFRESH_AUTHORITY_PATHS,
+    REFRESH_IMPLEMENTATION_SCOPED_PATHS,
+    REFRESH_OWNER_PATH,
+    REFRESH_PERMIT_PATH,
+    REFRESH_RUNTIME_PATH,
+    verify_effective_refresh_authority,
 )
-
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 TRACE_SCHEMA_VERSION = "scenesmith.t20_43b_r1_act_closed_loop_trace.v1"
@@ -609,10 +612,8 @@ def verify_all_outputs(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     sources = load_verified_sources(repo_root=root)
     spec = load_strict_json(root / SPEC_PATH)
     verify_spec(spec, sources=sources)
-    bundle = verify_materialized_authority(repo_root=root)
-    permit = bundle[PERMIT_PATH.as_posix()]
-    acceptance = load_strict_json(root / PRE_RUN_ACCEPTANCE_PATH)
-    verify_pre_run_acceptance(acceptance, permit=permit)
+    bundle = verify_effective_refresh_authority(repo_root=root)
+    permit = bundle[REFRESH_PERMIT_PATH.as_posix()]
     attempt = load_strict_json(root / ATTEMPT_PATH)
     verify_attempt_marker(attempt, permit=permit)
     run = load_strict_json(root / RUN_SUMMARY_PATH)
@@ -811,12 +812,11 @@ def _run_authorized_attempt(
     sources = load_verified_sources(repo_root=root)
     spec = load_strict_json(root / SPEC_PATH)
     verify_spec(spec, sources=sources)
-    bundle = verify_materialized_authority(repo_root=root)
-    permit = bundle[PERMIT_PATH.as_posix()]
-    runtime_preflight = bundle[RUNTIME_PREFLIGHT_PATH.as_posix()]
-    acceptance = load_strict_json(root / PRE_RUN_ACCEPTANCE_PATH)
-    verify_pre_run_acceptance(acceptance, permit=permit)
-    _require_active_time(bundle[OWNER_GRANT_PATH.as_posix()], started_at)
+    bundle = verify_effective_refresh_authority(repo_root=root)
+    permit = bundle[REFRESH_PERMIT_PATH.as_posix()]
+    runtime_preflight = bundle[REFRESH_RUNTIME_PATH.as_posix()]
+    acceptance = bundle[REFRESH_ACCEPTANCE_PATH.as_posix()]
+    _require_active_time(bundle[REFRESH_OWNER_PATH.as_posix()], started_at)
     if Path(sys.executable).resolve() != (root / STABLE_RUNNER_INTERPRETER).resolve():
         raise ValueError("T20.43b runner interpreter drifted from renderer smoke")
     if str(MUJOCO_SUPPORT_SITE_PACKAGES) not in sys.path:
@@ -1390,7 +1390,7 @@ def _require_remote_preservation(
             "--porcelain=v1",
             "--untracked-files=all",
             "--",
-            *[path.as_posix() for path in IMPLEMENTATION_SCOPED_PATHS],
+            *[path.as_posix() for path in REFRESH_IMPLEMENTATION_SCOPED_PATHS],
             OWNER_GRANT_PATH.as_posix(),
             GATE_A_PATH.as_posix(),
             REQUEST_PATH.as_posix(),
@@ -1399,6 +1399,8 @@ def _require_remote_preservation(
             PERMIT_PATH.as_posix(),
             SPEC_PATH.as_posix(),
             PRE_RUN_ACCEPTANCE_PATH.as_posix(),
+            *[path.as_posix() for path in REFRESH_AUTHORITY_PATHS],
+            REFRESH_ACCEPTANCE_PATH.as_posix(),
             acceptance["reviewer_path"],
         ],
         cwd=repo_root,

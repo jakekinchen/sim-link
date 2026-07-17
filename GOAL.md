@@ -98,13 +98,16 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-The policy task remains T20.43b. Its stable-runtime ACT replacement is
-implemented, source-pinned, and pre-run accepted, but unconsumed: marker,
+The policy task remains T20.43b under Brief 225. Its stable-runtime ACT
+replacement is implemented, source-pinned, and pre-run accepted, but unconsumed: marker,
 model, optimizer, checkpoint, rollout, and result paths are absent. T20.42/R0
 is verified constructive source/data evidence; T20.44 SmolVLA is a verified
 terminal negative; no learned policy has passed strict-v2. The next policy
-action is only a fresh administrative authority epoch for the unchanged ACT
-recipe under a window with proven completion budget. Hardware, network,
+action is implementation and model-free review of a separately named epoch-2
+administrative authority wrapper for the unchanged ACT recipe, followed only
+after origin preservation by fresh materialization and review. The owner has
+directed resolution of this final question; epoch 1 remains immutable and this
+direction is not a second replacement or attempt. Hardware, network,
 external compute, Brev, physical transfer, and promotion remain closed.
 
 Support task K1/Brief 224 creates the non-authorizing portable reconstruction
@@ -263,6 +266,11 @@ updates and fewer rollouts; that comparison is a budget bound, not an ACT speed
 claim. T20.43b remains unconsumed and capability-unresolved. The next window
 must refresh only the expired administrative authority epoch after proving the
 marker is still absent; it must not create a second replacement.
+Brief 225 and Reviewer 304 now accept the separately named epoch-2 refresh
+implementation: it freezes replacement/attempt ordinal 1, reuses the unchanged
+recipe and output paths, re-hashes epoch 1, and fails closed unless the marker
+and all run/result paths remain absent. Only model-free epoch-2 materialization
+opens after the implementation and synchronized state are exact on origin.
 
 T20.17 is `verified` as a bounded negative clean-base result; T20.18 is
 `verified` through Brief 149, T20.19 is `verified` through Brief 150, and T20.20
