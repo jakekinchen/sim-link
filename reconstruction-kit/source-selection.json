@@ -1,8 +1,8 @@
 {
   "schema_version": "scenesmith.reconstruction_source_selection.v1",
-  "source_commit": "992ed2f5e40d11e3979cc206eebdfac20a004073",
+  "source_commit": "d5358800e4937a44f0b442290a669f6680798069",
   "source_repository": "https://github.com/jakekinchen/sim-link.git",
-  "maximum_file_bytes": 2000000,
+  "maximum_file_bytes": 4000000,
   "forbidden_prefixes": [
     ".git/",
     ".env",
@@ -25,6 +25,30 @@
     {
       "path": "docs/autonomous-workflow/project_state.json",
       "reason": "Repository-bound live authority state is deliberately not transplanted; the kit supplies a non-authorizing proof snapshot and the destination must initialize its own state and authority epoch."
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_decision.json",
+      "reason": "Consumed source-repository authority is deliberately omitted; the replayable result and terminal receipts travel, while the destination must create its own non-transferred run authority."
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_request.json",
+      "reason": "Consumed source-repository authority is deliberately omitted; the replayable result and terminal receipts travel, while the destination must create its own non-transferred run authority."
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_owner_grant.json",
+      "reason": "Expired owner scope is inert history and is deliberately omitted so no copied grant can be mistaken for destination authority."
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_permit.json",
+      "reason": "The one-use source permit is consumed and deliberately omitted; its terminal result remains independently replayable without transferring permission."
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_pre_run_acceptance.json",
+      "reason": "Source-repository reviewer acceptance is consumed procedural history and is deliberately omitted from live fork inputs."
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_runtime_preflight.json",
+      "reason": "The source machine runtime snapshot is not portable authority; exact code, source pins, result evidence, and destination bootstrap verification travel instead."
     },
     {
       "path": "configurations/robot_lab/t17_7_compiler_window_replay_audit.json",
@@ -52,8 +76,22 @@
     "docs/autonomous-workflow/owner-direction-2026-07-17-final-overnight.md",
     "docs/briefs/226-portable-terminal-closeout-refresh.md",
     "docs/briefs/227-t20-43c-zero-update-act-continuation.md",
+    "docs/briefs/230-f0-release-gap-diagnosis.md",
+    "docs/briefs/231-f0a-chunk-timing-phase-observability.md",
+    "docs/briefs/232-f0b-hybrid-tail-cadence-evaluation.md",
+    "docs/briefs/233-f3-reconstruction-current-truth-fold.md",
     "configurations/robot_lab/k2_w1_portable_bootstrap_receipt.json",
     "configurations/robot_lab/k2_w2_combined_r0_recreation_receipt.json",
+    "configurations/robot_lab/f0_release_gap_diagnosis.json",
+    "configurations/robot_lab/f0a_chunk_phase_observability.json",
+    "configurations/robot_lab/f0b_hybrid_tail_cadence_attempt.json",
+    "configurations/robot_lab/f0b_hybrid_tail_cadence_final_receipt.json",
+    "configurations/robot_lab/f0b_hybrid_tail_cadence_result.json",
+    "configurations/robot_lab/f0b_hybrid_tail_cadence_result_mirror_manifest.json",
+    "configurations/robot_lab/f0b_hybrid_tail_cadence_retention_receipt.json",
+    "configurations/robot_lab/f0b_hybrid_tail_cadence_scorecard.json",
+    "configurations/robot_lab/f0b_hybrid_tail_cadence_spec.json",
+    "configurations/robot_lab/f0b_hybrid_tail_cadence_trace.json",
     "configurations/robot_lab/t20_43c_r2_act_equivalence_receipt.json",
     "configurations/robot_lab/t20_43c_r2_act_final_receipt.json",
     "configurations/robot_lab/t20_43c_r2_act_replacement_marker.json",
@@ -64,9 +102,21 @@
     "docs/reviewer-messages/313-close-rgb-camera-census-terminal-failure.md",
     "docs/reviewer-messages/314-close-t20-43c-terminal-interruption.md",
     "docs/reviewer-messages/318-verify-t20-43c-r2-terminal-negative.md",
+    "docs/reviewer-messages/320-verify-f0-release-gap-diagnosis.md",
+    "docs/reviewer-messages/321-verify-f0a-chunk-phase-observability.md",
+    "docs/reviewer-messages/325-verify-f0b-hybrid-tail-cadence-terminal-negative.md",
     "docs/session-logs/317-rgb-camera-census-terminal-failure.md",
     "docs/session-logs/318-t20-43c-terminal-interruption.md",
     "docs/session-logs/323-t20-43c-r2-terminal-negative.md",
+    "docs/session-logs/325-f0-release-gap-diagnosis.md",
+    "docs/session-logs/326-f0a-chunk-phase-observability.md",
+    "docs/session-logs/330-f0b-hybrid-tail-cadence-terminal-negative.md",
+    "scenesmith/robot_lab/f0_release_gap_diagnosis.py",
+    "scenesmith/robot_lab/f0a_chunk_phase_observability.py",
+    "scenesmith/robot_lab/f0b_hybrid_tail_cadence.py",
+    "tests/unit/test_f0_release_gap_diagnosis.py",
+    "tests/unit/test_f0a_chunk_phase_observability.py",
+    "tests/unit/test_f0b_hybrid_tail_cadence.py",
     "scenesmith/__init__.py",
     "scenesmith/robot_lab/__init__.py",
     "configurations/robot_lab/pi05_authority_composition_contract.json",

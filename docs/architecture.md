@@ -115,18 +115,21 @@ not a new training result or authority grant.
 | Rung | Current result | Architectural consequence |
 | --- | --- | --- |
 | R0 constructive source/data | Verified: 119 new training and nine fresh-held-out strict-v2 successes; exact prior base included once | The source, dataset, held-out, and processor spine is usable, but scripted source success is not learned-policy proof. |
-| R1 ACT | The original T20.43c proved bit-exact zero-update continuation and actual-schema mirrors, then ended as an immutable inconclusive interruption at update 728. T20.43c-R2 subsequently completed the same recipe through 10,000 updates, seven checkpoints, and fourteen rollouts. | R2 is a verified terminal negative with no infrastructure failure and no Gate C pass. Chunk-50 learned most of the grasp/lift/lower sequence and reached 45.674304 mm maximum lift, but final release remained the last strict-v2 failure; receding-10 was substantially worse. No retry is implied. |
+| R1 ACT | The original T20.43c proved bit-exact zero-update continuation and actual-schema mirrors, then ended as an immutable inconclusive interruption at update 728. T20.43c-R2 completed the same recipe through 10,000 updates, seven checkpoints, and fourteen rollouts. F0 localized a 20-frame delayed release; F0a found lift/lower observation aliasing; F0b changed only late cadence and still failed release. | R2/F0/F0a/F0b form one verified terminal-negative chain: chunk-50 learned grasp/lift/hold/lower and reached 45.674304 mm maximum lift, but release remained the last strict-v2 failure. Receding-10 lost grasp; hybrid tail cadence increased retreat contact persistence without clearing by frame 219. No retry or automatic corrective rung is implied. |
 | R2 SmolVLA | Verified terminal negative after 5,000 updates, five checkpoints, and ten dual-cadence rollouts | Stable training and partial interaction do not satisfy strict-v2; no retry is implied. |
 | R3 PI0.5 | Conditional compatibility/stress track; earlier Gate B alphabet is diagnostic history | T20.45 is not activated. The fork keeps PI0.5 as day-three stretch and requires a fresh route/authority decision before any further model work. |
 
 No learned policy has passed strict-v2. Physical-twin qualification, transfer
 readiness, and promotion remain false.
 
-The owner-recorded F0 release-gap route is a new, separately reviewed
-experiment derived from the R2 counterexample; it is not a reinterpretation or
-retry grant from the terminal receipt. The fork architecture remains ACT plus
-state-based RL as primary, regardless of the optional source-repo F1 PI0.5
-experiment.
+The separately reviewed F0 release-gap route is complete. Its model-free audits
+eliminated three tempting data/objective explanations, exposed observation
+aliasing and delayed release, and the one no-training F0b rollout falsified
+cadence alone as the repair. The corrective ACT rung remains unconsumed. The
+fork architecture therefore starts from the evidence rather than replaying the
+same recipe: ACT remains the imitation baseline, while short-horizon
+state-based RL supplies phase/consequence-sensitive control. SmolVLA and PI0.5
+remain stretch tracks.
 
 ## Fork Target Architecture
 

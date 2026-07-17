@@ -39,6 +39,12 @@ must be retained, along with queue reset, chunk-start states, executed tail
 lengths, and MP4/trace identities. A post-hoc render is useful evidence; a
 render integrated into every evaluation is better.
 
+F0b shows why cadence is a discriminator, not a cure. Keeping chunk-50 through
+frame 175 and re-observing every ten actions afterward increased strict retreat
+contact from 1 to 17 frames, yet both pads still touched at release-final frame
+219. The gripper cleared only by final retreat after the object returned to the
+desk. More feedback changed the trajectory but did not make release timely.
+
 ### 6. A thin capsule can recreate the full data boundary
 
 The 66 MB signed asset pack plus exact source/dependency pins reproduced the
@@ -94,6 +100,31 @@ chunk-50 rollout lifted 37.655304 mm and failed only
 0.502 mm. This points the fork toward consequence-aware release completion,
 short-horizon state-based control, and evaluator-owned task predicates—not a
 third attempt at the same ACT recipe or a weakened Gate C.
+
+### Release localization after ACT
+
+The post-campaign discriminator chain is part of the result, not optional
+commentary:
+
+- F0 result `807d3da7...` reconstructed all 10,000 optimizer samples and
+  rejected tail-window starvation, R0 open-gripper normalization failure, and
+  aggregate late-phase loss underweighting. A physical-L1 gripper coefficient
+  of 2.6963 is coherent, but the sharper signal is a release pattern about 20
+  frames late.
+- F0a result `278e8bc7...` found 20 of 24 source lower frames with qpos-near
+  and image-near lift counterparts despite opposite hidden velocity and
+  conflicting future targets. Candidate frame 200 lagged the nearest lower
+  state by 17 frames. Candidate images were not retained, so no
+  candidate/source image-equality claim is made.
+- F0b result `8fb34ff4...` changed only observation cadence for the same
+  checkpoint, seed, source episode, initial state, and evaluator. Actions match
+  chunk-50 through frame 175, then diverge at frame 176; Gate C still fails only
+  release. This falsifies cadence alone for the retained checkpoint.
+
+No optimizer or corrective training ran in F0/F0a/F0b, and the one
+owner-authorized corrective ACT rung remained unselected. Carry the full F0b
+trace as a regression and use the finding to shape the fork's observable,
+short-horizon tasks—not to manufacture a third source-repo attempt.
 
 ## Infrastructure failures that are not model results
 
@@ -160,6 +191,8 @@ third attempt at the same ACT recipe or a weakened Gate C.
 - Cameras or audiovisual datasets in the fast state-RL loop.
 - A second robot path beside the gateway.
 - Per-task XML edits, task alphabets, and committed output trees.
+- Another same-recipe ACT rung or cadence-only patch without a discriminator
+  that predicts a different release consequence.
 
 ## Strategic pattern to carry forward
 

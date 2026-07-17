@@ -12,14 +12,16 @@ inconclusive owner-directive interruption at update 728. T20.43c-R2 then
 completed the unchanged ACT recipe through 10,000 updates, seven checkpoints,
 and fourteen rollouts with no infrastructure failure and no Gate C pass. It is
 the decisive ACT-on-R0 terminal negative; no retry or third ACT attempt is
-authorized by that result itself. The later owner-recorded F0 route separately
-opens diagnosis of that counterexample and at most one corrective ACT rung
-after a fresh reviewed brief. The most useful counterexample is its chunk-50 release phase:
+authorized by that result itself. The later F0/F0a/F0b route has now completed:
+F0 falsified tail coverage, normalization, and release-mixture explanations;
+F0a localized lift/lower observation aliasing and a 17-frame state lag; and
+F0b changed only tail observation cadence but still failed release at frame
+219. The most useful counterexample remains its chunk-50 release phase:
 45.674304 mm maximum lift and 37.655304 mm final lift, with only
 `release_final_contact_clear` failing in the final rollout. Learned strict-v2
-success, rather than ACT plumbing, is now the sim-link long pole. PI0.5 remains
-day-three stretch in the fork; the separately scoped F1/Brev experiment is a
-source-repo parallel lane and does not change that fork priority. Robo Scan
+success, rather than ACT plumbing, is now the sim-link long pole. The corrective
+ACT rung was not selected or consumed, cadence alone is insufficient, and no
+F1/Brev run was started. PI0.5 remains day-three stretch in the fork. Robo Scan
 proceeds independently toward the real metric export required by I5.
 
 This plan is a task-ordering source, not an authority source. Live authority,
@@ -27,11 +29,12 @@ training readiness, and proof labels remain mechanically owned by
 [`project_state.json`](./autonomous-workflow/project_state.json) and the central
 authority composer.
 
-The current next-hours route is fixed by
+The current route is the terminal fold required by
 [`Owner Direction — Final Overnight Exploration`](./autonomous-workflow/owner-direction-2026-07-17-final-overnight.md):
-F0 release-gap diagnosis first, optional separately scoped F1 in parallel, F2
-serving after a grasping checkpoint, then F3 fold. Manager Intervention 018 is
-retained as superseded convergence history.
+F0 is closed as a structured terminal negative, F1 and F2 were not opened, and
+F3/Brief 233 now compresses the current evidence and architecture into the
+verified sim2claw reconstruction boundary. Manager Intervention 018 is retained
+as superseded convergence history.
 
 ## Product Cut
 
@@ -43,6 +46,10 @@ retained as superseded convergence history.
   an inconclusive update-728 interruption. T20.43c-R2 is the distinct verified
   terminal negative after the full unchanged campaign. Do not relabel the
   original interruption, conflate it with R2, or infer retry authority.
+- Preserve F0 result `807d3da7...`, F0a result `278e8bc7...`, and the full
+  replayable F0b trace/result `af62a3b5...`/`8fb34ff4...`. These establish a
+  delayed/aliased release mechanism and falsify hybrid cadence alone; they do
+  not establish learned success or authorize corrective training.
 - An explicit, reusable learning/plumbing evidence surface: exact R0 parity
   checks plus the existing signed T20.35x one-batch proof, kept distinct from
   any accepted product policy.
@@ -263,6 +270,9 @@ non-negotiable full-MVP exits:
 | 20b | **T20.43b — R1 ACT replacement rung (verified terminal runtime failure; Briefs 222/225, Reviewer 306)** | Sole marker `d67cf38e...` consumed. Fresh ACT/optimizer, checkpoint 0, and one untrained chunk-50 rollout completed, then mirror dispatch rejected the T20.43b trace schema. Receipt `89b6dbff...` binds zero updates, one checkpoint, one rollout, no Gate C, and no retry. This boundary alone did not resolve ACT-on-R0. | Verified T20.44 terminal boundary; owner addendum `8b4a206`; accepted epoch-2 authority; Reviewers 299/301/302/304-306 | Patch-and-resume, second replacement or attempt, retry, relabel as trained negative, recipe changes, correction objectives, threshold changes, hardware, network, external compute, Brev |
 | 20c | **T20.43c — exact zero-update ACT recovery (verified inconclusive interruption; Brief 227/Reviewer 314)** | Bit-exact fresh-seed equivalence, zero optimizer/sampler advance, and actual-schema mirror v2 all passed. The continuation then reached update 728 before a superseded scheduling instruction caused SIGINT. Terminal `d848a1a8...` is neither a trained negative nor infrastructure failure; its marker is consumed and no retry follows from this boundary. | Owner recovery direction; T20.43b receipt `89b6dbff...`; immutable-safe renderer v2 `37c5da6`; Reviewer 314 | Relabel as trained result, mutate/restart the consumed continuation, infer Gate C, recipe/gate/data change, hardware, network, external compute, Brev |
 | 20d | **T20.43c-R2 — owner-directed ACT manual replacement (verified terminal negative; Reviewer 318)** | Marker `dfe3ff05...` and final receipt `be11a258...` bind 10,000 updates, seven checkpoints, fourteen rollouts, no infrastructure failure, and no Gate C pass. Chunk-50 reached 45.674304 mm maximum lift; the final 37.655304 mm rollout failed only `release_final_contact_clear`. Final receding-10 lost grasp hold and lifted 0.502 mm. No retry or third ACT attempt. | Original T20.43c immutable interruption; separately reviewed owner replacement route; Reviewer 318 | Retry/third ACT attempt, relabel near-miss as Gate C, gate/recipe/data change, hardware, network, external compute, Brev |
+| F0 | **Release-gap diagnosis (verified model-free; Reviewer 320)** | Result `807d3da7...` falsifies tail-window starvation, R0 open-gripper normalization failure, and late-phase loss-mass underweighting. It localizes a 20-frame delayed release pattern and keeps the corrective rung unselected. | T20.43c-R2 terminal counterexample | Model/checkpoint load, optimizer/training, rollout, gate change, F1/Brev, hardware |
+| F0a | **Chunk/phase observability audit (verified model-free; Reviewer 321)** | Result `278e8bc7...` finds 20/24 qpos-near/image-near lift/lower pairs with opposite hidden velocity and conflicting futures; candidate frame 200 is 17 frames behind the nearest lower state. Candidate-image equivalence is not claimed. | Verified F0 | Model/checkpoint load, optimizer/training, rollout, wall-clock phase token, hardware |
+| F0b | **Hybrid tail-cadence evaluation (verified terminal negative; Reviewer 325)** | One same-checkpoint/same-seed rollout is identical through frame 175 and re-observes at frame 176. Strict retreat-contact frames rise 1→17, but both pads still contact at release-final frame 219 and Gate C fails only release. Result `8fb34ff4...`; no retry or corrective rung. | Verified F0a; Brief 232 | Retry, extra checkpoint/seed, optimizer/training, gate change, F1/Brev, hardware, promotion |
 | 21 | **T20.44 — R2 SmolVLA standard rung (verified terminal negative; Brief 220/Reviewer 297)** | Sole result `9d916206...` completes 5,000 finite updates, five checkpoints, and ten dual-semantics rollouts with no strict-v2 pass. Strongest partial result was checkpoint 1,000/receding-10 at 73 contacts and 18.061 mm lift; first-pass selection remains null. | Verified T20.42; T20.43 boundary; Reviewers 294-297 | Retry/replacement, correction objectives, network/download, Gate B/open-loop barrier, threshold changes, hardware, external compute, Brev |
 | 22 | **T20.45 — R3 conditional π0.5 standard rung** | Only after R1/R2 evidence: either one bounded local-MPS standard fine-tune from the cached base, or a costed external-compute proposal document (ABEJA-parity reference) for separate fresh owner authorization. No compute consumption beyond local MPS without that grant. | R1/R2 rollout evidence; fresh owner grant for any external compute | External compute or Brev consumption without fresh owner authorization, correction objectives, promotion |
 

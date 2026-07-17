@@ -1,4 +1,6 @@
-# SO-101 Simulation Learning Reconstruction Kit
+# sim2claw Reconstruction Kit
+
+**Simulation to Closed-Loop Autonomous Workcell**
 
 This directory is the compressed, portable handoff for the SO-101/MuJoCo/
 LeRobot program developed inside SceneSmith. It is designed to be copied into a
@@ -21,7 +23,13 @@ infrastructure failure and no Gate C pass. Its best chunk-50 lift was 45.674304
 mm; the final 37.655304 mm rollout missed only release, while final receding-10
 lost the grasp. ACT-on-R0 is therefore a verified terminal negative, not an
 unresolved capability, and no retry, physical-transfer, or promotion claim
-exists.
+exists. The subsequent F0/F0a/F0b chain narrowed that failure without changing
+the verdict: tail coverage, open-gripper normalization, and aggregate
+late-phase loss mass are not the defect; the policy's release pattern is about
+20 frames late amid lift/lower observation aliasing; and one same-checkpoint
+hybrid-cadence rollout still had both fingertip pads in contact at release-final
+frame 219. Cadence alone is insufficient. No corrective ACT rung or Brev run
+was consumed.
 
 ## Reading order
 
@@ -42,21 +50,23 @@ exists.
    — optional three-day team plan; direction only, never authority.
 
 `CURRENT_STATE.json` is the compact machine-readable result snapshot at the
-final portable source boundary. `SOURCE_MANIFEST.json` is generated from
+current portable source boundary. `SOURCE_MANIFEST.json` is generated from
 `source-selection.json` and binds every curated implementation/evidence byte,
-including the immutable T20.41 route snapshot and both T20.43c terminal
-boundaries, to one portable source commit. Compact R2 result evidence travels;
-its expired authority/preflight/permit files and manual runner do not. The
-export receipt separately binds the compressed reconciled documentation in
-this directory.
+including both T20.43c terminal boundaries and the later F0/F0a/F0b
+localization chain, to one portable source commit. Compact R2 result evidence
+and the full replayable F0b trace travel; expired authority/preflight/permit
+files and the manual R2 runner do not. The export receipt separately binds the
+compressed reconciled documentation in this directory.
 
 ## What travels
 
-The kit now includes a signed 66 MB reconstruction asset pack rather than the
+The kit includes a signed 66 MB reconstruction asset pack rather than the
 2.7 GB R0 output tree: the exact 10-episode/2,330-frame T20.23 base dataset,
-chunked below the repository file ceiling, plus one real signed trace from each
-T20.43, T20.43b, and T20.44 schema. It carries no model checkpoint, optimizer
-state, private observation, full R0 dataset, or authority.
+chunked below the repository file ceiling, plus one real signed trace fixture
+from each T20.43, T20.43b, and T20.44 schema. The source capsule additionally
+carries F0/F0a diagnostics and the 3.3 MB replayable F0b trace/result bundle.
+It carries no model checkpoint, optimizer state, private observation, full R0
+dataset, or live authority.
 
 The reviewed K3 RGB-only census note also travels. It records a safe terminal
 failure: D405 returned a decoded frame whose dimensions did not match the
@@ -87,7 +97,7 @@ recreation`. The receipt is compatibility evidence, never current authority.
 The future light state-only parquet/60-frame RL tier remains a separate
 fork-birth follow-on; full audiovisual data remains VLA/demo-only.
 
-The combined clean-export rehearsal now verifies this path end to end. W1
+The K2 combined clean-export rehearsal verifies this path end to end. W1
 receipt `392fcc8b...` proves the pinned dual-runtime source stack, one
 244-frame strict-v2 expert episode, and all three retained render schemas.
 W2 receipt `86739578...` then recreates the exact legacy R0 boundary in
@@ -99,7 +109,9 @@ After the combined receipt was preserved, the source capsule was re-pinned at
 `992ed2f...`. Final manifest `d5396251...`, source-pin validation export
 `ae7cfd7c...`, and W1 recheck `7d9fa11a...` all verify. The W2 run is not
 repeated merely to make fresh timestamps or wrapper hashes agree; its exact
-content gate and receipt remain the decisive data-parity proof.
+content gate and receipt remain the decisive data-parity proof. F3 re-verifies
+the final capsule/export/bootstrap boundary after folding the release findings,
+without pretending documentation changes require another hour-long generation.
 
 ## Verify and export
 
@@ -111,12 +123,11 @@ python3 reconstruction-kit/scripts/kit.py verify
 python3 reconstruction-kit/scripts/portable_assets.py verify
 python3 -m unittest reconstruction-kit/tests/test_kit.py
 python3 reconstruction-kit/tests/test_regenerate_r0.py
-python3 reconstruction-kit/scripts/kit.py export ../so101-reconstruction
-python3 ../so101-reconstruction/tools/reconstruction_kit.py \
-  verify-export ../so101-reconstruction
+python3 reconstruction-kit/scripts/kit.py export ../sim2claw
+python3 ../sim2claw/tools/reconstruction_kit.py verify-export ../sim2claw
 
 # In the pristine export, clone dependency pins locally and rehearse offline.
-python3 ../so101-reconstruction/tools/bootstrap.py \
+python3 ../sim2claw/tools/bootstrap.py \
   --local-source-root "$(pwd)" --offline
 ```
 
@@ -142,3 +153,5 @@ remain auditable without transplanting stale authority.
 - It does not make old owner grants or one-use permits valid in the new repo.
 - It is not a reason to replay the T20.35 optimizer alphabet. The useful
   mechanisms and negative findings are already distilled here.
+- It is not authority for a third ACT recipe attempt. The single source-repo
+  corrective rung remained unselected and does not transfer to the fork.

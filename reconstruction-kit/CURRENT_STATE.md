@@ -1,7 +1,7 @@
 # Current Proof State
 
 Current route snapshot: the portable source commit recorded in
-`SOURCE_MANIFEST.json` on `codex/pi05-autolearn-loop`, 2026-07-16. Historical
+`SOURCE_MANIFEST.json` on `codex/pi05-autolearn-loop`, 2026-07-17. Historical
 T20.43b, original T20.43c, and T20.43c-R2 artifacts remain immutable; this
 snapshot interprets them without rewriting or conflating any result.
 
@@ -14,7 +14,7 @@ snapshot interprets them without rewriting or conflating any result.
 | Portable reconstruction | Verified | One pristine export passed W1 dual-runtime/all-schema bootstrap and then reproduced exact legacy R0 under W2 with no mismatches and independent verification exit 0. |
 | Evidence and authority | Verified | Canonical JSON/SHA-256, source identities, central composition, renderer smoke, trace mirroring, and one-use permits fail closed. |
 | SmolVLA learned policy | Verified terminal negative | One 5,000-update, five-checkpoint, ten-rollout campaign produced no Gate C pass. |
-| ACT learned policy | Verified terminal negative | T20.43b ended in mirror-schema infrastructure at zero updates. Original T20.43c proved exact continuation and ended inconclusively at update 728. T20.43c-R2 then completed 10,000 updates, seven checkpoints, and fourteen rollouts without a Gate C pass or infrastructure failure. |
+| ACT learned policy | Verified terminal negative | T20.43b ended in mirror-schema infrastructure at zero updates. Original T20.43c proved exact continuation and ended inconclusively at update 728. T20.43c-R2 completed 10,000 updates, seven checkpoints, and fourteen rollouts without a Gate C pass or infrastructure failure. F0/F0a/F0b localized delayed/aliased release and falsified cadence alone without training. |
 | PI0.5 learned policy | Negative diagnostic history | Extensive Gate B work localized structured decode/objective mismatch; no learned Gate C success exists. |
 | RGB camera readiness | Terminal infrastructure failure | One D405 decoded frame failed signed input-mode dimension validation; C922 was not opened and no frame, mode census, latency result, or readiness label was accepted. |
 | Physical twin/transfer | Not qualified | Physical calibration, metric Robo Scan handoff, task proof, transfer, and promotion remain open. |
@@ -131,6 +131,30 @@ lifted 0.037655304225193253 m and failed only
 `release_final_contact_clear`; maximum chunk-50 lift was
 0.04567430422519325 m. Final receding-10 had no grasp hold and lifted only
 0.000502 m. The kit transfers this evidence, never its consumed authority.
+
+## Verified release-localization chain
+
+- F0 result `807d3da7e21bbf3ec846454bb13aa6a2cb92eac4f6dffe8d86becb0ad777e5f9`
+  rejects tail-window starvation, R0 open-gripper normalization failure, and
+  aggregate release-mixture underweighting. It records a 2.696308 physical-L1
+  gripper coefficient and a release-pattern best shift of 20 frames, but
+  selects no corrective training.
+- F0a result `278e8bc772dc879622a226abe22665d320421925045ad9b3cb1f88b1c31153a4`
+  finds 20/24 source lift/lower observation aliases and a 17-frame candidate
+  state lag aligned to the release delay. Candidate-image equivalence is not
+  claimed.
+- F0b trace `af62a3b5d47b315609590765445a4aa7db99effb2fe20b4d3a4d1c3bd9bbb3f9`
+  and result `8fb34ff4a0619d59f414ec6bb81cb028fd5cf3d31bb26c4655a9dd41855f185d`
+  preserve one same-checkpoint/same-seed hybrid-tail rollout. Actions match the
+  original through frame 175 and diverge at frame 176. Strict retreat-contact
+  frames rise from 1 to 17, but contact remains at release-final frame 219 and
+  Gate C still fails only release. No optimizer, training, retry, or
+  infrastructure failure occurred.
+
+The corrective ACT rung remains unselected and unconsumed. F3/Brief 233 is the
+active source-repo route only to reconcile and verify the sim2claw capsule; it
+does not authorize model work, F1/Brev, hardware, transfer, promotion, or the
+freeze tag before terminal review.
 
 See the optional [hackathon fork annex](../docs/autonomous-workflow/hackathon-fork-annex-2026-07-16.md)
 for the three-day distributed plan. It is task direction, not transferred

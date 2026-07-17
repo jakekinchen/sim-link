@@ -34,7 +34,7 @@ Do not infer permission from a past success, a local capability, or a runtime
 setting. The state file and central authority composition decide whether a
 training, live-observation, physical-transfer, or promotion claim is valid.
 
-At the current 2026-07-16 boundary, R0 source/data construction is verified and
+At the current 2026-07-17 boundary, R0 source/data construction is verified and
 both standard learned-policy campaigns are terminal negatives. SmolVLA ran
 5,000 updates and ten rollouts without a Gate C pass. The original T20.43c
 continuation remains an immutable inconclusive interruption at update 728;
@@ -50,11 +50,24 @@ transfer, or promotion claim exists. The
 snapshot](../reconstruction-kit/CURRENT_STATE.md) compresses this boundary;
 `project_state.json` remains authoritative for any later change.
 
-R2 itself grants no retry. The later owner-recorded F0 route is a distinct
-forward task: diagnose release-tail coverage, open-gripper normalization, and
-release weighting before a fresh brief may select at most one corrective ACT
-rung. The separately scoped F1/Brev lane is optional and does not change the
-fork's ACT-plus-state-RL primary architecture.
+The later F0/F0a/F0b route is now resolved rather than merely planned. F0
+falsified tail-window starvation, an R0 open-gripper normalization defect, and
+late-phase loss-mass underweighting, while localizing the retained policy's
+release pattern 20 frames late. F0a found 20/24 lift/lower source states that
+are qpos-near and image-near despite opposite hidden velocity and conflicting
+future actions; candidate-image equality was not claimed. F0b then tested the
+cadence hypothesis once with the same checkpoint and seed. Re-observing at
+frame 176 increased strict retreat-contact frames from 1 to 17 but still left
+both fingertip pads in contact at the frozen release-final frame 219. Gate C
+again failed only `release_final_contact_clear`. Cadence alone is therefore not
+the repair, no corrective ACT rung was selected or consumed, and no F1/Brev
+run was started.
+
+F3/Brief 233 is the active route: fold these exact results and the verified K2
+bootstrap/R0 reconstruction into the sim2claw seed, then verify a fresh export
+before the separately gated freeze tag. This does not change the fork's
+ACT-plus-state-RL primary architecture or grant model, hardware, transfer, or
+promotion authority.
 
 The kit's combined portability proof is also complete: W1 receipt
 `392fcc8b...` verifies the current dual-runtime/all-schema stack from a
@@ -85,7 +98,7 @@ held-out set, replayable signed claims, or separate evaluation ownership. All
 future teleop, tests, and demo traffic use one robot gateway. Outputs are
 ignored from commit one and runs have human names rather than a task alphabet.
 Copied permits and reviewer artifacts remain inert history. None of this
-changes current-repo authority before the morning freeze.
+changes current-repo authority or makes the freeze tag an authority grant.
 
 ## System At A Glance
 

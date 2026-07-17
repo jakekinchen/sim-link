@@ -17,7 +17,10 @@ import re
 from typing import Any
 
 LEDGER_CURRENT_TASK_PATTERN = re.compile(r"^current_task:\s*(\S+)", re.MULTILINE)
-TASK_ID_PATTERN = re.compile(r"^T\d+(?:\.\d+)?[a-z]?(?:-[A-Z])?$")
+LEDGER_NEXT_TASK_PATTERN = re.compile(r"^next_task:\s*(\S+)", re.MULTILINE)
+TASK_ID_PATTERN = re.compile(
+    r"^(?:T\d+(?:\.\d+)?[a-z]?(?:-[A-Z][A-Za-z0-9]*)?|[FK]\d+[a-z]?)$"
+)
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 SUMMARY_WORD_LIMIT = 8
 
@@ -46,6 +49,29 @@ def parse_ledger_current_task(ledger_text: str) -> str:
     if not TASK_ID_PATTERN.match(token):
         raise ValueError(
             f"Ledger current_task token {token!r} is not a recognizable task ID"
+        )
+    return token
+
+
+def parse_ledger_next_task(ledger_text: str) -> str:
+    """Extract an explicit next task, falling back to the current task.
+
+    A closeout may truthfully keep the completed task as ``current_task`` while
+    routing a distinct dependency-ready task through ``next_task``. Older
+    ledgers without that line retain their historical current-equals-next
+    behavior.
+    """
+    matches = LEDGER_NEXT_TASK_PATTERN.findall(ledger_text)
+    if len(matches) > 1:
+        raise ValueError(
+            f"Ledger has {len(matches)} 'next_task:' lines; expected at most one"
+        )
+    if not matches:
+        return parse_ledger_current_task(ledger_text)
+    token = matches[0].rstrip(";,")
+    if not TASK_ID_PATTERN.match(token):
+        raise ValueError(
+            f"Ledger next_task token {token!r} is not a recognizable task ID"
         )
     return token
 
@@ -110,10 +136,11 @@ def derive_pointer_targets(
     if not isinstance(tasks, dict):
         raise ValueError("project_state has no 'tasks' object")
     current_task = parse_ledger_current_task(ledger_text)
+    next_task = parse_ledger_next_task(ledger_text)
     boundary = derive_latest_verified_boundary(tasks)
     return {
         "current_task": current_task,
-        "next_eligible_task": current_task,
+        "next_eligible_task": next_task,
         "latest_verified_task_implementation_boundary": {
             "brief_id": boundary["brief_id"],
             "commit": boundary_commit,

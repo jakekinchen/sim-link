@@ -10,16 +10,15 @@ From this `sim-link` checkout:
 ```bash
 python3 reconstruction-kit/scripts/kit.py build-manifest --check
 python3 reconstruction-kit/scripts/kit.py verify
-python3 reconstruction-kit/scripts/kit.py export ../so101-reconstruction
-python3 ../so101-reconstruction/tools/reconstruction_kit.py \
-  verify-export ../so101-reconstruction
+python3 reconstruction-kit/scripts/kit.py export ../sim2claw
+python3 ../sim2claw/tools/reconstruction_kit.py verify-export ../sim2claw
 ```
 
 The destination must not exist and must be outside the source repo. Inspect
 `RECONSTRUCTION_RECEIPT.json` before initializing a new Git history.
 
 ```bash
-cd ../so101-reconstruction
+cd ../sim2claw
 git init
 git add -- .
 git commit -m "Seed SO-101 reconstruction from verified SceneSmith capsule"
@@ -28,7 +27,9 @@ git commit -m "Seed SO-101 reconstruction from verified SceneSmith capsule"
 At this point you have exact compact source parity with portable boundary
 recorded in `docs/reconstruction/SOURCE_MANIFEST.json`, but no external
 checkouts, model weights, or authority. The signed asset pack does include the
-exact 10-episode base dataset and three simulation-only trace fixtures.
+exact 10-episode base dataset and three simulation-only trace fixtures. The
+curated source capsule also includes the F0/F0a diagnostics and full replayable
+F0b hybrid-cadence trace/result, with all copied authority inert.
 
 ## Stage 1 — Run the one-command bootstrap
 
@@ -150,7 +151,16 @@ dataset identity, seed, wall clock, and metrics, plus replayable artifacts.
 SmolVLA and PI0.5 are day-three stretch tracks only. Historical T20.43b,
 original T20.43c, and T20.43c-R2 permits are consumed/inert. The original
 update-728 interruption remains inconclusive; R2 is the later full ACT terminal
-negative. Neither licenses a continuation or third ACT attempt in the fork.
+negative. The later F0 chain removes three tempting data/objective explanations,
+localizes a delayed/aliased release, and proves that more frequent tail
+re-observation alone still misses frame-219 release. Neither boundary licenses
+a continuation or third ACT attempt in the fork.
+
+Treat the carried F0b trace as a frozen regression and start new capability
+work with observable 60-frame state tasks. ACT remains the imitation baseline;
+state-based RL is the second primary track. A future long-horizon ACT change
+needs a new discriminator and its own fork `RUN_RECEIPT.json`, not a copied
+source permit.
 
 Model weights and checkpoints are not in this kit. Obtain them through their
 own licensed, checksum-bound process, and keep raw-byte identities in the new

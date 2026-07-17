@@ -15,6 +15,7 @@ from scenesmith.robot_lab.project_state_pointer_sync import (
     derive_pointer_targets,
     find_pointer_drift,
     parse_ledger_current_task,
+    parse_ledger_next_task,
     rewrite_pointer_fields,
 )
 
@@ -29,6 +30,7 @@ Updated: 2026-07-13
 ```text
 training_lock: closed
 current_task: T17.4 pending after verified T17.3; compile source-bound frames
+next_task: T18.1
 next_step: compile deterministic frame/segment tables
 ```
 """
@@ -90,6 +92,31 @@ class LedgerCurrentTaskParseTest(unittest.TestCase):
             "T16.2b-A",
         )
 
+    def test_accepts_fork_and_support_task_ids(self) -> None:
+        for task_id in ("F0b", "F3", "K2", "T20.43c-R2"):
+            with self.subTest(task_id=task_id):
+                self.assertEqual(
+                    parse_ledger_current_task(f"current_task: {task_id} active\n"),
+                    task_id,
+                )
+
+    def test_parses_distinct_next_task_and_falls_back_to_current(self) -> None:
+        self.assertEqual(parse_ledger_next_task(LEDGER_TEXT), "T18.1")
+        self.assertEqual(
+            parse_ledger_next_task("current_task: F3 in_progress\n"),
+            "F3",
+        )
+
+    def test_rejects_duplicate_or_invalid_next_task(self) -> None:
+        with self.assertRaises(ValueError):
+            parse_ledger_next_task(
+                "current_task: F3 active\nnext_task: F3\nnext_task: K2\n"
+            )
+        with self.assertRaises(ValueError):
+            parse_ledger_next_task(
+                "current_task: F3 active\nnext_task: unknown\n"
+            )
+
 
 class LatestVerifiedBoundaryTest(unittest.TestCase):
     def test_selects_highest_verified_brief(self) -> None:
@@ -118,7 +145,7 @@ class PointerTargetsAndDriftTest(unittest.TestCase):
     def test_targets_follow_ledger_and_tasks(self) -> None:
         targets = self.build_targets()
         self.assertEqual(targets["current_task"], "T17.4")
-        self.assertEqual(targets["next_eligible_task"], "T17.4")
+        self.assertEqual(targets["next_eligible_task"], "T18.1")
         boundary = targets["latest_verified_task_implementation_boundary"]
         self.assertEqual(boundary["brief_id"], "109")
         self.assertEqual(boundary["commit"], FAKE_COMMIT)
@@ -135,7 +162,7 @@ class PointerTargetsAndDriftTest(unittest.TestCase):
         targets = self.build_targets()
         state = apply_pointer_targets(copy.deepcopy(PROJECT_STATE), targets)
         self.assertEqual(state["current_task"], "T17.4")
-        self.assertEqual(state["next_eligible_task"], "T17.4")
+        self.assertEqual(state["next_eligible_task"], "T18.1")
         self.assertEqual(
             state["latest_verified_task_implementation_boundary"]["commit"],
             FAKE_COMMIT,

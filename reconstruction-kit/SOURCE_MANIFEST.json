@@ -85,6 +85,94 @@
     },
     {
       "git_mode": "100644",
+      "path": "configurations/robot_lab/f0_release_gap_diagnosis.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "b66c66b7eafc452bf7171f88d0b141f2ee113095d44665a02a430d662cb20aa9",
+      "size_bytes": 27935,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0a_chunk_phase_observability.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "2ef689c7f51784a799db20cba5dec5f35c51422608b5a78ff4bd94346da06fa6",
+      "size_bytes": 63485,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_attempt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "24b0c6e47774612eeae155d3467f3b926f77b2d0d0b80c07ae11f8335ef5f681",
+      "size_bytes": 1260,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_final_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "c619cf24d1d6f2f45cd6cd88fac369b76326af1985f99bfbd92d2845fcb96be3",
+      "size_bytes": 1187,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_renderer_smoke.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "9d274007a814eaff1c4147c7a0cd4f2fd94b641fc42f8d3bc11a38491769c2a5",
+      "size_bytes": 1561,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_result.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "35d8cda47ef73b5b3a2ddfa35d721ba8c8bbd1d44a8190c55b02de754a88ece3",
+      "size_bytes": 1908,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_result_mirror_manifest.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "300f290643a3515626b4934e0adda5c9e0a003460aaf89678abd70bd76ed09a0",
+      "size_bytes": 900,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_retention_receipt.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "6fcdde47035348dc3dbd3db129192849e675b3d257f16c92bbdb969fabcb6077",
+      "size_bytes": 1772,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_scorecard.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "95c81b1153d02ef981f1ce3e58acb69d2f8014ebbe5fd1337e612fdce2404949",
+      "size_bytes": 923,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_spec.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "3513a75aa201275e121a3c1fbe120c3f671104513c75fc65c41c726ff8d3a53b",
+      "size_bytes": 17731,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_trace.json",
+      "role": "signed compact evidence or contract",
+      "sha256": "831a10756b5adac21ddec66b9e83671b9a58631af443b104148c0cf269d00b7e",
+      "size_bytes": 3461769,
+      "tier": "evidence"
+    },
+    {
+      "git_mode": "100644",
       "path": "configurations/robot_lab/geometry_derived_unilateral_grasp.json",
       "role": "signed compact evidence or contract",
       "sha256": "7e2b7cc2d06799eeccbe560e9366a9dfc8b3f0f19b0411930227b1bcfff90006",
@@ -1703,8 +1791,8 @@
       "git_mode": "100644",
       "path": "docs/briefs/226-portable-terminal-closeout-refresh.md",
       "role": "canonical reference",
-      "sha256": "096cd7b537746f1a221045097f14f4a99818b0274058b69f735f0f47b2fd4572",
-      "size_bytes": 7731,
+      "sha256": "72f819b708195fab2eba3fd581d468ea7d453324e878ae3b995f1a2e28317a5e",
+      "size_bytes": 8446,
       "tier": "reference"
     },
     {
@@ -1713,6 +1801,38 @@
       "role": "canonical reference",
       "sha256": "b2055694c1536400de74813361fe252d7dd148ad75d2ee92146057617c891e84",
       "size_bytes": 5038,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/briefs/230-f0-release-gap-diagnosis.md",
+      "role": "canonical reference",
+      "sha256": "46369d1e0bd6e2a69ec3917af19aed733e541bf8e5531b0eb639433bf12b96ec",
+      "size_bytes": 6708,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/briefs/231-f0a-chunk-timing-phase-observability.md",
+      "role": "canonical reference",
+      "sha256": "f22a6311e4a6b1d75f7208965401e308d0cbef23ae4a821f3692f39a9f344084",
+      "size_bytes": 8073,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/briefs/232-f0b-hybrid-tail-cadence-evaluation.md",
+      "role": "canonical reference",
+      "sha256": "00a5b66b6baabaa8edefe852d25574eff60b48b11efb4f8d3e23e5ba268c30a0",
+      "size_bytes": 7843,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/briefs/233-f3-reconstruction-current-truth-fold.md",
+      "role": "canonical reference",
+      "sha256": "603f8fe2fffc47adad1269fbae055a140b43ba4f187951e3a678f1f19082eb3b",
+      "size_bytes": 7625,
       "tier": "reference"
     },
     {
@@ -1765,6 +1885,30 @@
     },
     {
       "git_mode": "100644",
+      "path": "docs/reviewer-messages/320-verify-f0-release-gap-diagnosis.md",
+      "role": "canonical reference",
+      "sha256": "c6b7a10597053a38955b7ec4ab46febb9ac233844c9468b03693f4ee0314e15c",
+      "size_bytes": 3190,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/321-verify-f0a-chunk-phase-observability.md",
+      "role": "canonical reference",
+      "sha256": "362871a3f10e28077c27c9313f9bf8efa5953a1518d0ad30187ab503638a0ea5",
+      "size_bytes": 3399,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/reviewer-messages/325-verify-f0b-hybrid-tail-cadence-terminal-negative.md",
+      "role": "canonical reference",
+      "sha256": "15c39e8c91b02f0e3cb28b0dd008fa36f72e40e1bb8c68a029078f2910f36b72",
+      "size_bytes": 4118,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
       "path": "docs/session-logs/317-rgb-camera-census-terminal-failure.md",
       "role": "canonical reference",
       "sha256": "3a12876a8900762a1ad7ef435ead6af160feb6bbe310ac641c7a65a62a350a83",
@@ -1785,6 +1929,30 @@
       "role": "canonical reference",
       "sha256": "e29e5202b4e9eb8f58b4e5ba9d4f757c4f595b6b6458110d3276611492145678",
       "size_bytes": 1609,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/session-logs/325-f0-release-gap-diagnosis.md",
+      "role": "canonical reference",
+      "sha256": "0dd5022d96f7a89351f7d487579473d6632c508ef9503e518f5e6297265d92fd",
+      "size_bytes": 2669,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/session-logs/326-f0a-chunk-phase-observability.md",
+      "role": "canonical reference",
+      "sha256": "ba98a79ebe9ac70b53a0c8a4b5691780dcab0677b49abe2f06be754c6524e277",
+      "size_bytes": 3157,
+      "tier": "reference"
+    },
+    {
+      "git_mode": "100644",
+      "path": "docs/session-logs/330-f0b-hybrid-tail-cadence-terminal-negative.md",
+      "role": "canonical reference",
+      "sha256": "e57f1eccf94b0ce886f8f298aeb710658b3e6ef4e33b1e8e6b9afca4917f92b2",
+      "size_bytes": 2333,
       "tier": "reference"
     },
     {
@@ -2225,6 +2393,30 @@
       "role": "portable implementation",
       "sha256": "6855d5a26306ced3848ea4536ffbef642348bbd432d10e0975cfe1a946a4d719",
       "size_bytes": 20567,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/f0_release_gap_diagnosis.py",
+      "role": "portable implementation",
+      "sha256": "afa213b0a16603c3798ef613cabbadbd6af21fa973b999eba2135c4ac1b15bbf",
+      "size_bytes": 41038,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/f0a_chunk_phase_observability.py",
+      "role": "portable implementation",
+      "sha256": "77401bf19e8ea549ec5f18b3d0bce0f66682f3582f03208cdee0f856ed9fe003",
+      "size_bytes": 55127,
+      "tier": "core"
+    },
+    {
+      "git_mode": "100644",
+      "path": "scenesmith/robot_lab/f0b_hybrid_tail_cadence.py",
+      "role": "portable implementation",
+      "sha256": "57dbcc5d29d3bf97f011212964d39819f0726279a18b13b9c2e84e7c29901070",
+      "size_bytes": 96273,
       "tier": "core"
     },
     {
@@ -2959,8 +3151,8 @@
       "git_mode": "100644",
       "path": "scripts/robot_lab/render_rollout_mirror_v2.py",
       "role": "reproduction entrypoint",
-      "sha256": "44a021eab6f59f1901afbd9165cad7ce2e60cde95b451265b19014f1bdf8dcd8",
-      "size_bytes": 2022,
+      "sha256": "3b6448f534b33d54a395e162abf9c0fa86bdfc72e0edcc0e441ceb54f0fc9074",
+      "size_bytes": 3341,
       "tier": "entrypoint"
     },
     {
@@ -3177,6 +3369,30 @@
       "role": "focused regression",
       "sha256": "f45c5fbbabea8947bb127cf20d79a7b15eba415f76a8c45a321a5d7f710e9334",
       "size_bytes": 18502,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_f0_release_gap_diagnosis.py",
+      "role": "focused regression",
+      "sha256": "2a7226aed5e84e4a98a0abe09d5d599ea2333d1e377615b70f3aae9480bae3c0",
+      "size_bytes": 6619,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_f0a_chunk_phase_observability.py",
+      "role": "focused regression",
+      "sha256": "8d18e34f2834e8b990e396377115a1567e68ae446e540a5a1b39edff944f19a5",
+      "size_bytes": 8895,
+      "tier": "validation"
+    },
+    {
+      "git_mode": "100644",
+      "path": "tests/unit/test_f0b_hybrid_tail_cadence.py",
+      "role": "focused regression",
+      "sha256": "38a2b7bffd8716b974f726d428feb97d07647b5ceb459a9ff770d513bf2a1f95",
+      "size_bytes": 17160,
       "tier": "validation"
     },
     {
@@ -3398,10 +3614,46 @@
     "outputs/",
     "tmp/"
   ],
-  "identity_sha256": "d53962511a6e178e5a06269ceda193b40b9d9c8667514deaae8902d695c6989e",
+  "identity_sha256": "bc17b06a686b3849c5c99334c968c91560d7bd00905b9c3c9201f24a85ef3606",
   "learned_policy_success_claimed": false,
-  "maximum_file_bytes": 2000000,
+  "maximum_file_bytes": 4000000,
   "omitted_source_artifacts": [
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_decision.json",
+      "reason": "Consumed source-repository authority is deliberately omitted; the replayable result and terminal receipts travel, while the destination must create its own non-transferred run authority.",
+      "sha256": "edb1e238777cd58387eba2de3c838e881d3997ef5665945b2a6a86a7606d7108",
+      "size_bytes": 6394
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_request.json",
+      "reason": "Consumed source-repository authority is deliberately omitted; the replayable result and terminal receipts travel, while the destination must create its own non-transferred run authority.",
+      "sha256": "9b8a8826a0f087a59c716a2d7dd3718122cf1678b029dce8d57663c6b4e48b68",
+      "size_bytes": 10797
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_owner_grant.json",
+      "reason": "Expired owner scope is inert history and is deliberately omitted so no copied grant can be mistaken for destination authority.",
+      "sha256": "de9ebb5dc70e50c0bea5df2f594b40ad537481312ddd2aaa1d82a5ce698f489d",
+      "size_bytes": 1832
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_permit.json",
+      "reason": "The one-use source permit is consumed and deliberately omitted; its terminal result remains independently replayable without transferring permission.",
+      "sha256": "6692c0f41ea8285537357318b60d633b93c66795e41f32aaa75ee28aaf130b74",
+      "size_bytes": 1780
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_pre_run_acceptance.json",
+      "reason": "Source-repository reviewer acceptance is consumed procedural history and is deliberately omitted from live fork inputs.",
+      "sha256": "3df51d555822984a8dcdf403af9b933504afcd766186259d141dd1cb7febd7f2",
+      "size_bytes": 1277
+    },
+    {
+      "path": "configurations/robot_lab/f0b_hybrid_tail_cadence_runtime_preflight.json",
+      "reason": "The source machine runtime snapshot is not portable authority; exact code, source pins, result evidence, and destination bootstrap verification travel instead.",
+      "sha256": "7cb1b131a7afac1e228c3bb6b8f550020e3ff808d10af3e8b02c9be6a5454e1d",
+      "size_bytes": 3194
+    },
     {
       "path": "configurations/robot_lab/t17_7_compiler_window_replay_audit.json",
       "reason": "Historical 4.99 MB replay evidence is content-addressed in the source repository but is not required by the current R0, ACT, SmolVLA, evaluator, or authority reconstruction path.",
@@ -3429,13 +3681,13 @@
     {
       "path": "docs/autonomous-workflow/project_state.json",
       "reason": "Repository-bound live authority state is deliberately not transplanted; the kit supplies a non-authorizing proof snapshot and the destination must initialize its own state and authority epoch.",
-      "sha256": "67ccf7d667614e98a5aafc3efae0663b8888ea446ea995d6c7f341bcea5b3882",
-      "size_bytes": 450472
+      "sha256": "7e4ba993c7680825f20d859e1da5d093212ef748af559be455723ed8b7d038f8",
+      "size_bytes": 467718
     }
   ],
   "physical_proof_transferred": false,
   "schema_version": "scenesmith.reconstruction_source_manifest.v1",
-  "selection_sha256": "addb9d5dd1d12f286018a357ed11c632bb390abdc5e241cbaf03f8b5d5b948e6",
-  "source_commit": "992ed2f5e40d11e3979cc206eebdfac20a004073",
+  "selection_sha256": "235ef77d4ea4a0ef8469f3f54c08abe40af1979d21d67438279ecdce4616df89",
+  "source_commit": "d5358800e4937a44f0b442290a669f6680798069",
   "source_repository": "https://github.com/jakekinchen/sim-link.git"
 }

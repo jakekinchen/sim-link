@@ -179,6 +179,34 @@ class ReconstructionKitTest(unittest.TestCase):
             selection["python_seeds"],
         )
 
+        f0_terminal_paths = {
+            "configurations/robot_lab/f0_release_gap_diagnosis.json",
+            "configurations/robot_lab/f0a_chunk_phase_observability.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_attempt.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_final_receipt.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_result.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_result_mirror_manifest.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_retention_receipt.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_scorecard.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_spec.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_trace.json",
+        }
+        self.assertTrue(f0_terminal_paths.issubset(explicit))
+        self.assertGreaterEqual(selection["maximum_file_bytes"], 3_500_000)
+        for path in (
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_owner_grant.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_request.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_decision.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_runtime_preflight.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_permit.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_pre_run_acceptance.json",
+        ):
+            with self.subTest(path=path):
+                self.assertNotIn(path, explicit)
+                self.assertFalse(
+                    any(kit.fnmatch.fnmatchcase(path, pattern) for pattern in patterns)
+                )
+
     def test_generated_manifest_is_current_and_verifies(self) -> None:
         expected = kit.build_manifest(REPO_ROOT)
         actual = kit.load_strict_json(kit.MANIFEST_PATH)
@@ -233,6 +261,15 @@ class ReconstructionKitTest(unittest.TestCase):
             "configurations/robot_lab/t20_43c_r2_act_standard_result.json",
         ):
             self.assertIn(path, paths)
+        for path in (
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_owner_grant.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_request.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_decision.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_runtime_preflight.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_permit.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_pre_run_acceptance.json",
+        ):
+            self.assertNotIn(path, paths)
         self.assertIn(
             "docs/reviewer-messages/318-verify-t20-43c-r2-terminal-negative.md",
             paths,
@@ -241,6 +278,18 @@ class ReconstructionKitTest(unittest.TestCase):
             "docs/session-logs/323-t20-43c-r2-terminal-negative.md",
             paths,
         )
+        for path in (
+            "configurations/robot_lab/f0_release_gap_diagnosis.json",
+            "configurations/robot_lab/f0a_chunk_phase_observability.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_result.json",
+            "configurations/robot_lab/f0b_hybrid_tail_cadence_trace.json",
+            "scenesmith/robot_lab/f0_release_gap_diagnosis.py",
+            "scenesmith/robot_lab/f0a_chunk_phase_observability.py",
+            "scenesmith/robot_lab/f0b_hybrid_tail_cadence.py",
+            "docs/reviewer-messages/325-verify-f0b-hybrid-tail-cadence-terminal-negative.md",
+            "docs/session-logs/330-f0b-hybrid-tail-cadence-terminal-negative.md",
+        ):
+            self.assertIn(path, paths)
         self.assertNotIn(
             "scripts/robot_lab/run_t20_43c_manual_replacement.py",
             paths,
@@ -258,14 +307,20 @@ class ReconstructionKitTest(unittest.TestCase):
             paths,
         )
         self.assertEqual(
-            [row["path"] for row in actual["omitted_source_artifacts"]],
-            [
+            {row["path"] for row in actual["omitted_source_artifacts"]},
+            {
+                "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_decision.json",
+                "configurations/robot_lab/f0b_hybrid_tail_cadence_authority_request.json",
+                "configurations/robot_lab/f0b_hybrid_tail_cadence_owner_grant.json",
+                "configurations/robot_lab/f0b_hybrid_tail_cadence_permit.json",
+                "configurations/robot_lab/f0b_hybrid_tail_cadence_pre_run_acceptance.json",
+                "configurations/robot_lab/f0b_hybrid_tail_cadence_runtime_preflight.json",
                 "configurations/robot_lab/t17_7_compiler_window_replay_audit.json",
                 "configurations/robot_lab/t20_35o_flow_trajectory_consistency_result.json",
                 "configurations/robot_lab/t20_35q_post_training_trajectory_result.json",
                 "configurations/robot_lab/t20_35v_post_training_trajectory_result.json",
                 "docs/autonomous-workflow/project_state.json",
-            ],
+            },
         )
         state = kit.load_strict_json(kit.KIT_ROOT / "CURRENT_STATE.json")
         act = state["act_replacement"]
@@ -277,7 +332,7 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertEqual(act["optimizer_update_count"], 0)
         self.assertFalse(act["retry_authorized"])
         route = state["current_route"]
-        self.assertEqual(route["task_id"], "K2")
+        self.assertEqual(route["task_id"], "F3")
         self.assertFalse(route["model_action_currently_authorized"])
         self.assertFalse(route["t20_43c_retry_authorized"])
         continuation = state["act_continuation"]
@@ -304,6 +359,15 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertEqual(replacement["maximum_chunk_50_lift_m"], 0.04567430422519325)
         self.assertFalse(replacement["final_receding_10_grasp_hold"])
         self.assertEqual(replacement["final_receding_10_lift_m"], 0.000502)
+        self.assertEqual(state["f0_release_gap"]["status"], "verified")
+        self.assertFalse(state["f0_release_gap"]["corrective_training_selected"])
+        self.assertEqual(state["f0a_observability"]["alias_pass_count"], 20)
+        cadence = state["f0b_hybrid_cadence"]
+        self.assertEqual(cadence["status"], "verified_terminal_negative")
+        self.assertFalse(cadence["gate_c_passed"])
+        self.assertEqual(cadence["first_action_divergence_frame"], 176)
+        self.assertEqual(cadence["hybrid_retreat_strict_contact_frames"], 17)
+        self.assertFalse(cadence["single_corrective_rung_consumed"])
 
     def test_fork_spine_keeps_current_and_future_contracts_distinct(self) -> None:
         required = [

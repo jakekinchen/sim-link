@@ -1,14 +1,20 @@
-# SO-101 Simulation Learning Lab
+# sim2claw
+
+**Simulation to Closed-Loop Autonomous Workcell**
 
 This repository was seeded from the source commit and exact file manifest in
 `docs/reconstruction/SOURCE_MANIFEST.json`.
 
 Current inherited evidence proves the simulation/data/evaluation substrate and
 records terminal negatives for both SmolVLA and the full T20.43c-R2 ACT
-campaign. It does **not** include a successful learned policy, physical
+campaign. The later F0/F0a/F0b chain localizes delayed/aliased release and
+shows that more frequent tail re-observation alone still fails the release
+gate. It does **not** include a successful learned policy, physical
 qualification, model weights, full R0 output, external checkouts, or runtime
 authority. It does include the signed minimal 10-episode/2,330-frame R0 base
 and three simulation-only trace fixtures.
+The curated source capsule also includes the complete replayable F0b trace and
+compact F0/F0a/F0b results; copied permits remain inert.
 
 Start here:
 
@@ -39,6 +45,13 @@ exact ACT zero-update equivalence followed by an inconclusive owner-directive
 interruption at update 728. T20.43c-R2 is retained separately as the later full
 10,000-update terminal negative. Every source-repo marker and permit is
 consumed and inert here.
+
+F0 rejected three tempting data/objective explanations, F0a exposed
+lift/lower observation aliasing, and F0b changed only cadence for the retained
+checkpoint while Gate C still failed release at frame 219. The source-repo
+corrective ACT rung was never consumed. Start new capability work with the
+fork's observable 60-frame state tasks; do not continue the copied checkpoint
+under inherited authority.
 
 After bootstrap, `external/lerobot/.venv/bin/python tools/regenerate_r0.py run`
 recreates the legacy R0 compatibility dataset and `verify` checks it

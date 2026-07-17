@@ -21,6 +21,12 @@ counterexample—not another retry—is the useful starting point: chunk-50 reac
 45.674304 mm maximum lift and the final rollout failed only release. All source
 markers and permits are consumed/inert and are not runnable fork authority.
 
+The later source-repo discriminator chain also travels. F0 eliminated
+tail-coverage, normalization, and aggregate late-loss explanations; F0a found
+observation aliasing and a 17-frame lag; F0b re-observed the same checkpoint at
+frame 176 and still missed release at frame 219. The full F0b trace is a frozen
+counterexample, not permission to continue that checkpoint.
+
 ## P1 — Portable R0 parity verified
 
 Materialize the included exact 10-episode base, regenerate the frozen 119+9
@@ -39,16 +45,15 @@ episodes, 31,366 frames, 59,904 windows, mixture `37b30d34...`, and statistics
 compatibility gate without transferring authority or making the full
 audiovisual legacy dataset the fork's fast-RL format.
 
-## Immediate source-repo route before fork birth
+## Source-repo route at fork birth
 
-The owner-recorded F0 route interrogates the R2 release-phase counterexample
-before any new ACT rung: measure tail-window under-representation, verify the
-open-gripper command lies inside the R0 normalization envelope, then inspect
-release-phase mixture and gripper weighting. Only a separately reviewed brief
-may choose one corrective ACT rung from that diagnosis. A scoped F1 PI0.5/Brev
-experiment is an optional parallel source-repo lane under its own cost and
-teardown contract; it does not make PI0.5 a fork-primary policy and it does not
-block F0. Neither lane is authorized by this reconstruction kit.
+The F0 route is complete and negative. No corrective ACT rung was selected;
+F1/Brev and F2 serving were not opened. The fork begins from that resolved
+evidence instead of inheriting an unfinished optimizer queue. Preserve ACT as
+the imitation baseline, but direct new capability work to observable,
+short-horizon state tasks and separately evaluated consequence gates. Any
+future long-horizon ACT recipe change must state a new discriminator and use a
+new fork run receipt; copied source-repo authority cannot authorize it.
 
 ## P2 — Establish the fork's two primary learning tracks
 
@@ -58,8 +63,9 @@ block F0. Neither lane is authorized by this reconstruction kit.
    light parquet, 60-frame success-terminated reach and push tasks, and
    direction-correct strict-v2 margins for shaped reward.
 3. Run ACT as the imitation baseline and one state-based RL algorithm as the
-   second primary track. Do not open SmolVLA or PI0.5 until an end-to-end demo
-   works or day-three stretch capacity is genuinely free.
+   second primary track. Use the R2/F0b release trace as a frozen regression,
+   not immediate training data. Do not open SmolVLA or PI0.5 until an
+   end-to-end demo works or day-three stretch capacity is genuinely free.
 4. Allow accelerator-nondeterministic training, but judge every checkpoint in
    the separately owned CPU/fp32 evaluator with bit-identical verdicts across
    Macs and Linux.

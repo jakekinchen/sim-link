@@ -87,6 +87,7 @@ important owned boundaries are:
 | R0 construction | `scripted_grasp_episode_generation.py`, `t20_42*` |
 | ACT terminal evidence | `t20_43b_r1_act_*` |
 | ACT continuation/terminal evidence | Brief 227/original T20.43c plus compact T20.43c-R2 terminal receipts and Reviewer 318 |
+| ACT release localization | `f0_release_gap_diagnosis.py`, `f0a_chunk_phase_observability.py`, `f0b_hybrid_tail_cadence.py`, and the replayable F0b trace |
 | SmolVLA baseline | `t20_44_r2_smolvla_*` |
 | Immutable-safe current mirror | `scripts/robot_lab/render_rollout_mirror_v2.py` |
 | Quantitative evidence | `quantitative_strict_v2_receipt.py`, `paired_trace_runner.py` |
@@ -124,7 +125,13 @@ Its later interruption was scheduling-owned and inconclusive. T20.43c-R2 then
 completed the same ACT recipe and resolved the model question as a terminal
 negative: chunk-50 acquired the grasp/lift/lower sequence but missed strict
 release, while receding-10 was weaker. Neither consumed marker transfers or
-authorizes a retry.
+authorizes a retry. F0 then ruled out three tempting coverage/normalization
+explanations and localized release about 20 frames late. F0a exposed
+lift/lower observation aliasing. F0b changed only tail cadence: it increased
+strict retreat-contact persistence from 1 to 17 frames but still had both pads
+in contact at release-final frame 219. This is evidence for a phase/consequence
+control problem, not evidence that a scheduler or another same-recipe rung will
+solve it.
 
 ## Fork-birth cut
 
@@ -178,6 +185,14 @@ For a 244-frame episode with `n_action_steps=50`, chunk starts are frames
 0/50/100/150/200 and executed lengths are 50/50/50/50/44. The six unused tail
 actions are never actor-valid padding. This exact accounting prevents a common
 source of misleading closed-loop evidence.
+
+F0b adds one diagnostic semantic without making it a new default: execute
+chunk-50 through frame 175, discard the remaining 24 queued actions at frame
+176, then re-decode every ten actions. The same checkpoint/seed stayed negative
+and cleared contact only at final retreat after the object returned to desk
+height. The fork preserves this trace as a falsifier; its fast lower RL rungs
+instead use short, success-terminated state episodes where progress is
+observable and consequences arrive inside the horizon.
 
 ## Authority contract
 
