@@ -133,7 +133,11 @@ def test_terminal_failure_binds_tree_and_forbids_retry():
     tree = [{"path": "progress.json", "sha256": SHA, "size_bytes": 10}]
     failure = build_terminal_failure(
         marker=marker,
-        progress={"stage": "fixture", "optimizer_update_count": 0},
+        progress={
+            "stage": "fixture",
+            "optimizer_update_count": 0,
+            "training_batches_consumed": 0,
+        },
         partial_run_tree=tree,
         error_type="FixtureError",
         error_message="fixture",

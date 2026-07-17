@@ -493,6 +493,8 @@ def build_retention_receipt(
 ) -> dict[str, Any]:
     if set(local_output_trees) != {"checkpoints", "rollouts", "mirrors"}:
         raise ValueError("T20.43c-R2 retention tree set drifted")
+    for label, tree in local_output_trees.items():
+        _validate_file_tree(tree, label=f"retention {label}")
     return sign_payload(
         {
             "schema_version": RETENTION_SCHEMA,
@@ -551,6 +553,32 @@ def build_terminal_failure(
     error_type: str,
     error_message: str,
 ) -> dict[str, Any]:
+    if (
+        not isinstance(progress, dict)
+        or not isinstance(progress.get("stage"), str)
+        or not progress["stage"]
+        or isinstance(progress.get("optimizer_update_count"), bool)
+        or not isinstance(progress.get("optimizer_update_count"), int)
+        or not 0 <= progress["optimizer_update_count"] <= MAXIMUM_OPTIMIZER_UPDATES
+        or isinstance(progress.get("training_batches_consumed"), bool)
+        or not isinstance(progress.get("training_batches_consumed"), int)
+        or not 0 <= progress["training_batches_consumed"] <= MAXIMUM_OPTIMIZER_UPDATES
+    ):
+        raise ValueError("T20.43c-R2 terminal progress drifted")
+    for key, value in progress.items():
+        if key not in {
+            "stage",
+            "optimizer_update_count",
+            "training_batches_consumed",
+        } and not isinstance(value, bool):
+            raise ValueError(f"T20.43c-R2 terminal progress field drifted: {key}")
+    _validate_file_tree(partial_run_tree, label="terminal partial")
+    if (
+        not isinstance(error_type, str)
+        or not error_type
+        or not isinstance(error_message, str)
+    ):
+        raise ValueError("T20.43c-R2 terminal error fields drifted")
     return sign_payload(
         {
             "schema_version": FAILURE_SCHEMA,
@@ -563,7 +591,7 @@ def build_terminal_failure(
                 canonical_json_bytes(partial_run_tree)
             ).hexdigest(),
             "error_type": str(error_type),
-            "error_message": str(error_message),
+            "error_message": error_message[:2000],
             "fresh_manual_replacement": True,
             "retry_after_this_attempt_authorized": False,
             **_false_authority_fields(),
@@ -984,6 +1012,29 @@ def _path_or_parent_is_symlink(root: Path, relative: Path) -> bool:
         if cursor.is_symlink():
             return True
     return False
+
+
+def _validate_file_tree(value: Any, *, label: str) -> None:
+    if not isinstance(value, list):
+        raise ValueError(f"T20.43c-R2 {label} tree must be a list")
+    paths: list[str] = []
+    for row in value:
+        if (
+            not isinstance(row, dict)
+            or set(row) != {"path", "sha256", "size_bytes"}
+            or not isinstance(row["path"], str)
+            or not row["path"]
+            or Path(row["path"]).is_absolute()
+            or ".." in Path(row["path"]).parts
+            or isinstance(row["size_bytes"], bool)
+            or not isinstance(row["size_bytes"], int)
+            or row["size_bytes"] < 0
+        ):
+            raise ValueError(f"T20.43c-R2 {label} tree row drifted")
+        _sha(row["sha256"])
+        paths.append(row["path"])
+    if paths != sorted(paths) or len(paths) != len(set(paths)):
+        raise ValueError(f"T20.43c-R2 {label} tree path order drifted")
 
 
 __all__ = [
