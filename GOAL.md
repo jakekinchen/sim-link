@@ -104,6 +104,15 @@ proof states must remain distinct.
   later superseded only for the separately reviewed T20.43c local continuation
   by the owner's explicit proceed instruction. Full ordering and supersession:
   `docs/autonomous-workflow/owner-direction-2026-07-16-final-hour.md`.
+- Owner overnight foundation run recorded 2026-07-16 ~22:20 CDT: freeze moves
+  to morning (tag `freeze-2026-07-17-hackathon-fork`). Worker priorities
+  W0–W6 — finish T20.43c unhurried; one-command bootstrap; turnkey R0
+  regeneration; multi-instance portability rehearsal; episode-hub/evaluator
+  skeleton; NVIDIA robot-gateway spec plus sim loopback; morning K1b kit
+  refresh — with the seven-item red-flag clearance list, all in
+  `docs/autonomous-workflow/owner-direction-2026-07-16-overnight-foundation.md`.
+  Network, installs, external compute, Brev, and non-census hardware remain
+  closed; rehearsals clone external pins from local checkouts only.
 - Prior windows are retained in
   `docs/autonomous-workflow/project_state.json`.
 

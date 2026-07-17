@@ -46,9 +46,14 @@ scripted expert.
 ## Hardware assignments
 
 - 96 GB Macs: local ACT/SmolVLA training and all simulation work.
-- The NVIDIA box ("800 GB" is almost certainly system RAM, not VRAM): episode
-  hub, central evaluator, and RealSense **depth as observer-role only**
-  (librealsense is first-class on Linux; depth stays out of policy inputs).
+- The NVIDIA box ("800 GB" is almost certainly system RAM, not VRAM — run
+  `nvidia-smi` day one): episode hub, central evaluator, RealSense **depth as
+  observer-role only** (librealsense is first-class on Linux), and **robot
+  gateway** — a policy-inference server (prefer pinned LeRobot async
+  inference) exposing an action-chunk protocol with T20.22 timing fields, so
+  any checkpoint of any size can drive the robot while a Mac keeps the serial
+  driver. If VRAM is genuinely ~80 GB+, it can also host the π0.5 fine-tune
+  locally instead of Brev.
 - $500 Brev credits: reserve for one π0.5 fine-tune (ABEJA-parity reference
   is ~5–20 A100-hours) only after local candidates prove the dataset.
 
