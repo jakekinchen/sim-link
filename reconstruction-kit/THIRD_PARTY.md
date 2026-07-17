@@ -8,7 +8,7 @@ copies the local `external/` checkouts.
 | --- | --- | --- | --- |
 | LeRobot | `e40b58a8dfa9e7b86918c374791599d070518d11` + patch `efe912e3...` | Apache-2.0 | Unified policy/dataset/processor/training runtime |
 | SO-ARM100 | `fda892cba81032c46c40976a48c9ceadbf40a9ca` | Apache-2.0 | Active SO-101 MJCF source |
-| leLab | `def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da` | Apache-2.0 | Optional UI/runtime and URDF reference |
+| leLab | `def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da` | Apache-2.0 | URDF required by current source proof; optional UI/runtime reference |
 | MuJoCo Menagerie | `71f066ad0be9cd271f7ed58c030243ef157af9f4` | Apache-2.0 | Vendored robotstudio_so101 structural reference |
 | openpi | `15a9616a00943ada6c20a0f158e3adb39df2ccac` | Apache-2.0 | PI0.5 semantic reference only |
 | SceneSmith capsule | exact commit in `SOURCE_MANIFEST.json`; original T20.43c terminal `d848a1a8...`; T20.43c-R2 final `be11a258...` | MIT | Portable simulator/data/evaluator source and non-authorizing evidence history |

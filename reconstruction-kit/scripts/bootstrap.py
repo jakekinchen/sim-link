@@ -64,6 +64,7 @@ TEST_MODULES = (
     "tests.unit.test_strict_grasp_v2",
     "tests.unit.test_lerobot_stack",
 )
+REQUIRED_CHECKOUT_NAMES = ("LeRobot", "SO-ARM100", "leLab")
 
 
 class BootstrapError(RuntimeError):
@@ -147,6 +148,12 @@ def _dependency(manifest: dict[str, Any], name: str) -> dict[str, Any]:
     return matches[0]
 
 
+def _required_dependencies(
+    manifest: dict[str, Any],
+) -> dict[str, dict[str, Any]]:
+    return {name: _dependency(manifest, name) for name in REQUIRED_CHECKOUT_NAMES}
+
+
 def _clone_exact(
     dependency: dict[str, Any],
     destination: Path,
@@ -179,13 +186,14 @@ def _clone_exact(
 
 
 def _prepare_checkouts(
-    manifest: dict[str, Any], *, local_source_root: Path | None, include_lelab: bool
+    manifest: dict[str, Any], *, local_source_root: Path | None
 ) -> list[dict[str, Any]]:
     external = REPO_ROOT / "external"
     if external.exists() or external.is_symlink():
         raise BootstrapError("external/ must be absent at bootstrap start")
 
-    lerobot = _dependency(manifest, "LeRobot")
+    dependencies = _required_dependencies(manifest)
+    lerobot = dependencies["LeRobot"]
     lerobot_root = external / "lerobot"
     _clone_exact(
         lerobot,
@@ -207,7 +215,7 @@ def _prepare_checkouts(
             "applied LeRobot patch bytes do not match the tracked patch"
         )
 
-    arm = _dependency(manifest, "SO-ARM100")
+    arm = dependencies["SO-ARM100"]
     arm_root = external / "SO-ARM100"
     _clone_exact(
         arm,
@@ -231,28 +239,24 @@ def _prepare_checkouts(
             "required_file_sha256": arm["required_file_sha256"],
         },
     ]
-    if include_lelab:
-        lelab = _dependency(manifest, "leLab")
-        lelab_root = external / "leLab"
-        _clone_exact(
-            lelab,
-            lelab_root,
-            local_source_root=local_source_root,
-            source_directory_name="leLab",
-        )
-        required = lelab_root / lelab["required_file"]
-        if (
-            not required.is_file()
-            or _sha_file(required) != lelab["required_file_sha256"]
-        ):
-            raise BootstrapError("leLab required URDF drifted")
-        evidence.append(
-            {
-                "name": "leLab",
-                "revision": lelab["revision"],
-                "required_file_sha256": lelab["required_file_sha256"],
-            }
-        )
+    lelab = dependencies["leLab"]
+    lelab_root = external / "leLab"
+    _clone_exact(
+        lelab,
+        lelab_root,
+        local_source_root=local_source_root,
+        source_directory_name="leLab",
+    )
+    required = lelab_root / lelab["required_file"]
+    if not required.is_file() or _sha_file(required) != lelab["required_file_sha256"]:
+        raise BootstrapError("leLab required URDF drifted")
+    evidence.append(
+        {
+            "name": "leLab",
+            "revision": lelab["revision"],
+            "required_file_sha256": lelab["required_file_sha256"],
+        }
+    )
     return evidence
 
 
@@ -327,7 +331,6 @@ def main() -> int:
         action="store_true",
         help="Require all Python artifacts to be present in the local uv cache.",
     )
-    parser.add_argument("--include-optional-lelab", action="store_true")
     args = parser.parse_args()
     started = time.monotonic()
 
@@ -343,7 +346,6 @@ def main() -> int:
     checkout_evidence = _prepare_checkouts(
         manifest,
         local_source_root=local_source_root,
-        include_lelab=args.include_optional_lelab,
     )
     python = _install_runtime(offline=args.offline)
     versions = _runtime_versions(python)

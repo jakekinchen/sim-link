@@ -1,6 +1,6 @@
 {
   "schema_version": "scenesmith.reconstruction_source_selection.v1",
-  "source_commit": "cdc44c863597869f48049b11fbb79c21fc231811",
+  "source_commit": "54468f5ee1ed214f7a9c3866608590e421bafe3d",
   "source_repository": "https://github.com/jakekinchen/sim-link.git",
   "maximum_file_bytes": 2000000,
   "forbidden_prefixes": [
@@ -91,7 +91,6 @@
     "configurations/robot_lab/t20_42*.json",
     "configurations/robot_lab/t20_43_r1*.json",
     "configurations/robot_lab/t20_43b_r1*.json",
-    "configurations/robot_lab/t20_43b_renderer_smoke.json",
     "configurations/robot_lab/t20_43c_act*.json",
     "configurations/robot_lab/t20_43c_renderer_smoke.json",
     "configurations/robot_lab/t20_44*.json"
@@ -192,7 +191,7 @@
       "repository": "https://github.com/huggingface/leLab.git",
       "revision": "def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da",
       "license": "Apache-2.0",
-      "role": "optional UI and URDF reference",
+      "role": "URDF required by current source proof; optional UI and runtime reference",
       "required_file": "frontend/public/so-101-urdf/urdf/so101_new_calib.urdf",
       "required_file_sha256": "443d38d756e01bac7d3455b24430047ddc6427105e0d3454b2003116f5f67236"
     },

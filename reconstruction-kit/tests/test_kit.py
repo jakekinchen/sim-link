@@ -59,6 +59,18 @@ class ReconstructionKitTest(unittest.TestCase):
             signed["identity_sha256"], bootstrap._sign(signed)["identity_sha256"]
         )
 
+    def test_bootstrap_requires_every_source_proof_checkout(self) -> None:
+        manifest = kit.load_strict_json(kit.SELECTION_PATH)
+        dependencies = bootstrap._required_dependencies(manifest)
+        self.assertEqual(
+            tuple(dependencies),
+            ("LeRobot", "SO-ARM100", "leLab"),
+        )
+        self.assertEqual(
+            dependencies["leLab"]["required_file"],
+            "frontend/public/so-101-urdf/urdf/so101_new_calib.urdf",
+        )
+
     def test_minimal_portable_assets_verify_without_full_r0_or_authority(self) -> None:
         manifest = assets.verify_asset_pack()
         base = manifest["base_dataset"]

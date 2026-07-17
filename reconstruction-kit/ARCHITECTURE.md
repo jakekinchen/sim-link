@@ -66,7 +66,8 @@ flowchart TD
   SceneSmith observes and binds package behavior rather than reimplementing it.
 - **SO-ARM100/Menagerie** own source geometry facts. Local code adds explicit
   workcell semantics but does not casually fork joint or body meaning.
-- **leLab** is an optional pinned UI/URDF surface, not a second policy stack.
+- **leLab** supplies the pinned URDF required by the current source-proof
+  dependency lock; its UI remains optional and it is not a second policy stack.
 - **Robo Scan** is a separate producer of future metric scene/calibration
   receipts, never an implicit runtime dependency or authority source.
 
