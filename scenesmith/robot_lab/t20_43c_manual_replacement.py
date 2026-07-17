@@ -13,6 +13,7 @@ import contextlib
 import hashlib
 import json
 import os
+import subprocess
 
 from datetime import datetime
 from pathlib import Path
@@ -620,7 +621,30 @@ def verify_terminal_failure(
 def collect_runtime_snapshot(
     *, required_source_commit: str, smoke: dict[str, Any], repo_root: Path = REPO_ROOT
 ) -> dict[str, Any]:
-    load_prior_interruption(repo_root=repo_root)
+    root = Path(repo_root).resolve()
+    load_prior_interruption(repo_root=root)
+    for relative in IMPLEMENTATION_SCOPED_PATHS:
+        path = root / relative
+        if not path.is_file() or path.is_symlink():
+            raise ValueError(
+                f"T20.43c-R2 implementation path is absent or aliased: {relative}"
+            )
+        tracked = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(root),
+                "ls-files",
+                "--error-unmatch",
+                relative.as_posix(),
+            ],
+            capture_output=True,
+            check=False,
+        )
+        if tracked.returncode != 0:
+            raise ValueError(
+                f"T20.43c-R2 implementation path is not tracked: {relative}"
+            )
     with _patched_attributes(
         base_materialization,
         {
@@ -631,7 +655,7 @@ def collect_runtime_snapshot(
         return base_materialization.collect_runtime_snapshot(
             required_source_commit=required_source_commit,
             smoke=smoke,
-            repo_root=repo_root,
+            repo_root=root,
         )
 
 
