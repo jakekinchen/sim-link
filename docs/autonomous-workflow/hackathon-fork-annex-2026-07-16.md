@@ -45,7 +45,8 @@ scripted expert.
 
 ## Hardware assignments
 
-- 96 GB Macs: local ACT/SmolVLA training and all simulation work.
+- 96 GB Macs: local ACT/state-RL training and simulation work; SmolVLA only as
+  day-three stretch.
 - The NVIDIA box ("800 GB" is almost certainly system RAM, not VRAM — run
   `nvidia-smi` day one): episode hub, central evaluator, RealSense **depth as
   observer-role only** (librealsense is first-class on Linux), and **robot
@@ -59,7 +60,8 @@ scripted expert.
 
 ## Camera decision (2026-07-16)
 
-Policies remain RGB + joint-state (Gate A parity with sim training). The D405
+VLA/demo policies remain RGB + joint-state. The fast state-RL tier is
+camera-free joint state plus simulator object pose. The D405
 enumerates on macOS as UVC but its depth stream is out-of-scope on Mac; a
 known-good Logitech C922 is already on hand as the RGB fallback. Real risks
 to budget for: camera-pose calibration and exposure/latency consistency
@@ -77,10 +79,15 @@ only if the central evaluator shows ≥85% per-move success by day 3.
 
 ## Day-one checklist
 
-1. Clone at tag `freeze-2026-07-16-hackathon-fork`; run the kit quick start.
-2. Run the T20.43c ACT ready-package — it validates the transplanted stack
-   end-to-end and answers this project's biggest open question as a side
-   effect.
+1. Clone at tag `freeze-2026-07-17-hackathon-fork`; run the one-command kit
+   bootstrap and inspect its receipt.
+2. Start fresh fork ACT and state-RL baselines from the reviewed R0 parity
+   boundary. Preserve both ACT source-repo boundaries: original T20.43c is
+   exact-equivalence evidence plus an inconclusive update-728 interruption;
+   T20.43c-R2 is the later 10,000-update terminal negative. The R2
+   counterexample is useful—chunk-50 reached 45.674304 mm maximum lift and the
+   final rollout failed only release—while all consumed markers and permits
+   remain inert history, never runnable fork authority.
 3. Freeze the fork's held-out scene/seed set before anyone trains.
 4. Per-device camera RGB checklist (resolution/fps/latency); stand up the
    episode hub and central evaluator; post the expert to the leaderboard.

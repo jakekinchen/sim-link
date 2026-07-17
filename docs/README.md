@@ -10,6 +10,7 @@ work without replacing the canonical state, signed evidence, or slice history.
 | --- | --- | --- |
 | Understand what is happening now | [Current state](#current-state) | [roadmap](#roadmap-and-next-work) and the active brief |
 | Recreate the useful current stack in a new repository | [Portable reconstruction kit](../reconstruction-kit/README.md) | its current-state snapshot, quick start, manifest, and receipt verifier |
+| Build the simplified hackathon fork | [Fork target](#fork-target-not-current-authority) | the reconstruction quick start and hackathon annex |
 | Learn how the pieces fit together | [Architecture](./architecture.md) | [requirements and contracts](./requirements-and-contracts.md) |
 | Connect scan or calibration work from Robo Scan | [Robo Scan integration boundary](./robo-scan-integration.md) | [integration and deduplication roadmap](./robo-scan-sim-link-integration-roadmap.md) |
 | See the approved MVP cut and sim-link-only queue | [MVP execution plan](./sim-link-mvp-execution-plan.md) | `GOAL.md`, current brief, and task state |
@@ -33,13 +34,46 @@ Do not infer permission from a past success, a local capability, or a runtime
 setting. The state file and central authority composition decide whether a
 training, live-observation, physical-transfer, or promotion claim is valid.
 
-At the 2026-07-16 closeout boundary, R0 source/data construction is verified,
-SmolVLA is a clean terminal negative after 5,000 updates and ten rollouts, and
-the corrected T20.43b ACT replacement is pre-run accepted but unconsumed. No
-learned policy has passed strict-v2, and no physical qualification, transfer,
-or promotion claim exists. The [reconstruction kit current-state
+At the current 2026-07-16 boundary, R0 source/data construction is verified and
+both standard learned-policy campaigns are terminal negatives. SmolVLA ran
+5,000 updates and ten rollouts without a Gate C pass. The original T20.43c
+continuation remains an immutable inconclusive interruption at update 728;
+T20.43c-R2 subsequently completed the unchanged ACT recipe through 10,000
+updates, seven checkpoints, and fourteen rollouts. R2 had no infrastructure
+failure and no Gate C pass, so ACT-on-R0 is now a verified terminal negative
+rather than an unresolved capability. Its best chunk-50 behavior lifted the
+cube 45.674304 mm; the final chunk-50 rollout lifted 37.655304 mm and missed
+only `release_final_contact_clear`, while final receding-10 lost the grasp and
+lifted 0.502 mm. No retry, learned strict-v2 success, physical qualification,
+transfer, or promotion claim exists. The
+[reconstruction kit current-state
 snapshot](../reconstruction-kit/CURRENT_STATE.md) compresses this boundary;
 `project_state.json` remains authoritative for any later change.
+
+## Fork Target, Not Current Authority
+
+The new-repository fork intentionally carries less machinery than this source
+repo. Tonight's W1 rehearsal still proves the existing parent/child runtime and
+all three retained trace schemas because that is the stack being exported. At
+fork birth, the design collapses to one pinned LeRobot venv, in-process
+rendering, and no subprocess dispatch layer.
+
+The fork starts with two primary policy tracks—ACT and state-based RL. Its lower
+RL rungs use camera-free joint state plus simulator object pose, light parquet,
+60-frame success-terminated episodes, a frozen workcell XML, and a task
+registry. Audiovisual LeRobot datasets and cameras belong to the VLA/demo tier;
+SmolVLA and PI0.5 are day-three stretch work. Training may be
+accelerator-nondeterministic, while the separately owned evaluator runs
+CPU/fp32 and must return bit-identical verdicts across Macs and Linux.
+
+The fork replaces the source repo's autonomous-agent ceremony with an
+auto-emitted `RUN_RECEIPT.json` containing commit, config hash, dataset
+identity, seed, wall clock, and metrics. It does not simplify away the frozen
+held-out set, replayable signed claims, or separate evaluation ownership. All
+future teleop, tests, and demo traffic use one robot gateway. Outputs are
+ignored from commit one and runs have human names rather than a task alphabet.
+Copied permits and reviewer artifacts remain inert history. None of this
+changes current-repo authority before the morning freeze.
 
 ## System At A Glance
 

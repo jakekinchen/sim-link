@@ -74,6 +74,40 @@ class ReconstructionKitTest(unittest.TestCase):
             for chunk in row["chunks"]:
                 self.assertLessEqual(chunk["size_bytes"], manifest["chunk_size_bytes"])
 
+    def test_source_selection_retains_r2_result_but_excludes_live_authority(
+        self,
+    ) -> None:
+        selection = kit.load_strict_json(kit.SELECTION_PATH)
+        explicit = set(selection["explicit_paths"])
+        patterns = selection["path_globs"]
+        terminal_paths = {
+            "configurations/robot_lab/t20_43c_r2_act_equivalence_receipt.json",
+            "configurations/robot_lab/t20_43c_r2_act_final_receipt.json",
+            "configurations/robot_lab/t20_43c_r2_act_replacement_marker.json",
+            "configurations/robot_lab/t20_43c_r2_act_retention_receipt.json",
+            "configurations/robot_lab/t20_43c_r2_act_scorecard.json",
+            "configurations/robot_lab/t20_43c_r2_act_standard_result.json",
+        }
+        self.assertTrue(terminal_paths.issubset(explicit))
+        live_paths = (
+            "configurations/robot_lab/t20_43c_r2_act_authority_decision.json",
+            "configurations/robot_lab/t20_43c_r2_act_authority_request.json",
+            "configurations/robot_lab/t20_43c_r2_act_owner_authorization.json",
+            "configurations/robot_lab/t20_43c_r2_act_permit.json",
+            "configurations/robot_lab/t20_43c_r2_act_pre_run_acceptance.json",
+            "configurations/robot_lab/t20_43c_r2_act_runtime_preflight.json",
+        )
+        for path in live_paths:
+            with self.subTest(path=path):
+                self.assertNotIn(path, explicit)
+                self.assertFalse(
+                    any(kit.fnmatch.fnmatchcase(path, pattern) for pattern in patterns)
+                )
+        self.assertNotIn(
+            "scripts/robot_lab/run_t20_43c_manual_replacement.py",
+            selection["python_seeds"],
+        )
+
     def test_generated_manifest_is_current_and_verifies(self) -> None:
         expected = kit.build_manifest(REPO_ROOT)
         actual = kit.load_strict_json(kit.MANIFEST_PATH)
@@ -103,8 +137,45 @@ class ReconstructionKitTest(unittest.TestCase):
             "docs/briefs/227-t20-43c-zero-update-act-continuation.md",
             paths,
         )
-        self.assertNotIn(
+        self.assertIn(
+            "docs/autonomous-workflow/owner-direction-2026-07-16-overnight-foundation.md",
+            paths,
+        )
+        self.assertIn(
             "scenesmith/robot_lab/t20_43c_act_continuation.py",
+            paths,
+        )
+        self.assertIn(
+            "configurations/robot_lab/t20_43c_act_terminal_failure.json",
+            paths,
+        )
+        for path in (
+            "configurations/robot_lab/t20_43c_r2_act_equivalence_receipt.json",
+            "configurations/robot_lab/t20_43c_r2_act_final_receipt.json",
+            "configurations/robot_lab/t20_43c_r2_act_replacement_marker.json",
+            "configurations/robot_lab/t20_43c_r2_act_retention_receipt.json",
+            "configurations/robot_lab/t20_43c_r2_act_scorecard.json",
+            "configurations/robot_lab/t20_43c_r2_act_standard_result.json",
+        ):
+            self.assertIn(path, paths)
+        self.assertIn(
+            "docs/reviewer-messages/318-verify-t20-43c-r2-terminal-negative.md",
+            paths,
+        )
+        self.assertIn(
+            "docs/session-logs/323-t20-43c-r2-terminal-negative.md",
+            paths,
+        )
+        self.assertNotIn(
+            "scripts/robot_lab/run_t20_43c_manual_replacement.py",
+            paths,
+        )
+        self.assertIn(
+            "docs/reviewer-messages/314-close-t20-43c-terminal-interruption.md",
+            paths,
+        )
+        self.assertIn(
+            "reconstruction-kit/assets/ASSET_MANIFEST.json",
             paths,
         )
         self.assertNotIn(
@@ -131,9 +202,65 @@ class ReconstructionKitTest(unittest.TestCase):
         self.assertEqual(act["optimizer_update_count"], 0)
         self.assertFalse(act["retry_authorized"])
         route = state["current_route"]
-        self.assertEqual(route["task_id"], "T20.43c")
+        self.assertEqual(route["task_id"], "K2")
         self.assertFalse(route["model_action_currently_authorized"])
-        self.assertFalse(route["third_act_attempt_tonight_authorized"])
+        self.assertFalse(route["t20_43c_retry_authorized"])
+        continuation = state["act_continuation"]
+        self.assertEqual(
+            continuation["status"], "inconclusive_owner_directive_interruption"
+        )
+        self.assertEqual(continuation["optimizer_update_count"], 728)
+        self.assertTrue(continuation["marker_consumed"])
+        self.assertFalse(continuation["infrastructure_failure"])
+        self.assertFalse(continuation["trained_negative"])
+        replacement = state["act_manual_replacement"]
+        self.assertEqual(replacement["status"], "verified_terminal_negative")
+        self.assertEqual(replacement["optimizer_update_count"], 10000)
+        self.assertEqual(replacement["checkpoint_count"], 7)
+        self.assertEqual(replacement["rollout_count"], 14)
+        self.assertFalse(replacement["gate_c_passed"])
+        self.assertFalse(replacement["infrastructure_failure"])
+        self.assertFalse(replacement["retry_authorized"])
+        self.assertEqual(
+            replacement["final_chunk_50_only_failed_gate"],
+            "release_final_contact_clear",
+        )
+        self.assertEqual(replacement["final_chunk_50_lift_m"], 0.037655304225193253)
+        self.assertEqual(replacement["maximum_chunk_50_lift_m"], 0.04567430422519325)
+        self.assertFalse(replacement["final_receding_10_grasp_hold"])
+        self.assertEqual(replacement["final_receding_10_lift_m"], 0.000502)
+
+    def test_fork_spine_keeps_current_and_future_contracts_distinct(self) -> None:
+        required = [
+            REPO_ROOT / "docs/README.md",
+            REPO_ROOT / "docs/architecture.md",
+            REPO_ROOT / "docs/sim-link-mvp-execution-plan.md",
+            REPO_ROOT / "reconstruction-kit/README.md",
+            REPO_ROOT / "reconstruction-kit/ARCHITECTURE.md",
+            REPO_ROOT / "reconstruction-kit/FORWARD_PLAN.md",
+            REPO_ROOT / "reconstruction-kit/QUICKSTART.md",
+            REPO_ROOT / "reconstruction-kit/RESULTS_AND_LESSONS.md",
+            REPO_ROOT / "reconstruction-kit/templates/README.md",
+        ]
+        combined = "\n".join(path.read_text(encoding="utf-8") for path in required)
+        for phrase in (
+            "pinned LeRobot",
+            "joint state",
+            "object pose",
+            "60-frame",
+            "CPU/fp32",
+            "RUN_RECEIPT.json",
+            "ACT",
+            "state-based RL",
+            "task registry",
+            "gateway",
+            "frozen held-out",
+            "replayable",
+            "separate evaluation",
+        ):
+            self.assertIn(phrase, combined)
+        self.assertIn("dual-runtime", combined)
+        self.assertIn("current-repo authority", combined)
 
     def test_current_and_reconstruction_document_links_resolve(self) -> None:
         documents = [
@@ -181,6 +308,17 @@ class ReconstructionKitTest(unittest.TestCase):
             self.assertTrue((destination / "tools/portable_assets.py").is_file())
             self.assertTrue((destination / "tools/bootstrap.py").is_file())
             self.assertTrue((destination / "tools/bootstrap_runtime.py").is_file())
+            self.assertTrue(
+                (
+                    destination
+                    / "docs/reconstruction/HARDWARE_READINESS_RGB_CAMERAS.md"
+                ).is_file()
+            )
+            self.assertTrue(
+                (
+                    destination / "reconstruction-kit/assets/ASSET_MANIFEST.json"
+                ).is_file()
+            )
             self.assertTrue((destination / "tests/__init__.py").is_file())
             self.assertTrue((destination / "tests/unit/__init__.py").is_file())
             self.assertTrue(
@@ -202,6 +340,17 @@ class ReconstructionKitTest(unittest.TestCase):
                 text=True,
             )
             self.assertEqual(imported.returncode, 0, msg=imported.stderr)
+            exported_documents = sorted(
+                (destination / "docs/reconstruction").glob("*.md")
+            )
+            missing_links = []
+            for document in exported_documents:
+                for target in local_markdown_targets(document):
+                    if not target.exists():
+                        missing_links.append(
+                            f"{document.relative_to(destination)} -> {target}"
+                        )
+            self.assertEqual(missing_links, [])
             self.assertFalse((destination / "outputs").exists())
             self.assertFalse((destination / "external").exists())
             self.assertFalse(receipt["bulk_outputs_copied"])

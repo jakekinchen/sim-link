@@ -11,7 +11,7 @@ copies the local `external/` checkouts.
 | leLab | `def3e9e51e99c03e01b214dc8a0d9b7c2dd5f0da` | Apache-2.0 | Optional UI/runtime and URDF reference |
 | MuJoCo Menagerie | `71f066ad0be9cd271f7ed58c030243ef157af9f4` | Apache-2.0 | Vendored robotstudio_so101 structural reference |
 | openpi | `15a9616a00943ada6c20a0f158e3adb39df2ccac` | Apache-2.0 | PI0.5 semantic reference only |
-| SceneSmith capsule | portable source commit `605e4d3...`; evidence snapshot `6c53d93...` | MIT | Governance shell, simulation/data/evaluation integration |
+| SceneSmith capsule | exact commit in `SOURCE_MANIFEST.json`; original T20.43c terminal `d848a1a8...`; T20.43c-R2 final `be11a258...` | MIT | Portable simulator/data/evaluator source and non-authorizing evidence history |
 
 ## Required byte checks
 
@@ -29,8 +29,10 @@ copies the local `external/` checkouts.
 - LeRobot, SO-ARM100, leLab, or openpi source checkouts.
 - Hugging Face model weights or gated checkpoints.
 - The 1.15 GB local LeRobot lock/cache environment.
-- Training datasets, camera frames, policy checkpoints, optimizer state,
-  rollout output trees, or campaign videos.
+- The full 31,366-frame R0 output, camera observations, policy checkpoints,
+  optimizer state, bulk rollout trees, or campaign videos. The included 66 MB
+  asset pack is limited to the exact 10-episode base plus three signed
+  simulation traces and explicitly transfers no authority.
 - Robo Scan source or private scan/calibration observations.
 
 Acquire each dependency from its owner, verify its license and pin, and record

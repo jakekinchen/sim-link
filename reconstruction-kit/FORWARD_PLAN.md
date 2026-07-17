@@ -1,37 +1,73 @@
 # Forward Plan
 
-## P0 — Resolve the unconsumed ACT rung
+## P0 — Prove the portable bootstrap
 
-Open a fresh owner window with enough measured budget for the full
-noninterruptible campaign. Create a new administrative authority epoch that:
+1. Verify the pristine export receipt and signed 66 MB asset pack before any
+   write.
+2. Clone the pinned LeRobot and SO-ARM100 revisions from local checkouts during
+   rehearsal; apply and verify the one tracked LeRobot patch.
+3. Build the pinned runtime, verify the stack, and run the focused model-free
+   suite.
+4. Generate one strict-v2 seed-0 expert episode and render one frame from each
+   retained T20.43, T20.43b, and T20.44 trace schema.
+5. Preserve the signed bootstrap receipt and measured timings. A passing W1
+   proves the exported source stack, including its current dual-runtime path;
+   it grants no training or hardware authority.
 
-- proves the old T20.43b marker is absent;
-- preserves attempt ordinal 1 and the one-replacement limit;
-- binds the new repo commit, stable interpreter, dependency tree, R0 identity,
-  output absence, and exact unchanged recipe;
-- does not reuse or rewrite the expired permit.
+Original T20.43c is retained as exact-equivalence evidence followed by an
+inconclusive owner-directive interruption at update 728. T20.43c-R2 is retained
+separately as the full 10,000-update terminal negative. Its release-phase
+counterexample—not another retry—is the useful starting point: chunk-50 reached
+45.674304 mm maximum lift and the final rollout failed only release. All source
+markers and permits are consumed/inert and are not runnable fork authority.
 
-Then run one 10,000-update ACT campaign through checkpoints
-0/500/1,000/2,500/5,000/7,500/10,000 and both action-consumption semantics.
+## P1 — Regenerate R0 under a portable parity contract
 
-| ACT outcome | Route |
-| --- | --- |
-| Gate C passes | Select the first passing checkpoint, preserve both rollout semantics and mirrors, then open the fixed counterexample/archive evaluation route. |
-| Training completes but Gate C fails | Close ACT as a clean negative; compare its interaction profile to SmolVLA and decide whether conditional PI0.5 is worth local runtime or only an external-compute proposal. |
-| Infrastructure fails after marker | Preserve a generic signed terminal receipt; do not retry automatically. Fix only with a new explicit owner decision. |
+Materialize the included exact 10-episode base, regenerate the frozen 119+9
+candidate set, and build the 129-episode/31,366-frame R0 dataset. Exact content
+that is independent of local authority must match: candidate order, episode
+hashes, compiler/window content, native dataset manifest, held-out exclusion,
+and MEAN_STD values. Fresh local execution IDs, paths, timestamps, and
+permit-bound wrapper identities are expected to differ and must never be forced
+to match by reusing historical authority.
 
-## P1 — Make learned success robust, not merely nominal
+This W2 runner and its receipt are integrated only after the isolated candidate
+handoff is reviewed. This document does not claim that rehearsal has passed.
 
-Only after the first learned Gate C pass:
+## P2 — Establish the fork's two primary learning tracks
 
-1. Evaluate the frozen active counterexample archive without scene mutation.
-2. Run the recovery/grid 2×2 and observer-confusion checks.
-3. Start counterexample-guided posterior-constrained domain randomization:
-   plausible parameters only, minimal failure retention, information-gain
-   prioritization, and no training ingestion without a signed admission gate.
-4. Require no regression of the nominal strict-v2 episode.
+1. Freeze held-out scenes/seeds before training and publish the constructive
+   expert as leaderboard entry zero.
+2. Start a camera-free state tier: joint state plus simulator object pose,
+   light parquet, 60-frame success-terminated reach and push tasks, and
+   direction-correct strict-v2 margins for shaped reward.
+3. Run ACT as the imitation baseline and one state-based RL algorithm as the
+   second primary track. Do not open SmolVLA or PI0.5 until an end-to-end demo
+   works or day-three stretch capacity is genuinely free.
+4. Allow accelerator-nondeterministic training, but judge every checkpoint in
+   the separately owned CPU/fp32 evaluator with bit-identical verdicts across
+   Macs and Linux.
+5. Auto-emit `RUN_RECEIPT.json` for every run: commit, config hash, dataset
+   identity, seed, wall clock, and metrics. Keep replayable trace/artifact
+   evidence beside the receipt.
 
-## P2 — Complete the metric producer/consumer boundary
+Only after the first learned strict-v2 pass, replay the frozen challenge archive
+and run the bounded recovery/grid checks. Counterexamples remain evidence until
+a separate admission decision makes them training data.
+
+## P3 — Add the hub, evaluator, and single gateway
+
+Once W1 and the R0 parity boundary are stable, add a small episode/checkpoint
+hub and CPU/fp32 evaluator skeleton. The evaluator owns frozen seeds and verdict
+logic separately from training. A candidate is not selected until its retained
+artifact replays to the same verdict.
+
+Define one robot gateway protocol with action chunks, observation timestamps,
+latency/hold fields, reset/abort semantics, and simulation loopback. Teleop,
+tests, and the eventual demo must all use that gateway; no second hardware path
+is allowed. Integrate W5 only after its isolated loopback evidence is reviewed.
+
+## P4 — Complete the metric producer/consumer boundary
 
 Robo Scan remains a separate producer. The next cross-repo steps are:
 
@@ -45,7 +81,7 @@ Robo Scan remains a separate producer. The next cross-repo steps are:
 Do not deduplicate the repositories until two verified metric handoffs and one
 end-to-end sim-link compile prove the boundary.
 
-## P3 — Physical canary
+## P5 — Physical canary
 
 Physical execution begins only after:
 
@@ -66,9 +102,13 @@ does not transfer automatically.
   owner-signed and preregistered.
 - Do not start a one-use campaign without measured evidence that it can finish
   inside the hard-close window.
+- Do not accept a renderer smoke unless it exercises the exact trace schema the
+  campaign will emit.
 - Do not rent external compute for a structured local defect.
 - Do not call partial contact/lift a learned grasp.
 - Do not allow the reconstruction kit or a copied artifact to grant authority.
+- Do not edit the frozen workcell XML to add a task; add task-registry data.
+- Do not add a second robot path beside the gateway.
 
 ## MVP exit
 
@@ -78,4 +118,5 @@ The useful MVP is not “training runs.” It is the conjunction of:
 2. robustness evidence from frozen challenges/counterexamples;
 3. a validated metric Robo Scan handoff and qualified twin candidate;
 4. one separately authorized physical-policy canary;
-5. complete content-addressed lineage and rollback evidence.
+5. complete content-addressed lineage and rollback evidence, including one
+   `RUN_RECEIPT.json` per fork run.

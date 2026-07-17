@@ -1,23 +1,9 @@
 [project]
 name = "so101-simulation-learning-lab"
 version = "0.1.0"
-description = "Content-addressed SO-101 MuJoCo and LeRobot reconstruction capsule"
+description = "Portable SO-101 simulation-learning fork"
 requires-python = ">=3.12,<3.13"
-dependencies = [
-  "datasets==4.8.5",
-  "mujoco==3.3.5",
-  "numpy==2.2.6",
-  "pillow==12.3.0",
-  "pyarrow==25.0.0",
-  "torch==2.11.0",
-  "torchvision==0.26.0",
-]
-
-[dependency-groups]
-dev = ["pytest>=8.4,<9"]
+dependencies = []
 
 [tool.uv]
 package = false
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]

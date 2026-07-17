@@ -9,6 +9,7 @@ external/
 data/
 datasets/
 outputs/
+runs/
 checkpoints/
 tmp/
 *.mp4

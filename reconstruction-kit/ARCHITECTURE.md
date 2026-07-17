@@ -18,7 +18,7 @@ the policy to rewrite the twin.
 flowchart LR
     R[Representation\nSO-101 geometry, coordinates, uncertainty]
     X[Experimentation\nconstructive episodes, forks, perturbations]
-    L[Learning\nLeRobot ACT, SmolVLA, PI0.5]
+    L[Learning\nACT + state RL primary; VLA stretch]
     U[Runtime\nMuJoCo now, separately permitted hardware later]
     G[Governance\nidentities, strict-v2, authority, receipts]
     E[Signed evidence]
@@ -39,9 +39,9 @@ flowchart LR
 | --- | --- | --- |
 | Representation | SO-101 pins, coordinate bridge, structural/measurement contracts | another robot description language or hidden calibration convention |
 | Experimentation | constructive strict-success source, deterministic randomization, native episodes | a general scientist service, reward compiler, or skill graph |
-| Learning | pinned LeRobot policies and processors | local forks of model architectures except reviewed minimal patches |
+| Learning | pinned LeRobot ACT plus state-based RL as primary tracks; VLA interfaces retained for stretch work | parallel model ladders before one demo works |
 | Runtime | MuJoCo execution and signed mirrors; bounded hardware adapter later | LLM as a real-time controller or implicit hardware access |
-| Governance | canonical JSON, SHA-256, strict-v2, central composer, permits, receipts | self-promoting component artifacts or prose-only gates |
+| Governance | canonical JSON, SHA-256, strict-v2, replayable claims, frozen held-out sets, separate evaluator ownership | self-promoting component artifacts or prose-only gates |
 
 ## Component boundary
 
@@ -51,7 +51,7 @@ flowchart TD
     C[Constructive strict-v2 controller] --> M
     M --> D[Native LeRobotDataset + training-only stats]
     D --> P[Pinned LeRobot processor]
-    P --> A[ACT / SmolVLA / PI0.5]
+    P --> A[ACT / state RL / VLA stretch]
     A --> Q[chunk-50 + receding-10 rollout]
     Q --> V[strict-v2 evaluator + signed MP4]
     V --> O[central authority / selection decision]
@@ -84,8 +84,10 @@ important owned boundaries are:
 | SO-101 coordinate semantics | `so101_coordinates.py`, `so101_processor.py` |
 | Truthful grasp result | `strict_grasp.py`, `gripper_contact_semantics.py` |
 | R0 construction | `scripted_grasp_episode_generation.py`, `t20_42*` |
-| ACT replacement | `t20_43b_r1_act_*` |
+| ACT terminal evidence | `t20_43b_r1_act_*` |
+| ACT continuation/terminal evidence | Brief 227/original T20.43c plus compact T20.43c-R2 terminal receipts and Reviewer 318 |
 | SmolVLA baseline | `t20_44_r2_smolvla_*` |
+| Immutable-safe current mirror | `scripts/robot_lab/render_rollout_mirror_v2.py` |
 | Quantitative evidence | `quantitative_strict_v2_receipt.py`, `paired_trace_runner.py` |
 | Scan handoff | `robo_scan_export_receipt.py` |
 
@@ -113,6 +115,55 @@ earlier success implies a later one. A scripted source success is not a learned
 success. A simulation learned success is not a physical qualification. A shell
 permission profile is not a hardware permit.
 
+Evidence-path smoke is schema-specific. A valid render of an older trace proves
+the renderer environment but not dispatch for a new trace schema. Original
+T20.43c proved the immutable-safe v2 path, exact checkpoint-0 equivalence,
+empty optimizer state, and an unadvanced sampler before reaching update 728.
+Its later interruption was scheduling-owned and inconclusive. T20.43c-R2 then
+completed the same ACT recipe and resolved the model question as a terminal
+negative: chunk-50 acquired the grasp/lift/lower sequence but missed strict
+release, while receding-10 was weaker. Neither consumed marker transfers or
+authorizes a retry.
+
+## Fork-birth cut
+
+W1 rehearses the exported source stack as it actually exists: parent/child
+runtime composition and all three retained trace schemas. That proof prevents
+the transfer process from hiding a missing dependency. It is not the fork's
+permanent runtime design.
+
+```mermaid
+flowchart LR
+    T[Task registry\nscene variant + predicates + margins] --> W[Frozen workcell XML]
+    W --> E[60-frame success-terminated simulator]
+    E --> S[State tier\njoints + object pose + light parquet]
+    E --> V[VLA/demo tier\nRGB + audiovisual LeRobotDataset]
+    S --> A[ACT or state RL]
+    V --> X[Day-3 VLA stretch]
+    A --> C[CPU/fp32 central evaluator]
+    X --> C
+    C --> R[RUN_RECEIPT.json + replayable artifacts]
+    C --> H[Episode/checkpoint hub]
+    G[Single robot gateway] -. later teleop/tests/demo .-> H
+```
+
+- The pinned LeRobot venv becomes the sole interpreter; rollout and rendering
+  are in-process and subprocess dispatch is removed.
+- State-first reach/push is camera-free and terminates on success within 60
+  frames. Cameras and full audiovisual data belong only to the VLA/demo tier.
+- Training may differ across MPS/CUDA. Evaluation runs CPU/fp32 and must produce
+  bit-identical verdicts on Macs and Linux.
+- ACT and state-based RL are the only primary tracks until an end-to-end demo
+  works. SmolVLA and PI0.5 are stretch tracks.
+- One frozen XML plus task-registry data replaces per-task scene editing.
+- `RUN_RECEIPT.json` replaces source-repo ceremony only in the fork and records
+  commit, config hash, dataset identity, seed, wall clock, and metrics.
+- Outputs are ignored from fork commit one and use human run names. A single
+  gateway is the only future robot-facing surface.
+
+Frozen held-out scenes/seeds, replayable signed claims, and evaluator ownership
+separate from training survive the simplification unchanged.
+
 ## Action cadence contract
 
 The current policy evaluations use action chunks of 50. Two semantics must be
@@ -134,3 +185,7 @@ prove a local fact but cannot grant `physical_twin_qualified`,
 `physical_transfer_ready`, or `promotion_eligible`. All authority is local,
 bounded, content-addressed, time-scoped where needed, and non-transferable to a
 new repository.
+
+The fork does not import this composer state. Copied grants, permits, markers,
+and reviewer decisions are inert history. A fork `RUN_RECEIPT.json` records what
+ran; it cannot qualify a physical twin or silently authorize robot access.

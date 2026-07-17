@@ -109,12 +109,34 @@ translate the dataset into another training format.
 | Rung | Current result | Architectural consequence |
 | --- | --- | --- |
 | R0 constructive source/data | Verified: 119 new training and nine fresh-held-out strict-v2 successes; exact prior base included once | The source, dataset, held-out, and processor spine is usable, but scripted source success is not learned-policy proof. |
-| R1 ACT | Corrected 10,000-update replacement is pre-run accepted and unconsumed; old window/permit expired | Next policy work refreshes administrative authority without changing the recipe or creating a second replacement. |
+| R1 ACT | The original T20.43c proved bit-exact zero-update continuation and actual-schema mirrors, then ended as an immutable inconclusive interruption at update 728. T20.43c-R2 subsequently completed the same recipe through 10,000 updates, seven checkpoints, and fourteen rollouts. | R2 is a verified terminal negative with no infrastructure failure and no Gate C pass. Chunk-50 learned most of the grasp/lift/lower sequence and reached 45.674304 mm maximum lift, but final release remained the last strict-v2 failure; receding-10 was substantially worse. No retry is implied. |
 | R2 SmolVLA | Verified terminal negative after 5,000 updates, five checkpoints, and ten dual-cadence rollouts | Stable training and partial interaction do not satisfy strict-v2; no retry is implied. |
-| R3 PI0.5 | Conditional compatibility/stress track; earlier Gate B alphabet is diagnostic history | Do not replay one-off correction rungs before ACT resolves the shared-pipeline control. |
+| R3 PI0.5 | Conditional compatibility/stress track; earlier Gate B alphabet is diagnostic history | T20.45 is not activated. The fork keeps PI0.5 as day-three stretch and requires a fresh route/authority decision before any further model work. |
 
 No learned policy has passed strict-v2. Physical-twin qualification, transfer
 readiness, and promotion remain false.
+
+## Fork Target Architecture
+
+The portable fork is a deliberate simplification target, not a description of
+the current checkout or a grant of authority.
+
+| Concern | Source repo through freeze | Fork target |
+| --- | --- | --- |
+| Interpreter/render path | W1 must verify the existing parent/child dual-runtime and all retained trace schemas | one pinned LeRobot venv; rollout and render in-process; subprocess dispatch deleted |
+| Fast learning tier | full observation/evidence stack remains available | camera-free joint state plus simulator object pose; light parquet; 60-frame success-terminated reach/push episodes |
+| Demo/VLA tier | native audiovisual LeRobotDataset and mirrors | cameras and full audiovisual data only here, not in the fast RL loop |
+| Primary policies | preserve ACT/SmolVLA/PI0.5 evidence honestly | ACT plus state-based RL until an end-to-end demo works; SmolVLA/PI0.5 are day-three stretch |
+| Reproducibility | deterministic contracts plus source-repo evidence ceremony | training may vary by accelerator; CPU/fp32 evaluation verdicts must be bit-identical across Macs/Linux |
+| Run record | composer, permits, markers, reviewer decisions, signed artifacts | one auto-emitted `RUN_RECEIPT.json`: commit, config hash, dataset identity, seed, wall clock, metrics |
+| Workcell/tasks | historical task-specific scenes and contracts remain preserved | one frozen workcell XML plus a data-only task registry mapping task to scene variant, predicates, and reward margins |
+| Robot path | current hardware remains permit/composer gated | one future gateway for teleop, tests, and demo traffic |
+| Repository hygiene | preserve historical task/evidence paths | outputs ignored from commit one; human run names; no task alphabet |
+
+Three rules remain non-negotiable in both systems: freeze held-out scenes and
+seeds before training, ship every claim with a replayable signed artifact, and
+keep evaluation ownership separate from training. Copied source-repo permits,
+reviewer decisions, and owner grants are inert history in the fork.
 
 ## Closed-Loop Action Contract
 

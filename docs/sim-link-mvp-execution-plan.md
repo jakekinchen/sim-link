@@ -7,13 +7,17 @@ while preserving the complete physical-product exit condition. T20.42/R0 is
 verified at result `d238379b...`: 119 new training successes, nine fresh-held-
 out successes, exact base once, and a 129-episode package. T20.44 SmolVLA is a
 verified terminal negative after 5,000 updates and ten strict-v2 rollouts. The
-immediate sim-link long pole remains ACT-on-R0 capability, but the corrected
-T20.43b replacement is now closed at verified terminal runtime failure
-`89b6dbff...`: its sole marker was consumed, checkpoint 0 and one untrained
-rollout completed, and mirror dispatch rejected the T20.43b trace schema before
-any optimizer update. This is not a trained-ACT negative; the question remains
-unresolved and no retry is authorized. PI0.5 remains conditional. Robo Scan
-proceeds independently toward the real metric export required by I5.
+original T20.43c exact-zero-update continuation remains an immutable
+inconclusive owner-directive interruption at update 728. T20.43c-R2 then
+completed the unchanged ACT recipe through 10,000 updates, seven checkpoints,
+and fourteen rollouts with no infrastructure failure and no Gate C pass. It is
+the decisive ACT-on-R0 terminal negative; no retry or third ACT attempt is
+authorized. The most useful counterexample is its chunk-50 release phase:
+45.674304 mm maximum lift and 37.655304 mm final lift, with only
+`release_final_contact_clear` failing in the final rollout. Learned strict-v2
+success, rather than ACT plumbing, is now the sim-link long pole. PI0.5 remains
+conditional/day-three stretch. Robo Scan proceeds independently toward the
+real metric export required by I5.
 
 This plan is a task-ordering source, not an authority source. Live authority,
 training readiness, and proof labels remain mechanically owned by
@@ -28,10 +32,12 @@ proof stack are fixed by
 
 ### Build in the current sim-link lane
 
-- Preserve verified T20.42 R0, the T20.44 terminal-negative SmolVLA result, and
-  the consumed T20.43b terminal infrastructure boundary. ACT-on-R0 remains
-  unresolved; validate exact-schema evidence dispatch first, then require a new
-  owner route decision before any further campaign.
+- Preserve verified T20.42 R0, the T20.44 terminal-negative SmolVLA result,
+  T20.43b's consumed terminal infrastructure boundary, and both later ACT
+  boundaries. Original T20.43c remains an exact-equivalence pass followed by
+  an inconclusive update-728 interruption. T20.43c-R2 is the distinct verified
+  terminal negative after the full unchanged campaign. Do not relabel the
+  original interruption, conflate it with R2, or infer retry authority.
 - An explicit, reusable learning/plumbing evidence surface: exact R0 parity
   checks plus the existing signed T20.35x one-batch proof, kept distinct from
   any accepted product policy.
@@ -116,6 +122,36 @@ proof stack are fixed by
 - Gaussian splats, dual renderers, tactile distillation, Genesis backend,
   deformables/multiphysics, cross-workcell learning, or a third repository.
 
+## Hackathon Fork Target (Design Only)
+
+The source repo keeps its existing evidence and authority semantics through the
+freeze. The new-repository fork starts from the following subtractive design:
+
+1. W1 first proves this repo's dual-runtime and every retained trace schema.
+   The fork then uses the pinned LeRobot venv as its sole interpreter, renders
+   in-process, and deletes subprocess dispatch.
+2. Reach and push train camera-free from joint state plus simulator object pose
+   in 60-frame success-terminated episodes. Light state parquet is the RL tier;
+   full audiovisual LeRobotDataset and cameras are the VLA/demo tier.
+3. ACT and state-based RL are the only primary tracks until a demo works.
+   SmolVLA and PI0.5 are day-three stretch work.
+4. Training may be accelerator-nondeterministic. The separately owned
+   evaluator is CPU/fp32 and must emit bit-identical verdicts on Macs and Linux.
+5. Every run auto-emits `RUN_RECEIPT.json` with commit, config hash, dataset
+   identity, seed, wall clock, and metrics. This replaces autonomous-agent
+   ceremony only in the fork.
+6. One frozen workcell XML is paired with a data-only task registry. Adding a
+   task changes registry data, not the base XML.
+7. A single gateway is the only future path to robot teleop, tests, or demos.
+8. Outputs are ignored from the first fork commit; runs use human names rather
+   than the source repo's task alphabet.
+
+The held-out set, replayable signed-claim rule, and separate evaluation
+ownership are deliberately retained. Expired source-repo permits, grants, and
+reviewer decisions may ship only as inert history. This section is neither live
+current-repo authority nor evidence that the W3 portability or W5 gateway
+handoffs have passed.
+
 ## Governing Design Rules
 
 1. **Construct before search.** Prefer deterministic geometry, exact package
@@ -126,7 +162,8 @@ proof stack are fixed by
 3. **Use a discrete ensemble before posterior machinery.** The MVP needs roughly
    10–20 declared combinations, not a new inference subsystem.
 4. **Success is not reward.** Strict-v2 remains the simulator success oracle.
-   No dense reward compiler is needed for the imitation-learning MVP.
+   The fork may expose T20.38 direction-correct margins as shaped state-RL
+   reward, but no general reward compiler is needed.
 5. **Package behavior is executed, not recreated.** Pinned LeRobot owns data,
    processors, policies, and training; MuJoCo owns physics/state transitions.
 6. **Repository boundaries follow present evidence.** Robo Scan and sim-link
@@ -149,7 +186,7 @@ not spent on a higher gate while a lower one is unmet.
 | --- | --- | --- | --- |
 | A | Exact train/inference parity: dataset statistics, image/state/action normalization, chunk interpretation, joint order, gripper representation, postprocessing, cadence/hold, with round-trip tests on known values | Contract or preprocessing parity | Largely verified: T20.12 round-trip, T20.13 statistics, T20.26 determinism, T20.28-T20.31 sampler/quantile chain |
 | B | One-batch memorization: the policy overfits a tiny fixed batch to near-zero action error | Model or trainer plumbing | Passed once by T20.35x under frozen uniform Gate B; T20.36 coverage regressed; T20.36n preserves the uniform pass but passes the consequence amendment on only 3/5 single-batch seeds; T20.36o then fails every forward bridge checkpoint and closes current candidate entry. Diagnostic purpose (plumbing localization) is complete per the 2026-07-16 owner route decision; R1–R3 rungs do not re-prove Gate B |
-| C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Open but unmet for the standard-recipe ladder: SmolVLA completed ten policy rollouts with no strict-v2 pass; T20.43b ACT terminated at checkpoint 0 before training, so it supplies no learned Gate C evidence. The older X bridge route is terminal negative and remains closed. |
+| C | One-episode closed-loop reproduction: an unassisted rollout reproduces one training episode (seeds 0-5) through strict-v2 | Action-chunk execution semantics or closed-loop compounding | Open but unmet: SmolVLA completed ten policy rollouts with no strict-v2 pass. Original T20.43c stopped inconclusively at update 728; T20.43c-R2 later completed fourteen ACT rollouts with no pass. Its chunk-50 checkpoints learned grasp/lift/lower behavior but still failed the release predicate. The older X bridge route is terminal negative and remains closed. |
 | D | Full training-set success: strict-v2 across all eight constructive episodes | Dataset coverage or adaptation capacity | Open |
 | E | Held-out nominal starts: seeds 6-7 and small initial-state variation | Generalization | Open (0/2 at T20.24 and T20.31) |
 | F | Robustness grid and forked recovery starts | Robustness | Open |
@@ -217,19 +254,20 @@ non-negotiable full-MVP exits:
 | 17 | **T20.40 — fixed archive replay harness (deferred)** | Replay the complete active manifest on every checkpoint eligible for selection; report open challenges and block regressions of required cases. No scene mutation or training. | Mechanical Gate C pass absent; verified T20.39 | Active adversarial search, optimizer, automatic training ingestion, policy acceptance, hardware, external compute, Brev |
 | 18 | **T20.41 — owner capability-route decision (decided 2026-07-16)** | The owner selects dataset expansion plus standard-recipe rungs with rollout-primary evaluation, recorded in [`owner-route-decision-2026-07-16-t20-41.md`](./autonomous-workflow/owner-route-decision-2026-07-16-t20-41.md). A fresh brief must open T20.42/R0; the optimizer alphabet stays closed. | T20.36o terminal negative; verified T20.39; recorded owner decision | Silent resumption of T20.35/T20.36, correction objectives, threshold changes to `463477dc...`, hardware, external compute, Brev |
 | 19 | **T20.42 — R0 dataset expansion by construction (verified; Briefs 216-218)** | Sole result `d238379b...` completes 119/119 training and 9/9 fresh-held-out strict-v2 successes. Exact T20.23 base once; 129 training episodes, 31,366 frames, 59,904 windows; held-out rows excluded; mixture `37b30d34...`, statistics `02ba0e70...`, retention `19d19fba...`; independent verifier exit 0. | Recorded T20.41 route; verified scripted expert and randomization contracts; Briefs 216-218; Reviewers 286-290 | Retry, relabel scripted data as learned-policy proof, model/optimizer work inside R0, hardware, external compute, Brev |
-| 20 | **T20.43 — R1 ACT standard rung (terminal infrastructure failure; Brief 219/Reviewer 293)** | Sole marker `064e5650...` consumed. Full ACT, optimizer, checkpoint 0, and one chunk-50 rollout completed with zero updates; trace `6133ce58...` failed strict-v2. Mirror child used a venv without MuJoCo and terminated the run. Receipt `b64ec6d0...` preserves the exact partial boundary. No retry; trained ACT capability remains unresolved. | Verified T20.42/Reviewer 290; Brief 219; Reviewer 293 | T20.43 retry/replacement, fabricating a trained ACT result, correction objectives, threshold changes, hardware, external compute, Brev |
-| 20b | **T20.43b — R1 ACT replacement rung (verified terminal runtime failure; Briefs 222/225, Reviewer 306)** | Sole marker `d67cf38e...` consumed. Fresh ACT/optimizer, checkpoint 0, and one untrained chunk-50 rollout completed, then mirror dispatch rejected the T20.43b trace schema. Receipt `89b6dbff...` binds zero updates, one checkpoint, one rollout, no Gate C, and no retry. ACT-on-R0 capability remains unresolved. | Verified T20.44 terminal boundary; owner addendum `8b4a206`; accepted epoch-2 authority; Reviewers 299/301/302/304-306 | Patch-and-resume, second replacement or attempt, retry, relabel as trained negative, recipe changes, correction objectives, threshold changes, hardware, network, external compute, Brev |
-| 20c | **T20.43c — exact zero-update ACT recovery (implementation in progress; Brief 227)** | Prove immutable checkpoint-0 equals fresh seeded ACT, optimizer and sampler are unadvanced, and actual-schema mirror v2 works; only then may a separately reviewed continuation complete the unchanged 10,000-update/14-rollout campaign once. | Owner recovery direction; T20.43b receipt `89b6dbff...`; immutable-safe renderer v2 `37c5da6` | Model action before equivalence/origin/central/pre-run review, rewriting T20.43b, correction objective, recipe/gate/data change, retry after continuation marker, hardware, network, external compute, Brev |
+| 20 | **T20.43 — R1 ACT standard rung (terminal infrastructure failure; Brief 219/Reviewer 293)** | Sole marker `064e5650...` consumed. Full ACT, optimizer, checkpoint 0, and one chunk-50 rollout completed with zero updates; trace `6133ce58...` failed strict-v2. Mirror child used a venv without MuJoCo and terminated the run. Receipt `b64ec6d0...` preserves the exact partial boundary. No retry; this boundary alone did not resolve trained ACT capability. | Verified T20.42/Reviewer 290; Brief 219; Reviewer 293 | T20.43 retry/replacement, fabricating a trained ACT result, correction objectives, threshold changes, hardware, external compute, Brev |
+| 20b | **T20.43b — R1 ACT replacement rung (verified terminal runtime failure; Briefs 222/225, Reviewer 306)** | Sole marker `d67cf38e...` consumed. Fresh ACT/optimizer, checkpoint 0, and one untrained chunk-50 rollout completed, then mirror dispatch rejected the T20.43b trace schema. Receipt `89b6dbff...` binds zero updates, one checkpoint, one rollout, no Gate C, and no retry. This boundary alone did not resolve ACT-on-R0. | Verified T20.44 terminal boundary; owner addendum `8b4a206`; accepted epoch-2 authority; Reviewers 299/301/302/304-306 | Patch-and-resume, second replacement or attempt, retry, relabel as trained negative, recipe changes, correction objectives, threshold changes, hardware, network, external compute, Brev |
+| 20c | **T20.43c — exact zero-update ACT recovery (verified inconclusive interruption; Brief 227/Reviewer 314)** | Bit-exact fresh-seed equivalence, zero optimizer/sampler advance, and actual-schema mirror v2 all passed. The continuation then reached update 728 before a superseded scheduling instruction caused SIGINT. Terminal `d848a1a8...` is neither a trained negative nor infrastructure failure; its marker is consumed and no retry follows from this boundary. | Owner recovery direction; T20.43b receipt `89b6dbff...`; immutable-safe renderer v2 `37c5da6`; Reviewer 314 | Relabel as trained result, mutate/restart the consumed continuation, infer Gate C, recipe/gate/data change, hardware, network, external compute, Brev |
+| 20d | **T20.43c-R2 — owner-directed ACT manual replacement (verified terminal negative; Reviewer 318)** | Marker `dfe3ff05...` and final receipt `be11a258...` bind 10,000 updates, seven checkpoints, fourteen rollouts, no infrastructure failure, and no Gate C pass. Chunk-50 reached 45.674304 mm maximum lift; the final 37.655304 mm rollout failed only `release_final_contact_clear`. Final receding-10 lost grasp hold and lifted 0.502 mm. No retry or third ACT attempt. | Original T20.43c immutable interruption; separately reviewed owner replacement route; Reviewer 318 | Retry/third ACT attempt, relabel near-miss as Gate C, gate/recipe/data change, hardware, network, external compute, Brev |
 | 21 | **T20.44 — R2 SmolVLA standard rung (verified terminal negative; Brief 220/Reviewer 297)** | Sole result `9d916206...` completes 5,000 finite updates, five checkpoints, and ten dual-semantics rollouts with no strict-v2 pass. Strongest partial result was checkpoint 1,000/receding-10 at 73 contacts and 18.061 mm lift; first-pass selection remains null. | Verified T20.42; T20.43 boundary; Reviewers 294-297 | Retry/replacement, correction objectives, network/download, Gate B/open-loop barrier, threshold changes, hardware, external compute, Brev |
 | 22 | **T20.45 — R3 conditional π0.5 standard rung** | Only after R1/R2 evidence: either one bounded local-MPS standard fine-tune from the cached base, or a costed external-compute proposal document (ABEJA-parity reference) for separate fresh owner authorization. No compute consumption beyond local MPS without that grant. | R1/R2 rollout evidence; fresh owner grant for any external compute | External compute or Brev consumption without fresh owner authorization, correction objectives, promotion |
 
 The historical T20.36 controls remain diagnostic evidence: ACT exposed a
 normalized boundary/endpoint miss, and SmolVLA exposed dependency-closure and
-decode behavior. The standard R2 SmolVLA campaign is a clean terminal negative;
-the standard R1 ACT replacement is consumed at a zero-update infrastructure
-failure and therefore scientifically unresolved. PI0.5 stays the conditional
-compatibility/stress baseline. CUDA, A100, external compute, and Brev remain
-closed.
+decode behavior. The standard SmolVLA campaign and the later full T20.43c-R2
+ACT campaign are clean terminal negatives; the earlier ACT runtime failures
+and original update-728 interruption remain distinct immutable history. PI0.5
+stays the conditional compatibility/stress baseline. CUDA, A100, external
+compute, and Brev remain closed.
 
 ### Support tooling
 
@@ -377,7 +415,7 @@ remain unmet; no paired-real/sim, hardware-observation, live-probe,
 clock-synchronization, calibration/twin update, physical-qualification,
 training-ready, posterior-calibration, or optimizer grant exists.
 
-## Tonight's MVP Demo Composition (owner convergence directive 2026-07-16)
+## Historical MVP Demo Composition (owner convergence directive 2026-07-16)
 
 The near-term presentation surface is a verified runbook and evidence bundle,
 not a new UI. It adds no authority and keeps scripted, learned-simulation,
@@ -393,19 +431,16 @@ metric-twin, and physical proof distinct.
 3. **Show learning plumbing.** Cite the signed one-batch T20.35x proof and the
    active candidate's exact R0 Gate A round-trip/parity evidence. Keep this
    separate from closed-loop policy behavior.
-4. **Train ACT first.** Run the bounded standard-recipe T20.43 rung. Evaluate
-   pre-registered checkpoints closed loop without an open-loop entry barrier.
-   At the first strict-v2 Gate C pass, preserve the checkpoint, full trace,
-   first divergence, margins, mirror MP4, and scorecard immediately.
-5. **Continue policy evidence.** If ACT is negative, proceed directly to
-   SmolVLA. If ACT is positive, publish the ACT demo before SmolVLA so a second
-   model cannot delay delivery. PI0.5 remains conditional and must not block a
-   valid ACT or SmolVLA demonstration.
-6. **Publish one proof index.** At the first Gate C result or by 18:30 CDT,
-   write `docs/autonomous-workflow/mvp-demo-status-2026-07-16.md` and a compact
-   tracked manifest binding every artifact that actually exists. Include exact
-   run/verification commands and one plain plumbing/policy/dataset/twin/canary
-   scorecard. A negative result is publishable evidence, not learned success.
+4. **ACT evidence completed negative.** The original recovery stopped
+   inconclusively at update 728; the separately reviewed R2 replacement then
+   completed the fixed recipe and fourteen rollouts without a Gate C pass.
+5. **SmolVLA evidence completed negative.** Its five-checkpoint campaign also
+   produced no Gate C pass. PI0.5 stayed conditional and did not delay the
+   truthful negative boundary.
+6. **Publish the proof index and reconstruction boundary.** Preserve exact run
+   and verification commands, plumbing/policy/dataset/twin/canary labels, and
+   the R2 release-phase near-miss without calling it learned success. The K2
+   reconstruction kit is the durable handoff for the next repository.
 
 This composition is a **demo-ready simulation-learning MVP** only after a
 learned, unassisted nominal strict-v2 Gate C pass. The complete product MVP

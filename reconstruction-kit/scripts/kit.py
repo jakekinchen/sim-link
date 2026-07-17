@@ -39,12 +39,25 @@ KIT_EXPORTS = {
     "RESULTS_AND_LESSONS.md": "docs/reconstruction/RESULTS_AND_LESSONS.md",
     "FORWARD_PLAN.md": "docs/reconstruction/FORWARD_PLAN.md",
     "THIRD_PARTY.md": "docs/reconstruction/THIRD_PARTY.md",
+    "HARDWARE_READINESS_RGB_CAMERAS.md": "docs/reconstruction/HARDWARE_READINESS_RGB_CAMERAS.md",
     "SOURCE_MANIFEST.json": "docs/reconstruction/SOURCE_MANIFEST.json",
     "source-selection.json": "docs/reconstruction/source-selection.json",
     "scripts/kit.py": "tools/reconstruction_kit.py",
     "scripts/portable_assets.py": "tools/portable_assets.py",
     "scripts/bootstrap.py": "tools/bootstrap.py",
     "scripts/bootstrap_runtime.py": "tools/bootstrap_runtime.py",
+}
+
+KIT_EXPORT_REWRITES = {
+    "README.md": {
+        b"../docs/autonomous-workflow/": b"../autonomous-workflow/",
+    },
+    "CURRENT_STATE.md": {
+        b"../docs/autonomous-workflow/": b"../autonomous-workflow/",
+    },
+    "HARDWARE_READINESS_RGB_CAMERAS.md": {
+        b"../configurations/": b"../../configurations/",
+    },
 }
 
 
@@ -450,6 +463,15 @@ def _write_bytes(path: Path, data: bytes, *, executable: bool = False) -> None:
     path.chmod(0o755 if executable else 0o644)
 
 
+def _kit_export_bytes(source: str, path: Path) -> bytes:
+    data = path.read_bytes()
+    for old, new in KIT_EXPORT_REWRITES.get(source, {}).items():
+        if old not in data:
+            raise KitError(f"expected portable-link source is absent: {source}")
+        data = data.replace(old, new)
+    return data
+
+
 def _receipt_entry(root: Path, path: Path) -> dict[str, Any]:
     relative = path.relative_to(root).as_posix()
     safe_relative_path(relative)
@@ -485,7 +507,7 @@ def export_kit(repo_root: Path, destination: Path) -> dict[str, Any]:
                 raise KitError(f"kit export source is absent or aliased: {source}")
             _write_bytes(
                 dest / safe_relative_path(target),
-                source_path.read_bytes(),
+                _kit_export_bytes(source, source_path),
                 executable=source.endswith("scripts/kit.py"),
             )
         for entry in manifest["files"]:
