@@ -74,3 +74,9 @@ decision `c316bf01...`, granting only `simulation_training_ready` through permit
 `166a6cd0...`. Training remains locked until the six-artifact bundle is exact
 on origin and a separate reviewer decision plus signed acceptance are written
 and preserved.
+
+Reviewer 310 accepts origin authority commit `02496f0...`. Signed acceptance
+`010d0a43...` binds that commit, permit `166a6cd0...`, and the reviewer file.
+Once this acceptance boundary is exact on origin and the window is active, the
+sole marker and post-marker equivalence gate may run once; update 1 remains
+barred until equivalence passes.

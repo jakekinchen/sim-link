@@ -116,8 +116,9 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 T20.43c under Brief 227 is the active recovery slice. Reviewer 309 accepts a
 model-free recovery after the actual-schema smoke succeeded but dependency
 inventory failed before authority JSON. The resumed smoke and compact authority
-now verify; origin preservation and separate acceptance are next while the
-training lock remains closed. The
+now verify at origin commit `02496f0...`; Reviewer 310 and acceptance
+`010d0a43...` open one local-simulation continuation while update 1 remains
+barred until bit-exact equivalence passes. The
 owner explicitly authorizes further action to resolve ACT-on-R0. T20.43b remains
 byte-immutable at terminal failure `89b6dbff...`: zero optimizer updates, one
 checkpoint, and one untrained chunk-50 rollout. T20.43c must first prove that

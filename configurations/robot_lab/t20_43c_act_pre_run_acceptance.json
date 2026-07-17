@@ -1,0 +1,21 @@
+{
+  "authority_commit": "02496f0eb9f09b4d84d06750143ddf06d202592a",
+  "brev_compute_authorized": false,
+  "checkpoint_tensor_read_or_model_action_executed": false,
+  "continuation_marker_exists": false,
+  "decision": "ACCEPT_ONE_T20_43C_ZERO_UPDATE_ACT_CONTINUATION",
+  "external_compute_authorized": false,
+  "hardware_authorized": false,
+  "identity_sha256": "010d0a43d1072205b1374387e5bf233dbbed8784abbc68d0de89947099567056",
+  "network_authorized": false,
+  "permit_identity_sha256": "166a6cd053d9fd7d1a827f5cd03ee8816fba1ca8cd7aa853795acf7728baa397",
+  "physical_transfer_authorized": false,
+  "promotion_authorized": false,
+  "retry_authorized": false,
+  "reviewer_decision_id": "310",
+  "reviewer_file_sha256": "5973c8ee506f88feee74430964ae0206a97f2ecd2ed3be2ff8f77bd32bfcd38b",
+  "reviewer_path": "docs/reviewer-messages/310-accept-t20-43c-pre-run-authority.md",
+  "schema_version": "scenesmith.t20_43c_act_pre_run_acceptance.v1",
+  "t20_45_authorized": false,
+  "task_id": "T20.43c"
+}
