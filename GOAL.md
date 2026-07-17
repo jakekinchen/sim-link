@@ -20,11 +20,10 @@ proof states must remain distinct.
 
 ## Active Run Window
 
-- Current status: active for the sole unchanged T20.43b ACT replacement from
-  `2026-07-16T21:25:04-05:00` through `2026-07-17T05:25:04-05:00`.
-  Epoch-2 authority commit `1012028` and Reviewer 305 acceptance `c6af1030...`
-  reconstruct exactly; the marker remains absent pending preservation of this
-  acceptance boundary on origin.
+- Current status: closed at `2026-07-16T21:32:23-05:00` after the sole T20.43b
+  marker was consumed and terminal receipt `89b6dbff...` preserved a mirror-
+  schema runtime failure at checkpoint 0 before any optimizer update. No retry
+  or second replacement is authorized.
 - Actual start: `2026-07-16T21:25:04-05:00`.
 - No new major slice after: not applicable; this window authorizes only the
   already reviewed noninterruptible T20.43b campaign.
@@ -100,17 +99,17 @@ M20 - Simulation-Only Clean Supervision And Capability Falsification
 
 ## Current Slice
 
-The policy task remains T20.43b under Brief 225. Its stable-runtime ACT
-replacement and separately named epoch-2 administrative authority are
-implemented, source-pinned, reconstructed, and accepted by Reviewer 305 but
-unconsumed: marker, model, optimizer, checkpoint, rollout, and result paths are
-absent. Authority commit `1012028` is exact on origin; acceptance `c6af1030...`
-must now be preserved on origin before the sole unchanged campaign may create
-the marker. T20.42/R0 is verified constructive source/data evidence; T20.44
-SmolVLA is a verified terminal negative; no learned policy has passed
-strict-v2. Epoch 1 remains immutable and epoch 2 is not a second replacement
-or attempt. Hardware, network, external compute, Brev, physical transfer, and
-promotion remain closed.
+T20.43b under Brief 225 is closed by Reviewer 306 at verified terminal runtime
+failure `89b6dbff...`. The accepted epoch-2 marker was consumed once; fresh ACT,
+optimizer, checkpoint 0, and one untrained chunk-50 rollout completed, then the
+mirror renderer rejected the new T20.43b trace schema before any optimizer
+update. The checkpoint-0 rollout had zero strict contacts and 0.000304225 mm
+lift, but that is not learned-policy evidence. ACT-on-R0 capability therefore
+remains unresolved, no trained Gate C attempt occurred, and no retry or second
+replacement is authorized. T20.42/R0 remains verified constructive source/data
+evidence and T20.44 SmolVLA remains a verified terminal negative. Hardware,
+network, external compute, Brev, physical transfer, and promotion remain
+closed.
 
 Support task K1/Brief 224 is verified by Reviewer 303. The non-authorizing
 portable reconstruction kit pins source manifest `5067d1c2...` and clean

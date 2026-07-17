@@ -13,6 +13,7 @@ from scenesmith.robot_lab.t20_43b_r1_act_runner import (
     build_terminal_failure,
     build_trace,
     verify_result,
+    verify_terminal_failure_boundary,
     verify_terminal_failure,
     verify_trace,
 )
@@ -84,6 +85,44 @@ class T2043bR1ACTRunnerTest(unittest.TestCase):
         mutated["retry_authorized"] = True
         with self.assertRaises(ValueError):
             verify_terminal_failure(mutated)
+
+    def test_terminal_failure_boundary_binds_attempt_and_partial_tree(self) -> None:
+        progress = {
+            "stage": "checkpoint_0_evaluation",
+            "optimizer_update_count": 0,
+            "model_constructed": True,
+            "model_loaded": True,
+            "model_inference": True,
+            "optimizer_created": True,
+            "optimizer_training": False,
+        }
+        tree = [{"path": "progress.json", "sha256": "a" * 64, "size_bytes": 1}]
+        failure = build_terminal_failure(
+            attempt_identity_sha256="b" * 64,
+            progress=progress,
+            partial_run_tree=tree,
+            checkpoint_count=1,
+            rollout_count=1,
+            error_type="CalledProcessError",
+            error_message="mirror rejected trace schema",
+        )
+        verify_terminal_failure_boundary(
+            failure=failure,
+            attempt={"identity_sha256": "b" * 64},
+            partial_run_tree=tree,
+        )
+        with self.assertRaises(ValueError):
+            verify_terminal_failure_boundary(
+                failure=failure,
+                attempt={"identity_sha256": "c" * 64},
+                partial_run_tree=tree,
+            )
+        with self.assertRaises(ValueError):
+            verify_terminal_failure_boundary(
+                failure=failure,
+                attempt={"identity_sha256": "b" * 64},
+                partial_run_tree=[],
+            )
 
     def _run(self, *, pass_update, pass_variants) -> dict:
         checkpoints = []

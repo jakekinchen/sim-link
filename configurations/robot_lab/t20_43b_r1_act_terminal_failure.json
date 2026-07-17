@@ -1,0 +1,61 @@
+{
+  "attempt_count": 1,
+  "attempt_identity_sha256": "d67cf38e7d7a441da93c3af55cdcfeefe64b55ce9cf3f0b95894299a88fdca09",
+  "brev_compute_started": false,
+  "camera_accessed": false,
+  "checkpoint_count": 1,
+  "error_message": "Command '['/Users/kelly/Developer/sim-link/external/lerobot/.venv/bin/python', '/Users/kelly/Developer/sim-link/scripts/robot_lab/render_rollout_mirror.py', '--trace', 'outputs/robot_lab/t20_43b_r1_act_run_001/rollouts/step_00000_chunk_50.json', '--output-mp4', 'outputs/robot_lab/t20_43b_r1_act_run_001/mirrors/step_00000_chunk_50.mp4', '--fps', '25']' returned non-zero exit status 1.",
+  "error_type": "CalledProcessError",
+  "execution_state": {
+    "model_constructed": true,
+    "model_inference": true,
+    "model_loaded": true,
+    "optimizer_created": true,
+    "optimizer_training": false,
+    "optimizer_update_count": 0,
+    "stage": "checkpoint_0_evaluation"
+  },
+  "external_compute_started": false,
+  "failure_stage": "checkpoint_0_evaluation",
+  "first_gate_c_pass": null,
+  "gate_c_passed": false,
+  "hardware_accessed": false,
+  "identity_sha256": "89b6dbff17f5da345b1c8d8fa9951989eda092998b702737dd7da16c42db2e92",
+  "network_accessed": false,
+  "optimizer_update_count": 0,
+  "partial_run_tree": [
+    {
+      "path": "checkpoints/step_00000/config.json",
+      "sha256": "1b2ba89880e421180962a0c862b37bfc854d16e5f8811e82210a64ecf6d09aaf",
+      "size_bytes": 1714
+    },
+    {
+      "path": "checkpoints/step_00000/model.safetensors",
+      "sha256": "acc865fb2504849ce39a403b08c5bff6b6660460d5622d3089f243c8868cf912",
+      "size_bytes": 206494928
+    },
+    {
+      "path": "progress.json",
+      "sha256": "af8e75d048a7653e9393fe8e655941202b2c8dc1f942e4dad0006bc33268ae93",
+      "size_bytes": 212
+    },
+    {
+      "path": "rollouts/step_00000_chunk_50.json",
+      "sha256": "0c01265d4536bff9f2220a0e6e26462342b5987927204db7b998f7e50f3eac46",
+      "size_bytes": 819002
+    }
+  ],
+  "physical_actuation": false,
+  "physical_motion": false,
+  "physical_transfer_ready": false,
+  "promotion_eligible": false,
+  "replacement_ordinal": 1,
+  "retry_authorized": false,
+  "rollout_count": 1,
+  "schema_version": "scenesmith.t20_43b_r1_act_terminal_failure.v1",
+  "second_replacement_authorized": false,
+  "serial_accessed": false,
+  "status": "verified_terminal_runtime_failure",
+  "t20_45_activated": false,
+  "task_id": "T20.43b"
+}

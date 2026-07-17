@@ -3,19 +3,34 @@
 Updated: 2026-07-16
 
 ```text
-training_lock: open through 2026-07-21T03:05:00-05:00 for bounded local simulation-only training authorized by T20.1; physical transfer, promotion, external compute, and Brev remain closed
-run_window: closed at 2026-07-16T18:50:03-05:00 before the T20.43b marker; a fresh owner window and reviewed administrative authority epoch are required before model action
-run_state: Brief 225/Reviewer 304 epoch-2 refresh implementation is exact on origin at 10df153; all marker/run/result paths remain absent and model-free authority materialization is next
+training_lock: closed after the sole T20.43b epoch-2 attempt was consumed at checkpoint 0 before any optimizer update; physical transfer, promotion, external compute, and Brev remain closed
+run_window: closed at 2026-07-16T21:32:23-05:00 on verified T20.43b terminal runtime failure 89b6dbff; no retry or second replacement is authorized
+run_state: Brief 225/Reviewer 306 closes T20.43b after one checkpoint-0 rollout and a required mirror-schema failure; the terminal verifier independently reconstructs the marker, receipt, and partial tree
 current_milestone: M20 simulation-only clean supervision
-current_task: T20.43b unconsumed replacement under Brief 225; materialize and review epoch 2 while preserving recipe, replacement ordinal 1, attempt ordinal 1, and epoch-1 bytes
+current_task: T20.43b verified terminal runtime failure under Brief 225; ACT-on-R0 capability remains unresolved and no further attempt is authorized
 support_task: K1 verified under Brief 224 and Reviewer 303; portable manifest 5067d1c2 and clean export receipt 729addbb preserve current methods/results without changing T20.43b, copying bulk/private artifacts, or carrying authority into a new repo
 completed: T16.0 guard; T16.1 dependency inventory; T16.1b unified executable stack; T16.2/T16.2b mechanically computed qualification; T16.2b-A central authority composition; T16.3 structural baseline; T16.4/T16.4b production measured-inertial compiler and numerical hardening; corrected T16.5a offline no-write census preflight; T20.1 source-bound simulation training specification and central authority
 evidence: processor 59827b3d...; fixture normalization bundle dea3ff8c... binds 94,568-sample MEAN_STD statistics, actual cached processor/tokenizer parity, camera order, revisions, and tensor hashes while remaining production-ineligible; T17.4 emitted 2 source-bound frames, 0 eligible frames, 0 segments, and 2 quarantines; T17.5 emitted 0 unpadded windows across 5/10/15/50 horizons; T17.5b emitted 8/8 strict scripted episodes, 1,952 eligible frames, 88 hard-boundary segments, 0 quarantines, and 3,744 unpadded windows including 120 horizon-50 windows; T17.6 inventory bound 3 legacy canary descriptors, accepted 0, and emitted a source-bound empty view because no source met the current raw-record contract; T17.7 verified 100 raw-to-compiler-to-window replay selections (25 per horizon) with all eight rollouts covered and no model call; T18.1 selected 192 unique valid windows across 24 complete source/task-phase/control-mode/horizon buckets, one per each of 8 episodes; T18.2 froze 192 exact IDs as immutable logical cycle 0001; T18.3 compiled 1,345 actor-safe exact-state records; T18.4 froze 192 snapshots with zero source corrections; T20.1 binds 488 training and 244 held-out simulation frames plus tensor hash eca512ab...; T20.2 ACT run 003 used 100 finite MPS updates and recorded train L1 1.0217 -> 0.1682, held-out L1 0.2213; policy-owned rollout made zero strict contacts and 0.2023 mm lift; T20.3 PI0.5 run 002 used 20 finite local-MPS LoRA updates with train loss 100.8441 -> 100.0873 and held-out loss 130.0066 -> 128.4057 but zero strict contacts; T20.4's 250-update rung reduced held-out loss to 31.4226 but retained zero strict contacts; T20.5 horizons 5/10/15 produced distinct action hashes but identical zero-contact outcomes; T20.6 binds all eight capability stages and eight semantic adversarial traces; T20.7 gave every model the same 20 samples and fixed seed-2 rollout, yielding no strict contact or winner; T20.9 exact source replay exposed only a release semantic mismatch; T20.10 corrected that mismatch without rewriting history; T20.11 localized all model divergence to frame zero; T20.12 proves 3.606e-9 rad conversion round-trip and equal six-way loss weights but finds shoulder lift, wrist flex, wrist roll, and gripper outside checkpoint-normalizer min/max, including open gripper 92.4302% versus 81.0264% max; T20.16 proves the gripper-only hybrid matches frame zero but fails closed loop with zero conversion clipping, zero projected frames, zero strict contacts, and a -24.9997 mm lift margin
 remaining: learned strict-v2 policy success, real Robo Scan metric bundle and sim-link I5 compile, and a separately authorized physical canary; T19.2 physical calibration remains under fresh permits
-owner_authority: the owner directs resolution of the final ACT-on-R0 question; epoch-2 implementation is reviewed, but marker/model action remains closed until fresh model-free materialization, origin preservation, and pre-run acceptance agree; hardware, network, package install, external compute, and Brev remain closed
-blockers: no scientific blocker remains before the ACT attempt; the remaining gate is fresh epoch-2 materialization and reviewer-bound acceptance with a full eight-hour completion budget; T20.40 remains ineligible without Gate C and T20.45 awaits R1 evidence
-next_step: materialize one epoch-2 owner/composer/runtime/permit bundle from origin commit 10df153, review and preserve its acceptance, then consume the sole marker once under the unchanged campaign
+owner_authority: the owner-directed attempt is consumed; any future ACT run requires a new explicit owner decision and separate reviewed authority boundary; hardware, network, package install, external compute, and Brev remain closed
+blockers: the scientific ACT-on-R0 question remains unanswered because the sole attempt failed in mirror-schema dispatch at zero updates; T20.40 remains ineligible without Gate C and T20.45 lacks trained R1 evidence
+next_step: stop at the preserved terminal boundary; do not patch-and-resume, retry, or create a second replacement without new explicit owner authority
 ```
+
+## 2026-07-16 - T20.43b sole epoch-2 attempt terminal runtime failure
+
+Marker `d67cf38e...` consumed the one accepted epoch-2 attempt. Fresh ACT and
+AdamW construction, checkpoint 0, and one untrained chunk-50 rollout completed,
+but the required mirror renderer rejected
+`scenesmith.t20_43b_r1_act_closed_loop_trace.v1` before the first optimizer
+update. Terminal receipt `89b6dbff...` binds zero updates, one checkpoint, one
+rollout, no Gate C pass, no retry, and the exact partial tree. The renderer
+dispatches original T20.43 and T20.44 schemas; the pre-run smoke replayed an
+original-T20.43 trace and therefore missed this new-schema integration gap.
+Reviewer 306 accepts the deterministic terminal-verifier repair after 6
+focused and 35 T20.43/T20.43b/T20.44 tests plus live verifier exit 0. This is a
+verified infrastructure failure, not a trained-ACT negative: ACT-on-R0 remains
+unresolved, and no further attempt or T20.45 activation is authorized.
 
 ## 2026-07-16 - T20.43b epoch-2 refresh implementation accepted
 

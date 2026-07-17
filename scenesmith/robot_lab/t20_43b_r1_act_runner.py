@@ -616,6 +616,20 @@ def verify_all_outputs(*, repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     permit = bundle[REFRESH_PERMIT_PATH.as_posix()]
     attempt = load_strict_json(root / ATTEMPT_PATH)
     verify_attempt_marker(attempt, permit=permit)
+    if (root / FAILURE_PATH).is_file():
+        if any(
+            (root / path).exists()
+            for path in (RUN_SUMMARY_PATH, RESULT_PATH, SCORECARD_PATH, RETENTION_PATH)
+        ):
+            raise ValueError("T20.43b failure and full result coexist")
+        failure = load_strict_json(root / FAILURE_PATH)
+        partial_tree = _file_tree(root / RUN_ROOT) if (root / RUN_ROOT).is_dir() else []
+        verify_terminal_failure_boundary(
+            failure=failure,
+            attempt=attempt,
+            partial_run_tree=partial_tree,
+        )
+        return failure
     run = load_strict_json(root / RUN_SUMMARY_PATH)
     verify_run_summary(run)
     for checkpoint in run["checkpoints"]:
@@ -758,6 +772,19 @@ def verify_terminal_failure(payload: dict[str, Any]) -> None:
     )
     if payload != expected:
         raise ValueError("T20.43b terminal failure drifted")
+
+
+def verify_terminal_failure_boundary(
+    *,
+    failure: dict[str, Any],
+    attempt: dict[str, Any],
+    partial_run_tree: list[dict[str, Any]],
+) -> None:
+    verify_terminal_failure(failure)
+    if failure["attempt_identity_sha256"] != attempt.get("identity_sha256"):
+        raise ValueError("T20.43b terminal failure attempt drifted")
+    if failure["partial_run_tree"] != partial_run_tree:
+        raise ValueError("T20.43b terminal partial output tree drifted")
 
 
 def run_authorized_attempt(

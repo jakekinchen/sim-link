@@ -7,9 +7,9 @@
     "no_new_major_slice_after": null,
     "hard_closeout": "2026-07-17T05:25:04-05:00",
     "owner_authorization_recorded_at": "2026-07-16T21:25:04-05:00",
-    "status": "active_pending_acceptance_origin_preservation",
-    "closeout_recorded_at": null,
-    "closeout_reason": null,
+    "status": "closed",
+    "closeout_recorded_at": "2026-07-16T21:32:23-05:00",
+    "closeout_reason": "t20_43b_one_use_attempt_consumed_by_checkpoint_0_mirror_schema_runtime_failure_before_optimizer_update",
     "scope": "sole_unchanged_t20_43b_act_replacement_epoch_2_attempt_1",
     "simulation_only": true,
     "hardware_authority": "closed",
@@ -332,8 +332,8 @@
       "policy_projected_assisted"
     ]
   },
-  "training_lock": "open",
-  "training_authority_valid_until": "2026-07-21T03:05:00-05:00",
+  "training_lock": "closed",
+  "training_authority_valid_until": null,
   "current_milestone": "M20 simulation-only clean supervision",
   "current_task": "T20.43b",
   "next_eligible_task": "T20.43b",
@@ -4941,13 +4941,13 @@
       "authority_not_granted": ["t20_43_second_attempt","t20_43_retry","t20_43_replacement","checkpoint_continuation","result_fabrication","correction_objective","threshold_change","schedule_change","archive_replay","t20_44_model_action_before_fresh_brief_and_composed_authority","hardware","camera_access","serial_access","physical_motion","network_access","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.43b": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T20.44_terminal_boundary_on_origin", "owner_addendum_8b4a206"],
       "active_brief_id": "225",
       "latest_verified_brief_id": "225",
-      "review_decision_id": "304",
+      "review_decision_id": "306",
       "source_commit": "10df15319e1fcb4ca2aacc129948427fa2ecb15a",
-      "result": "Reviewer 304 accepts the separately named epoch-2 administrative refresh implementation, now exact on origin at 10df153; epoch 1 remains immutable, replacement/attempt ordinal remain 1, and only model-free epoch-2 materialization is authorized next",
+      "result": "Reviewer 306 verifies terminal runtime failure 89b6dbff after the sole epoch-2 marker, fresh ACT/optimizer construction, checkpoint 0, and one untrained chunk-50 rollout; mirror dispatch rejected the T20.43b trace schema before any optimizer update, so trained ACT-on-R0 capability remains unresolved and no retry is authorized",
       "owner_authorization_commit": "8b4a20669a804b2d4fbed2805ea2fa6af305e2d7",
       "recipe_source_identity_sha256": "b3a510f84402d6574333800b73c3d95f5dcfb24af7e77740985f2f3c997449d2",
       "implementation": {"implementation_commit":"5e8a2187bccd41377c53812487c8eeb299b41e54","spec_path":"configurations/robot_lab/t20_43b_r1_act_standard_spec.json","spec_identity_sha256":"13c5bb4b2cadf8c451a25e7c11e9e0a1d824468f593774fdb60dbf7fa5197461","focused_test_count":11,"targeted_regression_test_count":30,"authority_pointer_receipt_test_count":34,"stable_interpreter":"external/lerobot/.venv/bin/python","stable_mujoco_support_cache_bound":true,"fresh_renderer_smoke_required":true,"attempt_marker_exists":false,"model_constructed":false,"optimizer_created":false,"gate_c_executed":false,"live_materialization_executed":true},
@@ -4957,8 +4957,10 @@
       "authority_refresh_implementation": {"refresh_epoch":2,"replacement_ordinal":1,"attempt_ordinal":1,"focused_refresh_test_count":4,"t20_43_t20_43b_t20_44_test_count":34,"artifact_composer_pointer_receipt_test_count":42,"epoch_1_immutable":true,"attempt_marker_exists":false,"model_or_optimizer_action_executed":false,"implementation_commit":"10df15319e1fcb4ca2aacc129948427fa2ecb15a"},
       "materialized_authority_epoch_2": {"refresh_epoch":2,"replacement_ordinal":1,"attempt_ordinal":1,"authority_commit":"1012028ba4265b12457b83d721df2d9c5c1ab027","owner_grant_identity_sha256":"fe05f0d2654c19aeea14b19ef5069db570c7a1fa72a326d07fa7e0951ec9a9b4","central_request_identity_sha256":"21ebdab15c46d751074656b70b8f9b845288976792a1d8af6c513601c0cd8a1b","central_decision_identity_sha256":"061b1c1b51df7a044f014e3ec951e79fc7342cf0d6883f157b04dbc0201e4ce7","runtime_preflight_identity_sha256":"edd06509dae01d14268dee306f356d1802bea1a3cb7bd215acf77a0924f960ae","permit_identity_sha256":"81b38484dddf8ff565b4ff12ba3ef4303c6ad8629b97119df717c0347ece55b8","valid_from":"2026-07-16T21:25:04-05:00","valid_until":"2026-07-17T05:25:04-05:00","authorized_attempt_count":1,"retry_authorized":false},
       "pre_run_acceptance_epoch_2": {"reviewer_decision_id":"305","path":"configurations/robot_lab/t20_43b_r1_act_pre_run_acceptance_epoch_002.json","identity_sha256":"c6af103096710491a7ec9f1439b349e0d9bca7033a2709ba367ebc1d786127c7","file_sha256":"c3ee9e56a266329f828f723d4f280bc63b12aa9185847e314ada68f3f8a5f6b1","authority_commit":"1012028ba4265b12457b83d721df2d9c5c1ab027","decision":"ACCEPT_T20_43B_EPOCH_2_ATTEMPT_1","attempt_marker_exists":false,"model_or_optimizer_action_executed":false},
-      "authority_granted": ["open_fresh_t20_43b_brief_after_t20_44_state_origin_confirmation","activate_brief_222","implement_and_fixture_test_stable_runtime_act_replacement_contracts","t20_43b_implementation_valid","materialize_model_free_gate_a_renderer_smoke_and_compact_authority_after_origin_confirmation","write_and_preserve_signed_pre_run_acceptance","activate_brief_225","implement_and_fixture_test_epoch_2_administrative_refresh","epoch_2_refresh_implementation_valid","materialize_epoch_2_administrative_authority_after_origin_confirmation","accept_epoch_2_pre_run_authority","create_sole_permit_consuming_marker_after_acceptance_origin_confirmation","execute_one_unchanged_t20_43b_act_campaign"],
-      "authority_not_granted": ["marker_or_model_action_before_epoch_2_acceptance_origin_preservation","stale_permit_reuse_after_expiry","second_replacement","retry","sweep","recipe_change","schedule_change","correction_objective","threshold_change","archive_replay","t20_45_activation","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
+      "execution_result": {"status":"verified_terminal_runtime_failure","attempt_marker_identity_sha256":"d67cf38e7d7a441da93c3af55cdcfeefe64b55ce9cf3f0b95894299a88fdca09","attempt_marker_file_sha256":"f816fbac541124a4393e0a4d329732965c2e7d0f20c56319fb067cfecd2b8d9b","terminal_failure_identity_sha256":"89b6dbff17f5da345b1c8d8fa9951989eda092998b702737dd7da16c42db2e92","terminal_failure_file_sha256":"429431d6f00e9078685184660a3be07b69bc8a5cd9f67c96be86fe6a3bda2cd9","checkpoint_0_identity_sha256":"916200d071995a84577a53dc35b552e2f7db2452194adf8cc18b9a6d54ec8b55","checkpoint_0_model_file_sha256":"acc865fb2504849ce39a403b08c5bff6b6660460d5622d3089f243c8868cf912","chunk_50_trace_identity_sha256":"b707b815ab3b204e29dbbc8e50114307058019da3116f8f5ac496c1b6e05f4bd","chunk_50_trace_file_sha256":"0c01265d4536bff9f2220a0e6e26462342b5987927204db7b998f7e50f3eac46","attempt_count":1,"optimizer_update_count":0,"checkpoint_count":1,"rollout_count":1,"checkpoint_0_strict_contact_frame_count":0,"checkpoint_0_maximum_anchor_lift_m":3.042251932594553e-7,"gate_c_passed":false,"retry_authorized":false,"trained_act_capability_resolved":false,"failure_code":"MIRROR_UNSUPPORTED_T20_43B_TRACE_SCHEMA","independent_verifier_exit_code":0},
+      "terminal_verifier_repair": {"model_free":true,"focused_runner_test_count":6,"t20_43_t20_43b_t20_44_regression_test_count":35,"rejects_success_failure_coexistence":true,"binds_attempt_identity":true,"binds_partial_run_tree":true},
+      "authority_granted": ["open_fresh_t20_43b_brief_after_t20_44_state_origin_confirmation","activate_brief_222","implement_and_fixture_test_stable_runtime_act_replacement_contracts","t20_43b_implementation_valid","materialize_model_free_gate_a_renderer_smoke_and_compact_authority_after_origin_confirmation","write_and_preserve_signed_pre_run_acceptance","activate_brief_225","implement_and_fixture_test_epoch_2_administrative_refresh","epoch_2_refresh_implementation_valid","materialize_epoch_2_administrative_authority_after_origin_confirmation","accept_epoch_2_pre_run_authority","create_sole_permit_consuming_marker_after_acceptance_origin_confirmation","execute_one_unchanged_t20_43b_act_campaign","preserve_terminal_runtime_failure","implement_model_free_terminal_failure_verifier","close_consumed_t20_43b_boundary"],
+      "authority_not_granted": ["patch_and_resume_consumed_attempt","second_replacement","retry","continuation","sweep","recipe_change","schedule_change","correction_objective","threshold_change","archive_replay","t20_45_activation","hardware","camera_access","serial_access","physical_motion","network_access","package_installation","external_compute","brev_compute","physical_transfer","promotion","destructive_operation"]
     },
     "T20.44": {
       "state": "verified",

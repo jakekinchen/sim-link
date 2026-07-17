@@ -93,3 +93,14 @@ and acceptance `c6af1030...` binds the exact permit, reviewer file, and
 authority commit. The marker and every run/result path remain absent. Only
 after this acceptance boundary is exact on origin may the runner create the
 sole marker and execute the unchanged campaign once.
+
+## Terminal execution result
+
+The marker was consumed once from accepted origin commit `a6b2c94`. Fresh ACT,
+optimizer, checkpoint 0, and one untrained chunk-50 rollout completed, but the
+required mirror renderer rejected the new T20.43b trace schema before any
+optimizer update. Receipt `89b6dbff...` signs one checkpoint, one rollout, zero
+updates, no Gate C pass, and no retry. Reviewer 306 accepts the repaired
+model-free terminal verifier and closes T20.43b as a verified runtime failure,
+not a trained-ACT negative. The ACT-on-R0 capability question remains
+unresolved and no second replacement or attempt is authorized.
