@@ -1,0 +1,333 @@
+{
+  "blender_version": "5.1.1",
+  "meshes": {
+    "stl/WCW-1A_R1_C0_ball-retainer_exterior-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        14.099999,
+        -24.799999,
+        -12.0
+      ],
+      "dimensions_mm": [
+        1.6,
+        49.9,
+        24.0
+      ],
+      "edges": 1542,
+      "faces": 717,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 825,
+      "volume_mm3": 1890.375096,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_C0_carrier_print-minus-x-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "edges": 253,
+      "faces": 102,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 153,
+      "volume_mm3": 42133.518451,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_C1_ball-retainer_exterior-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        9.799999,
+        -24.799999,
+        -12.0
+      ],
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "edges": 2075,
+      "faces": 897,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 1174,
+      "volume_mm3": 1961.09746,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_C1_carrier_print-minus-x-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "edges": 643,
+      "faces": 295,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 350,
+      "volume_mm3": 34932.024849,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_C2_ball-retainer_exterior-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        9.799999,
+        -24.799999,
+        -12.0
+      ],
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "edges": 2275,
+      "faces": 963,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 1306,
+      "volume_mm3": 1956.078936,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_C2_carrier_print-minus-x-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "edges": 648,
+      "faces": 297,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 353,
+      "volume_mm3": 34932.326461,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_C3_ball-retainer_exterior-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        9.799999,
+        -24.799999,
+        -12.0
+      ],
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "edges": 2806,
+      "faces": 1143,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 1653,
+      "volume_mm3": 2026.801308,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_C3_carrier_print-minus-x-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "edges": 1028,
+      "faces": 488,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 542,
+      "volume_mm3": 27730.531026,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_C4_ball-retainer_exterior-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        15.7,
+        25.1,
+        12.0
+      ],
+      "bounds_min_mm": [
+        9.799999,
+        -24.799999,
+        -12.0
+      ],
+      "dimensions_mm": [
+        5.900001,
+        49.9,
+        24.0
+      ],
+      "edges": 3013,
+      "faces": 1213,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 1788,
+      "volume_mm3": 2021.782775,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_C4_carrier_print-minus-x-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        16.5,
+        27.200001,
+        12.5
+      ],
+      "bounds_min_mm": [
+        -17.0,
+        -27.200001,
+        -12.5
+      ],
+      "dimensions_mm": [
+        33.5,
+        54.400002,
+        25.0
+      ],
+      "edges": 1043,
+      "faces": 492,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 553,
+      "volume_mm3": 27731.13447,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_ball-fit-coupon_20p4-20p6-20p8mm.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        45.0,
+        19.0,
+        2.0
+      ],
+      "bounds_min_mm": [
+        -45.0,
+        -19.0,
+        -2.0
+      ],
+      "dimensions_mm": [
+        90.0,
+        38.0,
+        4.0
+      ],
+      "edges": 5044,
+      "faces": 2374,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 2666,
+      "volume_mm3": 9303.601618,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_body_top-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        20.0,
+        30.0,
+        32.5
+      ],
+      "bounds_min_mm": [
+        -20.0,
+        -30.0,
+        -32.5
+      ],
+      "dimensions_mm": [
+        40.0,
+        60.0,
+        65.0
+      ],
+      "edges": 155,
+      "faces": 66,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 91,
+      "volume_mm3": 34143.972948,
+      "watertight_manifold": true
+    },
+    "stl/WCW-1A_R1_bottom-lid_outer-face-down.stl": {
+      "boundary_edges": 0,
+      "bounds_max_mm": [
+        19.700001,
+        29.700001,
+        4.8
+      ],
+      "bounds_min_mm": [
+        -19.700001,
+        -29.700001,
+        -1.3
+      ],
+      "dimensions_mm": [
+        39.400002,
+        59.400002,
+        6.1
+      ],
+      "edges": 389,
+      "faces": 151,
+      "non_manifold_edges": 0,
+      "self_intersection_pairs": 0,
+      "vertices": 240,
+      "volume_mm3": 10482.507523,
+      "watertight_manifold": true
+    }
+  },
+  "schema_version": "scenesmith.wcw1a_blender_build.v1",
+  "spec_identity_sha256": "14baa9dbb7813bc2b2961def7a4e0b065ea8ce675fce1b9457ea49eb4d70d3cd",
+  "units": "mm"
+}

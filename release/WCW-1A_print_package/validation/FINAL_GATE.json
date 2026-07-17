@@ -1,0 +1,16 @@
+{
+  "all_required_stls_exist_and_open": true,
+  "all_stls_millimetre_scale": true,
+  "balls_installable": true,
+  "balls_retained": true,
+  "bambu_studio_local_open_test": "not_run_bambu_studio_not_installed",
+  "batched_3mf_plates_verified": true,
+  "cartridges_uniquely_identified": true,
+  "fallback_180mm_print_job_count_including_coupon": 4,
+  "grasp_tags_unobstructed": true,
+  "primary_256mm_print_job_count_including_coupon": 2,
+  "reversible_assembly": true,
+  "schema_version": "scenesmith.wcw1a_final_gate.v1",
+  "spec_identity_sha256": "14baa9dbb7813bc2b2961def7a4e0b065ea8ce675fce1b9457ea49eb4d70d3cd",
+  "zip_verified": true
+}
