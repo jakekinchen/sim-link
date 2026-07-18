@@ -1,0 +1,33 @@
+{
+  "assignments": [
+    {
+      "extruder": 1,
+      "face_count": 39690,
+      "material": "PLA",
+      "upstream_object_id": 62
+    },
+    {
+      "extruder": 1,
+      "face_count": 18714,
+      "material": "PLA",
+      "upstream_object_id": 64
+    },
+    {
+      "extruder": 3,
+      "face_count": 3480,
+      "material": "TPU",
+      "upstream_object_id": 66
+    }
+  ],
+  "audit_method": "parsed Metadata/model_settings.config and matched disconnected component face counts",
+  "filament_type_array_prefix": [
+    "PLA",
+    "PLA",
+    "TPU"
+  ],
+  "schema_version": "scenesmith.xlerobot_gripper_material_assignment.v1",
+  "upstream_3mf_path": "hardware/XLeRobot_0_3_0.3mf",
+  "upstream_3mf_sha256": "4b41ae03895144ffff0a22b0d1a76e02d4ff0db0bc5ff0066ab528df8ce4fa4d",
+  "upstream_commit": "51ca0ec31bdb48713b94bacdba828bf8d889296b",
+  "upstream_repository": "https://github.com/Vector-Wangel/XLeRobot"
+}

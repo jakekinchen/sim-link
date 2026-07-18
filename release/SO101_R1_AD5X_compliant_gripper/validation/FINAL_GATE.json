@@ -1,0 +1,17 @@
+{
+  "ad5x_bed_fit_verified": true,
+  "all_required_files_exist": true,
+  "all_stls_open": true,
+  "delivery_allowed_only_after_builder_success": true,
+  "manifest_hash_gate_enforced_by_builder": true,
+  "material_jobs": 2,
+  "no_supports_required_by_upstream_design": true,
+  "physical_print_or_fit_claimed": false,
+  "pla_plate_contains_both_bases": true,
+  "printed_components": 3,
+  "schema_version": "scenesmith.so101_ad5x_gripper_final_gate.v1",
+  "source_geometry_preserved_by_translation_only": true,
+  "tpu_plate_contains_complete_soft_finger": true,
+  "units_millimeter": true,
+  "zip_crc_reopen_and_exact_content_gate_enforced_by_builder": true
+}

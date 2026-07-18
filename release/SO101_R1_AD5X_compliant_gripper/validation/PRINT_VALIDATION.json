@@ -1,0 +1,390 @@
+{
+  "components": [
+    {
+      "boundary_edge_count": 0,
+      "consistently_outward_wound": true,
+      "dimensions_mm": [
+        52.0,
+        48.58319091796875,
+        65.19906616210938
+      ],
+      "estimated_mass_g": 55.239185431838685,
+      "inconsistent_winding_edge_count": 0,
+      "key": "fixed_base",
+      "label": "SO-101 fixed gripper base",
+      "manifold": true,
+      "manifold_edge_count": 59535,
+      "material": "PLA or PLA+",
+      "minimum_triangle_area_mm2": 3.91155481338501e-08,
+      "nonmanifold_edge_count": 0,
+      "signed_volume_mm3": 44547.730186966684,
+      "source_bounds_mm": {
+        "max": [
+          103.2282485961914,
+          201.02798461914062,
+          65.19906616210938
+        ],
+        "min": [
+          51.228248596191406,
+          152.44479370117188,
+          0.0
+        ]
+      },
+      "source_geometry_sha256": "2c437cad755abe1c372d525a6b55952ffd9c9a247c286fd993221b46d2c18783",
+      "submicron_area_triangle_count": 9,
+      "triangle_count": 39690,
+      "upstream_extruder": 1,
+      "volume_mm3": 44547.730186966684,
+      "watertight": true,
+      "z0_print_orientation_preserved": true
+    },
+    {
+      "boundary_edge_count": 0,
+      "consistently_outward_wound": true,
+      "dimensions_mm": [
+        36.6645622253418,
+        20.332809448242188,
+        48.0
+      ],
+      "estimated_mass_g": 10.780066245909444,
+      "inconsistent_winding_edge_count": 0,
+      "key": "moving_base",
+      "label": "SO-101 moving gripper base",
+      "manifold": true,
+      "manifold_edge_count": 28071,
+      "material": "PLA or PLA+",
+      "minimum_triangle_area_mm2": 3.1494252079300086e-06,
+      "nonmanifold_edge_count": 0,
+      "signed_volume_mm3": 8693.601811217293,
+      "source_bounds_mm": {
+        "max": [
+          91.30517578125,
+          137.66395568847656,
+          48.0
+        ],
+        "min": [
+          54.6406135559082,
+          117.33114624023438,
+          0.0
+        ]
+      },
+      "source_geometry_sha256": "d5a1591257d71a2f693608fb9a07c7374040de6f39c399960c6fea6c82ec763c",
+      "submicron_area_triangle_count": 0,
+      "triangle_count": 18714,
+      "upstream_extruder": 1,
+      "volume_mm3": 8693.601811217293,
+      "watertight": true,
+      "z0_print_orientation_preserved": true
+    },
+    {
+      "boundary_edge_count": 0,
+      "consistently_outward_wound": true,
+      "dimensions_mm": [
+        67.18320846557617,
+        24.18842315673828,
+        24.059436798095703
+      ],
+      "estimated_mass_g": 12.358615838927985,
+      "inconsistent_winding_edge_count": 0,
+      "key": "soft_fin",
+      "label": "SO-101 Fin-Ray soft finger",
+      "manifold": true,
+      "manifold_edge_count": 5220,
+      "material": "TPU 95A",
+      "minimum_triangle_area_mm2": 4.689132949682536e-05,
+      "nonmanifold_edge_count": 0,
+      "signed_volume_mm3": 10213.732098287592,
+      "source_bounds_mm": {
+        "max": [
+          117.70692443847656,
+          106.00564575195312,
+          24.059436798095703
+        ],
+        "min": [
+          50.52371597290039,
+          81.81722259521484,
+          0.0
+        ]
+      },
+      "source_geometry_sha256": "e94cee6eaf285a5be0cfe3ea3b9f0915d8d52acadf9675742eb9b706ae746c95",
+      "submicron_area_triangle_count": 0,
+      "triangle_count": 3480,
+      "upstream_extruder": 3,
+      "volume_mm3": 10213.732098287592,
+      "watertight": true,
+      "z0_print_orientation_preserved": true
+    }
+  ],
+  "fallback_stls": [
+    {
+      "all_components_at_z0": true,
+      "all_components_watertight_and_manifold": true,
+      "all_components_within_220mm_bed": true,
+      "component_count": 2,
+      "components": [
+        {
+          "bounds_mm": {
+            "max": [
+              110.66799926757812,
+              134.2911834716797,
+              65.19906616210938
+            ],
+            "min": [
+              58.667999267578125,
+              85.70800018310547,
+              0.0
+            ]
+          },
+          "consistently_outward_wound": true,
+          "dimensions_mm": [
+            52.0,
+            48.58318328857422,
+            65.19906616210938
+          ],
+          "inconsistent_winding_edge_count": 0,
+          "manifold": true,
+          "minimum_triangle_area_mm2": 3.91155481338501e-08,
+          "signed_volume_mm3": 44547.71189522686,
+          "submicron_area_triangle_count": 9,
+          "triangle_count": 39690,
+          "volume_mm3": 44547.71189522686,
+          "watertight": true
+        },
+        {
+          "bounds_mm": {
+            "max": [
+              162.3325653076172,
+              120.16680908203125,
+              48.0
+            ],
+            "min": [
+              125.66799926757812,
+              99.83399963378906,
+              0.0
+            ]
+          },
+          "consistently_outward_wound": true,
+          "dimensions_mm": [
+            36.66456604003906,
+            20.332809448242188,
+            48.0
+          ],
+          "inconsistent_winding_edge_count": 0,
+          "manifold": true,
+          "minimum_triangle_area_mm2": 3.1494252079300086e-06,
+          "signed_volume_mm3": 8693.602495966086,
+          "submicron_area_triangle_count": 0,
+          "triangle_count": 18714,
+          "volume_mm3": 8693.602495966086,
+          "watertight": true
+        }
+      ],
+      "expected_triangle_counts": [
+        18714,
+        39690
+      ],
+      "file": "fallback_stl/SO101_R1_AD5X_plate01_PLA_gripper-bases_batch.stl",
+      "sha256": "d82a876060837ed1a969449fd4f8af9ada287c50a813d45838887be245f9c15f",
+      "size_bytes": 2920284,
+      "units": "millimeter"
+    },
+    {
+      "all_components_at_z0": true,
+      "all_components_watertight_and_manifold": true,
+      "all_components_within_220mm_bed": true,
+      "component_count": 1,
+      "components": [
+        {
+          "bounds_mm": {
+            "max": [
+              143.59120178222656,
+              122.09442138671875,
+              24.059436798095703
+            ],
+            "min": [
+              76.40799713134766,
+              97.90599822998047,
+              0.0
+            ]
+          },
+          "consistently_outward_wound": true,
+          "dimensions_mm": [
+            67.1832046508789,
+            24.18842315673828,
+            24.059436798095703
+          ],
+          "inconsistent_winding_edge_count": 0,
+          "manifold": true,
+          "minimum_triangle_area_mm2": 4.690291834824783e-05,
+          "signed_volume_mm3": 10213.731779932576,
+          "submicron_area_triangle_count": 0,
+          "triangle_count": 3480,
+          "volume_mm3": 10213.731779932576,
+          "watertight": true
+        }
+      ],
+      "expected_triangle_counts": [
+        3480
+      ],
+      "file": "fallback_stl/SO101_R1_AD5X_plate02_TPU95A_soft-fin_batch.stl",
+      "sha256": "045c1f4f625649eb2f7837c50f7db8c8556a589f50fddaa4a3da80f6d013c616",
+      "size_bytes": 174084,
+      "units": "millimeter"
+    }
+  ],
+  "gates": {
+    "all_parts_fit_ad5x_220mm_bed": true,
+    "all_release_3mf_files_crc_and_xml_valid": true,
+    "all_release_stl_files_open_and_validate": true,
+    "all_source_components_finite_nondegenerate_watertight_manifold": true,
+    "as_printed_grip_verified": false,
+    "exactly_three_disconnected_source_components": true,
+    "no_scale_rotation_remesh_or_triangle_repair": true,
+    "physical_fit_verified": false,
+    "pinned_source_hashes_match": true,
+    "pla_and_tpu_separated_into_exactly_two_jobs": true,
+    "robot_calibration_updated": false,
+    "source_z0_print_orientation_preserved": true,
+    "support_free_upstream_intent_preserved": true,
+    "upstream_material_assignment_bound_by_face_count": true,
+    "visual_renders_generated": true
+  },
+  "package_revision": "SO101-compliant-gripper-R1-AD5X",
+  "plates": [
+    {
+      "all_objects_at_z0": true,
+      "all_objects_within_bed": true,
+      "crc_test_passed": true,
+      "declared_bed_mm": [
+        220.0,
+        220.0
+      ],
+      "file": "plates/SO101_R1_AD5X_plate01_PLA_gripper-bases.3mf",
+      "format": "3MF Core standard OPC package",
+      "material": "PLA or PLA+",
+      "minimum_actual_edge_margin_mm": 57.66743779999999,
+      "minimum_actual_object_spacing_mm": 15.0,
+      "object_count": 2,
+      "objects": [
+        {
+          "component": "fixed_base",
+          "edge_margin_mm": 58.668,
+          "label": "SO-101 fixed gripper base",
+          "material": "PLA or PLA+",
+          "plate_bounds_mm": {
+            "max": [
+              110.668,
+              134.2911909,
+              65.1990662
+            ],
+            "min": [
+              58.668,
+              85.708,
+              0.0
+            ]
+          },
+          "source_geometry_sha256": "2c437cad755abe1c372d525a6b55952ffd9c9a247c286fd993221b46d2c18783",
+          "triangle_count": 39690,
+          "vertex_count": 19815
+        },
+        {
+          "component": "moving_base",
+          "edge_margin_mm": 57.66743779999999,
+          "label": "SO-101 moving gripper base",
+          "material": "PLA or PLA+",
+          "plate_bounds_mm": {
+            "max": [
+              162.3325622,
+              120.1668094,
+              48.0
+            ],
+            "min": [
+              125.668,
+              99.834,
+              0.0
+            ]
+          },
+          "source_geometry_sha256": "d5a1591257d71a2f693608fb9a07c7374040de6f39c399960c6fea6c82ec763c",
+          "triangle_count": 18714,
+          "vertex_count": 9333
+        }
+      ],
+      "sha256": "611341f3e5b1f52b3ea5e1652afdc6064cd789258a8c368cd45bd943e6a32c6a",
+      "size_bytes": 753701,
+      "slicer_profile_embedded": false,
+      "source_counts_faces_and_coordinates_match": true,
+      "units": "millimeter"
+    },
+    {
+      "all_objects_at_z0": true,
+      "all_objects_within_bed": true,
+      "crc_test_passed": true,
+      "declared_bed_mm": [
+        220.0,
+        220.0
+      ],
+      "file": "plates/SO101_R1_AD5X_plate02_TPU95A_soft-fin.3mf",
+      "format": "3MF Core standard OPC package",
+      "material": "TPU 95A",
+      "minimum_actual_edge_margin_mm": 76.408,
+      "minimum_actual_object_spacing_mm": null,
+      "object_count": 1,
+      "objects": [
+        {
+          "component": "soft_fin",
+          "edge_margin_mm": 76.408,
+          "label": "SO-101 Fin-Ray soft finger",
+          "material": "TPU 95A",
+          "plate_bounds_mm": {
+            "max": [
+              143.5912085,
+              122.09442320000001,
+              24.0594368
+            ],
+            "min": [
+              76.408,
+              97.906,
+              0.0
+            ]
+          },
+          "source_geometry_sha256": "e94cee6eaf285a5be0cfe3ea3b9f0915d8d52acadf9675742eb9b706ae746c95",
+          "triangle_count": 3480,
+          "vertex_count": 1706
+        }
+      ],
+      "sha256": "4f1c2e7c6982d81fb09ffd68e5581c6263c36bc6f7b1f8755f8dfc15913b021d",
+      "size_bytes": 52022,
+      "slicer_profile_embedded": false,
+      "source_counts_faces_and_coordinates_match": true,
+      "units": "millimeter"
+    }
+  ],
+  "printer_target": {
+    "build_volume_mm": [
+      220.0,
+      220.0,
+      220.0
+    ],
+    "default_nozzle_mm": 0.4,
+    "gcode_embedded": false,
+    "model": "FlashForge AD5X",
+    "slicer": "Orca-Flashforge or Orca Slicer",
+    "slicer_profile_embedded": false
+  },
+  "residual_risks": [
+    "Zane confirmed TPU availability but not Shore hardness or spool brand.",
+    "Temperatures, flow, retraction, and speed must use the actual spool and tuned AD5X profile.",
+    "Upstream specifies two additional M3 screws but does not freeze screw length.",
+    "No physical print, fit, grip, or durability test has been completed in this offline release.",
+    "Installing the compliant gripper changes contact geometry and requires a new SimLink gripper calibration."
+  ],
+  "schema_version": "scenesmith.so101_ad5x_gripper_validation.v1",
+  "source": {
+    "combined_stl_sha256": "4125201fffaca5f9e5ee354a11ff80328c08e7ccb4676661442a937b7a79b121",
+    "commit": "51ca0ec31bdb48713b94bacdba828bf8d889296b",
+    "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "repository": "https://github.com/Vector-Wangel/XLeRobot",
+    "soft_finger_step_sha256": "d90d2434f6920be1643963c6c1ba2dc1935a7ed84683ab01e07ee4bc132f4816",
+    "upstream_3mf_assignment_sha256": "4b41ae03895144ffff0a22b0d1a76e02d4ff0db0bc5ff0066ab528df8ce4fa4d"
+  }
+}
