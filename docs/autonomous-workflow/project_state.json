@@ -1,6 +1,6 @@
 {
   "schema_version": "scenesmith.project_state.v1",
-  "updated": "2026-07-17",
+  "updated": "2026-07-18",
   "run_window": {
     "actual_start": "2026-07-16T21:25:04-05:00",
     "total_duration_hours": 8,
@@ -376,8 +376,8 @@
   },
   "training_lock": "closed",
   "training_authority_valid_until": null,
-  "current_milestone": "ARCHIVE source repository closed",
-  "current_task": null,
+  "current_milestone": "T19 - offline hardware print support",
+  "current_task": "T19.2f",
   "next_eligible_task": null,
   "active_support_task": null,
   "support_tasks": {
@@ -6148,6 +6148,16 @@
       "result": "Reviewer 300 accepts the geometry-preserving standard-3MF WCW-1A-R1.1 replacement at fb0800e: two jobs on 256 mm or four on 180 mm, ZIP 553e8c63 CRC/manifest verified, and Gmail replacement message 19f6d4d052383966 delivered with ZIP plus README",
       "authority_granted": ["read_verified_t19_2d_package", "activate_brief_223", "generate_offline_batched_3mf_layouts", "rebuild_and_send_verified_replacement_package"],
       "authority_not_granted": ["physical_print_proof","printer_access","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","package_download","external_compute","brev_compute","promotion"]
+    },
+    "T19.2f": {
+      "state": "in_progress",
+      "depends_on": ["T19.2e", "owner_so101_gripper_print_package_request", "printer_ad5x_and_tpu_available"],
+      "active_brief_id": "238",
+      "latest_verified_brief_id": null,
+      "review_decision_id": null,
+      "result": "Preparing a geometry-preserving two-plate PLA/TPU SO-101 compliant-gripper package for Zane's FlashForge AD5X; no printer or robot access is authorized",
+      "authority_granted": ["read_pinned_public_xlerobot_gripper_sources", "activate_brief_238", "generate_offline_ad5x_pla_and_tpu_plate_files", "validate_package", "send_verified_package_to_owner_named_printer"],
+      "authority_not_granted": ["physical_print_proof","printer_access","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","training","external_compute","brev_compute","promotion"]
     }
   }
 }
