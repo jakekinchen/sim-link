@@ -159,10 +159,10 @@
     "summary": "full_access_no_prompt_hardware_runtime_policy"
   },
   "latest_verified_task_implementation_boundary": {
-    "brief_id": "235",
-    "commit": "fc46257b67b97b927ac6b8d8bda2ec243d62b572",
-    "reviewer_decision_id": "328",
-    "summary": "reviewer_328_verifies_f1_fold_1e933429_as_completed_pi05_negative_without_gate_c_or_new_authority"
+    "brief_id": "238",
+    "commit": "a309b71346423f3863629e8cd351ca37f69a6304",
+    "reviewer_decision_id": "332",
+    "summary": "reviewer_332_verifies_two-job_so101_ad5x_compliant_gripper_package_and_gmail_delivery_without_physical_fit_or_calibration_authority"
   },
   "t16_5c_negative_experiment_closeout_boundary": {
     "brief_id": "094",
@@ -176,7 +176,7 @@
     "review_commit": "06ef9497f5630d9dc8d293c402008c8f464337a2",
     "decision": "ACCEPT_BRIEF_071_FULL_ACCESS_NO_PROMPT_RUNTIME_POLICY_LIVE_GATE_REMAINS_CLOSED"
   },
-  "last_reviewed_implementation_commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
+  "last_reviewed_implementation_commit": "a309b71346423f3863629e8cd351ca37f69a6304",
   "source_review": {
     "implementation_commit": "19b7e766f31e4bf5702e454c62606165bf023dc5",
     "decision": "ACCEPT_BRIEF_071_FULL_ACCESS_NO_PROMPT_RUNTIME_POLICY_LIVE_GATE_REMAINS_CLOSED",
@@ -376,8 +376,8 @@
   },
   "training_lock": "closed",
   "training_authority_valid_until": null,
-  "current_milestone": "T19 - offline hardware print support",
-  "current_task": "T19.2f",
+  "current_milestone": "ARCHIVE source repository closed",
+  "current_task": null,
   "next_eligible_task": null,
   "active_support_task": null,
   "support_tasks": {
@@ -6150,15 +6150,17 @@
       "authority_not_granted": ["physical_print_proof","printer_access","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","package_download","external_compute","brev_compute","promotion"]
     },
     "T19.2f": {
-      "state": "in_progress",
+      "state": "verified",
       "depends_on": ["T19.2e", "owner_so101_gripper_print_package_request", "printer_ad5x_and_tpu_available"],
-      "active_brief_id": "238",
-      "latest_verified_brief_id": null,
-      "review_decision_id": null,
+      "active_brief_id": null,
+      "latest_verified_brief_id": "238",
+      "review_decision_id": "332",
       "implementation_commit": "a309b71346423f3863629e8cd351ca37f69a6304",
       "pre_delivery_review_decision_id": "331",
-      "result": "Reviewer 331 accepts the geometry-preserving two-job AD5X package for delivery; email delivery and final closeout receipt remain pending",
+      "source_commit": "a309b71346423f3863629e8cd351ca37f69a6304",
+      "result": "Reviewer 332 verifies the geometry-preserving two-job AD5X package and Gmail delivery: message 19f76782947c0aef sent the 6,144,138-byte ZIP plus standalone README to Zane without physical-fit or calibration claims",
       "artifact": {"path":"release/SO101_R1_AD5X_Compliant_Gripper_Print_Package.zip","sha256":"a67d4a47613b79cf63840d59266b6448bce381d0db2559fb0b883fd9e5c09b9a","size_bytes":6144138,"print_job_count":2,"printed_component_count":3,"pla_plate_object_count":2,"tpu_plate_object_count":1,"manifest_verified":true,"zip_crc_verified":true,"physical_fit_verified":false},
+      "delivery": {"channel":"gmail","message_id":"19f76782947c0aef","thread_id":"19f76782947c0aef","sender":"jakekinchen@gmail.com","recipient":"Zane.cooke17@gmail.com","subject":"SO-101 compliant gripper — AD5X two-plate print package","attachments":[{"filename":"SO101_R1_AD5X_Compliant_Gripper_Print_Package.zip","size_bytes":6144138},{"filename":"README_PRINTING.md","size_bytes":2274}],"sent_label_verified":true},
       "authority_granted": ["read_pinned_public_xlerobot_gripper_sources", "activate_brief_238", "generate_offline_ad5x_pla_and_tpu_plate_files", "validate_package", "send_verified_package_to_owner_named_printer"],
       "authority_not_granted": ["physical_print_proof","printer_access","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","training","external_compute","brev_compute","promotion"]
     }
