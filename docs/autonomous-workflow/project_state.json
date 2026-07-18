@@ -6155,7 +6155,10 @@
       "active_brief_id": "238",
       "latest_verified_brief_id": null,
       "review_decision_id": null,
-      "result": "Preparing a geometry-preserving two-plate PLA/TPU SO-101 compliant-gripper package for Zane's FlashForge AD5X; no printer or robot access is authorized",
+      "implementation_commit": "a309b71346423f3863629e8cd351ca37f69a6304",
+      "pre_delivery_review_decision_id": "331",
+      "result": "Reviewer 331 accepts the geometry-preserving two-job AD5X package for delivery; email delivery and final closeout receipt remain pending",
+      "artifact": {"path":"release/SO101_R1_AD5X_Compliant_Gripper_Print_Package.zip","sha256":"a67d4a47613b79cf63840d59266b6448bce381d0db2559fb0b883fd9e5c09b9a","size_bytes":6144138,"print_job_count":2,"printed_component_count":3,"pla_plate_object_count":2,"tpu_plate_object_count":1,"manifest_verified":true,"zip_crc_verified":true,"physical_fit_verified":false},
       "authority_granted": ["read_pinned_public_xlerobot_gripper_sources", "activate_brief_238", "generate_offline_ad5x_pla_and_tpu_plate_files", "validate_package", "send_verified_package_to_owner_named_printer"],
       "authority_not_granted": ["physical_print_proof","printer_access","camera_access","serial_access","register_write","torque_change","motion","calibration_result","physical_twin_qualified","physical_transfer_ready","policy_actuation","training","external_compute","brev_compute","promotion"]
     }
